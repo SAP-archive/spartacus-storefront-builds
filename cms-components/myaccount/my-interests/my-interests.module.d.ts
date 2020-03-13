@@ -7,7 +7,7 @@ import * as ɵngcc5 from '../../../shared/components/list-navigation/list-naviga
 import * as ɵngcc6 from '../../../shared/components/media/media.module';
 import * as ɵngcc7 from '../../../shared/components/spinner/spinner.module';
 export declare class MyInterestsModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MyInterestsModule, [typeof ɵngcc1.MyInterestsComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.I18nModule, typeof ɵngcc3.ConfigModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.ListNavigationModule, typeof ɵngcc3.I18nModule, typeof ɵngcc3.UrlModule, typeof ɵngcc6.MediaModule, typeof ɵngcc7.SpinnerModule], [typeof ɵngcc1.MyInterestsComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MyInterestsModule, [typeof ɵngcc1.MyInterestsComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.I18nModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.ListNavigationModule, typeof ɵngcc3.I18nModule, typeof ɵngcc3.UrlModule, typeof ɵngcc6.MediaModule, typeof ɵngcc7.SpinnerModule], [typeof ɵngcc1.MyInterestsComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<MyInterestsModule>;
 }
 

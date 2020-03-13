@@ -5,7 +5,7 @@ import * as ɵngcc3 from '@angular/forms';
 import * as ɵngcc4 from '@angular/router';
 import * as ɵngcc5 from '@spartacus/core';
 export declare class LoginFormModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<LoginFormModule, [typeof ɵngcc1.LoginFormComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.FormsModule, typeof ɵngcc3.ReactiveFormsModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.UrlModule, typeof ɵngcc5.ConfigModule, typeof ɵngcc5.I18nModule], [typeof ɵngcc1.LoginFormComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<LoginFormModule, [typeof ɵngcc1.LoginFormComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.FormsModule, typeof ɵngcc3.ReactiveFormsModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.UrlModule, typeof ɵngcc5.I18nModule], [typeof ɵngcc1.LoginFormComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<LoginFormModule>;
 }
 

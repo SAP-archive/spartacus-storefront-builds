@@ -5,7 +5,7 @@ import * as ɵngcc3 from '@angular/router';
 import * as ɵngcc4 from '@spartacus/core';
 import * as ɵngcc5 from '../../misc/icon/icon.module';
 export declare class MiniCartModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MiniCartModule, [typeof ɵngcc1.MiniCartComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.RouterModule, typeof ɵngcc4.ConfigModule, typeof ɵngcc4.UrlModule, typeof ɵngcc5.IconModule, typeof ɵngcc4.I18nModule], [typeof ɵngcc1.MiniCartComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MiniCartModule, [typeof ɵngcc1.MiniCartComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.RouterModule, typeof ɵngcc4.UrlModule, typeof ɵngcc5.IconModule, typeof ɵngcc4.I18nModule], [typeof ɵngcc1.MiniCartComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<MiniCartModule>;
 }
 

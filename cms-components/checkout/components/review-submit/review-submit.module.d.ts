@@ -7,7 +7,7 @@ import * as ɵngcc5 from '@spartacus/core';
 import * as ɵngcc6 from '@angular/router';
 import * as ɵngcc7 from '../promotions/promotions.module';
 export declare class ReviewSubmitModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<ReviewSubmitModule, [typeof ɵngcc1.ReviewSubmitComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.CardModule, typeof ɵngcc4.CartSharedModule, typeof ɵngcc5.I18nModule, typeof ɵngcc5.UrlModule, typeof ɵngcc6.RouterModule, typeof ɵngcc7.PromotionsModule, typeof ɵngcc5.FeaturesConfigModule, typeof ɵngcc5.ConfigModule], [typeof ɵngcc1.ReviewSubmitComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<ReviewSubmitModule, [typeof ɵngcc1.ReviewSubmitComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.CardModule, typeof ɵngcc4.CartSharedModule, typeof ɵngcc5.I18nModule, typeof ɵngcc5.UrlModule, typeof ɵngcc6.RouterModule, typeof ɵngcc7.PromotionsModule, typeof ɵngcc5.FeaturesConfigModule], [typeof ɵngcc1.ReviewSubmitComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<ReviewSubmitModule>;
 }
 

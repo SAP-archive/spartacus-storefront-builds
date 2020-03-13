@@ -7,7 +7,7 @@ import * as ɵngcc5 from '@spartacus/core';
 import * as ɵngcc6 from '../../misc/icon/icon.module';
 import * as ɵngcc7 from '../../../shared/components/spinner/spinner.module';
 export declare class CloseAccountModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CloseAccountModule, [typeof ɵngcc1.CloseAccountComponent, typeof ɵngcc2.CloseAccountModalComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.UrlModule, typeof ɵngcc5.I18nModule, typeof ɵngcc6.IconModule, typeof ɵngcc7.SpinnerModule, typeof ɵngcc5.ConfigModule], [typeof ɵngcc1.CloseAccountComponent, typeof ɵngcc2.CloseAccountModalComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CloseAccountModule, [typeof ɵngcc1.CloseAccountComponent, typeof ɵngcc2.CloseAccountModalComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.UrlModule, typeof ɵngcc5.I18nModule, typeof ɵngcc6.IconModule, typeof ɵngcc7.SpinnerModule], [typeof ɵngcc1.CloseAccountComponent, typeof ɵngcc2.CloseAccountModalComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<CloseAccountModule>;
 }
 

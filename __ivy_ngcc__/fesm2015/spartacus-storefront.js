@@ -1,7 +1,7 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, provideConfig, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -9518,7 +9518,10 @@ __decorate([
 let IconModule = class IconModule {
 };
 IconModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: IconModule });
-IconModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function IconModule_Factory(t) { return new (t || IconModule)(); }, providers: [{ provide: IconConfig, useExisting: Config }], imports: [[CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)]] });
+IconModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function IconModule_Factory(t) { return new (t || IconModule)(); }, providers: [
+        provideDefaultConfig(fontawesomeIconConfig),
+        { provide: IconConfig, useExisting: Config },
+    ], imports: [[CommonModule]] });
 
 /**
  * A reference to a newly opened modal
@@ -9736,22 +9739,19 @@ AnonymousConsentOpenDialogComponent.ctorParameters = () => [
 let AnonymousConsentManagementBannerModule = class AnonymousConsentManagementBannerModule {
 };
 AnonymousConsentManagementBannerModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AnonymousConsentManagementBannerModule });
-AnonymousConsentManagementBannerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AnonymousConsentManagementBannerModule_Factory(t) { return new (t || AnonymousConsentManagementBannerModule)(); }, imports: [[
-            CommonModule,
-            I18nModule,
-            FeaturesConfigModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AnonymousConsentManagementBannerComponent: {
-                        component: AnonymousConsentManagementBannerComponent,
-                        deferLoading: DeferLoadingStrategy.INSTANT
-                    },
-                    AnonymousConsentOpenDialogComponent: {
-                        component: AnonymousConsentOpenDialogComponent
-                    }
+AnonymousConsentManagementBannerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AnonymousConsentManagementBannerModule_Factory(t) { return new (t || AnonymousConsentManagementBannerModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AnonymousConsentManagementBannerComponent: {
+                    component: AnonymousConsentManagementBannerComponent,
+                    deferLoading: DeferLoadingStrategy.INSTANT
+                },
+                AnonymousConsentOpenDialogComponent: {
+                    component: AnonymousConsentOpenDialogComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, I18nModule, FeaturesConfigModule]] });
 
 class CmsComponentData {
 }
@@ -11235,6 +11235,7 @@ let SkipLinkModule = class SkipLinkModule {
 };
 SkipLinkModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SkipLinkModule });
 SkipLinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SkipLinkModule_Factory(t) { return new (t || SkipLinkModule)(); }, providers: [
+        provideDefaultConfig(defaultSkipLinkConfig),
         { provide: SkipLinkConfig, useExisting: Config },
         {
             provide: APP_INITIALIZER,
@@ -11242,11 +11243,7 @@ SkipLinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SkipLinkMo
             deps: [ComponentFactoryResolver, OutletService],
             multi: true
         },
-    ], imports: [[
-            CommonModule,
-            I18nModule,
-            ConfigModule.withConfig(defaultSkipLinkConfig),
-        ]] });
+    ], imports: [[CommonModule, I18nModule]] });
 /**
  * Adds the skip link component before the cx-storefront.
  */
@@ -11386,6 +11383,7 @@ let PwaModule = class PwaModule {
 };
 PwaModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PwaModule });
 PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Factory(t) { return new (t || PwaModule)(); }, providers: [
+        provideDefaultConfig(defaultPWAModuleConfig),
         { provide: PWAModuleConfig, useExisting: Config },
         {
             provide: SwRegistrationOptions,
@@ -11401,7 +11399,6 @@ PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Facto
         AddToHomeScreenService,
     ], imports: [[
             CommonModule,
-            ConfigModule.withConfig(defaultPWAModuleConfig),
             ServiceWorkerModule.register('/ngsw-worker.js'),
             I18nModule,
         ]] });
@@ -11510,7 +11507,7 @@ let RoutingModule = RoutingModule_1 = class RoutingModule {
     static forRoot() {
         return {
             ngModule: RoutingModule_1,
-            providers: [provideConfig(defaultRoutingConfig)],
+            providers: [provideDefaultConfig(defaultRoutingConfig)],
         };
     }
 };
@@ -14027,7 +14024,7 @@ let PaginationModule = class PaginationModule {
 };
 PaginationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PaginationModule });
 PaginationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaginationModule_Factory(t) { return new (t || PaginationModule)(); }, providers: [
-        provideConfig(defaultPaginationConfig),
+        provideDefaultConfig(defaultPaginationConfig),
         { provide: PaginationConfig, useExisting: Config },
     ], imports: [[CommonModule, RouterModule]] });
 
@@ -14208,22 +14205,19 @@ let QualtricsModule = class QualtricsModule {
 };
 QualtricsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: QualtricsModule });
 QualtricsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function QualtricsModule_Factory(t) { return new (t || QualtricsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                QualtricsComponent: {
+                    component: QualtricsComponent
+                }
+            }
+        }),
+        provideDefaultConfig(defaultQualtricsConfig),
         {
             provide: QualtricsConfig,
             useExisting: Config
         },
-    ], imports: [[
-            CommonModule,
-            HttpClientModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    QualtricsComponent: {
-                        component: QualtricsComponent
-                    }
-                }
-            }),
-            ConfigModule.withConfig(defaultQualtricsConfig),
-        ]] });
+    ], imports: [[CommonModule, HttpClientModule]] });
 
 let LanguageCurrencyComponent = class LanguageCurrencyComponent {
 };
@@ -14349,29 +14343,26 @@ __decorate([
 let SiteContextSelectorModule = class SiteContextSelectorModule {
 };
 SiteContextSelectorModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SiteContextSelectorModule });
-SiteContextSelectorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SiteContextSelectorModule_Factory(t) { return new (t || SiteContextSelectorModule)(); }, providers: [SiteContextComponentService], imports: [[
-            CommonModule,
-            RouterModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CMSSiteContextComponent: {
-                        component: SiteContextSelectorComponent,
-                        providers: [
-                            {
-                                provide: SiteContextComponentService,
-                                useClass: SiteContextComponentService,
-                                deps: [CmsComponentData, ContextServiceMap, Injector]
-                            },
-                        ]
-                    },
-                    LanguageCurrencyComponent: {
-                        component: LanguageCurrencyComponent
-                    }
+SiteContextSelectorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SiteContextSelectorModule_Factory(t) { return new (t || SiteContextSelectorModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CMSSiteContextComponent: {
+                    component: SiteContextSelectorComponent,
+                    providers: [
+                        {
+                            provide: SiteContextComponentService,
+                            useClass: SiteContextComponentService,
+                            deps: [CmsComponentData, ContextServiceMap, Injector]
+                        },
+                    ]
+                },
+                LanguageCurrencyComponent: {
+                    component: LanguageCurrencyComponent
                 }
-            }),
-            SiteContextModule,
-            IconModule,
-        ]] });
+            }
+        }),
+        SiteContextComponentService,
+    ], imports: [[CommonModule, RouterModule, SiteContextModule, IconModule]] });
 
 var SiteContextType;
 (function (SiteContextType) {
@@ -14460,7 +14451,7 @@ let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
         return {
             ngModule: ViewConfigModule_1,
             providers: [
-                provideConfig({
+                provideDefaultConfig({
                     view: {},
                 }),
                 {
@@ -14690,7 +14681,15 @@ CartCouponComponent.ctorParameters = () => [
 let CartCouponModule = class CartCouponModule {
 };
 CartCouponModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CartCouponModule });
-CartCouponModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartCouponModule_Factory(t) { return new (t || CartCouponModule)(); }, imports: [[
+CartCouponModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartCouponModule_Factory(t) { return new (t || CartCouponModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CartApplyCouponComponent: {
+                    component: CartCouponComponent
+                }
+            }
+        }),
+    ], imports: [[
             FeaturesConfigModule,
             CommonModule,
             NgSelectModule,
@@ -14698,13 +14697,6 @@ CartCouponModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartCoup
             ReactiveFormsModule,
             I18nModule,
             IconModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CartApplyCouponComponent: {
-                        component: CartCouponComponent
-                    }
-                }
-            }),
         ]] });
 
 let CartItemListComponent = class CartItemListComponent {
@@ -15058,7 +15050,15 @@ CartSharedModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartShar
 let AddToCartModule = class AddToCartModule {
 };
 AddToCartModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AddToCartModule });
-AddToCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToCartModule_Factory(t) { return new (t || AddToCartModule)(); }, imports: [[
+AddToCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToCartModule_Factory(t) { return new (t || AddToCartModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductAddToCartComponent: {
+                    component: AddToCartComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             ReactiveFormsModule,
             CartSharedModule,
@@ -15066,13 +15066,6 @@ AddToCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToCart
             SpinnerModule,
             PromotionsModule,
             FeaturesConfigModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductAddToCartComponent: {
-                        component: AddToCartComponent
-                    }
-                }
-            }),
             UrlModule,
             IconModule,
             I18nModule,
@@ -15172,7 +15165,15 @@ CartDetailsComponent.ctorParameters = () => [
 let CartDetailsModule = class CartDetailsModule {
 };
 CartDetailsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CartDetailsModule });
-CartDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartDetailsModule_Factory(t) { return new (t || CartDetailsModule)(); }, imports: [[
+CartDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartDetailsModule_Factory(t) { return new (t || CartDetailsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CartComponent: {
+                    component: CartDetailsComponent
+                }
+            }
+        }),
+    ], imports: [[
             CartSharedModule,
             CommonModule,
             CartCouponModule,
@@ -15180,13 +15181,6 @@ CartDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartDet
             UrlModule,
             PromotionsModule,
             FeaturesConfigModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CartComponent: {
-                        component: CartDetailsComponent
-                    }
-                }
-            }),
             I18nModule,
         ]] });
 
@@ -15277,17 +15271,18 @@ CartTotalsComponent.ctorParameters = () => [
 let CartTotalsModule = class CartTotalsModule {
 };
 CartTotalsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CartTotalsModule });
-CartTotalsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartTotalsModule_Factory(t) { return new (t || CartTotalsModule)(); }, imports: [[
+CartTotalsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartTotalsModule_Factory(t) { return new (t || CartTotalsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CartTotalsComponent: {
+                    component: CartTotalsComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CartTotalsComponent: {
-                        component: CartTotalsComponent
-                    }
-                }
-            }),
             CartSharedModule,
             I18nModule,
             CartCouponModule,
@@ -15334,20 +15329,15 @@ MiniCartComponent.ctorParameters = () => [
 let MiniCartModule = class MiniCartModule {
 };
 MiniCartModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: MiniCartModule });
-MiniCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MiniCartModule_Factory(t) { return new (t || MiniCartModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    MiniCartComponent: {
-                        component: MiniCartComponent
-                    }
+MiniCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MiniCartModule_Factory(t) { return new (t || MiniCartModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                MiniCartComponent: {
+                    component: MiniCartComponent
                 }
-            }),
-            UrlModule,
-            IconModule,
-            I18nModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, UrlModule, IconModule, I18nModule]] });
 
 let AddToWishListComponent = class AddToWishListComponent {
     constructor(wishListService, currentProductService, authService) {
@@ -15393,20 +15383,15 @@ AddToWishListComponent.ctorParameters = () => [
 let AddToWishListModule = class AddToWishListModule {
 };
 AddToWishListModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AddToWishListModule });
-AddToWishListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToWishListModule_Factory(t) { return new (t || AddToWishListModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AddToWishListComponent: {
-                        component: AddToWishListComponent
-                    }
+AddToWishListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToWishListModule_Factory(t) { return new (t || AddToWishListModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AddToWishListComponent: {
+                    component: AddToWishListComponent
                 }
-            }),
-            I18nModule,
-            IconModule,
-            RouterModule,
-            UrlModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, I18nModule, IconModule, RouterModule, UrlModule]] });
 
 let SaveForLaterComponent = class SaveForLaterComponent {
     constructor(cmsService, cartService, selectiveCartService) {
@@ -15454,21 +15439,18 @@ SaveForLaterComponent.ctorParameters = () => [
 let SaveForLaterModule = class SaveForLaterModule {
 };
 SaveForLaterModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SaveForLaterModule });
-SaveForLaterModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SaveForLaterModule_Factory(t) { return new (t || SaveForLaterModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    SaveForLaterComponent: {
-                        component: SaveForLaterComponent
-                    }
-                },
-                features: {
-                    saveForLater: '1.5'
+SaveForLaterModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SaveForLaterModule_Factory(t) { return new (t || SaveForLaterModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                SaveForLaterComponent: {
+                    component: SaveForLaterComponent
                 }
-            }),
-            I18nModule,
-            CartSharedModule,
-        ]] });
+            },
+            features: {
+                saveForLater: '1.5'
+            }
+        }),
+    ], imports: [[CommonModule, I18nModule, CartSharedModule]] });
 
 let CartComponentModule = class CartComponentModule {
 };
@@ -15910,18 +15892,18 @@ CheckoutOrchestratorComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Checko
 let CheckoutOrchestratorModule = class CheckoutOrchestratorModule {
 };
 CheckoutOrchestratorModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutOrchestratorModule });
-CheckoutOrchestratorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutOrchestratorModule_Factory(t) { return new (t || CheckoutOrchestratorModule)(); }, providers: [{ provide: CheckoutConfig, useExisting: Config }], imports: [[
-            CommonModule,
-            ConfigModule.withConfig(defaultCheckoutConfig),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutOrchestrator: {
-                        component: CheckoutOrchestratorComponent,
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard, CheckoutGuard]
-                    }
+CheckoutOrchestratorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutOrchestratorModule_Factory(t) { return new (t || CheckoutOrchestratorModule)(); }, providers: [
+        provideDefaultConfig(defaultCheckoutConfig),
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutOrchestrator: {
+                    component: CheckoutOrchestratorComponent,
+                    guards: [CheckoutAuthGuard, CartNotEmptyGuard, CheckoutGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+        { provide: CheckoutConfig, useExisting: Config },
+    ], imports: [[CommonModule]] });
 
 let CheckoutOrderSummaryComponent = class CheckoutOrderSummaryComponent {
     constructor(activeCartService) {
@@ -15943,17 +15925,15 @@ CheckoutOrderSummaryComponent.ctorParameters = () => [
 let CheckoutOrderSummaryModule = class CheckoutOrderSummaryModule {
 };
 CheckoutOrderSummaryModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutOrderSummaryModule });
-CheckoutOrderSummaryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutOrderSummaryModule_Factory(t) { return new (t || CheckoutOrderSummaryModule)(); }, imports: [[
-            CommonModule,
-            CartSharedModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutOrderSummary: {
-                        component: CheckoutOrderSummaryComponent
-                    }
+CheckoutOrderSummaryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutOrderSummaryModule_Factory(t) { return new (t || CheckoutOrderSummaryModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutOrderSummary: {
+                    component: CheckoutOrderSummaryComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, CartSharedModule]] });
 
 let CheckoutProgressMobileBottomComponent = class CheckoutProgressMobileBottomComponent {
     constructor(config, routingService, routingConfigService) {
@@ -15990,21 +15970,17 @@ CheckoutProgressMobileBottomComponent.ctorParameters = () => [
 let CheckoutProgressMobileBottomModule = class CheckoutProgressMobileBottomModule {
 };
 CheckoutProgressMobileBottomModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutProgressMobileBottomModule });
-CheckoutProgressMobileBottomModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressMobileBottomModule_Factory(t) { return new (t || CheckoutProgressMobileBottomModule)(); }, imports: [[
-            CommonModule,
-            UrlModule,
-            I18nModule,
-            RouterModule,
-            ConfigModule.withConfig(defaultCheckoutConfig),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutProgressMobileBottom: {
-                        component: CheckoutProgressMobileBottomComponent,
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard]
-                    }
+CheckoutProgressMobileBottomModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressMobileBottomModule_Factory(t) { return new (t || CheckoutProgressMobileBottomModule)(); }, providers: [
+        provideDefaultConfig(defaultCheckoutConfig),
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutProgressMobileBottom: {
+                    component: CheckoutProgressMobileBottomComponent,
+                    guards: [CheckoutAuthGuard, CartNotEmptyGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, UrlModule, I18nModule, RouterModule]] });
 
 let CheckoutProgressMobileTopComponent = class CheckoutProgressMobileTopComponent {
     constructor(config, routingService, routingConfigService, activeCartService) {
@@ -16044,21 +16020,17 @@ CheckoutProgressMobileTopComponent.ctorParameters = () => [
 let CheckoutProgressMobileTopModule = class CheckoutProgressMobileTopModule {
 };
 CheckoutProgressMobileTopModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutProgressMobileTopModule });
-CheckoutProgressMobileTopModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressMobileTopModule_Factory(t) { return new (t || CheckoutProgressMobileTopModule)(); }, imports: [[
-            CommonModule,
-            UrlModule,
-            I18nModule,
-            RouterModule,
-            ConfigModule.withConfig(defaultCheckoutConfig),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutProgressMobileTop: {
-                        component: CheckoutProgressMobileTopComponent,
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard]
-                    }
+CheckoutProgressMobileTopModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressMobileTopModule_Factory(t) { return new (t || CheckoutProgressMobileTopModule)(); }, providers: [
+        provideDefaultConfig(defaultCheckoutConfig),
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutProgressMobileTop: {
+                    component: CheckoutProgressMobileTopComponent,
+                    guards: [CheckoutAuthGuard, CartNotEmptyGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, UrlModule, I18nModule, RouterModule]] });
 
 let CheckoutProgressComponent = class CheckoutProgressComponent {
     constructor(config, routingService, routingConfigService) {
@@ -16104,21 +16076,18 @@ CheckoutProgressComponent.ctorParameters = () => [
 let CheckoutProgressModule = class CheckoutProgressModule {
 };
 CheckoutProgressModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutProgressModule });
-CheckoutProgressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressModule_Factory(t) { return new (t || CheckoutProgressModule)(); }, providers: [{ provide: CheckoutConfig, useExisting: Config }], imports: [[
-            CommonModule,
-            UrlModule,
-            I18nModule,
-            RouterModule,
-            ConfigModule.withConfig(defaultCheckoutConfig),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutProgress: {
-                        component: CheckoutProgressComponent,
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard]
-                    }
+CheckoutProgressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutProgressModule_Factory(t) { return new (t || CheckoutProgressModule)(); }, providers: [
+        provideDefaultConfig(defaultCheckoutConfig),
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutProgress: {
+                    component: CheckoutProgressComponent,
+                    guards: [CheckoutAuthGuard, CartNotEmptyGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+        { provide: CheckoutConfig, useExisting: Config },
+    ], imports: [[CommonModule, UrlModule, I18nModule, RouterModule]] });
 
 let ShippingAddressSetGuard = class ShippingAddressSetGuard {
     constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
@@ -16269,24 +16238,20 @@ DeliveryModeComponent.ctorParameters = () => [
 let DeliveryModeModule = class DeliveryModeModule {
 };
 DeliveryModeModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: DeliveryModeModule });
-DeliveryModeModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function DeliveryModeModule_Factory(t) { return new (t || DeliveryModeModule)(); }, imports: [[
-            CommonModule,
-            ReactiveFormsModule,
-            I18nModule,
-            SpinnerModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutDeliveryMode: {
-                        component: DeliveryModeComponent,
-                        guards: [
-                            CheckoutAuthGuard,
-                            CartNotEmptyGuard,
-                            ShippingAddressSetGuard,
-                        ]
-                    }
+DeliveryModeModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function DeliveryModeModule_Factory(t) { return new (t || DeliveryModeModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutDeliveryMode: {
+                    component: DeliveryModeComponent,
+                    guards: [
+                        CheckoutAuthGuard,
+                        CartNotEmptyGuard,
+                        ShippingAddressSetGuard,
+                    ]
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule]] });
 
 let DeliveryModeSetGuard = class DeliveryModeSetGuard {
     constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
@@ -17024,26 +16989,27 @@ PaymentMethodComponent.ctorParameters = () => [
 let PaymentMethodModule = class PaymentMethodModule {
 };
 PaymentMethodModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PaymentMethodModule });
-PaymentMethodModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaymentMethodModule_Factory(t) { return new (t || PaymentMethodModule)(); }, providers: [UserService], imports: [[
+PaymentMethodModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaymentMethodModule_Factory(t) { return new (t || PaymentMethodModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutPaymentDetails: {
+                    component: PaymentMethodComponent,
+                    guards: [
+                        CheckoutAuthGuard,
+                        CartNotEmptyGuard,
+                        ShippingAddressSetGuard,
+                        DeliveryModeSetGuard,
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             PaymentFormModule,
             CardModule,
             SpinnerModule,
             I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutPaymentDetails: {
-                        component: PaymentMethodComponent,
-                        guards: [
-                            CheckoutAuthGuard,
-                            CartNotEmptyGuard,
-                            ShippingAddressSetGuard,
-                            DeliveryModeSetGuard,
-                        ]
-                    }
-                }
-            }),
         ]] });
 
 let PlaceOrderComponent = class PlaceOrderComponent {
@@ -17115,20 +17081,16 @@ PlaceOrderComponent.ctorParameters = () => [
 let PlaceOrderModule = class PlaceOrderModule {
 };
 PlaceOrderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PlaceOrderModule });
-PlaceOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PlaceOrderModule_Factory(t) { return new (t || PlaceOrderModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            UrlModule,
-            I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutPlaceOrder: {
-                        component: PlaceOrderComponent,
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard]
-                    }
+PlaceOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PlaceOrderModule_Factory(t) { return new (t || PlaceOrderModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutPlaceOrder: {
+                    component: PlaceOrderComponent,
+                    guards: [CheckoutAuthGuard, CartNotEmptyGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, UrlModule, I18nModule]] });
 
 let PaymentDetailsSetGuard = class PaymentDetailsSetGuard {
     constructor(checkoutDetailsService, checkoutConfigService, routingConfigService, router) {
@@ -17322,7 +17284,22 @@ ReviewSubmitComponent.ctorParameters = () => [
 let ReviewSubmitModule = class ReviewSubmitModule {
 };
 ReviewSubmitModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ReviewSubmitModule });
-ReviewSubmitModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReviewSubmitModule_Factory(t) { return new (t || ReviewSubmitModule)(); }, imports: [[
+ReviewSubmitModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReviewSubmitModule_Factory(t) { return new (t || ReviewSubmitModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutReviewOrder: {
+                    component: ReviewSubmitComponent,
+                    guards: [
+                        CheckoutAuthGuard,
+                        CartNotEmptyGuard,
+                        ShippingAddressSetGuard,
+                        DeliveryModeSetGuard,
+                        PaymentDetailsSetGuard,
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             CardModule,
             CartSharedModule,
@@ -17331,20 +17308,6 @@ ReviewSubmitModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Review
             RouterModule,
             PromotionsModule,
             FeaturesConfigModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutReviewOrder: {
-                        component: ReviewSubmitComponent,
-                        guards: [
-                            CheckoutAuthGuard,
-                            CartNotEmptyGuard,
-                            ShippingAddressSetGuard,
-                            DeliveryModeSetGuard,
-                            PaymentDetailsSetGuard,
-                        ]
-                    }
-                }
-            }),
         ]] });
 
 let AddressFormComponent = class AddressFormComponent {
@@ -17922,7 +17885,20 @@ ShippingAddressComponent.ctorParameters = () => [
 let ShippingAddressModule = class ShippingAddressModule {
 };
 ShippingAddressModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ShippingAddressModule });
-ShippingAddressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ShippingAddressModule_Factory(t) { return new (t || ShippingAddressModule)(); }, imports: [[
+ShippingAddressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ShippingAddressModule_Factory(t) { return new (t || ShippingAddressModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CheckoutShippingAddress: {
+                    component: ShippingAddressComponent,
+                    guards: [
+                        CheckoutAuthGuard,
+                        CartNotEmptyGuard,
+                        CheckoutDetailsLoadedGuard,
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             AddressFormModule,
@@ -17931,18 +17907,6 @@ ShippingAddressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Shi
             I18nModule,
             CheckoutProgressMobileTopModule,
             CheckoutProgressMobileBottomModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CheckoutShippingAddress: {
-                        component: ShippingAddressComponent,
-                        guards: [
-                            CheckoutAuthGuard,
-                            CartNotEmptyGuard,
-                            CheckoutDetailsLoadedGuard,
-                        ]
-                    }
-                }
-            }),
         ]] });
 
 let CheckoutComponentModule = class CheckoutComponentModule {
@@ -18049,16 +18013,15 @@ HamburgerMenuComponent.ctorParameters = () => [
 let HamburgerMenuModule = class HamburgerMenuModule {
 };
 HamburgerMenuModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: HamburgerMenuModule });
-HamburgerMenuModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function HamburgerMenuModule_Factory(t) { return new (t || HamburgerMenuModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    HamburgerMenuComponent: {
-                        component: HamburgerMenuComponent
-                    }
+HamburgerMenuModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function HamburgerMenuModule_Factory(t) { return new (t || HamburgerMenuModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                HamburgerMenuComponent: {
+                    component: HamburgerMenuComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule]] });
 
 let LayoutModule = class LayoutModule {
 };
@@ -18339,21 +18302,22 @@ ConsentManagementComponent.ctorParameters = () => [
 let ConsentManagementModule = class ConsentManagementModule {
 };
 ConsentManagementModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ConsentManagementModule });
-ConsentManagementModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ConsentManagementModule_Factory(t) { return new (t || ConsentManagementModule)(); }, imports: [[
+ConsentManagementModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ConsentManagementModule_Factory(t) { return new (t || ConsentManagementModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ConsentManagementComponent: {
+                    component: ConsentManagementComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             FormsModule,
             ReactiveFormsModule,
             SpinnerModule,
             I18nModule,
             IconModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ConsentManagementComponent: {
-                        component: ConsentManagementComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
         ]] });
 
 let AnonymousConsentsModule = class AnonymousConsentsModule {
@@ -18478,19 +18442,15 @@ __decorate([
 let BannerCarouselModule = class BannerCarouselModule {
 };
 BannerCarouselModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: BannerCarouselModule });
-BannerCarouselModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BannerCarouselModule_Factory(t) { return new (t || BannerCarouselModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    RotatingImagesComponent: {
-                        component: BannerCarouselComponent
-                    }
+BannerCarouselModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BannerCarouselModule_Factory(t) { return new (t || BannerCarouselModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                RotatingImagesComponent: {
+                    component: BannerCarouselComponent
                 }
-            }),
-            PageComponentModule,
-            CarouselModule,
-            MediaModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, PageComponentModule, CarouselModule, MediaModule]] });
 
 let BannerComponent = class BannerComponent {
     constructor(component) {
@@ -18512,25 +18472,21 @@ BannerComponent.ctorParameters = () => [
 let BannerModule = class BannerModule {
 };
 BannerModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: BannerModule });
-BannerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BannerModule_Factory(t) { return new (t || BannerModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            GenericLinkModule,
-            MediaModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    SimpleResponsiveBannerComponent: {
-                        component: BannerComponent
-                    },
-                    BannerComponent: {
-                        component: BannerComponent
-                    },
-                    SimpleBannerComponent: {
-                        component: BannerComponent
-                    }
+BannerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BannerModule_Factory(t) { return new (t || BannerModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                SimpleResponsiveBannerComponent: {
+                    component: BannerComponent
+                },
+                BannerComponent: {
+                    component: BannerComponent
+                },
+                SimpleBannerComponent: {
+                    component: BannerComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, GenericLinkModule, MediaModule]] });
 
 let LinkComponent = class LinkComponent {
     constructor(component) {
@@ -18551,16 +18507,13 @@ LinkComponent.ctorParameters = () => [
 let LinkModule = class LinkModule {
 };
 LinkModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LinkModule });
-LinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LinkModule_Factory(t) { return new (t || LinkModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            GenericLinkModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CMSLinkComponent: { component: LinkComponent }
-                }
-            }),
-        ]] });
+LinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LinkModule_Factory(t) { return new (t || LinkModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CMSLinkComponent: { component: LinkComponent }
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, GenericLinkModule]] });
 
 let ParagraphComponent = class ParagraphComponent {
     constructor(component) {
@@ -18581,19 +18534,18 @@ ParagraphComponent.ctorParameters = () => [
 let CmsParagraphModule = class CmsParagraphModule {
 };
 CmsParagraphModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CmsParagraphModule });
-CmsParagraphModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CmsParagraphModule_Factory(t) { return new (t || CmsParagraphModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CMSParagraphComponent: {
-                        component: ParagraphComponent
-                    },
-                    CMSTabParagraphComponent: {
-                        component: ParagraphComponent
-                    }
+CmsParagraphModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CmsParagraphModule_Factory(t) { return new (t || CmsParagraphModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CMSParagraphComponent: {
+                    component: ParagraphComponent
+                },
+                CMSTabParagraphComponent: {
+                    component: ParagraphComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule]] });
 
 let TabParagraphContainerComponent = class TabParagraphContainerComponent {
     constructor(componentData, cmsService, winRef) {
@@ -18674,19 +18626,15 @@ __decorate([
 let TabParagraphContainerModule = class TabParagraphContainerModule {
 };
 TabParagraphContainerModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: TabParagraphContainerModule });
-TabParagraphContainerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function TabParagraphContainerModule_Factory(t) { return new (t || TabParagraphContainerModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CMSTabParagraphContainer: {
-                        component: TabParagraphContainerComponent
-                    }
+TabParagraphContainerModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function TabParagraphContainerModule_Factory(t) { return new (t || TabParagraphContainerModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CMSTabParagraphContainer: {
+                    component: TabParagraphContainerComponent
                 }
-            }),
-            PageComponentModule,
-            OutletModule,
-            I18nModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, PageComponentModule, OutletModule, I18nModule]] });
 
 let AddressBookComponentService = class AddressBookComponentService {
     constructor(userAddressService, checkoutDeliveryService) {
@@ -18837,23 +18785,26 @@ AddressBookComponent.ctorParameters = () => [
 let AddressBookModule = class AddressBookModule {
 };
 AddressBookModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AddressBookModule });
-AddressBookModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddressBookModule_Factory(t) { return new (t || AddressBookModule)(); }, providers: [UserAddressService, AddressBookComponentService], imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AccountAddressBookComponent: {
-                        component: AddressBookComponent,
-                        providers: [
-                            {
-                                provide: AddressBookComponentService,
-                                useClass: AddressBookComponentService,
-                                deps: [UserAddressService]
-                            },
-                        ],
-                        guards: [AuthGuard]
-                    }
+AddressBookModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddressBookModule_Factory(t) { return new (t || AddressBookModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AccountAddressBookComponent: {
+                    component: AddressBookComponent,
+                    providers: [
+                        {
+                            provide: AddressBookComponentService,
+                            useClass: AddressBookComponentService,
+                            deps: [UserAddressService]
+                        },
+                    ],
+                    guards: [AuthGuard]
                 }
-            }),
+            }
+        }),
+        UserAddressService,
+        AddressBookComponentService,
+    ], imports: [[
+            CommonModule,
             CardModule,
             AddressFormModule,
             SpinnerModule,
@@ -18979,21 +18930,22 @@ CloseAccountComponent.ctorParameters = () => [
 let CloseAccountModule = class CloseAccountModule {
 };
 CloseAccountModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CloseAccountModule });
-CloseAccountModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CloseAccountModule_Factory(t) { return new (t || CloseAccountModule)(); }, imports: [[
+CloseAccountModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CloseAccountModule_Factory(t) { return new (t || CloseAccountModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CloseAccountComponent: {
+                    component: CloseAccountComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             UrlModule,
             I18nModule,
             IconModule,
             SpinnerModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CloseAccountComponent: {
-                        component: CloseAccountComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
         ]] });
 
 let ForgotPasswordComponent = class ForgotPasswordComponent {
@@ -19070,19 +19022,20 @@ ForgotPasswordComponent.ctorParameters = () => [
 let ForgotPasswordModule = class ForgotPasswordModule {
 };
 ForgotPasswordModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ForgotPasswordModule });
-ForgotPasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ForgotPasswordModule_Factory(t) { return new (t || ForgotPasswordModule)(); }, imports: [[
+ForgotPasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ForgotPasswordModule_Factory(t) { return new (t || ForgotPasswordModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ForgotPasswordComponent: {
+                    component: ForgotPasswordComponent,
+                    guards: [NotAuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             ReactiveFormsModule,
             RouterModule,
             UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ForgotPasswordComponent: {
-                        component: ForgotPasswordComponent,
-                        guards: [NotAuthGuard]
-                    }
-                }
-            }),
             I18nModule,
         ]] });
 
@@ -19386,7 +19339,22 @@ const ɵ0$1 = {
 let CancelOrderConfirmationModule = class CancelOrderConfirmationModule {
 };
 CancelOrderConfirmationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CancelOrderConfirmationModule });
-CancelOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CancelOrderConfirmationModule_Factory(t) { return new (t || CancelOrderConfirmationModule)(); }, imports: [[
+CancelOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CancelOrderConfirmationModule_Factory(t) { return new (t || CancelOrderConfirmationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CancelOrderConfirmationComponent: {
+                    component: CancelOrderConfirmationComponent,
+                    guards: [AuthGuard, OrderCancellationGuard],
+                    providers: [
+                        {
+                            provide: OrderAmendService,
+                            useExisting: OrderCancellationService
+                        },
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -19397,20 +19365,6 @@ CancelOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: func
                 },
             ]),
             ReactiveFormsModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CancelOrderConfirmationComponent: {
-                        component: CancelOrderConfirmationComponent,
-                        guards: [AuthGuard, OrderCancellationGuard],
-                        providers: [
-                            {
-                                provide: OrderAmendService,
-                                useExisting: OrderCancellationService
-                            },
-                        ]
-                    }
-                }
-            }),
             AmendOrderItemsModule,
             AmendOrderActionsModule,
         ]] });
@@ -19442,7 +19396,22 @@ const ɵ0$2 = {
 let CancelOrderModule = class CancelOrderModule {
 };
 CancelOrderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CancelOrderModule });
-CancelOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CancelOrderModule_Factory(t) { return new (t || CancelOrderModule)(); }, imports: [[
+CancelOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CancelOrderModule_Factory(t) { return new (t || CancelOrderModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CancelOrderComponent: {
+                    component: CancelOrderComponent,
+                    guards: [AuthGuard],
+                    providers: [
+                        {
+                            provide: OrderAmendService,
+                            useExisting: OrderCancellationService
+                        },
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -19452,20 +19421,6 @@ CancelOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CancelO
                     data: ɵ0$2
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CancelOrderComponent: {
-                        component: CancelOrderComponent,
-                        guards: [AuthGuard],
-                        providers: [
-                            {
-                                provide: OrderAmendService,
-                                useExisting: OrderCancellationService
-                            },
-                        ]
-                    }
-                }
-            }),
             AmendOrderItemsModule,
             AmendOrderActionsModule,
         ]] });
@@ -19590,7 +19545,22 @@ const ɵ0$3 = {
 let ReturnOrderConfirmationModule = class ReturnOrderConfirmationModule {
 };
 ReturnOrderConfirmationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ReturnOrderConfirmationModule });
-ReturnOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnOrderConfirmationModule_Factory(t) { return new (t || ReturnOrderConfirmationModule)(); }, imports: [[
+ReturnOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnOrderConfirmationModule_Factory(t) { return new (t || ReturnOrderConfirmationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ReturnOrderConfirmationComponent: {
+                    component: ReturnOrderConfirmationComponent,
+                    guards: [AuthGuard, OrderReturnGuard],
+                    providers: [
+                        {
+                            provide: OrderAmendService,
+                            useExisting: OrderReturnService
+                        },
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -19600,20 +19570,6 @@ ReturnOrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: func
                     data: ɵ0$3
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ReturnOrderConfirmationComponent: {
-                        component: ReturnOrderConfirmationComponent,
-                        guards: [AuthGuard, OrderReturnGuard],
-                        providers: [
-                            {
-                                provide: OrderAmendService,
-                                useExisting: OrderReturnService
-                            },
-                        ]
-                    }
-                }
-            }),
             AmendOrderItemsModule,
             I18nModule,
             ReactiveFormsModule,
@@ -19647,7 +19603,22 @@ const ɵ0$4 = {
 let ReturnOrderModule = class ReturnOrderModule {
 };
 ReturnOrderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ReturnOrderModule });
-ReturnOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnOrderModule_Factory(t) { return new (t || ReturnOrderModule)(); }, imports: [[
+ReturnOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnOrderModule_Factory(t) { return new (t || ReturnOrderModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ReturnOrderComponent: {
+                    component: ReturnOrderComponent,
+                    guards: [AuthGuard],
+                    providers: [
+                        {
+                            provide: OrderAmendService,
+                            useExisting: OrderReturnService
+                        },
+                    ]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -19657,20 +19628,6 @@ ReturnOrderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnO
                     data: ɵ0$4
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ReturnOrderComponent: {
-                        component: ReturnOrderComponent,
-                        guards: [AuthGuard],
-                        providers: [
-                            {
-                                provide: OrderAmendService,
-                                useExisting: OrderReturnService
-                            },
-                        ]
-                    }
-                }
-            }),
             AmendOrderItemsModule,
             AmendOrderActionsModule,
         ]] });
@@ -19985,7 +19942,31 @@ const ɵ0$5 = { pageLabel: 'order', cxRoute: 'orderGuest' }, ɵ1 = { cxRoute: 'o
 let OrderDetailsModule = class OrderDetailsModule {
 };
 OrderDetailsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OrderDetailsModule });
-OrderDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderDetailsModule_Factory(t) { return new (t || OrderDetailsModule)(); }, providers: [OrderDetailsService], imports: [[
+OrderDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderDetailsModule_Factory(t) { return new (t || OrderDetailsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AccountOrderDetailsActionsComponent: {
+                    component: OrderDetailActionsComponent
+                },
+                AccountOrderDetailsHeadlineComponent: {
+                    component: OrderDetailHeadlineComponent
+                },
+                AccountOrderDetailsItemsComponent: {
+                    component: OrderDetailItemsComponent
+                },
+                AccountOrderDetailsTotalsComponent: {
+                    component: OrderDetailTotalsComponent
+                },
+                AccountOrderDetailsShippingComponent: {
+                    component: OrderDetailShippingComponent
+                }
+            },
+            features: {
+                consignmentTracking: '1.2'
+            }
+        }),
+        OrderDetailsService,
+    ], imports: [[
             CartSharedModule,
             CardModule,
             CommonModule,
@@ -20007,28 +19988,6 @@ OrderDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderD
                     data: ɵ1
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AccountOrderDetailsActionsComponent: {
-                        component: OrderDetailActionsComponent
-                    },
-                    AccountOrderDetailsHeadlineComponent: {
-                        component: OrderDetailHeadlineComponent
-                    },
-                    AccountOrderDetailsItemsComponent: {
-                        component: OrderDetailItemsComponent
-                    },
-                    AccountOrderDetailsTotalsComponent: {
-                        component: OrderDetailTotalsComponent
-                    },
-                    AccountOrderDetailsShippingComponent: {
-                        component: OrderDetailShippingComponent
-                    }
-                },
-                features: {
-                    consignmentTracking: '1.2'
-                }
-            }),
             SpinnerModule,
         ]] });
 
@@ -20107,7 +20066,16 @@ const ɵ0$6 = { cxRoute: 'orders' };
 let OrderHistoryModule = class OrderHistoryModule {
 };
 OrderHistoryModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OrderHistoryModule });
-OrderHistoryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderHistoryModule_Factory(t) { return new (t || OrderHistoryModule)(); }, providers: [UserService], imports: [[
+OrderHistoryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderHistoryModule_Factory(t) { return new (t || OrderHistoryModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AccountOrderHistoryComponent: {
+                    component: OrderHistoryComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -20117,14 +20085,6 @@ OrderHistoryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderH
                     data: ɵ0$6
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AccountOrderHistoryComponent: {
-                        component: OrderHistoryComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
             RouterModule,
             FormsModule,
             NgSelectModule,
@@ -20279,7 +20239,21 @@ const ɵ0$7 = { cxRoute: 'returnRequestDetails' };
 let ReturnRequestDetailModule = class ReturnRequestDetailModule {
 };
 ReturnRequestDetailModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ReturnRequestDetailModule });
-ReturnRequestDetailModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnRequestDetailModule_Factory(t) { return new (t || ReturnRequestDetailModule)(); }, imports: [[
+ReturnRequestDetailModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnRequestDetailModule_Factory(t) { return new (t || ReturnRequestDetailModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ReturnRequestOverviewComponent: {
+                    component: ReturnRequestOverviewComponent
+                },
+                ReturnRequestItemsComponent: {
+                    component: ReturnRequestItemsComponent
+                },
+                ReturnRequestTotalsComponent: {
+                    component: ReturnRequestTotalsComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule.forChild([
                 {
@@ -20289,19 +20263,6 @@ ReturnRequestDetailModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function
                     data: ɵ0$7
                 },
             ]),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ReturnRequestOverviewComponent: {
-                        component: ReturnRequestOverviewComponent
-                    },
-                    ReturnRequestItemsComponent: {
-                        component: ReturnRequestItemsComponent
-                    },
-                    ReturnRequestTotalsComponent: {
-                        component: ReturnRequestTotalsComponent
-                    }
-                }
-            }),
             RouterModule,
             UrlModule,
             I18nModule,
@@ -20374,16 +20335,17 @@ OrderReturnRequestListComponent.ctorParameters = () => [
 let ReturnRequestListModule = class ReturnRequestListModule {
 };
 ReturnRequestListModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ReturnRequestListModule });
-ReturnRequestListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnRequestListModule_Factory(t) { return new (t || ReturnRequestListModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    OrderReturnRequestListComponent: {
-                        component: OrderReturnRequestListComponent,
-                        guards: [AuthGuard]
-                    }
+ReturnRequestListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ReturnRequestListModule_Factory(t) { return new (t || ReturnRequestListModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                OrderReturnRequestListComponent: {
+                    component: OrderReturnRequestListComponent,
+                    guards: [AuthGuard]
                 }
-            }),
+            }
+        }),
+    ], imports: [[
+            CommonModule,
             RouterModule,
             ListNavigationModule,
             UrlModule,
@@ -20495,20 +20457,16 @@ PaymentMethodsComponent.ctorParameters = () => [
 let PaymentMethodsModule = class PaymentMethodsModule {
 };
 PaymentMethodsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PaymentMethodsModule });
-PaymentMethodsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaymentMethodsModule_Factory(t) { return new (t || PaymentMethodsModule)(); }, providers: [UserService], imports: [[
-            CommonModule,
-            CardModule,
-            SpinnerModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    AccountPaymentDetailsComponent: {
-                        component: PaymentMethodsComponent,
-                        guards: [AuthGuard]
-                    }
+PaymentMethodsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaymentMethodsModule_Factory(t) { return new (t || PaymentMethodsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                AccountPaymentDetailsComponent: {
+                    component: PaymentMethodsComponent,
+                    guards: [AuthGuard]
                 }
-            }),
-            I18nModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, CardModule, SpinnerModule, I18nModule]] });
 
 let ResetPasswordFormComponent = class ResetPasswordFormComponent {
     constructor(fb, routingService, userService) {
@@ -20615,16 +20573,17 @@ ResetPasswordFormComponent.ctorParameters = () => [
 let ResetPasswordModule = class ResetPasswordModule {
 };
 ResetPasswordModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ResetPasswordModule });
-ResetPasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ResetPasswordModule_Factory(t) { return new (t || ResetPasswordModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ResetPasswordComponent: {
-                        component: ResetPasswordFormComponent,
-                        guards: [NotAuthGuard]
-                    }
+ResetPasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ResetPasswordModule_Factory(t) { return new (t || ResetPasswordModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ResetPasswordComponent: {
+                    component: ResetPasswordFormComponent,
+                    guards: [NotAuthGuard]
                 }
-            }),
+            }
+        }),
+    ], imports: [[
+            CommonModule,
             FormsModule,
             ReactiveFormsModule,
             RouterModule,
@@ -20831,16 +20790,17 @@ UpdateEmailComponent.ctorParameters = () => [
 let UpdateEmailModule = class UpdateEmailModule {
 };
 UpdateEmailModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: UpdateEmailModule });
-UpdateEmailModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdateEmailModule_Factory(t) { return new (t || UpdateEmailModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    UpdateEmailComponent: {
-                        component: UpdateEmailComponent,
-                        guards: [AuthGuard]
-                    }
+UpdateEmailModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdateEmailModule_Factory(t) { return new (t || UpdateEmailModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                UpdateEmailComponent: {
+                    component: UpdateEmailComponent,
+                    guards: [AuthGuard]
                 }
-            }),
+            }
+        }),
+    ], imports: [[
+            CommonModule,
             FormsModule,
             ReactiveFormsModule,
             SpinnerModule,
@@ -21044,18 +21004,19 @@ UpdatePasswordComponent.ctorParameters = () => [
 let UpdatePasswordModule = class UpdatePasswordModule {
 };
 UpdatePasswordModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: UpdatePasswordModule });
-UpdatePasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdatePasswordModule_Factory(t) { return new (t || UpdatePasswordModule)(); }, imports: [[
+UpdatePasswordModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdatePasswordModule_Factory(t) { return new (t || UpdatePasswordModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                UpdatePasswordComponent: {
+                    component: UpdatePasswordComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             FormsModule,
             ReactiveFormsModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    UpdatePasswordComponent: {
-                        component: UpdatePasswordComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
             SpinnerModule,
             I18nModule,
         ]] });
@@ -21260,16 +21221,17 @@ UpdateProfileComponent.ctorParameters = () => [
 let UpdateProfileModule = class UpdateProfileModule {
 };
 UpdateProfileModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: UpdateProfileModule });
-UpdateProfileModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdateProfileModule_Factory(t) { return new (t || UpdateProfileModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    UpdateProfileComponent: {
-                        component: UpdateProfileComponent,
-                        guards: [AuthGuard]
-                    }
+UpdateProfileModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function UpdateProfileModule_Factory(t) { return new (t || UpdateProfileModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                UpdateProfileComponent: {
+                    component: UpdateProfileComponent,
+                    guards: [AuthGuard]
                 }
-            }),
+            }
+        }),
+    ], imports: [[
+            CommonModule,
             FormsModule,
             ReactiveFormsModule,
             SpinnerModule,
@@ -21696,7 +21658,20 @@ const ɵ0$8 = { cxRoute: 'couponClaim' };
 let MyCouponsModule = class MyCouponsModule {
 };
 MyCouponsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: MyCouponsModule });
-MyCouponsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MyCouponsModule_Factory(t) { return new (t || MyCouponsModule)(); }, imports: [[
+MyCouponsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MyCouponsModule_Factory(t) { return new (t || MyCouponsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                MyCouponsComponent: {
+                    component: MyCouponsComponent,
+                    guards: [AuthGuard]
+                },
+                CouponClaimComponent: {
+                    component: CouponClaimComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             CardModule,
             SpinnerModule,
@@ -21705,18 +21680,6 @@ MyCouponsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MyCoupons
             UrlModule,
             IconModule,
             ListNavigationModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    MyCouponsComponent: {
-                        component: MyCouponsComponent,
-                        guards: [AuthGuard]
-                    },
-                    CouponClaimComponent: {
-                        component: CouponClaimComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
             RouterModule.forChild([
                 {
                     path: null,
@@ -21770,19 +21733,16 @@ NotificationPreferenceComponent.ctorParameters = () => [
 let NotificationPreferenceModule = class NotificationPreferenceModule {
 };
 NotificationPreferenceModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: NotificationPreferenceModule });
-NotificationPreferenceModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function NotificationPreferenceModule_Factory(t) { return new (t || NotificationPreferenceModule)(); }, imports: [[
-            CommonModule,
-            SpinnerModule,
-            I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    NotificationPreferenceComponent: {
-                        component: NotificationPreferenceComponent,
-                        guards: [AuthGuard]
-                    }
+NotificationPreferenceModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function NotificationPreferenceModule_Factory(t) { return new (t || NotificationPreferenceModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                NotificationPreferenceComponent: {
+                    component: NotificationPreferenceComponent,
+                    guards: [AuthGuard]
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, SpinnerModule, I18nModule]] });
 
 let MyInterestsComponent = class MyInterestsComponent {
     constructor(productInterestService, translationService, productService) {
@@ -21877,17 +21837,18 @@ MyInterestsComponent.ctorParameters = () => [
 let MyInterestsModule = class MyInterestsModule {
 };
 MyInterestsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: MyInterestsModule });
-MyInterestsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MyInterestsModule_Factory(t) { return new (t || MyInterestsModule)(); }, imports: [[
+MyInterestsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MyInterestsModule_Factory(t) { return new (t || MyInterestsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                MyInterestsComponent: {
+                    component: MyInterestsComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    MyInterestsComponent: {
-                        component: MyInterestsComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
             RouterModule,
             ListNavigationModule,
             I18nModule,
@@ -21941,18 +21902,15 @@ BreadcrumbComponent.ctorParameters = () => [
 let BreadcrumbModule = class BreadcrumbModule {
 };
 BreadcrumbModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: BreadcrumbModule });
-BreadcrumbModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BreadcrumbModule_Factory(t) { return new (t || BreadcrumbModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    BreadcrumbComponent: {
-                        component: BreadcrumbComponent
-                    }
+BreadcrumbModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function BreadcrumbModule_Factory(t) { return new (t || BreadcrumbModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                BreadcrumbComponent: {
+                    component: BreadcrumbComponent
                 }
-            }),
-            CmsPageTitleModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, CmsPageTitleModule]] });
 
 let NavigationService = class NavigationService {
     constructor(cmsService, semanticPathService) {
@@ -22296,35 +22254,34 @@ NavigationComponent.ctorParameters = () => [
 let NavigationModule = class NavigationModule {
 };
 NavigationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: NavigationModule });
-NavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function NavigationModule_Factory(t) { return new (t || NavigationModule)(); }, imports: [[
+NavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function NavigationModule_Factory(t) { return new (t || NavigationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                NavigationComponent: {
+                    component: NavigationComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             IconModule,
             GenericLinkModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    NavigationComponent: {
-                        component: NavigationComponent
-                    }
-                }
-            }),
             I18nModule,
         ]] });
 
 let CategoryNavigationModule = class CategoryNavigationModule {
 };
 CategoryNavigationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CategoryNavigationModule });
-CategoryNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CategoryNavigationModule_Factory(t) { return new (t || CategoryNavigationModule)(); }, imports: [[
-            CommonModule,
-            NavigationModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CategoryNavigationComponent: {
-                        component: CategoryNavigationComponent
-                    }
+CategoryNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CategoryNavigationModule_Factory(t) { return new (t || CategoryNavigationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                CategoryNavigationComponent: {
+                    component: CategoryNavigationComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, NavigationModule]] });
 
 let FooterNavigationComponent = class FooterNavigationComponent {
     constructor(componentData, service, anonymousConsentsConfig) {
@@ -22358,19 +22315,20 @@ FooterNavigationComponent.ctorParameters = () => [
 let FooterNavigationModule = class FooterNavigationModule {
 };
 FooterNavigationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: FooterNavigationModule });
-FooterNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FooterNavigationModule_Factory(t) { return new (t || FooterNavigationModule)(); }, imports: [[
+FooterNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FooterNavigationModule_Factory(t) { return new (t || FooterNavigationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                FooterNavigationComponent: {
+                    component: FooterNavigationComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             NavigationModule,
             GenericLinkModule,
             I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    FooterNavigationComponent: {
-                        component: FooterNavigationComponent
-                    }
-                }
-            }),
         ]] });
 
 const HAS_SEARCH_RESULT_CLASS = 'has-searchbox-results';
@@ -22753,17 +22711,18 @@ HighlightPipe.ɵpipe = ɵngcc0.ɵɵdefinePipe({ name: "cxHighlight", type: Highl
 let SearchBoxModule = class SearchBoxModule {
 };
 SearchBoxModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SearchBoxModule });
-SearchBoxModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SearchBoxModule_Factory(t) { return new (t || SearchBoxModule)(); }, imports: [[
+SearchBoxModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SearchBoxModule_Factory(t) { return new (t || SearchBoxModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                SearchBoxComponent: {
+                    component: SearchBoxComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             MediaModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    SearchBoxComponent: {
-                        component: SearchBoxComponent
-                    }
-                }
-            }),
             IconModule,
             UrlModule,
             I18nModule,
@@ -23060,7 +23019,28 @@ const orderConfirmationComponents = [
 let OrderConfirmationModule = class OrderConfirmationModule {
 };
 OrderConfirmationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OrderConfirmationModule });
-OrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderConfirmationModule_Factory(t) { return new (t || OrderConfirmationModule)(); }, imports: [[
+OrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderConfirmationModule_Factory(t) { return new (t || OrderConfirmationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                OrderConfirmationThankMessageComponent: {
+                    component: OrderConfirmationThankYouMessageComponent,
+                    guards: [OrderConfirmationGuard]
+                },
+                OrderConfirmationItemsComponent: {
+                    component: OrderConfirmationItemsComponent,
+                    guards: [OrderConfirmationGuard]
+                },
+                OrderConfirmationTotalsComponent: {
+                    component: OrderConfirmationTotalsComponent,
+                    guards: [OrderConfirmationGuard]
+                },
+                OrderConfirmationOverviewComponent: {
+                    component: OrderConfirmationOverviewComponent,
+                    guards: [OrderConfirmationGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             CartSharedModule,
             CardModule,
@@ -23069,26 +23049,6 @@ OrderConfirmationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function O
             I18nModule,
             ReactiveFormsModule,
             FeaturesConfigModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    OrderConfirmationThankMessageComponent: {
-                        component: OrderConfirmationThankYouMessageComponent,
-                        guards: [OrderConfirmationGuard]
-                    },
-                    OrderConfirmationItemsComponent: {
-                        component: OrderConfirmationItemsComponent,
-                        guards: [OrderConfirmationGuard]
-                    },
-                    OrderConfirmationTotalsComponent: {
-                        component: OrderConfirmationTotalsComponent,
-                        guards: [OrderConfirmationGuard]
-                    },
-                    OrderConfirmationOverviewComponent: {
-                        component: OrderConfirmationOverviewComponent,
-                        guards: [OrderConfirmationGuard]
-                    }
-                }
-            }),
         ]] });
 
 let ProductCarouselService = class ProductCarouselService {
@@ -23176,20 +23136,15 @@ ProductCarouselComponent.ctorParameters = () => [
 let ProductCarouselModule = class ProductCarouselModule {
 };
 ProductCarouselModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductCarouselModule });
-ProductCarouselModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductCarouselModule_Factory(t) { return new (t || ProductCarouselModule)(); }, imports: [[
-            CommonModule,
-            CarouselModule,
-            MediaModule,
-            RouterModule,
-            UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductCarouselComponent: {
-                        component: ProductCarouselComponent
-                    }
+ProductCarouselModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductCarouselModule_Factory(t) { return new (t || ProductCarouselModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductCarouselComponent: {
+                    component: ProductCarouselComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule]] });
 
 let ProductReferencesComponent = class ProductReferencesComponent {
     constructor(component, current, referenceService) {
@@ -23234,20 +23189,15 @@ ProductReferencesComponent.ctorParameters = () => [
 let ProductReferencesModule = class ProductReferencesModule {
 };
 ProductReferencesModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductReferencesModule });
-ProductReferencesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductReferencesModule_Factory(t) { return new (t || ProductReferencesModule)(); }, imports: [[
-            CommonModule,
-            CarouselModule,
-            MediaModule,
-            RouterModule,
-            UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductReferencesComponent: {
-                        component: ProductReferencesComponent
-                    }
+ProductReferencesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductReferencesModule_Factory(t) { return new (t || ProductReferencesModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductReferencesComponent: {
+                    component: ProductReferencesComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule]] });
 
 const defaultScrollConfig = {
     view: {
@@ -23327,18 +23277,19 @@ ProductImagesComponent.ctorParameters = () => [
 let ProductImagesModule = class ProductImagesModule {
 };
 ProductImagesModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductImagesModule });
-ProductImagesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductImagesModule_Factory(t) { return new (t || ProductImagesModule)(); }, imports: [[
+ProductImagesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductImagesModule_Factory(t) { return new (t || ProductImagesModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductImagesComponent: {
+                    component: ProductImagesComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             MediaModule,
             OutletModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductImagesComponent: {
-                        component: ProductImagesComponent
-                    }
-                }
-            }),
             CarouselModule,
         ]] });
 
@@ -23416,18 +23367,15 @@ ProductIntroComponent.ctorParameters = () => [
 let ProductIntroModule = class ProductIntroModule {
 };
 ProductIntroModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductIntroModule });
-ProductIntroModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductIntroModule_Factory(t) { return new (t || ProductIntroModule)(); }, imports: [[
-            CommonModule,
-            I18nModule,
-            StarRatingModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductIntroComponent: {
-                        component: ProductIntroComponent
-                    }
+ProductIntroModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductIntroModule_Factory(t) { return new (t || ProductIntroModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductIntroComponent: {
+                    component: ProductIntroComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, I18nModule, StarRatingModule]] });
 
 let ProductListComponentService = class ProductListComponentService {
     constructor(productSearchService, routing, activatedRoute, currencyService, languageService, router) {
@@ -24291,18 +24239,19 @@ ProductVariantGuard.ɵprov = ɵɵdefineInjectable({ factory: function ProductVar
 let ProductVariantsModule = class ProductVariantsModule {
 };
 ProductVariantsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductVariantsModule });
-ProductVariantsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductVariantsModule_Factory(t) { return new (t || ProductVariantsModule)(); }, imports: [[
+ProductVariantsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductVariantsModule_Factory(t) { return new (t || ProductVariantsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductVariantSelectorComponent: {
+                    component: ProductVariantsComponent,
+                    guards: [ProductVariantGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             RouterModule,
             UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductVariantSelectorComponent: {
-                        component: ProductVariantsComponent,
-                        guards: [ProductVariantGuard]
-                    }
-                }
-            }),
             I18nModule,
             VariantStyleSelectorModule,
             VariantSizeSelectorModule,
@@ -24313,25 +24262,26 @@ ProductVariantsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Pro
 let ProductListModule = class ProductListModule {
 };
 ProductListModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductListModule });
-ProductListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductListModule_Factory(t) { return new (t || ProductListModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig(defaultScrollConfig),
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    CMSProductListComponent: {
-                        component: ProductListComponent
-                    },
-                    ProductGridComponent: {
-                        component: ProductListComponent
-                    },
-                    SearchResultsListComponent: {
-                        component: ProductListComponent
-                    },
-                    ProductRefinementComponent: {
-                        component: ProductFacetNavigationComponent
-                    }
+ProductListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductListModule_Factory(t) { return new (t || ProductListModule)(); }, providers: [
+        provideDefaultConfig(defaultScrollConfig),
+        provideDefaultConfig({
+            cmsComponents: {
+                CMSProductListComponent: {
+                    component: ProductListComponent
+                },
+                ProductGridComponent: {
+                    component: ProductListComponent
+                },
+                SearchResultsListComponent: {
+                    component: ProductListComponent
+                },
+                ProductRefinementComponent: {
+                    component: ProductFacetNavigationComponent
                 }
-            }),
+            }
+        }),
+    ], imports: [[
+            CommonModule,
             RouterModule,
             MediaModule,
             AddToCartModule,
@@ -24377,18 +24327,15 @@ ProductSummaryComponent.ctorParameters = () => [
 let ProductSummaryModule = class ProductSummaryModule {
 };
 ProductSummaryModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductSummaryModule });
-ProductSummaryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductSummaryModule_Factory(t) { return new (t || ProductSummaryModule)(); }, imports: [[
-            CommonModule,
-            OutletModule,
-            I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductSummaryComponent: {
-                        component: ProductSummaryComponent
-                    }
+ProductSummaryModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductSummaryModule_Factory(t) { return new (t || ProductSummaryModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductSummaryComponent: {
+                    component: ProductSummaryComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, OutletModule, I18nModule]] });
 
 let ProductAttributesComponent = class ProductAttributesComponent {
     constructor(currentProductService) {
@@ -24412,17 +24359,15 @@ ProductAttributesComponent.ctorParameters = () => [
 let ProductAttributesModule = class ProductAttributesModule {
 };
 ProductAttributesModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductAttributesModule });
-ProductAttributesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductAttributesModule_Factory(t) { return new (t || ProductAttributesModule)(); }, imports: [[
-            CommonModule,
-            I18nModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductSpecsTabComponent: {
-                        component: ProductAttributesComponent
-                    }
+ProductAttributesModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductAttributesModule_Factory(t) { return new (t || ProductAttributesModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductSpecsTabComponent: {
+                    component: ProductAttributesComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, I18nModule]] });
 
 let ProductDetailsTabComponent = class ProductDetailsTabComponent {
     constructor(currentProductService) {
@@ -24446,16 +24391,15 @@ ProductDetailsTabComponent.ctorParameters = () => [
 let ProductDetailsTabModule = class ProductDetailsTabModule {
 };
 ProductDetailsTabModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductDetailsTabModule });
-ProductDetailsTabModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductDetailsTabModule_Factory(t) { return new (t || ProductDetailsTabModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductDetailsTabComponent: {
-                        component: ProductDetailsTabComponent
-                    }
+ProductDetailsTabModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductDetailsTabModule_Factory(t) { return new (t || ProductDetailsTabModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductDetailsTabComponent: {
+                    component: ProductDetailsTabComponent
                 }
-            }),
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule]] });
 
 let ProductReviewsComponent = class ProductReviewsComponent {
     constructor(reviewService, currentProductService, fb, cd) {
@@ -24558,19 +24502,20 @@ __decorate([
 let ProductReviewsModule = class ProductReviewsModule {
 };
 ProductReviewsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductReviewsModule });
-ProductReviewsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductReviewsModule_Factory(t) { return new (t || ProductReviewsModule)(); }, imports: [[
+ProductReviewsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductReviewsModule_Factory(t) { return new (t || ProductReviewsModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ProductReviewsTabComponent: {
+                    component: ProductReviewsComponent
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             ReactiveFormsModule,
             FormsModule,
             I18nModule,
             StarRatingModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ProductReviewsTabComponent: {
-                        component: ProductReviewsComponent
-                    }
-                }
-            }),
         ]] });
 
 let ProductTabsModule = class ProductTabsModule {
@@ -24742,20 +24687,15 @@ StockNotificationComponent.ctorParameters = () => [
 let StockNotificationModule = class StockNotificationModule {
 };
 StockNotificationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: StockNotificationModule });
-StockNotificationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StockNotificationModule_Factory(t) { return new (t || StockNotificationModule)(); }, imports: [[
-            CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    StockNotificationComponent: {
-                        component: StockNotificationComponent
-                    }
+StockNotificationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StockNotificationModule_Factory(t) { return new (t || StockNotificationModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                StockNotificationComponent: {
+                    component: StockNotificationComponent
                 }
-            }),
-            RouterModule,
-            I18nModule,
-            SpinnerModule,
-            UrlModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, I18nModule, SpinnerModule, UrlModule]] });
 
 const WEEK_DAYS_NUMBER = 7;
 let ScheduleComponent = class ScheduleComponent {
@@ -25346,7 +25286,46 @@ __decorate([
 let StoreFinderModule = class StoreFinderModule {
 };
 StoreFinderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: StoreFinderModule });
-StoreFinderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StoreFinderModule_Factory(t) { return new (t || StoreFinderModule)(); }, imports: [[
+StoreFinderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StoreFinderModule_Factory(t) { return new (t || StoreFinderModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                StoreFinderComponent: {
+                    component: StoreFinderComponent,
+                    childRoutes: [
+                        {
+                            path: 'find',
+                            component: StoreFinderSearchResultComponent
+                        },
+                        {
+                            path: 'view-all',
+                            component: StoreFinderStoresCountComponent
+                        },
+                        {
+                            path: 'country/:country',
+                            component: StoreFinderGridComponent
+                        },
+                        {
+                            path: 'country/:country/region/:region',
+                            component: StoreFinderGridComponent
+                        },
+                        {
+                            path: 'country/:country/region/:region/:store',
+                            component: StoreFinderStoreComponent
+                        },
+                        {
+                            path: 'country/:country/:store',
+                            component: StoreFinderStoreComponent
+                        },
+                    ]
+                }
+            },
+            layoutSlots: {
+                StoreFinderPageTemplate: {
+                    slots: ['MiddleContent', 'SideContent']
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             ReactiveFormsModule,
             RouterModule,
@@ -25357,44 +25336,6 @@ StoreFinderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StoreFi
             StoreFinderCoreModule,
             I18nModule,
             IconModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    StoreFinderComponent: {
-                        component: StoreFinderComponent,
-                        childRoutes: [
-                            {
-                                path: 'find',
-                                component: StoreFinderSearchResultComponent
-                            },
-                            {
-                                path: 'view-all',
-                                component: StoreFinderStoresCountComponent
-                            },
-                            {
-                                path: 'country/:country',
-                                component: StoreFinderGridComponent
-                            },
-                            {
-                                path: 'country/:country/region/:region',
-                                component: StoreFinderGridComponent
-                            },
-                            {
-                                path: 'country/:country/region/:region/:store',
-                                component: StoreFinderStoreComponent
-                            },
-                            {
-                                path: 'country/:country/:store',
-                                component: StoreFinderStoreComponent
-                            },
-                        ]
-                    }
-                },
-                layoutSlots: {
-                    StoreFinderPageTemplate: {
-                        slots: ['MiddleContent', 'SideContent']
-                    }
-                }
-            }),
         ]] });
 
 let CheckoutLoginComponent = class CheckoutLoginComponent {
@@ -25503,19 +25444,20 @@ CheckoutLoginComponent.ctorParameters = () => [
 let CheckoutLoginModule = class CheckoutLoginModule {
 };
 CheckoutLoginModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CheckoutLoginModule });
-CheckoutLoginModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutLoginModule_Factory(t) { return new (t || CheckoutLoginModule)(); }, imports: [[
+CheckoutLoginModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CheckoutLoginModule_Factory(t) { return new (t || CheckoutLoginModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                GuestCheckoutLoginComponent: {
+                    component: CheckoutLoginComponent,
+                    guards: [NotCheckoutAuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             I18nModule,
             FormsModule,
             ReactiveFormsModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    GuestCheckoutLoginComponent: {
-                        component: CheckoutLoginComponent,
-                        guards: [NotCheckoutAuthGuard]
-                    }
-                }
-            }),
             FormsModule,
             ReactiveFormsModule,
         ]] });
@@ -25671,20 +25613,21 @@ LoginFormComponent.ctorParameters = () => [
 let LoginFormModule = class LoginFormModule {
 };
 LoginFormModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LoginFormModule });
-LoginFormModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LoginFormModule_Factory(t) { return new (t || LoginFormModule)(); }, imports: [[
+LoginFormModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LoginFormModule_Factory(t) { return new (t || LoginFormModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                ReturningCustomerLoginComponent: {
+                    component: LoginFormComponent,
+                    guards: [NotAuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             FormsModule,
             ReactiveFormsModule,
             RouterModule,
             UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    ReturningCustomerLoginComponent: {
-                        component: LoginFormComponent,
-                        guards: [NotAuthGuard]
-                    }
-                }
-            }),
             I18nModule,
         ]] });
 
@@ -25721,20 +25664,15 @@ LoginComponent.ctorParameters = () => [
 let LoginModule = class LoginModule {
 };
 LoginModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LoginModule });
-LoginModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LoginModule_Factory(t) { return new (t || LoginModule)(); }, imports: [[
-            CommonModule,
-            RouterModule,
-            UrlModule,
-            PageSlotModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    LoginComponent: {
-                        component: LoginComponent
-                    }
+LoginModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LoginModule_Factory(t) { return new (t || LoginModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                LoginComponent: {
+                    component: LoginComponent
                 }
-            }),
-            I18nModule,
-        ]] });
+            }
+        }),
+    ], imports: [[CommonModule, RouterModule, UrlModule, PageSlotModule, I18nModule]] });
 
 let LogoutGuard = class LogoutGuard {
     /**
@@ -25980,20 +25918,21 @@ RegisterComponent.ctorParameters = () => [
 let RegisterComponentModule = class RegisterComponentModule {
 };
 RegisterComponentModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: RegisterComponentModule });
-RegisterComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function RegisterComponentModule_Factory(t) { return new (t || RegisterComponentModule)(); }, imports: [[
+RegisterComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function RegisterComponentModule_Factory(t) { return new (t || RegisterComponentModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                RegisterCustomerComponent: {
+                    component: RegisterComponent,
+                    guards: [NotAuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             CommonModule,
             LoginModule,
             ReactiveFormsModule,
             RouterModule,
             UrlModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    RegisterCustomerComponent: {
-                        component: RegisterComponent,
-                        guards: [NotAuthGuard]
-                    }
-                }
-            }),
             I18nModule,
             SpinnerModule,
         ]] });
@@ -26109,17 +26048,18 @@ WishListComponent.ctorParameters = () => [
 let WishListModule = class WishListModule {
 };
 WishListModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: WishListModule });
-WishListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function WishListModule_Factory(t) { return new (t || WishListModule)(); }, imports: [[
+WishListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function WishListModule_Factory(t) { return new (t || WishListModule)(); }, providers: [
+        provideDefaultConfig({
+            cmsComponents: {
+                WishListComponent: {
+                    component: WishListComponent,
+                    guards: [AuthGuard]
+                }
+            }
+        }),
+    ], imports: [[
             AddToCartModule,
             CommonModule,
-            ConfigModule.withConfig({
-                cmsComponents: {
-                    WishListComponent: {
-                        component: WishListComponent,
-                        guards: [AuthGuard]
-                    }
-                }
-            }),
             I18nModule,
             MediaModule,
             RouterModule,
@@ -26213,7 +26153,17 @@ const ɵ0$a = { cxRoute: 'product' };
 let ProductDetailsPageModule = class ProductDetailsPageModule {
 };
 ProductDetailsPageModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductDetailsPageModule });
-ProductDetailsPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductDetailsPageModule_Factory(t) { return new (t || ProductDetailsPageModule)(); }, imports: [[
+ProductDetailsPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductDetailsPageModule_Factory(t) { return new (t || ProductDetailsPageModule)(); }, providers: [
+        provideDefaultConfig({
+            routing: {
+                routes: {
+                    product: {
+                        matchers: [PRODUCT_DETAILS_URL_MATCHER]
+                    }
+                }
+            }
+        }),
+    ], imports: [[
             RouterModule.forChild([
                 {
                     path: null,
@@ -26222,15 +26172,6 @@ ProductDetailsPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function 
                     data: ɵ0$a
                 },
             ]),
-            ConfigModule.withConfig({
-                routing: {
-                    routes: {
-                        product: {
-                            matchers: [PRODUCT_DETAILS_URL_MATCHER]
-                        }
-                    }
-                }
-            }),
         ]] });
 
 function getProductListingUrlMatcherFactory(service, defaultMatcherFactory) {
@@ -26264,7 +26205,17 @@ const ɵ0$b = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'br
 let ProductListingPageModule = class ProductListingPageModule {
 };
 ProductListingPageModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductListingPageModule });
-ProductListingPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductListingPageModule_Factory(t) { return new (t || ProductListingPageModule)(); }, imports: [[
+ProductListingPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductListingPageModule_Factory(t) { return new (t || ProductListingPageModule)(); }, providers: [
+        provideDefaultConfig({
+            routing: {
+                routes: {
+                    category: {
+                        matchers: [PRODUCT_LISTING_URL_MATCHER]
+                    }
+                }
+            }
+        }),
+    ], imports: [[
             RouterModule.forChild([
                 {
                     path: null,
@@ -26287,15 +26238,6 @@ ProductListingPageModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function 
                     data: ɵ2
                 },
             ]),
-            ConfigModule.withConfig({
-                routing: {
-                    routes: {
-                        category: {
-                            matchers: [PRODUCT_LISTING_URL_MATCHER]
-                        }
-                    }
-                }
-            }),
         ]] });
 
 const b2cLayoutConfig = {
@@ -26509,15 +26451,17 @@ let B2cStorefrontModule = B2cStorefrontModule_1 = class B2cStorefrontModule {
     }
 };
 B2cStorefrontModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: B2cStorefrontModule });
-B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cStorefrontModule_Factory(t) { return new (t || B2cStorefrontModule)(); }, imports: [[
-            StorefrontModule.withConfig({
-                pwa: {
-                    enabled: true,
-                    addToHomeScreen: true
-                }
-            }),
-            ConfigModule.withConfig(b2cLayoutConfig),
-            ConfigModule.withConfigFactory(defaultCmsContentConfig),
+B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cStorefrontModule_Factory(t) { return new (t || B2cStorefrontModule)(); }, providers: [
+        provideDefaultConfig({
+            pwa: {
+                enabled: true,
+                addToHomeScreen: true
+            }
+        }),
+        provideDefaultConfig(b2cLayoutConfig),
+        provideDefaultConfigFactory(defaultCmsContentConfig),
+    ], imports: [[
+            StorefrontModule,
             // the cms lib module contains all components that added in the bundle
             CmsLibModule,
         ],
@@ -26539,13 +26483,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         }], type: [{
             type: Input
         }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(IconModule, { declarations: function () { return [IconComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule]; }, exports: function () { return [IconComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(IconModule, { declarations: function () { return [IconComponent]; }, imports: function () { return [CommonModule]; }, exports: function () { return [IconComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(IconModule, [{
         type: NgModule,
         args: [{
                 declarations: [IconComponent],
-                imports: [CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)],
-                providers: [{ provide: IconConfig, useExisting: Config }],
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig(fontawesomeIconConfig),
+                    { provide: IconConfig, useExisting: Config },
+                ],
                 exports: [IconComponent]
             }]
     }], null, null); })();
@@ -26577,18 +26524,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ModalService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AnonymousConsentManagementBannerModule, { declarations: function () { return [AnonymousConsentManagementBannerComponent,
-        AnonymousConsentOpenDialogComponent]; }, imports: function () { return [CommonModule,
-        I18nModule,
-        FeaturesConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [AnonymousConsentManagementBannerComponent,
+        AnonymousConsentOpenDialogComponent]; }, imports: function () { return [CommonModule, I18nModule, FeaturesConfigModule]; }, exports: function () { return [AnonymousConsentManagementBannerComponent,
         AnonymousConsentOpenDialogComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AnonymousConsentManagementBannerModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    I18nModule,
-                    FeaturesConfigModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, I18nModule, FeaturesConfigModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             AnonymousConsentManagementBannerComponent: {
                                 component: AnonymousConsentManagementBannerComponent,
@@ -26876,20 +26819,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             type: Input
         }] }); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SkipLinkModule, { declarations: function () { return [SkipLinkComponent,
-        SkipLinkDirective]; }, imports: function () { return [CommonModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [SkipLinkDirective]; } }); })();
+        SkipLinkDirective]; }, imports: function () { return [CommonModule, I18nModule]; }, exports: function () { return [SkipLinkDirective]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    I18nModule,
-                    ConfigModule.withConfig(defaultSkipLinkConfig),
-                ],
+                imports: [CommonModule, I18nModule],
                 declarations: [SkipLinkComponent, SkipLinkDirective],
                 exports: [SkipLinkDirective],
                 entryComponents: [SkipLinkComponent],
                 providers: [
+                    provideDefaultConfig(defaultSkipLinkConfig),
                     { provide: SkipLinkConfig, useExisting: Config },
                     {
                         provide: APP_INITIALIZER,
@@ -26944,18 +26883,18 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: AddToHomeScreenService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PwaModule, { declarations: function () { return [AddToHomeScreenBtnComponent,
-        AddToHomeScreenBannerComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, ɵngcc6.ServiceWorkerModule, I18nModule]; }, exports: function () { return [AddToHomeScreenBtnComponent,
+        AddToHomeScreenBannerComponent]; }, imports: function () { return [CommonModule, ɵngcc6.ServiceWorkerModule, I18nModule]; }, exports: function () { return [AddToHomeScreenBtnComponent,
         AddToHomeScreenBannerComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PwaModule, [{
         type: NgModule,
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig(defaultPWAModuleConfig),
                     ServiceWorkerModule.register('/ngsw-worker.js'),
                     I18nModule,
                 ],
                 providers: [
+                    provideDefaultConfig(defaultPWAModuleConfig),
                     { provide: PWAModuleConfig, useExisting: Config },
                     {
                         provide: SwRegistrationOptions,
@@ -27531,7 +27470,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [CommonModule, RouterModule],
                 providers: [
-                    provideConfig(defaultPaginationConfig),
+                    provideDefaultConfig(defaultPaginationConfig),
                     { provide: PaginationConfig, useExisting: Config },
                 ],
                 declarations: [PaginationComponent],
@@ -27616,26 +27555,22 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
   `
             }]
     }], function () { return [{ type: QualtricsLoaderService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(QualtricsModule, { declarations: function () { return [QualtricsComponent]; }, imports: function () { return [CommonModule,
-        HttpClientModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(QualtricsModule, { declarations: function () { return [QualtricsComponent]; }, imports: function () { return [CommonModule, HttpClientModule]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(QualtricsModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    HttpClientModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, HttpClientModule],
+                declarations: [QualtricsComponent],
+                entryComponents: [QualtricsComponent],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             QualtricsComponent: {
                                 component: QualtricsComponent
                             }
                         }
                     }),
-                    ConfigModule.withConfig(defaultQualtricsConfig),
-                ],
-                declarations: [QualtricsComponent],
-                entryComponents: [QualtricsComponent],
-                providers: [
+                    provideDefaultConfig(defaultQualtricsConfig),
                     {
                         provide: QualtricsConfig,
                         useExisting: Config
@@ -27670,17 +27605,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             type: Input
         }] }); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SiteContextSelectorModule, { declarations: function () { return [SiteContextSelectorComponent,
-        LanguageCurrencyComponent]; }, imports: function () { return [CommonModule,
-        RouterModule, ɵngcc1.ConfigModule, SiteContextModule,
+        LanguageCurrencyComponent]; }, imports: function () { return [CommonModule, RouterModule, SiteContextModule,
         IconModule]; }, exports: function () { return [SiteContextSelectorComponent,
         LanguageCurrencyComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SiteContextSelectorModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, SiteContextModule, IconModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CMSSiteContextComponent: {
                                 component: SiteContextSelectorComponent,
@@ -27697,10 +27630,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    SiteContextModule,
-                    IconModule,
+                    SiteContextComponentService,
                 ],
-                providers: [SiteContextComponentService],
                 declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 exports: [SiteContextSelectorComponent, LanguageCurrencyComponent]
@@ -27784,7 +27715,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         FormsModule,
         ReactiveFormsModule,
         I18nModule,
-        IconModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CartCouponComponent,
+        IconModule]; }, exports: function () { return [CartCouponComponent,
         AppliedCouponsComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CartCouponModule, [{
         type: NgModule,
@@ -27799,7 +27730,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     ReactiveFormsModule,
                     I18nModule,
                     IconModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CartApplyCouponComponent: {
                                 component: CartCouponComponent
@@ -27912,7 +27845,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         RouterModule,
         SpinnerModule,
         PromotionsModule,
-        FeaturesConfigModule, ɵngcc1.ConfigModule, UrlModule,
+        FeaturesConfigModule,
+        UrlModule,
         IconModule,
         I18nModule,
         ItemCounterModule,
@@ -27929,18 +27863,20 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     SpinnerModule,
                     PromotionsModule,
                     FeaturesConfigModule,
-                    ConfigModule.withConfig({
+                    UrlModule,
+                    IconModule,
+                    I18nModule,
+                    ItemCounterModule,
+                    AutoFocusDirectiveModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductAddToCartComponent: {
                                 component: AddToCartComponent
                             }
                         }
                     }),
-                    UrlModule,
-                    IconModule,
-                    I18nModule,
-                    ItemCounterModule,
-                    AutoFocusDirectiveModule,
                 ],
                 declarations: [AddToCartComponent, AddedToCartDialogComponent],
                 entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
@@ -27961,7 +27897,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         RouterModule,
         UrlModule,
         PromotionsModule,
-        FeaturesConfigModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [CartDetailsComponent]; } }); })();
+        FeaturesConfigModule,
+        I18nModule]; }, exports: function () { return [CartDetailsComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CartDetailsModule, [{
         type: NgModule,
         args: [{
@@ -27973,14 +27910,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     UrlModule,
                     PromotionsModule,
                     FeaturesConfigModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CartComponent: {
                                 component: CartDetailsComponent
                             }
                         }
                     }),
-                    I18nModule,
                 ],
                 declarations: [CartDetailsComponent],
                 exports: [CartDetailsComponent],
@@ -28009,7 +27948,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartTotalsModule, { declarations: function () { return [CartTotalsComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
-        UrlModule, ɵngcc1.ConfigModule, CartSharedModule,
+        UrlModule,
+        CartSharedModule,
         I18nModule,
         CartCouponModule]; }, exports: function () { return [CartTotalsComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CartTotalsModule, [{
@@ -28019,16 +27959,18 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CommonModule,
                     RouterModule,
                     UrlModule,
-                    ConfigModule.withConfig({
+                    CartSharedModule,
+                    I18nModule,
+                    CartCouponModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CartTotalsComponent: {
                                 component: CartTotalsComponent
                             }
                         }
                     }),
-                    CartSharedModule,
-                    I18nModule,
-                    CartCouponModule,
                 ],
                 declarations: [CartTotalsComponent],
                 exports: [CartTotalsComponent],
@@ -28043,26 +27985,21 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(MiniCartModule, { declarations: function () { return [MiniCartComponent]; }, imports: function () { return [CommonModule,
-        RouterModule, ɵngcc1.ConfigModule, UrlModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(MiniCartModule, { declarations: function () { return [MiniCartComponent]; }, imports: function () { return [CommonModule, RouterModule, UrlModule,
         IconModule,
         I18nModule]; }, exports: function () { return [MiniCartComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(MiniCartModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, UrlModule, IconModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             MiniCartComponent: {
                                 component: MiniCartComponent
                             }
                         }
                     }),
-                    UrlModule,
-                    IconModule,
-                    I18nModule,
                 ],
                 declarations: [MiniCartComponent],
                 exports: [MiniCartComponent],
@@ -28077,26 +28014,21 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.WishListService }, { type: CurrentProductService }, { type: ɵngcc1.AuthService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddToWishListModule, { declarations: function () { return [AddToWishListComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, I18nModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddToWishListModule, { declarations: function () { return [AddToWishListComponent]; }, imports: function () { return [CommonModule, I18nModule,
         IconModule,
-        RouterModule,
-        UrlModule]; }, exports: function () { return [AddToWishListComponent]; } }); })();
+        RouterModule, UrlModule]; }, exports: function () { return [AddToWishListComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToWishListModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, I18nModule, IconModule, RouterModule, UrlModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             AddToWishListComponent: {
                                 component: AddToWishListComponent
                             }
                         }
                     }),
-                    I18nModule,
-                    IconModule,
-                    RouterModule,
-                    UrlModule,
                 ],
                 declarations: [AddToWishListComponent],
                 entryComponents: [AddToWishListComponent],
@@ -28110,14 +28042,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<ng-container *ngIf=\"isCartEmpty$ | async\">\n  <p\n    *ngIf=\"data$ | async as data\"\n    [innerHTML]=\"data.content\"\n    class=\"cx-empty-cart-info\"\n  ></p>\n</ng-container>\n\n<ng-container *ngIf=\"saveForLater$ | async as saveForLater\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"saveForLater.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{\n          'saveForLaterItems.itemTotal'\n            | cxTranslate: { count: saveForLater.totalItems }\n        }}\n      </div>\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [readonly]=\"false\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [options]=\"{\n          isSaveForLater: true,\n          optionalBtn: moveToCartBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #moveToCartBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"moveToCart(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.moveToCart' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n"
             }]
     }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.SelectiveCartService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SaveForLaterModule, { declarations: function () { return [SaveForLaterComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, I18nModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SaveForLaterModule, { declarations: function () { return [SaveForLaterComponent]; }, imports: function () { return [CommonModule, I18nModule,
         CartSharedModule]; }, exports: function () { return [SaveForLaterComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SaveForLaterModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, I18nModule, CartSharedModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             SaveForLaterComponent: {
                                 component: SaveForLaterComponent
@@ -28127,8 +28059,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             saveForLater: '1.5'
                         }
                     }),
-                    I18nModule,
-                    CartSharedModule,
                 ],
                 declarations: [SaveForLaterComponent],
                 exports: [SaveForLaterComponent],
@@ -28215,14 +28145,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return []; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutOrchestratorModule, { declarations: function () { return [CheckoutOrchestratorComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutOrchestratorComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutOrchestratorModule, { declarations: function () { return [CheckoutOrchestratorComponent]; }, imports: function () { return [CommonModule]; }, exports: function () { return [CheckoutOrchestratorComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutOrchestratorModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig(defaultCheckoutConfig),
-                    ConfigModule.withConfig({
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig(defaultCheckoutConfig),
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutOrchestrator: {
                                 component: CheckoutOrchestratorComponent,
@@ -28230,8 +28160,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
+                    { provide: CheckoutConfig, useExisting: Config },
                 ],
-                providers: [{ provide: CheckoutConfig, useExisting: Config }],
                 declarations: [CheckoutOrchestratorComponent],
                 entryComponents: [CheckoutOrchestratorComponent],
                 exports: [CheckoutOrchestratorComponent]
@@ -28246,14 +28176,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutOrderSummaryModule, { declarations: function () { return [CheckoutOrderSummaryComponent]; }, imports: function () { return [CommonModule,
-        CartSharedModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutOrderSummaryComponent]; } }); })();
+        CartSharedModule]; }, exports: function () { return [CheckoutOrderSummaryComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutOrderSummaryModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    CartSharedModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, CartSharedModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutOrderSummary: {
                                 component: CheckoutOrderSummaryComponent
@@ -28273,20 +28202,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<div *ngIf=\"routerState$ | async as routerState\">\n  <div class=\"cx-media\">\n    <div *ngFor=\"let step of steps; let i = index\">\n      <div class=\"cx-list-media\" *ngIf=\"i > activeStepIndex\">\n        <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             }]
     }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.RoutingConfigService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressMobileBottomModule, { declarations: function () { return [CheckoutProgressMobileBottomComponent]; }, imports: function () { return [CommonModule,
-        UrlModule,
-        I18nModule,
-        RouterModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutProgressMobileBottomComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressMobileBottomModule, { declarations: function () { return [CheckoutProgressMobileBottomComponent]; }, imports: function () { return [CommonModule, UrlModule, I18nModule, RouterModule]; }, exports: function () { return [CheckoutProgressMobileBottomComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutProgressMobileBottomModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    UrlModule,
-                    I18nModule,
-                    RouterModule,
-                    ConfigModule.withConfig(defaultCheckoutConfig),
-                    ConfigModule.withConfig({
+                imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+                providers: [
+                    provideDefaultConfig(defaultCheckoutConfig),
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgressMobileBottom: {
                                 component: CheckoutProgressMobileBottomComponent,
@@ -28307,20 +28230,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<div *ngIf=\"routerState$ | async as routerState\">\n  <div *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             }]
     }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressMobileTopModule, { declarations: function () { return [CheckoutProgressMobileTopComponent]; }, imports: function () { return [CommonModule,
-        UrlModule,
-        I18nModule,
-        RouterModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutProgressMobileTopComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressMobileTopModule, { declarations: function () { return [CheckoutProgressMobileTopComponent]; }, imports: function () { return [CommonModule, UrlModule, I18nModule, RouterModule]; }, exports: function () { return [CheckoutProgressMobileTopComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutProgressMobileTopModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    UrlModule,
-                    I18nModule,
-                    RouterModule,
-                    ConfigModule.withConfig(defaultCheckoutConfig),
-                    ConfigModule.withConfig({
+                imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+                providers: [
+                    provideDefaultConfig(defaultCheckoutConfig),
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgressMobileTop: {
                                 component: CheckoutProgressMobileTopComponent,
@@ -28342,20 +28259,17 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CheckoutConfig }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.RoutingConfigService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressModule, { declarations: function () { return [CheckoutProgressComponent]; }, imports: function () { return [CommonModule,
-        UrlModule,
-        I18nModule,
-        RouterModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CheckoutProgressComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutProgressModule, { declarations: function () { return [CheckoutProgressComponent]; }, imports: function () { return [CommonModule, UrlModule, I18nModule, RouterModule]; }, exports: function () { return [CheckoutProgressComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutProgressModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    UrlModule,
-                    I18nModule,
-                    RouterModule,
-                    ConfigModule.withConfig(defaultCheckoutConfig),
-                    ConfigModule.withConfig({
+                imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+                declarations: [CheckoutProgressComponent],
+                entryComponents: [CheckoutProgressComponent],
+                exports: [CheckoutProgressComponent],
+                providers: [
+                    provideDefaultConfig(defaultCheckoutConfig),
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgress: {
                                 component: CheckoutProgressComponent,
@@ -28363,11 +28277,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                ],
-                declarations: [CheckoutProgressComponent],
-                entryComponents: [CheckoutProgressComponent],
-                exports: [CheckoutProgressComponent],
-                providers: [{ provide: CheckoutConfig, useExisting: Config }]
+                    { provide: CheckoutConfig, useExisting: Config },
+                ]
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ShippingAddressSetGuard, [{
@@ -28384,19 +28295,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(DeliveryModeModule, { declarations: function () { return [DeliveryModeComponent]; }, imports: function () { return [CommonModule,
-        ReactiveFormsModule,
-        I18nModule,
-        SpinnerModule, ɵngcc1.ConfigModule]; }, exports: function () { return [DeliveryModeComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(DeliveryModeModule, { declarations: function () { return [DeliveryModeComponent]; }, imports: function () { return [CommonModule, ReactiveFormsModule, I18nModule,
+        SpinnerModule]; }, exports: function () { return [DeliveryModeComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(DeliveryModeModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    I18nModule,
-                    SpinnerModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutDeliveryMode: {
                                 component: DeliveryModeComponent,
@@ -28522,7 +28428,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         PaymentFormModule,
         CardModule,
         SpinnerModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [PaymentMethodComponent]; } }); })();
+        I18nModule]; }, exports: function () { return [PaymentMethodComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PaymentMethodModule, [{
         type: NgModule,
         args: [{
@@ -28533,7 +28439,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CardModule,
                     SpinnerModule,
                     I18nModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutPaymentDetails: {
                                 component: PaymentMethodComponent,
@@ -28547,7 +28455,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                         }
                     }),
                 ],
-                providers: [UserService],
                 declarations: [PaymentMethodComponent],
                 entryComponents: [PaymentMethodComponent],
                 exports: [PaymentMethodComponent]
@@ -28561,19 +28468,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: ɵngcc1.RoutingService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PlaceOrderModule, { declarations: function () { return [PlaceOrderComponent]; }, imports: function () { return [CommonModule,
-        RouterModule,
-        UrlModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [PlaceOrderComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PlaceOrderModule, { declarations: function () { return [PlaceOrderComponent]; }, imports: function () { return [CommonModule, RouterModule, UrlModule, I18nModule]; }, exports: function () { return [PlaceOrderComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PlaceOrderModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    UrlModule,
-                    I18nModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutPlaceOrder: {
                                 component: PlaceOrderComponent,
@@ -28608,7 +28509,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         UrlModule,
         RouterModule,
         PromotionsModule,
-        FeaturesConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ReviewSubmitComponent]; } }); })();
+        FeaturesConfigModule]; }, exports: function () { return [ReviewSubmitComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ReviewSubmitModule, [{
         type: NgModule,
         args: [{
@@ -28621,7 +28522,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     RouterModule,
                     PromotionsModule,
                     FeaturesConfigModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutReviewOrder: {
                                 component: ReviewSubmitComponent,
@@ -28714,7 +28617,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         SpinnerModule,
         I18nModule,
         CheckoutProgressMobileTopModule,
-        CheckoutProgressMobileBottomModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ShippingAddressComponent]; } }); })();
+        CheckoutProgressMobileBottomModule]; }, exports: function () { return [ShippingAddressComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ShippingAddressModule, [{
         type: NgModule,
         args: [{
@@ -28727,7 +28630,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     I18nModule,
                     CheckoutProgressMobileTopModule,
                     CheckoutProgressMobileBottomModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CheckoutShippingAddress: {
                                 component: ShippingAddressComponent,
@@ -28796,13 +28701,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: HamburgerMenuService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(HamburgerMenuModule, { declarations: function () { return [HamburgerMenuComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule]; }, exports: function () { return [HamburgerMenuComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(HamburgerMenuModule, { declarations: function () { return [HamburgerMenuComponent]; }, imports: function () { return [CommonModule]; }, exports: function () { return [HamburgerMenuComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(HamburgerMenuModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             HamburgerMenuComponent: {
                                 component: HamburgerMenuComponent
@@ -28856,7 +28761,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         ReactiveFormsModule,
         SpinnerModule,
         I18nModule,
-        IconModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ConsentManagementComponent,
+        IconModule]; }, exports: function () { return [ConsentManagementComponent,
         ConsentManagementFormComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ConsentManagementModule, [{
         type: NgModule,
@@ -28868,7 +28773,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     SpinnerModule,
                     I18nModule,
                     IconModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ConsentManagementComponent: {
                                 component: ConsentManagementComponent,
@@ -28957,24 +28864,22 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             type: HostBinding,
             args: ['class']
         }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BannerCarouselModule, { declarations: function () { return [BannerCarouselComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, PageComponentModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BannerCarouselModule, { declarations: function () { return [BannerCarouselComponent]; }, imports: function () { return [CommonModule,
+        PageComponentModule,
         CarouselModule,
         MediaModule]; }, exports: function () { return [BannerCarouselComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BannerCarouselModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, PageComponentModule, CarouselModule, MediaModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             RotatingImagesComponent: {
                                 component: BannerCarouselComponent
                             }
                         }
                     }),
-                    PageComponentModule,
-                    CarouselModule,
-                    MediaModule,
                 ],
                 declarations: [BannerCarouselComponent],
                 entryComponents: [BannerCarouselComponent],
@@ -28989,19 +28894,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BannerModule, { declarations: function () { return [BannerComponent]; }, imports: function () { return [CommonModule,
-        RouterModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BannerModule, { declarations: function () { return [BannerComponent]; }, imports: function () { return [CommonModule, RouterModule,
         GenericLinkModule,
-        MediaModule, ɵngcc1.ConfigModule]; }, exports: function () { return [BannerComponent]; } }); })();
+        MediaModule]; }, exports: function () { return [BannerComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BannerModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    GenericLinkModule,
-                    MediaModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, GenericLinkModule, MediaModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             SimpleResponsiveBannerComponent: {
                                 component: BannerComponent
@@ -29028,17 +28929,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LinkModule, { declarations: function () { return [LinkComponent]; }, imports: function () { return [CommonModule,
-        RouterModule,
-        GenericLinkModule, ɵngcc1.ConfigModule]; }, exports: function () { return [LinkComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LinkModule, { declarations: function () { return [LinkComponent]; }, imports: function () { return [CommonModule, RouterModule,
+        GenericLinkModule]; }, exports: function () { return [LinkComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LinkModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    GenericLinkModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, GenericLinkModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CMSLinkComponent: { component: LinkComponent }
                         }
@@ -29057,13 +28955,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CmsParagraphModule, { declarations: function () { return [ParagraphComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ParagraphComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CmsParagraphModule, { declarations: function () { return [ParagraphComponent]; }, imports: function () { return [CommonModule]; }, exports: function () { return [ParagraphComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsParagraphModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CMSParagraphComponent: {
                                 component: ParagraphComponent
@@ -29090,24 +28988,22 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             type: ViewChildren,
             args: [ComponentWrapperDirective]
         }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(TabParagraphContainerModule, { declarations: function () { return [TabParagraphContainerComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, PageComponentModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(TabParagraphContainerModule, { declarations: function () { return [TabParagraphContainerComponent]; }, imports: function () { return [CommonModule,
+        PageComponentModule,
         OutletModule,
         I18nModule]; }, exports: function () { return [TabParagraphContainerComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TabParagraphContainerModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, PageComponentModule, OutletModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CMSTabParagraphContainer: {
                                 component: TabParagraphContainerComponent
                             }
                         }
                     }),
-                    PageComponentModule,
-                    OutletModule,
-                    I18nModule,
                 ],
                 declarations: [TabParagraphContainerComponent],
                 entryComponents: [TabParagraphContainerComponent],
@@ -29124,7 +29020,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<div class=\"cx-section\">\n  <ng-container\n    *ngIf=\"\n      (addresses$ | async).length &&\n      !(showAddAddressForm || showEditAddressForm)\n    \"\n  >\n    <div class=\"row\">\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-action\"\n          (click)=\"addAddressButtonHandle()\"\n        >\n          {{ 'addressBook.addNewAddress' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div\n      class=\"row cx-address-deck\"\n      *ngIf=\"!(addressesStateLoading$ | async); else loading\"\n    >\n      <div\n        *ngFor=\"let address of addresses$ | async\"\n        class=\"col-md-6 cx-address-card\"\n      >\n        <cx-card\n          [border]=\"true\"\n          [fitToContainer]=\"true\"\n          [content]=\"getCardContent(address) | async\"\n          (editCard)=\"editAddressButtonHandle(address)\"\n          (setDefaultCard)=\"setAddressAsDefault(address.id)\"\n          (deleteCard)=\"setEdit(address.id)\"\n          [editMode]=\"address.id === editCard\"\n          (cancelCard)=\"cancelCard()\"\n        ></cx-card>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-container *ngIf=\"!(addresses$ | async).length || showAddAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.addNewShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        class=\"cx-form\"\n        showTitleCode=\"true\"\n        [showCancelBtn]=\"!((addresses$ | async).length === 0)\"\n        actionBtnLabel=\"{{ 'addressBook.addAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [setAsDefaultField]=\"!((addresses$ | async).length === 0)\"\n        (submitAddress)=\"addAddressSubmit($event)\"\n        (backToAddress)=\"addAddressCancel()\"\n        (cancelCard)=\"cancelCard()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n\n  <ng-container *ngIf=\"showEditAddressForm\">\n    <section>\n      <p class=\"cx-section-msg\">\n        {{ 'addressBook.editShippingAddress' | cxTranslate }}\n      </p>\n      <cx-address-form\n        showTitleCode=\"true\"\n        actionBtnLabel=\"{{ 'addressBook.updateAddress' | cxTranslate }}\"\n        cancelBtnLabel=\"{{ 'addressBook.backToAddressList' | cxTranslate }}\"\n        [addressData]=\"currentAddress\"\n        (submitAddress)=\"editAddressSubmit($event)\"\n        (backToAddress)=\"editAddressCancel()\"\n      ></cx-address-form>\n    </section>\n  </ng-container>\n</div>\n\n<ng-template #loading>\n  <div class=\"col-md-12 cx-address-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
             }]
     }], function () { return [{ type: AddressBookComponentService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddressBookModule, { declarations: function () { return [AddressBookComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, CardModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AddressBookModule, { declarations: function () { return [AddressBookComponent]; }, imports: function () { return [CommonModule,
+        CardModule,
         AddressFormModule,
         SpinnerModule,
         I18nModule]; }, exports: function () { return [AddressBookComponent]; } }); })();
@@ -29133,7 +29030,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig({
+                    CardModule,
+                    AddressFormModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                declarations: [AddressBookComponent],
+                exports: [AddressBookComponent],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             AccountAddressBookComponent: {
                                 component: AddressBookComponent,
@@ -29148,14 +29053,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    CardModule,
-                    AddressFormModule,
-                    SpinnerModule,
-                    I18nModule,
+                    UserAddressService,
+                    AddressBookComponentService,
                 ],
-                declarations: [AddressBookComponent],
-                exports: [AddressBookComponent],
-                providers: [UserAddressService, AddressBookComponentService],
                 entryComponents: [AddressBookComponent]
             }]
     }], null, null); })();
@@ -29181,7 +29081,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         UrlModule,
         I18nModule,
         IconModule,
-        SpinnerModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CloseAccountComponent,
+        SpinnerModule]; }, exports: function () { return [CloseAccountComponent,
         CloseAccountModalComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CloseAccountModule, [{
         type: NgModule,
@@ -29193,7 +29093,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     I18nModule,
                     IconModule,
                     SpinnerModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CloseAccountComponent: {
                                 component: CloseAccountComponent,
@@ -29217,7 +29119,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ForgotPasswordModule, { declarations: function () { return [ForgotPasswordComponent]; }, imports: function () { return [CommonModule,
         ReactiveFormsModule,
         RouterModule,
-        UrlModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [ForgotPasswordComponent]; } }); })();
+        UrlModule,
+        I18nModule]; }, exports: function () { return [ForgotPasswordComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ForgotPasswordModule, [{
         type: NgModule,
         args: [{
@@ -29226,7 +29129,10 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     ReactiveFormsModule,
                     RouterModule,
                     UrlModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ForgotPasswordComponent: {
                                 component: ForgotPasswordComponent,
@@ -29234,7 +29140,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
                 ],
                 declarations: [ForgotPasswordComponent],
                 exports: [ForgotPasswordComponent],
@@ -29326,7 +29231,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 providedIn: 'root'
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: OrderCancellationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderConfirmationModule, { declarations: function () { return [CancelOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ReactiveFormsModule, ɵngcc1.ConfigModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderConfirmationModule, { declarations: function () { return [CancelOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ReactiveFormsModule,
+        AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [CancelOrderConfirmationComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CancelOrderConfirmationModule, [{
         type: NgModule,
@@ -29342,7 +29248,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                         },
                     ]),
                     ReactiveFormsModule,
-                    ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CancelOrderConfirmationComponent: {
                                 component: CancelOrderConfirmationComponent,
@@ -29356,8 +29266,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [CancelOrderConfirmationComponent],
                 exports: [CancelOrderConfirmationComponent],
@@ -29372,7 +29280,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderModule, { declarations: function () { return [CancelOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderModule, { declarations: function () { return [CancelOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [CancelOrderComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CancelOrderModule, [{
         type: NgModule,
@@ -29387,7 +29295,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$2
                         },
                     ]),
-                    ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CancelOrderComponent: {
                                 component: CancelOrderComponent,
@@ -29401,8 +29313,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [CancelOrderComponent],
                 exports: [CancelOrderComponent],
@@ -29437,7 +29347,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderConfirmationModule, { declarations: function () { return [ReturnOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderConfirmationModule, { declarations: function () { return [ReturnOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
         I18nModule,
         ReactiveFormsModule,
         AmendOrderActionsModule]; }, exports: function () { return [ReturnOrderConfirmationComponent]; } }); })();
@@ -29454,7 +29364,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$3
                         },
                     ]),
-                    ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    I18nModule,
+                    ReactiveFormsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ReturnOrderConfirmationComponent: {
                                 component: ReturnOrderConfirmationComponent,
@@ -29468,10 +29384,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    AmendOrderItemsModule,
-                    I18nModule,
-                    ReactiveFormsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [ReturnOrderConfirmationComponent],
                 exports: [ReturnOrderConfirmationComponent],
@@ -29486,7 +29398,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderModule, { declarations: function () { return [ReturnOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderModule, { declarations: function () { return [ReturnOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [ReturnOrderComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ReturnOrderModule, [{
         type: NgModule,
@@ -29501,7 +29413,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$4
                         },
                     ]),
-                    ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ReturnOrderComponent: {
                                 component: ReturnOrderComponent,
@@ -29515,8 +29431,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [ReturnOrderComponent],
                 exports: [ReturnOrderComponent],
@@ -29608,7 +29522,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         I18nModule,
         FeaturesConfigModule,
         PromotionsModule,
-        UrlModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, SpinnerModule]; }, exports: function () { return [OrderDetailActionsComponent,
+        UrlModule, ɵngcc5.RouterModule, SpinnerModule]; }, exports: function () { return [OrderDetailActionsComponent,
         OrderDetailHeadlineComponent,
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
@@ -29641,7 +29555,10 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ1
                         },
                     ]),
-                    ConfigModule.withConfig({
+                    SpinnerModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             AccountOrderDetailsActionsComponent: {
                                 component: OrderDetailActionsComponent
@@ -29663,9 +29580,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             consignmentTracking: '1.2'
                         }
                     }),
-                    SpinnerModule,
+                    OrderDetailsService,
                 ],
-                providers: [OrderDetailsService],
                 declarations: [...moduleComponents],
                 exports: [...moduleComponents],
                 entryComponents: [...moduleComponents]
@@ -29679,7 +29595,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserOrderService }, { type: ɵngcc1.TranslationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OrderHistoryModule, { declarations: function () { return [OrderHistoryComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, RouterModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OrderHistoryModule, { declarations: function () { return [OrderHistoryComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, RouterModule,
         FormsModule,
         NgSelectModule,
         ListNavigationModule,
@@ -29698,14 +29614,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$6
                         },
                     ]),
-                    ConfigModule.withConfig({
-                        cmsComponents: {
-                            AccountOrderHistoryComponent: {
-                                component: OrderHistoryComponent,
-                                guards: [AuthGuard]
-                            }
-                        }
-                    }),
                     RouterModule,
                     FormsModule,
                     NgSelectModule,
@@ -29715,7 +29623,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 ],
                 declarations: [OrderHistoryComponent],
                 exports: [OrderHistoryComponent],
-                providers: [UserService],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            AccountOrderHistoryComponent: {
+                                component: OrderHistoryComponent,
+                                guards: [AuthGuard]
+                            }
+                        }
+                    }),
+                ],
                 entryComponents: [OrderHistoryComponent]
             }]
     }], null, null); })();
@@ -29751,7 +29668,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ReturnRequestService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnRequestDetailModule, { declarations: function () { return [ReturnRequestOverviewComponent,
         ReturnRequestItemsComponent,
-        ReturnRequestTotalsComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ɵngcc1.ConfigModule, RouterModule,
+        ReturnRequestTotalsComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, RouterModule,
         UrlModule,
         I18nModule,
         MediaModule,
@@ -29771,7 +29688,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$7
                         },
                     ]),
-                    ConfigModule.withConfig({
+                    RouterModule,
+                    UrlModule,
+                    I18nModule,
+                    MediaModule,
+                    FeaturesConfigModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ReturnRequestOverviewComponent: {
                                 component: ReturnRequestOverviewComponent
@@ -29784,11 +29708,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    RouterModule,
-                    UrlModule,
-                    I18nModule,
-                    MediaModule,
-                    FeaturesConfigModule,
                 ],
                 declarations: [...components],
                 exports: [...components],
@@ -29803,7 +29722,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.OrderReturnRequestService }, { type: ɵngcc1.TranslationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnRequestListModule, { declarations: function () { return [OrderReturnRequestListComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, RouterModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnRequestListModule, { declarations: function () { return [OrderReturnRequestListComponent]; }, imports: function () { return [CommonModule,
+        RouterModule,
         ListNavigationModule,
         UrlModule,
         I18nModule]; }, exports: function () { return [OrderReturnRequestListComponent]; } }); })();
@@ -29812,7 +29732,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig({
+                    RouterModule,
+                    ListNavigationModule,
+                    UrlModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             OrderReturnRequestListComponent: {
                                 component: OrderReturnRequestListComponent,
@@ -29820,10 +29746,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    RouterModule,
-                    ListNavigationModule,
-                    UrlModule,
-                    I18nModule,
                 ],
                 declarations: [OrderReturnRequestListComponent],
                 exports: [OrderReturnRequestListComponent],
@@ -29858,15 +29780,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.TranslationService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PaymentMethodsModule, { declarations: function () { return [PaymentMethodsComponent]; }, imports: function () { return [CommonModule,
         CardModule,
-        SpinnerModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [PaymentMethodsComponent]; } }); })();
+        SpinnerModule,
+        I18nModule]; }, exports: function () { return [PaymentMethodsComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PaymentMethodsModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    CardModule,
-                    SpinnerModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, CardModule, SpinnerModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             AccountPaymentDetailsComponent: {
                                 component: PaymentMethodsComponent,
@@ -29874,9 +29795,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
                 ],
-                providers: [UserService],
                 declarations: [PaymentMethodsComponent],
                 exports: [PaymentMethodsComponent],
                 entryComponents: [PaymentMethodsComponent]
@@ -29889,7 +29808,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<form\n  (submit)=\"resetPassword()\"\n  [formGroup]=\"form\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n      >\n        <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n      >\n        <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n"
             }]
     }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ResetPasswordModule, { declarations: function () { return [ResetPasswordFormComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, FormsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ResetPasswordModule, { declarations: function () { return [ResetPasswordFormComponent]; }, imports: function () { return [CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         RouterModule,
         I18nModule]; }, exports: function () { return [ResetPasswordFormComponent]; } }); })();
@@ -29898,7 +29818,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig({
+                    FormsModule,
+                    ReactiveFormsModule,
+                    RouterModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ResetPasswordComponent: {
                                 component: ResetPasswordFormComponent,
@@ -29906,10 +29832,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    RouterModule,
-                    I18nModule,
                 ],
                 declarations: [ResetPasswordFormComponent],
                 exports: [ResetPasswordFormComponent],
@@ -29935,7 +29857,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.AuthService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(UpdateEmailModule, { declarations: function () { return [UpdateEmailFormComponent,
-        UpdateEmailComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, FormsModule,
+        UpdateEmailComponent]; }, imports: function () { return [CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         SpinnerModule,
         I18nModule]; }, exports: function () { return [UpdateEmailComponent,
@@ -29945,7 +29868,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig({
+                    FormsModule,
+                    ReactiveFormsModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             UpdateEmailComponent: {
                                 component: UpdateEmailComponent,
@@ -29953,10 +29882,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    SpinnerModule,
-                    I18nModule,
                 ],
                 declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
                 exports: [UpdateEmailComponent, UpdateEmailFormComponent],
@@ -29984,7 +29909,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(UpdatePasswordModule, { declarations: function () { return [UpdatePasswordComponent,
         UpdatePasswordFormComponent]; }, imports: function () { return [CommonModule,
         FormsModule,
-        ReactiveFormsModule, ɵngcc1.ConfigModule, SpinnerModule,
+        ReactiveFormsModule,
+        SpinnerModule,
         I18nModule]; }, exports: function () { return [UpdatePasswordComponent,
         UpdatePasswordFormComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(UpdatePasswordModule, [{
@@ -29994,7 +29920,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CommonModule,
                     FormsModule,
                     ReactiveFormsModule,
-                    ConfigModule.withConfig({
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             UpdatePasswordComponent: {
                                 component: UpdatePasswordComponent,
@@ -30002,8 +29932,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    SpinnerModule,
-                    I18nModule,
                 ],
                 declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                 exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
@@ -30033,7 +29961,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(UpdateProfileModule, { declarations: function () { return [UpdateProfileComponent,
-        UpdateProfileFormComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, FormsModule,
+        UpdateProfileFormComponent]; }, imports: function () { return [CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         SpinnerModule,
         I18nModule]; }, exports: function () { return [UpdateProfileComponent,
@@ -30043,7 +29972,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig({
+                    FormsModule,
+                    ReactiveFormsModule,
+                    SpinnerModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             UpdateProfileComponent: {
                                 component: UpdateProfileComponent,
@@ -30051,10 +29986,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    FormsModule,
-                    ReactiveFormsModule,
-                    SpinnerModule,
-                    I18nModule,
                 ],
                 declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
                 exports: [UpdateProfileComponent, UpdateProfileFormComponent],
@@ -30114,7 +30045,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         RouterModule,
         UrlModule,
         IconModule,
-        ListNavigationModule, ɵngcc1.ConfigModule, ɵngcc5.RouterModule]; }, exports: function () { return [MyCouponsComponent,
+        ListNavigationModule, ɵngcc5.RouterModule]; }, exports: function () { return [MyCouponsComponent,
         CouponClaimComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(MyCouponsModule, [{
         type: NgModule,
@@ -30128,18 +30059,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     UrlModule,
                     IconModule,
                     ListNavigationModule,
-                    ConfigModule.withConfig({
-                        cmsComponents: {
-                            MyCouponsComponent: {
-                                component: MyCouponsComponent,
-                                guards: [AuthGuard]
-                            },
-                            CouponClaimComponent: {
-                                component: CouponClaimComponent,
-                                guards: [AuthGuard]
-                            }
-                        }
-                    }),
                     RouterModule.forChild([
                         {
                             path: null,
@@ -30154,6 +30073,20 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CouponCardComponent,
                     CouponDialogComponent,
                     CouponClaimComponent,
+                ],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            MyCouponsComponent: {
+                                component: MyCouponsComponent,
+                                guards: [AuthGuard]
+                            },
+                            CouponClaimComponent: {
+                                component: CouponClaimComponent,
+                                guards: [AuthGuard]
+                            }
+                        }
+                    }),
                 ],
                 exports: [MyCouponsComponent, CouponClaimComponent],
                 entryComponents: [
@@ -30173,16 +30106,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.UserNotificationPreferenceService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(NotificationPreferenceModule, { declarations: function () { return [NotificationPreferenceComponent]; }, imports: function () { return [CommonModule,
         SpinnerModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [NotificationPreferenceComponent]; } }); })();
+        I18nModule]; }, exports: function () { return [NotificationPreferenceComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(NotificationPreferenceModule, [{
         type: NgModule,
         args: [{
                 declarations: [NotificationPreferenceComponent],
-                imports: [
-                    CommonModule,
-                    SpinnerModule,
-                    I18nModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, SpinnerModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             NotificationPreferenceComponent: {
                                 component: NotificationPreferenceComponent,
@@ -30204,7 +30135,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.UserInterestsService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ProductService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(MyInterestsModule, { declarations: function () { return [MyInterestsComponent]; }, imports: function () { return [CommonModule,
-        I18nModule, ɵngcc1.ConfigModule, RouterModule,
+        I18nModule,
+        RouterModule,
         ListNavigationModule,
         I18nModule,
         UrlModule,
@@ -30217,7 +30149,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 imports: [
                     CommonModule,
                     I18nModule,
-                    ConfigModule.withConfig({
+                    RouterModule,
+                    ListNavigationModule,
+                    I18nModule,
+                    UrlModule,
+                    MediaModule,
+                    SpinnerModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             MyInterestsComponent: {
                                 component: MyInterestsComponent,
@@ -30225,12 +30165,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    RouterModule,
-                    ListNavigationModule,
-                    I18nModule,
-                    UrlModule,
-                    MediaModule,
-                    SpinnerModule,
                 ],
                 exports: [MyInterestsComponent],
                 entryComponents: [MyInterestsComponent]
@@ -30244,22 +30178,19 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.PageMetaService }, { type: ɵngcc1.TranslationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BreadcrumbModule, { declarations: function () { return [BreadcrumbComponent]; }, imports: function () { return [CommonModule,
-        RouterModule, ɵngcc1.ConfigModule, CmsPageTitleModule]; }, exports: function () { return [BreadcrumbComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(BreadcrumbModule, { declarations: function () { return [BreadcrumbComponent]; }, imports: function () { return [CommonModule, RouterModule, CmsPageTitleModule]; }, exports: function () { return [BreadcrumbComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreadcrumbModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, CmsPageTitleModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             BreadcrumbComponent: {
                                 component: BreadcrumbComponent
                             }
                         }
                     }),
-                    CmsPageTitleModule,
                 ],
                 declarations: [BreadcrumbComponent],
                 exports: [BreadcrumbComponent],
@@ -30319,7 +30250,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         NavigationUIComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         IconModule,
-        GenericLinkModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [NavigationComponent,
+        GenericLinkModule,
+        I18nModule]; }, exports: function () { return [NavigationComponent,
         NavigationUIComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(NavigationModule, [{
         type: NgModule,
@@ -30329,14 +30261,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     RouterModule,
                     IconModule,
                     GenericLinkModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             NavigationComponent: {
                                 component: NavigationComponent
                             }
                         }
                     }),
-                    I18nModule,
                 ],
                 declarations: [NavigationComponent, NavigationUIComponent],
                 entryComponents: [NavigationComponent],
@@ -30344,14 +30278,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], null, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CategoryNavigationModule, { declarations: function () { return [CategoryNavigationComponent]; }, imports: function () { return [CommonModule,
-        NavigationModule, ɵngcc1.ConfigModule]; }, exports: function () { return [CategoryNavigationComponent]; } }); })();
+        NavigationModule]; }, exports: function () { return [CategoryNavigationComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CategoryNavigationModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    NavigationModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, NavigationModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             CategoryNavigationComponent: {
                                 component: CategoryNavigationComponent
@@ -30376,7 +30309,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         RouterModule,
         NavigationModule,
         GenericLinkModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [FooterNavigationComponent]; } }); })();
+        I18nModule]; }, exports: function () { return [FooterNavigationComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FooterNavigationModule, [{
         type: NgModule,
         args: [{
@@ -30386,7 +30319,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     NavigationModule,
                     GenericLinkModule,
                     I18nModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             FooterNavigationComponent: {
                                 component: FooterNavigationComponent
@@ -30425,7 +30360,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SearchBoxModule, { declarations: function () { return [SearchBoxComponent,
         HighlightPipe]; }, imports: function () { return [CommonModule,
         RouterModule,
-        MediaModule, ɵngcc1.ConfigModule, IconModule,
+        MediaModule,
+        IconModule,
         UrlModule,
         I18nModule]; }, exports: function () { return [SearchBoxComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SearchBoxModule, [{
@@ -30435,16 +30371,18 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CommonModule,
                     RouterModule,
                     MediaModule,
-                    ConfigModule.withConfig({
+                    IconModule,
+                    UrlModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             SearchBoxComponent: {
                                 component: SearchBoxComponent
                             }
                         }
                     }),
-                    IconModule,
-                    UrlModule,
-                    I18nModule,
                 ],
                 declarations: [SearchBoxComponent, HighlightPipe],
                 entryComponents: [SearchBoxComponent],
@@ -30511,7 +30449,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         PromotionsModule,
         I18nModule,
         ReactiveFormsModule,
-        FeaturesConfigModule, ɵngcc1.ConfigModule]; }, exports: function () { return [OrderConfirmationItemsComponent,
+        FeaturesConfigModule]; }, exports: function () { return [OrderConfirmationItemsComponent,
         OrderConfirmationOverviewComponent,
         OrderConfirmationThankYouMessageComponent,
         OrderConfirmationTotalsComponent,
@@ -30528,7 +30466,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     I18nModule,
                     ReactiveFormsModule,
                     FeaturesConfigModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             OrderConfirmationThankMessageComponent: {
                                 component: OrderConfirmationThankYouMessageComponent,
@@ -30571,18 +30511,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductCarouselModule, { declarations: function () { return [ProductCarouselComponent]; }, imports: function () { return [CommonModule,
         CarouselModule,
         MediaModule,
-        RouterModule,
-        UrlModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductCarouselComponent]; } }); })();
+        RouterModule, UrlModule]; }, exports: function () { return [ProductCarouselComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductCarouselModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    CarouselModule,
-                    MediaModule,
-                    RouterModule,
-                    UrlModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductCarouselComponent: {
                                 component: ProductCarouselComponent
@@ -30606,18 +30541,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductReferencesModule, { declarations: function () { return [ProductReferencesComponent]; }, imports: function () { return [CommonModule,
         CarouselModule,
         MediaModule,
-        RouterModule,
-        UrlModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductReferencesComponent]; } }); })();
+        RouterModule, UrlModule]; }, exports: function () { return [ProductReferencesComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductReferencesModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    CarouselModule,
-                    MediaModule,
-                    RouterModule,
-                    UrlModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductReferencesComponent: {
                                 component: ProductReferencesComponent
@@ -30641,7 +30571,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductImagesModule, { declarations: function () { return [ProductImagesComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         MediaModule,
-        OutletModule, ɵngcc1.ConfigModule, CarouselModule]; }, exports: function () { return [ProductImagesComponent]; } }); })();
+        OutletModule,
+        CarouselModule]; }, exports: function () { return [ProductImagesComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductImagesModule, [{
         type: NgModule,
         args: [{
@@ -30650,14 +30581,16 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     RouterModule,
                     MediaModule,
                     OutletModule,
-                    ConfigModule.withConfig({
+                    CarouselModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductImagesComponent: {
                                 component: ProductImagesComponent
                             }
                         }
                     }),
-                    CarouselModule,
                 ],
                 declarations: [ProductImagesComponent],
                 entryComponents: [ProductImagesComponent],
@@ -30672,17 +30605,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CurrentProductService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.WindowRef }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductIntroModule, { declarations: function () { return [ProductIntroComponent]; }, imports: function () { return [CommonModule,
-        I18nModule,
-        StarRatingModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductIntroComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductIntroModule, { declarations: function () { return [ProductIntroComponent]; }, imports: function () { return [CommonModule, I18nModule,
+        StarRatingModule]; }, exports: function () { return [ProductIntroComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductIntroModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    I18nModule,
-                    StarRatingModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, I18nModule, StarRatingModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductIntroComponent: {
                                 component: ProductIntroComponent
@@ -30863,7 +30793,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.ProductService }, { type: ɵngcc1.RoutingService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductVariantsModule, { declarations: function () { return [ProductVariantsComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
-        UrlModule, ɵngcc1.ConfigModule, I18nModule,
+        UrlModule,
+        I18nModule,
         VariantStyleSelectorModule,
         VariantSizeSelectorModule,
         VariantColorSelectorModule,
@@ -30875,7 +30806,14 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     CommonModule,
                     RouterModule,
                     UrlModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                    VariantStyleSelectorModule,
+                    VariantSizeSelectorModule,
+                    VariantColorSelectorModule,
+                    VariantStyleIconsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductVariantSelectorComponent: {
                                 component: ProductVariantsComponent,
@@ -30883,11 +30821,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
-                    VariantStyleSelectorModule,
-                    VariantSizeSelectorModule,
-                    VariantColorSelectorModule,
-                    VariantStyleIconsModule,
                 ],
                 declarations: [ProductVariantsComponent],
                 entryComponents: [ProductVariantsComponent],
@@ -30899,7 +30832,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         ProductListItemComponent,
         ProductGridItemComponent,
         ProductViewComponent,
-        ProductScrollComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule, RouterModule,
+        ProductScrollComponent]; }, imports: function () { return [CommonModule,
+        RouterModule,
         MediaModule,
         AddToCartModule,
         ItemCounterModule,
@@ -30923,8 +30857,24 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 imports: [
                     CommonModule,
-                    ConfigModule.withConfig(defaultScrollConfig),
-                    ConfigModule.withConfig({
+                    RouterModule,
+                    MediaModule,
+                    AddToCartModule,
+                    ItemCounterModule,
+                    ListNavigationModule,
+                    UrlModule,
+                    I18nModule,
+                    StarRatingModule,
+                    IconModule,
+                    SpinnerModule,
+                    InfiniteScrollModule,
+                    ViewConfigModule,
+                    ProductVariantsModule,
+                    FeaturesConfigModule,
+                ],
+                providers: [
+                    provideDefaultConfig(defaultScrollConfig),
+                    provideDefaultConfig({
                         cmsComponents: {
                             CMSProductListComponent: {
                                 component: ProductListComponent
@@ -30940,20 +30890,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    RouterModule,
-                    MediaModule,
-                    AddToCartModule,
-                    ItemCounterModule,
-                    ListNavigationModule,
-                    UrlModule,
-                    I18nModule,
-                    StarRatingModule,
-                    IconModule,
-                    SpinnerModule,
-                    InfiniteScrollModule,
-                    ViewConfigModule,
-                    ProductVariantsModule,
-                    FeaturesConfigModule,
                 ],
                 declarations: [
                     ProductListComponent,
@@ -30984,15 +30920,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: CurrentProductService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductSummaryModule, { declarations: function () { return [ProductSummaryComponent]; }, imports: function () { return [CommonModule,
         OutletModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductSummaryComponent]; } }); })();
+        I18nModule]; }, exports: function () { return [ProductSummaryComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductSummaryModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    OutletModule,
-                    I18nModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, OutletModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductSummaryComponent: {
                                 component: ProductSummaryComponent
@@ -31013,15 +30947,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CurrentProductService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductAttributesModule, { declarations: function () { return [ProductAttributesComponent]; }, imports: function () { return [CommonModule,
-        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductAttributesComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductAttributesModule, { declarations: function () { return [ProductAttributesComponent]; }, imports: function () { return [CommonModule, I18nModule]; }, exports: function () { return [ProductAttributesComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductAttributesModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    I18nModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductSpecsTabComponent: {
                                 component: ProductAttributesComponent
@@ -31042,13 +30974,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CurrentProductService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsTabModule, { declarations: function () { return [ProductDetailsTabComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductDetailsTabComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsTabModule, { declarations: function () { return [ProductDetailsTabComponent]; }, imports: function () { return [CommonModule]; }, exports: function () { return [ProductDetailsTabComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductDetailsTabModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductDetailsTabComponent: {
                                 component: ProductDetailsTabComponent
@@ -31079,7 +31011,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         ReactiveFormsModule,
         FormsModule,
         I18nModule,
-        StarRatingModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductReviewsComponent]; } }); })();
+        StarRatingModule]; }, exports: function () { return [ProductReviewsComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductReviewsModule, [{
         type: NgModule,
         args: [{
@@ -31089,7 +31021,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     FormsModule,
                     I18nModule,
                     StarRatingModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ProductReviewsTabComponent: {
                                 component: ProductReviewsComponent
@@ -31131,8 +31065,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: CurrentProductService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.UserInterestsService }, { type: ModalService }, { type: ɵngcc1.UserNotificationPreferenceService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StockNotificationModule, { declarations: function () { return [StockNotificationComponent,
-        StockNotificationDialogComponent]; }, imports: function () { return [CommonModule, ɵngcc1.ConfigModule, RouterModule,
-        I18nModule,
+        StockNotificationDialogComponent]; }, imports: function () { return [CommonModule, RouterModule, I18nModule,
         SpinnerModule,
         UrlModule]; }, exports: function () { return [StockNotificationComponent,
         StockNotificationDialogComponent]; } }); })();
@@ -31140,19 +31073,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: NgModule,
         args: [{
                 declarations: [StockNotificationComponent, StockNotificationDialogComponent],
-                imports: [
-                    CommonModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, I18nModule, SpinnerModule, UrlModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             StockNotificationComponent: {
                                 component: StockNotificationComponent
                             }
                         }
                     }),
-                    RouterModule,
-                    I18nModule,
-                    SpinnerModule,
-                    UrlModule,
                 ],
                 entryComponents: [
                     StockNotificationComponent,
@@ -31317,7 +31246,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         UrlModule,
         StoreFinderCoreModule,
         I18nModule,
-        IconModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ScheduleComponent,
+        IconModule]; }, exports: function () { return [ScheduleComponent,
         StoreFinderComponent,
         StoreFinderGridComponent,
         StoreFinderHeaderComponent,
@@ -31344,7 +31273,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     StoreFinderCoreModule,
                     I18nModule,
                     IconModule,
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             StoreFinderComponent: {
                                 component: StoreFinderComponent,
@@ -31432,7 +31363,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutLoginModule, { declarations: function () { return [CheckoutLoginComponent]; }, imports: function () { return [CommonModule,
         I18nModule,
         FormsModule,
-        ReactiveFormsModule, ɵngcc1.ConfigModule, FormsModule,
+        ReactiveFormsModule,
+        FormsModule,
         ReactiveFormsModule]; }, exports: function () { return [CheckoutLoginComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutLoginModule, [{
         type: NgModule,
@@ -31442,7 +31374,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     I18nModule,
                     FormsModule,
                     ReactiveFormsModule,
-                    ConfigModule.withConfig({
+                    FormsModule,
+                    ReactiveFormsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             GuestCheckoutLoginComponent: {
                                 component: CheckoutLoginComponent,
@@ -31450,8 +31386,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    FormsModule,
-                    ReactiveFormsModule,
                 ],
                 declarations: [CheckoutLoginComponent],
                 exports: [CheckoutLoginComponent],
@@ -31469,7 +31403,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        UrlModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [LoginFormComponent]; } }); })();
+        UrlModule,
+        I18nModule]; }, exports: function () { return [LoginFormComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LoginFormModule, [{
         type: NgModule,
         args: [{
@@ -31479,7 +31414,10 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     ReactiveFormsModule,
                     RouterModule,
                     UrlModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             ReturningCustomerLoginComponent: {
                                 component: LoginFormComponent,
@@ -31487,7 +31425,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
                 ],
                 declarations: [LoginFormComponent],
                 exports: [LoginFormComponent],
@@ -31501,26 +31438,21 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<ng-container *ngIf=\"user$ | async as user; else login\">\n  <div class=\"cx-login-greet\">\n    {{ 'miniLogin.userGreeting' | cxTranslate: { name: user.name } }}\n  </div>\n  <cx-page-slot position=\"HeaderLinks\"></cx-page-slot>\n</ng-container>\n\n<ng-template #login>\n  <a role=\"link\" [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">{{\n    'miniLogin.signInRegister' | cxTranslate\n  }}</a>\n</ng-template>\n"
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.UserService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LoginModule, { declarations: function () { return [LoginComponent]; }, imports: function () { return [CommonModule,
-        RouterModule,
-        UrlModule,
-        PageSlotModule, ɵngcc1.ConfigModule, I18nModule]; }, exports: function () { return [LoginComponent]; } }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LoginModule, { declarations: function () { return [LoginComponent]; }, imports: function () { return [CommonModule, RouterModule, UrlModule,
+        PageSlotModule,
+        I18nModule]; }, exports: function () { return [LoginComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LoginModule, [{
         type: NgModule,
         args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    UrlModule,
-                    PageSlotModule,
-                    ConfigModule.withConfig({
+                imports: [CommonModule, RouterModule, UrlModule, PageSlotModule, I18nModule],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             LoginComponent: {
                                 component: LoginComponent
                             }
                         }
                     }),
-                    I18nModule,
                 ],
                 declarations: [LoginComponent],
                 entryComponents: [LoginComponent],
@@ -31561,7 +31493,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         LoginModule,
         ReactiveFormsModule,
         RouterModule,
-        UrlModule, ɵngcc1.ConfigModule, I18nModule,
+        UrlModule,
+        I18nModule,
         SpinnerModule]; }, exports: function () { return [RegisterComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(RegisterComponentModule, [{
         type: NgModule,
@@ -31572,7 +31505,11 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                     ReactiveFormsModule,
                     RouterModule,
                     UrlModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                    SpinnerModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             RegisterCustomerComponent: {
                                 component: RegisterComponent,
@@ -31580,8 +31517,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
-                    SpinnerModule,
                 ],
                 declarations: [RegisterComponent],
                 exports: [RegisterComponent],
@@ -31636,7 +31571,8 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.WishListService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(WishListModule, { declarations: function () { return [WishListComponent,
         WishListItemComponent]; }, imports: function () { return [AddToCartModule,
-        CommonModule, ɵngcc1.ConfigModule, I18nModule,
+        CommonModule,
+        I18nModule,
         MediaModule,
         RouterModule,
         StarRatingModule,
@@ -31649,7 +31585,15 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 imports: [
                     AddToCartModule,
                     CommonModule,
-                    ConfigModule.withConfig({
+                    I18nModule,
+                    MediaModule,
+                    RouterModule,
+                    StarRatingModule,
+                    UrlModule,
+                    ItemCounterModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         cmsComponents: {
                             WishListComponent: {
                                 component: WishListComponent,
@@ -31657,12 +31601,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             }
                         }
                     }),
-                    I18nModule,
-                    MediaModule,
-                    RouterModule,
-                    StarRatingModule,
-                    UrlModule,
-                    ItemCounterModule,
                 ],
                 declarations: [WishListComponent, WishListItemComponent],
                 entryComponents: [WishListComponent],
@@ -31772,7 +31710,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 ]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsPageModule, { imports: [ɵngcc5.RouterModule, ɵngcc1.ConfigModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsPageModule, { imports: [ɵngcc5.RouterModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductDetailsPageModule, [{
         type: NgModule,
         args: [{
@@ -31785,7 +31723,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ0$a
                         },
                     ]),
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         routing: {
                             routes: {
                                 product: {
@@ -31797,7 +31737,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 ]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductListingPageModule, { imports: [ɵngcc5.RouterModule, ɵngcc1.ConfigModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductListingPageModule, { imports: [ɵngcc5.RouterModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductListingPageModule, [{
         type: NgModule,
         args: [{
@@ -31824,7 +31764,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                             data: ɵ2
                         },
                     ]),
-                    ConfigModule.withConfig({
+                ],
+                providers: [
+                    provideDefaultConfig({
                         routing: {
                             routes: {
                                 category: {
@@ -31896,21 +31838,25 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 exports: [MainModule, StorefrontFoundationModule]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(B2cStorefrontModule, { imports: [StorefrontModule, ɵngcc1.ConfigModule, ɵngcc1.ConfigModule, CmsLibModule], exports: [StorefrontModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(B2cStorefrontModule, { imports: [StorefrontModule,
+        CmsLibModule], exports: [StorefrontModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(B2cStorefrontModule, [{
         type: NgModule,
         args: [{
                 imports: [
-                    StorefrontModule.withConfig({
+                    StorefrontModule,
+                    // the cms lib module contains all components that added in the bundle
+                    CmsLibModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
                         pwa: {
                             enabled: true,
                             addToHomeScreen: true
                         }
                     }),
-                    ConfigModule.withConfig(b2cLayoutConfig),
-                    ConfigModule.withConfigFactory(defaultCmsContentConfig),
-                    // the cms lib module contains all components that added in the bundle
-                    CmsLibModule,
+                    provideDefaultConfig(b2cLayoutConfig),
+                    provideDefaultConfigFactory(defaultCmsContentConfig),
                 ],
                 exports: [StorefrontModule]
             }]
@@ -31936,6 +31882,6 @@ const PLPAccessibilityLayoutConfig = {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkComponent as ɵba, SkipLinkService as ɵbb, SkipLinkDirective as ɵbc, MyCouponsComponentService as ɵbd, addCmsRoute as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi, AnonymousConsentsModule as ɵbj, AnonymousConsentDialogComponent as ɵbk, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, defaultSkipLinkConfig as ɵx, SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkScrollPosition as ɵba, SkipLinkDirective as ɵbb, defaultSkipLinkConfig as ɵbc, MyCouponsComponentService as ɵbd, addCmsRoute as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi, AnonymousConsentsModule as ɵbj, AnonymousConsentDialogComponent as ɵbk, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, SkipLinkComponent as ɵx, SkipLinkService as ɵy, SkipLinkConfig as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 
 //# sourceMappingURL=spartacus-storefront.js.map

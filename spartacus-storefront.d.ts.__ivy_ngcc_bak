@@ -25,11 +25,11 @@ export { CmsGuardsService as ɵs } from './cms-structure/services/cms-guards.ser
 export { CmsI18nService as ɵr } from './cms-structure/services/cms-i18n.service';
 export { CmsMappingService as ɵq } from './cms-structure/services/cms-mapping.service';
 export { CmsRoutesService as ɵp } from './cms-structure/services/cms-routes.service';
-export { SkipLinkComponent as ɵba } from './layout/a11y/skip-link/component/skip-link.component';
-export { defaultSkipLinkConfig as ɵx } from './layout/a11y/skip-link/config/default-skip-link.config';
-export { SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz } from './layout/a11y/skip-link/config/skip-link.config';
-export { SkipLinkDirective as ɵbc } from './layout/a11y/skip-link/directive/skip-link.directive';
-export { SkipLinkService as ɵbb } from './layout/a11y/skip-link/service/skip-link.service';
+export { SkipLinkComponent as ɵx } from './layout/a11y/skip-link/component/skip-link.component';
+export { defaultSkipLinkConfig as ɵbc } from './layout/a11y/skip-link/config/default-skip-link.config';
+export { SkipLinkConfig as ɵz, SkipLinkScrollPosition as ɵba } from './layout/a11y/skip-link/config/skip-link.config';
+export { SkipLinkDirective as ɵbb } from './layout/a11y/skip-link/directive/skip-link.directive';
+export { SkipLinkService as ɵy } from './layout/a11y/skip-link/service/skip-link.service';
 export { SkipLinkModule as ɵv, skipLinkFactory as ɵw } from './layout/a11y/skip-link/skip-link.module';
 export { AnonymousConsentsModule as ɵbj } from './shared/components/anonymous-consents/anonymous-consents.module';
 export { AnonymousConsentDialogComponent as ɵbk } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';

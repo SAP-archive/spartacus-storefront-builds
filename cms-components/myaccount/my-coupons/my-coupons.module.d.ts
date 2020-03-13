@@ -11,7 +11,7 @@ import * as ɵngcc9 from '@angular/router';
 import * as ɵngcc10 from '../../misc/icon/icon.module';
 import * as ɵngcc11 from '../../../shared/components/list-navigation/list-navigation.module';
 export declare class MyCouponsModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MyCouponsModule, [typeof ɵngcc1.MyCouponsComponent, typeof ɵngcc2.CouponCardComponent, typeof ɵngcc3.CouponDialogComponent, typeof ɵngcc4.CouponClaimComponent], [typeof ɵngcc5.CommonModule, typeof ɵngcc6.CardModule, typeof ɵngcc7.SpinnerModule, typeof ɵngcc8.I18nModule, typeof ɵngcc9.RouterModule, typeof ɵngcc8.UrlModule, typeof ɵngcc10.IconModule, typeof ɵngcc11.ListNavigationModule, typeof ɵngcc8.ConfigModule, typeof ɵngcc9.RouterModule], [typeof ɵngcc1.MyCouponsComponent, typeof ɵngcc4.CouponClaimComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<MyCouponsModule, [typeof ɵngcc1.MyCouponsComponent, typeof ɵngcc2.CouponCardComponent, typeof ɵngcc3.CouponDialogComponent, typeof ɵngcc4.CouponClaimComponent], [typeof ɵngcc5.CommonModule, typeof ɵngcc6.CardModule, typeof ɵngcc7.SpinnerModule, typeof ɵngcc8.I18nModule, typeof ɵngcc9.RouterModule, typeof ɵngcc8.UrlModule, typeof ɵngcc10.IconModule, typeof ɵngcc11.ListNavigationModule, typeof ɵngcc9.RouterModule], [typeof ɵngcc1.MyCouponsComponent, typeof ɵngcc4.CouponClaimComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<MyCouponsModule>;
 }
 

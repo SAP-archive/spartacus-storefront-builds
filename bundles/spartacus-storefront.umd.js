@@ -512,8 +512,11 @@
         IconModule = __decorate([
             core.NgModule({
                 declarations: [IconComponent],
-                imports: [common.CommonModule, core$1.ConfigModule.withConfig(fontawesomeIconConfig)],
-                providers: [{ provide: IconConfig, useExisting: core$1.Config }],
+                imports: [common.CommonModule],
+                providers: [
+                    core$1.provideDefaultConfig(fontawesomeIconConfig),
+                    { provide: IconConfig, useExisting: core$1.Config },
+                ],
                 exports: [IconComponent],
             })
         ], IconModule);
@@ -758,11 +761,9 @@
         }
         AnonymousConsentManagementBannerModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.I18nModule,
-                    core$1.FeaturesConfigModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.I18nModule, core$1.FeaturesConfigModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             AnonymousConsentManagementBannerComponent: {
                                 component: AnonymousConsentManagementBannerComponent,
@@ -2377,7 +2378,7 @@
     (function (SkipLinkScrollPosition) {
         SkipLinkScrollPosition["BEFORE"] = "BEFORE";
         SkipLinkScrollPosition["AFTER"] = "AFTER";
-    })(exports["ɵz"] || (exports["ɵz"] = {}));
+    })(exports["ɵba"] || (exports["ɵba"] = {}));
 
     var SkipLinkService = /** @class */ (function () {
         function SkipLinkService(config) {
@@ -2411,7 +2412,7 @@
         SkipLinkService.prototype.scrollToTarget = function (target, position, event) {
             target = target.parentNode;
             event.target.blur();
-            var options = position === exports["ɵz"].AFTER ? { inline: 'end' } : {};
+            var options = position === exports["ɵba"].AFTER ? { inline: 'end' } : {};
             target.scrollIntoView(options);
         };
         SkipLinkService.prototype.getSkipLinkIndexInArray = function (key) {
@@ -2497,7 +2498,7 @@
             },
             {
                 key: 'BottomHeaderSlot',
-                position: exports["ɵz"].AFTER,
+                position: exports["ɵba"].AFTER,
                 i18nKey: 'skipLink.labels.main',
             },
             {
@@ -2540,15 +2541,12 @@
         }
         SkipLinkModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.I18nModule,
-                    core$1.ConfigModule.withConfig(defaultSkipLinkConfig),
-                ],
+                imports: [common.CommonModule, core$1.I18nModule],
                 declarations: [SkipLinkComponent, SkipLinkDirective],
                 exports: [SkipLinkDirective],
                 entryComponents: [SkipLinkComponent],
                 providers: [
+                    core$1.provideDefaultConfig(defaultSkipLinkConfig),
                     { provide: SkipLinkConfig, useExisting: core$1.Config },
                     {
                         provide: core.APP_INITIALIZER,
@@ -2725,11 +2723,11 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig(defaultPWAModuleConfig),
                     serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
                     core$1.I18nModule,
                 ],
                 providers: [
+                    core$1.provideDefaultConfig(defaultPWAModuleConfig),
                     { provide: PWAModuleConfig, useExisting: core$1.Config },
                     {
                         provide: serviceWorker.SwRegistrationOptions,
@@ -2863,7 +2861,7 @@
         RoutingModule.forRoot = function () {
             return {
                 ngModule: RoutingModule_1,
-                providers: [core$1.provideConfig(defaultRoutingConfig)],
+                providers: [core$1.provideDefaultConfig(defaultRoutingConfig)],
             };
         };
         var RoutingModule_1;
@@ -5599,7 +5597,7 @@
             core.NgModule({
                 imports: [common.CommonModule, router.RouterModule],
                 providers: [
-                    core$1.provideConfig(defaultPaginationConfig),
+                    core$1.provideDefaultConfig(defaultPaginationConfig),
                     { provide: PaginationConfig, useExisting: core$1.Config },
                 ],
                 declarations: [PaginationComponent],
@@ -5815,21 +5813,18 @@
         }
         QualtricsModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    http.HttpClientModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, http.HttpClientModule],
+                declarations: [QualtricsComponent],
+                entryComponents: [QualtricsComponent],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             QualtricsComponent: {
                                 component: QualtricsComponent,
                             },
                         },
                     }),
-                    core$1.ConfigModule.withConfig(defaultQualtricsConfig),
-                ],
-                declarations: [QualtricsComponent],
-                entryComponents: [QualtricsComponent],
-                providers: [
+                    core$1.provideDefaultConfig(defaultQualtricsConfig),
                     {
                         provide: QualtricsConfig,
                         useExisting: core$1.Config,
@@ -6002,10 +5997,9 @@
         }
         SiteContextSelectorModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.SiteContextModule, IconModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CMSSiteContextComponent: {
                                 component: SiteContextSelectorComponent,
@@ -6022,10 +6016,8 @@
                             },
                         },
                     }),
-                    core$1.SiteContextModule,
-                    IconModule,
+                    SiteContextComponentService,
                 ],
-                providers: [SiteContextComponentService],
                 declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
                 exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
@@ -6134,7 +6126,7 @@
             return {
                 ngModule: ViewConfigModule_1,
                 providers: [
-                    core$1.provideConfig({
+                    core$1.provideDefaultConfig({
                         view: {},
                     }),
                     {
@@ -6409,7 +6401,9 @@
                     forms.ReactiveFormsModule,
                     core$1.I18nModule,
                     IconModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CartApplyCouponComponent: {
                                 component: CartCouponComponent,
@@ -6759,18 +6753,20 @@
                     SpinnerModule,
                     PromotionsModule,
                     core$1.FeaturesConfigModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.UrlModule,
+                    IconModule,
+                    core$1.I18nModule,
+                    ItemCounterModule,
+                    AutoFocusDirectiveModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductAddToCartComponent: {
                                 component: AddToCartComponent,
                             },
                         },
                     }),
-                    core$1.UrlModule,
-                    IconModule,
-                    core$1.I18nModule,
-                    ItemCounterModule,
-                    AutoFocusDirectiveModule,
                 ],
                 declarations: [AddToCartComponent, AddedToCartDialogComponent],
                 entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
@@ -6888,14 +6884,16 @@
                     core$1.UrlModule,
                     PromotionsModule,
                     core$1.FeaturesConfigModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CartComponent: {
                                 component: CartDetailsComponent,
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
                 declarations: [CartDetailsComponent],
                 exports: [CartDetailsComponent],
@@ -7017,16 +7015,18 @@
                     common.CommonModule,
                     router.RouterModule,
                     core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                    CartSharedModule,
+                    core$1.I18nModule,
+                    CartCouponModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CartTotalsComponent: {
                                 component: CartTotalsComponent,
                             },
                         },
                     }),
-                    CartSharedModule,
-                    core$1.I18nModule,
-                    CartCouponModule,
                 ],
                 declarations: [CartTotalsComponent],
                 exports: [CartTotalsComponent],
@@ -7061,19 +7061,15 @@
         }
         MiniCartModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.UrlModule, IconModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             MiniCartComponent: {
                                 component: MiniCartComponent,
                             },
                         },
                     }),
-                    core$1.UrlModule,
-                    IconModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [MiniCartComponent],
                 exports: [MiniCartComponent],
@@ -7130,19 +7126,15 @@
         }
         AddToWishListModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.I18nModule, IconModule, router.RouterModule, core$1.UrlModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             AddToWishListComponent: {
                                 component: AddToWishListComponent,
                             },
                         },
                     }),
-                    core$1.I18nModule,
-                    IconModule,
-                    router.RouterModule,
-                    core$1.UrlModule,
                 ],
                 declarations: [AddToWishListComponent],
                 entryComponents: [AddToWishListComponent],
@@ -7198,9 +7190,9 @@
         }
         SaveForLaterModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.I18nModule, CartSharedModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             SaveForLaterComponent: {
                                 component: SaveForLaterComponent,
@@ -7210,8 +7202,6 @@
                             saveForLater: '1.5',
                         },
                     }),
-                    core$1.I18nModule,
-                    CartSharedModule,
                 ],
                 declarations: [SaveForLaterComponent],
                 exports: [SaveForLaterComponent],
@@ -7754,10 +7744,10 @@
         }
         CheckoutOrchestratorModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig(defaultCheckoutConfig),
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule],
+                providers: [
+                    core$1.provideDefaultConfig(defaultCheckoutConfig),
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutOrchestrator: {
                                 component: CheckoutOrchestratorComponent,
@@ -7765,8 +7755,8 @@
                             },
                         },
                     }),
+                    { provide: CheckoutConfig, useExisting: core$1.Config },
                 ],
-                providers: [{ provide: CheckoutConfig, useExisting: core$1.Config }],
                 declarations: [CheckoutOrchestratorComponent],
                 entryComponents: [CheckoutOrchestratorComponent],
                 exports: [CheckoutOrchestratorComponent],
@@ -7798,10 +7788,9 @@
         }
         CheckoutOrderSummaryModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    CartSharedModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, CartSharedModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutOrderSummary: {
                                 component: CheckoutOrderSummaryComponent,
@@ -7855,13 +7844,10 @@
         }
         CheckoutProgressMobileBottomModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig(defaultCheckoutConfig),
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.UrlModule, core$1.I18nModule, router.RouterModule],
+                providers: [
+                    core$1.provideDefaultConfig(defaultCheckoutConfig),
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgressMobileBottom: {
                                 component: CheckoutProgressMobileBottomComponent,
@@ -7919,13 +7905,10 @@
         }
         CheckoutProgressMobileTopModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig(defaultCheckoutConfig),
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.UrlModule, core$1.I18nModule, router.RouterModule],
+                providers: [
+                    core$1.provideDefaultConfig(defaultCheckoutConfig),
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgressMobileTop: {
                                 component: CheckoutProgressMobileTopComponent,
@@ -7990,13 +7973,13 @@
         }
         CheckoutProgressModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig(defaultCheckoutConfig),
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.UrlModule, core$1.I18nModule, router.RouterModule],
+                declarations: [CheckoutProgressComponent],
+                entryComponents: [CheckoutProgressComponent],
+                exports: [CheckoutProgressComponent],
+                providers: [
+                    core$1.provideDefaultConfig(defaultCheckoutConfig),
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutProgress: {
                                 component: CheckoutProgressComponent,
@@ -8004,11 +7987,8 @@
                             },
                         },
                     }),
+                    { provide: CheckoutConfig, useExisting: core$1.Config },
                 ],
-                declarations: [CheckoutProgressComponent],
-                entryComponents: [CheckoutProgressComponent],
-                exports: [CheckoutProgressComponent],
-                providers: [{ provide: CheckoutConfig, useExisting: core$1.Config }],
             })
         ], CheckoutProgressModule);
         return CheckoutProgressModule;
@@ -8142,12 +8122,9 @@
         }
         DeliveryModeModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    forms.ReactiveFormsModule,
-                    core$1.I18nModule,
-                    SpinnerModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, forms.ReactiveFormsModule, core$1.I18nModule, SpinnerModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutDeliveryMode: {
                                 component: DeliveryModeComponent,
@@ -8756,7 +8733,9 @@
                     CardModule,
                     SpinnerModule,
                     core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutPaymentDetails: {
                                 component: PaymentMethodComponent,
@@ -8770,7 +8749,6 @@
                         },
                     }),
                 ],
-                providers: [core$1.UserService],
                 declarations: [PaymentMethodComponent],
                 entryComponents: [PaymentMethodComponent],
                 exports: [PaymentMethodComponent],
@@ -8824,12 +8802,9 @@
         }
         PlaceOrderModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.UrlModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutPlaceOrder: {
                                 component: PlaceOrderComponent,
@@ -9010,7 +8985,9 @@
                     router.RouterModule,
                     PromotionsModule,
                     core$1.FeaturesConfigModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutReviewOrder: {
                                 component: ReviewSubmitComponent,
@@ -9506,7 +9483,9 @@
                     core$1.I18nModule,
                     CheckoutProgressMobileTopModule,
                     CheckoutProgressMobileBottomModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CheckoutShippingAddress: {
                                 component: ShippingAddressComponent,
@@ -9649,9 +9628,9 @@
         }
         HamburgerMenuModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             HamburgerMenuComponent: {
                                 component: HamburgerMenuComponent,
@@ -9970,7 +9949,9 @@
                     SpinnerModule,
                     core$1.I18nModule,
                     IconModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ConsentManagementComponent: {
                                 component: ConsentManagementComponent,
@@ -10125,18 +10106,15 @@
         }
         BannerCarouselModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, PageComponentModule, CarouselModule, MediaModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             RotatingImagesComponent: {
                                 component: BannerCarouselComponent,
                             },
                         },
                     }),
-                    PageComponentModule,
-                    CarouselModule,
-                    MediaModule,
                 ],
                 declarations: [BannerCarouselComponent],
                 entryComponents: [BannerCarouselComponent],
@@ -10168,12 +10146,9 @@
         }
         BannerModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    GenericLinkModule,
-                    MediaModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, GenericLinkModule, MediaModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             SimpleResponsiveBannerComponent: {
                                 component: BannerComponent,
@@ -10217,11 +10192,9 @@
         }
         LinkModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    GenericLinkModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, GenericLinkModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CMSLinkComponent: { component: LinkComponent },
                         },
@@ -10257,9 +10230,9 @@
         }
         CmsParagraphModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CMSParagraphComponent: {
                                 component: ParagraphComponent,
@@ -10363,18 +10336,15 @@
         }
         TabParagraphContainerModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, PageComponentModule, OutletModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CMSTabParagraphContainer: {
                                 component: TabParagraphContainerComponent,
                             },
                         },
                     }),
-                    PageComponentModule,
-                    OutletModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [TabParagraphContainerComponent],
                 entryComponents: [TabParagraphContainerComponent],
@@ -10527,7 +10497,15 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    CardModule,
+                    AddressFormModule,
+                    SpinnerModule,
+                    core$1.I18nModule,
+                ],
+                declarations: [AddressBookComponent],
+                exports: [AddressBookComponent],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             AccountAddressBookComponent: {
                                 component: AddressBookComponent,
@@ -10542,14 +10520,9 @@
                             },
                         },
                     }),
-                    CardModule,
-                    AddressFormModule,
-                    SpinnerModule,
-                    core$1.I18nModule,
+                    core$1.UserAddressService,
+                    AddressBookComponentService,
                 ],
-                declarations: [AddressBookComponent],
-                exports: [AddressBookComponent],
-                providers: [core$1.UserAddressService, AddressBookComponentService],
                 entryComponents: [AddressBookComponent],
             })
         ], AddressBookModule);
@@ -10667,7 +10640,9 @@
                     core$1.I18nModule,
                     IconModule,
                     SpinnerModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CloseAccountComponent: {
                                 component: CloseAccountComponent,
@@ -10731,7 +10706,10 @@
                     forms.ReactiveFormsModule,
                     router.RouterModule,
                     core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ForgotPasswordComponent: {
                                 component: ForgotPasswordComponent,
@@ -10739,7 +10717,6 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
                 declarations: [ForgotPasswordComponent],
                 exports: [ForgotPasswordComponent],
@@ -11092,7 +11069,11 @@
                         },
                     ]),
                     forms.ReactiveFormsModule,
-                    core$1.ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CancelOrderConfirmationComponent: {
                                 component: CancelOrderConfirmationComponent,
@@ -11106,8 +11087,6 @@
                             },
                         },
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [CancelOrderConfirmationComponent],
                 exports: [CancelOrderConfirmationComponent],
@@ -11157,7 +11136,11 @@
                             data: ɵ0$2,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CancelOrderComponent: {
                                 component: CancelOrderComponent,
@@ -11171,8 +11154,6 @@
                             },
                         },
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [CancelOrderComponent],
                 exports: [CancelOrderComponent],
@@ -11340,7 +11321,13 @@
                             data: ɵ0$3,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    core$1.I18nModule,
+                    forms.ReactiveFormsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ReturnOrderConfirmationComponent: {
                                 component: ReturnOrderConfirmationComponent,
@@ -11354,10 +11341,6 @@
                             },
                         },
                     }),
-                    AmendOrderItemsModule,
-                    core$1.I18nModule,
-                    forms.ReactiveFormsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [ReturnOrderConfirmationComponent],
                 exports: [ReturnOrderConfirmationComponent],
@@ -11407,7 +11390,11 @@
                             data: ɵ0$4,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                    AmendOrderItemsModule,
+                    AmendOrderActionsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ReturnOrderComponent: {
                                 component: ReturnOrderComponent,
@@ -11421,8 +11408,6 @@
                             },
                         },
                     }),
-                    AmendOrderItemsModule,
-                    AmendOrderActionsModule,
                 ],
                 declarations: [ReturnOrderComponent],
                 exports: [ReturnOrderComponent],
@@ -11775,7 +11760,10 @@
                             data: ɵ1,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                    SpinnerModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             AccountOrderDetailsActionsComponent: {
                                 component: OrderDetailActionsComponent,
@@ -11797,9 +11785,8 @@
                             consignmentTracking: '1.2',
                         },
                     }),
-                    SpinnerModule,
+                    OrderDetailsService,
                 ],
-                providers: [OrderDetailsService],
                 declarations: __spread(moduleComponents),
                 exports: __spread(moduleComponents),
                 entryComponents: __spread(moduleComponents),
@@ -11897,14 +11884,6 @@
                             data: ɵ0$6,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
-                        cmsComponents: {
-                            AccountOrderHistoryComponent: {
-                                component: OrderHistoryComponent,
-                                guards: [core$1.AuthGuard],
-                            },
-                        },
-                    }),
                     router.RouterModule,
                     forms.FormsModule,
                     ngSelect.NgSelectModule,
@@ -11914,7 +11893,16 @@
                 ],
                 declarations: [OrderHistoryComponent],
                 exports: [OrderHistoryComponent],
-                providers: [core$1.UserService],
+                providers: [
+                    core$1.provideDefaultConfig({
+                        cmsComponents: {
+                            AccountOrderHistoryComponent: {
+                                component: OrderHistoryComponent,
+                                guards: [core$1.AuthGuard],
+                            },
+                        },
+                    }),
+                ],
                 entryComponents: [OrderHistoryComponent],
             })
         ], OrderHistoryModule);
@@ -12108,7 +12096,14 @@
                             data: ɵ0$7,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                    router.RouterModule,
+                    core$1.UrlModule,
+                    core$1.I18nModule,
+                    MediaModule,
+                    core$1.FeaturesConfigModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ReturnRequestOverviewComponent: {
                                 component: ReturnRequestOverviewComponent,
@@ -12121,11 +12116,6 @@
                             },
                         },
                     }),
-                    router.RouterModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    MediaModule,
-                    core$1.FeaturesConfigModule,
                 ],
                 declarations: __spread(components),
                 exports: __spread(components),
@@ -12206,7 +12196,13 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    router.RouterModule,
+                    ListNavigationModule,
+                    core$1.UrlModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             OrderReturnRequestListComponent: {
                                 component: OrderReturnRequestListComponent,
@@ -12214,10 +12210,6 @@
                             },
                         },
                     }),
-                    router.RouterModule,
-                    ListNavigationModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [OrderReturnRequestListComponent],
                 exports: [OrderReturnRequestListComponent],
@@ -12344,11 +12336,9 @@
         }
         PaymentMethodsModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    CardModule,
-                    SpinnerModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, CardModule, SpinnerModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             AccountPaymentDetailsComponent: {
                                 component: PaymentMethodsComponent,
@@ -12356,9 +12346,7 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
-                providers: [core$1.UserService],
                 declarations: [PaymentMethodsComponent],
                 exports: [PaymentMethodsComponent],
                 entryComponents: [PaymentMethodsComponent],
@@ -12432,7 +12420,13 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    forms.FormsModule,
+                    forms.ReactiveFormsModule,
+                    router.RouterModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ResetPasswordComponent: {
                                 component: ResetPasswordFormComponent,
@@ -12440,10 +12434,6 @@
                             },
                         },
                     }),
-                    forms.FormsModule,
-                    forms.ReactiveFormsModule,
-                    router.RouterModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [ResetPasswordFormComponent],
                 exports: [ResetPasswordFormComponent],
@@ -12573,7 +12563,13 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    forms.FormsModule,
+                    forms.ReactiveFormsModule,
+                    SpinnerModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             UpdateEmailComponent: {
                                 component: UpdateEmailComponent,
@@ -12581,10 +12577,6 @@
                             },
                         },
                     }),
-                    forms.FormsModule,
-                    forms.ReactiveFormsModule,
-                    SpinnerModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
                 exports: [UpdateEmailComponent, UpdateEmailFormComponent],
@@ -12713,7 +12705,11 @@
                     common.CommonModule,
                     forms.FormsModule,
                     forms.ReactiveFormsModule,
-                    core$1.ConfigModule.withConfig({
+                    SpinnerModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             UpdatePasswordComponent: {
                                 component: UpdatePasswordComponent,
@@ -12721,8 +12717,6 @@
                             },
                         },
                     }),
-                    SpinnerModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
                 exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
@@ -12849,7 +12843,13 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    forms.FormsModule,
+                    forms.ReactiveFormsModule,
+                    SpinnerModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             UpdateProfileComponent: {
                                 component: UpdateProfileComponent,
@@ -12857,10 +12857,6 @@
                             },
                         },
                     }),
-                    forms.FormsModule,
-                    forms.ReactiveFormsModule,
-                    SpinnerModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
                 exports: [UpdateProfileComponent, UpdateProfileFormComponent],
@@ -13154,18 +13150,6 @@
                     core$1.UrlModule,
                     IconModule,
                     ListNavigationModule,
-                    core$1.ConfigModule.withConfig({
-                        cmsComponents: {
-                            MyCouponsComponent: {
-                                component: MyCouponsComponent,
-                                guards: [core$1.AuthGuard],
-                            },
-                            CouponClaimComponent: {
-                                component: CouponClaimComponent,
-                                guards: [core$1.AuthGuard],
-                            },
-                        },
-                    }),
                     router.RouterModule.forChild([
                         {
                             path: null,
@@ -13180,6 +13164,20 @@
                     CouponCardComponent,
                     CouponDialogComponent,
                     CouponClaimComponent,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
+                        cmsComponents: {
+                            MyCouponsComponent: {
+                                component: MyCouponsComponent,
+                                guards: [core$1.AuthGuard],
+                            },
+                            CouponClaimComponent: {
+                                component: CouponClaimComponent,
+                                guards: [core$1.AuthGuard],
+                            },
+                        },
+                    }),
                 ],
                 exports: [MyCouponsComponent, CouponClaimComponent],
                 entryComponents: [
@@ -13243,11 +13241,9 @@
         NotificationPreferenceModule = __decorate([
             core.NgModule({
                 declarations: [NotificationPreferenceComponent],
-                imports: [
-                    common.CommonModule,
-                    SpinnerModule,
-                    core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, SpinnerModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             NotificationPreferenceComponent: {
                                 component: NotificationPreferenceComponent,
@@ -13366,7 +13362,15 @@
                 imports: [
                     common.CommonModule,
                     core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                    router.RouterModule,
+                    ListNavigationModule,
+                    core$1.I18nModule,
+                    core$1.UrlModule,
+                    MediaModule,
+                    SpinnerModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             MyInterestsComponent: {
                                 component: MyInterestsComponent,
@@ -13374,12 +13378,6 @@
                             },
                         },
                     }),
-                    router.RouterModule,
-                    ListNavigationModule,
-                    core$1.I18nModule,
-                    core$1.UrlModule,
-                    MediaModule,
-                    SpinnerModule,
                 ],
                 exports: [MyInterestsComponent],
                 entryComponents: [MyInterestsComponent],
@@ -13431,17 +13429,15 @@
         }
         BreadcrumbModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.CmsPageTitleModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             BreadcrumbComponent: {
                                 component: BreadcrumbComponent,
                             },
                         },
                     }),
-                    core$1.CmsPageTitleModule,
                 ],
                 declarations: [BreadcrumbComponent],
                 exports: [BreadcrumbComponent],
@@ -13812,14 +13808,16 @@
                     router.RouterModule,
                     IconModule,
                     GenericLinkModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             NavigationComponent: {
                                 component: NavigationComponent,
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
                 declarations: [NavigationComponent, NavigationUIComponent],
                 entryComponents: [NavigationComponent],
@@ -13834,10 +13832,9 @@
         }
         CategoryNavigationModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    NavigationModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, NavigationModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CategoryNavigationComponent: {
                                 component: CategoryNavigationComponent,
@@ -13892,7 +13889,9 @@
                     NavigationModule,
                     GenericLinkModule,
                     core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             FooterNavigationComponent: {
                                 component: FooterNavigationComponent,
@@ -14299,16 +14298,18 @@
                     common.CommonModule,
                     router.RouterModule,
                     MediaModule,
-                    core$1.ConfigModule.withConfig({
+                    IconModule,
+                    core$1.UrlModule,
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             SearchBoxComponent: {
                                 component: SearchBoxComponent,
                             },
                         },
                     }),
-                    IconModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
                 ],
                 declarations: [SearchBoxComponent, HighlightPipe],
                 entryComponents: [SearchBoxComponent],
@@ -14571,7 +14572,9 @@
                     core$1.I18nModule,
                     forms.ReactiveFormsModule,
                     core$1.FeaturesConfigModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             OrderConfirmationThankMessageComponent: {
                                 component: OrderConfirmationThankYouMessageComponent,
@@ -14701,13 +14704,9 @@
         }
         ProductCarouselModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    CarouselModule,
-                    MediaModule,
-                    router.RouterModule,
-                    core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, CarouselModule, MediaModule, router.RouterModule, core$1.UrlModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductCarouselComponent: {
                                 component: ProductCarouselComponent,
@@ -14770,13 +14769,9 @@
         }
         ProductReferencesModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    CarouselModule,
-                    MediaModule,
-                    router.RouterModule,
-                    core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, CarouselModule, MediaModule, router.RouterModule, core$1.UrlModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductReferencesComponent: {
                                 component: ProductReferencesComponent,
@@ -14880,14 +14875,16 @@
                     router.RouterModule,
                     MediaModule,
                     OutletModule,
-                    core$1.ConfigModule.withConfig({
+                    CarouselModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductImagesComponent: {
                                 component: ProductImagesComponent,
                             },
                         },
                     }),
-                    CarouselModule,
                 ],
                 declarations: [ProductImagesComponent],
                 entryComponents: [ProductImagesComponent],
@@ -14986,11 +14983,9 @@
         }
         ProductIntroModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.I18nModule,
-                    StarRatingModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.I18nModule, StarRatingModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductIntroComponent: {
                                 component: ProductIntroComponent,
@@ -15821,7 +15816,14 @@
                     common.CommonModule,
                     router.RouterModule,
                     core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                    VariantStyleSelectorModule,
+                    VariantSizeSelectorModule,
+                    VariantColorSelectorModule,
+                    VariantStyleIconsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductVariantSelectorComponent: {
                                 component: ProductVariantsComponent,
@@ -15829,11 +15831,6 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
-                    VariantStyleSelectorModule,
-                    VariantSizeSelectorModule,
-                    VariantColorSelectorModule,
-                    VariantStyleIconsModule,
                 ],
                 declarations: [ProductVariantsComponent],
                 entryComponents: [ProductVariantsComponent],
@@ -15850,8 +15847,24 @@
             core.NgModule({
                 imports: [
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig(defaultScrollConfig),
-                    core$1.ConfigModule.withConfig({
+                    router.RouterModule,
+                    MediaModule,
+                    AddToCartModule,
+                    ItemCounterModule,
+                    ListNavigationModule,
+                    core$1.UrlModule,
+                    core$1.I18nModule,
+                    StarRatingModule,
+                    IconModule,
+                    SpinnerModule,
+                    ngxInfiniteScroll.InfiniteScrollModule,
+                    ViewConfigModule,
+                    ProductVariantsModule,
+                    core$1.FeaturesConfigModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig(defaultScrollConfig),
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             CMSProductListComponent: {
                                 component: ProductListComponent,
@@ -15867,20 +15880,6 @@
                             },
                         },
                     }),
-                    router.RouterModule,
-                    MediaModule,
-                    AddToCartModule,
-                    ItemCounterModule,
-                    ListNavigationModule,
-                    core$1.UrlModule,
-                    core$1.I18nModule,
-                    StarRatingModule,
-                    IconModule,
-                    SpinnerModule,
-                    ngxInfiniteScroll.InfiniteScrollModule,
-                    ViewConfigModule,
-                    ProductVariantsModule,
-                    core$1.FeaturesConfigModule,
                 ],
                 declarations: [
                     ProductListComponent,
@@ -15936,11 +15935,9 @@
         }
         ProductSummaryModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    OutletModule,
-                    core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, OutletModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductSummaryComponent: {
                                 component: ProductSummaryComponent,
@@ -15981,10 +15978,9 @@
         }
         ProductAttributesModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.I18nModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductSpecsTabComponent: {
                                 component: ProductAttributesComponent,
@@ -16025,9 +16021,9 @@
         }
         ProductDetailsTabModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductDetailsTabComponent: {
                                 component: ProductDetailsTabComponent,
@@ -16148,7 +16144,9 @@
                     forms.FormsModule,
                     core$1.I18nModule,
                     StarRatingModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ProductReviewsTabComponent: {
                                 component: ProductReviewsComponent,
@@ -16332,19 +16330,15 @@
         StockNotificationModule = __decorate([
             core.NgModule({
                 declarations: [StockNotificationComponent, StockNotificationDialogComponent],
-                imports: [
-                    common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.I18nModule, SpinnerModule, core$1.UrlModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             StockNotificationComponent: {
                                 component: StockNotificationComponent,
                             },
                         },
                     }),
-                    router.RouterModule,
-                    core$1.I18nModule,
-                    SpinnerModule,
-                    core$1.UrlModule,
                 ],
                 entryComponents: [
                     StockNotificationComponent,
@@ -16874,7 +16868,9 @@
                     core$1.StoreFinderCoreModule,
                     core$1.I18nModule,
                     IconModule,
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             StoreFinderComponent: {
                                 component: StoreFinderComponent,
@@ -17026,7 +17022,11 @@
                     core$1.I18nModule,
                     forms.FormsModule,
                     forms.ReactiveFormsModule,
-                    core$1.ConfigModule.withConfig({
+                    forms.FormsModule,
+                    forms.ReactiveFormsModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             GuestCheckoutLoginComponent: {
                                 component: CheckoutLoginComponent,
@@ -17034,8 +17034,6 @@
                             },
                         },
                     }),
-                    forms.FormsModule,
-                    forms.ReactiveFormsModule,
                 ],
                 declarations: [CheckoutLoginComponent],
                 exports: [CheckoutLoginComponent],
@@ -17143,7 +17141,10 @@
                     forms.ReactiveFormsModule,
                     router.RouterModule,
                     core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             ReturningCustomerLoginComponent: {
                                 component: LoginFormComponent,
@@ -17151,7 +17152,6 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
                 declarations: [LoginFormComponent],
                 exports: [LoginFormComponent],
@@ -17195,19 +17195,15 @@
         }
         LoginModule = __decorate([
             core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    router.RouterModule,
-                    core$1.UrlModule,
-                    PageSlotModule,
-                    core$1.ConfigModule.withConfig({
+                imports: [common.CommonModule, router.RouterModule, core$1.UrlModule, PageSlotModule, core$1.I18nModule],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             LoginComponent: {
                                 component: LoginComponent,
                             },
                         },
                     }),
-                    core$1.I18nModule,
                 ],
                 declarations: [LoginComponent],
                 entryComponents: [LoginComponent],
@@ -17482,7 +17478,11 @@
                     forms.ReactiveFormsModule,
                     router.RouterModule,
                     core$1.UrlModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                    SpinnerModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             RegisterCustomerComponent: {
                                 component: RegisterComponent,
@@ -17490,8 +17490,6 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
-                    SpinnerModule,
                 ],
                 declarations: [RegisterComponent],
                 exports: [RegisterComponent],
@@ -17578,7 +17576,15 @@
                 imports: [
                     AddToCartModule,
                     common.CommonModule,
-                    core$1.ConfigModule.withConfig({
+                    core$1.I18nModule,
+                    MediaModule,
+                    router.RouterModule,
+                    StarRatingModule,
+                    core$1.UrlModule,
+                    ItemCounterModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         cmsComponents: {
                             WishListComponent: {
                                 component: WishListComponent,
@@ -17586,12 +17592,6 @@
                             },
                         },
                     }),
-                    core$1.I18nModule,
-                    MediaModule,
-                    router.RouterModule,
-                    StarRatingModule,
-                    core$1.UrlModule,
-                    ItemCounterModule,
                 ],
                 declarations: [WishListComponent, WishListItemComponent],
                 entryComponents: [WishListComponent],
@@ -17705,7 +17705,9 @@
                             data: ɵ0$a,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         routing: {
                             routes: {
                                 product: {
@@ -17778,7 +17780,9 @@
                             data: ɵ2,
                         },
                     ]),
-                    core$1.ConfigModule.withConfig({
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         routing: {
                             routes: {
                                 category: {
@@ -18021,16 +18025,19 @@
         B2cStorefrontModule = B2cStorefrontModule_1 = __decorate([
             core.NgModule({
                 imports: [
-                    StorefrontModule.withConfig({
+                    StorefrontModule,
+                    // the cms lib module contains all components that added in the bundle
+                    CmsLibModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig({
                         pwa: {
                             enabled: true,
                             addToHomeScreen: true,
                         },
                     }),
-                    core$1.ConfigModule.withConfig(b2cLayoutConfig),
-                    core$1.ConfigModule.withConfigFactory(defaultCmsContentConfig),
-                    // the cms lib module contains all components that added in the bundle
-                    CmsLibModule,
+                    core$1.provideDefaultConfig(b2cLayoutConfig),
+                    core$1.provideDefaultConfigFactory(defaultCmsContentConfig),
                 ],
                 exports: [StorefrontModule],
             })
@@ -18407,9 +18414,9 @@
     exports.ɵ2 = ɵ2;
     exports.ɵa = AsmLoaderModule;
     exports.ɵb = asmFactory;
-    exports.ɵba = SkipLinkComponent;
-    exports.ɵbb = SkipLinkService;
-    exports.ɵbc = SkipLinkDirective;
+    exports.ɵba = exports["ɵba"];
+    exports.ɵbb = SkipLinkDirective;
+    exports.ɵbc = defaultSkipLinkConfig;
     exports.ɵbd = MyCouponsComponentService;
     exports.ɵbe = addCmsRoute;
     exports.ɵbf = defaultStorefrontRoutesConfig;
@@ -18439,9 +18446,9 @@
     exports.ɵu = AddToHomeScreenService;
     exports.ɵv = SkipLinkModule;
     exports.ɵw = skipLinkFactory;
-    exports.ɵx = defaultSkipLinkConfig;
-    exports.ɵy = SkipLinkConfig;
-    exports.ɵz = exports["ɵz"];
+    exports.ɵx = SkipLinkComponent;
+    exports.ɵy = SkipLinkService;
+    exports.ɵz = SkipLinkConfig;
     exports.θDeferLoaderService = DeferLoaderService;
     exports.θIntersectionService = IntersectionService;
 

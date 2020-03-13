@@ -6,7 +6,7 @@ import * as ɵngcc4 from '@angular/router';
 import * as ɵngcc5 from '@spartacus/core';
 import * as ɵngcc6 from '../icon/icon.module';
 export declare class SiteContextSelectorModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<SiteContextSelectorModule, [typeof ɵngcc1.SiteContextSelectorComponent, typeof ɵngcc2.LanguageCurrencyComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.ConfigModule, typeof ɵngcc5.SiteContextModule, typeof ɵngcc6.IconModule], [typeof ɵngcc1.SiteContextSelectorComponent, typeof ɵngcc2.LanguageCurrencyComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<SiteContextSelectorModule, [typeof ɵngcc1.SiteContextSelectorComponent, typeof ɵngcc2.LanguageCurrencyComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.RouterModule, typeof ɵngcc5.SiteContextModule, typeof ɵngcc6.IconModule], [typeof ɵngcc1.SiteContextSelectorComponent, typeof ɵngcc2.LanguageCurrencyComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<SiteContextSelectorModule>;
 }
 

@@ -9,7 +9,7 @@ import * as ɵngcc7 from '@angular/router';
 import * as ɵngcc8 from '../../shared/components/star-rating/star-rating.module';
 import * as ɵngcc9 from '../../shared/components/item-counter/item-counter.module';
 export declare class WishListModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<WishListModule, [typeof ɵngcc1.WishListComponent, typeof ɵngcc2.WishListItemComponent], [typeof ɵngcc3.AddToCartModule, typeof ɵngcc4.CommonModule, typeof ɵngcc5.ConfigModule, typeof ɵngcc5.I18nModule, typeof ɵngcc6.MediaModule, typeof ɵngcc7.RouterModule, typeof ɵngcc8.StarRatingModule, typeof ɵngcc5.UrlModule, typeof ɵngcc9.ItemCounterModule], [typeof ɵngcc1.WishListComponent, typeof ɵngcc2.WishListItemComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<WishListModule, [typeof ɵngcc1.WishListComponent, typeof ɵngcc2.WishListItemComponent], [typeof ɵngcc3.AddToCartModule, typeof ɵngcc4.CommonModule, typeof ɵngcc5.I18nModule, typeof ɵngcc6.MediaModule, typeof ɵngcc7.RouterModule, typeof ɵngcc8.StarRatingModule, typeof ɵngcc5.UrlModule, typeof ɵngcc9.ItemCounterModule], [typeof ɵngcc1.WishListComponent, typeof ɵngcc2.WishListItemComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<WishListModule>;
 }
 

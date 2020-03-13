@@ -6,7 +6,7 @@ import * as ɵngcc2 from './directive/skip-link.directive';
 import * as ɵngcc3 from '@angular/common';
 import * as ɵngcc4 from '@spartacus/core';
 export declare class SkipLinkModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<SkipLinkModule, [typeof ɵngcc1.SkipLinkComponent, typeof ɵngcc2.SkipLinkDirective], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.I18nModule, typeof ɵngcc4.ConfigModule], [typeof ɵngcc2.SkipLinkDirective]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<SkipLinkModule, [typeof ɵngcc1.SkipLinkComponent, typeof ɵngcc2.SkipLinkDirective], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.I18nModule], [typeof ɵngcc2.SkipLinkDirective]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<SkipLinkModule>;
 }
 /**

@@ -1,7 +1,7 @@
 import { __decorate, __extends, __read, __values, __param, __awaiter, __generator, __assign, __spread } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, ConfigModule, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, provideConfig, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -327,8 +327,11 @@ var IconModule = /** @class */ (function () {
     IconModule = __decorate([
         NgModule({
             declarations: [IconComponent],
-            imports: [CommonModule, ConfigModule.withConfig(fontawesomeIconConfig)],
-            providers: [{ provide: IconConfig, useExisting: Config }],
+            imports: [CommonModule],
+            providers: [
+                provideDefaultConfig(fontawesomeIconConfig),
+                { provide: IconConfig, useExisting: Config },
+            ],
             exports: [IconComponent],
         })
     ], IconModule);
@@ -573,11 +576,9 @@ var AnonymousConsentManagementBannerModule = /** @class */ (function () {
     }
     AnonymousConsentManagementBannerModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                I18nModule,
-                FeaturesConfigModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, I18nModule, FeaturesConfigModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         AnonymousConsentManagementBannerComponent: {
                             component: AnonymousConsentManagementBannerComponent,
@@ -2355,15 +2356,12 @@ var SkipLinkModule = /** @class */ (function () {
     }
     SkipLinkModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                I18nModule,
-                ConfigModule.withConfig(defaultSkipLinkConfig),
-            ],
+            imports: [CommonModule, I18nModule],
             declarations: [SkipLinkComponent, SkipLinkDirective],
             exports: [SkipLinkDirective],
             entryComponents: [SkipLinkComponent],
             providers: [
+                provideDefaultConfig(defaultSkipLinkConfig),
                 { provide: SkipLinkConfig, useExisting: Config },
                 {
                     provide: APP_INITIALIZER,
@@ -2540,11 +2538,11 @@ var PwaModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig(defaultPWAModuleConfig),
                 ServiceWorkerModule.register('/ngsw-worker.js'),
                 I18nModule,
             ],
             providers: [
+                provideDefaultConfig(defaultPWAModuleConfig),
                 { provide: PWAModuleConfig, useExisting: Config },
                 {
                     provide: SwRegistrationOptions,
@@ -2678,7 +2676,7 @@ var RoutingModule = /** @class */ (function () {
     RoutingModule.forRoot = function () {
         return {
             ngModule: RoutingModule_1,
-            providers: [provideConfig(defaultRoutingConfig)],
+            providers: [provideDefaultConfig(defaultRoutingConfig)],
         };
     };
     var RoutingModule_1;
@@ -5414,7 +5412,7 @@ var PaginationModule = /** @class */ (function () {
         NgModule({
             imports: [CommonModule, RouterModule],
             providers: [
-                provideConfig(defaultPaginationConfig),
+                provideDefaultConfig(defaultPaginationConfig),
                 { provide: PaginationConfig, useExisting: Config },
             ],
             declarations: [PaginationComponent],
@@ -5630,21 +5628,18 @@ var QualtricsModule = /** @class */ (function () {
     }
     QualtricsModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                HttpClientModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, HttpClientModule],
+            declarations: [QualtricsComponent],
+            entryComponents: [QualtricsComponent],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         QualtricsComponent: {
                             component: QualtricsComponent,
                         },
                     },
                 }),
-                ConfigModule.withConfig(defaultQualtricsConfig),
-            ],
-            declarations: [QualtricsComponent],
-            entryComponents: [QualtricsComponent],
-            providers: [
+                provideDefaultConfig(defaultQualtricsConfig),
                 {
                     provide: QualtricsConfig,
                     useExisting: Config,
@@ -5817,10 +5812,9 @@ var SiteContextSelectorModule = /** @class */ (function () {
     }
     SiteContextSelectorModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, SiteContextModule, IconModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CMSSiteContextComponent: {
                             component: SiteContextSelectorComponent,
@@ -5837,10 +5831,8 @@ var SiteContextSelectorModule = /** @class */ (function () {
                         },
                     },
                 }),
-                SiteContextModule,
-                IconModule,
+                SiteContextComponentService,
             ],
-            providers: [SiteContextComponentService],
             declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
             entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
             exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
@@ -5949,7 +5941,7 @@ var ViewConfigModule = /** @class */ (function () {
         return {
             ngModule: ViewConfigModule_1,
             providers: [
-                provideConfig({
+                provideDefaultConfig({
                     view: {},
                 }),
                 {
@@ -6224,7 +6216,9 @@ var CartCouponModule = /** @class */ (function () {
                 ReactiveFormsModule,
                 I18nModule,
                 IconModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CartApplyCouponComponent: {
                             component: CartCouponComponent,
@@ -6574,18 +6568,20 @@ var AddToCartModule = /** @class */ (function () {
                 SpinnerModule,
                 PromotionsModule,
                 FeaturesConfigModule,
-                ConfigModule.withConfig({
+                UrlModule,
+                IconModule,
+                I18nModule,
+                ItemCounterModule,
+                AutoFocusDirectiveModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductAddToCartComponent: {
                             component: AddToCartComponent,
                         },
                     },
                 }),
-                UrlModule,
-                IconModule,
-                I18nModule,
-                ItemCounterModule,
-                AutoFocusDirectiveModule,
             ],
             declarations: [AddToCartComponent, AddedToCartDialogComponent],
             entryComponents: [AddToCartComponent, AddedToCartDialogComponent],
@@ -6703,14 +6699,16 @@ var CartDetailsModule = /** @class */ (function () {
                 UrlModule,
                 PromotionsModule,
                 FeaturesConfigModule,
-                ConfigModule.withConfig({
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CartComponent: {
                             component: CartDetailsComponent,
                         },
                     },
                 }),
-                I18nModule,
             ],
             declarations: [CartDetailsComponent],
             exports: [CartDetailsComponent],
@@ -6832,16 +6830,18 @@ var CartTotalsModule = /** @class */ (function () {
                 CommonModule,
                 RouterModule,
                 UrlModule,
-                ConfigModule.withConfig({
+                CartSharedModule,
+                I18nModule,
+                CartCouponModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CartTotalsComponent: {
                             component: CartTotalsComponent,
                         },
                     },
                 }),
-                CartSharedModule,
-                I18nModule,
-                CartCouponModule,
             ],
             declarations: [CartTotalsComponent],
             exports: [CartTotalsComponent],
@@ -6876,19 +6876,15 @@ var MiniCartModule = /** @class */ (function () {
     }
     MiniCartModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, UrlModule, IconModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         MiniCartComponent: {
                             component: MiniCartComponent,
                         },
                     },
                 }),
-                UrlModule,
-                IconModule,
-                I18nModule,
             ],
             declarations: [MiniCartComponent],
             exports: [MiniCartComponent],
@@ -6945,19 +6941,15 @@ var AddToWishListModule = /** @class */ (function () {
     }
     AddToWishListModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, I18nModule, IconModule, RouterModule, UrlModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         AddToWishListComponent: {
                             component: AddToWishListComponent,
                         },
                     },
                 }),
-                I18nModule,
-                IconModule,
-                RouterModule,
-                UrlModule,
             ],
             declarations: [AddToWishListComponent],
             entryComponents: [AddToWishListComponent],
@@ -7013,9 +7005,9 @@ var SaveForLaterModule = /** @class */ (function () {
     }
     SaveForLaterModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, I18nModule, CartSharedModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         SaveForLaterComponent: {
                             component: SaveForLaterComponent,
@@ -7025,8 +7017,6 @@ var SaveForLaterModule = /** @class */ (function () {
                         saveForLater: '1.5',
                     },
                 }),
-                I18nModule,
-                CartSharedModule,
             ],
             declarations: [SaveForLaterComponent],
             exports: [SaveForLaterComponent],
@@ -7569,10 +7559,10 @@ var CheckoutOrchestratorModule = /** @class */ (function () {
     }
     CheckoutOrchestratorModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig(defaultCheckoutConfig),
-                ConfigModule.withConfig({
+            imports: [CommonModule],
+            providers: [
+                provideDefaultConfig(defaultCheckoutConfig),
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutOrchestrator: {
                             component: CheckoutOrchestratorComponent,
@@ -7580,8 +7570,8 @@ var CheckoutOrchestratorModule = /** @class */ (function () {
                         },
                     },
                 }),
+                { provide: CheckoutConfig, useExisting: Config },
             ],
-            providers: [{ provide: CheckoutConfig, useExisting: Config }],
             declarations: [CheckoutOrchestratorComponent],
             entryComponents: [CheckoutOrchestratorComponent],
             exports: [CheckoutOrchestratorComponent],
@@ -7613,10 +7603,9 @@ var CheckoutOrderSummaryModule = /** @class */ (function () {
     }
     CheckoutOrderSummaryModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                CartSharedModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, CartSharedModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutOrderSummary: {
                             component: CheckoutOrderSummaryComponent,
@@ -7670,13 +7659,10 @@ var CheckoutProgressMobileBottomModule = /** @class */ (function () {
     }
     CheckoutProgressMobileBottomModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                UrlModule,
-                I18nModule,
-                RouterModule,
-                ConfigModule.withConfig(defaultCheckoutConfig),
-                ConfigModule.withConfig({
+            imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+            providers: [
+                provideDefaultConfig(defaultCheckoutConfig),
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutProgressMobileBottom: {
                             component: CheckoutProgressMobileBottomComponent,
@@ -7734,13 +7720,10 @@ var CheckoutProgressMobileTopModule = /** @class */ (function () {
     }
     CheckoutProgressMobileTopModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                UrlModule,
-                I18nModule,
-                RouterModule,
-                ConfigModule.withConfig(defaultCheckoutConfig),
-                ConfigModule.withConfig({
+            imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+            providers: [
+                provideDefaultConfig(defaultCheckoutConfig),
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutProgressMobileTop: {
                             component: CheckoutProgressMobileTopComponent,
@@ -7805,13 +7788,13 @@ var CheckoutProgressModule = /** @class */ (function () {
     }
     CheckoutProgressModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                UrlModule,
-                I18nModule,
-                RouterModule,
-                ConfigModule.withConfig(defaultCheckoutConfig),
-                ConfigModule.withConfig({
+            imports: [CommonModule, UrlModule, I18nModule, RouterModule],
+            declarations: [CheckoutProgressComponent],
+            entryComponents: [CheckoutProgressComponent],
+            exports: [CheckoutProgressComponent],
+            providers: [
+                provideDefaultConfig(defaultCheckoutConfig),
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutProgress: {
                             component: CheckoutProgressComponent,
@@ -7819,11 +7802,8 @@ var CheckoutProgressModule = /** @class */ (function () {
                         },
                     },
                 }),
+                { provide: CheckoutConfig, useExisting: Config },
             ],
-            declarations: [CheckoutProgressComponent],
-            entryComponents: [CheckoutProgressComponent],
-            exports: [CheckoutProgressComponent],
-            providers: [{ provide: CheckoutConfig, useExisting: Config }],
         })
     ], CheckoutProgressModule);
     return CheckoutProgressModule;
@@ -7957,12 +7937,9 @@ var DeliveryModeModule = /** @class */ (function () {
     }
     DeliveryModeModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ReactiveFormsModule,
-                I18nModule,
-                SpinnerModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutDeliveryMode: {
                             component: DeliveryModeComponent,
@@ -8571,7 +8548,9 @@ var PaymentMethodModule = /** @class */ (function () {
                 CardModule,
                 SpinnerModule,
                 I18nModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutPaymentDetails: {
                             component: PaymentMethodComponent,
@@ -8585,7 +8564,6 @@ var PaymentMethodModule = /** @class */ (function () {
                     },
                 }),
             ],
-            providers: [UserService],
             declarations: [PaymentMethodComponent],
             entryComponents: [PaymentMethodComponent],
             exports: [PaymentMethodComponent],
@@ -8639,12 +8617,9 @@ var PlaceOrderModule = /** @class */ (function () {
     }
     PlaceOrderModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                UrlModule,
-                I18nModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, UrlModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutPlaceOrder: {
                             component: PlaceOrderComponent,
@@ -8825,7 +8800,9 @@ var ReviewSubmitModule = /** @class */ (function () {
                 RouterModule,
                 PromotionsModule,
                 FeaturesConfigModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutReviewOrder: {
                             component: ReviewSubmitComponent,
@@ -9321,7 +9298,9 @@ var ShippingAddressModule = /** @class */ (function () {
                 I18nModule,
                 CheckoutProgressMobileTopModule,
                 CheckoutProgressMobileBottomModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CheckoutShippingAddress: {
                             component: ShippingAddressComponent,
@@ -9464,9 +9443,9 @@ var HamburgerMenuModule = /** @class */ (function () {
     }
     HamburgerMenuModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         HamburgerMenuComponent: {
                             component: HamburgerMenuComponent,
@@ -9785,7 +9764,9 @@ var ConsentManagementModule = /** @class */ (function () {
                 SpinnerModule,
                 I18nModule,
                 IconModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ConsentManagementComponent: {
                             component: ConsentManagementComponent,
@@ -9940,18 +9921,15 @@ var BannerCarouselModule = /** @class */ (function () {
     }
     BannerCarouselModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, PageComponentModule, CarouselModule, MediaModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         RotatingImagesComponent: {
                             component: BannerCarouselComponent,
                         },
                     },
                 }),
-                PageComponentModule,
-                CarouselModule,
-                MediaModule,
             ],
             declarations: [BannerCarouselComponent],
             entryComponents: [BannerCarouselComponent],
@@ -9983,12 +9961,9 @@ var BannerModule = /** @class */ (function () {
     }
     BannerModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                GenericLinkModule,
-                MediaModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, GenericLinkModule, MediaModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         SimpleResponsiveBannerComponent: {
                             component: BannerComponent,
@@ -10032,11 +10007,9 @@ var LinkModule = /** @class */ (function () {
     }
     LinkModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                GenericLinkModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, GenericLinkModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CMSLinkComponent: { component: LinkComponent },
                     },
@@ -10072,9 +10045,9 @@ var CmsParagraphModule = /** @class */ (function () {
     }
     CmsParagraphModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CMSParagraphComponent: {
                             component: ParagraphComponent,
@@ -10178,18 +10151,15 @@ var TabParagraphContainerModule = /** @class */ (function () {
     }
     TabParagraphContainerModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, PageComponentModule, OutletModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CMSTabParagraphContainer: {
                             component: TabParagraphContainerComponent,
                         },
                     },
                 }),
-                PageComponentModule,
-                OutletModule,
-                I18nModule,
             ],
             declarations: [TabParagraphContainerComponent],
             entryComponents: [TabParagraphContainerComponent],
@@ -10342,7 +10312,15 @@ var AddressBookModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig({
+                CardModule,
+                AddressFormModule,
+                SpinnerModule,
+                I18nModule,
+            ],
+            declarations: [AddressBookComponent],
+            exports: [AddressBookComponent],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         AccountAddressBookComponent: {
                             component: AddressBookComponent,
@@ -10357,14 +10335,9 @@ var AddressBookModule = /** @class */ (function () {
                         },
                     },
                 }),
-                CardModule,
-                AddressFormModule,
-                SpinnerModule,
-                I18nModule,
+                UserAddressService,
+                AddressBookComponentService,
             ],
-            declarations: [AddressBookComponent],
-            exports: [AddressBookComponent],
-            providers: [UserAddressService, AddressBookComponentService],
             entryComponents: [AddressBookComponent],
         })
     ], AddressBookModule);
@@ -10482,7 +10455,9 @@ var CloseAccountModule = /** @class */ (function () {
                 I18nModule,
                 IconModule,
                 SpinnerModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CloseAccountComponent: {
                             component: CloseAccountComponent,
@@ -10546,7 +10521,10 @@ var ForgotPasswordModule = /** @class */ (function () {
                 ReactiveFormsModule,
                 RouterModule,
                 UrlModule,
-                ConfigModule.withConfig({
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ForgotPasswordComponent: {
                             component: ForgotPasswordComponent,
@@ -10554,7 +10532,6 @@ var ForgotPasswordModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
             ],
             declarations: [ForgotPasswordComponent],
             exports: [ForgotPasswordComponent],
@@ -10907,7 +10884,11 @@ var CancelOrderConfirmationModule = /** @class */ (function () {
                     },
                 ]),
                 ReactiveFormsModule,
-                ConfigModule.withConfig({
+                AmendOrderItemsModule,
+                AmendOrderActionsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CancelOrderConfirmationComponent: {
                             component: CancelOrderConfirmationComponent,
@@ -10921,8 +10902,6 @@ var CancelOrderConfirmationModule = /** @class */ (function () {
                         },
                     },
                 }),
-                AmendOrderItemsModule,
-                AmendOrderActionsModule,
             ],
             declarations: [CancelOrderConfirmationComponent],
             exports: [CancelOrderConfirmationComponent],
@@ -10972,7 +10951,11 @@ var CancelOrderModule = /** @class */ (function () {
                         data: ɵ0$2,
                     },
                 ]),
-                ConfigModule.withConfig({
+                AmendOrderItemsModule,
+                AmendOrderActionsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CancelOrderComponent: {
                             component: CancelOrderComponent,
@@ -10986,8 +10969,6 @@ var CancelOrderModule = /** @class */ (function () {
                         },
                     },
                 }),
-                AmendOrderItemsModule,
-                AmendOrderActionsModule,
             ],
             declarations: [CancelOrderComponent],
             exports: [CancelOrderComponent],
@@ -11155,7 +11136,13 @@ var ReturnOrderConfirmationModule = /** @class */ (function () {
                         data: ɵ0$3,
                     },
                 ]),
-                ConfigModule.withConfig({
+                AmendOrderItemsModule,
+                I18nModule,
+                ReactiveFormsModule,
+                AmendOrderActionsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ReturnOrderConfirmationComponent: {
                             component: ReturnOrderConfirmationComponent,
@@ -11169,10 +11156,6 @@ var ReturnOrderConfirmationModule = /** @class */ (function () {
                         },
                     },
                 }),
-                AmendOrderItemsModule,
-                I18nModule,
-                ReactiveFormsModule,
-                AmendOrderActionsModule,
             ],
             declarations: [ReturnOrderConfirmationComponent],
             exports: [ReturnOrderConfirmationComponent],
@@ -11222,7 +11205,11 @@ var ReturnOrderModule = /** @class */ (function () {
                         data: ɵ0$4,
                     },
                 ]),
-                ConfigModule.withConfig({
+                AmendOrderItemsModule,
+                AmendOrderActionsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ReturnOrderComponent: {
                             component: ReturnOrderComponent,
@@ -11236,8 +11223,6 @@ var ReturnOrderModule = /** @class */ (function () {
                         },
                     },
                 }),
-                AmendOrderItemsModule,
-                AmendOrderActionsModule,
             ],
             declarations: [ReturnOrderComponent],
             exports: [ReturnOrderComponent],
@@ -11590,7 +11575,10 @@ var OrderDetailsModule = /** @class */ (function () {
                         data: ɵ1,
                     },
                 ]),
-                ConfigModule.withConfig({
+                SpinnerModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         AccountOrderDetailsActionsComponent: {
                             component: OrderDetailActionsComponent,
@@ -11612,9 +11600,8 @@ var OrderDetailsModule = /** @class */ (function () {
                         consignmentTracking: '1.2',
                     },
                 }),
-                SpinnerModule,
+                OrderDetailsService,
             ],
-            providers: [OrderDetailsService],
             declarations: __spread(moduleComponents),
             exports: __spread(moduleComponents),
             entryComponents: __spread(moduleComponents),
@@ -11712,14 +11699,6 @@ var OrderHistoryModule = /** @class */ (function () {
                         data: ɵ0$6,
                     },
                 ]),
-                ConfigModule.withConfig({
-                    cmsComponents: {
-                        AccountOrderHistoryComponent: {
-                            component: OrderHistoryComponent,
-                            guards: [AuthGuard],
-                        },
-                    },
-                }),
                 RouterModule,
                 FormsModule,
                 NgSelectModule,
@@ -11729,7 +11708,16 @@ var OrderHistoryModule = /** @class */ (function () {
             ],
             declarations: [OrderHistoryComponent],
             exports: [OrderHistoryComponent],
-            providers: [UserService],
+            providers: [
+                provideDefaultConfig({
+                    cmsComponents: {
+                        AccountOrderHistoryComponent: {
+                            component: OrderHistoryComponent,
+                            guards: [AuthGuard],
+                        },
+                    },
+                }),
+            ],
             entryComponents: [OrderHistoryComponent],
         })
     ], OrderHistoryModule);
@@ -11923,7 +11911,14 @@ var ReturnRequestDetailModule = /** @class */ (function () {
                         data: ɵ0$7,
                     },
                 ]),
-                ConfigModule.withConfig({
+                RouterModule,
+                UrlModule,
+                I18nModule,
+                MediaModule,
+                FeaturesConfigModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ReturnRequestOverviewComponent: {
                             component: ReturnRequestOverviewComponent,
@@ -11936,11 +11931,6 @@ var ReturnRequestDetailModule = /** @class */ (function () {
                         },
                     },
                 }),
-                RouterModule,
-                UrlModule,
-                I18nModule,
-                MediaModule,
-                FeaturesConfigModule,
             ],
             declarations: __spread(components),
             exports: __spread(components),
@@ -12021,7 +12011,13 @@ var ReturnRequestListModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig({
+                RouterModule,
+                ListNavigationModule,
+                UrlModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         OrderReturnRequestListComponent: {
                             component: OrderReturnRequestListComponent,
@@ -12029,10 +12025,6 @@ var ReturnRequestListModule = /** @class */ (function () {
                         },
                     },
                 }),
-                RouterModule,
-                ListNavigationModule,
-                UrlModule,
-                I18nModule,
             ],
             declarations: [OrderReturnRequestListComponent],
             exports: [OrderReturnRequestListComponent],
@@ -12159,11 +12151,9 @@ var PaymentMethodsModule = /** @class */ (function () {
     }
     PaymentMethodsModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                CardModule,
-                SpinnerModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, CardModule, SpinnerModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         AccountPaymentDetailsComponent: {
                             component: PaymentMethodsComponent,
@@ -12171,9 +12161,7 @@ var PaymentMethodsModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
             ],
-            providers: [UserService],
             declarations: [PaymentMethodsComponent],
             exports: [PaymentMethodsComponent],
             entryComponents: [PaymentMethodsComponent],
@@ -12247,7 +12235,13 @@ var ResetPasswordModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig({
+                FormsModule,
+                ReactiveFormsModule,
+                RouterModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ResetPasswordComponent: {
                             component: ResetPasswordFormComponent,
@@ -12255,10 +12249,6 @@ var ResetPasswordModule = /** @class */ (function () {
                         },
                     },
                 }),
-                FormsModule,
-                ReactiveFormsModule,
-                RouterModule,
-                I18nModule,
             ],
             declarations: [ResetPasswordFormComponent],
             exports: [ResetPasswordFormComponent],
@@ -12388,7 +12378,13 @@ var UpdateEmailModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig({
+                FormsModule,
+                ReactiveFormsModule,
+                SpinnerModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         UpdateEmailComponent: {
                             component: UpdateEmailComponent,
@@ -12396,10 +12392,6 @@ var UpdateEmailModule = /** @class */ (function () {
                         },
                     },
                 }),
-                FormsModule,
-                ReactiveFormsModule,
-                SpinnerModule,
-                I18nModule,
             ],
             declarations: [UpdateEmailFormComponent, UpdateEmailComponent],
             exports: [UpdateEmailComponent, UpdateEmailFormComponent],
@@ -12528,7 +12520,11 @@ var UpdatePasswordModule = /** @class */ (function () {
                 CommonModule,
                 FormsModule,
                 ReactiveFormsModule,
-                ConfigModule.withConfig({
+                SpinnerModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         UpdatePasswordComponent: {
                             component: UpdatePasswordComponent,
@@ -12536,8 +12532,6 @@ var UpdatePasswordModule = /** @class */ (function () {
                         },
                     },
                 }),
-                SpinnerModule,
-                I18nModule,
             ],
             declarations: [UpdatePasswordComponent, UpdatePasswordFormComponent],
             exports: [UpdatePasswordComponent, UpdatePasswordFormComponent],
@@ -12664,7 +12658,13 @@ var UpdateProfileModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig({
+                FormsModule,
+                ReactiveFormsModule,
+                SpinnerModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         UpdateProfileComponent: {
                             component: UpdateProfileComponent,
@@ -12672,10 +12672,6 @@ var UpdateProfileModule = /** @class */ (function () {
                         },
                     },
                 }),
-                FormsModule,
-                ReactiveFormsModule,
-                SpinnerModule,
-                I18nModule,
             ],
             declarations: [UpdateProfileComponent, UpdateProfileFormComponent],
             exports: [UpdateProfileComponent, UpdateProfileFormComponent],
@@ -12969,18 +12965,6 @@ var MyCouponsModule = /** @class */ (function () {
                 UrlModule,
                 IconModule,
                 ListNavigationModule,
-                ConfigModule.withConfig({
-                    cmsComponents: {
-                        MyCouponsComponent: {
-                            component: MyCouponsComponent,
-                            guards: [AuthGuard],
-                        },
-                        CouponClaimComponent: {
-                            component: CouponClaimComponent,
-                            guards: [AuthGuard],
-                        },
-                    },
-                }),
                 RouterModule.forChild([
                     {
                         path: null,
@@ -12995,6 +12979,20 @@ var MyCouponsModule = /** @class */ (function () {
                 CouponCardComponent,
                 CouponDialogComponent,
                 CouponClaimComponent,
+            ],
+            providers: [
+                provideDefaultConfig({
+                    cmsComponents: {
+                        MyCouponsComponent: {
+                            component: MyCouponsComponent,
+                            guards: [AuthGuard],
+                        },
+                        CouponClaimComponent: {
+                            component: CouponClaimComponent,
+                            guards: [AuthGuard],
+                        },
+                    },
+                }),
             ],
             exports: [MyCouponsComponent, CouponClaimComponent],
             entryComponents: [
@@ -13058,11 +13056,9 @@ var NotificationPreferenceModule = /** @class */ (function () {
     NotificationPreferenceModule = __decorate([
         NgModule({
             declarations: [NotificationPreferenceComponent],
-            imports: [
-                CommonModule,
-                SpinnerModule,
-                I18nModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, SpinnerModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         NotificationPreferenceComponent: {
                             component: NotificationPreferenceComponent,
@@ -13181,7 +13177,15 @@ var MyInterestsModule = /** @class */ (function () {
             imports: [
                 CommonModule,
                 I18nModule,
-                ConfigModule.withConfig({
+                RouterModule,
+                ListNavigationModule,
+                I18nModule,
+                UrlModule,
+                MediaModule,
+                SpinnerModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         MyInterestsComponent: {
                             component: MyInterestsComponent,
@@ -13189,12 +13193,6 @@ var MyInterestsModule = /** @class */ (function () {
                         },
                     },
                 }),
-                RouterModule,
-                ListNavigationModule,
-                I18nModule,
-                UrlModule,
-                MediaModule,
-                SpinnerModule,
             ],
             exports: [MyInterestsComponent],
             entryComponents: [MyInterestsComponent],
@@ -13246,17 +13244,15 @@ var BreadcrumbModule = /** @class */ (function () {
     }
     BreadcrumbModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, CmsPageTitleModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         BreadcrumbComponent: {
                             component: BreadcrumbComponent,
                         },
                     },
                 }),
-                CmsPageTitleModule,
             ],
             declarations: [BreadcrumbComponent],
             exports: [BreadcrumbComponent],
@@ -13627,14 +13623,16 @@ var NavigationModule = /** @class */ (function () {
                 RouterModule,
                 IconModule,
                 GenericLinkModule,
-                ConfigModule.withConfig({
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         NavigationComponent: {
                             component: NavigationComponent,
                         },
                     },
                 }),
-                I18nModule,
             ],
             declarations: [NavigationComponent, NavigationUIComponent],
             entryComponents: [NavigationComponent],
@@ -13649,10 +13647,9 @@ var CategoryNavigationModule = /** @class */ (function () {
     }
     CategoryNavigationModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                NavigationModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, NavigationModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         CategoryNavigationComponent: {
                             component: CategoryNavigationComponent,
@@ -13707,7 +13704,9 @@ var FooterNavigationModule = /** @class */ (function () {
                 NavigationModule,
                 GenericLinkModule,
                 I18nModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         FooterNavigationComponent: {
                             component: FooterNavigationComponent,
@@ -14114,16 +14113,18 @@ var SearchBoxModule = /** @class */ (function () {
                 CommonModule,
                 RouterModule,
                 MediaModule,
-                ConfigModule.withConfig({
+                IconModule,
+                UrlModule,
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         SearchBoxComponent: {
                             component: SearchBoxComponent,
                         },
                     },
                 }),
-                IconModule,
-                UrlModule,
-                I18nModule,
             ],
             declarations: [SearchBoxComponent, HighlightPipe],
             entryComponents: [SearchBoxComponent],
@@ -14386,7 +14387,9 @@ var OrderConfirmationModule = /** @class */ (function () {
                 I18nModule,
                 ReactiveFormsModule,
                 FeaturesConfigModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         OrderConfirmationThankMessageComponent: {
                             component: OrderConfirmationThankYouMessageComponent,
@@ -14516,13 +14519,9 @@ var ProductCarouselModule = /** @class */ (function () {
     }
     ProductCarouselModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                CarouselModule,
-                MediaModule,
-                RouterModule,
-                UrlModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductCarouselComponent: {
                             component: ProductCarouselComponent,
@@ -14585,13 +14584,9 @@ var ProductReferencesModule = /** @class */ (function () {
     }
     ProductReferencesModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                CarouselModule,
-                MediaModule,
-                RouterModule,
-                UrlModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, CarouselModule, MediaModule, RouterModule, UrlModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductReferencesComponent: {
                             component: ProductReferencesComponent,
@@ -14695,14 +14690,16 @@ var ProductImagesModule = /** @class */ (function () {
                 RouterModule,
                 MediaModule,
                 OutletModule,
-                ConfigModule.withConfig({
+                CarouselModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductImagesComponent: {
                             component: ProductImagesComponent,
                         },
                     },
                 }),
-                CarouselModule,
             ],
             declarations: [ProductImagesComponent],
             entryComponents: [ProductImagesComponent],
@@ -14801,11 +14798,9 @@ var ProductIntroModule = /** @class */ (function () {
     }
     ProductIntroModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                I18nModule,
-                StarRatingModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, I18nModule, StarRatingModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductIntroComponent: {
                             component: ProductIntroComponent,
@@ -15636,7 +15631,14 @@ var ProductVariantsModule = /** @class */ (function () {
                 CommonModule,
                 RouterModule,
                 UrlModule,
-                ConfigModule.withConfig({
+                I18nModule,
+                VariantStyleSelectorModule,
+                VariantSizeSelectorModule,
+                VariantColorSelectorModule,
+                VariantStyleIconsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductVariantSelectorComponent: {
                             component: ProductVariantsComponent,
@@ -15644,11 +15646,6 @@ var ProductVariantsModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
-                VariantStyleSelectorModule,
-                VariantSizeSelectorModule,
-                VariantColorSelectorModule,
-                VariantStyleIconsModule,
             ],
             declarations: [ProductVariantsComponent],
             entryComponents: [ProductVariantsComponent],
@@ -15665,8 +15662,24 @@ var ProductListModule = /** @class */ (function () {
         NgModule({
             imports: [
                 CommonModule,
-                ConfigModule.withConfig(defaultScrollConfig),
-                ConfigModule.withConfig({
+                RouterModule,
+                MediaModule,
+                AddToCartModule,
+                ItemCounterModule,
+                ListNavigationModule,
+                UrlModule,
+                I18nModule,
+                StarRatingModule,
+                IconModule,
+                SpinnerModule,
+                InfiniteScrollModule,
+                ViewConfigModule,
+                ProductVariantsModule,
+                FeaturesConfigModule,
+            ],
+            providers: [
+                provideDefaultConfig(defaultScrollConfig),
+                provideDefaultConfig({
                     cmsComponents: {
                         CMSProductListComponent: {
                             component: ProductListComponent,
@@ -15682,20 +15695,6 @@ var ProductListModule = /** @class */ (function () {
                         },
                     },
                 }),
-                RouterModule,
-                MediaModule,
-                AddToCartModule,
-                ItemCounterModule,
-                ListNavigationModule,
-                UrlModule,
-                I18nModule,
-                StarRatingModule,
-                IconModule,
-                SpinnerModule,
-                InfiniteScrollModule,
-                ViewConfigModule,
-                ProductVariantsModule,
-                FeaturesConfigModule,
             ],
             declarations: [
                 ProductListComponent,
@@ -15751,11 +15750,9 @@ var ProductSummaryModule = /** @class */ (function () {
     }
     ProductSummaryModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                OutletModule,
-                I18nModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, OutletModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductSummaryComponent: {
                             component: ProductSummaryComponent,
@@ -15796,10 +15793,9 @@ var ProductAttributesModule = /** @class */ (function () {
     }
     ProductAttributesModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                I18nModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductSpecsTabComponent: {
                             component: ProductAttributesComponent,
@@ -15840,9 +15836,9 @@ var ProductDetailsTabModule = /** @class */ (function () {
     }
     ProductDetailsTabModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductDetailsTabComponent: {
                             component: ProductDetailsTabComponent,
@@ -15963,7 +15959,9 @@ var ProductReviewsModule = /** @class */ (function () {
                 FormsModule,
                 I18nModule,
                 StarRatingModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ProductReviewsTabComponent: {
                             component: ProductReviewsComponent,
@@ -16147,19 +16145,15 @@ var StockNotificationModule = /** @class */ (function () {
     StockNotificationModule = __decorate([
         NgModule({
             declarations: [StockNotificationComponent, StockNotificationDialogComponent],
-            imports: [
-                CommonModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, I18nModule, SpinnerModule, UrlModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         StockNotificationComponent: {
                             component: StockNotificationComponent,
                         },
                     },
                 }),
-                RouterModule,
-                I18nModule,
-                SpinnerModule,
-                UrlModule,
             ],
             entryComponents: [
                 StockNotificationComponent,
@@ -16689,7 +16683,9 @@ var StoreFinderModule = /** @class */ (function () {
                 StoreFinderCoreModule,
                 I18nModule,
                 IconModule,
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         StoreFinderComponent: {
                             component: StoreFinderComponent,
@@ -16841,7 +16837,11 @@ var CheckoutLoginModule = /** @class */ (function () {
                 I18nModule,
                 FormsModule,
                 ReactiveFormsModule,
-                ConfigModule.withConfig({
+                FormsModule,
+                ReactiveFormsModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         GuestCheckoutLoginComponent: {
                             component: CheckoutLoginComponent,
@@ -16849,8 +16849,6 @@ var CheckoutLoginModule = /** @class */ (function () {
                         },
                     },
                 }),
-                FormsModule,
-                ReactiveFormsModule,
             ],
             declarations: [CheckoutLoginComponent],
             exports: [CheckoutLoginComponent],
@@ -16958,7 +16956,10 @@ var LoginFormModule = /** @class */ (function () {
                 ReactiveFormsModule,
                 RouterModule,
                 UrlModule,
-                ConfigModule.withConfig({
+                I18nModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         ReturningCustomerLoginComponent: {
                             component: LoginFormComponent,
@@ -16966,7 +16967,6 @@ var LoginFormModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
             ],
             declarations: [LoginFormComponent],
             exports: [LoginFormComponent],
@@ -17010,19 +17010,15 @@ var LoginModule = /** @class */ (function () {
     }
     LoginModule = __decorate([
         NgModule({
-            imports: [
-                CommonModule,
-                RouterModule,
-                UrlModule,
-                PageSlotModule,
-                ConfigModule.withConfig({
+            imports: [CommonModule, RouterModule, UrlModule, PageSlotModule, I18nModule],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         LoginComponent: {
                             component: LoginComponent,
                         },
                     },
                 }),
-                I18nModule,
             ],
             declarations: [LoginComponent],
             entryComponents: [LoginComponent],
@@ -17297,7 +17293,11 @@ var RegisterComponentModule = /** @class */ (function () {
                 ReactiveFormsModule,
                 RouterModule,
                 UrlModule,
-                ConfigModule.withConfig({
+                I18nModule,
+                SpinnerModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         RegisterCustomerComponent: {
                             component: RegisterComponent,
@@ -17305,8 +17305,6 @@ var RegisterComponentModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
-                SpinnerModule,
             ],
             declarations: [RegisterComponent],
             exports: [RegisterComponent],
@@ -17393,7 +17391,15 @@ var WishListModule = /** @class */ (function () {
             imports: [
                 AddToCartModule,
                 CommonModule,
-                ConfigModule.withConfig({
+                I18nModule,
+                MediaModule,
+                RouterModule,
+                StarRatingModule,
+                UrlModule,
+                ItemCounterModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     cmsComponents: {
                         WishListComponent: {
                             component: WishListComponent,
@@ -17401,12 +17407,6 @@ var WishListModule = /** @class */ (function () {
                         },
                     },
                 }),
-                I18nModule,
-                MediaModule,
-                RouterModule,
-                StarRatingModule,
-                UrlModule,
-                ItemCounterModule,
             ],
             declarations: [WishListComponent, WishListItemComponent],
             entryComponents: [WishListComponent],
@@ -17520,7 +17520,9 @@ var ProductDetailsPageModule = /** @class */ (function () {
                         data: ɵ0$a,
                     },
                 ]),
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     routing: {
                         routes: {
                             product: {
@@ -17593,7 +17595,9 @@ var ProductListingPageModule = /** @class */ (function () {
                         data: ɵ2,
                     },
                 ]),
-                ConfigModule.withConfig({
+            ],
+            providers: [
+                provideDefaultConfig({
                     routing: {
                         routes: {
                             category: {
@@ -17836,16 +17840,19 @@ var B2cStorefrontModule = /** @class */ (function () {
     B2cStorefrontModule = B2cStorefrontModule_1 = __decorate([
         NgModule({
             imports: [
-                StorefrontModule.withConfig({
+                StorefrontModule,
+                // the cms lib module contains all components that added in the bundle
+                CmsLibModule,
+            ],
+            providers: [
+                provideDefaultConfig({
                     pwa: {
                         enabled: true,
                         addToHomeScreen: true,
                     },
                 }),
-                ConfigModule.withConfig(b2cLayoutConfig),
-                ConfigModule.withConfigFactory(defaultCmsContentConfig),
-                // the cms lib module contains all components that added in the bundle
-                CmsLibModule,
+                provideDefaultConfig(b2cLayoutConfig),
+                provideDefaultConfigFactory(defaultCmsContentConfig),
             ],
             exports: [StorefrontModule],
         })
@@ -17873,5 +17880,5 @@ var PLPAccessibilityLayoutConfig = {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkComponent as ɵba, SkipLinkService as ɵbb, SkipLinkDirective as ɵbc, MyCouponsComponentService as ɵbd, addCmsRoute as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi, AnonymousConsentsModule as ɵbj, AnonymousConsentDialogComponent as ɵbk, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, defaultSkipLinkConfig as ɵx, SkipLinkConfig as ɵy, SkipLinkScrollPosition as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, AsmLoaderModule as ɵa, asmFactory as ɵb, SkipLinkScrollPosition as ɵba, SkipLinkDirective as ɵbb, defaultSkipLinkConfig as ɵbc, MyCouponsComponentService as ɵbd, addCmsRoute as ɵbe, defaultStorefrontRoutesConfig as ɵbf, defaultRoutingConfig as ɵbg, htmlLangProvider as ɵbh, setHtmlLangAttribute as ɵbi, AnonymousConsentsModule as ɵbj, AnonymousConsentDialogComponent as ɵbk, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, AutoFocusDirectiveModule as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, SkipLinkModule as ɵv, skipLinkFactory as ɵw, SkipLinkComponent as ɵx, SkipLinkService as ɵy, SkipLinkConfig as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

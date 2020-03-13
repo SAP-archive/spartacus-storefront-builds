@@ -6,7 +6,7 @@ import * as ɵngcc4 from '@spartacus/core';
 import * as ɵngcc5 from '../cart-shared/cart-shared.module';
 import * as ɵngcc6 from '../cart-coupon/cart-coupon.module';
 export declare class CartTotalsModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CartTotalsModule, [typeof ɵngcc1.CartTotalsComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.RouterModule, typeof ɵngcc4.UrlModule, typeof ɵngcc4.ConfigModule, typeof ɵngcc5.CartSharedModule, typeof ɵngcc4.I18nModule, typeof ɵngcc6.CartCouponModule], [typeof ɵngcc1.CartTotalsComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CartTotalsModule, [typeof ɵngcc1.CartTotalsComponent], [typeof ɵngcc2.CommonModule, typeof ɵngcc3.RouterModule, typeof ɵngcc4.UrlModule, typeof ɵngcc5.CartSharedModule, typeof ɵngcc4.I18nModule, typeof ɵngcc6.CartCouponModule], [typeof ɵngcc1.CartTotalsComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<CartTotalsModule>;
 }
 
