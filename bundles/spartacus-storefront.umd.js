@@ -909,7 +909,7 @@
         // auth
         auth, 
         // cart
-        cart, cartData, 
+        cart, 
         // checkout
         checkout, checkoutDelivery, checkoutPayment, 
         // cms
@@ -936,7 +936,6 @@
         ngZone) {
             this.auth = auth;
             this.cart = cart;
-            this.cartData = cartData;
             this.checkout = checkout;
             this.checkoutDelivery = checkoutDelivery;
             this.checkoutPayment = checkoutPayment;
@@ -969,7 +968,6 @@
         CxApiService.ctorParameters = function () { return [
             { type: core$1.AuthService, decorators: [{ type: core.Optional }] },
             { type: core$1.ActiveCartService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CartDataService, decorators: [{ type: core.Optional }] },
             { type: core$1.CheckoutService, decorators: [{ type: core.Optional }] },
             { type: core$1.CheckoutDeliveryService, decorators: [{ type: core.Optional }] },
             { type: core$1.CheckoutPaymentService, decorators: [{ type: core.Optional }] },
@@ -999,7 +997,7 @@
             { type: core$1.SelectiveCartService, decorators: [{ type: core.Optional }] },
             { type: core.NgZone }
         ]; };
-        CxApiService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CxApiService_Factory() { return new CxApiService(core["ɵɵinject"](core$1.AuthService, 8), core["ɵɵinject"](core$1.ActiveCartService, 8), core["ɵɵinject"](core$1.CartDataService, 8), core["ɵɵinject"](core$1.CheckoutService, 8), core["ɵɵinject"](core$1.CheckoutDeliveryService, 8), core["ɵɵinject"](core$1.CheckoutPaymentService, 8), core["ɵɵinject"](core$1.CmsService, 8), core["ɵɵinject"](core$1.PageMetaService, 8), core["ɵɵinject"](core$1.FeatureConfigService, 8), core["ɵɵinject"](core$1.GlobalMessageService, 8), core["ɵɵinject"](core$1.TranslationService, 8), core["ɵɵinject"](core$1.KymaService, 8), core["ɵɵinject"](core$1.OccEndpointsService, 8), core["ɵɵinject"](core$1.ProductService, 8), core["ɵɵinject"](core$1.ProductSearchService, 8), core["ɵɵinject"](core$1.ProductReviewService, 8), core["ɵɵinject"](core$1.ProductReferenceService, 8), core["ɵɵinject"](core$1.SearchboxService, 8), core["ɵɵinject"](core$1.RoutingService, 8), core["ɵɵinject"](core$1.CurrencyService, 8), core["ɵɵinject"](core$1.LanguageService, 8), core["ɵɵinject"](core$1.BaseSiteService, 8), core["ɵɵinject"](core$1.UserService, 8), core["ɵɵinject"](core$1.UserAddressService, 8), core["ɵɵinject"](core$1.UserConsentService, 8), core["ɵɵinject"](core$1.UserOrderService, 8), core["ɵɵinject"](core$1.UserPaymentService, 8), core["ɵɵinject"](core$1.UserNotificationPreferenceService, 8), core["ɵɵinject"](core$1.UserInterestsService, 8), core["ɵɵinject"](core$1.SelectiveCartService, 8), core["ɵɵinject"](core.NgZone)); }, token: CxApiService, providedIn: "root" });
+        CxApiService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CxApiService_Factory() { return new CxApiService(core["ɵɵinject"](core$1.AuthService, 8), core["ɵɵinject"](core$1.ActiveCartService, 8), core["ɵɵinject"](core$1.CheckoutService, 8), core["ɵɵinject"](core$1.CheckoutDeliveryService, 8), core["ɵɵinject"](core$1.CheckoutPaymentService, 8), core["ɵɵinject"](core$1.CmsService, 8), core["ɵɵinject"](core$1.PageMetaService, 8), core["ɵɵinject"](core$1.FeatureConfigService, 8), core["ɵɵinject"](core$1.GlobalMessageService, 8), core["ɵɵinject"](core$1.TranslationService, 8), core["ɵɵinject"](core$1.KymaService, 8), core["ɵɵinject"](core$1.OccEndpointsService, 8), core["ɵɵinject"](core$1.ProductService, 8), core["ɵɵinject"](core$1.ProductSearchService, 8), core["ɵɵinject"](core$1.ProductReviewService, 8), core["ɵɵinject"](core$1.ProductReferenceService, 8), core["ɵɵinject"](core$1.SearchboxService, 8), core["ɵɵinject"](core$1.RoutingService, 8), core["ɵɵinject"](core$1.CurrencyService, 8), core["ɵɵinject"](core$1.LanguageService, 8), core["ɵɵinject"](core$1.BaseSiteService, 8), core["ɵɵinject"](core$1.UserService, 8), core["ɵɵinject"](core$1.UserAddressService, 8), core["ɵɵinject"](core$1.UserConsentService, 8), core["ɵɵinject"](core$1.UserOrderService, 8), core["ɵɵinject"](core$1.UserPaymentService, 8), core["ɵɵinject"](core$1.UserNotificationPreferenceService, 8), core["ɵɵinject"](core$1.UserInterestsService, 8), core["ɵɵinject"](core$1.SelectiveCartService, 8), core["ɵɵinject"](core.NgZone)); }, token: CxApiService, providedIn: "root" });
         CxApiService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -1032,8 +1030,7 @@
             __param(25, core.Optional()),
             __param(26, core.Optional()),
             __param(27, core.Optional()),
-            __param(28, core.Optional()),
-            __param(29, core.Optional())
+            __param(28, core.Optional())
         ], CxApiService);
         return CxApiService;
     }());

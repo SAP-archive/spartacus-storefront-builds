@@ -1,7 +1,7 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -9642,7 +9642,7 @@ let CxApiService = class CxApiService {
     // auth
     auth, 
     // cart
-    cart, cartData, 
+    cart, 
     // checkout
     checkout, checkoutDelivery, checkoutPayment, 
     // cms
@@ -9669,7 +9669,6 @@ let CxApiService = class CxApiService {
     ngZone) {
         this.auth = auth;
         this.cart = cart;
-        this.cartData = cartData;
         this.checkout = checkout;
         this.checkoutDelivery = checkoutDelivery;
         this.checkoutPayment = checkoutPayment;
@@ -9700,11 +9699,10 @@ let CxApiService = class CxApiService {
         this.ngZone = ngZone;
     }
 };
-CxApiService.ɵfac = function CxApiService_Factory(t) { return new (t || CxApiService)(ɵngcc0.ɵɵinject(ɵngcc1.AuthService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CartDataService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CmsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService, 8), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService, 8), ɵngcc0.ɵɵinject(ɵngcc1.KymaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.OccEndpointsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SearchboxService, 8), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService, 8), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.BaseSiteService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserConsentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserNotificationPreferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserInterestsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc0.NgZone)); };
+CxApiService.ɵfac = function CxApiService_Factory(t) { return new (t || CxApiService)(ɵngcc0.ɵɵinject(ɵngcc1.AuthService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CmsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService, 8), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService, 8), ɵngcc0.ɵɵinject(ɵngcc1.KymaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.OccEndpointsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SearchboxService, 8), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService, 8), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.BaseSiteService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserConsentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserNotificationPreferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserInterestsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc0.NgZone)); };
 CxApiService.ctorParameters = () => [
     { type: AuthService, decorators: [{ type: Optional }] },
     { type: ActiveCartService, decorators: [{ type: Optional }] },
-    { type: CartDataService, decorators: [{ type: Optional }] },
     { type: CheckoutService, decorators: [{ type: Optional }] },
     { type: CheckoutDeliveryService, decorators: [{ type: Optional }] },
     { type: CheckoutPaymentService, decorators: [{ type: Optional }] },
@@ -9734,7 +9732,7 @@ CxApiService.ctorParameters = () => [
     { type: SelectiveCartService, decorators: [{ type: Optional }] },
     { type: NgZone }
 ];
-CxApiService.ɵprov = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(ActiveCartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(SelectiveCartService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
+CxApiService.ɵprov = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(ActiveCartService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(SelectiveCartService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
 CxApiService = __decorate([ __param(0, Optional()),
     __param(1, Optional()),
     __param(2, Optional()),
@@ -9763,8 +9761,7 @@ CxApiService = __decorate([ __param(0, Optional()),
     __param(25, Optional()),
     __param(26, Optional()),
     __param(27, Optional()),
-    __param(28, Optional()),
-    __param(29, Optional())
+    __param(28, Optional())
 ], CxApiService);
 
 let ComponentWrapperDirective = class ComponentWrapperDirective {
@@ -26273,8 +26270,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.AuthService, decorators: [{
                 type: Optional
             }] }, { type: ɵngcc1.ActiveCartService, decorators: [{
-                type: Optional
-            }] }, { type: ɵngcc1.CartDataService, decorators: [{
                 type: Optional
             }] }, { type: ɵngcc1.CheckoutService, decorators: [{
                 type: Optional
