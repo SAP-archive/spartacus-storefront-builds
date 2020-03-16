@@ -6952,7 +6952,7 @@
         MiniCartComponent = __decorate([
             core.Component({
                 selector: 'cx-mini-cart',
-                template: "<a\n  [attr.aria-label]=\"\n    'miniCart.item' | cxTranslate: { count: quantity$ | async }\n  \"\n  [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">{{ total$ | async }}</span>\n  <span class=\"count\">{{ quantity$ | async }}</span>\n</a>\n",
+                template: "<a\n  [attr.aria-label]=\"\n    'miniCart.item' | cxTranslate: { count: quantity$ | async }\n  \"\n  [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n>\n  <cx-icon [type]=\"iconTypes.CART\"></cx-icon>\n\n  <span class=\"total\">\n    {{ 'miniCart.total' | cxTranslate: { total: total$ | async } }}\n  </span>\n\n  <span class=\"count\">\n    {{ 'miniCart.count' | cxTranslate: { count: quantity$ | async } }}\n  </span>\n</a>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], MiniCartComponent);
