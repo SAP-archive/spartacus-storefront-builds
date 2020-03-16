@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { CartService, FeatureConfigService, PromotionLocation, PromotionResult, SelectiveCartService } from '@spartacus/core';
+import { CartService, FeatureConfigService, PromotionLocation, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CartItemComponentOptions, Item } from '../cart-item/cart-item.component';
 export declare class CartItemListComponent {
@@ -13,7 +13,6 @@ export declare class CartItemListComponent {
     form: FormGroup;
     set items(items: Item[]);
     get items(): Item[];
-    potentialProductPromotions: PromotionResult[];
     promotionLocation: PromotionLocation;
     set setLoading(value: boolean);
     constructor(cartService: CartService, selectiveCartService: SelectiveCartService, featureConfig: FeatureConfigService);
@@ -32,6 +31,4 @@ export declare class CartItemListComponent {
     private createForm;
     removeEntry(item: Item): void;
     getControl(item: Item): Observable<FormGroup>;
-    getPotentialProductPromotionsForItem(item: Item): PromotionResult[];
-    private isConsumedByEntry;
 }

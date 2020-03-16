@@ -481,34 +481,24 @@ function AddedToCartDialogComponent_ng_container_2_div_8_div_7_Template(rf, ctx)
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(cart_r94.subTotal == null ? null : cart_r94.subTotal.formattedValue);
 } }
-function AddedToCartDialogComponent_ng_container_2_div_8_ng_container_9_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 22);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 23);
+function AddedToCartDialogComponent_ng_container_2_div_8_div_9_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 21);
+    ɵngcc0.ɵɵelement(1, "cx-promotions", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const orderPromotions_r96 = ctx.ngIf;
+    const orderPromotions_r95 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r96);
-} }
-function AddedToCartDialogComponent_ng_container_2_div_8_ng_container_9_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, AddedToCartDialogComponent_ng_container_2_div_8_ng_container_9_div_1_Template, 2, 1, "div", 21);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const ctx_r93 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r93.orderPromotions$));
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r95);
 } }
 const _c9 = function () { return { cxRoute: "cart" }; };
 const _c10 = function () { return { cxRoute: "checkout" }; };
 function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r98 = ɵngcc0.ɵɵgetCurrentView();
+    const _r97 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "div", 11);
     ɵngcc0.ɵɵelementStart(3, "cx-cart-item", 12);
-    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r97 = ɵngcc0.ɵɵnextContext(2); return ctx_r97.dismissModal("Product selected"); });
+    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener() { ɵngcc0.ɵɵrestoreView(_r97); const ctx_r96 = ɵngcc0.ɵɵnextContext(2); return ctx_r96.dismissModal("Product selected"); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -516,19 +506,20 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(6, "div", 14);
     ɵngcc0.ɵɵtemplate(7, AddedToCartDialogComponent_ng_container_2_div_8_div_7_Template, 6, 7, "div", 15);
     ɵngcc0.ɵɵpipe(8, "async");
-    ɵngcc0.ɵɵtemplate(9, AddedToCartDialogComponent_ng_container_2_div_8_ng_container_9_Template, 3, 3, "ng-container", 16);
-    ɵngcc0.ɵɵelementStart(10, "div", 17);
-    ɵngcc0.ɵɵelementStart(11, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_11_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r99 = ɵngcc0.ɵɵnextContext(2); return !ctx_r99.form.dirty && ctx_r99.dismissModal("View Cart click"); });
-    ɵngcc0.ɵɵpipe(12, "cxUrl");
-    ɵngcc0.ɵɵtext(13);
-    ɵngcc0.ɵɵpipe(14, "cxTranslate");
+    ɵngcc0.ɵɵtemplate(9, AddedToCartDialogComponent_ng_container_2_div_8_div_9_Template, 2, 1, "div", 16);
+    ɵngcc0.ɵɵpipe(10, "async");
+    ɵngcc0.ɵɵelementStart(11, "div", 17);
+    ɵngcc0.ɵɵelementStart(12, "a", 18);
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_12_listener() { ɵngcc0.ɵɵrestoreView(_r97); const ctx_r98 = ɵngcc0.ɵɵnextContext(2); return !ctx_r98.form.dirty && ctx_r98.dismissModal("View Cart click"); });
+    ɵngcc0.ɵɵpipe(13, "cxUrl");
+    ɵngcc0.ɵɵtext(14);
+    ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(15, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_15_listener() { ɵngcc0.ɵɵrestoreView(_r98); const ctx_r100 = ɵngcc0.ɵɵnextContext(2); return !ctx_r100.form.dirty && ctx_r100.dismissModal("Proceed To Checkout click"); });
-    ɵngcc0.ɵɵpipe(16, "cxUrl");
-    ɵngcc0.ɵɵtext(17);
-    ɵngcc0.ɵɵpipe(18, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(16, "a", 19);
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_16_listener() { ɵngcc0.ɵɵrestoreView(_r97); const ctx_r99 = ɵngcc0.ɵɵnextContext(2); return !ctx_r99.form.dirty && ctx_r99.dismissModal("Proceed To Checkout click"); });
+    ɵngcc0.ɵɵpipe(17, "cxUrl");
+    ɵngcc0.ɵɵtext(18);
+    ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -542,20 +533,20 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 16, ctx_r90.cart$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(10, 18, ctx_r90.orderPromotions$));
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r90.form.dirty);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 20, ɵngcc0.ɵɵpureFunction0(28, _c9)));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(15, 22, "addToCart.viewCart"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵclassProp("disabled", ctx_r90.form.dirty);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(12, 18, ɵngcc0.ɵɵpureFunction0(26, _c9)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(17, 24, ɵngcc0.ɵɵpureFunction0(29, _c10)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(14, 20, "addToCart.viewCart"));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r90.form.dirty);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(16, 22, ɵngcc0.ɵɵpureFunction0(27, _c10)));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(18, 24, "addToCart.proceedToCheckout"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(19, 26, "addToCart.proceedToCheckout"));
 } }
 function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
-    const _r102 = ɵngcc0.ɵɵgetCurrentView();
+    const _r101 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -563,13 +554,13 @@ function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r102); const ctx_r101 = ɵngcc0.ɵɵnextContext(); return ctx_r101.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r101); const ctx_r100 = ɵngcc0.ɵɵnextContext(); return ctx_r100.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 6);
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(8, AddedToCartDialogComponent_ng_container_2_div_8_Template, 19, 28, "div", 8);
+    ɵngcc0.ɵɵtemplate(8, AddedToCartDialogComponent_ng_container_2_div_8_Template, 20, 30, "div", 8);
     ɵngcc0.ɵɵpipe(9, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -582,14 +573,14 @@ function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 5, ctx_r87.entry$));
 } }
 function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r104 = ɵngcc0.ɵɵgetCurrentView();
+    const _r103 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r104); const ctx_r103 = ɵngcc0.ɵɵnextContext(); return ctx_r103.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r103); const ctx_r102 = ɵngcc0.ɵɵnextContext(); return ctx_r102.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 6);
     ɵngcc0.ɵɵelement(6, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
@@ -597,7 +588,7 @@ function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(7, "div", 9);
     ɵngcc0.ɵɵelementStart(8, "div", 10);
-    ɵngcc0.ɵɵelementStart(9, "div", 24);
+    ɵngcc0.ɵɵelementStart(9, "div", 23);
     ɵngcc0.ɵɵelement(10, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -612,8 +603,8 @@ function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
 function AddToCartComponent_form_0_div_1_cx_item_counter_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-item-counter", 7);
 } if (rf & 2) {
-    const ctx_r108 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("max", ctx_r108.maxQuantity)("control", ctx_r108.addToCartForm.get("quantity"));
+    const ctx_r107 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("max", ctx_r107.maxQuantity)("control", ctx_r107.addToCartForm.get("quantity"));
 } }
 function AddToCartComponent_form_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -629,13 +620,13 @@ function AddToCartComponent_form_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r106 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r105 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, "addToCart.quantity"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r106.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r105.hasStock);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r106.hasStock ? ɵngcc0.ɵɵpipeBind1(7, 5, "addToCart.inStock") : ɵngcc0.ɵɵpipeBind1(8, 7, "addToCart.outOfStock"));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r105.hasStock ? ɵngcc0.ɵɵpipeBind1(7, 5, "addToCart.inStock") : ɵngcc0.ɵɵpipeBind1(8, 7, "addToCart.outOfStock"));
 } }
 function AddToCartComponent_form_0_button_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "button", 8);
@@ -643,61 +634,61 @@ function AddToCartComponent_form_0_button_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r107 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r107.quantity <= 0 || ctx_r107.quantity > ctx_r107.maxQuantity);
+    const ctx_r106 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r106.quantity <= 0 || ctx_r106.quantity > ctx_r106.maxQuantity);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "addToCart.addToCart"), " ");
 } }
 function AddToCartComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r110 = ɵngcc0.ɵɵgetCurrentView();
+    const _r109 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r110); const ctx_r109 = ɵngcc0.ɵɵnextContext(); return ctx_r109.addToCart(); });
+    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r109); const ctx_r108 = ɵngcc0.ɵɵnextContext(); return ctx_r108.addToCart(); });
     ɵngcc0.ɵɵtemplate(1, AddToCartComponent_form_0_div_1_Template, 9, 9, "div", 2);
     ɵngcc0.ɵɵtemplate(2, AddToCartComponent_form_0_button_2_Template, 3, 4, "button", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r105 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r105.addToCartForm);
+    const ctx_r104 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r104.addToCartForm);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r105.showQuantity);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r104.showQuantity);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r105.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r104.hasStock);
 } }
 function CardComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r112 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r111 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r112.content.header, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r111.content.header, " ");
 } }
 function CardComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r113 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r112 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r113.content.deleteMsg, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r112.content.deleteMsg, " ");
 } }
 function CardComponent_div_0_h4_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h4", 15);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r114 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r113 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r114.content.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r113.content.title, " ");
 } }
 function CardComponent_div_0_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r115 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r114 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r115.content.textBold, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r114.content.textBold, " ");
 } }
 function CardComponent_div_0_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -706,32 +697,32 @@ function CardComponent_div_0_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const line_r120 = ctx.$implicit;
+    const line_r119 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(line_r120);
+    ɵngcc0.ɵɵtextInterpolate(line_r119);
 } }
 function CardComponent_div_0_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
     ɵngcc0.ɵɵelement(1, "cx-icon", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r117 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r116 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r117.content.img);
+    ɵngcc0.ɵɵproperty("type", ctx_r116.content.img);
 } }
 function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r122 = ɵngcc0.ɵɵgetCurrentView();
+    const _r121 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "button", 22);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r121 = ɵngcc0.ɵɵnextContext(2); return ctx_r121.cancelEdit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r121); const ctx_r120 = ɵngcc0.ɵɵnextContext(2); return ctx_r120.cancelEdit(); });
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "div", 21);
     ɵngcc0.ɵɵelementStart(6, "button", 23);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r122); const ctx_r123 = ɵngcc0.ɵɵnextContext(2); return ctx_r123.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r121); const ctx_r122 = ɵngcc0.ɵɵnextContext(2); return ctx_r122.delete(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -744,58 +735,58 @@ function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 4, "common.delete"), " ");
 } }
 function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
-    const _r132 = ɵngcc0.ɵɵgetCurrentView();
+    const _r131 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r133 = ɵngcc0.ɵɵnextContext(4); return ctx_r133.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r131); const ctx_r130 = ɵngcc0.ɵɵnextContext(4); return ctx_r130.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r131); const ctx_r132 = ɵngcc0.ɵɵnextContext(4); return ctx_r132.delete(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r124 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r125.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r124.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
-    const _r136 = ɵngcc0.ɵɵgetCurrentView();
+    const _r135 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r135 = ɵngcc0.ɵɵnextContext(4); return ctx_r135.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.setDefault(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r135); const ctx_r134 = ɵngcc0.ɵɵnextContext(4); return ctx_r134.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r135); const ctx_r136 = ɵngcc0.ɵɵnextContext(4); return ctx_r136.setDefault(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r124 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r125.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r124.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
-    const _r140 = ɵngcc0.ɵɵgetCurrentView();
+    const _r139 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r139 = ɵngcc0.ɵɵnextContext(4); return ctx_r139.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r140); const ctx_r141 = ɵngcc0.ɵɵnextContext(4); return ctx_r141.send(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r139); const ctx_r138 = ɵngcc0.ɵɵnextContext(4); return ctx_r138.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r139); const ctx_r140 = ɵngcc0.ɵɵnextContext(4); return ctx_r140.send(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r124 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r125.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r124.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_5_Template(rf, ctx) { if (rf & 1) {
-    const _r144 = ɵngcc0.ɵɵgetCurrentView();
+    const _r143 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r143 = ɵngcc0.ɵɵnextContext(4); return ctx_r143.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r144); const ctx_r145 = ɵngcc0.ɵɵnextContext(4); return ctx_r145.edit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r143); const ctx_r142 = ɵngcc0.ɵɵnextContext(4); return ctx_r142.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r143); const ctx_r144 = ɵngcc0.ɵɵnextContext(4); return ctx_r144.edit(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r124 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r125.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r124.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 29);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵpropertyInterpolate("href", action_r125.link, ɵngcc0.ɵɵsanitizeUrl);
+    const action_r124 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵpropertyInterpolate("href", action_r124.link, ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r125.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r124.name);
 } }
 function CardComponent_div_0_div_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -808,9 +799,9 @@ function CardComponent_div_0_div_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r125 = ctx.$implicit;
+    const action_r124 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngSwitch", action_r125.event);
+    ɵngcc0.ɵɵproperty("ngSwitch", action_r124.event);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngSwitchCase", "delete");
     ɵngcc0.ɵɵadvance(1);
@@ -825,9 +816,9 @@ function CardComponent_div_0_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, CardComponent_div_0_div_11_div_1_Template, 7, 5, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r119 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r118 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r119.content.actions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r118.content.actions);
 } }
 function CardComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -847,47 +838,47 @@ function CardComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r111 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("cx-card-border", ctx_r111.border)("cx-card-fit-to-container", ctx_r111.fitToContainer);
+    const ctx_r110 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("cx-card-border", ctx_r110.border)("cx-card-fit-to-container", ctx_r110.fitToContainer);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.content.header && !ctx_r111.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.content.header && !ctx_r110.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("cx-card-delete", ctx_r111.editMode);
+    ɵngcc0.ɵɵclassProp("cx-card-delete", ctx_r110.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.content.title);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.content.title);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.content.textBold);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.content.textBold);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r111.content.text);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r110.content.text);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.content.img);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.content.img);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r111.content.actions && !ctx_r111.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r110.content.actions && !ctx_r110.editMode);
 } }
 function CarouselComponent_ng_container_0_h3_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h3");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r150 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r149 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r150.title);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r149.title);
 } }
 function CarouselComponent_ng_container_0_button_3_Template(rf, ctx) { if (rf & 1) {
-    const _r156 = ɵngcc0.ɵɵgetCurrentView();
+    const _r155 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r156); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r155 = ɵngcc0.ɵɵnextContext(); return ctx_r155.activeSlide = ctx_r155.activeSlide - size_r149; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r155); const size_r148 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r154 = ɵngcc0.ɵɵnextContext(); return ctx_r154.activeSlide = ctx_r154.activeSlide - size_r148; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r151 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r151.activeSlide === 0);
+    const ctx_r150 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r150.activeSlide === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r151.previousIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r150.previousIcon);
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -898,12 +889,12 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_di
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template, 1, 0, "ng-container", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r165 = ctx.ngIf;
-    const i_r159 = ɵngcc0.ɵɵnextContext(3).index;
-    const ctx_r164 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("active", i_r159 === ctx_r164.activeSlide);
+    const data_r164 = ctx.ngIf;
+    const i_r158 = ɵngcc0.ɵɵnextContext(3).index;
+    const ctx_r163 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("active", i_r158 === ctx_r163.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r164.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c11, data_r165));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r163.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c11, data_r164));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -911,9 +902,9 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Te
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r162 = ctx.$implicit;
+    const item_r161 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r162));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r161));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -921,66 +912,66 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx)
     ɵngcc0.ɵɵpipe(2, "slice");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r159 = ɵngcc0.ɵɵnextContext().index;
-    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r160 = ɵngcc0.ɵɵnextContext();
+    const i_r158 = ɵngcc0.ɵɵnextContext().index;
+    const size_r148 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r159 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r160.items, i_r159, i_r159 + size_r149));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r159.items, i_r158, i_r158 + size_r148));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_Template, 3, 5, "div", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r159 = ctx.index;
-    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
+    const i_r158 = ctx.index;
+    const size_r148 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r159 % size_r149 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r158 % size_r148 === 0);
 } }
 function CarouselComponent_ng_container_0_button_6_Template(rf, ctx) { if (rf & 1) {
-    const _r172 = ɵngcc0.ɵɵgetCurrentView();
+    const _r171 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r172); const size_r149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r171 = ɵngcc0.ɵɵnextContext(); return ctx_r171.activeSlide = ctx_r171.activeSlide + size_r149; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r171); const size_r148 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r170 = ɵngcc0.ɵɵnextContext(); return ctx_r170.activeSlide = ctx_r170.activeSlide + size_r148; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const size_r149 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r153 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("disabled", ctx_r153.activeSlide > ctx_r153.items.length - size_r149 - 1);
+    const size_r148 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r152 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("disabled", ctx_r152.activeSlide > ctx_r152.items.length - size_r148 - 1);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r153.nextIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r152.nextIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r180 = ɵngcc0.ɵɵgetCurrentView();
+    const _r179 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 17);
-    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r180); const i_r177 = ɵngcc0.ɵɵnextContext().index; const ctx_r179 = ɵngcc0.ɵɵnextContext(3); return ctx_r179.activeSlide = i_r177; });
+    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r179); const i_r176 = ɵngcc0.ɵɵnextContext().index; const ctx_r178 = ɵngcc0.ɵɵnextContext(3); return ctx_r178.activeSlide = i_r176; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r177 = ɵngcc0.ɵɵnextContext().index;
-    const ctx_r178 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("disabled", i_r177 === ctx_r178.activeSlide);
+    const i_r176 = ɵngcc0.ɵɵnextContext().index;
+    const ctx_r177 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("disabled", i_r176 === ctx_r177.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r178.indicatorIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r177.indicatorIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template, 2, 2, "button", 16);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r177 = ctx.index;
-    const size_r149 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const i_r176 = ctx.index;
+    const size_r148 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r177 % size_r149 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r176 % size_r148 === 0);
 } }
 function CarouselComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_Template, 2, 1, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r154 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r153 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r154.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r153.items);
 } }
 function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -995,29 +986,29 @@ function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, CarouselComponent_ng_container_0_div_7_Template, 2, 1, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const size_r149 = ctx.ngIf;
-    const ctx_r148 = ɵngcc0.ɵɵnextContext();
+    const size_r148 = ctx.ngIf;
+    const ctx_r147 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r148.title);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r147.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r149);
+    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r148);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r149 < ctx_r148.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r148 < ctx_r147.items.length);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r148.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r147.items);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r149 < ctx_r148.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r148 < ctx_r147.items.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r148.hideIndicators && size_r149 < ctx_r148.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r147.hideIndicators && size_r148 < ctx_r147.items.length);
 } }
 function MediaComponent_img_0_Template(rf, ctx) { if (rf & 1) {
-    const _r186 = ɵngcc0.ɵɵgetCurrentView();
+    const _r185 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "img", 1);
-    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener() { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r185 = ɵngcc0.ɵɵnextContext(); return ctx_r185.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener() { ɵngcc0.ɵɵrestoreView(_r186); const ctx_r187 = ɵngcc0.ɵɵnextContext(); return ctx_r187.errorHandler(); });
+    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener() { ɵngcc0.ɵɵrestoreView(_r185); const ctx_r184 = ɵngcc0.ɵɵnextContext(); return ctx_r184.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener() { ɵngcc0.ɵɵrestoreView(_r185); const ctx_r186 = ɵngcc0.ɵɵnextContext(); return ctx_r186.errorHandler(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r184 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵattribute("src", ctx_r184.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r184.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r184.media.alt);
+    const ctx_r183 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵattribute("src", ctx_r183.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r183.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r183.media.alt);
 } }
 const _c12 = ["qty"];
 function GenericLinkComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
@@ -1030,13 +1021,13 @@ function GenericLinkComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r189 = ɵngcc0.ɵɵnextContext();
-    const _r192 = ɵngcc0.ɵɵreference(4);
+    const ctx_r188 = ɵngcc0.ɵɵnextContext();
+    const _r191 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("href", ctx_r189.url, ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r189.target)("rel", ctx_r189.rel)("class", ctx_r189.class)("id", ctx_r189.id)("style", ctx_r189.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r189.title);
+    ɵngcc0.ɵɵproperty("href", ctx_r188.url, ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r188.target)("rel", ctx_r188.rel)("class", ctx_r188.class)("id", ctx_r188.id)("style", ctx_r188.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r188.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r192);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r191);
 } }
 function GenericLinkComponent_ng_template_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1046,44 +1037,44 @@ function GenericLinkComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_ng_container_1_Template, 1, 0, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r191 = ɵngcc0.ɵɵnextContext();
-    const _r192 = ɵngcc0.ɵɵreference(4);
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r191.routerUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r191.target)("class", ctx_r191.class)("id", ctx_r191.id)("style", ctx_r191.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r191.title);
+    const ctx_r190 = ɵngcc0.ɵɵnextContext();
+    const _r191 = ɵngcc0.ɵɵreference(4);
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r190.routerUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r190.target)("class", ctx_r190.class)("id", ctx_r190.id)("style", ctx_r190.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r190.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r192);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r191);
 } }
 function GenericLinkComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵprojection(0);
 } }
 function PaginationComponent_a_0_Template(rf, ctx) { if (rf & 1) {
-    const _r199 = ɵngcc0.ɵɵgetCurrentView();
+    const _r198 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 1);
-    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r199); const item_r197 = ctx.$implicit; const ctx_r198 = ɵngcc0.ɵɵnextContext(); return ctx_r198.pageChange(item_r197); });
+    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r198); const item_r196 = ctx.$implicit; const ctx_r197 = ɵngcc0.ɵɵnextContext(); return ctx_r197.pageChange(item_r196); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r197 = ctx.$implicit;
-    const ctx_r196 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassMap(item_r197.type);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r196.isInactive(item_r197))("current", ctx_r196.isCurrent(item_r197));
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r196.pageRoute)("queryParams", ctx_r196.getQueryParams(item_r197))("tabIndex", ctx_r196.isInactive(item_r197) ? 0 - 1 : 0);
+    const item_r196 = ctx.$implicit;
+    const ctx_r195 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassMap(item_r196.type);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r195.isInactive(item_r196))("current", ctx_r195.isCurrent(item_r196));
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r195.pageRoute)("queryParams", ctx_r195.getQueryParams(item_r196))("tabIndex", ctx_r195.isInactive(item_r196) ? 0 - 1 : 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r197.label, "\n");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r196.label, "\n");
 } }
 function SortingComponent_ng_option_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ng-option", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const sort_r201 = ctx.$implicit;
-    const ctx_r200 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("value", sort_r201.code);
+    const sort_r200 = ctx.$implicit;
+    const ctx_r199 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("value", sort_r200.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(sort_r201.name ? sort_r201.name : ctx_r200.sortLabels ? ctx_r200.sortLabels[sort_r201.code] : "");
+    ɵngcc0.ɵɵtextInterpolate(sort_r200.name ? sort_r200.name : ctx_r199.sortLabels ? ctx_r199.sortLabels[sort_r200.code] : "");
 } }
 function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r211 = ɵngcc0.ɵɵgetCurrentView();
+    const _r210 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1093,22 +1084,22 @@ function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_CONFIRMATION, i_r209); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r210); const i_r208 = ctx.index; const ctx_r209 = ɵngcc0.ɵɵnextContext(2); return ctx_r209.clear(ctx_r209.messageType.MSG_TYPE_CONFIRMATION, i_r208); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const confMsg_r208 = ctx.$implicit;
-    const ctx_r204 = ɵngcc0.ɵɵnextContext(2);
+    const confMsg_r207 = ctx.$implicit;
+    const ctx_r203 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.SUCCESS);
+    ɵngcc0.ɵɵproperty("type", ctx_r203.iconTypes.SUCCESS);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r208));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r207));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r203.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
-    const _r215 = ɵngcc0.ɵɵgetCurrentView();
+    const _r214 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1118,22 +1109,22 @@ function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_INFO, i_r213); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r214); const i_r212 = ctx.index; const ctx_r213 = ɵngcc0.ɵɵnextContext(2); return ctx_r213.clear(ctx_r213.messageType.MSG_TYPE_INFO, i_r212); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r212 = ctx.$implicit;
-    const ctx_r205 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r211 = ctx.$implicit;
+    const ctx_r204 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r212));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r211));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r204.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r219 = ɵngcc0.ɵɵgetCurrentView();
+    const _r218 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1143,22 +1134,22 @@ function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r219); const i_r217 = ctx.index; const ctx_r218 = ɵngcc0.ɵɵnextContext(2); return ctx_r218.clear(ctx_r218.messageType.MSG_TYPE_INFO, i_r217); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r218); const i_r216 = ctx.index; const ctx_r217 = ɵngcc0.ɵɵnextContext(2); return ctx_r217.clear(ctx_r217.messageType.MSG_TYPE_INFO, i_r216); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r216 = ctx.$implicit;
-    const ctx_r206 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r215 = ctx.$implicit;
+    const ctx_r205 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.WARNING);
+    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.WARNING);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r216));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r215));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r205.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r223 = ɵngcc0.ɵɵgetCurrentView();
+    const _r222 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1168,19 +1159,19 @@ function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r223); const i_r221 = ctx.index; const ctx_r222 = ɵngcc0.ɵɵnextContext(2); return ctx_r222.clear(ctx_r222.messageType.MSG_TYPE_ERROR, i_r221); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r222); const i_r220 = ctx.index; const ctx_r221 = ɵngcc0.ɵɵnextContext(2); return ctx_r221.clear(ctx_r221.messageType.MSG_TYPE_ERROR, i_r220); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const errorMsg_r220 = ctx.$implicit;
-    const ctx_r207 = ɵngcc0.ɵɵnextContext(2);
+    const errorMsg_r219 = ctx.$implicit;
+    const ctx_r206 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r207.iconTypes.ERROR);
+    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.ERROR);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r220));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r219));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r207.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r206.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1190,16 +1181,16 @@ function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, GlobalMessageComponent_div_0_div_4_Template, 8, 5, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const messages_r203 = ctx.ngIf;
-    const ctx_r202 = ɵngcc0.ɵɵnextContext();
+    const messages_r202 = ctx.ngIf;
+    const ctx_r201 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_CONFIRMATION]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r202[ctx_r201.messageType.MSG_TYPE_CONFIRMATION]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_INFO]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r202[ctx_r201.messageType.MSG_TYPE_INFO]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_WARNING]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r202[ctx_r201.messageType.MSG_TYPE_WARNING]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r203[ctx_r202.messageType.MSG_TYPE_ERROR]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r202[ctx_r201.messageType.MSG_TYPE_ERROR]);
 } }
 function QualtricsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1210,45 +1201,45 @@ function SiteContextSelectorComponent_label_0_option_5_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r228 = ctx.$implicit;
-    const ctx_r227 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵpropertyInterpolate("value", item_r228.isocode);
-    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r227.activeItem$) === item_r228.isocode);
+    const item_r227 = ctx.$implicit;
+    const ctx_r226 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵpropertyInterpolate("value", item_r227.isocode);
+    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r226.activeItem$) === item_r227.isocode);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r228.label);
+    ɵngcc0.ɵɵtextInterpolate(item_r227.label);
 } }
 function SiteContextSelectorComponent_label_0_Template(rf, ctx) { if (rf & 1) {
-    const _r230 = ɵngcc0.ɵɵgetCurrentView();
+    const _r229 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label");
     ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "select", 1);
-    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r230); const ctx_r229 = ɵngcc0.ɵɵnextContext(); return ctx_r229.active = $event.target.value; });
+    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r229); const ctx_r228 = ɵngcc0.ɵɵnextContext(); return ctx_r228.active = $event.target.value; });
     ɵngcc0.ɵɵtemplate(5, SiteContextSelectorComponent_label_0_option_5_Template, 3, 5, "option", 2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(6, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const items_r226 = ctx.ngIf;
-    const ctx_r225 = ɵngcc0.ɵɵnextContext();
+    const items_r225 = ctx.ngIf;
+    const ctx_r224 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r225.label$));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r224.label$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", items_r226);
+    ɵngcc0.ɵɵproperty("ngForOf", items_r225);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r225.iconTypes.CARET_DOWN);
+    ɵngcc0.ɵɵproperty("type", ctx_r224.iconTypes.CARET_DOWN);
 } }
 function StarRatingComponent_cx_icon_0_Template(rf, ctx) { if (rf & 1) {
-    const _r234 = ɵngcc0.ɵɵgetCurrentView();
+    const _r233 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-icon", 1);
-    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r233 = ɵngcc0.ɵɵnextContext(); return ctx_r233.setRate(i_r232); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const ctx_r235 = ɵngcc0.ɵɵnextContext(); return ctx_r235.setRate(0); })("keydown", function StarRatingComponent_cx_icon_0_Template_cx_icon_keydown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r236 = ɵngcc0.ɵɵnextContext(); return ctx_r236.setRateOnEvent($event, i_r232); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r234); const i_r232 = ctx.$implicit; const ctx_r237 = ɵngcc0.ɵɵnextContext(); return ctx_r237.saveRate(i_r232); });
+    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener() { ɵngcc0.ɵɵrestoreView(_r233); const i_r231 = ctx.$implicit; const ctx_r232 = ɵngcc0.ɵɵnextContext(); return ctx_r232.setRate(i_r231); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener() { ɵngcc0.ɵɵrestoreView(_r233); const ctx_r234 = ɵngcc0.ɵɵnextContext(); return ctx_r234.setRate(0); })("keydown", function StarRatingComponent_cx_icon_0_Template_cx_icon_keydown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r233); const i_r231 = ctx.$implicit; const ctx_r235 = ɵngcc0.ɵɵnextContext(); return ctx_r235.setRateOnEvent($event, i_r231); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r233); const i_r231 = ctx.$implicit; const ctx_r236 = ɵngcc0.ɵɵnextContext(); return ctx_r236.saveRate(i_r231); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r231 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r231.iconTypes.STAR);
-    ɵngcc0.ɵɵattribute("tabindex", ctx_r231.disabled ? null : 0);
+    const ctx_r230 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r230.iconTypes.STAR);
+    ɵngcc0.ɵɵattribute("tabindex", ctx_r230.disabled ? null : 0);
 } }
 const _c13 = function () { return [1, 2, 3, 4, 5]; };
 function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { if (rf & 1) {
@@ -1258,18 +1249,18 @@ function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r242 = ctx.$implicit;
+    const promotion_r241 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r242.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r241.description);
 } }
 function PromotionsComponent_div_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_1_strong_1_Template, 3, 1, "strong", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r239 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r238 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r239.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r238.promotions);
 } }
 function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ul");
@@ -1278,18 +1269,18 @@ function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r244 = ctx.$implicit;
+    const promotion_r243 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r244.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r243.description);
 } }
 function PromotionsComponent_div_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_2_ul_1_Template, 3, 1, "ul", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r240 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r239 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r240.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r239.promotions);
 } }
 function PromotionsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -1320,9 +1311,9 @@ function AppliedCouponsComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r250 = ctx.$implicit;
+    const voucher_r249 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r250.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r249.voucherCode);
 } }
 function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1330,21 +1321,21 @@ function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(2, AppliedCouponsComponent_div_0_div_2_Template, 3, 1, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r245 = ɵngcc0.ɵɵnextContext();
+    const ctx_r244 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r245.sortedVouchers.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r244.sortedVouchers.length > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r245.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r244.sortedVouchers);
 } }
 function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r254 = ɵngcc0.ɵɵgetCurrentView();
+    const _r253 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "span", 11);
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r254); const voucher_r252 = ctx.$implicit; const ctx_r253 = ɵngcc0.ɵɵnextContext(2); return ctx_r253.removeVoucher(voucher_r252.voucherCode); });
+    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r253); const voucher_r251 = ctx.$implicit; const ctx_r252 = ɵngcc0.ɵɵnextContext(2); return ctx_r252.removeVoucher(voucher_r251.voucherCode); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -1352,43 +1343,43 @@ function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r252 = ctx.$implicit;
-    const ctx_r251 = ɵngcc0.ɵɵnextContext(2);
+    const voucher_r251 = ctx.$implicit;
+    const ctx_r250 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r252.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r251.voucherCode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r251.cartIsLoading);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r251.cartIsLoading);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r250.cartIsLoading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r250.cartIsLoading);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r251.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r250.iconTypes.CLOSE);
 } }
 function AppliedCouponsComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_div_1_Template, 7, 5, "div", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r247 = ɵngcc0.ɵɵnextContext();
+    const ctx_r246 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r247.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r246.sortedVouchers);
 } }
 function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template(rf, ctx) { if (rf & 1) {
-    const _r261 = ɵngcc0.ɵɵgetCurrentView();
+    const _r260 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵelementStart(1, "button", 16);
-    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r261); const coupon_r259 = ctx.$implicit; const ctx_r260 = ɵngcc0.ɵɵnextContext(3); return ctx_r260.applyCustomerCoupon(coupon_r259.couponId); });
+    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r260); const coupon_r258 = ctx.$implicit; const ctx_r259 = ɵngcc0.ɵɵnextContext(3); return ctx_r259.applyCustomerCoupon(coupon_r258.couponId); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const coupon_r259 = ctx.$implicit;
-    const ctx_r258 = ɵngcc0.ɵɵnextContext(3);
+    const coupon_r258 = ctx.$implicit;
+    const ctx_r257 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r258.cartIsLoading$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(3, 6, ctx_r258.cartIsLoading$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r257.cartIsLoading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(3, 6, ctx_r257.cartIsLoading$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", coupon_r259.couponId, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", coupon_r258.couponId, " ");
 } }
 function CartCouponComponent_ng_container_0_ng_container_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1407,16 +1398,16 @@ function CartCouponComponent_ng_container_0_ng_container_18_Template(rf, ctx) { 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r257 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r256 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, "voucher.availableCoupons"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 5, "voucher.availableCouponsLabel"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r257.applicableCoupons);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r256.applicableCoupons);
 } }
 function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r263 = ɵngcc0.ɵɵgetCurrentView();
+    const _r262 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵtext(2);
@@ -1424,7 +1415,7 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 2);
     ɵngcc0.ɵɵelementStart(5, "form", 3);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_Template_form_submit_5_listener() { ɵngcc0.ɵɵrestoreView(_r263); const ctx_r262 = ɵngcc0.ɵɵnextContext(); return ctx_r262.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_Template_form_submit_5_listener() { ɵngcc0.ɵɵrestoreView(_r262); const ctx_r261 = ɵngcc0.ɵɵnextContext(); return ctx_r261.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(6, "div", 4);
     ɵngcc0.ɵɵelementStart(7, "div", 5);
     ɵngcc0.ɵɵelement(8, "input", 6);
@@ -1446,23 +1437,23 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(18, CartCouponComponent_ng_container_0_ng_container_18_Template, 10, 7, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r256 = ctx.ngIf;
-    const ctx_r255 = ɵngcc0.ɵɵnextContext();
+    const cart_r255 = ctx.ngIf;
+    const ctx_r254 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 11, "voucher.coupon"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r255.form);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r254.form);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(9, 13, "voucher.placeholder"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 15, ctx_r255.cartIsLoading$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 17, ctx_r255.cartIsLoading$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 15, ctx_r254.cartIsLoading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 17, ctx_r254.cartIsLoading$));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 19, "voucher.apply"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("vouchers", cart_r256.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(17, 21, ctx_r255.cartIsLoading$))("isReadOnly", false);
+    ɵngcc0.ɵɵproperty("vouchers", cart_r255.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(17, 21, ctx_r254.cartIsLoading$))("isReadOnly", false);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r255.applicableCoupons && ctx_r255.applicableCoupons.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r254.applicableCoupons && ctx_r254.applicableCoupons.length > 0);
 } }
 function CartItemListComponent_div_0_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1494,8 +1485,8 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r264 = ɵngcc0.ɵɵnextContext();
-    const _r266 = ɵngcc0.ɵɵreference(3);
+    const ctx_r263 = ɵngcc0.ɵɵnextContext();
+    const _r265 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -1503,30 +1494,30 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 9, "cartItems.quantity"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r264.isSaveForLaterEnabled() && ctx_r264.options.isSaveForLater)("ngIfElse", _r266);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r263.isSaveForLaterEnabled() && ctx_r263.options.isSaveForLater)("ngIfElse", _r265);
 } }
 function CartItemListComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelement(1, "cx-cart-item", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const control_r272 = ctx.ngIf;
-    const item_r269 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r271 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-changed", control_r272.get("quantity").dirty);
+    const control_r271 = ctx.ngIf;
+    const item_r268 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r270 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-changed", control_r271.get("quantity").dirty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("item", item_r269)("quantityControl", control_r272.get("quantity"))("readonly", ctx_r271.readonly)("potentialProductPromotions", ctx_r271.getPotentialProductPromotionsForItem(item_r269))("promotionLocation", ctx_r271.promotionLocation)("options", ctx_r271.options);
+    ɵngcc0.ɵɵproperty("item", item_r268)("quantityControl", control_r271.get("quantity"))("readonly", ctx_r270.readonly)("promotionLocation", ctx_r270.promotionLocation)("options", ctx_r270.options);
 } }
 function CartItemListComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵtemplate(1, CartItemListComponent_div_1_div_1_Template, 2, 8, "div", 11);
+    ɵngcc0.ɵɵtemplate(1, CartItemListComponent_div_1_div_1_Template, 2, 7, "div", 11);
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r269 = ctx.$implicit;
-    const ctx_r265 = ɵngcc0.ɵɵnextContext();
+    const item_r268 = ctx.$implicit;
+    const ctx_r264 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r265.getControl(item_r269)));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r264.getControl(item_r268)));
 } }
 function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -1539,34 +1530,34 @@ function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
 } }
 const _c14 = function (a1) { return { cxRoute: "product", params: a1 }; };
 function CartItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r287 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 18);
-    ɵngcc0.ɵɵelementStart(1, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r287); const ctx_r286 = ɵngcc0.ɵɵnextContext(); return ctx_r286.viewItem(); });
+    const _r285 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "div", 19);
+    ɵngcc0.ɵɵelementStart(1, "a", 20);
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r285); const ctx_r284 = ɵngcc0.ɵɵnextContext(); return ctx_r284.viewItem(); });
     ɵngcc0.ɵɵpipe(2, "cxUrl");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r274 = ɵngcc0.ɵɵnextContext();
+    const ctx_r273 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r274.item.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r273.item.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r274.item.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r273.item.product.name);
 } }
 function CartItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 20);
+    ɵngcc0.ɵɵelementStart(0, "div", 21);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r275 = ɵngcc0.ɵɵnextContext();
+    const ctx_r274 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r275.item.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r274.item.product.code, " ");
 } }
 function CartItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 22);
-    ɵngcc0.ɵɵelementStart(1, "div", 23);
+    ɵngcc0.ɵɵelementStart(0, "div", 23);
+    ɵngcc0.ɵɵelementStart(1, "div", 24);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "div", 12);
@@ -1574,65 +1565,65 @@ function CartItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r289 = ctx.$implicit;
+    const variant_r287 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r289.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r287.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r289.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r287.value);
 } }
 function CartItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_10_div_1_Template, 5, 2, "div", 21);
+    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_10_div_1_Template, 5, 2, "div", 22);
+    ɵngcc0.ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const ctx_r275 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r275.item.product.variantOptionQualifiers);
+} }
+function CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 24);
+    ɵngcc0.ɵɵtext(1);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const variant_r290 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r290.name, ": ", variant_r290.value, " ");
+} }
+function CartItemComponent_ng_container_11_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 23);
+    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template, 2, 2, "div", 25);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const variant_r290 = ctx.$implicit;
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r290.name && variant_r290.value);
+} }
+function CartItemComponent_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementContainerStart(0);
+    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_Template, 2, 1, "div", 22);
+    ɵngcc0.ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const ctx_r288 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r288.item.product.baseOptions[0] == null ? null : ctx_r288.item.product.baseOptions[0].selected == null ? null : ctx_r288.item.product.baseOptions[0].selected.variantOptionQualifiers);
+} }
+function CartItemComponent_ng_container_11_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementContainerStart(0);
+    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_Template, 2, 1, "ng-container", 16);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     const ctx_r276 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r276.item.product.variantOptionQualifiers);
-} }
-function CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 23);
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const variant_r292 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r292.name, ": ", variant_r292.value, " ");
-} }
-function CartItemComponent_ng_container_11_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 22);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_div_1_Template, 2, 2, "div", 25);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const variant_r292 = ctx.$implicit;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r292.name && variant_r292.value);
-} }
-function CartItemComponent_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_div_1_Template, 2, 1, "div", 21);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const ctx_r290 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r290.item.product.baseOptions[0] == null ? null : ctx_r290.item.product.baseOptions[0].selected == null ? null : ctx_r290.item.product.baseOptions[0].selected.variantOptionQualifiers);
-} }
-function CartItemComponent_ng_container_11_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_11_ng_container_1_Template, 2, 1, "ng-container", 24);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const ctx_r277 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r277.item.product.baseOptions == null ? null : ctx_r277.item.product.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r276.item.product.baseOptions == null ? null : ctx_r276.item.product.baseOptions.length);
 } }
 function CartItemComponent_div_12_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r295 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r293 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r295.item.basePrice == null ? null : ctx_r295.item.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r293.item.basePrice == null ? null : ctx_r293.item.basePrice.formattedValue, " ");
 } }
 function CartItemComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
@@ -1643,23 +1634,23 @@ function CartItemComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, CartItemComponent_div_12_div_4_Template, 2, 1, "div", 28);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r278 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r278.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    const ctx_r277 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r277.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r278.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r277.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r278.item.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r277.item.basePrice);
 } }
 function CartItemComponent_ng_container_20_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r296 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r294 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r296.item.product.stock.stockLevel, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r294.item.product.stock.stockLevel, " ");
 } }
 function CartItemComponent_ng_container_20_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -1682,16 +1673,16 @@ function CartItemComponent_ng_container_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r297 = ɵngcc0.ɵɵreference(7);
-    const ctx_r279 = ɵngcc0.ɵɵnextContext();
+    const _r295 = ɵngcc0.ɵɵreference(7);
+    const ctx_r278 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r279.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r278.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r279.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r278.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "saveForLaterItems.stock"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r279.item.product == null ? null : ctx_r279.item.product.stock == null ? null : ctx_r279.item.product.stock.stockLevel) >= 0)("ngIfElse", _r297);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r278.item.product == null ? null : ctx_r278.item.product.stock == null ? null : ctx_r278.item.product.stock.stockLevel) >= 0)("ngIfElse", _r295);
 } }
 function CartItemComponent_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 32);
@@ -1707,28 +1698,9 @@ function CartItemComponent_ng_container_22_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "cx-promotions", 33);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r281 = ɵngcc0.ɵɵnextContext();
+    const appliedProductPromotions_r297 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", ctx_r281.potentialProductPromotions);
-} }
-function CartItemComponent_ng_container_23_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 33);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const appliedProductPromotions_r300 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r300);
-} }
-function CartItemComponent_ng_container_23_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_23_ng_container_1_Template, 2, 1, "ng-container", 24);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const ctx_r282 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r282.appliedProductPromotions$));
+    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r297);
 } }
 function CartItemComponent_div_24_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1740,28 +1712,28 @@ function CartItemComponent_div_24_ng_container_1_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_ng_container_1_Template, 1, 0, "ng-container", 37);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r301 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r298 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r301.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c16, ɵngcc0.ɵɵpureFunction2(2, _c15, ctx_r301.quantityControl.disabled, ctx_r301.item)));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r298.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c16, ɵngcc0.ɵɵpureFunction2(2, _c15, ctx_r298.quantityControl.disabled, ctx_r298.item)));
 } }
 function CartItemComponent_div_24_Template(rf, ctx) { if (rf & 1) {
-    const _r304 = ɵngcc0.ɵɵgetCurrentView();
+    const _r301 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 34);
-    ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_Template, 2, 7, "ng-container", 24);
+    ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_24_ng_container_1_Template, 2, 7, "ng-container", 16);
     ɵngcc0.ɵɵelementStart(2, "div", 35);
     ɵngcc0.ɵɵelementStart(3, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r304); const ctx_r303 = ɵngcc0.ɵɵnextContext(); return ctx_r303.removeItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_24_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r301); const ctx_r300 = ɵngcc0.ɵɵnextContext(); return ctx_r300.removeItem(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r283 = ɵngcc0.ɵɵnextContext();
+    const ctx_r281 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r283.isProductOutOfStock(ctx_r283.item.product));
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r281.isProductOutOfStock(ctx_r281.item.product));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r283.quantityControl.disabled);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r281.quantityControl.disabled);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "common.remove"), " ");
 } }
@@ -1776,20 +1748,20 @@ function CartItemComponent_ng_template_25_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r305 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r305.compact ? "" : " col-md-3 col-xl-2");
+    const ctx_r302 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r302.compact ? "" : " col-md-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r305.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r302.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r305.item.totalPrice.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r302.item.totalPrice.formattedValue);
 } }
 function CartItemComponent_ng_template_25_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CartItemComponent_ng_template_25_div_0_Template, 6, 6, "div", 38);
 } if (rf & 2) {
-    const ctx_r285 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r285.item.totalPrice);
+    const ctx_r283 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r283.item.totalPrice);
 } }
 function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1802,11 +1774,11 @@ function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r308 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r305 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderCost.salesTax"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r308.cart.totalTax == null ? null : ctx_r308.cart.totalTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r305.cart.totalTax == null ? null : ctx_r305.cart.totalTax.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1814,9 +1786,9 @@ function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r309 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r306 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r309.cart.totalDiscounts == null ? null : ctx_r309.cart.totalDiscounts.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r306.cart.totalDiscounts == null ? null : ctx_r306.cart.totalDiscounts.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1824,9 +1796,9 @@ function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r310 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r307 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r310.cart.totalTax == null ? null : ctx_r310.cart.totalTax.formattedValue, ". ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r307.cart.totalTax == null ? null : ctx_r307.cart.totalTax.formattedValue, ". ");
 } }
 function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -1862,104 +1834,77 @@ function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(21, OrderSummaryComponent_div_3_div_21_Template, 3, 4, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r306 = ɵngcc0.ɵɵnextContext();
+    const ctx_r303 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 9, "orderCost.subtotal"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r306.cart.subTotal == null ? null : ctx_r306.cart.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r303.cart.subTotal == null ? null : ctx_r303.cart.subTotal.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 11, "orderCost.estimatedShipping"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r306.cart.deliveryCost == null ? null : ctx_r306.cart.deliveryCost.formattedValue) ? ctx_r306.cart.deliveryCost.formattedValue : "TBD", " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r303.cart.deliveryCost == null ? null : ctx_r303.cart.deliveryCost.formattedValue) ? ctx_r303.cart.deliveryCost.formattedValue : "TBD", " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r306.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r303.cart.net);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "orderCost.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r306.cart.totalPriceWithTax == null ? null : ctx_r306.cart.totalPriceWithTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r303.cart.totalPriceWithTax == null ? null : ctx_r303.cart.totalPriceWithTax.formattedValue, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r306.cart.totalDiscounts == null ? null : ctx_r306.cart.totalDiscounts.value) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r303.cart.totalDiscounts == null ? null : ctx_r303.cart.totalDiscounts.value) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r306.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r303.cart.net);
 } }
 function OrderSummaryComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-applied-coupons", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r307 = ɵngcc0.ɵɵnextContext();
+    const ctx_r304 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("vouchers", ctx_r307.cart.appliedVouchers)("isReadOnly", true);
+    ɵngcc0.ɵɵproperty("vouchers", ctx_r304.cart.appliedVouchers)("isReadOnly", true);
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 7);
-    ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r316 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const cart_r314 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r318 = ɵngcc0.ɵɵnextContext();
+    const orderPromotions_r316 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r318.promotions$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r316)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r318.cartLoaded$))("potentialProductPromotions", cart_r314.potentialProductPromotions);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r316);
 } }
-function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const orderPromotions_r323 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r323);
-} }
-const _c17 = function (a1) { return { isSaveForLater: false, optionalBtn: a1 }; };
-function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_ng_container_1_Template, 2, 1, "ng-container", 0);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 8);
-    ɵngcc0.ɵɵpipe(4, "async");
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const entries_r316 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r319 = ɵngcc0.ɵɵnextContext(2);
-    const _r312 = ɵngcc0.ɵɵreference(3);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 5, ctx_r319.orderPromotions$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r316)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(4, 7, ctx_r319.cartLoaded$))("promotionLocation", ctx_r319.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(9, _c17, ctx_r319.isSaveForLaterEnabled() ? _r312 : null));
-} }
-const _c18 = function (a0) { return { code: a0 }; };
+const _c17 = function (a0) { return { code: a0 }; };
+const _c18 = function (a1) { return { isSaveForLater: false, optionalBtn: a1 }; };
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(4, CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4_Template, 5, 8, "ng-container", 5);
-    ɵngcc0.ɵɵtemplate(5, CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_5_Template, 5, 11, "ng-container", 5);
+    ɵngcc0.ɵɵtemplate(4, CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4_Template, 2, 1, "ng-container", 0);
+    ɵngcc0.ɵɵpipe(5, "async");
+    ɵngcc0.ɵɵelement(6, "cx-cart-item-list", 5);
+    ɵngcc0.ɵɵpipe(7, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r314 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const entries_r313 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r311 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r314 = ɵngcc0.ɵɵnextContext();
+    const _r309 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 3, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(6, _c18, cart_r314.code)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 6, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(13, _c17, cart_r311.code)), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 9, ctx_r314.orderPromotions$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("items", entries_r313)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(7, 11, ctx_r314.cartLoaded$))("promotionLocation", ctx_r314.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(15, _c18, ctx_r314.isSaveForLaterEnabled() ? _r309 : null));
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template, 6, 8, "div", 2);
+    ɵngcc0.ɵɵtemplate(1, CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template, 8, 17, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r314 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r311 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cart_r314.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", cart_r311.totalItems > 0);
 } }
 function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1967,23 +1912,23 @@ function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r311 = ɵngcc0.ɵɵnextContext();
+    const ctx_r308 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r311.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r308.entries$));
 } }
 function CartDetailsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r329 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵelementStart(1, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r329); const ctx_r327 = ctx.$implicit; const ctx_r328 = ɵngcc0.ɵɵnextContext(); return ctx_r328.saveForLater(ctx_r327.item); });
+    const _r322 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "div", 7);
+    ɵngcc0.ɵɵelementStart(1, "button", 8);
+    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r322); const ctx_r320 = ctx.$implicit; const ctx_r321 = ɵngcc0.ɵɵnextContext(); return ctx_r321.saveForLater(ctx_r320.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r327 = ctx.$implicit;
+    const ctx_r320 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r327.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r320.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.saveForLater"), " ");
 } }
@@ -2004,12 +1949,12 @@ function CartTotalsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(2, CartTotalsComponent_ng_container_0_ng_container_1_button_2_Template, 4, 7, "button", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r333 = ctx.ngIf;
-    const cart_r331 = ɵngcc0.ɵɵnextContext().ngIf;
+    const entries_r326 = ctx.ngIf;
+    const cart_r324 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cart", cart_r331);
+    ɵngcc0.ɵɵproperty("cart", cart_r324);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", entries_r333.length);
+    ɵngcc0.ɵɵproperty("ngIf", entries_r326.length);
 } }
 function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2017,15 +1962,15 @@ function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r330 = ɵngcc0.ɵɵnextContext();
+    const ctx_r323 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r330.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r323.entries$));
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r349 = ɵngcc0.ɵɵgetCurrentView();
+    const _r342 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r349); const entry_r347 = ctx.ngIf; const ctx_r348 = ɵngcc0.ɵɵnextContext(5); return ctx_r348.remove(entry_r347); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r342); const entry_r340 = ctx.ngIf; const ctx_r341 = ɵngcc0.ɵɵnextContext(5); return ctx_r341.remove(entry_r340); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelement(3, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(4, "span", 6);
@@ -2035,18 +1980,18 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r344 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r337 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r344.loading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r337.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r344.iconTypes.HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r337.iconTypes.HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.remove"));
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r352 = ɵngcc0.ɵɵgetCurrentView();
+    const _r345 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r352); const product_r339 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r350 = ɵngcc0.ɵɵnextContext(); return ctx_r350.add(product_r339); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r345); const product_r332 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r343 = ɵngcc0.ɵɵnextContext(); return ctx_r343.add(product_r332); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(3, "span", 6);
@@ -2055,10 +2000,10 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r346 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r346.loading$));
+    const ctx_r339 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r339.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r346.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r339.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 5, "addToWishList.add"));
 } }
@@ -2068,21 +2013,21 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵtemplate(2, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template, 6, 7, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r345 = ɵngcc0.ɵɵreference(3);
-    const entries_r342 = ɵngcc0.ɵɵnextContext().ngIf;
-    const product_r339 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r343 = ɵngcc0.ɵɵnextContext();
+    const _r338 = ɵngcc0.ɵɵreference(3);
+    const entries_r335 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r332 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r336 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r343.getProductInWishList(product_r339, entries_r342))("ngIfElse", _r345);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r336.getProductInWishList(product_r332, entries_r335))("ngIfElse", _r338);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_Template, 4, 2, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r341 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r334 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r341.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r334.hasStock);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2090,9 +2035,9 @@ function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r340 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r333 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r340.wishListEntries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r333.wishListEntries$));
 } }
 function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2100,10 +2045,10 @@ function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r336 = ɵngcc0.ɵɵnextContext();
-    const _r337 = ɵngcc0.ɵɵreference(3);
+    const ctx_r329 = ɵngcc0.ɵɵnextContext();
+    const _r330 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r336.userLoggedIn$))("ngIfElse", _r337);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r329.userLoggedIn$))("ngIfElse", _r330);
 } }
 const _c19 = function () { return { cxRoute: "login" }; };
 function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
@@ -2118,25 +2063,25 @@ function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r355 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r348 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(7, _c19)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r355.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r348.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.anonymous"));
 } }
 function AddToWishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, AddToWishListComponent_ng_template_2_ng_container_0_Template, 7, 8, "ng-container", 0);
 } if (rf & 2) {
-    const ctx_r338 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r338.hasStock);
+    const ctx_r331 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r331.hasStock);
 } }
 function SaveForLaterComponent_ng_container_0_p_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const data_r361 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r361.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r354 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r354.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2144,9 +2089,9 @@ function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r356 = ɵngcc0.ɵɵnextContext();
+    const ctx_r349 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r356.data$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r349.data$));
 } }
 const _c20 = function (a1) { return { isSaveForLater: true, optionalBtn: a1 }; };
 function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -2159,23 +2104,23 @@ function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, 
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entries_r364 = ɵngcc0.ɵɵnextContext().ngIf;
-    const saveForLater_r362 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r365 = ɵngcc0.ɵɵnextContext();
-    const _r358 = ɵngcc0.ɵɵreference(5);
+    const entries_r357 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r355 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r358 = ɵngcc0.ɵɵnextContext();
+    const _r351 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c8, saveForLater_r362.totalItems)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c8, saveForLater_r355.totalItems)), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r364)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r365.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c20, _r358));
+    ɵngcc0.ɵɵproperty("items", entries_r357)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r358.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c20, _r351));
 } }
 function SaveForLaterComponent_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template, 6, 14, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const saveForLater_r362 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r355 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r362.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r355.totalItems > 0);
 } }
 function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2183,23 +2128,23 @@ function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r357 = ɵngcc0.ɵɵnextContext();
+    const ctx_r350 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r357.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r350.entries$));
 } }
 function SaveForLaterComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r371 = ɵngcc0.ɵɵgetCurrentView();
+    const _r364 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r371); const ctx_r369 = ctx.$implicit; const ctx_r370 = ɵngcc0.ɵɵnextContext(); return ctx_r370.moveToCart(ctx_r369.item); });
+    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r364); const ctx_r362 = ctx.$implicit; const ctx_r363 = ɵngcc0.ɵɵnextContext(); return ctx_r363.moveToCart(ctx_r362.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r369 = ctx.$implicit;
+    const ctx_r362 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r369.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r362.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.moveToCart"), " ");
 } }
@@ -2211,21 +2156,21 @@ function CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r378 = ɵngcc0.ɵɵnextContext();
-    const i_r376 = ctx_r378.index;
-    const step_r375 = ctx_r378.$implicit;
+    const ctx_r371 = ɵngcc0.ɵɵnextContext();
+    const i_r369 = ctx_r371.index;
+    const step_r368 = ctx_r371.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r376 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r375.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r369 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r368.name), "");
 } }
 function CheckoutProgressMobileBottomComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵtemplate(1, CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template, 4, 4, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r376 = ctx.index;
-    const ctx_r374 = ɵngcc0.ɵɵnextContext(2);
+    const i_r369 = ctx.index;
+    const ctx_r367 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r376 > ctx_r374.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r369 > ctx_r367.activeStepIndex);
 } }
 function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2234,9 +2179,9 @@ function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r372 = ɵngcc0.ɵɵnextContext();
+    const ctx_r365 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r372.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r365.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -2244,9 +2189,9 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r382 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r375 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r382.totalItems)), ": ", cart_r382.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r375.totalItems)), ": ", cart_r375.subTotal.formattedValue, " ");
 } }
 const _c21 = function (a0) { return { cxRoute: a0 }; };
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -2262,13 +2207,13 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r390 = ɵngcc0.ɵɵnextContext();
-    const i_r387 = ctx_r390.index;
-    const step_r386 = ctx_r390.$implicit;
+    const ctx_r383 = ɵngcc0.ɵɵnextContext();
+    const i_r380 = ctx_r383.index;
+    const step_r379 = ctx_r383.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r387 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r386.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r380 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r379.name), "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c21, step_r386.routeName)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c21, step_r379.routeName)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 8, "common.edit"), " ");
 } }
@@ -2280,11 +2225,11 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r391 = ɵngcc0.ɵɵnextContext();
-    const i_r387 = ctx_r391.index;
-    const step_r386 = ctx_r391.$implicit;
+    const ctx_r384 = ɵngcc0.ɵɵnextContext();
+    const i_r380 = ctx_r384.index;
+    const step_r379 = ctx_r384.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r387 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r386.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r380 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r379.name), "");
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2292,12 +2237,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(2, CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template, 4, 4, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r387 = ctx.index;
-    const ctx_r384 = ɵngcc0.ɵɵnextContext(3);
+    const i_r380 = ctx.index;
+    const ctx_r377 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r387 < ctx_r384.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r380 < ctx_r377.activeStepIndex);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r387 === ctx_r384.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r380 === ctx_r377.activeStepIndex);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2307,12 +2252,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r382 = ctx.ngIf;
-    const ctx_r381 = ɵngcc0.ɵɵnextContext(2);
+    const cart_r375 = ctx.ngIf;
+    const ctx_r374 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (cart_r382 == null ? null : cart_r382.totalItems) && (cart_r382 == null ? null : cart_r382.subTotal));
+    ɵngcc0.ɵɵproperty("ngIf", (cart_r375 == null ? null : cart_r375.totalItems) && (cart_r375 == null ? null : cart_r375.subTotal));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r381.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r374.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2320,9 +2265,9 @@ function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r379 = ɵngcc0.ɵɵnextContext();
+    const ctx_r372 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r379.cart$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r372.cart$));
 } }
 function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 4);
@@ -2333,14 +2278,14 @@ function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const step_r395 = ctx.$implicit;
-    const i_r396 = ctx.index;
-    const ctx_r394 = ɵngcc0.ɵɵnextContext(2);
+    const step_r388 = ctx.$implicit;
+    const i_r389 = ctx.index;
+    const ctx_r387 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("active", ctx_r394.isActive(i_r396))("disabled", ctx_r394.isDisabled(i_r396));
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 8, ɵngcc0.ɵɵpureFunction1(12, _c21, step_r395.routeName)))("tabindex", ctx_r394.getTabIndex(i_r396));
+    ɵngcc0.ɵɵclassProp("active", ctx_r387.isActive(i_r389))("disabled", ctx_r387.isDisabled(i_r389));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 8, ɵngcc0.ɵɵpureFunction1(12, _c21, step_r388.routeName)))("tabindex", ctx_r387.getTabIndex(i_r389));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", i_r396 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 10, step_r395.name), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", i_r389 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 10, step_r388.name), " ");
 } }
 function CheckoutProgressComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "section");
@@ -2351,15 +2296,15 @@ function CheckoutProgressComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r392 = ɵngcc0.ɵɵnextContext();
+    const ctx_r385 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r392.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r385.steps);
 } }
 function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r403 = ɵngcc0.ɵɵgetCurrentView();
+    const _r396 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 12);
-    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r403); const mode_r401 = ctx.$implicit; const ctx_r402 = ɵngcc0.ɵɵnextContext(2); return ctx_r402.changeMode(mode_r401.code); });
+    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r396); const mode_r394 = ctx.$implicit; const ctx_r395 = ɵngcc0.ɵɵnextContext(2); return ctx_r395.changeMode(mode_r394.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 13);
     ɵngcc0.ɵɵelementStart(3, "div", 14);
@@ -2374,18 +2319,18 @@ function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const mode_r401 = ctx.$implicit;
+    const mode_r394 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r401.code, "");
-    ɵngcc0.ɵɵproperty("value", mode_r401.code);
+    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r394.code, "");
+    ɵngcc0.ɵɵproperty("value", mode_r394.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r401.code, "");
+    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r394.code, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r401.name);
+    ɵngcc0.ɵɵtextInterpolate(mode_r394.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r401.deliveryCost.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r394.deliveryCost.formattedValue, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r401.description);
+    ɵngcc0.ɵɵtextInterpolate(mode_r394.description);
 } }
 function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2393,9 +2338,9 @@ function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r397 = ɵngcc0.ɵɵnextContext();
+    const ctx_r390 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r397.supportedDeliveryModes$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r390.supportedDeliveryModes$));
 } }
 function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2403,7 +2348,7 @@ function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r409 = ɵngcc0.ɵɵgetCurrentView();
+    const _r402 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2411,30 +2356,30 @@ function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r409); const ctx_r408 = ɵngcc0.ɵɵnextContext(2); return ctx_r408.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r402); const ctx_r401 = ɵngcc0.ɵɵnextContext(2); return ctx_r401.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r406 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r399 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r406);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r399);
 } }
 function BillingAddressFormComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_2_div_1_Template, 7, 9, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r406 = ctx.ngIf;
+    const countries_r399 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r406.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r399.length !== 0);
 } }
 function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r414 = ɵngcc0.ɵɵgetCurrentView();
+    const _r407 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2442,35 +2387,35 @@ function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 17);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r414); const ctx_r413 = ɵngcc0.ɵɵnextContext(2); return ctx_r413.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r407); const ctx_r406 = ɵngcc0.ɵɵnextContext(2); return ctx_r406.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r411 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r404 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r411[0].name ? "name" : "isocodeShort");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r411[0].name ? "isocodeShort" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r404[0].name ? "name" : "isocodeShort");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r404[0].name ? "isocodeShort" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r411);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r404);
 } }
 function BillingAddressFormComponent_ng_container_41_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 16);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_41_div_1_Template, 7, 11, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r411 = ctx.ngIf;
+    const regions_r404 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r411.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r404.length !== 0);
 } }
 function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) {
-    const _r420 = ɵngcc0.ɵɵgetCurrentView();
+    const _r413 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 18);
-    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r420); const ctx_r419 = ɵngcc0.ɵɵnextContext(); return ctx_r419.selectedAddress = $event; });
+    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r413); const ctx_r412 = ɵngcc0.ɵɵnextContext(); return ctx_r412.selectedAddress = $event; });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 19);
     ɵngcc0.ɵɵtext(3);
@@ -2491,28 +2436,28 @@ function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const suggestedAddress_r417 = ctx.$implicit;
-    const i_r418 = ctx.index;
-    const ctx_r416 = ɵngcc0.ɵɵnextContext();
+    const suggestedAddress_r410 = ctx.$implicit;
+    const i_r411 = ctx.index;
+    const ctx_r409 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngModel", ctx_r416.selectedAddress)("value", suggestedAddress_r417)("id", "suggested-addresses--suggested-" + i_r418);
+    ɵngcc0.ɵɵproperty("ngModel", ctx_r409.selectedAddress)("value", suggestedAddress_r410)("id", "suggested-addresses--suggested-" + i_r411);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r418);
+    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r411);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r416.suggestedAddresses == null ? null : ctx_r416.suggestedAddresses.length) > 1 ? i_r418 + 1 : null, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r409.suggestedAddresses == null ? null : ctx_r409.suggestedAddresses.length) > 1 ? i_r411 + 1 : null, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.firstName, " ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.lastName, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.firstName, " ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.lastName, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.line1, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.line1, "");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r417 == null ? null : suggestedAddress_r417.line2);
+    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r410 == null ? null : suggestedAddress_r410.line2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.town, " ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.region == null ? null : suggestedAddress_r417.region.isocode, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.town, " ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.region == null ? null : suggestedAddress_r410.region.isocode, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r417 == null ? null : suggestedAddress_r417.postalCode, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r410 == null ? null : suggestedAddress_r410.postalCode, " ");
 } }
 function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r435 = ɵngcc0.ɵɵgetCurrentView();
+    const _r428 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 27);
     ɵngcc0.ɵɵelementStart(2, "span", 28);
@@ -2520,35 +2465,35 @@ function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 29);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r435); const ctx_r434 = ɵngcc0.ɵɵnextContext(3); return ctx_r434.paymentSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r428); const ctx_r427 = ɵngcc0.ɵɵnextContext(3); return ctx_r427.paymentSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cardTypes_r432 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cardTypes_r425 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "paymentForm.paymentType"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "paymentForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r432);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r425);
 } }
 function PaymentFormComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PaymentFormComponent_div_0_ng_container_4_div_1_Template, 7, 9, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cardTypes_r432 = ctx.ngIf;
+    const cardTypes_r425 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r432.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r425.length !== 0);
 } }
 function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
-    const _r438 = ɵngcc0.ɵɵgetCurrentView();
+    const _r431 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "div", 30);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 31);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r438); const ctx_r437 = ɵngcc0.ɵɵnextContext(2); return ctx_r437.toggleDefaultPaymentMethod(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r431); const ctx_r430 = ɵngcc0.ɵɵnextContext(2); return ctx_r430.toggleDefaultPaymentMethod(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 32);
     ɵngcc0.ɵɵtext(5);
@@ -2562,13 +2507,13 @@ function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "paymentForm.setAsDefault"));
 } }
 function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf & 1) {
-    const _r440 = ɵngcc0.ɵɵgetCurrentView();
+    const _r433 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 30);
     ɵngcc0.ɵɵelementStart(3, "label");
     ɵngcc0.ɵɵelementStart(4, "input", 33);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener() { ɵngcc0.ɵɵrestoreView(_r440); const ctx_r439 = ɵngcc0.ɵɵnextContext(2); return ctx_r439.toggleSameAsShippingAddress(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener() { ɵngcc0.ɵɵrestoreView(_r433); const ctx_r432 = ɵngcc0.ɵɵnextContext(2); return ctx_r432.toggleSameAsShippingAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "span", 32);
     ɵngcc0.ɵɵtext(6);
@@ -2579,9 +2524,9 @@ function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r426 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r419 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("checked", ctx_r426.sameAsShippingAddress);
+    ɵngcc0.ɵɵproperty("checked", ctx_r419.sameAsShippingAddress);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(7, 2, "paymentForm.sameAsShippingAddress"));
 } }
@@ -2590,21 +2535,21 @@ function PaymentFormComponent_div_0_ng_container_47_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelement(1, "cx-card", 34);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const shippingAddress_r441 = ctx.ngIf;
-    const ctx_r427 = ɵngcc0.ɵɵnextContext(2);
+    const shippingAddress_r434 = ctx.ngIf;
+    const ctx_r420 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ctx_r427.getAddressCardContent(shippingAddress_r441));
+    ɵngcc0.ɵɵproperty("content", ctx_r420.getAddressCardContent(shippingAddress_r434));
 } }
 function PaymentFormComponent_div_0_ng_template_49_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-billing-address-form", 35);
 } if (rf & 2) {
-    const ctx_r429 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("billingAddress", ctx_r429.billingAddress)("countries$", ctx_r429.countries$);
+    const ctx_r422 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("billingAddress", ctx_r422.billingAddress)("countries$", ctx_r422.countries$);
 } }
 function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
-    const _r443 = ɵngcc0.ɵɵgetCurrentView();
+    const _r436 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r443); const ctx_r442 = ɵngcc0.ɵɵnextContext(2); return ctx_r442.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r436); const ctx_r435 = ɵngcc0.ɵɵnextContext(2); return ctx_r435.back(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2613,9 +2558,9 @@ function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "common.back"), " ");
 } }
 function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
-    const _r445 = ɵngcc0.ɵɵgetCurrentView();
+    const _r438 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r445); const ctx_r444 = ɵngcc0.ɵɵnextContext(2); return ctx_r444.close(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r438); const ctx_r437 = ɵngcc0.ɵɵnextContext(2); return ctx_r437.close(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2624,7 +2569,7 @@ function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "paymentForm.changePayment"), " ");
 } }
 function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r447 = ɵngcc0.ɵɵgetCurrentView();
+    const _r440 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -2662,13 +2607,13 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(25, "div", 11);
     ɵngcc0.ɵɵelementStart(26, "div", 12);
     ɵngcc0.ɵɵelementStart(27, "ng-select", 13);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r447); const ctx_r446 = ɵngcc0.ɵɵnextContext(); return ctx_r446.monthSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r440); const ctx_r439 = ɵngcc0.ɵɵnextContext(); return ctx_r439.monthSelected($event); });
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 14);
     ɵngcc0.ɵɵelementStart(30, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r447); const ctx_r448 = ɵngcc0.ɵɵnextContext(); return ctx_r448.yearSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r440); const ctx_r441 = ɵngcc0.ɵɵnextContext(); return ctx_r441.yearSelected($event); });
     ɵngcc0.ɵɵpipe(31, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -2707,7 +2652,7 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(55, "div", 24);
     ɵngcc0.ɵɵelementStart(56, "button", 26);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener() { ɵngcc0.ɵɵrestoreView(_r447); const ctx_r449 = ɵngcc0.ɵɵnextContext(); return ctx_r449.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener() { ɵngcc0.ɵɵrestoreView(_r440); const ctx_r442 = ɵngcc0.ɵɵnextContext(); return ctx_r442.next(); });
     ɵngcc0.ɵɵtext(57);
     ɵngcc0.ɵɵpipe(58, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2715,11 +2660,11 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r428 = ɵngcc0.ɵɵreference(50);
-    const ctx_r421 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r421.payment);
+    const _r421 = ɵngcc0.ɵɵreference(50);
+    const ctx_r414 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r414.payment);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 25, ctx_r421.cardTypes$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 25, ctx_r414.cardTypes$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 27, "paymentForm.accountHolderName.label"));
     ɵngcc0.ɵɵadvance(2);
@@ -2730,27 +2675,27 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(24, 33, "paymentForm.expirationDate"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 35, "paymentForm.monthMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r421.months);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r414.months);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(31, 37, "paymentForm.yearMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r421.years);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r414.years);
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 39, "paymentForm.securityCode"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(38, 41, "paymentForm.securityCodeTitle"));
-    ɵngcc0.ɵɵproperty("type", ctx_r421.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r414.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r421.setAsDefaultField);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r414.setAsDefaultField);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(44, 43, "paymentForm.billingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 45, ctx_r421.showSameAsShippingAddressCheckbox()));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 45, ctx_r414.showSameAsShippingAddressCheckbox()));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 47, ctx_r421.sameAsShippingAddress && ctx_r421.shippingAddress$))("ngIfElse", _r428);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 47, ctx_r414.sameAsShippingAddress && ctx_r414.shippingAddress$))("ngIfElse", _r421);
     ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r421.paymentMethodsCount === 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r414.paymentMethodsCount === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r421.paymentMethodsCount > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r414.paymentMethodsCount > 0);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(58, 49, "common.continue"), " ");
 } }
@@ -2758,23 +2703,23 @@ function PaymentFormComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-spinner");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r462 = ɵngcc0.ɵɵgetCurrentView();
+    const _r455 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵelementStart(1, "div", 14);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 15);
-    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r462); const method_r459 = ctx.$implicit; const ctx_r461 = ɵngcc0.ɵɵnextContext(4); return ctx_r461.paymentMethodSelected(method_r459); });
+    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r455); const method_r452 = ctx.$implicit; const ctx_r454 = ɵngcc0.ɵɵnextContext(4); return ctx_r454.paymentMethodSelected(method_r452); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const method_r459 = ctx.$implicit;
-    const ctx_r458 = ɵngcc0.ɵɵnextContext(4);
+    const method_r452 = ctx.$implicit;
+    const ctx_r451 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r458.getCardContent(method_r459)));
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r451.getCardContent(method_r452)));
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r464 = ɵngcc0.ɵɵgetCurrentView();
+    const _r457 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -2783,7 +2728,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r464); const ctx_r463 = ɵngcc0.ɵɵnextContext(3); return ctx_r463.showNewPaymentForm(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r457); const ctx_r456 = ɵngcc0.ɵɵnextContext(3); return ctx_r456.showNewPaymentForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2795,14 +2740,14 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(11, "div", 11);
     ɵngcc0.ɵɵelementStart(12, "div", 7);
     ɵngcc0.ɵɵelementStart(13, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r464); const ctx_r465 = ɵngcc0.ɵɵnextContext(3); return ctx_r465.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r457); const ctx_r458 = ɵngcc0.ɵɵnextContext(3); return ctx_r458.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 7);
     ɵngcc0.ɵɵelementStart(17, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r464); const ctx_r466 = ɵngcc0.ɵɵnextContext(3); return ctx_r466.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r457); const ctx_r459 = ɵngcc0.ɵɵnextContext(3); return ctx_r459.next(); });
     ɵngcc0.ɵɵtext(18);
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2810,30 +2755,30 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r451 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r455 = ɵngcc0.ɵɵnextContext();
+    const existingPaymentMethods_r444 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r448 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "paymentForm.choosePaymentMethod"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "paymentForm.addNewPayment"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r451);
+    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r444);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("disabled", !ctx_r455.selectedPayment);
+    ɵngcc0.ɵɵproperty("disabled", !ctx_r448.selectedPayment);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 12, "common.continue"), " ");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r469 = ɵngcc0.ɵɵgetCurrentView();
+    const _r462 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-payment-form", 16);
-    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r469); const ctx_r468 = ɵngcc0.ɵɵnextContext(3); return ctx_r468.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener() { ɵngcc0.ɵɵrestoreView(_r469); const ctx_r470 = ɵngcc0.ɵɵnextContext(3); return ctx_r470.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener() { ɵngcc0.ɵɵrestoreView(_r469); const ctx_r471 = ɵngcc0.ɵɵnextContext(3); return ctx_r471.back(); });
+    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r462); const ctx_r461 = ɵngcc0.ɵɵnextContext(3); return ctx_r461.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener() { ɵngcc0.ɵɵrestoreView(_r462); const ctx_r463 = ɵngcc0.ɵɵnextContext(3); return ctx_r463.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener() { ɵngcc0.ɵɵrestoreView(_r462); const ctx_r464 = ɵngcc0.ɵɵnextContext(3); return ctx_r464.back(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r451 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r457 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r451 == null ? null : existingPaymentMethods_r451.length) || 0)("setAsDefaultField", !ctx_r457.isGuestCheckout);
+    const existingPaymentMethods_r444 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r450 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r444 == null ? null : existingPaymentMethods_r444.length) || 0)("setAsDefaultField", !ctx_r450.isGuestCheckout);
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2842,10 +2787,10 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(3, PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template, 1, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r456 = ɵngcc0.ɵɵreference(4);
-    const ctx_r452 = ɵngcc0.ɵɵnextContext(2);
+    const _r449 = ɵngcc0.ɵɵreference(4);
+    const ctx_r445 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r452.existingPaymentMethods$).length && !ctx_r452.newPaymentFormManuallyOpened)("ngIfElse", _r456);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r445.existingPaymentMethods$).length && !ctx_r445.newPaymentFormManuallyOpened)("ngIfElse", _r449);
 } }
 function PaymentMethodComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2863,12 +2808,12 @@ function PaymentMethodComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(6, PaymentMethodComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r453 = ɵngcc0.ɵɵreference(7);
-    const ctx_r450 = ɵngcc0.ɵɵnextContext();
+    const _r446 = ɵngcc0.ɵɵreference(7);
+    const ctx_r443 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "paymentForm.payment"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r450.isLoading$))("ngIfElse", _r453);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r443.isLoading$))("ngIfElse", _r446);
 } }
 const _c22 = function () { return { cxRoute: "termsAndConditions" }; };
 function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
@@ -2880,9 +2825,9 @@ function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r473 = ɵngcc0.ɵɵnextContext();
+    const ctx_r466 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r473.getCheckoutStepUrl(ctx_r473.checkoutStepType.SHIPPING_ADDRESS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r466.getCheckoutStepUrl(ctx_r466.checkoutStepType.SHIPPING_ADDRESS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingAddress"));
 } }
@@ -2890,9 +2835,9 @@ function ReviewSubmitComponent_cx_card_16_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-card", 6);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const deliveryMode_r478 = ctx.ngIf;
-    const ctx_r474 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r474.getDeliveryModeCard(deliveryMode_r478)));
+    const deliveryMode_r471 = ctx.ngIf;
+    const ctx_r467 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r467.getDeliveryModeCard(deliveryMode_r471)));
 } }
 function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -2903,9 +2848,9 @@ function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r475 = ɵngcc0.ɵɵnextContext();
+    const ctx_r468 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r475.getCheckoutStepUrl(ctx_r475.checkoutStepType.DELIVERY_MODE))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r468.getCheckoutStepUrl(ctx_r468.checkoutStepType.DELIVERY_MODE))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingMethod"));
 } }
@@ -2918,55 +2863,34 @@ function ReviewSubmitComponent_div_25_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r476 = ɵngcc0.ɵɵnextContext();
+    const ctx_r469 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r476.getCheckoutStepUrl(ctx_r476.checkoutStepType.PAYMENT_DETAILS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c21, ctx_r469.getCheckoutStepUrl(ctx_r469.checkoutStepType.PAYMENT_DETAILS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editPaymentMethod"));
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-cart-item-list", 19);
+    ɵngcc0.ɵɵelement(1, "cx-promotions", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r481 = ɵngcc0.ɵɵnextContext().ngIf;
-    const cart_r479 = ɵngcc0.ɵɵnextContext().ngIf;
+    const orderPromotions_r476 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", entries_r481)("readonly", true)("potentialProductPromotions", cart_r479.potentialProductPromotions);
-} }
-function ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 21);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const orderPromotions_r487 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r487);
-} }
-function ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_ng_container_1_Template, 2, 1, "ng-container", 11);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 20);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const entries_r481 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r483 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r483.orderPromotions$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r481)("readonly", true)("promotionLocation", ctx_r483.promotionLocation);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r476);
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
-    ɵngcc0.ɵɵtemplate(1, ReviewSubmitComponent_ng_container_26_div_7_ng_container_1_Template, 2, 3, "ng-container", 18);
-    ɵngcc0.ɵɵtemplate(2, ReviewSubmitComponent_ng_container_26_div_7_ng_container_2_Template, 4, 6, "ng-container", 18);
+    ɵngcc0.ɵɵtemplate(1, ReviewSubmitComponent_ng_container_26_div_7_ng_container_1_Template, 2, 1, "ng-container", 11);
+    ɵngcc0.ɵɵpipe(2, "async");
+    ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 18);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
+    const entries_r474 = ctx.ngIf;
+    const ctx_r473 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r473.orderPromotions$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("items", entries_r474)("readonly", true)("promotionLocation", ctx_r473.promotionLocation);
 } }
 function ReviewSubmitComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2978,21 +2902,21 @@ function ReviewSubmitComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(7, ReviewSubmitComponent_ng_container_26_div_7_Template, 3, 2, "div", 16);
+    ɵngcc0.ɵɵtemplate(7, ReviewSubmitComponent_ng_container_26_div_7_Template, 4, 6, "div", 16);
     ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r479 = ctx.ngIf;
-    const ctx_r477 = ɵngcc0.ɵɵnextContext();
+    const cart_r472 = ctx.ngIf;
+    const ctx_r470 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c8, cart_r479.deliveryItemsQuantity)), ": ", cart_r479.totalPrice == null ? null : cart_r479.totalPrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c8, cart_r472.deliveryItemsQuantity)), ": ", cart_r472.totalPrice == null ? null : cart_r472.totalPrice.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 7, "checkoutReview.placeOrder"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r477.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r470.entries$));
 } }
 function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r497 = ɵngcc0.ɵɵgetCurrentView();
+    const _r485 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3000,30 +2924,30 @@ function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 23);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r497); const ctx_r496 = ɵngcc0.ɵɵnextContext(2); return ctx_r496.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r485); const ctx_r484 = ɵngcc0.ɵɵnextContext(2); return ctx_r484.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r494 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r482 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r494);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r482);
 } }
 function AddressFormComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_4_div_1_Template, 7, 9, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r494 = ctx.ngIf;
+    const countries_r482 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r494.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r482.length !== 0);
 } }
 function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r503 = ɵngcc0.ɵɵgetCurrentView();
+    const _r491 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3031,25 +2955,25 @@ function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 24);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r503); const ctx_r502 = ɵngcc0.ɵɵnextContext(3); return ctx_r502.titleSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r491); const ctx_r490 = ɵngcc0.ɵɵnextContext(3); return ctx_r490.titleSelected($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const titles_r500 = ɵngcc0.ɵɵnextContext().ngIf;
+    const titles_r488 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "addressForm.title"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r500);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r488);
 } }
 function AddressFormComponent_div_6_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_div_6_ng_container_1_div_1_Template, 6, 6, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const titles_r500 = ctx.ngIf;
+    const titles_r488 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", titles_r500.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", titles_r488.length !== 0);
 } }
 function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
@@ -3057,12 +2981,12 @@ function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r490 = ɵngcc0.ɵɵnextContext();
+    const ctx_r478 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r490.titles$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r478.titles$));
 } }
 function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r508 = ɵngcc0.ɵɵgetCurrentView();
+    const _r496 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -3070,37 +2994,37 @@ function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 26);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r508); const ctx_r507 = ɵngcc0.ɵɵnextContext(2); return ctx_r507.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r496); const ctx_r495 = ɵngcc0.ɵɵnextContext(2); return ctx_r495.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r505 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r493 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r505[0].name ? "name" : "isocode");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r505[0].name ? "isocode" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r493[0].name ? "name" : "isocode");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r493[0].name ? "isocode" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r505);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r493);
 } }
 function AddressFormComponent_ng_container_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 25);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_44_div_1_Template, 7, 11, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r505 = ctx.ngIf;
+    const regions_r493 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r505.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r493.length !== 0);
 } }
 function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
-    const _r511 = ɵngcc0.ɵɵgetCurrentView();
+    const _r499 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 27);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 28);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r511); const ctx_r510 = ɵngcc0.ɵɵnextContext(); return ctx_r510.toggleDefaultAddress(); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r499); const ctx_r498 = ɵngcc0.ɵɵnextContext(); return ctx_r498.toggleDefaultAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 29);
     ɵngcc0.ɵɵtext(5);
@@ -3114,36 +3038,36 @@ function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "addressForm.setAsDefault"));
 } }
 function AddressFormComponent_div_62_Template(rf, ctx) { if (rf & 1) {
-    const _r513 = ɵngcc0.ɵɵgetCurrentView();
+    const _r501 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r513); const ctx_r512 = ɵngcc0.ɵɵnextContext(); return ctx_r512.back(); });
+    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r501); const ctx_r500 = ɵngcc0.ɵɵnextContext(); return ctx_r500.back(); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r493 = ɵngcc0.ɵɵnextContext();
+    const ctx_r481 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r493.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r481.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r526 = ɵngcc0.ɵɵgetCurrentView();
+    const _r514 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r526); const card_r523 = ctx.$implicit; const ctx_r525 = ɵngcc0.ɵɵnextContext(4); return ctx_r525.addressSelected(card_r523.address); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r514); const card_r511 = ctx.$implicit; const ctx_r513 = ɵngcc0.ɵɵnextContext(4); return ctx_r513.addressSelected(card_r511.address); });
     ɵngcc0.ɵɵelementStart(2, "cx-card", 16);
-    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r526); const card_r523 = ctx.$implicit; const ctx_r527 = ɵngcc0.ɵɵnextContext(4); return ctx_r527.addressSelected(card_r523.address); });
+    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r514); const card_r511 = ctx.$implicit; const ctx_r515 = ɵngcc0.ɵɵnextContext(4); return ctx_r515.addressSelected(card_r511.address); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const card_r523 = ctx.$implicit;
+    const card_r511 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r523.card);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r511.card);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r529 = ɵngcc0.ɵɵgetCurrentView();
+    const _r517 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -3152,7 +3076,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r529); const ctx_r528 = ɵngcc0.ɵɵnextContext(3); return ctx_r528.showNewAddressForm(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r517); const ctx_r516 = ɵngcc0.ɵɵnextContext(3); return ctx_r516.showNewAddressForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3164,14 +3088,14 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(11, "div", 6);
     ɵngcc0.ɵɵelementStart(12, "div", 11);
     ɵngcc0.ɵɵelementStart(13, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r529); const ctx_r530 = ɵngcc0.ɵɵnextContext(3); return ctx_r530.back(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r517); const ctx_r518 = ɵngcc0.ɵɵnextContext(3); return ctx_r518.back(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 11);
     ɵngcc0.ɵɵelementStart(17, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r529); const ctx_r531 = ɵngcc0.ɵɵnextContext(3); return ctx_r531.next(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r517); const ctx_r519 = ɵngcc0.ɵɵnextContext(3); return ctx_r519.next(); });
     ɵngcc0.ɵɵpipe(18, "async");
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
@@ -3180,16 +3104,16 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cards_r515 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r519 = ɵngcc0.ɵɵnextContext();
+    const cards_r503 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r507 = ɵngcc0.ɵɵnextContext();
     var tmp_4_0 = null;
-    const currVal_4 = (!ctx_r519.selectedAddress || !ctx_r519.selectedAddress.id) && !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r519.selectedAddress$)) == null ? null : tmp_4_0.shippingAddress);
+    const currVal_4 = (!ctx_r507.selectedAddress || !ctx_r507.selectedAddress.id) && !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r507.selectedAddress$)) == null ? null : tmp_4_0.shippingAddress);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "checkoutAddress.selectYourShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "checkoutAddress.addNewAddress"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", cards_r515);
+    ɵngcc0.ɵɵproperty("ngForOf", cards_r503);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "checkout.backToCart"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -3198,10 +3122,10 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 14, "common.continue"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r537 = ɵngcc0.ɵɵgetCurrentView();
+    const _r525 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "cx-address-form", 18);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener() { ɵngcc0.ɵɵrestoreView(_r537); const ctx_r536 = ɵngcc0.ɵɵnextContext(4); return ctx_r536.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r537); const ctx_r538 = ɵngcc0.ɵɵnextContext(4); return ctx_r538.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener() { ɵngcc0.ɵɵrestoreView(_r525); const ctx_r524 = ɵngcc0.ɵɵnextContext(4); return ctx_r524.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r525); const ctx_r526 = ɵngcc0.ɵɵnextContext(4); return ctx_r526.addAddress($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -3209,23 +3133,23 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
     ɵngcc0.ɵɵproperty("showTitleCode", true);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template(rf, ctx) { if (rf & 1) {
-    const _r540 = ɵngcc0.ɵɵgetCurrentView();
+    const _r528 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-address-form", 19);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r539 = ɵngcc0.ɵɵnextContext(4); return ctx_r539.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r540); const ctx_r541 = ɵngcc0.ɵɵnextContext(4); return ctx_r541.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r528); const ctx_r527 = ɵngcc0.ɵɵnextContext(4); return ctx_r527.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r528); const ctx_r529 = ɵngcc0.ɵɵnextContext(4); return ctx_r529.addAddress($event); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r535 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r523 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(1, 4, "checkout.backToCart"));
-    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r535.isGuestCheckout)("addressData", ctx_r535.setAddress);
+    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r523.isGuestCheckout)("addressData", ctx_r523.setAddress);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template, 2, 1, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(1, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template, 2, 6, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
-    const _r534 = ɵngcc0.ɵɵreference(2);
-    const cards_r515 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("ngIf", cards_r515.length)("ngIfElse", _r534);
+    const _r522 = ɵngcc0.ɵɵreference(2);
+    const cards_r503 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("ngIf", cards_r503.length)("ngIfElse", _r522);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3233,11 +3157,11 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx
     ɵngcc0.ɵɵtemplate(2, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template, 3, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r520 = ɵngcc0.ɵɵreference(3);
-    const cards_r515 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r516 = ɵngcc0.ɵɵnextContext();
+    const _r508 = ɵngcc0.ɵɵreference(3);
+    const cards_r503 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r504 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (cards_r515 == null ? null : cards_r515.length) && !ctx_r516.newAddressFormManuallyOpened)("ngIfElse", _r520);
+    ɵngcc0.ɵɵproperty("ngIf", (cards_r503 == null ? null : cards_r503.length) && !ctx_r504.newAddressFormManuallyOpened)("ngIfElse", _r508);
 } }
 function ShippingAddressComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
@@ -3255,21 +3179,21 @@ function ShippingAddressComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(6, ShippingAddressComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r517 = ɵngcc0.ɵɵreference(7);
-    const ctx_r514 = ɵngcc0.ɵɵnextContext();
+    const _r505 = ɵngcc0.ɵɵreference(7);
+    const ctx_r502 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "checkoutAddress.shippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r514.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r514.isLoading$))("ngIfElse", _r517);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r502.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r502.isLoading$))("ngIfElse", _r505);
 } }
 function ConsentManagementFormComponent_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r544 = ɵngcc0.ɵɵnextContext();
+    const ctx_r532 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r544.consentTemplate == null ? null : ctx_r544.consentTemplate.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r532.consentTemplate == null ? null : ctx_r532.consentTemplate.name, " ");
 } }
 function ConsentManagementFormComponent_br_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "br");
@@ -3282,27 +3206,27 @@ function ConsentManagementComponent_ng_container_0_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template(rf, ctx) { if (rf & 1) {
-    const _r557 = ɵngcc0.ɵɵgetCurrentView();
+    const _r545 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-consent-management-form", 10);
-    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r557); const ctx_r556 = ɵngcc0.ɵɵnextContext(4); return ctx_r556.onConsentChange($event); });
+    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_cx_consent_management_form_11_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r545); const ctx_r544 = ɵngcc0.ɵɵnextContext(4); return ctx_r544.onConsentChange($event); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consentTemplate_r555 = ctx.$implicit;
-    const ctx_r554 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r555)("requiredConsents", ctx_r554.requiredConsents)("isAnonymousConsentsEnabled", ctx_r554.isAnonymousConsentsEnabled)("isLevel13", ctx_r554.isLevel13);
+    const consentTemplate_r543 = ctx.$implicit;
+    const ctx_r542 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r543)("requiredConsents", ctx_r542.requiredConsents)("isAnonymousConsentsEnabled", ctx_r542.isAnonymousConsentsEnabled)("isLevel13", ctx_r542.isLevel13);
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r559 = ɵngcc0.ɵɵgetCurrentView();
+    const _r547 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 6);
     ɵngcc0.ɵɵelementStart(3, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r559); const templateList_r553 = ctx.ngIf; const ctx_r558 = ɵngcc0.ɵɵnextContext(3); return ctx_r558.rejectAll(templateList_r553); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r547); const templateList_r541 = ctx.ngIf; const ctx_r546 = ɵngcc0.ɵɵnextContext(3); return ctx_r546.rejectAll(templateList_r541); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r559); const templateList_r553 = ctx.ngIf; const ctx_r560 = ɵngcc0.ɵɵnextContext(3); return ctx_r560.allowAll(templateList_r553); });
+    ɵngcc0.ɵɵlistener("click", function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r547); const templateList_r541 = ctx.ngIf; const ctx_r548 = ɵngcc0.ɵɵnextContext(3); return ctx_r548.allowAll(templateList_r541); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3315,20 +3239,20 @@ function ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const templateList_r553 = ctx.ngIf;
+    const templateList_r541 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "consentManagementForm.clearAll"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 5, "consentManagementForm.selectAll"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngForOf", templateList_r553);
+    ɵngcc0.ɵɵproperty("ngForOf", templateList_r541);
 } }
 function ConsentManagementComponent_ng_container_0_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_container_0_ng_template_3_ng_container_0_Template, 12, 7, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r551 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r551.templateList$));
+    const ctx_r539 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r539.templateList$));
 } }
 function ConsentManagementComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3337,10 +3261,10 @@ function ConsentManagementComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵtemplate(3, ConsentManagementComponent_ng_container_0_ng_template_3_Template, 2, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r550 = ɵngcc0.ɵɵreference(4);
-    const ctx_r546 = ɵngcc0.ɵɵnextContext();
+    const _r538 = ɵngcc0.ɵɵreference(4);
+    const ctx_r534 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r546.loading$))("ngIfElse", _r550);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r534.loading$))("ngIfElse", _r538);
 } }
 function ConsentManagementComponent_ng_template_1_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -3350,13 +3274,13 @@ function ConsentManagementComponent_ng_template_1_div_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
 } }
 function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template(rf, ctx) { if (rf & 1) {
-    const _r567 = ɵngcc0.ɵɵgetCurrentView();
+    const _r555 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-consent-management-form", 14);
-    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r567); const ctx_r566 = ɵngcc0.ɵɵnextContext(3); return ctx_r566.onConsentChange($event); });
+    ɵngcc0.ɵɵlistener("consentChanged", function ConsentManagementComponent_ng_template_1_ng_template_2_cx_consent_management_form_2_Template_cx_consent_management_form_consentChanged_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r555); const ctx_r554 = ɵngcc0.ɵɵnextContext(3); return ctx_r554.onConsentChange($event); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consentTemplate_r565 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r565);
+    const consentTemplate_r553 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("consentTemplate", consentTemplate_r553);
 } }
 function ConsentManagementComponent_ng_template_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -3366,23 +3290,23 @@ function ConsentManagementComponent_ng_template_1_ng_template_2_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r563 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r551 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r563.templateList$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r551.templateList$));
 } }
 function ConsentManagementComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_template_1_div_0_Template, 3, 0, "div", 0);
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵtemplate(2, ConsentManagementComponent_ng_template_1_ng_template_2_Template, 4, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
-    const _r562 = ɵngcc0.ɵɵreference(3);
-    const ctx_r548 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r548.loading$))("ngIfElse", _r562);
+    const _r550 = ɵngcc0.ɵɵreference(3);
+    const ctx_r536 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r536.loading$))("ngIfElse", _r550);
 } }
 function StorefrontComponent_ng_template_0_ng_template_0_Template(rf, ctx) { if (rf & 1) {
-    const _r572 = ɵngcc0.ɵɵgetCurrentView();
+    const _r560 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "header", 3);
-    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener() { ɵngcc0.ɵɵrestoreView(_r572); const ctx_r571 = ɵngcc0.ɵɵnextContext(2); return ctx_r571.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r572); const ctx_r573 = ɵngcc0.ɵɵnextContext(2); return ctx_r573.collapseMenuIfClickOutside($event); });
+    ɵngcc0.ɵɵlistener("keydown.escape", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_keydown_escape_0_listener() { ɵngcc0.ɵɵrestoreView(_r560); const ctx_r559 = ɵngcc0.ɵɵnextContext(2); return ctx_r559.collapseMenu(); })("click", function StorefrontComponent_ng_template_0_ng_template_0_Template_header_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r560); const ctx_r561 = ɵngcc0.ɵɵnextContext(2); return ctx_r561.collapseMenuIfClickOutside($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-page-layout", 4);
     ɵngcc0.ɵɵelement(3, "cx-page-layout", 5);
@@ -3390,8 +3314,8 @@ function StorefrontComponent_ng_template_0_ng_template_0_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 6);
     ɵngcc0.ɵɵelement(5, "cx-global-message");
 } if (rf & 2) {
-    const ctx_r569 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("is-expanded", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r569.isExpanded$));
+    const ctx_r557 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("is-expanded", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r557.isExpanded$));
 } }
 function StorefrontComponent_ng_template_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "footer");
@@ -3407,20 +3331,20 @@ const _c23 = function (a0, a1, a2) { return { flexType: a0, typeCode: a1, uid: a
 function BannerCarouselComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0, 2);
 } if (rf & 2) {
-    const item_r576 = ctx.item;
-    ɵngcc0.ɵɵproperty("cxComponentWrapper", ɵngcc0.ɵɵpureFunction3(1, _c23, item_r576.typeCode, item_r576.typeCode, item_r576 == null ? null : item_r576.uid));
+    const item_r564 = ctx.item;
+    ɵngcc0.ɵɵproperty("cxComponentWrapper", ɵngcc0.ɵɵpureFunction3(1, _c23, item_r564.typeCode, item_r564.typeCode, item_r564 == null ? null : item_r564.uid));
 } }
 function BannerComponent_ng_container_0_p_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 4);
 } if (rf & 2) {
-    const data_r578 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r578.headline, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r566 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r566.headline, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function BannerComponent_ng_container_0_p_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 4);
 } if (rf & 2) {
-    const data_r578 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r578.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r566 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r566.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function BannerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3431,46 +3355,46 @@ function BannerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const data_r578 = ctx.ngIf;
+    const data_r566 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("url", data_r578.urlLink)("target", data_r578.external ? "_blank" : null)("title", data_r578.media == null ? null : data_r578.media.altText);
+    ɵngcc0.ɵɵproperty("url", data_r566.urlLink)("target", data_r566.external ? "_blank" : null)("title", data_r566.media == null ? null : data_r566.media.altText);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", data_r578.headline);
+    ɵngcc0.ɵɵproperty("ngIf", data_r566.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("container", data_r578.media);
+    ɵngcc0.ɵɵproperty("container", data_r566.media);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", data_r578.content);
+    ɵngcc0.ɵɵproperty("ngIf", data_r566.content);
 } }
 function LinkComponent_cx_generic_link_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "cx-generic-link", 1);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r584 = ctx.ngIf;
-    ɵngcc0.ɵɵstyleMap(data_r584.styleAttributes);
-    ɵngcc0.ɵɵproperty("url", data_r584.url);
+    const data_r572 = ctx.ngIf;
+    ɵngcc0.ɵɵstyleMap(data_r572.styleAttributes);
+    ɵngcc0.ɵɵproperty("url", data_r572.url);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(data_r584.linkName);
+    ɵngcc0.ɵɵtextInterpolate(data_r572.linkName);
 } }
 function ParagraphComponent_p_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 1);
 } if (rf & 2) {
-    const data_r586 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r586.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r574 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r574.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function TabParagraphContainerComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0, 3);
 } if (rf & 2) {
-    const component_r588 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r588);
+    const component_r576 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r576);
 } }
 const _c24 = function (a0) { return { param: a0 }; };
 const _c25 = function () { return {}; };
 function TabParagraphContainerComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r593 = ɵngcc0.ɵɵgetCurrentView();
+    const _r581 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r593); const i_r589 = ctx.index; const ctx_r592 = ɵngcc0.ɵɵnextContext(); return ctx_r592.select(i_r589); });
+    ɵngcc0.ɵɵlistener("click", function TabParagraphContainerComponent_ng_container_0_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r581); const i_r577 = ctx.index; const ctx_r580 = ɵngcc0.ɵɵnextContext(); return ctx_r580.select(i_r577); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵpipe(4, "async");
@@ -3480,31 +3404,31 @@ function TabParagraphContainerComponent_ng_container_0_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const component_r588 = ctx.$implicit;
-    const i_r589 = ctx.index;
-    const ctx_r587 = ɵngcc0.ɵɵnextContext();
+    const component_r576 = ctx.$implicit;
+    const i_r577 = ctx.index;
+    const ctx_r575 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("active", i_r589 === ctx_r587.activeTabNum);
+    ɵngcc0.ɵɵclassProp("active", i_r577 === ctx_r575.activeTabNum);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 7, component_r588.title, ɵngcc0.ɵɵpureFunction1(12, _c24, ɵngcc0.ɵɵpipeBind1(4, 10, ctx_r587.tabTitleParams[i_r589]))), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 7, component_r576.title, ɵngcc0.ɵɵpureFunction1(12, _c24, ɵngcc0.ɵɵpipeBind1(4, 10, ctx_r575.tabTitleParams[i_r577]))), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("active", i_r589 === ctx_r587.activeTabNum);
+    ɵngcc0.ɵɵclassProp("active", i_r577 === ctx_r575.activeTabNum);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", component_r588.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction0(14, _c25));
+    ɵngcc0.ɵɵproperty("cxOutlet", component_r576.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction0(14, _c25));
 } }
 function AddressBookComponent_ng_container_1_div_6_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r603 = ɵngcc0.ɵɵgetCurrentView();
+    const _r591 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-card", 10);
-    ɵngcc0.ɵɵlistener("editCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_editCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r603); const address_r601 = ctx.$implicit; const ctx_r602 = ɵngcc0.ɵɵnextContext(3); return ctx_r602.editAddressButtonHandle(address_r601); })("setDefaultCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_setDefaultCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r603); const address_r601 = ctx.$implicit; const ctx_r604 = ɵngcc0.ɵɵnextContext(3); return ctx_r604.setAddressAsDefault(address_r601.id); })("deleteCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_deleteCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r603); const address_r601 = ctx.$implicit; const ctx_r605 = ɵngcc0.ɵɵnextContext(3); return ctx_r605.setEdit(address_r601.id); })("cancelCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_cancelCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r603); const ctx_r606 = ɵngcc0.ɵɵnextContext(3); return ctx_r606.cancelCard(); });
+    ɵngcc0.ɵɵlistener("editCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_editCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r591); const address_r589 = ctx.$implicit; const ctx_r590 = ɵngcc0.ɵɵnextContext(3); return ctx_r590.editAddressButtonHandle(address_r589); })("setDefaultCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_setDefaultCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r591); const address_r589 = ctx.$implicit; const ctx_r592 = ɵngcc0.ɵɵnextContext(3); return ctx_r592.setAddressAsDefault(address_r589.id); })("deleteCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_deleteCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r591); const address_r589 = ctx.$implicit; const ctx_r593 = ɵngcc0.ɵɵnextContext(3); return ctx_r593.setEdit(address_r589.id); })("cancelCard", function AddressBookComponent_ng_container_1_div_6_div_1_Template_cx_card_cancelCard_1_listener() { ɵngcc0.ɵɵrestoreView(_r591); const ctx_r594 = ɵngcc0.ɵɵnextContext(3); return ctx_r594.cancelCard(); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const address_r601 = ctx.$implicit;
-    const ctx_r600 = ɵngcc0.ɵɵnextContext(3);
+    const address_r589 = ctx.$implicit;
+    const ctx_r588 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r600.getCardContent(address_r601)))("editMode", address_r601.id === ctx_r600.editCard);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r588.getCardContent(address_r589)))("editMode", address_r589.id === ctx_r588.editCard);
 } }
 function AddressBookComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -3512,17 +3436,17 @@ function AddressBookComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r599 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r587 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r599.addresses$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r587.addresses$));
 } }
 function AddressBookComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r608 = ɵngcc0.ɵɵgetCurrentView();
+    const _r596 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r608); const ctx_r607 = ɵngcc0.ɵɵnextContext(); return ctx_r607.addAddressButtonHandle(); });
+    ɵngcc0.ɵɵlistener("click", function AddressBookComponent_ng_container_1_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r596); const ctx_r595 = ɵngcc0.ɵɵnextContext(); return ctx_r595.addAddressButtonHandle(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3532,15 +3456,15 @@ function AddressBookComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(7, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r594 = ɵngcc0.ɵɵnextContext();
-    const _r597 = ɵngcc0.ɵɵreference(7);
+    const ctx_r582 = ɵngcc0.ɵɵnextContext();
+    const _r585 = ɵngcc0.ɵɵreference(7);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "addressBook.addNewAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(7, 5, ctx_r594.addressesStateLoading$))("ngIfElse", _r597);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(7, 5, ctx_r582.addressesStateLoading$))("ngIfElse", _r585);
 } }
 function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    const _r610 = ɵngcc0.ɵɵgetCurrentView();
+    const _r598 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "section");
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3548,7 +3472,7 @@ function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 12);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r610); const ctx_r609 = ɵngcc0.ɵɵnextContext(); return ctx_r609.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r610); const ctx_r611 = ɵngcc0.ɵɵnextContext(); return ctx_r611.addAddressCancel(); })("cancelCard", function AddressBookComponent_ng_container_3_Template_cx_address_form_cancelCard_5_listener() { ɵngcc0.ɵɵrestoreView(_r610); const ctx_r612 = ɵngcc0.ɵɵnextContext(); return ctx_r612.cancelCard(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r598); const ctx_r597 = ɵngcc0.ɵɵnextContext(); return ctx_r597.addAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_3_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r598); const ctx_r599 = ɵngcc0.ɵɵnextContext(); return ctx_r599.addAddressCancel(); })("cancelCard", function AddressBookComponent_ng_container_3_Template_cx_address_form_cancelCard_5_listener() { ɵngcc0.ɵɵrestoreView(_r598); const ctx_r600 = ɵngcc0.ɵɵnextContext(); return ctx_r600.cancelCard(); });
     ɵngcc0.ɵɵpipe(6, "async");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
@@ -3557,16 +3481,16 @@ function AddressBookComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r595 = ɵngcc0.ɵɵnextContext();
+    const ctx_r583 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "addressBook.addNewShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("actionBtnLabel", ɵngcc0.ɵɵpipeBind1(7, 9, "addressBook.addAddress"));
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(8, 11, "addressBook.backToAddressList"));
-    ɵngcc0.ɵɵproperty("showCancelBtn", !(ɵngcc0.ɵɵpipeBind1(6, 7, ctx_r595.addresses$).length === 0))("setAsDefaultField", !(ɵngcc0.ɵɵpipeBind1(9, 13, ctx_r595.addresses$).length === 0));
+    ɵngcc0.ɵɵproperty("showCancelBtn", !(ɵngcc0.ɵɵpipeBind1(6, 7, ctx_r583.addresses$).length === 0))("setAsDefaultField", !(ɵngcc0.ɵɵpipeBind1(9, 13, ctx_r583.addresses$).length === 0));
 } }
 function AddressBookComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    const _r614 = ɵngcc0.ɵɵgetCurrentView();
+    const _r602 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "section");
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3574,20 +3498,20 @@ function AddressBookComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "cx-address-form", 13);
-    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r613 = ɵngcc0.ɵɵnextContext(); return ctx_r613.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r614); const ctx_r615 = ɵngcc0.ɵɵnextContext(); return ctx_r615.editAddressCancel(); });
+    ɵngcc0.ɵɵlistener("submitAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_submitAddress_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r602); const ctx_r601 = ɵngcc0.ɵɵnextContext(); return ctx_r601.editAddressSubmit($event); })("backToAddress", function AddressBookComponent_ng_container_5_Template_cx_address_form_backToAddress_5_listener() { ɵngcc0.ɵɵrestoreView(_r602); const ctx_r603 = ɵngcc0.ɵɵnextContext(); return ctx_r603.editAddressCancel(); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r596 = ɵngcc0.ɵɵnextContext();
+    const ctx_r584 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "addressBook.editShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("actionBtnLabel", ɵngcc0.ɵɵpipeBind1(6, 6, "addressBook.updateAddress"));
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(7, 8, "addressBook.backToAddressList"));
-    ɵngcc0.ɵɵproperty("addressData", ctx_r596.currentAddress);
+    ɵngcc0.ɵɵproperty("addressData", ctx_r584.currentAddress);
 } }
 function AddressBookComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -3602,7 +3526,7 @@ function CloseAccountModalComponent_ng_container_0_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
 } }
 function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, ctx) { if (rf & 1) {
-    const _r622 = ɵngcc0.ɵɵgetCurrentView();
+    const _r610 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "p", 11);
@@ -3613,12 +3537,12 @@ function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, c
     ɵngcc0.ɵɵelementStart(5, "div", 10);
     ɵngcc0.ɵɵelementStart(6, "div", 12);
     ɵngcc0.ɵɵelementStart(7, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r622); const ctx_r621 = ɵngcc0.ɵɵnextContext(2); return ctx_r621.closeAccount(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r610); const ctx_r609 = ɵngcc0.ɵɵnextContext(2); return ctx_r609.closeAccount(); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(10, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener() { ɵngcc0.ɵɵrestoreView(_r622); const ctx_r623 = ɵngcc0.ɵɵnextContext(2); return ctx_r623.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_ng_template_10_Template_button_click_10_listener() { ɵngcc0.ɵɵrestoreView(_r610); const ctx_r611 = ɵngcc0.ɵɵnextContext(2); return ctx_r611.dismissModal(); });
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3634,7 +3558,7 @@ function CloseAccountModalComponent_ng_container_0_ng_template_10_Template(rf, c
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 7, "common.cancel"), " ");
 } }
 function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r625 = ɵngcc0.ɵɵgetCurrentView();
+    const _r613 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "h3", 2);
@@ -3642,7 +3566,7 @@ function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r625); const ctx_r624 = ɵngcc0.ɵɵnextContext(); return ctx_r624.dismissModal(); });
+    ɵngcc0.ɵɵlistener("click", function CloseAccountModalComponent_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r613); const ctx_r612 = ɵngcc0.ɵɵnextContext(); return ctx_r612.dismissModal(); });
     ɵngcc0.ɵɵelementStart(6, "span", 4);
     ɵngcc0.ɵɵelement(7, "cx-icon", 5);
     ɵngcc0.ɵɵelementEnd();
@@ -3653,14 +3577,14 @@ function CloseAccountModalComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵtemplate(10, CloseAccountModalComponent_ng_container_0_ng_template_10_Template, 13, 9, "ng-template", null, 7, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r619 = ɵngcc0.ɵɵreference(11);
-    const ctx_r616 = ɵngcc0.ɵɵnextContext();
+    const _r607 = ɵngcc0.ɵɵreference(11);
+    const ctx_r604 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "closeAccount.confirmAccountClosure"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r616.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r604.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 6, ctx_r616.isLoading$))("ngIfElse", _r619);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 6, ctx_r604.isLoading$))("ngIfElse", _r607);
 } }
 const _c26 = function () { return { cxRoute: "home" }; };
 function ForgotPasswordComponent_div_8_Template(rf, ctx) { if (rf & 1) {
@@ -3683,9 +3607,9 @@ function AmendOrderActionsComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r627 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("disabled", !ctx_r627.isValid);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx_r627.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx_r627.orderCode))));
+    const ctx_r615 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("disabled", !ctx_r615.isValid);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx_r615.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c17, ctx_r615.orderCode))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "common.continue"), " ");
 } }
@@ -3695,15 +3619,15 @@ function AmendOrderActionsComponent_button_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r628 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("disabled", !ctx_r628.isValid);
+    const ctx_r616 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("disabled", !ctx_r616.isValid);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderDetails.cancellationAndReturn.submit"), " ");
 } }
 function CancelOrReturnItemsComponent_div_0_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r637 = ɵngcc0.ɵɵgetCurrentView();
+    const _r625 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r637); const form_r630 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r635 = ɵngcc0.ɵɵnextContext(); return ctx_r635.setAll(form_r630); });
+    ɵngcc0.ɵɵlistener("click", function CancelOrReturnItemsComponent_div_0_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r625); const form_r618 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r623 = ɵngcc0.ɵɵnextContext(); return ctx_r623.setAll(form_r618); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3734,9 +3658,9 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_6_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r638.product.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r626.product.name, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -3744,9 +3668,9 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", item_r638.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", item_r626.product.code, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -3758,38 +3682,38 @@ function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r650 = ctx.$implicit;
+    const variant_r638 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r650.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r638.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r650.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r638.value);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_8_div_1_Template, 5, 2, "div", 30);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", item_r638.product.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", item_r626.product.variantOptionQualifiers);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 32);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r654 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r642 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r654.name, ": ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r642.name, ": ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 33);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r654 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r642 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r654.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r642.value, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -3797,38 +3721,38 @@ function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1
     ɵngcc0.ɵɵtemplate(2, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_div_2_Template, 2, 1, "div", 35);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r654 = ctx.$implicit;
+    const variant_r642 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r654.name);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r642.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r654.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r642.value);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_div_1_Template, 3, 2, "div", 30);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext(2).$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext(2).$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", item_r638.product.baseOptions[0] == null ? null : item_r638.product.baseOptions[0].selected == null ? null : item_r638.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", item_r626.product.baseOptions[0] == null ? null : item_r626.product.baseOptions[0].selected == null ? null : item_r626.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CancelOrReturnItemsComponent_div_0_div_15_ng_container_9_ng_container_1_Template, 2, 1, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r638.product.baseOptions == null ? null : item_r638.product.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", item_r626.product.baseOptions == null ? null : item_r626.product.baseOptions.length);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_10_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 33);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext(2).$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext(2).$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r638.basePrice == null ? null : item_r638.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r626.basePrice == null ? null : item_r626.basePrice.formattedValue, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 36);
@@ -3839,11 +3763,11 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_10_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(4, CancelOrReturnItemsComponent_div_0_div_15_div_10_div_4_Template, 2, 1, "div", 35);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.cancellationAndReturn.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r638.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", item_r626.basePrice);
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 37);
@@ -3857,14 +3781,14 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_11_Template(rf, ctx) { if
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r645 = ɵngcc0.ɵɵnextContext(2);
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r633 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(2, 3, "cartItems.quantityTitle"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "orderDetails.cancellationAndReturn.quantity"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r645.getMaxAmendQuantity(item_r638), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r633.getMaxAmendQuantity(item_r626), " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_div_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 39);
@@ -3877,13 +3801,13 @@ function CancelOrReturnItemsComponent_div_0_div_15_div_17_Template(rf, ctx) { if
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r646 = ɵngcc0.ɵɵnextContext(2);
+    const item_r626 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r634 = ɵngcc0.ɵɵnextContext(2);
     var tmp_1_0 = null;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.cancellationAndReturn.totalPrice"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", (tmp_1_0 = ctx_r646.getItemPrice(item_r638)) == null ? null : tmp_1_0.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", (tmp_1_0 = ctx_r634.getItemPrice(item_r626)) == null ? null : tmp_1_0.formattedValue, " ");
 } }
 function CancelOrReturnItemsComponent_div_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -3912,29 +3836,29 @@ function CancelOrReturnItemsComponent_div_0_div_15_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r638 = ctx.$implicit;
-    const form_r630 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r634 = ɵngcc0.ɵɵnextContext();
+    const item_r626 = ctx.$implicit;
+    const form_r618 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r622 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("container", item_r638.product.images == null ? null : item_r638.product.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", item_r626.product.images == null ? null : item_r626.product.images.PRIMARY);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", item_r638.product.name);
+    ɵngcc0.ɵɵproperty("ngIf", item_r626.product.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r638.product.code);
+    ɵngcc0.ɵɵproperty("ngIf", item_r626.product.code);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", item_r638.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", item_r626.basePrice);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r634.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r622.isConfirmation);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 13, ctx_r634.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 13, ctx_r622.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("min", 0)("max", ctx_r634.getMaxAmendQuantity(item_r638))("control", ctx_r634.getControl(form_r630, item_r638))("readonly", ctx_r634.isConfirmation);
+    ɵngcc0.ɵɵproperty("min", 0)("max", ctx_r622.getMaxAmendQuantity(item_r626))("control", ctx_r622.getControl(form_r618, item_r626))("readonly", ctx_r622.isConfirmation);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r634.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r622.isConfirmation);
 } }
 function CancelOrReturnItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -3960,21 +3884,21 @@ function CancelOrReturnItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(15, CancelOrReturnItemsComponent_div_0_div_15_Template, 18, 15, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r629 = ɵngcc0.ɵɵnextContext();
+    const ctx_r617 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r629.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r617.isConfirmation);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 7, "orderDetails.cancellationAndReturn.item"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 9, "orderDetails.cancellationAndReturn.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r629.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r617.isConfirmation);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, ctx_r629.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, ctx_r617.isCancellation() ? "orderDetails.cancellationAndReturn.cancelQty" : "orderDetails.cancellationAndReturn.returnQty"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r629.isConfirmation);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r617.isConfirmation);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r629.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r617.entries);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -3982,8 +3906,8 @@ function CancelOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx
 function CancelOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 5);
 } if (rf & 2) {
-    const entries_r674 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r674)("isConfirmation", true);
+    const entries_r662 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r662)("isConfirmation", true);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -3991,20 +3915,20 @@ function CancelOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx
 function CancelOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 7);
 } if (rf & 2) {
-    const form_r668 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r675 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r675.orderCode)("isValid", form_r668.valid);
+    const form_r656 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r663 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r663.orderCode)("isValid", form_r656.valid);
 } }
 function CancelOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CancelOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const ctx_r673 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r673.orderCode);
+    const ctx_r661 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r661.orderCode);
 } }
 function CancelOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r678 = ɵngcc0.ɵɵgetCurrentView();
+    const _r666 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r678); const form_r668 = ctx.ngIf; const ctx_r677 = ɵngcc0.ɵɵnextContext(); return ctx_r677.submit(form_r668); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function CancelOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r666); const form_r656 = ctx.ngIf; const ctx_r665 = ɵngcc0.ɵɵnextContext(); return ctx_r665.submit(form_r656); });
     ɵngcc0.ɵɵtemplate(1, CancelOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, CancelOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4012,16 +3936,16 @@ function CancelOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(5, CancelOrderConfirmationComponent_form_0_ng_template_5_Template, 1, 1, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const form_r668 = ctx.ngIf;
-    const _r672 = ɵngcc0.ɵɵreference(6);
-    const ctx_r667 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", form_r668);
+    const form_r656 = ctx.ngIf;
+    const _r660 = ɵngcc0.ɵɵreference(6);
+    const ctx_r655 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", form_r656);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r672);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r660);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r667.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r655.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r672);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r660);
 } }
 function CancelOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4029,8 +3953,8 @@ function CancelOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { 
 function CancelOrderComponent_ng_container_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 4);
 } if (rf & 2) {
-    const entries_r686 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r686);
+    const entries_r674 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r674);
 } }
 function CancelOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4038,15 +3962,15 @@ function CancelOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { 
 function CancelOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const form_r680 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r687 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r687.orderCode)("isValid", form_r680.valid);
+    const form_r668 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r675 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r675.orderCode)("isValid", form_r668.valid);
 } }
 function CancelOrderComponent_ng_container_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CancelOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 5);
 } if (rf & 2) {
-    const ctx_r685 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r685.orderCode);
+    const ctx_r673 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r673.orderCode);
 } }
 function CancelOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4057,14 +3981,14 @@ function CancelOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, CancelOrderComponent_ng_container_0_ng_template_5_Template, 1, 1, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r684 = ɵngcc0.ɵɵreference(6);
-    const ctx_r679 = ɵngcc0.ɵɵnextContext();
+    const _r672 = ɵngcc0.ɵɵreference(6);
+    const ctx_r667 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r684);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r672);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r679.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r667.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r684);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r672);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4072,8 +3996,8 @@ function ReturnOrderConfirmationComponent_form_0_ng_container_1_Template(rf, ctx
 function ReturnOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 5);
 } if (rf & 2) {
-    const entries_r696 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r696)("isConfirmation", true);
+    const entries_r684 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r684)("isConfirmation", true);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4081,20 +4005,20 @@ function ReturnOrderConfirmationComponent_form_0_ng_container_4_Template(rf, ctx
 function ReturnOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 7);
 } if (rf & 2) {
-    const form_r690 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r697 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r697.orderCode)("isValid", form_r690.valid);
+    const form_r678 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r685 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r685.orderCode)("isValid", form_r678.valid);
 } }
 function ReturnOrderConfirmationComponent_form_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ReturnOrderConfirmationComponent_form_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const ctx_r695 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r695.orderCode);
+    const ctx_r683 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r683.orderCode);
 } }
 function ReturnOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r700 = ɵngcc0.ɵɵgetCurrentView();
+    const _r688 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r700); const form_r690 = ctx.ngIf; const ctx_r699 = ɵngcc0.ɵɵnextContext(); return ctx_r699.submit(form_r690); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ReturnOrderConfirmationComponent_form_0_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r688); const form_r678 = ctx.ngIf; const ctx_r687 = ɵngcc0.ɵɵnextContext(); return ctx_r687.submit(form_r678); });
     ɵngcc0.ɵɵtemplate(1, ReturnOrderConfirmationComponent_form_0_ng_container_1_Template, 1, 0, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(2, ReturnOrderConfirmationComponent_form_0_cx_amend_order_items_2_Template, 1, 2, "cx-amend-order-items", 3);
     ɵngcc0.ɵɵpipe(3, "async");
@@ -4102,16 +4026,16 @@ function ReturnOrderConfirmationComponent_form_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(5, ReturnOrderConfirmationComponent_form_0_ng_template_5_Template, 1, 1, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const form_r690 = ctx.ngIf;
-    const _r694 = ɵngcc0.ɵɵreference(6);
-    const ctx_r689 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", form_r690);
+    const form_r678 = ctx.ngIf;
+    const _r682 = ɵngcc0.ɵɵreference(6);
+    const ctx_r677 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", form_r678);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r694);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r682);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r689.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r677.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r694);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r682);
 } }
 function ReturnOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4119,8 +4043,8 @@ function ReturnOrderComponent_ng_container_0_ng_container_1_Template(rf, ctx) { 
 function ReturnOrderComponent_ng_container_0_cx_amend_order_items_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-items", 4);
 } if (rf & 2) {
-    const entries_r708 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("entries", entries_r708);
+    const entries_r696 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("entries", entries_r696);
 } }
 function ReturnOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -4128,15 +4052,15 @@ function ReturnOrderComponent_ng_container_0_ng_container_4_Template(rf, ctx) { 
 function ReturnOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-amend-order-actions", 6);
 } if (rf & 2) {
-    const form_r702 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r709 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r709.orderCode)("isValid", form_r702.valid);
+    const form_r690 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r697 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r697.orderCode)("isValid", form_r690.valid);
 } }
 function ReturnOrderComponent_ng_container_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ReturnOrderComponent_ng_container_0_ng_template_5_cx_amend_order_actions_0_Template, 1, 2, "cx-amend-order-actions", 5);
 } if (rf & 2) {
-    const ctx_r707 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r707.orderCode);
+    const ctx_r695 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r695.orderCode);
 } }
 function ReturnOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4147,14 +4071,14 @@ function ReturnOrderComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ReturnOrderComponent_ng_container_0_ng_template_5_Template, 1, 1, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r706 = ɵngcc0.ɵɵreference(6);
-    const ctx_r701 = ɵngcc0.ɵɵnextContext();
+    const _r694 = ɵngcc0.ɵɵreference(6);
+    const ctx_r689 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r706);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r694);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r701.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r689.entries$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r706);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r694);
 } }
 const _c29 = function (a0) { return { context: a0 }; };
 function OrderDetailHeadlineComponent_ng_container_0_div_19_Template(rf, ctx) { if (rf & 1) {
@@ -4163,9 +4087,9 @@ function OrderDetailHeadlineComponent_ng_container_0_div_19_Template(rf, ctx) { 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r712 = ɵngcc0.ɵɵnextContext().ngIf;
+    const order_r700 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(4, _c29, order_r712 == null ? null : order_r712.statusDisplay)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(4, _c29, order_r700 == null ? null : order_r700.statusDisplay)), " ");
 } }
 function OrderDetailHeadlineComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4199,209 +4123,71 @@ function OrderDetailHeadlineComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r712 = ctx.ngIf;
+    const order_r700 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "orderDetails.orderId"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(order_r712 == null ? null : order_r712.code);
+    ɵngcc0.ɵɵtextInterpolate(order_r700 == null ? null : order_r700.code);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "orderDetails.placed"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(14, 10, order_r712 == null ? null : order_r712.created));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(14, 10, order_r700 == null ? null : order_r700.created));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 12, "orderDetails.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", order_r712 == null ? null : order_r712.statusDisplay);
+    ɵngcc0.ɵɵproperty("ngIf", order_r700 == null ? null : order_r700.statusDisplay);
 } }
-function OrderDetailItemsComponent_ng_container_0_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+function OrderDetailItemsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
+    ɵngcc0.ɵɵelement(1, "cx-promotions", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r723 = ctx.ngIf;
+    const orderPromotions_r709 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r723);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r709);
 } }
-function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
+function OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_3_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 3);
 } if (rf & 2) {
-    const others_r724 = ctx.ngIf;
-    const order_r716 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r716)("consignments", others_r724);
+    const others_r710 = ctx.ngIf;
+    const order_r704 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r704)("consignments", others_r710);
 } }
-function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_5_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
+function OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_5_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 3);
 } if (rf & 2) {
-    const completed_r726 = ctx.ngIf;
-    const order_r716 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r716)("consignments", completed_r726);
+    const completed_r712 = ctx.ngIf;
+    const order_r704 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r704)("consignments", completed_r712);
 } }
-function OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_7_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 4);
+function OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_7_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-order-consigned-entries", 3);
 } if (rf & 2) {
-    const cancel_r728 = ctx.ngIf;
-    const order_r716 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("order", order_r716)("consignments", cancel_r728);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div");
-    ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_div_1_ng_container_1_Template, 2, 1, "ng-container", 0);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵtemplate(3, OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_3_Template, 1, 2, "cx-order-consigned-entries", 2);
-    ɵngcc0.ɵɵpipe(4, "async");
-    ɵngcc0.ɵɵtemplate(5, OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_5_Template, 1, 2, "cx-order-consigned-entries", 2);
-    ɵngcc0.ɵɵpipe(6, "async");
-    ɵngcc0.ɵɵtemplate(7, OrderDetailItemsComponent_ng_container_0_div_1_cx_order_consigned_entries_7_Template, 1, 2, "cx-order-consigned-entries", 2);
-    ɵngcc0.ɵɵpipe(8, "async");
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r717 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r717.orderPromotions$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r717.others$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(6, 8, ctx_r717.completed$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx_r717.cancel$));
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_span_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "span");
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵpipe(2, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const consignment_r732 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c29, consignment_r732.status)), " ");
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 14);
-    ɵngcc0.ɵɵelementStart(1, "div");
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵpipe(3, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "div");
-    ɵngcc0.ɵɵtext(5);
-    ɵngcc0.ɵɵpipe(6, "cxDate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const consignment_r732 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1("", ɵngcc0.ɵɵpipeBind1(3, 2, "orderDetails.shippedOn"), "\u00A0");
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 4, consignment_r732 == null ? null : consignment_r732.statusDate));
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_cx_consignment_tracking_5_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-consignment-tracking", 15);
-} if (rf & 2) {
-    const consignment_r732 = ɵngcc0.ɵɵnextContext().$implicit;
-    const order_r716 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("orderCode", order_r716.code)("consignment", consignment_r732);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const orderPromotions_r742 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r742);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_ng_container_1_Template, 2, 1, "ng-container", 0);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const ctx_r736 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r736.orderPromotions$));
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 7);
-    ɵngcc0.ɵɵelementStart(1, "div", 8);
-    ɵngcc0.ɵɵelementStart(2, "div", 9);
-    ɵngcc0.ɵɵtemplate(3, OrderDetailItemsComponent_ng_container_0_div_2_div_1_span_3_Template, 3, 6, "span", 0);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(4, OrderDetailItemsComponent_ng_container_0_div_2_div_1_div_4_Template, 7, 6, "div", 10);
-    ɵngcc0.ɵɵtemplate(5, OrderDetailItemsComponent_ng_container_0_div_2_div_1_cx_consignment_tracking_5_Template, 1, 2, "cx-consignment-tracking", 11);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(6, "div", 12);
-    ɵngcc0.ɵɵtemplate(7, OrderDetailItemsComponent_ng_container_0_div_2_div_1_ng_container_7_Template, 3, 3, "ng-container", 1);
-    ɵngcc0.ɵɵelement(8, "cx-cart-item-list", 13);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const consignment_r732 = ctx.$implicit;
-    const ctx_r730 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r732);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r732 == null ? null : consignment_r732.statusDate);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeature", "consignmentTracking");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", ctx_r730.getConsignmentProducts(consignment_r732))("readonly", true)("promotionLocation", ctx_r730.promotionLocation);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_2_ng_container_6_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 3);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const orderPromotions_r744 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r744);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_div_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 7);
-    ɵngcc0.ɵɵelementStart(1, "div", 8);
-    ɵngcc0.ɵɵelementStart(2, "div", 9);
-    ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵpipe(4, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "div", 12);
-    ɵngcc0.ɵɵtemplate(6, OrderDetailItemsComponent_ng_container_0_div_2_div_2_ng_container_6_Template, 2, 1, "ng-container", 0);
-    ɵngcc0.ɵɵpipe(7, "async");
-    ɵngcc0.ɵɵelement(8, "cx-cart-item-list", 13);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const order_r716 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r731 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "orderDetails.pending"), " ");
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(7, 7, ctx_r731.orderPromotions$));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", order_r716 == null ? null : order_r716.unconsignedEntries)("readonly", true)("promotionLocation", ctx_r731.promotionLocation);
-} }
-function OrderDetailItemsComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div");
-    ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_div_2_div_1_Template, 9, 7, "div", 5);
-    ɵngcc0.ɵɵtemplate(2, OrderDetailItemsComponent_ng_container_0_div_2_div_2_Template, 9, 9, "div", 6);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const order_r716 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", order_r716.consignments);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r716.unconsignedEntries == null ? null : order_r716.unconsignedEntries.length);
+    const cancel_r714 = ctx.ngIf;
+    const order_r704 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("order", order_r704)("consignments", cancel_r714);
 } }
 function OrderDetailItemsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_div_1_Template, 9, 12, "div", 1);
-    ɵngcc0.ɵɵtemplate(2, OrderDetailItemsComponent_ng_container_0_div_2_Template, 3, 2, "div", 1);
+    ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_ng_container_1_Template, 2, 1, "ng-container", 0);
+    ɵngcc0.ɵɵpipe(2, "async");
+    ɵngcc0.ɵɵtemplate(3, OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_3_Template, 1, 2, "cx-order-consigned-entries", 1);
+    ɵngcc0.ɵɵpipe(4, "async");
+    ɵngcc0.ɵɵtemplate(5, OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_5_Template, 1, 2, "cx-order-consigned-entries", 1);
+    ɵngcc0.ɵɵpipe(6, "async");
+    ɵngcc0.ɵɵtemplate(7, OrderDetailItemsComponent_ng_container_0_cx_order_consigned_entries_7_Template, 1, 2, "cx-order-consigned-entries", 1);
+    ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
+    const ctx_r703 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.4");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.4");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r703.orderPromotions$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 6, ctx_r703.others$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(6, 8, ctx_r703.completed$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx_r703.cancel$));
 } }
 function TrackingEventsComponent_ng_container_1_ng_container_8_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4410,11 +4196,11 @@ function TrackingEventsComponent_ng_container_1_ng_container_8_ng_container_29_T
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r752 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const consignmentTracking_r721 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("href", consignmentTracking_r752.trackingUrl, ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", consignmentTracking_r721.trackingUrl, ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(consignmentTracking_r752 == null ? null : consignmentTracking_r752.trackingID);
+    ɵngcc0.ɵɵtextInterpolate(consignmentTracking_r721 == null ? null : consignmentTracking_r721.trackingID);
 } }
 function TrackingEventsComponent_ng_container_1_ng_container_8_ng_container_30_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4423,9 +4209,9 @@ function TrackingEventsComponent_ng_container_1_ng_container_8_ng_container_30_T
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r752 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const consignmentTracking_r721 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r752 == null ? null : consignmentTracking_r752.trackingID, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r721 == null ? null : consignmentTracking_r721.trackingID, " ");
 } }
 function TrackingEventsComponent_ng_container_1_ng_container_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4476,26 +4262,26 @@ function TrackingEventsComponent_ng_container_1_ng_container_8_Template(rf, ctx)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r752 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r753 = ɵngcc0.ɵɵnextContext();
+    const consignmentTracking_r721 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r722 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 9, "orderDetails.consignmentTracking.dialog.shipped"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(9, 11, ctx_r753.shipDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(9, 11, ctx_r722.shipDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 14, "orderDetails.consignmentTracking.dialog.estimate"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(16, 16, consignmentTracking_r752 == null ? null : consignmentTracking_r752.targetArrivalDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(16, 16, consignmentTracking_r721 == null ? null : consignmentTracking_r721.targetArrivalDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(21, 19, "orderDetails.consignmentTracking.dialog.carrier"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r752 == null ? null : consignmentTracking_r752.carrierDetails == null ? null : consignmentTracking_r752.carrierDetails.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentTracking_r721 == null ? null : consignmentTracking_r721.carrierDetails == null ? null : consignmentTracking_r721.carrierDetails.name, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 21, "orderDetails.consignmentTracking.dialog.trackingId"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", consignmentTracking_r752 == null ? null : consignmentTracking_r752.trackingUrl);
+    ɵngcc0.ɵɵproperty("ngIf", consignmentTracking_r721 == null ? null : consignmentTracking_r721.trackingUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(consignmentTracking_r752 == null ? null : consignmentTracking_r752.trackingUrl));
+    ɵngcc0.ɵɵproperty("ngIf", !(consignmentTracking_r721 == null ? null : consignmentTracking_r721.trackingUrl));
 } }
 function TrackingEventsComponent_ng_container_1_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4516,18 +4302,18 @@ function TrackingEventsComponent_ng_container_1_ng_container_10_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentEvent_r760 = ctx.$implicit;
+    const consignmentEvent_r729 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(4, 4, consignmentEvent_r760.eventDate, "medium"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(4, 4, consignmentEvent_r729.eventDate, "medium"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentEvent_r760.referenceCode, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", consignmentEvent_r729.referenceCode, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(consignmentEvent_r760.detail);
+    ɵngcc0.ɵɵtextInterpolate(consignmentEvent_r729.detail);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" location: ", consignmentEvent_r760.location, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" location: ", consignmentEvent_r729.location, " ");
 } }
 function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r762 = ɵngcc0.ɵɵgetCurrentView();
+    const _r731 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "div", 5);
@@ -4535,7 +4321,7 @@ function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r762); const ctx_r761 = ɵngcc0.ɵɵnextContext(); return ctx_r761.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r731); const ctx_r730 = ɵngcc0.ɵɵnextContext(); return ctx_r730.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4547,15 +4333,15 @@ function TrackingEventsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const consignmentTracking_r752 = ctx.ngIf;
+    const consignmentTracking_r721 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r748 = ɵngcc0.ɵɵreference(4);
+    const _r717 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 4, "orderDetails.consignmentTracking.dialog.header"), " ");
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("ngIf", (consignmentTracking_r752 == null ? null : consignmentTracking_r752.carrierDetails) && (consignmentTracking_r752 == null ? null : consignmentTracking_r752.trackingID))("ngIfElse", _r748);
+    ɵngcc0.ɵɵproperty("ngIf", (consignmentTracking_r721 == null ? null : consignmentTracking_r721.carrierDetails) && (consignmentTracking_r721 == null ? null : consignmentTracking_r721.trackingID))("ngIfElse", _r717);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", consignmentTracking_r752.trackingEvents);
+    ɵngcc0.ɵɵproperty("ngForOf", consignmentTracking_r721.trackingEvents);
 } }
 function TrackingEventsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 21);
@@ -4569,7 +4355,7 @@ function TrackingEventsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "orderDetails.consignmentTracking.dialog.noTracking"), " ");
 } }
 function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r764 = ɵngcc0.ɵɵgetCurrentView();
+    const _r733 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "div", 5);
@@ -4577,7 +4363,7 @@ function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 23);
-    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r764); const ctx_r763 = ɵngcc0.ɵɵnextContext(); return ctx_r763.activeModal.dismiss("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function TrackingEventsComponent_ng_template_5_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r733); const ctx_r732 = ɵngcc0.ɵɵnextContext(); return ctx_r732.activeModal.dismiss("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 7);
     ɵngcc0.ɵɵtext(7, "\u00D7");
     ɵngcc0.ɵɵelementEnd();
@@ -4596,10 +4382,10 @@ function TrackingEventsComponent_ng_template_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "orderDetails.consignmentTracking.dialog.loadingHeader"), " ");
 } }
 function ConsignmentTrackingComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r768 = ɵngcc0.ɵɵgetCurrentView();
+    const _r737 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r768); const ctx_r767 = ɵngcc0.ɵɵnextContext(2); return ctx_r767.openTrackingDialog(ctx_r767.consignment); });
+    ɵngcc0.ɵɵlistener("click", function ConsignmentTrackingComponent_ng_container_0_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r737); const ctx_r736 = ɵngcc0.ɵɵnextContext(2); return ctx_r736.openTrackingDialog(ctx_r736.consignment); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -4613,9 +4399,9 @@ function ConsignmentTrackingComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtemplate(1, ConsignmentTrackingComponent_ng_container_0_div_1_Template, 4, 3, "div", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r765 = ɵngcc0.ɵɵnextContext();
+    const ctx_r734 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r765.consignmentStatus.includes(ctx_r765.consignment.status));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r734.consignmentStatus.includes(ctx_r734.consignment.status));
 } }
 function OrderConsignedEntriesComponent_div_0_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
@@ -4623,9 +4409,9 @@ function OrderConsignedEntriesComponent_div_0_span_3_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r770 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r739 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c29, consignment_r770.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 1, "orderDetails.deliveryStatus", ɵngcc0.ɵɵpureFunction1(4, _c29, consignment_r739.status)), " ");
 } }
 function OrderConsignedEntriesComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -4635,16 +4421,16 @@ function OrderConsignedEntriesComponent_div_0_div_4_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r770 = ɵngcc0.ɵɵnextContext().$implicit;
+    const consignment_r739 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, consignment_r770 == null ? null : consignment_r770.statusDate));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, consignment_r739 == null ? null : consignment_r739.statusDate));
 } }
 function OrderConsignedEntriesComponent_div_0_cx_consignment_tracking_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-consignment-tracking", 10);
 } if (rf & 2) {
-    const consignment_r770 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r773 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("orderCode", ctx_r773.order.code)("consignment", consignment_r770);
+    const consignment_r739 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r742 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("orderCode", ctx_r742.order.code)("consignment", consignment_r739);
 } }
 function OrderConsignedEntriesComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -4660,16 +4446,16 @@ function OrderConsignedEntriesComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const consignment_r770 = ctx.$implicit;
-    const ctx_r769 = ɵngcc0.ɵɵnextContext();
+    const consignment_r739 = ctx.$implicit;
+    const ctx_r738 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r770);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r739);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", consignment_r770 == null ? null : consignment_r770.statusDate);
+    ɵngcc0.ɵɵproperty("ngIf", consignment_r739 == null ? null : consignment_r739.statusDate);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeature", "consignmentTracking");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", consignment_r770.entries)("readonly", true)("promotionLocation", ctx_r769.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", consignment_r739.entries)("readonly", true)("promotionLocation", ctx_r738.promotionLocation);
 } }
 function OrderDetailShippingComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4677,10 +4463,10 @@ function OrderDetailShippingComponent_ng_container_0_div_2_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r778 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r779 = ɵngcc0.ɵɵnextContext();
+    const order_r747 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r748 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r779.getAddressCardContent(order_r778.deliveryAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r748.getAddressCardContent(order_r747.deliveryAddress)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4688,10 +4474,10 @@ function OrderDetailShippingComponent_ng_container_0_div_3_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r778 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r780 = ɵngcc0.ɵɵnextContext();
+    const order_r747 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r749 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r780.getBillingAddressCardContent(order_r778.paymentInfo.billingAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r749.getBillingAddressCardContent(order_r747.paymentInfo.billingAddress)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4699,10 +4485,10 @@ function OrderDetailShippingComponent_ng_container_0_div_4_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r778 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r781 = ɵngcc0.ɵɵnextContext();
+    const order_r747 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r750 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r781.getPaymentCardContent(order_r778.paymentInfo)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r750.getPaymentCardContent(order_r747.paymentInfo)));
 } }
 function OrderDetailShippingComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -4710,10 +4496,10 @@ function OrderDetailShippingComponent_ng_container_0_div_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r778 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r782 = ɵngcc0.ɵɵnextContext();
+    const order_r747 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r751 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r782.getShippingMethodCardContent(order_r778.deliveryMode)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r751.getShippingMethodCardContent(order_r747.deliveryMode)));
 } }
 function OrderDetailShippingComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4725,15 +4511,15 @@ function OrderDetailShippingComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r778 = ctx.ngIf;
+    const order_r747 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", order_r778.deliveryAddress);
+    ɵngcc0.ɵɵproperty("ngIf", order_r747.deliveryAddress);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r778.paymentInfo == null ? null : order_r778.paymentInfo.billingAddress);
+    ɵngcc0.ɵɵproperty("ngIf", order_r747.paymentInfo == null ? null : order_r747.paymentInfo.billingAddress);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r778.paymentInfo);
+    ɵngcc0.ɵɵproperty("ngIf", order_r747.paymentInfo);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r778.deliveryMode);
+    ɵngcc0.ɵɵproperty("ngIf", order_r747.deliveryMode);
 } }
 function OrderDetailTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -4744,9 +4530,9 @@ function OrderDetailTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r788 = ctx.ngIf;
+    const order_r757 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("cart", order_r788);
+    ɵngcc0.ɵɵproperty("cart", order_r757);
 } }
 const _c30 = function (a1) { return { cxRoute: "orderCancel", params: a1 }; };
 function OrderDetailActionsComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
@@ -4756,8 +4542,8 @@ function OrderDetailActionsComponent_ng_container_0_a_8_Template(rf, ctx) { if (
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r790 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c30, order_r790)));
+    const order_r759 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c30, order_r759)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "orderDetails.cancellationAndReturn.cancelAction"), " ");
 } }
@@ -4769,8 +4555,8 @@ function OrderDetailActionsComponent_ng_container_0_a_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r790 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c31, order_r790)));
+    const order_r759 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction1(6, _c31, order_r759)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "orderDetails.cancellationAndReturn.returnAction"), " ");
 } }
@@ -4792,21 +4578,21 @@ function OrderDetailActionsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r790 = ctx.ngIf;
+    const order_r759 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 4, ɵngcc0.ɵɵpureFunction0(8, _c32)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 6, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", order_r790.cancellable);
+    ɵngcc0.ɵɵproperty("ngIf", order_r759.cancellable);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", order_r790.returnable);
+    ɵngcc0.ɵɵproperty("ngIf", order_r759.returnable);
 } }
 const _c33 = function (a1) { return { cxRoute: "orderDetails", params: a1 }; };
 function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template(rf, ctx) { if (rf & 1) {
-    const _r803 = ɵngcc0.ɵɵgetCurrentView();
+    const _r772 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "tr", 16);
-    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r803); const order_r801 = ctx.$implicit; const ctx_r802 = ɵngcc0.ɵɵnextContext(3); return ctx_r802.goToOrderDetail(order_r801); });
+    ɵngcc0.ɵɵlistener("click", function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template_tr_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r772); const order_r770 = ctx.$implicit; const ctx_r771 = ɵngcc0.ɵɵnextContext(3); return ctx_r771.goToOrderDetail(order_r770); });
     ɵngcc0.ɵɵelementStart(1, "td", 17);
     ɵngcc0.ɵɵelementStart(2, "div", 18);
     ɵngcc0.ɵɵtext(3);
@@ -4851,46 +4637,46 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_tr_23_Template(rf, 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r801 = ctx.$implicit;
+    const order_r770 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 12, "orderHistory.orderId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 14, ɵngcc0.ɵɵpureFunction1(34, _c33, order_r801)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 14, ɵngcc0.ɵɵpureFunction1(34, _c33, order_r770)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", order_r801 == null ? null : order_r801.code, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", order_r770 == null ? null : order_r770.code, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 16, "orderHistory.date"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 18, ɵngcc0.ɵɵpureFunction1(36, _c33, order_r801)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 18, ɵngcc0.ɵɵpureFunction1(36, _c33, order_r770)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(15, 20, order_r801 == null ? null : order_r801.placed, "longDate"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(15, 20, order_r770 == null ? null : order_r770.placed, "longDate"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 23, "orderHistory.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(21, 25, ɵngcc0.ɵɵpureFunction1(38, _c33, order_r801)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(21, 25, ɵngcc0.ɵɵpureFunction1(38, _c33, order_r770)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(23, 27, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(40, _c29, order_r801 == null ? null : order_r801.statusDisplay)), "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(23, 27, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(40, _c29, order_r770 == null ? null : order_r770.statusDisplay)), "");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 30, "orderHistory.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(29, 32, ɵngcc0.ɵɵpureFunction1(42, _c33, order_r801)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(29, 32, ɵngcc0.ɵɵpureFunction1(42, _c33, order_r770)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", order_r801 == null ? null : order_r801.total.formattedValue, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", order_r770 == null ? null : order_r770.total.formattedValue, "");
 } }
 function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r805 = ɵngcc0.ɵɵgetCurrentView();
+    const _r774 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r805); const ctx_r804 = ɵngcc0.ɵɵnextContext(2); return ctx_r804.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r774); const ctx_r773 = ɵngcc0.ɵɵnextContext(2); return ctx_r773.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 9);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r805); const ctx_r806 = ɵngcc0.ɵɵnextContext(2); return ctx_r806.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r774); const ctx_r775 = ɵngcc0.ɵɵnextContext(2); return ctx_r775.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -4920,26 +4706,26 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) {
     ɵngcc0.ɵɵelementStart(24, "div", 15);
     ɵngcc0.ɵɵelementStart(25, "div", 7);
     ɵngcc0.ɵɵelementStart(26, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r805); const ctx_r807 = ɵngcc0.ɵɵnextContext(2); return ctx_r807.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r774); const ctx_r776 = ɵngcc0.ɵɵnextContext(2); return ctx_r776.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(27, "async");
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 9);
     ɵngcc0.ɵɵelementStart(30, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r805); const ctx_r808 = ɵngcc0.ɵɵnextContext(2); return ctx_r808.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderHistoryComponent_ng_container_0_ng_container_7_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r774); const ctx_r777 = ɵngcc0.ɵɵnextContext(2); return ctx_r777.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orders_r796 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r797 = ɵngcc0.ɵɵnextContext();
+    const orders_r765 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r766 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 17, "orderHistory.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", orders_r796.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r797.getSortLabels()))("selectedOption", orders_r796.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", orders_r765.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r766.getSortLabels()))("selectedOption", orders_r765.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", orders_r796.pagination);
+    ɵngcc0.ɵɵproperty("pagination", orders_r765.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 19, "orderHistory.orderId"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -4949,12 +4735,12 @@ function OrderHistoryComponent_ng_container_0_ng_container_7_Template(rf, ctx) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(21, 25, "orderHistory.total"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", orders_r796.orders);
+    ɵngcc0.ɵɵproperty("ngForOf", orders_r765.orders);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 29, "orderHistory.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", orders_r796.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r797.getSortLabels()))("selectedOption", orders_r796.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", orders_r765.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r766.getSortLabels()))("selectedOption", orders_r765.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", orders_r796.pagination);
+    ɵngcc0.ɵɵproperty("pagination", orders_r765.pagination);
 } }
 function OrderHistoryComponent_ng_container_0_ng_template_8_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 24);
@@ -4982,8 +4768,8 @@ function OrderHistoryComponent_ng_container_0_ng_template_8_Template(rf, ctx) { 
     ɵngcc0.ɵɵtemplate(0, OrderHistoryComponent_ng_container_0_ng_template_8_div_0_Template, 9, 10, "div", 23);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r799 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r799.isLoaded$));
+    const ctx_r768 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r768.isLoaded$));
 } }
 function OrderHistoryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5001,34 +4787,34 @@ function OrderHistoryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orders_r796 = ctx.ngIf;
-    const _r798 = ɵngcc0.ɵɵreference(9);
+    const orders_r765 = ctx.ngIf;
+    const _r767 = ɵngcc0.ɵɵreference(9);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, "orderHistory.orderHistory"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", orders_r796.pagination.totalResults > 0)("ngIfElse", _r798);
+    ɵngcc0.ɵɵproperty("ngIf", orders_r765.pagination.totalResults > 0)("ngIfElse", _r767);
 } }
 function ReturnRequestOverviewComponent_ng_container_0_button_7_Template(rf, ctx) { if (rf & 1) {
-    const _r816 = ɵngcc0.ɵɵgetCurrentView();
+    const _r785 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r816); const returnRequest_r812 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r814 = ɵngcc0.ɵɵnextContext(); return ctx_r814.cancelReturn(returnRequest_r812.rma); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_button_7_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r785); const returnRequest_r781 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r783 = ɵngcc0.ɵɵnextContext(); return ctx_r783.cancelReturn(returnRequest_r781.rma); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r813 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r813.isCancelling$));
+    const ctx_r782 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r782.isCancelling$));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "returnRequest.cancel"), " ");
 } }
 function ReturnRequestOverviewComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r818 = ɵngcc0.ɵɵgetCurrentView();
+    const _r787 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵelementStart(3, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r818); const ctx_r817 = ɵngcc0.ɵɵnextContext(); return ctx_r817.back(); });
+    ɵngcc0.ɵɵlistener("click", function ReturnRequestOverviewComponent_ng_container_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r787); const ctx_r786 = ɵngcc0.ɵɵnextContext(); return ctx_r786.back(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -5069,32 +4855,32 @@ function ReturnRequestOverviewComponent_ng_container_0_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r812 = ctx.ngIf;
+    const returnRequest_r781 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 8, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", returnRequest_r812.cancellable);
+    ɵngcc0.ɵɵproperty("ngIf", returnRequest_r781.cancellable);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 10, "returnRequest.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(returnRequest_r812.rma);
+    ɵngcc0.ɵɵtextInterpolate(returnRequest_r781.rma);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 12, "returnRequest.orderCode"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(returnRequest_r812.order == null ? null : returnRequest_r812.order.code);
+    ɵngcc0.ɵɵtextInterpolate(returnRequest_r781.order == null ? null : returnRequest_r781.order.code);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(24, 14, "returnRequest.status"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(27, 16, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(19, _c29, returnRequest_r812.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(27, 16, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(19, _c29, returnRequest_r781.status)), " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 24);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r791 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.name, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -5102,9 +4888,9 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_div_9_Template(rf, ct
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r791 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.code, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -5116,38 +4902,38 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r832 = ctx.$implicit;
+    const variant_r801 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r832.name);
+    ɵngcc0.ɵɵtextInterpolate(variant_r801.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(variant_r832.value);
+    ɵngcc0.ɵɵtextInterpolate(variant_r801.value);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_10_div_1_Template, 5, 2, "div", 26);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r791 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.variantOptionQualifiers);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 28);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r804 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r835.name, ": ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r804.name, ": ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r835 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r804 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r835.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r804.value, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -5155,20 +4941,20 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1
     ɵngcc0.ɵɵtemplate(2, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_div_2_Template, 2, 1, "div", 30);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r835 = ctx.$implicit;
+    const variant_r804 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r835.name);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r804.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r835.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r804.value);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ReturnRequestItemsComponent_ng_container_0_div_15_ng_container_11_div_1_Template, 3, 2, "div", 26);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r791 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.baseOptions[0] == null ? null : returnEntry_r822.orderEntry.product.baseOptions[0].selected == null ? null : returnEntry_r822.orderEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.baseOptions[0] == null ? null : returnEntry_r791.orderEntry.product.baseOptions[0].selected == null ? null : returnEntry_r791.orderEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -5181,11 +4967,11 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_div_12_Template(rf, c
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ɵngcc0.ɵɵnextContext().$implicit;
+    const returnEntry_r791 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "returnRequest.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.basePrice == null ? null : returnEntry_r822.orderEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.basePrice == null ? null : returnEntry_r791.orderEntry.basePrice.formattedValue, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -5227,27 +5013,27 @@ function ReturnRequestItemsComponent_ng_container_0_div_15_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const returnEntry_r822 = ctx.$implicit;
+    const returnEntry_r791 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("container", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.images == null ? null : returnEntry_r822.orderEntry.product.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.images == null ? null : returnEntry_r791.orderEntry.product.images.PRIMARY);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.name);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.product.code);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.product.code);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r822.orderEntry == null ? null : returnEntry_r822.orderEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", returnEntry_r791.orderEntry == null ? null : returnEntry_r791.orderEntry.basePrice);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(16, 10, "returnRequest.returnQty"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r822.expectedQuantity, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r791.expectedQuantity, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(22, 12, "returnRequest.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r822.refundAmount == null ? null : returnEntry_r822.refundAmount.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnEntry_r791.refundAmount == null ? null : returnEntry_r791.refundAmount.formattedValue, " ");
 } }
 function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5274,7 +5060,7 @@ function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵtemplate(15, ReturnRequestItemsComponent_ng_container_0_div_15_Template, 25, 14, "div", 7);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r820 = ctx.ngIf;
+    const returnRequest_r789 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 5, "returnRequest.item"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -5284,7 +5070,7 @@ function ReturnRequestItemsComponent_ng_container_0_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(14, 11, "returnRequest.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", returnRequest_r820.returnEntries);
+    ɵngcc0.ɵɵproperty("ngForOf", returnRequest_r789.returnEntries);
 } }
 function ReturnRequestTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5329,21 +5115,21 @@ function ReturnRequestTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequest_r843 = ctx.ngIf;
+    const returnRequest_r812 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 8, "returnRequest.summary"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 10, "returnRequest.subtotal"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r843.subTotal == null ? null : returnRequest_r843.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r812.subTotal == null ? null : returnRequest_r812.subTotal.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 12, "returnRequest.deliveryCode"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r843.deliveryCost == null ? null : returnRequest_r843.deliveryCost.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r812.deliveryCost == null ? null : returnRequest_r812.deliveryCost.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(21, 14, "returnRequest.estimatedRefund"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r843.totalPrice == null ? null : returnRequest_r843.totalPrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", returnRequest_r812.totalPrice == null ? null : returnRequest_r812.totalPrice.formattedValue, " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(26, 16, "returnRequest.note"), " ");
 } }
@@ -5388,42 +5174,42 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_tr_23_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const return_r848 = ctx.$implicit;
+    const return_r817 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 10, "returnRequestList.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 12, ɵngcc0.ɵɵpureFunction1(28, _c34, return_r848)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(6, 12, ɵngcc0.ɵɵpureFunction1(28, _c34, return_r817)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", return_r848 == null ? null : return_r848.rma, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", return_r817 == null ? null : return_r817.rma, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 14, "returnRequestList.orderId"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 16, ɵngcc0.ɵɵpureFunction1(30, _c33, return_r848 == null ? null : return_r848.order)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 16, ɵngcc0.ɵɵpureFunction1(30, _c33, return_r817 == null ? null : return_r817.order)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", return_r848 == null ? null : return_r848.order == null ? null : return_r848.order.code, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", return_r817 == null ? null : return_r817.order == null ? null : return_r817.order.code, "");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 18, "returnRequestList.date"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(20, 20, return_r848 == null ? null : return_r848.creationTime, "longDate"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(20, 20, return_r817 == null ? null : return_r817.creationTime, "longDate"), " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(24, 23, "returnRequestList.status"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(26, 25, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(32, _c29, return_r848 == null ? null : return_r848.status)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(26, 25, "returnRequestList.statusDisplay", ɵngcc0.ɵɵpureFunction1(32, _c29, return_r817 == null ? null : return_r817.status)), " ");
 } }
 function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    const _r850 = ɵngcc0.ɵɵgetCurrentView();
+    const _r819 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 5);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r850); const ctx_r849 = ɵngcc0.ɵɵnextContext(2); return ctx_r849.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r819); const ctx_r818 = ɵngcc0.ɵɵnextContext(2); return ctx_r818.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 6);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 7);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r850); const ctx_r851 = ɵngcc0.ɵɵnextContext(2); return ctx_r851.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r819); const ctx_r820 = ɵngcc0.ɵɵnextContext(2); return ctx_r820.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5453,26 +5239,26 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(
     ɵngcc0.ɵɵelementStart(24, "div", 12);
     ɵngcc0.ɵɵelementStart(25, "div", 4);
     ɵngcc0.ɵɵelementStart(26, "cx-sorting", 5);
-    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r850); const ctx_r852 = ɵngcc0.ɵɵnextContext(2); return ctx_r852.changeSortCode($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_sorting_sortListEvent_26_listener($event) { ɵngcc0.ɵɵrestoreView(_r819); const ctx_r821 = ɵngcc0.ɵɵnextContext(2); return ctx_r821.changeSortCode($event); });
     ɵngcc0.ɵɵpipe(27, "async");
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 6);
     ɵngcc0.ɵɵelementStart(30, "cx-pagination", 7);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r850); const ctx_r853 = ɵngcc0.ɵɵnextContext(2); return ctx_r853.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template_cx_pagination_viewPageEvent_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r819); const ctx_r822 = ɵngcc0.ɵɵnextContext(2); return ctx_r822.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequests_r845 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r846 = ɵngcc0.ɵɵnextContext();
+    const returnRequests_r814 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r815 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 17, "returnRequestList.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r845.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r846.getSortLabels()))("selectedOption", returnRequests_r845.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r814.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r815.getSortLabels()))("selectedOption", returnRequests_r814.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", returnRequests_r845.pagination);
+    ɵngcc0.ɵɵproperty("pagination", returnRequests_r814.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 19, "returnRequestList.returnRequestId"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -5482,12 +5268,12 @@ function OrderReturnRequestListComponent_ng_container_0_ng_container_3_Template(
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(21, 25, "returnRequestList.status"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", returnRequests_r845.returnRequests);
+    ɵngcc0.ɵɵproperty("ngForOf", returnRequests_r814.returnRequests);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 29, "returnRequestList.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r845.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r846.getSortLabels()))("selectedOption", returnRequests_r845.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", returnRequests_r814.sorts)("sortLabels", ɵngcc0.ɵɵpipeBind1(27, 27, ctx_r815.getSortLabels()))("selectedOption", returnRequests_r814.pagination.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", returnRequests_r845.pagination);
+    ɵngcc0.ɵɵproperty("pagination", returnRequests_r814.pagination);
 } }
 function OrderReturnRequestListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5498,9 +5284,9 @@ function OrderReturnRequestListComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const returnRequests_r845 = ctx.ngIf;
+    const returnRequests_r814 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", returnRequests_r845.pagination.totalResults > 0);
+    ɵngcc0.ɵɵproperty("ngIf", returnRequests_r814.pagination.totalResults > 0);
 } }
 function PaymentMethodsComponent_ng_container_0_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -5508,29 +5294,29 @@ function PaymentMethodsComponent_ng_container_0_div_10_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r863 = ɵngcc0.ɵɵgetCurrentView();
+    const _r832 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 11);
-    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r863); const paymentMethod_r861 = ctx.$implicit; const ctx_r862 = ɵngcc0.ɵɵnextContext(3); return ctx_r862.deletePaymentMethod(paymentMethod_r861); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r863); const paymentMethod_r861 = ctx.$implicit; const ctx_r864 = ɵngcc0.ɵɵnextContext(3); return ctx_r864.setDefaultPaymentMethod(paymentMethod_r861); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r863); const paymentMethod_r861 = ctx.$implicit; const ctx_r865 = ɵngcc0.ɵɵnextContext(3); return ctx_r865.setEdit(paymentMethod_r861); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r863); const ctx_r866 = ɵngcc0.ɵɵnextContext(3); return ctx_r866.cancelCard(); });
+    ɵngcc0.ɵɵlistener("deleteCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_deleteCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r832); const paymentMethod_r830 = ctx.$implicit; const ctx_r831 = ɵngcc0.ɵɵnextContext(3); return ctx_r831.deletePaymentMethod(paymentMethod_r830); })("setDefaultCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_setDefaultCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r832); const paymentMethod_r830 = ctx.$implicit; const ctx_r833 = ɵngcc0.ɵɵnextContext(3); return ctx_r833.setDefaultPaymentMethod(paymentMethod_r830); })("editCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_editCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r832); const paymentMethod_r830 = ctx.$implicit; const ctx_r834 = ɵngcc0.ɵɵnextContext(3); return ctx_r834.setEdit(paymentMethod_r830); })("cancelCard", function PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template_cx_card_cancelCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r832); const ctx_r835 = ɵngcc0.ɵɵnextContext(3); return ctx_r835.cancelCard(); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const paymentMethod_r861 = ctx.$implicit;
-    const ctx_r860 = ɵngcc0.ɵɵnextContext(3);
+    const paymentMethod_r830 = ctx.$implicit;
+    const ctx_r829 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r860.getCardContent(paymentMethod_r861)))("editMode", ctx_r860.editCard === paymentMethod_r861.id);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 4, ctx_r829.getCardContent(paymentMethod_r830)))("editMode", ctx_r829.editCard === paymentMethod_r830.id);
 } }
 function PaymentMethodsComponent_ng_container_0_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵtemplate(1, PaymentMethodsComponent_ng_container_0_ng_template_12_div_1_Template, 4, 6, "div", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const paymentMethods_r856 = ɵngcc0.ɵɵnextContext().ngIf;
+    const paymentMethods_r825 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", paymentMethods_r856);
+    ɵngcc0.ɵɵproperty("ngForOf", paymentMethods_r825);
 } }
 function PaymentMethodsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -5553,14 +5339,14 @@ function PaymentMethodsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r858 = ɵngcc0.ɵɵreference(13);
-    const ctx_r855 = ɵngcc0.ɵɵnextContext();
+    const _r827 = ɵngcc0.ɵɵreference(13);
+    const ctx_r824 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 4, "paymentMethods.paymentMethods"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 6, "paymentMethods.newPaymentMethodsAreAddedDuringCheckout"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(11, 8, ctx_r855.loading$))("ngIfElse", _r858);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(11, 8, ctx_r824.loading$))("ngIfElse", _r827);
 } }
 function ResetPasswordFormComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -5625,11 +5411,11 @@ function UpdateEmailComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdateEmailComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r877 = ɵngcc0.ɵɵgetCurrentView();
+    const _r846 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-email-form", 5);
-    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r877); const ctx_r876 = ɵngcc0.ɵɵnextContext(); return ctx_r876.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener() { ɵngcc0.ɵɵrestoreView(_r877); const ctx_r878 = ɵngcc0.ɵɵnextContext(); return ctx_r878.onCancel(); });
+    ɵngcc0.ɵɵlistener("saveEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_saveEmail_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r846); const ctx_r845 = ɵngcc0.ɵɵnextContext(); return ctx_r845.onSubmit($event); })("cancelEmail", function UpdateEmailComponent_ng_template_3_Template_cx_update_email_form_cancelEmail_2_listener() { ɵngcc0.ɵɵrestoreView(_r846); const ctx_r847 = ɵngcc0.ɵɵnextContext(); return ctx_r847.onCancel(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5675,11 +5461,11 @@ function UpdatePasswordComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdatePasswordComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r886 = ɵngcc0.ɵɵgetCurrentView();
+    const _r855 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "cx-update-password-form", 5);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener() { ɵngcc0.ɵɵrestoreView(_r886); const ctx_r885 = ɵngcc0.ɵɵnextContext(); return ctx_r885.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r886); const ctx_r887 = ɵngcc0.ɵɵnextContext(); return ctx_r887.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_cancelled_2_listener() { ɵngcc0.ɵɵrestoreView(_r855); const ctx_r854 = ɵngcc0.ɵɵnextContext(); return ctx_r854.onCancel(); })("submited", function UpdatePasswordComponent_ng_template_3_Template_cx_update_password_form_submited_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r855); const ctx_r856 = ɵngcc0.ɵɵnextContext(); return ctx_r856.onSubmit($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5689,10 +5475,10 @@ function UpdateProfileFormComponent_option_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r891 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r891.code);
+    const title_r860 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r860.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r891.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r860.name);
 } }
 function UpdateProfileFormComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -5724,15 +5510,15 @@ function UpdateProfileComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template(rf, ctx) { if (rf & 1) {
-    const _r897 = ɵngcc0.ɵɵgetCurrentView();
+    const _r866 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-update-profile-form", 6);
-    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener() { ɵngcc0.ɵɵrestoreView(_r897); const ctx_r896 = ɵngcc0.ɵɵnextContext(2); return ctx_r896.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r897); const ctx_r898 = ɵngcc0.ɵɵnextContext(2); return ctx_r898.onSubmit($event); });
+    ɵngcc0.ɵɵlistener("cancelled", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_cancelled_0_listener() { ɵngcc0.ɵɵrestoreView(_r866); const ctx_r865 = ɵngcc0.ɵɵnextContext(2); return ctx_r865.onCancel(); })("submited", function UpdateProfileComponent_ng_template_3_cx_update_profile_form_2_Template_cx_update_profile_form_submited_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r866); const ctx_r867 = ɵngcc0.ɵɵnextContext(2); return ctx_r867.onSubmit($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r895 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("user", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r895.user$))("titles", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r895.titles$));
+    const ctx_r864 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("user", ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r864.user$))("titles", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r864.titles$));
 } }
 function UpdateProfileComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -5742,39 +5528,39 @@ function UpdateProfileComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r894 = ɵngcc0.ɵɵnextContext();
+    const ctx_r863 = ɵngcc0.ɵɵnextContext();
     var tmp_0_0 = null;
-    const currVal_0 = (tmp_0_0 = ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r894.user$)) == null ? null : tmp_0_0.uid;
+    const currVal_0 = (tmp_0_0 = ɵngcc0.ɵɵpipeBind1(3, 1, ctx_r863.user$)) == null ? null : tmp_0_0.uid;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", currVal_0);
 } }
 function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r910 = ɵngcc0.ɵɵgetCurrentView();
+    const _r879 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "cx-coupon-card", 21);
-    ɵngcc0.ɵɵlistener("notificationChanged", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template_cx_coupon_card_notificationChanged_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r910); const ctx_r909 = ɵngcc0.ɵɵnextContext(4); return ctx_r909.notificationChange($event); });
+    ɵngcc0.ɵɵlistener("notificationChanged", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_div_8_Template_cx_coupon_card_notificationChanged_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r879); const ctx_r878 = ɵngcc0.ɵɵnextContext(4); return ctx_r878.notificationChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const coupon_r908 = ctx.$implicit;
-    const ctx_r907 = ɵngcc0.ɵɵnextContext(4);
+    const coupon_r877 = ctx.$implicit;
+    const ctx_r876 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("coupon", coupon_r908)("couponSubscriptionLoading$", ctx_r907.couponSubscriptionLoading$);
+    ɵngcc0.ɵɵproperty("coupon", coupon_r877)("couponSubscriptionLoading$", ctx_r876.couponSubscriptionLoading$);
 } }
 const _c35 = function () { return ["/my-account/notification-preference"]; };
 function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template(rf, ctx) { if (rf & 1) {
-    const _r912 = ɵngcc0.ɵɵgetCurrentView();
+    const _r881 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 8);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r912); const ctx_r911 = ɵngcc0.ɵɵnextContext(3); return ctx_r911.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r881); const ctx_r880 = ɵngcc0.ɵɵnextContext(3); return ctx_r880.sortChange($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "div", 9);
     ɵngcc0.ɵɵelementStart(6, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r912); const ctx_r913 = ɵngcc0.ɵɵnextContext(3); return ctx_r913.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_6_listener($event) { ɵngcc0.ɵɵrestoreView(_r881); const ctx_r882 = ɵngcc0.ɵɵnextContext(3); return ctx_r882.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5784,14 +5570,14 @@ function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Templat
     ɵngcc0.ɵɵelementStart(9, "div", 13);
     ɵngcc0.ɵɵelementStart(10, "div", 14);
     ɵngcc0.ɵɵelementStart(11, "cx-sorting", 15);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_11_listener($event) { ɵngcc0.ɵɵrestoreView(_r912); const ctx_r914 = ɵngcc0.ɵɵnextContext(3); return ctx_r914.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_sorting_sortListEvent_11_listener($event) { ɵngcc0.ɵɵrestoreView(_r881); const ctx_r883 = ɵngcc0.ɵɵnextContext(3); return ctx_r883.sortChange($event); });
     ɵngcc0.ɵɵpipe(12, "async");
     ɵngcc0.ɵɵpipe(13, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(14, "div", 16);
     ɵngcc0.ɵɵelementStart(15, "cx-pagination", 10);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r912); const ctx_r915 = ɵngcc0.ɵɵnextContext(3); return ctx_r915.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template_cx_pagination_viewPageEvent_15_listener($event) { ɵngcc0.ɵɵrestoreView(_r881); const ctx_r884 = ɵngcc0.ɵɵnextContext(3); return ctx_r884.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -5810,21 +5596,21 @@ function MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Templat
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const couponResult_r905 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r906 = ɵngcc0.ɵɵnextContext(2);
+    const couponResult_r874 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r875 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r906.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r906.sortLabels))("selectedOption", ctx_r906.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r875.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 15, ctx_r875.sortLabels))("selectedOption", ctx_r875.sort);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r906.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r875.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", couponResult_r905.coupons);
+    ɵngcc0.ɵɵproperty("ngForOf", couponResult_r874.coupons);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(13, 19, "myCoupons.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r906.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(12, 17, ctx_r906.sortLabels))("selectedOption", ctx_r906.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r875.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(12, 17, ctx_r875.sortLabels))("selectedOption", ctx_r875.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r906.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r875.pagination);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r906.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r875.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 21, "myCoupons.notesPreffix"), "");
     ɵngcc0.ɵɵadvance(2);
@@ -5845,13 +5631,13 @@ function MyCouponsComponent_ng_container_1_ng_container_1_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(5, MyCouponsComponent_ng_container_1_ng_container_1_ng_container_5_Template, 26, 28, "ng-container", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const couponResult_r905 = ctx.ngIf;
+    const couponResult_r874 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r903 = ɵngcc0.ɵɵreference(4);
+    const _r872 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "myCoupons.myCoupons"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", couponResult_r905.pagination.totalCount > 0)("ngIfElse", _r903);
+    ɵngcc0.ɵɵproperty("ngIf", couponResult_r874.pagination.totalCount > 0)("ngIfElse", _r872);
 } }
 function MyCouponsComponent_ng_container_1_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "section");
@@ -5871,9 +5657,9 @@ function MyCouponsComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(3, MyCouponsComponent_ng_container_1_ng_template_3_Template, 4, 3, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r899 = ɵngcc0.ɵɵnextContext();
+    const ctx_r868 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r899.couponResult$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r868.couponResult$));
 } }
 function MyCouponsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -5881,10 +5667,10 @@ function MyCouponsComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template(rf, ctx) { if (rf & 1) {
-    const _r928 = ɵngcc0.ɵɵgetCurrentView();
+    const _r897 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label", 10);
     ɵngcc0.ɵɵelementStart(1, "input", 11);
-    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r928); const preference_r924 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r926 = ɵngcc0.ɵɵnextContext(3); return ctx_r926.updatePreference(preference_r924); });
+    ɵngcc0.ɵɵlistener("change", function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r897); const preference_r893 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r895 = ɵngcc0.ɵɵnextContext(3); return ctx_r895.updatePreference(preference_r893); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "span", 12);
@@ -5893,21 +5679,21 @@ function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_lab
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r924 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r925 = ɵngcc0.ɵɵnextContext(3);
+    const preference_r893 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r894 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", preference_r924.enabled)("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r925.isLoading$));
+    ɵngcc0.ɵɵproperty("checked", preference_r893.enabled)("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r894.isLoading$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "notificationPreference." + preference_r924.channel), " ", preference_r924.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 6, "notificationPreference." + preference_r893.channel), " ", preference_r893.value, " ");
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, NotificationPreferenceComponent_ng_container_0_div_1_ng_container_7_label_1_Template, 6, 8, "label", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const preference_r924 = ctx.$implicit;
+    const preference_r893 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r924.visible);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r893.visible);
 } }
 function NotificationPreferenceComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -5932,11 +5718,11 @@ function NotificationPreferenceComponent_ng_container_0_div_1_Template(rf, ctx) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preferences_r919 = ɵngcc0.ɵɵnextContext().ngIf;
+    const preferences_r888 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "notificationPreference.message"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", preferences_r919);
+    ɵngcc0.ɵɵproperty("ngForOf", preferences_r888);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(11, 6, "notificationPreference.note"));
     ɵngcc0.ɵɵadvance(2);
@@ -5953,10 +5739,10 @@ function NotificationPreferenceComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtemplate(2, NotificationPreferenceComponent_ng_container_0_ng_template_2_Template, 2, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const preferences_r919 = ctx.ngIf;
-    const _r921 = ɵngcc0.ɵɵreference(3);
+    const preferences_r888 = ctx.ngIf;
+    const _r890 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preferences_r919.length > 0)("ngIfElse", _r921);
+    ɵngcc0.ɵɵproperty("ngIf", preferences_r888.length > 0)("ngIfElse", _r890);
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 37);
@@ -5966,11 +5752,11 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r942 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r911 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, product_r942)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, product_r911)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r942.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r911.name, " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 39);
@@ -5980,9 +5766,9 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r942 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r911 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c18, product_r942.code)));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c17, product_r911.code)));
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 41);
@@ -5994,20 +5780,20 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r952 = ctx.$implicit;
+    const variant_r921 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r952.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r921.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r952.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", variant_r921.value, " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_div_1_Template, 5, 2, "div", 40);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const baseOptions_r950 = ctx.$implicit;
+    const baseOptions_r919 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", baseOptions_r950.selected == null ? null : baseOptions_r950.selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", baseOptions_r919.selected == null ? null : baseOptions_r919.selected.variantOptionQualifiers);
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 41);
@@ -6034,14 +5820,14 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interestEntry_r953 = ctx.$implicit;
+    const interestEntry_r922 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "myInterests." + interestEntry_r953.interestType), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "myInterests." + interestEntry_r922.interestType), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(6, 4, "myInterests.expirationDate", ɵngcc0.ɵɵpureFunction1(9, _c36, ɵngcc0.ɵɵpipeBind1(7, 7, interestEntry_r953.expirationDate))), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(6, 4, "myInterests.expirationDate", ɵngcc0.ɵɵpureFunction1(9, _c36, ɵngcc0.ɵɵpipeBind1(7, 7, interestEntry_r922.expirationDate))), " ");
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r956 = ɵngcc0.ɵɵgetCurrentView();
+    const _r925 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "td");
     ɵngcc0.ɵɵelementStart(2, "div", 22);
@@ -6086,7 +5872,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     ɵngcc0.ɵɵelementStart(27, "td");
     ɵngcc0.ɵɵelementStart(28, "div", 35);
     ɵngcc0.ɵɵelementStart(29, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener() { ɵngcc0.ɵɵrestoreView(_r956); const interest_r940 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r954 = ɵngcc0.ɵɵnextContext(4); return ctx_r954.removeInterest(interest_r940); });
+    ɵngcc0.ɵɵlistener("click", function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Template_button_click_29_listener() { ɵngcc0.ɵɵrestoreView(_r925); const interest_r909 = ɵngcc0.ɵɵnextContext().$implicit; const ctx_r923 = ɵngcc0.ɵɵnextContext(4); return ctx_r923.removeInterest(interest_r909); });
     ɵngcc0.ɵɵpipe(30, "async");
     ɵngcc0.ɵɵtext(31);
     ɵngcc0.ɵɵpipe(32, "cxTranslate");
@@ -6095,31 +5881,31 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r942 = ctx.ngIf;
-    const interest_r940 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r941 = ɵngcc0.ɵɵnextContext(4);
+    const product_r911 = ctx.ngIf;
+    const interest_r909 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r910 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c14, product_r942)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c14, product_r911)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("container", product_r942.images == null ? null : product_r942.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", product_r911.images == null ? null : product_r911.images.PRIMARY);
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("ngIf", product_r942.name);
+    ɵngcc0.ɵɵproperty("ngIf", product_r911.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r942.code);
+    ɵngcc0.ɵɵproperty("ngIf", product_r911.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r942.baseOptions);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r911.baseOptions);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r942.stock.stockLevelStatus === "outOfStock");
+    ɵngcc0.ɵɵproperty("ngIf", product_r911.stock.stockLevelStatus === "outOfStock");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(18, 14, "myInterests.price"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(product_r942.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(product_r911.price.formattedValue);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(25, 16, "myInterests.notifications"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", interest_r940.productInterestEntry);
+    ɵngcc0.ɵɵproperty("ngForOf", interest_r909.productInterestEntry);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(30, 18, ctx_r941.isRemoveDisabled$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(30, 18, ctx_r910.isRemoveDisabled$));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(32, 20, "myInterests.remove"), " ");
 } }
@@ -6129,24 +5915,24 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_Template(rf, ctx)
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interest_r940 = ctx.$implicit;
+    const interest_r909 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, interest_r940.product$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, interest_r909.product$));
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r959 = ɵngcc0.ɵɵgetCurrentView();
+    const _r928 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 8);
     ɵngcc0.ɵɵelementStart(2, "div", 9);
     ɵngcc0.ɵɵelementStart(3, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r959); const ctx_r958 = ɵngcc0.ɵɵnextContext(3); return ctx_r958.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_3_listener($event) { ɵngcc0.ɵɵrestoreView(_r928); const ctx_r927 = ɵngcc0.ɵɵnextContext(3); return ctx_r927.sortChange($event); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "div", 11);
     ɵngcc0.ɵɵelementStart(7, "cx-pagination", 12);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r959); const ctx_r960 = ɵngcc0.ɵɵnextContext(3); return ctx_r960.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_7_listener($event) { ɵngcc0.ɵɵrestoreView(_r928); const ctx_r929 = ɵngcc0.ɵɵnextContext(3); return ctx_r929.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6174,26 +5960,26 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(23, "div", 17);
     ɵngcc0.ɵɵelementStart(24, "div", 18);
     ɵngcc0.ɵɵelementStart(25, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_25_listener($event) { ɵngcc0.ɵɵrestoreView(_r959); const ctx_r961 = ɵngcc0.ɵɵnextContext(3); return ctx_r961.sortChange($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_sorting_sortListEvent_25_listener($event) { ɵngcc0.ɵɵrestoreView(_r928); const ctx_r930 = ɵngcc0.ɵɵnextContext(3); return ctx_r930.sortChange($event); });
     ɵngcc0.ɵɵpipe(26, "async");
     ɵngcc0.ɵɵpipe(27, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(28, "div", 19);
     ɵngcc0.ɵɵelementStart(29, "cx-pagination", 12);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r959); const ctx_r962 = ɵngcc0.ɵɵnextContext(3); return ctx_r962.pageChange($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function MyInterestsComponent_div_0_div_5_ng_container_1_Template_cx_pagination_viewPageEvent_29_listener($event) { ɵngcc0.ɵɵrestoreView(_r928); const ctx_r931 = ɵngcc0.ɵɵnextContext(3); return ctx_r931.pageChange($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const interests_r936 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r938 = ɵngcc0.ɵɵnextContext();
+    const interests_r905 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r907 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(5, 16, "myInterests.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r938.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r938.sortLabels))("selectedOption", ctx_r938.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r907.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r907.sortLabels))("selectedOption", ctx_r907.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r938.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r907.pagination);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 18, "myInterests.item"), " ");
     ɵngcc0.ɵɵadvance(4);
@@ -6201,23 +5987,23 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 22, "myInterests.notifications"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngForOf", interests_r936.results);
+    ɵngcc0.ɵɵproperty("ngForOf", interests_r905.results);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(27, 26, "myInterests.sortByMostRecent"));
-    ɵngcc0.ɵɵproperty("sortOptions", ctx_r938.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(26, 24, ctx_r938.sortLabels))("selectedOption", ctx_r938.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", ctx_r907.sortOptions)("sortLabels", ɵngcc0.ɵɵpipeBind1(26, 24, ctx_r907.sortLabels))("selectedOption", ctx_r907.sort);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r938.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r907.pagination);
 } }
 function MyInterestsComponent_div_0_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵtemplate(1, MyInterestsComponent_div_0_div_5_ng_container_1_Template, 30, 28, "ng-container", 7);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const interests_r936 = ɵngcc0.ɵɵnextContext().ngIf;
+    const interests_r905 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r932 = ɵngcc0.ɵɵreference(3);
+    const _r901 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", interests_r936.pagination.totalCount > 0)("ngIfElse", _r932);
+    ɵngcc0.ɵɵproperty("ngIf", interests_r905.pagination.totalCount > 0)("ngIfElse", _r901);
 } }
 function MyInterestsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6231,12 +6017,12 @@ function MyInterestsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(6, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r931 = ɵngcc0.ɵɵnextContext();
-    const _r934 = ɵngcc0.ɵɵreference(5);
+    const ctx_r900 = ɵngcc0.ɵɵnextContext();
+    const _r903 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 3, "myInterests.header"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(6, 5, ctx_r931.getInterestsloading$))("ngIfElse", _r934);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(6, 5, ctx_r900.getInterestsloading$))("ngIfElse", _r903);
 } }
 function MyInterestsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 48);
@@ -6257,22 +6043,22 @@ function BreadcrumbComponent_span_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "a", 1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const crumb_r966 = ctx.$implicit;
+    const crumb_r935 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", crumb_r966.link)("innerHTML", crumb_r966.label, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("routerLink", crumb_r935.link)("innerHTML", crumb_r935.label, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function CategoryNavigationComponent_cx_navigation_ui_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-navigation-ui", 1);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const data_r968 = ctx.ngIf;
-    const ctx_r967 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r967.node$))("ngClass", data_r968.styleClass)("wrapAfter", data_r968.wrapAfter)("allowAlignToRight", true);
+    const data_r937 = ctx.ngIf;
+    const ctx_r936 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r936.node$))("ngClass", data_r937.styleClass)("wrapAfter", data_r937.wrapAfter)("allowAlignToRight", true);
 } }
 function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r974 = ɵngcc0.ɵɵgetCurrentView();
+    const _r943 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
-    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r974); const ctx_r973 = ɵngcc0.ɵɵnextContext(); return ctx_r973.back(); });
+    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_div_0_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r943); const ctx_r942 = ɵngcc0.ɵɵnextContext(); return ctx_r942.back(); });
     ɵngcc0.ɵɵelementStart(1, "h5");
     ɵngcc0.ɵɵelement(2, "cx-icon", 4);
     ɵngcc0.ɵɵtext(3);
@@ -6280,9 +6066,9 @@ function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r969 = ɵngcc0.ɵɵnextContext();
+    const ctx_r938 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r969.iconType.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r938.iconType.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "common.back"), " ");
 } }
@@ -6295,17 +6081,17 @@ function NavigationUIComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_container_1_ng_container_1_Template, 1, 0, "ng-container", 5);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const child_r975 = ctx.$implicit;
+    const child_r944 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext();
-    const _r971 = ɵngcc0.ɵɵreference(3);
+    const _r940 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r971)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r975));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r940)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r944));
 } }
 function NavigationUIComponent_ng_template_2_cx_generic_link_1_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 4);
 } if (rf & 2) {
-    const ctx_r982 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r982.iconType.CARET_DOWN);
+    const ctx_r951 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("type", ctx_r951.iconType.CARET_DOWN);
 } }
 function NavigationUIComponent_ng_template_2_cx_generic_link_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "cx-generic-link", 10);
@@ -6313,19 +6099,19 @@ function NavigationUIComponent_ng_template_2_cx_generic_link_1_Template(rf, ctx)
     ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_cx_generic_link_1_cx_icon_2_Template, 1, 1, "cx-icon", 11);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r977 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r978 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("url", node_r977.url)("target", node_r977.target);
+    const node_r946 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r947 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("url", node_r946.url)("target", node_r946.target);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", node_r977.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", node_r946.title, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r978.flyout && (node_r977.children == null ? null : node_r977.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r947.flyout && (node_r946.children == null ? null : node_r946.children.length) > 0);
 } }
 function NavigationUIComponent_ng_template_2_ng_template_2_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 4);
 } if (rf & 2) {
-    const ctx_r984 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r984.iconType.CARET_DOWN);
+    const ctx_r953 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("type", ctx_r953.iconType.CARET_DOWN);
 } }
 function NavigationUIComponent_ng_template_2_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h5");
@@ -6333,13 +6119,13 @@ function NavigationUIComponent_ng_template_2_ng_template_2_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_ng_template_2_cx_icon_2_Template, 1, 1, "cx-icon", 11);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r977 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r980 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵattribute("aria-label", node_r977.title)("tabindex", ctx_r980.flyout ? 0 : 0 - 1);
+    const node_r946 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r949 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵattribute("aria-label", node_r946.title)("tabindex", ctx_r949.flyout ? 0 : 0 - 1);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", node_r977.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", node_r946.title, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r980.flyout && (node_r977.children == null ? null : node_r977.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r949.flyout && (node_r946.children == null ? null : node_r946.children.length) > 0);
 } }
 const _c38 = function (a0) { return { navNode: a0 }; };
 function NavigationUIComponent_ng_template_2_div_4_cx_generic_link_1_Template(rf, ctx) { if (rf & 1) {
@@ -6348,10 +6134,10 @@ function NavigationUIComponent_ng_template_2_div_4_cx_generic_link_1_Template(rf
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r977 = ɵngcc0.ɵɵnextContext(2).node;
-    ɵngcc0.ɵɵproperty("url", node_r977.url)("target", node_r977.target);
+    const node_r946 = ɵngcc0.ɵɵnextContext(2).node;
+    ɵngcc0.ɵɵproperty("url", node_r946.url)("target", node_r946.target);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 3, "navigation.shopAll", ɵngcc0.ɵɵpureFunction1(6, _c38, node_r977.title)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(2, 3, "navigation.shopAll", ɵngcc0.ɵɵpureFunction1(6, _c38, node_r946.title)), " ");
 } }
 function NavigationUIComponent_ng_template_2_div_4_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -6361,11 +6147,11 @@ function NavigationUIComponent_ng_template_2_div_4_ng_container_3_Template(rf, c
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_template_2_div_4_ng_container_3_ng_container_1_Template, 1, 0, "ng-container", 5);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const child_r989 = ctx.$implicit;
+    const child_r958 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext(3);
-    const _r971 = ɵngcc0.ɵɵreference(3);
+    const _r940 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r971)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r989));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r940)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c37, child_r958));
 } }
 function NavigationUIComponent_ng_template_2_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -6375,71 +6161,71 @@ function NavigationUIComponent_ng_template_2_div_4_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r977 = ɵngcc0.ɵɵnextContext().node;
-    const ctx_r981 = ɵngcc0.ɵɵnextContext();
+    const node_r946 = ɵngcc0.ɵɵnextContext().node;
+    const ctx_r950 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", node_r977.url);
+    ɵngcc0.ɵɵproperty("ngIf", node_r946.url);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("depth", ctx_r981.getDepth(node_r977))("wrap-after", (node_r977.children == null ? null : node_r977.children.length) > ctx_r981.wrapAfter ? ctx_r981.wrapAfter : null)("columns", ctx_r981.getColumnCount(node_r977.children == null ? null : node_r977.children.length));
+    ɵngcc0.ɵɵattribute("depth", ctx_r950.getDepth(node_r946))("wrap-after", (node_r946.children == null ? null : node_r946.children.length) > ctx_r950.wrapAfter ? ctx_r950.wrapAfter : null)("columns", ctx_r950.getColumnCount(node_r946.children == null ? null : node_r946.children.length));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", node_r977.children);
+    ɵngcc0.ɵɵproperty("ngForOf", node_r946.children);
 } }
 function NavigationUIComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r993 = ɵngcc0.ɵɵgetCurrentView();
+    const _r962 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "nav", 6);
-    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_ng_template_2_Template_nav_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r993); const ctx_r992 = ɵngcc0.ɵɵnextContext(); return ctx_r992.toggleOpen($event); })("mouseenter", function NavigationUIComponent_ng_template_2_Template_nav_mouseenter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r993); const ctx_r994 = ɵngcc0.ɵɵnextContext(); return ctx_r994.onMouseEnter($event); })("keydown.space", function NavigationUIComponent_ng_template_2_Template_nav_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r993); const ctx_r995 = ɵngcc0.ɵɵnextContext(); return ctx_r995.toggleOpen($event); })("keydown.esc", function NavigationUIComponent_ng_template_2_Template_nav_keydown_esc_0_listener() { ɵngcc0.ɵɵrestoreView(_r993); const ctx_r996 = ɵngcc0.ɵɵnextContext(); return ctx_r996.back(); });
+    ɵngcc0.ɵɵlistener("click", function NavigationUIComponent_ng_template_2_Template_nav_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r962); const ctx_r961 = ɵngcc0.ɵɵnextContext(); return ctx_r961.toggleOpen($event); })("mouseenter", function NavigationUIComponent_ng_template_2_Template_nav_mouseenter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r962); const ctx_r963 = ɵngcc0.ɵɵnextContext(); return ctx_r963.onMouseEnter($event); })("keydown.space", function NavigationUIComponent_ng_template_2_Template_nav_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r962); const ctx_r964 = ɵngcc0.ɵɵnextContext(); return ctx_r964.toggleOpen($event); })("keydown.esc", function NavigationUIComponent_ng_template_2_Template_nav_keydown_esc_0_listener() { ɵngcc0.ɵɵrestoreView(_r962); const ctx_r965 = ɵngcc0.ɵɵnextContext(); return ctx_r965.back(); });
     ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_template_2_cx_generic_link_1_Template, 3, 4, "cx-generic-link", 7);
     ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_ng_template_2_Template, 3, 4, "ng-template", null, 8, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵtemplate(4, NavigationUIComponent_ng_template_2_div_4_Template, 4, 5, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const node_r977 = ctx.node;
-    const _r979 = ɵngcc0.ɵɵreference(3);
+    const node_r946 = ctx.node;
+    const _r948 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", node_r977.url && (!node_r977.children || (node_r977.children == null ? null : node_r977.children.length) === 0))("ngIfElse", _r979);
+    ɵngcc0.ɵɵproperty("ngIf", node_r946.url && (!node_r946.children || (node_r946.children == null ? null : node_r946.children.length) === 0))("ngIfElse", _r948);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", (node_r977.children == null ? null : node_r977.children.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (node_r946.children == null ? null : node_r946.children.length) > 0);
 } }
 function FooterNavigationComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r998 = ctx.ngIf;
+    const data_r967 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", data_r998.notice, "\n");
+    ɵngcc0.ɵɵtextInterpolate1(" ", data_r967.notice, "\n");
 } }
 function SearchBoxComponent_div_6_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "div", 11);
 } if (rf & 2) {
-    const result_r1001 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", result_r1001.message, ɵngcc0.ɵɵsanitizeHtml);
+    const result_r970 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", result_r970.message, ɵngcc0.ɵɵsanitizeHtml);
 } }
 const _c39 = function (a0) { return { query: a0 }; };
 const _c40 = function (a1) { return { cxRoute: "search", params: a1 }; };
 function SearchBoxComponent_div_6_a_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1008 = ɵngcc0.ɵɵgetCurrentView();
+    const _r977 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 12);
-    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1008); const ctx_r1007 = ɵngcc0.ɵɵnextContext(2); return ctx_r1007.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1008); const ctx_r1009 = ɵngcc0.ɵɵnextContext(2); return ctx_r1009.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_a_3_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1008); const ctx_r1010 = ɵngcc0.ɵɵnextContext(2); return ctx_r1010.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_a_3_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1008); const ctx_r1011 = ɵngcc0.ɵɵnextContext(2); return ctx_r1011.close($event, true); })("blur", function SearchBoxComponent_div_6_a_3_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1008); const ctx_r1012 = ɵngcc0.ɵɵnextContext(2); return ctx_r1012.close($event); });
+    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r977); const ctx_r976 = ɵngcc0.ɵɵnextContext(2); return ctx_r976.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_a_3_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r977); const ctx_r978 = ɵngcc0.ɵɵnextContext(2); return ctx_r978.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_a_3_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r977); const ctx_r979 = ɵngcc0.ɵɵnextContext(2); return ctx_r979.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_a_3_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r977); const ctx_r980 = ɵngcc0.ɵɵnextContext(2); return ctx_r980.close($event, true); })("blur", function SearchBoxComponent_div_6_a_3_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r977); const ctx_r981 = ɵngcc0.ɵɵnextContext(2); return ctx_r981.close($event); });
     ɵngcc0.ɵɵpipe(1, "cxHighlight");
     ɵngcc0.ɵɵpipe(2, "cxUrl");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const suggestion_r1006 = ctx.$implicit;
+    const suggestion_r975 = ctx.$implicit;
     ɵngcc0.ɵɵnextContext(2);
-    const _r999 = ɵngcc0.ɵɵreference(2);
-    ɵngcc0.ɵɵproperty("innerHTML", ɵngcc0.ɵɵpipeBind2(1, 2, suggestion_r1006, _r999.value), ɵngcc0.ɵɵsanitizeHtml)("routerLink", ɵngcc0.ɵɵpipeBind1(2, 5, ɵngcc0.ɵɵpureFunction1(9, _c40, ɵngcc0.ɵɵpureFunction1(7, _c39, suggestion_r1006))));
+    const _r968 = ɵngcc0.ɵɵreference(2);
+    ɵngcc0.ɵɵproperty("innerHTML", ɵngcc0.ɵɵpipeBind2(1, 2, suggestion_r975, _r968.value), ɵngcc0.ɵɵsanitizeHtml)("routerLink", ɵngcc0.ɵɵpipeBind1(2, 5, ɵngcc0.ɵɵpureFunction1(9, _c40, ɵngcc0.ɵɵpureFunction1(7, _c39, suggestion_r975))));
 } }
 function SearchBoxComponent_div_6_div_4_a_1_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 19);
 } if (rf & 2) {
-    const product_r1014 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("container", product_r1014.images == null ? null : product_r1014.images.PRIMARY)("alt", product_r1014.summary);
+    const product_r983 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("container", product_r983.images == null ? null : product_r983.images.PRIMARY)("alt", product_r983.summary);
 } }
 function SearchBoxComponent_div_6_div_4_a_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1018 = ɵngcc0.ɵɵgetCurrentView();
+    const _r987 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 15);
-    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1018); const ctx_r1017 = ɵngcc0.ɵɵnextContext(3); return ctx_r1017.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1018); const ctx_r1019 = ɵngcc0.ɵɵnextContext(3); return ctx_r1019.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1018); const ctx_r1020 = ɵngcc0.ɵɵnextContext(3); return ctx_r1020.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1018); const ctx_r1021 = ɵngcc0.ɵɵnextContext(3); return ctx_r1021.close($event, true); })("blur", function SearchBoxComponent_div_6_div_4_a_1_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1018); const ctx_r1022 = ɵngcc0.ɵɵnextContext(3); return ctx_r1022.close($event); });
+    ɵngcc0.ɵɵlistener("keydown.arrowup", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r986 = ɵngcc0.ɵɵnextContext(3); return ctx_r986.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_arrowdown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r988 = ɵngcc0.ɵɵnextContext(3); return ctx_r988.focusNextChild($event); })("keydown.enter", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_enter_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r989 = ɵngcc0.ɵɵnextContext(3); return ctx_r989.close($event, true); })("keydown.escape", function SearchBoxComponent_div_6_div_4_a_1_Template_a_keydown_escape_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r990 = ɵngcc0.ɵɵnextContext(3); return ctx_r990.close($event, true); })("blur", function SearchBoxComponent_div_6_div_4_a_1_Template_a_blur_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r987); const ctx_r991 = ɵngcc0.ɵɵnextContext(3); return ctx_r991.close($event); });
     ɵngcc0.ɵɵpipe(1, "cxUrl");
     ɵngcc0.ɵɵtemplate(2, SearchBoxComponent_div_6_div_4_a_1_cx_media_2_Template, 1, 2, "cx-media", 16);
     ɵngcc0.ɵɵelement(3, "h4", 17);
@@ -6448,30 +6234,30 @@ function SearchBoxComponent_div_6_div_4_a_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1014 = ctx.$implicit;
-    const ctx_r1013 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵclassProp("has-media", ctx_r1013.config.displayProductImages);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c14, product_r1014)));
+    const product_r983 = ctx.$implicit;
+    const ctx_r982 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵclassProp("has-media", ctx_r982.config.displayProductImages);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c14, product_r983)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1013.config.displayProductImages);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r982.config.displayProductImages);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1014.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r983.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(product_r1014.price == null ? null : product_r1014.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(product_r983.price == null ? null : product_r983.price.formattedValue);
 } }
 function SearchBoxComponent_div_6_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵtemplate(1, SearchBoxComponent_div_6_div_4_a_1_Template, 6, 10, "a", 14);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const result_r1001 = ɵngcc0.ɵɵnextContext().ngIf;
+    const result_r970 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", result_r1001.products);
+    ɵngcc0.ɵɵproperty("ngForOf", result_r970.products);
 } }
 function SearchBoxComponent_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1025 = ɵngcc0.ɵɵgetCurrentView();
+    const _r994 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
-    ɵngcc0.ɵɵlistener("click", function SearchBoxComponent_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1025); const ctx_r1024 = ɵngcc0.ɵɵnextContext(); return ctx_r1024.close($event, true); });
+    ɵngcc0.ɵɵlistener("click", function SearchBoxComponent_div_6_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r994); const ctx_r993 = ɵngcc0.ɵɵnextContext(); return ctx_r993.close($event, true); });
     ɵngcc0.ɵɵtemplate(1, SearchBoxComponent_div_6_div_1_Template, 1, 1, "div", 7);
     ɵngcc0.ɵɵelementStart(2, "div", 8);
     ɵngcc0.ɵɵtemplate(3, SearchBoxComponent_div_6_a_3_Template, 3, 11, "a", 9);
@@ -6479,32 +6265,22 @@ function SearchBoxComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, SearchBoxComponent_div_6_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const result_r1001 = ctx.ngIf;
+    const result_r970 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", result_r1001.message);
+    ɵngcc0.ɵɵproperty("ngIf", result_r970.message);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", result_r1001.suggestions);
+    ɵngcc0.ɵɵproperty("ngForOf", result_r970.suggestions);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", result_r1001.products);
-} }
-function OrderConfirmationItemsComponent_div_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const orderPromotions_r1031 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r1031);
+    ɵngcc0.ɵɵproperty("ngIf", result_r970.products);
 } }
 function OrderConfirmationItemsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, OrderConfirmationItemsComponent_div_0_ng_container_4_ng_container_1_Template, 2, 1, "ng-container", 5);
-    ɵngcc0.ɵɵpipe(2, "async");
+    ɵngcc0.ɵɵelement(1, "cx-promotions", 5);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1029 = ɵngcc0.ɵɵnextContext(2);
+    const orderPromotions_r999 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1029.orderPromotions$));
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r999);
 } }
 function OrderConfirmationItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6512,18 +6288,19 @@ function OrderConfirmationItemsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(4, OrderConfirmationItemsComponent_div_0_ng_container_4_Template, 3, 3, "ng-container", 3);
-    ɵngcc0.ɵɵelement(5, "cx-cart-item-list", 4);
+    ɵngcc0.ɵɵtemplate(4, OrderConfirmationItemsComponent_div_0_ng_container_4_Template, 2, 1, "ng-container", 3);
+    ɵngcc0.ɵɵpipe(5, "async");
+    ɵngcc0.ɵɵelement(6, "cx-cart-item-list", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1028 = ctx.ngIf;
-    const ctx_r1027 = ɵngcc0.ɵɵnextContext();
+    const order_r997 = ctx.ngIf;
+    const ctx_r996 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 5, "checkoutOrderConfirmation.orderItems"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("items", order_r1028.entries)("readonly", true)("promotionLocation", ctx_r1027.promotionLocation);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 7, ctx_r996.orderPromotions$));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("items", order_r997.entries)("readonly", true)("promotionLocation", ctx_r996.promotionLocation);
 } }
 function OrderConfirmationOverviewComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6557,26 +6334,26 @@ function OrderConfirmationOverviewComponent_div_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1033 = ctx.ngIf;
-    const ctx_r1032 = ɵngcc0.ɵɵnextContext();
+    const order_r1001 = ctx.ngIf;
+    const ctx_r1000 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(6, 4, ctx_r1032.getAddressCardContent(order_r1033 == null ? null : order_r1033.deliveryAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(6, 4, ctx_r1000.getAddressCardContent(order_r1001 == null ? null : order_r1001.deliveryAddress)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(10, 6, ctx_r1032.getBillingAddressCardContent(order_r1033 == null ? null : order_r1033.paymentInfo == null ? null : order_r1033.paymentInfo.billingAddress)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(10, 6, ctx_r1000.getBillingAddressCardContent(order_r1001 == null ? null : order_r1001.paymentInfo == null ? null : order_r1001.paymentInfo.billingAddress)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(14, 8, ctx_r1032.getDeliveryModeCardContent(order_r1033 == null ? null : order_r1033.deliveryMode)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(14, 8, ctx_r1000.getDeliveryModeCardContent(order_r1001 == null ? null : order_r1001.deliveryMode)));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(18, 10, ctx_r1032.getPaymentInfoCardContent(order_r1033 == null ? null : order_r1033.paymentInfo)));
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(18, 10, ctx_r1000.getPaymentInfoCardContent(order_r1001 == null ? null : order_r1001.paymentInfo)));
 } }
 function OrderConfirmationThankYouMessageComponent_ng_container_0_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelement(1, "cx-guest-register-form", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1035 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1036 = ɵngcc0.ɵɵnextContext();
+    const order_r1003 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1004 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("guid", ctx_r1036.orderGuid)("email", order_r1035.paymentInfo.billingAddress.email);
+    ɵngcc0.ɵɵproperty("guid", ctx_r1004.orderGuid)("email", order_r1003.paymentInfo.billingAddress.email);
 } }
 function OrderConfirmationThankYouMessageComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6600,16 +6377,16 @@ function OrderConfirmationThankYouMessageComponent_ng_container_0_Template(rf, c
     ɵngcc0.ɵɵelement(13, "cx-add-to-home-screen-banner");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const order_r1035 = ctx.ngIf;
-    const ctx_r1034 = ɵngcc0.ɵɵnextContext();
+    const order_r1003 = ctx.ngIf;
+    const ctx_r1002 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "checkoutOrderConfirmation.confirmationOfOrder"), " ", order_r1035.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "checkoutOrderConfirmation.confirmationOfOrder"), " ", order_r1003.code, " ");
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 7, "checkoutOrderConfirmation.thankYou"));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 9, "checkoutOrderConfirmation.invoiceHasBeenSentByEmail"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1034.isGuestCustomer);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1002.isGuestCustomer);
 } }
 function OrderConfirmationTotalsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6620,9 +6397,9 @@ function OrderConfirmationTotalsComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const order_r1039 = ctx.ngIf;
+    const order_r1007 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("cart", order_r1039);
+    ɵngcc0.ɵɵproperty("cart", order_r1007);
 } }
 function GuestRegisterFormComponent_div_16_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -6650,8 +6427,8 @@ const _c41 = function (a0) { return { email: a0 }; };
 function ProductCarouselComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 5);
 } if (rf & 2) {
-    const item_r1044 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r1044.images.PRIMARY);
+    const item_r1012 = ɵngcc0.ɵɵnextContext().item;
+    ɵngcc0.ɵɵproperty("container", item_r1012.images.PRIMARY);
 } }
 function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
@@ -6665,20 +6442,20 @@ function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1044 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1044)));
+    const item_r1012 = ctx.item;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1012)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r1044.images == null ? null : item_r1044.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("ngIf", item_r1012.images == null ? null : item_r1012.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1044.name);
+    ɵngcc0.ɵɵtextInterpolate(item_r1012.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1044.price == null ? null : item_r1044.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(item_r1012.price == null ? null : item_r1012.price.formattedValue);
 } }
 function ProductReferencesComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-media", 5);
 } if (rf & 2) {
-    const item_r1049 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r1049.images.PRIMARY);
+    const item_r1017 = ɵngcc0.ɵɵnextContext().item;
+    ɵngcc0.ɵɵproperty("container", item_r1017.images.PRIMARY);
 } }
 function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
@@ -6692,57 +6469,57 @@ function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1049 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1049)));
+    const item_r1017 = ctx.item;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1017)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r1049.images == null ? null : item_r1049.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("ngIf", item_r1017.images == null ? null : item_r1017.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1049.name);
+    ɵngcc0.ɵɵtextInterpolate(item_r1017.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r1049.price == null ? null : item_r1049.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(item_r1017.price == null ? null : item_r1017.price.formattedValue);
 } }
 function ProductImagesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-media", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const main_r1056 = ctx.ngIf;
+    const main_r1024 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("container", main_r1056);
+    ɵngcc0.ɵɵproperty("container", main_r1024);
 } }
 function ProductImagesComponent_ng_container_2_cx_carousel_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-carousel", 4);
 } if (rf & 2) {
-    const thumbs_r1057 = ɵngcc0.ɵɵnextContext().ngIf;
+    const thumbs_r1025 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1054 = ɵngcc0.ɵɵreference(5);
-    ɵngcc0.ɵɵproperty("items", thumbs_r1057)("hideIndicators", false)("template", _r1054);
+    const _r1022 = ɵngcc0.ɵɵreference(5);
+    ɵngcc0.ɵɵproperty("items", thumbs_r1025)("hideIndicators", false)("template", _r1022);
 } }
 function ProductImagesComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductImagesComponent_ng_container_2_cx_carousel_1_Template, 1, 3, "cx-carousel", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const thumbs_r1057 = ctx.ngIf;
+    const thumbs_r1025 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", thumbs_r1057.length);
+    ɵngcc0.ɵɵproperty("ngIf", thumbs_r1025.length);
 } }
 function ProductImagesComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1062 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1030 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-media", 5);
-    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r1062); const item_r1060 = ctx.item; const ctx_r1061 = ɵngcc0.ɵɵnextContext(); return ctx_r1061.openImage(item_r1060.container); });
+    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r1030); const item_r1028 = ctx.item; const ctx_r1029 = ɵngcc0.ɵɵnextContext(); return ctx_r1029.openImage(item_r1028.container); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r1060 = ctx.item;
-    const ctx_r1055 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r1055.isActive(item_r1060.container)));
-    ɵngcc0.ɵɵproperty("container", item_r1060.container);
+    const item_r1028 = ctx.item;
+    const ctx_r1023 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r1023.isActive(item_r1028.container)));
+    ɵngcc0.ɵɵproperty("container", item_r1028.container);
 } }
 function ProductIntroComponent_ng_container_0_div_1_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1069 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1037 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1069); const ctx_r1068 = ɵngcc0.ɵɵnextContext(3); return ctx_r1068.showReviews(); });
+    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1037); const ctx_r1036 = ɵngcc0.ɵɵnextContext(3); return ctx_r1036.showReviews(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6760,14 +6537,14 @@ function ProductIntroComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1064 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1065 = ɵngcc0.ɵɵnextContext();
+    const product_r1032 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1033 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", product_r1064 == null ? null : product_r1064.averageRating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", product_r1032 == null ? null : product_r1032.averageRating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1("(", product_r1064 == null ? null : product_r1064.numberOfReviews, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", product_r1032 == null ? null : product_r1032.numberOfReviews, ")");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r1065.reviewsTabAvailable));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r1033.reviewsTabAvailable));
 } }
 function ProductIntroComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6788,25 +6565,25 @@ function ProductIntroComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1064 = ctx.ngIf;
+    const product_r1032 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1064.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1032.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1064.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1032.averageRating);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r1064 == null ? null : product_r1064.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r1032 == null ? null : product_r1032.code, " ");
 } }
 function ProductViewComponent_cx_icon_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 2);
 } if (rf & 2) {
-    const ctx_r1071 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1071.iconTypes.GRID);
+    const ctx_r1039 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1039.iconTypes.GRID);
 } }
 function ProductViewComponent_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 2);
 } if (rf & 2) {
-    const ctx_r1072 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1072.iconTypes.LIST);
+    const ctx_r1040 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1040.iconTypes.LIST);
 } }
 function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
@@ -6815,15 +6592,15 @@ function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1074 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1042 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1074.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1042.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_cx_product_grid_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 24);
 } if (rf & 2) {
-    const product_r1086 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1086);
+    const product_r1054 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1054);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6832,24 +6609,24 @@ function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Templat
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1074 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1042 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1074 == null ? null : model_r1074.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1042 == null ? null : model_r1042.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 26);
 } if (rf & 2) {
-    const product_r1089 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1089);
+    const product_r1057 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1057);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template, 1, 1, "cx-product-list-item", 25);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1074 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1042 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1074 == null ? null : model_r1074.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1042 == null ? null : model_r1042.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6857,20 +6634,20 @@ function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(2, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template, 2, 1, "ng-container", 22);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const viewMode_r1076 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1078 = ɵngcc0.ɵɵnextContext(2);
+    const viewMode_r1044 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1046 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1076 === ctx_r1078.ViewModes.Grid);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1044 === ctx_r1046.ViewModes.Grid);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1076 === ctx_r1078.ViewModes.List);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1044 === ctx_r1046.ViewModes.List);
 } }
 function ProductListComponent_div_0_div_4_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-scroll", 27);
 } if (rf & 2) {
-    const viewMode_r1076 = ɵngcc0.ɵɵnextContext().ngIf;
-    const model_r1074 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1080 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1080.scrollConfig)("model", model_r1074)("inputViewMode", viewMode_r1076);
+    const viewMode_r1044 = ɵngcc0.ɵɵnextContext().ngIf;
+    const model_r1042 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1048 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1048.scrollConfig)("model", model_r1042)("inputViewMode", viewMode_r1044);
 } }
 function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 28);
@@ -6879,19 +6656,19 @@ function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1074 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1042 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1074.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1042.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1096 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1064 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 7);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "div", 8);
     ɵngcc0.ɵɵelementStart(4, "div", 9);
     ɵngcc0.ɵɵelementStart(5, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1096); const ctx_r1095 = ɵngcc0.ɵɵnextContext(2); return ctx_r1095.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1064); const ctx_r1063 = ɵngcc0.ɵɵnextContext(2); return ctx_r1063.sortList($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6899,7 +6676,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, ProductListComponent_div_0_div_4_div_7_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementStart(8, "div", 12);
     ɵngcc0.ɵɵelementStart(9, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1096); const ctx_r1097 = ɵngcc0.ɵɵnextContext(2); return ctx_r1097.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1064); const ctx_r1065 = ɵngcc0.ɵɵnextContext(2); return ctx_r1065.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6913,7 +6690,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(16, "div", 8);
     ɵngcc0.ɵɵelementStart(17, "div", 9);
     ɵngcc0.ɵɵelementStart(18, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1096); const ctx_r1098 = ɵngcc0.ɵɵnextContext(2); return ctx_r1098.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1064); const ctx_r1066 = ɵngcc0.ɵɵnextContext(2); return ctx_r1066.sortList($event); });
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6921,33 +6698,33 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(20, ProductListComponent_div_0_div_4_div_20_Template, 3, 2, "div", 18);
     ɵngcc0.ɵɵelementStart(21, "div", 12);
     ɵngcc0.ɵɵelementStart(22, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1096); const ctx_r1099 = ɵngcc0.ɵɵnextContext(2); return ctx_r1099.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1064); const ctx_r1067 = ɵngcc0.ɵɵnextContext(2); return ctx_r1067.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const viewMode_r1076 = ctx.ngIf;
-    const _r1079 = ɵngcc0.ɵɵreference(13);
-    const model_r1074 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1075 = ɵngcc0.ɵɵnextContext();
+    const viewMode_r1044 = ctx.ngIf;
+    const _r1047 = ɵngcc0.ɵɵreference(13);
+    const model_r1042 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1043 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 12, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1074.sorts)("selectedOption", model_r1074.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1042.sorts)("selectedOption", model_r1042.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1075.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1043.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1076);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1044);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1075.isInfiniteScroll)("ngIfElse", _r1079);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1043.isInfiniteScroll)("ngIfElse", _r1047);
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(19, 14, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1074.sorts)("selectedOption", model_r1074.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1042.sorts)("selectedOption", model_r1042.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1075.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1043.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1076);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1044);
 } }
 function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6961,20 +6738,20 @@ function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1073 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1041 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1073.viewMode$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1041.viewMode$));
 } }
 function ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 8);
 } if (rf & 2) {
-    const product_r1107 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1107);
+    const product_r1075 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1075);
 } }
 function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1109 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1077 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1109); const ctx_r1108 = ɵngcc0.ɵɵnextContext(2); return ctx_r1108.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1077); const ctx_r1076 = ɵngcc0.ɵɵnextContext(2); return ctx_r1076.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6983,9 +6760,9 @@ function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1111 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1079 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1111); const ctx_r1110 = ɵngcc0.ɵɵnextContext(2); return ctx_r1110.loadNextPage((ctx_r1110.model == null ? null : ctx_r1110.model.pagination == null ? null : ctx_r1110.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1079); const ctx_r1078 = ɵngcc0.ɵɵnextContext(2); return ctx_r1078.loadNextPage((ctx_r1078.model == null ? null : ctx_r1078.model.pagination == null ? null : ctx_r1078.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6999,10 +6776,10 @@ function ProductScrollComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1113 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1081 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1113); const ctx_r1112 = ɵngcc0.ɵɵnextContext(); return ctx_r1112.scrollPage((ctx_r1112.model == null ? null : ctx_r1112.model.pagination == null ? null : ctx_r1112.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1081); const ctx_r1080 = ɵngcc0.ɵɵnextContext(); return ctx_r1080.scrollPage((ctx_r1080.model == null ? null : ctx_r1080.model.pagination == null ? null : ctx_r1080.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵtemplate(3, ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template, 1, 1, "cx-product-grid-item", 3);
     ɵngcc0.ɵɵelementEnd();
@@ -7014,30 +6791,30 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1101 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1069 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1101.isMaxProducts || ctx_r1101.isLastPage || ctx_r1101.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1069.isMaxProducts || ctx_r1069.isLastPage || ctx_r1069.isEmpty);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1101.model == null ? null : ctx_r1101.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1069.model == null ? null : ctx_r1069.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("className", !ctx_r1101.isLastPage && (ctx_r1101.model == null ? null : ctx_r1101.model.pagination == null ? null : ctx_r1101.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1069.isLastPage && (ctx_r1069.model == null ? null : ctx_r1069.model.pagination == null ? null : ctx_r1069.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1101.isMaxProducts || ctx_r1101.isLastPage) && (ctx_r1101.model == null ? null : ctx_r1101.model.pagination == null ? null : ctx_r1101.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1069.isMaxProducts || ctx_r1069.isLastPage) && (ctx_r1069.model == null ? null : ctx_r1069.model.pagination == null ? null : ctx_r1069.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1101.isMaxProducts && !ctx_r1101.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1069.isMaxProducts && !ctx_r1069.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1101.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1069.appendProducts);
 } }
 function ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 13);
 } if (rf & 2) {
-    const product_r1118 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1118);
+    const product_r1086 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1086);
 } }
 function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1120 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1088 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1120); const ctx_r1119 = ɵngcc0.ɵɵnextContext(2); return ctx_r1119.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1088); const ctx_r1087 = ɵngcc0.ɵɵnextContext(2); return ctx_r1087.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7046,9 +6823,9 @@ function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1122 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1090 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1122); const ctx_r1121 = ɵngcc0.ɵɵnextContext(2); return ctx_r1121.loadNextPage((ctx_r1121.model == null ? null : ctx_r1121.model.pagination == null ? null : ctx_r1121.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1090); const ctx_r1089 = ɵngcc0.ɵɵnextContext(2); return ctx_r1089.loadNextPage((ctx_r1089.model == null ? null : ctx_r1089.model.pagination == null ? null : ctx_r1089.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7062,10 +6839,10 @@ function ProductScrollComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1124 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1092 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1124); const ctx_r1123 = ɵngcc0.ɵɵnextContext(); return ctx_r1123.scrollPage((ctx_r1123.model == null ? null : ctx_r1123.model.pagination == null ? null : ctx_r1123.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1092); const ctx_r1091 = ɵngcc0.ɵɵnextContext(); return ctx_r1091.scrollPage((ctx_r1091.model == null ? null : ctx_r1091.model.pagination == null ? null : ctx_r1091.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 12);
     ɵngcc0.ɵɵelementStart(3, "div", 4);
     ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 5);
@@ -7075,41 +6852,41 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1102 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1070 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1102.isMaxProducts || ctx_r1102.isLastPage || ctx_r1102.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1070.isMaxProducts || ctx_r1070.isLastPage || ctx_r1070.isEmpty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1102.model == null ? null : ctx_r1102.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1070.model == null ? null : ctx_r1070.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("className", !ctx_r1102.isLastPage && (ctx_r1102.model == null ? null : ctx_r1102.model.pagination == null ? null : ctx_r1102.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1070.isLastPage && (ctx_r1070.model == null ? null : ctx_r1070.model.pagination == null ? null : ctx_r1070.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1102.isMaxProducts || ctx_r1102.isLastPage) && (ctx_r1102.model == null ? null : ctx_r1102.model.pagination == null ? null : ctx_r1102.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1070.isMaxProducts || ctx_r1070.isLastPage) && (ctx_r1070.model == null ? null : ctx_r1070.model.pagination == null ? null : ctx_r1070.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1102.isMaxProducts && !ctx_r1102.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1070.isMaxProducts && !ctx_r1070.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1102.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1070.appendProducts);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1135 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1103 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelementStart(1, "span", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1135); const breadcrumb_r1133 = ctx.$implicit; const ctx_r1134 = ɵngcc0.ɵɵnextContext(3); return ctx_r1134.toggleValue(breadcrumb_r1133.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1103); const breadcrumb_r1101 = ctx.$implicit; const ctx_r1102 = ɵngcc0.ɵɵnextContext(3); return ctx_r1102.toggleValue(breadcrumb_r1101.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const breadcrumb_r1133 = ctx.$implicit;
-    const ctx_r1132 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("hidden", breadcrumb_r1133.facetValueCode === ctx_r1132.activeFacetValueCode);
+    const breadcrumb_r1101 = ctx.$implicit;
+    const ctx_r1100 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("hidden", breadcrumb_r1101.facetValueCode === ctx_r1100.activeFacetValueCode);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(breadcrumb_r1133.facetValueName);
+    ɵngcc0.ɵɵtextInterpolate(breadcrumb_r1101.facetValueName);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1132.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1100.iconTypes.CLOSE);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7122,19 +6899,19 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template(
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1126 = ɵngcc0.ɵɵnextContext().ngIf;
+    const searchResult_r1094 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "productList.filterBy.label"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1126.breadcrumbs);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1094.breadcrumbs);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1148 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1116 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelementStart(1, "div", 22);
     ɵngcc0.ɵɵelementStart(2, "label", 23);
     ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1148); const value_r1145 = ctx.$implicit; const ctx_r1147 = ɵngcc0.ɵɵnextContext(5); return ctx_r1147.toggleValue(value_r1145.query.query.value); });
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1116); const value_r1113 = ctx.$implicit; const ctx_r1115 = ɵngcc0.ɵɵnextContext(5); return ctx_r1115.toggleValue(value_r1113.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
@@ -7143,16 +6920,16 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1145 = ctx.$implicit;
+    const value_r1113 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1145.selected);
+    ɵngcc0.ɵɵproperty("checked", value_r1113.selected);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1145.name, " (", value_r1145.count, ")");
+    ɵngcc0.ɵɵtextInterpolate2("", value_r1113.name, " (", value_r1113.count, ")");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1151 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1119 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 26);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1151); const facet_r1139 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1149 = ɵngcc0.ɵɵnextContext(3); return ctx_r1149.showLess(facet_r1139.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1119); const facet_r1107 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1117 = ɵngcc0.ɵɵnextContext(3); return ctx_r1117.showLess(facet_r1107.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7161,9 +6938,9 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showLess"), " ");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1154 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1122 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 27);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1154); const facet_r1139 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1152 = ɵngcc0.ɵɵnextContext(3); return ctx_r1152.showMore(facet_r1139.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1122); const facet_r1107 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1120 = ɵngcc0.ɵɵnextContext(3); return ctx_r1120.showMore(facet_r1107.name); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7180,22 +6957,22 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const facet_r1139 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1141 = ɵngcc0.ɵɵnextContext(3);
+    const facet_r1107 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1109 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1141.getVisibleFacetValues(facet_r1139));
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1109.getVisibleFacetValues(facet_r1107));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1141.showAllPerFacetMap.get(facet_r1139.name));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1109.showAllPerFacetMap.get(facet_r1107.name));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1141.showAllPerFacetMap.get(facet_r1139.name) && facet_r1139.values.length > facet_r1139.topValueCount);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1109.showAllPerFacetMap.get(facet_r1107.name) && facet_r1107.values.length > facet_r1107.topValueCount);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1157 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1125 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 16);
     ɵngcc0.ɵɵelementStart(2, "div", 17);
     ɵngcc0.ɵɵelementStart(3, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1157); const facet_r1139 = ctx.$implicit; const ctx_r1156 = ɵngcc0.ɵɵnextContext(3); return ctx_r1156.toggleFacet(facet_r1139.name); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1125); const facet_r1107 = ctx.$implicit; const ctx_r1124 = ɵngcc0.ɵɵnextContext(3); return ctx_r1124.toggleFacet(facet_r1107.name); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7204,46 +6981,46 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const facet_r1139 = ctx.$implicit;
-    const ctx_r1138 = ɵngcc0.ɵɵnextContext(3);
+    const facet_r1107 = ctx.$implicit;
+    const ctx_r1106 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵattribute("aria-expanded", !ctx_r1138.isFacetCollapsed(facet_r1139.name));
+    ɵngcc0.ɵɵattribute("aria-expanded", !ctx_r1106.isFacetCollapsed(facet_r1107.name));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1139.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1107.name, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1138.isFacetCollapsed(facet_r1139.name) ? ctx_r1138.iconTypes.EXPAND : ctx_r1138.iconTypes.COLLAPSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1106.isFacetCollapsed(facet_r1107.name) ? ctx_r1106.iconTypes.EXPAND : ctx_r1106.iconTypes.COLLAPSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1138.isFacetCollapsed(facet_r1139.name));
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1106.isFacetCollapsed(facet_r1107.name));
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_container_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template, 7, 4, "ng-container", 15);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const visibleFacets_r1137 = ctx.ngIf;
+    const visibleFacets_r1105 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", visibleFacets_r1137);
+    ɵngcc0.ɵɵproperty("ngForOf", visibleFacets_r1105);
 } }
 function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1161 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1129 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 29);
     ɵngcc0.ɵɵelementStart(1, "span", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1161); const breadcrumb_r1159 = ctx.$implicit; const ctx_r1160 = ɵngcc0.ɵɵnextContext(3); return ctx_r1160.toggleValue(breadcrumb_r1159.removeQuery.query.value); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1129); const breadcrumb_r1127 = ctx.$implicit; const ctx_r1128 = ɵngcc0.ɵɵnextContext(3); return ctx_r1128.toggleValue(breadcrumb_r1127.removeQuery.query.value); });
     ɵngcc0.ɵɵelementStart(4, "span", 13);
     ɵngcc0.ɵɵelement(5, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const breadcrumb_r1159 = ctx.$implicit;
-    const ctx_r1158 = ɵngcc0.ɵɵnextContext(3);
+    const breadcrumb_r1127 = ctx.$implicit;
+    const ctx_r1126 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", breadcrumb_r1159.facetValueName, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", breadcrumb_r1127.facetValueName, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1158.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1126.iconTypes.CLOSE);
 } }
 function ProductFacetNavigationComponent_ng_container_0_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7256,19 +7033,19 @@ function ProductFacetNavigationComponent_ng_container_0_div_11_Template(rf, ctx)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const searchResult_r1126 = ɵngcc0.ɵɵnextContext().ngIf;
+    const searchResult_r1094 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "productList.appliedFilter"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1126.breadcrumbs);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1094.breadcrumbs);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1172 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1140 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelementStart(1, "div", 22);
     ɵngcc0.ɵɵelementStart(2, "label", 23);
     ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1172); const value_r1169 = ctx.$implicit; const ctx_r1171 = ɵngcc0.ɵɵnextContext(4); return ctx_r1171.toggleValue(value_r1169.query.query.value); });
+    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1140); const value_r1137 = ctx.$implicit; const ctx_r1139 = ɵngcc0.ɵɵnextContext(4); return ctx_r1139.toggleValue(value_r1137.query.query.value); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 25);
     ɵngcc0.ɵɵtext(5);
@@ -7277,11 +7054,11 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1169 = ctx.$implicit;
+    const value_r1137 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1169.selected);
+    ɵngcc0.ɵɵproperty("checked", value_r1137.selected);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1169.name, " (", value_r1169.count, ")");
+    ɵngcc0.ɵɵtextInterpolate2("", value_r1137.name, " (", value_r1137.count, ")");
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 34);
@@ -7295,11 +7072,11 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const facet_r1166 = ctx.$implicit;
+    const facet_r1134 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1166.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1134.name, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", facet_r1166.values);
+    ɵngcc0.ɵɵproperty("ngForOf", facet_r1134.values);
 } }
 function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 30);
@@ -7308,7 +7085,7 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener() { const d_r1164 = ctx.dismiss; return d_r1164("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener() { const d_r1132 = ctx.dismiss; return d_r1132("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -7320,17 +7097,17 @@ function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const searchResult_r1126 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1131 = ɵngcc0.ɵɵnextContext();
+    const searchResult_r1094 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1099 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "productList.filterBy.label"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1131.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1099.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1126.facets);
+    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1094.facets);
 } }
 function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1176 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1144 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵtemplate(2, ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template, 6, 4, "ng-container", 0);
@@ -7340,7 +7117,7 @@ function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementStart(5, "div", 2);
     ɵngcc0.ɵɵelementStart(6, "div", 3);
     ɵngcc0.ɵɵelementStart(7, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r1176); const _r1130 = ɵngcc0.ɵɵreference(13); const ctx_r1175 = ɵngcc0.ɵɵnextContext(); return ctx_r1175.openFilterModal(_r1130); });
+    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r1144); const _r1098 = ɵngcc0.ɵɵreference(13); const ctx_r1143 = ɵngcc0.ɵɵnextContext(); return ctx_r1143.openFilterModal(_r1098); });
     ɵngcc0.ɵɵtext(8);
     ɵngcc0.ɵɵpipe(9, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7352,22 +7129,22 @@ function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtemplate(12, ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template, 10, 5, "ng-template", null, 6, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1126 = ctx.ngIf;
-    const ctx_r1125 = ɵngcc0.ɵɵnextContext();
+    const searchResult_r1094 = ctx.ngIf;
+    const ctx_r1093 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1126.breadcrumbs == null ? null : searchResult_r1126.breadcrumbs.length);
+    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1094.breadcrumbs == null ? null : searchResult_r1094.breadcrumbs.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 4, ctx_r1125.visibleFacets$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 4, ctx_r1093.visibleFacets$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 6, "productList.filterBy.action"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1126.breadcrumbs == null ? null : searchResult_r1126.breadcrumbs.length);
+    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1094.breadcrumbs == null ? null : searchResult_r1094.breadcrumbs.length);
 } }
 function ProductGridItemComponent_cx_star_rating_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 10);
 } if (rf & 2) {
-    const ctx_r1177 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1177.product == null ? null : ctx_r1177.product.averageRating)("disabled", true);
+    const ctx_r1145 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1145.product == null ? null : ctx_r1145.product.averageRating)("disabled", true);
 } }
 function ProductGridItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -7383,30 +7160,30 @@ function ProductGridItemComponent_ng_container_11_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelement(1, "cx-variant-style-icons", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1181 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1149 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1181.product.variantOptions);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1149.product.variantOptions);
 } }
 function ProductGridItemComponent_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductGridItemComponent_ng_container_11_div_1_Template, 2, 1, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1179 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1147 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1179.product.variantOptions);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1147.product.variantOptions);
 } }
 function ProductGridItemComponent_cx_add_to_cart_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 14);
 } if (rf & 2) {
-    const ctx_r1180 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1180.product);
+    const ctx_r1148 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1148.product);
 } }
 function ProductListItemComponent_cx_star_rating_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 12);
 } if (rf & 2) {
-    const ctx_r1182 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1182.product == null ? null : ctx_r1182.product.averageRating)("disabled", true);
+    const ctx_r1150 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1150.product == null ? null : ctx_r1150.product.averageRating)("disabled", true);
 } }
 function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -7420,43 +7197,43 @@ function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 function ProductListItemComponent_ng_container_12_cx_variant_style_icons_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-icons", 15);
 } if (rf & 2) {
-    const ctx_r1186 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1186.product.variantOptions);
+    const ctx_r1154 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1154.product.variantOptions);
 } }
 function ProductListItemComponent_ng_container_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductListItemComponent_ng_container_12_cx_variant_style_icons_1_Template, 1, 1, "cx-variant-style-icons", 14);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1184 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1152 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1184.product.variantOptions);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1152.product.variantOptions);
 } }
 function ProductListItemComponent_cx_add_to_cart_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 16);
 } if (rf & 2) {
-    const ctx_r1185 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1185.product);
+    const ctx_r1153 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1153.product);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_style_selector_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-selector", 5);
 } if (rf & 2) {
-    const ctx_r1190 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1190.variants[ctx_r1190.variantType.STYLE]);
+    const ctx_r1158 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1158.variants[ctx_r1158.variantType.STYLE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_size_selector_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-size-selector", 6);
 } if (rf & 2) {
-    const product_r1188 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1191 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1188)("variants", ctx_r1191.variants[ctx_r1191.variantType.SIZE]);
+    const product_r1156 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1159 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1156)("variants", ctx_r1159.variants[ctx_r1159.variantType.SIZE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-color-selector", 6);
 } if (rf & 2) {
-    const product_r1188 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1192 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1188)("variants", ctx_r1192.variants[ctx_r1192.variantType.COLOR]);
+    const product_r1156 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1160 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1156)("variants", ctx_r1160.variants[ctx_r1160.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7465,22 +7242,22 @@ function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtemplate(3, ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template, 1, 2, "cx-variant-color-selector", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1189 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1157 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1189.variants[ctx_r1189.variantType.STYLE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1157.variants[ctx_r1157.variantType.STYLE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1189.variants[ctx_r1189.variantType.SIZE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1157.variants[ctx_r1157.variantType.SIZE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1189.variants[ctx_r1189.variantType.COLOR]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1157.variants[ctx_r1157.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductVariantsComponent_ng_container_0_div_1_Template, 4, 3, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1188 = ctx.ngIf;
+    const product_r1156 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1188.baseOptions == null ? null : product_r1188.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1156.baseOptions == null ? null : product_r1156.baseOptions.length);
 } }
 function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -7491,77 +7268,77 @@ function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1195 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1163 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "variant.style"), ": ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1195.getVariantOptionValue(ctx_r1195.variants == null ? null : ctx_r1195.variants.selected.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1163.getVariantOptionValue(ctx_r1163.variants == null ? null : ctx_r1163.variants.selected.variantOptionQualifiers));
 } }
 const _c42 = function (a0) { return { "selected-variant": a0 }; };
 function VariantStyleSelectorComponent_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1199 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1167 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 6);
     ɵngcc0.ɵɵelementStart(1, "img", 7);
-    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1199); const v_r1197 = ctx.$implicit; const ctx_r1198 = ɵngcc0.ɵɵnextContext(); return ctx_r1198.changeStyle(v_r1197.code); });
+    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1167); const v_r1165 = ctx.$implicit; const ctx_r1166 = ɵngcc0.ɵɵnextContext(); return ctx_r1166.changeStyle(v_r1165.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1197 = ctx.$implicit;
-    const ctx_r1196 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c42, v_r1197.code === (ctx_r1196.variants == null ? null : ctx_r1196.variants.selected.code)));
+    const v_r1165 = ctx.$implicit;
+    const ctx_r1164 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c42, v_r1165.code === (ctx_r1164.variants == null ? null : ctx_r1164.variants.selected.code)));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1196.getVariantThumbnailUrl(v_r1197.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1196.getVariantOptionValue(v_r1197.variantOptionQualifiers));
-    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1196.getVariantOptionValue(v_r1197.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1164.getVariantThumbnailUrl(v_r1165.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1164.getVariantOptionValue(v_r1165.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1164.getVariantOptionValue(v_r1165.variantOptionQualifiers));
 } }
 function VariantSizeSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1201 = ctx.$implicit;
-    const ctx_r1200 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1201.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1201.code === (ctx_r1200.product == null ? null : ctx_r1200.product.code));
+    const v_r1169 = ctx.$implicit;
+    const ctx_r1168 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1169.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1169.code === (ctx_r1168.product == null ? null : ctx_r1168.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1200.getVariantOptionValue(v_r1201.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1168.getVariantOptionValue(v_r1169.variantOptionQualifiers));
 } }
 function VariantColorSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 4);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1203 = ctx.$implicit;
-    const ctx_r1202 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1203.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1203.code === (ctx_r1202.product == null ? null : ctx_r1202.product.code));
+    const v_r1171 = ctx.$implicit;
+    const ctx_r1170 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1171.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1171.code === (ctx_r1170.product == null ? null : ctx_r1170.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1202.getVariantOptionValue(v_r1203.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1170.getVariantOptionValue(v_r1171.variantOptionQualifiers));
 } }
 function VariantStyleIconsComponent_li_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelement(1, "img");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1205 = ctx.$implicit;
-    const ctx_r1204 = ɵngcc0.ɵɵnextContext();
+    const v_r1173 = ctx.$implicit;
+    const ctx_r1172 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("src", ctx_r1204.getVariantThumbnailUrl(v_r1205.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1204.variantNames[v_r1205.code])("alt", ctx_r1204.variantNames[v_r1205.code]);
+    ɵngcc0.ɵɵattribute("src", ctx_r1172.getVariantThumbnailUrl(v_r1173.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1172.variantNames[v_r1173.code])("alt", ctx_r1172.variantNames[v_r1173.code]);
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1207 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r1175 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1207 == null ? null : product_r1207.price == null ? null : product_r1207.price.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1175 == null ? null : product_r1175.price == null ? null : product_r1175.price.formattedValue, " ");
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const product_r1207 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1207 == null ? null : product_r1207.summary, ɵngcc0.ɵɵsanitizeHtml);
+    const product_r1175 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1175 == null ? null : product_r1175.summary, ɵngcc0.ɵɵsanitizeHtml);
 } }
 const _c43 = function (a0) { return { product: a0 }; };
 function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
@@ -7570,21 +7347,21 @@ function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(2, ProductSummaryComponent_ng_container_0_ng_template_2_Template, 1, 1, "ng-template", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1207 = ctx.ngIf;
-    const ctx_r1206 = ɵngcc0.ɵɵnextContext();
+    const product_r1175 = ctx.ngIf;
+    const ctx_r1174 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1206.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c43, product_r1207));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1174.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c43, product_r1175));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1206.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c43, product_r1207));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1174.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c43, product_r1175));
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_li_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const featureValue_r1219 = ctx.$implicit;
+    const featureValue_r1187 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1219 == null ? null : featureValue_r1219.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1187 == null ? null : featureValue_r1187.value, " ");
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "tr");
@@ -7598,11 +7375,11 @@ function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1217 = ctx.$implicit;
+    const feature_r1185 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1217.name);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1185.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", feature_r1217 == null ? null : feature_r1217.featureValues);
+    ɵngcc0.ɵɵproperty("ngForOf", feature_r1185 == null ? null : feature_r1185.featureValues);
 } }
 function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "table");
@@ -7614,11 +7391,11 @@ function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(4, ProductAttributesComponent_ng_container_0_table_5_tr_4_Template, 6, 2, "tr", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const class_r1215 = ctx.$implicit;
+    const class_r1183 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(class_r1215.name);
+    ɵngcc0.ɵɵtextInterpolate(class_r1183.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", class_r1215.features);
+    ɵngcc0.ɵɵproperty("ngForOf", class_r1183.features);
 } }
 function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7631,28 +7408,28 @@ function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1213 = ctx.ngIf;
+    const product_r1181 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "productDetails.specification"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r1213 == null ? null : product_r1213.classifications);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r1181 == null ? null : product_r1181.classifications);
 } }
 function ProductDetailsTabComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1221 = ctx.ngIf;
+    const product_r1189 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1221 == null ? null : product_r1221.description, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1189 == null ? null : product_r1189.description, ɵngcc0.ɵɵsanitizeHtml);
 } }
 const _c44 = ["titleInput"];
 const _c45 = ["writeReviewButton"];
 function ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 9);
 } if (rf & 2) {
-    const product_r1223 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("rating", product_r1223.averageRating)("disabled", true);
+    const product_r1191 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("rating", product_r1191.averageRating)("disabled", true);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -7681,22 +7458,22 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const review_r1236 = ctx.$implicit;
+    const review_r1204 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(review_r1236.headline);
+    ɵngcc0.ɵɵtextInterpolate(review_r1204.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", review_r1236.rating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", review_r1204.rating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1236.alias ? review_r1236.alias : review_r1236.principal == null ? null : review_r1236.principal.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1204.alias ? review_r1204.alias : review_r1204.principal == null ? null : review_r1204.principal.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1236.date));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1204.date));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(review_r1236.comment);
+    ɵngcc0.ɵɵtextInterpolate(review_r1204.comment);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1240 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1208 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1240); const reviews_r1233 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1239 = ɵngcc0.ɵɵnextContext(4); return ctx_r1239.maxListItems = reviews_r1233.length; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1208); const reviews_r1201 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1207 = ɵngcc0.ɵɵnextContext(4); return ctx_r1207.maxListItems = reviews_r1201.length; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7705,9 +7482,9 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productReview.more"), " ");
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1243 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1211 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1243); const ctx_r1242 = ɵngcc0.ɵɵnextContext(6); return ctx_r1242.maxListItems = ctx_r1242.initialMaxListItems; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1211); const ctx_r1210 = ɵngcc0.ɵɵnextContext(6); return ctx_r1210.maxListItems = ctx_r1210.initialMaxListItems; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7721,11 +7498,11 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(2, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template, 3, 3, "button", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1235 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r1203 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1235.maxListItems === ctx_r1235.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1203.maxListItems === ctx_r1203.initialMaxListItems);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1235.maxListItems !== ctx_r1235.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1203.maxListItems !== ctx_r1203.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7734,12 +7511,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(3, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const reviews_r1233 = ctx.ngIf;
-    const ctx_r1232 = ɵngcc0.ɵɵnextContext(4);
+    const reviews_r1201 = ctx.ngIf;
+    const ctx_r1200 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1233, 0, ctx_r1232.maxListItems));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1201, 0, ctx_r1200.maxListItems));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", reviews_r1233.length > ctx_r1232.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", reviews_r1201.length > ctx_r1200.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7747,12 +7524,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(r
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1230 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1198 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1230.reviews$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1198.reviews$));
 } }
 function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1245 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1213 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "h3");
@@ -7760,7 +7537,7 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5, 6);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1245); const ctx_r1244 = ɵngcc0.ɵɵnextContext(2); return ctx_r1244.initiateWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1213); const ctx_r1212 = ɵngcc0.ɵɵnextContext(2); return ctx_r1212.initiateWriteReview(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7770,25 +7547,25 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵtemplate(11, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template, 3, 3, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1223 = ɵngcc0.ɵɵnextContext().ngIf;
-    const _r1225 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1224 = ɵngcc0.ɵɵnextContext();
+    const product_r1191 = ɵngcc0.ɵɵnextContext().ngIf;
+    const _r1193 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1192 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 6, "productReview.overallRating"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "productReview.writeReview"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1223.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1191.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1223.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1191.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1224.isWritingReview)("ngIfElse", _r1225);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1192.isWritingReview)("ngIfElse", _r1193);
 } }
 const _c46 = function (a0) { return { "submit-btn": a0 }; };
 function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1250 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1218 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 20);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1250); const product_r1223 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1248 = ɵngcc0.ɵɵnextContext(); return ctx_r1248.submitReview(product_r1223); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1218); const product_r1191 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1216 = ɵngcc0.ɵɵnextContext(); return ctx_r1216.submitReview(product_r1191); });
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "span", 22);
@@ -7814,7 +7591,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(18, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(19, "cx-star-rating", 26);
-    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_19_listener($event) { ɵngcc0.ɵɵrestoreView(_r1250); const ctx_r1251 = ɵngcc0.ɵɵnextContext(2); return ctx_r1251.setRating($event); });
+    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_19_listener($event) { ɵngcc0.ɵɵrestoreView(_r1218); const ctx_r1219 = ɵngcc0.ɵɵnextContext(2); return ctx_r1219.setRating($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -7830,7 +7607,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementStart(26, "div", 28);
     ɵngcc0.ɵɵelementStart(27, "div", 29);
     ɵngcc0.ɵɵelementStart(28, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1250); const ctx_r1252 = ɵngcc0.ɵɵnextContext(2); return ctx_r1252.cancelWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1218); const ctx_r1220 = ɵngcc0.ɵɵnextContext(2); return ctx_r1220.cancelWriteReview(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7844,16 +7621,16 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1226 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1226.reviewForm);
+    const ctx_r1194 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1194.reviewForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 12, "productReview.reviewTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1226.reviewForm.controls["title"].invalid && (ctx_r1226.reviewForm.controls["title"].touched || ctx_r1226.reviewForm.controls["title"].dirty));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1194.reviewForm.controls["title"].invalid && (ctx_r1194.reviewForm.controls["title"].touched || ctx_r1194.reviewForm.controls["title"].dirty));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 14, "productReview.writeYourComments"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1226.reviewForm.controls["comment"].invalid && (ctx_r1226.reviewForm.controls["comment"].touched || ctx_r1226.reviewForm.controls["comment"].dirty));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1194.reviewForm.controls["comment"].invalid && (ctx_r1194.reviewForm.controls["comment"].touched || ctx_r1194.reviewForm.controls["comment"].dirty));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(18, 16, "productReview.rating"));
     ɵngcc0.ɵɵadvance(6);
@@ -7861,7 +7638,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵadvance(6);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(30, 20, "common.cancel"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(24, _c46, ctx_r1226.reviewForm.valid));
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(24, _c46, ctx_r1194.reviewForm.valid));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(34, 22, "common.submit"), " ");
 } }
@@ -7875,22 +7652,22 @@ function ProductReviewsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ProductReviewsComponent_div_0_ng_template_5_Template, 35, 26, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1223 = ctx.ngIf;
-    const _r1225 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1222 = ɵngcc0.ɵɵnextContext();
+    const product_r1191 = ctx.ngIf;
+    const _r1193 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1190 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1223.numberOfReviews, ") ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1191.numberOfReviews, ") ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1222.isWritingReview)("ngIfElse", _r1225);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1190.isWritingReview)("ngIfElse", _r1193);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1257 = ɵngcc0.ɵɵnextContext().$implicit;
+    const preference_r1225 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1257.value);
+    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1225.value);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 14);
@@ -7900,15 +7677,15 @@ function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) {
     ɵngcc0.ɵɵtemplate(3, StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template, 2, 1, "span", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1257 = ctx.$implicit;
+    const preference_r1225 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(preference_r1257.channel);
+    ɵngcc0.ɵɵtextInterpolate(preference_r1225.channel);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r1257.value);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r1225.value);
 } }
 const _c47 = function () { return ["/my-account/my-interests"]; };
 function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1261 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1229 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
@@ -7925,7 +7702,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementStart(13, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1260 = ɵngcc0.ɵɵnextContext(); return ctx_r1260.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1229); const ctx_r1228 = ɵngcc0.ɵɵnextContext(); return ctx_r1228.close(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7936,7 +7713,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
     ɵngcc0.ɵɵelementStart(21, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1262 = ɵngcc0.ɵɵnextContext(); return ctx_r1262.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1229); const ctx_r1230 = ɵngcc0.ɵɵnextContext(); return ctx_r1230.close(); });
     ɵngcc0.ɵɵtext(22);
     ɵngcc0.ɵɵpipe(23, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7946,7 +7723,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(26, "div", 11);
     ɵngcc0.ɵɵelementStart(27, "div", 12);
     ɵngcc0.ɵɵelementStart(28, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1261); const ctx_r1263 = ɵngcc0.ɵɵnextContext(); return ctx_r1263.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1229); const ctx_r1231 = ɵngcc0.ɵɵnextContext(); return ctx_r1231.close(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7956,11 +7733,11 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1253 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1221 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 12, "stockNotification.subscriptionDialog.notifiedPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1253.enabledPrefs);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1221.enabledPrefs);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 14, "stockNotification.subscriptionDialog.notifiedSuffix"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -7999,7 +7776,7 @@ function StockNotificationDialogComponent_ng_template_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "stockNotification.subscriptionDialog.subscribing"), " ");
 } }
 function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1274 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1242 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -8008,7 +7785,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1274); const ctx_r1273 = ɵngcc0.ɵɵnextContext(3); return ctx_r1273.subscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1242); const ctx_r1241 = ɵngcc0.ɵɵnextContext(3); return ctx_r1241.subscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8025,10 +7802,10 @@ function StockNotificationComponent_ng_container_0_ng_container_1_Template(rf, c
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1271 = ɵngcc0.ɵɵnextContext(2);
-    const _r1265 = ɵngcc0.ɵɵreference(3);
+    const ctx_r1239 = ɵngcc0.ɵɵnextContext(2);
+    const _r1233 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1271.prefsEnabled$))("ngIfElse", _r1265);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1239.prefsEnabled$))("ngIfElse", _r1233);
 } }
 function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8036,10 +7813,10 @@ function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1264 = ɵngcc0.ɵɵnextContext();
-    const _r1267 = ɵngcc0.ɵɵreference(5);
+    const ctx_r1232 = ɵngcc0.ɵɵnextContext();
+    const _r1235 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1264.hasProductInterests$))("ngIfElse", _r1267);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1232.hasProductInterests$))("ngIfElse", _r1235);
 } }
 function StockNotificationComponent_ng_template_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8095,15 +7872,15 @@ function StockNotificationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1276 = ɵngcc0.ɵɵreference(4);
-    const ctx_r1266 = ɵngcc0.ɵɵnextContext();
+    const _r1244 = ɵngcc0.ɵɵreference(4);
+    const ctx_r1234 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1266.anonymous)("ngIfElse", _r1276);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1234.anonymous)("ngIfElse", _r1244);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 3, "stockNotification.notifyMe"), " ");
 } }
 function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1280 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1248 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -8112,7 +7889,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1280); const ctx_r1279 = ɵngcc0.ɵɵnextContext(2); return ctx_r1279.unsubscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1248); const ctx_r1247 = ɵngcc0.ɵɵnextContext(2); return ctx_r1247.unsubscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -8127,9 +7904,9 @@ function StockNotificationComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵtemplate(0, StockNotificationComponent_ng_template_4_ng_container_0_Template, 8, 6, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r1268 = ɵngcc0.ɵɵnextContext();
-    const _r1269 = ɵngcc0.ɵɵreference(7);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1268.isRemoveInterestLoading$))("ngIfElse", _r1269);
+    const ctx_r1236 = ɵngcc0.ɵɵnextContext();
+    const _r1237 = ɵngcc0.ɵɵreference(7);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1236.isRemoveInterestLoading$))("ngIfElse", _r1237);
 } }
 function StockNotificationComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -8145,10 +7922,10 @@ function ScheduleComponent_div_1_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1283 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1284 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1251 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1252 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1284.getStoreOpeningTime(day_r1283), " - ", ctx_r1284.getStoreClosingTime(day_r1283), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1252.getStoreOpeningTime(day_r1251), " - ", ctx_r1252.getStoreClosingTime(day_r1251), " ");
 } }
 function ScheduleComponent_div_1_div_1_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8169,32 +7946,32 @@ function ScheduleComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ScheduleComponent_div_1_div_1_div_5_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1283 = ctx.$implicit;
-    const ctx_r1282 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1251 = ctx.$implicit;
+    const ctx_r1250 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1283, "EEE"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1251, "EEE"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1282.getStoreOpeningTime(day_r1283) !== "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1250.getStoreOpeningTime(day_r1251) !== "closed");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1282.getStoreOpeningTime(day_r1283) === "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1250.getStoreOpeningTime(day_r1251) === "closed");
 } }
 function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
     ɵngcc0.ɵɵtemplate(1, ScheduleComponent_div_1_div_1_Template, 6, 6, "div", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1281 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1249 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1281.displayDays);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1249.displayDays);
 } }
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1292 = ctx.$implicit;
+    const location_r1260 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1292);
+    ɵngcc0.ɵɵproperty("location", location_r1260);
 } }
 function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8205,9 +7982,9 @@ function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1290 = ctx.ngIf;
+    const locations_r1258 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1290 == null ? null : locations_r1290.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1258 == null ? null : locations_r1258.stores);
 } }
 function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -8215,34 +7992,34 @@ function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderListItemComponent_button_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1297 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1265 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1297); const ctx_r1296 = ɵngcc0.ɵɵnextContext(); return ctx_r1296.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1297); const ctx_r1298 = ɵngcc0.ɵɵnextContext(); return ctx_r1298.onKey($event); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1265); const ctx_r1264 = ɵngcc0.ɵɵnextContext(); return ctx_r1264.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1265); const ctx_r1266 = ɵngcc0.ɵɵnextContext(); return ctx_r1266.onKey($event); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1293 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1261 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1293.location.displayName || ctx_r1293.location.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1261.location.displayName || ctx_r1261.location.name, " ");
 } }
 function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 7);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1294 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("href", ctx_r1294.prepareRouteUrl(ctx_r1294.location), ɵngcc0.ɵɵsanitizeUrl);
+    const ctx_r1262 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("href", ctx_r1262.prepareRouteUrl(ctx_r1262.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1294.location.displayName || ctx_r1294.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1262.location.displayName || ctx_r1262.location.name);
 } }
 function StoreFinderListItemComponent_div_7_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1299 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1267 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1299.location.formattedDistance, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1267.location.formattedDistance, " ");
 } }
 const _c48 = function (a0, a1, a2) { return [a0, a1, a2]; };
 function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
@@ -8254,28 +8031,28 @@ function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_7_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1295 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1263 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1295.location.address.line1, " ", ctx_r1295.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1263.location.address.line1, " ", ctx_r1263.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1295.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c48, ctx_r1295.location.address.town, ctx_r1295.location.address.postalCode, ctx_r1295.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1263.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c48, ctx_r1263.location.address.town, ctx_r1263.location.address.postalCode, ctx_r1263.location.address.country.isocode)), " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1295.location.formattedDistance && ctx_r1295.displayDistance);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1263.location.formattedDistance && ctx_r1263.displayDistance);
 } }
 const _c49 = ["mapElement"];
 const _c50 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1308 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1276 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1308); const ctx_r1307 = ɵngcc0.ɵɵnextContext(3); return ctx_r1307.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1276); const ctx_r1275 = ɵngcc0.ɵɵnextContext(3); return ctx_r1275.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1306 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1274 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1306.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1274.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "storeFinder.backToList"), " ");
 } }
@@ -8289,49 +8066,49 @@ function StoreFinderListComponent_ng_container_0_div_2_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1302 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1270 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r1302.locations.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r1270.locations.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1302.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1270.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1309 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1277 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1309.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1277.storeDetails)("disableMap", true);
 } }
 const _c51 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1316 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1284 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1316); const location_r1313 = ctx.$implicit; const ctx_r1315 = ɵngcc0.ɵɵnextContext(4); return ctx_r1315.centerStoreOnMapByIndex($event, location_r1313); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1284); const location_r1281 = ctx.$implicit; const ctx_r1283 = ɵngcc0.ɵɵnextContext(4); return ctx_r1283.centerStoreOnMapByIndex($event, location_r1281); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1313 = ctx.$implicit;
-    const i_r1314 = ctx.index;
-    const ctx_r1312 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1314);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1312.selectedStoreIndex === i_r1314));
+    const location_r1281 = ctx.$implicit;
+    const i_r1282 = ctx.index;
+    const ctx_r1280 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1282);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1280.selectedStoreIndex === i_r1282));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1313)("locationIndex", i_r1314)("displayDistance", ctx_r1312.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1314 + ctx_r1312.locations.pagination.currentPage * ctx_r1312.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1281)("locationIndex", i_r1282)("displayDistance", ctx_r1280.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1282 + ctx_r1280.locations.pagination.currentPage * ctx_r1280.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1310 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1278 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1310.locations == null ? null : ctx_r1310.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1278.locations == null ? null : ctx_r1278.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1318 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1286 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "div", 13);
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_3_div_2_Template, 2, 2, "div", 14);
@@ -8339,18 +8116,18 @@ function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵelementStart(5, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1318); const ctx_r1317 = ɵngcc0.ɵɵnextContext(2); return ctx_r1317.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1286); const ctx_r1285 = ɵngcc0.ɵɵnextContext(2); return ctx_r1285.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1303 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1271 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1303.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1271.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1303.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1271.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1303.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1271.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8363,34 +8140,34 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_div_1_Templ
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1323 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1291 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1323.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1291.storeDetails)("disableMap", true);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1329 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1297 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1329); const location_r1326 = ctx.$implicit; const ctx_r1328 = ɵngcc0.ɵɵnextContext(5); return ctx_r1328.centerStoreOnMapByIndex($event, location_r1326); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1297); const location_r1294 = ctx.$implicit; const ctx_r1296 = ɵngcc0.ɵɵnextContext(5); return ctx_r1296.centerStoreOnMapByIndex($event, location_r1294); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1326 = ctx.$implicit;
-    const i_r1327 = ctx.index;
-    const ctx_r1325 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1327);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1325.selectedStoreIndex === i_r1327));
+    const location_r1294 = ctx.$implicit;
+    const i_r1295 = ctx.index;
+    const ctx_r1293 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1295);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c51, ctx_r1293.selectedStoreIndex === i_r1295));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1326)("locationIndex", i_r1327)("displayDistance", ctx_r1325.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1327 + ctx_r1325.locations.pagination.currentPage * ctx_r1325.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1294)("locationIndex", i_r1295)("displayDistance", ctx_r1293.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1295 + ctx_r1293.locations.pagination.currentPage * ctx_r1293.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1324 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1292 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1324.locations == null ? null : ctx_r1324.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1292.locations == null ? null : ctx_r1292.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -8398,11 +8175,11 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template, 2, 1, "ol", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1320 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1288 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1320.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1288.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1320.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1288.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8412,16 +8189,16 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
 } }
 const _c52 = function (a0) { return [a0]; };
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1332 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1300 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1332); const ctx_r1331 = ɵngcc0.ɵɵnextContext(3); return ctx_r1331.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1300); const ctx_r1299 = ɵngcc0.ɵɵnextContext(3); return ctx_r1299.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1322 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1290 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1322.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1322.selectedStore) : ctx_r1322.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1290.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1290.selectedStore) : ctx_r1290.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8458,36 +8235,36 @@ function StoreFinderListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1301 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1269 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1301.locations == null ? null : ctx_r1301.locations.pagination);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1269.locations == null ? null : ctx_r1269.locations.pagination);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1301.locations == null ? null : ctx_r1301.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1269.locations == null ? null : ctx_r1269.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1301.locations == null ? null : ctx_r1301.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1269.locations == null ? null : ctx_r1269.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1301.locations == null ? null : ctx_r1301.locations.stores));
+    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1269.locations == null ? null : ctx_r1269.locations.stores));
 } }
 function StoreFinderSearchResultComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1341 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1309 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "cx-pagination", 6);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1341); const ctx_r1340 = ɵngcc0.ɵɵnextContext(2); return ctx_r1340.viewPage($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1309); const ctx_r1308 = ɵngcc0.ɵɵnextContext(2); return ctx_r1308.viewPage($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1336 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1304 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", locations_r1336.pagination);
+    ɵngcc0.ɵɵproperty("pagination", locations_r1304.pagination);
 } }
 function StoreFinderSearchResultComponent_div_0_cx_store_finder_list_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-store-finder-list", 7);
 } if (rf & 2) {
-    const locations_r1336 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1338 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("locations", locations_r1336)("useMylocation", ctx_r1338.useMyLocation);
+    const locations_r1304 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1306 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("locations", locations_r1304)("useMylocation", ctx_r1306.useMyLocation);
 } }
 function StoreFinderSearchResultComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8509,13 +8286,13 @@ function StoreFinderSearchResultComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_div_0_div_3_Template, 5, 3, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1336 = ctx.ngIf;
+    const locations_r1304 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1336 == null ? null : locations_r1336.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1304 == null ? null : locations_r1304.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1336 == null ? null : locations_r1336.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1304 == null ? null : locations_r1304.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1336 == null ? null : locations_r1336.stores.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1304 == null ? null : locations_r1304.stores.length));
 } }
 function StoreFinderSearchResultComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -8532,11 +8309,11 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1346 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1314 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1346.location.address.line1, " ", ctx_r1346.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1314.location.address.line1, " ", ctx_r1314.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1346.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c48, ctx_r1346.location.address.town, ctx_r1346.location.address.postalCode, ctx_r1346.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1314.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c48, ctx_r1314.location.address.town, ctx_r1314.location.address.postalCode, ctx_r1314.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8544,9 +8321,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1347 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1315 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1347.location.address == null ? null : ctx_r1347.location.address.phone, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1315.location.address == null ? null : ctx_r1315.location.address.phone, " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -8558,9 +8335,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1348 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1316 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1348.location);
+    ɵngcc0.ɵɵproperty("location", ctx_r1316.location);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "storeFinder.storeHours"));
 } }
@@ -8571,9 +8348,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_div_7_Templa
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1352 = ctx.$implicit;
+    const feature_r1320 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1352.value);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1320.value);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
@@ -8590,20 +8367,20 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1349 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1317 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 2, "storeFinder.storeFeatures"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1349.location.features == null ? null : ctx_r1349.location.features.entry);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1317.location.features == null ? null : ctx_r1317.location.features.entry);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "article", 22);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-map", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1350 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1318 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1350.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c52, ctx_r1318.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8634,33 +8411,33 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1345 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1313 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1345.location.displayName || ctx_r1345.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1313.location.displayName || ctx_r1313.location.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1345.location.address);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1313.location.address);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("href", ctx_r1345.getDirections(ctx_r1345.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", ctx_r1313.getDirections(ctx_r1313.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "storeFinder.getDirections"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1345.location.address == null ? null : ctx_r1345.location.address.phone);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1313.location.address == null ? null : ctx_r1313.location.address.phone);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1345.location.openingHours);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1313.location.openingHours);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1345.location.features) != "{}");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1313.location.features) != "{}");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1345.disableMap);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1313.disableMap);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_span_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1360 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1360 == null ? null : country_r1360.storeCountDataList) ? "country-header" : "country-header-link");
+    const country_r1328 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1328 == null ? null : country_r1328.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1("(", country_r1360.count, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", country_r1328.count, ")");
 } }
 const _c56 = function (a1) { return ["../country", a1]; };
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -8675,24 +8452,24 @@ function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1360 = ctx.$implicit;
+    const country_r1328 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c56, country_r1360.isoCode));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c56, country_r1328.isoCode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1360 == null ? null : country_r1360.storeCountDataList) ? "country-header" : "country-header-link");
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1328 == null ? null : country_r1328.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(country_r1360.name);
+    ɵngcc0.ɵɵtextInterpolate(country_r1328.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(country_r1360 == null ? null : country_r1360.storeCountDataList));
+    ɵngcc0.ɵɵproperty("ngIf", !(country_r1328 == null ? null : country_r1328.storeCountDataList));
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtemplate(1, StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template, 6, 6, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1356 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1324 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1356);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1324);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -8713,11 +8490,11 @@ function StoreFinderStoresCountComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1356 = ctx.ngIf;
+    const locations_r1324 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1356 == null ? null : locations_r1356.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1324 == null ? null : locations_r1324.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1356 == null ? null : locations_r1356.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1324 == null ? null : locations_r1324.length));
 } }
 function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -8725,12 +8502,12 @@ function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1369 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1337 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1369); const ctx_r1368 = ɵngcc0.ɵɵnextContext(); return ctx_r1368.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1337); const ctx_r1336 = ɵngcc0.ɵɵnextContext(); return ctx_r1336.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -8744,14 +8521,14 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1367 = ctx.ngIf;
-    const ctx_r1364 = ɵngcc0.ɵɵnextContext();
+    const location_r1335 = ctx.ngIf;
+    const ctx_r1332 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1364.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1332.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 4, "storeFinder.backToList"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("disableMap", ctx_r1364.disableMap)("location", location_r1367);
+    ɵngcc0.ɵɵproperty("disableMap", ctx_r1332.disableMap)("location", location_r1335);
 } }
 function StoreFinderStoreComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -8832,9 +8609,9 @@ function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const user_r1378 = ctx.ngIf;
+    const user_r1346 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c60, user_r1378.name)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c60, user_r1346.name)), " ");
 } }
 function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
@@ -8852,10 +8629,10 @@ function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1388 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1388.code);
+    const title_r1356 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1356.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1388.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1356.name);
 } }
 function RegisterComponent_section_0_div_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 27);
@@ -8887,12 +8664,12 @@ function RegisterComponent_section_0_ng_container_55_label_1_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1390 = ctx.ngIf;
-    const ctx_r1389 = ɵngcc0.ɵɵnextContext(3);
+    const anonymousConsent_r1358 = ctx.ngIf;
+    const ctx_r1357 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1389.isConsentGiven(anonymousConsent_r1390.consent));
+    ɵngcc0.ɵɵproperty("checked", ctx_r1357.isConsentGiven(anonymousConsent_r1358.consent));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1390.template, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1358.template, " ");
 } }
 function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8900,9 +8677,9 @@ function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1385 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1353 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1385.anonymousConsent$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1353.anonymousConsent$));
 } }
 function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
@@ -8917,7 +8694,7 @@ function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "register.emailMarketing"), " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1392 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1360 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -9014,7 +8791,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(69, "button", 24);
-    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1392); const ctx_r1391 = ɵngcc0.ɵɵnextContext(); return ctx_r1391.submit(); });
+    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1360); const ctx_r1359 = ɵngcc0.ɵɵnextContext(); return ctx_r1359.submit(); });
     ɵngcc0.ɵɵtext(70);
     ɵngcc0.ɵɵpipe(71, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -9029,16 +8806,16 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1386 = ɵngcc0.ɵɵreference(57);
-    const ctx_r1379 = ɵngcc0.ɵɵnextContext();
+    const _r1354 = ɵngcc0.ɵɵreference(57);
+    const ctx_r1347 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1379.userRegistrationForm);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1347.userRegistrationForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 30, "register.title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 32, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1379.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1347.titles$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 36, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
@@ -9050,24 +8827,24 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 44, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1379.userRegistrationForm.get("email").errors && (ctx_r1379.userRegistrationForm.get("email").errors["email"] || ctx_r1379.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1379.userRegistrationForm.get("email").dirty);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1347.userRegistrationForm.get("email").errors && (ctx_r1347.userRegistrationForm.get("email").errors["email"] || ctx_r1347.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1347.userRegistrationForm.get("email").dirty);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 46, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 48, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1379.userRegistrationForm.get("password").invalid && ctx_r1379.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1347.userRegistrationForm.get("password").invalid && ctx_r1347.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 50, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1379.userRegistrationForm.get("password").invalid && ctx_r1379.userRegistrationForm.get("password").dirty);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1347.userRegistrationForm.get("password").invalid && ctx_r1347.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 52, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1379.userRegistrationForm.get("password").value !== ctx_r1379.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1347.userRegistrationForm.get("password").value !== ctx_r1347.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 54, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1379.userRegistrationForm.get("password").value !== ctx_r1379.userRegistrationForm.get("passwordconf").value && ctx_r1379.userRegistrationForm.get("passwordconf").value);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1347.userRegistrationForm.get("password").value !== ctx_r1347.userRegistrationForm.get("passwordconf").value && ctx_r1347.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1379.isAnonymousConsentEnabled)("ngIfElse", _r1386);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1347.isAnonymousConsentEnabled)("ngIfElse", _r1354);
     ɵngcc0.ɵɵadvance(8);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(64, 56, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -9094,11 +8871,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1393 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1361 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1393.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1361.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1393.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1361.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -9106,45 +8883,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1394 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1362 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1394.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1362.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1401 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1369 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1401.name, ": ", variant_r1401.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1369.name, ": ", variant_r1369.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1401 = ctx.$implicit;
+    const variant_r1369 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1401.name && variant_r1401.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1369.name && variant_r1369.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1395 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1363 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1395.cartEntry.product.baseOptions[0] == null ? null : ctx_r1395.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1395.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1363.cartEntry.product.baseOptions[0] == null ? null : ctx_r1363.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1363.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1404 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1372 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1404.cartEntry.basePrice == null ? null : ctx_r1404.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1372.cartEntry.basePrice == null ? null : ctx_r1372.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -9155,17 +8932,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1396 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1364 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1396.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1364.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1397 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1397.cartEntry.product);
+    const ctx_r1365 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1365.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -9177,18 +8954,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1413 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1381 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1413); const ctx_r1412 = ɵngcc0.ɵɵnextContext(3); return ctx_r1412.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1381); const ctx_r1380 = ɵngcc0.ɵɵnextContext(3); return ctx_r1380.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1411 = ctx.$implicit;
-    const ctx_r1410 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1379 = ctx.$implicit;
+    const ctx_r1378 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1411)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1410.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1379)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1378.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -9211,7 +8988,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1408 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1376 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -9219,18 +8996,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1408 == null ? null : wishList_r1408.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1376 == null ? null : wishList_r1376.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1408 = ctx.ngIf;
+    const wishList_r1376 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1406 = ɵngcc0.ɵɵreference(3);
+    const _r1374 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1408 == null ? null : wishList_r1408.entries == null ? null : wishList_r1408.entries.length) > 0)("ngIfElse", _r1406);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1376 == null ? null : wishList_r1376.entries == null ? null : wishList_r1376.entries.length) > 0)("ngIfElse", _r1374);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -12853,13 +12630,13 @@ let AddedToCartDialogComponent = class AddedToCartDialogComponent {
         this.modalService.dismissActiveModal(reason);
     }
 };
-AddedToCartDialogComponent.ɵfac = function AddedToCartDialogComponent_Factory(t) { return new (t || AddedToCartDialogComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
+AddedToCartDialogComponent.ɵfac = function AddedToCartDialogComponent_Factory(t) { return new (t || AddedToCartDialogComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
 AddedToCartDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddedToCartDialogComponent, selectors: [["cx-added-to-cart-dialog"]], viewQuery: function AddedToCartDialogComponent_Query(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵviewQuery(_c7, true, ElementRef);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.dialog = _t.first);
-    } }, decls: 6, vars: 4, consts: [["dialog", ""], [4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-dialog-header", "modal-header"], [1, "cx-dialog-title", "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], ["class", "cx-dialog-body modal-body", 4, "ngIf"], [1, "cx-dialog-body", "modal-body"], [1, "cx-dialog-row"], [1, "cx-dialog-item", "col-sm-12", "col-md-6"], [3, "item", "compact", "quantityControl", "promotionLocation", "view"], [1, "cx-dialog-separator", "col-sm-12", "d-xs-block", "d-sm-block", "d-md-none"], [1, "cx-dialog-actions", "col-sm-12", "col-md-6"], ["class", "cx-dialog-total", 4, "ngIf"], [4, "cxFeatureLevel"], [1, "cx-dialog-buttons"], ["cxAutoFocus", "", 1, "btn", "btn-primary", 3, "routerLink", "click"], [1, "btn", "btn-secondary", 3, "routerLink", "click"], [1, "cx-dialog-total"], ["class", "cx-dialog-promotions", 4, "ngIf"], [1, "cx-dialog-promotions"], [3, "promotions"], [1, "col-sm-12"]], template: function AddedToCartDialogComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 6, vars: 4, consts: [["dialog", ""], [4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-dialog-header", "modal-header"], [1, "cx-dialog-title", "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], ["class", "cx-dialog-body modal-body", 4, "ngIf"], [1, "cx-dialog-body", "modal-body"], [1, "cx-dialog-row"], [1, "cx-dialog-item", "col-sm-12", "col-md-6"], [3, "item", "compact", "quantityControl", "promotionLocation", "view"], [1, "cx-dialog-separator", "col-sm-12", "d-xs-block", "d-sm-block", "d-md-none"], [1, "cx-dialog-actions", "col-sm-12", "col-md-6"], ["class", "cx-dialog-total", 4, "ngIf"], ["class", "cx-dialog-promotions", 4, "ngIf"], [1, "cx-dialog-buttons"], ["cxAutoFocus", "", 1, "btn", "btn-primary", 3, "routerLink", "click"], [1, "btn", "btn-secondary", 3, "routerLink", "click"], [1, "cx-dialog-total"], [1, "cx-dialog-promotions"], [3, "promotions"], [1, "col-sm-12"]], template: function AddedToCartDialogComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", null, 0);
         ɵngcc0.ɵɵtemplate(2, AddedToCartDialogComponent_ng_container_2_Template, 10, 7, "ng-container", 1);
         ɵngcc0.ɵɵpipe(3, "async");
@@ -12870,12 +12647,12 @@ AddedToCartDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddedToCa
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 2, ctx.loaded$) || ctx.modalIsOpen)("ngIfElse", _r88);
     } }, directives: function () { return [ɵngcc4.NgIf, IconComponent,
-        CartItemComponent, ɵngcc1.FeatureLevelDirective, ɵngcc5.RouterLinkWithHref, AutoFocusDirective,
+        CartItemComponent, ɵngcc5.RouterLinkWithHref, AutoFocusDirective,
         PromotionsComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe]; }, encapsulation: 2 });
 AddedToCartDialogComponent.ctorParameters = () => [
     { type: ModalService },
-    { type: CartService },
+    { type: ActiveCartService },
     { type: PromotionService }
 ];
 __decorate([
@@ -13529,12 +13306,12 @@ ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComp
         ɵngcc0.ɵɵtext(6, " +\n");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r188 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("disabled", _r188.disabled || (_r188 == null ? null : _r188.value) <= ctx.min);
+        const _r187 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("disabled", _r187.disabled || (_r187 == null ? null : _r187.value) <= ctx.min);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("min", ctx.min)("max", ctx.max)("step", ctx.step)("formControl", ɵngcc0.ɵɵpipeBind1(4, 6, ctx.getControl()));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("disabled", _r188.disabled || (_r188 == null ? null : _r188.value) >= ctx.max);
+        ɵngcc0.ɵɵproperty("disabled", _r187.disabled || (_r187 == null ? null : _r187.value) >= ctx.max);
     } }, directives: [ɵngcc7.NumberValueAccessor, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 __decorate([
     Input()
@@ -13596,8 +13373,8 @@ GenericLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GenericLinkComp
         ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_Template, 2, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵtemplate(3, GenericLinkComponent_ng_template_3_Template, 1, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r190 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r190);
+        const _r189 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r189);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgTemplateOutlet, ɵngcc5.RouterLinkWithHref], encapsulation: 2 });
 __decorate([
     Input()
@@ -14543,8 +14320,8 @@ AppliedCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AppliedCoupo
         ɵngcc0.ɵɵtemplate(0, AppliedCouponsComponent_div_0_Template, 3, 2, "div", 0);
         ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_Template, 2, 1, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r246 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r246);
+        const _r245 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r245);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, IconComponent], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 AppliedCouponsComponent.ctorParameters = () => [
     { type: CartVoucherService }
@@ -14711,7 +14488,6 @@ let CartItemListComponent = class CartItemListComponent {
             optionalBtn: null,
         };
         this._items = [];
-        this.potentialProductPromotions = [];
         this.promotionLocation = PromotionLocation.ActiveCart;
     }
     set items(items) {
@@ -14789,45 +14565,9 @@ let CartItemListComponent = class CartItemListComponent {
             }
         }), map(() => this.form.get(item.product.code)));
     }
-    getPotentialProductPromotionsForItem(item) {
-        const entryPromotions = [];
-        //don't show promotions in saveforlater
-        if (this.options.isSaveForLater) {
-            return entryPromotions;
-        }
-        if (this.potentialProductPromotions &&
-            this.potentialProductPromotions.length > 0) {
-            for (const promotion of this.potentialProductPromotions) {
-                if (promotion.description &&
-                    promotion.consumedEntries &&
-                    promotion.consumedEntries.length > 0) {
-                    for (const consumedEntry of promotion.consumedEntries) {
-                        if (this.isConsumedByEntry(consumedEntry, item)) {
-                            entryPromotions.push(promotion);
-                        }
-                    }
-                }
-            }
-        }
-        return entryPromotions;
-    }
-    isConsumedByEntry(consumedEntry, entry) {
-        const consumedEntryNumber = consumedEntry.orderEntryNumber;
-        if (entry.entries && entry.entries.length > 0) {
-            for (const subEntry of entry.entries) {
-                if (subEntry.entryNumber === consumedEntryNumber) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else {
-            return consumedEntryNumber === entry.entryNumber;
-        }
-    }
 };
 CartItemListComponent.ɵfac = function CartItemListComponent_Factory(t) { return new (t || CartItemListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
-CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListComponent, selectors: [["cx-cart-item-list"]], inputs: { readonly: "readonly", hasHeader: "hasHeader", options: "options", potentialProductPromotions: "potentialProductPromotions", promotionLocation: "promotionLocation", items: "items", setLoading: ["cartIsLoading", "setLoading"] }, decls: 4, vars: 2, consts: [["class", "d-none d-md-block d-lg-block d-xl-block", 4, "ngIf"], ["class", "cx-item-list-row", 4, "ngFor", "ngForOf"], ["totalHeader", ""], [1, "d-none", "d-md-block", "d-lg-block", "d-xl-block"], [1, "cx-item-list-header", "row"], [1, "cx-item-list-desc", "col-md-5", "col-lg-5", "col-xl-6"], [1, "cx-item-list-price", "col-md-3", "col-lg-2", "col-xl-2"], [1, "cx-item-list-qty", "col-md-2", "col-lg-3", "col-xl-2"], [4, "ngIf", "ngIfElse"], [1, "cx-item-list-total", "col-md-2", "col-lg-2", "col-xl-2"], [1, "cx-item-list-row"], ["class", "cx-item-list-items", 3, "is-changed", 4, "ngIf"], [1, "cx-item-list-items"], [3, "item", "quantityControl", "readonly", "potentialProductPromotions", "promotionLocation", "options"]], template: function CartItemListComponent_Template(rf, ctx) { if (rf & 1) {
+CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListComponent, selectors: [["cx-cart-item-list"]], inputs: { readonly: "readonly", hasHeader: "hasHeader", options: "options", promotionLocation: "promotionLocation", items: "items", setLoading: ["cartIsLoading", "setLoading"] }, decls: 4, vars: 2, consts: [["class", "d-none d-md-block d-lg-block d-xl-block", 4, "ngIf"], ["class", "cx-item-list-row", 4, "ngFor", "ngForOf"], ["totalHeader", ""], [1, "d-none", "d-md-block", "d-lg-block", "d-xl-block"], [1, "cx-item-list-header", "row"], [1, "cx-item-list-desc", "col-md-5", "col-lg-5", "col-xl-6"], [1, "cx-item-list-price", "col-md-3", "col-lg-2", "col-xl-2"], [1, "cx-item-list-qty", "col-md-2", "col-lg-3", "col-xl-2"], [4, "ngIf", "ngIfElse"], [1, "cx-item-list-total", "col-md-2", "col-lg-2", "col-xl-2"], [1, "cx-item-list-row"], ["class", "cx-item-list-items", 3, "is-changed", 4, "ngIf"], [1, "cx-item-list-items"], [3, "item", "quantityControl", "readonly", "promotionLocation", "options"]], template: function CartItemListComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartItemListComponent_div_0_Template, 12, 11, "div", 0);
         ɵngcc0.ɵɵtemplate(1, CartItemListComponent_div_1_Template, 3, 3, "div", 1);
         ɵngcc0.ɵɵtemplate(2, CartItemListComponent_ng_template_2_Template, 3, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
@@ -14853,9 +14593,6 @@ __decorate([
 __decorate([
     Input('items')
 ], CartItemListComponent.prototype, "items", null);
-__decorate([
-    Input()
-], CartItemListComponent.prototype, "potentialProductPromotions", void 0);
 __decorate([
     Input()
 ], CartItemListComponent.prototype, "promotionLocation", void 0);
@@ -14903,7 +14640,7 @@ let CartItemComponent = class CartItemComponent {
     }
 };
 CartItemComponent.ɵfac = function CartItemComponent_Factory(t) { return new (t || CartItemComponent)(ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
-CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent, selectors: [["cx-cart-item"]], inputs: { compact: "compact", readonly: "readonly", promotionLocation: "promotionLocation", options: "options", item: "item", potentialProductPromotions: "potentialProductPromotions", quantityControl: "quantityControl" }, outputs: { view: "view" }, decls: 27, vars: 31, consts: [[3, "ngClass"], [1, "col-2", "cx-image-container"], ["tabindex", "-1", 3, "routerLink", "click"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "cxFeatureLevel"], ["class", "cx-price", 3, "ngClass", 4, "ngIf"], [1, "cx-quantity", 3, "ngClass"], ["placement", "left", 1, "cx-label", 3, "ngClass", "title"], [1, "cx-value"], [3, "control", "readonly", "max", "allowZero"], [4, "ngIf", "ngIfElse"], ["class", "cx-availability col-12", 4, "ngIf"], ["class", "cx-actions col-12", 4, "ngIf"], ["total", ""], [1, "cx-name"], [1, "cx-link", 3, "routerLink", "click"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label"], [4, "ngIf"], ["class", "cx-label", 4, "ngIf"], [1, "cx-price", 3, "ngClass"], [1, "cx-label", 3, "ngClass"], ["class", "cx-value", 4, "ngIf"], [1, "cx-total", 3, "ngClass"], ["class", "cx-value", 4, "ngIf", "ngIfElse"], ["forceInstock", ""], [1, "cx-availability", "col-12"], [3, "promotions"], [1, "cx-actions", "col-12"], [1, "col-md-3", "cx-remove-btn"], [1, "link", 3, "disabled", "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "cx-total", 3, "ngClass", 4, "ngIf"]], template: function CartItemComponent_Template(rf, ctx) { if (rf & 1) {
+CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent, selectors: [["cx-cart-item"]], inputs: { compact: "compact", readonly: "readonly", promotionLocation: "promotionLocation", options: "options", item: "item", quantityControl: "quantityControl" }, outputs: { view: "view" }, decls: 27, vars: 32, consts: [[3, "ngClass"], [1, "col-2", "cx-image-container"], ["tabindex", "-1", 3, "routerLink", "click"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "cxFeatureLevel"], ["class", "cx-price", 3, "ngClass", 4, "ngIf"], [1, "cx-quantity", 3, "ngClass"], ["placement", "left", 1, "cx-label", 3, "ngClass", "title"], [1, "cx-value"], [3, "control", "readonly", "max", "allowZero"], [4, "ngIf", "ngIfElse"], ["class", "cx-availability col-12", 4, "ngIf"], [4, "ngIf"], ["class", "cx-actions col-12", 4, "ngIf"], ["total", ""], [1, "cx-name"], [1, "cx-link", 3, "routerLink", "click"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], [1, "cx-label"], ["class", "cx-label", 4, "ngIf"], [1, "cx-price", 3, "ngClass"], [1, "cx-label", 3, "ngClass"], ["class", "cx-value", 4, "ngIf"], [1, "cx-total", 3, "ngClass"], ["class", "cx-value", 4, "ngIf", "ngIfElse"], ["forceInstock", ""], [1, "cx-availability", "col-12"], [3, "promotions"], [1, "cx-actions", "col-12"], [1, "col-md-3", "cx-remove-btn"], [1, "link", 3, "disabled", "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "cx-total", 3, "ngClass", 4, "ngIf"]], template: function CartItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
         ɵngcc0.ɵɵelementStart(2, "a", 2);
@@ -14934,17 +14671,17 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵtemplate(20, CartItemComponent_ng_container_20_Template, 8, 7, "ng-container", 14);
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(21, CartItemComponent_div_21_Template, 3, 3, "div", 15);
-        ɵngcc0.ɵɵtemplate(22, CartItemComponent_ng_container_22_Template, 2, 1, "ng-container", 8);
-        ɵngcc0.ɵɵtemplate(23, CartItemComponent_ng_container_23_Template, 3, 3, "ng-container", 8);
-        ɵngcc0.ɵɵtemplate(24, CartItemComponent_div_24_Template, 6, 5, "div", 16);
+        ɵngcc0.ɵɵtemplate(22, CartItemComponent_ng_container_22_Template, 2, 1, "ng-container", 16);
+        ɵngcc0.ɵɵpipe(23, "async");
+        ɵngcc0.ɵɵtemplate(24, CartItemComponent_div_24_Template, 6, 5, "div", 17);
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵtemplate(25, CartItemComponent_ng_template_25_Template, 1, 1, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
+        ɵngcc0.ɵɵtemplate(25, CartItemComponent_ng_template_25_Template, 1, 1, "ng-template", null, 18, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r284 = ɵngcc0.ɵɵreference(26);
+        const _r282 = ɵngcc0.ɵɵreference(26);
         ɵngcc0.ɵɵproperty("ngClass", ctx.compact ? "cx-compact row" : "row");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 23, ɵngcc0.ɵɵpureFunction1(29, _c14, ctx.item.product)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 22, ɵngcc0.ɵɵpureFunction1(30, _c14, ctx.item.product)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("container", ctx.item.product.images == null ? null : ctx.item.product.images.PRIMARY);
         ɵngcc0.ɵɵadvance(3);
@@ -14962,21 +14699,19 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngClass", ctx.compact ? "" : " col-3");
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(15, 25, "cartItems.quantityTitle"));
+        ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(15, 24, "cartItems.quantityTitle"));
         ɵngcc0.ɵɵproperty("ngClass", ctx.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 27, "cartItems.quantity"), " ");
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 26, "cartItems.quantity"), " ");
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("control", ctx.quantityControl)("readonly", !ctx.item.updateable || ctx.readonly || ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("max", (ctx.item.product.stock == null ? null : ctx.item.product.stock.stockLevel) || 1000)("allowZero", true);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r284);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r282);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.isProductOutOfStock(ctx.item.product));
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("cxFeatureLevel", "!1.5");
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.5");
-        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(23, 28, ctx.appliedProductPromotions$));
+        ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", (!ctx.readonly || ctx.options.isSaveForLater) && ctx.item.updateable);
     } }, directives: [ɵngcc4.NgClass, ɵngcc5.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ɵngcc1.FeatureLevelDirective, ItemCounterComponent, ɵngcc4.NgForOf, PromotionsComponent, ɵngcc4.NgTemplateOutlet], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 CartItemComponent.ctorParameters = () => [
@@ -14989,9 +14724,6 @@ __decorate([
 __decorate([
     Input()
 ], CartItemComponent.prototype, "item", void 0);
-__decorate([
-    Input()
-], CartItemComponent.prototype, "potentialProductPromotions", void 0);
 __decorate([
     Input()
 ], CartItemComponent.prototype, "readonly", void 0);
@@ -15074,8 +14806,8 @@ AddToCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToCart
         ]] });
 
 let CartDetailsComponent = class CartDetailsComponent {
-    constructor(cartService, promotionService, selectiveCartService, authService, routingService, featureConfig) {
-        this.cartService = cartService;
+    constructor(activeCartService, promotionService, selectiveCartService, authService, routingService, featureConfig) {
+        this.activeCartService = activeCartService;
         this.promotionService = promotionService;
         this.selectiveCartService = selectiveCartService;
         this.authService = authService;
@@ -15085,32 +14817,24 @@ let CartDetailsComponent = class CartDetailsComponent {
         this.promotionLocation = PromotionLocation.ActiveCart;
     }
     ngOnInit() {
-        this.cart$ = this.cartService.getActive();
-        /**
-         * TODO Remove the check for promotion service
-         * Issue: GH-5670
-         */
-        if (this.promotionService) {
-            this.promotions$ = this.promotionService.getOrderPromotionsFromCart();
-        }
-        this.entries$ = this.cartService
+        this.cart$ = this.activeCartService.getActive();
+        this.promotions$ = this.promotionService.getOrderPromotionsFromCart();
+        this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter(entries => entries.length > 0));
         if (this.isSaveForLaterEnabled()) {
             this.cartLoaded$ = combineLatest([
-                this.cartService.getLoaded(),
+                this.activeCartService.getLoaded(),
                 this.selectiveCartService.getLoaded(),
                 this.authService.isUserLoggedIn(),
             ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded));
         }
         //TODO remove for #5958
         else {
-            this.cartLoaded$ = this.cartService.getLoaded();
+            this.cartLoaded$ = this.activeCartService.getLoaded();
         }
         //TODO  remove for #5958 end
-        if (this.promotionService) {
-            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
-        }
+        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
     }
     //TODO remove feature flag for #5958
     isSaveForLaterEnabled() {
@@ -15120,23 +14844,9 @@ let CartDetailsComponent = class CartDetailsComponent {
         return false;
     }
     //TODO remove feature flag for #5958 end
-    /**
-     * @deprecated Since 1.5
-     * Use promotionService instead of the promotion inputs.
-     * Remove issue: #5670
-     */
-    getAllPromotionsForCart(cart) {
-        const potentialPromotions = [];
-        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
-        potentialPromotions.push(...(cart.potentialProductPromotions || []));
-        const appliedPromotions = [];
-        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
-        appliedPromotions.push(...(cart.appliedProductPromotions || []));
-        return [...potentialPromotions, ...appliedPromotions];
-    }
     saveForLater(item) {
         if (this.loggedIn) {
-            this.cartService.removeEntry(item);
+            this.activeCartService.removeEntry(item);
             this.selectiveCartService.addEntry(item.product.code, item.quantity);
         }
         else {
@@ -15144,17 +14854,17 @@ let CartDetailsComponent = class CartDetailsComponent {
         }
     }
 };
-CartDetailsComponent.ɵfac = function CartDetailsComponent_Factory(t) { return new (t || CartDetailsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
-CartDetailsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartDetailsComponent, selectors: [["cx-cart-details"]], decls: 4, vars: 3, consts: [[4, "ngIf"], ["saveForLaterBtn", ""], ["class", "cart-details-wrapper", 4, "ngIf"], [1, "cart-details-wrapper"], [1, "cx-total"], [4, "cxFeatureLevel"], [3, "promotions"], [3, "items", "cartIsLoading", "potentialProductPromotions"], [3, "items", "cartIsLoading", "promotionLocation", "options"], [1, "col-md-3", "col-lg-3", "col-xl-3", "cx-sfl-btn"], ["type", "button", 1, "link", 3, "disabled", "click"]], template: function CartDetailsComponent_Template(rf, ctx) { if (rf & 1) {
+CartDetailsComponent.ɵfac = function CartDetailsComponent_Factory(t) { return new (t || CartDetailsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartDetailsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartDetailsComponent, selectors: [["cx-cart-details"]], decls: 4, vars: 3, consts: [[4, "ngIf"], ["saveForLaterBtn", ""], ["class", "cart-details-wrapper", 4, "ngIf"], [1, "cart-details-wrapper"], [1, "cx-total"], [3, "items", "cartIsLoading", "promotionLocation", "options"], [3, "promotions"], [1, "col-md-3", "col-lg-3", "col-xl-3", "cx-sfl-btn"], ["type", "button", 1, "link", 3, "disabled", "click"]], template: function CartDetailsComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartDetailsComponent_ng_container_0_Template, 3, 3, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, CartDetailsComponent_ng_template_2_Template, 4, 4, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc1.FeatureLevelDirective, PromotionsComponent,
-        CartItemListComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, CartItemListComponent,
+        PromotionsComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CartDetailsComponent.ctorParameters = () => [
-    { type: CartService },
+    { type: ActiveCartService },
     { type: PromotionService },
     { type: SelectiveCartService },
     { type: AuthService },
@@ -16212,14 +15922,14 @@ DeliveryModeComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: DeliveryModeCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(17, DeliveryModeComponent_ng_template_17_Template, 2, 0, "ng-template", null, 9, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r398 = ɵngcc0.ɵɵreference(18);
+        const _r391 = ɵngcc0.ɵɵreference(18);
         var tmp_2_0 = null;
         const currVal_2 = (tmp_2_0 = ɵngcc0.ɵɵpipeBind1(7, 9, ctx.supportedDeliveryModes$)) == null ? null : tmp_2_0.length;
         ɵngcc0.ɵɵproperty("formGroup", ctx.mode);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 7, "checkoutShipping.shippingMethod"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r398);
+        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r391);
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 11, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -16746,8 +16456,8 @@ PaymentFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentFormComp
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, PaymentFormComponent_ng_template_2_Template, 1, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r422 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r422);
+        const _r415 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r415);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, IconComponent,
         CardComponent,
         BillingAddressFormComponent,
@@ -17122,11 +16832,11 @@ PaymentDetailsSetGuard.ctorParameters = () => [
 PaymentDetailsSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
 
 let ReviewSubmitComponent = class ReviewSubmitComponent {
-    constructor(checkoutDeliveryService, checkoutPaymentService, userAddressService, cartService, translation, checkoutConfigService, promotionService) {
+    constructor(checkoutDeliveryService, checkoutPaymentService, userAddressService, activeCartService, translation, checkoutConfigService, promotionService) {
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
         this.userAddressService = userAddressService;
-        this.cartService = cartService;
+        this.activeCartService = activeCartService;
         this.translation = translation;
         this.checkoutConfigService = checkoutConfigService;
         this.promotionService = promotionService;
@@ -17134,8 +16844,8 @@ let ReviewSubmitComponent = class ReviewSubmitComponent {
         this.promotionLocation = PromotionLocation.ActiveCart;
     }
     ngOnInit() {
-        this.cart$ = this.cartService.getActive();
-        this.entries$ = this.cartService.getEntries();
+        this.cart$ = this.activeCartService.getActive();
+        this.entries$ = this.activeCartService.getEntries();
         this.deliveryAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
         this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
@@ -17203,15 +16913,12 @@ let ReviewSubmitComponent = class ReviewSubmitComponent {
         }));
     }
     getCheckoutStepUrl(stepType) {
-        // TODO(issue:#4121) Deprecated since 1.1.0
-        if (this.checkoutConfigService) {
-            const step = this.checkoutConfigService.getCheckoutStep(stepType);
-            return step && step.routeName;
-        }
+        const step = this.checkoutConfigService.getCheckoutStep(stepType);
+        return step && step.routeName;
     }
 };
-ReviewSubmitComponent.ɵfac = function ReviewSubmitComponent_Factory(t) { return new (t || ReviewSubmitComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
-ReviewSubmitComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ReviewSubmitComponent, selectors: [["cx-review-submit"]], decls: 28, vars: 24, consts: [[1, "cx-review"], [1, "cx-review-title", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-review-summary", "row"], [1, "col-md-12", "col-lg-6", "col-xl-4"], [1, "cx-review-summary-wrapper"], [1, "cx-review-summary-card", "cx-review-card-address"], [3, "content"], ["class", "cx-review-summary-edit-step", 4, "cxFeatureLevel"], [1, "cx-review-summary-card", "cx-review-card-shipping"], [3, "content", 4, "ngIf"], [1, "cx-review-summary-card", "cx-review-card-payment"], [4, "ngIf"], [1, "cx-review-summary-edit-step"], [3, "routerLink"], [1, "cx-review-cart-total", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-review-cart-heading", "d-block", "d-lg-none", "d-xl-none"], ["class", "cx-review-cart-item col-md-12", 4, "ngIf"], [1, "cx-review-cart-item", "col-md-12"], [4, "cxFeatureLevel"], [3, "items", "readonly", "potentialProductPromotions"], [3, "items", "readonly", "promotionLocation"], [3, "promotions"]], template: function ReviewSubmitComponent_Template(rf, ctx) { if (rf & 1) {
+ReviewSubmitComponent.ɵfac = function ReviewSubmitComponent_Factory(t) { return new (t || ReviewSubmitComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
+ReviewSubmitComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ReviewSubmitComponent, selectors: [["cx-review-submit"]], decls: 28, vars: 24, consts: [[1, "cx-review"], [1, "cx-review-title", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-review-summary", "row"], [1, "col-md-12", "col-lg-6", "col-xl-4"], [1, "cx-review-summary-wrapper"], [1, "cx-review-summary-card", "cx-review-card-address"], [3, "content"], ["class", "cx-review-summary-edit-step", 4, "cxFeatureLevel"], [1, "cx-review-summary-card", "cx-review-card-shipping"], [3, "content", 4, "ngIf"], [1, "cx-review-summary-card", "cx-review-card-payment"], [4, "ngIf"], [1, "cx-review-summary-edit-step"], [3, "routerLink"], [1, "cx-review-cart-total", "d-none", "d-lg-block", "d-xl-block"], [1, "cx-review-cart-heading", "d-block", "d-lg-none", "d-xl-none"], ["class", "cx-review-cart-item col-md-12", 4, "ngIf"], [1, "cx-review-cart-item", "col-md-12"], [3, "items", "readonly", "promotionLocation"], [3, "promotions"]], template: function ReviewSubmitComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "h3", 1);
         ɵngcc0.ɵɵtext(2);
@@ -17275,7 +16982,7 @@ ReviewSubmitComponent.ctorParameters = () => [
     { type: CheckoutDeliveryService },
     { type: CheckoutPaymentService },
     { type: UserAddressService },
-    { type: CartService },
+    { type: ActiveCartService },
     { type: TranslationService },
     { type: CheckoutConfigService },
     { type: PromotionService }
@@ -18288,8 +17995,8 @@ ConsentManagementComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ConsentMa
         ɵngcc0.ɵɵtemplate(0, ConsentManagementComponent_ng_container_0_Template, 5, 4, "ng-container", 0);
         ɵngcc0.ɵɵtemplate(1, ConsentManagementComponent_ng_template_1_Template, 4, 4, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r547 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isLevel13)("ngIfElse", _r547);
+        const _r535 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isLevel13)("ngIfElse", _r535);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent, ɵngcc4.NgForOf, ConsentManagementFormComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 ConsentManagementComponent.ctorParameters = () => [
     { type: UserConsentService },
@@ -18427,8 +18134,8 @@ BannerCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: BannerCarous
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, BannerCarouselComponent_ng_template_2_Template, 1, 5, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r574 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.getItems()))("template", _r574);
+        const _r562 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.getItems()))("template", _r562);
     } }, directives: [CarouselComponent,
         ComponentWrapperDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 BannerCarouselComponent.ctorParameters = () => [
@@ -19061,7 +18768,7 @@ AmendOrderActionsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AmendOrde
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c18, ctx.orderCode))));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c28, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c17, ctx.orderCode))));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 6, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -19686,27 +19393,15 @@ let OrderDetailItemsComponent = class OrderDetailItemsComponent {
             }
         }));
     }
-    /**
-     * @deprecated
-     * NOTE: This function will be removed in version 2.0
-     */
-    getConsignmentProducts(consignment) {
-        const products = [];
-        consignment.entries.forEach(element => {
-            products.push(element.orderEntry);
-        });
-        return products;
-    }
 };
 OrderDetailItemsComponent.ɵfac = function OrderDetailItemsComponent_Factory(t) { return new (t || OrderDetailItemsComponent)(ɵngcc0.ɵɵdirectiveInject(OrderDetailsService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
-OrderDetailItemsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderDetailItemsComponent, selectors: [["cx-order-details-items"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [4, "cxFeatureLevel"], [3, "order", "consignments", 4, "ngIf"], [3, "promotions"], [3, "order", "consignments"], ["class", "cx-list row", 4, "ngFor", "ngForOf"], ["class", "cx-list row", 4, "ngIf"], [1, "cx-list", "row"], [1, "cx-list-header", "col-12"], [1, "cx-list-status"], ["class", "cx-list-date", 4, "ngIf"], [3, "orderCode", "consignment", 4, "cxFeature"], [1, "cx-list-item", "col-12"], [3, "items", "readonly", "promotionLocation"], [1, "cx-list-date"], [3, "orderCode", "consignment"]], template: function OrderDetailItemsComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, OrderDetailItemsComponent_ng_container_0_Template, 3, 2, "ng-container", 0);
+OrderDetailItemsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderDetailItemsComponent, selectors: [["cx-order-details-items"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [3, "order", "consignments", 4, "ngIf"], [3, "promotions"], [3, "order", "consignments"]], template: function OrderDetailItemsComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, OrderDetailItemsComponent_ng_container_0_Template, 9, 12, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.order$));
-    } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc1.FeatureLevelDirective, PromotionsComponent,
-        OrderConsignedEntriesComponent, ɵngcc4.NgForOf, ɵngcc1.FeatureDirective, CartItemListComponent,
-        ConsignmentTrackingComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.CxDatePipe]; }, encapsulation: 2 });
+    } }, directives: function () { return [ɵngcc4.NgIf, PromotionsComponent,
+        OrderConsignedEntriesComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 OrderDetailItemsComponent.ctorParameters = () => [
     { type: OrderDetailsService },
     { type: PromotionService }
@@ -19730,9 +19425,9 @@ TrackingEventsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: TrackingEven
         ɵngcc0.ɵɵtemplate(5, TrackingEventsComponent_ng_template_5_Template, 12, 3, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r750 = ɵngcc0.ɵɵreference(6);
+        const _r719 = ɵngcc0.ɵɵreference(6);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.tracking$))("ngIfElse", _r750);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.tracking$))("ngIfElse", _r719);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.CxDatePipe], encapsulation: 2 });
 TrackingEventsComponent.ctorParameters = () => [
     { type: NgbActiveModal },
@@ -20775,9 +20470,9 @@ UpdateEmailComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmailComp
         ɵngcc0.ɵɵtemplate(3, UpdateEmailComponent_ng_template_3_Template, 3, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r874 = ɵngcc0.ɵɵreference(4);
+        const _r843 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.isLoading$))("ngIfElse", _r874);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.isLoading$))("ngIfElse", _r843);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdateEmailFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdateEmailComponent.ctorParameters = () => [
@@ -20990,9 +20685,9 @@ UpdatePasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePasswo
         ɵngcc0.ɵɵtemplate(3, UpdatePasswordComponent_ng_template_3_Template, 3, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r883 = ɵngcc0.ɵɵreference(4);
+        const _r852 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r883);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r852);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdatePasswordFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdatePasswordComponent.ctorParameters = () => [
@@ -21207,9 +20902,9 @@ UpdateProfileComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateProfile
         ɵngcc0.ɵɵtemplate(3, UpdateProfileComponent_ng_template_3_Template, 4, 3, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementContainerEnd();
     } if (rf & 2) {
-        const _r893 = ɵngcc0.ɵɵreference(4);
+        const _r862 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r893);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.loading$))("ngIfElse", _r862);
     } }, directives: [ɵngcc4.NgIf, SpinnerComponent,
         UpdateProfileFormComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 UpdateProfileComponent.ctorParameters = () => [
@@ -21373,9 +21068,9 @@ MyCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyCouponsComponen
         ɵngcc0.ɵɵtemplate(3, MyCouponsComponent_ng_template_3_Template, 2, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r900 = ɵngcc0.ɵɵreference(4);
+        const _r869 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx.couponsLoading$))("ngIfElse", _r900);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx.couponsLoading$))("ngIfElse", _r869);
     } }, directives: function () { return [ɵngcc4.NgIf, SortingComponent,
         PaginationComponent, ɵngcc4.NgForOf, IconComponent, ɵngcc5.RouterLinkWithHref, CouponCardComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2 });
@@ -22659,14 +22354,14 @@ let SearchBoxComponent = class SearchBoxComponent {
 };
 SearchBoxComponent.ɵfac = function SearchBoxComponent_Factory(t) { return new (t || SearchBoxComponent)(ɵngcc0.ɵɵdirectiveInject(SearchBoxComponentService), ɵngcc0.ɵɵdirectiveInject(CmsComponentData, 8), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef)); };
 SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponent, selectors: [["cx-searchbox"]], inputs: { queryText: "queryText" }, decls: 8, vars: 10, consts: [[1, "searchbox"], ["aria-label", "search", 3, "placeholder", "focus", "input", "blur", "keydown.escape", "keydown.enter", "keydown.arrowup", "keydown.arrowdown"], ["searchInput", ""], ["aria-label", "reset", "tabindex", "0", 1, "reset", 3, "type", "mousedown", "keydown.enter"], ["aria-label", "search", "tabindex", "0", 1, "search", 3, "type", "mousedown", "keydown.enter"], ["class", "results", 3, "click", 4, "ngIf"], [1, "results", 3, "click"], ["class", "message", 3, "innerHTML", 4, "ngIf"], [1, "suggestions"], [3, "innerHTML", "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur", 4, "ngFor", "ngForOf"], ["class", "products", 4, "ngIf"], [1, "message", 3, "innerHTML"], [3, "innerHTML", "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur"], [1, "products"], [3, "routerLink", "has-media", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur", 4, "ngFor", "ngForOf"], [3, "routerLink", "keydown.arrowup", "keydown.arrowdown", "keydown.enter", "keydown.escape", "blur"], ["format", "thumbnail", 3, "container", "alt", 4, "ngIf"], [1, "name", 3, "innerHTML"], [1, "price"], ["format", "thumbnail", 3, "container", "alt"]], template: function SearchBoxComponent_Template(rf, ctx) { if (rf & 1) {
-        const _r1026 = ɵngcc0.ɵɵgetCurrentView();
+        const _r995 = ɵngcc0.ɵɵgetCurrentView();
         ɵngcc0.ɵɵelementStart(0, "label", 0);
         ɵngcc0.ɵɵelementStart(1, "input", 1, 2);
-        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener() { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener() { ɵngcc0.ɵɵrestoreView(_r1026); const _r999 = ɵngcc0.ɵɵreference(2); return ctx.search(_r999.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const _r999 = ɵngcc0.ɵɵreference(2); ctx.close($event, true); return ctx.launchSearchResult($event, _r999.value); })("keydown.arrowup", function SearchBoxComponent_Template_input_keydown_arrowup_1_listener($event) { return ctx.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_Template_input_keydown_arrowdown_1_listener($event) { return ctx.focusNextChild($event); });
+        ɵngcc0.ɵɵlistener("focus", function SearchBoxComponent_Template_input_focus_1_listener() { return ctx.open(); })("input", function SearchBoxComponent_Template_input_input_1_listener() { ɵngcc0.ɵɵrestoreView(_r995); const _r968 = ɵngcc0.ɵɵreference(2); return ctx.search(_r968.value); })("blur", function SearchBoxComponent_Template_input_blur_1_listener($event) { return ctx.close($event); })("keydown.escape", function SearchBoxComponent_Template_input_keydown_escape_1_listener($event) { return ctx.close($event); })("keydown.enter", function SearchBoxComponent_Template_input_keydown_enter_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r995); const _r968 = ɵngcc0.ɵɵreference(2); ctx.close($event, true); return ctx.launchSearchResult($event, _r968.value); })("keydown.arrowup", function SearchBoxComponent_Template_input_keydown_arrowup_1_listener($event) { return ctx.focusPreviousChild($event); })("keydown.arrowdown", function SearchBoxComponent_Template_input_keydown_arrowdown_1_listener($event) { return ctx.focusNextChild($event); });
         ɵngcc0.ɵɵpipe(3, "cxTranslate");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "cx-icon", 3);
-        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener() { ɵngcc0.ɵɵrestoreView(_r1026); const _r999 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r999); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_4_listener() { ɵngcc0.ɵɵrestoreView(_r1026); const _r999 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r999); });
+        ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_4_listener() { ɵngcc0.ɵɵrestoreView(_r995); const _r968 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r968); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_4_listener() { ɵngcc0.ɵɵrestoreView(_r995); const _r968 = ɵngcc0.ɵɵreference(2); return ctx.clear(_r968); });
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(5, "cx-icon", 4);
         ɵngcc0.ɵɵlistener("mousedown", function SearchBoxComponent_Template_cx_icon_mousedown_5_listener($event) { return ctx.avoidReopen($event); })("keydown.enter", function SearchBoxComponent_Template_cx_icon_keydown_enter_5_listener($event) { return ctx.avoidReopen($event); });
@@ -22675,8 +22370,8 @@ SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponen
         ɵngcc0.ɵɵtemplate(6, SearchBoxComponent_div_6_Template, 5, 3, "div", 5);
         ɵngcc0.ɵɵpipe(7, "async");
     } if (rf & 2) {
-        const _r999 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵclassProp("dirty", !!_r999.value);
+        const _r968 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵclassProp("dirty", !!_r968.value);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("placeholder", ɵngcc0.ɵɵpipeBind1(3, 6, "searchBox.placeholder"));
         ɵngcc0.ɵɵadvance(3);
@@ -22743,12 +22438,12 @@ let OrderConfirmationItemsComponent = class OrderConfirmationItemsComponent {
     }
 };
 OrderConfirmationItemsComponent.ɵfac = function OrderConfirmationItemsComponent_Factory(t) { return new (t || OrderConfirmationItemsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
-OrderConfirmationItemsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderConfirmationItemsComponent, selectors: [["cx-order-confirmation-items"]], decls: 2, vars: 3, consts: [["class", "cx-order-items container", 4, "ngIf"], [1, "cx-order-items", "container"], [1, "cx-order-items-header"], [4, "cxFeatureLevel"], [3, "items", "readonly", "promotionLocation"], [4, "ngIf"], [3, "promotions"]], template: function OrderConfirmationItemsComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, OrderConfirmationItemsComponent_div_0_Template, 6, 7, "div", 0);
+OrderConfirmationItemsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderConfirmationItemsComponent, selectors: [["cx-order-confirmation-items"]], decls: 2, vars: 3, consts: [["class", "cx-order-items container", 4, "ngIf"], [1, "cx-order-items", "container"], [1, "cx-order-items-header"], [4, "ngIf"], [3, "items", "readonly", "promotionLocation"], [3, "promotions"]], template: function OrderConfirmationItemsComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, OrderConfirmationItemsComponent_div_0_Template, 7, 9, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.order$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc1.FeatureLevelDirective, CartItemListComponent,
+    } }, directives: [ɵngcc4.NgIf, CartItemListComponent,
         PromotionsComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 OrderConfirmationItemsComponent.ctorParameters = () => [
     { type: CheckoutService },
@@ -23124,8 +22819,8 @@ ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCaro
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, ProductCarouselComponent_ng_template_3_Template, 7, 8, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1042 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r1042);
+        const _r1010 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r1010);
     } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
@@ -23177,8 +22872,8 @@ ProductReferencesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductRe
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, ProductReferencesComponent_ng_template_3_Template, 7, 8, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1047 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r1047);
+        const _r1015 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r1015);
     } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductReferencesComponent.ctorParameters = () => [
     { type: CmsComponentData },
@@ -24566,11 +24261,11 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(8, "async");
         ɵngcc0.ɵɵtemplate(9, StockNotificationDialogComponent_ng_template_9_Template, 7, 3, "ng-template", null, 5, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1254 = ɵngcc0.ɵɵreference(10);
+        const _r1222 = ɵngcc0.ɵɵreference(10);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "stockNotification.subscriptionDialog.header"), " ");
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1254);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1222);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 StockNotificationDialogComponent.ctorParameters = () => [
     { type: ModalService },
@@ -24777,8 +24472,8 @@ StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderGridComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1288 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1288);
+        const _r1256 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1256);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, StoreFinderListItemComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 StoreFinderGridComponent.ctorParameters = () => [
@@ -25096,8 +24791,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1334 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1334);
+        const _r1302 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1302);
     } }, directives: [ɵngcc4.NgIf, PaginationComponent,
         StoreFinderListComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25161,12 +24856,12 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1344 = ɵngcc0.ɵɵreference(5);
+        const _r1312 = ɵngcc0.ɵɵreference(5);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "storeFinder.searchBox"));
         ɵngcc0.ɵɵproperty("formControl", ctx.searchBox);
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c53))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c39, _r1344.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c54, !(_r1344.value && _r1344.value.length)));
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c53))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c39, _r1312.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c54, !(_r1312.value && _r1312.value.length)));
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, "storeFinder.useMyLocation"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -25217,8 +24912,8 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoresCountComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1354 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1354);
+        const _r1322 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1322);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
@@ -25266,8 +24961,8 @@ StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinde
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoreComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1365 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1365);
+        const _r1333 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1333);
     } }, directives: [ɵngcc4.NgIf, IconComponent,
         StoreFinderStoreDescriptionComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25653,8 +25348,8 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, LoginComponent_ng_template_2_Template, 4, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1376 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1376);
+        const _r1344 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1344);
     } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
@@ -25900,8 +25595,8 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1380 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1380);
+        const _r1348 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1348);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc7.CheckboxControlValueAccessor, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: AuthService },
@@ -25993,7 +25688,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1398 = ɵngcc0.ɵɵreference(15);
+        const _r1366 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -26007,7 +25702,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1398);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1366);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -27220,9 +26915,9 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <ng-container *cxFeatureLevel=\"'1.5'\">\n            <div\n              class=\"cx-dialog-promotions\"\n              *ngIf=\"orderPromotions$ | async as orderPromotions\"\n            >\n              <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n            </div>\n          </ng-container>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
             }]
-    }], function () { return [{ type: ModalService }, { type: ɵngcc1.CartService }, { type: PromotionService }]; }, { dialog: [{
+    }], function () { return [{ type: ModalService }, { type: ɵngcc1.ActiveCartService }, { type: PromotionService }]; }, { dialog: [{
             type: ViewChild,
             args: ['dialog', { read: ElementRef }]
         }] }); })();
@@ -27747,7 +27442,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-cart-item-list',
-                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [potentialProductPromotions]=\"getPotentialProductPromotionsForItem(item)\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.CartService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.FeatureConfigService }]; }, { readonly: [{
@@ -27755,8 +27450,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         }], hasHeader: [{
             type: Input
         }], options: [{
-            type: Input
-        }], potentialProductPromotions: [{
             type: Input
         }], promotionLocation: [{
             type: Input
@@ -27771,7 +27464,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-cart-item',
-                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n    <ng-container *cxFeatureLevel=\"'!1.5'\">\n      <cx-promotions [promotions]=\"potentialProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <ng-container *cxFeatureLevel=\"'1.5'\">\n      <ng-container\n        *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n      >\n        <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n      </ng-container>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
+                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *cxFeatureLevel=\"'!1.5'\">\n          <div\n            *ngFor=\"let variant of item.product.variantOptionQualifiers\"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\">{{ variant.name }}</div>\n            <div class=\"cx-value\">{{ variant.value }}</div>\n          </div>\n        </ng-container>\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"item.product.baseOptions?.length\">\n            <div\n              *ngFor=\"\n                let variant of item.product.baseOptions[0]?.selected\n                  ?.variantOptionQualifiers\n              \"\n              class=\"cx-property\"\n            >\n              <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n                {{ variant.name }}: {{ variant.value }}\n              </div>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n\n    <ng-container\n      *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n    >\n      <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
             }]
     }], function () { return [{ type: PromotionService }, { type: ɵngcc1.FeatureConfigService }]; }, { compact: [{
             type: Input
@@ -27784,8 +27477,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         }], options: [{
             type: Input
         }], item: [{
-            type: Input
-        }], potentialProductPromotions: [{
             type: Input
         }], quantityControl: [{
             type: Input
@@ -27887,10 +27578,10 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-cart-details',
-                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-promotions [promotions]=\"promotions$ | async\"></cx-promotions>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [cartIsLoading]=\"!(cartLoaded$ | async)\"\n          [promotionLocation]=\"promotionLocation\"\n          [options]=\"{\n            isSaveForLater: false,\n            optionalBtn: isSaveForLaterEnabled() ? saveForLaterBtn : null\n          }\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
+                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [promotionLocation]=\"promotionLocation\"\n        [options]=\"{\n          isSaveForLater: false,\n          optionalBtn: isSaveForLaterEnabled() ? saveForLaterBtn : null\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: PromotionService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: PromotionService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartDetailsModule, { declarations: function () { return [CartDetailsComponent]; }, imports: function () { return [CartSharedModule,
         CommonModule,
         CartCouponModule,
@@ -28498,10 +28189,10 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-review-submit',
-                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <ng-container *cxFeatureLevel=\"'!1.5'\">\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [readonly]=\"true\"\n          [potentialProductPromotions]=\"cart.potentialProductPromotions\"\n        ></cx-cart-item-list>\n      </ng-container>\n\n      <ng-container *cxFeatureLevel=\"'1.5'\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"entries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </ng-container>\n    </div>\n  </ng-container>\n</div>\n",
+                template: "<div class=\"cx-review\">\n  <!-- TITLE -->\n  <h3 class=\"cx-review-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutReview.review' | cxTranslate }}\n  </h3>\n  <div class=\"cx-review-summary row\">\n    <!-- SHIPPING ADDRESS SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-address\">\n          <cx-card\n            [content]=\"\n              getShippingAddressCard(\n                deliveryAddress$ | async,\n                countryName$ | async\n              ) | async\n            \"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              {\n                cxRoute: getCheckoutStepUrl(checkoutStepType.SHIPPING_ADDRESS)\n              } | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingAddress' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- DELIVERY MODE SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-shipping\">\n          <cx-card\n            *ngIf=\"deliveryMode$ | async as deliveryMode\"\n            [content]=\"getDeliveryModeCard(deliveryMode) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.DELIVERY_MODE) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editShippingMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n\n    <!-- PAYMENT METHOD SECTION -->\n    <div class=\"col-md-12 col-lg-6 col-xl-4\">\n      <div class=\"cx-review-summary-wrapper\">\n        <div class=\"cx-review-summary-card cx-review-card-payment\">\n          <cx-card\n            [content]=\"getPaymentMethodCard(paymentDetails$ | async) | async\"\n          ></cx-card>\n        </div>\n        <div *cxFeatureLevel=\"'1.1'\" class=\"cx-review-summary-edit-step\">\n          <a\n            [routerLink]=\"\n              { cxRoute: getCheckoutStepUrl(checkoutStepType.PAYMENT_DETAILS) }\n                | cxUrl\n            \"\n            >{{ 'checkoutReview.editPaymentMethod' | cxTranslate }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- CART ITEM SECTION -->\n  <ng-container *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-review-cart-total d-none d-lg-block d-xl-block\">\n      {{\n        'cartItems.cartTotal'\n          | cxTranslate: { count: cart.deliveryItemsQuantity }\n      }}:\n      {{ cart.totalPrice?.formattedValue }}\n    </div>\n    <h4 class=\"cx-review-cart-heading d-block d-lg-none d-xl-none\">\n      {{ 'checkoutReview.placeOrder' | cxTranslate }}\n    </h4>\n    <div\n      class=\"cx-review-cart-item col-md-12\"\n      *ngIf=\"entries$ | async as entries\"\n    >\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [readonly]=\"true\"\n        [promotionLocation]=\"promotionLocation\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CartService }, { type: ɵngcc1.TranslationService }, { type: CheckoutConfigService }, { type: PromotionService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.TranslationService }, { type: CheckoutConfigService }, { type: PromotionService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReviewSubmitModule, { declarations: function () { return [ReviewSubmitComponent]; }, imports: function () { return [CommonModule,
         CardModule,
         CartSharedModule,
@@ -29456,7 +29147,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <!-- consigned entries -->\n  <div *cxFeatureLevel=\"'1.4'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </div>\n\n  <div *cxFeatureLevel=\"'!1.4'\">\n    <div *ngFor=\"let consignment of order.consignments\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          <span *ngIf=\"consignment\">\n            {{\n              'orderDetails.deliveryStatus'\n                | cxTranslate: { context: consignment.status }\n            }}\n          </span>\n        </div>\n        <div *ngIf=\"consignment?.statusDate\" class=\"cx-list-date\">\n          <div>{{ 'orderDetails.shippedOn' | cxTranslate }}&nbsp;</div>\n          <div>{{ consignment?.statusDate | cxDate }}</div>\n        </div>\n\n        <cx-consignment-tracking\n          [orderCode]=\"order.code\"\n          [consignment]=\"consignment\"\n          *cxFeature=\"'consignmentTracking'\"\n        >\n        </cx-consignment-tracking>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *cxFeatureLevel=\"'1.5'\">\n          <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </ng-container>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"getConsignmentProducts(consignment)\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n    <!-- unconsigned entries -->\n    <div *ngIf=\"order.unconsignedEntries?.length\" class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{ 'orderDetails.pending' | cxTranslate }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n          <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n        </ng-container>\n\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n    <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n  </ng-container>\n\n  <cx-order-consigned-entries\n    *ngIf=\"others$ | async as others\"\n    [order]=\"order\"\n    [consignments]=\"others\"\n  ></cx-order-consigned-entries>\n\n  <cx-order-consigned-entries\n    *ngIf=\"completed$ | async as completed\"\n    [order]=\"order\"\n    [consignments]=\"completed\"\n  ></cx-order-consigned-entries>\n\n  <cx-order-consigned-entries\n    *ngIf=\"cancel$ | async as cancel\"\n    [order]=\"order\"\n    [consignments]=\"cancel\"\n  ></cx-order-consigned-entries>\n</ng-container>\n"
             }]
     }], function () { return [{ type: OrderDetailsService }, { type: PromotionService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TrackingEventsComponent, [{
@@ -30393,7 +30084,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         type: Component,
         args: [{
                 selector: 'cx-order-confirmation-items',
-                template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n\n  <ng-container *cxFeatureLevel=\"'1.5'\">\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [readonly]=\"true\"\n    [promotionLocation]=\"promotionLocation\"\n  ></cx-cart-item-list>\n</div>\n",
+                template: "<div class=\"cx-order-items container\" *ngIf=\"order$ | async as order\">\n  <h4 class=\"cx-order-items-header\">\n    {{ 'checkoutOrderConfirmation.orderItems' | cxTranslate }}\n  </h4>\n\n  <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n    <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n  </ng-container>\n\n  <cx-cart-item-list\n    [items]=\"order.entries\"\n    [readonly]=\"true\"\n    [promotionLocation]=\"promotionLocation\"\n  ></cx-cart-item-list>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: PromotionService }]; }, null); })();
