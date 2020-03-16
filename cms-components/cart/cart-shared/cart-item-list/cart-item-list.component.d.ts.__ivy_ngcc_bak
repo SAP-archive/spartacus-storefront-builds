@@ -1,11 +1,11 @@
 import { FormGroup } from '@angular/forms';
-import { CartService, FeatureConfigService, PromotionLocation, SelectiveCartService } from '@spartacus/core';
+import { ActiveCartService, FeatureConfigService, PromotionLocation, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CartItemComponentOptions, Item } from '../cart-item/cart-item.component';
 export declare class CartItemListComponent {
-    protected cartService: CartService;
-    protected selectiveCartService?: SelectiveCartService;
-    private featureConfig?;
+    protected activeCartService: ActiveCartService;
+    protected selectiveCartService: SelectiveCartService;
+    protected featureConfig: FeatureConfigService;
     readonly: boolean;
     hasHeader: boolean;
     options: CartItemComponentOptions;
@@ -15,13 +15,7 @@ export declare class CartItemListComponent {
     get items(): Item[];
     promotionLocation: PromotionLocation;
     set setLoading(value: boolean);
-    constructor(cartService: CartService, selectiveCartService: SelectiveCartService, featureConfig: FeatureConfigService);
-    /**
-     * @deprecated Since 1.5
-     * Add selectiveCartService authService routingService and featureConfig for save for later.
-     * Remove issue: #5958
-     */
-    constructor(cartService: CartService);
+    constructor(activeCartService: ActiveCartService, selectiveCartService: SelectiveCartService, featureConfig: FeatureConfigService);
     isSaveForLaterEnabled(): boolean;
     /**
      * The items we're getting form the input do not have a consistent model.

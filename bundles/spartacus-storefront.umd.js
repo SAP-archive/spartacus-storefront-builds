@@ -968,7 +968,7 @@
         }
         CxApiService.ctorParameters = function () { return [
             { type: core$1.AuthService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CartService, decorators: [{ type: core.Optional }] },
+            { type: core$1.ActiveCartService, decorators: [{ type: core.Optional }] },
             { type: core$1.CartDataService, decorators: [{ type: core.Optional }] },
             { type: core$1.CheckoutService, decorators: [{ type: core.Optional }] },
             { type: core$1.CheckoutDeliveryService, decorators: [{ type: core.Optional }] },
@@ -999,7 +999,7 @@
             { type: core$1.SelectiveCartService, decorators: [{ type: core.Optional }] },
             { type: core.NgZone }
         ]; };
-        CxApiService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CxApiService_Factory() { return new CxApiService(core["ɵɵinject"](core$1.AuthService, 8), core["ɵɵinject"](core$1.CartService, 8), core["ɵɵinject"](core$1.CartDataService, 8), core["ɵɵinject"](core$1.CheckoutService, 8), core["ɵɵinject"](core$1.CheckoutDeliveryService, 8), core["ɵɵinject"](core$1.CheckoutPaymentService, 8), core["ɵɵinject"](core$1.CmsService, 8), core["ɵɵinject"](core$1.PageMetaService, 8), core["ɵɵinject"](core$1.FeatureConfigService, 8), core["ɵɵinject"](core$1.GlobalMessageService, 8), core["ɵɵinject"](core$1.TranslationService, 8), core["ɵɵinject"](core$1.KymaService, 8), core["ɵɵinject"](core$1.OccEndpointsService, 8), core["ɵɵinject"](core$1.ProductService, 8), core["ɵɵinject"](core$1.ProductSearchService, 8), core["ɵɵinject"](core$1.ProductReviewService, 8), core["ɵɵinject"](core$1.ProductReferenceService, 8), core["ɵɵinject"](core$1.SearchboxService, 8), core["ɵɵinject"](core$1.RoutingService, 8), core["ɵɵinject"](core$1.CurrencyService, 8), core["ɵɵinject"](core$1.LanguageService, 8), core["ɵɵinject"](core$1.BaseSiteService, 8), core["ɵɵinject"](core$1.UserService, 8), core["ɵɵinject"](core$1.UserAddressService, 8), core["ɵɵinject"](core$1.UserConsentService, 8), core["ɵɵinject"](core$1.UserOrderService, 8), core["ɵɵinject"](core$1.UserPaymentService, 8), core["ɵɵinject"](core$1.UserNotificationPreferenceService, 8), core["ɵɵinject"](core$1.UserInterestsService, 8), core["ɵɵinject"](core$1.SelectiveCartService, 8), core["ɵɵinject"](core.NgZone)); }, token: CxApiService, providedIn: "root" });
+        CxApiService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CxApiService_Factory() { return new CxApiService(core["ɵɵinject"](core$1.AuthService, 8), core["ɵɵinject"](core$1.ActiveCartService, 8), core["ɵɵinject"](core$1.CartDataService, 8), core["ɵɵinject"](core$1.CheckoutService, 8), core["ɵɵinject"](core$1.CheckoutDeliveryService, 8), core["ɵɵinject"](core$1.CheckoutPaymentService, 8), core["ɵɵinject"](core$1.CmsService, 8), core["ɵɵinject"](core$1.PageMetaService, 8), core["ɵɵinject"](core$1.FeatureConfigService, 8), core["ɵɵinject"](core$1.GlobalMessageService, 8), core["ɵɵinject"](core$1.TranslationService, 8), core["ɵɵinject"](core$1.KymaService, 8), core["ɵɵinject"](core$1.OccEndpointsService, 8), core["ɵɵinject"](core$1.ProductService, 8), core["ɵɵinject"](core$1.ProductSearchService, 8), core["ɵɵinject"](core$1.ProductReviewService, 8), core["ɵɵinject"](core$1.ProductReferenceService, 8), core["ɵɵinject"](core$1.SearchboxService, 8), core["ɵɵinject"](core$1.RoutingService, 8), core["ɵɵinject"](core$1.CurrencyService, 8), core["ɵɵinject"](core$1.LanguageService, 8), core["ɵɵinject"](core$1.BaseSiteService, 8), core["ɵɵinject"](core$1.UserService, 8), core["ɵɵinject"](core$1.UserAddressService, 8), core["ɵɵinject"](core$1.UserConsentService, 8), core["ɵɵinject"](core$1.UserOrderService, 8), core["ɵɵinject"](core$1.UserPaymentService, 8), core["ɵɵinject"](core$1.UserNotificationPreferenceService, 8), core["ɵɵinject"](core$1.UserInterestsService, 8), core["ɵɵinject"](core$1.SelectiveCartService, 8), core["ɵɵinject"](core.NgZone)); }, token: CxApiService, providedIn: "root" });
         CxApiService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -6256,13 +6256,13 @@
     }());
 
     var CartCouponComponent = /** @class */ (function () {
-        function CartCouponComponent(cartService, authService, cartVoucherService, formBuilder, customerCouponService, featureConfig) {
-            this.cartService = cartService;
+        function CartCouponComponent(authService, cartVoucherService, formBuilder, customerCouponService, featureConfig, activeCartService) {
             this.authService = authService;
             this.cartVoucherService = cartVoucherService;
             this.formBuilder = formBuilder;
             this.customerCouponService = customerCouponService;
             this.featureConfig = featureConfig;
+            this.activeCartService = activeCartService;
             this.MAX_CUSTOMER_COUPON_PAGE = 100;
             this.ignoreCloseEvent = false;
             this.subscription = new rxjs.Subscription();
@@ -6275,7 +6275,7 @@
             }
             if (this.featureConfig && this.featureConfig.isLevel('1.5')) {
                 this.cart$ = rxjs.combineLatest([
-                    this.cartService.getActive(),
+                    this.activeCartService.getActive(),
                     this.authService.getOccUserId(),
                     this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
                 ]).pipe(operators.tap(function (_a) {
@@ -6291,7 +6291,7 @@
             //TODO(issue:#5971) Deprecated since 1.5
             else {
                 this.cart$ = rxjs.combineLatest([
-                    this.cartService.getActive(),
+                    this.activeCartService.getActive(),
                     this.authService.getOccUserId(),
                 ]).pipe(operators.tap(function (_a) {
                     var _b = __read(_a, 2), cart = _b[0], userId = _b[1];
@@ -6303,7 +6303,7 @@
                 }));
             }
             //TODO(issue:#5971) Deprecated since 1.5
-            this.cartIsLoading$ = this.cartService
+            this.cartIsLoading$ = this.activeCartService
                 .getLoaded()
                 .pipe(operators.map(function (loaded) { return !loaded; }));
             this.cartVoucherService.resetAddVoucherProcessingState();
@@ -6370,12 +6370,12 @@
             this.cartVoucherService.resetAddVoucherProcessingState();
         };
         CartCouponComponent.ctorParameters = function () { return [
-            { type: core$1.CartService },
             { type: core$1.AuthService },
             { type: core$1.CartVoucherService },
             { type: forms.FormBuilder },
             { type: core$1.CustomerCouponService },
-            { type: core$1.FeatureConfigService }
+            { type: core$1.FeatureConfigService },
+            { type: core$1.ActiveCartService }
         ]; };
         CartCouponComponent = __decorate([
             core.Component({
@@ -6418,8 +6418,8 @@
     }());
 
     var CartItemListComponent = /** @class */ (function () {
-        function CartItemListComponent(cartService, selectiveCartService, featureConfig) {
-            this.cartService = cartService;
+        function CartItemListComponent(activeCartService, selectiveCartService, featureConfig) {
+            this.activeCartService = activeCartService;
             this.selectiveCartService = selectiveCartService;
             this.featureConfig = featureConfig;
             this.readonly = false;
@@ -6499,7 +6499,7 @@
                 this.selectiveCartService.removeEntry(item);
             }
             else {
-                this.cartService.removeEntry(item);
+                this.activeCartService.removeEntry(item);
             }
             delete this.form.controls[item.product.code];
         };
@@ -6512,12 +6512,12 @@
                     _this.selectiveCartService.updateEntry(value.entryNumber, value.quantity);
                 }
                 else if (value) {
-                    _this.cartService.updateEntry(value.entryNumber, value.quantity);
+                    _this.activeCartService.updateEntry(value.entryNumber, value.quantity);
                 }
             }), operators.map(function () { return _this.form.get(item.product.code); }));
         };
         CartItemListComponent.ctorParameters = function () { return [
-            { type: core$1.CartService },
+            { type: core$1.ActiveCartService },
             { type: core$1.SelectiveCartService },
             { type: core$1.FeatureConfigService }
         ]; };

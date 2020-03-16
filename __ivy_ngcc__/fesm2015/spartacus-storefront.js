@@ -1,7 +1,7 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, CartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, ActiveCartService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CartDataService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, observeOn, mergeMap, shareReplay, scan, distinctUntilKeyChanged, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -9699,10 +9699,10 @@ let CxApiService = class CxApiService {
         this.ngZone = ngZone;
     }
 };
-CxApiService.ɵfac = function CxApiService_Factory(t) { return new (t || CxApiService)(ɵngcc0.ɵɵinject(ɵngcc1.AuthService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CartService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CartDataService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CmsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService, 8), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService, 8), ɵngcc0.ɵɵinject(ɵngcc1.KymaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.OccEndpointsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SearchboxService, 8), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService, 8), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.BaseSiteService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserConsentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserNotificationPreferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserInterestsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc0.NgZone)); };
+CxApiService.ɵfac = function CxApiService_Factory(t) { return new (t || CxApiService)(ɵngcc0.ɵɵinject(ɵngcc1.AuthService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CartDataService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CmsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService, 8), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService, 8), ɵngcc0.ɵɵinject(ɵngcc1.KymaService, 8), ɵngcc0.ɵɵinject(ɵngcc1.OccEndpointsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService, 8), ɵngcc0.ɵɵinject(ɵngcc1.ProductReferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SearchboxService, 8), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService, 8), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService, 8), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService, 8), ɵngcc0.ɵɵinject(ɵngcc1.BaseSiteService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserConsentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserPaymentService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserNotificationPreferenceService, 8), ɵngcc0.ɵɵinject(ɵngcc1.UserInterestsService, 8), ɵngcc0.ɵɵinject(ɵngcc1.SelectiveCartService, 8), ɵngcc0.ɵɵinject(ɵngcc0.NgZone)); };
 CxApiService.ctorParameters = () => [
     { type: AuthService, decorators: [{ type: Optional }] },
-    { type: CartService, decorators: [{ type: Optional }] },
+    { type: ActiveCartService, decorators: [{ type: Optional }] },
     { type: CartDataService, decorators: [{ type: Optional }] },
     { type: CheckoutService, decorators: [{ type: Optional }] },
     { type: CheckoutDeliveryService, decorators: [{ type: Optional }] },
@@ -9733,7 +9733,7 @@ CxApiService.ctorParameters = () => [
     { type: SelectiveCartService, decorators: [{ type: Optional }] },
     { type: NgZone }
 ];
-CxApiService.ɵprov = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(CartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(SelectiveCartService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
+CxApiService.ɵprov = ɵɵdefineInjectable({ factory: function CxApiService_Factory() { return new CxApiService(ɵɵinject(AuthService, 8), ɵɵinject(ActiveCartService, 8), ɵɵinject(CartDataService, 8), ɵɵinject(CheckoutService, 8), ɵɵinject(CheckoutDeliveryService, 8), ɵɵinject(CheckoutPaymentService, 8), ɵɵinject(CmsService, 8), ɵɵinject(PageMetaService, 8), ɵɵinject(FeatureConfigService, 8), ɵɵinject(GlobalMessageService, 8), ɵɵinject(TranslationService, 8), ɵɵinject(KymaService, 8), ɵɵinject(OccEndpointsService, 8), ɵɵinject(ProductService, 8), ɵɵinject(ProductSearchService, 8), ɵɵinject(ProductReviewService, 8), ɵɵinject(ProductReferenceService, 8), ɵɵinject(SearchboxService, 8), ɵɵinject(RoutingService, 8), ɵɵinject(CurrencyService, 8), ɵɵinject(LanguageService, 8), ɵɵinject(BaseSiteService, 8), ɵɵinject(UserService, 8), ɵɵinject(UserAddressService, 8), ɵɵinject(UserConsentService, 8), ɵɵinject(UserOrderService, 8), ɵɵinject(UserPaymentService, 8), ɵɵinject(UserNotificationPreferenceService, 8), ɵɵinject(UserInterestsService, 8), ɵɵinject(SelectiveCartService, 8), ɵɵinject(NgZone)); }, token: CxApiService, providedIn: "root" });
 CxApiService = __decorate([ __param(0, Optional()),
     __param(1, Optional()),
     __param(2, Optional()),
@@ -14337,13 +14337,13 @@ __decorate([
 ], AppliedCouponsComponent.prototype, "isReadOnly", void 0);
 
 let CartCouponComponent = class CartCouponComponent {
-    constructor(cartService, authService, cartVoucherService, formBuilder, customerCouponService, featureConfig) {
-        this.cartService = cartService;
+    constructor(authService, cartVoucherService, formBuilder, customerCouponService, featureConfig, activeCartService) {
         this.authService = authService;
         this.cartVoucherService = cartVoucherService;
         this.formBuilder = formBuilder;
         this.customerCouponService = customerCouponService;
         this.featureConfig = featureConfig;
+        this.activeCartService = activeCartService;
         this.MAX_CUSTOMER_COUPON_PAGE = 100;
         this.ignoreCloseEvent = false;
         this.subscription = new Subscription();
@@ -14355,7 +14355,7 @@ let CartCouponComponent = class CartCouponComponent {
         }
         if (this.featureConfig && this.featureConfig.isLevel('1.5')) {
             this.cart$ = combineLatest([
-                this.cartService.getActive(),
+                this.activeCartService.getActive(),
                 this.authService.getOccUserId(),
                 this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
             ]).pipe(tap(([cart, userId, customerCoupons]) => {
@@ -14367,13 +14367,13 @@ let CartCouponComponent = class CartCouponComponent {
         //TODO(issue:#5971) Deprecated since 1.5
         else {
             this.cart$ = combineLatest([
-                this.cartService.getActive(),
+                this.activeCartService.getActive(),
                 this.authService.getOccUserId(),
             ]).pipe(tap(([cart, userId]) => (this.cartId =
                 userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code)), map(([cart]) => cart));
         }
         //TODO(issue:#5971) Deprecated since 1.5
-        this.cartIsLoading$ = this.cartService
+        this.cartIsLoading$ = this.activeCartService
             .getLoaded()
             .pipe(map(loaded => !loaded));
         this.cartVoucherService.resetAddVoucherProcessingState();
@@ -14439,7 +14439,7 @@ let CartCouponComponent = class CartCouponComponent {
         this.cartVoucherService.resetAddVoucherProcessingState();
     }
 };
-CartCouponComponent.ɵfac = function CartCouponComponent_Factory(t) { return new (t || CartCouponComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartVoucherService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CustomerCouponService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartCouponComponent.ɵfac = function CartCouponComponent_Factory(t) { return new (t || CartCouponComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartVoucherService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CustomerCouponService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CartCouponComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartCouponComponent, selectors: [["cx-cart-coupon"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-cart-coupon-title"], [1, "form-group"], [3, "formGroup", "submit"], [1, "row"], [1, "col-md-8"], ["type", "text", "id", "applyVoucher", "formControlName", "couponCode", 1, "form-control", "input-coupon-code", 3, "placeholder"], [1, "col-md-4"], ["type", "submit", 1, "btn", "btn-block", "btn-action", "apply-coupon-button", 3, "disabled"], [3, "vouchers", "cartIsLoading", "isReadOnly"], [1, "cx-available-coupon"], [1, "title", "cx-cart-coupon-title"], [1, "message"], [1, "scroll"], ["class", "coupons card ", 4, "ngFor", "ngForOf"], [1, "coupons", "card"], [1, "coupon-id", "link", 3, "disabled", "click"]], template: function CartCouponComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartCouponComponent_ng_container_0_Template, 19, 23, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -14447,12 +14447,12 @@ CartCouponComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartCouponCompon
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, AppliedCouponsComponent, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 CartCouponComponent.ctorParameters = () => [
-    { type: CartService },
     { type: AuthService },
     { type: CartVoucherService },
     { type: FormBuilder },
     { type: CustomerCouponService },
-    { type: FeatureConfigService }
+    { type: FeatureConfigService },
+    { type: ActiveCartService }
 ];
 
 let CartCouponModule = class CartCouponModule {
@@ -14477,8 +14477,8 @@ CartCouponModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartCoup
         ]] });
 
 let CartItemListComponent = class CartItemListComponent {
-    constructor(cartService, selectiveCartService, featureConfig) {
-        this.cartService = cartService;
+    constructor(activeCartService, selectiveCartService, featureConfig) {
+        this.activeCartService = activeCartService;
         this.selectiveCartService = selectiveCartService;
         this.featureConfig = featureConfig;
         this.readonly = false;
@@ -14549,7 +14549,7 @@ let CartItemListComponent = class CartItemListComponent {
             this.selectiveCartService.removeEntry(item);
         }
         else {
-            this.cartService.removeEntry(item);
+            this.activeCartService.removeEntry(item);
         }
         delete this.form.controls[item.product.code];
     }
@@ -14561,12 +14561,12 @@ let CartItemListComponent = class CartItemListComponent {
                 this.selectiveCartService.updateEntry(value.entryNumber, value.quantity);
             }
             else if (value) {
-                this.cartService.updateEntry(value.entryNumber, value.quantity);
+                this.activeCartService.updateEntry(value.entryNumber, value.quantity);
             }
         }), map(() => this.form.get(item.product.code)));
     }
 };
-CartItemListComponent.ɵfac = function CartItemListComponent_Factory(t) { return new (t || CartItemListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartItemListComponent.ɵfac = function CartItemListComponent_Factory(t) { return new (t || CartItemListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
 CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListComponent, selectors: [["cx-cart-item-list"]], inputs: { readonly: "readonly", hasHeader: "hasHeader", options: "options", promotionLocation: "promotionLocation", items: "items", setLoading: ["cartIsLoading", "setLoading"] }, decls: 4, vars: 2, consts: [["class", "d-none d-md-block d-lg-block d-xl-block", 4, "ngIf"], ["class", "cx-item-list-row", 4, "ngFor", "ngForOf"], ["totalHeader", ""], [1, "d-none", "d-md-block", "d-lg-block", "d-xl-block"], [1, "cx-item-list-header", "row"], [1, "cx-item-list-desc", "col-md-5", "col-lg-5", "col-xl-6"], [1, "cx-item-list-price", "col-md-3", "col-lg-2", "col-xl-2"], [1, "cx-item-list-qty", "col-md-2", "col-lg-3", "col-xl-2"], [4, "ngIf", "ngIfElse"], [1, "cx-item-list-total", "col-md-2", "col-lg-2", "col-xl-2"], [1, "cx-item-list-row"], ["class", "cx-item-list-items", 3, "is-changed", 4, "ngIf"], [1, "cx-item-list-items"], [3, "item", "quantityControl", "readonly", "promotionLocation", "options"]], template: function CartItemListComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartItemListComponent_div_0_Template, 12, 11, "div", 0);
         ɵngcc0.ɵɵtemplate(1, CartItemListComponent_div_1_Template, 3, 3, "div", 1);
@@ -14577,7 +14577,7 @@ CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListCo
         ɵngcc0.ɵɵproperty("ngForOf", ctx.items);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, CartItemComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe]; }, encapsulation: 2, changeDetection: 0 });
 CartItemListComponent.ctorParameters = () => [
-    { type: CartService },
+    { type: ActiveCartService },
     { type: SelectiveCartService },
     { type: FeatureConfigService }
 ];
@@ -26269,7 +26269,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             }]
     }], function () { return [{ type: ɵngcc1.AuthService, decorators: [{
                 type: Optional
-            }] }, { type: ɵngcc1.CartService, decorators: [{
+            }] }, { type: ɵngcc1.ActiveCartService, decorators: [{
                 type: Optional
             }] }, { type: ɵngcc1.CartDataService, decorators: [{
                 type: Optional
@@ -27402,7 +27402,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 selector: 'cx-cart-coupon',
                 template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card \" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.CartVoucherService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CustomerCouponService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.CartVoucherService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CustomerCouponService }, { type: ɵngcc1.FeatureConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartCouponModule, { declarations: function () { return [CartCouponComponent,
         AppliedCouponsComponent]; }, imports: function () { return [FeaturesConfigModule,
         CommonModule,
@@ -27445,7 +27445,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CartService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.FeatureConfigService }]; }, { readonly: [{
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.FeatureConfigService }]; }, { readonly: [{
             type: Input
         }], hasHeader: [{
             type: Input
