@@ -1,0 +1,5 @@
+import { FocusConfig } from './keyboard-focus.model';
+import { LockFocusDirective } from './lock';
+export declare class FocusDirective extends LockFocusDirective {
+    protected config: FocusConfig;
+}

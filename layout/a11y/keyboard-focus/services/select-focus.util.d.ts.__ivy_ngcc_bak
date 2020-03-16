@@ -1,0 +1,18 @@
+import { AutoFocusConfig } from '../keyboard-focus.model';
+export declare class SelectFocusUtility {
+    /**
+     * Query selectors used to query focusable child elements of the host element.
+     * The selectors are supplemented with `:not([disabled])` and `:not([hidden])`.
+     */
+    protected focusableSelectors: string[];
+    query(host: HTMLElement, selector: string): HTMLElement[];
+    findFirstFocusable(host: HTMLElement, config?: AutoFocusConfig): HTMLElement;
+    /**
+     * returns all focusable child elements of the host element. The element selectors
+     * are build from the `focusableSelectors`.
+     *
+     * @param host the `HTMLElement` used to query focusable elements
+     * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returend as well
+     */
+    findFocusable(host: HTMLElement, locked?: boolean): HTMLElement[];
+}

@@ -10,9 +10,9 @@ import * as ɵngcc8 from '../../checkout/components/promotions/promotions.module
 import * as ɵngcc9 from '@spartacus/core';
 import * as ɵngcc10 from '../../misc/icon/icon.module';
 import * as ɵngcc11 from '../../../shared/components/item-counter/item-counter.module';
-import * as ɵngcc12 from '../../../shared/directives/auto-focus/auto-focus.directive.module';
+import * as ɵngcc12 from '../../../layout/a11y/keyboard-focus/keyboard-focus.module';
 export declare class AddToCartModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<AddToCartModule, [typeof ɵngcc1.AddToCartComponent, typeof ɵngcc2.AddedToCartDialogComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.ReactiveFormsModule, typeof ɵngcc5.CartSharedModule, typeof ɵngcc6.RouterModule, typeof ɵngcc7.SpinnerModule, typeof ɵngcc8.PromotionsModule, typeof ɵngcc9.FeaturesConfigModule, typeof ɵngcc9.UrlModule, typeof ɵngcc10.IconModule, typeof ɵngcc9.I18nModule, typeof ɵngcc11.ItemCounterModule, typeof ɵngcc12.AutoFocusDirectiveModule], [typeof ɵngcc1.AddToCartComponent, typeof ɵngcc2.AddedToCartDialogComponent]>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<AddToCartModule, [typeof ɵngcc1.AddToCartComponent, typeof ɵngcc2.AddedToCartDialogComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.ReactiveFormsModule, typeof ɵngcc5.CartSharedModule, typeof ɵngcc6.RouterModule, typeof ɵngcc7.SpinnerModule, typeof ɵngcc8.PromotionsModule, typeof ɵngcc9.FeaturesConfigModule, typeof ɵngcc9.UrlModule, typeof ɵngcc10.IconModule, typeof ɵngcc9.I18nModule, typeof ɵngcc11.ItemCounterModule, typeof ɵngcc12.KeyboardFocusModule], [typeof ɵngcc1.AddToCartComponent, typeof ɵngcc2.AddedToCartDialogComponent]>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<AddToCartModule>;
 }
 

@@ -1,0 +1,6 @@
+import * as ɵngcc0 from '@angular/core';
+export declare abstract class BaseFocusService {
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<BaseFocusService>;
+}
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzZS1mb2N1cy5zZXJ2aWNlLmQudHMiLCJzb3VyY2VzIjpbImJhc2UtZm9jdXMuc2VydmljZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7QUFDQSIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGFic3RyYWN0IGNsYXNzIEJhc2VGb2N1c1NlcnZpY2Uge1xufVxuIl19

@@ -2354,225 +2354,19 @@
         PageSlotComponent = __decorate([
             core.Component({
                 selector: 'cx-page-slot,[cx-page-slot]',
-                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n  [cxSkipLink]=\"position\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], PageSlotComponent);
         return PageSlotComponent;
     }());
 
-    var SkipLinkConfig = /** @class */ (function () {
-        function SkipLinkConfig() {
-        }
-        return SkipLinkConfig;
-    }());
-    var SkipLink = /** @class */ (function () {
-        function SkipLink() {
-        }
-        return SkipLink;
-    }());
-
-    (function (SkipLinkScrollPosition) {
-        SkipLinkScrollPosition["BEFORE"] = "BEFORE";
-        SkipLinkScrollPosition["AFTER"] = "AFTER";
-    })(exports["ɵba"] || (exports["ɵba"] = {}));
-
-    var SkipLinkService = /** @class */ (function () {
-        function SkipLinkService(config) {
-            this.config = config;
-            this.skipLinks$ = new rxjs.BehaviorSubject([]);
-        }
-        SkipLinkService.prototype.getSkipLinks = function () {
-            return this.skipLinks$;
-        };
-        SkipLinkService.prototype.add = function (key, target) {
-            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
-            if (found) {
-                var existing = this.skipLinks$.value;
-                existing.splice(this.getSkipLinkIndexInArray(key), 0, {
-                    target: target,
-                    i18nKey: found.i18nKey,
-                    position: found.position,
-                    key: key,
-                });
-                this.skipLinks$.next(existing);
-            }
-        };
-        SkipLinkService.prototype.remove = function (key) {
-            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
-            if (found) {
-                var existing = this.skipLinks$.value;
-                existing = existing.filter(function (skipLink) { return skipLink.key !== key; });
-                this.skipLinks$.next(existing);
-            }
-        };
-        SkipLinkService.prototype.scrollToTarget = function (target, position, event) {
-            target = target.parentNode;
-            event.target.blur();
-            var options = position === exports["ɵba"].AFTER ? { inline: 'end' } : {};
-            target.scrollIntoView(options);
-        };
-        SkipLinkService.prototype.getSkipLinkIndexInArray = function (key) {
-            var index = this.config.skipLinks.findIndex(function (skipLink) { return skipLink.key === key; });
-            var _loop_1 = function () {
-                index--;
-                var previous = this_1.config.skipLinks[index];
-                if (previous) {
-                    var existing = this_1.skipLinks$.value;
-                    var found = existing.findIndex(function (skipLink) { return skipLink.key === previous.key; });
-                    if (found > -1) {
-                        return { value: found + 1 };
-                    }
-                }
-            };
-            var this_1 = this;
-            while (index > 0) {
-                var state_1 = _loop_1();
-                if (typeof state_1 === "object")
-                    return state_1.value;
-            }
-            return 0;
-        };
-        SkipLinkService.ctorParameters = function () { return [
-            { type: SkipLinkConfig }
-        ]; };
-        SkipLinkService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SkipLinkService_Factory() { return new SkipLinkService(core["ɵɵinject"](SkipLinkConfig)); }, token: SkipLinkService, providedIn: "root" });
-        SkipLinkService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], SkipLinkService);
-        return SkipLinkService;
-    }());
-
-    var SkipLinkComponent = /** @class */ (function () {
-        function SkipLinkComponent(skipLinkService) {
-            this.skipLinkService = skipLinkService;
-            this.skipLinks$ = this.skipLinkService
-                .getSkipLinks()
-                .pipe(operators.observeOn(rxjs.asyncScheduler)); // delay view's update to avoid ExpressionChangedAfterItHasBeenCheckedError
-        }
-        SkipLinkComponent.prototype.scrollToTarget = function (skipLink, event) {
-            this.skipLinkService.scrollToTarget(skipLink.target, skipLink.position, event);
-        };
-        /**
-         * Hides the skip link by removing the focus.
-         */
-        SkipLinkComponent.prototype.blur = function (event) {
-            event.target.blur();
-        };
-        SkipLinkComponent.prototype.tabNext = function (event) {
-            if (this.isElement(event.target.nextSibling)) {
-                event.target.nextSibling.focus();
-            }
-        };
-        SkipLinkComponent.prototype.tabPrev = function (event) {
-            if (this.isElement(event.target.previousSibling)) {
-                event.target.previousSibling.focus();
-            }
-        };
-        SkipLinkComponent.prototype.isElement = function (element) {
-            return !!element && element instanceof HTMLElement;
-        };
-        SkipLinkComponent.ctorParameters = function () { return [
-            { type: SkipLinkService }
-        ]; };
-        SkipLinkComponent = __decorate([
-            core.Component({
-                selector: 'cx-skip-link',
-                template: "<button\n  *ngFor=\"let skipLink of skipLinks$ | async\"\n  (click)=\"scrollToTarget(skipLink, $event)\"\n  (keydown.esc)=\"blur($event)\"\n  (keydown.arrowright)=\"tabNext($event)\"\n  (keydown.arrowleft)=\"tabPrev($event)\"\n>\n  {{ 'skipLink.skipTo' | cxTranslate }}\n  {{ skipLink.i18nKey | cxTranslate }}\n</button>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], SkipLinkComponent);
-        return SkipLinkComponent;
-    }());
-
-    var defaultSkipLinkConfig = {
-        skipLinks: [
-            {
-                key: 'SiteContext',
-                i18nKey: 'skipLink.labels.header',
-            },
-            {
-                key: 'BottomHeaderSlot',
-                position: exports["ɵba"].AFTER,
-                i18nKey: 'skipLink.labels.main',
-            },
-            {
-                key: 'ProductLeftRefinements',
-                i18nKey: 'skipLink.labels.productFacets',
-            },
-            { key: 'ProductListSlot', i18nKey: 'skipLink.labels.productList' },
-            { key: 'Footer', i18nKey: 'skipLink.labels.footer' },
-        ],
-    };
-
-    var SkipLinkDirective = /** @class */ (function () {
-        function SkipLinkDirective(elementRef, skipLinkService) {
-            this.elementRef = elementRef;
-            this.skipLinkService = skipLinkService;
-        }
-        SkipLinkDirective.prototype.ngOnInit = function () {
-            this.skipLinkService.add(this.cxSkipLink, this.elementRef.nativeElement);
-        };
-        SkipLinkDirective.prototype.ngOnDestroy = function () {
-            this.skipLinkService.remove(this.cxSkipLink);
-        };
-        SkipLinkDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: SkipLinkService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], SkipLinkDirective.prototype, "cxSkipLink", void 0);
-        SkipLinkDirective = __decorate([
-            core.Directive({
-                selector: '[cxSkipLink]',
-            })
-        ], SkipLinkDirective);
-        return SkipLinkDirective;
-    }());
-
-    var SkipLinkModule = /** @class */ (function () {
-        function SkipLinkModule() {
-        }
-        SkipLinkModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule, core$1.I18nModule],
-                declarations: [SkipLinkComponent, SkipLinkDirective],
-                exports: [SkipLinkDirective],
-                entryComponents: [SkipLinkComponent],
-                providers: [
-                    core$1.provideDefaultConfig(defaultSkipLinkConfig),
-                    { provide: SkipLinkConfig, useExisting: core$1.Config },
-                    {
-                        provide: core.APP_INITIALIZER,
-                        useFactory: skipLinkFactory,
-                        deps: [core.ComponentFactoryResolver, OutletService],
-                        multi: true,
-                    },
-                ],
-            })
-        ], SkipLinkModule);
-        return SkipLinkModule;
-    }());
-    /**
-     * Adds the skip link component before the cx-storefront.
-     */
-    function skipLinkFactory(componentFactoryResolver, outletService) {
-        var isReady = function () {
-            var factory = componentFactoryResolver.resolveComponentFactory(SkipLinkComponent);
-            outletService.add('cx-storefront', factory, exports.OutletPosition.BEFORE);
-        };
-        return isReady;
-    }
-
     var PageSlotModule = /** @class */ (function () {
         function PageSlotModule() {
         }
         PageSlotModule = __decorate([
             core.NgModule({
-                imports: [common.CommonModule, OutletModule, PageComponentModule, SkipLinkModule],
+                imports: [common.CommonModule, OutletModule, PageComponentModule],
                 providers: [],
                 declarations: [PageSlotComponent],
                 exports: [PageSlotComponent],
@@ -4359,7 +4153,7 @@
         AddedToCartDialogComponent = __decorate([
             core.Component({
                 selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              cxAutoFocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
             })
         ], AddedToCartDialogComponent);
         return AddedToCartDialogComponent;
@@ -4480,34 +4274,1126 @@
         return AddToCartComponent;
     }());
 
-    var AutoFocusDirective = /** @class */ (function () {
-        function AutoFocusDirective(hostElement) {
-            this.hostElement = hostElement;
+    var BaseFocusService = /** @class */ (function () {
+        function BaseFocusService() {
         }
-        AutoFocusDirective.prototype.ngAfterViewInit = function () {
-            this.hostElement.nativeElement.focus();
+        BaseFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
+        BaseFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], BaseFocusService);
+        return BaseFocusService;
+    }());
+
+    /**
+     * Abstract directive that provides a common interface for all focus directives:
+     * - Block Focus
+     * - Persist Focus
+     * - Escape Focus
+     * - Auto Focus
+     * - Tab Focus
+     * - Trap Focus
+     * - Lock Focus
+     */
+    var BaseFocusDirective = /** @class */ (function () {
+        function BaseFocusDirective(elementRef, service) {
+            this.elementRef = elementRef;
+            this.service = service;
+            this.defaultConfig = {};
+        }
+        BaseFocusDirective.prototype.ngOnInit = function () {
+            this.setDefaultConfiguration();
+            this.requiredTabindex = -1;
         };
-        AutoFocusDirective.ctorParameters = function () { return [
-            { type: core.ElementRef }
+        /**
+         * Override the (input) config if it undefined or an empty string, with the
+         * `defaultConfig`. The `defaultConfig` might be specified for each directive
+         * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
+         * specific (inherited) defaultConfig will be used.
+         */
+        BaseFocusDirective.prototype.setDefaultConfiguration = function () {
+            if ((!this.config || this.config === '') && this.defaultConfig) {
+                this.config = this.defaultConfig;
+            }
+        };
+        Object.defineProperty(BaseFocusDirective.prototype, "host", {
+            /**
+             * Helper method to return the host element for the directive
+             * given by the `elementRef`.
+             */
+            get: function () {
+                return this.elementRef.nativeElement;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseFocusDirective.prototype, "requiredTabindex", {
+            /**
+             * Force a tabindex on the host element if it is _requried_ to make the element
+             * focusable. If the element is focusable by nature or by a given tabindex, the
+             * `tabindex` is not applied.
+             *
+             * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
+             */
+            set: function (tabindex) {
+                if (this.requiresExplicitTabIndex) {
+                    this.tabindex = tabindex;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BaseFocusDirective.prototype, "requiresExplicitTabIndex", {
+            /**
+             * Returns true if the host element does not have a tabindex defined
+             * and it also doesn't get focus by browsers nature (i.e. button or
+             * active link).
+             *
+             * We keep this utility method private to not pollute the API.
+             */
+            get: function () {
+                return (this.tabindex === undefined &&
+                    ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
+                    !(this.host.tagName === 'A' && this.host.hasAttribute('href')));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        BaseFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: BaseFocusService }
         ]; };
+        __decorate([
+            core.Input(), core.HostBinding('attr.tabindex')
+        ], BaseFocusDirective.prototype, "tabindex", void 0);
+        BaseFocusDirective = __decorate([
+            core.Directive()
+        ], BaseFocusDirective);
+        return BaseFocusDirective;
+    }());
+
+    var BlockFocusDirective = /** @class */ (function (_super) {
+        __extends(BlockFocusDirective, _super);
+        function BlockFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            _this.defaultConfig = { block: true };
+            _this.config = {};
+            return _this;
+        }
+        BlockFocusDirective.prototype.ngOnInit = function () {
+            _super.prototype.ngOnInit.call(this);
+            if (this.config.block) {
+                this.tabindex = -1;
+            }
+        };
+        BlockFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: BaseFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxBlockFocus')
+        ], BlockFocusDirective.prototype, "config", void 0);
+        BlockFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxBlockFocus]',
+            })
+        ], BlockFocusDirective);
+        return BlockFocusDirective;
+    }(BaseFocusDirective));
+
+    /** The element attribute used to store the focus state */
+    var FOCUS_ATTR = 'data-cx-focus';
+    /** The element attribute used to store the focus group state */
+    var FOCUS_GROUP_ATTR = 'data-cx-focus-group';
+
+    var GLOBAL_GROUP = '_g_';
+    /**
+     * Shared service to persist the focus for an element or a group
+     * of elements. The persisted element focus can be used to persist
+     * the focus for a DOM tree, so that the focus remains after a repaint
+     * or reoccurs when a DOM tree is "unlocked".
+     */
+    var PersistFocusService = /** @class */ (function (_super) {
+        __extends(PersistFocusService, _super);
+        function PersistFocusService() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            // this is going to fail as we have sub services. They will al have their own map.
+            // We must bring this to a singlton map.
+            _this.focus = new Map();
+            return _this;
+        }
+        PersistFocusService.prototype.get = function (group) {
+            return this.focus.get(group || GLOBAL_GROUP);
+        };
+        PersistFocusService.prototype.set = function (value, group) {
+            if (value) {
+                this.focus.set(group || GLOBAL_GROUP, value);
+            }
+        };
+        PersistFocusService.prototype.getPersistenceGroup = function (host, config) {
+            var _a;
+            return ((_a = config) === null || _a === void 0 ? void 0 : _a.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
+        };
+        PersistFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PersistFocusService_Factory() { return new PersistFocusService(); }, token: PersistFocusService, providedIn: "root" });
+        PersistFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], PersistFocusService);
+        return PersistFocusService;
+    }(BaseFocusService));
+
+    /**
+     * Directive that provides persistence of the focused state. This is useful
+     * when a group of focusable elements got refocused or even recreated. That
+     * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
+     *
+     * The focus state is based on a configured _key_, which can be passed in the
+     * config input, either by using a string primitive or `PersistFocusConfig.key`:
+     *
+     * ```html
+     * <button cxPersistFocus="myKey"></button>
+     * <button cxFocus="myKey"></button>
+     * <button [cxFocus]="{{key:'myKey'}"></button>
+     * ```
+     *
+     * The focus state can be part of a focus _group_, so that the state is shared
+     * and remember for the given group. In order to detect the persistence for a
+     * given element, we store the persistence key as a data attribute (`data-cx-focus`):
+     *
+     * ```html
+     * <button data-cx-focus="myKey"></button>
+     * ```
+     *
+     * Other keyboard focus directives can read the key to understand whether the element
+     * should retrieve focus.
+     *
+     */
+    var PersistFocusDirective = /** @class */ (function (_super) {
+        __extends(PersistFocusDirective, _super);
+        function PersistFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            _this.defaultConfig = {};
+            /**
+             * The persistence key can be passed directly or through the `FocusConfig.key`.
+             * While this could be considered a global key, the likeliness of conflicts
+             * is very small since the key is cleared when the focus is changed.
+             */
+            _this.config = {};
+            return _this;
+        }
+        /**
+         * The persistence key is maintained in a singleton cross the app to ensure we
+         * can reset the focus if the DOM gets rebuild.
+         */
+        PersistFocusDirective.prototype.handleFocus = function (event) {
+            var _a, _b;
+            this.service.set(this.key, this.group);
+            (_a = event) === null || _a === void 0 ? void 0 : _a.preventDefault();
+            (_b = event) === null || _b === void 0 ? void 0 : _b.stopPropagation();
+        };
+        PersistFocusDirective.prototype.ngOnInit = function () {
+            _super.prototype.ngOnInit.call(this);
+            this.attr = this.key ? this.key : undefined;
+        };
+        PersistFocusDirective.prototype.setDefaultConfiguration = function () {
+            if (typeof this.config === 'string' && this.config !== '') {
+                this.config = { key: this.config };
+            }
+            _super.prototype.setDefaultConfiguration.call(this);
+        };
+        /**
+         * Focus the element explicitly if it was focused before.
+         */
+        PersistFocusDirective.prototype.ngAfterViewInit = function () {
+            if (this.isPersisted) {
+                this.host.focus({ preventScroll: true });
+            }
+        };
+        Object.defineProperty(PersistFocusDirective.prototype, "isPersisted", {
+            get: function () {
+                return !!this.key && this.service.get(this.group) === this.key;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersistFocusDirective.prototype, "key", {
+            /**
+             * Returns the key for the host element, which is used to persist the
+             * focus state. This is useful in cases where the DOM is rebuild.
+             */
+            get: function () {
+                var _a;
+                return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersistFocusDirective.prototype, "group", {
+            /**
+             * returns the persistence group (if any) for the focusable elements.
+             */
+            get: function () {
+                return this.service.getPersistenceGroup(this.host, this.config);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        PersistFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: PersistFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxPersistFocus')
+        ], PersistFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.HostBinding("attr." + FOCUS_ATTR)
+        ], PersistFocusDirective.prototype, "attr", void 0);
+        __decorate([
+            core.HostListener('focus', ['$event'])
+        ], PersistFocusDirective.prototype, "handleFocus", null);
+        PersistFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxPersistFocus]',
+            })
+        ], PersistFocusDirective);
+        return PersistFocusDirective;
+    }(BlockFocusDirective));
+
+    var SelectFocusUtility = /** @class */ (function () {
+        function SelectFocusUtility() {
+            /**
+             * Query selectors used to query focusable child elements of the host element.
+             * The selectors are supplemented with `:not([disabled])` and `:not([hidden])`.
+             */
+            this.focusableSelectors = [
+                'a[href]',
+                'button',
+                '[tabindex]',
+                'input',
+                'select',
+                'textarea',
+            ];
+        }
+        // like to leave out the following as we don't use it, and make this list exensible.
+        //   `[contentEditable=true]`, // very unlikely to suport as we're not a business tool
+        //   `iframe`, // we really don't like iframes...
+        //   `area[href]`, // very debatable!
+        SelectFocusUtility.prototype.query = function (host, selector) {
+            if (!selector || selector === '') {
+                return [];
+            }
+            return Array.from(host.querySelectorAll(selector));
+        };
+        SelectFocusUtility.prototype.findFirstFocusable = function (host, config) {
+            if (config === void 0) { config = { autofocus: true }; }
+            var _a;
+            var selector = typeof ((_a = config) === null || _a === void 0 ? void 0 : _a.autofocus) === 'string' ? config.autofocus : '[autofocus]';
+            // fallback to first focusable
+            return (this.query(host, selector).find(Boolean) ||
+                this.findFocusable(host).find(Boolean));
+        };
+        /**
+         * returns all focusable child elements of the host element. The element selectors
+         * are build from the `focusableSelectors`.
+         *
+         * @param host the `HTMLElement` used to query focusable elements
+         * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returend as well
+         */
+        SelectFocusUtility.prototype.findFocusable = function (host, locked) {
+            if (locked === void 0) { locked = false; }
+            var suffix = ':not([disabled])';
+            if (!locked) {
+                suffix += ":not([tabindex='-1'])";
+            }
+            var selector = this.focusableSelectors.map(function (s) { return (s += suffix); }).join(',');
+            return this.query(host, selector);
+        };
+        SelectFocusUtility.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SelectFocusUtility_Factory() { return new SelectFocusUtility(); }, token: SelectFocusUtility, providedIn: "root" });
+        SelectFocusUtility = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SelectFocusUtility);
+        return SelectFocusUtility;
+    }());
+
+    var EscapeFocusService = /** @class */ (function (_super) {
+        __extends(EscapeFocusService, _super);
+        function EscapeFocusService(selectFocusUtil) {
+            var _this = _super.call(this) || this;
+            _this.selectFocusUtil = selectFocusUtil;
+            return _this;
+        }
+        EscapeFocusService.prototype.shouldFocus = function (config) {
+            var _a;
+            return !!((_a = config) === null || _a === void 0 ? void 0 : _a.focusOnEscape);
+        };
+        EscapeFocusService.prototype.handleEscape = function (host, config, event) {
+            var _a, _b;
+            if (this.shouldFocus(config)) {
+                if (host !== event.target) {
+                    host.focus({ preventScroll: true });
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                else {
+                    if ((_a = config) === null || _a === void 0 ? void 0 : _a.focusOnDoubleEscape) {
+                        (_b = this.selectFocusUtil
+                            .findFirstFocusable(host, { autofocus: true })) === null || _b === void 0 ? void 0 : _b.focus();
+                    }
+                }
+            }
+        };
+        EscapeFocusService.ctorParameters = function () { return [
+            { type: SelectFocusUtility }
+        ]; };
+        EscapeFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function EscapeFocusService_Factory() { return new EscapeFocusService(core["ɵɵinject"](SelectFocusUtility)); }, token: EscapeFocusService, providedIn: "root" });
+        EscapeFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], EscapeFocusService);
+        return EscapeFocusService;
+    }(PersistFocusService));
+
+    /**
+     * Directive to focus the host element whenever the `escape` key is captured.
+     * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
+     * on a tree of elements. Each time the escape key is used, the focus will
+     * move up in the DOM tree.
+     *
+     */
+    var EscapeFocusDirective = /** @class */ (function (_super) {
+        __extends(EscapeFocusDirective, _super);
+        function EscapeFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            _this.defaultConfig = { focusOnEscape: true };
+            _this.esc = new core.EventEmitter();
+            return _this;
+        }
+        /**
+         * Handles the escape key event.
+         * @param event the native keyboard event which contains the escape keydown event
+         */
+        EscapeFocusDirective.prototype.handleEscape = function (event) {
+            if (this.service.shouldFocus(this.config)) {
+                this.service.handleEscape(this.host, this.config, event);
+            }
+            this.esc.emit(this.service.shouldFocus(this.config));
+        };
+        EscapeFocusDirective.prototype.ngOnInit = function () {
+            if (this.service.shouldFocus(this.config)) {
+                this.requiredTabindex = -1;
+            }
+            _super.prototype.ngOnInit.call(this);
+        };
+        EscapeFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: EscapeFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxEscFocus')
+        ], EscapeFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.Output()
+        ], EscapeFocusDirective.prototype, "esc", void 0);
+        __decorate([
+            core.HostListener('keydown.escape', ['$event'])
+        ], EscapeFocusDirective.prototype, "handleEscape", null);
+        EscapeFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxEscFocus]',
+            })
+        ], EscapeFocusDirective);
+        return EscapeFocusDirective;
+    }(PersistFocusDirective));
+
+    var AutoFocusService = /** @class */ (function (_super) {
+        __extends(AutoFocusService, _super);
+        function AutoFocusService() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        /**
+         * Returns the first focusable child element of the host element.
+         */
+        AutoFocusService.prototype.findFirstFocusable = function (host, config) {
+            if (config === void 0) { config = { autofocus: true }; }
+            var _a;
+            if (((_a = config) === null || _a === void 0 ? void 0 : _a.autofocus) === ':host') {
+                return host;
+            }
+            else if (this.hasPersistedFocus(host, config)) {
+                return this.getPersisted(host, this.getPersistenceGroup(host, config));
+            }
+            else {
+                return this.selectFocusUtil.findFirstFocusable(host, config);
+            }
+        };
+        /**
+         * Indicates whether any of the focusabe child elements is focused.
+         */
+        AutoFocusService.prototype.hasPersistedFocus = function (host, config) {
+            return !!this.getPersisted(host, this.getPersistenceGroup(host, config));
+        };
+        /**
+         * Returns the element that has a persisted focus state.
+         *
+         * @param host the `HTMLElement` used to query for focusable children
+         * @param group the optional group for the persistent state, to separate different focus
+         *   groups and remain the persistance
+         */
+        AutoFocusService.prototype.getPersisted = function (host, group) {
+            if (!this.get(group)) {
+                return;
+            }
+            var focussed = Array.from(host.querySelectorAll("[" + FOCUS_ATTR + "='" + this.get(group) + "']"));
+            return focussed.length > 0 ? focussed[0] : null;
+        };
+        AutoFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AutoFocusService_Factory() { return new AutoFocusService(core["ɵɵinject"](SelectFocusUtility)); }, token: AutoFocusService, providedIn: "root" });
+        AutoFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], AutoFocusService);
+        return AutoFocusService;
+    }(EscapeFocusService));
+
+    /**
+     * Directive that focus the first nested _focusable_ element based on state and configuration:
+     *
+     * 1. focusable element that was left in a focused state
+     * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
+     * 3. focusable element marked with the native HTML5 `autofocus` attribute
+     * 4. first focusable element
+     * 5. the host element, in case the configured CSS selector is `:host`.
+     *
+     * Example configurations:
+     *
+     * `<div cxAutoFocus>[...]</div>`
+     *
+     * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
+     *
+     * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
+     *
+     * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
+     *
+     */
+    var AutoFocusDirective = /** @class */ (function (_super) {
+        __extends(AutoFocusDirective, _super);
+        function AutoFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            /** The AutoFocusDirective will be using autofocus by default  */
+            _this.defaultConfig = { autofocus: true };
+            return _this;
+        }
+        /**
+         * Focus the element explicitly if it was focussed before.
+         */
+        AutoFocusDirective.prototype.ngAfterViewInit = function () {
+            if (this.shouldAutofocus) {
+                this.handleFocus();
+            }
+            if (!this.shouldAutofocus || this.hasPersistedFocus) {
+                _super.prototype.ngAfterViewInit.call(this);
+            }
+        };
+        /**
+         * Mimic the focus without setting the actual focus on the host. The first
+         * focusable child element will be focussed.
+         */
+        AutoFocusDirective.prototype.handleFocus = function (event) {
+            var _a, _b;
+            if (this.shouldAutofocus) {
+                if (!((_a = event) === null || _a === void 0 ? void 0 : _a.target) || event.target === this.host) {
+                    (_b = this.firstFocusable) === null || _b === void 0 ? void 0 : _b.focus();
+                }
+                else {
+                    event.target.focus();
+                }
+            }
+            _super.prototype.handleFocus.call(this, event);
+        };
+        Object.defineProperty(AutoFocusDirective.prototype, "hasPersistedFocus", {
+            /**
+             * Helper function to get the first focusable child element
+             */
+            get: function () {
+                return this.service.hasPersistedFocus(this.host, this.config);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AutoFocusDirective.prototype, "shouldAutofocus", {
+            /**
+             * Helper function to indicate whether we should use autofocus for the
+             * child elements.
+             *
+             * We keep this private to not polute the API.
+             */
+            get: function () {
+                var _a;
+                return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AutoFocusDirective.prototype, "firstFocusable", {
+            /**
+             * Helper function to get the first focusable child element.
+             *
+             * We keep this private to not polute the API.
+             */
+            get: function () {
+                return this.service.findFirstFocusable(this.host, this.config);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        AutoFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: AutoFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxAutoFocus')
+        ], AutoFocusDirective.prototype, "config", void 0);
         AutoFocusDirective = __decorate([
             core.Directive({
                 selector: '[cxAutoFocus]',
             })
         ], AutoFocusDirective);
         return AutoFocusDirective;
-    }());
+    }(EscapeFocusDirective));
 
-    var AutoFocusDirectiveModule = /** @class */ (function () {
-        function AutoFocusDirectiveModule() {
+    var TabFocusService = /** @class */ (function (_super) {
+        __extends(TabFocusService, _super);
+        function TabFocusService() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
-        AutoFocusDirectiveModule = __decorate([
-            core.NgModule({
-                declarations: [AutoFocusDirective],
-                exports: [AutoFocusDirective],
+        /**
+         * Moves to the next (or previous) tab.
+         */
+        TabFocusService.prototype.moveTab = function (host, config, increment, event) {
+            var _a, _b;
+            if ((_a = config) === null || _a === void 0 ? void 0 : _a.tab) {
+                var next = config.tab === 'scroll'
+                    ? this.findNextScrollable(host, config, increment)
+                    : this.findNext(host, config, increment);
+                (_b = next) === null || _b === void 0 ? void 0 : _b.focus();
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        };
+        /**
+         * builds out virtual slides out of the full scrollable area, to allow
+         * for maximum flexibility for the underlying layout without using hardcoded
+         * slide sizes.
+         */
+        TabFocusService.prototype.findNextScrollable = function (host, config, increment) {
+            var _a;
+            var active = this.getActiveChild(host, config);
+            if (!active) {
+                return;
+            }
+            // slide count
+            var virtualSlideCount = Math.round(host.scrollWidth / host.clientWidth);
+            // find current virtual slide
+            var currentVirtualSlide = Math.round(active.offsetLeft / (host.scrollWidth / virtualSlideCount));
+            var nextVirtualSlide = currentVirtualSlide + increment;
+            if (increment === 1 /* NEXT */ &&
+                nextVirtualSlide >= virtualSlideCount) {
+                nextVirtualSlide = 0;
+            }
+            if (increment === -1 /* PREV */ && nextVirtualSlide < 0) {
+                nextVirtualSlide = virtualSlideCount - 1;
+            }
+            var firstItemOnNextSlide = (_a = this.getChildren(host, config)) === null || _a === void 0 ? void 0 : _a.find(function (tab) {
+                return tab.offsetLeft >=
+                    (host.scrollWidth / virtualSlideCount) * nextVirtualSlide;
+            });
+            return firstItemOnNextSlide;
+        };
+        TabFocusService.prototype.findNext = function (host, config, increment) {
+            var _this = this;
+            var _a, _b;
+            var childs = this.getChildren(host, config);
+            var activeIndex = (_a = childs) === null || _a === void 0 ? void 0 : _a.findIndex(function (c) { return c === _this.getActiveChild(host, config); });
+            if (!activeIndex || activeIndex === -1) {
+                activeIndex = 0;
+            }
+            activeIndex += increment;
+            if (increment === 1 /* NEXT */ && activeIndex >= ((_b = childs) === null || _b === void 0 ? void 0 : _b.length)) {
+                activeIndex = childs.length - 1;
+            }
+            if (increment === -1 /* PREV */ && activeIndex < 0) {
+                activeIndex = 0;
+            }
+            return childs ? childs[activeIndex] : undefined;
+        };
+        /**
+         * Returns the active focusable child element. If there's no active
+         * focusable child element, the first focusable child is returned.
+         */
+        TabFocusService.prototype.getActiveChild = function (host, config) {
+            var _this = this;
+            var _a;
+            var persisted = this.getPersisted(host, (_a = config) === null || _a === void 0 ? void 0 : _a.group);
+            if (persisted) {
+                return persisted;
+            }
+            var children = this.getChildren(host, config);
+            var index = children.findIndex(function (tab) { return _this.isActive(tab); });
+            if (!index || index === -1) {
+                index = 0;
+            }
+            return children[index];
+        };
+        TabFocusService.prototype.getChildren = function (host, config) {
+            if (typeof config.tab === 'string' && config.tab !== 'scroll') {
+                return this.selectFocusUtil.query(host, config.tab);
+            }
+            else {
+                return this.findFocusable(host, true);
+            }
+        };
+        /**
+         * returns all focusable child elements of the host element.
+         */
+        TabFocusService.prototype.findFocusable = function (host, locked) {
+            if (locked === void 0) { locked = false; }
+            return this.selectFocusUtil.findFocusable(host, locked);
+        };
+        TabFocusService.prototype.isActive = function (el) {
+            var child = document.activeElement;
+            var selector = child.tagName;
+            return (el === child ||
+                !!Array.from(el.querySelectorAll(selector)).find(function (e) { return e === child; }));
+        };
+        TabFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function TabFocusService_Factory() { return new TabFocusService(core["ɵɵinject"](SelectFocusUtility)); }, token: TabFocusService, providedIn: "root" });
+        TabFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
             })
-        ], AutoFocusDirectiveModule);
-        return AutoFocusDirectiveModule;
+        ], TabFocusService);
+        return TabFocusService;
+    }(AutoFocusService));
+
+    /**
+     * Directive to move the focus of ("locked") child elements. This is useful
+     * for a nested list of tabs, carousel slides or any group of elements that
+     * requires horizontal navigation.
+     */
+    var TabFocusDirective = /** @class */ (function (_super) {
+        __extends(TabFocusDirective, _super);
+        function TabFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            /** `tab` defaults to true if the directive `cxTabFocus` is used. */
+            _this.defaultConfig = { tab: true };
+            _this.config = {};
+            return _this;
+        }
+        TabFocusDirective.prototype.handleNextTab = function (event) {
+            var _a;
+            if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+                this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
+            }
+        };
+        TabFocusDirective.prototype.handlePreviousTab = function (event) {
+            var _a;
+            if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+                this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
+            }
+        };
+        TabFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: TabFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxTabFocus')
+        ], TabFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.HostListener('keydown.arrowRight', ['$event'])
+        ], TabFocusDirective.prototype, "handleNextTab", null);
+        __decorate([
+            core.HostListener('keydown.arrowLeft', ['$event'])
+        ], TabFocusDirective.prototype, "handlePreviousTab", null);
+        TabFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxTabFocus]',
+            })
+        ], TabFocusDirective);
+        return TabFocusDirective;
+    }(AutoFocusDirective));
+
+    var TrapFocusService = /** @class */ (function (_super) {
+        __extends(TrapFocusService, _super);
+        function TrapFocusService() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        /**
+         * Indicates whether any of the child elements of the host are focusable.
+         *
+         * @param host `HTMLElement` that is used to query the focusable elements.
+         */
+        TrapFocusService.prototype.hasFocusableChildren = function (host) {
+            return this.findFocusable(host).length > 0;
+        };
+        /**
+         * Focus the next or previous element of all available focusable elements.
+         * The focus is _trapped_ in case there's no next or previous available element.
+         * The focus will automatically move the start or end of the list.
+         */
+        TrapFocusService.prototype.moveFocus = function (host, config, increment, event) {
+            var focusable = this.findFocusable(host);
+            var index = focusable.findIndex(function (v) { return v === event.target; }) + increment;
+            var shouldMoveFocus = (index >= 0 && index < focusable.length) ||
+                (index < 0 && this.getTrapStart(config.trap)) ||
+                (index >= focusable.length && this.getTrapEnd(config.trap));
+            if (shouldMoveFocus) {
+                if (index >= focusable.length) {
+                    index = 0;
+                }
+                if (index < 0) {
+                    index = focusable.length - 1;
+                }
+                event.preventDefault();
+                event.stopPropagation();
+                var el = focusable[index];
+                el.focus();
+            }
+        };
+        TrapFocusService.prototype.getTrapStart = function (trap) {
+            return trap === true || trap === 'start';
+        };
+        TrapFocusService.prototype.getTrapEnd = function (trap) {
+            return trap === true || trap === 'end';
+        };
+        TrapFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function TrapFocusService_Factory() { return new TrapFocusService(core["ɵɵinject"](SelectFocusUtility)); }, token: TrapFocusService, providedIn: "root" });
+        TrapFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], TrapFocusService);
+        return TrapFocusService;
+    }(TabFocusService));
+
+    /**
+     * Directive that keeps the focus inside the focussable child elements,
+     * also known as a _focus trap_.
+     */
+    var TrapFocusDirective = /** @class */ (function (_super) {
+        __extends(TrapFocusDirective, _super);
+        function TrapFocusDirective(elementRef, service) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            _this.defaultConfig = { trap: true };
+            _this.config = {};
+            _this.handleTrapDown = function (event) {
+                if (!!_this.config.trap) {
+                    _this.moveFocus(event, 1 /* NEXT */);
+                }
+            };
+            _this.handleTrapUp = function (event) {
+                if (!!_this.config.trap) {
+                    _this.moveFocus(event, -1 /* PREV */);
+                }
+            };
+            return _this;
+        }
+        /**
+         * Moves the focus of the element reference up or down, depending on the increment.
+         * The focus of the element is trapped to avoid it from going out of the group.
+         *
+         * @param event UIEvent that is used to get the target element. The event is blocked
+         *   from standard execution and further bubbling.
+         * @param increment indicates whether the next or previous is focussed.
+         */
+        TrapFocusDirective.prototype.moveFocus = function (event, increment) {
+            if (this.service.hasFocusableChildren(this.host)) {
+                this.service.moveFocus(this.host, this.config, increment, event);
+            }
+        };
+        TrapFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: TrapFocusService }
+        ]; };
+        __decorate([
+            core.Input('cxTrapFocus')
+        ], TrapFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.HostListener('keydown.arrowdown', ['$event']),
+            core.HostListener('keydown.tab', ['$event'])
+        ], TrapFocusDirective.prototype, "handleTrapDown", void 0);
+        __decorate([
+            core.HostListener('keydown.arrowup', ['$event']),
+            core.HostListener('keydown.shift.tab', ['$event'])
+        ], TrapFocusDirective.prototype, "handleTrapUp", void 0);
+        TrapFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxTrapFocus]',
+            })
+        ], TrapFocusDirective);
+        return TrapFocusDirective;
+    }(TabFocusDirective));
+
+    var LockFocusService = /** @class */ (function (_super) {
+        __extends(LockFocusService, _super);
+        function LockFocusService() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        LockFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function LockFocusService_Factory() { return new LockFocusService(core["ɵɵinject"](SelectFocusUtility)); }, token: LockFocusService, providedIn: "root" });
+        LockFocusService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], LockFocusService);
+        return LockFocusService;
+    }(TrapFocusService));
+
+    /**
+     * Directive that adds persistence for focussed element in case
+     * the elements are being rebuild. This happens often when change
+     * detection kicks in because of new data set from the backend.
+     */
+    var LockFocusDirective = /** @class */ (function (_super) {
+        __extends(LockFocusDirective, _super);
+        function LockFocusDirective(elementRef, service, renderer) {
+            var _this = _super.call(this, elementRef, service) || this;
+            _this.elementRef = elementRef;
+            _this.service = service;
+            _this.renderer = renderer;
+            _this.defaultConfig = { lock: true };
+            _this.config = {};
+            /**
+             * Emits an event when the host is unlocked.
+             */
+            _this.unlock = new core.EventEmitter();
+            return _this;
+        }
+        /**
+         * When the user selects enter or space, the focusable childs are
+         * unlocked, which means that the tabindex is set to 0.
+         */
+        LockFocusDirective.prototype.handleEnter = function (event) {
+            if (this.shouldLock && this.host === event.target) {
+                this.unlockFocus(event);
+                event.stopPropagation();
+            }
+        };
+        /**
+         * In case any of the children elements is touched by the mouse,
+         * we unlock the group to not break the mouse-experience.
+         */
+        LockFocusDirective.prototype.handleClick = function (event) {
+            if (this.shouldLock && this.isLocked) {
+                this.unlockFocus(event);
+                event.stopPropagation();
+            }
+        };
+        LockFocusDirective.prototype.lockFocus = function () {
+            this.addTabindexToChildren(-1);
+        };
+        LockFocusDirective.prototype.unlockFocus = function (event) {
+            var _a;
+            this.unlock.emit(true);
+            this.addTabindexToChildren(0);
+            // we focus the host if the event target was a nested child
+            if (((_a = event) === null || _a === void 0 ? void 0 : _a.target) === this.host) {
+                _super.prototype.handleFocus.call(this, event);
+            }
+        };
+        LockFocusDirective.prototype.ngOnInit = function () {
+            var _a, _b;
+            _super.prototype.ngOnInit.call(this);
+            this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
+            if (this.shouldLock) {
+                this.tabindex = 0;
+                // Locked elements will be set to `autofocus` by default if it's not
+                // been configured. This will ensure that autofocus kicks in upon unlock.
+                if (!this.config.hasOwnProperty('autofocus')) {
+                    this.config.autofocus = true;
+                }
+                // Locked elements will be set to `focusOnEscape` by default if it's not
+                // been configured. This will ensure that  the host gets locked again when
+                // `escape` is pressed.
+                if (!this.config.hasOwnProperty('focusOnEscape')) {
+                    this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
+                }
+            }
+        };
+        LockFocusDirective.prototype.ngAfterContentInit = function () {
+            var _this = this;
+            if (this.shouldLock) {
+                /**
+                 * If the component hosts a group of focusable children elmenents,
+                 * we persist the group key to the children, so that they can taken this
+                 * into account when they persist their focus state.
+                 */
+                if (!!this.group) {
+                    this.service
+                        .findFocusable(this.host)
+                        .forEach(function (el) {
+                        return _this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, _this.group);
+                    });
+                }
+                this.lockFocus();
+            }
+        };
+        LockFocusDirective.prototype.handleFocus = function (event) {
+            var _this = this;
+            var _a;
+            if (this.shouldLock) {
+                this.lockFocus();
+                if (this.shouldUnlockAfterAutofocus(event)) {
+                    // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
+                    setTimeout(function () { return _this.unlockFocus(event); });
+                }
+                else {
+                    this.lockFocus();
+                }
+                // let's not bubble up the handleFocus event if the host is locked
+                if (this.isLocked) {
+                    (_a = event) === null || _a === void 0 ? void 0 : _a.stopPropagation();
+                    return;
+                }
+            }
+            _super.prototype.handleFocus.call(this, event);
+        };
+        /**
+         * When the handleFocus is called without an actual event, it's coming from Autofocus.
+         * In this case we unlock the focusable children in case there's a focusable child that
+         * was unlocked before.
+         *
+         * We keep this private to not polute the API.
+         */
+        LockFocusDirective.prototype.shouldUnlockAfterAutofocus = function (event) {
+            return !event && this.service.hasPersistedFocus(this.host, this.config);
+        };
+        /**
+         * Add the tabindex attribute to the focusable children elements
+         */
+        LockFocusDirective.prototype.addTabindexToChildren = function (i) {
+            var _this = this;
+            if (i === void 0) { i = 0; }
+            if (this.shouldLock) {
+                this.isLocked = i === -1;
+                if (!(this.hasFocusableChildren && i === 0) || i === 0) {
+                    this.focusable.forEach(function (el) {
+                        _this.renderer.setAttribute(el, 'tabindex', i.toString());
+                    });
+                }
+            }
+        };
+        Object.defineProperty(LockFocusDirective.prototype, "hasFocusableChildren", {
+            /**
+             * Utility method, returns all focusable children for the host element.
+             *
+             * We keep this private to not polute the API.
+             */
+            get: function () {
+                return this.service.hasFocusableChildren(this.host);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(LockFocusDirective.prototype, "focusable", {
+            /**
+             * Returns the focusable children of the host element. If the host element
+             * is configured to be locked, the query is restricted to child elements
+             * with a tabindex !== `-1`.
+             *
+             * We keep this private to not polute the API.
+             */
+            get: function () {
+                return this.service.findFocusable(this.host, this.shouldLock);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        LockFocusDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: LockFocusService },
+            { type: core.Renderer2 }
+        ]; };
+        __decorate([
+            core.Input('cxLockFocus')
+        ], LockFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.HostBinding('class.focus-lock')
+        ], LockFocusDirective.prototype, "shouldLock", void 0);
+        __decorate([
+            core.HostBinding('class.is-locked')
+        ], LockFocusDirective.prototype, "isLocked", void 0);
+        __decorate([
+            core.Output()
+        ], LockFocusDirective.prototype, "unlock", void 0);
+        __decorate([
+            core.HostListener('keydown.enter', ['$event']),
+            core.HostListener('keydown.space', ['$event'])
+        ], LockFocusDirective.prototype, "handleEnter", null);
+        __decorate([
+            core.HostListener('click', ['$event'])
+        ], LockFocusDirective.prototype, "handleClick", null);
+        LockFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxLockFocus]',
+            })
+        ], LockFocusDirective);
+        return LockFocusDirective;
+    }(TrapFocusDirective));
+
+    var FocusDirective = /** @class */ (function (_super) {
+        __extends(FocusDirective, _super);
+        function FocusDirective() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            // tslint:disable-next-line: no-input-rename
+            _this.config = {};
+            return _this;
+        }
+        __decorate([
+            core.Input('cxFocus')
+        ], FocusDirective.prototype, "config", void 0);
+        FocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxFocus]',
+            })
+        ], FocusDirective);
+        return FocusDirective;
+    }(LockFocusDirective));
+
+    var directives = [
+        PersistFocusDirective,
+        AutoFocusDirective,
+        BlockFocusDirective,
+        EscapeFocusDirective,
+        LockFocusDirective,
+        TrapFocusDirective,
+        TabFocusDirective,
+        FocusDirective,
+    ];
+    var KeyboardFocusModule = /** @class */ (function () {
+        function KeyboardFocusModule() {
+        }
+        KeyboardFocusModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule],
+                declarations: __spread(directives),
+                exports: __spread(directives),
+            })
+        ], KeyboardFocusModule);
+        return KeyboardFocusModule;
     }());
 
     var CardComponent = /** @class */ (function () {
@@ -4578,7 +5464,7 @@
         CardComponent = __decorate([
             core.Component({
                 selector: 'cx-card',
-                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button\n          class=\"btn btn-block btn-primary\"\n          (click)=\"delete()\"\n          cxAutoFocus\n        >\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n  cxAutoFocus\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\" autofocus>\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             })
         ], CardComponent);
         return CardComponent;
@@ -4589,7 +5475,7 @@
         }
         CardModule = __decorate([
             core.NgModule({
-                imports: [common.CommonModule, core$1.I18nModule, IconModule, AutoFocusDirectiveModule],
+                imports: [common.CommonModule, core$1.I18nModule, IconModule, KeyboardFocusModule],
                 declarations: [CardComponent],
                 exports: [CardComponent],
             })
@@ -6679,7 +7565,7 @@
                     IconModule,
                     core$1.I18nModule,
                     ItemCounterModule,
-                    AutoFocusDirectiveModule,
+                    KeyboardFocusModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -9129,7 +10015,6 @@
                     ngSelect.NgSelectModule,
                     IconModule,
                     core$1.I18nModule,
-                    AutoFocusDirectiveModule,
                 ],
                 declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                 entryComponents: [SuggestedAddressDialogComponent],
@@ -9459,6 +10344,199 @@
         ], NotCheckoutAuthGuard);
         return NotCheckoutAuthGuard;
     }());
+
+    var defaultSkipLinkConfig = {
+        skipLinks: [
+            {
+                key: 'cx-header',
+                i18nKey: 'skipLink.labels.header',
+            },
+            {
+                key: 'cx-main',
+                i18nKey: 'skipLink.labels.main',
+            },
+            { key: 'cx-footer', i18nKey: 'skipLink.labels.footer' },
+        ],
+    };
+
+    var SkipLinkConfig = /** @class */ (function () {
+        function SkipLinkConfig() {
+        }
+        return SkipLinkConfig;
+    }());
+    var SkipLink = /** @class */ (function () {
+        function SkipLink() {
+        }
+        return SkipLink;
+    }());
+
+    (function (SkipLinkScrollPosition) {
+        SkipLinkScrollPosition["BEFORE"] = "BEFORE";
+        SkipLinkScrollPosition["AFTER"] = "AFTER";
+    })(exports.SkipLinkScrollPosition || (exports.SkipLinkScrollPosition = {}));
+
+    var SkipLinkService = /** @class */ (function () {
+        function SkipLinkService(config) {
+            this.config = config;
+            this.skipLinks$ = new rxjs.BehaviorSubject([]);
+        }
+        SkipLinkService.prototype.getSkipLinks = function () {
+            return this.skipLinks$;
+        };
+        SkipLinkService.prototype.add = function (key, target) {
+            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
+            if (found) {
+                var existing = this.skipLinks$.value;
+                existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                    target: target,
+                    i18nKey: found.i18nKey,
+                    position: found.position,
+                    key: key,
+                });
+                this.skipLinks$.next(existing);
+            }
+        };
+        SkipLinkService.prototype.remove = function (key) {
+            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
+            if (found) {
+                var existing = this.skipLinks$.value;
+                existing = existing.filter(function (skipLink) { return skipLink.key !== key; });
+                this.skipLinks$.next(existing);
+            }
+        };
+        SkipLinkService.prototype.scrollToTarget = function (skipLink) {
+            var target = skipLink.target instanceof HTMLElement
+                ? skipLink.target
+                : skipLink.target.parentElement;
+            // we force a tabindex if not available, to ensure we can focus into the element
+            var currentTabIndex = target.getAttribute('tabindex');
+            if (!currentTabIndex) {
+                target.setAttribute('tabindex', '-1');
+            }
+            target.focus();
+            // drop the tmp tabindex
+            if (!currentTabIndex) {
+                target.removeAttribute('tabindex');
+            }
+        };
+        SkipLinkService.prototype.getSkipLinkIndexInArray = function (key) {
+            var index = this.config.skipLinks.findIndex(function (skipLink) { return skipLink.key === key; });
+            var _loop_1 = function () {
+                index--;
+                var previous = this_1.config.skipLinks[index];
+                if (previous) {
+                    var existing = this_1.skipLinks$.value;
+                    var found = existing.findIndex(function (skipLink) { return skipLink.key === previous.key; });
+                    if (found > -1) {
+                        return { value: found + 1 };
+                    }
+                }
+            };
+            var this_1 = this;
+            while (index > 0) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+            return 0;
+        };
+        SkipLinkService.ctorParameters = function () { return [
+            { type: SkipLinkConfig }
+        ]; };
+        SkipLinkService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SkipLinkService_Factory() { return new SkipLinkService(core["ɵɵinject"](SkipLinkConfig)); }, token: SkipLinkService, providedIn: "root" });
+        SkipLinkService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SkipLinkService);
+        return SkipLinkService;
+    }());
+
+    var SkipLinkComponent = /** @class */ (function () {
+        function SkipLinkComponent(skipLinkService) {
+            this.skipLinkService = skipLinkService;
+            this.skipLinks$ = this.skipLinkService.getSkipLinks();
+        }
+        SkipLinkComponent.prototype.scrollToTarget = function (skipLink) {
+            this.skipLinkService.scrollToTarget(skipLink);
+        };
+        SkipLinkComponent.ctorParameters = function () { return [
+            { type: SkipLinkService }
+        ]; };
+        SkipLinkComponent = __decorate([
+            core.Component({
+                selector: 'cx-skip-link',
+                template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], SkipLinkComponent);
+        return SkipLinkComponent;
+    }());
+
+    var SkipLinkDirective = /** @class */ (function () {
+        function SkipLinkDirective(elementRef, skipLinkService) {
+            this.elementRef = elementRef;
+            this.skipLinkService = skipLinkService;
+        }
+        SkipLinkDirective.prototype.ngOnInit = function () {
+            this.skipLinkService.add(this.cxSkipLink, this.elementRef.nativeElement);
+        };
+        SkipLinkDirective.prototype.ngOnDestroy = function () {
+            this.skipLinkService.remove(this.cxSkipLink);
+        };
+        SkipLinkDirective.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: SkipLinkService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], SkipLinkDirective.prototype, "cxSkipLink", void 0);
+        SkipLinkDirective = __decorate([
+            core.Directive({
+                selector: '[cxSkipLink]',
+            })
+        ], SkipLinkDirective);
+        return SkipLinkDirective;
+    }());
+
+    var SkipLinkModule = /** @class */ (function () {
+        function SkipLinkModule() {
+        }
+        SkipLinkModule = __decorate([
+            core.NgModule({
+                imports: [
+                    common.CommonModule,
+                    core$1.I18nModule,
+                    core$1.ConfigModule.withConfig(defaultSkipLinkConfig),
+                    KeyboardFocusModule,
+                ],
+                declarations: [SkipLinkComponent, SkipLinkDirective],
+                exports: [SkipLinkDirective],
+                entryComponents: [SkipLinkComponent],
+                providers: [
+                    core$1.provideDefaultConfig(defaultSkipLinkConfig),
+                    { provide: SkipLinkConfig, useExisting: core$1.Config },
+                    {
+                        provide: core.APP_INITIALIZER,
+                        useFactory: skipLinkFactory,
+                        deps: [core.ComponentFactoryResolver, OutletService],
+                        multi: true,
+                    },
+                ],
+            })
+        ], SkipLinkModule);
+        return SkipLinkModule;
+    }());
+    /**
+     * Adds the skip link component before the cx-storefront.
+     */
+    function skipLinkFactory(componentFactoryResolver, outletService) {
+        var isReady = function () {
+            var factory = componentFactoryResolver.resolveComponentFactory(SkipLinkComponent);
+            outletService.add('cx-storefront', factory, exports.OutletPosition.BEFORE);
+        };
+        return isReady;
+    }
 
     var HamburgerMenuService = /** @class */ (function () {
         function HamburgerMenuService(router$1) {
@@ -9886,11 +10964,22 @@
     }());
 
     var StorefrontComponent = /** @class */ (function () {
-        function StorefrontComponent(hamburgerMenuService, routingService) {
+        function StorefrontComponent(hamburgerMenuService, routingService, elementRef, service) {
             this.hamburgerMenuService = hamburgerMenuService;
             this.routingService = routingService;
+            this.elementRef = elementRef;
+            this.service = service;
             this.isExpanded$ = this.hamburgerMenuService.isExpanded;
+            // required by esc focus
+            this.tabindex = '0';
+            this.config = {
+                focusOnEscape: true,
+                focusOnDoubleEscape: true,
+            };
         }
+        StorefrontComponent.prototype.handleEscape = function (event) {
+            this.service.handleEscape(this.elementRef.nativeElement, this.config, event);
+        };
         StorefrontComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.navigateSubscription = this.routingService
@@ -9915,7 +11004,9 @@
         };
         StorefrontComponent.ctorParameters = function () { return [
             { type: HamburgerMenuService },
-            { type: core$1.RoutingService }
+            { type: core$1.RoutingService },
+            { type: core.ElementRef },
+            { type: EscapeFocusService }
         ]; };
         __decorate([
             core.HostBinding('class.start-navigating')
@@ -9923,10 +11014,19 @@
         __decorate([
             core.HostBinding('class.stop-navigating')
         ], StorefrontComponent.prototype, "stopNavigating", void 0);
+        __decorate([
+            core.HostBinding('tabindex')
+        ], StorefrontComponent.prototype, "tabindex", void 0);
+        __decorate([
+            core.ViewChild(SkipLinkComponent)
+        ], StorefrontComponent.prototype, "child", void 0);
+        __decorate([
+            core.HostListener('keydown.escape', ['$event'])
+        ], StorefrontComponent.prototype, "handleEscape", null);
         StorefrontComponent = __decorate([
             core.Component({
                 selector: 'cx-storefront',
-                template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <router-outlet></router-outlet>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer>\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
+                template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ autofocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main cxSkipLink=\"cx-main\" [cxFocus]=\"{ autofocus: true }\">\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer cxSkipLink=\"cx-footer\" [cxFocus]=\"{ autofocus: true }\">\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
             })
         ], StorefrontComponent);
         return StorefrontComponent;
@@ -9949,6 +11049,8 @@
                     PageSlotModule,
                     AnonymousConsentsModule,
                     core$1.FeaturesConfigModule,
+                    SkipLinkModule,
+                    KeyboardFocusModule,
                 ],
                 declarations: [StorefrontComponent],
                 exports: [StorefrontComponent],
@@ -17692,7 +18794,6 @@
             header: {
                 md: {
                     slots: [
-                        'PreHeader',
                         'SiteContext',
                         'SiteLinks',
                         'SiteLogo',
@@ -17967,13 +19068,17 @@
     exports.AppliedCouponsComponent = AppliedCouponsComponent;
     exports.AsmModule = AsmModule;
     exports.AutoFocusDirective = AutoFocusDirective;
+    exports.AutoFocusService = AutoFocusService;
     exports.B2cStorefrontModule = B2cStorefrontModule;
     exports.BannerCarouselComponent = BannerCarouselComponent;
     exports.BannerCarouselModule = BannerCarouselModule;
     exports.BannerComponent = BannerComponent;
     exports.BannerModule = BannerModule;
+    exports.BaseFocusDirective = BaseFocusDirective;
+    exports.BaseFocusService = BaseFocusService;
     exports.BillingAddressFormComponent = BillingAddressFormComponent;
     exports.BillingAddressFormModule = BillingAddressFormModule;
+    exports.BlockFocusDirective = BlockFocusDirective;
     exports.BreadcrumbComponent = BreadcrumbComponent;
     exports.BreadcrumbModule = BreadcrumbModule;
     exports.BreadcrumbSchemaBuilder = BreadcrumbSchemaBuilder;
@@ -18042,6 +19147,11 @@
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
+    exports.EscapeFocusDirective = EscapeFocusDirective;
+    exports.EscapeFocusService = EscapeFocusService;
+    exports.FOCUS_ATTR = FOCUS_ATTR;
+    exports.FOCUS_GROUP_ATTR = FOCUS_GROUP_ATTR;
+    exports.FocusDirective = FocusDirective;
     exports.FooterNavigationComponent = FooterNavigationComponent;
     exports.FooterNavigationModule = FooterNavigationModule;
     exports.ForgotPasswordComponent = ForgotPasswordComponent;
@@ -18069,12 +19179,15 @@
     exports.JsonLdProductOfferBuilder = JsonLdProductOfferBuilder;
     exports.JsonLdProductReviewBuilder = JsonLdProductReviewBuilder;
     exports.JsonLdScriptFactory = JsonLdScriptFactory;
+    exports.KeyboardFocusModule = KeyboardFocusModule;
     exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
     exports.LayoutConfig = LayoutConfig;
     exports.LayoutModule = LayoutModule;
     exports.LinkComponent = LinkComponent;
     exports.LinkModule = LinkModule;
     exports.ListNavigationModule = ListNavigationModule;
+    exports.LockFocusDirective = LockFocusDirective;
+    exports.LockFocusService = LockFocusService;
     exports.LoginComponent = LoginComponent;
     exports.LoginFormComponent = LoginFormComponent;
     exports.LoginFormModule = LoginFormModule;
@@ -18154,6 +19267,8 @@
     exports.PaymentMethodModule = PaymentMethodModule;
     exports.PaymentMethodsComponent = PaymentMethodsComponent;
     exports.PaymentMethodsModule = PaymentMethodsModule;
+    exports.PersistFocusDirective = PersistFocusDirective;
+    exports.PersistFocusService = PersistFocusService;
     exports.PlaceOrderComponent = PlaceOrderComponent;
     exports.PlaceOrderModule = PlaceOrderModule;
     exports.ProductAttributesComponent = ProductAttributesComponent;
@@ -18219,6 +19334,7 @@
     exports.SearchBoxComponent = SearchBoxComponent;
     exports.SearchBoxComponentService = SearchBoxComponentService;
     exports.SearchBoxModule = SearchBoxModule;
+    exports.SelectFocusUtility = SelectFocusUtility;
     exports.SeoMetaService = SeoMetaService;
     exports.SeoModule = SeoModule;
     exports.ShippingAddressComponent = ShippingAddressComponent;
@@ -18227,6 +19343,12 @@
     exports.SiteContextComponentService = SiteContextComponentService;
     exports.SiteContextSelectorComponent = SiteContextSelectorComponent;
     exports.SiteContextSelectorModule = SiteContextSelectorModule;
+    exports.SkipLink = SkipLink;
+    exports.SkipLinkComponent = SkipLinkComponent;
+    exports.SkipLinkConfig = SkipLinkConfig;
+    exports.SkipLinkDirective = SkipLinkDirective;
+    exports.SkipLinkModule = SkipLinkModule;
+    exports.SkipLinkService = SkipLinkService;
     exports.SortingComponent = SortingComponent;
     exports.SpinnerComponent = SpinnerComponent;
     exports.SpinnerModule = SpinnerModule;
@@ -18253,9 +19375,13 @@
     exports.StorefrontModule = StorefrontModule;
     exports.StructuredDataModule = StructuredDataModule;
     exports.SuggestedAddressDialogComponent = SuggestedAddressDialogComponent;
+    exports.TabFocusDirective = TabFocusDirective;
+    exports.TabFocusService = TabFocusService;
     exports.TabParagraphContainerComponent = TabParagraphContainerComponent;
     exports.TabParagraphContainerModule = TabParagraphContainerModule;
     exports.TrackingEventsComponent = TrackingEventsComponent;
+    exports.TrapFocusDirective = TrapFocusDirective;
+    exports.TrapFocusService = TrapFocusService;
     exports.USE_STACKED_OUTLETS = USE_STACKED_OUTLETS;
     exports.UpdateEmailComponent = UpdateEmailComponent;
     exports.UpdateEmailFormComponent = UpdateEmailFormComponent;
@@ -18286,6 +19412,7 @@
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
     exports.defaultPaginationConfig = defaultPaginationConfig;
     exports.defaultScrollConfig = defaultScrollConfig;
+    exports.defaultSkipLinkConfig = defaultSkipLinkConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
     exports.getStructuredDataFactory = getStructuredDataFactory;
     exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
@@ -18293,6 +19420,7 @@
     exports.initSeoService = initSeoService;
     exports.pwaConfigurationFactory = pwaConfigurationFactory;
     exports.pwaFactory = pwaFactory;
+    exports.skipLinkFactory = skipLinkFactory;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
     exports.ɵ0 = ɵ0$1;
@@ -18300,17 +19428,9 @@
     exports.ɵ2 = ɵ2;
     exports.ɵa = AsmLoaderModule;
     exports.ɵb = asmFactory;
-    exports.ɵba = exports["ɵba"];
-    exports.ɵbb = SkipLinkDirective;
-    exports.ɵbc = defaultSkipLinkConfig;
-    exports.ɵbd = MyCouponsComponentService;
-    exports.ɵbe = addCmsRoute;
-    exports.ɵbf = defaultStorefrontRoutesConfig;
-    exports.ɵbg = defaultRoutingConfig;
-    exports.ɵbh = htmlLangProvider;
-    exports.ɵbi = setHtmlLangAttribute;
-    exports.ɵbj = AnonymousConsentsModule;
-    exports.ɵbk = AnonymousConsentDialogComponent;
+    exports.ɵba = setHtmlLangAttribute;
+    exports.ɵbb = AnonymousConsentsModule;
+    exports.ɵbc = AnonymousConsentDialogComponent;
     exports.ɵc = ComponentMapperService;
     exports.ɵd = AsmEnablerService;
     exports.ɵe = AsmMainUiComponent;
@@ -18320,7 +19440,7 @@
     exports.ɵi = AsmSessionTimerComponent;
     exports.ɵj = FormatTimerPipe;
     exports.ɵk = CustomerEmulationComponent;
-    exports.ɵl = AutoFocusDirectiveModule;
+    exports.ɵl = LockFocusDirective;
     exports.ɵm = defaultCheckoutConfig;
     exports.ɵn = ExpressCheckoutService;
     exports.ɵo = defaultQualtricsConfig;
@@ -18330,11 +19450,11 @@
     exports.ɵs = CmsGuardsService;
     exports.ɵt = ReturnRequestService;
     exports.ɵu = AddToHomeScreenService;
-    exports.ɵv = SkipLinkModule;
-    exports.ɵw = skipLinkFactory;
-    exports.ɵx = SkipLinkComponent;
-    exports.ɵy = SkipLinkService;
-    exports.ɵz = SkipLinkConfig;
+    exports.ɵv = MyCouponsComponentService;
+    exports.ɵw = addCmsRoute;
+    exports.ɵx = defaultStorefrontRoutesConfig;
+    exports.ɵy = defaultRoutingConfig;
+    exports.ɵz = htmlLangProvider;
     exports.θDeferLoaderService = DeferLoaderService;
     exports.θIntersectionService = IntersectionService;
 

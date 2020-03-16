@@ -1,15 +1,23 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
+import { EscapeFocusService } from '../a11y/keyboard-focus/index';
+import { SkipLinkComponent } from '../a11y/skip-link/index';
 import { HamburgerMenuService } from '../header/hamburger-menu/hamburger-menu.service';
 export declare class StorefrontComponent implements OnInit, OnDestroy {
     private hamburgerMenuService;
     private routingService;
+    protected elementRef: ElementRef<HTMLElement>;
+    protected service: EscapeFocusService;
     navigateSubscription: Subscription;
     isExpanded$: Observable<boolean>;
     startNavigating: any;
     stopNavigating: any;
-    constructor(hamburgerMenuService: HamburgerMenuService, routingService: RoutingService);
+    tabindex: string;
+    child: SkipLinkComponent;
+    private config;
+    handleEscape(event: KeyboardEvent): void;
+    constructor(hamburgerMenuService: HamburgerMenuService, routingService: RoutingService, elementRef: ElementRef<HTMLElement>, service: EscapeFocusService);
     ngOnInit(): void;
     collapseMenuIfClickOutside(event: MouseEvent): void;
     collapseMenu(): void;

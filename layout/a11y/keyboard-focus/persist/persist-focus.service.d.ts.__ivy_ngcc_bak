@@ -1,0 +1,14 @@
+import { BaseFocusService } from '../base/base-focus.service';
+import { PersistFocusConfig } from '../keyboard-focus.model';
+/**
+ * Shared service to persist the focus for an element or a group
+ * of elements. The persisted element focus can be used to persist
+ * the focus for a DOM tree, so that the focus remains after a repaint
+ * or reoccurs when a DOM tree is "unlocked".
+ */
+export declare class PersistFocusService extends BaseFocusService {
+    protected focus: Map<string, string>;
+    get(group?: string): string;
+    set(value: string, group?: string): void;
+    getPersistenceGroup(host: HTMLElement, config?: PersistFocusConfig): string;
+}
