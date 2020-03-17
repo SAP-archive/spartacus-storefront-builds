@@ -8,7 +8,14 @@ export declare const enum MOVE_FOCUS {
 }
 export interface BaseFocusConfig {
 }
-export interface BlockFocusConfig extends BaseFocusConfig {
+export interface VisibleFocusConfig {
+    /**
+     * When set to true, the mouse-focus class is added to the host element,
+     * indicating that the element focus was not caused by the keyboard.
+     */
+    disableMouseFocus?: boolean;
+}
+export interface BlockFocusConfig extends VisibleFocusConfig {
     block?: boolean;
 }
 export interface PersistFocusConfig extends BlockFocusConfig {

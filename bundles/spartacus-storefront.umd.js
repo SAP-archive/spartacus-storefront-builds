@@ -4373,6 +4373,58 @@
         return BaseFocusDirective;
     }());
 
+    /**
+     * Directive implementation that adds a CSS class to the host element
+     * when the moused is used to focus an element. As soon as the keyboard
+     * is used, the class is removed.
+     */
+    var VisibleFocusDirective = /** @class */ (function (_super) {
+        __extends(VisibleFocusDirective, _super);
+        function VisibleFocusDirective() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.defaultConfig = { disableMouseFocus: true };
+            /** controls a polyfill for the lacking focus-visible feature */
+            _this.mouseFocus = false;
+            return _this;
+        }
+        VisibleFocusDirective.prototype.handleMousedown = function () {
+            if (this.shouldFocusVisible) {
+                this.mouseFocus = true;
+            }
+        };
+        VisibleFocusDirective.prototype.handleKeydown = function () {
+            if (this.shouldFocusVisible) {
+                this.mouseFocus = false;
+            }
+        };
+        Object.defineProperty(VisibleFocusDirective.prototype, "shouldFocusVisible", {
+            get: function () {
+                var _a;
+                return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core.Input('cxVisibleFocus')
+        ], VisibleFocusDirective.prototype, "config", void 0);
+        __decorate([
+            core.HostBinding('class.mouse-focus')
+        ], VisibleFocusDirective.prototype, "mouseFocus", void 0);
+        __decorate([
+            core.HostListener('mousedown')
+        ], VisibleFocusDirective.prototype, "handleMousedown", null);
+        __decorate([
+            core.HostListener('keydown')
+        ], VisibleFocusDirective.prototype, "handleKeydown", null);
+        VisibleFocusDirective = __decorate([
+            core.Directive({
+                selector: '[cxVisibleFocus]',
+            })
+        ], VisibleFocusDirective);
+        return VisibleFocusDirective;
+    }(BaseFocusDirective));
+
     var BlockFocusDirective = /** @class */ (function (_super) {
         __extends(BlockFocusDirective, _super);
         function BlockFocusDirective(elementRef, service) {
@@ -4402,7 +4454,7 @@
             })
         ], BlockFocusDirective);
         return BlockFocusDirective;
-    }(BaseFocusDirective));
+    }(VisibleFocusDirective));
 
     /** The element attribute used to store the focus state */
     var FOCUS_ATTR = 'data-cx-focus';
@@ -5375,8 +5427,9 @@
 
     var directives = [
         PersistFocusDirective,
-        AutoFocusDirective,
+        VisibleFocusDirective,
         BlockFocusDirective,
+        AutoFocusDirective,
         EscapeFocusDirective,
         LockFocusDirective,
         TrapFocusDirective,
@@ -11020,7 +11073,7 @@
         StorefrontComponent = __decorate([
             core.Component({
                 selector: 'cx-storefront',
-                template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ autofocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main cxSkipLink=\"cx-main\" [cxFocus]=\"{ autofocus: true }\">\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer cxSkipLink=\"cx-footer\" [cxFocus]=\"{ autofocus: true }\">\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
+                template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main\n    cxSkipLink=\"cx-main\"\n    [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n  >\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer\n      cxSkipLink=\"cx-footer\"\n      [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n    >\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
             })
         ], StorefrontComponent);
         return StorefrontComponent;
@@ -19397,6 +19450,7 @@
     exports.VariantStyleSelectorModule = VariantStyleSelectorModule;
     exports.ViewConfig = ViewConfig;
     exports.ViewConfigModule = ViewConfigModule;
+    exports.VisibleFocusDirective = VisibleFocusDirective;
     exports.WishListComponent = WishListComponent;
     exports.WishListItemComponent = WishListItemComponent;
     exports.WishListModule = WishListModule;
