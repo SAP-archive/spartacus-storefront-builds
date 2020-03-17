@@ -14950,13 +14950,7 @@ let StarRatingComponent = class StarRatingComponent {
     }
     setRate(value, force) {
         if (!this.disabled || force) {
-            // TODO(issue:#3803) deprecated since 1.0.2
-            if (this.renderer) {
-                this.renderer.setAttribute(this.el.nativeElement, 'style', `--star-fill:${value || this.initialRate};`);
-            }
-            else {
-                this.el.nativeElement.style.setProperty('--star-fill', value || this.initialRate);
-            }
+            this.renderer.setAttribute(this.el.nativeElement, 'style', `--star-fill:${value || this.initialRate};`);
         }
     }
     saveRate(rating) {
