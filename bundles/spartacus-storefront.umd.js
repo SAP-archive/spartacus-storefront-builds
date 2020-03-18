@@ -3210,30 +3210,22 @@
     }());
 
     var CurrentProductService = /** @class */ (function () {
-        function CurrentProductService(routingService, productService, features) {
+        function CurrentProductService(routingService, productService) {
             this.routingService = routingService;
             this.productService = productService;
-            this.features = features;
-            this.DEFAULT_PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.DETAILS : '';
+            this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
         }
         CurrentProductService.prototype.getProduct = function (scopes) {
             var _this = this;
             return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.filter(Boolean), operators.switchMap(function (productCode) {
-                return _this.productService.get(productCode, 
-                // TODO deprecated since 1.4 - should be replaced with 'scopes || this.DEFAULT_PRODUCT_SCOPE'
-                _this.features && _this.features.isLevel('1.4')
-                    ? scopes || _this.DEFAULT_PRODUCT_SCOPE
-                    : undefined
-                // deprecated END
-                );
+                return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
             }));
         };
         CurrentProductService.ctorParameters = function () { return [
             { type: core$1.RoutingService },
-            { type: core$1.ProductService },
-            { type: core$1.FeatureConfigService }
+            { type: core$1.ProductService }
         ]; };
-        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService), core["ɵɵinject"](core$1.FeatureConfigService)); }, token: CurrentProductService, providedIn: "root" });
+        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService)); }, token: CurrentProductService, providedIn: "root" });
         CurrentProductService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -15699,12 +15691,11 @@
     }());
 
     var ProductCarouselComponent = /** @class */ (function () {
-        function ProductCarouselComponent(componentData, productService, features) {
+        function ProductCarouselComponent(componentData, productService) {
             var _this = this;
             this.componentData = componentData;
             this.productService = productService;
-            this.features = features;
-            this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? core$1.ProductScope.LIST : '';
+            this.PRODUCT_SCOPE = core$1.ProductScope.LIST;
             this.componentData$ = this.componentData.data$.pipe(operators.filter(Boolean));
             /**
              * returns an Obervable string for the title.
@@ -15721,8 +15712,7 @@
         }
         ProductCarouselComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
-            { type: core$1.ProductService },
-            { type: core$1.FeatureConfigService }
+            { type: core$1.ProductService }
         ]; };
         ProductCarouselComponent = __decorate([
             core.Component({

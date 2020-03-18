@@ -11589,29 +11589,21 @@ JsonLdProductReviewBuilder.ctorParameters = () => [
 JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
 
 let CurrentProductService = class CurrentProductService {
-    constructor(routingService, productService, features) {
+    constructor(routingService, productService) {
         this.routingService = routingService;
         this.productService = productService;
-        this.features = features;
-        this.DEFAULT_PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.DETAILS : '';
+        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(Boolean), switchMap((productCode) => this.productService.get(productCode, 
-        // TODO deprecated since 1.4 - should be replaced with 'scopes || this.DEFAULT_PRODUCT_SCOPE'
-        this.features && this.features.isLevel('1.4')
-            ? scopes || this.DEFAULT_PRODUCT_SCOPE
-            : undefined
-        // deprecated END
-        )));
+        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(Boolean), switchMap((productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)));
     }
 };
-CurrentProductService.ɵfac = function CurrentProductService_Factory(t) { return new (t || CurrentProductService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ProductService), ɵngcc0.ɵɵinject(ɵngcc1.FeatureConfigService)); };
+CurrentProductService.ɵfac = function CurrentProductService_Factory(t) { return new (t || CurrentProductService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ProductService)); };
 CurrentProductService.ctorParameters = () => [
     { type: RoutingService },
-    { type: ProductService },
-    { type: FeatureConfigService }
+    { type: ProductService }
 ];
-CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService), ɵɵinject(FeatureConfigService)); }, token: CurrentProductService, providedIn: "root" });
+CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
 
 /**
  * Adds the minimal structured data for the product, see https://schema.org/product.
@@ -23813,11 +23805,10 @@ ProductCarouselService.ctorParameters = () => [
 ProductCarouselService.ɵprov = ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(ɵɵinject(ProductService), ɵɵinject(ProductReferenceService), ɵɵinject(SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
 
 let ProductCarouselComponent = class ProductCarouselComponent {
-    constructor(componentData, productService, features) {
+    constructor(componentData, productService) {
         this.componentData = componentData;
         this.productService = productService;
-        this.features = features;
-        this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.LIST : '';
+        this.PRODUCT_SCOPE = ProductScope.LIST;
         this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
         /**
          * returns an Obervable string for the title.
@@ -23831,7 +23822,7 @@ let ProductCarouselComponent = class ProductCarouselComponent {
         this.items$ = this.componentData$.pipe(map(data => data.productCodes.trim().split(' ')), map(codes => codes.map(code => this.productService.get(code, this.PRODUCT_SCOPE))));
     }
 };
-ProductCarouselComponent.ɵfac = function ProductCarouselComponent_Factory(t) { return new (t || ProductCarouselComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+ProductCarouselComponent.ɵfac = function ProductCarouselComponent_Factory(t) { return new (t || ProductCarouselComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductService)); };
 ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCarouselComponent, selectors: [["cx-product-carousel"]], decls: 5, vars: 7, consts: [["itemWidth", "285px", 3, "items", "title", "template"], ["carouselItem", ""], ["tabindex", "0", 3, "routerLink"], ["format", "product", 3, "container", 4, "ngIf"], [1, "price"], ["format", "product", 3, "container"]], template: function ProductCarouselComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelement(0, "cx-carousel", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -23843,8 +23834,7 @@ ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCaro
     } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: ProductService },
-    { type: FeatureConfigService }
+    { type: ProductService }
 ];
 
 let ProductCarouselModule = class ProductCarouselModule {
@@ -27699,7 +27689,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.ProductService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.ProductService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductSchemaBuilder, [{
         type: Injectable,
         args: [{
@@ -31440,7 +31430,7 @@ const ɵFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(FocusDirect
                 template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images.PRIMARY\"\n      format=\"product\"\n    >\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.ProductService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.ProductService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductCarouselModule, { declarations: function () { return [ProductCarouselComponent]; }, imports: function () { return [CommonModule,
         CarouselModule,
         MediaModule,

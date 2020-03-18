@@ -2692,28 +2692,20 @@ JsonLdProductReviewBuilder = __decorate([
 ], JsonLdProductReviewBuilder);
 
 let CurrentProductService = class CurrentProductService {
-    constructor(routingService, productService, features) {
+    constructor(routingService, productService) {
         this.routingService = routingService;
         this.productService = productService;
-        this.features = features;
-        this.DEFAULT_PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.DETAILS : '';
+        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(Boolean), switchMap((productCode) => this.productService.get(productCode, 
-        // TODO deprecated since 1.4 - should be replaced with 'scopes || this.DEFAULT_PRODUCT_SCOPE'
-        this.features && this.features.isLevel('1.4')
-            ? scopes || this.DEFAULT_PRODUCT_SCOPE
-            : undefined
-        // deprecated END
-        )));
+        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(Boolean), switchMap((productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)));
     }
 };
 CurrentProductService.ctorParameters = () => [
     { type: RoutingService },
-    { type: ProductService },
-    { type: FeatureConfigService }
+    { type: ProductService }
 ];
-CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService), ɵɵinject(FeatureConfigService)); }, token: CurrentProductService, providedIn: "root" });
+CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
 CurrentProductService = __decorate([
     Injectable({
         providedIn: 'root',
@@ -14169,11 +14161,10 @@ ProductCarouselService = __decorate([
 ], ProductCarouselService);
 
 let ProductCarouselComponent = class ProductCarouselComponent {
-    constructor(componentData, productService, features) {
+    constructor(componentData, productService) {
         this.componentData = componentData;
         this.productService = productService;
-        this.features = features;
-        this.PRODUCT_SCOPE = this.features && this.features.isLevel('1.4') ? ProductScope.LIST : '';
+        this.PRODUCT_SCOPE = ProductScope.LIST;
         this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
         /**
          * returns an Obervable string for the title.
@@ -14189,8 +14180,7 @@ let ProductCarouselComponent = class ProductCarouselComponent {
 };
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
-    { type: ProductService },
-    { type: FeatureConfigService }
+    { type: ProductService }
 ];
 ProductCarouselComponent = __decorate([
     Component({
