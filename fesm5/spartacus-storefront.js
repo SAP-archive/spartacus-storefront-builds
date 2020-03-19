@@ -2,8 +2,8 @@ import { __decorate, __extends, __read, __values, __param, __awaiter, __generato
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
 import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, concat, of, isObservable, from, fromEvent, BehaviorSubject, Observable, asyncScheduler } from 'rxjs';
-import { take, distinctUntilChanged, tap, first, skipWhile, endWith, debounceTime, startWith, map, switchMap, filter, withLatestFrom, flatMap, mergeMap, shareReplay, scan, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
+import { Subscription, combineLatest, concat, of, isObservable, from, BehaviorSubject, Observable, fromEvent, asyncScheduler } from 'rxjs';
+import { take, distinctUntilChanged, tap, first, skipWhile, endWith, map, switchMap, filter, withLatestFrom, flatMap, mergeMap, debounceTime, shareReplay, startWith, scan, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl, FormsModule } from '@angular/forms';
@@ -1208,23 +1208,35 @@ var BreakpointService = /** @class */ (function () {
         this.winRef = winRef;
         this.config = config;
     }
-    BreakpointService.prototype.getSize = function (breakpoint) {
-        return this.config.breakpoints
-            ? this.config.breakpoints[breakpoint]
-            : DEFAULT_BREAKPOINTS[breakpoint];
-    };
     Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
         get: function () {
             var _this = this;
             if (!this.window) {
                 return of(BREAKPOINT.xs);
             }
-            return fromEvent(this.window, 'resize').pipe(debounceTime(300), startWith({ target: this.window }), map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), distinctUntilChanged());
+            return this.winRef.resize$.pipe(map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), distinctUntilChanged());
         },
         enumerable: true,
         configurable: true
     });
+    /**
+     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+     * configuration. If no configuration is available for the given breakpoint, the
+     * method will return the default values:
+     * - xs: 567
+     * - sm: 768
+     * - md: 992
+     * - lg: 1200
+     */
+    BreakpointService.prototype.getSize = function (breakpoint) {
+        var _a;
+        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+            : DEFAULT_BREAKPOINTS[breakpoint];
+    };
     Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+        /**
+         * Returns all available breakpoints for the system.
+         */
         get: function () {
             return [
                 BREAKPOINT.xs,
@@ -1237,6 +1249,42 @@ var BreakpointService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Indicates whether the current screen size is smaller than the maximum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+     */
+    BreakpointService.prototype.isDown = function (breakpoint) {
+        var _this = this;
+        return this.breakpoint$.pipe(map(function (br) {
+            return _this.breakpoints
+                .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
+                .includes(br);
+        }));
+    };
+    /**
+     * Indicates whether the current screen size is larger than the minimum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+     */
+    BreakpointService.prototype.isUp = function (breakpoint) {
+        var _this = this;
+        return this.breakpoint$.pipe(map(function (br) {
+            return _this.breakpoints
+                .slice(_this.breakpoints.indexOf(breakpoint))
+                .includes(br);
+        }));
+    };
+    /**
+     * Indicates whether the current screen size fits to the given breakpoint
+     */
+    BreakpointService.prototype.isEqual = function (breakpoint) {
+        return this.breakpoint$.pipe(map(function (br) { return br === breakpoint; }));
+    };
     BreakpointService.prototype.getBreakpoint = function (windowWidth) {
         var breakpoint = this.getClosest(windowWidth);
         return BREAKPOINT[breakpoint || BREAKPOINT.lg];
@@ -1246,9 +1294,9 @@ var BreakpointService = /** @class */ (function () {
         if (!windowWidth) {
             windowWidth = this.window.innerWidth;
         }
-        return windowWidth < this.getSize(BREAKPOINT.xs)
-            ? BREAKPOINT.xs
-            : this.breakpoints.reverse().find(function (br) { return windowWidth >= _this.getSize(br); });
+        return windowWidth > this.getSize(BREAKPOINT.lg)
+            ? BREAKPOINT.xl
+            : this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); });
     };
     Object.defineProperty(BreakpointService.prototype, "window", {
         get: function () {
@@ -18643,7 +18691,7 @@ var b2cLayoutConfig = {
     // },
     layoutSlots: {
         header: {
-            md: {
+            lg: {
                 slots: [
                     'SiteContext',
                     'SiteLinks',
@@ -18654,15 +18702,11 @@ var b2cLayoutConfig = {
                     'NavigationBar',
                 ],
             },
-            xs: {
-                slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
-            },
+            slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
         },
         navigation: {
-            md: { slots: [] },
-            xs: {
-                slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
-            },
+            lg: { slots: [] },
+            slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
         },
         footer: {
             slots: ['Footer'],
@@ -18709,12 +18753,10 @@ var b2cLayoutConfig = {
             ],
         },
         ProductDetailsPageTemplate: {
-            md: {
+            lg: {
                 pageFold: 'UpSelling',
             },
-            xs: {
-                pageFold: 'Summary',
-            },
+            pageFold: 'Summary',
             slots: [
                 'Summary',
                 'UpSelling',

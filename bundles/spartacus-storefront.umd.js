@@ -1393,23 +1393,35 @@
             this.winRef = winRef;
             this.config = config;
         }
-        BreakpointService.prototype.getSize = function (breakpoint) {
-            return this.config.breakpoints
-                ? this.config.breakpoints[breakpoint]
-                : DEFAULT_BREAKPOINTS[breakpoint];
-        };
         Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
             get: function () {
                 var _this = this;
                 if (!this.window) {
                     return rxjs.of(exports.BREAKPOINT.xs);
                 }
-                return rxjs.fromEvent(this.window, 'resize').pipe(operators.debounceTime(300), operators.startWith({ target: this.window }), operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged());
+                return this.winRef.resize$.pipe(operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged());
             },
             enumerable: true,
             configurable: true
         });
+        /**
+         * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+         * configuration. If no configuration is available for the given breakpoint, the
+         * method will return the default values:
+         * - xs: 567
+         * - sm: 768
+         * - md: 992
+         * - lg: 1200
+         */
+        BreakpointService.prototype.getSize = function (breakpoint) {
+            var _a;
+            return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+                : DEFAULT_BREAKPOINTS[breakpoint];
+        };
         Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+            /**
+             * Returns all available breakpoints for the system.
+             */
             get: function () {
                 return [
                     exports.BREAKPOINT.xs,
@@ -1422,6 +1434,42 @@
             enumerable: true,
             configurable: true
         });
+        /**
+         * Indicates whether the current screen size is smaller than the maximum size of the
+         * given breakpoint.
+         *
+         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+         * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+         */
+        BreakpointService.prototype.isDown = function (breakpoint) {
+            var _this = this;
+            return this.breakpoint$.pipe(operators.map(function (br) {
+                return _this.breakpoints
+                    .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
+                    .includes(br);
+            }));
+        };
+        /**
+         * Indicates whether the current screen size is larger than the minimum size of the
+         * given breakpoint.
+         *
+         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+         * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+         */
+        BreakpointService.prototype.isUp = function (breakpoint) {
+            var _this = this;
+            return this.breakpoint$.pipe(operators.map(function (br) {
+                return _this.breakpoints
+                    .slice(_this.breakpoints.indexOf(breakpoint))
+                    .includes(br);
+            }));
+        };
+        /**
+         * Indicates whether the current screen size fits to the given breakpoint
+         */
+        BreakpointService.prototype.isEqual = function (breakpoint) {
+            return this.breakpoint$.pipe(operators.map(function (br) { return br === breakpoint; }));
+        };
         BreakpointService.prototype.getBreakpoint = function (windowWidth) {
             var breakpoint = this.getClosest(windowWidth);
             return exports.BREAKPOINT[breakpoint || exports.BREAKPOINT.lg];
@@ -1431,9 +1479,9 @@
             if (!windowWidth) {
                 windowWidth = this.window.innerWidth;
             }
-            return windowWidth < this.getSize(exports.BREAKPOINT.xs)
-                ? exports.BREAKPOINT.xs
-                : this.breakpoints.reverse().find(function (br) { return windowWidth >= _this.getSize(br); });
+            return windowWidth > this.getSize(exports.BREAKPOINT.lg)
+                ? exports.BREAKPOINT.xl
+                : this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); });
         };
         Object.defineProperty(BreakpointService.prototype, "window", {
             get: function () {
@@ -18828,7 +18876,7 @@
         // },
         layoutSlots: {
             header: {
-                md: {
+                lg: {
                     slots: [
                         'SiteContext',
                         'SiteLinks',
@@ -18839,15 +18887,11 @@
                         'NavigationBar',
                     ],
                 },
-                xs: {
-                    slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
-                },
+                slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
             },
             navigation: {
-                md: { slots: [] },
-                xs: {
-                    slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
-                },
+                lg: { slots: [] },
+                slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
             },
             footer: {
                 slots: ['Footer'],
@@ -18894,12 +18938,10 @@
                 ],
             },
             ProductDetailsPageTemplate: {
-                md: {
+                lg: {
                     pageFold: 'UpSelling',
                 },
-                xs: {
-                    pageFold: 'Summary',
-                },
+                pageFold: 'Summary',
                 slots: [
                     'Summary',
                     'UpSelling',
