@@ -897,8 +897,7 @@ var ComponentWrapperDirective = /** @class */ (function () {
                         if (elementName) {
                             this.webElement = this.renderer.createElement(elementName);
                             cmsComponentData = this.getCmsDataForComponent();
-                            this.webElement.cxApi = __assign(__assign({}, this.injector.get(CxApiService)), { CmsComponentData: cmsComponentData, // TODO: remove / deprecated since 1.0.x
-                                cmsComponentData: cmsComponentData });
+                            this.webElement.cxApi = __assign(__assign({}, this.injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
                             this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
                             if (this.cmsService.isLaunchInSmartEdit()) {
                                 this.addSmartEditContract(this.webElement);
