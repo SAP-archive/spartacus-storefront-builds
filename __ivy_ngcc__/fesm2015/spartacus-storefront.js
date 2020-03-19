@@ -11594,7 +11594,7 @@ let CurrentProductService = class CurrentProductService {
         this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), filter(Boolean), switchMap((productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)));
+        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), switchMap((productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)));
     }
 };
 CurrentProductService.ɵfac = function CurrentProductService_Factory(t) { return new (t || CurrentProductService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ProductService)); };
@@ -11615,7 +11615,7 @@ let ProductSchemaBuilder = class ProductSchemaBuilder {
         this.builders = builders;
     }
     build() {
-        return this.currentProduct.getProduct().pipe(startWith(null), switchMap((product) => {
+        return this.currentProduct.getProduct().pipe(switchMap((product) => {
             if (product) {
                 return combineLatest(this.collect(product)).pipe(map((res) => Object.assign({}, ...res)));
             }

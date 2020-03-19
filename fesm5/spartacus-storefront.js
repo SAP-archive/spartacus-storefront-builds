@@ -3031,7 +3031,7 @@ var CurrentProductService = /** @class */ (function () {
     }
     CurrentProductService.prototype.getProduct = function (scopes) {
         var _this = this;
-        return this.routingService.getRouterState().pipe(map(function (state) { return state.state.params['productCode']; }), filter(Boolean), switchMap(function (productCode) {
+        return this.routingService.getRouterState().pipe(map(function (state) { return state.state.params['productCode']; }), switchMap(function (productCode) {
             return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
         }));
     };
@@ -3060,7 +3060,7 @@ var ProductSchemaBuilder = /** @class */ (function () {
     }
     ProductSchemaBuilder.prototype.build = function () {
         var _this = this;
-        return this.currentProduct.getProduct().pipe(startWith(null), switchMap(function (product) {
+        return this.currentProduct.getProduct().pipe(switchMap(function (product) {
             if (product) {
                 return combineLatest(_this.collect(product)).pipe(map(function (res) { return Object.assign.apply(Object, __spread([{}], res)); }));
             }
