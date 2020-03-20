@@ -1,9 +1,11 @@
 import { Observable } from 'rxjs';
+import { KeyboardFocusService } from '../../keyboard-focus';
 import { SkipLink, SkipLinkConfig } from '../config/skip-link.config';
 export declare class SkipLinkService {
     protected config: SkipLinkConfig;
+    protected keyboardFocusService: KeyboardFocusService;
     private skipLinks$;
-    constructor(config: SkipLinkConfig);
+    constructor(config: SkipLinkConfig, keyboardFocusService: KeyboardFocusService);
     getSkipLinks(): Observable<SkipLink[]>;
     add(key: string, target: HTMLElement): void;
     remove(key: string): void;

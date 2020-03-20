@@ -13,7 +13,6 @@ export declare class EscapeFocusDirective extends PersistFocusDirective implemen
     protected elementRef: ElementRef;
     protected service: EscapeFocusService;
     protected defaultConfig: EscapeFocusConfig;
-    /** Optional configuration to drive behaviour of the directive. */
     protected config: EscapeFocusConfig;
     esc: EventEmitter<boolean>;
     /**

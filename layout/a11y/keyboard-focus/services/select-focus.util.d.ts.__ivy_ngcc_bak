@@ -5,6 +5,7 @@ export declare class SelectFocusUtility {
      * The selectors are supplemented with `:not([disabled])` and `:not([hidden])`.
      */
     protected focusableSelectors: string[];
+    protected focusableSelectorSuffix: string;
     query(host: HTMLElement, selector: string): HTMLElement[];
     findFirstFocusable(host: HTMLElement, config?: AutoFocusConfig): HTMLElement;
     /**

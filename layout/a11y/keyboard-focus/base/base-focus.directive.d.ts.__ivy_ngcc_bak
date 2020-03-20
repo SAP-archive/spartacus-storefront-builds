@@ -14,7 +14,15 @@ import { BaseFocusService } from './base-focus.service';
 export declare abstract class BaseFocusDirective implements OnInit {
     protected elementRef: ElementRef<HTMLElement>;
     protected service: BaseFocusService;
+    /**
+     * Optional configuration for the focus directive drives the behaviour of the keyboard
+     * focus directive.
+     */
     protected config: BaseFocusConfig;
+    /**
+     * A default config can be provided for each directive if a specific focus directive
+     * is used directly. i.e. `<div cxAutoFocus></div>`
+     */
     protected defaultConfig: BaseFocusConfig;
     tabindex: number;
     constructor(elementRef: ElementRef<HTMLElement>, service: BaseFocusService);

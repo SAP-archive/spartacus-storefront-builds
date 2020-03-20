@@ -3694,6 +3694,11 @@ AddToCartComponent = __decorate([
     })
 ], AddToCartComponent);
 
+/** The element attribute used to store the focus state */
+const FOCUS_ATTR = 'data-cx-focus';
+/** The element attribute used to store the focus group state */
+const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
+
 let BaseFocusService = class BaseFocusService {
 };
 BaseFocusService.ɵprov = ɵɵdefineInjectable({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
@@ -3717,6 +3722,10 @@ let BaseFocusDirective = class BaseFocusDirective {
     constructor(elementRef, service) {
         this.elementRef = elementRef;
         this.service = service;
+        /**
+         * A default config can be provided for each directive if a specific focus directive
+         * is used directly. i.e. `<div cxAutoFocus></div>`
+         */
         this.defaultConfig = {};
     }
     ngOnInit() {
@@ -3786,7 +3795,7 @@ let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirecti
     constructor() {
         super(...arguments);
         this.defaultConfig = { disableMouseFocus: true };
-        /** controls a polyfill for the lacking focus-visible feature */
+        /** controls a polyfill class for the lacking focus-visible feature */
         this.mouseFocus = false;
     }
     handleMousedown() {
@@ -3805,9 +3814,6 @@ let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirecti
     }
 };
 __decorate([
-    Input('cxVisibleFocus')
-], VisibleFocusDirective.prototype, "config", void 0);
-__decorate([
     HostBinding('class.mouse-focus')
 ], VisibleFocusDirective.prototype, "mouseFocus", void 0);
 __decorate([
@@ -3817,17 +3823,18 @@ __decorate([
     HostListener('keydown')
 ], VisibleFocusDirective.prototype, "handleKeydown", null);
 VisibleFocusDirective = __decorate([
-    Directive({
-        selector: '[cxVisibleFocus]',
-    })
+    Directive() // selector: '[cxVisibleFocus]'
 ], VisibleFocusDirective);
 
-let BlockFocusDirective = class BlockFocusDirective extends VisibleFocusDirective {
+let BlockFocusDirective = 
+// { selector: '[cxBlockFocus]' }
+class BlockFocusDirective extends VisibleFocusDirective {
     constructor(elementRef, service) {
         super(elementRef, service);
         this.elementRef = elementRef;
         this.service = service;
         this.defaultConfig = { block: true };
+        // @Input('cxBlockFocus')
         this.config = {};
     }
     ngOnInit() {
@@ -3841,19 +3848,10 @@ BlockFocusDirective.ctorParameters = () => [
     { type: ElementRef },
     { type: BaseFocusService }
 ];
-__decorate([
-    Input('cxBlockFocus')
-], BlockFocusDirective.prototype, "config", void 0);
 BlockFocusDirective = __decorate([
-    Directive({
-        selector: '[cxBlockFocus]',
-    })
+    Directive()
+    // { selector: '[cxBlockFocus]' }
 ], BlockFocusDirective);
-
-/** The element attribute used to store the focus state */
-const FOCUS_ATTR = 'data-cx-focus';
-/** The element attribute used to store the focus group state */
-const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
 
 const GLOBAL_GROUP = '_g_';
 /**
@@ -3926,6 +3924,7 @@ let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirect
          * While this could be considered a global key, the likeliness of conflicts
          * is very small since the key is cleared when the focus is changed.
          */
+        // @Input('cxPersistFocus')
         this.config = {};
     }
     /**
@@ -3979,18 +3978,13 @@ PersistFocusDirective.ctorParameters = () => [
     { type: PersistFocusService }
 ];
 __decorate([
-    Input('cxPersistFocus')
-], PersistFocusDirective.prototype, "config", void 0);
-__decorate([
     HostBinding(`attr.${FOCUS_ATTR}`)
 ], PersistFocusDirective.prototype, "attr", void 0);
 __decorate([
     HostListener('focus', ['$event'])
 ], PersistFocusDirective.prototype, "handleFocus", null);
 PersistFocusDirective = __decorate([
-    Directive({
-        selector: '[cxPersistFocus]',
-    })
+    Directive() // selector: '[cxPersistFocus]',
 ], PersistFocusDirective);
 
 let SelectFocusUtility = class SelectFocusUtility {
@@ -4007,11 +4001,12 @@ let SelectFocusUtility = class SelectFocusUtility {
             'select',
             'textarea',
         ];
+        // like to leave out the following as we don't use it, and make this list exensible.
+        //   `[contentEditable=true]`, // very unlikely to suport as we're not a business tool
+        //   `iframe`, // we really don't like iframes...
+        //   `area[href]`, // very debatable!
+        this.focusableSelectorSuffix = ':not([disabled]):not([hidden])';
     }
-    // like to leave out the following as we don't use it, and make this list exensible.
-    //   `[contentEditable=true]`, // very unlikely to suport as we're not a business tool
-    //   `iframe`, // we really don't like iframes...
-    //   `area[href]`, // very debatable!
     query(host, selector) {
         if (!selector || selector === '') {
             return [];
@@ -4033,7 +4028,7 @@ let SelectFocusUtility = class SelectFocusUtility {
      * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returend as well
      */
     findFocusable(host, locked = false) {
-        let suffix = ':not([disabled])';
+        let suffix = this.focusableSelectorSuffix;
         if (!locked) {
             suffix += `:not([tabindex='-1'])`;
         }
@@ -4121,18 +4116,13 @@ EscapeFocusDirective.ctorParameters = () => [
     { type: EscapeFocusService }
 ];
 __decorate([
-    Input('cxEscFocus')
-], EscapeFocusDirective.prototype, "config", void 0);
-__decorate([
     Output()
 ], EscapeFocusDirective.prototype, "esc", void 0);
 __decorate([
     HostListener('keydown.escape', ['$event'])
 ], EscapeFocusDirective.prototype, "handleEscape", null);
 EscapeFocusDirective = __decorate([
-    Directive({
-        selector: '[cxEscFocus]',
-    })
+    Directive() // selector: '[cxEscFocus]',
 ], EscapeFocusDirective);
 
 let AutoFocusService = class AutoFocusService extends EscapeFocusService {
@@ -4263,13 +4253,8 @@ AutoFocusDirective.ctorParameters = () => [
     { type: ElementRef },
     { type: AutoFocusService }
 ];
-__decorate([
-    Input('cxAutoFocus')
-], AutoFocusDirective.prototype, "config", void 0);
 AutoFocusDirective = __decorate([
-    Directive({
-        selector: '[cxAutoFocus]',
-    })
+    Directive() // selector: '[cxAutoFocus]'
 ], AutoFocusDirective);
 
 let TabFocusService = class TabFocusService extends AutoFocusService {
@@ -4387,6 +4372,7 @@ let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
         this.service = service;
         /** `tab` defaults to true if the directive `cxTabFocus` is used. */
         this.defaultConfig = { tab: true };
+        // @Input('cxTabFocus')
         this.config = {};
     }
     handleNextTab(event) {
@@ -4407,18 +4393,13 @@ TabFocusDirective.ctorParameters = () => [
     { type: TabFocusService }
 ];
 __decorate([
-    Input('cxTabFocus')
-], TabFocusDirective.prototype, "config", void 0);
-__decorate([
     HostListener('keydown.arrowRight', ['$event'])
 ], TabFocusDirective.prototype, "handleNextTab", null);
 __decorate([
     HostListener('keydown.arrowLeft', ['$event'])
 ], TabFocusDirective.prototype, "handlePreviousTab", null);
 TabFocusDirective = __decorate([
-    Directive({
-        selector: '[cxTabFocus]',
-    })
+    Directive() // selector: '[cxTabFocus]'
 ], TabFocusDirective);
 
 let TrapFocusService = class TrapFocusService extends TabFocusService {
@@ -4478,6 +4459,7 @@ let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
         this.elementRef = elementRef;
         this.service = service;
         this.defaultConfig = { trap: true };
+        // @Input('cxTrapFocus')
         this.config = {};
         this.handleTrapDown = (event) => {
             if (!!this.config.trap) {
@@ -4509,9 +4491,6 @@ TrapFocusDirective.ctorParameters = () => [
     { type: TrapFocusService }
 ];
 __decorate([
-    Input('cxTrapFocus')
-], TrapFocusDirective.prototype, "config", void 0);
-__decorate([
     HostListener('keydown.arrowdown', ['$event']),
     HostListener('keydown.tab', ['$event'])
 ], TrapFocusDirective.prototype, "handleTrapDown", void 0);
@@ -4520,9 +4499,7 @@ __decorate([
     HostListener('keydown.shift.tab', ['$event'])
 ], TrapFocusDirective.prototype, "handleTrapUp", void 0);
 TrapFocusDirective = __decorate([
-    Directive({
-        selector: '[cxTrapFocus]',
-    })
+    Directive() // selector: '[cxTrapFocus]'
 ], TrapFocusDirective);
 
 let LockFocusService = class LockFocusService extends TrapFocusService {
@@ -4546,6 +4523,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
         this.service = service;
         this.renderer = renderer;
         this.defaultConfig = { lock: true };
+        // @Input('cxLockFocus')
         this.config = {};
         /**
          * Emits an event when the host is unlocked.
@@ -4685,9 +4663,6 @@ LockFocusDirective.ctorParameters = () => [
     { type: Renderer2 }
 ];
 __decorate([
-    Input('cxLockFocus')
-], LockFocusDirective.prototype, "config", void 0);
-__decorate([
     HostBinding('class.focus-lock')
 ], LockFocusDirective.prototype, "shouldLock", void 0);
 __decorate([
@@ -4704,18 +4679,34 @@ __decorate([
     HostListener('click', ['$event'])
 ], LockFocusDirective.prototype, "handleClick", null);
 LockFocusDirective = __decorate([
-    Directive({
-        selector: '[cxLockFocus]',
-    })
+    Directive() // selector: '[cxLockFocus]'
 ], LockFocusDirective);
 
+let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
+};
+KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
+KeyboardFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], KeyboardFocusService);
+
 let FocusDirective = class FocusDirective extends LockFocusDirective {
-    constructor() {
-        super(...arguments);
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service, renderer);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = {};
         // tslint:disable-next-line: no-input-rename
         this.config = {};
     }
 };
+FocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyboardFocusService },
+    { type: Renderer2 }
+];
 __decorate([
     Input('cxFocus')
 ], FocusDirective.prototype, "config", void 0);
@@ -4726,14 +4717,14 @@ FocusDirective = __decorate([
 ], FocusDirective);
 
 const directives = [
-    PersistFocusDirective,
-    VisibleFocusDirective,
-    BlockFocusDirective,
-    AutoFocusDirective,
-    EscapeFocusDirective,
-    LockFocusDirective,
-    TrapFocusDirective,
-    TabFocusDirective,
+    // PersistFocusDirective,
+    // VisibleFocusDirective,
+    // BlockFocusDirective,
+    // AutoFocusDirective,
+    // EscapeFocusDirective,
+    // LockFocusDirective,
+    // TrapFocusDirective,
+    // TabFocusDirective,
     FocusDirective,
 ];
 let KeyboardFocusModule = class KeyboardFocusModule {
@@ -4815,7 +4806,7 @@ __decorate([
 CardComponent = __decorate([
     Component({
         selector: 'cx-card',
-        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n  cxAutoFocus\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\" autofocus>\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
     })
 ], CardComponent);
 
@@ -4823,7 +4814,7 @@ let CardModule = class CardModule {
 };
 CardModule = __decorate([
     NgModule({
-        imports: [CommonModule, I18nModule, IconModule, KeyboardFocusModule],
+        imports: [CommonModule, I18nModule, IconModule],
         declarations: [CardComponent],
         exports: [CardComponent],
     })
@@ -9298,6 +9289,18 @@ NotCheckoutAuthGuard = __decorate([
     })
 ], NotCheckoutAuthGuard);
 
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
+
 const defaultSkipLinkConfig = {
     skipLinks: [
         {
@@ -9323,8 +9326,9 @@ var SkipLinkScrollPosition;
 })(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
 
 let SkipLinkService = class SkipLinkService {
-    constructor(config) {
+    constructor(config, keyboardFocusService) {
         this.config = config;
+        this.keyboardFocusService = keyboardFocusService;
         this.skipLinks$ = new BehaviorSubject([]);
     }
     getSkipLinks() {
@@ -9355,15 +9359,17 @@ let SkipLinkService = class SkipLinkService {
         const target = skipLink.target instanceof HTMLElement
             ? skipLink.target
             : skipLink.target.parentElement;
+        // focus first focusable element in the
+        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
         // we force a tabindex if not available, to ensure we can focus into the element
-        const currentTabIndex = target.getAttribute('tabindex');
-        if (!currentTabIndex) {
-            target.setAttribute('tabindex', '-1');
+        const hasTabindex = firstFocusable.hasAttribute('tabindex');
+        if (!hasTabindex) {
+            firstFocusable.setAttribute('tabindex', '-1');
         }
-        target.focus();
+        firstFocusable.focus();
         // drop the tmp tabindex
-        if (!currentTabIndex) {
-            target.removeAttribute('tabindex');
+        if (!hasTabindex) {
+            firstFocusable.removeAttribute('tabindex');
         }
     }
     getSkipLinkIndexInArray(key) {
@@ -9383,9 +9389,10 @@ let SkipLinkService = class SkipLinkService {
     }
 };
 SkipLinkService.ctorParameters = () => [
-    { type: SkipLinkConfig }
+    { type: SkipLinkConfig },
+    { type: KeyboardFocusService }
 ];
-SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig)); }, token: SkipLinkService, providedIn: "root" });
+SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
 SkipLinkService = __decorate([
     Injectable({
         providedIn: 'root',
@@ -9852,21 +9859,21 @@ AnonymousConsentsModule = __decorate([
 ], AnonymousConsentsModule);
 
 let StorefrontComponent = class StorefrontComponent {
-    constructor(hamburgerMenuService, routingService, elementRef, service) {
+    constructor(hamburgerMenuService, routingService, elementRef, keyboardFocusService) {
         this.hamburgerMenuService = hamburgerMenuService;
         this.routingService = routingService;
         this.elementRef = elementRef;
-        this.service = service;
+        this.keyboardFocusService = keyboardFocusService;
         this.isExpanded$ = this.hamburgerMenuService.isExpanded;
         // required by esc focus
         this.tabindex = '0';
-        this.config = {
+        this.keyboardFocusConfig = {
             focusOnEscape: true,
             focusOnDoubleEscape: true,
         };
     }
     handleEscape(event) {
-        this.service.handleEscape(this.elementRef.nativeElement, this.config, event);
+        this.keyboardFocusService.handleEscape(this.elementRef.nativeElement, this.keyboardFocusConfig, event);
     }
     ngOnInit() {
         this.navigateSubscription = this.routingService
@@ -9894,7 +9901,7 @@ StorefrontComponent.ctorParameters = () => [
     { type: HamburgerMenuService },
     { type: RoutingService },
     { type: ElementRef },
-    { type: EscapeFocusService }
+    { type: KeyboardFocusService }
 ];
 __decorate([
     HostBinding('class.start-navigating')
@@ -9914,7 +9921,7 @@ __decorate([
 StorefrontComponent = __decorate([
     Component({
         selector: 'cx-storefront',
-        template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main\n    cxSkipLink=\"cx-main\"\n    [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n  >\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer\n      cxSkipLink=\"cx-footer\"\n      [cxFocus]=\"{ autofocus: true, disableMouseFocus: true }\"\n    >\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
+        template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ disableMouseFocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main cxSkipLink=\"cx-main\" [cxFocus]=\"{ disableMouseFocus: true }\">\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer cxSkipLink=\"cx-footer\" [cxFocus]=\"{ disableMouseFocus: true }\">\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
     })
 ], StorefrontComponent);
 
@@ -17360,5 +17367,5 @@ const PLPAccessibilityLayoutConfig = {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, AutoFocusDirective, AutoFocusService, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BaseFocusDirective, BaseFocusService, BillingAddressFormComponent, BillingAddressFormModule, BlockFocusDirective, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, EscapeFocusDirective, EscapeFocusService, FOCUS_ATTR, FOCUS_GROUP_ATTR, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LockFocusDirective, LockFocusService, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PersistFocusDirective, PersistFocusService, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabFocusDirective, TabFocusService, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, TrapFocusDirective, TrapFocusService, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, VisibleFocusDirective, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, skipLinkFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, AsmLoaderModule as ɵa, asmFactory as ɵb, setHtmlLangAttribute as ɵba, AnonymousConsentsModule as ɵbb, AnonymousConsentDialogComponent as ɵbc, ComponentMapperService as ɵc, AsmEnablerService as ɵd, AsmMainUiComponent as ɵe, AsmComponentService as ɵf, CSAgentLoginFormComponent as ɵg, CustomerSelectionComponent as ɵh, AsmSessionTimerComponent as ɵi, FormatTimerPipe as ɵj, CustomerEmulationComponent as ɵk, LockFocusDirective as ɵl, defaultCheckoutConfig as ɵm, ExpressCheckoutService as ɵn, defaultQualtricsConfig as ɵo, CmsRoutesService as ɵp, CmsMappingService as ɵq, CmsI18nService as ɵr, CmsGuardsService as ɵs, ReturnRequestService as ɵt, AddToHomeScreenService as ɵu, MyCouponsComponentService as ɵv, addCmsRoute as ɵw, defaultStorefrontRoutesConfig as ɵx, defaultRoutingConfig as ɵy, htmlLangProvider as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getStructuredDataFactory, getSuffixUrlMatcher, headerComponents, initSeoService, pwaConfigurationFactory, pwaFactory, skipLinkFactory, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, FOCUS_ATTR as ɵa, AsmLoaderModule as ɵb, TrapFocusService as ɵba, LockFocusService as ɵbb, defaultCheckoutConfig as ɵbc, ExpressCheckoutService as ɵbd, defaultQualtricsConfig as ɵbe, CmsRoutesService as ɵbf, CmsMappingService as ɵbg, CmsI18nService as ɵbh, CmsGuardsService as ɵbi, ReturnRequestService as ɵbj, AddToHomeScreenService as ɵbk, MyCouponsComponentService as ɵbl, addCmsRoute as ɵbm, defaultStorefrontRoutesConfig as ɵbn, defaultRoutingConfig as ɵbo, htmlLangProvider as ɵbp, setHtmlLangAttribute as ɵbq, KeyboardFocusService as ɵbr, AnonymousConsentsModule as ɵbs, AnonymousConsentDialogComponent as ɵbt, asmFactory as ɵc, ComponentMapperService as ɵd, AsmEnablerService as ɵe, AsmMainUiComponent as ɵf, AsmComponentService as ɵg, CSAgentLoginFormComponent as ɵh, CustomerSelectionComponent as ɵi, AsmSessionTimerComponent as ɵj, FormatTimerPipe as ɵk, CustomerEmulationComponent as ɵl, LockFocusDirective as ɵm, TrapFocusDirective as ɵn, TabFocusDirective as ɵo, AutoFocusDirective as ɵp, EscapeFocusDirective as ɵq, PersistFocusDirective as ɵr, BlockFocusDirective as ɵs, VisibleFocusDirective as ɵt, BaseFocusDirective as ɵu, BaseFocusService as ɵv, PersistFocusService as ɵw, EscapeFocusService as ɵx, AutoFocusService as ɵy, TabFocusService as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

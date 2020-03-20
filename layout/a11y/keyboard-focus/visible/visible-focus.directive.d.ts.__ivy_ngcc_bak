@@ -8,7 +8,7 @@ import { VisibleFocusConfig } from '../keyboard-focus.model';
 export declare class VisibleFocusDirective extends BaseFocusDirective {
     protected defaultConfig: VisibleFocusConfig;
     protected config: VisibleFocusConfig;
-    /** controls a polyfill for the lacking focus-visible feature */
+    /** controls a polyfill class for the lacking focus-visible feature */
     mouseFocus: boolean;
     handleMousedown(): void;
     handleKeydown(): void;
