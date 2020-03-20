@@ -3077,11 +3077,18 @@ var CurrentProductService = /** @class */ (function () {
         this.productService = productService;
         this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
+    /**
+     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+     *
+     * @param scopes
+     */
     CurrentProductService.prototype.getProduct = function (scopes) {
         var _this = this;
         return this.routingService.getRouterState().pipe(map(function (state) { return state.state.params['productCode']; }), switchMap(function (productCode) {
-            return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
-        }));
+            return productCode
+                ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
+                : of(null);
+        }), filter(function (x) { return x !== undefined; }), distinctUntilChanged());
     };
     CurrentProductService.ctorParameters = function () { return [
         { type: RoutingService },

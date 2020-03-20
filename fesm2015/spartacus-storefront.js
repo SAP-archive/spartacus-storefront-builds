@@ -2738,8 +2738,17 @@ let CurrentProductService = class CurrentProductService {
         this.productService = productService;
         this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
+    /**
+     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+     *
+     * @param scopes
+     */
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), switchMap((productCode) => this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)));
+        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), switchMap((productCode) => {
+            return productCode
+                ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
+                : of(null);
+        }), filter(x => x !== undefined), distinctUntilChanged());
     }
 };
 CurrentProductService.ctorParameters = () => [

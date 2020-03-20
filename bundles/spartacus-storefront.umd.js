@@ -3262,11 +3262,18 @@
             this.productService = productService;
             this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
         }
+        /**
+         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+         *
+         * @param scopes
+         */
         CurrentProductService.prototype.getProduct = function (scopes) {
             var _this = this;
             return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
-                return _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE);
-            }));
+                return productCode
+                    ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
+                    : rxjs.of(null);
+            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
         };
         CurrentProductService.ctorParameters = function () { return [
             { type: core$1.RoutingService },
