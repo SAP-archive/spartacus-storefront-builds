@@ -54,22 +54,4 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     };
     goNext(): void;
     goPrevious(): void;
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goNext() instead.
-     * TODO(issue:#4992) deprecated since 1.3
-     */
-    next(): void;
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goPrevious() instead.
-     * TODO(issue:#4992) deprecated since 1.3
-     */
-    back(): void;
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use selectPaymentMethod() instead.
-     * TODO(issue:#4992) deprecated since 1.3
-     */
-    paymentMethodSelected(paymentDetails: PaymentDetails): void;
 }
