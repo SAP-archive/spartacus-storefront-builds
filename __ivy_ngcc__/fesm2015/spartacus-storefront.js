@@ -3043,9 +3043,9 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_d
     const _r507 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r507); const card_r504 = ctx.$implicit; const ctx_r506 = ɵngcc0.ɵɵnextContext(4); return ctx_r506.addressSelected(card_r504.address); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r507); const card_r504 = ctx.$implicit; const ctx_r506 = ɵngcc0.ɵɵnextContext(4); return ctx_r506.selectAddress(card_r504.address); });
     ɵngcc0.ɵɵelementStart(2, "cx-card", 16);
-    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r507); const card_r504 = ctx.$implicit; const ctx_r508 = ɵngcc0.ɵɵnextContext(4); return ctx_r508.addressSelected(card_r504.address); });
+    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r507); const card_r504 = ctx.$implicit; const ctx_r508 = ɵngcc0.ɵɵnextContext(4); return ctx_r508.selectAddress(card_r504.address); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -3076,14 +3076,14 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(11, "div", 6);
     ɵngcc0.ɵɵelementStart(12, "div", 11);
     ɵngcc0.ɵɵelementStart(13, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r510); const ctx_r511 = ɵngcc0.ɵɵnextContext(3); return ctx_r511.back(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r510); const ctx_r511 = ɵngcc0.ɵɵnextContext(3); return ctx_r511.goPrevious(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 11);
     ɵngcc0.ɵɵelementStart(17, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r510); const ctx_r512 = ɵngcc0.ɵɵnextContext(3); return ctx_r512.next(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r510); const ctx_r512 = ɵngcc0.ɵɵnextContext(3); return ctx_r512.goNext(); });
     ɵngcc0.ɵɵpipe(18, "async");
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
@@ -3095,7 +3095,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     const cards_r496 = ɵngcc0.ɵɵnextContext(2).ngIf;
     const ctx_r500 = ɵngcc0.ɵɵnextContext();
     var tmp_4_0 = null;
-    const currVal_4 = (!ctx_r500.selectedAddress || !ctx_r500.selectedAddress.id) && !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r500.selectedAddress$)) == null ? null : tmp_4_0.shippingAddress);
+    const currVal_4 = !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r500.selectedAddress$)) == null ? null : tmp_4_0.id);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "checkoutAddress.selectYourShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(5);
@@ -3124,16 +3124,17 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
     const _r521 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-address-form", 19);
     ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r521); const ctx_r520 = ɵngcc0.ɵɵnextContext(4); return ctx_r520.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r521); const ctx_r522 = ɵngcc0.ɵɵnextContext(4); return ctx_r522.addAddress($event); });
-    ɵngcc0.ɵɵpipe(1, "cxTranslate");
+    ɵngcc0.ɵɵpipe(1, "async");
+    ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r516 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(1, 4, "checkout.backToCart"));
-    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r516.isGuestCheckout)("addressData", ctx_r516.setAddress);
+    ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(2, 6, "checkout.backToCart"));
+    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r516.isGuestCheckout)("addressData", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r516.selectedAddress$));
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template, 2, 1, "ng-container", 2);
-    ɵngcc0.ɵɵtemplate(1, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template, 2, 6, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
+    ɵngcc0.ɵɵtemplate(1, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template, 3, 8, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
     const _r515 = ɵngcc0.ɵɵreference(2);
     const cards_r496 = ɵngcc0.ɵɵnextContext(2).ngIf;
@@ -18239,36 +18240,9 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         this.activeCartService = activeCartService;
         this.newAddressFormManuallyOpened = false;
         this.forceLoader = false; // this helps with smoother steps transition
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use cards$ observable instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.cards = [];
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Avoid using it.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.goTo = null;
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use CheckoutConfigService.getNextCheckoutStepUrl(this.activatedRoute) instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-        /**
-         * @deprecated since version 1.3
-         * This variable will no longer be in use. Use CheckoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) instead.
-         * TODO(issue:#3921) deprecated since 1.3
-         */
-        this.checkoutStepUrlPrevious = 'cart';
         this.isGuestCheckout = false;
     }
     ngOnInit() {
-        this.goTo = null;
-        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-        this.checkoutStepUrlPrevious = 'cart';
         this.isLoading$ = this.userAddressService.getAddressesLoading();
         this.existingAddresses$ = this.userAddressService.getAddresses();
         this.selectedAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
@@ -18281,9 +18255,7 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         ]).pipe(map(([addresses, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected,]) => {
             // Select default address if none selected
             if (addresses.length &&
-                (!selected ||
-                    Object.keys(selected).length === 0 ||
-                    !this.selectedAddress)) {
+                (!selected || Object.keys(selected).length === 0)) {
                 const defaultAddress = addresses.find(address => address.defaultAddress);
                 selected = defaultAddress;
                 this.selectAddress(defaultAddress);
@@ -18323,14 +18295,9 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         };
     }
     selectAddress(address) {
-        this.selectedAddress = address;
         this.checkoutDeliveryService.setDeliveryAddress(address);
     }
     addAddress(address) {
-        // TODO(issue:#3921) deprecated since 1.3 - Remove temp address
-        const tempAddress = address['address']
-            ? address['address']
-            : address;
         const selectedSub = this.selectedAddress$.subscribe(selected => {
             if (selected && selected.shippingAddress) {
                 this.goNext();
@@ -18338,20 +18305,11 @@ let ShippingAddressComponent = class ShippingAddressComponent {
             }
         });
         this.forceLoader = true;
-        // TODO(issue:#3921) deprecated since 1.3 - Remove this condition
-        if (address['address'] || address['newAddress']) {
-            address['newAddress']
-                ? this.checkoutDeliveryService.createAndSetAddress(tempAddress)
-                : this.selectAddress(tempAddress);
-        }
-        else {
-            // TODO(issue:#3921) deprecated since 1.3 - Use instead of condition
-            this.existingAddresses$.pipe(take(1)).subscribe(addresses => {
-                addresses.includes(tempAddress)
-                    ? this.selectAddress(tempAddress)
-                    : this.checkoutDeliveryService.createAndSetAddress(tempAddress);
-            });
-        }
+        this.existingAddresses$.pipe(take(1)).subscribe(addresses => {
+            addresses.includes(address)
+                ? this.selectAddress(address)
+                : this.checkoutDeliveryService.createAndSetAddress(address);
+        });
     }
     showNewAddressForm() {
         this.newAddressFormManuallyOpened = true;
@@ -18367,51 +18325,6 @@ let ShippingAddressComponent = class ShippingAddressComponent {
     }
     goPrevious() {
         this.routingService.go(this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) || 'cart');
-    }
-    /**
-     * @deprecated since version 1.3
-     * This variable will no longer be in use. Use selectAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    addressSelected(address) {
-        this.selectAddress(address);
-    }
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goPrevious() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    back() {
-        this.goPrevious();
-    }
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use goNext() instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    next() {
-        this.goNext();
-    }
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Use addAddress(address: Address) instead.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    addNewAddress(address) {
-        this.addAddress(address);
-    }
-    /**
-     * @deprecated since version 1.3
-     * This method will no longer be in use. Remove.
-     * TODO(issue:#3921) deprecated since 1.3
-     */
-    ngOnDestroy() {
-        if (this.setAddressSub) {
-            this.setAddressSub.unsubscribe();
-        }
-        if (this.selectedAddressSub) {
-            this.selectedAddressSub.unsubscribe();
-        }
     }
 };
 ShippingAddressComponent.ɵfac = function ShippingAddressComponent_Factory(t) { return new (t || ShippingAddressComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
@@ -29446,7 +29359,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-shipping-address',
-                template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"addressSelected(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"addressSelected(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"cx-btn btn btn-block btn-action\" (click)=\"back()\">\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"\n              (!selectedAddress || !selectedAddress.id) &&\n              !(selectedAddress$ | async)?.shippingAddress\n            \"\n            (click)=\"next()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"setAddress\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"selectAddress(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"selectAddress(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-action\"\n            (click)=\"goPrevious()\"\n          >\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!(selectedAddress$ | async)?.id\"\n            (click)=\"goNext()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"selectedAddress$ | async\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
