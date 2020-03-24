@@ -10332,20 +10332,6 @@
     // export * from './visible/index';
     // export * from './keyboard-focus.model';
 
-    var defaultSkipLinkConfig = {
-        skipLinks: [
-            {
-                key: 'cx-header',
-                i18nKey: 'skipLink.labels.header',
-            },
-            {
-                key: 'cx-main',
-                i18nKey: 'skipLink.labels.main',
-            },
-            { key: 'cx-footer', i18nKey: 'skipLink.labels.footer' },
-        ],
-    };
-
     var SkipLinkConfig = /** @class */ (function () {
         function SkipLinkConfig() {
         }
@@ -10463,6 +10449,20 @@
         ], SkipLinkComponent);
         return SkipLinkComponent;
     }());
+
+    var defaultSkipLinkConfig = {
+        skipLinks: [
+            {
+                key: 'cx-header',
+                i18nKey: 'skipLink.labels.header',
+            },
+            {
+                key: 'cx-main',
+                i18nKey: 'skipLink.labels.main',
+            },
+            { key: 'cx-footer', i18nKey: 'skipLink.labels.footer' },
+        ],
+    };
 
     var SkipLinkDirective = /** @class */ (function () {
         function SkipLinkDirective(elementRef, skipLinkService) {
@@ -19377,64 +19377,64 @@
     exports.defaultScrollConfig = defaultScrollConfig;
     exports.defaultSkipLinkConfig = defaultSkipLinkConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
-    exports.getStructuredDataFactory = getStructuredDataFactory;
     exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
     exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
-    exports.pwaConfigurationFactory = pwaConfigurationFactory;
-    exports.pwaFactory = pwaFactory;
-    exports.skipLinkFactory = skipLinkFactory;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
     exports.ɵ0 = ɵ0$1;
     exports.ɵ1 = ɵ1;
     exports.ɵ2 = ɵ2;
-    exports.ɵa = FOCUS_ATTR;
-    exports.ɵb = AsmLoaderModule;
-    exports.ɵba = TrapFocusService;
-    exports.ɵbb = LockFocusService;
-    exports.ɵbc = defaultCheckoutConfig;
-    exports.ɵbd = ExpressCheckoutService;
-    exports.ɵbe = defaultQualtricsConfig;
-    exports.ɵbf = CmsRoutesService;
-    exports.ɵbg = CmsMappingService;
-    exports.ɵbh = CmsI18nService;
-    exports.ɵbi = CmsGuardsService;
-    exports.ɵbj = ReturnRequestService;
-    exports.ɵbk = AddToHomeScreenService;
-    exports.ɵbl = MyCouponsComponentService;
-    exports.ɵbm = addCmsRoute;
-    exports.ɵbn = defaultStorefrontRoutesConfig;
-    exports.ɵbo = defaultRoutingConfig;
-    exports.ɵbp = htmlLangProvider;
-    exports.ɵbq = setHtmlLangAttribute;
-    exports.ɵbr = KeyboardFocusService;
-    exports.ɵbs = AnonymousConsentsModule;
-    exports.ɵbt = AnonymousConsentDialogComponent;
-    exports.ɵc = asmFactory;
-    exports.ɵd = ComponentMapperService;
-    exports.ɵe = AsmEnablerService;
-    exports.ɵf = AsmMainUiComponent;
-    exports.ɵg = AsmComponentService;
-    exports.ɵh = CSAgentLoginFormComponent;
-    exports.ɵi = CustomerSelectionComponent;
-    exports.ɵj = AsmSessionTimerComponent;
-    exports.ɵk = FormatTimerPipe;
-    exports.ɵl = CustomerEmulationComponent;
-    exports.ɵm = LockFocusDirective;
-    exports.ɵn = TrapFocusDirective;
-    exports.ɵo = TabFocusDirective;
-    exports.ɵp = AutoFocusDirective;
-    exports.ɵq = EscapeFocusDirective;
-    exports.ɵr = PersistFocusDirective;
-    exports.ɵs = BlockFocusDirective;
-    exports.ɵt = VisibleFocusDirective;
-    exports.ɵu = BaseFocusDirective;
-    exports.ɵv = BaseFocusService;
-    exports.ɵw = PersistFocusService;
-    exports.ɵx = EscapeFocusService;
-    exports.ɵy = AutoFocusService;
-    exports.ɵz = TabFocusService;
+    exports.ɵa = pwaConfigurationFactory;
+    exports.ɵb = pwaFactory;
+    exports.ɵba = PersistFocusService;
+    exports.ɵbb = EscapeFocusService;
+    exports.ɵbc = AutoFocusService;
+    exports.ɵbd = TabFocusService;
+    exports.ɵbe = TrapFocusService;
+    exports.ɵbf = LockFocusService;
+    exports.ɵbg = defaultCheckoutConfig;
+    exports.ɵbh = ExpressCheckoutService;
+    exports.ɵbi = defaultQualtricsConfig;
+    exports.ɵbj = CmsRoutesService;
+    exports.ɵbk = CmsMappingService;
+    exports.ɵbl = CmsI18nService;
+    exports.ɵbm = CmsGuardsService;
+    exports.ɵbn = ReturnRequestService;
+    exports.ɵbo = AddToHomeScreenService;
+    exports.ɵbp = MyCouponsComponentService;
+    exports.ɵbq = addCmsRoute;
+    exports.ɵbr = defaultStorefrontRoutesConfig;
+    exports.ɵbs = defaultRoutingConfig;
+    exports.ɵbt = htmlLangProvider;
+    exports.ɵbu = setHtmlLangAttribute;
+    exports.ɵbv = KeyboardFocusService;
+    exports.ɵbw = AnonymousConsentsModule;
+    exports.ɵbx = AnonymousConsentDialogComponent;
+    exports.ɵc = getStructuredDataFactory;
+    exports.ɵd = FOCUS_ATTR;
+    exports.ɵe = skipLinkFactory;
+    exports.ɵf = AsmLoaderModule;
+    exports.ɵg = asmFactory;
+    exports.ɵh = ComponentMapperService;
+    exports.ɵi = AsmEnablerService;
+    exports.ɵj = AsmMainUiComponent;
+    exports.ɵk = AsmComponentService;
+    exports.ɵl = CSAgentLoginFormComponent;
+    exports.ɵm = CustomerSelectionComponent;
+    exports.ɵn = AsmSessionTimerComponent;
+    exports.ɵo = FormatTimerPipe;
+    exports.ɵp = CustomerEmulationComponent;
+    exports.ɵq = LockFocusDirective;
+    exports.ɵr = TrapFocusDirective;
+    exports.ɵs = TabFocusDirective;
+    exports.ɵt = AutoFocusDirective;
+    exports.ɵu = EscapeFocusDirective;
+    exports.ɵv = PersistFocusDirective;
+    exports.ɵw = BlockFocusDirective;
+    exports.ɵx = VisibleFocusDirective;
+    exports.ɵy = BaseFocusDirective;
+    exports.ɵz = BaseFocusService;
     exports.θDeferLoaderService = DeferLoaderService;
     exports.θIntersectionService = IntersectionService;
 
