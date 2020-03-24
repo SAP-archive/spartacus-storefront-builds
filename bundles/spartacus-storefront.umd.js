@@ -16931,8 +16931,6 @@
             this.currentProductService = currentProductService;
             this.product$ = this.currentProductService.getProduct(core$1.ProductScope.ATTRIBUTES);
         }
-        // TODO deprecated since 1.4, remove
-        ProductAttributesComponent.prototype.ngOnInit = function () { };
         ProductAttributesComponent.ctorParameters = function () { return [
             { type: CurrentProductService }
         ]; };

@@ -15282,8 +15282,6 @@ let ProductAttributesComponent = class ProductAttributesComponent {
         this.currentProductService = currentProductService;
         this.product$ = this.currentProductService.getProduct(ProductScope.ATTRIBUTES);
     }
-    // TODO deprecated since 1.4, remove
-    ngOnInit() { }
 };
 ProductAttributesComponent.ctorParameters = () => [
     { type: CurrentProductService }

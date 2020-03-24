@@ -24871,8 +24871,6 @@ let ProductAttributesComponent = class ProductAttributesComponent {
         this.currentProductService = currentProductService;
         this.product$ = this.currentProductService.getProduct(ProductScope.ATTRIBUTES);
     }
-    // TODO deprecated since 1.4, remove
-    ngOnInit() { }
 };
 ProductAttributesComponent.ɵfac = function ProductAttributesComponent_Factory(t) { return new (t || ProductAttributesComponent)(ɵngcc0.ɵɵdirectiveInject(CurrentProductService)); };
 ProductAttributesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductAttributesComponent, selectors: [["cx-product-attributes"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "container"], [4, "ngFor", "ngForOf"]], template: function ProductAttributesComponent_Template(rf, ctx) { if (rf & 1) {
