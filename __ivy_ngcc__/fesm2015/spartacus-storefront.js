@@ -8521,17 +8521,17 @@ function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 4, "miniLogin.signInRegister"));
 } }
 function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "option", 26);
+    ɵngcc0.ɵɵelementStart(0, "option", 25);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1337 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1337.code);
+    const title_r1335 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1335.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1337.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1335.name);
 } }
 function RegisterComponent_section_0_div_44_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 27);
+    ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -8542,7 +8542,7 @@ function RegisterComponent_section_0_div_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "register.passwordMinRequirements"));
 } }
 function RegisterComponent_section_0_div_52_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 27);
+    ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -8552,45 +8552,23 @@ function RegisterComponent_section_0_div_52_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "register.bothPasswordMustMatch"));
 } }
-function RegisterComponent_section_0_ng_container_55_label_1_Template(rf, ctx) { if (rf & 1) {
+function RegisterComponent_section_0_label_55_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
-    ɵngcc0.ɵɵelement(1, "input", 29);
-    ɵngcc0.ɵɵelementStart(2, "span", 22);
+    ɵngcc0.ɵɵelement(1, "input", 27);
+    ɵngcc0.ɵɵelementStart(2, "span", 21);
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1339 = ctx.ngIf;
-    const ctx_r1338 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1338.isConsentGiven(anonymousConsent_r1339.consent));
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1339.template, " ");
-} }
-function RegisterComponent_section_0_ng_container_55_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, RegisterComponent_section_0_ng_container_55_label_1_Template, 4, 2, "label", 28);
-    ɵngcc0.ɵɵpipe(2, "async");
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
+    const anonymousConsent_r1336 = ctx.ngIf;
     const ctx_r1334 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1334.anonymousConsent$));
-} }
-function RegisterComponent_section_0_ng_template_56_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "label");
-    ɵngcc0.ɵɵelement(1, "input", 30);
-    ɵngcc0.ɵɵelementStart(2, "span", 22);
-    ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵpipe(4, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 1, "register.emailMarketing"), " ");
+    ɵngcc0.ɵɵproperty("checked", ctx_r1334.isConsentGiven(anonymousConsent_r1336.consent));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1336.template, " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1341 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1338 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -8666,35 +8644,35 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(53, "div", 7);
     ɵngcc0.ɵɵelementStart(54, "div", 18);
-    ɵngcc0.ɵɵtemplate(55, RegisterComponent_section_0_ng_container_55_Template, 3, 3, "ng-container", 19);
-    ɵngcc0.ɵɵtemplate(56, RegisterComponent_section_0_ng_template_56_Template, 5, 3, "ng-template", null, 20, ɵngcc0.ɵɵtemplateRefExtractor);
+    ɵngcc0.ɵɵtemplate(55, RegisterComponent_section_0_label_55_Template, 4, 2, "label", 19);
+    ɵngcc0.ɵɵpipe(56, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(58, "div", 7);
-    ɵngcc0.ɵɵelementStart(59, "div", 18);
-    ɵngcc0.ɵɵelementStart(60, "label");
-    ɵngcc0.ɵɵelement(61, "input", 21);
-    ɵngcc0.ɵɵelementStart(62, "span", 22);
-    ɵngcc0.ɵɵtext(63);
-    ɵngcc0.ɵɵpipe(64, "cxTranslate");
-    ɵngcc0.ɵɵelementStart(65, "a", 23);
-    ɵngcc0.ɵɵpipe(66, "cxUrl");
-    ɵngcc0.ɵɵtext(67);
-    ɵngcc0.ɵɵpipe(68, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(57, "div", 7);
+    ɵngcc0.ɵɵelementStart(58, "div", 18);
+    ɵngcc0.ɵɵelementStart(59, "label");
+    ɵngcc0.ɵɵelement(60, "input", 20);
+    ɵngcc0.ɵɵelementStart(61, "span", 21);
+    ɵngcc0.ɵɵtext(62);
+    ɵngcc0.ɵɵpipe(63, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(64, "a", 22);
+    ɵngcc0.ɵɵpipe(65, "cxUrl");
+    ɵngcc0.ɵɵtext(66);
+    ɵngcc0.ɵɵpipe(67, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(69, "button", 24);
-    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_69_listener() { ɵngcc0.ɵɵrestoreView(_r1341); const ctx_r1340 = ɵngcc0.ɵɵnextContext(); return ctx_r1340.submit(); });
-    ɵngcc0.ɵɵtext(70);
-    ɵngcc0.ɵɵpipe(71, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(68, "button", 23);
+    ɵngcc0.ɵɵlistener("click", function RegisterComponent_section_0_Template_button_click_68_listener() { ɵngcc0.ɵɵrestoreView(_r1338); const ctx_r1337 = ɵngcc0.ɵɵnextContext(); return ctx_r1337.submit(); });
+    ɵngcc0.ɵɵtext(69);
+    ɵngcc0.ɵɵpipe(70, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(72, "a", 25);
-    ɵngcc0.ɵɵpipe(73, "cxUrl");
-    ɵngcc0.ɵɵtext(74);
-    ɵngcc0.ɵɵpipe(75, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(71, "a", 24);
+    ɵngcc0.ɵɵpipe(72, "cxUrl");
+    ɵngcc0.ɵɵtext(73);
+    ɵngcc0.ɵɵpipe(74, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -8702,60 +8680,59 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1335 = ɵngcc0.ɵɵreference(57);
     const ctx_r1328 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵproperty("formGroup", ctx_r1328.userRegistrationForm);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 30, "register.title"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 29, "register.title"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 32, "register.selectTitle"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 31, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 34, ctx_r1328.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 33, ctx_r1328.titles$));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 36, "register.firstName.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 35, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 38, "register.firstName.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 37, "register.firstName.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(27, 40, "register.lastName.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(27, 39, "register.lastName.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(29, 42, "register.lastName.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(29, 41, "register.lastName.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 44, "register.emailAddress.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(34, 43, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1328.userRegistrationForm.get("email").errors && (ctx_r1328.userRegistrationForm.get("email").errors["email"] || ctx_r1328.userRegistrationForm.get("email").errors["InvalidEmail"]) && ctx_r1328.userRegistrationForm.get("email").dirty);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 46, "register.emailAddress.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(36, 45, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 48, "register.password.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(41, 47, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1328.userRegistrationForm.get("password").invalid && ctx_r1328.userRegistrationForm.get("password").dirty);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 50, "register.password.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(43, 49, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", ctx_r1328.userRegistrationForm.get("password").invalid && ctx_r1328.userRegistrationForm.get("password").dirty);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 52, "register.confirmPassword.label"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(49, 51, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵclassProp("is-invalid", ctx_r1328.userRegistrationForm.get("password").value !== ctx_r1328.userRegistrationForm.get("passwordconf").value);
-    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 54, "register.confirmPassword.placeholder"));
+    ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(51, 53, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", ctx_r1328.userRegistrationForm.get("password").value !== ctx_r1328.userRegistrationForm.get("passwordconf").value && ctx_r1328.userRegistrationForm.get("passwordconf").value);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1328.isAnonymousConsentEnabled)("ngIfElse", _r1335);
-    ɵngcc0.ɵɵadvance(8);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(64, 56, "register.confirmThatRead"), " ");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(56, 55, ctx_r1328.anonymousConsent$));
+    ɵngcc0.ɵɵadvance(7);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(63, 57, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(66, 58, ɵngcc0.ɵɵpureFunction0(68, _c23)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(65, 59, ɵngcc0.ɵɵpureFunction0(69, _c23)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(68, 60, "register.termsAndConditions"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(67, 61, "register.termsAndConditions"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(71, 62, "register.register"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(70, 63, "register.register"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(73, 64, ɵngcc0.ɵɵpureFunction0(69, _c20)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(72, 65, ɵngcc0.ɵɵpureFunction0(70, _c20)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(75, 66, "register.signIn"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(74, 67, "register.signIn"));
 } }
 function RegisterComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 31);
+    ɵngcc0.ɵɵelementStart(0, "div", 28);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
@@ -8767,11 +8744,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1342 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1339 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1342.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1339.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1342.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1339.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -8779,45 +8756,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1343 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1340 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1343.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1340.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1350 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1347 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1350.name, ": ", variant_r1350.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1347.name, ": ", variant_r1347.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1350 = ctx.$implicit;
+    const variant_r1347 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1350.name && variant_r1350.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1347.name && variant_r1347.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1344 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1341 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1344.cartEntry.product.baseOptions[0] == null ? null : ctx_r1344.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1344.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1341.cartEntry.product.baseOptions[0] == null ? null : ctx_r1341.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1341.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1353 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1350 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1353.cartEntry.basePrice == null ? null : ctx_r1353.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1350.cartEntry.basePrice == null ? null : ctx_r1350.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -8828,17 +8805,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1345 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1342 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1345.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1342.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1346 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1346.cartEntry.product);
+    const ctx_r1343 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1343.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -8850,18 +8827,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1362 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1359 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1362); const ctx_r1361 = ɵngcc0.ɵɵnextContext(3); return ctx_r1361.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1359); const ctx_r1358 = ɵngcc0.ɵɵnextContext(3); return ctx_r1358.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1360 = ctx.$implicit;
-    const ctx_r1359 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1357 = ctx.$implicit;
+    const ctx_r1356 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1360)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1359.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1357)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1356.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8884,7 +8861,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1357 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1354 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -8892,18 +8869,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1357 == null ? null : wishList_r1357.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1354 == null ? null : wishList_r1354.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1357 = ctx.ngIf;
+    const wishList_r1354 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1355 = ɵngcc0.ɵɵreference(3);
+    const _r1352 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1357 == null ? null : wishList_r1357.entries == null ? null : wishList_r1357.entries.length) > 0)("ngIfElse", _r1355);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1354 == null ? null : wishList_r1354.entries == null ? null : wishList_r1354.entries.length) > 0)("ngIfElse", _r1352);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -26303,21 +26280,14 @@ LogoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LogoutModule
         ]] });
 
 let RegisterComponent = class RegisterComponent {
-    constructor(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig, anonymousConsentsService, anonymousConsentsConfig) {
-        this.auth = auth;
-        this.authRedirectService = authRedirectService;
+    constructor(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig) {
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.router = router;
-        this.featureConfig = featureConfig;
         this.anonymousConsentsService = anonymousConsentsService;
         this.anonymousConsentsConfig = anonymousConsentsConfig;
         this.subscription = new Subscription();
-        // TODO(issue:4237) Register flow
-        this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
-        this.isAnonymousConsentEnabled = this.featureConfig &&
-            this.featureConfig.isEnabled(ANONYMOUS_CONSENTS_FEATURE);
         this.userRegistrationForm = this.fb.group({
             titleCode: [''],
             firstName: ['', Validators.required],
@@ -26330,14 +26300,13 @@ let RegisterComponent = class RegisterComponent {
             passwordconf: ['', Validators.required],
             newsletter: new FormControl({
                 value: false,
-                disabled: this.isAnonymousConsentEnabled
-                    ? this.isConsentRequired()
-                    : false,
+                disabled: this.isConsentRequired(),
             }),
             termsandconditions: [false, Validators.requiredTrue],
         }, { validator: CustomFormValidators.matchPassword });
     }
     ngOnInit() {
+        var _a;
         this.titles$ = this.userService.getTitles().pipe(tap(titles => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
@@ -26345,29 +26314,8 @@ let RegisterComponent = class RegisterComponent {
         }), map(titles => {
             return titles.sort(sortTitles);
         }));
-        // TODO(issue:4237) Register flow
-        if (this.isNewRegisterFlowEnabled) {
-            this.loading$ = this.userService.getRegisterUserResultLoading();
-            this.registerUserProcessInit();
-        }
-        else {
-            if (this.auth && this.authRedirectService) {
-                this.subscription.add(this.userService
-                    .getRegisterUserResultSuccess()
-                    .subscribe((success) => {
-                    if (success) {
-                        const { uid, password } = this.collectDataFromRegisterForm(this.userRegistrationForm.value);
-                        this.auth.authorize(uid, password);
-                    }
-                }));
-                this.subscription.add(this.auth.getUserToken().subscribe(data => {
-                    if (data && data.access_token) {
-                        this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                        this.authRedirectService.redirect();
-                    }
-                }));
-            }
-        }
+        this.loading$ = this.userService.getRegisterUserResultLoading();
+        this.registerUserProcessInit();
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
         this.subscription.add(this.globalMessageService
             .get()
@@ -26381,25 +26329,19 @@ let RegisterComponent = class RegisterComponent {
                 this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
         }));
-        if (this.isAnonymousConsentEnabled &&
-            Boolean(this.anonymousConsentsConfig) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent)) {
-            this.anonymousConsent$ = combineLatest([
-                this.anonymousConsentsService.getConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
-                this.anonymousConsentsService.getTemplate(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
-            ]).pipe(map(([consent, template]) => {
-                return {
-                    consent,
-                    template: template ? template.description : '',
-                };
-            }));
-            this.subscription.add(this.userRegistrationForm
-                .get('newsletter')
-                .valueChanges.subscribe(_ => {
-                this.toggleAnonymousConsent();
-            }));
-        }
+        const { registerConsent } = (_a = this.anonymousConsentsConfig) === null || _a === void 0 ? void 0 : _a.anonymousConsents;
+        this.anonymousConsent$ = combineLatest([
+            this.anonymousConsentsService.getConsent(registerConsent),
+            this.anonymousConsentsService.getTemplate(registerConsent),
+        ]).pipe(map(([consent, template]) => {
+            return {
+                consent,
+                template: template ? template.description : '',
+            };
+        }));
+        this.subscription.add(this.userRegistrationForm.get('newsletter').valueChanges.subscribe(() => {
+            this.toggleAnonymousConsent();
+        }));
     }
     submit() {
         this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
@@ -26421,26 +26363,26 @@ let RegisterComponent = class RegisterComponent {
         return this.anonymousConsentsService.isConsentGiven(consent);
     }
     isConsentRequired() {
-        if (Boolean(this.anonymousConsentsService) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
-            return this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+        var _a;
+        const { requiredConsents, registerConsent, } = (_a = this.anonymousConsentsConfig) === null || _a === void 0 ? void 0 : _a.anonymousConsents;
+        if (requiredConsents && registerConsent) {
+            return requiredConsents.includes(registerConsent);
         }
         return false;
     }
     onRegisterUserSuccess(success) {
-        if (this.router && success) {
+        if (success) {
             this.router.go('login');
             this.globalMessageService.add({ key: 'register.postRegisterMessage' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     }
     toggleAnonymousConsent() {
+        const { registerConsent } = this.anonymousConsentsConfig.anonymousConsents;
         if (Boolean(this.userRegistrationForm.get('newsletter').value)) {
-            this.anonymousConsentsService.giveConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+            this.anonymousConsentsService.giveConsent(registerConsent);
         }
         else {
-            this.anonymousConsentsService.withdrawConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+            this.anonymousConsentsService.withdrawConsent(registerConsent);
         }
     }
     registerUserProcessInit() {
@@ -26454,9 +26396,9 @@ let RegisterComponent = class RegisterComponent {
         this.userService.resetRegisterUserProcessState();
     }
 };
-RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsConfig)); };
-RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent, selectors: [["cx-register"]], decls: 4, vars: 4, consts: [["class", "cx-page-section container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-page-section", "container"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "cx-section"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["selected", "", "value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstname", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "name", "lastname", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], [1, "form-check"], [4, "ngIf", "ngIfElse"], ["hardcodedNewsletter", ""], ["type", "checkbox", "name", "termsandconditions", "formControlName", "termsandconditions"], [1, "form-check-label"], ["target", "_blank", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-login-link", "btn-link", 3, "routerLink"], [3, "value"], [1, "invalid-feedback"], [4, "ngIf"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input", 3, "checked"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input"], [1, "cx-spinner"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, RegisterComponent_section_0_Template, 76, 70, "section", 0);
+RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsConfig)); };
+RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent, selectors: [["cx-register"]], decls: 4, vars: 4, consts: [["class", "cx-page-section container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-page-section", "container"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "cx-section"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["selected", "", "value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstname", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "name", "lastname", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], [1, "form-check"], [4, "ngIf"], ["type", "checkbox", "name", "termsandconditions", "formControlName", "termsandconditions"], [1, "form-check-label"], ["target", "_blank", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-login-link", "btn-link", 3, "routerLink"], [3, "value"], [1, "invalid-feedback"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input", 3, "checked"], [1, "cx-spinner"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, RegisterComponent_section_0_Template, 75, 71, "section", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
@@ -26464,13 +26406,10 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
         ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1329);
     } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc7.CheckboxControlValueAccessor, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
-    { type: AuthService },
-    { type: AuthRedirectService },
     { type: UserService },
     { type: GlobalMessageService },
     { type: FormBuilder },
     { type: RoutingService },
-    { type: FeatureConfigService },
     { type: AnonymousConsentsService },
     { type: AnonymousConsentsConfig }
 ];
@@ -26553,7 +26492,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1347 = ɵngcc0.ɵɵreference(15);
+        const _r1344 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -26567,7 +26506,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1347);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1344);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -32200,9 +32139,9 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-register',
-                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <ng-container\n                *ngIf=\"isAnonymousConsentEnabled; else hardcodedNewsletter\"\n              >\n                <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                    [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ anonymousConsent.template }}\n                  </span>\n                </label>\n              </ng-container>\n              <ng-template #hardcodedNewsletter\n                ><label>\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ 'register.emailMarketing' | cxTranslate }}\n                  </span>\n                </label>\n              </ng-template>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                  [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                />\n                <span class=\"form-check-label\">\n                  {{ anonymousConsent.template }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.FeatureConfigService }, { type: ɵngcc1.AnonymousConsentsService }, { type: ɵngcc1.AnonymousConsentsConfig }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.AnonymousConsentsService }, { type: ɵngcc1.AnonymousConsentsConfig }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(RegisterComponentModule, { declarations: function () { return [RegisterComponent]; }, imports: function () { return [CommonModule,
         LoginModule,
         ReactiveFormsModule,

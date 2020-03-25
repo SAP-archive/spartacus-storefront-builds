@@ -18305,21 +18305,14 @@
     }());
 
     var RegisterComponent = /** @class */ (function () {
-        function RegisterComponent(auth, authRedirectService, userService, globalMessageService, fb, router, featureConfig, anonymousConsentsService, anonymousConsentsConfig) {
-            this.auth = auth;
-            this.authRedirectService = authRedirectService;
+        function RegisterComponent(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig) {
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.router = router;
-            this.featureConfig = featureConfig;
             this.anonymousConsentsService = anonymousConsentsService;
             this.anonymousConsentsConfig = anonymousConsentsConfig;
             this.subscription = new rxjs.Subscription();
-            // TODO(issue:4237) Register flow
-            this.isNewRegisterFlowEnabled = this.featureConfig && this.featureConfig.isLevel('1.1');
-            this.isAnonymousConsentEnabled = this.featureConfig &&
-                this.featureConfig.isEnabled(core$1.ANONYMOUS_CONSENTS_FEATURE);
             this.userRegistrationForm = this.fb.group({
                 titleCode: [''],
                 firstName: ['', forms.Validators.required],
@@ -18332,15 +18325,14 @@
                 passwordconf: ['', forms.Validators.required],
                 newsletter: new forms.FormControl({
                     value: false,
-                    disabled: this.isAnonymousConsentEnabled
-                        ? this.isConsentRequired()
-                        : false,
+                    disabled: this.isConsentRequired(),
                 }),
                 termsandconditions: [false, forms.Validators.requiredTrue],
             }, { validator: CustomFormValidators.matchPassword });
         }
         RegisterComponent.prototype.ngOnInit = function () {
             var _this = this;
+            var _a;
             this.titles$ = this.userService.getTitles().pipe(operators.tap(function (titles) {
                 if (Object.keys(titles).length === 0) {
                     _this.userService.loadTitles();
@@ -18348,29 +18340,8 @@
             }), operators.map(function (titles) {
                 return titles.sort(sortTitles);
             }));
-            // TODO(issue:4237) Register flow
-            if (this.isNewRegisterFlowEnabled) {
-                this.loading$ = this.userService.getRegisterUserResultLoading();
-                this.registerUserProcessInit();
-            }
-            else {
-                if (this.auth && this.authRedirectService) {
-                    this.subscription.add(this.userService
-                        .getRegisterUserResultSuccess()
-                        .subscribe(function (success) {
-                        if (success) {
-                            var _a = _this.collectDataFromRegisterForm(_this.userRegistrationForm.value), uid = _a.uid, password = _a.password;
-                            _this.auth.authorize(uid, password);
-                        }
-                    }));
-                    this.subscription.add(this.auth.getUserToken().subscribe(function (data) {
-                        if (data && data.access_token) {
-                            _this.globalMessageService.remove(core$1.GlobalMessageType.MSG_TYPE_ERROR);
-                            _this.authRedirectService.redirect();
-                        }
-                    }));
-                }
-            }
+            this.loading$ = this.userService.getRegisterUserResultLoading();
+            this.registerUserProcessInit();
             // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
             this.subscription.add(this.globalMessageService
                 .get()
@@ -18384,26 +18355,20 @@
                     _this.globalMessageService.add({ key: 'register.titleRequired' }, core$1.GlobalMessageType.MSG_TYPE_ERROR);
                 }
             }));
-            if (this.isAnonymousConsentEnabled &&
-                Boolean(this.anonymousConsentsConfig) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent)) {
-                this.anonymousConsent$ = rxjs.combineLatest([
-                    this.anonymousConsentsService.getConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
-                    this.anonymousConsentsService.getTemplate(this.anonymousConsentsConfig.anonymousConsents.registerConsent),
-                ]).pipe(operators.map(function (_a) {
-                    var _b = __read(_a, 2), consent = _b[0], template = _b[1];
-                    return {
-                        consent: consent,
-                        template: template ? template.description : '',
-                    };
-                }));
-                this.subscription.add(this.userRegistrationForm
-                    .get('newsletter')
-                    .valueChanges.subscribe(function (_) {
-                    _this.toggleAnonymousConsent();
-                }));
-            }
+            var registerConsent = ((_a = this.anonymousConsentsConfig) === null || _a === void 0 ? void 0 : _a.anonymousConsents).registerConsent;
+            this.anonymousConsent$ = rxjs.combineLatest([
+                this.anonymousConsentsService.getConsent(registerConsent),
+                this.anonymousConsentsService.getTemplate(registerConsent),
+            ]).pipe(operators.map(function (_a) {
+                var _b = __read(_a, 2), consent = _b[0], template = _b[1];
+                return {
+                    consent: consent,
+                    template: template ? template.description : '',
+                };
+            }));
+            this.subscription.add(this.userRegistrationForm.get('newsletter').valueChanges.subscribe(function () {
+                _this.toggleAnonymousConsent();
+            }));
         };
         RegisterComponent.prototype.submit = function () {
             this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
@@ -18425,26 +18390,26 @@
             return this.anonymousConsentsService.isConsentGiven(consent);
         };
         RegisterComponent.prototype.isConsentRequired = function () {
-            if (Boolean(this.anonymousConsentsService) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents.registerConsent) &&
-                Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
-                return this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+            var _a;
+            var _b = (_a = this.anonymousConsentsConfig) === null || _a === void 0 ? void 0 : _a.anonymousConsents, requiredConsents = _b.requiredConsents, registerConsent = _b.registerConsent;
+            if (requiredConsents && registerConsent) {
+                return requiredConsents.includes(registerConsent);
             }
             return false;
         };
         RegisterComponent.prototype.onRegisterUserSuccess = function (success) {
-            if (this.router && success) {
+            if (success) {
                 this.router.go('login');
                 this.globalMessageService.add({ key: 'register.postRegisterMessage' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }
         };
         RegisterComponent.prototype.toggleAnonymousConsent = function () {
+            var registerConsent = this.anonymousConsentsConfig.anonymousConsents.registerConsent;
             if (Boolean(this.userRegistrationForm.get('newsletter').value)) {
-                this.anonymousConsentsService.giveConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+                this.anonymousConsentsService.giveConsent(registerConsent);
             }
             else {
-                this.anonymousConsentsService.withdrawConsent(this.anonymousConsentsConfig.anonymousConsents.registerConsent);
+                this.anonymousConsentsService.withdrawConsent(registerConsent);
             }
         };
         RegisterComponent.prototype.registerUserProcessInit = function () {
@@ -18459,20 +18424,17 @@
             this.userService.resetRegisterUserProcessState();
         };
         RegisterComponent.ctorParameters = function () { return [
-            { type: core$1.AuthService },
-            { type: core$1.AuthRedirectService },
             { type: core$1.UserService },
             { type: core$1.GlobalMessageService },
             { type: forms.FormBuilder },
             { type: core$1.RoutingService },
-            { type: core$1.FeatureConfigService },
             { type: core$1.AnonymousConsentsService },
             { type: core$1.AnonymousConsentsConfig }
         ]; };
         RegisterComponent = __decorate([
             core.Component({
                 selector: 'cx-register',
-                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <ng-container\n                *ngIf=\"isAnonymousConsentEnabled; else hardcodedNewsletter\"\n              >\n                <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                    [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ anonymousConsent.template }}\n                  </span>\n                </label>\n              </ng-container>\n              <ng-template #hardcodedNewsletter\n                ><label>\n                  <input\n                    type=\"checkbox\"\n                    name=\"newsletter\"\n                    class=\"form-check-input\"\n                    formControlName=\"newsletter\"\n                  />\n                  <span class=\"form-check-label\">\n                    {{ 'register.emailMarketing' | cxTranslate }}\n                  </span>\n                </label>\n              </ng-template>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                  [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                />\n                <span class=\"form-check-label\">\n                  {{ anonymousConsent.template }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             })
         ], RegisterComponent);
         return RegisterComponent;
