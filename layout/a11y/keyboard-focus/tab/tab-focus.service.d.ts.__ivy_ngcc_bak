@@ -19,8 +19,12 @@ export declare class TabFocusService extends AutoFocusService {
     protected getActiveChild(host: HTMLElement, config: TabFocusConfig): HTMLElement;
     protected getChildren(host: HTMLElement, config: TabFocusConfig): HTMLElement[];
     /**
-     * returns all focusable child elements of the host element.
+     * Returns all focusable child elements of the host element.
+     *
+     * @param host The host element is used to query child focusable elements.
+     * @param locked Indicates if locked elements (tabindex=-1) should be returned, defaults to false.
+     * @param invisible Indicates if invisible child elements should be returned, defaults to false.
      */
-    findFocusable(host: HTMLElement, locked?: boolean): HTMLElement[];
+    findFocusable(host: HTMLElement, locked?: boolean, invisible?: boolean): HTMLElement[];
     protected isActive(el: HTMLElement): boolean;
 }

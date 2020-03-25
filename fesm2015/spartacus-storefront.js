@@ -3775,13 +3775,12 @@ let BaseFocusDirective = class BaseFocusDirective {
      * Returns true if the host element does not have a tabindex defined
      * and it also doesn't get focus by browsers nature (i.e. button or
      * active link).
-     *
-     * We keep this utility method private to not pollute the API.
      */
     get requiresExplicitTabIndex() {
         return (this.tabindex === undefined &&
             ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
-            !(this.host.tagName === 'A' && this.host.hasAttribute('href')));
+            !(this.host.tagName === 'A' &&
+                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
     }
 };
 BaseFocusDirective.ctorParameters = () => [
@@ -3879,11 +3878,25 @@ let PersistFocusService = class PersistFocusService extends BaseFocusService {
     get(group) {
         return this.focus.get(group || GLOBAL_GROUP);
     }
-    set(value, group) {
-        if (value) {
-            this.focus.set(group || GLOBAL_GROUP, value);
+    /**
+     * Persist the keyboard focus state for the given key. The focus is stored globally
+     * or for the given group.
+     */
+    set(key, group) {
+        if (key) {
+            this.focus.set(group || GLOBAL_GROUP, key);
         }
     }
+    /**
+     * Clears the persisted keyboard focus state globally or for the given group.
+     */
+    clear(group) {
+        this.focus.delete(group || GLOBAL_GROUP);
+    }
+    /**
+     * Returns the group for the host element based on the configured group or
+     * by the `data-cx-focus-group` attribute stored on the host.
+     */
     getPersistenceGroup(host, config) {
         var _a;
         return ((_a = config) === null || _a === void 0 ? void 0 : _a.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
@@ -3936,10 +3949,6 @@ let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirect
         // @Input('cxPersistFocus')
         this.config = {};
     }
-    /**
-     * The persistence key is maintained in a singleton cross the app to ensure we
-     * can reset the focus if the DOM gets rebuild.
-     */
     handleFocus(event) {
         var _a, _b;
         this.service.set(this.key, this.group);
@@ -4026,23 +4035,37 @@ let SelectFocusUtility = class SelectFocusUtility {
         var _a;
         const selector = typeof ((_a = config) === null || _a === void 0 ? void 0 : _a.autofocus) === 'string' ? config.autofocus : '[autofocus]';
         // fallback to first focusable
-        return (this.query(host, selector).find(Boolean) ||
-            this.findFocusable(host).find(Boolean));
+        return (this.query(host, selector).find(el => !this.isHidden(el)) ||
+            this.findFocusable(host).find(el => Boolean(el)));
     }
     /**
      * returns all focusable child elements of the host element. The element selectors
      * are build from the `focusableSelectors`.
      *
      * @param host the `HTMLElement` used to query focusable elements
-     * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returend as well
+     * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returned
+     * @param invisible indicates whether hidden focusable elements should be returned
      */
-    findFocusable(host, locked = false) {
+    findFocusable(host, locked = false, invisible = false) {
         let suffix = this.focusableSelectorSuffix;
         if (!locked) {
             suffix += `:not([tabindex='-1'])`;
         }
         const selector = this.focusableSelectors.map(s => (s += suffix)).join(',');
-        return this.query(host, selector);
+        return this.query(host, selector).filter(el => !invisible ? !this.isHidden(el) : Boolean(el));
+    }
+    /**
+     * Indicates whether the element is hidden by CSS. There are various CSS rules and
+     * HTML structures which can lead to an hidden or invisible element. An `offsetParent`
+     * of null indicates that the element or any of it's decendants is hidden (`display:none`).
+     *
+     * Oother techniques use the visibility (`visibility: hidden`), opacity (`opacity`) or
+     * phyisical location on the element itself or any of it's anchestor elements. Those
+     * technique require to work with the _computed styles_, which will cause a performance
+     * downgrade. We don't do this in the standard implementaton.
+     */
+    isHidden(el) {
+        return el.offsetParent === null;
     }
 };
 SelectFocusUtility.ɵprov = ɵɵdefineInjectable({ factory: function SelectFocusUtility_Factory() { return new SelectFocusUtility(); }, token: SelectFocusUtility, providedIn: "root" });
@@ -4147,7 +4170,7 @@ let AutoFocusService = class AutoFocusService extends EscapeFocusService {
             return this.getPersisted(host, this.getPersistenceGroup(host, config));
         }
         else {
-            return this.selectFocusUtil.findFirstFocusable(host, config);
+            return this.selectFocusUtil.findFirstFocusable(host, config) || host;
         }
     }
     /**
@@ -4181,7 +4204,7 @@ AutoFocusService = __decorate([
 /**
  * Directive that focus the first nested _focusable_ element based on state and configuration:
  *
- * 1. focusable element that was left in a focused state
+ * 1. focusable element that was left in a focused state (aka _persisted_ focus)
  * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
  * 3. focusable element marked with the native HTML5 `autofocus` attribute
  * 4. first focusable element
@@ -4242,8 +4265,6 @@ let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
     /**
      * Helper function to indicate whether we should use autofocus for the
      * child elements.
-     *
-     * We keep this private to not polute the API.
      */
     get shouldAutofocus() {
         var _a;
@@ -4350,10 +4371,14 @@ let TabFocusService = class TabFocusService extends AutoFocusService {
         }
     }
     /**
-     * returns all focusable child elements of the host element.
+     * Returns all focusable child elements of the host element.
+     *
+     * @param host The host element is used to query child focusable elements.
+     * @param locked Indicates if locked elements (tabindex=-1) should be returned, defaults to false.
+     * @param invisible Indicates if invisible child elements should be returned, defaults to false.
      */
-    findFocusable(host, locked = false) {
-        return this.selectFocusUtil.findFocusable(host, locked);
+    findFocusable(host, locked = false, invisible = false) {
+        return this.selectFocusUtil.findFocusable(host, locked, invisible);
     }
     isActive(el) {
         const child = document.activeElement;
@@ -4521,6 +4546,11 @@ LockFocusService = __decorate([
 ], LockFocusService);
 
 /**
+ * Focusable elements exclude hidden elements by default, but this contradicts with
+ * unlocking (hidden) elements.
+ */
+const UNLOCK_HIDDEN_ELEMENTS = true;
+/**
  * Directive that adds persistence for focussed element in case
  * the elements are being rebuild. This happens often when change
  * detection kicks in because of new data set from the backend.
@@ -4566,7 +4596,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
         var _a;
         this.unlock.emit(true);
         this.addTabindexToChildren(0);
-        // we focus the host if the event target was a nested child
+        // we focus the host if the event was triggered from a child
         if (((_a = event) === null || _a === void 0 ? void 0 : _a.target) === this.host) {
             super.handleFocus(event);
         }
@@ -4590,7 +4620,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
             }
         }
     }
-    ngAfterContentInit() {
+    ngAfterViewInit() {
         if (this.shouldLock) {
             /**
              * If the component hosts a group of focusable children elmenents,
@@ -4598,31 +4628,36 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
              * into account when they persist their focus state.
              */
             if (!!this.group) {
-                this.service
-                    .findFocusable(this.host)
-                    .forEach(el => this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
+                this.service.findFocusable(this.host).forEach(el => 
+                // we must do this in after view init as
+                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
             }
-            this.lockFocus();
+            if (this.shouldAutofocus) {
+                this.handleFocus();
+            }
         }
+        super.ngAfterViewInit();
     }
     handleFocus(event) {
         var _a;
         if (this.shouldLock) {
-            this.lockFocus();
             if (this.shouldUnlockAfterAutofocus(event)) {
                 // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
                 setTimeout(() => this.unlockFocus(event));
             }
             else {
-                this.lockFocus();
-            }
-            // let's not bubble up the handleFocus event if the host is locked
-            if (this.isLocked) {
+                setTimeout(() => this.lockFocus());
                 (_a = event) === null || _a === void 0 ? void 0 : _a.stopPropagation();
                 return;
             }
         }
         super.handleFocus(event);
+    }
+    handleEscape(event) {
+        if (this.shouldLock) {
+            this.service.clear(this.config.group);
+        }
+        super.handleEscape(event);
     }
     /**
      * When the handleFocus is called without an actual event, it's coming from Autofocus.
@@ -4641,9 +4676,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
         if (this.shouldLock) {
             this.isLocked = i === -1;
             if (!(this.hasFocusableChildren && i === 0) || i === 0) {
-                this.focusable.forEach(el => {
-                    this.renderer.setAttribute(el, 'tabindex', i.toString());
-                });
+                this.focusable.forEach(el => this.renderer.setAttribute(el, 'tabindex', i.toString()));
             }
         }
     }
@@ -4663,7 +4696,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
      * We keep this private to not polute the API.
      */
     get focusable() {
-        return this.service.findFocusable(this.host, this.shouldLock);
+        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
     }
 };
 LockFocusDirective.ctorParameters = () => [

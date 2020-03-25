@@ -44,10 +44,6 @@ export declare class PersistFocusDirective extends BlockFocusDirective implement
      * state in case of a repaint.
      */
     attr: string;
-    /**
-     * The persistence key is maintained in a singleton cross the app to ensure we
-     * can reset the focus if the DOM gets rebuild.
-     */
     handleFocus(event?: KeyboardEvent): void;
     constructor(elementRef: ElementRef, service: PersistFocusService);
     ngOnInit(): void;

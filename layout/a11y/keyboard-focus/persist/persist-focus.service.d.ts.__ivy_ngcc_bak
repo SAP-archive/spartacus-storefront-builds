@@ -9,6 +9,18 @@ import { PersistFocusConfig } from '../keyboard-focus.model';
 export declare class PersistFocusService extends BaseFocusService {
     protected focus: Map<string, string>;
     get(group?: string): string;
-    set(value: string, group?: string): void;
+    /**
+     * Persist the keyboard focus state for the given key. The focus is stored globally
+     * or for the given group.
+     */
+    set(key: string, group?: string): void;
+    /**
+     * Clears the persisted keyboard focus state globally or for the given group.
+     */
+    clear(group?: string): void;
+    /**
+     * Returns the group for the host element based on the configured group or
+     * by the `data-cx-focus-group` attribute stored on the host.
+     */
     getPersistenceGroup(host: HTMLElement, config?: PersistFocusConfig): string;
 }
