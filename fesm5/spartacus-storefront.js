@@ -17881,21 +17881,17 @@ var LoginFormComponent = /** @class */ (function () {
         this.loginAsGuest = false;
     }
     LoginFormComponent.prototype.ngOnInit = function () {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         this.form = this.fb.group({
             userId: ['', [Validators.required, CustomFormValidators.emailValidator]],
             password: ['', Validators.required],
         });
-        if (this.checkoutConfigService &&
-            this.checkoutConfigService.isGuestCheckout()) {
-            this.loginAsGuest = this.activatedRoute.snapshot.queryParams['forced'];
+        if (this.checkoutConfigService.isGuestCheckout()) {
+            this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
         }
-        // TODO(issue:#4055) Deprecated since 1.1.0
-        if (this.winRef && this.winRef.nativeWindow) {
-            var routeState = this.winRef.nativeWindow.history &&
-                this.winRef.nativeWindow.history.state;
-            if (routeState && routeState['newUid'] && routeState['newUid'].length) {
-                this.prefillForm('userId', routeState['newUid']);
-            }
+        var prefilledEmail = (_g = (_f = (_e = (_d = this.winRef) === null || _d === void 0 ? void 0 : _d.nativeWindow) === null || _e === void 0 ? void 0 : _e.history) === null || _f === void 0 ? void 0 : _f.state) === null || _g === void 0 ? void 0 : _g['newUid'];
+        if ((_h = prefilledEmail) === null || _h === void 0 ? void 0 : _h.length) {
+            this.prefillForm('userId', prefilledEmail);
         }
     };
     LoginFormComponent.prototype.login = function () {

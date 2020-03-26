@@ -5,13 +5,13 @@ import { AuthRedirectService, AuthService, GlobalMessageService, WindowRef } fro
 import { Subscription } from 'rxjs';
 import { CheckoutConfigService } from '../../checkout/services/checkout-config.service';
 export declare class LoginFormComponent implements OnInit, OnDestroy {
-    private auth;
-    private globalMessageService;
-    private fb;
-    private authRedirectService;
-    private winRef;
-    private activatedRoute;
-    private checkoutConfigService;
+    protected auth: AuthService;
+    protected globalMessageService: GlobalMessageService;
+    protected fb: FormBuilder;
+    protected authRedirectService: AuthRedirectService;
+    protected winRef: WindowRef;
+    protected activatedRoute: ActivatedRoute;
+    protected checkoutConfigService: CheckoutConfigService;
     sub: Subscription;
     form: FormGroup;
     loginAsGuest: boolean;
