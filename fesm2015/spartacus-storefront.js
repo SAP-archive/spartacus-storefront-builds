@@ -3670,7 +3670,7 @@ let AddToCartComponent = class AddToCartComponent {
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
         modalInstance.cart$ = this.activeCartService.getActive();
-        modalInstance.loaded$ = this.activeCartService.getLoaded();
+        modalInstance.loaded$ = this.activeCartService.isStable();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     }
@@ -6406,7 +6406,7 @@ let CartCouponComponent = class CartCouponComponent {
         }
         //TODO(issue:#5971) Deprecated since 1.5
         this.cartIsLoading$ = this.activeCartService
-            .getLoaded()
+            .isStable()
             .pipe(map(loaded => !loaded));
         this.cartVoucherService.resetAddVoucherProcessingState();
         this.form = this.formBuilder.group({
@@ -6796,14 +6796,14 @@ let CartDetailsComponent = class CartDetailsComponent {
             .pipe(filter(entries => entries.length > 0));
         if (this.isSaveForLaterEnabled()) {
             this.cartLoaded$ = combineLatest([
-                this.activeCartService.getLoaded(),
+                this.activeCartService.isStable(),
                 this.selectiveCartService.getLoaded(),
                 this.authService.isUserLoggedIn(),
             ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded));
         }
         //TODO remove for #5958
         else {
-            this.cartLoaded$ = this.activeCartService.getLoaded();
+            this.cartLoaded$ = this.activeCartService.isStable();
         }
         //TODO  remove for #5958 end
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
@@ -6879,7 +6879,7 @@ let CartNotEmptyGuard = class CartNotEmptyGuard {
     canActivate() {
         return combineLatest([
             this.activeCartService.getActive(),
-            this.activeCartService.getLoaded(),
+            this.activeCartService.isStable(),
         ]).pipe(filter(([_, loaded]) => loaded), map(([cart]) => {
             if (this.isEmpty(cart)) {
                 this.routingService.go({ cxRoute: 'home' });
@@ -7104,7 +7104,7 @@ let SaveForLaterComponent = class SaveForLaterComponent {
             .getEntries()
             .pipe(filter(entries => entries.length > 0));
         this.cartLoaded$ = combineLatest([
-            this.cartService.getLoaded(),
+            this.cartService.isStable(),
             this.selectiveCartService.getLoaded(),
         ]).pipe(map(([cartLoaded, sflLoaded]) => cartLoaded && sflLoaded));
         this.data$ = this.cmsService.getComponentData('EmptyCartParagraphComponent');

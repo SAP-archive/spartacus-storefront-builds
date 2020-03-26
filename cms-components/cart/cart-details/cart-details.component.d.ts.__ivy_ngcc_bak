@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { AuthService, Cart, ActiveCartService, FeatureConfigService, OrderEntry, PromotionLocation, PromotionResult, RoutingService, SelectiveCartService } from '@spartacus/core';
+import { ActiveCartService, AuthService, Cart, FeatureConfigService, OrderEntry, PromotionLocation, PromotionResult, RoutingService, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PromotionService } from '../../../shared/services/promotion/promotion.service';
 import { Item } from '../cart-shared/cart-item/cart-item.component';

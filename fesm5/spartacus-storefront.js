@@ -4101,7 +4101,7 @@ var AddToCartComponent = /** @class */ (function () {
         modalInstance = this.modalRef.componentInstance;
         modalInstance.entry$ = this.cartEntry$;
         modalInstance.cart$ = this.activeCartService.getActive();
-        modalInstance.loaded$ = this.activeCartService.getLoaded();
+        modalInstance.loaded$ = this.activeCartService.isStable();
         modalInstance.quantity = this.quantity;
         modalInstance.increment = this.increment;
     };
@@ -7129,7 +7129,7 @@ var CartCouponComponent = /** @class */ (function () {
         }
         //TODO(issue:#5971) Deprecated since 1.5
         this.cartIsLoading$ = this.activeCartService
-            .getLoaded()
+            .isStable()
             .pipe(map(function (loaded) { return !loaded; }));
         this.cartVoucherService.resetAddVoucherProcessingState();
         this.form = this.formBuilder.group({
@@ -7546,7 +7546,7 @@ var CartDetailsComponent = /** @class */ (function () {
             .pipe(filter(function (entries) { return entries.length > 0; }));
         if (this.isSaveForLaterEnabled()) {
             this.cartLoaded$ = combineLatest([
-                this.activeCartService.getLoaded(),
+                this.activeCartService.isStable(),
                 this.selectiveCartService.getLoaded(),
                 this.authService.isUserLoggedIn(),
             ]).pipe(tap(function (_a) {
@@ -7559,7 +7559,7 @@ var CartDetailsComponent = /** @class */ (function () {
         }
         //TODO remove for #5958
         else {
-            this.cartLoaded$ = this.activeCartService.getLoaded();
+            this.cartLoaded$ = this.activeCartService.isStable();
         }
         //TODO  remove for #5958 end
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
@@ -7640,7 +7640,7 @@ var CartNotEmptyGuard = /** @class */ (function () {
         var _this = this;
         return combineLatest([
             this.activeCartService.getActive(),
-            this.activeCartService.getLoaded(),
+            this.activeCartService.isStable(),
         ]).pipe(filter(function (_a) {
             var _b = __read(_a, 2), _ = _b[0], loaded = _b[1];
             return loaded;
@@ -7887,7 +7887,7 @@ var SaveForLaterComponent = /** @class */ (function () {
             .getEntries()
             .pipe(filter(function (entries) { return entries.length > 0; }));
         this.cartLoaded$ = combineLatest([
-            this.cartService.getLoaded(),
+            this.cartService.isStable(),
             this.selectiveCartService.getLoaded(),
         ]).pipe(map(function (_a) {
             var _b = __read(_a, 2), cartLoaded = _b[0], sflLoaded = _b[1];

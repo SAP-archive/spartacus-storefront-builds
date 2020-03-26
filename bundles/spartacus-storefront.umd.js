@@ -4286,7 +4286,7 @@
             modalInstance = this.modalRef.componentInstance;
             modalInstance.entry$ = this.cartEntry$;
             modalInstance.cart$ = this.activeCartService.getActive();
-            modalInstance.loaded$ = this.activeCartService.getLoaded();
+            modalInstance.loaded$ = this.activeCartService.isStable();
             modalInstance.quantity = this.quantity;
             modalInstance.increment = this.increment;
         };
@@ -7314,7 +7314,7 @@
             }
             //TODO(issue:#5971) Deprecated since 1.5
             this.cartIsLoading$ = this.activeCartService
-                .getLoaded()
+                .isStable()
                 .pipe(operators.map(function (loaded) { return !loaded; }));
             this.cartVoucherService.resetAddVoucherProcessingState();
             this.form = this.formBuilder.group({
@@ -7731,7 +7731,7 @@
                 .pipe(operators.filter(function (entries) { return entries.length > 0; }));
             if (this.isSaveForLaterEnabled()) {
                 this.cartLoaded$ = rxjs.combineLatest([
-                    this.activeCartService.getLoaded(),
+                    this.activeCartService.isStable(),
                     this.selectiveCartService.getLoaded(),
                     this.authService.isUserLoggedIn(),
                 ]).pipe(operators.tap(function (_a) {
@@ -7744,7 +7744,7 @@
             }
             //TODO remove for #5958
             else {
-                this.cartLoaded$ = this.activeCartService.getLoaded();
+                this.cartLoaded$ = this.activeCartService.isStable();
             }
             //TODO  remove for #5958 end
             this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
@@ -7825,7 +7825,7 @@
             var _this = this;
             return rxjs.combineLatest([
                 this.activeCartService.getActive(),
-                this.activeCartService.getLoaded(),
+                this.activeCartService.isStable(),
             ]).pipe(operators.filter(function (_a) {
                 var _b = __read(_a, 2), _ = _b[0], loaded = _b[1];
                 return loaded;
@@ -8072,7 +8072,7 @@
                 .getEntries()
                 .pipe(operators.filter(function (entries) { return entries.length > 0; }));
             this.cartLoaded$ = rxjs.combineLatest([
-                this.cartService.getLoaded(),
+                this.cartService.isStable(),
                 this.selectiveCartService.getLoaded(),
             ]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), cartLoaded = _b[0], sflLoaded = _b[1];
