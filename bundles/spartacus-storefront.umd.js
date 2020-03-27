@@ -13967,7 +13967,6 @@
         }
         MyCouponsComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
             this.couponResult$ = this.couponService
                 .getCustomerCoupons(this.PAGE_SIZE)
                 .pipe(operators.tap(function (coupons) {

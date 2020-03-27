@@ -12543,7 +12543,6 @@ let MyCouponsComponent = class MyCouponsComponent {
         ];
     }
     ngOnInit() {
-        this.couponService.loadCustomerCoupons(this.PAGE_SIZE);
         this.couponResult$ = this.couponService
             .getCustomerCoupons(this.PAGE_SIZE)
             .pipe(tap(coupons => (this.pagination = {

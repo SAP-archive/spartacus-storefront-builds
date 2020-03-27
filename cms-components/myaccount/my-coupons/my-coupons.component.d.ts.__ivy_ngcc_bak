@@ -1,6 +1,6 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { CustomerCouponSearchResult, CustomerCouponService, PaginationModel } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { CustomerCouponService, CustomerCouponSearchResult, PaginationModel } from '@spartacus/core';
 import { ICON_TYPE } from '../../misc/icon/icon.model';
 import { MyCouponsComponentService } from './my-coupons.component.service';
 export declare class MyCouponsComponent implements OnInit, OnDestroy {
