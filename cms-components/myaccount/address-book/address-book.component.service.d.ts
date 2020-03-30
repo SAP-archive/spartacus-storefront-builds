@@ -10,7 +10,7 @@ export declare class AddressBookComponentService {
     loadAddresses(): void;
     addUserAddress(address: Address): void;
     updateUserAddress(addressId: string, address: Address): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddressBookComponentService>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddressBookComponentService, never>;
     static ɵprov: ɵngcc0.ɵɵInjectableDef<AddressBookComponentService>;
 }
 

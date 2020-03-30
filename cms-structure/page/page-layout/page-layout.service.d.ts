@@ -44,7 +44,7 @@ export declare class PageLayoutService {
      * in a format that can be copied / paste to the configuration.
      */
     private logMissingLayoutConfig;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageLayoutService>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageLayoutService, [null, null, null, { optional: true; }]>;
     static ɵprov: ɵngcc0.ɵɵInjectableDef<PageLayoutService>;
 }
 

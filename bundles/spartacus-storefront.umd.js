@@ -3066,8 +3066,7 @@
                 .pipe(operators.map(function (pageMeta) { return _this.collect(pageMeta); }));
         };
         BreadcrumbSchemaBuilder.prototype.collect = function (pageMeta) {
-            var _a;
-            if (!((_a = pageMeta) === null || _a === void 0 ? void 0 : _a.breadcrumbs)) {
+            if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
                 return;
             }
             var crumbs = pageMeta.breadcrumbs.map(function (crumb, index) {
@@ -4541,8 +4540,7 @@
          * by the `data-cx-focus-group` attribute stored on the host.
          */
         PersistFocusService.prototype.getPersistenceGroup = function (host, config) {
-            var _a;
-            return ((_a = config) === null || _a === void 0 ? void 0 : _a.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
+            return (config === null || config === void 0 ? void 0 : config.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
         };
         PersistFocusService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PersistFocusService_Factory() { return new PersistFocusService(); }, token: PersistFocusService, providedIn: "root" });
         PersistFocusService = __decorate([
@@ -4596,10 +4594,9 @@
             return _this;
         }
         PersistFocusDirective.prototype.handleFocus = function (event) {
-            var _a, _b;
             this.service.set(this.key, this.group);
-            (_a = event) === null || _a === void 0 ? void 0 : _a.preventDefault();
-            (_b = event) === null || _b === void 0 ? void 0 : _b.stopPropagation();
+            event === null || event === void 0 ? void 0 : event.preventDefault();
+            event === null || event === void 0 ? void 0 : event.stopPropagation();
         };
         PersistFocusDirective.prototype.ngOnInit = function () {
             _super.prototype.ngOnInit.call(this);
@@ -4693,8 +4690,7 @@
         SelectFocusUtility.prototype.findFirstFocusable = function (host, config) {
             var _this = this;
             if (config === void 0) { config = { autofocus: true }; }
-            var _a;
-            var selector = typeof ((_a = config) === null || _a === void 0 ? void 0 : _a.autofocus) === 'string' ? config.autofocus : '[autofocus]';
+            var selector = typeof (config === null || config === void 0 ? void 0 : config.autofocus) === 'string' ? config.autofocus : '[autofocus]';
             // fallback to first focusable
             return (this.query(host, selector).find(function (el) { return !_this.isHidden(el); }) ||
                 this.findFocusable(host).find(function (el) { return Boolean(el); }));
@@ -4750,11 +4746,10 @@
             return _this;
         }
         EscapeFocusService.prototype.shouldFocus = function (config) {
-            var _a;
-            return !!((_a = config) === null || _a === void 0 ? void 0 : _a.focusOnEscape);
+            return !!(config === null || config === void 0 ? void 0 : config.focusOnEscape);
         };
         EscapeFocusService.prototype.handleEscape = function (host, config, event) {
-            var _a, _b;
+            var _a;
             if (this.shouldFocus(config)) {
                 if (host !== event.target) {
                     host.focus({ preventScroll: true });
@@ -4762,9 +4757,9 @@
                     event.stopPropagation();
                 }
                 else {
-                    if ((_a = config) === null || _a === void 0 ? void 0 : _a.focusOnDoubleEscape) {
-                        (_b = this.selectFocusUtil
-                            .findFirstFocusable(host, { autofocus: true })) === null || _b === void 0 ? void 0 : _b.focus();
+                    if (config === null || config === void 0 ? void 0 : config.focusOnDoubleEscape) {
+                        (_a = this.selectFocusUtil
+                            .findFirstFocusable(host, { autofocus: true })) === null || _a === void 0 ? void 0 : _a.focus();
                     }
                 }
             }
@@ -4840,8 +4835,7 @@
          */
         AutoFocusService.prototype.findFirstFocusable = function (host, config) {
             if (config === void 0) { config = { autofocus: true }; }
-            var _a;
-            if (((_a = config) === null || _a === void 0 ? void 0 : _a.autofocus) === ':host') {
+            if ((config === null || config === void 0 ? void 0 : config.autofocus) === ':host') {
                 return host;
             }
             else if (this.hasPersistedFocus(host, config)) {
@@ -4926,10 +4920,10 @@
          * focusable child element will be focussed.
          */
         AutoFocusDirective.prototype.handleFocus = function (event) {
-            var _a, _b;
+            var _a;
             if (this.shouldAutofocus) {
-                if (!((_a = event) === null || _a === void 0 ? void 0 : _a.target) || event.target === this.host) {
-                    (_b = this.firstFocusable) === null || _b === void 0 ? void 0 : _b.focus();
+                if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
+                    (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
                 }
                 else {
                     event.target.focus();
@@ -4990,12 +4984,11 @@
          * Moves to the next (or previous) tab.
          */
         TabFocusService.prototype.moveTab = function (host, config, increment, event) {
-            var _a, _b;
-            if ((_a = config) === null || _a === void 0 ? void 0 : _a.tab) {
+            if (config === null || config === void 0 ? void 0 : config.tab) {
                 var next = config.tab === 'scroll'
                     ? this.findNextScrollable(host, config, increment)
                     : this.findNext(host, config, increment);
-                (_b = next) === null || _b === void 0 ? void 0 : _b.focus();
+                next === null || next === void 0 ? void 0 : next.focus();
                 event.preventDefault();
                 event.stopPropagation();
             }
@@ -5031,14 +5024,13 @@
         };
         TabFocusService.prototype.findNext = function (host, config, increment) {
             var _this = this;
-            var _a, _b;
             var childs = this.getChildren(host, config);
-            var activeIndex = (_a = childs) === null || _a === void 0 ? void 0 : _a.findIndex(function (c) { return c === _this.getActiveChild(host, config); });
+            var activeIndex = childs === null || childs === void 0 ? void 0 : childs.findIndex(function (c) { return c === _this.getActiveChild(host, config); });
             if (!activeIndex || activeIndex === -1) {
                 activeIndex = 0;
             }
             activeIndex += increment;
-            if (increment === 1 /* NEXT */ && activeIndex >= ((_b = childs) === null || _b === void 0 ? void 0 : _b.length)) {
+            if (increment === 1 /* NEXT */ && activeIndex >= (childs === null || childs === void 0 ? void 0 : childs.length)) {
                 activeIndex = childs.length - 1;
             }
             if (increment === -1 /* PREV */ && activeIndex < 0) {
@@ -5052,8 +5044,7 @@
          */
         TabFocusService.prototype.getActiveChild = function (host, config) {
             var _this = this;
-            var _a;
-            var persisted = this.getPersisted(host, (_a = config) === null || _a === void 0 ? void 0 : _a.group);
+            var persisted = this.getPersisted(host, config === null || config === void 0 ? void 0 : config.group);
             if (persisted) {
                 return persisted;
             }
@@ -5316,11 +5307,10 @@
             this.addTabindexToChildren(-1);
         };
         LockFocusDirective.prototype.unlockFocus = function (event) {
-            var _a;
             this.unlock.emit(true);
             this.addTabindexToChildren(0);
             // we focus the host if the event was triggered from a child
-            if (((_a = event) === null || _a === void 0 ? void 0 : _a.target) === this.host) {
+            if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
                 _super.prototype.handleFocus.call(this, event);
             }
         };
@@ -5365,7 +5355,6 @@
         };
         LockFocusDirective.prototype.handleFocus = function (event) {
             var _this = this;
-            var _a;
             if (this.shouldLock) {
                 if (this.shouldUnlockAfterAutofocus(event)) {
                     // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
@@ -5373,7 +5362,7 @@
                 }
                 else {
                     setTimeout(function () { return _this.lockFocus(); });
-                    (_a = event) === null || _a === void 0 ? void 0 : _a.stopPropagation();
+                    event === null || event === void 0 ? void 0 : event.stopPropagation();
                     return;
                 }
             }
@@ -14423,8 +14412,7 @@
                 this.translation.translate('common.home').pipe(operators.observeOn(rxjs.asyncScheduler)),
             ]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), meta = _b[0], textHome = _b[1];
-                var _c;
-                return ((_c = meta) === null || _c === void 0 ? void 0 : _c.breadcrumbs) ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
+                return (meta === null || meta === void 0 ? void 0 : meta.breadcrumbs) ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
             }));
         };
         BreadcrumbComponent.ctorParameters = function () { return [
@@ -18065,7 +18053,7 @@
             this.loginAsGuest = false;
         }
         LoginFormComponent.prototype.ngOnInit = function () {
-            var _a, _b, _c, _d, _e, _f, _g, _h;
+            var _a, _b, _c, _d, _e, _f, _g;
             this.form = this.fb.group({
                 userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                 password: ['', forms.Validators.required],
@@ -18074,7 +18062,7 @@
                 this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
             }
             var prefilledEmail = (_g = (_f = (_e = (_d = this.winRef) === null || _d === void 0 ? void 0 : _d.nativeWindow) === null || _e === void 0 ? void 0 : _e.history) === null || _f === void 0 ? void 0 : _f.state) === null || _g === void 0 ? void 0 : _g['newUid'];
-            if ((_h = prefilledEmail) === null || _h === void 0 ? void 0 : _h.length) {
+            if (prefilledEmail === null || prefilledEmail === void 0 ? void 0 : prefilledEmail.length) {
                 this.prefillForm('userId', prefilledEmail);
             }
         };

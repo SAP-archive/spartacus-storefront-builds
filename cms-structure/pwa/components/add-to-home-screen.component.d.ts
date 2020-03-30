@@ -8,7 +8,7 @@ export declare abstract class AddToHomeScreenComponent implements OnInit {
     constructor(addToHomeScreenService: AddToHomeScreenService);
     ngOnInit(): void;
     prompt(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToHomeScreenComponent>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToHomeScreenComponent, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<AddToHomeScreenComponent, never, never, {}, {}, never>;
 }
 

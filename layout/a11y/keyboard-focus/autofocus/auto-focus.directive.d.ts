@@ -54,7 +54,7 @@ export declare class AutoFocusDirective extends EscapeFocusDirective implements 
      * We keep this private to not polute the API.
      */
     private get firstFocusable();
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<AutoFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AutoFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<AutoFocusDirective, never, never, {}, {}, never>;
 }
 

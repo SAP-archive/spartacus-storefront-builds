@@ -14,7 +14,7 @@ export declare class AddToHomeScreenService {
     enableAddToHomeScreen(): void;
     disableAddToHomeScreen(): void;
     firePrompt(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToHomeScreenService>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToHomeScreenService, never>;
     static ɵprov: ɵngcc0.ɵɵInjectableDef<AddToHomeScreenService>;
 }
 

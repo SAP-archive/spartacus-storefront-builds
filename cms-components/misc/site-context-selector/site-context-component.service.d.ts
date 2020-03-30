@@ -17,7 +17,7 @@ export declare class SiteContextComponentService {
     protected getContext(context?: SiteContextType): Observable<string>;
     protected getInjectedService(context: string): SiteContext<any>;
     protected getOptionLabel(item: any, context?: string): string;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SiteContextComponentService>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SiteContextComponentService, [{ optional: true; }, null, null]>;
     static ɵprov: ɵngcc0.ɵɵInjectableDef<SiteContextComponentService>;
 }
 

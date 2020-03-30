@@ -11,15 +11,8 @@ export declare class SortingComponent {
     sortListEvent: EventEmitter<string>;
     constructor();
     sortList(sortCode: string): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SortingComponent>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SortingComponent, "cx-sorting", never, {
-    "sortOptions": "sortOptions";
-    "selectedOption": "selectedOption";
-    "placeholder": "placeholder";
-    "sortLabels": "sortLabels";
-}, {
-    "sortListEvent": "sortListEvent";
-}, never>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SortingComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SortingComponent, "cx-sorting", never, { "sortOptions": "sortOptions"; "selectedOption": "selectedOption"; "placeholder": "placeholder"; "sortLabels": "sortLabels"; }, { "sortListEvent": "sortListEvent"; }, never, never>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic29ydGluZy5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsic29ydGluZy5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0FBRUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFVQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEV2ZW50RW1pdHRlciB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgU29ydE1vZGVsIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIFNvcnRpbmdDb21wb25lbnQge1xuICAgIHNvcnRPcHRpb25zOiBTb3J0TW9kZWxbXTtcbiAgICBzZWxlY3RlZE9wdGlvbjogc3RyaW5nO1xuICAgIHBsYWNlaG9sZGVyOiBzdHJpbmc7XG4gICAgc29ydExhYmVsczoge1xuICAgICAgICBbY29kZTogc3RyaW5nXTogc3RyaW5nO1xuICAgIH07XG4gICAgc29ydExpc3RFdmVudDogRXZlbnRFbWl0dGVyPHN0cmluZz47XG4gICAgY29uc3RydWN0b3IoKTtcbiAgICBzb3J0TGlzdChzb3J0Q29kZTogc3RyaW5nKTogdm9pZDtcbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic29ydGluZy5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsic29ydGluZy5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7O0FBRUE7Ozs7Ozs7Ozs7OztBQVVBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRXZlbnRFbWl0dGVyIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBTb3J0TW9kZWwgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuZXhwb3J0IGRlY2xhcmUgY2xhc3MgU29ydGluZ0NvbXBvbmVudCB7XG4gICAgc29ydE9wdGlvbnM6IFNvcnRNb2RlbFtdO1xuICAgIHNlbGVjdGVkT3B0aW9uOiBzdHJpbmc7XG4gICAgcGxhY2Vob2xkZXI6IHN0cmluZztcbiAgICBzb3J0TGFiZWxzOiB7XG4gICAgICAgIFtjb2RlOiBzdHJpbmddOiBzdHJpbmc7XG4gICAgfTtcbiAgICBzb3J0TGlzdEV2ZW50OiBFdmVudEVtaXR0ZXI8c3RyaW5nPjtcbiAgICBjb25zdHJ1Y3RvcigpO1xuICAgIHNvcnRMaXN0KHNvcnRDb2RlOiBzdHJpbmcpOiB2b2lkO1xufVxuIl19

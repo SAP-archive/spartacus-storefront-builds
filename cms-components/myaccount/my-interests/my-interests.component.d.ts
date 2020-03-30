@@ -36,8 +36,8 @@ export declare class MyInterestsComponent implements OnInit, OnDestroy {
     sortChange(sort: string): void;
     pageChange(page: number): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<MyInterestsComponent>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<MyInterestsComponent, "cx-my-interests", never, {}, {}, never>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MyInterestsComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<MyInterestsComponent, "cx-my-interests", never, {}, {}, never, never>;
 }
 export {};
 

@@ -24,7 +24,7 @@ export declare class TrapFocusDirective extends TabFocusDirective implements OnI
      * @param increment indicates whether the next or previous is focussed.
      */
     protected moveFocus(event: UIEvent, increment: number): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TrapFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TrapFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<TrapFocusDirective, never, never, {}, {}, never>;
 }
 

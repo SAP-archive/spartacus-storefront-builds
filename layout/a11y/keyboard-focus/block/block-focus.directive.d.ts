@@ -10,7 +10,7 @@ export declare class BlockFocusDirective extends VisibleFocusDirective implement
     protected config: BlockFocusConfig;
     constructor(elementRef: ElementRef, service: BaseFocusService);
     ngOnInit(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<BlockFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<BlockFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<BlockFocusDirective, never, never, {}, {}, never>;
 }
 

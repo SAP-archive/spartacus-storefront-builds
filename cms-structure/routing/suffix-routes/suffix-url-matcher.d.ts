@@ -13,7 +13,7 @@ export declare function getSuffixUrlMatcher({ marker, paramName, precedingParamN
     precedingParamName?: string;
 }): {
     (segments: UrlSegment[]): UrlMatchResult;
-    '_suffixRouteConfig': {
+    _suffixRouteConfig: {
         marker: string;
         paramName: string;
         precedingParamName: string;

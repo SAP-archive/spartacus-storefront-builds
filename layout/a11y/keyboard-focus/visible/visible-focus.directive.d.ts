@@ -14,7 +14,7 @@ export declare class VisibleFocusDirective extends BaseFocusDirective {
     handleMousedown(): void;
     handleKeydown(): void;
     protected get shouldFocusVisible(): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<VisibleFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<VisibleFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<VisibleFocusDirective, never, never, {}, {}, never>;
 }
 

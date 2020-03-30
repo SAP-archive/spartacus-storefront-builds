@@ -35,7 +35,7 @@ export declare abstract class OrderAmendService {
     getAmendedPrice(entry: OrderEntry): Price;
     getMaxAmendQuantity(entry: OrderEntry): number;
     isCancellation(): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderAmendService>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderAmendService, never>;
     static ɵprov: ɵngcc0.ɵɵInjectableDef<OrderAmendService>;
 }
 

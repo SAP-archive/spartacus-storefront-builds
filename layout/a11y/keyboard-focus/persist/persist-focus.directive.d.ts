@@ -63,7 +63,7 @@ export declare class PersistFocusDirective extends BlockFocusDirective implement
      * returns the persistence group (if any) for the focusable elements.
      */
     protected get group(): string;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PersistFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PersistFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<PersistFocusDirective, never, never, {}, {}, never>;
 }
 

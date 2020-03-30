@@ -17,7 +17,7 @@ export declare class TabFocusDirective extends AutoFocusDirective {
     handleNextTab(event: KeyboardEvent): void;
     handlePreviousTab(event: KeyboardEvent): void;
     constructor(elementRef: ElementRef, service: TabFocusService);
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TabFocusDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TabFocusDirective, never>;
     static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<TabFocusDirective, never, never, {}, {}, never>;
 }
 
