@@ -134,7 +134,7 @@ let IconLoaderService = class IconLoaderService {
      */
     isResourceType(iconType, resourceType) {
         return (this.config.resources &&
-            !!this.config.resources.find(res => res.types && res.type === resourceType && res.types.includes(iconType)));
+            !!this.config.resources.find((res) => res.types && res.type === resourceType && res.types.includes(iconType)));
     }
     /**
      * Returns the path to the svg link. The link supports path names
@@ -143,7 +143,7 @@ let IconLoaderService = class IconLoaderService {
      * icon IDs in the SVG.
      */
     getSvgPath(iconType) {
-        const svgResource = this.config.resources.find(res => res.type === IconResourceType.SVG &&
+        const svgResource = this.config.resources.find((res) => res.type === IconResourceType.SVG &&
             res.types &&
             res.types.includes(iconType));
         if (svgResource) {
@@ -178,10 +178,10 @@ let IconLoaderService = class IconLoaderService {
         if (!this.config.resources) {
             return;
         }
-        let resource = this.config.resources.find(res => res.type === resourceType && res.types && res.types.includes(iconType));
+        let resource = this.config.resources.find((res) => res.type === resourceType && res.types && res.types.includes(iconType));
         // no specific resource found, let's try to find a one-size-fits-all resource
         if (!resource) {
-            resource = this.config.resources.find(res => (res.type === resourceType && !res.types) || res.types === []);
+            resource = this.config.resources.find((res) => (res.type === resourceType && !res.types) || res.types === []);
         }
         return resource;
     }
@@ -260,10 +260,10 @@ let IconComponent = class IconComponent {
     addStyleClasses(type) {
         this.renderer.addClass(this.host, 'cx-icon');
         if (this.styleClasses) {
-            this.styleClasses.forEach(cls => this.renderer.removeClass(this.host, cls));
+            this.styleClasses.forEach((cls) => this.renderer.removeClass(this.host, cls));
         }
         this.styleClasses = this.iconLoader.getStyleClasses(type).split(' ');
-        this.styleClasses.forEach(cls => {
+        this.styleClasses.forEach((cls) => {
             if (cls !== '') {
                 this.renderer.addClass(this.host, cls);
             }
@@ -384,7 +384,7 @@ let AnonymousConsentDialogComponent = class AnonymousConsentDialogComponent {
     }
     rejectAll() {
         this.subscriptions.add(combineLatest([this.templates$, this.consents$])
-            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach(template => {
+            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
             const consent = this.getCorrespondingConsent(template, consents);
             if (this.anonymousConsentsService.isConsentGiven(consent)) {
                 if (this.isRequiredConsent(template)) {
@@ -398,7 +398,7 @@ let AnonymousConsentDialogComponent = class AnonymousConsentDialogComponent {
     }
     allowAll() {
         this.subscriptions.add(combineLatest([this.templates$, this.consents$])
-            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach(template => {
+            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
             const consent = this.getCorrespondingConsent(template, consents);
             if ((consent && consent.consentState == null) ||
                 this.anonymousConsentsService.isConsentWithdrawn(consent)) {
@@ -465,7 +465,7 @@ let AnonymousConsentManagementBannerComponent = class AnonymousConsentManagement
     allowAll() {
         this.subscriptions.add(this.anonymousConsentsService
             .giveAllConsents()
-            .pipe(tap(_ => this.hideBanner()))
+            .pipe(tap(() => this.hideBanner()))
             .subscribe());
     }
     hideBanner() {
@@ -599,7 +599,7 @@ let ComponentMapperService = class ComponentMapperService {
         return typeof component === 'string' && (component || '').includes('#');
     }
     initWebComponent(componentType, renderer) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const [path, selector] = this.getComponent(componentType).split('#');
             let script = this.loadedWebComponents[path];
             if (!script) {
@@ -916,7 +916,7 @@ let CmsMappingService = class CmsMappingService {
     getGuardsForComponents(componentTypes) {
         const guards = new Set();
         for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach(guard => guards.add(guard));
+            this.getGuardsForComponent(componentType).forEach((guard) => guards.add(guard));
         }
         return Array.from(guards);
     }
@@ -924,7 +924,7 @@ let CmsMappingService = class CmsMappingService {
         const i18nKeys = new Set();
         for (const componentType of componentTypes) {
             if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach(key => i18nKeys.add(key));
+                this.getI18nKeysForComponent(componentType).forEach((key) => i18nKeys.add(key));
             }
         }
         return Array.from(i18nKeys);
@@ -965,7 +965,7 @@ let CmsGuardsService = class CmsGuardsService {
     cmsPageCanActivate(componentTypes, route, state) {
         const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
         if (guards.length) {
-            const canActivateObservables = guards.map(guardClass => {
+            const canActivateObservables = guards.map((guardClass) => {
                 const guard = this.injector.get(guardClass, null);
                 if (isCanActivate(guard)) {
                     return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
@@ -1072,7 +1072,7 @@ let BreakpointService = class BreakpointService {
         if (!this.window) {
             return of(BREAKPOINT.xs);
         }
-        return this.winRef.resize$.pipe(map(event => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
+        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
     }
     /**
      * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
@@ -1108,7 +1108,7 @@ let BreakpointService = class BreakpointService {
      * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
      */
     isDown(breakpoint) {
-        return this.breakpoint$.pipe(map(br => this.breakpoints
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
             .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
             .includes(br)));
     }
@@ -1120,7 +1120,7 @@ let BreakpointService = class BreakpointService {
      * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
      */
     isUp(breakpoint) {
-        return this.breakpoint$.pipe(map(br => this.breakpoints
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
             .slice(this.breakpoints.indexOf(breakpoint))
             .includes(br)));
     }
@@ -1128,7 +1128,7 @@ let BreakpointService = class BreakpointService {
      * Indicates whether the current screen size fits to the given breakpoint
      */
     isEqual(breakpoint) {
-        return this.breakpoint$.pipe(map(br => br === breakpoint));
+        return this.breakpoint$.pipe(map((br) => br === breakpoint));
     }
     getBreakpoint(windowWidth) {
         const breakpoint = this.getClosest(windowWidth);
@@ -1140,7 +1140,7 @@ let BreakpointService = class BreakpointService {
         }
         return windowWidth > this.getSize(BREAKPOINT.lg)
             ? BREAKPOINT.xl
-            : this.breakpoints.find(br => windowWidth <= this.getSize(br));
+            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
     }
     get window() {
         return this.winRef.nativeWindow;
@@ -1201,7 +1201,7 @@ let PageLayoutService = class PageLayoutService {
      * The page fold is configurable in the `LayoutConfig` for each page layout.
      */
     getPageFoldSlot(pageTemplate) {
-        return this.breakpointService.breakpoint$.pipe(map(breakpoint => {
+        return this.breakpointService.breakpoint$.pipe(map((breakpoint) => {
             if (!this.config.layoutSlots) {
                 // no layout config available
                 return null;
@@ -1215,7 +1215,7 @@ let PageLayoutService = class PageLayoutService {
         const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
         if (config && config.slots) {
             const pageSlots = Object.keys(page.slots);
-            return config.slots.filter(slot => pageSlots.includes(slot));
+            return config.slots.filter((slot) => pageSlots.includes(slot));
         }
         else if (!section) {
             this.logMissingLayoutConfig(page);
@@ -1227,10 +1227,10 @@ let PageLayoutService = class PageLayoutService {
         }
     }
     get page$() {
-        return this.cms.getCurrentPage().pipe(filter(page => !!page));
+        return this.cms.getCurrentPage().pipe(filter((page) => !!page));
     }
     get templateName$() {
-        return this.page$.pipe(filter(page => !!page.template), map((page) => page.template));
+        return this.page$.pipe(filter((page) => !!page.template), map((page) => page.template));
     }
     /**
      * load slots from the layout configuration. The breakpoint is used
@@ -1343,11 +1343,11 @@ let PageLayoutComponent = class PageLayoutComponent {
         this.section$ = new BehaviorSubject(undefined);
         this.templateName$ = this.pageLayoutService
             .templateName$;
-        this.layoutName$ = this.section$.pipe(switchMap(section => (section ? of(section) : this.templateName$)), tap(name => {
+        this.layoutName$ = this.section$.pipe(switchMap((section) => (section ? of(section) : this.templateName$)), tap((name) => {
             this.styleClass = name;
         }));
-        this.slots$ = this.section$.pipe(switchMap(section => this.pageLayoutService.getSlots(section)));
-        this.pageFoldSlot$ = this.templateName$.pipe(switchMap(templateName => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
+        this.slots$ = this.section$.pipe(switchMap((section) => this.pageLayoutService.getSlots(section)));
+        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((templateName) => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
     }
     set section(value) {
         this.section$.next(value);
@@ -1463,18 +1463,18 @@ let CmsPageGuard = class CmsPageGuard {
         return this.protectedRoutesGuard
             ? this.protectedRoutesGuard
                 .canActivate(route)
-                .pipe(switchMap(result => result ? this.getCmsPage(route, state) : of(result)))
+                .pipe(switchMap((result) => result ? this.getCmsPage(route, state) : of(result)))
             : this.getCmsPage(route, state);
     }
     getCmsPage(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap(pageContext => this.cmsService
+        return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
             .getPage(pageContext, true)
             .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
             ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
             : this.handleNotFoundPage(pageContext, route, state)));
     }
     resolveCmsPageLogic(pageContext, pageData, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap(componentTypes => this.cmsGuards
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((componentTypes) => this.cmsGuards
             .cmsPageCanActivate(componentTypes, route, state)
             .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
             if (canActivate === true) {
@@ -1495,13 +1495,13 @@ let CmsPageGuard = class CmsPageGuard {
             type: PageType.CONTENT_PAGE,
             id: this.semanticPathService.get('notFound'),
         };
-        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap(notFoundPage => {
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((notFoundPage) => {
             if (notFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap(notFoundIndex => {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((notFoundIndex) => {
                     this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                }), switchMap(notFoundIndex => this.cmsService.getPageIndex(pageContext).pipe(
+                }), switchMap((notFoundIndex) => this.cmsService.getPageIndex(pageContext).pipe(
                 // we have to wait for page index update
-                filter(index => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
+                filter((index) => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
             }
             return of(false);
         }));
@@ -1645,7 +1645,7 @@ let IntersectionService = class IntersectionService {
      *  depends on whether the element appears in the view port.
      */
     isIntersected(element, options) {
-        return this.intersects(element, options).pipe(first(v => v === true));
+        return this.intersects(element, options).pipe(first((v) => v === true));
     }
     /**
      * Indicates whenever the element intersects the view port. An optional margin
@@ -1656,10 +1656,10 @@ let IntersectionService = class IntersectionService {
      * to introduce additional (css) render effects to the UI.
      */
     intersects(element, options) {
-        const elementVisible$ = new Observable(observer => {
+        const elementVisible$ = new Observable((observer) => {
             const rootMargin = this.getRootMargin(options);
             const intersectOptions = { rootMargin };
-            const intersectionObserver = new IntersectionObserver(entries => {
+            const intersectionObserver = new IntersectionObserver((entries) => {
                 observer.next(entries);
             }, intersectOptions);
             intersectionObserver.observe(element);
@@ -1794,7 +1794,7 @@ let OutletDirective = class OutletDirective {
         if (!Array.isArray(templates)) {
             templates = [templates];
         }
-        templates.forEach(obj => {
+        templates.forEach((obj) => {
             this.create(obj);
         });
     }
@@ -1879,8 +1879,8 @@ let PageSlotComponent = class PageSlotComponent {
          * @deprecated we'll stop supporting this property in 2.0 as
          * it is not used separately.
          */
-        this.slot$ = this.position$.pipe(switchMap(position => this.cmsService.getContentSlot(position)), tap(slot => this.addSmartEditSlotClass(slot)));
-        this.components$ = this.slot$.pipe(map(slot => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
+        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
+        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
         this.subscription = new Subscription();
     }
     /**
@@ -1896,7 +1896,7 @@ let PageSlotComponent = class PageSlotComponent {
         return this.position$.value;
     }
     ngOnInit() {
-        this.subscription.add(this.components$.subscribe(components => {
+        this.subscription.add(this.components$.subscribe((components) => {
             this.hasComponents = components && components.length > 0;
             this.pendingComponentCount = components ? components.length : 0;
             this.isPending = this.pendingComponentCount > 0;
@@ -2010,7 +2010,7 @@ let AddToHomeScreenService = class AddToHomeScreenService {
     }
     init() {
         if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', event => {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (event) => {
                 event.preventDefault();
                 this.deferredEvent = event;
                 this.enableAddToHomeScreen();
@@ -2343,7 +2343,7 @@ const htmlLangProvider = {
  */
 function setHtmlLangAttribute(winRef, languageService) {
     const result = () => {
-        languageService.getActive().subscribe(lang => {
+        languageService.getActive().subscribe((lang) => {
             winRef.document.documentElement.lang = lang;
         });
     };
@@ -2472,7 +2472,7 @@ let StructuredDataFactory = class StructuredDataFactory {
         if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
             return of();
         }
-        return combineLatest(this.builders.map(builder => builder.build())).pipe();
+        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
     }
 };
 StructuredDataFactory.ctorParameters = () => [
@@ -2677,7 +2677,7 @@ let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
         return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
             return {
                 aggregateRating: this.buildAggregatedReviews(product, reviews),
-                review: reviews.map(review => this.buildReviews(review)),
+                review: reviews.map((review) => this.buildReviews(review)),
             };
         }));
     }
@@ -2689,8 +2689,8 @@ let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
             aggregated.ratingValue = product.averageRating;
         }
         if (reviews) {
-            aggregated.ratingCount = reviews.filter(rev => !!rev.rating).length;
-            aggregated.reviewCount = reviews.filter(rev => !!rev.comment).length;
+            aggregated.ratingCount = reviews.filter((rev) => !!rev.rating).length;
+            aggregated.reviewCount = reviews.filter((rev) => !!rev.comment).length;
         }
         return aggregated;
     }
@@ -2703,8 +2703,7 @@ let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
         }
         if (review.date) {
             const date = new Date(review.date);
-            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() +
-                1}-${date.getDate()}`;
+            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         }
         if (review.headline) {
             reviewSchema.name = review.headline;
@@ -2743,11 +2742,11 @@ let CurrentProductService = class CurrentProductService {
      * @param scopes
      */
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map(state => state.state.params['productCode']), switchMap((productCode) => {
+        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
             return productCode
                 ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
                 : of(null);
-        }), filter(x => x !== undefined), distinctUntilChanged());
+        }), filter((x) => x !== undefined), distinctUntilChanged());
     }
 };
 CurrentProductService.ctorParameters = () => [
@@ -2784,7 +2783,7 @@ let ProductSchemaBuilder = class ProductSchemaBuilder {
             return [];
         }
         const builders = this.builders
-            ? this.builders.map(builder => builder.build(product))
+            ? this.builders.map((builder) => builder.build(product))
             : [];
         return [
             of({
@@ -2861,7 +2860,7 @@ let AsmComponentService = class AsmComponentService {
         this.authService
             .getUserToken()
             .pipe(take(1))
-            .subscribe(token => {
+            .subscribe((token) => {
             if (this.asmAuthService.isCustomerEmulationToken(token)) {
                 this.logoutCustomer();
             }
@@ -2875,7 +2874,7 @@ let AsmComponentService = class AsmComponentService {
     isCustomerEmulationSessionInProgress() {
         return this.authService
             .getUserToken()
-            .pipe(mergeMap(userToken => of(this.asmAuthService.isCustomerEmulationToken(userToken))));
+            .pipe(mergeMap((userToken) => of(this.asmAuthService.isCustomerEmulationToken(userToken))));
     }
     /**
      * We're currently only removing the persisted storage in the browser
@@ -2917,7 +2916,7 @@ let AsmMainUiComponent = class AsmMainUiComponent {
     ngOnInit() {
         this.csAgentToken$ = this.asmAuthService.getCustomerSupportAgentToken();
         this.csAgentTokenLoading$ = this.asmAuthService.getCustomerSupportAgentTokenLoading();
-        this.customer$ = this.authService.getUserToken().pipe(switchMap(token => {
+        this.customer$ = this.authService.getUserToken().pipe(switchMap((token) => {
             if (token && !!token.access_token) {
                 this.handleCustomerSessionStartRedirection(token);
                 return this.userService.get();
@@ -2945,7 +2944,7 @@ let AsmMainUiComponent = class AsmMainUiComponent {
         this.asmAuthService
             .getCustomerSupportAgentToken()
             .pipe(take(1))
-            .subscribe(customerSupportAgentToken => this.asmAuthService.startCustomerEmulationSession(customerSupportAgentToken, customerId))
+            .subscribe((customerSupportAgentToken) => this.asmAuthService.startCustomerEmulationSession(customerSupportAgentToken, customerId))
             .unsubscribe();
         this.startingCustomerSession = true;
     }
@@ -3106,7 +3105,7 @@ let AsmSessionTimerComponent = class AsmSessionTimerComponent {
         this.resetOnCustomerSessionChange();
     }
     resetOnNavigate() {
-        this.subscriptions.add(this.routingService.isNavigating().subscribe(isNavigating => {
+        this.subscriptions.add(this.routingService.isNavigating().subscribe((isNavigating) => {
             if (isNavigating) {
                 this.resetTimer();
             }
@@ -3116,7 +3115,7 @@ let AsmSessionTimerComponent = class AsmSessionTimerComponent {
         this.subscriptions.add(this.authService
             .getOccUserId()
             .pipe(distinctUntilChanged())
-            .subscribe(_ => this.resetTimer()));
+            .subscribe(() => this.resetTimer()));
     }
     resetTimer() {
         if (this.timeLeft > 0) {
@@ -3251,7 +3250,7 @@ let CustomerEmulationComponent = class CustomerEmulationComponent {
         this.subscription = new Subscription();
     }
     ngOnInit() {
-        this.subscription.add(this.userService.get().subscribe(user => (this.customer = user)));
+        this.subscription.add(this.userService.get().subscribe((user) => (this.customer = user)));
         this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
     }
     logoutCustomer() {
@@ -3291,7 +3290,7 @@ let CustomerSelectionComponent = class CustomerSelectionComponent {
         this.searchResults = this.asmService.getCustomerSearchResults();
         this.subscription.add(this.form.controls.searchTerm.valueChanges
             .pipe(debounceTime(300))
-            .subscribe(searchTermValue => {
+            .subscribe((searchTermValue) => {
             this.handleSearchTerm(searchTermValue);
         }));
     }
@@ -3359,6 +3358,7 @@ CustomerSelectionComponent = __decorate([
         selector: 'cx-customer-selection',
         template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
         encapsulation: ViewEncapsulation.None,
+        // tslint:disable-next-line:no-host-metadata-property
         host: {
             '(document:click)': 'onDocumentClick($event)',
         },
@@ -3395,8 +3395,8 @@ let OrderDetailsService = class OrderDetailsService {
         this.routingService = routingService;
         this.orderCode$ = this.routingService
             .getRouterState()
-            .pipe(map(routingData => routingData.state.params.orderCode));
-        this.orderLoad$ = this.orderCode$.pipe(tap(orderCode => {
+            .pipe(map((routingData) => routingData.state.params.orderCode));
+        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
             if (orderCode) {
                 this.userOrderService.loadOrderDetails(orderCode);
             }
@@ -3441,7 +3441,7 @@ let PromotionService = class PromotionService {
     getOrderPromotionsFromCart() {
         return this.activeCartService
             .getActive()
-            .pipe(map(cart => this.getOrderPromotionsFromCartHelper(cart)));
+            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
     }
     getOrderPromotionsFromCartHelper(cart) {
         const potentialPromotions = [];
@@ -3453,12 +3453,12 @@ let PromotionService = class PromotionService {
     getOrderPromotionsFromCheckout() {
         return this.checkoutService
             .getOrderDetails()
-            .pipe(map(order => this.getOrderPromotionsFromOrderHelper(order)));
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
     }
     getOrderPromotionsFromOrder() {
         return this.orderDetailsService
             .getOrderDetails()
-            .pipe(map(order => this.getOrderPromotionsFromOrderHelper(order)));
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
     }
     getOrderPromotionsFromOrderHelper(order) {
         const appliedOrderPromotions = [];
@@ -3470,15 +3470,15 @@ let PromotionService = class PromotionService {
             case PromotionLocation.ActiveCart:
                 return this.activeCartService
                     .getActive()
-                    .pipe(map(cart => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
+                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
             case PromotionLocation.Checkout:
                 return this.checkoutService
                     .getOrderDetails()
-                    .pipe(map(order => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
             case PromotionLocation.Order:
                 return this.orderDetailsService
                     .getOrderDetails()
-                    .pipe(map(order => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
         }
     }
     getProductPromotion(item, promotions) {
@@ -3543,9 +3543,9 @@ let AddedToCartDialogComponent = class AddedToCartDialogComponent {
      */
     getQuantityControl() {
         if (!this.quantityControl$) {
-            this.quantityControl$ = this.entry$.pipe(filter(e => !!e), map(entry => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
+            this.quantityControl$ = this.entry$.pipe(filter((e) => !!e), map((entry) => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
             // tslint:disable-next-line:deprecation
-            startWith(null), tap(valueChange => {
+            startWith(null), tap((valueChange) => {
                 if (valueChange) {
                     this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
                     if (valueChange.quantity === 0) {
@@ -3650,7 +3650,7 @@ let AddToCartComponent = class AddToCartComponent {
         // so modal will have proper header text displayed
         this.activeCartService
             .getEntry(this.productCode)
-            .subscribe(entry => {
+            .subscribe((entry) => {
             if (entry) {
                 this.increment = true;
             }
@@ -4031,8 +4031,8 @@ let SelectFocusUtility = class SelectFocusUtility {
     findFirstFocusable(host, config = { autofocus: true }) {
         const selector = typeof (config === null || config === void 0 ? void 0 : config.autofocus) === 'string' ? config.autofocus : '[autofocus]';
         // fallback to first focusable
-        return (this.query(host, selector).find(el => !this.isHidden(el)) ||
-            this.findFocusable(host).find(el => Boolean(el)));
+        return (this.query(host, selector).find((el) => !this.isHidden(el)) ||
+            this.findFocusable(host).find((el) => Boolean(el)));
     }
     /**
      * returns all focusable child elements of the host element. The element selectors
@@ -4047,8 +4047,10 @@ let SelectFocusUtility = class SelectFocusUtility {
         if (!locked) {
             suffix += `:not([tabindex='-1'])`;
         }
-        const selector = this.focusableSelectors.map(s => (s += suffix)).join(',');
-        return this.query(host, selector).filter(el => !invisible ? !this.isHidden(el) : Boolean(el));
+        const selector = this.focusableSelectors
+            .map((s) => (s += suffix))
+            .join(',');
+        return this.query(host, selector).filter((el) => !invisible ? !this.isHidden(el) : Boolean(el));
     }
     /**
      * Indicates whether the element is hidden by CSS. There are various CSS rules and
@@ -4318,13 +4320,13 @@ let TabFocusService = class TabFocusService extends AutoFocusService {
         if (increment === -1 /* PREV */ && nextVirtualSlide < 0) {
             nextVirtualSlide = virtualSlideCount - 1;
         }
-        const firstItemOnNextSlide = (_a = this.getChildren(host, config)) === null || _a === void 0 ? void 0 : _a.find(tab => tab.offsetLeft >=
+        const firstItemOnNextSlide = (_a = this.getChildren(host, config)) === null || _a === void 0 ? void 0 : _a.find((tab) => tab.offsetLeft >=
             (host.scrollWidth / virtualSlideCount) * nextVirtualSlide);
         return firstItemOnNextSlide;
     }
     findNext(host, config, increment) {
         const childs = this.getChildren(host, config);
-        let activeIndex = childs === null || childs === void 0 ? void 0 : childs.findIndex(c => c === this.getActiveChild(host, config));
+        let activeIndex = childs === null || childs === void 0 ? void 0 : childs.findIndex((c) => c === this.getActiveChild(host, config));
         if (!activeIndex || activeIndex === -1) {
             activeIndex = 0;
         }
@@ -4347,7 +4349,7 @@ let TabFocusService = class TabFocusService extends AutoFocusService {
             return persisted;
         }
         const children = this.getChildren(host, config);
-        let index = children.findIndex(tab => this.isActive(tab));
+        let index = children.findIndex((tab) => this.isActive(tab));
         if (!index || index === -1) {
             index = 0;
         }
@@ -4375,7 +4377,7 @@ let TabFocusService = class TabFocusService extends AutoFocusService {
         const child = document.activeElement;
         const selector = child.tagName;
         return (el === child ||
-            !!Array.from(el.querySelectorAll(selector)).find(e => e === child));
+            !!Array.from(el.querySelectorAll(selector)).find((e) => e === child));
     }
 };
 TabFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TabFocusService_Factory() { return new TabFocusService(ɵɵinject(SelectFocusUtility)); }, token: TabFocusService, providedIn: "root" });
@@ -4443,7 +4445,7 @@ let TrapFocusService = class TrapFocusService extends TabFocusService {
      */
     moveFocus(host, config, increment, event) {
         const focusable = this.findFocusable(host);
-        let index = focusable.findIndex(v => v === event.target) + increment;
+        let index = focusable.findIndex((v) => v === event.target) + increment;
         const shouldMoveFocus = (index >= 0 && index < focusable.length) ||
             (index < 0 && this.getTrapStart(config.trap)) ||
             (index >= focusable.length && this.getTrapEnd(config.trap));
@@ -4618,7 +4620,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
              * into account when they persist their focus state.
              */
             if (!!this.group) {
-                this.service.findFocusable(this.host).forEach(el => 
+                this.service.findFocusable(this.host).forEach((el) => 
                 // we must do this in after view init as
                 this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
             }
@@ -4665,7 +4667,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
         if (this.shouldLock) {
             this.isLocked = i === -1;
             if (!(this.hasFocusableChildren && i === 0) || i === 0) {
-                this.focusable.forEach(el => this.renderer.setAttribute(el, 'tabindex', i.toString()));
+                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
             }
         }
     }
@@ -4867,7 +4869,7 @@ let CarouselService = class CarouselService {
      * whenever the window got resized.
      */
     getItemsPerSlide(nativeElement, itemWidth) {
-        return this.winRef.resize$.pipe(map(() => nativeElement.clientWidth), map(totalWidth => this.calculateItems(totalWidth, itemWidth)));
+        return this.winRef.resize$.pipe(map(() => nativeElement.clientWidth), map((totalWidth) => this.calculateItems(totalWidth, itemWidth)));
     }
     /**
      * Calculates the number of items per given hostSize.  calculated based on the given
@@ -5040,7 +5042,7 @@ let MediaService = class MediaService {
     getHighestAvailableFormat(media) {
         if (media) {
             let mediaFormat;
-            this.mediaFormats.forEach(format => {
+            this.mediaFormats.forEach((format) => {
                 if (!mediaFormat ||
                     (mediaFormat.threshold < format.threshold && media[format.code])) {
                     mediaFormat = format;
@@ -5263,7 +5265,7 @@ let ItemCounterComponent = class ItemCounterComponent {
      */
     getControl() {
         if (!this._control$) {
-            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap(value => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
+            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
         }
         return this._control$;
     }
@@ -5910,7 +5912,7 @@ let QualtricsLoaderService = class QualtricsLoaderService {
         }
     }
     initialize() {
-        fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe(_ => this.qualtricsLoaded$.next(true));
+        fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe(() => this.qualtricsLoaded$.next(true));
     }
     setup() {
         const qualtricsScript = this.winRef.document.createElement('script');
@@ -5928,9 +5930,9 @@ let QualtricsLoaderService = class QualtricsLoaderService {
         return (Boolean(this.config.qualtrics) && Boolean(this.config.qualtrics.projectId));
     }
     load() {
-        return this.qualtricsLoaded$.pipe(filter(loaded => loaded), switchMap(_ => {
+        return this.qualtricsLoaded$.pipe(filter((loaded) => loaded), switchMap(() => {
             const qsi = this.winRef.nativeWindow['QSI'];
-            return this.isDataLoaded().pipe(distinctUntilChanged(), tap(dataLoaded => {
+            return this.isDataLoaded().pipe(distinctUntilChanged(), tap((dataLoaded) => {
                 if (dataLoaded) {
                     qsi.API.unload();
                     qsi.API.load().done(qsi.API.run());
@@ -5970,9 +5972,7 @@ QualtricsComponent.ctorParameters = () => [
 QualtricsComponent = __decorate([
     Component({
         selector: 'cx-qualtrics',
-        template: `
-    <ng-container *ngIf="qualtricsEnabled$ | async"></ng-container>
-  `
+        template: ` <ng-container *ngIf="qualtricsEnabled$ | async"></ng-container> `
     })
 ], QualtricsComponent);
 
@@ -6028,7 +6028,7 @@ let SiteContextComponentService = class SiteContextComponentService {
         this.injector = injector;
     }
     getItems(context) {
-        return this.getService(context).pipe(switchMap((service) => service.getAll()), switchMap(items => this.getContext(context).pipe(switchMap(ctx => {
+        return this.getService(context).pipe(switchMap((service) => service.getAll()), switchMap((items) => this.getContext(context).pipe(switchMap((ctx) => {
             const itemsCopy = [];
             for (const item of items) {
                 itemsCopy.push(Object.assign(Object.assign({}, item), { label: this.getOptionLabel(item, ctx) }));
@@ -6040,26 +6040,26 @@ let SiteContextComponentService = class SiteContextComponentService {
         return this.getService(context).pipe(switchMap((service) => service.getActive()));
     }
     getLabel(context) {
-        return this.getContext(context).pipe(map(ctx => {
+        return this.getContext(context).pipe(map((ctx) => {
             return LABELS[ctx];
         }));
     }
     setActive(value, context) {
         this.getService(context)
             .pipe(take(1))
-            .subscribe(service => {
+            .subscribe((service) => {
             service.setActive(value);
         });
     }
     getService(context) {
-        return this.getContext(context).pipe(map((ctx) => this.getInjectedService(ctx)), filter(s => !!s));
+        return this.getContext(context).pipe(map((ctx) => this.getInjectedService(ctx)), filter((s) => !!s));
     }
     getContext(context) {
         if (context) {
             return of(context);
         }
         else if (this.componentData) {
-            return this.componentData.data$.pipe(map(data => data.context), map(ctx => {
+            return this.componentData.data$.pipe(map((data) => data.context), map((ctx) => {
                 switch (ctx) {
                     case 'LANGUAGE':
                         return LANGUAGE_CONTEXT_ID;
@@ -6176,6 +6176,7 @@ let StarRatingComponent = class StarRatingComponent {
         /**
          * Emits the given rating when the user clicks on a star.
          */
+        // tslint:disable-next-line:no-output-native
         this.change = new EventEmitter();
         this.initialRate = 0;
         this.iconTypes = ICON_TYPE;
@@ -6352,7 +6353,7 @@ __decorate([
 AppliedCouponsComponent = __decorate([
     Component({
         selector: 'cx-applied-coupons',
-        template: "<div *ngIf=\"isReadOnly; else editableCoupons\">\r\n  <div *ngIf=\"sortedVouchers.length > 0\">\r\n    <div class=\"cx-applied-coupon-title\">\r\n      {{ 'voucher.vouchersApplied' | cxTranslate }}\r\n    </div>\r\n  </div>\r\n  <div\r\n    *ngFor=\"let voucher of sortedVouchers\"\r\n    class=\"coupon-summary cx-coupon-card textonly\"\r\n    role=\"filter\"\r\n  >\r\n    <span class=\"cx-applied-coupon-code\">{{ voucher.voucherCode }}</span>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #editableCoupons>\r\n  <div class=\"row\">\r\n    <div\r\n      *ngFor=\"let voucher of sortedVouchers\"\r\n      class=\"col-sm-12 col-md-6 col-lg-12 cx-coupon-card-grid\"\r\n      role=\"filter\"\r\n    >\r\n      <div class=\"cx-coupon-apply cx-coupon-card cx-coupon-list-wrap\">\r\n        <span class=\"cx-cart-coupon-code\">{{ voucher.voucherCode }}</span>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          aria-label=\"Close\"\r\n          (click)=\"removeVoucher(voucher.voucherCode)\"\r\n          [disabled]=\"cartIsLoading\"\r\n          [class.disabled]=\"cartIsLoading\"\r\n        >\r\n          <span aria-hidden=\"true\">\r\n            <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\r\n          </span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ng-template>\r\n",
+        template: "<div *ngIf=\"isReadOnly; else editableCoupons\">\n  <div *ngIf=\"sortedVouchers.length > 0\">\n    <div class=\"cx-applied-coupon-title\">\n      {{ 'voucher.vouchersApplied' | cxTranslate }}\n    </div>\n  </div>\n  <div\n    *ngFor=\"let voucher of sortedVouchers\"\n    class=\"coupon-summary cx-coupon-card textonly\"\n    role=\"filter\"\n  >\n    <span class=\"cx-applied-coupon-code\">{{ voucher.voucherCode }}</span>\n  </div>\n</div>\n\n<ng-template #editableCoupons>\n  <div class=\"row\">\n    <div\n      *ngFor=\"let voucher of sortedVouchers\"\n      class=\"col-sm-12 col-md-6 col-lg-12 cx-coupon-card-grid\"\n      role=\"filter\"\n    >\n      <div class=\"cx-coupon-apply cx-coupon-card cx-coupon-list-wrap\">\n        <span class=\"cx-cart-coupon-code\">{{ voucher.voucherCode }}</span>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"removeVoucher(voucher.voucherCode)\"\n          [disabled]=\"cartIsLoading\"\n          [class.disabled]=\"cartIsLoading\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n          </span>\n        </button>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], AppliedCouponsComponent);
@@ -6396,17 +6397,17 @@ let CartCouponComponent = class CartCouponComponent {
         //TODO(issue:#5971) Deprecated since 1.5
         this.cartIsLoading$ = this.activeCartService
             .isStable()
-            .pipe(map(loaded => !loaded));
+            .pipe(map((loaded) => !loaded));
         this.cartVoucherService.resetAddVoucherProcessingState();
         this.form = this.formBuilder.group({
             couponCode: ['', [Validators.required]],
         });
         this.subscription.add(this.cartVoucherService
             .getAddVoucherResultSuccess()
-            .subscribe(success => {
+            .subscribe((success) => {
             this.onSuccess(success);
         }));
-        this.subscription.add(this.cartVoucherService.getAddVoucherResultError().subscribe(error => {
+        this.subscription.add(this.cartVoucherService.getAddVoucherResultError().subscribe((error) => {
             this.onError(error);
         }));
     }
@@ -6425,8 +6426,8 @@ let CartCouponComponent = class CartCouponComponent {
     getApplicableCustomerCoupons(cart, coupons) {
         this.applicableCoupons = coupons || [];
         if (cart.appliedVouchers) {
-            cart.appliedVouchers.forEach(appliedVoucher => {
-                this.applicableCoupons = this.applicableCoupons.filter(coupon => coupon.couponId !== appliedVoucher.code);
+            cart.appliedVouchers.forEach((appliedVoucher) => {
+                this.applicableCoupons = this.applicableCoupons.filter((coupon) => coupon.couponId !== appliedVoucher.code);
             });
         }
     }
@@ -6471,7 +6472,7 @@ CartCouponComponent.ctorParameters = () => [
 CartCouponComponent = __decorate([
     Component({
         selector: 'cx-cart-coupon',
-        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group \">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card \" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group\">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card\" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
     })
 ], CartCouponComponent);
 
@@ -6546,8 +6547,8 @@ let CartItemListComponent = class CartItemListComponent {
      * In case of a `consignmentEntry`, we need to normalize the data from the orderEntry.
      */
     resolveItems(items) {
-        if (items.every(item => item.hasOwnProperty('orderEntry'))) {
-            this._items = items.map(consignmentEntry => {
+        if (items.every((item) => item.hasOwnProperty('orderEntry'))) {
+            this._items = items.map((consignmentEntry) => {
                 const entry = Object.assign({}, consignmentEntry.orderEntry);
                 entry.quantity = consignmentEntry.quantity;
                 return entry;
@@ -6559,7 +6560,7 @@ let CartItemListComponent = class CartItemListComponent {
     }
     createForm() {
         this.form = new FormGroup({});
-        this._items.forEach(item => {
+        this._items.forEach((item) => {
             const { code } = item.product;
             const group = new FormGroup({
                 entryNumber: new FormControl(item.entryNumber),
@@ -6583,7 +6584,7 @@ let CartItemListComponent = class CartItemListComponent {
     getControl(item) {
         return this.form.get(item.product.code).valueChanges.pipe(
         // tslint:disable-next-line:deprecation
-        startWith(null), map(value => {
+        startWith(null), map((value) => {
             if (value && this.selectiveCartService && this.options.isSaveForLater) {
                 this.selectiveCartService.updateEntry(value.entryNumber, value.quantity);
             }
@@ -6691,7 +6692,7 @@ __decorate([
 CartItemComponent = __decorate([
     Component({
         selector: 'cx-cart-item',
-        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"item.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n\n    <ng-container\n      *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n    >\n      <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
+        template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row\">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"item.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n\n    <ng-container\n      *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n    >\n      <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
     })
 ], CartItemComponent);
 
@@ -6782,7 +6783,7 @@ let CartDetailsComponent = class CartDetailsComponent {
         this.promotions$ = this.promotionService.getOrderPromotionsFromCart();
         this.entries$ = this.activeCartService
             .getEntries()
-            .pipe(filter(entries => entries.length > 0));
+            .pipe(filter((entries) => entries.length > 0));
         if (this.isSaveForLaterEnabled()) {
             this.cartLoaded$ = combineLatest([
                 this.activeCartService.isStable(),
@@ -6905,14 +6906,14 @@ let CartPageLayoutHandler = class CartPageLayoutHandler {
                 this.selectiveCartService.getCart(),
             ]).pipe(map(([slots, cart, selectiveCart]) => {
                 if (cart.totalItems) {
-                    return slots.filter(slot => slot !== 'EmptyCartMiddleContent');
+                    return slots.filter((slot) => slot !== 'EmptyCartMiddleContent');
                 }
                 else if (selectiveCart.totalItems) {
-                    return slots.filter(slot => slot !== 'EmptyCartMiddleContent' &&
+                    return slots.filter((slot) => slot !== 'EmptyCartMiddleContent' &&
                         slot !== 'CenterRightContentSlot');
                 }
                 else {
-                    return slots.filter(slot => slot !== 'TopContent' && slot !== 'CenterRightContentSlot');
+                    return slots.filter((slot) => slot !== 'TopContent' && slot !== 'CenterRightContentSlot');
                 }
             }));
         }
@@ -6938,7 +6939,7 @@ let CartTotalsComponent = class CartTotalsComponent {
         this.cart$ = this.activeCartService.getActive();
         this.entries$ = this.activeCartService
             .getEntries()
-            .pipe(filter(entries => entries.length > 0));
+            .pipe(filter((entries) => entries.length > 0));
     }
 };
 CartTotalsComponent.ctorParameters = () => [
@@ -6983,8 +6984,8 @@ let MiniCartComponent = class MiniCartComponent {
     constructor(activeCartService) {
         this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
-        this.quantity$ = this.activeCartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map(cart => cart.deliveryItemsQuantity || 0));
-        this.total$ = this.activeCartService.getActive().pipe(filter(cart => !!cart.totalPrice), map(cart => cart.totalPrice.formattedValue));
+        this.quantity$ = this.activeCartService.getActive().pipe(startWith({ deliveryItemsQuantity: 0 }), map((cart) => cart.deliveryItemsQuantity || 0));
+        this.total$ = this.activeCartService.getActive().pipe(filter((cart) => !!cart.totalPrice), map((cart) => cart.totalPrice.formattedValue));
     }
 };
 MiniCartComponent.ctorParameters = () => [
@@ -7023,8 +7024,8 @@ let AddToWishListComponent = class AddToWishListComponent {
         this.wishListService = wishListService;
         this.currentProductService = currentProductService;
         this.authService = authService;
-        this.product$ = this.currentProductService.getProduct().pipe(filter(product => Boolean(product)), tap(product => this.setStockInfo(product)));
-        this.wishListEntries$ = this.wishListService.getWishList().pipe(filter(wishlist => Boolean(wishlist)), map(wishList => wishList.entries));
+        this.product$ = this.currentProductService.getProduct().pipe(filter((product) => Boolean(product)), tap((product) => this.setStockInfo(product)));
+        this.wishListEntries$ = this.wishListService.getWishList().pipe(filter((wishlist) => Boolean(wishlist)), map((wishList) => wishList.entries));
         this.userLoggedIn$ = this.authService.isUserLoggedIn();
         this.loading$ = this.wishListService.getWishListLoading();
         this.hasStock = false;
@@ -7037,7 +7038,7 @@ let AddToWishListComponent = class AddToWishListComponent {
         this.wishListService.removeEntry(entry);
     }
     getProductInWishList(product, entries) {
-        const item = entries.find(entry => entry.product.code === product.code);
+        const item = entries.find((entry) => entry.product.code === product.code);
         return item;
     }
     setStockInfo(product) {
@@ -7087,11 +7088,11 @@ let SaveForLaterComponent = class SaveForLaterComponent {
     ngOnInit() {
         this.isCartEmpty$ = this.cartService
             .getActive()
-            .pipe(map(cart => !(cart && cart.totalItems && cart.totalItems > 0)));
+            .pipe(map((cart) => !(cart && cart.totalItems && cart.totalItems > 0)));
         this.saveForLater$ = this.selectiveCartService.getCart();
         this.entries$ = this.selectiveCartService
             .getEntries()
-            .pipe(filter(entries => entries.length > 0));
+            .pipe(filter((entries) => entries.length > 0));
         this.cartLoaded$ = combineLatest([
             this.cartService.isStable(),
             this.selectiveCartService.getLoaded(),
@@ -7282,7 +7283,7 @@ let CheckoutConfigService = class CheckoutConfigService {
                 }
                 break;
             case DeliveryModePreferences.LEAST_EXPENSIVE:
-                const leastExpensiveFound = deliveryModes.find(deliveryMode => deliveryMode.deliveryCost.value !== 0);
+                const leastExpensiveFound = deliveryModes.find((deliveryMode) => deliveryMode.deliveryCost.value !== 0);
                 if (leastExpensiveFound) {
                     return leastExpensiveFound.code;
                 }
@@ -7290,7 +7291,7 @@ let CheckoutConfigService = class CheckoutConfigService {
             case DeliveryModePreferences.MOST_EXPENSIVE:
                 return deliveryModes[deliveryModes.length - 1].code;
             default:
-                const codeFound = deliveryModes.find(deliveryMode => deliveryMode.code === this.defaultDeliveryMode[index]);
+                const codeFound = deliveryModes.find((deliveryMode) => deliveryMode.code === this.defaultDeliveryMode[index]);
                 if (codeFound) {
                     return codeFound.code;
                 }
@@ -7386,14 +7387,14 @@ let CheckoutDetailsService = class CheckoutDetailsService {
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
         this.activeCartService = activeCartService;
-        this.cartId$ = this.activeCartService.getActive().pipe(map(cartData => {
+        this.cartId$ = this.activeCartService.getActive().pipe(map((cartData) => {
             if ((cartData.user && cartData.user.uid === OCC_USER_ID_ANONYMOUS) ||
                 this.activeCartService.isGuestCart()) {
                 return cartData.guid;
             }
             return cartData.code;
-        }), filter(cartId => !!cartId));
-        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap(cartId => this.checkoutService.loadCheckoutDetails(cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile(loaded => !loaded));
+        }), filter((cartId) => !!cartId));
+        this.getCheckoutDetailsLoaded$ = this.cartId$.pipe(tap((cartId) => this.checkoutService.loadCheckoutDetails(cartId)), shareReplay(1), switchMap(() => this.checkoutService.getCheckoutDetailsLoaded()), skipWhile((loaded) => !loaded));
     }
     getDeliveryAddress() {
         return this.getCheckoutDetailsLoaded$.pipe(switchMap(() => this.checkoutDeliveryService.getDeliveryAddress()));
@@ -7440,7 +7441,7 @@ let ExpressCheckoutService = class ExpressCheckoutService {
                 this.userAddressService.loadAddresses();
             }
         }), filter(([, addressesLoadedSuccess]) => addressesLoadedSuccess), switchMap(([addresses, , setDeliveryAddressProcess]) => {
-            const defaultAddress = addresses.find(address => address.defaultAddress) || addresses[0];
+            const defaultAddress = addresses.find((address) => address.defaultAddress) || addresses[0];
             if (defaultAddress && Object.keys(defaultAddress).length) {
                 if (!(setDeliveryAddressProcess.success ||
                     setDeliveryAddressProcess.error ||
@@ -7456,7 +7457,7 @@ let ExpressCheckoutService = class ExpressCheckoutService {
                         return this.checkoutDetailsService.getDeliveryAddress();
                     }
                     return of(false);
-                }), map(data => Boolean(data && Object.keys(data).length)));
+                }), map((data) => Boolean(data && Object.keys(data).length)));
             }
             return of(false);
         }));
@@ -7471,7 +7472,7 @@ let ExpressCheckoutService = class ExpressCheckoutService {
                 this.userPaymentService.loadPaymentMethods();
             }
         }), filter(([, success]) => success), switchMap(([payments, , setPaymentDetailsProcess]) => {
-            const defaultPayment = payments.find(address => address.defaultPayment) || payments[0];
+            const defaultPayment = payments.find((address) => address.defaultPayment) || payments[0];
             if (defaultPayment && Object.keys(defaultPayment).length) {
                 if (!(setPaymentDetailsProcess.success ||
                     setPaymentDetailsProcess.error ||
@@ -7487,7 +7488,7 @@ let ExpressCheckoutService = class ExpressCheckoutService {
                         return this.checkoutDetailsService.getPaymentDetails();
                     }
                     return of(false);
-                }), map(data => Boolean(data && Object.keys(data).length)));
+                }), map((data) => Boolean(data && Object.keys(data).length)));
             }
             return of(false);
         }));
@@ -7526,7 +7527,7 @@ let ExpressCheckoutService = class ExpressCheckoutService {
                                 return this.checkoutDetailsService.getSelectedDeliveryModeCode();
                             }
                             return of(false);
-                        }), map(data => Boolean(data)));
+                        }), map((data) => Boolean(data)));
                     }
                     return of(false);
                 }));
@@ -7675,7 +7676,7 @@ let CheckoutProgressMobileBottomComponent = class CheckoutProgressMobileBottomCo
     }
     ngOnInit() {
         this.steps = this.config.checkout.steps;
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((router) => {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
@@ -7730,7 +7731,7 @@ let CheckoutProgressMobileTopComponent = class CheckoutProgressMobileTopComponen
     ngOnInit() {
         this.steps = this.config.checkout.steps;
         this.cart$ = this.activeCartService.getActive();
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((router) => {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
@@ -7784,7 +7785,7 @@ let CheckoutProgressComponent = class CheckoutProgressComponent {
     }
     ngOnInit() {
         this.steps = this.config.checkout.steps;
-        this.routerState$ = this.routingService.getRouterState().pipe(tap(router => {
+        this.routerState$ = this.routingService.getRouterState().pipe(tap((router) => {
             this.activeStepUrl = router.state.context.id;
             this.steps.forEach((step, index) => {
                 const routeUrl = `/${this.routingConfigService.getRouteConfig(step.routeName).paths[0]}`;
@@ -7945,7 +7946,7 @@ DeliveryModeComponent.ctorParameters = () => [
 DeliveryModeComponent = __decorate([
     Component({
         selector: 'cx-delivery-mode',
-        template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of supportedDeliveryModes$ | async\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label\n                form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
+        template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of supportedDeliveryModes$ | async\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], DeliveryModeComponent);
@@ -8014,7 +8015,7 @@ let BillingAddressFormComponent = class BillingAddressFormComponent {
         this.selectedCountry$ = new BehaviorSubject('');
     }
     ngOnInit() {
-        this.regions$ = this.selectedCountry$.pipe(switchMap(country => this.userAddressService.getRegions(country)), tap(regions => {
+        this.regions$ = this.selectedCountry$.pipe(switchMap((country) => this.userAddressService.getRegions(country)), tap((regions) => {
             const regionControl = this.billingAddress.get('region.isocodeShort');
             if (regions.length > 0) {
                 regionControl.enable();
@@ -8140,13 +8141,13 @@ let PaymentFormComponent = class PaymentFormComponent {
     }
     ngOnInit() {
         this.expMonthAndYear();
-        this.countries$ = this.userPaymentService.getAllBillingCountries().pipe(tap(countries => {
+        this.countries$ = this.userPaymentService.getAllBillingCountries().pipe(tap((countries) => {
             // If the store is empty fetch countries. This is also used when changing language.
             if (Object.keys(countries).length === 0) {
                 this.userPaymentService.loadBillingCountries();
             }
         }));
-        this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(tap(cardTypes => {
+        this.cardTypes$ = this.checkoutPaymentService.getCardTypes().pipe(tap((cardTypes) => {
             if (Object.keys(cardTypes).length === 0) {
                 this.checkoutPaymentService.loadSupportedCardTypes();
             }
@@ -8369,8 +8370,8 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
         this.getPaymentDetailsSub = this.checkoutPaymentService
             .getPaymentDetails()
-            .pipe(filter(paymentInfo => paymentInfo && !!Object.keys(paymentInfo).length))
-            .subscribe(paymentInfo => {
+            .pipe(filter((paymentInfo) => paymentInfo && !!Object.keys(paymentInfo).length))
+            .subscribe((paymentInfo) => {
             if (this.allowRouting) {
                 this.routingService.go(this.checkoutStepUrlNext);
             }
@@ -8378,7 +8379,7 @@ let PaymentMethodComponent = class PaymentMethodComponent {
                 this.selectedPayment = paymentInfo;
             }
             else {
-                Object.keys(paymentInfo).forEach(key => {
+                Object.keys(paymentInfo).forEach((key) => {
                     if (key.startsWith('InvalidField')) {
                         this.sendPaymentMethodFailGlobalMessage(paymentInfo[key]);
                     }
@@ -8551,7 +8552,7 @@ let PlaceOrderComponent = class PlaceOrderComponent {
     ngOnInit() {
         this.placeOrderSubscription = this.checkoutService
             .getOrderDetails()
-            .pipe(filter(order => Object.keys(order).length !== 0))
+            .pipe(filter((order) => Object.keys(order).length !== 0))
             .subscribe(() => {
             this.routingService.go({ cxRoute: 'orderConfirmation' });
         });
@@ -8609,7 +8610,7 @@ let PaymentDetailsSetGuard = class PaymentDetailsSetGuard {
         }
         return this.checkoutDetailsService
             .getPaymentDetails()
-            .pipe(map(paymentDetails => paymentDetails && Object.keys(paymentDetails).length !== 0
+            .pipe(map((paymentDetails) => paymentDetails && Object.keys(paymentDetails).length !== 0
             ? true
             : this.router.parseUrl(checkoutStep &&
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
@@ -8799,23 +8800,23 @@ let AddressFormComponent = class AddressFormComponent {
     }
     ngOnInit() {
         // Fetching countries
-        this.countries$ = this.userAddressService.getDeliveryCountries().pipe(tap(countries => {
+        this.countries$ = this.userAddressService.getDeliveryCountries().pipe(tap((countries) => {
             if (Object.keys(countries).length === 0) {
                 this.userAddressService.loadDeliveryCountries();
             }
         }));
         // Fetching titles
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
-        }), map(titles => {
+        }), map((titles) => {
             titles.sort(sortTitles);
             const noneTitle = { code: '', name: 'Title' };
             return [noneTitle, ...titles];
         }));
         // Fetching regions
-        this.regions$ = this.selectedCountry$.pipe(switchMap(country => this.userAddressService.getRegions(country)), tap(regions => {
+        this.regions$ = this.selectedCountry$.pipe(switchMap((country) => this.userAddressService.getRegions(country)), tap((regions) => {
             const regionControl = this.address.get('region.isocode');
             if (regions && regions.length > 0) {
                 regionControl.enable();
@@ -8836,7 +8837,7 @@ let AddressFormComponent = class AddressFormComponent {
             }
             else if (results.decision === 'REJECT') {
                 // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
-                if (results.errors.errors.some(error => error.subject === 'titleCode')) {
+                if (results.errors.errors.some((error) => error.subject === 'titleCode')) {
                     this.globalMessageService.add({ key: 'addressForm.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
                 }
                 else {
@@ -8874,8 +8875,8 @@ let AddressFormComponent = class AddressFormComponent {
     }
     verifyAddress() {
         if (this.address.controls['region'].value.isocode) {
-            this.regionsSub = this.regions$.pipe(take(1)).subscribe(regions => {
-                const obj = regions.find(region => region.isocode === this.address.controls['region'].value.isocode);
+            this.regionsSub = this.regions$.pipe(take(1)).subscribe((regions) => {
+                const obj = regions.find((region) => region.isocode === this.address.controls['region'].value.isocode);
                 Object.assign(this.address.value.region, {
                     isocodeShort: obj.isocodeShort,
                 });
@@ -8897,7 +8898,7 @@ let AddressFormComponent = class AddressFormComponent {
             this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
                 results.suggestedAddresses;
             this.suggestedAddressModalRef.result
-                .then(address => {
+                .then((address) => {
                 this.checkoutDeliveryService.clearAddressVerificationResults();
                 if (address) {
                     address = Object.assign({
@@ -9034,11 +9035,11 @@ let ShippingAddressComponent = class ShippingAddressComponent {
             // Select default address if none selected
             if (addresses.length &&
                 (!selected || Object.keys(selected).length === 0)) {
-                const defaultAddress = addresses.find(address => address.defaultAddress);
+                const defaultAddress = addresses.find((address) => address.defaultAddress);
                 selected = defaultAddress;
                 this.selectAddress(defaultAddress);
             }
-            return addresses.map(address => {
+            return addresses.map((address) => {
                 const card = this.getCardContent(address, selected, textDefaultShippingAddress, textShipToThisAddress, textSelected);
                 return {
                     address,
@@ -9076,14 +9077,14 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         this.checkoutDeliveryService.setDeliveryAddress(address);
     }
     addAddress(address) {
-        const selectedSub = this.selectedAddress$.subscribe(selected => {
+        const selectedSub = this.selectedAddress$.subscribe((selected) => {
             if (selected && selected.shippingAddress) {
                 this.goNext();
                 selectedSub.unsubscribe();
             }
         });
         this.forceLoader = true;
-        this.existingAddresses$.pipe(take(1)).subscribe(addresses => {
+        this.existingAddresses$.pipe(take(1)).subscribe((addresses) => {
             addresses.includes(address)
                 ? this.selectAddress(address)
                 : this.checkoutDeliveryService.createAndSetAddress(address);
@@ -9184,7 +9185,7 @@ let NotCheckoutAuthGuard = class NotCheckoutAuthGuard {
         this.activeCartService = activeCartService;
     }
     canActivate() {
-        return this.authService.getUserToken().pipe(map(token => {
+        return this.authService.getUserToken().pipe(map((token) => {
             if (token.access_token) {
                 this.routingService.go({ cxRoute: 'home' });
             }
@@ -9240,7 +9241,7 @@ let SkipLinkService = class SkipLinkService {
         return this.skipLinks$;
     }
     add(key, target) {
-        const found = this.config.skipLinks.find(skipLink => skipLink.key === key);
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
         if (found) {
             const existing = this.skipLinks$.value;
             existing.splice(this.getSkipLinkIndexInArray(key), 0, {
@@ -9253,10 +9254,10 @@ let SkipLinkService = class SkipLinkService {
         }
     }
     remove(key) {
-        const found = this.config.skipLinks.find(skipLink => skipLink.key === key);
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
         if (found) {
             let existing = this.skipLinks$.value;
-            existing = existing.filter(skipLink => skipLink.key !== key);
+            existing = existing.filter((skipLink) => skipLink.key !== key);
             this.skipLinks$.next(existing);
         }
     }
@@ -9278,13 +9279,13 @@ let SkipLinkService = class SkipLinkService {
         }
     }
     getSkipLinkIndexInArray(key) {
-        let index = this.config.skipLinks.findIndex(skipLink => skipLink.key === key);
+        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
         while (index > 0) {
             index--;
             const previous = this.config.skipLinks[index];
             if (previous) {
                 const existing = this.skipLinks$.value;
-                const found = existing.findIndex(skipLink => skipLink.key === previous.key);
+                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
                 if (found > -1) {
                     return found + 1;
                 }
@@ -9403,7 +9404,7 @@ let HamburgerMenuService = class HamburgerMenuService {
     constructor(router) {
         this.isExpanded = new BehaviorSubject(false);
         router.events
-            .pipe(filter(event => event instanceof NavigationStart))
+            .pipe(filter((event) => event instanceof NavigationStart))
             .subscribe(() => {
             this.toggle(true);
         });
@@ -9599,7 +9600,7 @@ let ConsentManagementComponent = class ConsentManagementComponent {
         let hideTemplateIds = [];
         if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
             .showAnonymousConsents) {
-            hideTemplateIds = anonymousTemplates.map(template => template.id);
+            hideTemplateIds = anonymousTemplates.map((template) => template.id);
             return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
         }
         if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
@@ -9615,18 +9616,18 @@ let ConsentManagementComponent = class ConsentManagementComponent {
         this.userConsentService.resetGiveConsentProcessState();
         this.subscriptions.add(this.userConsentService
             .getGiveConsentResultSuccess()
-            .subscribe(success => this.onConsentGivenSuccess(success)));
+            .subscribe((success) => this.onConsentGivenSuccess(success)));
     }
     withdrawConsentInit() {
         this.userConsentService.resetWithdrawConsentProcessState();
         this.subscriptions.add(this.userConsentService
             .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map(([, withdrawalSuccess]) => withdrawalSuccess), tap(withdrawalSuccess => {
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map(([, withdrawalSuccess]) => withdrawalSuccess), tap((withdrawalSuccess) => {
             if (withdrawalSuccess) {
                 this.userConsentService.loadConsents();
             }
         }))
-            .subscribe(withdrawalSuccess => this.onConsentWithdrawnSuccess(withdrawalSuccess)));
+            .subscribe((withdrawalSuccess) => this.onConsentWithdrawnSuccess(withdrawalSuccess)));
     }
     consentsExists(templateList) {
         return Boolean(templateList) && templateList.length > 0;
@@ -9653,7 +9654,7 @@ let ConsentManagementComponent = class ConsentManagementComponent {
     }
     rejectAll(templates = []) {
         const consentsToWithdraw = [];
-        templates.forEach(template => {
+        templates.forEach((template) => {
             if (this.userConsentService.isConsentGiven(template.currentConsent)) {
                 if (this.isRequiredConsent(template)) {
                     return;
@@ -9663,23 +9664,23 @@ let ConsentManagementComponent = class ConsentManagementComponent {
         });
         this.allConsentsLoading.next(true);
         this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
-            .pipe(tap(_timesLoaded => this.allConsentsLoading.next(false)))
+            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
             .subscribe());
     }
     setupWithdrawalStream(consentsToWithdraw = []) {
-        const loading$ = concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(distinctUntilChanged(), filter(loading => !loading));
+        const loading$ = concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
         const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
-        const withdraw$ = count$.pipe(tap(i => {
+        const withdraw$ = count$.pipe(tap((i) => {
             if (i < consentsToWithdraw.length) {
                 this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
             }
         }));
-        const checkTimesLoaded$ = withdraw$.pipe(filter(timesLoaded => timesLoaded === consentsToWithdraw.length));
+        const checkTimesLoaded$ = withdraw$.pipe(filter((timesLoaded) => timesLoaded === consentsToWithdraw.length));
         return checkTimesLoaded$;
     }
     allowAll(templates = []) {
         const consentsToGive = [];
-        templates.forEach(template => {
+        templates.forEach((template) => {
             if (this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
                 if (this.isRequiredConsent(template)) {
                     return;
@@ -9689,18 +9690,18 @@ let ConsentManagementComponent = class ConsentManagementComponent {
         });
         this.allConsentsLoading.next(true);
         this.subscriptions.add(this.setupGiveStream(consentsToGive)
-            .pipe(tap(_timesLoaded => this.allConsentsLoading.next(false)))
+            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
             .subscribe());
     }
     setupGiveStream(consentsToGive = []) {
-        const loading$ = concat(this.userConsentService.getGiveConsentResultLoading()).pipe(distinctUntilChanged(), filter(loading => !loading));
+        const loading$ = concat(this.userConsentService.getGiveConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
         const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
-        const giveConsent$ = count$.pipe(tap(i => {
+        const giveConsent$ = count$.pipe(tap((i) => {
             if (i < consentsToGive.length) {
                 this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
             }
         }));
-        const checkTimesLoaded$ = giveConsent$.pipe(filter(timesLoaded => timesLoaded === consentsToGive.length));
+        const checkTimesLoaded$ = giveConsent$.pipe(filter((timesLoaded) => timesLoaded === consentsToGive.length));
         return checkTimesLoaded$;
     }
     isRequiredConsent(template) {
@@ -9797,7 +9798,7 @@ let StorefrontComponent = class StorefrontComponent {
     ngOnInit() {
         this.navigateSubscription = this.routingService
             .isNavigating()
-            .subscribe(val => {
+            .subscribe((val) => {
             this.startNavigating = val === true;
             this.stopNavigating = val === false;
         });
@@ -9876,7 +9877,7 @@ let BannerCarouselComponent = class BannerCarouselComponent {
         this.componentData = componentData;
         this.cmsService = cmsService;
         this.componentData$ = this.componentData.data$.pipe(filter(Boolean), tap((d) => (this.theme = `${d.effect}-theme`)));
-        this.items$ = this.componentData$.pipe(map(data => data.banners.trim().split(' ')), map(codes => codes.map(code => this.cmsService.getComponentData(code))));
+        this.items$ = this.componentData$.pipe(map((data) => data.banners.trim().split(' ')), map((codes) => codes.map((code) => this.cmsService.getComponentData(code))));
         /**
          * Adds a specific theme for the carousel. The effect can be
          * used in CSS customisations.
@@ -10049,7 +10050,7 @@ let TabParagraphContainerComponent = class TabParagraphContainerComponent {
         this.winRef = winRef;
         this.activeTabNum = 0;
         this.tabTitleParams = [];
-        this.components$ = this.componentData.data$.pipe(distinctUntilKeyChanged('components'), switchMap(data => combineLatest(data.components.split(' ').map(component => this.cmsService.getComponentData(component).pipe(distinctUntilChanged(), map(tab => {
+        this.components$ = this.componentData.data$.pipe(distinctUntilKeyChanged('components'), switchMap((data) => combineLatest(data.components.split(' ').map((component) => this.cmsService.getComponentData(component).pipe(distinctUntilChanged(), map((tab) => {
             if (!tab.flexType) {
                 tab = Object.assign(Object.assign({}, tab), { flexType: tab.typeCode });
             }
@@ -10081,7 +10082,7 @@ let TabParagraphContainerComponent = class TabParagraphContainerComponent {
         }
     }
     getTitleParams(children) {
-        children.forEach(comp => {
+        children.forEach((comp) => {
             if (comp.cmpRef && comp.cmpRef.instance.tabTitleParam$) {
                 this.tabTitleParams.push(comp.cmpRef.instance.tabTitleParam$);
             }
@@ -10317,10 +10318,10 @@ let CloseAccountModalComponent = class CloseAccountModalComponent {
         this.userService.resetRemoveUserProcessState();
         this.subscription.add(this.userService
             .getRemoveUserResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((success) => this.onSuccess(success)));
         this.subscription.add(this.userService
             .getRemoveUserResultError()
-            .subscribe(error => this.onError(error)));
+            .subscribe((error) => this.onError(error)));
         this.isLoading$ = this.userService.getRemoveUserResultLoading();
     }
     onSuccess(success) {
@@ -10329,7 +10330,7 @@ let CloseAccountModalComponent = class CloseAccountModalComponent {
             this.translationService
                 .translate('closeAccount.accountClosedSuccessfully')
                 .pipe(first())
-                .subscribe(text => {
+                .subscribe((text) => {
                 this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_CONFIRMATION);
             });
             this.routingService.go({ cxRoute: 'home' });
@@ -10341,7 +10342,7 @@ let CloseAccountModalComponent = class CloseAccountModalComponent {
             this.translationService
                 .translate('closeAccount.accountClosedFailure')
                 .pipe(first())
-                .subscribe(text => {
+                .subscribe((text) => {
                 this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_ERROR);
             });
         }
@@ -10532,7 +10533,7 @@ var AmendOrderType;
 
 function ValidateQuantity(control) {
     let q = 0;
-    Object.keys(control.value).forEach(key => (q += control.value[key]));
+    Object.keys(control.value).forEach((key) => (q += control.value[key]));
     return q > 0 ? null : { required: true };
 }
 let OrderAmendService = class OrderAmendService {
@@ -10543,8 +10544,8 @@ let OrderAmendService = class OrderAmendService {
      * Returns entries with an amended quantity.
      */
     getAmendedEntries() {
-        return this.getForm().pipe(switchMap(form => {
-            return this.getEntries().pipe(map(entries => entries.filter(entry => this.getFormControl(form, entry).value > 0)));
+        return this.getForm().pipe(switchMap((form) => {
+            return this.getEntries().pipe(map((entries) => entries.filter((entry) => this.getFormControl(form, entry).value > 0)));
         }));
     }
     getOrder() {
@@ -10554,7 +10555,7 @@ let OrderAmendService = class OrderAmendService {
      * returns the form with form data at runtime
      */
     getForm() {
-        return this.getOrder().pipe(tap(order => {
+        return this.getOrder().pipe(tap((order) => {
             if (!this.form || this.form.get('orderCode').value !== order.code) {
                 this.buildForm(order);
             }
@@ -10565,7 +10566,7 @@ let OrderAmendService = class OrderAmendService {
         this.form.addControl('orderCode', new FormControl(order.code));
         const entryGroup = new FormGroup({}, { validators: [ValidateQuantity] });
         this.form.addControl('entries', entryGroup);
-        (order.entries || []).forEach(entry => {
+        (order.entries || []).forEach((entry) => {
             const key = entry.entryNumber.toString();
             entryGroup.addControl(key, new FormControl(0, {
                 validators: [
@@ -10622,7 +10623,7 @@ let CancelOrReturnItemsComponent = class CancelOrReturnItemsComponent {
         return control;
     }
     setAll(form) {
-        this.entries.forEach(entry => this.getControl(form, entry).setValue(this.getMaxAmendQuantity(entry)));
+        this.entries.forEach((entry) => this.getControl(form, entry).setValue(this.getMaxAmendQuantity(entry)));
     }
     getItemPrice(entry) {
         return this.orderAmendService.getAmendedPrice(entry);
@@ -10646,7 +10647,7 @@ __decorate([
 CancelOrReturnItemsComponent = __decorate([
     Component({
         selector: 'cx-amend-order-items',
-        template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty'\n          ) | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3  col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *ngIf=\"item.product.baseOptions?.length\">\n              <div\n                *ngFor=\"\n                  let variant of item.product.baseOptions[0]?.selected\n                    ?.variantOptionQualifiers\n                \"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\" *ngIf=\"variant.name\">\n                  {{ variant.name }}:\n                </div>\n                <div class=\"cx-value\" *ngIf=\"variant.value\">\n                  {{ variant.value }}\n                </div>\n              </div>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty'\n                ) | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [control]=\"getControl(form, item)\"\n              [readonly]=\"isConfirmation\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+        template: "<div *ngIf=\"form$ | async as form\">\n  <button\n    *ngIf=\"!isConfirmation\"\n    class=\"btn btn-link cx-action-link\"\n    (click)=\"setAll(form)\"\n  >\n    {{ 'orderDetails.cancellationAndReturn.setAll' | cxTranslate }}\n  </button>\n\n  <div class=\"d-none d-md-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-xl-6\">\n        {{ 'orderDetails.cancellationAndReturn.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-2\">\n        {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n      </div>\n      <div *ngIf=\"!isConfirmation\" class=\"cx-item-list-qty col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-2\">\n        {{\n          (isCancellation()\n            ? 'orderDetails.cancellationAndReturn.cancelQty'\n            : 'orderDetails.cancellationAndReturn.returnQty'\n          ) | cxTranslate\n        }}\n      </div>\n      <div *ngIf=\"isConfirmation\" class=\"cx-item-list-total col-md-3 col-xl-2\">\n        {{ 'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cx-item-list-row\" *ngFor=\"let item of entries; let i = index\">\n    <div class=\"row cx-item-list-items\">\n      <!-- Item Image -->\n      <cx-media\n        class=\"col-2 cx-image-container\"\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n\n      <!-- Item Information -->\n      <div class=\"cx-info col-10\">\n        <div class=\"cx-info-container row\">\n          <!-- Item Description -->\n          <div class=\"col-md-3 col-xl-5\">\n            <div *ngIf=\"item.product.name\" class=\"cx-name\">\n              {{ item.product.name }}\n            </div>\n            <div *ngIf=\"item.product.code\" class=\"cx-code\">\n              {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n            </div>\n            <!-- Variants -->\n            <ng-container *ngIf=\"item.product.baseOptions?.length\">\n              <div\n                *ngFor=\"\n                  let variant of item.product.baseOptions[0]?.selected\n                    ?.variantOptionQualifiers\n                \"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\" *ngIf=\"variant.name\">\n                  {{ variant.name }}:\n                </div>\n                <div class=\"cx-value\" *ngIf=\"variant.value\">\n                  {{ variant.value }}\n                </div>\n              </div>\n            </ng-container>\n          </div>\n          <!-- Price -->\n          <div\n            *ngIf=\"item.basePrice\"\n            class=\"cx-price col-md-3 col-lg-3 col-xl-2\"\n          >\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{ 'orderDetails.cancellationAndReturn.itemPrice' | cxTranslate }}\n            </div>\n            <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n              {{ item.basePrice?.formattedValue }}\n            </div>\n          </div>\n          <!-- item Quantity -->\n          <div *ngIf=\"!isConfirmation\" class=\"cx-request-qty col-md-3\">\n            <div\n              class=\"cx-label d-block d-md-none d-lg-none d-xl-none\"\n              placement=\"left\"\n              title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n            >\n              {{ 'orderDetails.cancellationAndReturn.quantity' | cxTranslate }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getMaxAmendQuantity(item) }}\n            </div>\n          </div>\n          <!-- Amended Quantity -->\n          <div class=\"cx-quantity col-md-3 col-xl-2\">\n            <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n              {{\n                (isCancellation()\n                  ? 'orderDetails.cancellationAndReturn.cancelQty'\n                  : 'orderDetails.cancellationAndReturn.returnQty'\n                ) | cxTranslate\n              }}\n            </div>\n\n            <cx-item-counter\n              [min]=\"0\"\n              [max]=\"getMaxAmendQuantity(item)\"\n              [control]=\"getControl(form, item)\"\n              [readonly]=\"isConfirmation\"\n            >\n            </cx-item-counter>\n          </div>\n          <!-- Total Price -->\n          <div *ngIf=\"isConfirmation\" class=\"cx-total col-3\">\n            <div class=\"cx-label d-block d-md-none\">\n              {{\n                'orderDetails.cancellationAndReturn.totalPrice' | cxTranslate\n              }}\n            </div>\n            <div class=\"cx-value\">\n              {{ getItemPrice(item)?.formattedValue }}\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], CancelOrReturnItemsComponent);
@@ -10674,7 +10675,7 @@ let CancelOrderConfirmationComponent = class CancelOrderConfirmationComponent {
         this.orderAmendService = orderAmendService;
         this.form$ = this.orderAmendService
             .getForm()
-            .pipe(tap(form => (this.orderCode = form.value.orderCode)));
+            .pipe(tap((form) => (this.orderCode = form.value.orderCode)));
         this.entries$ = this.orderAmendService.getAmendedEntries();
     }
     submit(form) {
@@ -10706,14 +10707,14 @@ let OrderCancellationService = class OrderCancellationService extends OrderAmend
      * Return cancellable order entries.
      */
     getEntries() {
-        return this.getOrder().pipe(filter(order => Boolean(order)), map(order => order.entries.filter(entry => entry.entryNumber !== -1 && entry.cancellableQuantity > 0)));
+        return this.getOrder().pipe(filter((order) => Boolean(order)), map((order) => order.entries.filter((entry) => entry.entryNumber !== -1 && entry.cancellableQuantity > 0)));
     }
     save() {
         const orderCode = this.form.value.orderCode;
         const entries = this.form.value.entries;
         const inputs = Object.keys(entries)
-            .filter(entryNumber => entries[entryNumber] > 0)
-            .map(entryNumber => ({
+            .filter((entryNumber) => entries[entryNumber] > 0)
+            .map((entryNumber) => ({
             orderEntryNumber: Number(entryNumber),
             quantity: entries[entryNumber],
         }));
@@ -10756,7 +10757,7 @@ let OrderCancellationGuard = class OrderCancellationGuard {
         this.orderAmendService = orderAmendService;
     }
     canActivate() {
-        return this.orderAmendService.getForm().pipe(map(form => {
+        return this.orderAmendService.getForm().pipe(map((form) => {
             if (!form.valid) {
                 // the order code is not available in the route
                 // as long as we're inside a guard, hence we redirect
@@ -10829,7 +10830,7 @@ let CancelOrderComponent = class CancelOrderComponent {
         this.orderAmendService = orderAmendService;
         this.form$ = this.orderAmendService
             .getForm()
-            .pipe(tap(form => (this.orderCode = form.value.orderCode)));
+            .pipe(tap((form) => (this.orderCode = form.value.orderCode)));
         this.entries$ = this.orderAmendService.getEntries();
     }
 };
@@ -10904,14 +10905,14 @@ let OrderReturnService = class OrderReturnService extends OrderAmendService {
         this.amendType = AmendOrderType.RETURN;
     }
     getEntries() {
-        return this.getOrder().pipe(filter(order => !!order.entries), map(order => order.entries.filter(entry => entry.entryNumber !== -1 && entry.returnableQuantity > 0)));
+        return this.getOrder().pipe(filter((order) => !!order.entries), map((order) => order.entries.filter((entry) => entry.entryNumber !== -1 && entry.returnableQuantity > 0)));
     }
     save() {
         const orderCode = this.form.value.orderCode;
         const entries = this.form.value.entries;
         const inputs = Object.keys(entries)
-            .filter(entryNumber => entries[entryNumber] > 0)
-            .map(entryNumber => ({
+            .filter((entryNumber) => entries[entryNumber] > 0)
+            .map((entryNumber) => ({
             orderEntryNumber: Number(entryNumber),
             quantity: entries[entryNumber],
         }));
@@ -10928,8 +10929,8 @@ let OrderReturnService = class OrderReturnService extends OrderAmendService {
     afterSave() {
         this.returnRequestService
             .getOrderReturnRequest()
-            .pipe(first(r => !!r))
-            .subscribe(returnRequest => {
+            .pipe(first((r) => !!r))
+            .subscribe((returnRequest) => {
             const rma = returnRequest.rma;
             this.globalMessageService.add({
                 key: 'orderDetails.cancellationAndReturn.returnSuccess',
@@ -10961,7 +10962,7 @@ let OrderReturnGuard = class OrderReturnGuard {
         this.orderAmendService = orderAmendService;
     }
     canActivate() {
-        return this.orderAmendService.getForm().pipe(map(form => {
+        return this.orderAmendService.getForm().pipe(map((form) => {
             if (!form.valid) {
                 // the order code is not available in the route
                 // as long as we're inside a guard, hence we redirect
@@ -10991,7 +10992,7 @@ let ReturnOrderConfirmationComponent = class ReturnOrderConfirmationComponent {
         this.orderAmendService = orderAmendService;
         this.form$ = this.orderAmendService
             .getForm()
-            .pipe(tap(form => (this.orderCode = form.value.orderCode)));
+            .pipe(tap((form) => (this.orderCode = form.value.orderCode)));
         this.entries$ = this.orderAmendService.getAmendedEntries();
     }
     submit(form) {
@@ -11059,7 +11060,7 @@ let ReturnOrderComponent = class ReturnOrderComponent {
         this.orderAmendService = orderAmendService;
         this.form$ = this.orderAmendService
             .getForm()
-            .pipe(tap(form => (this.orderCode = form.value.orderCode)));
+            .pipe(tap((form) => (this.orderCode = form.value.orderCode)));
         this.entries$ = this.orderAmendService.getEntries();
     }
 };
@@ -11159,16 +11160,16 @@ let OrderDetailItemsComponent = class OrderDetailItemsComponent {
         this.cancel$ = this.getExactStatus(cancelledValues);
     }
     getExactStatus(consignmentStatus) {
-        return this.order$.pipe(map(order => {
+        return this.order$.pipe(map((order) => {
             if (Boolean(order.consignments)) {
-                return order.consignments.filter(consignment => consignmentStatus.includes(consignment.status));
+                return order.consignments.filter((consignment) => consignmentStatus.includes(consignment.status));
             }
         }));
     }
     getOtherStatus(...consignmentStatus) {
-        return this.order$.pipe(map(order => {
+        return this.order$.pipe(map((order) => {
             if (Boolean(order.consignments)) {
-                return order.consignments.filter(consignment => !consignmentStatus.includes(consignment.status));
+                return order.consignments.filter((consignment) => !consignmentStatus.includes(consignment.status));
             }
         }));
     }
@@ -11200,7 +11201,7 @@ TrackingEventsComponent.ctorParameters = () => [
 TrackingEventsComponent = __decorate([
     Component({
         selector: 'cx-tracking-events',
-        template: "<div class=\"cx-consignment-tracking-dialog\">\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"tracking$ | async as consignmentTracking; else loading\">\n    <div class=\"header modal-header\">\n      <div class=\"title modal-title\">\n        {{ 'orderDetails.consignmentTracking.dialog.header' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <!-- shipment header -->\n    <ng-container\n      *ngIf=\"\n        consignmentTracking?.carrierDetails && consignmentTracking?.trackingID;\n        else noTracking\n      \"\n    >\n      <div class=\"shipment-heading\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title \">\n              {{\n                'orderDetails.consignmentTracking.dialog.shipped' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ shipDate | cxDate: 'medium' }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.estimate' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.targetArrivalDate | cxDate: 'medium' }}\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.carrier' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.carrierDetails?.name }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.trackingId'\n                  | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              <ng-container *ngIf=\"consignmentTracking?.trackingUrl\">\n                <a target=\"_blank\" [href]=\"consignmentTracking.trackingUrl\">{{\n                  consignmentTracking?.trackingID\n                }}</a>\n              </ng-container>\n              <ng-container *ngIf=\"!consignmentTracking?.trackingUrl\">\n                <label>\n                  {{ consignmentTracking?.trackingID }}\n                </label>\n              </ng-container>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n\n    <!-- tracking events -->\n    <div class=\"events modal-body\">\n      <ng-container\n        *ngFor=\"let consignmentEvent of consignmentTracking.trackingEvents\"\n      >\n        <div class=\"event-body\">\n          <div class=\"event-content\">\n            {{ consignmentEvent.eventDate | cxDate: 'medium' }}\n          </div>\n          <div class=\"event-title\">\n            {{ consignmentEvent.referenceCode }}\n          </div>\n          <div class=\"event-content\">{{ consignmentEvent.detail }}</div>\n          <div class=\"event-city\">\n            location: {{ consignmentEvent.location }}\n          </div>\n        </div>\n      </ng-container>\n    </div>\n  </ng-container>\n\n  <ng-template #noTracking>\n    <div class=\"no-tracking-heading\">\n      <div class=\"shipment-content\">\n        {{ 'orderDetails.consignmentTracking.dialog.noTracking' | cxTranslate }}\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template #loading>\n    <div class=\"tracking-loading\">\n      <div class=\"header modal-header\">\n        <div class=\"title modal-title\">\n          {{\n            'orderDetails.consignmentTracking.dialog.loadingHeader'\n              | cxTranslate\n          }}\n        </div>\n        <button\n          type=\"button\"\n          class=\"close btn-dismiss\"\n          aria-label=\"Close\"\n          (click)=\"activeModal.dismiss('Cross click')\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <!-- Modal Body -->\n      <div class=\"body modal-body\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <cx-spinner></cx-spinner>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+        template: "<div class=\"cx-consignment-tracking-dialog\">\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"tracking$ | async as consignmentTracking; else loading\">\n    <div class=\"header modal-header\">\n      <div class=\"title modal-title\">\n        {{ 'orderDetails.consignmentTracking.dialog.header' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"activeModal.dismiss('Cross click')\"\n      >\n        <span aria-hidden=\"true\">&times;</span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <!-- shipment header -->\n    <ng-container\n      *ngIf=\"\n        consignmentTracking?.carrierDetails && consignmentTracking?.trackingID;\n        else noTracking\n      \"\n    >\n      <div class=\"shipment-heading\">\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.shipped' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ shipDate | cxDate: 'medium' }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.estimate' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.targetArrivalDate | cxDate: 'medium' }}\n            </div>\n          </div>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.carrier' | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              {{ consignmentTracking?.carrierDetails?.name }}\n            </div>\n          </div>\n          <div class=\"col-sm-12 col-md-6\">\n            <div class=\"shipment-title\">\n              {{\n                'orderDetails.consignmentTracking.dialog.trackingId'\n                  | cxTranslate\n              }}\n            </div>\n            <div class=\"shipment-content\">\n              <ng-container *ngIf=\"consignmentTracking?.trackingUrl\">\n                <a target=\"_blank\" [href]=\"consignmentTracking.trackingUrl\">{{\n                  consignmentTracking?.trackingID\n                }}</a>\n              </ng-container>\n              <ng-container *ngIf=\"!consignmentTracking?.trackingUrl\">\n                <label>\n                  {{ consignmentTracking?.trackingID }}\n                </label>\n              </ng-container>\n            </div>\n          </div>\n        </div>\n      </div>\n    </ng-container>\n\n    <!-- tracking events -->\n    <div class=\"events modal-body\">\n      <ng-container\n        *ngFor=\"let consignmentEvent of consignmentTracking.trackingEvents\"\n      >\n        <div class=\"event-body\">\n          <div class=\"event-content\">\n            {{ consignmentEvent.eventDate | cxDate: 'medium' }}\n          </div>\n          <div class=\"event-title\">\n            {{ consignmentEvent.referenceCode }}\n          </div>\n          <div class=\"event-content\">{{ consignmentEvent.detail }}</div>\n          <div class=\"event-city\">\n            location: {{ consignmentEvent.location }}\n          </div>\n        </div>\n      </ng-container>\n    </div>\n  </ng-container>\n\n  <ng-template #noTracking>\n    <div class=\"no-tracking-heading\">\n      <div class=\"shipment-content\">\n        {{ 'orderDetails.consignmentTracking.dialog.noTracking' | cxTranslate }}\n      </div>\n    </div>\n  </ng-template>\n\n  <ng-template #loading>\n    <div class=\"tracking-loading\">\n      <div class=\"header modal-header\">\n        <div class=\"title modal-title\">\n          {{\n            'orderDetails.consignmentTracking.dialog.loadingHeader'\n              | cxTranslate\n          }}\n        </div>\n        <button\n          type=\"button\"\n          class=\"close btn-dismiss\"\n          aria-label=\"Close\"\n          (click)=\"activeModal.dismiss('Cross click')\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <!-- Modal Body -->\n      <div class=\"body modal-body\">\n        <div class=\"row\">\n          <div class=\"col-sm-12\">\n            <cx-spinner></cx-spinner>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
     })
 ], TrackingEventsComponent);
 
@@ -11258,7 +11259,7 @@ let OrderConsignedEntriesComponent = class OrderConsignedEntriesComponent {
     }
     getConsignmentProducts(consignment) {
         const products = [];
-        consignment.entries.forEach(element => {
+        consignment.entries.forEach((element) => {
             products.push(element.orderEntry);
         });
         return products;
@@ -11475,7 +11476,7 @@ let OrderHistoryComponent = class OrderHistoryComponent {
          * When "Order Return" feature is enabled, this component becomes one tab in
          * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
          */
-        this.tabTitleParam$ = this.orders$.pipe(map(order => order.pagination.totalResults), filter(totalResults => totalResults !== undefined), take(1));
+        this.tabTitleParam$ = this.orders$.pipe(map((order) => order.pagination.totalResults), filter((totalResults) => totalResults !== undefined), take(1));
     }
     ngOnDestroy() {
         this.userOrderService.clearOrderList();
@@ -11638,11 +11639,11 @@ let ReturnRequestOverviewComponent = class ReturnRequestOverviewComponent {
         this.returnRequestService = returnRequestService;
         this.returnRequest$ = this.returnRequestService
             .getReturnRequest()
-            .pipe(tap(returnRequest => (this.rma = returnRequest.rma)));
+            .pipe(tap((returnRequest) => (this.rma = returnRequest.rma)));
         this.isCancelling$ = this.returnRequestService.isCancelling$;
     }
     ngOnInit() {
-        this.subscription = this.returnRequestService.isCancelSuccess$.subscribe(success => {
+        this.subscription = this.returnRequestService.isCancelSuccess$.subscribe((success) => {
             if (success) {
                 this.returnRequestService.cancelSuccess(this.rma);
             }
@@ -11683,7 +11684,7 @@ ReturnRequestItemsComponent.ctorParameters = () => [
 ReturnRequestItemsComponent = __decorate([
     Component({
         selector: 'cx-return-request-items',
-        template: "<ng-container *ngIf=\"returnRequest$ | async as returnRequest\">\n  <div class=\"d-none d-md-block d-lg-block d-xl-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n        {{ 'returnRequest.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-md-2 col-lg-2 col-xl-2\">\n        {{ 'returnRequest.itemPrice' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-md-3 col-lg-3 col-xl-2\">\n        {{ 'returnRequest.returnQty' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'returnRequest.total' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div\n    class=\"cx-item-list-row\"\n    *ngFor=\"let returnEntry of returnRequest.returnEntries; let i = index\"\n  >\n    <div class=\"cx-item-list-items\">\n      <div class=\"row\">\n        <!-- Item Image -->\n        <div class=\"col-2 cx-image-container\">\n          <cx-media\n            [container]=\"returnEntry.orderEntry?.product.images?.PRIMARY\"\n            format=\"thumbnail\"\n          ></cx-media>\n        </div>\n        <!-- Item Information -->\n        <div class=\"cx-info col-10\">\n          <div class=\"cx-info-container row \">\n            <!-- Item Description -->\n            <div class=\"col-md-3 col-lg-4 col-xl-5\">\n              <div *ngIf=\"returnEntry.orderEntry?.product.name\" class=\"cx-name\">\n                {{ returnEntry.orderEntry?.product.name }}\n              </div>\n              <div *ngIf=\"returnEntry.orderEntry?.product.code\" class=\"cx-code\">\n                {{ 'cartItems.id' | cxTranslate }}\n                {{ returnEntry.orderEntry?.product.code }}\n              </div>\n              <!-- Variants -->\n              <div\n                *ngFor=\"\n                  let variant of (returnEntry.orderEntry?.product\n                    .baseOptions)[0]?.selected?.variantOptionQualifiers\n                \"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\" *ngIf=\"variant.name\">\n                  {{ variant.name }}:\n                </div>\n                <div class=\"cx-value\" *ngIf=\"variant.value\">\n                  {{ variant.value }}\n                </div>\n              </div>\n            </div>\n            <!-- Item Price -->\n            <div\n              *ngIf=\"returnEntry.orderEntry?.basePrice\"\n              class=\"cx-price col-md-3 col-lg-2 col-xl-2\"\n            >\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.itemPrice' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.orderEntry?.basePrice?.formattedValue }}\n              </div>\n            </div>\n            <!-- return Quantity -->\n            <div class=\"cx-quantity col-md-3 col-lg-3 col-xl-3\">\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.returnQty' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.expectedQuantity }}\n              </div>\n            </div>\n            <!-- Total Price -->\n            <div class=\"cx-total col-md-3 col-lg-3 col-xl-2\">\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.total' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.refundAmount?.formattedValue }}\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
+        template: "<ng-container *ngIf=\"returnRequest$ | async as returnRequest\">\n  <div class=\"d-none d-md-block d-lg-block d-xl-block\">\n    <div class=\"cx-item-list-header row\">\n      <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n        {{ 'returnRequest.item' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-price col-md-2 col-lg-2 col-xl-2\">\n        {{ 'returnRequest.itemPrice' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-qty col-md-3 col-lg-3 col-xl-2\">\n        {{ 'returnRequest.returnQty' | cxTranslate }}\n      </div>\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'returnRequest.total' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n\n  <div\n    class=\"cx-item-list-row\"\n    *ngFor=\"let returnEntry of returnRequest.returnEntries; let i = index\"\n  >\n    <div class=\"cx-item-list-items\">\n      <div class=\"row\">\n        <!-- Item Image -->\n        <div class=\"col-2 cx-image-container\">\n          <cx-media\n            [container]=\"returnEntry.orderEntry?.product.images?.PRIMARY\"\n            format=\"thumbnail\"\n          ></cx-media>\n        </div>\n        <!-- Item Information -->\n        <div class=\"cx-info col-10\">\n          <div class=\"cx-info-container row\">\n            <!-- Item Description -->\n            <div class=\"col-md-3 col-lg-4 col-xl-5\">\n              <div *ngIf=\"returnEntry.orderEntry?.product.name\" class=\"cx-name\">\n                {{ returnEntry.orderEntry?.product.name }}\n              </div>\n              <div *ngIf=\"returnEntry.orderEntry?.product.code\" class=\"cx-code\">\n                {{ 'cartItems.id' | cxTranslate }}\n                {{ returnEntry.orderEntry?.product.code }}\n              </div>\n              <!-- Variants -->\n              <div\n                *ngFor=\"\n                  let variant of (returnEntry.orderEntry?.product\n                    .baseOptions)[0]?.selected?.variantOptionQualifiers\n                \"\n                class=\"cx-property\"\n              >\n                <div class=\"cx-label\" *ngIf=\"variant.name\">\n                  {{ variant.name }}:\n                </div>\n                <div class=\"cx-value\" *ngIf=\"variant.value\">\n                  {{ variant.value }}\n                </div>\n              </div>\n            </div>\n            <!-- Item Price -->\n            <div\n              *ngIf=\"returnEntry.orderEntry?.basePrice\"\n              class=\"cx-price col-md-3 col-lg-2 col-xl-2\"\n            >\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.itemPrice' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.orderEntry?.basePrice?.formattedValue }}\n              </div>\n            </div>\n            <!-- return Quantity -->\n            <div class=\"cx-quantity col-md-3 col-lg-3 col-xl-3\">\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.returnQty' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.expectedQuantity }}\n              </div>\n            </div>\n            <!-- Total Price -->\n            <div class=\"cx-total col-md-3 col-lg-3 col-xl-2\">\n              <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n                {{ 'returnRequest.total' | cxTranslate }}\n              </div>\n              <div class=\"cx-value\">\n                {{ returnEntry.refundAmount?.formattedValue }}\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], ReturnRequestItemsComponent);
@@ -11769,7 +11770,7 @@ let OrderReturnRequestListComponent = class OrderReturnRequestListComponent {
          * When "Order Return" feature is enabled, this component becomes one tab in
          * TabParagraphContainerComponent. This can be read from TabParagraphContainer.
          */
-        this.tabTitleParam$ = this.returnRequests$.pipe(map(returnRequests => returnRequests.pagination.totalResults), filter(totalResults => totalResults !== undefined), take(1));
+        this.tabTitleParam$ = this.returnRequests$.pipe(map((returnRequests) => returnRequests.pagination.totalResults), filter((totalResults) => totalResults !== undefined), take(1));
     }
     ngOnDestroy() {
         this.returnRequestService.clearOrderReturnRequestList();
@@ -11865,10 +11866,10 @@ let PaymentMethodsComponent = class PaymentMethodsComponent {
         this.iconTypes = ICON_TYPE;
     }
     ngOnInit() {
-        this.paymentMethods$ = this.userPaymentService.getPaymentMethods().pipe(tap(paymentDetails => {
+        this.paymentMethods$ = this.userPaymentService.getPaymentMethods().pipe(tap((paymentDetails) => {
             // Set first payment method to DEFAULT if none is set
             if (paymentDetails.length > 0 &&
-                !paymentDetails.find(paymentDetail => paymentDetail.defaultPayment)) {
+                !paymentDetails.find((paymentDetail) => paymentDetail.defaultPayment)) {
                 this.setDefaultPaymentMethod(paymentDetails[0]);
             }
         }));
@@ -11986,8 +11987,8 @@ let ResetPasswordFormComponent = class ResetPasswordFormComponent {
     ngOnInit() {
         this.subscription.add(this.routingService
             .getRouterState()
-            .subscribe(state => (this.token = state.state.queryParams['token'])));
-        this.subscription.add(this.userService.isPasswordReset().subscribe(reset => {
+            .subscribe((state) => (this.token = state.state.queryParams['token'])));
+        this.subscription.add(this.userService.isPasswordReset().subscribe((reset) => {
             if (reset) {
                 this.routingService.go({ cxRoute: 'login' });
             }
@@ -12118,7 +12119,7 @@ let UpdateEmailComponent = class UpdateEmailComponent {
         this.userService.resetUpdateEmailResultState();
         this.subscription.add(this.userService
             .getUpdateEmailResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((success) => this.onSuccess(success)));
         this.isLoading$ = this.userService.getUpdateEmailResultLoading();
     }
     onCancel() {
@@ -12246,7 +12247,7 @@ __decorate([
 UpdatePasswordFormComponent = __decorate([
     Component({
         selector: 'cx-update-password-form',
-        template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component \"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
+        template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component\"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
     })
 ], UpdatePasswordFormComponent);
 
@@ -12262,7 +12263,7 @@ let UpdatePasswordComponent = class UpdatePasswordComponent {
         this.loading$ = this.userService.getUpdatePasswordResultLoading();
         this.subscription.add(this.userService
             .getUpdatePasswordResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((success) => this.onSuccess(success)));
     }
     onSuccess(success) {
         if (success) {
@@ -12386,7 +12387,7 @@ let UpdateProfileComponent = class UpdateProfileComponent {
         // reset the previous form processing state
         this.userService.resetUpdatePersonalDetailsProcessingState();
         this.user$ = this.userService.get();
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
@@ -12394,7 +12395,7 @@ let UpdateProfileComponent = class UpdateProfileComponent {
         this.loading$ = this.userService.getUpdatePersonalDetailsResultLoading();
         this.subscription.add(this.userService
             .getUpdatePersonalDetailsResultSuccess()
-            .subscribe(success => this.onSuccess(success)));
+            .subscribe((success) => this.onSuccess(success)));
     }
     onSuccess(success) {
         if (success) {
@@ -12534,7 +12535,7 @@ let MyCouponsComponent = class MyCouponsComponent {
     ngOnInit() {
         this.couponResult$ = this.couponService
             .getCustomerCoupons(this.PAGE_SIZE)
-            .pipe(tap(coupons => (this.pagination = {
+            .pipe(tap((coupons) => (this.pagination = {
             currentPage: coupons.pagination.page,
             pageSize: coupons.pagination.count,
             totalPages: coupons.pagination.totalPages,
@@ -12550,12 +12551,12 @@ let MyCouponsComponent = class MyCouponsComponent {
         this.subscriptions
             .add(this.couponService
             .getSubscribeCustomerCouponResultError()
-            .subscribe(error => {
+            .subscribe((error) => {
             this.subscriptionFail(error);
         }))
             .add(this.couponService
             .getUnsubscribeCustomerCouponResultError()
-            .subscribe(error => {
+            .subscribe((error) => {
             this.subscriptionFail(error);
         }));
     }
@@ -12670,13 +12671,13 @@ let CouponClaimComponent = class CouponClaimComponent {
     ngOnInit() {
         this.routingService
             .getRouterState()
-            .subscribe(k => {
+            .subscribe((k) => {
             const couponCode = k.state.params.couponCode;
             if (couponCode) {
                 this.couponService.claimCustomerCoupon(couponCode);
                 this.subscription = this.couponService
                     .getClaimCustomerCouponResultSuccess()
-                    .subscribe(success => {
+                    .subscribe((success) => {
                     if (success) {
                         this.messageService.add({ key: 'myCoupons.claimCustomerCoupon' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
                     }
@@ -12768,7 +12769,7 @@ let NotificationPreferenceComponent = class NotificationPreferenceComponent {
         this.notificationPreferenceService.resetNotificationPreferences();
         this.preferences$ = this.notificationPreferenceService
             .getPreferences()
-            .pipe(tap(preferences => (this.preferences = preferences)));
+            .pipe(tap((preferences) => (this.preferences = preferences)));
         this.notificationPreferenceService.loadPreferences();
         this.isLoading$ = combineLatest([
             this.notificationPreferenceService.getPreferencesLoading(),
@@ -12777,7 +12778,7 @@ let NotificationPreferenceComponent = class NotificationPreferenceComponent {
     }
     updatePreference(preference) {
         const updatedPreferences = [];
-        this.preferences.forEach(p => {
+        this.preferences.forEach((p) => {
             if (p.channel === preference.channel) {
                 updatedPreferences.push(Object.assign(Object.assign({}, p), { enabled: !p.enabled }));
             }
@@ -12845,14 +12846,14 @@ let MyInterestsComponent = class MyInterestsComponent {
     ngOnInit() {
         this.interests$ = this.productInterestService
             .getAndLoadProductInterests(this.DEFAULT_PAGE_SIZE)
-            .pipe(tap(interests => (this.pagination = {
+            .pipe(tap((interests) => (this.pagination = {
             currentPage: interests.pagination.page,
             pageSize: interests.pagination.count,
             totalPages: interests.pagination.totalPages,
             totalResults: interests.pagination.totalCount,
             sort: 'byNameAsc',
-        })), map(interest => (Object.assign(Object.assign({}, interest), { results: interest.results
-                ? interest.results.map(result => (Object.assign(Object.assign({}, result), { product$: this.getProduct(result) })))
+        })), map((interest) => (Object.assign(Object.assign({}, interest), { results: interest.results
+                ? interest.results.map((result) => (Object.assign(Object.assign({}, result), { product$: this.getProduct(result) })))
                 : interest.results }))));
         this.getInterestsloading$ = this.productInterestService.getProdutInterestsLoading();
         this.isRemoveDisabled$ = combineLatest([
@@ -12901,7 +12902,7 @@ MyInterestsComponent.ctorParameters = () => [
 MyInterestsComponent = __decorate([
     Component({
         selector: 'cx-my-interests',
-        template: "<div *ngIf=\"interests$ | async as interests\" class=\"container\">\n  <div class=\"cx-product-interests-title h3\">\n    <h3>{{ 'myInterests.header' | cxTranslate }}</h3>\n  </div>\n  <div\n    class=\"cx-product-interests-body\"\n    *ngIf=\"!(getInterestsloading$ | async); else loading\"\n  >\n    <ng-container *ngIf=\"interests.pagination.totalCount > 0; else noInterest\">\n      <div class=\"cx-product-interests-sort top row\">\n        <div\n          class=\"cx-product-interests-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div\n          class=\"cx-product-interests-pagination cx-product-interests-thead-mobile\"\n        >\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n      <table class=\"table cx-product-interests-table\">\n        <thead class=\"cx-product-interests-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'myInterests.item' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n          <th scope=\"col\">\n            {{ 'myInterests.price' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'myInterests.notifications' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let interest of interests.results\"\n            class=\"cx-product-interests-product-item\"\n          >\n            <ng-container *ngIf=\"interest.product$ | async as product\">\n              <td>\n                <div class=\"cx-product-interests-label\">\n                  <a\n                    class=\"cx-product-interests-product-image-link\"\n                    tabindex=\"-1\"\n                    [routerLink]=\"\n                      { cxRoute: 'product', params: product } | cxUrl\n                    \"\n                  >\n                    <cx-media\n                      [container]=\"product.images?.PRIMARY\"\n                      format=\"thumbnail\"\n                    ></cx-media>\n                  </a>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-info col-10\">\n                  <div class=\"cx-info-container row \">\n                    <div>\n                      <div *ngIf=\"product.name\" class=\"cx-name\">\n                        <a\n                          class=\"cx-link cx-product-interests-product-code-link\"\n                          [routerLink]=\"\n                            { cxRoute: 'product', params: product } | cxUrl\n                          \"\n                        >\n                          {{ product.name }}\n                        </a>\n                      </div>\n                      <div *ngIf=\"product.code\" class=\"cx-code\">\n                        <span>{{\n                          'myInterests.productId'\n                            | cxTranslate: { code: product.code }\n                        }}</span>\n                      </div>\n\n                      <ng-container\n                        *ngFor=\"let baseOptions of product.baseOptions\"\n                      >\n                        <div\n                          *ngFor=\"\n                            let variant of baseOptions.selected\n                              ?.variantOptionQualifiers\n                          \"\n                          class=\"cx-property\"\n                        >\n                          <div\n                            class=\"cx-label cx-product-interests-variant-name\"\n                          >\n                            {{ variant.name }}\n                          </div>\n                          <div\n                            class=\"cx-value cx-product-interests-variant-value\"\n                          >\n                            {{ variant.value }}\n                          </div>\n                        </div>\n                      </ng-container>\n                      <div\n                        class=\"cx-property\"\n                        *ngIf=\"product.stock.stockLevelStatus === 'outOfStock'\"\n                      >\n                        <div\n                          class=\"cx-label cx-product-interests-product-stock\"\n                        >\n                          {{ 'myInterests.outOfStock' | cxTranslate }}\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-product-price\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.price' | cxTranslate }}\n                  </div>\n                  <span>{{ product.price.formattedValue }}</span>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-subscriptions\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.notifications' | cxTranslate }}\n                  </div>\n                  <div\n                    class=\"cx-product-interests-notification\"\n                    *ngFor=\"let interestEntry of interest.productInterestEntry\"\n                  >\n                    <span class=\"cx-product-interests-type\">\n                      {{\n                        'myInterests.' + interestEntry.interestType\n                          | cxTranslate\n                      }}\n                    </span>\n                    <span class=\"cx-product-interests-expiration-date\">\n                      {{\n                        'myInterests.expirationDate'\n                          | cxTranslate\n                            : {\n                                expirationDate:\n                                  interestEntry.expirationDate | date\n                              }\n                      }}\n                    </span>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-actions cx-product-interests-remove-button\">\n                  <button\n                    type=\"button\"\n                    class=\"link cx-product-interests-remove-btn\"\n                    [disabled]=\"isRemoveDisabled$ | async\"\n                    (click)=\"removeInterest(interest)\"\n                  >\n                    {{ 'myInterests.remove' | cxTranslate }}\n                  </button>\n                </div>\n              </td>\n            </ng-container>\n          </tr>\n        </tbody>\n      </table>\n      <div class=\"cx-product-interests-sort bottom row\">\n        <div\n          class=\"cx-product-interests-form-group cx-product-interests-thead-mobile form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div class=\"cx-product-interests-pagination\">\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n    </ng-container>\n  </div>\n</div>\n<ng-template #noInterest>\n  <div class=\"cx-product-interests-message\">\n    {{ 'myInterests.noInterests' | cxTranslate }}\n  </div>\n</ng-template>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
+        template: "<div *ngIf=\"interests$ | async as interests\" class=\"container\">\n  <div class=\"cx-product-interests-title h3\">\n    <h3>{{ 'myInterests.header' | cxTranslate }}</h3>\n  </div>\n  <div\n    class=\"cx-product-interests-body\"\n    *ngIf=\"!(getInterestsloading$ | async); else loading\"\n  >\n    <ng-container *ngIf=\"interests.pagination.totalCount > 0; else noInterest\">\n      <div class=\"cx-product-interests-sort top row\">\n        <div\n          class=\"cx-product-interests-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div\n          class=\"cx-product-interests-pagination cx-product-interests-thead-mobile\"\n        >\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n      <table class=\"table cx-product-interests-table\">\n        <thead class=\"cx-product-interests-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'myInterests.item' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n          <th scope=\"col\">\n            {{ 'myInterests.price' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'myInterests.notifications' | cxTranslate }}\n          </th>\n          <th scope=\"col\"></th>\n        </thead>\n        <tbody>\n          <tr\n            *ngFor=\"let interest of interests.results\"\n            class=\"cx-product-interests-product-item\"\n          >\n            <ng-container *ngIf=\"interest.product$ | async as product\">\n              <td>\n                <div class=\"cx-product-interests-label\">\n                  <a\n                    class=\"cx-product-interests-product-image-link\"\n                    tabindex=\"-1\"\n                    [routerLink]=\"\n                      { cxRoute: 'product', params: product } | cxUrl\n                    \"\n                  >\n                    <cx-media\n                      [container]=\"product.images?.PRIMARY\"\n                      format=\"thumbnail\"\n                    ></cx-media>\n                  </a>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-info col-10\">\n                  <div class=\"cx-info-container row\">\n                    <div>\n                      <div *ngIf=\"product.name\" class=\"cx-name\">\n                        <a\n                          class=\"cx-link cx-product-interests-product-code-link\"\n                          [routerLink]=\"\n                            { cxRoute: 'product', params: product } | cxUrl\n                          \"\n                        >\n                          {{ product.name }}\n                        </a>\n                      </div>\n                      <div *ngIf=\"product.code\" class=\"cx-code\">\n                        <span>{{\n                          'myInterests.productId'\n                            | cxTranslate: { code: product.code }\n                        }}</span>\n                      </div>\n\n                      <ng-container\n                        *ngFor=\"let baseOptions of product.baseOptions\"\n                      >\n                        <div\n                          *ngFor=\"\n                            let variant of baseOptions.selected\n                              ?.variantOptionQualifiers\n                          \"\n                          class=\"cx-property\"\n                        >\n                          <div\n                            class=\"cx-label cx-product-interests-variant-name\"\n                          >\n                            {{ variant.name }}\n                          </div>\n                          <div\n                            class=\"cx-value cx-product-interests-variant-value\"\n                          >\n                            {{ variant.value }}\n                          </div>\n                        </div>\n                      </ng-container>\n                      <div\n                        class=\"cx-property\"\n                        *ngIf=\"product.stock.stockLevelStatus === 'outOfStock'\"\n                      >\n                        <div\n                          class=\"cx-label cx-product-interests-product-stock\"\n                        >\n                          {{ 'myInterests.outOfStock' | cxTranslate }}\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-product-price\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.price' | cxTranslate }}\n                  </div>\n                  <span>{{ product.price.formattedValue }}</span>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-product-interests-subscriptions\">\n                  <div class=\"d-md-none cx-product-interests-label\">\n                    {{ 'myInterests.notifications' | cxTranslate }}\n                  </div>\n                  <div\n                    class=\"cx-product-interests-notification\"\n                    *ngFor=\"let interestEntry of interest.productInterestEntry\"\n                  >\n                    <span class=\"cx-product-interests-type\">\n                      {{\n                        'myInterests.' + interestEntry.interestType\n                          | cxTranslate\n                      }}\n                    </span>\n                    <span class=\"cx-product-interests-expiration-date\">\n                      {{\n                        'myInterests.expirationDate'\n                          | cxTranslate\n                            : {\n                                expirationDate:\n                                  interestEntry.expirationDate | date\n                              }\n                      }}\n                    </span>\n                  </div>\n                </div>\n              </td>\n              <td>\n                <div class=\"cx-actions cx-product-interests-remove-button\">\n                  <button\n                    type=\"button\"\n                    class=\"link cx-product-interests-remove-btn\"\n                    [disabled]=\"isRemoveDisabled$ | async\"\n                    (click)=\"removeInterest(interest)\"\n                  >\n                    {{ 'myInterests.remove' | cxTranslate }}\n                  </button>\n                </div>\n              </td>\n            </ng-container>\n          </tr>\n        </tbody>\n      </table>\n      <div class=\"cx-product-interests-sort bottom row\">\n        <div\n          class=\"cx-product-interests-form-group cx-product-interests-thead-mobile form-group col-sm-12 col-md-4 col-lg-4\"\n        >\n          <cx-sorting\n            [sortOptions]=\"sortOptions\"\n            [sortLabels]=\"sortLabels | async\"\n            (sortListEvent)=\"sortChange($event)\"\n            [selectedOption]=\"sort\"\n            placeholder=\"{{ 'myInterests.sortByMostRecent' | cxTranslate }}\"\n          >\n          </cx-sorting>\n        </div>\n        <div class=\"cx-product-interests-pagination\">\n          <cx-pagination\n            [pagination]=\"pagination\"\n            (viewPageEvent)=\"pageChange($event)\"\n          ></cx-pagination>\n        </div>\n      </div>\n    </ng-container>\n  </div>\n</div>\n<ng-template #noInterest>\n  <div class=\"cx-product-interests-message\">\n    {{ 'myInterests.noInterests' | cxTranslate }}\n  </div>\n</ng-template>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], MyInterestsComponent);
@@ -13011,9 +13012,9 @@ let NavigationService = class NavigationService {
         if (!data$) {
             return of();
         }
-        return data$.pipe(filter(data => !!data), switchMap(data => {
+        return data$.pipe(filter((data) => !!data), switchMap((data) => {
             const navigation = data.navigationNode ? data.navigationNode : data;
-            return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap(items => {
+            return this.cmsService.getNavigationEntryItems(navigation.uid).pipe(tap((items) => {
                 if (items === undefined) {
                     this.loadNavigationEntryItems(navigation, true);
                 }
@@ -13021,13 +13022,13 @@ let NavigationService = class NavigationService {
                     // we should check whether the existing node items are what expected
                     const expectedItems = [];
                     this.loadNavigationEntryItems(navigation, false, expectedItems);
-                    const existingItems = Object.keys(items).map(key => items[key].uid);
-                    const missingItems = expectedItems.filter(it => !existingItems.includes(it.id));
+                    const existingItems = Object.keys(items).map((key) => items[key].uid);
+                    const missingItems = expectedItems.filter((it) => !existingItems.includes(it.id));
                     if (missingItems.length > 0) {
                         this.cmsService.loadNavigationItems(navigation.uid, missingItems);
                     }
                 }
-            }), filter(Boolean), map(items => this.populateNavigationNode(navigation, items)));
+            }), filter(Boolean), map((items) => this.populateNavigationNode(navigation, items)));
         }));
     }
     /**
@@ -13038,7 +13039,7 @@ let NavigationService = class NavigationService {
      */
     loadNavigationEntryItems(nodeData, root, itemsList = []) {
         if (nodeData.entries && nodeData.entries.length > 0) {
-            nodeData.entries.forEach(entry => {
+            nodeData.entries.forEach((entry) => {
                 itemsList.push({
                     superType: entry.itemSuperType,
                     id: entry.itemId,
@@ -13046,7 +13047,7 @@ let NavigationService = class NavigationService {
             });
         }
         if (nodeData.children && nodeData.children.length > 0) {
-            nodeData.children.forEach(child => this.loadNavigationEntryItems(child, false, itemsList));
+            nodeData.children.forEach((child) => this.loadNavigationEntryItems(child, false, itemsList));
         }
         if (root) {
             this.cmsService.loadNavigationItems(nodeData.uid, itemsList);
@@ -13069,7 +13070,7 @@ let NavigationService = class NavigationService {
         }
         if (nodeData.children && nodeData.children.length > 0) {
             const children = nodeData.children
-                .map(child => this.populateNavigationNode(child, items))
+                .map((child) => this.populateNavigationNode(child, items))
                 .filter(Boolean);
             if (children.length > 0) {
                 node.children = children;
@@ -13170,7 +13171,7 @@ let NavigationUIComponent = class NavigationUIComponent {
         this.subscriptions = new Subscription();
         this.resize = new EventEmitter();
         this.subscriptions.add(this.router.events
-            .pipe(filter(event => event instanceof NavigationEnd))
+            .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe(() => this.clear()));
         this.subscriptions.add(this.resize.pipe(debounceTime(50)).subscribe(() => {
             this.alignWrappersToRightIfStickOut();
@@ -13187,7 +13188,7 @@ let NavigationUIComponent = class NavigationUIComponent {
                 this.back();
             }
             else {
-                this.openNodes = this.openNodes.filter(n => n !== node);
+                this.openNodes = this.openNodes.filter((n) => n !== node);
                 this.renderer.removeClass(node, 'is-open');
             }
         }
@@ -13215,7 +13216,7 @@ let NavigationUIComponent = class NavigationUIComponent {
     }
     getDepth(node, depth = 0) {
         if (node.children && node.children.length > 0) {
-            return Math.max(...node.children.map(n => this.getDepth(n, depth + 1)));
+            return Math.max(...node.children.map((n) => this.getDepth(n, depth + 1)));
         }
         else {
             return depth;
@@ -13253,8 +13254,8 @@ let NavigationUIComponent = class NavigationUIComponent {
     alignWrappersToRightIfStickOut() {
         const navs = this.elemRef.nativeElement.childNodes;
         Array.from(navs)
-            .filter(node => node.tagName === 'NAV')
-            .forEach(nav => this.alignWrapperToRightIfStickOut(nav));
+            .filter((node) => node.tagName === 'NAV')
+            .forEach((nav) => this.alignWrapperToRightIfStickOut(nav));
     }
     updateClasses() {
         this.openNodes.forEach((node, i) => {
@@ -13309,7 +13310,7 @@ let NavigationComponent = class NavigationComponent {
         this.componentData = componentData;
         this.service = service;
         this.node$ = this.service.createNavigation(this.componentData.data$);
-        this.styleClass$ = this.componentData.data$.pipe(map(d => d.styleClass));
+        this.styleClass$ = this.componentData.data$.pipe(map((d) => d.styleClass));
     }
 };
 NavigationComponent.ctorParameters = () => [
@@ -13376,9 +13377,9 @@ let FooterNavigationComponent = class FooterNavigationComponent {
         this.service = service;
         this.anonymousConsentsConfig = anonymousConsentsConfig;
         this.node$ = this.service.getNavigationNode(this.componentData.data$);
-        this.styleClass$ = this.componentData.data$.pipe(map(d => d.styleClass));
+        this.styleClass$ = this.componentData.data$.pipe(map((d) => d.styleClass));
         // in order to preserve the backwards compatibility, this should render only if anonymous consents feature is disabled
-        this.data$ = this.componentData.data$.pipe(filter(_ => !isFeatureEnabled(this.anonymousConsentsConfig, ANONYMOUS_CONSENTS_FEATURE)));
+        this.data$ = this.componentData.data$.pipe(filter(() => !isFeatureEnabled(this.anonymousConsentsConfig, ANONYMOUS_CONSENTS_FEATURE)));
     }
 };
 FooterNavigationComponent.ctorParameters = () => [
@@ -13469,7 +13470,7 @@ let SearchBoxComponentService = class SearchBoxComponentService {
                 suggestions,
                 message,
             };
-        }), tap(results => this.toggleBodyClass(HAS_SEARCH_RESULT_CLASS, this.hasResults(results))));
+        }), tap((results) => this.toggleBodyClass(HAS_SEARCH_RESULT_CLASS, this.hasResults(results))));
     }
     /**
      * Clears the searchbox results, so that old values are
@@ -13514,9 +13515,9 @@ let SearchBoxComponentService = class SearchBoxComponentService {
             return of([]);
         }
         else {
-            return this.searchService.getSuggestionResults().pipe(map(res => res.map(suggestion => suggestion.value)), switchMap(suggestions => {
+            return this.searchService.getSuggestionResults().pipe(map((res) => res.map((suggestion) => suggestion.value)), switchMap((suggestions) => {
                 if (suggestions.length === 0) {
-                    return this.getExactSuggestion(config).pipe(map(match => (match ? [match] : [])));
+                    return this.getExactSuggestion(config).pipe(map((match) => (match ? [match] : [])));
                 }
                 else {
                     return of(suggestions);
@@ -13529,7 +13530,7 @@ let SearchBoxComponentService = class SearchBoxComponentService {
      * a suggestion to provide easy access to the search result page
      */
     getExactSuggestion(config) {
-        return this.getProductResults(config).pipe(switchMap(productResult => {
+        return this.getProductResults(config).pipe(switchMap((productResult) => {
             return productResult.products && productResult.products.length > 0
                 ? this.fetchTranslation('searchBox.help.exactMatch', {
                     term: productResult.freeTextSearch,
@@ -13603,7 +13604,7 @@ let SearchBoxComponent = class SearchBoxComponent {
          * for example when we click inside the search result section.
          */
         this.ignoreCloseEvent = false;
-        this.results$ = this.config$.pipe(tap(c => (this.config = c)), switchMap(config => this.searchBoxComponentService.getResults(config)));
+        this.results$ = this.config$.pipe(tap((c) => (this.config = c)), switchMap((config) => this.searchBoxComponentService.getResults(config)));
     }
     /**
      * Sets the search box input field
@@ -13621,7 +13622,7 @@ let SearchBoxComponent = class SearchBoxComponent {
             return this.componentData.data$.pipe(
             // Since the backend returns string values (i.e. displayProducts: "true") for
             // boolean values, we replace them with boolean values.
-            map(c => {
+            map((c) => {
                 return Object.assign(Object.assign({}, c), { displayProducts: c.displayProducts === 'true' || c.displayProducts === true, displayProductImages: c.displayProductImages === 'true' ||
                         c.displayProductImages === true, displaySuggestions: c.displaySuggestions === 'true' ||
                         c.displaySuggestions === true });
@@ -13844,7 +13845,7 @@ let OrderConfirmationOverviewComponent = class OrderConfirmationOverviewComponen
         this.checkoutService.clearCheckoutData();
     }
     getAddressCardContent(deliveryAddress) {
-        return this.translation.translate('addressCard.shipTo').pipe(filter(_ => Boolean(deliveryAddress)), map(textTitle => ({
+        return this.translation.translate('addressCard.shipTo').pipe(filter(() => Boolean(deliveryAddress)), map((textTitle) => ({
             title: textTitle,
             textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
             text: [
@@ -13856,14 +13857,14 @@ let OrderConfirmationOverviewComponent = class OrderConfirmationOverviewComponen
         })));
     }
     getDeliveryModeCardContent(deliveryMode) {
-        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter(_ => Boolean(deliveryMode)), map(textTitle => ({
+        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter(() => Boolean(deliveryMode)), map((textTitle) => ({
             title: textTitle,
             textBold: deliveryMode.name,
             text: [deliveryMode.description],
         })));
     }
     getBillingAddressCardContent(billingAddress) {
-        return this.translation.translate('addressCard.billTo').pipe(filter(_ => Boolean(billingAddress)), map(textTitle => ({
+        return this.translation.translate('addressCard.billTo').pipe(filter(() => Boolean(billingAddress)), map((textTitle) => ({
             title: textTitle,
             textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
             text: [
@@ -13881,7 +13882,7 @@ let OrderConfirmationOverviewComponent = class OrderConfirmationOverviewComponen
                 month: Boolean(payment) ? payment.expiryMonth : '',
                 year: Boolean(payment) ? payment.expiryYear : '',
             }),
-        ]).pipe(filter(_ => Boolean(payment)), map(([textTitle, textExpires]) => ({
+        ]).pipe(filter(() => Boolean(payment)), map(([textTitle, textExpires]) => ({
             title: textTitle,
             textBold: payment.accountHolderName,
             text: [payment.cardNumber, textExpires],
@@ -13906,7 +13907,7 @@ let OrderConfirmationThankYouMessageComponent = class OrderConfirmationThankYouM
         this.isGuestCustomer = false;
     }
     ngOnInit() {
-        this.order$ = this.checkoutService.getOrderDetails().pipe(tap(order => {
+        this.order$ = this.checkoutService.getOrderDetails().pipe(tap((order) => {
             this.isGuestCustomer = order.guestCustomer;
             this.orderGuid = order.guid;
         }));
@@ -13965,7 +13966,7 @@ let GuestRegisterFormComponent = class GuestRegisterFormComponent {
     submit() {
         this.userService.registerGuest(this.guid, this.guestRegisterForm.value.password);
         if (!this.subscription) {
-            this.subscription = this.authService.getUserToken().subscribe(token => {
+            this.subscription = this.authService.getUserToken().subscribe((token) => {
                 if (token.access_token) {
                     this.routingService.go({ cxRoute: 'home' });
                 }
@@ -14004,7 +14005,7 @@ let OrderConfirmationGuard = class OrderConfirmationGuard {
         this.semanticPathService = semanticPathService;
     }
     canActivate() {
-        return this.checkoutService.getOrderDetails().pipe(map(orderDetails => {
+        return this.checkoutService.getOrderDetails().pipe(map((orderDetails) => {
             if (orderDetails && Object.keys(orderDetails).length !== 0) {
                 return true;
             }
@@ -14085,10 +14086,10 @@ let ProductCarouselService = class ProductCarouselService {
      * Loads the product data and converts it `CarouselItem`.
      */
     loadProduct(code) {
-        return this.productService.get(code).pipe(filter(Boolean), map(product => this.convertProduct(product)));
+        return this.productService.get(code).pipe(filter(Boolean), map((product) => this.convertProduct(product)));
     }
     getProductReferences(code, referenceType, displayTitle, displayProductPrices) {
-        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map(ref => this.convertProduct(ref.target, displayTitle, displayProductPrices))));
+        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map((ref) => this.convertProduct(ref.target, displayTitle, displayProductPrices))));
     }
     /**
      * Converts the product to a generic CarouselItem
@@ -14135,13 +14136,13 @@ let ProductCarouselComponent = class ProductCarouselComponent {
         /**
          * returns an Obervable string for the title.
          */
-        this.title$ = this.componentData$.pipe(map(data => data.title));
+        this.title$ = this.componentData$.pipe(map((data) => data.title));
         /**
          * Obervable that holds an Array of Observables. This is done, so that
          * the component UI could consider to lazy load the UI components when they're
          * in the viewpoint.
          */
-        this.items$ = this.componentData$.pipe(map(data => data.productCodes.trim().split(' ')), map(codes => codes.map(code => this.productService.get(code, this.PRODUCT_SCOPE))));
+        this.items$ = this.componentData$.pipe(map((data) => data.productCodes.trim().split(' ')), map((codes) => codes.map((code) => this.productService.get(code, this.PRODUCT_SCOPE))));
     }
 };
 ProductCarouselComponent.ctorParameters = () => [
@@ -14184,7 +14185,7 @@ let ProductReferencesComponent = class ProductReferencesComponent {
         /**
          * returns an Obervable string for the title
          */
-        this.title$ = this.component.data$.pipe(map(d => d.title));
+        this.title$ = this.component.data$.pipe(map((d) => d.title));
         this.currentProductCode$ = this.current.getProduct().pipe(filter(Boolean), map((p) => p.code), distinctUntilChanged(), tap(() => this.referenceService.cleanReferences()));
         /**
          * Obervable with an Array of Observables. This is done, so that
@@ -14197,7 +14198,7 @@ let ProductReferencesComponent = class ProductReferencesComponent {
         ]).pipe(switchMap(([code, data]) => this.getProductReferences(code, data.productReferenceTypes)));
     }
     getProductReferences(code, referenceType) {
-        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map(ref => of(ref.target))));
+        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map((ref) => of(ref.target))));
     }
 };
 ProductReferencesComponent.ctorParameters = () => [
@@ -14266,7 +14267,7 @@ let ProductImagesComponent = class ProductImagesComponent {
     /** find the index of the main media in the list of media */
     getActive(thumbs) {
         return this.mainMediaContainer.pipe(filter(Boolean), map((container) => {
-            const current = thumbs.find(t => t.media &&
+            const current = thumbs.find((t) => t.media &&
                 container.zoom &&
                 t.media.container &&
                 t.media.container.zoom &&
@@ -14284,7 +14285,7 @@ let ProductImagesComponent = class ProductImagesComponent {
             product.images.GALLERY.length < 2) {
             return [];
         }
-        return product.images.GALLERY.map(c => of({ container: c }));
+        return product.images.GALLERY.map((c) => of({ container: c }));
     }
 };
 ProductImagesComponent.ctorParameters = () => [
@@ -14340,7 +14341,7 @@ let ProductIntroComponent = class ProductIntroComponent {
         // Use translated label for Reviews tab reference
         this.translationService
             .translate('TabPanelContainer.tabs.ProductReviewsTabComponent')
-            .subscribe(reviewsTabLabel => {
+            .subscribe((reviewsTabLabel) => {
             const tabsComponent = this.getTabsComponent();
             const reviewsTab = this.getTabByLabel(reviewsTabLabel, tabsComponent);
             const reviewsComponent = this.getReviewsComponent();
@@ -14428,7 +14429,7 @@ let ProductListComponentService = class ProductListComponentService {
         this.RELEVANCE_ALLCATEGORIES = ':relevance:allCategories:';
         this.searchResults$ = this.productSearchService
             .getResults()
-            .pipe(filter(searchResult => Object.keys(searchResult).length > 0));
+            .pipe(filter((searchResult) => Object.keys(searchResult).length > 0));
         this.searchByRouting$ = combineLatest([
             this.routing.getRouterState().pipe(distinctUntilChanged((x, y) => {
                 // router emits new value also when the anticipated `nextState` changes
@@ -14490,7 +14491,7 @@ let ProductListComponentService = class ProductListComponentService {
             sortCode: criteria.sortCode,
         };
         // drop empty keys
-        Object.keys(result).forEach(key => !result[key] && delete result[key]);
+        Object.keys(result).forEach((key) => !result[key] && delete result[key]);
         return result;
     }
     setQuery(query) {
@@ -14505,7 +14506,7 @@ let ProductListComponentService = class ProductListComponentService {
     getPageItems(pageNumber) {
         this.routing
             .getRouterState()
-            .subscribe(route => {
+            .subscribe((route) => {
             const routeCriteria = this.getCriteriaFromRoute(route.state.params, route.state.queryParams);
             const criteria = Object.assign(Object.assign({}, routeCriteria), { currentPage: pageNumber });
             this.search(criteria);
@@ -14595,7 +14596,9 @@ let ProductListComponent = class ProductListComponent {
     ngOnInit() {
         this.isInfiniteScroll = this.scrollConfig.view.infiniteScroll.active;
         this.productListComponentService.clearSearchResults();
-        this.subscription.add(this.pageLayoutService.templateName$.pipe(take(1)).subscribe(template => {
+        this.subscription.add(this.pageLayoutService.templateName$
+            .pipe(take(1))
+            .subscribe((template) => {
             this.viewMode$.next(template === 'ProductGridPageTemplate'
                 ? ViewModes.Grid
                 : ViewModes.List);
@@ -14778,19 +14781,19 @@ let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
         this.queryCodec = new HttpUrlEncodingCodec();
     }
     ngOnInit() {
-        this.sub = this.activatedRoute.params.subscribe(params => {
+        this.sub = this.activatedRoute.params.subscribe((params) => {
             this.activeFacetValueCode = params.categoryCode || params.brandCode;
         });
-        this.searchResult$ = this.productListComponentService.model$.pipe(tap(searchResult => {
+        this.searchResult$ = this.productListComponentService.model$.pipe(tap((searchResult) => {
             if (searchResult.facets) {
-                searchResult.facets.forEach(el => {
+                searchResult.facets.forEach((el) => {
                     this.showAllPerFacetMap.set(el.name, false);
                 });
             }
         }));
-        this.visibleFacets$ = this.searchResult$.pipe(map(searchResult => {
+        this.visibleFacets$ = this.searchResult$.pipe(map((searchResult) => {
             return searchResult.facets
-                ? searchResult.facets.filter(facet => facet.visible)
+                ? searchResult.facets.filter((facet) => facet.visible)
                 : [];
         }));
     }
@@ -14877,8 +14880,8 @@ let ProductVariantsComponent = class ProductVariantsComponent {
         this.variantType = VariantType;
     }
     ngOnInit() {
-        this.product$ = this.currentProductService.getProduct().pipe(filter(product => !!(product && product.baseOptions)), distinctUntilChanged(), tap(product => {
-            product.baseOptions.forEach(option => {
+        this.product$ = this.currentProductService.getProduct().pipe(filter((product) => !!(product && product.baseOptions)), distinctUntilChanged(), tap((product) => {
+            product.baseOptions.forEach((option) => {
                 if (option && option.variantType) {
                     this.variants[option.variantType] = option;
                 }
@@ -14905,11 +14908,11 @@ let VariantStyleSelectorComponent = class VariantStyleSelectorComponent {
         this.variantQualifier = VariantQualifier;
     }
     getVariantOptionValue(qualifiers) {
-        const obj = qualifiers.find(q => q.qualifier === VariantQualifier.STYLE);
+        const obj = qualifiers.find((q) => q.qualifier === VariantQualifier.STYLE);
         return obj ? obj.value : '';
     }
     getVariantThumbnailUrl(variantOptionQualifiers) {
-        const qualifier = variantOptionQualifiers.find(item => item.image);
+        const qualifier = variantOptionQualifiers.find((item) => item.image);
         return qualifier
             ? `${this.config.backend.occ.baseUrl}${qualifier.image.url}`
             : '';
@@ -14982,7 +14985,7 @@ let VariantSizeSelectorComponent = class VariantSizeSelectorComponent {
         return null;
     }
     getVariantOptionValue(qualifiers) {
-        const obj = qualifiers.find(q => q.qualifier === VariantQualifier.SIZE);
+        const obj = qualifiers.find((q) => q.qualifier === VariantQualifier.SIZE);
         return obj ? obj.value : '';
     }
 };
@@ -15029,7 +15032,7 @@ let VariantColorSelectorComponent = class VariantColorSelectorComponent {
         return null;
     }
     getVariantOptionValue(qualifiers) {
-        const obj = qualifiers.find(q => q.qualifier === VariantQualifier.COLOR);
+        const obj = qualifiers.find((q) => q.qualifier === VariantQualifier.COLOR);
         return obj ? obj.value : '';
     }
 };
@@ -15067,20 +15070,20 @@ let VariantStyleIconsComponent = class VariantStyleIconsComponent {
         this.variantNames = {};
     }
     ngOnInit() {
-        this.variants.forEach(variant => {
+        this.variants.forEach((variant) => {
             this.variantNames[variant.code] = this.getVariantName(variant.variantOptionQualifiers);
         });
     }
     getVariantThumbnailUrl(variantOptionQualifiers) {
-        const thumbnail = variantOptionQualifiers.find(item => item.qualifier === VariantQualifier.THUMBNAIL);
+        const thumbnail = variantOptionQualifiers.find((item) => item.qualifier === VariantQualifier.THUMBNAIL);
         return thumbnail
             ? `${this.config.backend.occ.baseUrl}${thumbnail.image.url}`
             : '';
     }
     getVariantName(variantOptionQualifiers) {
-        const rollupProperty = variantOptionQualifiers.find(item => item.qualifier === VariantQualifier.ROLLUP_PROPERTY);
+        const rollupProperty = variantOptionQualifiers.find((item) => item.qualifier === VariantQualifier.ROLLUP_PROPERTY);
         const property = rollupProperty
-            ? variantOptionQualifiers.find(item => item.qualifier === rollupProperty.value)
+            ? variantOptionQualifiers.find((item) => item.qualifier === rollupProperty.value)
             : null;
         return property ? property.value : '';
     }
@@ -15117,7 +15120,7 @@ let ProductVariantGuard = class ProductVariantGuard {
         this.routingService = routingService;
     }
     canActivate() {
-        return this.routingService.getRouterState().pipe(map(state => state.nextState.params.productCode), switchMap((productCode) => {
+        return this.routingService.getRouterState().pipe(map((state) => state.nextState.params.productCode), switchMap((productCode) => {
             // if open pdp from smartedit
             if (!productCode) {
                 return of(true);
@@ -15145,7 +15148,7 @@ let ProductVariantGuard = class ProductVariantGuard {
         }));
     }
     findVariant(variants) {
-        const results = variants.filter(variant => {
+        const results = variants.filter((variant) => {
             return variant.stock && variant.stock.stockLevel ? variant : false;
         });
         return !results.length && variants.length ? variants[0] : results[0];
@@ -15384,7 +15387,7 @@ let ProductReviewsComponent = class ProductReviewsComponent {
         // TODO: configurable
         this.initialMaxListItems = 5;
         this.product$ = this.currentProductService.getProduct();
-        this.reviews$ = this.product$.pipe(filter(p => !!p), map(p => p.code), distinctUntilChanged(), switchMap(productCode => this.reviewService.getByProductCode(productCode)), tap(() => {
+        this.reviews$ = this.product$.pipe(filter((p) => !!p), map((p) => p.code), distinctUntilChanged(), switchMap((productCode) => this.reviewService.getByProductCode(productCode)), tap(() => {
             this.resetReviewForm();
             this.maxListItems = this.initialMaxListItems;
         }));
@@ -15408,7 +15411,7 @@ let ProductReviewsComponent = class ProductReviewsComponent {
         this.reviewForm.controls.rating.setValue(rating);
     }
     markFormAsTouched() {
-        Object.keys(this.reviewForm.controls).forEach(key => {
+        Object.keys(this.reviewForm.controls).forEach((key) => {
             this.reviewForm.controls[key].markAsTouched();
         });
     }
@@ -15515,7 +15518,7 @@ let StockNotificationDialogComponent = class StockNotificationDialogComponent {
     ngOnDestroy() {
         if (this.subscribeSuccess$) {
             this.subscribeSuccess$
-                .subscribe(success => {
+                .subscribe((success) => {
                 if (success) {
                     this.interestsService.resetAddInterestState();
                 }
@@ -15562,20 +15565,20 @@ let StockNotificationComponent = class StockNotificationComponent {
         }), map(([product]) => !!product.stock && product.stock.stockLevelStatus === 'outOfStock'));
         this.hasProductInterests$ = this.interestsService
             .getProductInterests()
-            .pipe(map(interests => !!interests.results && interests.results.length === 1));
+            .pipe(map((interests) => !!interests.results && interests.results.length === 1));
         this.subscribeSuccess$ = this.interestsService.getAddProductInterestSuccess();
         this.isRemoveInterestLoading$ = this.interestsService.getRemoveProdutInterestLoading();
         this.prefsEnabled$ = this.notificationPrefService
             .getEnabledPreferences()
-            .pipe(tap(prefs => (this.enabledPrefs = prefs)), map(prefs => prefs.length > 0));
-        this.subscriptions.add(this.interestsService.getAddProductInterestError().subscribe(error => {
+            .pipe(tap((prefs) => (this.enabledPrefs = prefs)), map((prefs) => prefs.length > 0));
+        this.subscriptions.add(this.interestsService.getAddProductInterestError().subscribe((error) => {
             if (error) {
                 this.onInterestAddingError();
             }
         }));
         this.subscriptions.add(this.interestsService
             .getRemoveProdutInterestSuccess()
-            .subscribe(success => {
+            .subscribe((success) => {
             if (success) {
                 this.onInterestRemovingSuccess();
             }
@@ -15601,7 +15604,7 @@ let StockNotificationComponent = class StockNotificationComponent {
         this.subscriptions.add(this.translationService
             .translate('stockNotification.unsubscribeSuccess')
             .pipe(first())
-            .subscribe(text => this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_INFO)));
+            .subscribe((text) => this.globalMessageService.add(text, GlobalMessageType.MSG_TYPE_INFO)));
         this.interestsService.resetRemoveInterestState();
     }
     onInterestAddingError() {
@@ -15855,7 +15858,7 @@ let StoreFinderMapComponent = class StoreFinderMapComponent {
         this.googleMapRendererService.centerMap(latitude, longitude);
     }
     renderMap() {
-        this.googleMapRendererService.renderMap(this.mapElement.nativeElement, this.locations, markerIndex => {
+        this.googleMapRendererService.renderMap(this.mapElement.nativeElement, this.locations, (markerIndex) => {
             this.selectStoreItemClickHandle(markerIndex);
         });
     }
@@ -15971,7 +15974,7 @@ let StoreFinderSearchResultComponent = class StoreFinderSearchResultComponent {
         };
     }
     ngOnInit() {
-        this.subscription = this.route.queryParams.subscribe(params => this.initialize(params));
+        this.subscription = this.route.queryParams.subscribe((params) => this.initialize(params));
     }
     ngOnDestroy() {
         if (this.subscription) {
@@ -16063,7 +16066,7 @@ __decorate([
 StoreFinderStoreDescriptionComponent = __decorate([
     Component({
         selector: 'cx-store-finder-store-description',
-        template: "<ng-container *ngIf=\"location\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <article class=\"cx-store col-md-4\">\n        <h2>{{ location.displayName || location.name }}</h2>\n\n        <p *ngIf=\"location.address\" class=\"cx-store-description-address\">\n          {{ location.address.line1 }} {{ location.address.line2 }} <br />\n          {{\n            getFormattedStoreAddress([\n              location.address.town,\n              location.address.postalCode,\n              location.address.country.isocode\n            ])\n          }}\n        </p>\n\n        <section class=\"cx-contact\">\n          <ul class=\"cx-list\">\n            <li class=\"cx-item\">\n              <a\n                class=\"cx-link\"\n                [href]=\"getDirections(location)\"\n                target=\"_blank\"\n                >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n              >\n            </li>\n            <li class=\"cx-item\" *ngIf=\"location.address?.phone\">\n              {{ 'storeFinder.call' | cxTranslate }}\n              {{ location.address?.phone }}\n            </li>\n          </ul>\n        </section>\n        <div class=\"cx-schedule\" *ngIf=\"location.openingHours\">\n          <cx-schedule [location]=\"location\">\n            <h3>{{ 'storeFinder.storeHours' | cxTranslate }}</h3>\n          </cx-schedule>\n        </div>\n\n        <div *ngIf=\"(location.features | json) != '{}'\" class=\"cx-features\">\n          <div class=\"row \">\n            <div class=\"col-lg-12\">\n              <h3 class=\"cx-features-header\">\n                {{ 'storeFinder.storeFeatures' | cxTranslate }}\n              </h3>\n            </div>\n          </div>\n\n          <article class=\"row\">\n            <div\n              class=\"col-lg-12 cx-feature-item\"\n              *ngFor=\"let feature of location.features?.entry\"\n            >\n              <div class=\"cx-feature-value\">{{ feature.value }}</div>\n            </div>\n          </article>\n        </div>\n      </article>\n      <article class=\"cx-storeMap col-lg-8\" *ngIf=\"!disableMap\">\n        <cx-store-finder-map [locations]=\"[location]\"></cx-store-finder-map>\n      </article>\n    </div>\n  </div>\n</ng-container>\n"
+        template: "<ng-container *ngIf=\"location\">\n  <div class=\"container\">\n    <div class=\"row\">\n      <article class=\"cx-store col-md-4\">\n        <h2>{{ location.displayName || location.name }}</h2>\n\n        <p *ngIf=\"location.address\" class=\"cx-store-description-address\">\n          {{ location.address.line1 }} {{ location.address.line2 }} <br />\n          {{\n            getFormattedStoreAddress([\n              location.address.town,\n              location.address.postalCode,\n              location.address.country.isocode\n            ])\n          }}\n        </p>\n\n        <section class=\"cx-contact\">\n          <ul class=\"cx-list\">\n            <li class=\"cx-item\">\n              <a\n                class=\"cx-link\"\n                [href]=\"getDirections(location)\"\n                target=\"_blank\"\n                >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n              >\n            </li>\n            <li class=\"cx-item\" *ngIf=\"location.address?.phone\">\n              {{ 'storeFinder.call' | cxTranslate }}\n              {{ location.address?.phone }}\n            </li>\n          </ul>\n        </section>\n        <div class=\"cx-schedule\" *ngIf=\"location.openingHours\">\n          <cx-schedule [location]=\"location\">\n            <h3>{{ 'storeFinder.storeHours' | cxTranslate }}</h3>\n          </cx-schedule>\n        </div>\n\n        <div *ngIf=\"(location.features | json) != '{}'\" class=\"cx-features\">\n          <div class=\"row\">\n            <div class=\"col-lg-12\">\n              <h3 class=\"cx-features-header\">\n                {{ 'storeFinder.storeFeatures' | cxTranslate }}\n              </h3>\n            </div>\n          </div>\n\n          <article class=\"row\">\n            <div\n              class=\"col-lg-12 cx-feature-item\"\n              *ngFor=\"let feature of location.features?.entry\"\n            >\n              <div class=\"cx-feature-value\">{{ feature.value }}</div>\n            </div>\n          </article>\n        </div>\n      </article>\n      <article class=\"cx-storeMap col-lg-8\" *ngIf=\"!disableMap\">\n        <cx-store-finder-map [locations]=\"[location]\"></cx-store-finder-map>\n      </article>\n    </div>\n  </div>\n</ng-container>\n"
     })
 ], StoreFinderStoreDescriptionComponent);
 
@@ -16261,7 +16264,7 @@ let CheckoutLoginComponent = class CheckoutLoginComponent {
         const email = this.form.value.email;
         this.activeCartService.addEmail(email);
         if (!this.sub) {
-            this.sub = this.activeCartService.getAssignedUser().subscribe(_ => {
+            this.sub = this.activeCartService.getAssignedUser().subscribe(() => {
                 if (this.activeCartService.isGuestCart()) {
                     this.authRedirectService.redirect();
                 }
@@ -16358,7 +16361,7 @@ let LoginFormComponent = class LoginFormComponent {
         this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
         password.value);
         if (!this.sub) {
-            this.sub = this.auth.getUserToken().subscribe(data => {
+            this.sub = this.auth.getUserToken().subscribe((data) => {
                 if (data && data.access_token) {
                     this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                     this.authRedirectService.redirect();
@@ -16367,7 +16370,7 @@ let LoginFormComponent = class LoginFormComponent {
         }
     }
     markFormAsTouched() {
-        Object.keys(this.form.controls).forEach(key => {
+        Object.keys(this.form.controls).forEach((key) => {
             this.form.controls[key].markAsTouched();
         });
     }
@@ -16433,7 +16436,7 @@ let LoginComponent = class LoginComponent {
         this.userService = userService;
     }
     ngOnInit() {
-        this.user$ = this.auth.isUserLoggedIn().pipe(switchMap(isUserLoggedIn => {
+        this.user$ = this.auth.isUserLoggedIn().pipe(switchMap((isUserLoggedIn) => {
             if (isUserLoggedIn) {
                 return this.userService.get();
             }
@@ -16496,7 +16499,7 @@ let LogoutGuard = class LogoutGuard {
             id: this.semanticPathService.get('logout'),
             type: PageType.CONTENT_PAGE,
         })
-            .pipe(tap(hasPage => {
+            .pipe(tap((hasPage) => {
             if (!hasPage) {
                 this.redirect();
             }
@@ -16577,11 +16580,11 @@ let RegisterComponent = class RegisterComponent {
     }
     ngOnInit() {
         var _a;
-        this.titles$ = this.userService.getTitles().pipe(tap(titles => {
+        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
             if (Object.keys(titles).length === 0) {
                 this.userService.loadTitles();
             }
-        }), map(titles => {
+        }), map((titles) => {
             return titles.sort(sortTitles);
         }));
         this.loading$ = this.userService.getRegisterUserResultLoading();
@@ -16589,12 +16592,12 @@ let RegisterComponent = class RegisterComponent {
         // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
         this.subscription.add(this.globalMessageService
             .get()
-            .pipe(filter(messages => !!Object.keys(messages).length))
+            .pipe(filter((messages) => !!Object.keys(messages).length))
             .subscribe((globalMessageEntities) => {
             const messages = globalMessageEntities &&
                 globalMessageEntities[GlobalMessageType.MSG_TYPE_ERROR];
             if (messages &&
-                messages.some(message => message === 'This field is required.')) {
+                messages.some((message) => message === 'This field is required.')) {
                 this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
                 this.globalMessageService.add({ key: 'register.titleRequired' }, GlobalMessageType.MSG_TYPE_ERROR);
             }
@@ -16657,7 +16660,7 @@ let RegisterComponent = class RegisterComponent {
     }
     registerUserProcessInit() {
         this.userService.resetRegisterUserProcessState();
-        this.subscription.add(this.userService.getRegisterUserResultSuccess().subscribe(success => {
+        this.subscription.add(this.userService.getRegisterUserResultSuccess().subscribe((success) => {
             this.onRegisterUserSuccess(success);
         }));
     }
@@ -16749,7 +16752,7 @@ __decorate([
 WishListItemComponent = __decorate([
     Component({
         selector: 'cx-wish-list-item',
-        template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row \">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"cartEntry.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of cartEntry.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"\n            cartEntry.product.stock.stockLevelStatus !== 'outOfStock';\n            else outOfStock\n          \"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n        <ng-template #outOfStock>\n          <span class=\"cx-out-of-stock\">\n            {{ 'addToCart.outOfStock' | cxTranslate }}\n          </span>\n        </ng-template>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+        template: "<div class=\"row\">\n  <!-- Item Image -->\n  <div class=\"cx-image-container col-2\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: cartEntry.product } | cxUrl\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"cartEntry.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row\">\n      <!-- Item Description -->\n      <div class=\"col-md-5 col-lg-5 col-xl-5\">\n        <div *ngIf=\"cartEntry.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"\n              { cxRoute: 'product', params: cartEntry.product } | cxUrl\n            \"\n            >{{ cartEntry.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"cartEntry.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ cartEntry.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"cartEntry.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of cartEntry.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"cartEntry.basePrice\"\n        class=\"cx-price col-md-3 col-lg-4 col-xl-4\"\n      >\n        <div class=\"cx-label d-block d-md-none d-lg-none d-xl-none\">\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"cartEntry.basePrice\" class=\"cx-value\">\n          {{ cartEntry.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Total -->\n      <div class=\"col-sm-8 col-md-4 col-lg-3 col-xl-3 cx-add-to-cart\">\n        <cx-add-to-cart\n          *ngIf=\"\n            cartEntry.product.stock.stockLevelStatus !== 'outOfStock';\n            else outOfStock\n          \"\n          [showQuantity]=\"false\"\n          [product]=\"cartEntry.product\"\n        ></cx-add-to-cart>\n        <ng-template #outOfStock>\n          <span class=\"cx-out-of-stock\">\n            {{ 'addToCart.outOfStock' | cxTranslate }}\n          </span>\n        </ng-template>\n      </div>\n    </div>\n    <div class=\"cx-return-button col-12\">\n      <button\n        class=\"btn btn-link\"\n        (click)=\"removeEntry(cartEntry)\"\n        [disabled]=\"isLoading\"\n      >\n        {{ 'common.remove' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], WishListItemComponent);
