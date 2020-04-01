@@ -1,0 +1,12 @@
+import { RoutingService } from '@spartacus/core';
+import { LaunchRoute, LAUNCH_CALLER } from '../config/index';
+import { LaunchRenderStrategy } from './launch-render.strategy';
+export declare class RoutingRenderStrategy extends LaunchRenderStrategy {
+    protected routingService: RoutingService;
+    constructor(routingService: RoutingService);
+    /**
+     * Navigates to the route configured for the caller
+     */
+    render(config: LaunchRoute, _caller: LAUNCH_CALLER): void;
+    match(config: LaunchRoute): boolean;
+}

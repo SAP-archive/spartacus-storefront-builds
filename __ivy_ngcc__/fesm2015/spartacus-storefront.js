@@ -1,16 +1,16 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, concat, of, isObservable, from, BehaviorSubject, Observable, fromEvent, asyncScheduler } from 'rxjs';
-import { take, distinctUntilChanged, tap, first, skipWhile, endWith, map, switchMap, filter, withLatestFrom, flatMap, mergeMap, debounceTime, shareReplay, startWith, scan, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, isDevMode, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, INJECTOR, ViewChildren, inject } from '@angular/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, AsmModule as AsmModule$1, ProductScope, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Subscription, combineLatest, of, BehaviorSubject, fromEvent, Observable, concat, isObservable, from, asyncScheduler } from 'rxjs';
+import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, filter, shareReplay, startWith, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl, FormsModule } from '@angular/forms';
-import { Router, RouterModule, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
+import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -20,10 +20,10 @@ import * as ɵngcc1 from '@spartacus/core';
 import * as ɵngcc2 from '@angular/platform-browser';
 import * as ɵngcc3 from '@ng-bootstrap/ng-bootstrap';
 import * as ɵngcc4 from '@angular/common';
-import * as ɵngcc5 from '@angular/router';
-import * as ɵngcc6 from '@angular/service-worker';
-import * as ɵngcc7 from '@angular/forms';
-import * as ɵngcc8 from '@ng-select/ng-select';
+import * as ɵngcc5 from '@angular/forms';
+import * as ɵngcc6 from '@angular/router';
+import * as ɵngcc7 from '@ng-select/ng-select';
+import * as ɵngcc8 from '@angular/service-worker';
 import * as ɵngcc9 from 'ngx-infinite-scroll';
 import * as ɵngcc10 from '@ngrx/store';
 import * as ɵngcc11 from '@ngrx/effects';
@@ -170,104 +170,22 @@ function AnonymousConsentManagementBannerComponent_ng_container_0_Template(rf, c
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 11, "anonymousConsents.banner.allowAll"), " ");
 } }
-function PageLayoutComponent_ng_template_0_cx_page_slot_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-page-slot", 2);
-    ɵngcc0.ɵɵpipe(1, "async");
-} if (rf & 2) {
-    const slot_r26 = ctx.$implicit;
-    const ctx_r25 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("position", slot_r26)("isPageFold", slot_r26 === ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r25.pageFoldSlot$));
-} }
-function PageLayoutComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵprojection(0);
-    ɵngcc0.ɵɵtemplate(1, PageLayoutComponent_ng_template_0_cx_page_slot_1_Template, 2, 4, "cx-page-slot", 1);
-    ɵngcc0.ɵɵpipe(2, "async");
-} if (rf & 2) {
-    const ctx_r24 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r24.slots$));
-} }
-const _c2 = function (a0, a1, a2) { return { templateName$: a0, slots$: a1, section$: a2 }; };
-function PageSlotComponent_ng_template_0_0_ng_template_0_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainer(0, 3);
-} if (rf & 2) {
-    const component_r29 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r29);
-} }
-const _c3 = function (a0) { return { component: a0 }; };
-function PageSlotComponent_ng_template_0_0_Template(rf, ctx) { if (rf & 1) {
-    const _r33 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_0_ng_template_0_Template, 1, 1, "ng-template", 2);
-    ɵngcc0.ɵɵlistener("loaded", function PageSlotComponent_ng_template_0_0_Template_ng_template_loaded_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r33); const ctx_r32 = ɵngcc0.ɵɵnextContext(2); return ctx_r32.isLoaded($event); });
-} if (rf & 2) {
-    const component_r29 = ctx.$implicit;
-    const ctx_r28 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("cxOutlet", component_r29.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(3, _c3, component_r29))("cxOutletDefer", ctx_r28.getComponentDeferOptions(component_r29.flexType));
-} }
-function PageSlotComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_0_Template, 1, 5, undefined, 1);
-    ɵngcc0.ɵɵpipe(1, "async");
-} if (rf & 2) {
-    const ctx_r27 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r27.components$));
-} }
-const _c4 = function (a0) { return { components$: a0 }; };
-function AddToHomeScreenBannerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r36 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div");
-    ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵelementStart(2, "div", 2);
-    ɵngcc0.ɵɵelementStart(3, "p");
-    ɵngcc0.ɵɵtext(4);
-    ɵngcc0.ɵɵpipe(5, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(6, "ul");
-    ɵngcc0.ɵɵelementStart(7, "li");
-    ɵngcc0.ɵɵtext(8);
-    ɵngcc0.ɵɵpipe(9, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(10, "li");
-    ɵngcc0.ɵɵtext(11);
-    ɵngcc0.ɵɵpipe(12, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(13, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBannerComponent_div_0_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r36); const ctx_r35 = ɵngcc0.ɵɵnextContext(); return ctx_r35.prompt(); });
-    ɵngcc0.ɵɵtext(14);
-    ɵngcc0.ɵɵpipe(15, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "pwa.addToHomeScreenDescription"), " ");
-    ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 6, "pwa.noInstallationNeeded"));
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "pwa.fastAccessToApplication"));
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "pwa.addToHomeScreen"), " ");
-} }
-function AddToHomeScreenBtnComponent_1_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵprojection(0, 0, ["*ngIf", "canPrompt$ | async"]);
-} }
 function AsmMainUiComponent_cx_asm_session_timer_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-asm-session-timer");
 } }
 function AsmMainUiComponent_button_10_Template(rf, ctx) { if (rf & 1) {
-    const _r45 = ɵngcc0.ɵɵgetCurrentView();
+    const _r31 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r45); const ctx_r44 = ɵngcc0.ɵɵnextContext(); return ctx_r44.hideUi(); });
+    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r31); const ctx_r30 = ɵngcc0.ɵɵnextContext(); return ctx_r30.hideUi(); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(1, 1, "asm.hideUi"));
 } }
 function AsmMainUiComponent_button_13_Template(rf, ctx) { if (rf & 1) {
-    const _r47 = ɵngcc0.ɵɵgetCurrentView();
+    const _r33 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 11);
-    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_button_13_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r47); const ctx_r46 = ɵngcc0.ɵɵnextContext(); return ctx_r46.logout(); });
+    ɵngcc0.ɵɵlistener("click", function AsmMainUiComponent_button_13_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r33); const ctx_r32 = ɵngcc0.ɵɵnextContext(); return ctx_r32.logout(); });
     ɵngcc0.ɵɵpipe(1, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -277,9 +195,9 @@ function AsmMainUiComponent_ng_container_15_cx_customer_emulation_1_Template(rf,
     ɵngcc0.ɵɵelement(0, "cx-customer-emulation");
 } }
 function AsmMainUiComponent_ng_container_15_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r53 = ɵngcc0.ɵɵgetCurrentView();
+    const _r39 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-customer-selection", 13);
-    ɵngcc0.ɵɵlistener("submitEvent", function AsmMainUiComponent_ng_container_15_ng_template_3_Template_cx_customer_selection_submitEvent_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r53); const ctx_r52 = ɵngcc0.ɵɵnextContext(2); return ctx_r52.startCustomerEmulationSession($event); });
+    ɵngcc0.ɵɵlistener("submitEvent", function AsmMainUiComponent_ng_container_15_ng_template_3_Template_cx_customer_selection_submitEvent_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r39); const ctx_r38 = ɵngcc0.ɵɵnextContext(2); return ctx_r38.startCustomerEmulationSession($event); });
     ɵngcc0.ɵɵelementEnd();
 } }
 function AsmMainUiComponent_ng_container_15_Template(rf, ctx) { if (rf & 1) {
@@ -289,20 +207,44 @@ function AsmMainUiComponent_ng_container_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(3, AsmMainUiComponent_ng_container_15_ng_template_3_Template, 1, 0, "ng-template", null, 12, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r49 = ɵngcc0.ɵɵreference(4);
-    const ctx_r41 = ɵngcc0.ɵɵnextContext();
+    const _r35 = ɵngcc0.ɵɵreference(4);
+    const ctx_r27 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r41.customer$))("ngIfElse", _r49);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r27.customer$))("ngIfElse", _r35);
 } }
 function AsmMainUiComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
-    const _r55 = ɵngcc0.ɵɵgetCurrentView();
+    const _r41 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-csagent-login-form", 14);
-    ɵngcc0.ɵɵlistener("submitEvent", function AsmMainUiComponent_ng_template_17_Template_cx_csagent_login_form_submitEvent_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r55); const ctx_r54 = ɵngcc0.ɵɵnextContext(); return ctx_r54.loginCustomerSupportAgent($event); });
+    ɵngcc0.ɵɵlistener("submitEvent", function AsmMainUiComponent_ng_template_17_Template_cx_csagent_login_form_submitEvent_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r41); const ctx_r40 = ɵngcc0.ɵɵnextContext(); return ctx_r40.loginCustomerSupportAgent($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r43 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("csAgentTokenLoading", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r43.csAgentTokenLoading$));
+    const ctx_r29 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("csAgentTokenLoading", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r29.csAgentTokenLoading$));
+} }
+function SkipLinkComponent_div_0_button_1_Template(rf, ctx) { if (rf & 1) {
+    const _r47 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "button", 3);
+    ɵngcc0.ɵɵlistener("click", function SkipLinkComponent_div_0_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r47); const link_r45 = ctx.$implicit; const ctx_r46 = ɵngcc0.ɵɵnextContext(2); return ctx_r46.scrollToTarget(link_r45); });
+    ɵngcc0.ɵɵtext(1);
+    ɵngcc0.ɵɵpipe(2, "cxTranslate");
+    ɵngcc0.ɵɵpipe(3, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const link_r45 = ctx.$implicit;
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "skipLink.skipTo"), " ", ɵngcc0.ɵɵpipeBind1(3, 4, link_r45.i18nKey), " ");
+} }
+const _c2 = function () { return { tab: true }; };
+function SkipLinkComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "div", 1);
+    ɵngcc0.ɵɵtemplate(1, SkipLinkComponent_div_0_button_1_Template, 4, 6, "button", 2);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const links_r43 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("cxFocus", ɵngcc0.ɵɵpureFunction0(2, _c2));
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", links_r43);
 } }
 function CSAgentLoginFormComponent_form_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -327,9 +269,9 @@ function CSAgentLoginFormComponent_form_0_div_8_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 1, "asm.loginForm.password.required"));
 } }
 function CSAgentLoginFormComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r61 = ɵngcc0.ɵɵgetCurrentView();
+    const _r53 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 2);
-    ɵngcc0.ɵɵlistener("submit", function CSAgentLoginFormComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r61); const ctx_r60 = ɵngcc0.ɵɵnextContext(); return ctx_r60.onSubmit(); });
+    ɵngcc0.ɵɵlistener("submit", function CSAgentLoginFormComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r53); const ctx_r52 = ɵngcc0.ɵɵnextContext(); return ctx_r52.onSubmit(); });
     ɵngcc0.ɵɵelementStart(1, "label");
     ɵngcc0.ɵɵelement(2, "input", 3);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
@@ -346,18 +288,18 @@ function CSAgentLoginFormComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r56 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r56.form);
+    const ctx_r48 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r48.form);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r56.isNotValid("userId"));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r48.isNotValid("userId"));
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(3, 10, "asm.loginForm.userId.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r56.isNotValid("userId"));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r48.isNotValid("userId"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r56.isNotValid("password"));
+    ɵngcc0.ɵɵclassProp("is-invalid", ctx_r48.isNotValid("password"));
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(7, 12, "asm.loginForm.password.label"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r56.isNotValid("password"));
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r48.isNotValid("password"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 14, "asm.loginForm.submit"), " ");
 } }
@@ -369,19 +311,19 @@ function CSAgentLoginFormComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function CustomerEmulationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r66 = ɵngcc0.ɵɵgetCurrentView();
+    const _r58 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "input", 2);
     ɵngcc0.ɵɵelementStart(2, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function CustomerEmulationComponent_ng_container_0_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r66); const ctx_r65 = ɵngcc0.ɵɵnextContext(); return ctx_r65.logoutCustomer(); });
+    ɵngcc0.ɵɵlistener("click", function CustomerEmulationComponent_ng_container_0_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r58); const ctx_r57 = ɵngcc0.ɵɵnextContext(); return ctx_r57.logoutCustomer(); });
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r62 = ɵngcc0.ɵɵnextContext();
+    const ctx_r54 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate2("placeholder", "", ctx_r62.customer == null ? null : ctx_r62.customer.name, ", ", ctx_r62.customer == null ? null : ctx_r62.customer.uid, "");
+    ɵngcc0.ɵɵpropertyInterpolate2("placeholder", "", ctx_r54.customer == null ? null : ctx_r54.customer.name, ", ", ctx_r54.customer == null ? null : ctx_r54.customer.uid, "");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, "asm.endSession"), " ");
 } }
@@ -394,12 +336,12 @@ function CustomerEmulationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "asm.standardSessionInProgress"), " ");
 } }
-const _c5 = ["resultList"];
-const _c6 = ["searchTerm"];
+const _c3 = ["resultList"];
+const _c4 = ["searchTerm"];
 function CustomerSelectionComponent_div_7_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r76 = ɵngcc0.ɵɵgetCurrentView();
+    const _r68 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r76); const result_r74 = ctx.$implicit; const ctx_r75 = ɵngcc0.ɵɵnextContext(2); return ctx_r75.selectCustomerFromList(result_r74); });
+    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r68); const result_r66 = ctx.$implicit; const ctx_r67 = ɵngcc0.ɵɵnextContext(2); return ctx_r67.selectCustomerFromList(result_r66); });
     ɵngcc0.ɵɵelementStart(1, "span", 10);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
@@ -408,16 +350,16 @@ function CustomerSelectionComponent_div_7_button_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const result_r74 = ctx.$implicit;
+    const result_r66 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(result_r74.name);
+    ɵngcc0.ɵɵtextInterpolate(result_r66.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(result_r74.uid);
+    ɵngcc0.ɵɵtextInterpolate(result_r66.uid);
 } }
 function CustomerSelectionComponent_div_7_button_3_Template(rf, ctx) { if (rf & 1) {
-    const _r78 = ɵngcc0.ɵɵgetCurrentView();
+    const _r70 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r78); const ctx_r77 = ɵngcc0.ɵɵnextContext(2); return ctx_r77.closeResults(); });
+    ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_div_7_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r70); const ctx_r69 = ɵngcc0.ɵɵnextContext(2); return ctx_r69.closeResults(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -432,13 +374,13 @@ function CustomerSelectionComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const results_r70 = ctx.ngIf;
-    const ctx_r68 = ɵngcc0.ɵɵnextContext();
-    const _r67 = ɵngcc0.ɵɵreference(2);
+    const results_r62 = ctx.ngIf;
+    const ctx_r60 = ɵngcc0.ɵɵnextContext();
+    const _r59 = ɵngcc0.ɵɵreference(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", results_r70.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", results_r62.entries);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(4, 2, ctx_r68.searchResultsLoading$) && _r67.value.length >= 3 && !!results_r70.entries && results_r70.entries.length <= 0);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(4, 2, ctx_r60.searchResultsLoading$) && _r59.value.length >= 3 && !!results_r62.entries && results_r62.entries.length <= 0);
 } }
 function CustomerSelectionComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
@@ -449,8 +391,8 @@ function CustomerSelectionComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } }
-const _c7 = ["dialog"];
-const _c8 = function (a0) { return { count: a0 }; };
+const _c5 = ["dialog"];
+const _c6 = function (a0) { return { count: a0 }; };
 function AddedToCartDialogComponent_ng_container_2_div_8_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "div");
@@ -462,30 +404,30 @@ function AddedToCartDialogComponent_ng_container_2_div_8_div_7_Template(rf, ctx)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r87 = ctx.ngIf;
+    const cart_r79 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r87.deliveryItemsQuantity)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c6, cart_r79.deliveryItemsQuantity)), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(cart_r87.subTotal == null ? null : cart_r87.subTotal.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(cart_r79.subTotal == null ? null : cart_r79.subTotal.formattedValue);
 } }
 function AddedToCartDialogComponent_ng_container_2_div_8_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 21);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const orderPromotions_r88 = ctx.ngIf;
+    const orderPromotions_r80 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r88);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r80);
 } }
-const _c9 = function () { return { cxRoute: "cart" }; };
-const _c10 = function () { return { cxRoute: "checkout" }; };
+const _c7 = function () { return { cxRoute: "cart" }; };
+const _c8 = function () { return { cxRoute: "checkout" }; };
 function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r90 = ɵngcc0.ɵɵgetCurrentView();
+    const _r82 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "div", 11);
     ɵngcc0.ɵɵelementStart(3, "cx-cart-item", 12);
-    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener() { ɵngcc0.ɵɵrestoreView(_r90); const ctx_r89 = ɵngcc0.ɵɵnextContext(2); return ctx_r89.dismissModal("Product selected"); });
+    ɵngcc0.ɵɵlistener("view", function AddedToCartDialogComponent_ng_container_2_div_8_Template_cx_cart_item_view_3_listener() { ɵngcc0.ɵɵrestoreView(_r82); const ctx_r81 = ɵngcc0.ɵɵnextContext(2); return ctx_r81.dismissModal("Product selected"); });
     ɵngcc0.ɵɵpipe(4, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -497,13 +439,13 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(10, "async");
     ɵngcc0.ɵɵelementStart(11, "div", 17);
     ɵngcc0.ɵɵelementStart(12, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_12_listener() { ɵngcc0.ɵɵrestoreView(_r90); const ctx_r91 = ɵngcc0.ɵɵnextContext(2); return !ctx_r91.form.dirty && ctx_r91.dismissModal("View Cart click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_12_listener() { ɵngcc0.ɵɵrestoreView(_r82); const ctx_r83 = ɵngcc0.ɵɵnextContext(2); return !ctx_r83.form.dirty && ctx_r83.dismissModal("View Cart click"); });
     ɵngcc0.ɵɵpipe(13, "cxUrl");
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_16_listener() { ɵngcc0.ɵɵrestoreView(_r90); const ctx_r92 = ɵngcc0.ɵɵnextContext(2); return !ctx_r92.form.dirty && ctx_r92.dismissModal("Proceed To Checkout click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_div_8_Template_a_click_16_listener() { ɵngcc0.ɵɵrestoreView(_r82); const ctx_r84 = ɵngcc0.ɵɵnextContext(2); return !ctx_r84.form.dirty && ctx_r84.dismissModal("Proceed To Checkout click"); });
     ɵngcc0.ɵɵpipe(17, "cxUrl");
     ɵngcc0.ɵɵtext(18);
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
@@ -513,27 +455,27 @@ function AddedToCartDialogComponent_ng_container_2_div_8_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r84 = ctx.ngIf;
-    const ctx_r83 = ɵngcc0.ɵɵnextContext(2);
+    const entry_r76 = ctx.ngIf;
+    const ctx_r75 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("item", entry_r84)("compact", true)("quantityControl", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r83.getQuantityControl()))("promotionLocation", ctx_r83.promotionLocation);
+    ɵngcc0.ɵɵproperty("item", entry_r76)("compact", true)("quantityControl", ɵngcc0.ɵɵpipeBind1(4, 14, ctx_r75.getQuantityControl()))("promotionLocation", ctx_r75.promotionLocation);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 16, ctx_r83.cart$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 16, ctx_r75.cart$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(10, 18, ctx_r83.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(10, 18, ctx_r75.orderPromotions$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r83.form.dirty);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 20, ɵngcc0.ɵɵpureFunction0(28, _c9)));
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r75.form.dirty);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 20, ɵngcc0.ɵɵpureFunction0(28, _c7)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(15, 22, "addToCart.viewCart"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r83.form.dirty);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(17, 24, ɵngcc0.ɵɵpureFunction0(29, _c10)));
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r75.form.dirty);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(17, 24, ɵngcc0.ɵɵpureFunction0(29, _c8)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(19, 26, "addToCart.proceedToCheckout"));
 } }
 function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
-    const _r94 = ɵngcc0.ɵɵgetCurrentView();
+    const _r86 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -541,7 +483,7 @@ function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r94); const ctx_r93 = ɵngcc0.ɵɵnextContext(); return ctx_r93.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_container_2_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r86); const ctx_r85 = ɵngcc0.ɵɵnextContext(); return ctx_r85.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(6, "span", 6);
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
@@ -551,23 +493,23 @@ function AddedToCartDialogComponent_ng_container_2_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(9, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r80 = ɵngcc0.ɵɵnextContext();
+    const ctx_r72 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, ctx_r80.increment ? "addToCart.itemsIncrementedInYourCart" : "addToCart.itemsAddedToYourCart"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, ctx_r72.increment ? "addToCart.itemsIncrementedInYourCart" : "addToCart.itemsAddedToYourCart"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r80.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r72.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 5, ctx_r80.entry$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(9, 5, ctx_r72.entry$));
 } }
 function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r96 = ɵngcc0.ɵɵgetCurrentView();
+    const _r88 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r96); const ctx_r95 = ɵngcc0.ɵɵnextContext(); return ctx_r95.dismissModal("Cross click"); });
+    ɵngcc0.ɵɵlistener("click", function AddedToCartDialogComponent_ng_template_4_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r88); const ctx_r87 = ɵngcc0.ɵɵnextContext(); return ctx_r87.dismissModal("Cross click"); });
     ɵngcc0.ɵɵelementStart(5, "span", 6);
     ɵngcc0.ɵɵelement(6, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
@@ -581,17 +523,17 @@ function AddedToCartDialogComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r82 = ɵngcc0.ɵɵnextContext();
+    const ctx_r74 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "addToCart.updatingCart"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r82.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r74.iconTypes.CLOSE);
 } }
 function AddToCartComponent_form_0_div_1_cx_item_counter_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-item-counter", 7);
 } if (rf & 2) {
-    const ctx_r100 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("max", ctx_r100.maxQuantity)("control", ctx_r100.addToCartForm.get("quantity"));
+    const ctx_r92 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("max", ctx_r92.maxQuantity)("control", ctx_r92.addToCartForm.get("quantity"));
 } }
 function AddToCartComponent_form_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -607,13 +549,13 @@ function AddToCartComponent_form_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r98 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r90 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, "addToCart.quantity"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r98.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r90.hasStock);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r98.hasStock ? ɵngcc0.ɵɵpipeBind1(7, 5, "addToCart.inStock") : ɵngcc0.ɵɵpipeBind1(8, 7, "addToCart.outOfStock"));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r90.hasStock ? ɵngcc0.ɵɵpipeBind1(7, 5, "addToCart.inStock") : ɵngcc0.ɵɵpipeBind1(8, 7, "addToCart.outOfStock"));
 } }
 function AddToCartComponent_form_0_button_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "button", 8);
@@ -621,61 +563,61 @@ function AddToCartComponent_form_0_button_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r99 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r99.quantity <= 0 || ctx_r99.quantity > ctx_r99.maxQuantity);
+    const ctx_r91 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r91.quantity <= 0 || ctx_r91.quantity > ctx_r91.maxQuantity);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "addToCart.addToCart"), " ");
 } }
 function AddToCartComponent_form_0_Template(rf, ctx) { if (rf & 1) {
-    const _r102 = ɵngcc0.ɵɵgetCurrentView();
+    const _r94 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 1);
-    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r102); const ctx_r101 = ɵngcc0.ɵɵnextContext(); return ctx_r101.addToCart(); });
+    ɵngcc0.ɵɵlistener("submit", function AddToCartComponent_form_0_Template_form_submit_0_listener() { ɵngcc0.ɵɵrestoreView(_r94); const ctx_r93 = ɵngcc0.ɵɵnextContext(); return ctx_r93.addToCart(); });
     ɵngcc0.ɵɵtemplate(1, AddToCartComponent_form_0_div_1_Template, 9, 9, "div", 2);
     ɵngcc0.ɵɵtemplate(2, AddToCartComponent_form_0_button_2_Template, 3, 4, "button", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r97 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r97.addToCartForm);
+    const ctx_r89 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r89.addToCartForm);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r97.showQuantity);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r89.showQuantity);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r97.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r89.hasStock);
 } }
 function CardComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r104 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r96 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r104.content.header, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r96.content.header, " ");
 } }
 function CardComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r105 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r97 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r105.content.deleteMsg, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r97.content.deleteMsg, " ");
 } }
 function CardComponent_div_0_h4_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h4", 15);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r106 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r98 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r106.content.title, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r98.content.title, " ");
 } }
 function CardComponent_div_0_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r107 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r99 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r107.content.textBold, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r99.content.textBold, " ");
 } }
 function CardComponent_div_0_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -684,32 +626,32 @@ function CardComponent_div_0_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const line_r112 = ctx.$implicit;
+    const line_r104 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(line_r112);
+    ɵngcc0.ɵɵtextInterpolate(line_r104);
 } }
 function CardComponent_div_0_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
     ɵngcc0.ɵɵelement(1, "cx-icon", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r109 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r101 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r109.content.img);
+    ɵngcc0.ɵɵproperty("type", ctx_r101.content.img);
 } }
 function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r114 = ɵngcc0.ɵɵgetCurrentView();
+    const _r106 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "button", 22);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r114); const ctx_r113 = ɵngcc0.ɵɵnextContext(2); return ctx_r113.cancelEdit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_2_listener() { ɵngcc0.ɵɵrestoreView(_r106); const ctx_r105 = ɵngcc0.ɵɵnextContext(2); return ctx_r105.cancelEdit(); });
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "div", 21);
     ɵngcc0.ɵɵelementStart(6, "button", 23);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r114); const ctx_r115 = ɵngcc0.ɵɵnextContext(2); return ctx_r115.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_10_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r106); const ctx_r107 = ɵngcc0.ɵɵnextContext(2); return ctx_r107.delete(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -722,58 +664,58 @@ function CardComponent_div_0_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 4, "common.delete"), " ");
 } }
 function CardComponent_div_0_div_11_div_1_a_2_Template(rf, ctx) { if (rf & 1) {
-    const _r124 = ɵngcc0.ɵɵgetCurrentView();
+    const _r116 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r124); const ctx_r123 = ɵngcc0.ɵɵnextContext(4); return ctx_r123.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r124); const ctx_r125 = ɵngcc0.ɵɵnextContext(4); return ctx_r125.delete(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_2_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r116); const ctx_r115 = ɵngcc0.ɵɵnextContext(4); return ctx_r115.delete(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_2_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r116); const ctx_r117 = ɵngcc0.ɵɵnextContext(4); return ctx_r117.delete(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r109 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r117.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r109.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_3_Template(rf, ctx) { if (rf & 1) {
-    const _r128 = ɵngcc0.ɵɵgetCurrentView();
+    const _r120 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r128); const ctx_r127 = ɵngcc0.ɵɵnextContext(4); return ctx_r127.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r128); const ctx_r129 = ɵngcc0.ɵɵnextContext(4); return ctx_r129.setDefault(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_3_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r120); const ctx_r119 = ɵngcc0.ɵɵnextContext(4); return ctx_r119.setDefault(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_3_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r120); const ctx_r121 = ɵngcc0.ɵɵnextContext(4); return ctx_r121.setDefault(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r109 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r117.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r109.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_4_Template(rf, ctx) { if (rf & 1) {
-    const _r132 = ɵngcc0.ɵɵgetCurrentView();
+    const _r124 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r131 = ɵngcc0.ɵɵnextContext(4); return ctx_r131.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r132); const ctx_r133 = ɵngcc0.ɵɵnextContext(4); return ctx_r133.send(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_4_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r124); const ctx_r123 = ɵngcc0.ɵɵnextContext(4); return ctx_r123.send(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_4_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r124); const ctx_r125 = ɵngcc0.ɵɵnextContext(4); return ctx_r125.send(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r109 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r117.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r109.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_5_Template(rf, ctx) { if (rf & 1) {
-    const _r136 = ɵngcc0.ɵɵgetCurrentView();
+    const _r128 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 28);
-    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r135 = ɵngcc0.ɵɵnextContext(4); return ctx_r135.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r136); const ctx_r137 = ɵngcc0.ɵɵnextContext(4); return ctx_r137.edit(); });
+    ɵngcc0.ɵɵlistener("click", function CardComponent_div_0_div_11_div_1_a_5_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r128); const ctx_r127 = ɵngcc0.ɵɵnextContext(4); return ctx_r127.edit(); })("keydown.enter", function CardComponent_div_0_div_11_div_1_a_5_Template_a_keydown_enter_0_listener() { ɵngcc0.ɵɵrestoreView(_r128); const ctx_r129 = ɵngcc0.ɵɵnextContext(4); return ctx_r129.edit(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ɵngcc0.ɵɵnextContext().$implicit;
+    const action_r109 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r117.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r109.name);
 } }
 function CardComponent_div_0_div_11_div_1_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 29);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵpropertyInterpolate("href", action_r117.link, ɵngcc0.ɵɵsanitizeUrl);
+    const action_r109 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵpropertyInterpolate("href", action_r109.link, ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(action_r117.name);
+    ɵngcc0.ɵɵtextInterpolate(action_r109.name);
 } }
 function CardComponent_div_0_div_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -786,9 +728,9 @@ function CardComponent_div_0_div_11_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const action_r117 = ctx.$implicit;
+    const action_r109 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngSwitch", action_r117.event);
+    ɵngcc0.ɵɵproperty("ngSwitch", action_r109.event);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngSwitchCase", "delete");
     ɵngcc0.ɵɵadvance(1);
@@ -803,9 +745,9 @@ function CardComponent_div_0_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, CardComponent_div_0_div_11_div_1_Template, 7, 5, "div", 9);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r111 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r103 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r111.content.actions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r103.content.actions);
 } }
 function CardComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -825,63 +767,63 @@ function CardComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r103 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("cx-card-border", ctx_r103.border)("cx-card-fit-to-container", ctx_r103.fitToContainer);
+    const ctx_r95 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("cx-card-border", ctx_r95.border)("cx-card-fit-to-container", ctx_r95.fitToContainer);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.content.header && !ctx_r103.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.content.header && !ctx_r95.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("cx-card-delete", ctx_r103.editMode);
+    ɵngcc0.ɵɵclassProp("cx-card-delete", ctx_r95.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.content.title);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.content.title);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.content.textBold);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.content.textBold);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r103.content.text);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r95.content.text);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.content.img);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.content.img);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.editMode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r103.content.actions && !ctx_r103.editMode);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r95.content.actions && !ctx_r95.editMode);
 } }
 function CarouselComponent_ng_container_0_h3_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h3");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r142 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r134 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r142.title);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r134.title);
 } }
 function CarouselComponent_ng_container_0_button_3_Template(rf, ctx) { if (rf & 1) {
-    const _r148 = ɵngcc0.ɵɵgetCurrentView();
+    const _r140 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r148); const size_r141 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r147 = ɵngcc0.ɵɵnextContext(); return ctx_r147.activeSlide = ctx_r147.activeSlide - size_r141; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_3_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r140); const size_r133 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r139 = ɵngcc0.ɵɵnextContext(); return ctx_r139.activeSlide = ctx_r139.activeSlide - size_r133; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r143 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r143.activeSlide === 0);
+    const ctx_r135 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r135.activeSlide === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r143.previousIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r135.previousIcon);
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
 } }
-const _c11 = function (a0) { return { item: a0 }; };
+const _c9 = function (a0) { return { item: a0 }; };
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_div_1_ng_container_1_Template, 1, 0, "ng-container", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const data_r157 = ctx.ngIf;
-    const i_r151 = ɵngcc0.ɵɵnextContext(3).index;
-    const ctx_r156 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("active", i_r151 === ctx_r156.activeSlide);
+    const data_r149 = ctx.ngIf;
+    const i_r143 = ɵngcc0.ɵɵnextContext(3).index;
+    const ctx_r148 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("active", i_r143 === ctx_r148.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r156.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c11, data_r157));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r148.template)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c9, data_r149));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -889,9 +831,9 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_ng_container_1_Te
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const item_r154 = ctx.$implicit;
+    const item_r146 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r154));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, item_r146));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -899,66 +841,66 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx)
     ɵngcc0.ɵɵpipe(2, "slice");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r151 = ɵngcc0.ɵɵnextContext().index;
-    const size_r141 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r152 = ɵngcc0.ɵɵnextContext();
+    const i_r143 = ɵngcc0.ɵɵnextContext().index;
+    const size_r133 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r144 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r152.items, i_r151, i_r151 + size_r141));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r144.items, i_r143, i_r143 + size_r133));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_Template, 3, 5, "div", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r151 = ctx.index;
-    const size_r141 = ɵngcc0.ɵɵnextContext().ngIf;
+    const i_r143 = ctx.index;
+    const size_r133 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r151 % size_r141 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r143 % size_r133 === 0);
 } }
 function CarouselComponent_ng_container_0_button_6_Template(rf, ctx) { if (rf & 1) {
-    const _r164 = ɵngcc0.ɵɵgetCurrentView();
+    const _r156 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 14);
-    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r164); const size_r141 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r163 = ɵngcc0.ɵɵnextContext(); return ctx_r163.activeSlide = ctx_r163.activeSlide + size_r141; });
+    ɵngcc0.ɵɵlistener("click", function CarouselComponent_ng_container_0_button_6_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r156); const size_r133 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r155 = ɵngcc0.ɵɵnextContext(); return ctx_r155.activeSlide = ctx_r155.activeSlide + size_r133; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const size_r141 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r145 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("disabled", ctx_r145.activeSlide > ctx_r145.items.length - size_r141 - 1);
+    const size_r133 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r137 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("disabled", ctx_r137.activeSlide > ctx_r137.items.length - size_r133 - 1);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r145.nextIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r137.nextIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r172 = ɵngcc0.ɵɵgetCurrentView();
+    const _r164 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 17);
-    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r172); const i_r169 = ɵngcc0.ɵɵnextContext().index; const ctx_r171 = ɵngcc0.ɵɵnextContext(3); return ctx_r171.activeSlide = i_r169; });
+    ɵngcc0.ɵɵlistener("focus", function CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template_button_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r164); const i_r161 = ɵngcc0.ɵɵnextContext().index; const ctx_r163 = ɵngcc0.ɵɵnextContext(3); return ctx_r163.activeSlide = i_r161; });
     ɵngcc0.ɵɵelement(1, "cx-icon", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r169 = ɵngcc0.ɵɵnextContext().index;
-    const ctx_r170 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("disabled", i_r169 === ctx_r170.activeSlide);
+    const i_r161 = ɵngcc0.ɵɵnextContext().index;
+    const ctx_r162 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("disabled", i_r161 === ctx_r162.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r170.indicatorIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r162.indicatorIcon);
 } }
 function CarouselComponent_ng_container_0_div_7_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_button_1_Template, 2, 2, "button", 16);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const i_r169 = ctx.index;
-    const size_r141 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const i_r161 = ctx.index;
+    const size_r133 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r169 % size_r141 === 0);
+    ɵngcc0.ɵɵproperty("ngIf", i_r161 % size_r133 === 0);
 } }
 function CarouselComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_div_7_ng_container_1_Template, 2, 1, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r146 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r138 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r146.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r138.items);
 } }
 function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -973,31 +915,31 @@ function CarouselComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, CarouselComponent_ng_container_0_div_7_Template, 2, 1, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const size_r141 = ctx.ngIf;
-    const ctx_r140 = ɵngcc0.ɵɵnextContext();
+    const size_r133 = ctx.ngIf;
+    const ctx_r132 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r140.title);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r132.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r141);
+    ɵngcc0.ɵɵproperty("ngClass", "size-" + size_r133);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r141 < ctx_r140.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r133 < ctx_r132.items.length);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r140.items);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r132.items);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", size_r141 < ctx_r140.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", size_r133 < ctx_r132.items.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r140.hideIndicators && size_r141 < ctx_r140.items.length);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r132.hideIndicators && size_r133 < ctx_r132.items.length);
 } }
 function MediaComponent_img_0_Template(rf, ctx) { if (rf & 1) {
-    const _r178 = ɵngcc0.ɵɵgetCurrentView();
+    const _r170 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "img", 1);
-    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener() { ɵngcc0.ɵɵrestoreView(_r178); const ctx_r177 = ɵngcc0.ɵɵnextContext(); return ctx_r177.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener() { ɵngcc0.ɵɵrestoreView(_r178); const ctx_r179 = ɵngcc0.ɵɵnextContext(); return ctx_r179.errorHandler(); });
+    ɵngcc0.ɵɵlistener("load", function MediaComponent_img_0_Template_img_load_0_listener() { ɵngcc0.ɵɵrestoreView(_r170); const ctx_r169 = ɵngcc0.ɵɵnextContext(); return ctx_r169.loadHandler(); })("error", function MediaComponent_img_0_Template_img_error_0_listener() { ɵngcc0.ɵɵrestoreView(_r170); const ctx_r171 = ɵngcc0.ɵɵnextContext(); return ctx_r171.errorHandler(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r176 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵattribute("src", ctx_r176.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r176.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r176.media.alt);
+    const ctx_r168 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵattribute("src", ctx_r168.media.src, ɵngcc0.ɵɵsanitizeUrl)("srcset", ctx_r168.media.srcset, ɵngcc0.ɵɵsanitizeUrl)("alt", ctx_r168.media.alt);
 } }
-const _c12 = ["qty"];
+const _c10 = ["qty"];
 function GenericLinkComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
 } }
@@ -1008,13 +950,13 @@ function GenericLinkComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r181 = ɵngcc0.ɵɵnextContext();
-    const _r184 = ɵngcc0.ɵɵreference(4);
+    const ctx_r173 = ɵngcc0.ɵɵnextContext();
+    const _r176 = ɵngcc0.ɵɵreference(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("href", ctx_r181.url, ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r181.target)("rel", ctx_r181.rel)("class", ctx_r181.class)("id", ctx_r181.id)("style", ctx_r181.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r181.title);
+    ɵngcc0.ɵɵproperty("href", ctx_r173.url, ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r173.target)("rel", ctx_r173.rel)("class", ctx_r173.class)("id", ctx_r173.id)("style", ctx_r173.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r173.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r184);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r176);
 } }
 function GenericLinkComponent_ng_template_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1024,44 +966,44 @@ function GenericLinkComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_ng_container_1_Template, 1, 0, "ng-container", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r183 = ɵngcc0.ɵɵnextContext();
-    const _r184 = ɵngcc0.ɵɵreference(4);
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r183.routerUrl);
-    ɵngcc0.ɵɵattribute("target", ctx_r183.target)("class", ctx_r183.class)("id", ctx_r183.id)("style", ctx_r183.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r183.title);
+    const ctx_r175 = ɵngcc0.ɵɵnextContext();
+    const _r176 = ɵngcc0.ɵɵreference(4);
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r175.routerUrl);
+    ɵngcc0.ɵɵattribute("target", ctx_r175.target)("class", ctx_r175.class)("id", ctx_r175.id)("style", ctx_r175.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r175.title);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r184);
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r176);
 } }
 function GenericLinkComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵprojection(0);
 } }
 function PaginationComponent_a_0_Template(rf, ctx) { if (rf & 1) {
-    const _r191 = ɵngcc0.ɵɵgetCurrentView();
+    const _r183 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 1);
-    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r191); const item_r189 = ctx.$implicit; const ctx_r190 = ɵngcc0.ɵɵnextContext(); return ctx_r190.pageChange(item_r189); });
+    ɵngcc0.ɵɵlistener("click", function PaginationComponent_a_0_Template_a_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r183); const item_r181 = ctx.$implicit; const ctx_r182 = ɵngcc0.ɵɵnextContext(); return ctx_r182.pageChange(item_r181); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r189 = ctx.$implicit;
-    const ctx_r188 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassMap(item_r189.type);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r188.isInactive(item_r189))("current", ctx_r188.isCurrent(item_r189));
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r188.pageRoute)("queryParams", ctx_r188.getQueryParams(item_r189))("tabIndex", ctx_r188.isInactive(item_r189) ? 0 - 1 : 0);
+    const item_r181 = ctx.$implicit;
+    const ctx_r180 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassMap(item_r181.type);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r180.isInactive(item_r181))("current", ctx_r180.isCurrent(item_r181));
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r180.pageRoute)("queryParams", ctx_r180.getQueryParams(item_r181))("tabIndex", ctx_r180.isInactive(item_r181) ? 0 - 1 : 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", item_r189.label, "\n");
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r181.label, "\n");
 } }
 function SortingComponent_ng_option_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ng-option", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const sort_r193 = ctx.$implicit;
-    const ctx_r192 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("value", sort_r193.code);
+    const sort_r185 = ctx.$implicit;
+    const ctx_r184 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("value", sort_r185.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(sort_r193.name ? sort_r193.name : ctx_r192.sortLabels ? ctx_r192.sortLabels[sort_r193.code] : "");
+    ɵngcc0.ɵɵtextInterpolate(sort_r185.name ? sort_r185.name : ctx_r184.sortLabels ? ctx_r184.sortLabels[sort_r185.code] : "");
 } }
 function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r203 = ɵngcc0.ɵɵgetCurrentView();
+    const _r195 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1071,22 +1013,22 @@ function GlobalMessageComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r203); const i_r201 = ctx.index; const ctx_r202 = ɵngcc0.ɵɵnextContext(2); return ctx_r202.clear(ctx_r202.messageType.MSG_TYPE_CONFIRMATION, i_r201); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r195); const i_r193 = ctx.index; const ctx_r194 = ɵngcc0.ɵɵnextContext(2); return ctx_r194.clear(ctx_r194.messageType.MSG_TYPE_CONFIRMATION, i_r193); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const confMsg_r200 = ctx.$implicit;
-    const ctx_r196 = ɵngcc0.ɵɵnextContext(2);
+    const confMsg_r192 = ctx.$implicit;
+    const ctx_r188 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r196.iconTypes.SUCCESS);
+    ɵngcc0.ɵɵproperty("type", ctx_r188.iconTypes.SUCCESS);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r200));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, confMsg_r192));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r196.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r188.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
-    const _r207 = ɵngcc0.ɵɵgetCurrentView();
+    const _r199 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1096,22 +1038,22 @@ function GlobalMessageComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r207); const i_r205 = ctx.index; const ctx_r206 = ɵngcc0.ɵɵnextContext(2); return ctx_r206.clear(ctx_r206.messageType.MSG_TYPE_INFO, i_r205); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_2_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r199); const i_r197 = ctx.index; const ctx_r198 = ɵngcc0.ɵɵnextContext(2); return ctx_r198.clear(ctx_r198.messageType.MSG_TYPE_INFO, i_r197); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r204 = ctx.$implicit;
-    const ctx_r197 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r196 = ctx.$implicit;
+    const ctx_r189 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r197.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r189.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r204));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r196));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r197.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r189.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r211 = ɵngcc0.ɵɵgetCurrentView();
+    const _r203 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1121,22 +1063,22 @@ function GlobalMessageComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r211); const i_r209 = ctx.index; const ctx_r210 = ɵngcc0.ɵɵnextContext(2); return ctx_r210.clear(ctx_r210.messageType.MSG_TYPE_INFO, i_r209); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_3_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r203); const i_r201 = ctx.index; const ctx_r202 = ɵngcc0.ɵɵnextContext(2); return ctx_r202.clear(ctx_r202.messageType.MSG_TYPE_INFO, i_r201); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const infoMsg_r208 = ctx.$implicit;
-    const ctx_r198 = ɵngcc0.ɵɵnextContext(2);
+    const infoMsg_r200 = ctx.$implicit;
+    const ctx_r190 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r198.iconTypes.WARNING);
+    ɵngcc0.ɵɵproperty("type", ctx_r190.iconTypes.WARNING);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r208));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, infoMsg_r200));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r198.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r190.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r215 = ɵngcc0.ɵɵgetCurrentView();
+    const _r207 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "span", 6);
     ɵngcc0.ɵɵelement(2, "cx-icon", 7);
@@ -1146,19 +1088,19 @@ function GlobalMessageComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r215); const i_r213 = ctx.index; const ctx_r214 = ɵngcc0.ɵɵnextContext(2); return ctx_r214.clear(ctx_r214.messageType.MSG_TYPE_ERROR, i_r213); });
+    ɵngcc0.ɵɵlistener("click", function GlobalMessageComponent_div_0_div_4_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r207); const i_r205 = ctx.index; const ctx_r206 = ɵngcc0.ɵɵnextContext(2); return ctx_r206.clear(ctx_r206.messageType.MSG_TYPE_ERROR, i_r205); });
     ɵngcc0.ɵɵelement(7, "cx-icon", 7);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const errorMsg_r212 = ctx.$implicit;
-    const ctx_r199 = ɵngcc0.ɵɵnextContext(2);
+    const errorMsg_r204 = ctx.$implicit;
+    const ctx_r191 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r199.iconTypes.ERROR);
+    ɵngcc0.ɵɵproperty("type", ctx_r191.iconTypes.ERROR);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r212));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 3, errorMsg_r204));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r199.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r191.iconTypes.CLOSE);
 } }
 function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1168,16 +1110,16 @@ function GlobalMessageComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, GlobalMessageComponent_div_0_div_4_Template, 8, 5, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const messages_r195 = ctx.ngIf;
-    const ctx_r194 = ɵngcc0.ɵɵnextContext();
+    const messages_r187 = ctx.ngIf;
+    const ctx_r186 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r195[ctx_r194.messageType.MSG_TYPE_CONFIRMATION]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r187[ctx_r186.messageType.MSG_TYPE_CONFIRMATION]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r195[ctx_r194.messageType.MSG_TYPE_INFO]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r187[ctx_r186.messageType.MSG_TYPE_INFO]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r195[ctx_r194.messageType.MSG_TYPE_WARNING]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r187[ctx_r186.messageType.MSG_TYPE_WARNING]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", messages_r195[ctx_r194.messageType.MSG_TYPE_ERROR]);
+    ɵngcc0.ɵɵproperty("ngForOf", messages_r187[ctx_r186.messageType.MSG_TYPE_ERROR]);
 } }
 function QualtricsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
@@ -1188,47 +1130,47 @@ function SiteContextSelectorComponent_label_0_option_5_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r220 = ctx.$implicit;
-    const ctx_r219 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵpropertyInterpolate("value", item_r220.isocode);
-    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r219.activeItem$) === item_r220.isocode);
+    const item_r212 = ctx.$implicit;
+    const ctx_r211 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵpropertyInterpolate("value", item_r212.isocode);
+    ɵngcc0.ɵɵproperty("selected", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r211.activeItem$) === item_r212.isocode);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r220.label);
+    ɵngcc0.ɵɵtextInterpolate(item_r212.label);
 } }
 function SiteContextSelectorComponent_label_0_Template(rf, ctx) { if (rf & 1) {
-    const _r222 = ɵngcc0.ɵɵgetCurrentView();
+    const _r214 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "label");
     ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "select", 1);
-    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r222); const ctx_r221 = ɵngcc0.ɵɵnextContext(); return ctx_r221.active = $event.target.value; });
+    ɵngcc0.ɵɵlistener("change", function SiteContextSelectorComponent_label_0_Template_select_change_4_listener($event) { ɵngcc0.ɵɵrestoreView(_r214); const ctx_r213 = ɵngcc0.ɵɵnextContext(); return ctx_r213.active = $event.target.value; });
     ɵngcc0.ɵɵtemplate(5, SiteContextSelectorComponent_label_0_option_5_Template, 3, 5, "option", 2);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(6, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const items_r218 = ctx.ngIf;
-    const ctx_r217 = ɵngcc0.ɵɵnextContext();
+    const items_r210 = ctx.ngIf;
+    const ctx_r209 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r217.label$));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r209.label$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", items_r218);
+    ɵngcc0.ɵɵproperty("ngForOf", items_r210);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r217.iconTypes.CARET_DOWN);
+    ɵngcc0.ɵɵproperty("type", ctx_r209.iconTypes.CARET_DOWN);
 } }
 function StarRatingComponent_cx_icon_0_Template(rf, ctx) { if (rf & 1) {
-    const _r226 = ɵngcc0.ɵɵgetCurrentView();
+    const _r218 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-icon", 1);
-    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener() { ɵngcc0.ɵɵrestoreView(_r226); const i_r224 = ctx.$implicit; const ctx_r225 = ɵngcc0.ɵɵnextContext(); return ctx_r225.setRate(i_r224); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener() { ɵngcc0.ɵɵrestoreView(_r226); const ctx_r227 = ɵngcc0.ɵɵnextContext(); return ctx_r227.setRate(0); })("keydown", function StarRatingComponent_cx_icon_0_Template_cx_icon_keydown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r226); const i_r224 = ctx.$implicit; const ctx_r228 = ɵngcc0.ɵɵnextContext(); return ctx_r228.setRateOnEvent($event, i_r224); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r226); const i_r224 = ctx.$implicit; const ctx_r229 = ɵngcc0.ɵɵnextContext(); return ctx_r229.saveRate(i_r224); });
+    ɵngcc0.ɵɵlistener("mouseover", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseover_0_listener() { ɵngcc0.ɵɵrestoreView(_r218); const i_r216 = ctx.$implicit; const ctx_r217 = ɵngcc0.ɵɵnextContext(); return ctx_r217.setRate(i_r216); })("mouseout", function StarRatingComponent_cx_icon_0_Template_cx_icon_mouseout_0_listener() { ɵngcc0.ɵɵrestoreView(_r218); const ctx_r219 = ɵngcc0.ɵɵnextContext(); return ctx_r219.setRate(0); })("keydown", function StarRatingComponent_cx_icon_0_Template_cx_icon_keydown_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r218); const i_r216 = ctx.$implicit; const ctx_r220 = ɵngcc0.ɵɵnextContext(); return ctx_r220.setRateOnEvent($event, i_r216); })("click", function StarRatingComponent_cx_icon_0_Template_cx_icon_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r218); const i_r216 = ctx.$implicit; const ctx_r221 = ɵngcc0.ɵɵnextContext(); return ctx_r221.saveRate(i_r216); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r223 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r223.iconTypes.STAR);
-    ɵngcc0.ɵɵattribute("tabindex", ctx_r223.disabled ? null : 0);
+    const ctx_r215 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r215.iconTypes.STAR);
+    ɵngcc0.ɵɵattribute("tabindex", ctx_r215.disabled ? null : 0);
 } }
-const _c13 = function () { return [1, 2, 3, 4, 5]; };
+const _c11 = function () { return [1, 2, 3, 4, 5]; };
 function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "strong");
     ɵngcc0.ɵɵelementStart(1, "li");
@@ -1236,18 +1178,18 @@ function PromotionsComponent_div_0_ng_container_1_strong_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r234 = ctx.$implicit;
+    const promotion_r226 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r234.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r226.description);
 } }
 function PromotionsComponent_div_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_1_strong_1_Template, 3, 1, "strong", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r231 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r223 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r231.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r223.promotions);
 } }
 function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ul");
@@ -1256,18 +1198,18 @@ function PromotionsComponent_div_0_ng_container_2_ul_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const promotion_r236 = ctx.$implicit;
+    const promotion_r228 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(promotion_r236.description);
+    ɵngcc0.ɵɵtextInterpolate(promotion_r228.description);
 } }
 function PromotionsComponent_div_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PromotionsComponent_div_0_ng_container_2_ul_1_Template, 3, 1, "ul", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r232 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r224 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r232.promotions);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r224.promotions);
 } }
 function PromotionsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -1298,9 +1240,9 @@ function AppliedCouponsComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r242 = ctx.$implicit;
+    const voucher_r234 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r242.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r234.voucherCode);
 } }
 function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -1308,21 +1250,21 @@ function AppliedCouponsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(2, AppliedCouponsComponent_div_0_div_2_Template, 3, 1, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r237 = ɵngcc0.ɵɵnextContext();
+    const ctx_r229 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r237.sortedVouchers.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r229.sortedVouchers.length > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r237.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r229.sortedVouchers);
 } }
 function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r246 = ɵngcc0.ɵɵgetCurrentView();
+    const _r238 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "div", 10);
     ɵngcc0.ɵɵelementStart(2, "span", 11);
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r246); const voucher_r244 = ctx.$implicit; const ctx_r245 = ɵngcc0.ɵɵnextContext(2); return ctx_r245.removeVoucher(voucher_r244.voucherCode); });
+    ɵngcc0.ɵɵlistener("click", function AppliedCouponsComponent_ng_template_1_div_1_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r238); const voucher_r236 = ctx.$implicit; const ctx_r237 = ɵngcc0.ɵɵnextContext(2); return ctx_r237.removeVoucher(voucher_r236.voucherCode); });
     ɵngcc0.ɵɵelementStart(5, "span", 13);
     ɵngcc0.ɵɵelement(6, "cx-icon", 14);
     ɵngcc0.ɵɵelementEnd();
@@ -1330,43 +1272,43 @@ function AppliedCouponsComponent_ng_template_1_div_1_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const voucher_r244 = ctx.$implicit;
-    const ctx_r243 = ɵngcc0.ɵɵnextContext(2);
+    const voucher_r236 = ctx.$implicit;
+    const ctx_r235 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(voucher_r244.voucherCode);
+    ɵngcc0.ɵɵtextInterpolate(voucher_r236.voucherCode);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("disabled", ctx_r243.cartIsLoading);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r243.cartIsLoading);
+    ɵngcc0.ɵɵclassProp("disabled", ctx_r235.cartIsLoading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r235.cartIsLoading);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r243.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r235.iconTypes.CLOSE);
 } }
 function AppliedCouponsComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_div_1_Template, 7, 5, "div", 8);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r239 = ɵngcc0.ɵɵnextContext();
+    const ctx_r231 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r239.sortedVouchers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r231.sortedVouchers);
 } }
 function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template(rf, ctx) { if (rf & 1) {
-    const _r253 = ɵngcc0.ɵɵgetCurrentView();
+    const _r245 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 15);
     ɵngcc0.ɵɵelementStart(1, "button", 16);
-    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r253); const coupon_r251 = ctx.$implicit; const ctx_r252 = ɵngcc0.ɵɵnextContext(3); return ctx_r252.applyCustomerCoupon(coupon_r251.couponId); });
+    ɵngcc0.ɵɵlistener("click", function CartCouponComponent_ng_container_0_ng_container_18_div_9_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r245); const coupon_r243 = ctx.$implicit; const ctx_r244 = ɵngcc0.ɵɵnextContext(3); return ctx_r244.applyCustomerCoupon(coupon_r243.couponId); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const coupon_r251 = ctx.$implicit;
-    const ctx_r250 = ɵngcc0.ɵɵnextContext(3);
+    const coupon_r243 = ctx.$implicit;
+    const ctx_r242 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r250.cartIsLoading$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(3, 6, ctx_r250.cartIsLoading$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r242.cartIsLoading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(3, 6, ctx_r242.cartIsLoading$));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", coupon_r251.couponId, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", coupon_r243.couponId, " ");
 } }
 function CartCouponComponent_ng_container_0_ng_container_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1385,16 +1327,16 @@ function CartCouponComponent_ng_container_0_ng_container_18_Template(rf, ctx) { 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r249 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r241 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, "voucher.availableCoupons"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 5, "voucher.availableCouponsLabel"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r249.applicableCoupons);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r241.applicableCoupons);
 } }
 function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r255 = ɵngcc0.ɵɵgetCurrentView();
+    const _r247 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
     ɵngcc0.ɵɵtext(2);
@@ -1402,7 +1344,7 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 2);
     ɵngcc0.ɵɵelementStart(5, "form", 3);
-    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_Template_form_submit_5_listener() { ɵngcc0.ɵɵrestoreView(_r255); const ctx_r254 = ɵngcc0.ɵɵnextContext(); return ctx_r254.applyVoucher(); });
+    ɵngcc0.ɵɵlistener("submit", function CartCouponComponent_ng_container_0_Template_form_submit_5_listener() { ɵngcc0.ɵɵrestoreView(_r247); const ctx_r246 = ɵngcc0.ɵɵnextContext(); return ctx_r246.applyVoucher(); });
     ɵngcc0.ɵɵelementStart(6, "div", 4);
     ɵngcc0.ɵɵelementStart(7, "div", 5);
     ɵngcc0.ɵɵelement(8, "input", 6);
@@ -1424,23 +1366,23 @@ function CartCouponComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(18, CartCouponComponent_ng_container_0_ng_container_18_Template, 10, 7, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r248 = ctx.ngIf;
-    const ctx_r247 = ɵngcc0.ɵɵnextContext();
+    const cart_r240 = ctx.ngIf;
+    const ctx_r239 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 11, "voucher.coupon"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r247.form);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r239.form);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(9, 13, "voucher.placeholder"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 15, ctx_r247.cartIsLoading$));
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 17, ctx_r247.cartIsLoading$));
+    ɵngcc0.ɵɵclassProp("disabled", ɵngcc0.ɵɵpipeBind1(12, 15, ctx_r239.cartIsLoading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(13, 17, ctx_r239.cartIsLoading$));
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 19, "voucher.apply"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("vouchers", cart_r248.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(17, 21, ctx_r247.cartIsLoading$))("isReadOnly", false);
+    ɵngcc0.ɵɵproperty("vouchers", cart_r240.appliedVouchers)("cartIsLoading", ɵngcc0.ɵɵpipeBind1(17, 21, ctx_r239.cartIsLoading$))("isReadOnly", false);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r247.applicableCoupons && ctx_r247.applicableCoupons.length > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r239.applicableCoupons && ctx_r239.applicableCoupons.length > 0);
 } }
 function CartItemListComponent_div_0_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1472,8 +1414,8 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r256 = ɵngcc0.ɵɵnextContext();
-    const _r258 = ɵngcc0.ɵɵreference(3);
+    const ctx_r248 = ɵngcc0.ɵɵnextContext();
+    const _r250 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -1481,19 +1423,19 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 9, "cartItems.quantity"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r256.isSaveForLaterEnabled() && ctx_r256.options.isSaveForLater)("ngIfElse", _r258);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r248.isSaveForLaterEnabled() && ctx_r248.options.isSaveForLater)("ngIfElse", _r250);
 } }
 function CartItemListComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelement(1, "cx-cart-item", 13);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const control_r264 = ctx.ngIf;
-    const item_r261 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r263 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-changed", control_r264.get("quantity").dirty);
+    const control_r256 = ctx.ngIf;
+    const item_r253 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r255 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-changed", control_r256.get("quantity").dirty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("item", item_r261)("quantityControl", control_r264.get("quantity"))("readonly", ctx_r263.readonly)("promotionLocation", ctx_r263.promotionLocation)("options", ctx_r263.options);
+    ɵngcc0.ɵɵproperty("item", item_r253)("quantityControl", control_r256.get("quantity"))("readonly", ctx_r255.readonly)("promotionLocation", ctx_r255.promotionLocation)("options", ctx_r255.options);
 } }
 function CartItemListComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -1501,10 +1443,10 @@ function CartItemListComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r261 = ctx.$implicit;
-    const ctx_r257 = ɵngcc0.ɵɵnextContext();
+    const item_r253 = ctx.$implicit;
+    const ctx_r249 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r257.getControl(item_r261)));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r249.getControl(item_r253)));
 } }
 function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 9);
@@ -1515,22 +1457,22 @@ function CartItemListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "cartItems.total"), " ");
 } }
-const _c14 = function (a1) { return { cxRoute: "product", params: a1 }; };
+const _c12 = function (a1) { return { cxRoute: "product", params: a1 }; };
 function CartItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
-    const _r277 = ɵngcc0.ɵɵgetCurrentView();
+    const _r269 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 18);
     ɵngcc0.ɵɵelementStart(1, "a", 19);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r277); const ctx_r276 = ɵngcc0.ɵɵnextContext(); return ctx_r276.viewItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_8_Template_a_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r269); const ctx_r268 = ɵngcc0.ɵɵnextContext(); return ctx_r268.viewItem(); });
     ɵngcc0.ɵɵpipe(2, "cxUrl");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r266 = ɵngcc0.ɵɵnextContext();
+    const ctx_r258 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r266.item.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r258.item.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r266.item.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r258.item.product.name);
 } }
 function CartItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
@@ -1538,45 +1480,45 @@ function CartItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r267 = ɵngcc0.ɵɵnextContext();
+    const ctx_r259 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r267.item.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r259.item.product.code, " ");
 } }
 function CartItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 24);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r279 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r271 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r279.name, ": ", variant_r279.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r271.name, ": ", variant_r271.value, " ");
 } }
 function CartItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r279 = ctx.$implicit;
+    const variant_r271 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r279.name && variant_r279.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r271.name && variant_r271.value);
 } }
 function CartItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 21);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r268 = ɵngcc0.ɵɵnextContext();
+    const ctx_r260 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r268.item.product.baseOptions[0] == null ? null : ctx_r268.item.product.baseOptions[0].selected == null ? null : ctx_r268.item.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r260.item.product.baseOptions[0] == null ? null : ctx_r260.item.product.baseOptions[0].selected == null ? null : ctx_r260.item.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function CartItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r282 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r274 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r282.item.basePrice == null ? null : ctx_r282.item.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r274.item.basePrice == null ? null : ctx_r274.item.basePrice.formattedValue, " ");
 } }
 function CartItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -1587,23 +1529,23 @@ function CartItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, CartItemComponent_div_11_div_4_Template, 2, 1, "div", 27);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r269 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r269.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    const ctx_r261 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r261.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r269.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r261.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r269.item.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r261.item.basePrice);
 } }
 function CartItemComponent_ng_container_19_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r283 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r275 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r283.item.product.stock.stockLevel, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r275.item.product.stock.stockLevel, " ");
 } }
 function CartItemComponent_ng_container_19_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -1626,16 +1568,16 @@ function CartItemComponent_ng_container_19_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r284 = ɵngcc0.ɵɵreference(7);
-    const ctx_r270 = ɵngcc0.ɵɵnextContext();
+    const _r276 = ɵngcc0.ɵɵreference(7);
+    const ctx_r262 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r270.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r262.compact ? "" : " col-md-3 col-lg-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r270.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r262.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "saveForLaterItems.stock"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r270.item.product == null ? null : ctx_r270.item.product.stock == null ? null : ctx_r270.item.product.stock.stockLevel) >= 0)("ngIfElse", _r284);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r262.item.product == null ? null : ctx_r262.item.product.stock == null ? null : ctx_r262.item.product.stock.stockLevel) >= 0)("ngIfElse", _r276);
 } }
 function CartItemComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 31);
@@ -1651,42 +1593,42 @@ function CartItemComponent_ng_container_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "cx-promotions", 32);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const appliedProductPromotions_r286 = ctx.ngIf;
+    const appliedProductPromotions_r278 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r286);
+    ɵngcc0.ɵɵproperty("promotions", appliedProductPromotions_r278);
 } }
 function CartItemComponent_div_23_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainer(0);
 } }
-const _c15 = function (a0, a1) { return { loading: a0, item: a1 }; };
-const _c16 = function (a0) { return { $implicit: a0 }; };
+const _c13 = function (a0, a1) { return { loading: a0, item: a1 }; };
+const _c14 = function (a0) { return { $implicit: a0 }; };
 function CartItemComponent_div_23_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_23_ng_container_1_ng_container_1_Template, 1, 0, "ng-container", 36);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r287 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r279 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r287.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c16, ɵngcc0.ɵɵpureFunction2(2, _c15, ctx_r287.quantityControl.disabled, ctx_r287.item)));
+    ɵngcc0.ɵɵproperty("ngTemplateOutlet", ctx_r279.options.optionalBtn)("ngTemplateOutletContext", ɵngcc0.ɵɵpureFunction1(5, _c14, ɵngcc0.ɵɵpureFunction2(2, _c13, ctx_r279.quantityControl.disabled, ctx_r279.item)));
 } }
 function CartItemComponent_div_23_Template(rf, ctx) { if (rf & 1) {
-    const _r290 = ɵngcc0.ɵɵgetCurrentView();
+    const _r282 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 33);
     ɵngcc0.ɵɵtemplate(1, CartItemComponent_div_23_ng_container_1_Template, 2, 7, "ng-container", 8);
     ɵngcc0.ɵɵelementStart(2, "div", 34);
     ɵngcc0.ɵɵelementStart(3, "button", 35);
-    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_23_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r290); const ctx_r289 = ɵngcc0.ɵɵnextContext(); return ctx_r289.removeItem(); });
+    ɵngcc0.ɵɵlistener("click", function CartItemComponent_div_23_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r282); const ctx_r281 = ɵngcc0.ɵɵnextContext(); return ctx_r281.removeItem(); });
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵpipe(5, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r273 = ɵngcc0.ɵɵnextContext();
+    const ctx_r265 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r273.isProductOutOfStock(ctx_r273.item.product));
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r265.isProductOutOfStock(ctx_r265.item.product));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r273.quantityControl.disabled);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r265.quantityControl.disabled);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 3, "common.remove"), " ");
 } }
@@ -1701,20 +1643,20 @@ function CartItemComponent_ng_template_24_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r291 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r291.compact ? "" : " col-md-3 col-xl-2");
+    const ctx_r283 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r283.compact ? "" : " col-md-3 col-xl-2");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngClass", ctx_r291.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
+    ɵngcc0.ɵɵproperty("ngClass", ctx_r283.compact ? "" : " d-block d-md-none d-lg-none d-xl-none");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r291.item.totalPrice.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r283.item.totalPrice.formattedValue);
 } }
 function CartItemComponent_ng_template_24_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, CartItemComponent_ng_template_24_div_0_Template, 6, 6, "div", 37);
 } if (rf & 2) {
-    const ctx_r275 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r275.item.totalPrice);
+    const ctx_r267 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r267.item.totalPrice);
 } }
 function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1727,11 +1669,11 @@ function OrderSummaryComponent_div_3_div_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r294 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r286 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "orderCost.salesTax"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r294.cart.totalTax == null ? null : ctx_r294.cart.totalTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r286.cart.totalTax == null ? null : ctx_r286.cart.totalTax.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1739,9 +1681,9 @@ function OrderSummaryComponent_div_3_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r295 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r287 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r295.cart.totalDiscounts == null ? null : ctx_r295.cart.totalDiscounts.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.discount"), " ", ctx_r287.cart.totalDiscounts == null ? null : ctx_r287.cart.totalDiscounts.formattedValue, " ");
 } }
 function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -1749,9 +1691,9 @@ function OrderSummaryComponent_div_3_div_21_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r296 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r288 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r296.cart.totalTax == null ? null : ctx_r296.cart.totalTax.formattedValue, ". ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "orderCost.grossTax"), " ", ctx_r288.cart.totalTax == null ? null : ctx_r288.cart.totalTax.formattedValue, ". ");
 } }
 function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -1787,46 +1729,46 @@ function OrderSummaryComponent_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(21, OrderSummaryComponent_div_3_div_21_Template, 3, 4, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r292 = ɵngcc0.ɵɵnextContext();
+    const ctx_r284 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 9, "orderCost.subtotal"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r292.cart.subTotal == null ? null : ctx_r292.cart.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r284.cart.subTotal == null ? null : ctx_r284.cart.subTotal.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 11, "orderCost.estimatedShipping"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r292.cart.deliveryCost == null ? null : ctx_r292.cart.deliveryCost.formattedValue) ? ctx_r292.cart.deliveryCost.formattedValue : "TBD", " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", (ctx_r284.cart.deliveryCost == null ? null : ctx_r284.cart.deliveryCost.formattedValue) ? ctx_r284.cart.deliveryCost.formattedValue : "TBD", " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r292.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r284.cart.net);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "orderCost.total"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r292.cart.totalPriceWithTax == null ? null : ctx_r292.cart.totalPriceWithTax.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r284.cart.totalPriceWithTax == null ? null : ctx_r284.cart.totalPriceWithTax.formattedValue, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r292.cart.totalDiscounts == null ? null : ctx_r292.cart.totalDiscounts.value) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r284.cart.totalDiscounts == null ? null : ctx_r284.cart.totalDiscounts.value) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r292.cart.net);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r284.cart.net);
 } }
 function OrderSummaryComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-applied-coupons", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r293 = ɵngcc0.ɵɵnextContext();
+    const ctx_r285 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("vouchers", ctx_r293.cart.appliedVouchers)("isReadOnly", true);
+    ɵngcc0.ɵɵproperty("vouchers", ctx_r285.cart.appliedVouchers)("isReadOnly", true);
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-promotions", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r305 = ctx.ngIf;
+    const orderPromotions_r297 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r305);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r297);
 } }
-const _c17 = function (a0) { return { code: a0 }; };
-const _c18 = function (a1) { return { isSaveForLater: false, optionalBtn: a1 }; };
+const _c15 = function (a0) { return { code: a0 }; };
+const _c16 = function (a1) { return { isSaveForLater: false, optionalBtn: a1 }; };
 function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
@@ -1839,25 +1781,25 @@ function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, c
     ɵngcc0.ɵɵpipe(7, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entries_r302 = ɵngcc0.ɵɵnextContext().ngIf;
-    const cart_r300 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r303 = ɵngcc0.ɵɵnextContext();
-    const _r298 = ɵngcc0.ɵɵreference(3);
+    const entries_r294 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r292 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r295 = ɵngcc0.ɵɵnextContext();
+    const _r290 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 6, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(13, _c17, cart_r300.code)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 6, "cartDetails.cartName", ɵngcc0.ɵɵpureFunction1(13, _c15, cart_r292.code)), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 9, ctx_r303.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 9, ctx_r295.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r302)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(7, 11, ctx_r303.cartLoaded$))("promotionLocation", ctx_r303.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(15, _c18, ctx_r303.isSaveForLaterEnabled() ? _r298 : null));
+    ɵngcc0.ɵɵproperty("items", entries_r294)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(7, 11, ctx_r295.cartLoaded$))("promotionLocation", ctx_r295.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(15, _c16, ctx_r295.isSaveForLaterEnabled() ? _r290 : null));
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template, 8, 17, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r300 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r292 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cart_r300.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", cart_r292.totalItems > 0);
 } }
 function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1865,23 +1807,23 @@ function CartDetailsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r297 = ɵngcc0.ɵɵnextContext();
+    const ctx_r289 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r297.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r289.entries$));
 } }
 function CartDetailsComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r311 = ɵngcc0.ɵɵgetCurrentView();
+    const _r303 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 7);
     ɵngcc0.ɵɵelementStart(1, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r311); const ctx_r309 = ctx.$implicit; const ctx_r310 = ɵngcc0.ɵɵnextContext(); return ctx_r310.saveForLater(ctx_r309.item); });
+    ɵngcc0.ɵɵlistener("click", function CartDetailsComponent_ng_template_2_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r303); const ctx_r301 = ctx.$implicit; const ctx_r302 = ɵngcc0.ɵɵnextContext(); return ctx_r302.saveForLater(ctx_r301.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r309 = ctx.$implicit;
+    const ctx_r301 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r309.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r301.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.saveForLater"), " ");
 } }
@@ -1892,7 +1834,7 @@ function CartTotalsComponent_ng_container_0_ng_container_1_button_2_Template(rf,
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction0(6, _c10)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction0(6, _c8)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "cartDetails.proceedToCheckout"), " ");
 } }
@@ -1902,12 +1844,12 @@ function CartTotalsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(2, CartTotalsComponent_ng_container_0_ng_container_1_button_2_Template, 4, 7, "button", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const entries_r315 = ctx.ngIf;
-    const cart_r313 = ɵngcc0.ɵɵnextContext().ngIf;
+    const entries_r307 = ctx.ngIf;
+    const cart_r305 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cart", cart_r313);
+    ɵngcc0.ɵɵproperty("cart", cart_r305);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", entries_r315.length);
+    ɵngcc0.ɵɵproperty("ngIf", entries_r307.length);
 } }
 function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1915,16 +1857,16 @@ function CartTotalsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r312 = ɵngcc0.ɵɵnextContext();
+    const ctx_r304 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r312.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r304.entries$));
 } }
-const _c19 = function (a0) { return { total: a0 }; };
+const _c17 = function (a0) { return { total: a0 }; };
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r331 = ɵngcc0.ɵɵgetCurrentView();
+    const _r323 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r331); const entry_r329 = ctx.ngIf; const ctx_r330 = ɵngcc0.ɵɵnextContext(5); return ctx_r330.remove(entry_r329); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_div_1_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r323); const entry_r321 = ctx.ngIf; const ctx_r322 = ɵngcc0.ɵɵnextContext(5); return ctx_r322.remove(entry_r321); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelement(3, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(4, "span", 6);
@@ -1934,18 +1876,18 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r326 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r318 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r326.loading$));
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(2, 3, ctx_r318.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r326.iconTypes.HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r318.iconTypes.HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.remove"));
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template(rf, ctx) { if (rf & 1) {
-    const _r334 = ɵngcc0.ɵɵgetCurrentView();
+    const _r326 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r334); const product_r321 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r332 = ɵngcc0.ɵɵnextContext(); return ctx_r332.add(product_r321); });
+    ɵngcc0.ɵɵlistener("click", function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r326); const product_r313 = ɵngcc0.ɵɵnextContext(4).ngIf; const ctx_r324 = ɵngcc0.ɵɵnextContext(); return ctx_r324.add(product_r313); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelement(2, "cx-icon", 5);
     ɵngcc0.ɵɵelementStart(3, "span", 6);
@@ -1954,10 +1896,10 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r328 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r328.loading$));
+    const ctx_r320 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵproperty("disabled", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r320.loading$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r328.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r320.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 5, "addToWishList.add"));
 } }
@@ -1967,21 +1909,21 @@ function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_
     ɵngcc0.ɵɵtemplate(2, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_ng_template_2_Template, 6, 7, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r327 = ɵngcc0.ɵɵreference(3);
-    const entries_r324 = ɵngcc0.ɵɵnextContext().ngIf;
-    const product_r321 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r325 = ɵngcc0.ɵɵnextContext();
+    const _r319 = ɵngcc0.ɵɵreference(3);
+    const entries_r316 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r313 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r317 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r325.getProductInWishList(product_r321, entries_r324))("ngIfElse", _r327);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r317.getProductInWishList(product_r313, entries_r316))("ngIfElse", _r319);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddToWishListComponent_ng_container_0_ng_container_1_ng_container_1_ng_container_1_Template, 4, 2, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r323 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r315 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r323.hasStock);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r315.hasStock);
 } }
 function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1989,9 +1931,9 @@ function AddToWishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r322 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r314 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r322.wishListEntries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r314.wishListEntries$));
 } }
 function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -1999,12 +1941,12 @@ function AddToWishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r318 = ɵngcc0.ɵɵnextContext();
-    const _r319 = ɵngcc0.ɵɵreference(3);
+    const ctx_r310 = ɵngcc0.ɵɵnextContext();
+    const _r311 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r318.userLoggedIn$))("ngIfElse", _r319);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r310.userLoggedIn$))("ngIfElse", _r311);
 } }
-const _c20 = function () { return { cxRoute: "login" }; };
+const _c18 = function () { return { cxRoute: "login" }; };
 function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "a", 8);
@@ -2017,25 +1959,25 @@ function AddToWishListComponent_ng_template_2_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r337 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r329 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(7, _c20)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(7, _c18)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("type", ctx_r337.iconTypes.EMPTY_HEART);
+    ɵngcc0.ɵɵproperty("type", ctx_r329.iconTypes.EMPTY_HEART);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "addToWishList.anonymous"));
 } }
 function AddToWishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, AddToWishListComponent_ng_template_2_ng_container_0_Template, 7, 8, "ng-container", 0);
 } if (rf & 2) {
-    const ctx_r320 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r320.hasStock);
+    const ctx_r312 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r312.hasStock);
 } }
 function SaveForLaterComponent_ng_container_0_p_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const data_r343 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", data_r343.content, ɵngcc0.ɵɵsanitizeHtml);
+    const data_r335 = ctx.ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", data_r335.content, ɵngcc0.ɵɵsanitizeHtml);
 } }
 function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2043,11 +1985,11 @@ function SaveForLaterComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r338 = ɵngcc0.ɵɵnextContext();
+    const ctx_r330 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r338.data$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r330.data$));
 } }
-const _c21 = function (a1) { return { isSaveForLater: true, optionalBtn: a1 }; };
+const _c19 = function (a1) { return { isSaveForLater: true, optionalBtn: a1 }; };
 function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
@@ -2058,23 +2000,23 @@ function SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template(rf, 
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entries_r346 = ɵngcc0.ɵɵnextContext().ngIf;
-    const saveForLater_r344 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r347 = ɵngcc0.ɵɵnextContext();
-    const _r340 = ɵngcc0.ɵɵreference(5);
+    const entries_r338 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r336 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r339 = ɵngcc0.ɵɵnextContext();
+    const _r332 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c8, saveForLater_r344.totalItems)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 5, "saveForLaterItems.itemTotal", ɵngcc0.ɵɵpureFunction1(10, _c6, saveForLater_r336.totalItems)), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r346)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r347.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c21, _r340));
+    ɵngcc0.ɵɵproperty("items", entries_r338)("readonly", false)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(5, 8, ctx_r339.cartLoaded$))("options", ɵngcc0.ɵɵpureFunction1(12, _c19, _r332));
 } }
 function SaveForLaterComponent_ng_container_2_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, SaveForLaterComponent_ng_container_2_ng_container_1_div_1_Template, 6, 14, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const saveForLater_r344 = ɵngcc0.ɵɵnextContext().ngIf;
+    const saveForLater_r336 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r344.totalItems > 0);
+    ɵngcc0.ɵɵproperty("ngIf", saveForLater_r336.totalItems > 0);
 } }
 function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2082,23 +2024,23 @@ function SaveForLaterComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r339 = ɵngcc0.ɵɵnextContext();
+    const ctx_r331 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r339.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r331.entries$));
 } }
 function SaveForLaterComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r353 = ɵngcc0.ɵɵgetCurrentView();
+    const _r345 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "button", 9);
-    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r353); const ctx_r351 = ctx.$implicit; const ctx_r352 = ɵngcc0.ɵɵnextContext(); return ctx_r352.moveToCart(ctx_r351.item); });
+    ɵngcc0.ɵɵlistener("click", function SaveForLaterComponent_ng_template_4_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r345); const ctx_r343 = ctx.$implicit; const ctx_r344 = ɵngcc0.ɵɵnextContext(); return ctx_r344.moveToCart(ctx_r343.item); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r351 = ctx.$implicit;
+    const ctx_r343 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("disabled", ctx_r351.loading);
+    ɵngcc0.ɵɵproperty("disabled", ctx_r343.loading);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "saveForLaterItems.moveToCart"), " ");
 } }
@@ -2110,21 +2052,21 @@ function CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r360 = ɵngcc0.ɵɵnextContext();
-    const i_r358 = ctx_r360.index;
-    const step_r357 = ctx_r360.$implicit;
+    const ctx_r352 = ɵngcc0.ɵɵnextContext();
+    const i_r350 = ctx_r352.index;
+    const step_r349 = ctx_r352.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r358 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r357.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r350 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r349.name), "");
 } }
 function CheckoutProgressMobileBottomComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵtemplate(1, CheckoutProgressMobileBottomComponent_div_0_div_2_div_1_Template, 4, 4, "div", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r358 = ctx.index;
-    const ctx_r356 = ɵngcc0.ɵɵnextContext(2);
+    const i_r350 = ctx.index;
+    const ctx_r348 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r358 > ctx_r356.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r350 > ctx_r348.activeStepIndex);
 } }
 function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2133,9 +2075,9 @@ function CheckoutProgressMobileBottomComponent_div_0_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r354 = ɵngcc0.ɵɵnextContext();
+    const ctx_r346 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r354.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r346.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -2143,11 +2085,11 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_2_Template(rf, ctx) 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r364 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cart_r356 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c8, cart_r364.totalItems)), ": ", cart_r364.subTotal.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(2, 2, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(5, _c6, cart_r356.totalItems)), ": ", cart_r356.subTotal.formattedValue, " ");
 } }
-const _c22 = function (a0) { return { cxRoute: a0 }; };
+const _c20 = function (a0) { return { cxRoute: a0 }; };
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵelementStart(1, "div");
@@ -2161,13 +2103,13 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r372 = ɵngcc0.ɵɵnextContext();
-    const i_r369 = ctx_r372.index;
-    const step_r368 = ctx_r372.$implicit;
+    const ctx_r364 = ɵngcc0.ɵɵnextContext();
+    const i_r361 = ctx_r364.index;
+    const step_r360 = ctx_r364.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r369 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r368.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r361 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 4, step_r360.name), "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c22, step_r368.routeName)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(5, 6, ɵngcc0.ɵɵpureFunction1(10, _c20, step_r360.routeName)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 8, "common.edit"), " ");
 } }
@@ -2179,11 +2121,11 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r373 = ɵngcc0.ɵɵnextContext();
-    const i_r369 = ctx_r373.index;
-    const step_r368 = ctx_r373.$implicit;
+    const ctx_r365 = ɵngcc0.ɵɵnextContext();
+    const i_r361 = ctx_r365.index;
+    const step_r360 = ctx_r365.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", i_r369 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r368.name), "");
+    ɵngcc0.ɵɵtextInterpolate2("", i_r361 + 1, ". ", ɵngcc0.ɵɵpipeBind1(3, 2, step_r360.name), "");
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2191,12 +2133,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_div_3_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(2, CheckoutProgressMobileTopComponent_div_0_div_1_div_3_div_2_Template, 4, 4, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const i_r369 = ctx.index;
-    const ctx_r366 = ɵngcc0.ɵɵnextContext(3);
+    const i_r361 = ctx.index;
+    const ctx_r358 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r369 < ctx_r366.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r361 < ctx_r358.activeStepIndex);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", i_r369 === ctx_r366.activeStepIndex);
+    ɵngcc0.ɵɵproperty("ngIf", i_r361 === ctx_r358.activeStepIndex);
 } }
 function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2206,12 +2148,12 @@ function CheckoutProgressMobileTopComponent_div_0_div_1_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cart_r364 = ctx.ngIf;
-    const ctx_r363 = ɵngcc0.ɵɵnextContext(2);
+    const cart_r356 = ctx.ngIf;
+    const ctx_r355 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", (cart_r364 == null ? null : cart_r364.totalItems) && (cart_r364 == null ? null : cart_r364.subTotal));
+    ɵngcc0.ɵɵproperty("ngIf", (cart_r356 == null ? null : cart_r356.totalItems) && (cart_r356 == null ? null : cart_r356.subTotal));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r363.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r355.steps);
 } }
 function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -2219,9 +2161,9 @@ function CheckoutProgressMobileTopComponent_div_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r361 = ɵngcc0.ɵɵnextContext();
+    const ctx_r353 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r361.cart$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r353.cart$));
 } }
 function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 4);
@@ -2232,14 +2174,14 @@ function CheckoutProgressComponent_section_0_li_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const step_r377 = ctx.$implicit;
-    const i_r378 = ctx.index;
-    const ctx_r376 = ɵngcc0.ɵɵnextContext(2);
+    const step_r369 = ctx.$implicit;
+    const i_r370 = ctx.index;
+    const ctx_r368 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵclassProp("active", ctx_r376.isActive(i_r378))("disabled", ctx_r376.isDisabled(i_r378));
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 8, ɵngcc0.ɵɵpureFunction1(12, _c22, step_r377.routeName)))("tabindex", ctx_r376.getTabIndex(i_r378));
+    ɵngcc0.ɵɵclassProp("active", ctx_r368.isActive(i_r370))("disabled", ctx_r368.isDisabled(i_r370));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 8, ɵngcc0.ɵɵpureFunction1(12, _c20, step_r369.routeName)))("tabindex", ctx_r368.getTabIndex(i_r370));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", i_r378 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 10, step_r377.name), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", i_r370 + 1, ". ", ɵngcc0.ɵɵpipeBind1(4, 10, step_r369.name), " ");
 } }
 function CheckoutProgressComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "section");
@@ -2250,15 +2192,15 @@ function CheckoutProgressComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r374 = ɵngcc0.ɵɵnextContext();
+    const ctx_r366 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r374.steps);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r366.steps);
 } }
 function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r385 = ɵngcc0.ɵɵgetCurrentView();
+    const _r377 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 12);
-    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r385); const mode_r383 = ctx.$implicit; const ctx_r384 = ɵngcc0.ɵɵnextContext(2); return ctx_r384.changeMode(mode_r383.code); });
+    ɵngcc0.ɵɵlistener("change", function DeliveryModeComponent_ng_container_6_div_1_Template_input_change_1_listener() { ɵngcc0.ɵɵrestoreView(_r377); const mode_r375 = ctx.$implicit; const ctx_r376 = ɵngcc0.ɵɵnextContext(2); return ctx_r376.changeMode(mode_r375.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 13);
     ɵngcc0.ɵɵelementStart(3, "div", 14);
@@ -2273,18 +2215,18 @@ function DeliveryModeComponent_ng_container_6_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const mode_r383 = ctx.$implicit;
+    const mode_r375 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r383.code, "");
-    ɵngcc0.ɵɵproperty("value", mode_r383.code);
+    ɵngcc0.ɵɵpropertyInterpolate1("id", "deliveryMode-", mode_r375.code, "");
+    ɵngcc0.ɵɵproperty("value", mode_r375.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r383.code, "");
+    ɵngcc0.ɵɵpropertyInterpolate1("for", "deliveryMode-", mode_r375.code, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r383.name);
+    ɵngcc0.ɵɵtextInterpolate(mode_r375.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r383.deliveryCost.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", mode_r375.deliveryCost.formattedValue, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(mode_r383.description);
+    ɵngcc0.ɵɵtextInterpolate(mode_r375.description);
 } }
 function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2292,9 +2234,9 @@ function DeliveryModeComponent_ng_container_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r379 = ɵngcc0.ɵɵnextContext();
+    const ctx_r371 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r379.supportedDeliveryModes$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r371.supportedDeliveryModes$));
 } }
 function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2302,7 +2244,7 @@ function DeliveryModeComponent_ng_template_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
 } }
 function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r391 = ɵngcc0.ɵɵgetCurrentView();
+    const _r383 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2310,30 +2252,30 @@ function BillingAddressFormComponent_ng_container_2_div_1_Template(rf, ctx) { if
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r391); const ctx_r390 = ɵngcc0.ɵɵnextContext(2); return ctx_r390.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_2_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r383); const ctx_r382 = ɵngcc0.ɵɵnextContext(2); return ctx_r382.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r388 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r380 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r388);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r380);
 } }
 function BillingAddressFormComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_2_div_1_Template, 7, 9, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r388 = ctx.ngIf;
+    const countries_r380 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r388.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r380.length !== 0);
 } }
 function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r396 = ɵngcc0.ɵɵgetCurrentView();
+    const _r388 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 14);
     ɵngcc0.ɵɵelementStart(2, "span", 3);
@@ -2341,35 +2283,35 @@ function BillingAddressFormComponent_ng_container_41_div_1_Template(rf, ctx) { i
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 17);
-    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r396); const ctx_r395 = ɵngcc0.ɵɵnextContext(2); return ctx_r395.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function BillingAddressFormComponent_ng_container_41_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r388); const ctx_r387 = ɵngcc0.ɵɵnextContext(2); return ctx_r387.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r393 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r385 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r393[0].name ? "name" : "isocodeShort");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r393[0].name ? "isocodeShort" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r385[0].name ? "name" : "isocodeShort");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r385[0].name ? "isocodeShort" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r393);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r385);
 } }
 function BillingAddressFormComponent_ng_container_41_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 16);
     ɵngcc0.ɵɵtemplate(1, BillingAddressFormComponent_ng_container_41_div_1_Template, 7, 11, "div", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r393 = ctx.ngIf;
+    const regions_r385 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r393.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r385.length !== 0);
 } }
 function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) {
-    const _r402 = ɵngcc0.ɵɵgetCurrentView();
+    const _r394 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelementStart(1, "input", 18);
-    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r402); const ctx_r401 = ɵngcc0.ɵɵnextContext(); return ctx_r401.selectedAddress = $event; });
+    ɵngcc0.ɵɵlistener("ngModelChange", function SuggestedAddressDialogComponent_div_17_Template_input_ngModelChange_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r394); const ctx_r393 = ɵngcc0.ɵɵnextContext(); return ctx_r393.selectedAddress = $event; });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(2, "label", 19);
     ɵngcc0.ɵɵtext(3);
@@ -2390,28 +2332,28 @@ function SuggestedAddressDialogComponent_div_17_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const suggestedAddress_r399 = ctx.$implicit;
-    const i_r400 = ctx.index;
-    const ctx_r398 = ɵngcc0.ɵɵnextContext();
+    const suggestedAddress_r391 = ctx.$implicit;
+    const i_r392 = ctx.index;
+    const ctx_r390 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngModel", ctx_r398.selectedAddress)("value", suggestedAddress_r399)("id", "suggested-addresses--suggested-" + i_r400);
+    ɵngcc0.ɵɵproperty("ngModel", ctx_r390.selectedAddress)("value", suggestedAddress_r391)("id", "suggested-addresses--suggested-" + i_r392);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r400);
+    ɵngcc0.ɵɵproperty("for", "suggested-addresses--suggested-" + i_r392);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r398.suggestedAddresses == null ? null : ctx_r398.suggestedAddresses.length) > 1 ? i_r400 + 1 : null, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(4, 13, "checkoutAddress.suggestedAddress"), " ", (ctx_r390.suggestedAddresses == null ? null : ctx_r390.suggestedAddresses.length) > 1 ? i_r392 + 1 : null, " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.firstName, " ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.lastName, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.firstName, " ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.lastName, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.line1, "");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.line1, "");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r399 == null ? null : suggestedAddress_r399.line2);
+    ɵngcc0.ɵɵtextInterpolate(suggestedAddress_r391 == null ? null : suggestedAddress_r391.line2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.town, " ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.region == null ? null : suggestedAddress_r399.region.isocode, "");
+    ɵngcc0.ɵɵtextInterpolate2(" ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.town, " ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.region == null ? null : suggestedAddress_r391.region.isocode, "");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r399 == null ? null : suggestedAddress_r399.postalCode, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", suggestedAddress_r391 == null ? null : suggestedAddress_r391.postalCode, " ");
 } }
 function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r417 = ɵngcc0.ɵɵgetCurrentView();
+    const _r409 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 27);
     ɵngcc0.ɵɵelementStart(2, "span", 28);
@@ -2419,35 +2361,35 @@ function PaymentFormComponent_div_0_ng_container_4_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 29);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r417); const ctx_r416 = ɵngcc0.ɵɵnextContext(3); return ctx_r416.paymentSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r409); const ctx_r408 = ɵngcc0.ɵɵnextContext(3); return ctx_r408.paymentSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const cardTypes_r414 = ɵngcc0.ɵɵnextContext().ngIf;
+    const cardTypes_r406 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "paymentForm.paymentType"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "paymentForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r414);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", cardTypes_r406);
 } }
 function PaymentFormComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, PaymentFormComponent_div_0_ng_container_4_div_1_Template, 7, 9, "div", 6);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cardTypes_r414 = ctx.ngIf;
+    const cardTypes_r406 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r414.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", cardTypes_r406.length !== 0);
 } }
 function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
-    const _r420 = ɵngcc0.ɵɵgetCurrentView();
+    const _r412 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelementStart(1, "div", 30);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 31);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r420); const ctx_r419 = ɵngcc0.ɵɵnextContext(2); return ctx_r419.toggleDefaultPaymentMethod(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_div_40_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r412); const ctx_r411 = ɵngcc0.ɵɵnextContext(2); return ctx_r411.toggleDefaultPaymentMethod(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 32);
     ɵngcc0.ɵɵtext(5);
@@ -2461,13 +2403,13 @@ function PaymentFormComponent_div_0_div_40_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "paymentForm.setAsDefault"));
 } }
 function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf & 1) {
-    const _r422 = ɵngcc0.ɵɵgetCurrentView();
+    const _r414 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "div", 30);
     ɵngcc0.ɵɵelementStart(3, "label");
     ɵngcc0.ɵɵelementStart(4, "input", 33);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener() { ɵngcc0.ɵɵrestoreView(_r422); const ctx_r421 = ɵngcc0.ɵɵnextContext(2); return ctx_r421.toggleSameAsShippingAddress(); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_ng_container_45_Template_input_change_4_listener() { ɵngcc0.ɵɵrestoreView(_r414); const ctx_r413 = ɵngcc0.ɵɵnextContext(2); return ctx_r413.toggleSameAsShippingAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "span", 32);
     ɵngcc0.ɵɵtext(6);
@@ -2478,9 +2420,9 @@ function PaymentFormComponent_div_0_ng_container_45_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r408 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r400 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("checked", ctx_r408.sameAsShippingAddress);
+    ɵngcc0.ɵɵproperty("checked", ctx_r400.sameAsShippingAddress);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(7, 2, "paymentForm.sameAsShippingAddress"));
 } }
@@ -2489,21 +2431,21 @@ function PaymentFormComponent_div_0_ng_container_47_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵelement(1, "cx-card", 34);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const shippingAddress_r423 = ctx.ngIf;
-    const ctx_r409 = ɵngcc0.ɵɵnextContext(2);
+    const shippingAddress_r415 = ctx.ngIf;
+    const ctx_r401 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("content", ctx_r409.getAddressCardContent(shippingAddress_r423));
+    ɵngcc0.ɵɵproperty("content", ctx_r401.getAddressCardContent(shippingAddress_r415));
 } }
 function PaymentFormComponent_div_0_ng_template_49_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-billing-address-form", 35);
 } if (rf & 2) {
-    const ctx_r411 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("billingAddress", ctx_r411.billingAddress)("countries$", ctx_r411.countries$);
+    const ctx_r403 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("billingAddress", ctx_r403.billingAddress)("countries$", ctx_r403.countries$);
 } }
 function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
-    const _r425 = ɵngcc0.ɵɵgetCurrentView();
+    const _r417 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r425); const ctx_r424 = ɵngcc0.ɵɵnextContext(2); return ctx_r424.back(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_53_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r417); const ctx_r416 = ɵngcc0.ɵɵnextContext(2); return ctx_r416.back(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2512,9 +2454,9 @@ function PaymentFormComponent_div_0_button_53_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "common.back"), " ");
 } }
 function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
-    const _r427 = ɵngcc0.ɵɵgetCurrentView();
+    const _r419 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 36);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r427); const ctx_r426 = ɵngcc0.ɵɵnextContext(2); return ctx_r426.close(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_button_54_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r419); const ctx_r418 = ɵngcc0.ɵɵnextContext(2); return ctx_r418.close(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2523,7 +2465,7 @@ function PaymentFormComponent_div_0_button_54_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "paymentForm.changePayment"), " ");
 } }
 function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r429 = ɵngcc0.ɵɵgetCurrentView();
+    const _r421 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
@@ -2561,13 +2503,13 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(25, "div", 11);
     ɵngcc0.ɵɵelementStart(26, "div", 12);
     ɵngcc0.ɵɵelementStart(27, "ng-select", 13);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r429); const ctx_r428 = ɵngcc0.ɵɵnextContext(); return ctx_r428.monthSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_27_listener($event) { ɵngcc0.ɵɵrestoreView(_r421); const ctx_r420 = ɵngcc0.ɵɵnextContext(); return ctx_r420.monthSelected($event); });
     ɵngcc0.ɵɵpipe(28, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(29, "div", 14);
     ɵngcc0.ɵɵelementStart(30, "ng-select", 15);
-    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r429); const ctx_r430 = ɵngcc0.ɵɵnextContext(); return ctx_r430.yearSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function PaymentFormComponent_div_0_Template_ng_select_change_30_listener($event) { ɵngcc0.ɵɵrestoreView(_r421); const ctx_r422 = ɵngcc0.ɵɵnextContext(); return ctx_r422.yearSelected($event); });
     ɵngcc0.ɵɵpipe(31, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -2606,7 +2548,7 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(55, "div", 24);
     ɵngcc0.ɵɵelementStart(56, "button", 26);
-    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener() { ɵngcc0.ɵɵrestoreView(_r429); const ctx_r431 = ɵngcc0.ɵɵnextContext(); return ctx_r431.next(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentFormComponent_div_0_Template_button_click_56_listener() { ɵngcc0.ɵɵrestoreView(_r421); const ctx_r423 = ɵngcc0.ɵɵnextContext(); return ctx_r423.next(); });
     ɵngcc0.ɵɵtext(57);
     ɵngcc0.ɵɵpipe(58, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2614,11 +2556,11 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r410 = ɵngcc0.ɵɵreference(50);
-    const ctx_r403 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r403.payment);
+    const _r402 = ɵngcc0.ɵɵreference(50);
+    const ctx_r395 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r395.payment);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 25, ctx_r403.cardTypes$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 25, ctx_r395.cardTypes$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 27, "paymentForm.accountHolderName.label"));
     ɵngcc0.ɵɵadvance(2);
@@ -2629,27 +2571,27 @@ function PaymentFormComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(24, 33, "paymentForm.expirationDate"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(28, 35, "paymentForm.monthMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r403.months);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r395.months);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(31, 37, "paymentForm.yearMask"));
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r403.years);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", ctx_r395.years);
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 39, "paymentForm.securityCode"), " ");
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(38, 41, "paymentForm.securityCodeTitle"));
-    ɵngcc0.ɵɵproperty("type", ctx_r403.iconTypes.INFO);
+    ɵngcc0.ɵɵproperty("type", ctx_r395.iconTypes.INFO);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r403.setAsDefaultField);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r395.setAsDefaultField);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(44, 43, "paymentForm.billingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 45, ctx_r403.showSameAsShippingAddressCheckbox()));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(46, 45, ctx_r395.showSameAsShippingAddressCheckbox()));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 47, ctx_r403.sameAsShippingAddress && ctx_r403.shippingAddress$))("ngIfElse", _r410);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(48, 47, ctx_r395.sameAsShippingAddress && ctx_r395.shippingAddress$))("ngIfElse", _r402);
     ɵngcc0.ɵɵadvance(6);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r403.paymentMethodsCount === 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r395.paymentMethodsCount === 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r403.paymentMethodsCount > 0);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r395.paymentMethodsCount > 0);
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(58, 49, "common.continue"), " ");
 } }
@@ -2657,23 +2599,23 @@ function PaymentFormComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-spinner");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r444 = ɵngcc0.ɵɵgetCurrentView();
+    const _r436 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 13);
     ɵngcc0.ɵɵelementStart(1, "div", 14);
     ɵngcc0.ɵɵelementStart(2, "cx-card", 15);
-    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r444); const method_r441 = ctx.$implicit; const ctx_r443 = ɵngcc0.ɵɵnextContext(4); return ctx_r443.selectPaymentMethod(method_r441); });
+    ɵngcc0.ɵɵlistener("sendCard", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r436); const method_r433 = ctx.$implicit; const ctx_r435 = ɵngcc0.ɵɵnextContext(4); return ctx_r435.selectPaymentMethod(method_r433); });
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const method_r441 = ctx.$implicit;
-    const ctx_r440 = ɵngcc0.ɵɵnextContext(4);
+    const method_r433 = ctx.$implicit;
+    const ctx_r432 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r440.getCardContent(method_r441)));
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", ɵngcc0.ɵɵpipeBind1(3, 3, ctx_r432.getCardContent(method_r433)));
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r446 = ɵngcc0.ɵɵgetCurrentView();
+    const _r438 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -2682,7 +2624,7 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r446); const ctx_r445 = ɵngcc0.ɵɵnextContext(3); return ctx_r445.showNewPaymentForm(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r438); const ctx_r437 = ɵngcc0.ɵɵnextContext(3); return ctx_r437.showNewPaymentForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2694,14 +2636,14 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementStart(11, "div", 11);
     ɵngcc0.ɵɵelementStart(12, "div", 7);
     ɵngcc0.ɵɵelementStart(13, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r446); const ctx_r447 = ɵngcc0.ɵɵnextContext(3); return ctx_r447.goPrevious(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r438); const ctx_r439 = ɵngcc0.ɵɵnextContext(3); return ctx_r439.goPrevious(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 7);
     ɵngcc0.ɵɵelementStart(17, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r446); const ctx_r448 = ɵngcc0.ɵɵnextContext(3); return ctx_r448.goNext(); });
+    ɵngcc0.ɵɵlistener("click", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r438); const ctx_r440 = ɵngcc0.ɵɵnextContext(3); return ctx_r440.goNext(); });
     ɵngcc0.ɵɵtext(18);
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -2709,30 +2651,30 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_ng_container_1_Tem
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r433 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r437 = ɵngcc0.ɵɵnextContext();
+    const existingPaymentMethods_r425 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r429 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "paymentForm.choosePaymentMethod"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "paymentForm.addNewPayment"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r433);
+    ɵngcc0.ɵɵproperty("ngForOf", existingPaymentMethods_r425);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "common.back"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("disabled", !ctx_r437.selectedPayment);
+    ɵngcc0.ɵɵproperty("disabled", !ctx_r429.selectedPayment);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 12, "common.continue"), " ");
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
-    const _r451 = ɵngcc0.ɵɵgetCurrentView();
+    const _r443 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-payment-form", 16);
-    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r450 = ɵngcc0.ɵɵnextContext(3); return ctx_r450.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener() { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r452 = ɵngcc0.ɵɵnextContext(3); return ctx_r452.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener() { ɵngcc0.ɵɵrestoreView(_r451); const ctx_r453 = ɵngcc0.ɵɵnextContext(3); return ctx_r453.goPrevious(); });
+    ɵngcc0.ɵɵlistener("setPaymentDetails", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_setPaymentDetails_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r443); const ctx_r442 = ɵngcc0.ɵɵnextContext(3); return ctx_r442.setPaymentDetails($event); })("closeForm", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_closeForm_0_listener() { ɵngcc0.ɵɵrestoreView(_r443); const ctx_r444 = ɵngcc0.ɵɵnextContext(3); return ctx_r444.hideNewPaymentForm(); })("goBack", function PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template_cx_payment_form_goBack_0_listener() { ɵngcc0.ɵɵrestoreView(_r443); const ctx_r445 = ɵngcc0.ɵɵnextContext(3); return ctx_r445.goPrevious(); });
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const existingPaymentMethods_r433 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r439 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r433 == null ? null : existingPaymentMethods_r433.length) || 0)("setAsDefaultField", !ctx_r439.isGuestCheckout);
+    const existingPaymentMethods_r425 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r431 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("paymentMethodsCount", (existingPaymentMethods_r425 == null ? null : existingPaymentMethods_r425.length) || 0)("setAsDefaultField", !ctx_r431.isGuestCheckout);
 } }
 function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2741,10 +2683,10 @@ function PaymentMethodComponent_ng_container_0_ng_container_4_Template(rf, ctx) 
     ɵngcc0.ɵɵtemplate(3, PaymentMethodComponent_ng_container_0_ng_container_4_ng_template_3_Template, 1, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r438 = ɵngcc0.ɵɵreference(4);
-    const ctx_r434 = ɵngcc0.ɵɵnextContext(2);
+    const _r430 = ɵngcc0.ɵɵreference(4);
+    const ctx_r426 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r434.existingPaymentMethods$).length && !ctx_r434.newPaymentFormManuallyOpened)("ngIfElse", _r438);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r426.existingPaymentMethods$).length && !ctx_r426.newPaymentFormManuallyOpened)("ngIfElse", _r430);
 } }
 function PaymentMethodComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2762,14 +2704,14 @@ function PaymentMethodComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(6, PaymentMethodComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r435 = ɵngcc0.ɵɵreference(7);
-    const ctx_r432 = ɵngcc0.ɵɵnextContext();
+    const _r427 = ɵngcc0.ɵɵreference(7);
+    const ctx_r424 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "paymentForm.payment"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r432.isLoading$))("ngIfElse", _r435);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r424.isLoading$))("ngIfElse", _r427);
 } }
-const _c23 = function () { return { cxRoute: "termsAndConditions" }; };
+const _c21 = function () { return { cxRoute: "termsAndConditions" }; };
 function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "a", 13);
@@ -2779,9 +2721,9 @@ function ReviewSubmitComponent_div_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r455 = ɵngcc0.ɵɵnextContext();
+    const ctx_r447 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c22, ctx_r455.getCheckoutStepUrl(ctx_r455.checkoutStepType.SHIPPING_ADDRESS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c20, ctx_r447.getCheckoutStepUrl(ctx_r447.checkoutStepType.SHIPPING_ADDRESS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingAddress"));
 } }
@@ -2789,9 +2731,9 @@ function ReviewSubmitComponent_cx_card_16_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-card", 6);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const deliveryMode_r460 = ctx.ngIf;
-    const ctx_r456 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r456.getDeliveryModeCard(deliveryMode_r460)));
+    const deliveryMode_r452 = ctx.ngIf;
+    const ctx_r448 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("content", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r448.getDeliveryModeCard(deliveryMode_r452)));
 } }
 function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -2802,9 +2744,9 @@ function ReviewSubmitComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r457 = ɵngcc0.ɵɵnextContext();
+    const ctx_r449 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c22, ctx_r457.getCheckoutStepUrl(ctx_r457.checkoutStepType.DELIVERY_MODE))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c20, ctx_r449.getCheckoutStepUrl(ctx_r449.checkoutStepType.DELIVERY_MODE))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editShippingMethod"));
 } }
@@ -2817,9 +2759,9 @@ function ReviewSubmitComponent_div_25_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r458 = ɵngcc0.ɵɵnextContext();
+    const ctx_r450 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c22, ctx_r458.getCheckoutStepUrl(ctx_r458.checkoutStepType.PAYMENT_DETAILS))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(6, _c20, ctx_r450.getCheckoutStepUrl(ctx_r450.checkoutStepType.PAYMENT_DETAILS))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "checkoutReview.editPaymentMethod"));
 } }
@@ -2828,9 +2770,9 @@ function ReviewSubmitComponent_ng_container_26_div_7_ng_container_1_Template(rf,
     ɵngcc0.ɵɵelement(1, "cx-promotions", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const orderPromotions_r465 = ctx.ngIf;
+    const orderPromotions_r457 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r465);
+    ɵngcc0.ɵɵproperty("promotions", orderPromotions_r457);
 } }
 function ReviewSubmitComponent_ng_container_26_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 17);
@@ -2839,12 +2781,12 @@ function ReviewSubmitComponent_ng_container_26_div_7_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelement(3, "cx-cart-item-list", 18);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entries_r463 = ctx.ngIf;
-    const ctx_r462 = ɵngcc0.ɵɵnextContext(2);
+    const entries_r455 = ctx.ngIf;
+    const ctx_r454 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r462.orderPromotions$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 4, ctx_r454.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r463)("readonly", true)("promotionLocation", ctx_r462.promotionLocation);
+    ɵngcc0.ɵɵproperty("items", entries_r455)("readonly", true)("promotionLocation", ctx_r454.promotionLocation);
 } }
 function ReviewSubmitComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -2860,17 +2802,17 @@ function ReviewSubmitComponent_ng_container_26_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(8, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cart_r461 = ctx.ngIf;
-    const ctx_r459 = ɵngcc0.ɵɵnextContext();
+    const cart_r453 = ctx.ngIf;
+    const ctx_r451 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c8, cart_r461.deliveryItemsQuantity)), ": ", cart_r461.totalPrice == null ? null : cart_r461.totalPrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind2(3, 4, "cartItems.cartTotal", ɵngcc0.ɵɵpureFunction1(11, _c6, cart_r453.deliveryItemsQuantity)), ": ", cart_r453.totalPrice == null ? null : cart_r453.totalPrice.formattedValue, " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 7, "checkoutReview.placeOrder"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r459.entries$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 9, ctx_r451.entries$));
 } }
 function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r474 = ɵngcc0.ɵɵgetCurrentView();
+    const _r466 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -2878,30 +2820,30 @@ function AddressFormComponent_ng_container_4_div_1_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 23);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r474); const ctx_r473 = ɵngcc0.ɵɵnextContext(2); return ctx_r473.countrySelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_4_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r466); const ctx_r465 = ɵngcc0.ɵɵnextContext(2); return ctx_r465.countrySelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const countries_r471 = ɵngcc0.ɵɵnextContext().ngIf;
+    const countries_r463 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 5, "addressForm.country"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 7, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r471);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", countries_r463);
 } }
 function AddressFormComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_4_div_1_Template, 7, 9, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const countries_r471 = ctx.ngIf;
+    const countries_r463 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", countries_r471.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", countries_r463.length !== 0);
 } }
 function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r480 = ɵngcc0.ɵɵgetCurrentView();
+    const _r472 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -2909,25 +2851,25 @@ function AddressFormComponent_div_6_ng_container_1_div_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 24);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r479 = ɵngcc0.ɵɵnextContext(3); return ctx_r479.titleSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_6_ng_container_1_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r472); const ctx_r471 = ɵngcc0.ɵɵnextContext(3); return ctx_r471.titleSelected($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const titles_r477 = ɵngcc0.ɵɵnextContext().ngIf;
+    const titles_r469 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "addressForm.title"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r477);
+    ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("items", titles_r469);
 } }
 function AddressFormComponent_div_6_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_div_6_ng_container_1_div_1_Template, 6, 6, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const titles_r477 = ctx.ngIf;
+    const titles_r469 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", titles_r477.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", titles_r469.length !== 0);
 } }
 function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
@@ -2935,12 +2877,12 @@ function AddressFormComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r467 = ɵngcc0.ɵɵnextContext();
+    const ctx_r459 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r467.titles$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r459.titles$));
 } }
 function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r485 = ɵngcc0.ɵɵgetCurrentView();
+    const _r477 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "label", 22);
     ɵngcc0.ɵɵelementStart(2, "span", 7);
@@ -2948,37 +2890,37 @@ function AddressFormComponent_ng_container_44_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "ng-select", 26);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r485); const ctx_r484 = ɵngcc0.ɵɵnextContext(2); return ctx_r484.regionSelected($event); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_ng_container_44_div_1_Template_ng_select_change_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r477); const ctx_r476 = ɵngcc0.ɵɵnextContext(2); return ctx_r476.regionSelected($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const regions_r482 = ɵngcc0.ɵɵnextContext().ngIf;
+    const regions_r474 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 7, "addressForm.state"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r482[0].name ? "name" : "isocode");
-    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r482[0].name ? "isocode" : "region");
+    ɵngcc0.ɵɵpropertyInterpolate("bindLabel", regions_r474[0].name ? "name" : "isocode");
+    ɵngcc0.ɵɵpropertyInterpolate("bindValue", regions_r474[0].name ? "isocode" : "region");
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "addressForm.selectOne"));
-    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r482);
+    ɵngcc0.ɵɵproperty("searchable", true)("clearable", false)("items", regions_r474);
 } }
 function AddressFormComponent_ng_container_44_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0, 25);
     ɵngcc0.ɵɵtemplate(1, AddressFormComponent_ng_container_44_div_1_Template, 7, 11, "div", 4);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const regions_r482 = ctx.ngIf;
+    const regions_r474 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", regions_r482.length !== 0);
+    ɵngcc0.ɵɵproperty("ngIf", regions_r474.length !== 0);
 } }
 function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
-    const _r488 = ɵngcc0.ɵɵgetCurrentView();
+    const _r480 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 27);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "input", 28);
-    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r488); const ctx_r487 = ɵngcc0.ɵɵnextContext(); return ctx_r487.toggleDefaultAddress(); });
+    ɵngcc0.ɵɵlistener("change", function AddressFormComponent_div_60_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r480); const ctx_r479 = ɵngcc0.ɵɵnextContext(); return ctx_r479.toggleDefaultAddress(); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "span", 29);
     ɵngcc0.ɵɵtext(5);
@@ -2992,36 +2934,36 @@ function AddressFormComponent_div_60_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 1, "addressForm.setAsDefault"));
 } }
 function AddressFormComponent_div_62_Template(rf, ctx) { if (rf & 1) {
-    const _r490 = ɵngcc0.ɵɵgetCurrentView();
+    const _r482 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵelementStart(1, "button", 30);
-    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r490); const ctx_r489 = ɵngcc0.ɵɵnextContext(); return ctx_r489.back(); });
+    ɵngcc0.ɵɵlistener("click", function AddressFormComponent_div_62_Template_button_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r482); const ctx_r481 = ɵngcc0.ɵɵnextContext(); return ctx_r481.back(); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r470 = ɵngcc0.ɵɵnextContext();
+    const ctx_r462 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r470.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r462.cancelBtnLabel || ɵngcc0.ɵɵpipeBind1(3, 1, "addressForm.chooseAddress"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template(rf, ctx) { if (rf & 1) {
-    const _r503 = ɵngcc0.ɵɵgetCurrentView();
+    const _r495 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 14);
     ɵngcc0.ɵɵelementStart(1, "div", 15);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r503); const card_r500 = ctx.$implicit; const ctx_r502 = ɵngcc0.ɵɵnextContext(4); return ctx_r502.selectAddress(card_r500.address); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_div_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r495); const card_r492 = ctx.$implicit; const ctx_r494 = ɵngcc0.ɵɵnextContext(4); return ctx_r494.selectAddress(card_r492.address); });
     ɵngcc0.ɵɵelementStart(2, "cx-card", 16);
-    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r503); const card_r500 = ctx.$implicit; const ctx_r504 = ɵngcc0.ɵɵnextContext(4); return ctx_r504.selectAddress(card_r500.address); });
+    ɵngcc0.ɵɵlistener("sendCard", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_div_10_Template_cx_card_sendCard_2_listener() { ɵngcc0.ɵɵrestoreView(_r495); const card_r492 = ctx.$implicit; const ctx_r496 = ɵngcc0.ɵɵnextContext(4); return ctx_r496.selectAddress(card_r492.address); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const card_r500 = ctx.$implicit;
+    const card_r492 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r500.card);
+    ɵngcc0.ɵɵproperty("border", true)("fitToContainer", true)("content", card_r492.card);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r506 = ɵngcc0.ɵɵgetCurrentView();
+    const _r498 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "p", 5);
     ɵngcc0.ɵɵtext(2);
@@ -3030,7 +2972,7 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(4, "div", 6);
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "button", 8);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r506); const ctx_r505 = ɵngcc0.ɵɵnextContext(3); return ctx_r505.showNewAddressForm(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_6_listener() { ɵngcc0.ɵɵrestoreView(_r498); const ctx_r497 = ɵngcc0.ɵɵnextContext(3); return ctx_r497.showNewAddressForm(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -3042,14 +2984,14 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementStart(11, "div", 6);
     ɵngcc0.ɵɵelementStart(12, "div", 11);
     ɵngcc0.ɵɵelementStart(13, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r506); const ctx_r507 = ɵngcc0.ɵɵnextContext(3); return ctx_r507.goPrevious(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r498); const ctx_r499 = ɵngcc0.ɵɵnextContext(3); return ctx_r499.goPrevious(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(16, "div", 11);
     ɵngcc0.ɵɵelementStart(17, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r506); const ctx_r508 = ɵngcc0.ɵɵnextContext(3); return ctx_r508.goNext(); });
+    ɵngcc0.ɵɵlistener("click", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_Template_button_click_17_listener() { ɵngcc0.ɵɵrestoreView(_r498); const ctx_r500 = ɵngcc0.ɵɵnextContext(3); return ctx_r500.goNext(); });
     ɵngcc0.ɵɵpipe(18, "async");
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
@@ -3058,16 +3000,16 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const cards_r492 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r496 = ɵngcc0.ɵɵnextContext();
+    const cards_r484 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r488 = ɵngcc0.ɵɵnextContext();
     var tmp_4_0 = null;
-    const currVal_4 = !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r496.selectedAddress$)) == null ? null : tmp_4_0.id);
+    const currVal_4 = !((tmp_4_0 = ɵngcc0.ɵɵpipeBind1(18, 12, ctx_r488.selectedAddress$)) == null ? null : tmp_4_0.id);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "checkoutAddress.selectYourShippingAddress"), " ");
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "checkoutAddress.addNewAddress"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", cards_r492);
+    ɵngcc0.ɵɵproperty("ngForOf", cards_r484);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "checkout.backToCart"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -3076,10 +3018,10 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_container_1_T
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 14, "common.continue"), " ");
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r514 = ɵngcc0.ɵɵgetCurrentView();
+    const _r506 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "cx-address-form", 18);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener() { ɵngcc0.ɵɵrestoreView(_r514); const ctx_r513 = ɵngcc0.ɵɵnextContext(4); return ctx_r513.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r514); const ctx_r515 = ɵngcc0.ɵɵnextContext(4); return ctx_r515.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_backToAddress_1_listener() { ɵngcc0.ɵɵrestoreView(_r506); const ctx_r505 = ɵngcc0.ɵɵnextContext(4); return ctx_r505.hideNewAddressForm(false); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template_cx_address_form_submitAddress_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r506); const ctx_r507 = ɵngcc0.ɵɵnextContext(4); return ctx_r507.addAddress($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -3087,24 +3029,24 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng
     ɵngcc0.ɵɵproperty("showTitleCode", true);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template(rf, ctx) { if (rf & 1) {
-    const _r517 = ɵngcc0.ɵɵgetCurrentView();
+    const _r509 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-address-form", 19);
-    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r517); const ctx_r516 = ɵngcc0.ɵɵnextContext(4); return ctx_r516.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r517); const ctx_r518 = ɵngcc0.ɵɵnextContext(4); return ctx_r518.addAddress($event); });
+    ɵngcc0.ɵɵlistener("backToAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_backToAddress_0_listener() { ɵngcc0.ɵɵrestoreView(_r509); const ctx_r508 = ɵngcc0.ɵɵnextContext(4); return ctx_r508.hideNewAddressForm(true); })("submitAddress", function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template_cx_address_form_submitAddress_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r509); const ctx_r510 = ɵngcc0.ɵɵnextContext(4); return ctx_r510.addAddress($event); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r512 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r504 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵpropertyInterpolate("cancelBtnLabel", ɵngcc0.ɵɵpipeBind1(2, 6, "checkout.backToCart"));
-    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r512.isGuestCheckout)("addressData", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r512.selectedAddress$));
+    ɵngcc0.ɵɵproperty("showTitleCode", true)("setAsDefaultField", !ctx_r504.isGuestCheckout)("addressData", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r504.selectedAddress$));
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_container_0_Template, 2, 1, "ng-container", 2);
     ɵngcc0.ɵɵtemplate(1, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_ng_template_1_Template, 3, 8, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
 } if (rf & 2) {
-    const _r511 = ɵngcc0.ɵɵreference(2);
-    const cards_r492 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("ngIf", cards_r492.length)("ngIfElse", _r511);
+    const _r503 = ɵngcc0.ɵɵreference(2);
+    const cards_r484 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("ngIf", cards_r484.length)("ngIfElse", _r503);
 } }
 function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -3112,11 +3054,11 @@ function ShippingAddressComponent_ng_container_0_ng_container_4_Template(rf, ctx
     ɵngcc0.ɵɵtemplate(2, ShippingAddressComponent_ng_container_0_ng_container_4_ng_template_2_Template, 3, 2, "ng-template", null, 4, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r497 = ɵngcc0.ɵɵreference(3);
-    const cards_r492 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r493 = ɵngcc0.ɵɵnextContext();
+    const _r489 = ɵngcc0.ɵɵreference(3);
+    const cards_r484 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r485 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (cards_r492 == null ? null : cards_r492.length) && !ctx_r493.newAddressFormManuallyOpened)("ngIfElse", _r497);
+    ɵngcc0.ɵɵproperty("ngIf", (cards_r484 == null ? null : cards_r484.length) && !ctx_r485.newAddressFormManuallyOpened)("ngIfElse", _r489);
 } }
 function ShippingAddressComponent_ng_container_0_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
@@ -3134,36 +3076,94 @@ function ShippingAddressComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtemplate(6, ShippingAddressComponent_ng_container_0_ng_template_6_Template, 2, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const _r494 = ɵngcc0.ɵɵreference(7);
-    const ctx_r491 = ɵngcc0.ɵɵnextContext();
+    const _r486 = ɵngcc0.ɵɵreference(7);
+    const ctx_r483 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "checkoutAddress.shippingAddress"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r491.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r491.isLoading$))("ngIfElse", _r494);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r483.forceLoader && !ɵngcc0.ɵɵpipeBind1(5, 5, ctx_r483.isLoading$))("ngIfElse", _r486);
 } }
-function SkipLinkComponent_div_0_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r526 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "button", 3);
-    ɵngcc0.ɵɵlistener("click", function SkipLinkComponent_div_0_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r526); const link_r524 = ctx.$implicit; const ctx_r525 = ɵngcc0.ɵɵnextContext(2); return ctx_r525.scrollToTarget(link_r524); });
-    ɵngcc0.ɵɵtext(1);
-    ɵngcc0.ɵɵpipe(2, "cxTranslate");
-    ɵngcc0.ɵɵpipe(3, "cxTranslate");
+function PageSlotComponent_ng_template_0_0_ng_template_0_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementContainer(0, 3);
+} if (rf & 2) {
+    const component_r515 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("cxComponentWrapper", component_r515);
+} }
+const _c22 = function (a0) { return { component: a0 }; };
+function PageSlotComponent_ng_template_0_0_Template(rf, ctx) { if (rf & 1) {
+    const _r519 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_0_ng_template_0_Template, 1, 1, "ng-template", 2);
+    ɵngcc0.ɵɵlistener("loaded", function PageSlotComponent_ng_template_0_0_Template_ng_template_loaded_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r519); const ctx_r518 = ɵngcc0.ɵɵnextContext(2); return ctx_r518.isLoaded($event); });
+} if (rf & 2) {
+    const component_r515 = ctx.$implicit;
+    const ctx_r514 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("cxOutlet", component_r515.flexType)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(3, _c22, component_r515))("cxOutletDefer", ctx_r514.getComponentDeferOptions(component_r515.flexType));
+} }
+function PageSlotComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_0_Template, 1, 5, undefined, 1);
+    ɵngcc0.ɵɵpipe(1, "async");
+} if (rf & 2) {
+    const ctx_r513 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r513.components$));
+} }
+const _c23 = function (a0) { return { components$: a0 }; };
+function PageLayoutComponent_ng_template_0_cx_page_slot_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelement(0, "cx-page-slot", 2);
+    ɵngcc0.ɵɵpipe(1, "async");
+} if (rf & 2) {
+    const slot_r522 = ctx.$implicit;
+    const ctx_r521 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("position", slot_r522)("isPageFold", slot_r522 === ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r521.pageFoldSlot$));
+} }
+function PageLayoutComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵprojection(0);
+    ɵngcc0.ɵɵtemplate(1, PageLayoutComponent_ng_template_0_cx_page_slot_1_Template, 2, 4, "cx-page-slot", 1);
+    ɵngcc0.ɵɵpipe(2, "async");
+} if (rf & 2) {
+    const ctx_r520 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r520.slots$));
+} }
+const _c24 = function (a0, a1, a2) { return { templateName$: a0, slots$: a1, section$: a2 }; };
+function AddToHomeScreenBannerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    const _r525 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "div");
+    ɵngcc0.ɵɵelementStart(1, "div", 1);
+    ɵngcc0.ɵɵelementStart(2, "div", 2);
+    ɵngcc0.ɵɵelementStart(3, "p");
+    ɵngcc0.ɵɵtext(4);
+    ɵngcc0.ɵɵpipe(5, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(6, "ul");
+    ɵngcc0.ɵɵelementStart(7, "li");
+    ɵngcc0.ɵɵtext(8);
+    ɵngcc0.ɵɵpipe(9, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(10, "li");
+    ɵngcc0.ɵɵtext(11);
+    ɵngcc0.ɵɵpipe(12, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(13, "button", 3);
+    ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBannerComponent_div_0_Template_button_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r525); const ctx_r524 = ɵngcc0.ɵɵnextContext(); return ctx_r524.prompt(); });
+    ɵngcc0.ɵɵtext(14);
+    ɵngcc0.ɵɵpipe(15, "cxTranslate");
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const link_r524 = ctx.$implicit;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "skipLink.skipTo"), " ", ɵngcc0.ɵɵpipeBind1(3, 4, link_r524.i18nKey), " ");
+    ɵngcc0.ɵɵadvance(4);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "pwa.addToHomeScreenDescription"), " ");
+    ɵngcc0.ɵɵadvance(4);
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 6, "pwa.noInstallationNeeded"));
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "pwa.fastAccessToApplication"));
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(15, 10, "pwa.addToHomeScreen"), " ");
 } }
-const _c24 = function () { return { tab: true }; };
-function SkipLinkComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 1);
-    ɵngcc0.ɵɵtemplate(1, SkipLinkComponent_div_0_button_1_Template, 4, 6, "button", 2);
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const links_r522 = ctx.ngIf;
-    ɵngcc0.ɵɵproperty("cxFocus", ɵngcc0.ɵɵpureFunction0(2, _c24));
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", links_r522);
+function AddToHomeScreenBtnComponent_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵprojection(0, 0, ["*ngIf", "canPrompt$ | async"]);
 } }
 function ConsentManagementFormComponent_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 5);
@@ -3597,7 +3597,7 @@ function AmendOrderActionsComponent_a_6_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r610 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵclassProp("disabled", !ctx_r610.isValid);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c31, ctx_r610.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c17, ctx_r610.orderCode))));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction2(10, _c31, ctx_r610.forwardRoute, ɵngcc0.ɵɵpureFunction1(8, _c15, ctx_r610.orderCode))));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 6, "common.continue"), " ");
 } }
@@ -5668,7 +5668,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
 } if (rf & 2) {
     const product_r894 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, product_r894)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, product_r894)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", product_r894.name, " ");
 } }
@@ -5682,7 +5682,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_di
 } if (rf & 2) {
     const product_r894 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c17, product_r894.code)));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 1, "myInterests.productId", ɵngcc0.ɵɵpureFunction1(4, _c15, product_r894.code)));
 } }
 function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_ng_container_12_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 41);
@@ -5799,7 +5799,7 @@ function MyInterestsComponent_div_0_div_5_ng_container_1_tr_22_ng_container_1_Te
     const interest_r892 = ɵngcc0.ɵɵnextContext().$implicit;
     const ctx_r893 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c14, product_r894)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(22, _c12, product_r894)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("container", product_r894.images == null ? null : product_r894.images.PRIMARY);
     ɵngcc0.ɵɵadvance(5);
@@ -6151,7 +6151,7 @@ function SearchBoxComponent_div_6_div_4_a_1_Template(rf, ctx) { if (rf & 1) {
     const product_r966 = ctx.$implicit;
     const ctx_r965 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵclassProp("has-media", ctx_r965.config.displayProductImages);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c14, product_r966)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 6, ɵngcc0.ɵɵpureFunction1(8, _c12, product_r966)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", ctx_r965.config.displayProductImages);
     ɵngcc0.ɵɵadvance(1);
@@ -6357,7 +6357,7 @@ function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const item_r995 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r995)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c12, item_r995)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", item_r995.images == null ? null : item_r995.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
@@ -6384,7 +6384,7 @@ function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const item_r1000 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c14, item_r1000)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c12, item_r1000)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", item_r1000.images == null ? null : item_r1000.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
@@ -7727,7 +7727,7 @@ function StockNotificationComponent_ng_template_2_ng_container_2_Template(rf, ct
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(9, _c20)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 3, ɵngcc0.ɵɵpureFunction0(9, _c18)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 5, "miniLogin.signInRegister"), "");
     ɵngcc0.ɵɵadvance(2);
@@ -8516,7 +8516,7 @@ function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction0(6, _c20)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 2, ɵngcc0.ɵɵpureFunction0(6, _c18)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(3, 4, "miniLogin.signInRegister"));
 } }
@@ -8721,13 +8721,13 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(63, 57, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(65, 59, ɵngcc0.ɵɵpureFunction0(69, _c23)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(65, 59, ɵngcc0.ɵɵpureFunction0(69, _c21)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(67, 61, "register.termsAndConditions"), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(70, 63, "register.register"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(72, 65, ɵngcc0.ɵɵpureFunction0(70, _c20)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(72, 65, ɵngcc0.ɵɵpureFunction0(70, _c18)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(74, 67, "register.signIn"));
 } }
@@ -8746,7 +8746,7 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r1339 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c14, ctx_r1339.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r1339.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ctx_r1339.cartEntry.product.name);
 } }
@@ -9741,1851 +9741,6 @@ let PageComponentModule = class PageComponentModule {
 PageComponentModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageComponentModule });
 PageComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageComponentModule_Factory(t) { return new (t || PageComponentModule)(); }, providers: [], imports: [[CommonModule]] });
 
-/**
- * Please don't put that service in public API.
- * */
-let CmsMappingService = class CmsMappingService {
-    constructor(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    isComponentEnabled(flexType) {
-        const isSSR = isPlatformServer(this.platformId);
-        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    }
-    getRoutesForComponents(componentTypes) {
-        const routes = [];
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                routes.push(...this.getRoutesForComponent(componentType));
-            }
-        }
-        return routes;
-    }
-    getGuardsForComponents(componentTypes) {
-        const guards = new Set();
-        for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach((guard) => guards.add(guard));
-        }
-        return Array.from(guards);
-    }
-    getI18nKeysForComponents(componentTypes) {
-        const i18nKeys = new Set();
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach((key) => i18nKeys.add(key));
-            }
-        }
-        return Array.from(i18nKeys);
-    }
-    getRoutesForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    }
-    getGuardsForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    }
-    getI18nKeysForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    }
-};
-CmsMappingService.ɵfac = function CmsMappingService_Factory(t) { return new (t || CmsMappingService)(ɵngcc0.ɵɵinject(ɵngcc1.CmsConfig), ɵngcc0.ɵɵinject(PLATFORM_ID)); };
-CmsMappingService.ctorParameters = () => [
-    { type: CmsConfig },
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-];
-CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-CmsMappingService = __decorate([ __param(1, Inject(PLATFORM_ID))
-], CmsMappingService);
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsGuardsService = class CmsGuardsService {
-    constructor(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    cmsPageCanActivate(componentTypes, route, state) {
-        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            const canActivateObservables = guards.map((guardClass) => {
-                const guard = this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            });
-            return concat(...canActivateObservables).pipe(skipWhile((canActivate) => canActivate === true), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    }
-};
-CmsGuardsService.ɵfac = function CmsGuardsService_Factory(t) { return new (t || CmsGuardsService)(ɵngcc0.ɵɵinject(CmsMappingService), ɵngcc0.ɵɵinject(ɵngcc0.Injector)); };
-CmsGuardsService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: Injector }
-];
-CmsGuardsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsI18nService = class CmsI18nService {
-    constructor(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    loadChunksForComponents(componentTypes) {
-        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        const i18nChunks = new Set();
-        for (const key of i18nKeys) {
-            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    }
-};
-CmsI18nService.ɵfac = function CmsI18nService_Factory(t) { return new (t || CmsI18nService)(ɵngcc0.ɵɵinject(CmsMappingService), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService), ɵngcc0.ɵɵinject(ɵngcc1.TranslationChunkService)); };
-CmsI18nService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: TranslationService },
-    { type: TranslationChunkService }
-];
-CmsI18nService.ɵprov = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-
-var BREAKPOINT;
-(function (BREAKPOINT) {
-    BREAKPOINT["xs"] = "xs";
-    BREAKPOINT["sm"] = "sm";
-    BREAKPOINT["md"] = "md";
-    BREAKPOINT["lg"] = "lg";
-    BREAKPOINT["xl"] = "xl";
-})(BREAKPOINT || (BREAKPOINT = {}));
-/**
- * The LayoutConfig supports the configuration of page slots by page templates
- * or page sections, such as headers and footers. The configuration also supports
- * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
- * por a given breakpoint.
- */
-class LayoutConfig {
-}
-
-const DEFAULT_BREAKPOINTS = {
-    [BREAKPOINT.xs]: 576,
-    [BREAKPOINT.sm]: 768,
-    [BREAKPOINT.md]: 992,
-    [BREAKPOINT.lg]: 1200,
-};
-let BreakpointService = class BreakpointService {
-    constructor(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-    }
-    get breakpoint$() {
-        if (!this.window) {
-            return of(BREAKPOINT.xs);
-        }
-        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
-    }
-    /**
-     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-     * configuration. If no configuration is available for the given breakpoint, the
-     * method will return the default values:
-     * - xs: 567
-     * - sm: 768
-     * - md: 992
-     * - lg: 1200
-     */
-    getSize(breakpoint) {
-        var _a;
-        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
-            : DEFAULT_BREAKPOINTS[breakpoint];
-    }
-    /**
-     * Returns all available breakpoints for the system.
-     */
-    get breakpoints() {
-        return [
-            BREAKPOINT.xs,
-            BREAKPOINT.sm,
-            BREAKPOINT.md,
-            BREAKPOINT.lg,
-            BREAKPOINT.xl,
-        ];
-    }
-    /**
-     * Indicates whether the current screen size is smaller than the maximum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
-     */
-    isDown(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size is larger than the minimum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
-     */
-    isUp(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(this.breakpoints.indexOf(breakpoint))
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size fits to the given breakpoint
-     */
-    isEqual(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => br === breakpoint));
-    }
-    getBreakpoint(windowWidth) {
-        const breakpoint = this.getClosest(windowWidth);
-        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-    }
-    getClosest(windowWidth) {
-        if (!windowWidth) {
-            windowWidth = this.window.innerWidth;
-        }
-        return windowWidth > this.getSize(BREAKPOINT.lg)
-            ? BREAKPOINT.xl
-            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
-    }
-    get window() {
-        return this.winRef.nativeWindow;
-    }
-};
-BreakpointService.ɵfac = function BreakpointService_Factory(t) { return new (t || BreakpointService)(ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(LayoutConfig)); };
-BreakpointService.ctorParameters = () => [
-    { type: WindowRef },
-    { type: LayoutConfig }
-];
-BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-
-const PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
-
-let PageLayoutService = class PageLayoutService {
-    constructor(cms, config, breakpointService, handlers) {
-        this.cms = cms;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        this.handlers = handlers;
-        // Prints warn messages for missing layout configs.
-        // The warnings are only printed once per config
-        // to not pollute the console log.
-        this.warnLogMessages = {};
-        this.logSlots = {};
-    }
-    getSlots(section) {
-        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map(([page, breakpoint]) => {
-            const pageTemplate = page.template;
-            const slots = this.resolveSlots(page, section, breakpoint);
-            return { slots, pageTemplate, breakpoint };
-        }), switchMap(({ slots, pageTemplate, breakpoint }) => {
-            let result = of(slots);
-            for (const handler of this.handlers || []) {
-                result = handler.handle(result, pageTemplate, section, breakpoint);
-            }
-            return result;
-        }), distinctUntilChanged((a, b) => {
-            if (a.length !== b.length) {
-                return false;
-            }
-            for (let i = 0; i < a.length; i++) {
-                if (a[i] !== b[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }));
-    }
-    /**
-     * Returns an observable with the last page slot above-the-fold
-     * for the given pageTemplate / breakpoint.
-     *
-     * The page fold is configurable in the `LayoutConfig` for each page layout.
-     */
-    getPageFoldSlot(pageTemplate) {
-        return this.breakpointService.breakpoint$.pipe(map((breakpoint) => {
-            if (!this.config.layoutSlots) {
-                // no layout config available
-                return null;
-            }
-            const pageTemplateConfig = this.config.layoutSlots[pageTemplate];
-            const config = this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
-            return config ? config.pageFold : null;
-        }));
-    }
-    resolveSlots(page, section, breakpoint) {
-        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-        if (config && config.slots) {
-            const pageSlots = Object.keys(page.slots);
-            return config.slots.filter((slot) => pageSlots.includes(slot));
-        }
-        else if (!section) {
-            this.logMissingLayoutConfig(page);
-            return Object.keys(page.slots);
-        }
-        else {
-            this.logMissingLayoutConfig(page, section);
-            return [];
-        }
-    }
-    get page$() {
-        return this.cms.getCurrentPage().pipe(filter((page) => !!page));
-    }
-    get templateName$() {
-        return this.page$.pipe(filter((page) => !!page.template), map((page) => page.template));
-    }
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     */
-    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
-        if (!this.config.layoutSlots) {
-            return null;
-        }
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (section) {
-            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-        }
-        if (pageTemplateConfig) {
-            return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
-        }
-    }
-    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (!pageTemplateConfig) {
-            return null;
-        }
-        // if there's no section config on the page layout
-        // we fall back to the global section config
-        const sectionConfig = pageTemplateConfig[section]
-            ? pageTemplateConfig[section]
-            : this.config.layoutSlots[section];
-        if (!sectionConfig) {
-            return null;
-        }
-        const responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
-        if (responsiveConfig.hasOwnProperty(configAttribute)) {
-            return responsiveConfig;
-        }
-        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-            return pageTemplateConfig[section];
-        }
-        else if (this.config.layoutSlots[section]) {
-            return this.config.layoutSlots[section];
-        }
-    }
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     */
-    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
-        let slotConfig = layoutSlotConfig;
-        // fallback to default slot config
-        if (!layoutSlotConfig || !breakpoint) {
-            return slotConfig;
-        }
-        // we have a config for the specific breakpoint
-        if (layoutSlotConfig[breakpoint] &&
-            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-            return layoutSlotConfig[breakpoint];
-        }
-        // find closest config
-        const all = this.breakpointService.breakpoints;
-        for (const br of all.splice(0, all.indexOf(breakpoint))) {
-            if (layoutSlotConfig[br] &&
-                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                slotConfig = layoutSlotConfig[br];
-            }
-        }
-        return slotConfig;
-    }
-    /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     */
-    logMissingLayoutConfig(page, section) {
-        if (!isDevMode()) {
-            return;
-        }
-        if (!this.logSlots[page.template]) {
-            // the info log is not printed in production
-            // tslint:disable-next-line: no-console
-            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
-            this.logSlots[page.template] = true;
-        }
-        const cacheKey = section || page.template;
-        if (!this.warnLogMessages[cacheKey]) {
-            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
-            this.warnLogMessages[cacheKey] = true;
-        }
-    }
-};
-PageLayoutService.ɵfac = function PageLayoutService_Factory(t) { return new (t || PageLayoutService)(ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(LayoutConfig), ɵngcc0.ɵɵinject(BreakpointService), ɵngcc0.ɵɵinject(PAGE_LAYOUT_HANDLER, 8)); };
-PageLayoutService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: PageLayoutService, factory: PageLayoutService.ɵfac });
-PageLayoutService.ctorParameters = () => [
-    { type: CmsService },
-    { type: LayoutConfig },
-    { type: BreakpointService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
-];
-PageLayoutService = __decorate([ __param(3, Optional()),
-    __param(3, Inject(PAGE_LAYOUT_HANDLER))
-], PageLayoutService);
-
-let PageLayoutComponent = class PageLayoutComponent {
-    constructor(el, renderer, pageLayoutService) {
-        this.el = el;
-        this.renderer = renderer;
-        this.pageLayoutService = pageLayoutService;
-        this.section$ = new BehaviorSubject(undefined);
-        this.templateName$ = this.pageLayoutService
-            .templateName$;
-        this.layoutName$ = this.section$.pipe(switchMap((section) => (section ? of(section) : this.templateName$)), tap((name) => {
-            this.styleClass = name;
-        }));
-        this.slots$ = this.section$.pipe(switchMap((section) => this.pageLayoutService.getSlots(section)));
-        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((templateName) => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
-    }
-    set section(value) {
-        this.section$.next(value);
-    }
-    set styleClass(cls) {
-        if (this.currentClass) {
-            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-        }
-        this.renderer.addClass(this.el.nativeElement, cls);
-        this.currentClass = cls;
-    }
-};
-PageLayoutComponent.ɵfac = function PageLayoutComponent_Factory(t) { return new (t || PageLayoutComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(PageLayoutService)); };
-PageLayoutComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageLayoutComponent, selectors: [["cx-page-layout"]], inputs: { section: "section" }, ngContentSelectors: _c0, decls: 2, vars: 8, consts: [[3, "cxOutlet", "cxOutletContext"], [3, "position", "isPageFold", 4, "ngFor", "ngForOf"], [3, "position", "isPageFold"]], template: function PageLayoutComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵprojectionDef();
-        ɵngcc0.ɵɵtemplate(0, PageLayoutComponent_ng_template_0_Template, 3, 3, "ng-template", 0);
-        ɵngcc0.ɵɵpipe(1, "async");
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("cxOutlet", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.layoutName$))("cxOutletContext", ɵngcc0.ɵɵpureFunction3(4, _c2, ctx.templateName$, ctx.slots$, ctx.section$));
-    } }, directives: function () { return [OutletDirective, ɵngcc4.NgForOf, PageSlotComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2, changeDetection: 0 });
-PageLayoutComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: PageLayoutService }
-];
-__decorate([
-    Input()
-], PageLayoutComponent.prototype, "section", null);
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsRoutesService = class CmsRoutesService {
-    constructor(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    cmsRouteExist(url) {
-        const isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        const routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((route) => route.data && route.data.cxCmsRouteContext && route.path === routePath));
-    }
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param pageContext
-     * @param currentUrl
-     */
-    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
-        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    }
-    updateRouting(pageContext, pageLabel, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageLabel.startsWith('/') &&
-            pageLabel.length > 1) {
-            const newRoute = {
-                path: pageLabel.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: {
-                        type: pageContext.type,
-                        id: pageLabel,
-                    },
-                },
-            };
-            this.router.resetConfig([newRoute, ...this.router.config]);
-            return true;
-        }
-        return false;
-    }
-};
-CmsRoutesService.ɵfac = function CmsRoutesService_Factory(t) { return new (t || CmsRoutesService)(ɵngcc0.ɵɵinject(ɵngcc5.Router), ɵngcc0.ɵɵinject(CmsMappingService)); };
-CmsRoutesService.ctorParameters = () => [
-    { type: Router },
-    { type: CmsMappingService }
-];
-CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-
-let CmsPageGuard = class CmsPageGuard {
-    constructor(
-    // expose as `protected` only services from public API:
-    routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-        this.protectedRoutesGuard = protectedRoutesGuard;
-    }
-    canActivate(route, state) {
-        /**
-         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-         */
-        return this.protectedRoutesGuard
-            ? this.protectedRoutesGuard
-                .canActivate(route)
-                .pipe(switchMap((result) => result ? this.getCmsPage(route, state) : of(result)))
-            : this.getCmsPage(route, state);
-    }
-    getCmsPage(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
-            .getPage(pageContext, true)
-            .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
-            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
-            : this.handleNotFoundPage(pageContext, route, state)));
-    }
-    resolveCmsPageLogic(pageContext, pageData, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((componentTypes) => this.cmsGuards
-            .cmsPageCanActivate(componentTypes, route, state)
-            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
-            if (canActivate === true) {
-                this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        }), map(([canActivate, componentTypes]) => {
-            const pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
-                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
-            }
-            return canActivate;
-        }));
-    }
-    handleNotFoundPage(pageContext, route, state) {
-        const notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((notFoundPage) => {
-            if (notFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((notFoundIndex) => {
-                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                }), switchMap((notFoundIndex) => this.cmsService.getPageIndex(pageContext).pipe(
-                // we have to wait for page index update
-                filter((index) => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
-            }
-            return of(false);
-        }));
-    }
-};
-CmsPageGuard.ɵfac = function CmsPageGuard_Factory(t) { return new (t || CmsPageGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(CmsRoutesService), ɵngcc0.ɵɵinject(CmsI18nService), ɵngcc0.ɵɵinject(CmsGuardsService), ɵngcc0.ɵɵinject(ɵngcc1.SemanticPathService), ɵngcc0.ɵɵinject(ɵngcc1.ProtectedRoutesGuard)); };
-CmsPageGuard.guardName = 'CmsPageGuard';
-CmsPageGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: CmsService },
-    { type: CmsRoutesService },
-    { type: CmsI18nService },
-    { type: CmsGuardsService },
-    { type: SemanticPathService },
-    { type: ProtectedRoutesGuard }
-];
-CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
-
-var OutletPosition;
-(function (OutletPosition) {
-    OutletPosition["REPLACE"] = "replace";
-    OutletPosition["BEFORE"] = "before";
-    OutletPosition["AFTER"] = "after";
-})(OutletPosition || (OutletPosition = {}));
-const AVOID_STACKED_OUTLETS = false;
-const USE_STACKED_OUTLETS = true;
-
-let OutletService = class OutletService {
-    constructor() {
-        this.templatesRefs = new Map();
-        this.templatesRefsBefore = new Map();
-        this.templatesRefsAfter = new Map();
-    }
-    /**
-     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
-     */
-    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
-        if (position === OutletPosition.BEFORE) {
-            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.store(this.templatesRefs, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.AFTER) {
-            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
-        }
-    }
-    /**
-     *
-     * Returns a single object or multiple objects for the given outlet reference,
-     * depending on the `stacked` argument.
-     *
-     * @param outlet The outlet reference
-     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
-     * @param stacked Indicates whether an array of outlet components is returned
-     */
-    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
-        let templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore.get(outlet);
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter.get(outlet);
-                break;
-            default:
-                templateRef = this.templatesRefs.get(outlet);
-        }
-        if (templateRef && !stacked) {
-            return templateRef[0];
-        }
-        return templateRef;
-    }
-    store(store, outlet, value) {
-        const existing = store.get(outlet) || [];
-        const newValue = existing.concat([value]);
-        store.set(outlet, newValue);
-    }
-};
-OutletService.ɵfac = function OutletService_Factory(t) { return new (t || OutletService)(); };
-OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-
-let OutletRefDirective = class OutletRefDirective {
-    constructor(tpl, outletService) {
-        this.tpl = tpl;
-        this.outletService = outletService;
-    }
-    ngOnInit() {
-        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-    }
-};
-OutletRefDirective.ɵfac = function OutletRefDirective_Factory(t) { return new (t || OutletRefDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.TemplateRef), ɵngcc0.ɵɵdirectiveInject(OutletService)); };
-OutletRefDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletRefDirective, selectors: [["", "cxOutletRef", ""]], inputs: { cxOutletRef: "cxOutletRef", cxOutletPos: "cxOutletPos" } });
-OutletRefDirective.ctorParameters = () => [
-    { type: TemplateRef },
-    { type: OutletService }
-];
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletRef", void 0);
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletPos", void 0);
-
-let OutletRefModule = class OutletRefModule {
-};
-OutletRefModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OutletRefModule });
-OutletRefModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OutletRefModule_Factory(t) { return new (t || OutletRefModule)(); }, imports: [[CommonModule]] });
-
-/**
- * The IntersectionService uses the native IntersectionObserver (v2), which
- * can be used to implement pre-loading and deferred loading of DOM content.
- *
- */
-let IntersectionService = class IntersectionService {
-    constructor(config) {
-        this.config = config;
-    }
-    /**
-     * Returns an Observable that emits only once a boolean value whenever
-     * the given element has shown in the view port.
-     *
-     * The returned obervable will only emit the first value. The
-     * observable must be cleaned up either way, since the value might never emit; it
-     *  depends on whether the element appears in the view port.
-     */
-    isIntersected(element, options) {
-        return this.intersects(element, options).pipe(first((v) => v === true));
-    }
-    /**
-     * Indicates whenever the element intersects the view port. An optional margin
-     * is used to intersects before the element shows up in the viewport.
-     * A value is emitted each time the element intersects.
-     *
-     * This is private for now, but could be exposed as a public API
-     * to introduce additional (css) render effects to the UI.
-     */
-    intersects(element, options) {
-        const elementVisible$ = new Observable((observer) => {
-            const rootMargin = this.getRootMargin(options);
-            const intersectOptions = { rootMargin };
-            const intersectionObserver = new IntersectionObserver((entries) => {
-                observer.next(entries);
-            }, intersectOptions);
-            intersectionObserver.observe(element);
-            return () => {
-                intersectionObserver.disconnect();
-            };
-        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
-        return elementVisible$;
-    }
-    getRootMargin(options) {
-        if (options.rootMargin) {
-            return options.rootMargin;
-        }
-        const layoutConfig = this.config;
-        if (layoutConfig.deferredLoading &&
-            layoutConfig.deferredLoading.intersectionMargin) {
-            return layoutConfig.deferredLoading.intersectionMargin;
-        }
-    }
-};
-IntersectionService.ɵfac = function IntersectionService_Factory(t) { return new (t || IntersectionService)(ɵngcc0.ɵɵinject(LayoutConfig)); };
-IntersectionService.ctorParameters = () => [
-    { type: LayoutConfig }
-];
-IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
-
-/**
- * The defer loading serivce is used to defer loading of DOM elements
- * until the elements are required for the user experience.
- */
-let DeferLoaderService = class DeferLoaderService {
-    constructor(platformId, config, intersectionService) {
-        this.platformId = platformId;
-        this.config = config;
-        this.intersectionService = intersectionService;
-        this.globalLoadStrategy = config.deferredLoading
-            ? config.deferredLoading.strategy
-            : DeferLoadingStrategy.INSTANT;
-    }
-    /**
-     * Defer loading till the element intersects the viewport.
-     *
-     * We evalutes whether we instantly load the element for different reasons:
-     * - we run in SSR mode
-     * - there's no global strategy given
-     * - the global loading strategy is set to INSTANT loading,
-     *   and the loading strategy in the given is not set to DEFER
-     * - the loading strategy in the given options is set to INSTANT
-     */
-    load(element, options) {
-        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
-            return of(true);
-        }
-        else {
-            return this.intersectionService.isIntersected(element, options);
-        }
-    }
-    shouldLoadInstantly(elementLoadingStrategy) {
-        return (isPlatformServer(this.platformId) ||
-            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
-            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
-                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
-    }
-};
-DeferLoaderService.ɵfac = function DeferLoaderService_Factory(t) { return new (t || DeferLoaderService)(ɵngcc0.ɵɵinject(PLATFORM_ID), ɵngcc0.ɵɵinject(LayoutConfig), ɵngcc0.ɵɵinject(IntersectionService)); };
-DeferLoaderService.ctorParameters = () => [
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: LayoutConfig },
-    { type: IntersectionService }
-];
-DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
-DeferLoaderService = __decorate([ __param(0, Inject(PLATFORM_ID))
-], DeferLoaderService);
-
-let OutletDirective = class OutletDirective {
-    constructor(vcr, templateRef, outletService, deferLoaderService) {
-        this.vcr = vcr;
-        this.templateRef = templateRef;
-        this.outletService = outletService;
-        this.deferLoaderService = deferLoaderService;
-        this.loaded = new EventEmitter(true);
-        this.subscription = new Subscription();
-    }
-    initializeOutlet() {
-        this.vcr.clear();
-        this.subscription.unsubscribe();
-        this.subscription = new Subscription();
-        if (this.cxOutletDefer) {
-            this.deferLoading();
-        }
-        else {
-            this.render();
-        }
-    }
-    ngOnChanges(changes) {
-        if (changes.cxOutlet) {
-            this.initializeOutlet();
-        }
-    }
-    deferLoading() {
-        this.loaded.emit(false);
-        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
-        // Although the deferLoaderService might emit only once, as long as the hostElement
-        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
-        // the subscription on destroy.
-        this.subscription.add(this.deferLoaderService
-            .load(hostElement, this.cxOutletDefer)
-            .subscribe(() => {
-            this.render();
-            this.loaded.emit(true);
-        }));
-    }
-    render() {
-        this.renderOutlet(OutletPosition.BEFORE);
-        this.renderOutlet(OutletPosition.REPLACE);
-        this.renderOutlet(OutletPosition.AFTER);
-    }
-    renderOutlet(position) {
-        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
-        if (!templates && position === OutletPosition.REPLACE) {
-            templates = [this.templateRef];
-        }
-        // Just in case someone extended the `OutletService` and
-        // returns a singular object.
-        if (!Array.isArray(templates)) {
-            templates = [templates];
-        }
-        templates.forEach((obj) => {
-            this.create(obj);
-        });
-    }
-    create(tmplOrFactory) {
-        if (tmplOrFactory instanceof ComponentFactory) {
-            this.vcr.createComponent(tmplOrFactory);
-        }
-        else if (tmplOrFactory instanceof TemplateRef) {
-            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
-                $implicit: this.cxOutletContext,
-            });
-            // we do not know if content is created dynamically or not
-            // so we apply change detection anyway
-            view.markForCheck();
-        }
-    }
-    /**
-     * Returns the closest `HtmlElement`, by iterating over the
-     * parent elements of the given element.
-     *
-     * @param element
-     */
-    getHostElement(element) {
-        if (element instanceof HTMLElement) {
-            return element;
-        }
-        return this.getHostElement(element.parentElement);
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-};
-OutletDirective.ɵfac = function OutletDirective_Factory(t) { return new (t || OutletDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ViewContainerRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.TemplateRef), ɵngcc0.ɵɵdirectiveInject(OutletService), ɵngcc0.ɵɵdirectiveInject(DeferLoaderService)); };
-OutletDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletDirective, selectors: [["", "cxOutlet", ""]], inputs: { cxOutlet: "cxOutlet", cxOutletContext: "cxOutletContext", cxOutletDefer: "cxOutletDefer" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature] });
-OutletDirective.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: OutletService },
-    { type: DeferLoaderService }
-];
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutlet", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletContext", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletDefer", void 0);
-__decorate([
-    Output()
-], OutletDirective.prototype, "loaded", void 0);
-
-let OutletModule = class OutletModule {
-};
-OutletModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OutletModule });
-OutletModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OutletModule_Factory(t) { return new (t || OutletModule)(); }, providers: [OutletService], imports: [[CommonModule]] });
-
-let PageSlotComponent = class PageSlotComponent {
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        this.config = config;
-        this.isPending = true;
-        this.hasComponents = false;
-        this.isPageFold = false;
-        this.position$ = new BehaviorSubject(undefined);
-        /**
-         * observable with `ContentSlotData` for the current position
-         *
-         * @deprecated we'll stop supporting this property in 2.0 as
-         * it is not used separately.
-         */
-        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
-        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
-        this.subscription = new Subscription();
-    }
-    /**
-     * The position is used to find the CMS page slot (and optional outlet)
-     * that is rendered in the PageSlotComponent. Furthermore, the position
-     * is added as a CSS class name to the host element.
-     */
-    set position(position) {
-        this.position$.next(position);
-        this.renderer.addClass(this.hostElement.nativeElement, position);
-    }
-    get position() {
-        return this.position$.value;
-    }
-    ngOnInit() {
-        this.subscription.add(this.components$.subscribe((components) => {
-            this.hasComponents = components && components.length > 0;
-            this.pendingComponentCount = components ? components.length : 0;
-            this.isPending = this.pendingComponentCount > 0;
-        }));
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-    /**
-     * Is triggered when a component is added to the view.
-     * We use this information to dropthe `is-pending` class from the page slot
-     * when all nested components have been added.
-     */
-    isLoaded(loadState) {
-        if (loadState) {
-            this.pendingComponentCount--;
-        }
-        this.isPending = this.pendingComponentCount > 0;
-    }
-    getComponentDeferOptions(componentType) {
-        const deferLoading = this.getDeferLoadingStrategy(componentType);
-        return { deferLoading };
-    }
-    /**
-     * The `DeferLoadingStrategy` indicates whether component rendering
-     * should be deferred.
-     */
-    getDeferLoadingStrategy(componentType) {
-        if (this.config) {
-            return (this.config.cmsComponents[componentType] || {})
-                .deferLoading;
-        }
-    }
-    addSmartEditSlotClass(slot) {
-        if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    }
-    addSmartEditContract(slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-    }
-};
-PageSlotComponent.ɵfac = function PageSlotComponent_Factory(t) { return new (t || PageSlotComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.DynamicAttributeService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsConfig)); };
-PageSlotComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageSlotComponent, selectors: [["cx-page-slot"], ["", "cx-page-slot", ""]], hostVars: 6, hostBindings: function PageSlotComponent_HostBindings(rf, ctx) { if (rf & 2) {
-        ɵngcc0.ɵɵclassProp("cx-pending", ctx.isPending)("has-components", ctx.hasComponents)("page-fold", ctx.isPageFold);
-    } }, inputs: { isPageFold: "isPageFold", position: "position" }, decls: 1, vars: 4, consts: [[3, "cxOutlet", "cxOutletContext"], [4, "ngFor", "ngForOf"], [3, "cxOutlet", "cxOutletContext", "cxOutletDefer", "loaded"], [3, "cxComponentWrapper"]], template: function PageSlotComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_Template, 2, 3, "ng-template", 0);
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("cxOutlet", ctx.position)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c4, ctx.components$));
-    } }, directives: [OutletDirective, ɵngcc4.NgForOf, ComponentWrapperDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
-PageSlotComponent.ctorParameters = () => [
-    { type: CmsService },
-    { type: DynamicAttributeService },
-    { type: Renderer2 },
-    { type: ElementRef },
-    { type: CmsConfig }
-];
-__decorate([
-    Input()
-], PageSlotComponent.prototype, "position", null);
-__decorate([
-    HostBinding('class.cx-pending')
-], PageSlotComponent.prototype, "isPending", void 0);
-__decorate([
-    HostBinding('class.has-components')
-], PageSlotComponent.prototype, "hasComponents", void 0);
-__decorate([
-    HostBinding('class.page-fold'), Input()
-], PageSlotComponent.prototype, "isPageFold", void 0);
-
-let PageSlotModule = class PageSlotModule {
-};
-PageSlotModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageSlotModule });
-PageSlotModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageSlotModule_Factory(t) { return new (t || PageSlotModule)(); }, providers: [], imports: [[CommonModule, OutletModule, PageComponentModule]] });
-
-let PageLayoutModule = class PageLayoutModule {
-};
-PageLayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageLayoutModule });
-PageLayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageLayoutModule_Factory(t) { return new (t || PageLayoutModule)(); }, providers: [PageLayoutService], imports: [[CommonModule, OutletModule, PageSlotModule]] });
-
-class PWAModuleConfig {
-}
-const defaultPWAModuleConfig = {
-    pwa: {
-        enabled: false,
-        addToHomeScreen: false,
-    },
-};
-
-let AddToHomeScreenService = class AddToHomeScreenService {
-    constructor(config, globalMessageService, winRef) {
-        this.config = config;
-        this.globalMessageService = globalMessageService;
-        this.winRef = winRef;
-        this.canPrompt = new BehaviorSubject(false);
-        this.canPrompt$ = this.canPrompt.asObservable();
-        if (this.config.pwa.addToHomeScreen) {
-            this.init();
-        }
-    }
-    init() {
-        if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (event) => {
-                event.preventDefault();
-                this.deferredEvent = event;
-                this.enableAddToHomeScreen();
-            });
-            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
-                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                this.disableAddToHomeScreen();
-                this.deferredEvent = null;
-            });
-        }
-    }
-    enableAddToHomeScreen() {
-        this.canPrompt.next(true);
-    }
-    disableAddToHomeScreen() {
-        this.canPrompt.next(false);
-    }
-    firePrompt() {
-        if (this.deferredEvent) {
-            this.deferredEvent.prompt();
-        }
-    }
-};
-AddToHomeScreenService.ɵfac = function AddToHomeScreenService_Factory(t) { return new (t || AddToHomeScreenService)(ɵngcc0.ɵɵinject(PWAModuleConfig), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef)); };
-AddToHomeScreenService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: AddToHomeScreenService, factory: AddToHomeScreenService.ɵfac });
-AddToHomeScreenService.ctorParameters = () => [
-    { type: PWAModuleConfig },
-    { type: GlobalMessageService },
-    { type: WindowRef }
-];
-
-class AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-    ngOnInit() {
-        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-    }
-    prompt() {
-        this.addToHomeScreenService.firePrompt();
-    }
-}
-AddToHomeScreenComponent.ɵfac = function AddToHomeScreenComponent_Factory(t) { ɵngcc0.ɵɵinvalidFactory(); };
-AddToHomeScreenComponent.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: AddToHomeScreenComponent });
-
-let AddToHomeScreenBannerComponent = class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-};
-AddToHomeScreenBannerComponent.ɵfac = function AddToHomeScreenBannerComponent_Factory(t) { return new (t || AddToHomeScreenBannerComponent)(ɵngcc0.ɵɵdirectiveInject(AddToHomeScreenService)); };
-AddToHomeScreenBannerComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToHomeScreenBannerComponent, selectors: [["cx-add-to-home-screen-banner"]], features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-add-to-home-screen-banner"], [1, "cx-add-to-home-screen-banner-inner"], [1, "btn", "btn-primary", 3, "click"]], template: function AddToHomeScreenBannerComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, AddToHomeScreenBannerComponent_div_0_Template, 16, 12, "div", 0);
-        ɵngcc0.ɵɵpipe(1, "async");
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.canPrompt$));
-    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
-AddToHomeScreenBannerComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-
-let AddToHomeScreenBtnComponent = class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-};
-AddToHomeScreenBtnComponent.ɵfac = function AddToHomeScreenBtnComponent_Factory(t) { return new (t || AddToHomeScreenBtnComponent)(ɵngcc0.ɵɵdirectiveInject(AddToHomeScreenService)); };
-AddToHomeScreenBtnComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToHomeScreenBtnComponent, selectors: [["cx-add-to-home-screen-btn"]], features: [ɵngcc0.ɵɵInheritDefinitionFeature], ngContentSelectors: _c0, decls: 3, vars: 3, consts: [[3, "click"], [4, "ngIf"]], template: function AddToHomeScreenBtnComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵprojectionDef();
-        ɵngcc0.ɵɵelementStart(0, "span", 0);
-        ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBtnComponent_Template_span_click_0_listener() { return ctx.prompt(); });
-        ɵngcc0.ɵɵtemplate(1, AddToHomeScreenBtnComponent_1_Template, 1, 0, undefined, 1);
-        ɵngcc0.ɵɵpipe(2, "async");
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx.canPrompt$));
-    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
-AddToHomeScreenBtnComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-
-function pwaConfigurationFactory(pwaConfig) {
-    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
-}
-function pwaFactory(addToHomeScreenService) {
-    const result = () => addToHomeScreenService;
-    return result;
-}
-let PwaModule = class PwaModule {
-};
-PwaModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PwaModule });
-PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Factory(t) { return new (t || PwaModule)(); }, providers: [
-        provideDefaultConfig(defaultPWAModuleConfig),
-        { provide: PWAModuleConfig, useExisting: Config },
-        {
-            provide: SwRegistrationOptions,
-            useFactory: pwaConfigurationFactory,
-            deps: [Config]
-        },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: pwaFactory,
-            deps: [AddToHomeScreenService],
-            multi: true
-        },
-        AddToHomeScreenService,
-    ], imports: [[
-            CommonModule,
-            ServiceWorkerModule.register('/ngsw-worker.js'),
-            I18nModule,
-        ]] });
-
-const cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-function addCmsRoute(injector) {
-    const result = () => {
-        const router = injector.get(Router);
-        router.config.push(cmsRoute);
-    };
-    return result;
-}
-
-const ɵ0 = addCmsRoute;
-let CmsRouteModule = class CmsRouteModule {
-};
-CmsRouteModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CmsRouteModule });
-CmsRouteModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CmsRouteModule_Factory(t) { return new (t || CmsRouteModule)(); }, providers: [
-        {
-            provide: APP_INITIALIZER,
-            multi: true,
-            deps: [Injector],
-            useFactory: ɵ0
-        },
-    ] });
-
-const defaultStorefrontRoutesConfig = {
-    home: { paths: [''] },
-    notFound: { paths: ['not-found'] },
-    cart: { paths: ['cart'] },
-    // semantic links for login related pages
-    login: { paths: ['login'], protected: false },
-    register: { paths: ['login/register'], protected: false },
-    forgotPassword: { paths: ['login/forgot-password'], protected: false },
-    resetPassword: { paths: ['login/pw/change'], protected: false },
-    logout: { paths: ['logout'] },
-    checkoutLogin: { paths: ['checkout-login'] },
-    checkout: { paths: ['checkout'] },
-    checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
-    checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
-    checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
-    checkoutReviewOrder: { paths: ['checkout/review-order'] },
-    orderConfirmation: { paths: ['order-confirmation'] },
-    // plp routes
-    search: { paths: ['search/:query'] },
-    category: {
-        paths: ['category/:categoryCode'],
-        paramsMapping: { categoryCode: 'code' },
-    },
-    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
-    // pdp routes
-    product: {
-        paths: ['product/:productCode/:name'],
-        paramsMapping: { productCode: 'code' },
-    },
-    termsAndConditions: { paths: ['terms-and-conditions'] },
-    orders: {
-        paths: ['my-account/orders'],
-    },
-    orderDetails: {
-        paths: ['my-account/order/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderGuest: {
-        paths: ['guest/order/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderReturn: {
-        paths: ['my-account/order/return/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderReturnConfirmation: {
-        paths: ['my-account/order/return/confirmation/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderCancel: {
-        paths: ['my-account/order/cancel/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderCancelConfirmation: {
-        paths: ['my-account/order/cancel/confirmation/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    returnRequestDetails: {
-        paths: ['my-account/return-request/:returnCode'],
-        paramsMapping: { returnCode: 'rma' },
-    },
-    coupons: { paths: ['my-account/coupons'] },
-    couponClaim: {
-        paths: ['my-account/coupon/claim/:couponCode'],
-        paramsMapping: { couponCode: 'code' },
-    },
-};
-const defaultRoutingConfig = {
-    routing: {
-        routes: defaultStorefrontRoutesConfig,
-    },
-};
-
-var RoutingModule_1;
-let RoutingModule = RoutingModule_1 = class RoutingModule {
-    static forRoot() {
-        return {
-            ngModule: RoutingModule_1,
-            providers: [provideDefaultConfig(defaultRoutingConfig)],
-        };
-    }
-};
-RoutingModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: RoutingModule });
-RoutingModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function RoutingModule_Factory(t) { return new (t || RoutingModule)(); }, imports: [[RoutingModule$1.forRoot(), CmsRouteModule]] });
-
-/**
- * Matches the pattern '[ ** / ] marker / :paramName'
- *
- * @param marker phrase that indicates the start of the match
- * @param paramName name of the parameter present after the marker
- * @param precedingParamName name of the parameter for every preceding url segment
- *        i.e. `param` will result in `param0`, `param1`, ...
- */
-function getSuffixUrlMatcher({ marker, paramName, precedingParamName, }) {
-    precedingParamName = precedingParamName || 'param';
-    const matcher = function suffixUrlMatcher(segments) {
-        const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
-        const isMarkerLastSegment = markerIndex === segments.length - 1;
-        if (markerIndex === -1 || isMarkerLastSegment) {
-            return null;
-        }
-        const paramIndex = markerIndex + 1;
-        const posParams = {
-            [paramName]: segments[paramIndex],
-        };
-        for (let i = 0; i < markerIndex; i++) {
-            posParams[`${precedingParamName}${i}`] = segments[i];
-        }
-        return { consumed: segments.slice(0, paramIndex + 1), posParams };
-    };
-    if (isDevMode()) {
-        matcher['_suffixRouteConfig'] = { marker, paramName, precedingParamName }; // property added for easier debugging of routes
-    }
-    return matcher;
-}
-function findLastIndex(elements, predicate) {
-    for (let index = elements.length - 1; index >= 0; index--) {
-        if (predicate(elements[index])) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-let SeoMetaService = class SeoMetaService {
-    constructor(ngTitle, ngMeta, pageMetaService) {
-        this.ngTitle = ngTitle;
-        this.ngMeta = ngMeta;
-        this.pageMetaService = pageMetaService;
-    }
-    init() {
-        this.pageMetaService
-            .getMeta()
-            .pipe(filter(Boolean))
-            .subscribe((meta) => (this.meta = meta));
-    }
-    set meta(meta) {
-        this.title = meta.title;
-        this.description = meta.description;
-        this.image = meta.image;
-        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
-    }
-    set title(title) {
-        this.ngTitle.setTitle(title || '');
-    }
-    set description(value) {
-        this.addTag({ name: 'description', content: value });
-    }
-    set image(imageUrl) {
-        if (imageUrl) {
-            this.addTag({ name: 'og:image', content: imageUrl });
-        }
-    }
-    set robots(value) {
-        if (value) {
-            this.addTag({ name: 'robots', content: value.join(', ') });
-        }
-    }
-    addTag(meta) {
-        if (meta.content) {
-            this.ngMeta.updateTag(meta);
-        }
-    }
-};
-SeoMetaService.ɵfac = function SeoMetaService_Factory(t) { return new (t || SeoMetaService)(ɵngcc0.ɵɵinject(ɵngcc2.Title), ɵngcc0.ɵɵinject(ɵngcc2.Meta), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService)); };
-SeoMetaService.ctorParameters = () => [
-    { type: Title },
-    { type: Meta },
-    { type: PageMetaService }
-];
-SeoMetaService.ɵprov = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-
-const htmlLangProvider = {
-    provide: APP_INITIALIZER,
-    multi: true,
-    useFactory: setHtmlLangAttribute,
-    deps: [WindowRef, LanguageService],
-};
-/**
- * Sets active language in <html lang="">
- */
-function setHtmlLangAttribute(winRef, languageService) {
-    const result = () => {
-        languageService.getActive().subscribe((lang) => {
-            winRef.document.documentElement.lang = lang;
-        });
-    };
-    return result;
-}
-
-let JsonLdScriptFactory = class JsonLdScriptFactory {
-    constructor(platformId, winRef, rendererFactory, sanitizer) {
-        this.platformId = platformId;
-        this.winRef = winRef;
-        this.rendererFactory = rendererFactory;
-        this.sanitizer = sanitizer;
-    }
-    build(schema) {
-        if (schema && this.isJsonLdRequired()) {
-            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
-        }
-    }
-    /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
-     */
-    isJsonLdRequired() {
-        return !isPlatformBrowser(this.platformId) || isDevMode();
-    }
-    createJsonLdScriptElement() {
-        const id = 'json-ld';
-        let scriptElement = (this.winRef.document.getElementById(id));
-        if (!scriptElement) {
-            const renderer = this.rendererFactory.createRenderer(null, null);
-            const script = renderer.createElement('script');
-            script.id = id;
-            script.type = 'application/ld+json';
-            renderer.appendChild(this.winRef.document.body, script);
-            scriptElement = script;
-        }
-        return scriptElement;
-    }
-    /**
-     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
-     *
-     * The given schema is not trusted, as malicious code could be injected (XSS)
-     * into the json-ld script.
-     */
-    sanitize(schema) {
-        return JSON.stringify(schema, (_key, value) => typeof value === 'string'
-            ? this.sanitizer.sanitize(SecurityContext.HTML, value)
-            : value);
-    }
-};
-JsonLdScriptFactory.ɵfac = function JsonLdScriptFactory_Factory(t) { return new (t || JsonLdScriptFactory)(ɵngcc0.ɵɵinject(PLATFORM_ID), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(ɵngcc0.RendererFactory2), ɵngcc0.ɵɵinject(ɵngcc2.DomSanitizer)); };
-JsonLdScriptFactory.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: WindowRef },
-    { type: RendererFactory2 },
-    { type: DomSanitizer }
-];
-JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
-JsonLdScriptFactory = __decorate([ __param(0, Inject(PLATFORM_ID))
-], JsonLdScriptFactory);
-
-/**
- * Low level directive that adds a json-ld script tag to the component.
- * This code bypasses the strict XSS security, as otherwise we're not able
- * to append a script tag with JS inside.
- */
-let JsonLdDirective = class JsonLdDirective {
-    constructor(jsonLdScriptFactory, sanitizer) {
-        this.jsonLdScriptFactory = jsonLdScriptFactory;
-        this.sanitizer = sanitizer;
-    }
-    set cxJsonLd(schema) {
-        this.writeJsonLd(schema);
-    }
-    writeJsonLd(schema) {
-        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
-            const sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
-            const html = `<script type="application/ld+json">${sanitizedSchema}</script>`;
-            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
-        }
-    }
-};
-JsonLdDirective.ɵfac = function JsonLdDirective_Factory(t) { return new (t || JsonLdDirective)(ɵngcc0.ɵɵdirectiveInject(JsonLdScriptFactory), ɵngcc0.ɵɵdirectiveInject(ɵngcc2.DomSanitizer)); };
-JsonLdDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: JsonLdDirective, selectors: [["", "cxJsonLd", ""]], hostVars: 1, hostBindings: function JsonLdDirective_HostBindings(rf, ctx) { if (rf & 2) {
-        ɵngcc0.ɵɵhostProperty("innerHTML", ctx.jsonLD, ɵngcc0.ɵɵsanitizeHtml);
-    } }, inputs: { cxJsonLd: "cxJsonLd" } });
-JsonLdDirective.ctorParameters = () => [
-    { type: JsonLdScriptFactory },
-    { type: DomSanitizer }
-];
-__decorate([
-    Input()
-], JsonLdDirective.prototype, "cxJsonLd", null);
-__decorate([
-    HostBinding('innerHTML')
-], JsonLdDirective.prototype, "jsonLD", void 0);
-
-/**
- * Injection token to extend schema builders for adding structural data (json-ld).
- *
- * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
- * lowever level builder to further extend the schema.
- */
-const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
-/**
- * Injection token to add specific json-ld builders for product related schema's.
- * See see https://schema.org/product for more information.
- */
-const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
-
-let StructuredDataFactory = class StructuredDataFactory {
-    constructor(scriptBuilder, builders) {
-        this.scriptBuilder = scriptBuilder;
-        this.builders = builders;
-    }
-    build() {
-        this.collectSchemas().subscribe((schema) => {
-            this.scriptBuilder.build(schema);
-        });
-    }
-    collectSchemas() {
-        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-            return of();
-        }
-        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
-    }
-};
-StructuredDataFactory.ɵfac = function StructuredDataFactory_Factory(t) { return new (t || StructuredDataFactory)(ɵngcc0.ɵɵinject(JsonLdScriptFactory), ɵngcc0.ɵɵinject(SCHEMA_BUILDER, 8)); };
-StructuredDataFactory.ctorParameters = () => [
-    { type: JsonLdScriptFactory },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
-];
-StructuredDataFactory.ɵprov = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
-StructuredDataFactory = __decorate([ __param(1, Optional()),
-    __param(1, Inject(SCHEMA_BUILDER))
-], StructuredDataFactory);
-
-/**
- * Factory to build the structure data
- * without any interaction with the UI.
- */
-function getStructuredDataFactory(injector) {
-    const result = () => {
-        const factory = injector.get(StructuredDataFactory);
-        factory.build();
-    };
-    return result;
-}
-let StructuredDataModule = class StructuredDataModule {
-};
-StructuredDataModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: StructuredDataModule });
-StructuredDataModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StructuredDataModule_Factory(t) { return new (t || StructuredDataModule)(); }, providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: getStructuredDataFactory,
-            deps: [Injector],
-            multi: true
-        },
-    ], imports: [[CommonModule]] });
-
-function initSeoService(injector) {
-    const result = () => {
-        const service = injector.get(SeoMetaService);
-        service.init();
-    };
-    return result;
-}
-let SeoModule = class SeoModule {
-};
-SeoModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SeoModule });
-SeoModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SeoModule_Factory(t) { return new (t || SeoModule)(); }, providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initSeoService,
-            deps: [Injector],
-            multi: true
-        },
-        htmlLangProvider,
-    ], imports: [[StructuredDataModule]] });
-
-let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
-    constructor(pageMetaService) {
-        this.pageMetaService = pageMetaService;
-    }
-    build() {
-        return this.pageMetaService
-            .getMeta()
-            .pipe(map((pageMeta) => this.collect(pageMeta)));
-    }
-    collect(pageMeta) {
-        if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
-            return;
-        }
-        const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {
-            return {
-                '@type': 'ListItem',
-                position: index + 1,
-                item: {
-                    '@id': crumb.link,
-                    name: crumb.label,
-                },
-            };
-        });
-        if (pageMeta.title) {
-            crumbs.push({
-                '@type': 'ListItem',
-                position: crumbs.length + 1,
-                item: {
-                    '@id': pageMeta.title,
-                    name: pageMeta.title,
-                },
-            });
-        }
-        return {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: crumbs,
-        };
-    }
-};
-BreadcrumbSchemaBuilder.ɵfac = function BreadcrumbSchemaBuilder_Factory(t) { return new (t || BreadcrumbSchemaBuilder)(ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService)); };
-BreadcrumbSchemaBuilder.ctorParameters = () => [
-    { type: PageMetaService }
-];
-BreadcrumbSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
-
-/**
- * Builds the basic structured data for the product, see https://schema.org/product.
- * This builder includes data for sku number, name, description, brand and main image.
- */
-let JsonLdBaseProductBuilder = class JsonLdBaseProductBuilder {
-    build(product) {
-        return of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
-    }
-    getProductBase(product) {
-        const result = { sku: product.code };
-        if (product.name) {
-            result.name = product.name;
-        }
-        if (product.summary) {
-            result.description = product.summary;
-        }
-        return result;
-    }
-    getProductImage(product) {
-        return product.images &&
-            product.images.PRIMARY &&
-            product.images.PRIMARY['zoom'] &&
-            product.images.PRIMARY['zoom'].url
-            ? {
-                image: product.images.PRIMARY['zoom'].url,
-            }
-            : {};
-    }
-    getProductBrand(product) {
-        return product['manufacturer']
-            ? {
-                brand: product['manufacturer'],
-            }
-            : null;
-    }
-};
-JsonLdBaseProductBuilder.ɵfac = function JsonLdBaseProductBuilder_Factory(t) { return new (t || JsonLdBaseProductBuilder)(); };
-JsonLdBaseProductBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
-
-/**
- * Builds the structured data for the product offer, see https://schema.org/offers.
- * The data includes the price, currency and availability level.
- */
-let JsonLdProductOfferBuilder = class JsonLdProductOfferBuilder {
-    build(product) {
-        const schema = { '@type': 'Offer' };
-        if (product.price) {
-            if (product.price.value) {
-                schema.price = product.price.value;
-            }
-            if (product.price.currencyIso) {
-                schema.priceCurrency = product.price.currencyIso;
-            }
-        }
-        if (product.stock && product.stock.stockLevelStatus) {
-            schema.availability =
-                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
-        }
-        return of({
-            offers: schema,
-        });
-    }
-};
-JsonLdProductOfferBuilder.ɵfac = function JsonLdProductOfferBuilder_Factory(t) { return new (t || JsonLdProductOfferBuilder)(); };
-JsonLdProductOfferBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
-
-/**
- * Builds the structured data for the product reviews, see https://schema.org/Review.
- * The data includes the aggregated product rating and the individual reviews.
- */
-let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
-    constructor(reviewService) {
-        this.reviewService = reviewService;
-    }
-    build(product) {
-        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
-            return {
-                aggregateRating: this.buildAggregatedReviews(product, reviews),
-                review: reviews.map((review) => this.buildReviews(review)),
-            };
-        }));
-    }
-    buildAggregatedReviews(product, reviews) {
-        const aggregated = {
-            '@type': 'AggregateRating',
-        };
-        if (product.averageRating) {
-            aggregated.ratingValue = product.averageRating;
-        }
-        if (reviews) {
-            aggregated.ratingCount = reviews.filter((rev) => !!rev.rating).length;
-            aggregated.reviewCount = reviews.filter((rev) => !!rev.comment).length;
-        }
-        return aggregated;
-    }
-    buildReviews(review) {
-        const reviewSchema = {
-            '@type': 'review',
-        };
-        if (review.principal && review.principal.name) {
-            reviewSchema.author = review.principal.name;
-        }
-        if (review.date) {
-            const date = new Date(review.date);
-            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-        }
-        if (review.headline) {
-            reviewSchema.name = review.headline;
-        }
-        if (review.comment) {
-            reviewSchema.description = review.comment;
-        }
-        if (review.rating) {
-            reviewSchema.reviewRating = {
-                '@type': 'Rating',
-                ratingValue: review.rating.toString(),
-            };
-        }
-        return reviewSchema;
-    }
-};
-JsonLdProductReviewBuilder.ɵfac = function JsonLdProductReviewBuilder_Factory(t) { return new (t || JsonLdProductReviewBuilder)(ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService)); };
-JsonLdProductReviewBuilder.ctorParameters = () => [
-    { type: ProductReviewService }
-];
-JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
-
-let CurrentProductService = class CurrentProductService {
-    constructor(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
-    }
-    /**
-     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
-     *
-     * @param scopes
-     */
-    getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
-            return productCode
-                ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
-                : of(null);
-        }), filter((x) => x !== undefined), distinctUntilChanged());
-    }
-};
-CurrentProductService.ɵfac = function CurrentProductService_Factory(t) { return new (t || CurrentProductService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ProductService)); };
-CurrentProductService.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ProductService }
-];
-CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
-
-/**
- * Adds the minimal structured data for the product, see https://schema.org/product.
- * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
- * using the `JSONLD_PRODUCT_BUILDER` token.
- */
-let ProductSchemaBuilder = class ProductSchemaBuilder {
-    constructor(currentProduct, builders) {
-        this.currentProduct = currentProduct;
-        this.builders = builders;
-    }
-    build() {
-        return this.currentProduct.getProduct().pipe(switchMap((product) => {
-            if (product) {
-                return combineLatest(this.collect(product)).pipe(map((res) => Object.assign({}, ...res)));
-            }
-            return of({});
-        }));
-    }
-    collect(product) {
-        if (!product || !product.code) {
-            return [];
-        }
-        const builders = this.builders
-            ? this.builders.map((builder) => builder.build(product))
-            : [];
-        return [
-            of({
-                '@context': 'http://schema.org',
-                '@type': 'Product',
-            }),
-            ...builders,
-        ];
-    }
-};
-ProductSchemaBuilder.ɵfac = function ProductSchemaBuilder_Factory(t) { return new (t || ProductSchemaBuilder)(ɵngcc0.ɵɵinject(CurrentProductService), ɵngcc0.ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); };
-ProductSchemaBuilder.ctorParameters = () => [
-    { type: CurrentProductService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
-];
-ProductSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
-ProductSchemaBuilder = __decorate([ __param(1, Optional()),
-    __param(1, Inject(JSONLD_PRODUCT_BUILDER))
-], ProductSchemaBuilder);
-
-/**
- * Provides several standard json-ld builders that contribute
- * to colleting and building json-ld data.
- */
-let JsonLdBuilderModule = class JsonLdBuilderModule {
-};
-JsonLdBuilderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: JsonLdBuilderModule });
-JsonLdBuilderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function JsonLdBuilderModule_Factory(t) { return new (t || JsonLdBuilderModule)(); }, providers: [
-        {
-            provide: SCHEMA_BUILDER,
-            useExisting: ProductSchemaBuilder,
-            multi: true
-        },
-        {
-            provide: SCHEMA_BUILDER,
-            useExisting: BreadcrumbSchemaBuilder,
-            multi: true
-        },
-        // lower level json-ld builder classes offering fine-graiend control
-        // for product related schema's
-        {
-            provide: JSONLD_PRODUCT_BUILDER,
-            useExisting: JsonLdBaseProductBuilder,
-            multi: true
-        },
-        {
-            provide: JSONLD_PRODUCT_BUILDER,
-            useExisting: JsonLdProductOfferBuilder,
-            multi: true
-        },
-        {
-            provide: JSONLD_PRODUCT_BUILDER,
-            useExisting: JsonLdProductReviewBuilder,
-            multi: true
-        },
-    ] });
-
 const ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
 
 let AsmComponentService = class AsmComponentService {
@@ -11715,7 +9870,7 @@ AsmMainUiComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AsmMainUiComponen
         ɵngcc0.ɵɵpipe(16, "async");
         ɵngcc0.ɵɵtemplate(17, AsmMainUiComponent_ng_template_17_Template, 2, 3, "ng-template", null, 9, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r42 = ɵngcc0.ɵɵreference(18);
+        const _r28 = ɵngcc0.ɵɵreference(18);
         var tmp_2_0 = null;
         const currVal_2 = (tmp_2_0 = ɵngcc0.ɵɵpipeBind1(9, 11, ctx.csAgentToken$)) == null ? null : tmp_2_0.access_token;
         var tmp_3_0 = null;
@@ -11735,7 +9890,7 @@ AsmMainUiComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AsmMainUiComponen
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("ngIf", currVal_4);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", currVal_5)("ngIfElse", _r42);
+        ɵngcc0.ɵɵproperty("ngIf", currVal_5)("ngIfElse", _r28);
     } }, directives: function () { return [ɵngcc4.NgIf, AsmSessionTimerComponent,
         CustomerEmulationComponent,
         CustomerSelectionComponent,
@@ -11751,758 +9906,6 @@ AsmMainUiComponent.ctorParameters = () => [
 __decorate([
     HostBinding('class.hidden')
 ], AsmMainUiComponent.prototype, "disabled", void 0);
-
-/**
- * The AsmEnablerService is used to enable ASM for those scenario's
- * where it's actually used. This service is added to avoid any polution
- * of the UI and runtime performance for the ordinary production user.
- */
-let AsmEnablerService = class AsmEnablerService {
-    constructor(location, winRef, componentFactoryResolver, outletService) {
-        this.location = location;
-        this.winRef = winRef;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.outletService = outletService;
-        /** indicates whether the ASM UI has been added already */
-        this.isUiAdded = false;
-    }
-    /**
-     * Loads the ASM UI if needed. The ASM UI will be added based on the
-     * existence of a URL parameter or previous usage given by local storage.
-     */
-    load() {
-        if (this.isEnabled()) {
-            this.addUi();
-        }
-    }
-    /**
-     * Indicates whether the ASM module is enabled.
-     */
-    isEnabled() {
-        if (this.isLaunched() && !this.isUsedBefore()) {
-            if (this.winRef.localStorage) {
-                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
-            }
-        }
-        return this.isLaunched() || this.isUsedBefore();
-    }
-    /**
-     * Indicates whether ASM is launched through the URL,
-     * using the asm flag in the URL.
-     */
-    isLaunched() {
-        const params = this.location.path().split('?')[1];
-        return params && params.split('&').includes('asm=true');
-    }
-    /**
-     * Evaluates local storage where we persist the usage of ASM.
-     */
-    isUsedBefore() {
-        return (this.winRef.localStorage &&
-            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
-    }
-    /**
-     * Adds the ASM UI by using the `cx-storefront` outlet.
-     */
-    addUi() {
-        if (this.isUiAdded) {
-            return;
-        }
-        const factory = this.componentFactoryResolver.resolveComponentFactory(AsmMainUiComponent);
-        this.outletService.add('cx-storefront', factory, OutletPosition.BEFORE);
-        this.isUiAdded = true;
-    }
-};
-AsmEnablerService.ɵfac = function AsmEnablerService_Factory(t) { return new (t || AsmEnablerService)(ɵngcc0.ɵɵinject(ɵngcc4.Location), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(ɵngcc0.ComponentFactoryResolver), ɵngcc0.ɵɵinject(OutletService)); };
-AsmEnablerService.ctorParameters = () => [
-    { type: Location },
-    { type: WindowRef },
-    { type: ComponentFactoryResolver },
-    { type: OutletService }
-];
-AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletService)); }, token: AsmEnablerService, providedIn: "root" });
-
-/**
- * The ASM loader module takes care of loading the ASM UI
- * only in case there's a reason to do so.
- */
-let AsmLoaderModule = class AsmLoaderModule {
-};
-AsmLoaderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AsmLoaderModule });
-AsmLoaderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AsmLoaderModule_Factory(t) { return new (t || AsmLoaderModule)(); }, providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: asmFactory,
-            deps: [AsmEnablerService],
-            multi: true
-        },
-    ], imports: [[CommonModule, PageComponentModule]] });
-/**
- *
- * We do not like to block the UI, which is why we delgate loading of ASM
- * to a real component; the router and state aren't available in an optimized
- * way during the APP_INITIALIZER.
- */
-function asmFactory(asmEnablerService) {
-    const isReady = () => {
-        asmEnablerService.load();
-    };
-    return isReady;
-}
-
-let AsmSessionTimerComponent = class AsmSessionTimerComponent {
-    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
-        this.config = config;
-        this.asmComponentService = asmComponentService;
-        this.authService = authService;
-        this.routingService = routingService;
-        this.changeDetectorRef = changeDetectorRef;
-        this.subscriptions = new Subscription();
-        this.maxStartDelayInSeconds = 60000;
-    }
-    ngOnInit() {
-        this.timeLeft = this.getTimerStartDelayInSeconds();
-        this.interval = setInterval(() => {
-            if (this.timeLeft > 0) {
-                this.timeLeft--;
-            }
-            else {
-                clearInterval(this.interval);
-                this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
-            }
-            this.changeDetectorRef.markForCheck();
-        }, 1000);
-        this.resetOnNavigate();
-        this.resetOnCustomerSessionChange();
-    }
-    resetOnNavigate() {
-        this.subscriptions.add(this.routingService.isNavigating().subscribe((isNavigating) => {
-            if (isNavigating) {
-                this.resetTimer();
-            }
-        }));
-    }
-    resetOnCustomerSessionChange() {
-        this.subscriptions.add(this.authService
-            .getOccUserId()
-            .pipe(distinctUntilChanged())
-            .subscribe(() => this.resetTimer()));
-    }
-    resetTimer() {
-        if (this.timeLeft > 0) {
-            this.timeLeft = this.getTimerStartDelayInSeconds();
-        }
-    }
-    getTimerStartDelayInSeconds() {
-        if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
-            this.maxStartDelayInSeconds) {
-            return this.maxStartDelayInSeconds;
-        }
-        else {
-            return this.config.asm.agentSessionTimer.startingDelayInSeconds;
-        }
-    }
-    ngOnDestroy() {
-        this.subscriptions.unsubscribe();
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-};
-AsmSessionTimerComponent.ɵfac = function AsmSessionTimerComponent_Factory(t) { return new (t || AsmSessionTimerComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmConfig), ɵngcc0.ɵɵdirectiveInject(AsmComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
-AsmSessionTimerComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AsmSessionTimerComponent, selectors: [["cx-asm-session-timer"]], decls: 9, vars: 12, consts: [[1, "label"], [1, "time"], [1, "reset", 3, "title", "click"]], template: function AsmSessionTimerComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "span", 0);
-        ɵngcc0.ɵɵtext(1);
-        ɵngcc0.ɵɵpipe(2, "cxTranslate");
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(3, "span", 1);
-        ɵngcc0.ɵɵtext(4);
-        ɵngcc0.ɵɵpipe(5, "formatTimer");
-        ɵngcc0.ɵɵpipe(6, "cxTranslate");
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementStart(7, "button", 2);
-        ɵngcc0.ɵɵlistener("click", function AsmSessionTimerComponent_Template_button_click_7_listener() { return ctx.resetTimer(); });
-        ɵngcc0.ɵɵpipe(8, "cxTranslate");
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate1("", ɵngcc0.ɵɵpipeBind1(2, 4, "asm.agentSessionTimer.label"), ":");
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵtextInterpolate2("", ɵngcc0.ɵɵpipeBind1(5, 6, ctx.timeLeft), " ", ɵngcc0.ɵɵpipeBind1(6, 8, "asm.agentSessionTimer.minutes"), "");
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(8, 10, "asm.agentSessionTimer.reset"));
-    } }, pipes: function () { return [ɵngcc1.TranslatePipe, FormatTimerPipe]; }, styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"], encapsulation: 2 });
-AsmSessionTimerComponent.ctorParameters = () => [
-    { type: AsmConfig },
-    { type: AsmComponentService },
-    { type: AuthService },
-    { type: RoutingService },
-    { type: ChangeDetectorRef }
-];
-
-let FormatTimerPipe = class FormatTimerPipe {
-    transform(totalSeconds) {
-        if (totalSeconds < 0) {
-            totalSeconds = 0;
-        }
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        let zeroPaddedMinutes;
-        if (minutes < 10) {
-            zeroPaddedMinutes = ('00' + minutes).slice(-2);
-        }
-        else {
-            zeroPaddedMinutes = minutes + '';
-        }
-        const zeroPaddedSeconds = ('00' + seconds).slice(-2);
-        return `${zeroPaddedMinutes}:${zeroPaddedSeconds}`;
-    }
-};
-FormatTimerPipe.ɵfac = function FormatTimerPipe_Factory(t) { return new (t || FormatTimerPipe)(); };
-FormatTimerPipe.ɵpipe = ɵngcc0.ɵɵdefinePipe({ name: "formatTimer", type: FormatTimerPipe, pure: true });
-
-/**
- * Utility class when working with forms.
- */
-class FormUtils {
-    /**
-     *
-     * Validates a field of the given form group
-     *
-     * If the field is NOT valid (or invalid), the method returns `true`.
-     *
-     * @param form Form with fields to check
-     * @param formControlName Name of the form field to check
-     * @param submitted Has the form been submitted
-     */
-    static isNotValidField(form, formControlName, submitted) {
-        const control = form.get(formControlName);
-        return control.invalid && (submitted || (control.touched && control.dirty));
-    }
-}
-
-let CSAgentLoginFormComponent = class CSAgentLoginFormComponent {
-    constructor(fb) {
-        this.fb = fb;
-        this.submitClicked = false;
-        this.csAgentTokenLoading = false;
-        this.submitEvent = new EventEmitter();
-    }
-    ngOnInit() {
-        this.form = this.fb.group({
-            userId: ['', [Validators.required]],
-            password: ['', [Validators.required]],
-        });
-    }
-    onSubmit() {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.submitEvent.emit({
-            userId: this.form.controls.userId.value,
-            password: this.form.controls.password.value,
-        });
-    }
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-    }
-};
-CSAgentLoginFormComponent.ɵfac = function CSAgentLoginFormComponent_Factory(t) { return new (t || CSAgentLoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
-CSAgentLoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CSAgentLoginFormComponent, selectors: [["cx-csagent-login-form"]], inputs: { csAgentTokenLoading: "csAgentTokenLoading" }, outputs: { submitEvent: "submitEvent" }, decls: 2, vars: 2, consts: [[3, "formGroup", "submit", 4, "ngIf"], ["class", "spinner", "aria-hidden", "false", "aria-label", "Loading", 4, "ngIf"], [3, "formGroup", "submit"], ["type", "text", "formControlName", "userId", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 3, "placeholder"], ["type", "submit"], [1, "invalid-feedback"], ["aria-hidden", "false", "aria-label", "Loading", 1, "spinner"]], template: function CSAgentLoginFormComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, CSAgentLoginFormComponent_form_0_Template, 12, 16, "form", 0);
-        ɵngcc0.ɵɵtemplate(1, CSAgentLoginFormComponent_div_1_Template, 4, 0, "div", 1);
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", !ctx.csAgentTokenLoading);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.csAgentTokenLoading);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName], pipes: [ɵngcc1.TranslatePipe], styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"], encapsulation: 2 });
-CSAgentLoginFormComponent.ctorParameters = () => [
-    { type: FormBuilder }
-];
-__decorate([
-    Input()
-], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
-__decorate([
-    Output()
-], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
-
-let CustomerEmulationComponent = class CustomerEmulationComponent {
-    constructor(asmComponentService, userService) {
-        this.asmComponentService = asmComponentService;
-        this.userService = userService;
-        this.subscription = new Subscription();
-    }
-    ngOnInit() {
-        this.subscription.add(this.userService.get().subscribe((user) => (this.customer = user)));
-        this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
-    }
-    logoutCustomer() {
-        this.asmComponentService.logoutCustomer();
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-};
-CustomerEmulationComponent.ɵfac = function CustomerEmulationComponent_Factory(t) { return new (t || CustomerEmulationComponent)(ɵngcc0.ɵɵdirectiveInject(AsmComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService)); };
-CustomerEmulationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CustomerEmulationComponent, selectors: [["cx-customer-emulation"]], decls: 4, vars: 4, consts: [[4, "ngIf", "ngIfElse"], ["realCustomerSession", ""], ["formcontrolname", "customer", "type", "text", "disabled", "true", 3, "placeholder"], [3, "click"], ["role", "alert", 1, "asm-alert"]], template: function CustomerEmulationComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, CustomerEmulationComponent_ng_container_0_Template, 5, 5, "ng-container", 0);
-        ɵngcc0.ɵɵpipe(1, "async");
-        ɵngcc0.ɵɵtemplate(2, CustomerEmulationComponent_ng_template_2_Template, 3, 3, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
-    } if (rf & 2) {
-        const _r63 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isCustomerEmulationSessionInProgress$))("ngIfElse", _r63);
-    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"], encapsulation: 2 });
-CustomerEmulationComponent.ctorParameters = () => [
-    { type: AsmComponentService },
-    { type: UserService }
-];
-
-let CustomerSelectionComponent = class CustomerSelectionComponent {
-    constructor(fb, asmService, config) {
-        this.fb = fb;
-        this.asmService = asmService;
-        this.config = config;
-        this.subscription = new Subscription();
-        this.submitEvent = new EventEmitter();
-    }
-    ngOnInit() {
-        this.form = this.fb.group({
-            searchTerm: [''],
-        });
-        this.asmService.customerSearchReset();
-        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
-        this.searchResults = this.asmService.getCustomerSearchResults();
-        this.subscription.add(this.form.controls.searchTerm.valueChanges
-            .pipe(debounceTime(300))
-            .subscribe((searchTermValue) => {
-            this.handleSearchTerm(searchTermValue);
-        }));
-    }
-    handleSearchTerm(searchTermValue) {
-        if (Boolean(this.selectedCustomer) &&
-            searchTermValue !== this.selectedCustomer.name) {
-            this.selectedCustomer = undefined;
-        }
-        if (Boolean(this.selectedCustomer)) {
-            return;
-        }
-        this.asmService.customerSearchReset();
-        if (searchTermValue.trim().length >= 3) {
-            this.asmService.customerSearch({
-                query: searchTermValue,
-                pageSize: this.config.asm.customerSearch.maxResults,
-            });
-        }
-    }
-    selectCustomerFromList(customer) {
-        this.selectedCustomer = customer;
-        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
-        this.asmService.customerSearchReset();
-    }
-    onSubmit() {
-        if (Boolean(this.selectedCustomer)) {
-            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
-        }
-    }
-    onDocumentClick(event) {
-        if (Boolean(this.resultList)) {
-            if (this.resultList.nativeElement.contains(event.target) ||
-                this.searchTerm.nativeElement.contains(event.target)) {
-                return;
-            }
-            else {
-                this.asmService.customerSearchReset();
-            }
-        }
-    }
-    closeResults() {
-        this.asmService.customerSearchReset();
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.asmService.customerSearchReset();
-    }
-};
-CustomerSelectionComponent.ɵfac = function CustomerSelectionComponent_Factory(t) { return new (t || CustomerSelectionComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmConfig)); };
-CustomerSelectionComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CustomerSelectionComponent, selectors: [["cx-customer-selection"]], viewQuery: function CustomerSelectionComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c5, true);
-        ɵngcc0.ɵɵviewQuery(_c6, true);
-    } if (rf & 2) {
-        var _t;
-        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.resultList = _t.first);
-        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.searchTerm = _t.first);
-    } }, hostBindings: function CustomerSelectionComponent_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_click_HostBindingHandler($event) { return ctx.onDocumentClick($event); }, false, ɵngcc0.ɵɵresolveDocument);
-    } }, outputs: { submitEvent: "submitEvent" }, decls: 11, vars: 14, consts: [[3, "formGroup", "submit"], ["type", "text", "formControlName", "searchTerm", 3, "placeholder"], ["searchTerm", ""], ["type", "submit", 3, "disabled"], ["class", "asm-results", 4, "ngIf"], [1, "asm-results"], ["resultList", ""], [3, "click", 4, "ngFor", "ngForOf"], [3, "click", 4, "ngIf"], [3, "click"], [1, "result-name"], [1, "result-id"], ["aria-hidden", "false", "aria-label", "Loading", 1, "spinner"]], template: function CustomerSelectionComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "form", 0);
-        ɵngcc0.ɵɵlistener("submit", function CustomerSelectionComponent_Template_form_submit_0_listener() { return ctx.onSubmit(); });
-        ɵngcc0.ɵɵelement(1, "input", 1, 2);
-        ɵngcc0.ɵɵpipe(3, "cxTranslate");
-        ɵngcc0.ɵɵelementStart(4, "button", 3);
-        ɵngcc0.ɵɵtext(5);
-        ɵngcc0.ɵɵpipe(6, "cxTranslate");
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵelementEnd();
-        ɵngcc0.ɵɵtemplate(7, CustomerSelectionComponent_div_7_Template, 5, 4, "div", 4);
-        ɵngcc0.ɵɵpipe(8, "async");
-        ɵngcc0.ɵɵtemplate(9, CustomerSelectionComponent_div_9_Template, 5, 0, "div", 4);
-        ɵngcc0.ɵɵpipe(10, "async");
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("formGroup", ctx.form);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(3, 6, "asm.customerSearch.searchTerm.label"));
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("disabled", !ctx.selectedCustomer);
-        ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 8, "asm.customerSearch.submit"), " ");
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx.searchResults));
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(10, 12, ctx.searchResultsLoading$));
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf, ɵngcc4.NgForOf], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"], encapsulation: 2 });
-CustomerSelectionComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: AsmService },
-    { type: AsmConfig }
-];
-__decorate([
-    Output()
-], CustomerSelectionComponent.prototype, "submitEvent", void 0);
-__decorate([
-    ViewChild('resultList')
-], CustomerSelectionComponent.prototype, "resultList", void 0);
-__decorate([
-    ViewChild('searchTerm')
-], CustomerSelectionComponent.prototype, "searchTerm", void 0);
-
-let AsmModule = class AsmModule {
-};
-AsmModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AsmModule });
-AsmModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AsmModule_Factory(t) { return new (t || AsmModule)(); }, imports: [[
-            CommonModule,
-            ReactiveFormsModule,
-            I18nModule,
-            AsmModule$1.forRoot(),
-            AsmLoaderModule,
-        ]] });
-
-let OrderDetailsService = class OrderDetailsService {
-    constructor(userOrderService, routingService) {
-        this.userOrderService = userOrderService;
-        this.routingService = routingService;
-        this.orderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map((routingData) => routingData.state.params.orderCode));
-        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
-            if (orderCode) {
-                this.userOrderService.loadOrderDetails(orderCode);
-            }
-            else {
-                this.userOrderService.clearOrderDetails();
-            }
-        }), shareReplay({ bufferSize: 1, refCount: true }));
-    }
-    getOrderDetails() {
-        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
-    }
-};
-OrderDetailsService.ɵfac = function OrderDetailsService_Factory(t) { return new (t || OrderDetailsService)(ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService)); };
-OrderDetailsService.ctorParameters = () => [
-    { type: UserOrderService },
-    { type: RoutingService }
-];
-OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
-
-let PromotionService = class PromotionService {
-    constructor(orderDetailsService, checkoutService, activeCartService) {
-        this.orderDetailsService = orderDetailsService;
-        this.checkoutService = checkoutService;
-        this.activeCartService = activeCartService;
-    }
-    getOrderPromotions(promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.getOrderPromotionsFromCart();
-            case PromotionLocation.Checkout:
-                return this.getOrderPromotionsFromCheckout();
-            case PromotionLocation.Order:
-                return this.getOrderPromotionsFromOrder();
-            default:
-                return of([]);
-        }
-    }
-    getOrderPromotionsFromCart() {
-        return this.activeCartService
-            .getActive()
-            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
-    }
-    getOrderPromotionsFromCartHelper(cart) {
-        const potentialPromotions = [];
-        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
-        const appliedPromotions = [];
-        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
-        return [...potentialPromotions, ...appliedPromotions];
-    }
-    getOrderPromotionsFromCheckout() {
-        return this.checkoutService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrder() {
-        return this.orderDetailsService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrderHelper(order) {
-        const appliedOrderPromotions = [];
-        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
-        return appliedOrderPromotions;
-    }
-    getProductPromotionForEntry(item, promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.activeCartService
-                    .getActive()
-                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
-            case PromotionLocation.Checkout:
-                return this.checkoutService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-            case PromotionLocation.Order:
-                return this.orderDetailsService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-        }
-    }
-    getProductPromotion(item, promotions) {
-        const entryPromotions = [];
-        if (promotions && promotions.length > 0) {
-            for (const promotion of promotions) {
-                if (promotion.description &&
-                    promotion.consumedEntries &&
-                    promotion.consumedEntries.length > 0) {
-                    for (const consumedEntry of promotion.consumedEntries) {
-                        if (this.isConsumedByEntry(consumedEntry, item)) {
-                            entryPromotions.push(promotion);
-                        }
-                    }
-                }
-            }
-        }
-        return entryPromotions;
-    }
-    isConsumedByEntry(consumedEntry, entry) {
-        const consumedEntryNumber = consumedEntry.orderEntryNumber;
-        if (entry.entries && entry.entries.length > 0) {
-            for (const subEntry of entry.entries) {
-                if (subEntry.entryNumber === consumedEntryNumber) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else {
-            return consumedEntryNumber === entry.entryNumber;
-        }
-    }
-};
-PromotionService.ɵfac = function PromotionService_Factory(t) { return new (t || PromotionService)(ɵngcc0.ɵɵinject(OrderDetailsService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
-PromotionService.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: CheckoutService },
-    { type: ActiveCartService }
-];
-PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
-
-let AddedToCartDialogComponent = class AddedToCartDialogComponent {
-    constructor(modalService, cartService, promotionService) {
-        this.modalService = modalService;
-        this.cartService = cartService;
-        this.promotionService = promotionService;
-        this.iconTypes = ICON_TYPE;
-        this.promotionLocation = PromotionLocation.ActiveCart;
-        this.quantity = 0;
-        this.modalIsOpen = false;
-        this.form = new FormGroup({});
-    }
-    /**
-     * Returns an observable formControl with the quantity of the cartEntry,
-     * but also updates the entry in case of a changed value.
-     * The quantity can be set to zero in order to remove the entry.
-     */
-    getQuantityControl() {
-        if (!this.quantityControl$) {
-            this.quantityControl$ = this.entry$.pipe(filter((e) => !!e), map((entry) => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
-            // tslint:disable-next-line:deprecation
-            startWith(null), tap((valueChange) => {
-                if (valueChange) {
-                    this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
-                    if (valueChange.quantity === 0) {
-                        this.dismissModal('Removed');
-                    }
-                }
-                else {
-                    this.form.markAsPristine();
-                }
-            }))), map(() => this.form.get('quantity')));
-        }
-        return this.quantityControl$;
-    }
-    ngOnInit() {
-        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
-    }
-    getFormControl(entry) {
-        if (!this.form.get('quantity')) {
-            const quantity = new FormControl(entry.quantity, { updateOn: 'blur' });
-            this.form.addControl('quantity', quantity);
-            const entryNumber = new FormControl(entry.entryNumber);
-            this.form.addControl('entryNumber', entryNumber);
-        }
-        return this.form.get('quantity');
-    }
-    dismissModal(reason) {
-        this.modalService.dismissActiveModal(reason);
-    }
-};
-AddedToCartDialogComponent.ɵfac = function AddedToCartDialogComponent_Factory(t) { return new (t || AddedToCartDialogComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
-AddedToCartDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddedToCartDialogComponent, selectors: [["cx-added-to-cart-dialog"]], viewQuery: function AddedToCartDialogComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c7, true, ElementRef);
-    } if (rf & 2) {
-        var _t;
-        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.dialog = _t.first);
-    } }, decls: 6, vars: 4, consts: [["dialog", ""], [4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-dialog-header", "modal-header"], [1, "cx-dialog-title", "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], ["class", "cx-dialog-body modal-body", 4, "ngIf"], [1, "cx-dialog-body", "modal-body"], [1, "cx-dialog-row"], [1, "cx-dialog-item", "col-sm-12", "col-md-6"], [3, "item", "compact", "quantityControl", "promotionLocation", "view"], [1, "cx-dialog-separator", "col-sm-12", "d-xs-block", "d-sm-block", "d-md-none"], [1, "cx-dialog-actions", "col-sm-12", "col-md-6"], ["class", "cx-dialog-total", 4, "ngIf"], ["class", "cx-dialog-promotions", 4, "ngIf"], [1, "cx-dialog-buttons"], ["autofocus", "", 1, "btn", "btn-primary", 3, "routerLink", "click"], [1, "btn", "btn-secondary", 3, "routerLink", "click"], [1, "cx-dialog-total"], [1, "cx-dialog-promotions"], [3, "promotions"], [1, "col-sm-12"]], template: function AddedToCartDialogComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵelementStart(0, "div", null, 0);
-        ɵngcc0.ɵɵtemplate(2, AddedToCartDialogComponent_ng_container_2_Template, 10, 7, "ng-container", 1);
-        ɵngcc0.ɵɵpipe(3, "async");
-        ɵngcc0.ɵɵtemplate(4, AddedToCartDialogComponent_ng_template_4_Template, 11, 4, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
-        ɵngcc0.ɵɵelementEnd();
-    } if (rf & 2) {
-        const _r81 = ɵngcc0.ɵɵreference(5);
-        ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 2, ctx.loaded$) || ctx.modalIsOpen)("ngIfElse", _r81);
-    } }, directives: function () { return [ɵngcc4.NgIf, IconComponent,
-        CartItemComponent, ɵngcc5.RouterLinkWithHref, PromotionsComponent,
-        SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe]; }, encapsulation: 2 });
-AddedToCartDialogComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: ActiveCartService },
-    { type: PromotionService }
-];
-__decorate([
-    ViewChild('dialog', { read: ElementRef })
-], AddedToCartDialogComponent.prototype, "dialog", void 0);
-
-let AddToCartComponent = class AddToCartComponent {
-    constructor(modalService, currentProductService, cd, activeCartService) {
-        this.modalService = modalService;
-        this.currentProductService = currentProductService;
-        this.cd = cd;
-        this.activeCartService = activeCartService;
-        this.showQuantity = true;
-        this.hasStock = false;
-        this.quantity = 1;
-        this.increment = false;
-        this.addToCartForm = new FormGroup({
-            quantity: new FormControl(1),
-        });
-    }
-    ngOnInit() {
-        if (this.product) {
-            this.productCode = this.product.code;
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-            this.setStockInfo(this.product);
-            this.cd.markForCheck();
-        }
-        else if (this.productCode) {
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-            // force hasStock and quantity for the time being, as we do not have more info:
-            this.quantity = 1;
-            this.hasStock = true;
-            this.cd.markForCheck();
-        }
-        else {
-            this.subscription = this.currentProductService
-                .getProduct()
-                .pipe(filter(Boolean))
-                .subscribe((product) => {
-                this.productCode = product.code;
-                this.setStockInfo(product);
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                this.cd.markForCheck();
-            });
-        }
-    }
-    setStockInfo(product) {
-        this.quantity = 1;
-        this.hasStock =
-            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
-        if (this.hasStock && product.stock.stockLevel) {
-            this.maxQuantity = product.stock.stockLevel;
-        }
-    }
-    updateCount(value) {
-        this.quantity = value;
-    }
-    addToCart() {
-        const quantity = this.addToCartForm.get('quantity').value;
-        if (!this.productCode || quantity <= 0) {
-            return;
-        }
-        // check item is already present in the cart
-        // so modal will have proper header text displayed
-        this.activeCartService
-            .getEntry(this.productCode)
-            .subscribe((entry) => {
-            if (entry) {
-                this.increment = true;
-            }
-            this.openModal();
-            this.activeCartService.addEntry(this.productCode, quantity);
-            this.increment = false;
-        })
-            .unsubscribe();
-    }
-    openModal() {
-        let modalInstance;
-        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
-        modalInstance = this.modalRef.componentInstance;
-        modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.activeCartService.getActive();
-        modalInstance.loaded$ = this.activeCartService.isStable();
-        modalInstance.quantity = this.quantity;
-        modalInstance.increment = this.increment;
-    }
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-};
-AddToCartComponent.ɵfac = function AddToCartComponent_Factory(t) { return new (t || AddToCartComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
-AddToCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToCartComponent, selectors: [["cx-add-to-cart"]], inputs: { showQuantity: "showQuantity", productCode: "productCode", product: "product" }, decls: 1, vars: 1, consts: [[3, "formGroup", "submit", 4, "ngIf"], [3, "formGroup", "submit"], ["class", "quantity", 4, "ngIf"], ["class", "btn btn-primary btn-block", "type", "submit", 3, "disabled", 4, "ngIf"], [1, "quantity"], [3, "max", "control", 4, "ngIf"], [1, "info"], [3, "max", "control"], ["type", "submit", 1, "btn", "btn-primary", "btn-block", 3, "disabled"]], template: function AddToCartComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, AddToCartComponent_form_0_Template, 3, 3, "form", 0);
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", ctx.productCode);
-    } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ItemCounterComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
-AddToCartComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: CurrentProductService },
-    { type: ChangeDetectorRef },
-    { type: ActiveCartService }
-];
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "productCode", void 0);
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "showQuantity", void 0);
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "product", void 0);
 
 /** The element attribute used to store the focus state */
 const FOCUS_ATTR = 'data-cx-focus';
@@ -13538,6 +10941,1011 @@ let KeyboardFocusModule = class KeyboardFocusModule {
 KeyboardFocusModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: KeyboardFocusModule });
 KeyboardFocusModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function KeyboardFocusModule_Factory(t) { return new (t || KeyboardFocusModule)(); }, imports: [[CommonModule]] });
 
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
+
+class SkipLinkConfig {
+}
+class SkipLink {
+}
+var SkipLinkScrollPosition;
+(function (SkipLinkScrollPosition) {
+    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
+    SkipLinkScrollPosition["AFTER"] = "AFTER";
+})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
+
+let SkipLinkService = class SkipLinkService {
+    constructor(config, keyboardFocusService) {
+        this.config = config;
+        this.keyboardFocusService = keyboardFocusService;
+        this.skipLinks$ = new BehaviorSubject([]);
+    }
+    getSkipLinks() {
+        return this.skipLinks$;
+    }
+    add(key, target) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            const existing = this.skipLinks$.value;
+            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                target,
+                i18nKey: found.i18nKey,
+                position: found.position,
+                key,
+            });
+            this.skipLinks$.next(existing);
+        }
+    }
+    remove(key) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            let existing = this.skipLinks$.value;
+            existing = existing.filter((skipLink) => skipLink.key !== key);
+            this.skipLinks$.next(existing);
+        }
+    }
+    scrollToTarget(skipLink) {
+        const target = skipLink.target instanceof HTMLElement
+            ? skipLink.target
+            : skipLink.target.parentElement;
+        // focus first focusable element in the
+        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
+        // we force a tabindex if not available, to ensure we can focus into the element
+        const hasTabindex = firstFocusable.hasAttribute('tabindex');
+        if (!hasTabindex) {
+            firstFocusable.setAttribute('tabindex', '-1');
+        }
+        firstFocusable.focus();
+        // drop the tmp tabindex
+        if (!hasTabindex) {
+            firstFocusable.removeAttribute('tabindex');
+        }
+    }
+    getSkipLinkIndexInArray(key) {
+        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
+        while (index > 0) {
+            index--;
+            const previous = this.config.skipLinks[index];
+            if (previous) {
+                const existing = this.skipLinks$.value;
+                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
+                if (found > -1) {
+                    return found + 1;
+                }
+            }
+        }
+        return 0;
+    }
+};
+SkipLinkService.ɵfac = function SkipLinkService_Factory(t) { return new (t || SkipLinkService)(ɵngcc0.ɵɵinject(SkipLinkConfig), ɵngcc0.ɵɵinject(KeyboardFocusService)); };
+SkipLinkService.ctorParameters = () => [
+    { type: SkipLinkConfig },
+    { type: KeyboardFocusService }
+];
+SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
+
+let SkipLinkComponent = class SkipLinkComponent {
+    constructor(skipLinkService) {
+        this.skipLinkService = skipLinkService;
+        this.skipLinks$ = this.skipLinkService.getSkipLinks();
+    }
+    scrollToTarget(skipLink) {
+        this.skipLinkService.scrollToTarget(skipLink);
+    }
+};
+SkipLinkComponent.ɵfac = function SkipLinkComponent_Factory(t) { return new (t || SkipLinkComponent)(ɵngcc0.ɵɵdirectiveInject(SkipLinkService)); };
+SkipLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SkipLinkComponent, selectors: [["cx-skip-link"]], decls: 2, vars: 3, consts: [[3, "cxFocus", 4, "ngIf"], [3, "cxFocus"], [3, "click", 4, "ngFor", "ngForOf"], [3, "click"]], template: function SkipLinkComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, SkipLinkComponent_div_0_Template, 2, 3, "div", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.skipLinks$));
+    } }, directives: [ɵngcc4.NgIf, FocusDirective, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+SkipLinkComponent.ctorParameters = () => [
+    { type: SkipLinkService }
+];
+
+const DEFAULT_LAUNCH_CONFIG = {
+    launch: {
+        ASM: {
+            outlet: 'cx-storefront',
+            component: AsmMainUiComponent,
+        },
+        SKIP_LINKS: {
+            outlet: 'cx-storefront',
+            component: SkipLinkComponent,
+        },
+    },
+};
+
+class LaunchConfig {
+}
+/**
+ * Types of dialog openings supported
+ */
+var DIALOG_TYPE;
+(function (DIALOG_TYPE) {
+    DIALOG_TYPE["POPOVER"] = "POPOVER";
+    DIALOG_TYPE["DIALOG"] = "DIALOG";
+    DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
+    DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
+})(DIALOG_TYPE || (DIALOG_TYPE = {}));
+/**
+ * List of available callers
+ */
+var LAUNCH_CALLER;
+(function (LAUNCH_CALLER) {
+    LAUNCH_CALLER["ASM"] = "ASM";
+    LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
+})(LAUNCH_CALLER || (LAUNCH_CALLER = {}));
+
+class LaunchRenderStrategy {
+    constructor() {
+        // List of called references; only used for rendered elements
+        this.renderedCallers = [];
+    }
+    /**
+     * Determines if element should render
+     *
+     * @param caller
+     * @param config
+     */
+    shouldRender(caller, config) {
+        return this.renderedCallers.some((el) => el.caller === caller)
+            ? !!config.multi
+            : true;
+    }
+    /**
+     * Method to call when rendered element is destroyed
+     * The element will be removed from the list of rendered elements
+     *
+     * @param caller
+     * @param _config optional parameters used in children strategies
+     */
+    remove(caller, _config) {
+        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
+    }
+}
+
+let LaunchDialogService = class LaunchDialogService {
+    constructor(renderStrategies, launchConfig) {
+        this.renderStrategies = renderStrategies;
+        this.launchConfig = launchConfig;
+        // Keep a list of rendered elements
+        this.renderedCallers = [];
+        this.renderStrategies = this.renderStrategies || [];
+    }
+    /**
+     * Render the element based on the strategy from the launch configuration
+     *
+     * @param caller LAUNCH_CALLER
+     * @param vcr View Container Ref of the container for inline rendering
+     */
+    launch(caller, vcr) {
+        const config = this.findConfiguration(caller);
+        const renderer = this.getStrategy(config);
+        // Render if the strategy exists
+        if (renderer) {
+            renderer.render(config, caller, vcr);
+        }
+    }
+    /**
+     * Util method to remove element from rendered elements list
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    clear(caller) {
+        const config = this.findConfiguration(caller);
+        const renderer = this.getStrategy(config);
+        // Render if the strategy exists
+        if (renderer) {
+            renderer.remove(caller, config);
+        }
+    }
+    /**
+     * Returns the configuration for the caller
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    findConfiguration(caller) {
+        var _a;
+        return (_a = this.launchConfig) === null || _a === void 0 ? void 0 : _a.launch[caller];
+    }
+    /**
+     * Returns the render strategy based on the configuration
+     *
+     * @param config Configuration for launch
+     */
+    getStrategy(config) {
+        return this.renderStrategies.find((strategy) => strategy.match(config));
+    }
+};
+LaunchDialogService.ɵfac = function LaunchDialogService_Factory(t) { return new (t || LaunchDialogService)(ɵngcc0.ɵɵinject(LaunchRenderStrategy), ɵngcc0.ɵɵinject(LaunchConfig)); };
+LaunchDialogService.ctorParameters = () => [
+    { type: Array, decorators: [{ type: Inject, args: [LaunchRenderStrategy,] }] },
+    { type: LaunchConfig }
+];
+LaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function LaunchDialogService_Factory() { return new LaunchDialogService(ɵɵinject(LaunchRenderStrategy), ɵɵinject(LaunchConfig)); }, token: LaunchDialogService, providedIn: "root" });
+LaunchDialogService = __decorate([ __param(0, Inject(LaunchRenderStrategy))
+], LaunchDialogService);
+
+/**
+ * The AsmEnablerService is used to enable ASM for those scenario's
+ * where it's actually used. This service is added to avoid any polution
+ * of the UI and runtime performance for the ordinary production user.
+ */
+let AsmEnablerService = class AsmEnablerService {
+    constructor(location, winRef, launchDialogService) {
+        this.location = location;
+        this.winRef = winRef;
+        this.launchDialogService = launchDialogService;
+    }
+    /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     */
+    load() {
+        if (this.isEnabled()) {
+            this.addUi();
+        }
+    }
+    /**
+     * Indicates whether the ASM module is enabled.
+     */
+    isEnabled() {
+        if (this.isLaunched() && !this.isUsedBefore()) {
+            if (this.winRef.localStorage) {
+                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
+            }
+        }
+        return this.isLaunched() || this.isUsedBefore();
+    }
+    /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     */
+    isLaunched() {
+        const params = this.location.path().split('?')[1];
+        return params && params.split('&').includes('asm=true');
+    }
+    /**
+     * Evaluates local storage where we persist the usage of ASM.
+     */
+    isUsedBefore() {
+        return (this.winRef.localStorage &&
+            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
+    }
+    /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     */
+    addUi() {
+        this.launchDialogService.launch(LAUNCH_CALLER.ASM);
+    }
+};
+AsmEnablerService.ɵfac = function AsmEnablerService_Factory(t) { return new (t || AsmEnablerService)(ɵngcc0.ɵɵinject(ɵngcc4.Location), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(LaunchDialogService)); };
+AsmEnablerService.ctorParameters = () => [
+    { type: Location },
+    { type: WindowRef },
+    { type: LaunchDialogService }
+];
+AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(LaunchDialogService)); }, token: AsmEnablerService, providedIn: "root" });
+
+/**
+ * The ASM loader module takes care of loading the ASM UI
+ * only in case there's a reason to do so.
+ */
+let AsmLoaderModule = class AsmLoaderModule {
+};
+AsmLoaderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AsmLoaderModule });
+AsmLoaderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AsmLoaderModule_Factory(t) { return new (t || AsmLoaderModule)(); }, providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: asmFactory,
+            deps: [AsmEnablerService],
+            multi: true
+        },
+    ], imports: [[CommonModule, PageComponentModule]] });
+/**
+ *
+ * We do not like to block the UI, which is why we delgate loading of ASM
+ * to a real component; the router and state aren't available in an optimized
+ * way during the APP_INITIALIZER.
+ */
+function asmFactory(asmEnablerService) {
+    const isReady = () => {
+        asmEnablerService.load();
+    };
+    return isReady;
+}
+
+let AsmSessionTimerComponent = class AsmSessionTimerComponent {
+    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
+        this.config = config;
+        this.asmComponentService = asmComponentService;
+        this.authService = authService;
+        this.routingService = routingService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.subscriptions = new Subscription();
+        this.maxStartDelayInSeconds = 60000;
+    }
+    ngOnInit() {
+        this.timeLeft = this.getTimerStartDelayInSeconds();
+        this.interval = setInterval(() => {
+            if (this.timeLeft > 0) {
+                this.timeLeft--;
+            }
+            else {
+                clearInterval(this.interval);
+                this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
+            }
+            this.changeDetectorRef.markForCheck();
+        }, 1000);
+        this.resetOnNavigate();
+        this.resetOnCustomerSessionChange();
+    }
+    resetOnNavigate() {
+        this.subscriptions.add(this.routingService.isNavigating().subscribe((isNavigating) => {
+            if (isNavigating) {
+                this.resetTimer();
+            }
+        }));
+    }
+    resetOnCustomerSessionChange() {
+        this.subscriptions.add(this.authService
+            .getOccUserId()
+            .pipe(distinctUntilChanged())
+            .subscribe(() => this.resetTimer()));
+    }
+    resetTimer() {
+        if (this.timeLeft > 0) {
+            this.timeLeft = this.getTimerStartDelayInSeconds();
+        }
+    }
+    getTimerStartDelayInSeconds() {
+        if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
+            this.maxStartDelayInSeconds) {
+            return this.maxStartDelayInSeconds;
+        }
+        else {
+            return this.config.asm.agentSessionTimer.startingDelayInSeconds;
+        }
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+    }
+};
+AsmSessionTimerComponent.ɵfac = function AsmSessionTimerComponent_Factory(t) { return new (t || AsmSessionTimerComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmConfig), ɵngcc0.ɵɵdirectiveInject(AsmComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
+AsmSessionTimerComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AsmSessionTimerComponent, selectors: [["cx-asm-session-timer"]], decls: 9, vars: 12, consts: [[1, "label"], [1, "time"], [1, "reset", 3, "title", "click"]], template: function AsmSessionTimerComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "span", 0);
+        ɵngcc0.ɵɵtext(1);
+        ɵngcc0.ɵɵpipe(2, "cxTranslate");
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(3, "span", 1);
+        ɵngcc0.ɵɵtext(4);
+        ɵngcc0.ɵɵpipe(5, "formatTimer");
+        ɵngcc0.ɵɵpipe(6, "cxTranslate");
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementStart(7, "button", 2);
+        ɵngcc0.ɵɵlistener("click", function AsmSessionTimerComponent_Template_button_click_7_listener() { return ctx.resetTimer(); });
+        ɵngcc0.ɵɵpipe(8, "cxTranslate");
+        ɵngcc0.ɵɵelementEnd();
+    } if (rf & 2) {
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵtextInterpolate1("", ɵngcc0.ɵɵpipeBind1(2, 4, "asm.agentSessionTimer.label"), ":");
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵtextInterpolate2("", ɵngcc0.ɵɵpipeBind1(5, 6, ctx.timeLeft), " ", ɵngcc0.ɵɵpipeBind1(6, 8, "asm.agentSessionTimer.minutes"), "");
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵpropertyInterpolate("title", ɵngcc0.ɵɵpipeBind1(8, 10, "asm.agentSessionTimer.reset"));
+    } }, pipes: function () { return [ɵngcc1.TranslatePipe, FormatTimerPipe]; }, styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"], encapsulation: 2 });
+AsmSessionTimerComponent.ctorParameters = () => [
+    { type: AsmConfig },
+    { type: AsmComponentService },
+    { type: AuthService },
+    { type: RoutingService },
+    { type: ChangeDetectorRef }
+];
+
+let FormatTimerPipe = class FormatTimerPipe {
+    transform(totalSeconds) {
+        if (totalSeconds < 0) {
+            totalSeconds = 0;
+        }
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        let zeroPaddedMinutes;
+        if (minutes < 10) {
+            zeroPaddedMinutes = ('00' + minutes).slice(-2);
+        }
+        else {
+            zeroPaddedMinutes = minutes + '';
+        }
+        const zeroPaddedSeconds = ('00' + seconds).slice(-2);
+        return `${zeroPaddedMinutes}:${zeroPaddedSeconds}`;
+    }
+};
+FormatTimerPipe.ɵfac = function FormatTimerPipe_Factory(t) { return new (t || FormatTimerPipe)(); };
+FormatTimerPipe.ɵpipe = ɵngcc0.ɵɵdefinePipe({ name: "formatTimer", type: FormatTimerPipe, pure: true });
+
+/**
+ * Utility class when working with forms.
+ */
+class FormUtils {
+    /**
+     *
+     * Validates a field of the given form group
+     *
+     * If the field is NOT valid (or invalid), the method returns `true`.
+     *
+     * @param form Form with fields to check
+     * @param formControlName Name of the form field to check
+     * @param submitted Has the form been submitted
+     */
+    static isNotValidField(form, formControlName, submitted) {
+        const control = form.get(formControlName);
+        return control.invalid && (submitted || (control.touched && control.dirty));
+    }
+}
+
+let CSAgentLoginFormComponent = class CSAgentLoginFormComponent {
+    constructor(fb) {
+        this.fb = fb;
+        this.submitClicked = false;
+        this.csAgentTokenLoading = false;
+        this.submitEvent = new EventEmitter();
+    }
+    ngOnInit() {
+        this.form = this.fb.group({
+            userId: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        });
+    }
+    onSubmit() {
+        this.submitClicked = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.submitEvent.emit({
+            userId: this.form.controls.userId.value,
+            password: this.form.controls.password.value,
+        });
+    }
+    isNotValid(formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    }
+};
+CSAgentLoginFormComponent.ɵfac = function CSAgentLoginFormComponent_Factory(t) { return new (t || CSAgentLoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder)); };
+CSAgentLoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CSAgentLoginFormComponent, selectors: [["cx-csagent-login-form"]], inputs: { csAgentTokenLoading: "csAgentTokenLoading" }, outputs: { submitEvent: "submitEvent" }, decls: 2, vars: 2, consts: [[3, "formGroup", "submit", 4, "ngIf"], ["class", "spinner", "aria-hidden", "false", "aria-label", "Loading", 4, "ngIf"], [3, "formGroup", "submit"], ["type", "text", "formControlName", "userId", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 3, "placeholder"], ["type", "submit"], [1, "invalid-feedback"], ["aria-hidden", "false", "aria-label", "Loading", 1, "spinner"]], template: function CSAgentLoginFormComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, CSAgentLoginFormComponent_form_0_Template, 12, 16, "form", 0);
+        ɵngcc0.ɵɵtemplate(1, CSAgentLoginFormComponent_div_1_Template, 4, 0, "div", 1);
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", !ctx.csAgentTokenLoading);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.csAgentTokenLoading);
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName], pipes: [ɵngcc1.TranslatePipe], styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"], encapsulation: 2 });
+CSAgentLoginFormComponent.ctorParameters = () => [
+    { type: FormBuilder }
+];
+__decorate([
+    Input()
+], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
+__decorate([
+    Output()
+], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
+
+let CustomerEmulationComponent = class CustomerEmulationComponent {
+    constructor(asmComponentService, userService) {
+        this.asmComponentService = asmComponentService;
+        this.userService = userService;
+        this.subscription = new Subscription();
+    }
+    ngOnInit() {
+        this.subscription.add(this.userService.get().subscribe((user) => (this.customer = user)));
+        this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
+    }
+    logoutCustomer() {
+        this.asmComponentService.logoutCustomer();
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+};
+CustomerEmulationComponent.ɵfac = function CustomerEmulationComponent_Factory(t) { return new (t || CustomerEmulationComponent)(ɵngcc0.ɵɵdirectiveInject(AsmComponentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService)); };
+CustomerEmulationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CustomerEmulationComponent, selectors: [["cx-customer-emulation"]], decls: 4, vars: 4, consts: [[4, "ngIf", "ngIfElse"], ["realCustomerSession", ""], ["formcontrolname", "customer", "type", "text", "disabled", "true", 3, "placeholder"], [3, "click"], ["role", "alert", 1, "asm-alert"]], template: function CustomerEmulationComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, CustomerEmulationComponent_ng_container_0_Template, 5, 5, "ng-container", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+        ɵngcc0.ɵɵtemplate(2, CustomerEmulationComponent_ng_template_2_Template, 3, 3, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
+    } if (rf & 2) {
+        const _r55 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isCustomerEmulationSessionInProgress$))("ngIfElse", _r55);
+    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"], encapsulation: 2 });
+CustomerEmulationComponent.ctorParameters = () => [
+    { type: AsmComponentService },
+    { type: UserService }
+];
+
+let CustomerSelectionComponent = class CustomerSelectionComponent {
+    constructor(fb, asmService, config) {
+        this.fb = fb;
+        this.asmService = asmService;
+        this.config = config;
+        this.subscription = new Subscription();
+        this.submitEvent = new EventEmitter();
+    }
+    ngOnInit() {
+        this.form = this.fb.group({
+            searchTerm: [''],
+        });
+        this.asmService.customerSearchReset();
+        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+        this.searchResults = this.asmService.getCustomerSearchResults();
+        this.subscription.add(this.form.controls.searchTerm.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((searchTermValue) => {
+            this.handleSearchTerm(searchTermValue);
+        }));
+    }
+    handleSearchTerm(searchTermValue) {
+        if (Boolean(this.selectedCustomer) &&
+            searchTermValue !== this.selectedCustomer.name) {
+            this.selectedCustomer = undefined;
+        }
+        if (Boolean(this.selectedCustomer)) {
+            return;
+        }
+        this.asmService.customerSearchReset();
+        if (searchTermValue.trim().length >= 3) {
+            this.asmService.customerSearch({
+                query: searchTermValue,
+                pageSize: this.config.asm.customerSearch.maxResults,
+            });
+        }
+    }
+    selectCustomerFromList(customer) {
+        this.selectedCustomer = customer;
+        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+        this.asmService.customerSearchReset();
+    }
+    onSubmit() {
+        if (Boolean(this.selectedCustomer)) {
+            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
+        }
+    }
+    onDocumentClick(event) {
+        if (Boolean(this.resultList)) {
+            if (this.resultList.nativeElement.contains(event.target) ||
+                this.searchTerm.nativeElement.contains(event.target)) {
+                return;
+            }
+            else {
+                this.asmService.customerSearchReset();
+            }
+        }
+    }
+    closeResults() {
+        this.asmService.customerSearchReset();
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+        this.asmService.customerSearchReset();
+    }
+};
+CustomerSelectionComponent.ɵfac = function CustomerSelectionComponent_Factory(t) { return new (t || CustomerSelectionComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AsmConfig)); };
+CustomerSelectionComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CustomerSelectionComponent, selectors: [["cx-customer-selection"]], viewQuery: function CustomerSelectionComponent_Query(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵviewQuery(_c3, true);
+        ɵngcc0.ɵɵviewQuery(_c4, true);
+    } if (rf & 2) {
+        var _t;
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.resultList = _t.first);
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.searchTerm = _t.first);
+    } }, hostBindings: function CustomerSelectionComponent_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("click", function CustomerSelectionComponent_click_HostBindingHandler($event) { return ctx.onDocumentClick($event); }, false, ɵngcc0.ɵɵresolveDocument);
+    } }, outputs: { submitEvent: "submitEvent" }, decls: 11, vars: 14, consts: [[3, "formGroup", "submit"], ["type", "text", "formControlName", "searchTerm", 3, "placeholder"], ["searchTerm", ""], ["type", "submit", 3, "disabled"], ["class", "asm-results", 4, "ngIf"], [1, "asm-results"], ["resultList", ""], [3, "click", 4, "ngFor", "ngForOf"], [3, "click", 4, "ngIf"], [3, "click"], [1, "result-name"], [1, "result-id"], ["aria-hidden", "false", "aria-label", "Loading", 1, "spinner"]], template: function CustomerSelectionComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "form", 0);
+        ɵngcc0.ɵɵlistener("submit", function CustomerSelectionComponent_Template_form_submit_0_listener() { return ctx.onSubmit(); });
+        ɵngcc0.ɵɵelement(1, "input", 1, 2);
+        ɵngcc0.ɵɵpipe(3, "cxTranslate");
+        ɵngcc0.ɵɵelementStart(4, "button", 3);
+        ɵngcc0.ɵɵtext(5);
+        ɵngcc0.ɵɵpipe(6, "cxTranslate");
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵtemplate(7, CustomerSelectionComponent_div_7_Template, 5, 4, "div", 4);
+        ɵngcc0.ɵɵpipe(8, "async");
+        ɵngcc0.ɵɵtemplate(9, CustomerSelectionComponent_div_9_Template, 5, 0, "div", 4);
+        ɵngcc0.ɵɵpipe(10, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("formGroup", ctx.form);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(3, 6, "asm.customerSearch.searchTerm.label"));
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵproperty("disabled", !ctx.selectedCustomer);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 8, "asm.customerSearch.submit"), " ");
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 10, ctx.searchResults));
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(10, 12, ctx.searchResultsLoading$));
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf, ɵngcc4.NgForOf], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"], encapsulation: 2 });
+CustomerSelectionComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: AsmService },
+    { type: AsmConfig }
+];
+__decorate([
+    Output()
+], CustomerSelectionComponent.prototype, "submitEvent", void 0);
+__decorate([
+    ViewChild('resultList')
+], CustomerSelectionComponent.prototype, "resultList", void 0);
+__decorate([
+    ViewChild('searchTerm')
+], CustomerSelectionComponent.prototype, "searchTerm", void 0);
+
+let AsmModule = class AsmModule {
+};
+AsmModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: AsmModule });
+AsmModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AsmModule_Factory(t) { return new (t || AsmModule)(); }, imports: [[
+            CommonModule,
+            ReactiveFormsModule,
+            I18nModule,
+            AsmModule$1.forRoot(),
+            AsmLoaderModule,
+        ]] });
+
+let CurrentProductService = class CurrentProductService {
+    constructor(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
+    }
+    /**
+     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+     *
+     * @param scopes
+     */
+    getProduct(scopes) {
+        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
+            return productCode
+                ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
+                : of(null);
+        }), filter((x) => x !== undefined), distinctUntilChanged());
+    }
+};
+CurrentProductService.ɵfac = function CurrentProductService_Factory(t) { return new (t || CurrentProductService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.ProductService)); };
+CurrentProductService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ProductService }
+];
+CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+
+let OrderDetailsService = class OrderDetailsService {
+    constructor(userOrderService, routingService) {
+        this.userOrderService = userOrderService;
+        this.routingService = routingService;
+        this.orderCode$ = this.routingService
+            .getRouterState()
+            .pipe(map((routingData) => routingData.state.params.orderCode));
+        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
+            if (orderCode) {
+                this.userOrderService.loadOrderDetails(orderCode);
+            }
+            else {
+                this.userOrderService.clearOrderDetails();
+            }
+        }), shareReplay({ bufferSize: 1, refCount: true }));
+    }
+    getOrderDetails() {
+        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
+    }
+};
+OrderDetailsService.ɵfac = function OrderDetailsService_Factory(t) { return new (t || OrderDetailsService)(ɵngcc0.ɵɵinject(ɵngcc1.UserOrderService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService)); };
+OrderDetailsService.ctorParameters = () => [
+    { type: UserOrderService },
+    { type: RoutingService }
+];
+OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
+
+let PromotionService = class PromotionService {
+    constructor(orderDetailsService, checkoutService, activeCartService) {
+        this.orderDetailsService = orderDetailsService;
+        this.checkoutService = checkoutService;
+        this.activeCartService = activeCartService;
+    }
+    getOrderPromotions(promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.getOrderPromotionsFromCart();
+            case PromotionLocation.Checkout:
+                return this.getOrderPromotionsFromCheckout();
+            case PromotionLocation.Order:
+                return this.getOrderPromotionsFromOrder();
+            default:
+                return of([]);
+        }
+    }
+    getOrderPromotionsFromCart() {
+        return this.activeCartService
+            .getActive()
+            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
+    }
+    getOrderPromotionsFromCartHelper(cart) {
+        const potentialPromotions = [];
+        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
+        const appliedPromotions = [];
+        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
+        return [...potentialPromotions, ...appliedPromotions];
+    }
+    getOrderPromotionsFromCheckout() {
+        return this.checkoutService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrder() {
+        return this.orderDetailsService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrderHelper(order) {
+        const appliedOrderPromotions = [];
+        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
+        return appliedOrderPromotions;
+    }
+    getProductPromotionForEntry(item, promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.activeCartService
+                    .getActive()
+                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
+            case PromotionLocation.Checkout:
+                return this.checkoutService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+            case PromotionLocation.Order:
+                return this.orderDetailsService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+        }
+    }
+    getProductPromotion(item, promotions) {
+        const entryPromotions = [];
+        if (promotions && promotions.length > 0) {
+            for (const promotion of promotions) {
+                if (promotion.description &&
+                    promotion.consumedEntries &&
+                    promotion.consumedEntries.length > 0) {
+                    for (const consumedEntry of promotion.consumedEntries) {
+                        if (this.isConsumedByEntry(consumedEntry, item)) {
+                            entryPromotions.push(promotion);
+                        }
+                    }
+                }
+            }
+        }
+        return entryPromotions;
+    }
+    isConsumedByEntry(consumedEntry, entry) {
+        const consumedEntryNumber = consumedEntry.orderEntryNumber;
+        if (entry.entries && entry.entries.length > 0) {
+            for (const subEntry of entry.entries) {
+                if (subEntry.entryNumber === consumedEntryNumber) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return consumedEntryNumber === entry.entryNumber;
+        }
+    }
+};
+PromotionService.ɵfac = function PromotionService_Factory(t) { return new (t || PromotionService)(ɵngcc0.ɵɵinject(OrderDetailsService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
+PromotionService.ctorParameters = () => [
+    { type: OrderDetailsService },
+    { type: CheckoutService },
+    { type: ActiveCartService }
+];
+PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
+
+let AddedToCartDialogComponent = class AddedToCartDialogComponent {
+    constructor(modalService, cartService, promotionService) {
+        this.modalService = modalService;
+        this.cartService = cartService;
+        this.promotionService = promotionService;
+        this.iconTypes = ICON_TYPE;
+        this.promotionLocation = PromotionLocation.ActiveCart;
+        this.quantity = 0;
+        this.modalIsOpen = false;
+        this.form = new FormGroup({});
+    }
+    /**
+     * Returns an observable formControl with the quantity of the cartEntry,
+     * but also updates the entry in case of a changed value.
+     * The quantity can be set to zero in order to remove the entry.
+     */
+    getQuantityControl() {
+        if (!this.quantityControl$) {
+            this.quantityControl$ = this.entry$.pipe(filter((e) => !!e), map((entry) => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
+            // tslint:disable-next-line:deprecation
+            startWith(null), tap((valueChange) => {
+                if (valueChange) {
+                    this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
+                    if (valueChange.quantity === 0) {
+                        this.dismissModal('Removed');
+                    }
+                }
+                else {
+                    this.form.markAsPristine();
+                }
+            }))), map(() => this.form.get('quantity')));
+        }
+        return this.quantityControl$;
+    }
+    ngOnInit() {
+        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+    }
+    getFormControl(entry) {
+        if (!this.form.get('quantity')) {
+            const quantity = new FormControl(entry.quantity, { updateOn: 'blur' });
+            this.form.addControl('quantity', quantity);
+            const entryNumber = new FormControl(entry.entryNumber);
+            this.form.addControl('entryNumber', entryNumber);
+        }
+        return this.form.get('quantity');
+    }
+    dismissModal(reason) {
+        this.modalService.dismissActiveModal(reason);
+    }
+};
+AddedToCartDialogComponent.ɵfac = function AddedToCartDialogComponent_Factory(t) { return new (t || AddedToCartDialogComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
+AddedToCartDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddedToCartDialogComponent, selectors: [["cx-added-to-cart-dialog"]], viewQuery: function AddedToCartDialogComponent_Query(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵviewQuery(_c5, true, ElementRef);
+    } if (rf & 2) {
+        var _t;
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.dialog = _t.first);
+    } }, decls: 6, vars: 4, consts: [["dialog", ""], [4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-dialog-header", "modal-header"], [1, "cx-dialog-title", "modal-title"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], ["class", "cx-dialog-body modal-body", 4, "ngIf"], [1, "cx-dialog-body", "modal-body"], [1, "cx-dialog-row"], [1, "cx-dialog-item", "col-sm-12", "col-md-6"], [3, "item", "compact", "quantityControl", "promotionLocation", "view"], [1, "cx-dialog-separator", "col-sm-12", "d-xs-block", "d-sm-block", "d-md-none"], [1, "cx-dialog-actions", "col-sm-12", "col-md-6"], ["class", "cx-dialog-total", 4, "ngIf"], ["class", "cx-dialog-promotions", 4, "ngIf"], [1, "cx-dialog-buttons"], ["autofocus", "", 1, "btn", "btn-primary", 3, "routerLink", "click"], [1, "btn", "btn-secondary", 3, "routerLink", "click"], [1, "cx-dialog-total"], [1, "cx-dialog-promotions"], [3, "promotions"], [1, "col-sm-12"]], template: function AddedToCartDialogComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "div", null, 0);
+        ɵngcc0.ɵɵtemplate(2, AddedToCartDialogComponent_ng_container_2_Template, 10, 7, "ng-container", 1);
+        ɵngcc0.ɵɵpipe(3, "async");
+        ɵngcc0.ɵɵtemplate(4, AddedToCartDialogComponent_ng_template_4_Template, 11, 4, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
+        ɵngcc0.ɵɵelementEnd();
+    } if (rf & 2) {
+        const _r73 = ɵngcc0.ɵɵreference(5);
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(3, 2, ctx.loaded$) || ctx.modalIsOpen)("ngIfElse", _r73);
+    } }, directives: function () { return [ɵngcc4.NgIf, IconComponent,
+        CartItemComponent, ɵngcc6.RouterLinkWithHref, PromotionsComponent,
+        SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe]; }, encapsulation: 2 });
+AddedToCartDialogComponent.ctorParameters = () => [
+    { type: ModalService },
+    { type: ActiveCartService },
+    { type: PromotionService }
+];
+__decorate([
+    ViewChild('dialog', { read: ElementRef })
+], AddedToCartDialogComponent.prototype, "dialog", void 0);
+
+let AddToCartComponent = class AddToCartComponent {
+    constructor(modalService, currentProductService, cd, activeCartService) {
+        this.modalService = modalService;
+        this.currentProductService = currentProductService;
+        this.cd = cd;
+        this.activeCartService = activeCartService;
+        this.showQuantity = true;
+        this.hasStock = false;
+        this.quantity = 1;
+        this.increment = false;
+        this.addToCartForm = new FormGroup({
+            quantity: new FormControl(1),
+        });
+    }
+    ngOnInit() {
+        if (this.product) {
+            this.productCode = this.product.code;
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+            this.setStockInfo(this.product);
+            this.cd.markForCheck();
+        }
+        else if (this.productCode) {
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+            // force hasStock and quantity for the time being, as we do not have more info:
+            this.quantity = 1;
+            this.hasStock = true;
+            this.cd.markForCheck();
+        }
+        else {
+            this.subscription = this.currentProductService
+                .getProduct()
+                .pipe(filter(Boolean))
+                .subscribe((product) => {
+                this.productCode = product.code;
+                this.setStockInfo(product);
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                this.cd.markForCheck();
+            });
+        }
+    }
+    setStockInfo(product) {
+        this.quantity = 1;
+        this.hasStock =
+            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+        if (this.hasStock && product.stock.stockLevel) {
+            this.maxQuantity = product.stock.stockLevel;
+        }
+    }
+    updateCount(value) {
+        this.quantity = value;
+    }
+    addToCart() {
+        const quantity = this.addToCartForm.get('quantity').value;
+        if (!this.productCode || quantity <= 0) {
+            return;
+        }
+        // check item is already present in the cart
+        // so modal will have proper header text displayed
+        this.activeCartService
+            .getEntry(this.productCode)
+            .subscribe((entry) => {
+            if (entry) {
+                this.increment = true;
+            }
+            this.openModal();
+            this.activeCartService.addEntry(this.productCode, quantity);
+            this.increment = false;
+        })
+            .unsubscribe();
+    }
+    openModal() {
+        let modalInstance;
+        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+        modalInstance = this.modalRef.componentInstance;
+        modalInstance.entry$ = this.cartEntry$;
+        modalInstance.cart$ = this.activeCartService.getActive();
+        modalInstance.loaded$ = this.activeCartService.isStable();
+        modalInstance.quantity = this.quantity;
+        modalInstance.increment = this.increment;
+    }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+};
+AddToCartComponent.ɵfac = function AddToCartComponent_Factory(t) { return new (t || AddToCartComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
+AddToCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToCartComponent, selectors: [["cx-add-to-cart"]], inputs: { showQuantity: "showQuantity", productCode: "productCode", product: "product" }, decls: 1, vars: 1, consts: [[3, "formGroup", "submit", 4, "ngIf"], [3, "formGroup", "submit"], ["class", "quantity", 4, "ngIf"], ["class", "btn btn-primary btn-block", "type", "submit", 3, "disabled", 4, "ngIf"], [1, "quantity"], [3, "max", "control", 4, "ngIf"], [1, "info"], [3, "max", "control"], ["type", "submit", 1, "btn", "btn-primary", "btn-block", 3, "disabled"]], template: function AddToCartComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, AddToCartComponent_form_0_Template, 3, 3, "form", 0);
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ctx.productCode);
+    } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ItemCounterComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
+AddToCartComponent.ctorParameters = () => [
+    { type: ModalService },
+    { type: CurrentProductService },
+    { type: ChangeDetectorRef },
+    { type: ActiveCartService }
+];
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "productCode", void 0);
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "showQuantity", void 0);
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "product", void 0);
+
 let CardComponent = class CardComponent {
     constructor() {
         this.iconTypes = ICON_TYPE;
@@ -13746,6 +12154,119 @@ __decorate([
 __decorate([
     Input()
 ], CarouselComponent.prototype, "nextIcon", void 0);
+
+var BREAKPOINT;
+(function (BREAKPOINT) {
+    BREAKPOINT["xs"] = "xs";
+    BREAKPOINT["sm"] = "sm";
+    BREAKPOINT["md"] = "md";
+    BREAKPOINT["lg"] = "lg";
+    BREAKPOINT["xl"] = "xl";
+})(BREAKPOINT || (BREAKPOINT = {}));
+/**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ */
+class LayoutConfig {
+}
+
+const DEFAULT_BREAKPOINTS = {
+    [BREAKPOINT.xs]: 576,
+    [BREAKPOINT.sm]: 768,
+    [BREAKPOINT.md]: 992,
+    [BREAKPOINT.lg]: 1200,
+};
+let BreakpointService = class BreakpointService {
+    constructor(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+    }
+    get breakpoint$() {
+        if (!this.window) {
+            return of(BREAKPOINT.xs);
+        }
+        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
+    }
+    /**
+     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+     * configuration. If no configuration is available for the given breakpoint, the
+     * method will return the default values:
+     * - xs: 567
+     * - sm: 768
+     * - md: 992
+     * - lg: 1200
+     */
+    getSize(breakpoint) {
+        var _a;
+        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+            : DEFAULT_BREAKPOINTS[breakpoint];
+    }
+    /**
+     * Returns all available breakpoints for the system.
+     */
+    get breakpoints() {
+        return [
+            BREAKPOINT.xs,
+            BREAKPOINT.sm,
+            BREAKPOINT.md,
+            BREAKPOINT.lg,
+            BREAKPOINT.xl,
+        ];
+    }
+    /**
+     * Indicates whether the current screen size is smaller than the maximum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+     */
+    isDown(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size is larger than the minimum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+     */
+    isUp(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(this.breakpoints.indexOf(breakpoint))
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size fits to the given breakpoint
+     */
+    isEqual(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => br === breakpoint));
+    }
+    getBreakpoint(windowWidth) {
+        const breakpoint = this.getClosest(windowWidth);
+        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+    }
+    getClosest(windowWidth) {
+        if (!windowWidth) {
+            windowWidth = this.window.innerWidth;
+        }
+        return windowWidth > this.getSize(BREAKPOINT.lg)
+            ? BREAKPOINT.xl
+            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
+    }
+    get window() {
+        return this.winRef.nativeWindow;
+    }
+};
+BreakpointService.ɵfac = function BreakpointService_Factory(t) { return new (t || BreakpointService)(ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(LayoutConfig)); };
+BreakpointService.ctorParameters = () => [
+    { type: WindowRef },
+    { type: LayoutConfig }
+];
+BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
 
 /** the default format is used for browsers that do not support   */
 const DEFAULT_MEDIA_FORMAT = 'tablet';
@@ -14034,7 +12555,7 @@ let ItemCounterComponent = class ItemCounterComponent {
 };
 ItemCounterComponent.ɵfac = function ItemCounterComponent_Factory(t) { return new (t || ItemCounterComponent)(); };
 ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComponent, selectors: [["cx-item-counter"]], viewQuery: function ItemCounterComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c12, true);
+        ɵngcc0.ɵɵviewQuery(_c10, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.input = _t.first);
@@ -14054,13 +12575,13 @@ ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComp
         ɵngcc0.ɵɵtext(6, " +\n");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r180 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("disabled", _r180.disabled || (_r180 == null ? null : _r180.value) <= ctx.min);
+        const _r172 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("disabled", _r172.disabled || (_r172 == null ? null : _r172.value) <= ctx.min);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("min", ctx.min)("max", ctx.max)("step", ctx.step)("formControl", ɵngcc0.ɵɵpipeBind1(4, 6, ctx.getControl()));
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("disabled", _r180.disabled || (_r180 == null ? null : _r180.value) >= ctx.max);
-    } }, directives: [ɵngcc7.NumberValueAccessor, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
+        ɵngcc0.ɵɵproperty("disabled", _r172.disabled || (_r172 == null ? null : _r172.value) >= ctx.max);
+    } }, directives: [ɵngcc5.NumberValueAccessor, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 __decorate([
     Input()
 ], ItemCounterComponent.prototype, "control", void 0);
@@ -14121,9 +12642,9 @@ GenericLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GenericLinkComp
         ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_Template, 2, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵtemplate(3, GenericLinkComponent_ng_template_3_Template, 1, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r182 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r182);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgTemplateOutlet, ɵngcc5.RouterLinkWithHref], encapsulation: 2 });
+        const _r174 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r174);
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgTemplateOutlet, ɵngcc6.RouterLinkWithHref], encapsulation: 2 });
 __decorate([
     Input()
 ], GenericLinkComponent.prototype, "url", void 0);
@@ -14519,12 +13040,12 @@ let PaginationComponent = class PaginationComponent {
         this.viewPageEvent.emit(page.number);
     }
 };
-PaginationComponent.ɵfac = function PaginationComponent_Factory(t) { return new (t || PaginationComponent)(ɵngcc0.ɵɵdirectiveInject(PaginationBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute)); };
+PaginationComponent.ɵfac = function PaginationComponent_Factory(t) { return new (t || PaginationComponent)(ɵngcc0.ɵɵdirectiveInject(PaginationBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute)); };
 PaginationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaginationComponent, selectors: [["cx-pagination"]], inputs: { pagination: "pagination", pageRoute: "pageRoute", queryParam: "queryParam", defaultPage: "defaultPage" }, outputs: { viewPageEvent: "viewPageEvent" }, decls: 1, vars: 1, consts: [[3, "class", "disabled", "current", "routerLink", "queryParams", "tabIndex", "click", 4, "ngFor", "ngForOf"], [3, "routerLink", "queryParams", "tabIndex", "click"]], template: function PaginationComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, PaginationComponent_a_0_Template, 2, 10, "a", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngForOf", ctx.pages);
-    } }, directives: [ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref], encapsulation: 2, changeDetection: 0 });
 PaginationComponent.ctorParameters = () => [
     { type: PaginationBuilder },
     { type: ActivatedRoute }
@@ -14572,7 +13093,7 @@ SortingComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SortingComponent, s
         ɵngcc0.ɵɵproperty("searchable", false)("clearable", false)("ngModel", ctx.selectedOption);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngForOf", ctx.sortOptions);
-    } }, directives: [ɵngcc8.NgSelectComponent, ɵngcc7.NgControlStatus, ɵngcc7.NgModel, ɵngcc4.NgForOf, ɵngcc8.ɵr], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc7.NgSelectComponent, ɵngcc5.NgControlStatus, ɵngcc5.NgModel, ɵngcc4.NgForOf, ɵngcc7.ɵr], encapsulation: 2, changeDetection: 0 });
 __decorate([
     Input()
 ], SortingComponent.prototype, "sortOptions", void 0);
@@ -14941,7 +13462,7 @@ StarRatingComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StarRatingCompon
     } }, inputs: { disabled: "disabled", rating: "rating" }, outputs: { change: "change" }, decls: 1, vars: 2, consts: [["class", "star", 3, "type", "mouseover", "mouseout", "keydown", "click", 4, "ngFor", "ngForOf"], [1, "star", 3, "type", "mouseover", "mouseout", "keydown", "click"]], template: function StarRatingComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StarRatingComponent_cx_icon_0_Template, 1, 2, "cx-icon", 0);
     } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpureFunction0(1, _c13));
+        ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpureFunction0(1, _c11));
     } }, directives: [ɵngcc4.NgForOf, IconComponent], encapsulation: 2, changeDetection: 0 });
 StarRatingComponent.ctorParameters = () => [
     { type: ElementRef },
@@ -15063,8 +13584,8 @@ AppliedCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AppliedCoupo
         ɵngcc0.ɵɵtemplate(0, AppliedCouponsComponent_div_0_Template, 3, 2, "div", 0);
         ɵngcc0.ɵɵtemplate(1, AppliedCouponsComponent_ng_template_1_Template, 2, 1, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r238 = ɵngcc0.ɵɵreference(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r238);
+        const _r230 = ɵngcc0.ɵɵreference(2);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isReadOnly)("ngIfElse", _r230);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, IconComponent], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 AppliedCouponsComponent.ctorParameters = () => [
     { type: CartVoucherService }
@@ -15182,13 +13703,13 @@ let CartCouponComponent = class CartCouponComponent {
         this.cartVoucherService.resetAddVoucherProcessingState();
     }
 };
-CartCouponComponent.ɵfac = function CartCouponComponent_Factory(t) { return new (t || CartCouponComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartVoucherService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CustomerCouponService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
+CartCouponComponent.ɵfac = function CartCouponComponent_Factory(t) { return new (t || CartCouponComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CartVoucherService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CustomerCouponService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CartCouponComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartCouponComponent, selectors: [["cx-cart-coupon"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-cart-coupon-title"], [1, "form-group"], [3, "formGroup", "submit"], [1, "row"], [1, "col-md-8"], ["type", "text", "id", "applyVoucher", "formControlName", "couponCode", 1, "form-control", "input-coupon-code", 3, "placeholder"], [1, "col-md-4"], ["type", "submit", 1, "btn", "btn-block", "btn-action", "apply-coupon-button", 3, "disabled"], [3, "vouchers", "cartIsLoading", "isReadOnly"], [1, "cx-available-coupon"], [1, "title", "cx-cart-coupon-title"], [1, "message"], [1, "scroll"], ["class", "coupons card", 4, "ngFor", "ngForOf"], [1, "coupons", "card"], [1, "coupon-id", "link", 3, "disabled", "click"]], template: function CartCouponComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartCouponComponent_ng_container_0_Template, 19, 23, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, AppliedCouponsComponent, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, AppliedCouponsComponent, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 CartCouponComponent.ctorParameters = () => [
     { type: AuthService },
     { type: CartVoucherService },
@@ -15420,10 +13941,10 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(24, CartItemComponent_ng_template_24_Template, 1, 1, "ng-template", null, 17, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r274 = ɵngcc0.ɵɵreference(25);
+        const _r266 = ɵngcc0.ɵɵreference(25);
         ɵngcc0.ɵɵproperty("ngClass", ctx.compact ? "cx-compact row" : "row");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 21, ɵngcc0.ɵɵpureFunction1(29, _c14, ctx.item.product)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 21, ɵngcc0.ɵɵpureFunction1(29, _c12, ctx.item.product)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("container", ctx.item.product.images == null ? null : ctx.item.product.images.PRIMARY);
         ɵngcc0.ɵɵadvance(3);
@@ -15446,14 +13967,14 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("control", ctx.quantityControl)("readonly", !ctx.item.updateable || ctx.readonly || ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("max", (ctx.item.product.stock == null ? null : ctx.item.product.stock.stockLevel) || 1000)("allowZero", true);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r274);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r266);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.isProductOutOfStock(ctx.item.product));
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(22, 27, ctx.appliedProductPromotions$));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", (!ctx.readonly || ctx.options.isSaveForLater) && ctx.item.updateable);
-    } }, directives: [ɵngcc4.NgClass, ɵngcc5.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ItemCounterComponent, ɵngcc4.NgForOf, PromotionsComponent, ɵngcc4.NgTemplateOutlet], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgClass, ɵngcc6.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ItemCounterComponent, ɵngcc4.NgForOf, PromotionsComponent, ɵngcc4.NgTemplateOutlet], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 CartItemComponent.ctorParameters = () => [
     { type: PromotionService },
     { type: FeatureConfigService }
@@ -15713,7 +14234,7 @@ CartTotalsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartTotalsCompon
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.cart$));
-    } }, directives: [ɵngcc4.NgIf, OrderSummaryComponent, ɵngcc5.RouterLink], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, OrderSummaryComponent, ɵngcc6.RouterLink], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CartTotalsComponent.ctorParameters = () => [
     { type: ActiveCartService }
 ];
@@ -15737,6 +14258,8 @@ CartTotalsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartTota
             I18nModule,
             CartCouponModule,
         ]] });
+
+const PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
 
 let MiniCartComponent = class MiniCartComponent {
     constructor(activeCartService) {
@@ -15765,15 +14288,15 @@ MiniCartComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MiniCartComponent,
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction0(22, _c9)));
-        ɵngcc0.ɵɵattribute("aria-label", ɵngcc0.ɵɵpipeBind2(1, 5, "miniCart.item", ɵngcc0.ɵɵpureFunction1(23, _c8, ɵngcc0.ɵɵpipeBind1(2, 8, ctx.quantity$))));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction0(22, _c7)));
+        ɵngcc0.ɵɵattribute("aria-label", ɵngcc0.ɵɵpipeBind2(1, 5, "miniCart.item", ɵngcc0.ɵɵpureFunction1(23, _c6, ɵngcc0.ɵɵpipeBind1(2, 8, ctx.quantity$))));
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("type", ctx.iconTypes.CART);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(7, 12, "miniCart.total", ɵngcc0.ɵɵpureFunction1(25, _c19, ɵngcc0.ɵɵpipeBind1(8, 15, ctx.total$))), " ");
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(7, 12, "miniCart.total", ɵngcc0.ɵɵpureFunction1(25, _c17, ɵngcc0.ɵɵpipeBind1(8, 15, ctx.total$))), " ");
         ɵngcc0.ɵɵadvance(4);
-        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(11, 17, "miniCart.count", ɵngcc0.ɵɵpureFunction1(27, _c8, ɵngcc0.ɵɵpipeBind1(12, 20, ctx.quantity$))), " ");
-    } }, directives: [ɵngcc5.RouterLinkWithHref, IconComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(11, 17, "miniCart.count", ɵngcc0.ɵɵpureFunction1(27, _c6, ɵngcc0.ɵɵpipeBind1(12, 20, ctx.quantity$))), " ");
+    } }, directives: [ɵngcc6.RouterLinkWithHref, IconComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 MiniCartComponent.ctorParameters = () => [
     { type: ActiveCartService }
 ];
@@ -15825,7 +14348,7 @@ AddToWishListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToWishList
         ɵngcc0.ɵɵtemplate(2, AddToWishListComponent_ng_template_2_Template, 1, 1, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.product$));
-    } }, directives: [ɵngcc4.NgIf, IconComponent, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, IconComponent, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 AddToWishListComponent.ctorParameters = () => [
     { type: WishListService },
     { type: CurrentProductService },
@@ -16325,7 +14848,7 @@ let CheckoutGuard = class CheckoutGuard {
         return this.firstStep$;
     }
 };
-CheckoutGuard.ɵfac = function CheckoutGuard_Factory(t) { return new (t || CheckoutGuard)(ɵngcc0.ɵɵinject(ɵngcc5.Router), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ExpressCheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
+CheckoutGuard.ɵfac = function CheckoutGuard_Factory(t) { return new (t || CheckoutGuard)(ɵngcc0.ɵɵinject(ɵngcc6.Router), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ExpressCheckoutService), ɵngcc0.ɵɵinject(ɵngcc1.ActiveCartService)); };
 CheckoutGuard.ctorParameters = () => [
     { type: Router },
     { type: RoutingConfigService },
@@ -16461,7 +14984,7 @@ CheckoutProgressMobileTopComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: C
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.routerState$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLink], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLink], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 CheckoutProgressMobileTopComponent.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingService },
@@ -16518,7 +15041,7 @@ CheckoutProgressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutPr
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.routerState$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CheckoutProgressComponent.ctorParameters = () => [
     { type: CheckoutConfig },
     { type: RoutingService },
@@ -16561,7 +15084,7 @@ let ShippingAddressSetGuard = class ShippingAddressSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 };
-ShippingAddressSetGuard.ɵfac = function ShippingAddressSetGuard_Factory(t) { return new (t || ShippingAddressSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc5.Router)); };
+ShippingAddressSetGuard.ɵfac = function ShippingAddressSetGuard_Factory(t) { return new (t || ShippingAddressSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc6.Router)); };
 ShippingAddressSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
@@ -16632,7 +15155,7 @@ let DeliveryModeComponent = class DeliveryModeComponent {
         }
     }
 };
-DeliveryModeComponent.ɵfac = function DeliveryModeComponent_Factory(t) { return new (t || DeliveryModeComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute)); };
+DeliveryModeComponent.ɵfac = function DeliveryModeComponent_Factory(t) { return new (t || DeliveryModeComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute)); };
 DeliveryModeComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: DeliveryModeComponent, selectors: [["cx-delivery-mode"]], decls: 19, vars: 15, consts: [[3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], [1, "cx-checkout-title", "d-none", "d-lg-block", "d-xl-block"], [4, "ngIf", "ngIfElse"], [1, "row", "cx-checkout-btns"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], ["loading", ""], ["class", "form-check", 4, "ngFor", "ngForOf"], [1, "form-check"], ["role", "radio", "type", "radio", "aria-checked", "true", "formControlName", "deliveryModeId", 1, "form-check-input", 3, "id", "value", "change"], [1, "cx-delivery-label", "form-check-label", "form-radio-label", 3, "for"], [1, "cx-delivery-mode"], [1, "cx-delivery-price"], [1, "cx-delivery-details"], [1, "cx-spinner"]], template: function DeliveryModeComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -16664,21 +15187,21 @@ DeliveryModeComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: DeliveryModeCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(17, DeliveryModeComponent_ng_template_17_Template, 2, 0, "ng-template", null, 9, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r380 = ɵngcc0.ɵɵreference(18);
+        const _r372 = ɵngcc0.ɵɵreference(18);
         var tmp_2_0 = null;
         const currVal_2 = (tmp_2_0 = ɵngcc0.ɵɵpipeBind1(7, 9, ctx.supportedDeliveryModes$)) == null ? null : tmp_2_0.length;
         ɵngcc0.ɵɵproperty("formGroup", ctx.mode);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 7, "checkoutShipping.shippingMethod"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r380);
+        ɵngcc0.ɵɵproperty("ngIf", currVal_2)("ngIfElse", _r372);
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 11, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("disabled", ctx.deliveryModeInvalid);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(16, 13, "common.continue"), " ");
-    } }, directives: [ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc7.RadioControlValueAccessor, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RadioControlValueAccessor, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 DeliveryModeComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: CheckoutDeliveryService },
@@ -16725,7 +15248,7 @@ let DeliveryModeSetGuard = class DeliveryModeSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 };
-DeliveryModeSetGuard.ɵfac = function DeliveryModeSetGuard_Factory(t) { return new (t || DeliveryModeSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc5.Router)); };
+DeliveryModeSetGuard.ɵfac = function DeliveryModeSetGuard_Factory(t) { return new (t || DeliveryModeSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc6.Router)); };
 DeliveryModeSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
@@ -16864,7 +15387,7 @@ BillingAddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: BillingA
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(48, 39, "addressForm.zipCode.label"));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(50, 41, "addressForm.zipCode.placeholder"));
-    } }, directives: [ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc4.NgIf, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, ɵngcc7.FormGroupName], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc4.NgIf, ɵngcc5.DefaultValueAccessor, ɵngcc5.RequiredValidator, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc7.NgSelectComponent, ɵngcc5.FormGroupName], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 BillingAddressFormComponent.ctorParameters = () => [
     { type: UserAddressService }
 ];
@@ -16996,7 +15519,7 @@ SuggestedAddressDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sugg
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(38, 25, "checkoutAddress.editAddress"), " ");
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(41, 27, "checkoutAddress.saveAddress"), " ");
-    } }, directives: [IconComponent, ɵngcc7.NgControlStatusGroup, ɵngcc7.NgForm, ɵngcc4.NgForOf, ɵngcc7.RadioControlValueAccessor, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.NgModel], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [IconComponent, ɵngcc5.NgControlStatusGroup, ɵngcc5.NgForm, ɵngcc4.NgForOf, ɵngcc5.RadioControlValueAccessor, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.NgModel], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 SuggestedAddressDialogComponent.ctorParameters = () => [
     { type: ModalService }
 ];
@@ -17192,15 +15715,15 @@ let PaymentFormComponent = class PaymentFormComponent {
         }
     }
 };
-PaymentFormComponent.ɵfac = function PaymentFormComponent_Factory(t) { return new (t || PaymentFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
+PaymentFormComponent.ɵfac = function PaymentFormComponent_Factory(t) { return new (t || PaymentFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
 PaymentFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentFormComponent, selectors: [["cx-payment-form"]], inputs: { setAsDefaultField: "setAsDefaultField", paymentMethodsCount: "paymentMethodsCount" }, outputs: { goBack: "goBack", closeForm: "closeForm", setPaymentDetails: "setPaymentDetails" }, decls: 4, vars: 4, consts: [[3, "formGroup", 4, "ngIf", "ngIfElse"], ["spinner", ""], [3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], [1, "form-group"], [4, "ngIf"], [1, "label-content"], ["type", "text", "required", "", "formControlName", "accountHolderName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "cardNumber", 1, "form-control"], [1, "form-group", "col-md-6"], [1, "cx-payment-form-exp-date", "row"], [1, "col-sm-6", "col-md-5"], ["bindLabel", "name", "bindValue", "expiryMonth", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "col-sm-6", "col-md-7"], ["bindLabel", "name", "bindValue", "expiryYear", 3, "searchable", "clearable", "items", "placeholder", "change"], ["placement", "right", "alt", "", 1, "cx-payment-form-tooltip", 3, "type", "title"], ["type", "text", "id", "cVVNumber", "required", "", "formControlName", "cvn", 1, "form-control"], ["class", "form-group", 4, "ngIf"], [1, "cx-payment-form-billing"], [1, "cx-payment-form-billing-address"], [4, "ngIf", "ngIfElse"], ["billingAddressForm", ""], [1, "cx-checkout-btns", "row"], [1, "col-md-12", "col-lg-6"], ["class", "btn btn-block btn-action", 3, "click", 4, "ngIf"], [1, "btn", "btn-block", "btn-primary", 3, "click"], ["aria-required", "true"], [1, "label-content", "required"], ["bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", 1, "form-check-input", 3, "change"], [1, "form-check-label"], ["type", "checkbox", 1, "form-check-input", 3, "checked", "change"], [3, "content"], [3, "billingAddress", "countries$"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function PaymentFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, PaymentFormComponent_div_0_Template, 59, 51, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, PaymentFormComponent_ng_template_2_Template, 1, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r404 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r404);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, IconComponent,
+        const _r396 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$).loading)("ngIfElse", _r396);
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.RequiredValidator, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc7.NgSelectComponent, IconComponent,
         CardComponent,
         BillingAddressFormComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
@@ -17392,7 +15915,7 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         this.routingService.go(this.checkoutStepUrlPrevious);
     }
 };
-PaymentMethodComponent.ɵfac = function PaymentMethodComponent_Factory(t) { return new (t || PaymentMethodComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
+PaymentMethodComponent.ɵfac = function PaymentMethodComponent_Factory(t) { return new (t || PaymentMethodComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutPaymentService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 PaymentMethodComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PaymentMethodComponent, selectors: [["cx-payment-method"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-checkout-title", "d-none", "d-lg-block", "d-xl-block"], [4, "ngIf", "ngIfElse"], ["loading", ""], ["newPaymentForm", ""], [1, "cx-checkout-text"], [1, "cx-checkout-btns", "row"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-checkout-body", "row"], ["class", "cx-payment-card col-md-12 col-lg-6", 4, "ngFor", "ngForOf"], [1, "row", "cx-checkout-btns"], [1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "cx-payment-card", "col-md-12", "col-lg-6"], [1, "cx-payment-card-inner"], [3, "border", "fitToContainer", "content", "sendCard"], [3, "paymentMethodsCount", "setAsDefaultField", "setPaymentDetails", "closeForm", "goBack"], [1, "cx-spinner"]], template: function PaymentMethodComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, PaymentMethodComponent_ng_container_0_Template, 8, 7, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -17493,14 +16016,14 @@ PlaceOrderComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PlaceOrderCompon
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 5, "checkoutReview.confirmThatRead"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 7, ɵngcc0.ɵɵpureFunction0(13, _c23)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 7, ɵngcc0.ɵɵpureFunction0(13, _c21)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 9, "checkoutReview.termsAndConditions"), " ");
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("disabled", !ctx.tAndCToggler);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(12, 11, "checkoutReview.placeOrder"), "\n");
-    } }, directives: [ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 PlaceOrderComponent.ctorParameters = () => [
     { type: CheckoutService },
     { type: RoutingService }
@@ -17540,7 +16063,7 @@ let PaymentDetailsSetGuard = class PaymentDetailsSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 };
-PaymentDetailsSetGuard.ɵfac = function PaymentDetailsSetGuard_Factory(t) { return new (t || PaymentDetailsSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc5.Router)); };
+PaymentDetailsSetGuard.ɵfac = function PaymentDetailsSetGuard_Factory(t) { return new (t || PaymentDetailsSetGuard)(ɵngcc0.ɵɵinject(CheckoutDetailsService), ɵngcc0.ɵɵinject(CheckoutConfigService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService), ɵngcc0.ɵɵinject(ɵngcc6.Router)); };
 PaymentDetailsSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
     { type: CheckoutConfigService },
@@ -17694,7 +16217,7 @@ ReviewSubmitComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ReviewSubmitCo
         ɵngcc0.ɵɵproperty("cxFeatureLevel", "1.1");
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(27, 22, ctx.cart$));
-    } }, directives: [CardComponent, ɵngcc1.FeatureLevelDirective, ɵngcc4.NgIf, ɵngcc5.RouterLinkWithHref, CartItemListComponent,
+    } }, directives: [CardComponent, ɵngcc1.FeatureLevelDirective, ɵngcc4.NgIf, ɵngcc6.RouterLinkWithHref, CartItemListComponent,
         PromotionsComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ReviewSubmitComponent.ctorParameters = () => [
     { type: CheckoutDeliveryService },
@@ -17898,7 +16421,7 @@ let AddressFormComponent = class AddressFormComponent {
         }
     }
 };
-AddressFormComponent.ɵfac = function AddressFormComponent_Factory(t) { return new (t || AddressFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
+AddressFormComponent.ɵfac = function AddressFormComponent_Factory(t) { return new (t || AddressFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ModalService)); };
 AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComponent, selectors: [["cx-address-form"]], inputs: { showCancelBtn: "showCancelBtn", addressData: "addressData", actionBtnLabel: "actionBtnLabel", cancelBtnLabel: "cancelBtnLabel", setAsDefaultField: "setAsDefaultField", showTitleCode: "showTitleCode" }, outputs: { submitAddress: "submitAddress", backToAddress: "backToAddress" }, decls: 67, vars: 55, consts: [[3, "formGroup"], [1, "row"], [1, "col-md-12", "col-lg-9"], ["formGroupName", "country", 1, "form-group"], [4, "ngIf"], ["class", "form-group", 4, "ngIf"], [1, "form-group"], [1, "label-content", "required"], ["type", "text", "required", "", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "text", "required", "", "formControlName", "line1", 1, "form-control", 3, "placeholder"], [1, "label-content"], ["type", "text", "formControlName", "line2", 1, "form-control", 3, "placeholder"], [1, "form-group", "col-md-6"], ["type", "text", "required", "", "formControlName", "town", 1, "form-control", 3, "placeholder"], ["formGroupName", "region", 4, "ngIf"], ["type", "text", "required", "", "formControlName", "postalCode", 1, "form-control", 3, "placeholder"], ["type", "text", "formControlName", "phone", 1, "form-control", 3, "placeholder"], [1, "cx-checkout-btns", "row"], ["class", "col-md-12 col-lg-6", 4, "ngIf"], [1, "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-primary", 3, "click"], ["aria-required", "true"], ["formControlName", "isocode", "bindLabel", "name", "bindValue", "isocode", 1, "country-select", 3, "searchable", "clearable", "items", "placeholder", "change"], ["formControlName", "titleCode", "bindLabel", "name", "bindValue", "code", 3, "searchable", "clearable", "items", "change"], ["formGroupName", "region"], ["formControlName", "isocode", 1, "region-select", 3, "searchable", "clearable", "items", "bindLabel", "bindValue", "placeholder", "change"], [1, "form-check"], ["type", "checkbox", "formControlName", "defaultAddress", 1, "form-check-input", 3, "change"], [1, "form-check-label"], [1, "btn", "btn-block", "btn-action", 3, "click"]], template: function AddressFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -18040,7 +16563,7 @@ AddressFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddressFormComp
         ɵngcc0.ɵɵproperty("ngIf", ctx.showCancelBtn);
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate1(" ", ctx.actionBtnLabel || ɵngcc0.ɵɵpipeBind1(66, 53, "common.continue"), " ");
-    } }, directives: [ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.FormGroupName, ɵngcc4.NgIf, ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc8.NgSelectComponent, ɵngcc7.CheckboxControlValueAccessor], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.FormGroupName, ɵngcc4.NgIf, ɵngcc5.DefaultValueAccessor, ɵngcc5.RequiredValidator, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc7.NgSelectComponent, ɵngcc5.CheckboxControlValueAccessor], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 AddressFormComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: CheckoutDeliveryService },
@@ -18199,7 +16722,7 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         this.routingService.go(this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute) || 'cart');
     }
 };
-ShippingAddressComponent.ɵfac = function ShippingAddressComponent_Factory(t) { return new (t || ShippingAddressComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
+ShippingAddressComponent.ɵfac = function ShippingAddressComponent_Factory(t) { return new (t || ShippingAddressComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CheckoutDeliveryService), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.TranslationService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 ShippingAddressComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ShippingAddressComponent, selectors: [["cx-shipping-address"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-checkout-title", "d-none", "d-lg-block", "d-xl-block"], [4, "ngIf", "ngIfElse"], ["loading", ""], ["newAddressForm", ""], [1, "cx-checkout-text"], [1, "cx-checkout-btns", "row"], [1, "col-sm-12", "col-md-12", "col-lg-6"], [1, "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-checkout-body", "row"], ["class", "cx-shipping-address-card col-md-12 col-lg-6", 4, "ngFor", "ngForOf"], [1, "col-md-12", "col-lg-6"], [1, "cx-btn", "btn", "btn-block", "btn-action", 3, "click"], [1, "cx-btn", "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "cx-shipping-address-card", "col-md-12", "col-lg-6"], [1, "cx-shipping-address-card-inner", 3, "click"], [3, "border", "fitToContainer", "content", "sendCard"], ["initialAddressForm", ""], [3, "showTitleCode", "backToAddress", "submitAddress"], [3, "showTitleCode", "setAsDefaultField", "addressData", "cancelBtnLabel", "backToAddress", "submitAddress"], [1, "cx-spinner"]], template: function ShippingAddressComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ShippingAddressComponent_ng_container_0_Template, 8, 7, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -18290,118 +16813,6 @@ NotCheckoutAuthGuard.ctorParameters = () => [
 ];
 NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
 
-// given that we're likely going to refactor the directives, we're
-// export * from './autofocus/index';
-// export * from './base/index';
-// export * from './block/index';
-// export * from './escape/index';
-// export * from './lock/index';
-// export * from './persist/index';
-// export * from './tab/index';
-// export * from './trap/index';
-// export * from './visible/index';
-// export * from './keyboard-focus.model';
-
-class SkipLinkConfig {
-}
-class SkipLink {
-}
-var SkipLinkScrollPosition;
-(function (SkipLinkScrollPosition) {
-    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
-    SkipLinkScrollPosition["AFTER"] = "AFTER";
-})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
-
-let SkipLinkService = class SkipLinkService {
-    constructor(config, keyboardFocusService) {
-        this.config = config;
-        this.keyboardFocusService = keyboardFocusService;
-        this.skipLinks$ = new BehaviorSubject([]);
-    }
-    getSkipLinks() {
-        return this.skipLinks$;
-    }
-    add(key, target) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            const existing = this.skipLinks$.value;
-            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
-                target,
-                i18nKey: found.i18nKey,
-                position: found.position,
-                key,
-            });
-            this.skipLinks$.next(existing);
-        }
-    }
-    remove(key) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            let existing = this.skipLinks$.value;
-            existing = existing.filter((skipLink) => skipLink.key !== key);
-            this.skipLinks$.next(existing);
-        }
-    }
-    scrollToTarget(skipLink) {
-        const target = skipLink.target instanceof HTMLElement
-            ? skipLink.target
-            : skipLink.target.parentElement;
-        // focus first focusable element in the
-        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
-        // we force a tabindex if not available, to ensure we can focus into the element
-        const hasTabindex = firstFocusable.hasAttribute('tabindex');
-        if (!hasTabindex) {
-            firstFocusable.setAttribute('tabindex', '-1');
-        }
-        firstFocusable.focus();
-        // drop the tmp tabindex
-        if (!hasTabindex) {
-            firstFocusable.removeAttribute('tabindex');
-        }
-    }
-    getSkipLinkIndexInArray(key) {
-        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
-        while (index > 0) {
-            index--;
-            const previous = this.config.skipLinks[index];
-            if (previous) {
-                const existing = this.skipLinks$.value;
-                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
-                if (found > -1) {
-                    return found + 1;
-                }
-            }
-        }
-        return 0;
-    }
-};
-SkipLinkService.ɵfac = function SkipLinkService_Factory(t) { return new (t || SkipLinkService)(ɵngcc0.ɵɵinject(SkipLinkConfig), ɵngcc0.ɵɵinject(KeyboardFocusService)); };
-SkipLinkService.ctorParameters = () => [
-    { type: SkipLinkConfig },
-    { type: KeyboardFocusService }
-];
-SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
-
-let SkipLinkComponent = class SkipLinkComponent {
-    constructor(skipLinkService) {
-        this.skipLinkService = skipLinkService;
-        this.skipLinks$ = this.skipLinkService.getSkipLinks();
-    }
-    scrollToTarget(skipLink) {
-        this.skipLinkService.scrollToTarget(skipLink);
-    }
-};
-SkipLinkComponent.ɵfac = function SkipLinkComponent_Factory(t) { return new (t || SkipLinkComponent)(ɵngcc0.ɵɵdirectiveInject(SkipLinkService)); };
-SkipLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SkipLinkComponent, selectors: [["cx-skip-link"]], decls: 2, vars: 3, consts: [[3, "cxFocus", 4, "ngIf"], [3, "cxFocus"], [3, "click", 4, "ngFor", "ngForOf"], [3, "click"]], template: function SkipLinkComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, SkipLinkComponent_div_0_Template, 2, 3, "div", 0);
-        ɵngcc0.ɵɵpipe(1, "async");
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.skipLinks$));
-    } }, directives: [ɵngcc4.NgIf, FocusDirective, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
-SkipLinkComponent.ctorParameters = () => [
-    { type: SkipLinkService }
-];
-
 const defaultSkipLinkConfig = {
     skipLinks: [
         {
@@ -18437,6 +16848,92 @@ SkipLinkDirective.ctorParameters = () => [
 __decorate([
     Input()
 ], SkipLinkDirective.prototype, "cxSkipLink", void 0);
+
+var OutletPosition;
+(function (OutletPosition) {
+    OutletPosition["REPLACE"] = "replace";
+    OutletPosition["BEFORE"] = "before";
+    OutletPosition["AFTER"] = "after";
+})(OutletPosition || (OutletPosition = {}));
+const AVOID_STACKED_OUTLETS = false;
+const USE_STACKED_OUTLETS = true;
+
+let OutletService = class OutletService {
+    constructor() {
+        this.templatesRefs = new Map();
+        this.templatesRefsBefore = new Map();
+        this.templatesRefsAfter = new Map();
+    }
+    /**
+     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     */
+    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
+        if (position === OutletPosition.BEFORE) {
+            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.REPLACE) {
+            this.store(this.templatesRefs, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.AFTER) {
+            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+        }
+    }
+    /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param outlet The outlet reference
+     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param stacked Indicates whether an array of outlet components is returned
+     */
+    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
+        let templateRef;
+        switch (position) {
+            case OutletPosition.BEFORE:
+                templateRef = this.templatesRefsBefore.get(outlet);
+                break;
+            case OutletPosition.AFTER:
+                templateRef = this.templatesRefsAfter.get(outlet);
+                break;
+            default:
+                templateRef = this.templatesRefs.get(outlet);
+        }
+        if (templateRef && !stacked) {
+            return templateRef[0];
+        }
+        return templateRef;
+    }
+    remove(outlet, position = OutletPosition.REPLACE, value) {
+        switch (position) {
+            case OutletPosition.BEFORE:
+                this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
+                break;
+            case OutletPosition.AFTER:
+                this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
+                break;
+            default:
+                this.removeValueOrAll(this.templatesRefs, outlet, value);
+        }
+    }
+    store(store, outlet, value) {
+        const existing = store.get(outlet) || [];
+        const newValue = existing.concat([value]);
+        store.set(outlet, newValue);
+    }
+    removeValueOrAll(store, outlet, value) {
+        if (!value && store.has(outlet)) {
+            store.delete(outlet);
+        }
+        else if (value && store.has(outlet)) {
+            let existing = store.get(outlet);
+            existing = existing.filter((val) => val === value);
+            store.set(outlet, existing);
+        }
+    }
+};
+OutletService.ɵfac = function OutletService_Factory(t) { return new (t || OutletService)(); };
+OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
 
 let SkipLinkModule = class SkipLinkModule {
 };
@@ -18488,7 +16985,7 @@ let HamburgerMenuService = class HamburgerMenuService {
         }
     }
 };
-HamburgerMenuService.ɵfac = function HamburgerMenuService_Factory(t) { return new (t || HamburgerMenuService)(ɵngcc0.ɵɵinject(ɵngcc5.Router)); };
+HamburgerMenuService.ɵfac = function HamburgerMenuService_Factory(t) { return new (t || HamburgerMenuService)(ɵngcc0.ɵɵinject(ɵngcc6.Router)); };
 HamburgerMenuService.ctorParameters = () => [
     { type: Router }
 ];
@@ -18536,11 +17033,1121 @@ HamburgerMenuModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Hambu
         }),
     ], imports: [[CommonModule]] });
 
+let InlineRenderStrategy = class InlineRenderStrategy extends LaunchRenderStrategy {
+    constructor(componentFactoryResolver) {
+        super();
+        this.componentFactoryResolver = componentFactoryResolver;
+    }
+    /**
+     * Renders the component from the configuration in the view container ref
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller, vcr) {
+        // Only render if a ViewContainerRef is provided
+        if (vcr && this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            vcr.createComponent(template);
+            this.renderedCallers.push({ caller, element: vcr.element });
+        }
+        else if (isDevMode()) {
+            if (!vcr) {
+                console.warn(`No view container ref provided for ${caller}`);
+            }
+            else {
+                console.warn(`Element for ${caller} already rendered. To allow multi rendering add property multi: true.`);
+            }
+        }
+    }
+    match(config) {
+        return Boolean(config.inline);
+    }
+};
+InlineRenderStrategy.ɵfac = function InlineRenderStrategy_Factory(t) { return new (t || InlineRenderStrategy)(ɵngcc0.ɵɵinject(ɵngcc0.ComponentFactoryResolver)); };
+InlineRenderStrategy.ctorParameters = () => [
+    { type: ComponentFactoryResolver }
+];
+InlineRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function InlineRenderStrategy_Factory() { return new InlineRenderStrategy(ɵɵinject(ComponentFactoryResolver)); }, token: InlineRenderStrategy, providedIn: "root" });
+
+let OutletRefDirective = class OutletRefDirective {
+    constructor(tpl, outletService) {
+        this.tpl = tpl;
+        this.outletService = outletService;
+    }
+    ngOnInit() {
+        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+    }
+};
+OutletRefDirective.ɵfac = function OutletRefDirective_Factory(t) { return new (t || OutletRefDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.TemplateRef), ɵngcc0.ɵɵdirectiveInject(OutletService)); };
+OutletRefDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletRefDirective, selectors: [["", "cxOutletRef", ""]], inputs: { cxOutletRef: "cxOutletRef", cxOutletPos: "cxOutletPos" } });
+OutletRefDirective.ctorParameters = () => [
+    { type: TemplateRef },
+    { type: OutletService }
+];
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletRef", void 0);
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletPos", void 0);
+
+let OutletRefModule = class OutletRefModule {
+};
+OutletRefModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OutletRefModule });
+OutletRefModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OutletRefModule_Factory(t) { return new (t || OutletRefModule)(); }, imports: [[CommonModule]] });
+
+/**
+ * The IntersectionService uses the native IntersectionObserver (v2), which
+ * can be used to implement pre-loading and deferred loading of DOM content.
+ *
+ */
+let IntersectionService = class IntersectionService {
+    constructor(config) {
+        this.config = config;
+    }
+    /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned obervable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     */
+    isIntersected(element, options) {
+        return this.intersects(element, options).pipe(first((v) => v === true));
+    }
+    /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     */
+    intersects(element, options) {
+        const elementVisible$ = new Observable((observer) => {
+            const rootMargin = this.getRootMargin(options);
+            const intersectOptions = { rootMargin };
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                observer.next(entries);
+            }, intersectOptions);
+            intersectionObserver.observe(element);
+            return () => {
+                intersectionObserver.disconnect();
+            };
+        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
+        return elementVisible$;
+    }
+    getRootMargin(options) {
+        if (options.rootMargin) {
+            return options.rootMargin;
+        }
+        const layoutConfig = this.config;
+        if (layoutConfig.deferredLoading &&
+            layoutConfig.deferredLoading.intersectionMargin) {
+            return layoutConfig.deferredLoading.intersectionMargin;
+        }
+    }
+};
+IntersectionService.ɵfac = function IntersectionService_Factory(t) { return new (t || IntersectionService)(ɵngcc0.ɵɵinject(LayoutConfig)); };
+IntersectionService.ctorParameters = () => [
+    { type: LayoutConfig }
+];
+IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+
+/**
+ * The defer loading serivce is used to defer loading of DOM elements
+ * until the elements are required for the user experience.
+ */
+let DeferLoaderService = class DeferLoaderService {
+    constructor(platformId, config, intersectionService) {
+        this.platformId = platformId;
+        this.config = config;
+        this.intersectionService = intersectionService;
+        this.globalLoadStrategy = config.deferredLoading
+            ? config.deferredLoading.strategy
+            : DeferLoadingStrategy.INSTANT;
+    }
+    /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evalutes whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     */
+    load(element, options) {
+        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+            return of(true);
+        }
+        else {
+            return this.intersectionService.isIntersected(element, options);
+        }
+    }
+    shouldLoadInstantly(elementLoadingStrategy) {
+        return (isPlatformServer(this.platformId) ||
+            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
+            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
+                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
+    }
+};
+DeferLoaderService.ɵfac = function DeferLoaderService_Factory(t) { return new (t || DeferLoaderService)(ɵngcc0.ɵɵinject(PLATFORM_ID), ɵngcc0.ɵɵinject(LayoutConfig), ɵngcc0.ɵɵinject(IntersectionService)); };
+DeferLoaderService.ctorParameters = () => [
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: LayoutConfig },
+    { type: IntersectionService }
+];
+DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+DeferLoaderService = __decorate([ __param(0, Inject(PLATFORM_ID))
+], DeferLoaderService);
+
+let OutletRendererService = class OutletRendererService {
+    constructor() {
+        this.outletRefs = new Map();
+    }
+    render(outlet) {
+        if (this.outletRefs.size !== 0) {
+            this.outletRefs.get(outlet).render();
+        }
+    }
+    register(cxOutlet, context) {
+        this.outletRefs.set(cxOutlet, context);
+    }
+};
+OutletRendererService.ɵfac = function OutletRendererService_Factory(t) { return new (t || OutletRendererService)(); };
+OutletRendererService.ɵprov = ɵɵdefineInjectable({ factory: function OutletRendererService_Factory() { return new OutletRendererService(); }, token: OutletRendererService, providedIn: "root" });
+
+let OutletDirective = class OutletDirective {
+    constructor(vcr, templateRef, outletService, deferLoaderService, outletRendererService) {
+        this.vcr = vcr;
+        this.templateRef = templateRef;
+        this.outletService = outletService;
+        this.deferLoaderService = deferLoaderService;
+        this.outletRendererService = outletRendererService;
+        this.renderedTemplate = [];
+        this.loaded = new EventEmitter(true);
+        this.subscription = new Subscription();
+    }
+    render() {
+        this.vcr.clear();
+        this.renderedTemplate = [];
+        this.subscription.unsubscribe();
+        this.subscription = new Subscription();
+        this.outletRendererService.register(this.cxOutlet, this);
+        if (this.cxOutletDefer) {
+            this.deferLoading();
+        }
+        else {
+            this.build();
+        }
+    }
+    ngOnChanges(changes) {
+        if (changes.cxOutlet) {
+            this.render();
+        }
+    }
+    deferLoading() {
+        this.loaded.emit(false);
+        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
+        // Although the deferLoaderService might emit only once, as long as the hostElement
+        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+        // the subscription on destroy.
+        this.subscription.add(this.deferLoaderService
+            .load(hostElement, this.cxOutletDefer)
+            .subscribe(() => {
+            this.build();
+            this.loaded.emit(true);
+        }));
+    }
+    build() {
+        this.buildOutlet(OutletPosition.BEFORE);
+        this.buildOutlet(OutletPosition.REPLACE);
+        this.buildOutlet(OutletPosition.AFTER);
+    }
+    buildOutlet(position) {
+        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
+        templates = templates === null || templates === void 0 ? void 0 : templates.filter((el) => !this.renderedTemplate.includes(el));
+        if (!templates && position === OutletPosition.REPLACE) {
+            templates = [this.templateRef];
+        }
+        // Just in case someone extended the `OutletService` and
+        // returns a singular object.
+        if (!Array.isArray(templates)) {
+            templates = [templates];
+        }
+        templates.forEach((obj) => {
+            this.create(obj);
+        });
+    }
+    create(tmplOrFactory) {
+        if (tmplOrFactory instanceof ComponentFactory) {
+            this.vcr.createComponent(tmplOrFactory);
+        }
+        else if (tmplOrFactory instanceof TemplateRef) {
+            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
+                $implicit: this.cxOutletContext,
+            });
+            // we do not know if content is created dynamically or not
+            // so we apply change detection anyway
+            view.markForCheck();
+        }
+        this.renderedTemplate.push(tmplOrFactory);
+    }
+    /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent elements of the given element.
+     *
+     * @param element
+     */
+    getHostElement(element) {
+        if (element instanceof HTMLElement) {
+            return element;
+        }
+        return this.getHostElement(element.parentElement);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+};
+OutletDirective.ɵfac = function OutletDirective_Factory(t) { return new (t || OutletDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ViewContainerRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.TemplateRef), ɵngcc0.ɵɵdirectiveInject(OutletService), ɵngcc0.ɵɵdirectiveInject(DeferLoaderService), ɵngcc0.ɵɵdirectiveInject(OutletRendererService)); };
+OutletDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: OutletDirective, selectors: [["", "cxOutlet", ""]], inputs: { cxOutlet: "cxOutlet", cxOutletContext: "cxOutletContext", cxOutletDefer: "cxOutletDefer" }, outputs: { loaded: "loaded" }, features: [ɵngcc0.ɵɵNgOnChangesFeature] });
+OutletDirective.ctorParameters = () => [
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: OutletService },
+    { type: DeferLoaderService },
+    { type: OutletRendererService }
+];
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutlet", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletContext", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletDefer", void 0);
+__decorate([
+    Output()
+], OutletDirective.prototype, "loaded", void 0);
+
+let OutletModule = class OutletModule {
+};
+OutletModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: OutletModule });
+OutletModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OutletModule_Factory(t) { return new (t || OutletModule)(); }, providers: [OutletService], imports: [[CommonModule]] });
+
+let OutletRenderStrategy = class OutletRenderStrategy extends LaunchRenderStrategy {
+    constructor(outletService, componentFactoryResolver, outletRendererService) {
+        super();
+        this.outletService = outletService;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.outletRendererService = outletRendererService;
+    }
+    /**
+     * Renders the element in the configured outlet
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller, vcr) {
+        if (this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            this.outletService.add(config.outlet, template, config.position ? config.position : OutletPosition.BEFORE);
+            this.outletRendererService.render(config.outlet);
+            const element = vcr === null || vcr === void 0 ? void 0 : vcr.element;
+            this.renderedCallers.push({ caller, element });
+        }
+    }
+    match(config) {
+        return Boolean(config.outlet);
+    }
+    remove(caller, config) {
+        const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
+        this.outletService.remove(config.outlet, config.position ? config.position : OutletPosition.BEFORE, template);
+    }
+};
+OutletRenderStrategy.ɵfac = function OutletRenderStrategy_Factory(t) { return new (t || OutletRenderStrategy)(ɵngcc0.ɵɵinject(OutletService), ɵngcc0.ɵɵinject(ɵngcc0.ComponentFactoryResolver), ɵngcc0.ɵɵinject(OutletRendererService)); };
+OutletRenderStrategy.ctorParameters = () => [
+    { type: OutletService },
+    { type: ComponentFactoryResolver },
+    { type: OutletRendererService }
+];
+OutletRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function OutletRenderStrategy_Factory() { return new OutletRenderStrategy(ɵɵinject(OutletService), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletRendererService)); }, token: OutletRenderStrategy, providedIn: "root" });
+
+let RoutingRenderStrategy = class RoutingRenderStrategy extends LaunchRenderStrategy {
+    constructor(routingService) {
+        super();
+        this.routingService = routingService;
+    }
+    /**
+     * Navigates to the route configured for the caller
+     */
+    render(config, _caller) {
+        this.routingService.go(config);
+    }
+    match(config) {
+        return Boolean(config.cxRoute);
+    }
+};
+RoutingRenderStrategy.ɵfac = function RoutingRenderStrategy_Factory(t) { return new (t || RoutingRenderStrategy)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService)); };
+RoutingRenderStrategy.ctorParameters = () => [
+    { type: RoutingService }
+];
+RoutingRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function RoutingRenderStrategy_Factory() { return new RoutingRenderStrategy(ɵɵinject(RoutingService)); }, token: RoutingRenderStrategy, providedIn: "root" });
+
+var LaunchDialogModule_1;
+let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
+    static forRoot() {
+        return {
+            ngModule: LaunchDialogModule_1,
+            providers: [
+                provideConfig(DEFAULT_LAUNCH_CONFIG),
+                { provide: LaunchConfig, useExisting: Config },
+            ],
+        };
+    }
+};
+LaunchDialogModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LaunchDialogModule });
+LaunchDialogModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LaunchDialogModule_Factory(t) { return new (t || LaunchDialogModule)(); }, providers: [
+        {
+            provide: LaunchRenderStrategy,
+            useExisting: OutletRenderStrategy,
+            multi: true
+        },
+        {
+            provide: LaunchRenderStrategy,
+            useExisting: InlineRenderStrategy,
+            multi: true
+        },
+        {
+            provide: LaunchRenderStrategy,
+            useExisting: RoutingRenderStrategy,
+            multi: true
+        },
+    ] });
+
 let LayoutModule = class LayoutModule {
 };
 LayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LayoutModule });
-LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule_Factory(t) { return new (t || LayoutModule)(); }, providers: [{ provide: LayoutConfig, useExisting: Config }], imports: [[OutletRefModule],
+LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule_Factory(t) { return new (t || LayoutModule)(); }, providers: [{ provide: LayoutConfig, useExisting: Config }], imports: [[OutletRefModule, LaunchDialogModule.forRoot()],
         OutletRefModule] });
+
+let PageSlotComponent = class PageSlotComponent {
+    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        this.config = config;
+        this.isPending = true;
+        this.hasComponents = false;
+        this.isPageFold = false;
+        this.position$ = new BehaviorSubject(undefined);
+        /**
+         * observable with `ContentSlotData` for the current position
+         *
+         * @deprecated we'll stop supporting this property in 2.0 as
+         * it is not used separately.
+         */
+        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
+        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
+        this.subscription = new Subscription();
+    }
+    /**
+     * The position is used to find the CMS page slot (and optional outlet)
+     * that is rendered in the PageSlotComponent. Furthermore, the position
+     * is added as a CSS class name to the host element.
+     */
+    set position(position) {
+        this.position$.next(position);
+        this.renderer.addClass(this.hostElement.nativeElement, position);
+    }
+    get position() {
+        return this.position$.value;
+    }
+    ngOnInit() {
+        this.subscription.add(this.components$.subscribe((components) => {
+            this.hasComponents = components && components.length > 0;
+            this.pendingComponentCount = components ? components.length : 0;
+            this.isPending = this.pendingComponentCount > 0;
+        }));
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+    /**
+     * Is triggered when a component is added to the view.
+     * We use this information to dropthe `is-pending` class from the page slot
+     * when all nested components have been added.
+     */
+    isLoaded(loadState) {
+        if (loadState) {
+            this.pendingComponentCount--;
+        }
+        this.isPending = this.pendingComponentCount > 0;
+    }
+    getComponentDeferOptions(componentType) {
+        const deferLoading = this.getDeferLoadingStrategy(componentType);
+        return { deferLoading };
+    }
+    /**
+     * The `DeferLoadingStrategy` indicates whether component rendering
+     * should be deferred.
+     */
+    getDeferLoadingStrategy(componentType) {
+        if (this.config) {
+            return (this.config.cmsComponents[componentType] || {})
+                .deferLoading;
+        }
+    }
+    addSmartEditSlotClass(slot) {
+        if (slot && this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    }
+    addSmartEditContract(slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    }
+};
+PageSlotComponent.ɵfac = function PageSlotComponent_Factory(t) { return new (t || PageSlotComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.DynamicAttributeService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsConfig)); };
+PageSlotComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageSlotComponent, selectors: [["cx-page-slot"], ["", "cx-page-slot", ""]], hostVars: 6, hostBindings: function PageSlotComponent_HostBindings(rf, ctx) { if (rf & 2) {
+        ɵngcc0.ɵɵclassProp("cx-pending", ctx.isPending)("has-components", ctx.hasComponents)("page-fold", ctx.isPageFold);
+    } }, inputs: { isPageFold: "isPageFold", position: "position" }, decls: 1, vars: 4, consts: [[3, "cxOutlet", "cxOutletContext"], [4, "ngFor", "ngForOf"], [3, "cxOutlet", "cxOutletContext", "cxOutletDefer", "loaded"], [3, "cxComponentWrapper"]], template: function PageSlotComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_Template, 2, 3, "ng-template", 0);
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("cxOutlet", ctx.position)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c23, ctx.components$));
+    } }, directives: [OutletDirective, ɵngcc4.NgForOf, ComponentWrapperDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+PageSlotComponent.ctorParameters = () => [
+    { type: CmsService },
+    { type: DynamicAttributeService },
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: CmsConfig }
+];
+__decorate([
+    Input()
+], PageSlotComponent.prototype, "position", null);
+__decorate([
+    HostBinding('class.cx-pending')
+], PageSlotComponent.prototype, "isPending", void 0);
+__decorate([
+    HostBinding('class.has-components')
+], PageSlotComponent.prototype, "hasComponents", void 0);
+__decorate([
+    HostBinding('class.page-fold'), Input()
+], PageSlotComponent.prototype, "isPageFold", void 0);
+
+let PageSlotModule = class PageSlotModule {
+};
+PageSlotModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageSlotModule });
+PageSlotModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageSlotModule_Factory(t) { return new (t || PageSlotModule)(); }, providers: [], imports: [[CommonModule, OutletModule, PageComponentModule]] });
+
+let PageLayoutService = class PageLayoutService {
+    constructor(cms, config, breakpointService, handlers) {
+        this.cms = cms;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        this.handlers = handlers;
+        // Prints warn messages for missing layout configs.
+        // The warnings are only printed once per config
+        // to not pollute the console log.
+        this.warnLogMessages = {};
+        this.logSlots = {};
+    }
+    getSlots(section) {
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map(([page, breakpoint]) => {
+            const pageTemplate = page.template;
+            const slots = this.resolveSlots(page, section, breakpoint);
+            return { slots, pageTemplate, breakpoint };
+        }), switchMap(({ slots, pageTemplate, breakpoint }) => {
+            let result = of(slots);
+            for (const handler of this.handlers || []) {
+                result = handler.handle(result, pageTemplate, section, breakpoint);
+            }
+            return result;
+        }), distinctUntilChanged((a, b) => {
+            if (a.length !== b.length) {
+                return false;
+            }
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }));
+    }
+    /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     */
+    getPageFoldSlot(pageTemplate) {
+        return this.breakpointService.breakpoint$.pipe(map((breakpoint) => {
+            if (!this.config.layoutSlots) {
+                // no layout config available
+                return null;
+            }
+            const pageTemplateConfig = this.config.layoutSlots[pageTemplate];
+            const config = this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
+            return config ? config.pageFold : null;
+        }));
+    }
+    resolveSlots(page, section, breakpoint) {
+        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+        if (config && config.slots) {
+            const pageSlots = Object.keys(page.slots);
+            return config.slots.filter((slot) => pageSlots.includes(slot));
+        }
+        else if (!section) {
+            this.logMissingLayoutConfig(page);
+            return Object.keys(page.slots);
+        }
+        else {
+            this.logMissingLayoutConfig(page, section);
+            return [];
+        }
+    }
+    get page$() {
+        return this.cms.getCurrentPage().pipe(filter((page) => !!page));
+    }
+    get templateName$() {
+        return this.page$.pipe(filter((page) => !!page.template), map((page) => page.template));
+    }
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     */
+    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
+        if (!this.config.layoutSlots) {
+            return null;
+        }
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (section) {
+            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+        }
+        if (pageTemplateConfig) {
+            return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
+        }
+    }
+    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (!pageTemplateConfig) {
+            return null;
+        }
+        // if there's no section config on the page layout
+        // we fall back to the global section config
+        const sectionConfig = pageTemplateConfig[section]
+            ? pageTemplateConfig[section]
+            : this.config.layoutSlots[section];
+        if (!sectionConfig) {
+            return null;
+        }
+        const responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
+        if (responsiveConfig.hasOwnProperty(configAttribute)) {
+            return responsiveConfig;
+        }
+        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+            return pageTemplateConfig[section];
+        }
+        else if (this.config.layoutSlots[section]) {
+            return this.config.layoutSlots[section];
+        }
+    }
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     */
+    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
+        let slotConfig = layoutSlotConfig;
+        // fallback to default slot config
+        if (!layoutSlotConfig || !breakpoint) {
+            return slotConfig;
+        }
+        // we have a config for the specific breakpoint
+        if (layoutSlotConfig[breakpoint] &&
+            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+            return layoutSlotConfig[breakpoint];
+        }
+        // find closest config
+        const all = this.breakpointService.breakpoints;
+        for (const br of all.splice(0, all.indexOf(breakpoint))) {
+            if (layoutSlotConfig[br] &&
+                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                slotConfig = layoutSlotConfig[br];
+            }
+        }
+        return slotConfig;
+    }
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     */
+    logMissingLayoutConfig(page, section) {
+        if (!isDevMode()) {
+            return;
+        }
+        if (!this.logSlots[page.template]) {
+            // the info log is not printed in production
+            // tslint:disable-next-line: no-console
+            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
+            this.logSlots[page.template] = true;
+        }
+        const cacheKey = section || page.template;
+        if (!this.warnLogMessages[cacheKey]) {
+            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
+            this.warnLogMessages[cacheKey] = true;
+        }
+    }
+};
+PageLayoutService.ɵfac = function PageLayoutService_Factory(t) { return new (t || PageLayoutService)(ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(LayoutConfig), ɵngcc0.ɵɵinject(BreakpointService), ɵngcc0.ɵɵinject(PAGE_LAYOUT_HANDLER, 8)); };
+PageLayoutService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: PageLayoutService, factory: PageLayoutService.ɵfac });
+PageLayoutService.ctorParameters = () => [
+    { type: CmsService },
+    { type: LayoutConfig },
+    { type: BreakpointService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
+];
+PageLayoutService = __decorate([ __param(3, Optional()),
+    __param(3, Inject(PAGE_LAYOUT_HANDLER))
+], PageLayoutService);
+
+let PageLayoutComponent = class PageLayoutComponent {
+    constructor(el, renderer, pageLayoutService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.pageLayoutService = pageLayoutService;
+        this.section$ = new BehaviorSubject(undefined);
+        this.templateName$ = this.pageLayoutService
+            .templateName$;
+        this.layoutName$ = this.section$.pipe(switchMap((section) => (section ? of(section) : this.templateName$)), tap((name) => {
+            this.styleClass = name;
+        }));
+        this.slots$ = this.section$.pipe(switchMap((section) => this.pageLayoutService.getSlots(section)));
+        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((templateName) => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
+    }
+    set section(value) {
+        this.section$.next(value);
+    }
+    set styleClass(cls) {
+        if (this.currentClass) {
+            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+        }
+        this.renderer.addClass(this.el.nativeElement, cls);
+        this.currentClass = cls;
+    }
+};
+PageLayoutComponent.ɵfac = function PageLayoutComponent_Factory(t) { return new (t || PageLayoutComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(PageLayoutService)); };
+PageLayoutComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageLayoutComponent, selectors: [["cx-page-layout"]], inputs: { section: "section" }, ngContentSelectors: _c0, decls: 2, vars: 8, consts: [[3, "cxOutlet", "cxOutletContext"], [3, "position", "isPageFold", 4, "ngFor", "ngForOf"], [3, "position", "isPageFold"]], template: function PageLayoutComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵprojectionDef();
+        ɵngcc0.ɵɵtemplate(0, PageLayoutComponent_ng_template_0_Template, 3, 3, "ng-template", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("cxOutlet", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.layoutName$))("cxOutletContext", ɵngcc0.ɵɵpureFunction3(4, _c24, ctx.templateName$, ctx.slots$, ctx.section$));
+    } }, directives: [OutletDirective, ɵngcc4.NgForOf, PageSlotComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+PageLayoutComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: PageLayoutService }
+];
+__decorate([
+    Input()
+], PageLayoutComponent.prototype, "section", null);
+
+let PageLayoutModule = class PageLayoutModule {
+};
+PageLayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageLayoutModule });
+PageLayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageLayoutModule_Factory(t) { return new (t || PageLayoutModule)(); }, providers: [PageLayoutService], imports: [[CommonModule, OutletModule, PageSlotModule]] });
+
+class PWAModuleConfig {
+}
+const defaultPWAModuleConfig = {
+    pwa: {
+        enabled: false,
+        addToHomeScreen: false,
+    },
+};
+
+let AddToHomeScreenService = class AddToHomeScreenService {
+    constructor(config, globalMessageService, winRef) {
+        this.config = config;
+        this.globalMessageService = globalMessageService;
+        this.winRef = winRef;
+        this.canPrompt = new BehaviorSubject(false);
+        this.canPrompt$ = this.canPrompt.asObservable();
+        if (this.config.pwa.addToHomeScreen) {
+            this.init();
+        }
+    }
+    init() {
+        if (this.winRef.nativeWindow) {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (event) => {
+                event.preventDefault();
+                this.deferredEvent = event;
+                this.enableAddToHomeScreen();
+            });
+            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
+                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                this.disableAddToHomeScreen();
+                this.deferredEvent = null;
+            });
+        }
+    }
+    enableAddToHomeScreen() {
+        this.canPrompt.next(true);
+    }
+    disableAddToHomeScreen() {
+        this.canPrompt.next(false);
+    }
+    firePrompt() {
+        if (this.deferredEvent) {
+            this.deferredEvent.prompt();
+        }
+    }
+};
+AddToHomeScreenService.ɵfac = function AddToHomeScreenService_Factory(t) { return new (t || AddToHomeScreenService)(ɵngcc0.ɵɵinject(PWAModuleConfig), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef)); };
+AddToHomeScreenService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: AddToHomeScreenService, factory: AddToHomeScreenService.ɵfac });
+AddToHomeScreenService.ctorParameters = () => [
+    { type: PWAModuleConfig },
+    { type: GlobalMessageService },
+    { type: WindowRef }
+];
+
+class AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+    ngOnInit() {
+        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+    }
+    prompt() {
+        this.addToHomeScreenService.firePrompt();
+    }
+}
+AddToHomeScreenComponent.ɵfac = function AddToHomeScreenComponent_Factory(t) { ɵngcc0.ɵɵinvalidFactory(); };
+AddToHomeScreenComponent.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: AddToHomeScreenComponent });
+
+let AddToHomeScreenBannerComponent = class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+};
+AddToHomeScreenBannerComponent.ɵfac = function AddToHomeScreenBannerComponent_Factory(t) { return new (t || AddToHomeScreenBannerComponent)(ɵngcc0.ɵɵdirectiveInject(AddToHomeScreenService)); };
+AddToHomeScreenBannerComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToHomeScreenBannerComponent, selectors: [["cx-add-to-home-screen-banner"]], features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-add-to-home-screen-banner"], [1, "cx-add-to-home-screen-banner-inner"], [1, "btn", "btn-primary", 3, "click"]], template: function AddToHomeScreenBannerComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, AddToHomeScreenBannerComponent_div_0_Template, 16, 12, "div", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.canPrompt$));
+    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
+AddToHomeScreenBannerComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+
+let AddToHomeScreenBtnComponent = class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+};
+AddToHomeScreenBtnComponent.ɵfac = function AddToHomeScreenBtnComponent_Factory(t) { return new (t || AddToHomeScreenBtnComponent)(ɵngcc0.ɵɵdirectiveInject(AddToHomeScreenService)); };
+AddToHomeScreenBtnComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AddToHomeScreenBtnComponent, selectors: [["cx-add-to-home-screen-btn"]], features: [ɵngcc0.ɵɵInheritDefinitionFeature], ngContentSelectors: _c0, decls: 3, vars: 3, consts: [[3, "click"], [4, "ngIf"]], template: function AddToHomeScreenBtnComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵprojectionDef();
+        ɵngcc0.ɵɵelementStart(0, "span", 0);
+        ɵngcc0.ɵɵlistener("click", function AddToHomeScreenBtnComponent_Template_span_click_0_listener() { return ctx.prompt(); });
+        ɵngcc0.ɵɵtemplate(1, AddToHomeScreenBtnComponent_1_Template, 1, 0, undefined, 1);
+        ɵngcc0.ɵɵpipe(2, "async");
+        ɵngcc0.ɵɵelementEnd();
+    } if (rf & 2) {
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx.canPrompt$));
+    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
+AddToHomeScreenBtnComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+
+function pwaConfigurationFactory(pwaConfig) {
+    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
+}
+function pwaFactory(addToHomeScreenService) {
+    const result = () => addToHomeScreenService;
+    return result;
+}
+let PwaModule = class PwaModule {
+};
+PwaModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PwaModule });
+PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Factory(t) { return new (t || PwaModule)(); }, providers: [
+        provideDefaultConfig(defaultPWAModuleConfig),
+        { provide: PWAModuleConfig, useExisting: Config },
+        {
+            provide: SwRegistrationOptions,
+            useFactory: pwaConfigurationFactory,
+            deps: [Config]
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: pwaFactory,
+            deps: [AddToHomeScreenService],
+            multi: true
+        },
+        AddToHomeScreenService,
+    ], imports: [[
+            CommonModule,
+            ServiceWorkerModule.register('/ngsw-worker.js'),
+            I18nModule,
+        ]] });
+
+const htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    const result = () => {
+        languageService.getActive().subscribe((lang) => {
+            winRef.document.documentElement.lang = lang;
+        });
+    };
+    return result;
+}
+
+let SeoMetaService = class SeoMetaService {
+    constructor(ngTitle, ngMeta, pageMetaService) {
+        this.ngTitle = ngTitle;
+        this.ngMeta = ngMeta;
+        this.pageMetaService = pageMetaService;
+    }
+    init() {
+        this.pageMetaService
+            .getMeta()
+            .pipe(filter(Boolean))
+            .subscribe((meta) => (this.meta = meta));
+    }
+    set meta(meta) {
+        this.title = meta.title;
+        this.description = meta.description;
+        this.image = meta.image;
+        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
+    }
+    set title(title) {
+        this.ngTitle.setTitle(title || '');
+    }
+    set description(value) {
+        this.addTag({ name: 'description', content: value });
+    }
+    set image(imageUrl) {
+        if (imageUrl) {
+            this.addTag({ name: 'og:image', content: imageUrl });
+        }
+    }
+    set robots(value) {
+        if (value) {
+            this.addTag({ name: 'robots', content: value.join(', ') });
+        }
+    }
+    addTag(meta) {
+        if (meta.content) {
+            this.ngMeta.updateTag(meta);
+        }
+    }
+};
+SeoMetaService.ɵfac = function SeoMetaService_Factory(t) { return new (t || SeoMetaService)(ɵngcc0.ɵɵinject(ɵngcc2.Title), ɵngcc0.ɵɵinject(ɵngcc2.Meta), ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService)); };
+SeoMetaService.ctorParameters = () => [
+    { type: Title },
+    { type: Meta },
+    { type: PageMetaService }
+];
+SeoMetaService.ɵprov = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+
+let JsonLdScriptFactory = class JsonLdScriptFactory {
+    constructor(platformId, winRef, rendererFactory, sanitizer) {
+        this.platformId = platformId;
+        this.winRef = winRef;
+        this.rendererFactory = rendererFactory;
+        this.sanitizer = sanitizer;
+    }
+    build(schema) {
+        if (schema && this.isJsonLdRequired()) {
+            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
+        }
+    }
+    /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     */
+    isJsonLdRequired() {
+        return !isPlatformBrowser(this.platformId) || isDevMode();
+    }
+    createJsonLdScriptElement() {
+        const id = 'json-ld';
+        let scriptElement = (this.winRef.document.getElementById(id));
+        if (!scriptElement) {
+            const renderer = this.rendererFactory.createRenderer(null, null);
+            const script = renderer.createElement('script');
+            script.id = id;
+            script.type = 'application/ld+json';
+            renderer.appendChild(this.winRef.document.body, script);
+            scriptElement = script;
+        }
+        return scriptElement;
+    }
+    /**
+     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+     *
+     * The given schema is not trusted, as malicious code could be injected (XSS)
+     * into the json-ld script.
+     */
+    sanitize(schema) {
+        return JSON.stringify(schema, (_key, value) => typeof value === 'string'
+            ? this.sanitizer.sanitize(SecurityContext.HTML, value)
+            : value);
+    }
+};
+JsonLdScriptFactory.ɵfac = function JsonLdScriptFactory_Factory(t) { return new (t || JsonLdScriptFactory)(ɵngcc0.ɵɵinject(PLATFORM_ID), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef), ɵngcc0.ɵɵinject(ɵngcc0.RendererFactory2), ɵngcc0.ɵɵinject(ɵngcc2.DomSanitizer)); };
+JsonLdScriptFactory.ctorParameters = () => [
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: WindowRef },
+    { type: RendererFactory2 },
+    { type: DomSanitizer }
+];
+JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
+JsonLdScriptFactory = __decorate([ __param(0, Inject(PLATFORM_ID))
+], JsonLdScriptFactory);
+
+/**
+ * Low level directive that adds a json-ld script tag to the component.
+ * This code bypasses the strict XSS security, as otherwise we're not able
+ * to append a script tag with JS inside.
+ */
+let JsonLdDirective = class JsonLdDirective {
+    constructor(jsonLdScriptFactory, sanitizer) {
+        this.jsonLdScriptFactory = jsonLdScriptFactory;
+        this.sanitizer = sanitizer;
+    }
+    set cxJsonLd(schema) {
+        this.writeJsonLd(schema);
+    }
+    writeJsonLd(schema) {
+        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+            const sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
+            const html = `<script type="application/ld+json">${sanitizedSchema}</script>`;
+            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+    }
+};
+JsonLdDirective.ɵfac = function JsonLdDirective_Factory(t) { return new (t || JsonLdDirective)(ɵngcc0.ɵɵdirectiveInject(JsonLdScriptFactory), ɵngcc0.ɵɵdirectiveInject(ɵngcc2.DomSanitizer)); };
+JsonLdDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: JsonLdDirective, selectors: [["", "cxJsonLd", ""]], hostVars: 1, hostBindings: function JsonLdDirective_HostBindings(rf, ctx) { if (rf & 2) {
+        ɵngcc0.ɵɵhostProperty("innerHTML", ctx.jsonLD, ɵngcc0.ɵɵsanitizeHtml);
+    } }, inputs: { cxJsonLd: "cxJsonLd" } });
+JsonLdDirective.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: DomSanitizer }
+];
+__decorate([
+    Input()
+], JsonLdDirective.prototype, "cxJsonLd", null);
+__decorate([
+    HostBinding('innerHTML')
+], JsonLdDirective.prototype, "jsonLD", void 0);
+
+/**
+ * Injection token to extend schema builders for adding structural data (json-ld).
+ *
+ * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+ * lowever level builder to further extend the schema.
+ */
+const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
+/**
+ * Injection token to add specific json-ld builders for product related schema's.
+ * See see https://schema.org/product for more information.
+ */
+const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
+
+let StructuredDataFactory = class StructuredDataFactory {
+    constructor(scriptBuilder, builders) {
+        this.scriptBuilder = scriptBuilder;
+        this.builders = builders;
+    }
+    build() {
+        this.collectSchemas().subscribe((schema) => {
+            this.scriptBuilder.build(schema);
+        });
+    }
+    collectSchemas() {
+        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+            return of();
+        }
+        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
+    }
+};
+StructuredDataFactory.ɵfac = function StructuredDataFactory_Factory(t) { return new (t || StructuredDataFactory)(ɵngcc0.ɵɵinject(JsonLdScriptFactory), ɵngcc0.ɵɵinject(SCHEMA_BUILDER, 8)); };
+StructuredDataFactory.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
+];
+StructuredDataFactory.ɵprov = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+StructuredDataFactory = __decorate([ __param(1, Optional()),
+    __param(1, Inject(SCHEMA_BUILDER))
+], StructuredDataFactory);
+
+/**
+ * Factory to build the structure data
+ * without any interaction with the UI.
+ */
+function getStructuredDataFactory(injector) {
+    const result = () => {
+        const factory = injector.get(StructuredDataFactory);
+        factory.build();
+    };
+    return result;
+}
+let StructuredDataModule = class StructuredDataModule {
+};
+StructuredDataModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: StructuredDataModule });
+StructuredDataModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function StructuredDataModule_Factory(t) { return new (t || StructuredDataModule)(); }, providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: getStructuredDataFactory,
+            deps: [Injector],
+            multi: true
+        },
+    ], imports: [[CommonModule]] });
+
+function initSeoService(injector) {
+    const result = () => {
+        const service = injector.get(SeoMetaService);
+        service.init();
+    };
+    return result;
+}
+let SeoModule = class SeoModule {
+};
+SeoModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SeoModule });
+SeoModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SeoModule_Factory(t) { return new (t || SeoModule)(); }, providers: [
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initSeoService,
+            deps: [Injector],
+            multi: true
+        },
+        htmlLangProvider,
+    ], imports: [[StructuredDataModule]] });
 
 let ConsentManagementFormComponent = class ConsentManagementFormComponent {
     constructor() {
@@ -18898,7 +18505,7 @@ StorefrontComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StorefrontCompon
         ɵngcc0.ɵɵtemplate(0, StorefrontComponent_ng_template_0_Template, 4, 2, "ng-template", 0);
     } }, directives: [OutletDirective,
         SkipLinkDirective,
-        FocusDirective, ɵngcc5.RouterOutlet, PageLayoutComponent,
+        FocusDirective, ɵngcc6.RouterOutlet, PageLayoutComponent,
         PageSlotComponent,
         GlobalMessageComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2 });
 StorefrontComponent.ctorParameters = () => [
@@ -18941,6 +18548,689 @@ MainModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function MainModule_Fac
             SkipLinkModule,
             KeyboardFocusModule,
         ]] });
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsMappingService = class CmsMappingService {
+    constructor(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    isComponentEnabled(flexType) {
+        const isSSR = isPlatformServer(this.platformId);
+        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    }
+    getRoutesForComponents(componentTypes) {
+        const routes = [];
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                routes.push(...this.getRoutesForComponent(componentType));
+            }
+        }
+        return routes;
+    }
+    getGuardsForComponents(componentTypes) {
+        const guards = new Set();
+        for (const componentType of componentTypes) {
+            this.getGuardsForComponent(componentType).forEach((guard) => guards.add(guard));
+        }
+        return Array.from(guards);
+    }
+    getI18nKeysForComponents(componentTypes) {
+        const i18nKeys = new Set();
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                this.getI18nKeysForComponent(componentType).forEach((key) => i18nKeys.add(key));
+            }
+        }
+        return Array.from(i18nKeys);
+    }
+    getRoutesForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    }
+    getGuardsForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    }
+    getI18nKeysForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    }
+};
+CmsMappingService.ɵfac = function CmsMappingService_Factory(t) { return new (t || CmsMappingService)(ɵngcc0.ɵɵinject(ɵngcc1.CmsConfig), ɵngcc0.ɵɵinject(PLATFORM_ID)); };
+CmsMappingService.ctorParameters = () => [
+    { type: CmsConfig },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+CmsMappingService = __decorate([ __param(1, Inject(PLATFORM_ID))
+], CmsMappingService);
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsGuardsService = class CmsGuardsService {
+    constructor(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    cmsPageCanActivate(componentTypes, route, state) {
+        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            const canActivateObservables = guards.map((guardClass) => {
+                const guard = this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            });
+            return concat(...canActivateObservables).pipe(skipWhile((canActivate) => canActivate === true), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    }
+};
+CmsGuardsService.ɵfac = function CmsGuardsService_Factory(t) { return new (t || CmsGuardsService)(ɵngcc0.ɵɵinject(CmsMappingService), ɵngcc0.ɵɵinject(ɵngcc0.Injector)); };
+CmsGuardsService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: Injector }
+];
+CmsGuardsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsI18nService = class CmsI18nService {
+    constructor(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    loadChunksForComponents(componentTypes) {
+        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        const i18nChunks = new Set();
+        for (const key of i18nKeys) {
+            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    }
+};
+CmsI18nService.ɵfac = function CmsI18nService_Factory(t) { return new (t || CmsI18nService)(ɵngcc0.ɵɵinject(CmsMappingService), ɵngcc0.ɵɵinject(ɵngcc1.TranslationService), ɵngcc0.ɵɵinject(ɵngcc1.TranslationChunkService)); };
+CmsI18nService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: TranslationService },
+    { type: TranslationChunkService }
+];
+CmsI18nService.ɵprov = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsRoutesService = class CmsRoutesService {
+    constructor(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    cmsRouteExist(url) {
+        const isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        const routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((route) => route.data && route.data.cxCmsRouteContext && route.path === routePath));
+    }
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param pageContext
+     * @param currentUrl
+     */
+    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
+        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    }
+    updateRouting(pageContext, pageLabel, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
+            const newRoute = {
+                path: pageLabel.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
+                },
+            };
+            this.router.resetConfig([newRoute, ...this.router.config]);
+            return true;
+        }
+        return false;
+    }
+};
+CmsRoutesService.ɵfac = function CmsRoutesService_Factory(t) { return new (t || CmsRoutesService)(ɵngcc0.ɵɵinject(ɵngcc6.Router), ɵngcc0.ɵɵinject(CmsMappingService)); };
+CmsRoutesService.ctorParameters = () => [
+    { type: Router },
+    { type: CmsMappingService }
+];
+CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+
+let CmsPageGuard = class CmsPageGuard {
+    constructor(
+    // expose as `protected` only services from public API:
+    routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
+    }
+    canActivate(route, state) {
+        /**
+         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+         */
+        return this.protectedRoutesGuard
+            ? this.protectedRoutesGuard
+                .canActivate(route)
+                .pipe(switchMap((result) => result ? this.getCmsPage(route, state) : of(result)))
+            : this.getCmsPage(route, state);
+    }
+    getCmsPage(route, state) {
+        return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
+            .getPage(pageContext, true)
+            .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
+            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
+            : this.handleNotFoundPage(pageContext, route, state)));
+    }
+    resolveCmsPageLogic(pageContext, pageData, route, state) {
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((componentTypes) => this.cmsGuards
+            .cmsPageCanActivate(componentTypes, route, state)
+            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
+            if (canActivate === true) {
+                this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        }), map(([canActivate, componentTypes]) => {
+            const pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
+            }
+            return canActivate;
+        }));
+    }
+    handleNotFoundPage(pageContext, route, state) {
+        const notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((notFoundPage) => {
+            if (notFoundPage) {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((notFoundIndex) => {
+                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                }), switchMap((notFoundIndex) => this.cmsService.getPageIndex(pageContext).pipe(
+                // we have to wait for page index update
+                filter((index) => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
+            }
+            return of(false);
+        }));
+    }
+};
+CmsPageGuard.ɵfac = function CmsPageGuard_Factory(t) { return new (t || CmsPageGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(CmsRoutesService), ɵngcc0.ɵɵinject(CmsI18nService), ɵngcc0.ɵɵinject(CmsGuardsService), ɵngcc0.ɵɵinject(ɵngcc1.SemanticPathService), ɵngcc0.ɵɵinject(ɵngcc1.ProtectedRoutesGuard)); };
+CmsPageGuard.guardName = 'CmsPageGuard';
+CmsPageGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: CmsService },
+    { type: CmsRoutesService },
+    { type: CmsI18nService },
+    { type: CmsGuardsService },
+    { type: SemanticPathService },
+    { type: ProtectedRoutesGuard }
+];
+CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+
+const cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+function addCmsRoute(injector) {
+    const result = () => {
+        const router = injector.get(Router);
+        router.config.push(cmsRoute);
+    };
+    return result;
+}
+
+const ɵ0 = addCmsRoute;
+let CmsRouteModule = class CmsRouteModule {
+};
+CmsRouteModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: CmsRouteModule });
+CmsRouteModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CmsRouteModule_Factory(t) { return new (t || CmsRouteModule)(); }, providers: [
+        {
+            provide: APP_INITIALIZER,
+            multi: true,
+            deps: [Injector],
+            useFactory: ɵ0
+        },
+    ] });
+
+const defaultStorefrontRoutesConfig = {
+    home: { paths: [''] },
+    notFound: { paths: ['not-found'] },
+    cart: { paths: ['cart'] },
+    // semantic links for login related pages
+    login: { paths: ['login'], protected: false },
+    register: { paths: ['login/register'], protected: false },
+    forgotPassword: { paths: ['login/forgot-password'], protected: false },
+    resetPassword: { paths: ['login/pw/change'], protected: false },
+    logout: { paths: ['logout'] },
+    checkoutLogin: { paths: ['checkout-login'] },
+    checkout: { paths: ['checkout'] },
+    checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
+    checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
+    checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+    checkoutReviewOrder: { paths: ['checkout/review-order'] },
+    orderConfirmation: { paths: ['order-confirmation'] },
+    // plp routes
+    search: { paths: ['search/:query'] },
+    category: {
+        paths: ['category/:categoryCode'],
+        paramsMapping: { categoryCode: 'code' },
+    },
+    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+    // pdp routes
+    product: {
+        paths: ['product/:productCode/:name'],
+        paramsMapping: { productCode: 'code' },
+    },
+    termsAndConditions: { paths: ['terms-and-conditions'] },
+    orders: {
+        paths: ['my-account/orders'],
+    },
+    orderDetails: {
+        paths: ['my-account/order/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderGuest: {
+        paths: ['guest/order/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderReturn: {
+        paths: ['my-account/order/return/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderReturnConfirmation: {
+        paths: ['my-account/order/return/confirmation/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderCancel: {
+        paths: ['my-account/order/cancel/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderCancelConfirmation: {
+        paths: ['my-account/order/cancel/confirmation/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    returnRequestDetails: {
+        paths: ['my-account/return-request/:returnCode'],
+        paramsMapping: { returnCode: 'rma' },
+    },
+    coupons: { paths: ['my-account/coupons'] },
+    couponClaim: {
+        paths: ['my-account/coupon/claim/:couponCode'],
+        paramsMapping: { couponCode: 'code' },
+    },
+};
+const defaultRoutingConfig = {
+    routing: {
+        routes: defaultStorefrontRoutesConfig,
+    },
+};
+
+var RoutingModule_1;
+let RoutingModule = RoutingModule_1 = class RoutingModule {
+    static forRoot() {
+        return {
+            ngModule: RoutingModule_1,
+            providers: [provideDefaultConfig(defaultRoutingConfig)],
+        };
+    }
+};
+RoutingModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: RoutingModule });
+RoutingModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function RoutingModule_Factory(t) { return new (t || RoutingModule)(); }, imports: [[RoutingModule$1.forRoot(), CmsRouteModule]] });
+
+/**
+ * Matches the pattern '[ ** / ] marker / :paramName'
+ *
+ * @param marker phrase that indicates the start of the match
+ * @param paramName name of the parameter present after the marker
+ * @param precedingParamName name of the parameter for every preceding url segment
+ *        i.e. `param` will result in `param0`, `param1`, ...
+ */
+function getSuffixUrlMatcher({ marker, paramName, precedingParamName, }) {
+    precedingParamName = precedingParamName || 'param';
+    const matcher = function suffixUrlMatcher(segments) {
+        const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
+        const isMarkerLastSegment = markerIndex === segments.length - 1;
+        if (markerIndex === -1 || isMarkerLastSegment) {
+            return null;
+        }
+        const paramIndex = markerIndex + 1;
+        const posParams = {
+            [paramName]: segments[paramIndex],
+        };
+        for (let i = 0; i < markerIndex; i++) {
+            posParams[`${precedingParamName}${i}`] = segments[i];
+        }
+        return { consumed: segments.slice(0, paramIndex + 1), posParams };
+    };
+    if (isDevMode()) {
+        matcher['_suffixRouteConfig'] = { marker, paramName, precedingParamName }; // property added for easier debugging of routes
+    }
+    return matcher;
+}
+function findLastIndex(elements, predicate) {
+    for (let index = elements.length - 1; index >= 0; index--) {
+        if (predicate(elements[index])) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
+    constructor(pageMetaService) {
+        this.pageMetaService = pageMetaService;
+    }
+    build() {
+        return this.pageMetaService
+            .getMeta()
+            .pipe(map((pageMeta) => this.collect(pageMeta)));
+    }
+    collect(pageMeta) {
+        if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
+            return;
+        }
+        const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@id': crumb.link,
+                    name: crumb.label,
+                },
+            };
+        });
+        if (pageMeta.title) {
+            crumbs.push({
+                '@type': 'ListItem',
+                position: crumbs.length + 1,
+                item: {
+                    '@id': pageMeta.title,
+                    name: pageMeta.title,
+                },
+            });
+        }
+        return {
+            '@context': 'http://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs,
+        };
+    }
+};
+BreadcrumbSchemaBuilder.ɵfac = function BreadcrumbSchemaBuilder_Factory(t) { return new (t || BreadcrumbSchemaBuilder)(ɵngcc0.ɵɵinject(ɵngcc1.PageMetaService)); };
+BreadcrumbSchemaBuilder.ctorParameters = () => [
+    { type: PageMetaService }
+];
+BreadcrumbSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+
+/**
+ * Builds the basic structured data for the product, see https://schema.org/product.
+ * This builder includes data for sku number, name, description, brand and main image.
+ */
+let JsonLdBaseProductBuilder = class JsonLdBaseProductBuilder {
+    build(product) {
+        return of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
+    }
+    getProductBase(product) {
+        const result = { sku: product.code };
+        if (product.name) {
+            result.name = product.name;
+        }
+        if (product.summary) {
+            result.description = product.summary;
+        }
+        return result;
+    }
+    getProductImage(product) {
+        return product.images &&
+            product.images.PRIMARY &&
+            product.images.PRIMARY['zoom'] &&
+            product.images.PRIMARY['zoom'].url
+            ? {
+                image: product.images.PRIMARY['zoom'].url,
+            }
+            : {};
+    }
+    getProductBrand(product) {
+        return product['manufacturer']
+            ? {
+                brand: product['manufacturer'],
+            }
+            : null;
+    }
+};
+JsonLdBaseProductBuilder.ɵfac = function JsonLdBaseProductBuilder_Factory(t) { return new (t || JsonLdBaseProductBuilder)(); };
+JsonLdBaseProductBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+
+/**
+ * Builds the structured data for the product offer, see https://schema.org/offers.
+ * The data includes the price, currency and availability level.
+ */
+let JsonLdProductOfferBuilder = class JsonLdProductOfferBuilder {
+    build(product) {
+        const schema = { '@type': 'Offer' };
+        if (product.price) {
+            if (product.price.value) {
+                schema.price = product.price.value;
+            }
+            if (product.price.currencyIso) {
+                schema.priceCurrency = product.price.currencyIso;
+            }
+        }
+        if (product.stock && product.stock.stockLevelStatus) {
+            schema.availability =
+                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+        }
+        return of({
+            offers: schema,
+        });
+    }
+};
+JsonLdProductOfferBuilder.ɵfac = function JsonLdProductOfferBuilder_Factory(t) { return new (t || JsonLdProductOfferBuilder)(); };
+JsonLdProductOfferBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+
+/**
+ * Builds the structured data for the product reviews, see https://schema.org/Review.
+ * The data includes the aggregated product rating and the individual reviews.
+ */
+let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
+    constructor(reviewService) {
+        this.reviewService = reviewService;
+    }
+    build(product) {
+        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
+            return {
+                aggregateRating: this.buildAggregatedReviews(product, reviews),
+                review: reviews.map((review) => this.buildReviews(review)),
+            };
+        }));
+    }
+    buildAggregatedReviews(product, reviews) {
+        const aggregated = {
+            '@type': 'AggregateRating',
+        };
+        if (product.averageRating) {
+            aggregated.ratingValue = product.averageRating;
+        }
+        if (reviews) {
+            aggregated.ratingCount = reviews.filter((rev) => !!rev.rating).length;
+            aggregated.reviewCount = reviews.filter((rev) => !!rev.comment).length;
+        }
+        return aggregated;
+    }
+    buildReviews(review) {
+        const reviewSchema = {
+            '@type': 'review',
+        };
+        if (review.principal && review.principal.name) {
+            reviewSchema.author = review.principal.name;
+        }
+        if (review.date) {
+            const date = new Date(review.date);
+            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        }
+        if (review.headline) {
+            reviewSchema.name = review.headline;
+        }
+        if (review.comment) {
+            reviewSchema.description = review.comment;
+        }
+        if (review.rating) {
+            reviewSchema.reviewRating = {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+            };
+        }
+        return reviewSchema;
+    }
+};
+JsonLdProductReviewBuilder.ɵfac = function JsonLdProductReviewBuilder_Factory(t) { return new (t || JsonLdProductReviewBuilder)(ɵngcc0.ɵɵinject(ɵngcc1.ProductReviewService)); };
+JsonLdProductReviewBuilder.ctorParameters = () => [
+    { type: ProductReviewService }
+];
+JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+
+/**
+ * Adds the minimal structured data for the product, see https://schema.org/product.
+ * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+ * using the `JSONLD_PRODUCT_BUILDER` token.
+ */
+let ProductSchemaBuilder = class ProductSchemaBuilder {
+    constructor(currentProduct, builders) {
+        this.currentProduct = currentProduct;
+        this.builders = builders;
+    }
+    build() {
+        return this.currentProduct.getProduct().pipe(switchMap((product) => {
+            if (product) {
+                return combineLatest(this.collect(product)).pipe(map((res) => Object.assign({}, ...res)));
+            }
+            return of({});
+        }));
+    }
+    collect(product) {
+        if (!product || !product.code) {
+            return [];
+        }
+        const builders = this.builders
+            ? this.builders.map((builder) => builder.build(product))
+            : [];
+        return [
+            of({
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+            }),
+            ...builders,
+        ];
+    }
+};
+ProductSchemaBuilder.ɵfac = function ProductSchemaBuilder_Factory(t) { return new (t || ProductSchemaBuilder)(ɵngcc0.ɵɵinject(CurrentProductService), ɵngcc0.ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); };
+ProductSchemaBuilder.ctorParameters = () => [
+    { type: CurrentProductService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+];
+ProductSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+ProductSchemaBuilder = __decorate([ __param(1, Optional()),
+    __param(1, Inject(JSONLD_PRODUCT_BUILDER))
+], ProductSchemaBuilder);
+
+/**
+ * Provides several standard json-ld builders that contribute
+ * to colleting and building json-ld data.
+ */
+let JsonLdBuilderModule = class JsonLdBuilderModule {
+};
+JsonLdBuilderModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: JsonLdBuilderModule });
+JsonLdBuilderModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function JsonLdBuilderModule_Factory(t) { return new (t || JsonLdBuilderModule)(); }, providers: [
+        {
+            provide: SCHEMA_BUILDER,
+            useExisting: ProductSchemaBuilder,
+            multi: true
+        },
+        {
+            provide: SCHEMA_BUILDER,
+            useExisting: BreadcrumbSchemaBuilder,
+            multi: true
+        },
+        // lower level json-ld builder classes offering fine-graiend control
+        // for product related schema's
+        {
+            provide: JSONLD_PRODUCT_BUILDER,
+            useExisting: JsonLdBaseProductBuilder,
+            multi: true
+        },
+        {
+            provide: JSONLD_PRODUCT_BUILDER,
+            useExisting: JsonLdProductOfferBuilder,
+            multi: true
+        },
+        {
+            provide: JSONLD_PRODUCT_BUILDER,
+            useExisting: JsonLdProductReviewBuilder,
+            multi: true
+        },
+    ] });
 
 /**
  * Generic carousel that renders CMS Components.
@@ -19469,7 +19759,7 @@ CloseAccountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CloseAccountCo
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(6, 5, "common.cancel"));
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 7, "closeAccount.closeMyAccount"), " ");
-    } }, directives: [ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 CloseAccountComponent.ctorParameters = () => [
     { type: ModalService }
 ];
@@ -19519,7 +19809,7 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
         this.routingService.go({ cxRoute: 'login' });
     }
 };
-ForgotPasswordComponent.ɵfac = function ForgotPasswordComponent_Factory(t) { return new (t || ForgotPasswordComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
+ForgotPasswordComponent.ɵfac = function ForgotPasswordComponent_Factory(t) { return new (t || ForgotPasswordComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
 ForgotPasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ForgotPasswordComponent, selectors: [["cx-forgot-password"]], decls: 16, vars: 21, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userEmail", 1, "form-control", 3, "placeholder", "ngClass"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "btn", "btn-block", "btn-secondary", 3, "routerLink"], [1, "invalid-feedback"]], template: function ForgotPasswordComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("submit", function ForgotPasswordComponent_Template_form_submit_0_listener() { return ctx.requestForgotPasswordEmail(); });
@@ -19556,10 +19846,10 @@ ForgotPasswordComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ForgotPasswo
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 12, "common.submit"), " ");
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 14, ɵngcc0.ɵɵpureFunction0(20, _c20)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(13, 14, ɵngcc0.ɵɵpureFunction0(20, _c18)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(15, 16, "common.cancel"));
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgClass, ɵngcc4.NgIf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgClass, ɵngcc4.NgIf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 ForgotPasswordComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: UserService },
@@ -19608,14 +19898,14 @@ AmendOrderActionsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: AmendOrde
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c31, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c17, ctx.orderCode))));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 4, ɵngcc0.ɵɵpureFunction2(10, _c31, ctx.backRoute, ɵngcc0.ɵɵpureFunction1(8, _c15, ctx.orderCode))));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 6, "common.back"), " ");
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("ngIf", ctx.forwardRoute);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", !ctx.forwardRoute);
-    } }, directives: [ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc6.RouterLinkWithHref, ɵngcc4.NgIf], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 __decorate([
     Input()
 ], AmendOrderActionsComponent.prototype, "orderCode", void 0);
@@ -19795,7 +20085,7 @@ CancelOrderConfirmationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Can
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.form$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc4.NgTemplateOutlet, CancelOrReturnItemsComponent,
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc4.NgTemplateOutlet, CancelOrReturnItemsComponent,
         AmendOrderActionsComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 CancelOrderConfirmationComponent.ctorParameters = () => [
     { type: OrderAmendService }
@@ -20081,7 +20371,7 @@ ReturnOrderConfirmationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Ret
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.form$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc4.NgTemplateOutlet, CancelOrReturnItemsComponent,
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc4.NgTemplateOutlet, CancelOrReturnItemsComponent,
         AmendOrderActionsComponent], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 ReturnOrderConfirmationComponent.ctorParameters = () => [
     { type: OrderAmendService }
@@ -20459,7 +20749,7 @@ OrderDetailActionsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderDet
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.order$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc5.RouterLink, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc6.RouterLink, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 OrderDetailActionsComponent.ctorParameters = () => [
     { type: OrderDetailsService }
 ];
@@ -20591,7 +20881,7 @@ OrderHistoryComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: OrderHistoryCo
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.orders$));
     } }, directives: [ɵngcc4.NgIf, SortingComponent,
-        PaginationComponent, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc5.RouterLinkActive], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
+        PaginationComponent, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, ɵngcc6.RouterLinkActive], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
 OrderHistoryComponent.ctorParameters = () => [
     { type: RoutingService },
     { type: UserOrderService },
@@ -20862,7 +21152,7 @@ OrderReturnRequestListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Orde
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.returnRequests$));
     } }, directives: [ɵngcc4.NgIf, SortingComponent,
-        PaginationComponent, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
+        PaginationComponent, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
 OrderReturnRequestListComponent.ctorParameters = () => [
     { type: OrderReturnRequestService },
     { type: TranslationService }
@@ -21048,7 +21338,7 @@ let ResetPasswordFormComponent = class ResetPasswordFormComponent {
         }
     }
 };
-ResetPasswordFormComponent.ɵfac = function ResetPasswordFormComponent_Factory(t) { return new (t || ResetPasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService)); };
+ResetPasswordFormComponent.ɵfac = function ResetPasswordFormComponent_Factory(t) { return new (t || ResetPasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService)); };
 ResetPasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ResetPasswordFormComponent, selectors: [["cx-reset-password-form"]], decls: 21, vars: 22, consts: [[1, "cx-reset-password-form-component", 3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "repassword", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function ResetPasswordFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("submit", function ResetPasswordFormComponent_Template_form_submit_0_listener() { return ctx.resetPassword(); });
@@ -21099,7 +21389,7 @@ ResetPasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ResetPass
         ɵngcc0.ɵɵproperty("ngIf", ctx.form.hasError("NotEqual") && (ctx.submited || ctx.form.get("repassword").dirty && ctx.form.get("repassword").touched));
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 20, "register.resetPassword"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 ResetPasswordFormComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: RoutingService },
@@ -21165,7 +21455,7 @@ let UpdateEmailFormComponent = class UpdateEmailFormComponent {
         }
     }
 };
-UpdateEmailFormComponent.ɵfac = function UpdateEmailFormComponent_Factory(t) { return new (t || UpdateEmailFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
+UpdateEmailFormComponent.ɵfac = function UpdateEmailFormComponent_Factory(t) { return new (t || UpdateEmailFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder)); };
 UpdateEmailFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmailFormComponent, selectors: [["cx-update-email-form"]], outputs: { saveEmail: "saveEmail", cancelEmail: "cancelEmail" }, decls: 37, vars: 34, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], [1, "col-sm-12"], ["type", "email", "name", "confirmEmail", "formControlName", "confirmEmail", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", "autocomplete", "new-password", 1, "form-control", 3, "placeholder"], [1, "col-lg-6"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function UpdateEmailFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("ngSubmit", function UpdateEmailFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
@@ -21251,7 +21541,7 @@ UpdateEmailFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateEmail
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(32, 30, "common.cancel"), " ");
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 32, "common.save"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 UpdateEmailFormComponent.ctorParameters = () => [
     { type: FormBuilder }
 ];
@@ -21390,7 +21680,7 @@ let UpdatePasswordFormComponent = class UpdatePasswordFormComponent {
         return null;
     }
 };
-UpdatePasswordFormComponent.ɵfac = function UpdatePasswordFormComponent_Factory(t) { return new (t || UpdatePasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
+UpdatePasswordFormComponent.ɵfac = function UpdatePasswordFormComponent_Factory(t) { return new (t || UpdatePasswordFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder)); };
 UpdatePasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePasswordFormComponent, selectors: [["cx-update-password-form"]], outputs: { submited: "submited", cancelled: "cancelled" }, decls: 37, vars: 34, consts: [[1, "cx-update-password-component", 3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["type", "password", "name", "oldPassword", "formControlName", "oldPassword", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "newPassword", "formControlName", "newPassword", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "newPasswordConfirm", "formControlName", "newPasswordConfirm", 1, "form-control", 3, "placeholder"], [1, "col-lg-6", "col-md-12"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function UpdatePasswordFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("ngSubmit", function UpdatePasswordFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
@@ -21476,7 +21766,7 @@ UpdatePasswordFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePa
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(32, 30, "common.cancel"), " ");
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(36, 32, "common.save"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 UpdatePasswordFormComponent.ctorParameters = () => [
     { type: FormBuilder }
 ];
@@ -21590,7 +21880,7 @@ let UpdateProfileFormComponent = class UpdateProfileFormComponent {
         this.cancelled.emit();
     }
 };
-UpdateProfileFormComponent.ɵfac = function UpdateProfileFormComponent_Factory(t) { return new (t || UpdateProfileFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
+UpdateProfileFormComponent.ɵfac = function UpdateProfileFormComponent_Factory(t) { return new (t || UpdateProfileFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder)); };
 UpdateProfileFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdateProfileFormComponent, selectors: [["cx-update-profile-form"]], inputs: { user: "user", titles: "titles" }, outputs: { submited: "submited", cancelled: "cancelled" }, decls: 39, vars: 32, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group", "row"], [1, "col-md-12"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["value", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstName", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "text", "name", "lastName", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], [1, "col-lg-6", "col-md-12"], ["type", "button", 1, "btn", "btn-block", "btn-secondary", 3, "click"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [3, "value"], [1, "invalid-feedback"]], template: function UpdateProfileFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("ngSubmit", function UpdateProfileFormComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
@@ -21679,7 +21969,7 @@ UpdateProfileFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: UpdatePro
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(34, 28, "common.cancel"), " ");
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(38, 30, "common.save"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.SelectControlValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc5.NgSelectOption, ɵngcc5.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc5.DefaultValueAccessor, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 UpdateProfileFormComponent.ctorParameters = () => [
     { type: FormBuilder }
 ];
@@ -21912,7 +22202,7 @@ MyCouponsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyCouponsComponen
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx.couponsLoading$))("ngIfElse", _r852);
     } }, directives: function () { return [ɵngcc4.NgIf, SortingComponent,
-        PaginationComponent, ɵngcc4.NgForOf, IconComponent, ɵngcc5.RouterLinkWithHref, CouponCardComponent,
+        PaginationComponent, ɵngcc4.NgForOf, IconComponent, ɵngcc6.RouterLinkWithHref, CouponCardComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2 });
 MyCouponsComponent.ctorParameters = () => [
     { type: CustomerCouponService },
@@ -21930,7 +22220,7 @@ let CouponDialogComponent = class CouponDialogComponent {
 };
 CouponDialogComponent.ɵfac = function CouponDialogComponent_Factory(t) { return new (t || CouponDialogComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService)); };
 CouponDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CouponDialogComponent, selectors: [["cx-coupon-dialog"]], viewQuery: function CouponDialogComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c7, true, ElementRef);
+        ɵngcc0.ɵɵviewQuery(_c5, true, ElementRef);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.dialog = _t.first);
@@ -22361,7 +22651,7 @@ MyInterestsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: MyInterestsComp
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.interests$));
     } }, directives: [ɵngcc4.NgIf, SortingComponent,
-        PaginationComponent, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, MediaComponent,
+        PaginationComponent, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, MediaComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe, ɵngcc4.DatePipe], encapsulation: 2, changeDetection: 0 });
 MyInterestsComponent.ctorParameters = () => [
     { type: UserInterestsService },
@@ -22427,7 +22717,7 @@ BreadcrumbComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: BreadcrumbCompon
         ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx.crumbs$));
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 4, ctx.title$));
-    } }, directives: [ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
 BreadcrumbComponent.ctorParameters = () => [
     { type: CmsComponentData },
     { type: PageMetaService },
@@ -22727,7 +23017,7 @@ let NavigationUIComponent = class NavigationUIComponent {
         return this.flyout && node.children && node.children.length;
     }
 };
-NavigationUIComponent.ɵfac = function NavigationUIComponent_Factory(t) { return new (t || NavigationUIComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.Router), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
+NavigationUIComponent.ɵfac = function NavigationUIComponent_Factory(t) { return new (t || NavigationUIComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc6.Router), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
 NavigationUIComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: NavigationUIComponent, selectors: [["cx-navigation-ui"]], hostVars: 4, hostBindings: function NavigationUIComponent_HostBindings(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵlistener("resize", function NavigationUIComponent_resize_HostBindingHandler() { return ctx.onResize(); }, false, ɵngcc0.ɵɵresolveWindow);
     } if (rf & 2) {
@@ -23220,7 +23510,7 @@ SearchBoxComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SearchBoxComponen
         ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(7, 8, ctx.results$));
-    } }, directives: function () { return [IconComponent, ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, MediaComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, HighlightPipe, ɵngcc1.UrlPipe]; }, encapsulation: 2, changeDetection: 0 });
+    } }, directives: function () { return [IconComponent, ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, MediaComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe, HighlightPipe, ɵngcc1.UrlPipe]; }, encapsulation: 2, changeDetection: 0 });
 SearchBoxComponent.ctorParameters = () => [
     { type: SearchBoxComponentService },
     { type: CmsComponentData, decorators: [{ type: Optional }] },
@@ -23437,7 +23727,7 @@ let GuestRegisterFormComponent = class GuestRegisterFormComponent {
         }
     }
 };
-GuestRegisterFormComponent.ɵfac = function GuestRegisterFormComponent_Factory(t) { return new (t || GuestRegisterFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder)); };
+GuestRegisterFormComponent.ɵfac = function GuestRegisterFormComponent_Factory(t) { return new (t || GuestRegisterFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder)); };
 GuestRegisterFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GuestRegisterFormComponent, selectors: [["cx-guest-register-form"]], inputs: { guid: "guid", email: "email" }, decls: 28, vars: 32, consts: [[1, "register-guest"], [1, "col-md-6", "col-lg-4"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "disabled", "click"], [1, "invalid-feedback"]], template: function GuestRegisterFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -23505,7 +23795,7 @@ GuestRegisterFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GuestRegi
         ɵngcc0.ɵɵproperty("disabled", ctx.guestRegisterForm.invalid);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(27, 28, "common.submit"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 GuestRegisterFormComponent.ctorParameters = () => [
     { type: UserService },
     { type: RoutingService },
@@ -23536,7 +23826,7 @@ let OrderConfirmationGuard = class OrderConfirmationGuard {
         }));
     }
 };
-OrderConfirmationGuard.ɵfac = function OrderConfirmationGuard_Factory(t) { return new (t || OrderConfirmationGuard)(ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc5.Router), ɵngcc0.ɵɵinject(ɵngcc1.SemanticPathService)); };
+OrderConfirmationGuard.ɵfac = function OrderConfirmationGuard_Factory(t) { return new (t || OrderConfirmationGuard)(ɵngcc0.ɵɵinject(ɵngcc1.CheckoutService), ɵngcc0.ɵɵinject(ɵngcc6.Router), ɵngcc0.ɵɵinject(ɵngcc1.SemanticPathService)); };
 OrderConfirmationGuard.ctorParameters = () => [
     { type: CheckoutService },
     { type: Router },
@@ -23660,7 +23950,7 @@ ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCaro
     } if (rf & 2) {
         const _r993 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r993);
-    } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
     { type: ProductService }
@@ -23712,7 +24002,7 @@ ProductReferencesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductRe
     } if (rf & 2) {
         const _r998 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r998);
-    } }, directives: [CarouselComponent, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductReferencesComponent.ctorParameters = () => [
     { type: CmsComponentData },
     { type: CurrentProductService },
@@ -24014,7 +24304,7 @@ let ProductListComponentService = class ProductListComponentService {
         });
     }
 };
-ProductListComponentService.ɵfac = function ProductListComponentService_Factory(t) { return new (t || ProductListComponentService)(ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService), ɵngcc0.ɵɵinject(ɵngcc5.Router)); };
+ProductListComponentService.ɵfac = function ProductListComponentService_Factory(t) { return new (t || ProductListComponentService)(ɵngcc0.ɵɵinject(ɵngcc1.ProductSearchService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵinject(ɵngcc1.CurrencyService), ɵngcc0.ɵɵinject(ɵngcc1.LanguageService), ɵngcc0.ɵɵinject(ɵngcc6.Router)); };
 ProductListComponentService.ctorParameters = () => [
     { type: ProductSearchService },
     { type: RoutingService },
@@ -24339,7 +24629,7 @@ let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
         }
     }
 };
-ProductFacetNavigationComponent.ɵfac = function ProductFacetNavigationComponent_Factory(t) { return new (t || ProductFacetNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ProductListComponentService)); };
+ProductFacetNavigationComponent.ɵfac = function ProductFacetNavigationComponent_Factory(t) { return new (t || ProductFacetNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ProductListComponentService)); };
 ProductFacetNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductFacetNavigationComponent, selectors: [["cx-product-facet-navigation"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-search-facet"], [1, "cx-facet-mobile"], [1, "container"], [1, "btn", "btn-action", "btn-block", "cx-facet-mobile-btn", 3, "click"], ["class", "cx-facet-mobile", 4, "ngIf"], ["content", ""], [1, "cx-facet-filter-header"], [1, "cx-facet-filter-container"], ["class", "cx-facet-filter-pill", "role", "filter", 3, "hidden", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill", 3, "hidden"], [1, "cx-facet-pill-value"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], [4, "ngFor", "ngForOf"], [1, "cx-facet-group"], [1, "cx-facet-header"], ["aria-controls", "", "tabindex", "0", 1, "cx-facet-header-link", 3, "click"], [1, "cx-facet-list"], ["class", "cx-facet-toggle-btn", 3, "click", 4, "ngIf"], ["class", "cx-facet-toggle-btn", "tabindex", "0", 3, "click", 4, "ngIf"], [1, "form-check"], [1, "form-checkbox", "cx-facet-label"], ["role", "checkbox", "type", "checkbox", "aria-checked", "true", 1, "form-check-input", "cx-facet-checkbox", 3, "checked", "change"], [1, "cx-facet-text"], [1, "cx-facet-toggle-btn", 3, "click"], ["tabindex", "0", 1, "cx-facet-toggle-btn", 3, "click"], ["class", "cx-facet-filter-pill", "role", "filter", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill"], [1, "modal-header"], ["id", "modal-title", 1, "cx-facet-modal-title"], [1, "modal-body", "cx-facet-modal-body"], ["class", "form-group", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "megapixels", 1, "cx-facet-modal-label"], [1, "input-group"]], template: function ProductFacetNavigationComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, ProductFacetNavigationComponent_ng_container_0_Template, 14, 8, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -24374,11 +24664,11 @@ ProductGridItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductGrid
         ɵngcc0.ɵɵtemplate(11, ProductGridItemComponent_div_11_Template, 2, 1, "div", 8);
         ɵngcc0.ɵɵtemplate(12, ProductGridItemComponent_cx_add_to_cart_12_Template, 1, 2, "cx-add-to-cart", 9);
     } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.product)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 10, ɵngcc0.ɵɵpureFunction1(14, _c12, ctx.product)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("container", ctx.product.images == null ? null : ctx.product.images.PRIMARY)("alt", ctx.product.summary);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(16, _c14, ctx.product)))("innerHTML", ctx.product.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(4, 12, ɵngcc0.ɵɵpureFunction1(16, _c12, ctx.product)))("innerHTML", ctx.product.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
         ɵngcc0.ɵɵadvance(3);
         ɵngcc0.ɵɵproperty("ngIf", ctx.product.averageRating);
         ɵngcc0.ɵɵadvance(1);
@@ -24389,7 +24679,7 @@ ProductGridItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductGrid
         ɵngcc0.ɵɵproperty("ngIf", ctx.product.variantOptions);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", (ctx.product.stock == null ? null : ctx.product.stock.stockLevelStatus) !== "outOfStock");
-    } }, directives: function () { return [ɵngcc5.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, StarRatingComponent,
+    } }, directives: function () { return [ɵngcc6.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, StarRatingComponent,
         VariantStyleIconsComponent,
         AddToCartComponent]; }, pipes: function () { return [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
 __decorate([
@@ -24430,11 +24720,11 @@ ProductListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductList
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 12, ɵngcc0.ɵɵpureFunction1(16, _c14, ctx.product)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 12, ɵngcc0.ɵɵpureFunction1(16, _c12, ctx.product)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("container", ctx.product.images == null ? null : ctx.product.images.PRIMARY)("alt", ctx.product.summary);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 14, ɵngcc0.ɵɵpureFunction1(18, _c14, ctx.product)))("innerHtml", ctx.product.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(7, 14, ɵngcc0.ɵɵpureFunction1(18, _c12, ctx.product)))("innerHtml", ctx.product.nameHtml, ɵngcc0.ɵɵsanitizeHtml);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.product.averageRating);
         ɵngcc0.ɵɵadvance(1);
@@ -24449,7 +24739,7 @@ ProductListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductList
         ɵngcc0.ɵɵtextInterpolate1(" ", ctx.product.summary, " ");
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("ngIf", (ctx.product.stock == null ? null : ctx.product.stock.stockLevelStatus) !== "outOfStock");
-    } }, directives: function () { return [ɵngcc5.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, StarRatingComponent,
+    } }, directives: function () { return [ɵngcc6.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, StarRatingComponent,
         VariantStyleIconsComponent,
         AddToCartComponent]; }, pipes: function () { return [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
 __decorate([
@@ -25001,7 +25291,7 @@ let ProductReviewsComponent = class ProductReviewsComponent {
         });
     }
 };
-ProductReviewsComponent.ɵfac = function ProductReviewsComponent_Factory(t) { return new (t || ProductReviewsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReviewService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
+ProductReviewsComponent.ɵfac = function ProductReviewsComponent_Factory(t) { return new (t || ProductReviewsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReviewService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
 ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReviewsComponent, selectors: [["cx-product-reviews"]], viewQuery: function ProductReviewsComponent_Query(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵviewQuery(_c47, true);
         ɵngcc0.ɵɵviewQuery(_c48, true);
@@ -25014,7 +25304,7 @@ ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductRevie
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.product$));
-    } }, directives: [ɵngcc4.NgIf, StarRatingComponent, ɵngcc4.NgForOf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgClass], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc4.SlicePipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, StarRatingComponent, ɵngcc4.NgForOf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgClass], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc4.SlicePipe, ɵngcc1.CxDatePipe], encapsulation: 2, changeDetection: 0 });
 ProductReviewsComponent.ctorParameters = () => [
     { type: ProductReviewService },
     { type: CurrentProductService },
@@ -25100,7 +25390,7 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "stockNotification.subscriptionDialog.header"), " ");
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1203);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 StockNotificationDialogComponent.ctorParameters = () => [
     { type: ModalService },
     { type: UserInterestsService }
@@ -25202,7 +25492,7 @@ StockNotificationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StockNoti
         ɵngcc0.ɵɵtemplate(6, StockNotificationComponent_ng_template_6_Template, 4, 0, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.outOfStock$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 StockNotificationComponent.ctorParameters = () => [
     { type: AuthService },
     { type: CurrentProductService },
@@ -25299,7 +25589,7 @@ let StoreFinderGridComponent = class StoreFinderGridComponent {
     }
     ngOnDestroy() { }
 };
-StoreFinderGridComponent.ɵfac = function StoreFinderGridComponent_Factory(t) { return new (t || StoreFinderGridComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute)); };
+StoreFinderGridComponent.ɵfac = function StoreFinderGridComponent_Factory(t) { return new (t || StoreFinderGridComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute)); };
 StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderGridComponent, selectors: [["cx-store-finder-grid"]], decls: 5, vars: 6, consts: [[4, "ngIf", "ngIfElse"], ["loading", ""], [1, "container"], [1, "row"], ["class", "col-sm-4 col-md-4 col-lg-3 item", 4, "ngFor", "ngForOf"], [1, "col-sm-4", "col-md-4", "col-lg-3", "item"], [3, "location"], [1, "cx-spinner"]], template: function StoreFinderGridComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderGridComponent_ng_container_0_Template, 4, 1, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -25380,7 +25670,7 @@ let StoreFinderListItemComponent = class StoreFinderListItemComponent extends Ab
         }
     }
 };
-StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
+StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
 StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance", useClickEvent: "useClickEvent" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 11, vars: 8, consts: [[1, "cx-store-list-order"], [1, "cx-store-name"], [3, "click", "keyup", 4, "ngIf"], [3, "href", 4, "ngIf"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [3, "click", "keyup"], [3, "href"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementContainerStart(0);
         ɵngcc0.ɵɵelementStart(1, "div");
@@ -25507,7 +25797,7 @@ StoreFinderPaginationDetailsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵtextInterpolate2(" ", ctx.getResultsPerPage(), " ", ɵngcc0.ɵɵpipeBind2(2, 2, "storeFinder.fromStoresFound", ɵngcc0.ɵɵpureFunction1(5, _c8, ctx.pagination.totalResults)), "\n");
+        ɵngcc0.ɵɵtextInterpolate2(" ", ctx.getResultsPerPage(), " ", ɵngcc0.ɵɵpipeBind2(2, 2, "storeFinder.fromStoresFound", ɵngcc0.ɵɵpureFunction1(5, _c6, ctx.pagination.totalResults)), "\n");
     } }, pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 __decorate([
     Input()
@@ -25618,7 +25908,7 @@ let StoreFinderSearchResultComponent = class StoreFinderSearchResultComponent {
         return searchQuery;
     }
 };
-StoreFinderSearchResultComponent.ɵfac = function StoreFinderSearchResultComponent_Factory(t) { return new (t || StoreFinderSearchResultComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute)); };
+StoreFinderSearchResultComponent.ɵfac = function StoreFinderSearchResultComponent_Factory(t) { return new (t || StoreFinderSearchResultComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute)); };
 StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderSearchResultComponent, selectors: [["cx-store-finder-search-result"]], decls: 5, vars: 6, consts: [[4, "ngIf", "ngIfElse"], ["loading", ""], [4, "ngIf"], [3, "locations", "useMylocation", 4, "ngIf"], ["class", "container", 4, "ngIf"], [1, "cx-pagination"], [3, "pagination", "viewPageEvent"], [3, "locations", "useMylocation"], [1, "container"], [1, "row"], [1, "cx-no-stores"], [1, "cx-spinner"]], template: function StoreFinderSearchResultComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderSearchResultComponent_div_0_Template, 4, 3, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -25702,7 +25992,7 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(20, _c58));
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "storeFinder.viewAllStores"), " ");
-    } }, directives: [ɵngcc7.DefaultValueAccessor, ɵngcc7.RequiredValidator, ɵngcc7.NgControlStatus, ɵngcc7.FormControlDirective, IconComponent, ɵngcc5.RouterLink, ɵngcc4.NgClass], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.DefaultValueAccessor, ɵngcc5.RequiredValidator, ɵngcc5.NgControlStatus, ɵngcc5.FormControlDirective, IconComponent, ɵngcc6.RouterLink, ɵngcc4.NgClass], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderSearchComponent.ctorParameters = () => [
     { type: RoutingService }
 ];
@@ -25748,7 +26038,7 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
     } if (rf & 2) {
         const _r1303 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1303);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc5.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
 ];
@@ -25763,7 +26053,7 @@ StoreFinderComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderComp
         ɵngcc0.ɵɵelement(3, "router-outlet");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementContainerEnd();
-    } }, directives: [StoreFinderHeaderComponent, ɵngcc5.RouterOutlet], encapsulation: 2 });
+    } }, directives: [StoreFinderHeaderComponent, ɵngcc6.RouterOutlet], encapsulation: 2 });
 
 let StoreFinderStoreComponent = class StoreFinderStoreComponent {
     constructor(storeFinderService, route, routingService) {
@@ -25788,7 +26078,7 @@ let StoreFinderStoreComponent = class StoreFinderStoreComponent {
         ]);
     }
 };
-StoreFinderStoreComponent.ɵfac = function StoreFinderStoreComponent_Factory(t) { return new (t || StoreFinderStoreComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
+StoreFinderStoreComponent.ɵfac = function StoreFinderStoreComponent_Factory(t) { return new (t || StoreFinderStoreComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
 StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderStoreComponent, selectors: [["cx-store-finder-store"]], inputs: { location: "location", disableMap: "disableMap" }, decls: 5, vars: 6, consts: [["class", "container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "container"], [1, "row", "cx-store-actions"], [1, "col-md-4", "col-sm-6", "col-lg-2"], [1, "btn", "btn-block", "btn-action", 3, "click"], [3, "type"], [1, "row"], [1, "col-12", "p-0"], [3, "disableMap", "location"], [1, "cx-spinner"]], template: function StoreFinderStoreComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderStoreComponent_div_0_Template, 10, 6, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -25914,7 +26204,7 @@ let CheckoutLoginComponent = class CheckoutLoginComponent {
             : null;
     }
 };
-CheckoutLoginComponent.ɵfac = function CheckoutLoginComponent_Factory(t) { return new (t || CheckoutLoginComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
+CheckoutLoginComponent.ɵfac = function CheckoutLoginComponent_Factory(t) { return new (t || CheckoutLoginComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService)); };
 CheckoutLoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutLoginComponent, selectors: [["cx-checkout-login"]], decls: 20, vars: 22, consts: [[3, "formGroup", "ngSubmit"], [1, "form-group"], [1, "label-content"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "email", "name", "emailConfirmation", "formControlName", "emailConfirmation", 1, "form-control", 3, "placeholder"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "invalid-feedback"]], template: function CheckoutLoginComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("ngSubmit", function CheckoutLoginComponent_Template_form_ngSubmit_0_listener() { return ctx.onSubmit(); });
@@ -25963,7 +26253,7 @@ CheckoutLoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CheckoutLogin
         ɵngcc0.ɵɵproperty("ngIf", ctx.isEmailConfirmInvalid());
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 20, "checkoutLogin.continue"), " ");
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 CheckoutLoginComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: AuthRedirectService },
@@ -26054,7 +26344,7 @@ let LoginFormComponent = class LoginFormComponent {
         this.form.get(field).markAsTouched(); // this action will check field validity on load
     }
 };
-LoginFormComponent.ɵfac = function LoginFormComponent_Factory(t) { return new (t || LoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService)); };
+LoginFormComponent.ɵfac = function LoginFormComponent_Factory(t) { return new (t || LoginFormComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthRedirectService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.WindowRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(CheckoutConfigService)); };
 LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponent, selectors: [["cx-login-form"]], decls: 30, vars: 31, consts: [[3, "formGroup", "submit"], [1, "form-group"], [1, "label-content"], ["type", "email", "formControlName", "userId", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["aria-controls", "reset-password", 1, "btn-link", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary"], [1, "register"], [1, "cx-section-title", "cx-section-title-alt"], [4, "ngIf"], [1, "invalid-feedback"], [1, "btn", "btn-block", "btn-secondary", "btn-register", 3, "routerLink"], [1, "btn", "btn-block", "btn-secondary", "btn-guest", 3, "routerLink"]], template: function LoginFormComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "form", 0);
         ɵngcc0.ɵɵlistener("submit", function LoginFormComponent_Template_form_submit_0_listener() { return ctx.login(); });
@@ -26124,7 +26414,7 @@ LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponen
         ɵngcc0.ɵɵproperty("ngIf", !ctx.loginAsGuest);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.loginAsGuest);
-    } }, directives: [ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.DefaultValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc4.NgIf, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc4.NgIf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginFormComponent.ctorParameters = () => [
     { type: AuthService },
     { type: GlobalMessageService },
@@ -26180,7 +26470,7 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
     } if (rf & 2) {
         const _r1325 = ɵngcc0.ɵɵreference(3);
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1325);
-    } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc5.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
     { type: UserService }
@@ -26384,7 +26674,7 @@ let RegisterComponent = class RegisterComponent {
         this.userService.resetRegisterUserProcessState();
     }
 };
-RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc7.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsConfig)); };
+RegisterComponent.ɵfac = function RegisterComponent_Factory(t) { return new (t || RegisterComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.UserService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AnonymousConsentsConfig)); };
 RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent, selectors: [["cx-register"]], decls: 4, vars: 4, consts: [["class", "cx-page-section container", 4, "ngIf", "ngIfElse"], ["loading", ""], [1, "cx-page-section", "container"], [1, "row", "justify-content-center"], [1, "col-md-6"], [1, "cx-section"], [3, "formGroup"], [1, "form-group"], [1, "label-content"], ["formControlName", "titleCode", 1, "form-control"], ["selected", "", "value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["type", "text", "name", "firstname", "formControlName", "firstName", 1, "form-control", 3, "placeholder"], ["type", "text", "name", "lastname", "formControlName", "lastName", 1, "form-control", 3, "placeholder"], ["type", "email", "name", "email", "formControlName", "email", 1, "form-control", 3, "placeholder"], ["type", "password", "name", "password", "formControlName", "password", 1, "form-control", 3, "placeholder"], ["class", "invalid-feedback", 4, "ngIf"], ["type", "password", "name", "confirmpassword", "formControlName", "passwordconf", 1, "form-control", 3, "placeholder"], [1, "form-check"], [4, "ngIf"], ["type", "checkbox", "name", "termsandconditions", "formControlName", "termsandconditions"], [1, "form-check-label"], ["target", "_blank", 3, "routerLink"], ["type", "submit", 1, "btn", "btn-block", "btn-primary", 3, "click"], [1, "cx-login-link", "btn-link", 3, "routerLink"], [3, "value"], [1, "invalid-feedback"], ["type", "checkbox", "name", "newsletter", "formControlName", "newsletter", 1, "form-check-input", 3, "checked"], [1, "cx-spinner"]], template: function RegisterComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, RegisterComponent_section_0_Template, 75, 71, "section", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -26392,7 +26682,7 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
     } if (rf & 2) {
         const _r1329 = ɵngcc0.ɵɵreference(3);
         ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1329);
-    } }, directives: [ɵngcc4.NgIf, ɵngcc7.ɵangular_packages_forms_forms_y, ɵngcc7.NgControlStatusGroup, ɵngcc7.FormGroupDirective, ɵngcc7.SelectControlValueAccessor, ɵngcc7.NgControlStatus, ɵngcc7.FormControlName, ɵngcc7.NgSelectOption, ɵngcc7.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc7.DefaultValueAccessor, ɵngcc7.CheckboxControlValueAccessor, ɵngcc5.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.SelectControlValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc5.NgSelectOption, ɵngcc5.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc5.DefaultValueAccessor, ɵngcc5.CheckboxControlValueAccessor, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: UserService },
     { type: GlobalMessageService },
@@ -26482,7 +26772,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
     } if (rf & 2) {
         const _r1344 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c14, ctx.cartEntry.product)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c12, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("container", ctx.cartEntry.product.images == null ? null : ctx.cartEntry.product.images.PRIMARY);
         ɵngcc0.ɵɵadvance(4);
@@ -26499,7 +26789,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(19, 12, "common.remove"), " ");
-    } }, directives: [ɵngcc5.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ɵngcc4.NgForOf, AddToCartComponent], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [ɵngcc6.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ɵngcc4.NgForOf, AddToCartComponent], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
 __decorate([
     Input()
 ], WishListItemComponent.prototype, "isLoading", void 0);
@@ -27132,386 +27422,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 exports: [ComponentWrapperDirective]
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsMappingService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.CmsConfig }, { type: Object, decorators: [{
-                type: Inject,
-                args: [PLATFORM_ID]
-            }] }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsGuardsService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: CmsMappingService }, { type: ɵngcc0.Injector }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsI18nService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: CmsMappingService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.TranslationChunkService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreakpointService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.WindowRef }, { type: LayoutConfig }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutService, [{
-        type: Injectable
-    }], function () { return [{ type: ɵngcc1.CmsService }, { type: LayoutConfig }, { type: BreakpointService }, { type: Array, decorators: [{
-                type: Optional
-            }, {
-                type: Inject,
-                args: [PAGE_LAYOUT_HANDLER]
-            }] }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-page-layout',
-                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }]
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: ɵngcc0.Renderer2 }, { type: PageLayoutService }]; }, { section: [{
-            type: Input
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsRoutesService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc5.Router }, { type: CmsMappingService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsPageGuard, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.CmsService }, { type: CmsRoutesService }, { type: CmsI18nService }, { type: CmsGuardsService }, { type: ɵngcc1.SemanticPathService }, { type: ɵngcc1.ProtectedRoutesGuard }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return []; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRefDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[cxOutletRef]'
-            }]
-    }], function () { return [{ type: ɵngcc0.TemplateRef }, { type: OutletService }]; }, { cxOutletRef: [{
-            type: Input
-        }], cxOutletPos: [{
-            type: Input
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OutletRefModule, { declarations: function () { return [OutletRefDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [OutletRefDirective]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRefModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule],
-                declarations: [OutletRefDirective],
-                exports: [OutletRefDirective]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(IntersectionService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: LayoutConfig }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(DeferLoaderService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: Object, decorators: [{
-                type: Inject,
-                args: [PLATFORM_ID]
-            }] }, { type: LayoutConfig }, { type: IntersectionService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[cxOutlet]'
-            }]
-    }], function () { return [{ type: ɵngcc0.ViewContainerRef }, { type: ɵngcc0.TemplateRef }, { type: OutletService }, { type: DeferLoaderService }]; }, { loaded: [{
-            type: Output
-        }], cxOutlet: [{
-            type: Input
-        }], cxOutletContext: [{
-            type: Input
-        }], cxOutletDefer: [{
-            type: Input
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OutletModule, { declarations: function () { return [OutletDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [OutletDirective]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule],
-                declarations: [OutletDirective],
-                providers: [OutletService],
-                exports: [OutletDirective]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageSlotComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-page-slot,[cx-page-slot]',
-                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }]
-    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }]; }, { isPending: [{
-            type: HostBinding,
-            args: ['class.cx-pending']
-        }], hasComponents: [{
-            type: HostBinding,
-            args: ['class.has-components']
-        }], isPageFold: [{
-            type: HostBinding,
-            args: ['class.page-fold']
-        }, {
-            type: Input
-        }], position: [{
-            type: Input
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PageSlotModule, { declarations: function () { return [PageSlotComponent]; }, imports: function () { return [CommonModule,
-        OutletModule,
-        PageComponentModule]; }, exports: function () { return [PageSlotComponent]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageSlotModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule, OutletModule, PageComponentModule],
-                providers: [],
-                declarations: [PageSlotComponent],
-                exports: [PageSlotComponent]
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PageLayoutModule, { declarations: function () { return [PageLayoutComponent]; }, imports: function () { return [CommonModule,
-        OutletModule,
-        PageSlotModule]; }, exports: function () { return [PageLayoutComponent]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule, OutletModule, PageSlotModule],
-                declarations: [PageLayoutComponent],
-                providers: [PageLayoutService],
-                exports: [PageLayoutComponent]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenService, [{
-        type: Injectable
-    }], function () { return [{ type: PWAModuleConfig }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.WindowRef }]; }, null); })();
-
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenBannerComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-add-to-home-screen-banner',
-                template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-            }]
-    }], function () { return [{ type: AddToHomeScreenService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenBtnComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-add-to-home-screen-btn',
-                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
-            }]
-    }], function () { return [{ type: AddToHomeScreenService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PwaModule, { declarations: function () { return [AddToHomeScreenBtnComponent,
-        AddToHomeScreenBannerComponent]; }, imports: function () { return [CommonModule, ɵngcc6.ServiceWorkerModule, I18nModule]; }, exports: function () { return [AddToHomeScreenBtnComponent,
-        AddToHomeScreenBannerComponent]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PwaModule, [{
-        type: NgModule,
-        args: [{
-                imports: [
-                    CommonModule,
-                    ServiceWorkerModule.register('/ngsw-worker.js'),
-                    I18nModule,
-                ],
-                providers: [
-                    provideDefaultConfig(defaultPWAModuleConfig),
-                    { provide: PWAModuleConfig, useExisting: Config },
-                    {
-                        provide: SwRegistrationOptions,
-                        useFactory: pwaConfigurationFactory,
-                        deps: [Config]
-                    },
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: pwaFactory,
-                        deps: [AddToHomeScreenService],
-                        multi: true
-                    },
-                    AddToHomeScreenService,
-                ],
-                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsRouteModule, [{
-        type: NgModule,
-        args: [{
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        multi: true,
-                        deps: [Injector],
-                        useFactory: ɵ0
-                    },
-                ]
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(RoutingModule, { imports: [ɵngcc1.RoutingModule, CmsRouteModule] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(RoutingModule, [{
-        type: NgModule,
-        args: [{
-                imports: [RoutingModule$1.forRoot(), CmsRouteModule]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SeoMetaService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc2.Title }, { type: ɵngcc2.Meta }, { type: ɵngcc1.PageMetaService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdScriptFactory, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: String, decorators: [{
-                type: Inject,
-                args: [PLATFORM_ID]
-            }] }, { type: ɵngcc1.WindowRef }, { type: ɵngcc0.RendererFactory2 }, { type: ɵngcc2.DomSanitizer }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[cxJsonLd]'
-            }]
-    }], function () { return [{ type: JsonLdScriptFactory }, { type: ɵngcc2.DomSanitizer }]; }, { cxJsonLd: [{
-            type: Input
-        }], jsonLD: [{
-            type: HostBinding,
-            args: ['innerHTML']
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StructuredDataFactory, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: JsonLdScriptFactory }, { type: Array, decorators: [{
-                type: Optional
-            }, {
-                type: Inject,
-                args: [SCHEMA_BUILDER]
-            }] }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StructuredDataModule, { declarations: function () { return [JsonLdDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [JsonLdDirective]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StructuredDataModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule],
-                declarations: [JsonLdDirective],
-                exports: [JsonLdDirective],
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: getStructuredDataFactory,
-                        deps: [Injector],
-                        multi: true
-                    },
-                ]
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SeoModule, { imports: [StructuredDataModule] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SeoModule, [{
-        type: NgModule,
-        args: [{
-                imports: [StructuredDataModule],
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: initSeoService,
-                        deps: [Injector],
-                        multi: true
-                    },
-                    htmlLangProvider,
-                ]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreadcrumbSchemaBuilder, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.PageMetaService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdBaseProductBuilder, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdProductOfferBuilder, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdProductReviewBuilder, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.ProductReviewService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CurrentProductService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.ProductService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductSchemaBuilder, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: CurrentProductService }, { type: Array, decorators: [{
-                type: Optional
-            }, {
-                type: Inject,
-                args: [JSONLD_PRODUCT_BUILDER]
-            }] }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdBuilderModule, [{
-        type: NgModule,
-        args: [{
-                providers: [
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: ProductSchemaBuilder,
-                        multi: true
-                    },
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: BreadcrumbSchemaBuilder,
-                        multi: true
-                    },
-                    // lower level json-ld builder classes offering fine-graiend control
-                    // for product related schema's
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdBaseProductBuilder,
-                        multi: true
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductOfferBuilder,
-                        multi: true
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductReviewBuilder,
-                        multi: true
-                    },
-                ]
-            }]
-    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmComponentService, [{
         type: Injectable,
         args: [{
@@ -27529,151 +27439,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.AsmAuthService }, { type: ɵngcc1.UserService }, { type: AsmComponentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.RoutingService }]; }, { disabled: [{
             type: HostBinding,
             args: ['class.hidden']
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmEnablerService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc4.Location }, { type: ɵngcc1.WindowRef }, { type: ɵngcc0.ComponentFactoryResolver }, { type: OutletService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AsmLoaderModule, { imports: function () { return [CommonModule,
-        PageComponentModule]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmLoaderModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule, PageComponentModule],
-                providers: [
-                    {
-                        provide: APP_INITIALIZER,
-                        useFactory: asmFactory,
-                        deps: [AsmEnablerService],
-                        multi: true
-                    },
-                ]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmSessionTimerComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-asm-session-timer',
-                template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
-                encapsulation: ViewEncapsulation.None,
-                styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
-            }]
-    }], function () { return [{ type: ɵngcc1.AsmConfig }, { type: AsmComponentService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc0.ChangeDetectorRef }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FormatTimerPipe, [{
-        type: Pipe,
-        args: [{
-                name: 'formatTimer'
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CSAgentLoginFormComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-csagent-login-form',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
-                encapsulation: ViewEncapsulation.None,
-                styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
-            }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }]; }, { csAgentTokenLoading: [{
-            type: Input
-        }], submitEvent: [{
-            type: Output
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CustomerEmulationComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-customer-emulation',
-                template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
-                encapsulation: ViewEncapsulation.None,
-                styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
-            }]
-    }], function () { return [{ type: AsmComponentService }, { type: ɵngcc1.UserService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CustomerSelectionComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-customer-selection',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
-                encapsulation: ViewEncapsulation.None,
-                // tslint:disable-next-line:no-host-metadata-property
-                host: {
-                    '(document:click)': 'onDocumentClick($event)'
-                },
-                styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
-            }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.AsmService }, { type: ɵngcc1.AsmConfig }]; }, { submitEvent: [{
-            type: Output
-        }], resultList: [{
-            type: ViewChild,
-            args: ['resultList']
-        }], searchTerm: [{
-            type: ViewChild,
-            args: ['searchTerm']
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AsmModule, { declarations: function () { return [AsmMainUiComponent,
-        CSAgentLoginFormComponent,
-        CustomerSelectionComponent,
-        AsmSessionTimerComponent,
-        FormatTimerPipe,
-        CustomerEmulationComponent]; }, imports: function () { return [CommonModule,
-        ReactiveFormsModule,
-        I18nModule, ɵngcc1.AsmModule, AsmLoaderModule]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmModule, [{
-        type: NgModule,
-        args: [{
-                imports: [
-                    CommonModule,
-                    ReactiveFormsModule,
-                    I18nModule,
-                    AsmModule$1.forRoot(),
-                    AsmLoaderModule,
-                ],
-                declarations: [
-                    AsmMainUiComponent,
-                    CSAgentLoginFormComponent,
-                    CustomerSelectionComponent,
-                    AsmSessionTimerComponent,
-                    FormatTimerPipe,
-                    CustomerEmulationComponent,
-                ],
-                entryComponents: [AsmMainUiComponent]
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OrderDetailsService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: ɵngcc1.UserOrderService }, { type: ɵngcc1.RoutingService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PromotionService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: OrderDetailsService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddedToCartDialogComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-            }]
-    }], function () { return [{ type: ModalService }, { type: ɵngcc1.ActiveCartService }, { type: PromotionService }]; }, { dialog: [{
-            type: ViewChild,
-            args: ['dialog', { read: ElementRef }]
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToCartComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-add-to-cart',
-                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }]
-    }], function () { return [{ type: ModalService }, { type: CurrentProductService }, { type: ɵngcc0.ChangeDetectorRef }, { type: ɵngcc1.ActiveCartService }]; }, { showQuantity: [{
-            type: Input
-        }], productCode: [{
-            type: Input
-        }], product: [{
-            type: Input
         }] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BaseFocusService, [{
         type: Injectable,
@@ -27841,6 +27606,178 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 exports: [...directives]
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: SkipLinkConfig }, { type: KeyboardFocusService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-skip-link',
+                template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: SkipLinkService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LaunchDialogService, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: Array, decorators: [{
+                type: Inject,
+                args: [LaunchRenderStrategy]
+            }] }, { type: LaunchConfig }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmEnablerService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc4.Location }, { type: ɵngcc1.WindowRef }, { type: LaunchDialogService }]; }, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AsmLoaderModule, { imports: function () { return [CommonModule,
+        PageComponentModule]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmLoaderModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule, PageComponentModule],
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: asmFactory,
+                        deps: [AsmEnablerService],
+                        multi: true
+                    },
+                ]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmSessionTimerComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-asm-session-timer',
+                template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
+                encapsulation: ViewEncapsulation.None,
+                styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
+            }]
+    }], function () { return [{ type: ɵngcc1.AsmConfig }, { type: AsmComponentService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc0.ChangeDetectorRef }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FormatTimerPipe, [{
+        type: Pipe,
+        args: [{
+                name: 'formatTimer'
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CSAgentLoginFormComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-csagent-login-form',
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
+                encapsulation: ViewEncapsulation.None,
+                styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
+            }]
+    }], function () { return [{ type: ɵngcc5.FormBuilder }]; }, { csAgentTokenLoading: [{
+            type: Input
+        }], submitEvent: [{
+            type: Output
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CustomerEmulationComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-customer-emulation',
+                template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                encapsulation: ViewEncapsulation.None,
+                styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
+            }]
+    }], function () { return [{ type: AsmComponentService }, { type: ɵngcc1.UserService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CustomerSelectionComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-customer-selection',
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+                encapsulation: ViewEncapsulation.None,
+                // tslint:disable-next-line:no-host-metadata-property
+                host: {
+                    '(document:click)': 'onDocumentClick($event)'
+                },
+                styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
+            }]
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.AsmService }, { type: ɵngcc1.AsmConfig }]; }, { submitEvent: [{
+            type: Output
+        }], resultList: [{
+            type: ViewChild,
+            args: ['resultList']
+        }], searchTerm: [{
+            type: ViewChild,
+            args: ['searchTerm']
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(AsmModule, { declarations: function () { return [AsmMainUiComponent,
+        CSAgentLoginFormComponent,
+        CustomerSelectionComponent,
+        AsmSessionTimerComponent,
+        FormatTimerPipe,
+        CustomerEmulationComponent]; }, imports: function () { return [CommonModule,
+        ReactiveFormsModule,
+        I18nModule, ɵngcc1.AsmModule, AsmLoaderModule]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AsmModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    ReactiveFormsModule,
+                    I18nModule,
+                    AsmModule$1.forRoot(),
+                    AsmLoaderModule,
+                ],
+                declarations: [
+                    AsmMainUiComponent,
+                    CSAgentLoginFormComponent,
+                    CustomerSelectionComponent,
+                    AsmSessionTimerComponent,
+                    FormatTimerPipe,
+                    CustomerEmulationComponent,
+                ],
+                entryComponents: [AsmMainUiComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CurrentProductService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.ProductService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OrderDetailsService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.UserOrderService }, { type: ɵngcc1.RoutingService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PromotionService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: OrderDetailsService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddedToCartDialogComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-added-to-cart-dialog',
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+            }]
+    }], function () { return [{ type: ModalService }, { type: ɵngcc1.ActiveCartService }, { type: PromotionService }]; }, { dialog: [{
+            type: ViewChild,
+            args: ['dialog', { read: ElementRef }]
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToCartComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-add-to-cart',
+                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: ModalService }, { type: CurrentProductService }, { type: ɵngcc0.ChangeDetectorRef }, { type: ɵngcc1.ActiveCartService }]; }, { showQuantity: [{
+            type: Input
+        }], productCode: [{
+            type: Input
+        }], product: [{
+            type: Input
+        }] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CardComponent, [{
         type: Component,
         args: [{
@@ -27909,6 +27846,12 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         }], template: [{
             type: Input
         }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreakpointService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.WindowRef }, { type: LayoutConfig }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(MediaService, [{
         type: Injectable,
         args: [{
@@ -28039,7 +27982,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<a\n  *ngFor=\"let item of pages\"\n  [class]=\"item.type\"\n  [class.disabled]=\"isInactive(item)\"\n  [class.current]=\"isCurrent(item)\"\n  [routerLink]=\"pageRoute\"\n  [queryParams]=\"getQueryParams(item)\"\n  [tabIndex]=\"isInactive(item) ? -1 : 0\"\n  (click)=\"pageChange(item)\"\n>\n  {{ item.label }}\n</a>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: PaginationBuilder }, { type: ɵngcc5.ActivatedRoute }]; }, { viewPageEvent: [{
+    }], function () { return [{ type: PaginationBuilder }, { type: ɵngcc6.ActivatedRoute }]; }, { viewPageEvent: [{
             type: Output
         }], pagination: [{
             type: Input
@@ -28291,7 +28234,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-cart-coupon',
                 template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group\">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card\" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.CartVoucherService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CustomerCouponService }, { type: ɵngcc1.FeatureConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.CartVoucherService }, { type: ɵngcc5.FormBuilder }, { type: ɵngcc1.CustomerCouponService }, { type: ɵngcc1.FeatureConfigService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartCouponModule, { declarations: function () { return [CartCouponComponent,
         AppliedCouponsComponent]; }, imports: function () { return [FeaturesConfigModule,
         CommonModule,
@@ -28716,7 +28659,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc5.Router }, { type: ɵngcc1.RoutingConfigService }, { type: CheckoutConfigService }, { type: ExpressCheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc6.Router }, { type: ɵngcc1.RoutingConfigService }, { type: CheckoutConfigService }, { type: ExpressCheckoutService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutOrchestratorComponent, [{
         type: Component,
         args: [{
@@ -28866,7 +28809,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc5.Router }]; }, null); })();
+    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc6.Router }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(DeliveryModeComponent, [{
         type: Component,
         args: [{
@@ -28874,7 +28817,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<div [formGroup]=\"mode\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n        {{ 'checkoutShipping.shippingMethod' | cxTranslate }}\n      </h3>\n\n      <ng-container\n        *ngIf=\"(supportedDeliveryModes$ | async)?.length; else loading\"\n      >\n        <div\n          class=\"form-check\"\n          *ngFor=\"let mode of supportedDeliveryModes$ | async\"\n        >\n          <input\n            class=\"form-check-input\"\n            role=\"radio\"\n            type=\"radio\"\n            id=\"deliveryMode-{{ mode.code }}\"\n            aria-checked=\"true\"\n            (change)=\"changeMode(mode.code)\"\n            [value]=\"mode.code\"\n            formControlName=\"deliveryModeId\"\n          />\n          <label\n            class=\"cx-delivery-label form-check-label form-radio-label\"\n            for=\"deliveryMode-{{ mode.code }}\"\n          >\n            <div class=\"cx-delivery-mode\">{{ mode.name }}</div>\n            <div class=\"cx-delivery-price\">\n              {{ mode.deliveryCost.formattedValue }}\n            </div>\n            <div class=\"cx-delivery-details\">{{ mode.description }}</div>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n\n  <div class=\"row cx-checkout-btns\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        class=\"btn btn-block btn-primary\"\n        [disabled]=\"deliveryModeInvalid\"\n        (click)=\"next()\"\n      >\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }]; }, null); })();
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc6.ActivatedRoute }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(DeliveryModeModule, { declarations: function () { return [DeliveryModeComponent]; }, imports: function () { return [CommonModule, ReactiveFormsModule, I18nModule,
         SpinnerModule]; }, exports: function () { return [DeliveryModeComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(DeliveryModeModule, [{
@@ -28905,7 +28848,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc5.Router }]; }, null); })();
+    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc6.Router }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BillingAddressFormComponent, [{
         type: Component,
         args: [{
@@ -28958,7 +28901,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<!-- FORM -->\n<div *ngIf=\"!(loading$ | async).loading; else spinner\" [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n          </label>\n          <div class=\"cx-payment-form-exp-date row\">\n            <div class=\"col-sm-6 col-md-5\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"months\"\n                bindLabel=\"name\"\n                bindValue=\"expiryMonth\"\n                placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                (change)=\"monthSelected($event)\"\n              >\n              </ng-select>\n            </div>\n            <div class=\"col-sm-6 col-md-7\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"years\"\n                bindLabel=\"name\"\n                bindValue=\"expiryYear\"\n                placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                (change)=\"yearSelected($event)\"\n              >\n              </ng-select>\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            sameAsShippingAddress && shippingAddress$\n              | async as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"next()\">\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ModalService }]; }, { goBack: [{
+    }], function () { return [{ type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc5.FormBuilder }, { type: ModalService }]; }, { goBack: [{
             type: Output
         }], closeForm: [{
             type: Output
@@ -29002,7 +28945,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<ng-container *ngIf=\"existingPaymentMethods$ | async as existingPaymentMethods\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        (existingPaymentMethods$ | async).length &&\n          !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"selectPaymentMethod(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"goPrevious()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"goNext()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"goPrevious()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserPaymentService }, { type: ɵngcc1.CheckoutService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.CheckoutPaymentService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.RoutingService }, { type: CheckoutConfigService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PaymentMethodModule, { declarations: function () { return [PaymentMethodComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         PaymentFormModule,
@@ -29073,7 +29016,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc5.Router }]; }, null); })();
+    }], function () { return [{ type: CheckoutDetailsService }, { type: CheckoutConfigService }, { type: ɵngcc1.RoutingConfigService }, { type: ɵngcc6.Router }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ReviewSubmitComponent, [{
         type: Component,
         args: [{
@@ -29131,7 +29074,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"countries$ | async as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"true\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"titles$ | async as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"regions$ | async as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-select\n                  class=\"region-select\"\n                  formControlName=\"isocode\"\n                  [searchable]=\"true\"\n                  [clearable]=\"false\"\n                  [items]=\"regions\"\n                  bindLabel=\"{{ regions[0].name ? 'name' : 'isocode' }}\"\n                  bindValue=\"{{ regions[0].name ? 'isocode' : 'region' }}\"\n                  placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                  (change)=\"regionSelected($event)\"\n                >\n                </ng-select>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"verifyAddress()\">\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.GlobalMessageService }, { type: ModalService }]; }, { showCancelBtn: [{
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.CheckoutDeliveryService }, { type: ɵngcc1.UserService }, { type: ɵngcc1.UserAddressService }, { type: ɵngcc1.GlobalMessageService }, { type: ModalService }]; }, { showCancelBtn: [{
             type: Input
         }], submitAddress: [{
             type: Output
@@ -29187,7 +29130,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'checkoutAddress.shippingAddress' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!forceLoader && !(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newAddressFormManuallyOpened;\n        else newAddressForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'checkoutAddress.selectYourShippingAddress' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-sm-12 col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewAddressForm()\"\n          >\n            {{ 'checkoutAddress.addNewAddress' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-shipping-address-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div\n            class=\"cx-shipping-address-card-inner\"\n            (click)=\"selectAddress(card.address)\"\n          >\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.card\"\n              (sendCard)=\"selectAddress(card.address)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-action\"\n            (click)=\"goPrevious()\"\n          >\n            {{ 'checkout.backToCart' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"cx-btn btn btn-block btn-primary\"\n            [disabled]=\"!(selectedAddress$ | async)?.id\"\n            (click)=\"goNext()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newAddressForm>\n      <ng-container *ngIf=\"cards.length; else initialAddressForm\">\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          (backToAddress)=\"hideNewAddressForm(false)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-container>\n      <ng-template #initialAddressForm>\n        <cx-address-form\n          [showTitleCode]=\"true\"\n          [setAsDefaultField]=\"!isGuestCheckout\"\n          [addressData]=\"selectedAddress$ | async\"\n          cancelBtnLabel=\"{{ 'checkout.backToCart' | cxTranslate }}\"\n          (backToAddress)=\"hideNewAddressForm(true)\"\n          (submitAddress)=\"addAddress($event)\"\n        ></cx-address-form>\n      </ng-template>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: CheckoutConfigService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.CheckoutDeliveryService }, { type: CheckoutConfigService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ShippingAddressModule, { declarations: function () { return [ShippingAddressComponent]; }, imports: function () { return [CommonModule,
         RouterModule,
         AddressFormModule,
@@ -29265,20 +29208,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 providedIn: 'root'
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkService, [{
-        type: Injectable,
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: SkipLinkConfig }, { type: KeyboardFocusService }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkComponent, [{
-        type: Component,
-        args: [{
-                selector: 'cx-skip-link',
-                template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
-                changeDetection: ChangeDetectionStrategy.OnPush
-            }]
-    }], function () { return [{ type: SkipLinkService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkDirective, [{
         type: Directive,
         args: [{
@@ -29287,6 +29216,12 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
     }], function () { return [{ type: ɵngcc0.ElementRef }, { type: SkipLinkService }]; }, { cxSkipLink: [{
             type: Input
         }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SkipLinkModule, { declarations: function () { return [SkipLinkComponent,
         SkipLinkDirective]; }, imports: function () { return [CommonModule,
         I18nModule, ɵngcc1.ConfigModule, KeyboardFocusModule]; }, exports: function () { return [SkipLinkDirective]; } }); })();
@@ -29319,7 +29254,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc5.Router }]; }, null); })();
+    }], function () { return [{ type: ɵngcc6.Router }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(HamburgerMenuComponent, [{
         type: Component,
         args: [{
@@ -29347,13 +29282,294 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 entryComponents: [HamburgerMenuComponent]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LayoutModule, { imports: [OutletRefModule], exports: [OutletRefModule] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(InlineRenderStrategy, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: ɵngcc0.ComponentFactoryResolver }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRefDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[cxOutletRef]'
+            }]
+    }], function () { return [{ type: ɵngcc0.TemplateRef }, { type: OutletService }]; }, { cxOutletRef: [{
+            type: Input
+        }], cxOutletPos: [{
+            type: Input
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OutletRefModule, { declarations: function () { return [OutletRefDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [OutletRefDirective]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRefModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule],
+                declarations: [OutletRefDirective],
+                exports: [OutletRefDirective]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(IntersectionService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: LayoutConfig }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(DeferLoaderService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: Object, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }, { type: LayoutConfig }, { type: IntersectionService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRendererService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[cxOutlet]'
+            }]
+    }], function () { return [{ type: ɵngcc0.ViewContainerRef }, { type: ɵngcc0.TemplateRef }, { type: OutletService }, { type: DeferLoaderService }, { type: OutletRendererService }]; }, { loaded: [{
+            type: Output
+        }], cxOutlet: [{
+            type: Input
+        }], cxOutletContext: [{
+            type: Input
+        }], cxOutletDefer: [{
+            type: Input
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OutletModule, { declarations: function () { return [OutletDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [OutletDirective]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule],
+                declarations: [OutletDirective],
+                providers: [OutletService],
+                exports: [OutletDirective]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(OutletRenderStrategy, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: OutletService }, { type: ɵngcc0.ComponentFactoryResolver }, { type: OutletRendererService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(RoutingRenderStrategy, [{
+        type: Injectable,
+        args: [{ providedIn: 'root' }]
+    }], function () { return [{ type: ɵngcc1.RoutingService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LaunchDialogModule, [{
+        type: NgModule,
+        args: [{
+                providers: [
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: OutletRenderStrategy,
+                        multi: true
+                    },
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: InlineRenderStrategy,
+                        multi: true
+                    },
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: RoutingRenderStrategy,
+                        multi: true
+                    },
+                ]
+            }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LayoutModule, { imports: [OutletRefModule,
+        LaunchDialogModule], exports: [OutletRefModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LayoutModule, [{
         type: NgModule,
         args: [{
-                imports: [OutletRefModule],
+                imports: [OutletRefModule, LaunchDialogModule.forRoot()],
                 providers: [{ provide: LayoutConfig, useExisting: Config }],
                 exports: [OutletRefModule]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageSlotComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-page-slot,[cx-page-slot]',
+                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }]; }, { isPending: [{
+            type: HostBinding,
+            args: ['class.cx-pending']
+        }], hasComponents: [{
+            type: HostBinding,
+            args: ['class.has-components']
+        }], isPageFold: [{
+            type: HostBinding,
+            args: ['class.page-fold']
+        }, {
+            type: Input
+        }], position: [{
+            type: Input
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PageSlotModule, { declarations: function () { return [PageSlotComponent]; }, imports: function () { return [CommonModule,
+        OutletModule,
+        PageComponentModule]; }, exports: function () { return [PageSlotComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageSlotModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule, OutletModule, PageComponentModule],
+                providers: [],
+                declarations: [PageSlotComponent],
+                exports: [PageSlotComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutService, [{
+        type: Injectable
+    }], function () { return [{ type: ɵngcc1.CmsService }, { type: LayoutConfig }, { type: BreakpointService }, { type: Array, decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [PAGE_LAYOUT_HANDLER]
+            }] }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-page-layout',
+                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: ɵngcc0.Renderer2 }, { type: PageLayoutService }]; }, { section: [{
+            type: Input
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PageLayoutModule, { declarations: function () { return [PageLayoutComponent]; }, imports: function () { return [CommonModule,
+        OutletModule,
+        PageSlotModule]; }, exports: function () { return [PageLayoutComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule, OutletModule, PageSlotModule],
+                declarations: [PageLayoutComponent],
+                providers: [PageLayoutService],
+                exports: [PageLayoutComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenService, [{
+        type: Injectable
+    }], function () { return [{ type: PWAModuleConfig }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.WindowRef }]; }, null); })();
+
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenBannerComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-add-to-home-screen-banner',
+                template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+            }]
+    }], function () { return [{ type: AddToHomeScreenService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenBtnComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-add-to-home-screen-btn',
+                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
+            }]
+    }], function () { return [{ type: AddToHomeScreenService }]; }, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PwaModule, { declarations: function () { return [AddToHomeScreenBtnComponent,
+        AddToHomeScreenBannerComponent]; }, imports: function () { return [CommonModule, ɵngcc8.ServiceWorkerModule, I18nModule]; }, exports: function () { return [AddToHomeScreenBtnComponent,
+        AddToHomeScreenBannerComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PwaModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    ServiceWorkerModule.register('/ngsw-worker.js'),
+                    I18nModule,
+                ],
+                providers: [
+                    provideDefaultConfig(defaultPWAModuleConfig),
+                    { provide: PWAModuleConfig, useExisting: Config },
+                    {
+                        provide: SwRegistrationOptions,
+                        useFactory: pwaConfigurationFactory,
+                        deps: [Config]
+                    },
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: pwaFactory,
+                        deps: [AddToHomeScreenService],
+                        multi: true
+                    },
+                    AddToHomeScreenService,
+                ],
+                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SeoMetaService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc2.Title }, { type: ɵngcc2.Meta }, { type: ɵngcc1.PageMetaService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdScriptFactory, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: String, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }, { type: ɵngcc1.WindowRef }, { type: ɵngcc0.RendererFactory2 }, { type: ɵngcc2.DomSanitizer }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[cxJsonLd]'
+            }]
+    }], function () { return [{ type: JsonLdScriptFactory }, { type: ɵngcc2.DomSanitizer }]; }, { cxJsonLd: [{
+            type: Input
+        }], jsonLD: [{
+            type: HostBinding,
+            args: ['innerHTML']
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StructuredDataFactory, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: JsonLdScriptFactory }, { type: Array, decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [SCHEMA_BUILDER]
+            }] }]; }, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StructuredDataModule, { declarations: function () { return [JsonLdDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [JsonLdDirective]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StructuredDataModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule],
+                declarations: [JsonLdDirective],
+                exports: [JsonLdDirective],
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: getStructuredDataFactory,
+                        deps: [Injector],
+                        multi: true
+                    },
+                ]
+            }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(SeoModule, { imports: [StructuredDataModule] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SeoModule, [{
+        type: NgModule,
+        args: [{
+                imports: [StructuredDataModule],
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        useFactory: initSeoService,
+                        deps: [Injector],
+                        multi: true
+                    },
+                    htmlLangProvider,
+                ]
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ConsentManagementFormComponent, [{
@@ -29491,6 +29707,128 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 ],
                 declarations: [StorefrontComponent],
                 exports: [StorefrontComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsMappingService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.CmsConfig }, { type: Object, decorators: [{
+                type: Inject,
+                args: [PLATFORM_ID]
+            }] }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsGuardsService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: CmsMappingService }, { type: ɵngcc0.Injector }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsI18nService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: CmsMappingService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.TranslationChunkService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsRoutesService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc6.Router }, { type: CmsMappingService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsPageGuard, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.CmsService }, { type: CmsRoutesService }, { type: CmsI18nService }, { type: CmsGuardsService }, { type: ɵngcc1.SemanticPathService }, { type: ɵngcc1.ProtectedRoutesGuard }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsRouteModule, [{
+        type: NgModule,
+        args: [{
+                providers: [
+                    {
+                        provide: APP_INITIALIZER,
+                        multi: true,
+                        deps: [Injector],
+                        useFactory: ɵ0
+                    },
+                ]
+            }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(RoutingModule, { imports: [ɵngcc1.RoutingModule, CmsRouteModule] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(RoutingModule, [{
+        type: NgModule,
+        args: [{
+                imports: [RoutingModule$1.forRoot(), CmsRouteModule]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreadcrumbSchemaBuilder, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.PageMetaService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdBaseProductBuilder, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdProductOfferBuilder, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdProductReviewBuilder, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.ProductReviewService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductSchemaBuilder, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: CurrentProductService }, { type: Array, decorators: [{
+                type: Optional
+            }, {
+                type: Inject,
+                args: [JSONLD_PRODUCT_BUILDER]
+            }] }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(JsonLdBuilderModule, [{
+        type: NgModule,
+        args: [{
+                providers: [
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: ProductSchemaBuilder,
+                        multi: true
+                    },
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: BreadcrumbSchemaBuilder,
+                        multi: true
+                    },
+                    // lower level json-ld builder classes offering fine-graiend control
+                    // for product related schema's
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdBaseProductBuilder,
+                        multi: true
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductOfferBuilder,
+                        multi: true
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductReviewBuilder,
+                        multi: true
+                    },
+                ]
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BannerCarouselComponent, [{
@@ -29755,7 +30093,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-forgot-password',
                 template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.UserService }, { type: ɵngcc1.RoutingService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.UserService }, { type: ɵngcc1.RoutingService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ForgotPasswordModule, { declarations: function () { return [ForgotPasswordComponent]; }, imports: function () { return [CommonModule,
         ReactiveFormsModule,
         RouterModule,
@@ -29871,7 +30209,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 providedIn: 'root'
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: OrderCancellationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderConfirmationModule, { declarations: function () { return [CancelOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, ReactiveFormsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderConfirmationModule, { declarations: function () { return [CancelOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, ReactiveFormsModule,
         AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [CancelOrderConfirmationComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CancelOrderConfirmationModule, [{
@@ -29920,7 +30258,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderModule, { declarations: function () { return [CancelOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CancelOrderModule, { declarations: function () { return [CancelOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [CancelOrderComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CancelOrderModule, [{
         type: NgModule,
@@ -29987,7 +30325,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderConfirmationModule, { declarations: function () { return [ReturnOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderConfirmationModule, { declarations: function () { return [ReturnOrderConfirmationComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, AmendOrderItemsModule,
         I18nModule,
         ReactiveFormsModule,
         AmendOrderActionsModule]; }, exports: function () { return [ReturnOrderConfirmationComponent]; } }); })();
@@ -30038,7 +30376,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: OrderAmendService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderModule, { declarations: function () { return [ReturnOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, AmendOrderItemsModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnOrderModule, { declarations: function () { return [ReturnOrderComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, AmendOrderItemsModule,
         AmendOrderActionsModule]; }, exports: function () { return [ReturnOrderComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ReturnOrderModule, [{
         type: NgModule,
@@ -30162,7 +30500,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         I18nModule,
         FeaturesConfigModule,
         PromotionsModule,
-        UrlModule, ɵngcc5.RouterModule, SpinnerModule]; }, exports: function () { return [OrderDetailActionsComponent,
+        UrlModule, ɵngcc6.RouterModule, SpinnerModule]; }, exports: function () { return [OrderDetailActionsComponent,
         OrderDetailHeadlineComponent,
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
@@ -30235,7 +30573,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserOrderService }, { type: ɵngcc1.TranslationService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OrderHistoryModule, { declarations: function () { return [OrderHistoryComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, RouterModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OrderHistoryModule, { declarations: function () { return [OrderHistoryComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, RouterModule,
         FormsModule,
         NgSelectModule,
         ListNavigationModule,
@@ -30308,7 +30646,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
     }], function () { return [{ type: ReturnRequestService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ReturnRequestDetailModule, { declarations: function () { return [ReturnRequestOverviewComponent,
         ReturnRequestItemsComponent,
-        ReturnRequestTotalsComponent]; }, imports: function () { return [CommonModule, ɵngcc5.RouterModule, RouterModule,
+        ReturnRequestTotalsComponent]; }, imports: function () { return [CommonModule, ɵngcc6.RouterModule, RouterModule,
         UrlModule,
         I18nModule,
         MediaModule,
@@ -30447,7 +30785,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-reset-password-form',
                 template: "<form\n  (submit)=\"resetPassword()\"\n  [formGroup]=\"form\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n      >\n        <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n      >\n        <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.UserService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ResetPasswordModule, { declarations: function () { return [ResetPasswordFormComponent]; }, imports: function () { return [CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -30484,7 +30822,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-update-email-form',
                 template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{ 'updateEmailForm.bothEmailMustMatch' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"new-password\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }]; }, { saveEmail: [{
+    }], function () { return [{ type: ɵngcc5.FormBuilder }]; }, { saveEmail: [{
             type: Output
         }], cancelEmail: [{
             type: Output
@@ -30534,7 +30872,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-update-password-form',
                 template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component\"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }]; }, { submited: [{
+    }], function () { return [{ type: ɵngcc5.FormBuilder }]; }, { submited: [{
             type: Output
         }], cancelled: [{
             type: Output
@@ -30584,7 +30922,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-update-profile-form',
                 template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.title' | cxTranslate\n        }}</span>\n        <select formControlName=\"titleCode\" class=\"form-control\">\n          <option value=\"\">{{ 'updateProfileForm.none' | cxTranslate }}</option>\n          <option *ngFor=\"let title of titles\" [value]=\"title.code\">{{\n            title.name\n          }}</option>\n        </select>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.firstName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"firstName\"\n          placeholder=\"{{\n            'updateProfileForm.firstName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"firstName\"\n          [class.is-invalid]=\"isNotValid('firstName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('firstName')\">\n          <span>{{\n            'updateProfileForm.firstNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.lastName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"lastName\"\n          placeholder=\"{{\n            'updateProfileForm.lastName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"lastName\"\n          [class.is-invalid]=\"isNotValid('lastName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('lastName')\">\n          <span>{{\n            'updateProfileForm.lastNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }]; }, { submited: [{
+    }], function () { return [{ type: ɵngcc5.FormBuilder }]; }, { submited: [{
             type: Output
         }], cancelled: [{
             type: Output
@@ -30685,7 +31023,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         RouterModule,
         UrlModule,
         IconModule,
-        ListNavigationModule, ɵngcc5.RouterModule]; }, exports: function () { return [MyCouponsComponent,
+        ListNavigationModule, ɵngcc6.RouterModule]; }, exports: function () { return [MyCouponsComponent,
         CouponClaimComponent]; } }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(MyCouponsModule, [{
         type: NgModule,
@@ -30858,7 +31196,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\">\n  <nav\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n    (keydown.space)=\"toggleOpen($event)\"\n    (keydown.esc)=\"back()\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5\n        [attr.aria-label]=\"node.title\"\n        [attr.tabindex]=\"flyout && node.url ? 0 : -1\"\n      >\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container *ngTemplateOutlet=\"nav; context: { node: child }\">\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc5.Router }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }]; }, { allowAlignToRight: [{
+    }], function () { return [{ type: ɵngcc6.Router }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }]; }, { allowAlignToRight: [{
             type: Input
         }], flyout: [{
             type: Input
@@ -31067,7 +31405,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-guest-register-form',
                 template: "<div class=\"register-guest\">\n  <div class=\"col-md-6 col-lg-4\">\n    <h3>{{ 'checkoutOrderConfirmation.createAccount' | cxTranslate }}</h3>\n    <p>\n      {{\n        'checkoutOrderConfirmation.createAccountForNext'\n          | cxTranslate: { email: email }\n      }}\n    </p>\n\n    <form [formGroup]=\"guestRegisterForm\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.password.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            [class.is-invalid]=\"\n              guestRegisterForm.get('password').invalid &&\n              guestRegisterForm.get('password').dirty\n            \"\n            type=\"password\"\n            name=\"password\"\n            placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n            formControlName=\"password\"\n          />\n          <div\n            class=\"invalid-feedback\"\n            *ngIf=\"\n              guestRegisterForm.get('password').invalid &&\n              guestRegisterForm.get('password').dirty\n            \"\n          >\n            <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n          </div>\n        </label>\n      </div>\n\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.confirmPassword.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            [class.is-invalid]=\"\n              guestRegisterForm.get('password').value !==\n              guestRegisterForm.get('passwordconf').value\n            \"\n            type=\"password\"\n            name=\"confirmpassword\"\n            placeholder=\"{{\n              'register.confirmPassword.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"passwordconf\"\n          />\n          <div\n            class=\"invalid-feedback\"\n            *ngIf=\"\n              guestRegisterForm.get('password').value !==\n                guestRegisterForm.get('passwordconf').value &&\n              guestRegisterForm.get('passwordconf').value\n            \"\n          >\n            <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n          </div>\n        </label>\n      </div>\n\n      <button\n        type=\"submit\"\n        (click)=\"submit()\"\n        [disabled]=\"guestRegisterForm.invalid\"\n        class=\"btn btn-block btn-primary\"\n      >\n        {{ 'common.submit' | cxTranslate }}\n      </button>\n    </form>\n  </div>\n</div>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.UserService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc7.FormBuilder }]; }, { guid: [{
+    }], function () { return [{ type: ɵngcc1.UserService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.AuthService }, { type: ɵngcc5.FormBuilder }]; }, { guid: [{
             type: Input
         }], email: [{
             type: Input
@@ -31077,7 +31415,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: ɵngcc5.Router }, { type: ɵngcc1.SemanticPathService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.CheckoutService }, { type: ɵngcc6.Router }, { type: ɵngcc1.SemanticPathService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(OrderConfirmationModule, { declarations: function () { return [OrderConfirmationItemsComponent,
         OrderConfirmationOverviewComponent,
         OrderConfirmationThankYouMessageComponent,
@@ -31268,7 +31606,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductListComponentService, [{
         type: Injectable,
         args: [{ providedIn: 'root' }]
-    }], function () { return [{ type: ɵngcc1.ProductSearchService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.CurrencyService }, { type: ɵngcc1.LanguageService }, { type: ɵngcc5.Router }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ProductSearchService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.CurrencyService }, { type: ɵngcc1.LanguageService }, { type: ɵngcc6.Router }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductViewComponent, [{
         type: Component,
         args: [{
@@ -31311,7 +31649,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n              tabindex=\"0\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n                tabindex=\"0\"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ModalService }, { type: ɵngcc5.ActivatedRoute }, { type: ProductListComponentService }]; }, null); })();
+    }], function () { return [{ type: ModalService }, { type: ɵngcc6.ActivatedRoute }, { type: ProductListComponentService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductGridItemComponent, [{
         type: Component,
         args: [{
@@ -31640,7 +31978,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button\n        #writeReviewButton\n        class=\"btn btn-primary\"\n        (click)=\"initiateWriteReview()\"\n      >\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input\n            #titleInput\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"title\"\n            [class.is-invalid]=\"\n              reviewForm.controls['title'].invalid &&\n              (reviewForm.controls['title'].touched ||\n                reviewForm.controls['title'].dirty)\n            \"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n            [class.is-invalid]=\"\n              reviewForm.controls['comment'].invalid &&\n              (reviewForm.controls['comment'].touched ||\n                reviewForm.controls['comment'].dirty)\n            \"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"button\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.ProductReviewService }, { type: CurrentProductService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc0.ChangeDetectorRef }]; }, { titleInput: [{
+    }], function () { return [{ type: ɵngcc1.ProductReviewService }, { type: CurrentProductService }, { type: ɵngcc5.FormBuilder }, { type: ɵngcc0.ChangeDetectorRef }]; }, { titleInput: [{
             type: ViewChild,
             args: ['titleInput', { static: false }]
         }], writeReviewButton: [{
@@ -31745,7 +32083,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-store-finder-grid',
                 template: "<ng-container\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div\n        class=\"col-sm-4 col-md-4 col-lg-3 item\"\n        *ngFor=\"let location of locations?.stores\"\n      >\n        <cx-store-finder-list-item\n          [location]=\"location\"\n        ></cx-store-finder-list-item>\n      </div>\n    </div>\n  </div>\n</ng-container>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc5.ActivatedRoute }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc6.ActivatedRoute }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderHeaderComponent, [{
         type: Component,
         args: [{
@@ -31764,7 +32102,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-store-finder-list-item',
                 template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [href]=\"prepareRouteUrl(location)\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreDataService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { locationIndex: [{
+    }], function () { return [{ type: ɵngcc1.StoreDataService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { locationIndex: [{
             type: Input
         }], storeItemClick: [{
             type: Output
@@ -31821,7 +32159,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-store-finder-search-result',
                 template: "<div\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div *ngIf=\"locations?.stores.length\">\n    <div class=\"cx-pagination\">\n      <cx-pagination\n        [pagination]=\"locations.pagination\"\n        (viewPageEvent)=\"viewPage($event)\"\n      ></cx-pagination>\n    </div>\n  </div>\n  <cx-store-finder-list\n    *ngIf=\"locations?.stores.length\"\n    [locations]=\"locations\"\n    [useMylocation]=\"useMyLocation\"\n  ></cx-store-finder-list>\n  <div class=\"container\" *ngIf=\"!locations?.stores.length\">\n    <div class=\"row\">\n      <span class=\"cx-no-stores\">{{\n        'storeFinder.noStoresMessage' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc5.ActivatedRoute }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc6.ActivatedRoute }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderSearchComponent, [{
         type: Component,
         args: [{
@@ -31860,7 +32198,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-store-finder-store',
                 template: "<div\n  class=\"container\"\n  *ngIf=\"\n    location || (!(isLoading$ | async) && (location$ | async)) as location;\n    else loading\n  \"\n>\n  <div class=\"row cx-store-actions\">\n    <div class=\"col-md-4 col-sm-6 col-lg-2\">\n      <button class=\"btn btn-block btn-action\" (click)=\"goBack()\">\n        <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n        {{ 'storeFinder.backToList' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"col-12 p-0\">\n      <cx-store-finder-store-description\n        [disableMap]=\"disableMap\"\n        [location]=\"location\"\n      ></cx-store-finder-store-description>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc5.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { location: [{
+    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { location: [{
             type: Input
         }], disableMap: [{
             type: Input
@@ -31999,7 +32337,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-checkout-login',
                 template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isNotValid('email')\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n        <span>{{ 'checkoutLogin.emailIsRequired' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isEmailConfirmInvalid()\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isEmailConfirmInvalid()\">\n        <span>{{ 'checkoutLogin.emailsMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
             }]
-    }], function () { return [{ type: ɵngcc7.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc5.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.ActiveCartService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CheckoutLoginModule, { declarations: function () { return [CheckoutLoginComponent]; }, imports: function () { return [CommonModule,
         I18nModule,
         FormsModule,
@@ -32038,7 +32376,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-login-form',
                 template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.WindowRef }, { type: ɵngcc5.ActivatedRoute }, { type: CheckoutConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc5.FormBuilder }, { type: ɵngcc1.AuthRedirectService }, { type: ɵngcc1.WindowRef }, { type: ɵngcc6.ActivatedRoute }, { type: CheckoutConfigService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LoginFormModule, { declarations: function () { return [LoginFormComponent]; }, imports: function () { return [CommonModule,
         FormsModule,
         ReactiveFormsModule,
@@ -32105,7 +32443,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 providedIn: 'root'
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: ɵngcc1.CmsService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.SemanticPathService }, { type: ɵngcc1.ProtectedRoutesService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LogoutModule, { imports: [PageLayoutModule, ɵngcc5.RouterModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(LogoutModule, { imports: [PageLayoutModule, ɵngcc6.RouterModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LogoutModule, [{
         type: NgModule,
         args: [{
@@ -32128,7 +32466,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 selector: 'cx-register',
                 template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                  [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                />\n                <span class=\"form-check-label\">\n                  {{ anonymousConsent.template }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc7.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.AnonymousConsentsService }, { type: ɵngcc1.AnonymousConsentsConfig }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.UserService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc5.FormBuilder }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.AnonymousConsentsService }, { type: ɵngcc1.AnonymousConsentsConfig }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(RegisterComponentModule, { declarations: function () { return [RegisterComponent]; }, imports: function () { return [CommonModule,
         LoginModule,
         ReactiveFormsModule,
@@ -32350,7 +32688,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 ]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsPageModule, { imports: [ɵngcc5.RouterModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductDetailsPageModule, { imports: [ɵngcc6.RouterModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductDetailsPageModule, [{
         type: NgModule,
         args: [{
@@ -32377,7 +32715,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 ]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductListingPageModule, { imports: [ɵngcc5.RouterModule] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductListingPageModule, { imports: [ɵngcc6.RouterModule] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductListingPageModule, [{
         type: NgModule,
         args: [{
@@ -32446,7 +32784,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 providers: [...provideConfigFromMetaTags()]
             }]
     }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StorefrontModule, { imports: [ɵngcc5.RouterModule, ɵngcc10.StoreRootModule, ɵngcc11.EffectsRootModule, AsmModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(StorefrontModule, { imports: [ɵngcc6.RouterModule, ɵngcc10.StoreRootModule, ɵngcc11.EffectsRootModule, AsmModule,
         StorefrontFoundationModule,
         MainModule, ɵngcc1.SiteContextModule, ɵngcc1.SmartEditModule, ɵngcc1.PersonalizationModule, ɵngcc1.OccModule, ProductDetailsPageModule,
         ProductListingPageModule, ɵngcc1.ExternalRoutesModule], exports: [MainModule,
@@ -32522,6 +32860,6 @@ const PLPAccessibilityLayoutConfig = {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsRoutesService as ɵbj, CmsMappingService as ɵbk, CmsI18nService as ɵbl, CmsGuardsService as ɵbm, ReturnRequestService as ɵbn, AddToHomeScreenService as ɵbo, MyCouponsComponentService as ɵbp, addCmsRoute as ɵbq, defaultStorefrontRoutesConfig as ɵbr, defaultRoutingConfig as ɵbs, htmlLangProvider as ɵbt, setHtmlLangAttribute as ɵbu, KeyboardFocusService as ɵbv, AnonymousConsentsModule as ɵbw, AnonymousConsentDialogComponent as ɵbx, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsRoutesService as ɵbj, CmsMappingService as ɵbk, CmsI18nService as ɵbl, CmsGuardsService as ɵbm, ReturnRequestService as ɵbn, OutletRendererService as ɵbo, AddToHomeScreenService as ɵbp, MyCouponsComponentService as ɵbq, addCmsRoute as ɵbr, defaultStorefrontRoutesConfig as ɵbs, defaultRoutingConfig as ɵbt, htmlLangProvider as ɵbu, setHtmlLangAttribute as ɵbv, KeyboardFocusService as ɵbw, AnonymousConsentsModule as ɵbx, AnonymousConsentDialogComponent as ɵby, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 
 //# sourceMappingURL=spartacus-storefront.js.map

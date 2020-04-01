@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
-import { ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 import { WindowRef } from '@spartacus/core';
-import { OutletService } from '../../../cms-structure/index';
+import { LaunchDialogService } from '../../../layout/launch-dialog/services/launch-dialog.service';
 /**
  * The AsmEnablerService is used to enable ASM for those scenario's
  * where it's actually used. This service is added to avoid any polution
@@ -10,11 +9,8 @@ import { OutletService } from '../../../cms-structure/index';
 export declare class AsmEnablerService {
     protected location: Location;
     protected winRef: WindowRef;
-    protected componentFactoryResolver: ComponentFactoryResolver;
-    protected outletService: OutletService<ComponentFactory<any>>;
-    /** indicates whether the ASM UI has been added already */
-    private isUiAdded;
-    constructor(location: Location, winRef: WindowRef, componentFactoryResolver: ComponentFactoryResolver, outletService: OutletService<ComponentFactory<any>>);
+    protected launchDialogService: LaunchDialogService;
+    constructor(location: Location, winRef: WindowRef, launchDialogService: LaunchDialogService);
     /**
      * Loads the ASM UI if needed. The ASM UI will be added based on the
      * existence of a URL parameter or previous usage given by local storage.
@@ -28,13 +24,13 @@ export declare class AsmEnablerService {
      * Indicates whether ASM is launched through the URL,
      * using the asm flag in the URL.
      */
-    private isLaunched;
+    protected isLaunched(): boolean;
     /**
      * Evaluates local storage where we persist the usage of ASM.
      */
-    private isUsedBefore;
+    protected isUsedBefore(): boolean;
     /**
      * Adds the ASM UI by using the `cx-storefront` outlet.
      */
-    private addUi;
+    protected addUi(): void;
 }

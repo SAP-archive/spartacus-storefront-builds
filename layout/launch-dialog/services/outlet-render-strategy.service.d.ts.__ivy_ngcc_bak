@@ -1,0 +1,21 @@
+import { ComponentFactory, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { OutletService } from '../../../cms-structure/outlet/index';
+import { OutletRendererService } from '../../../cms-structure/outlet/outlet-renderer.service';
+import { LaunchOutletDialog, LAUNCH_CALLER } from '../config/index';
+import { LaunchRenderStrategy } from './launch-render.strategy';
+export declare class OutletRenderStrategy extends LaunchRenderStrategy {
+    protected outletService: OutletService<ComponentFactory<any>>;
+    protected componentFactoryResolver: ComponentFactoryResolver;
+    protected outletRendererService: OutletRendererService;
+    constructor(outletService: OutletService<ComponentFactory<any>>, componentFactoryResolver: ComponentFactoryResolver, outletRendererService: OutletRendererService);
+    /**
+     * Renders the element in the configured outlet
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config: LaunchOutletDialog, caller: LAUNCH_CALLER, vcr?: ViewContainerRef): void;
+    match(config: LaunchOutletDialog): boolean;
+    remove(caller: LAUNCH_CALLER, config: LaunchOutletDialog): void;
+}

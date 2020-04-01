@@ -29,5 +29,7 @@ export declare class OutletService<T = TemplateRef<any>> {
      * @param stacked Indicates whether an array of outlet components is returned
      */
     get(outlet: string, position?: OutletPosition, stacked?: boolean): T[] | T;
+    remove(outlet: string, position?: OutletPosition, value?: T): void;
     private store;
+    protected removeValueOrAll(store: Map<string, T[]>, outlet: string, value?: T): void;
 }

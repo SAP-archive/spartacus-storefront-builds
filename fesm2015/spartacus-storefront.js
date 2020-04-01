@@ -1,16 +1,16 @@
 import { __decorate, __param, __awaiter } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, INJECTOR, InjectionToken, isDevMode, ChangeDetectionStrategy, TemplateRef, EventEmitter, ComponentFactory, Output, HostBinding, APP_INITIALIZER, SecurityContext, RendererFactory2, ViewEncapsulation, ChangeDetectorRef, Pipe, ViewChild, HostListener, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, GlobalMessageType, RoutingModule as RoutingModule$1, PageRobotsMeta, ProductScope, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, provideConfig, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, concat, of, isObservable, from, BehaviorSubject, Observable, fromEvent, asyncScheduler } from 'rxjs';
-import { take, distinctUntilChanged, tap, first, skipWhile, endWith, map, switchMap, filter, withLatestFrom, flatMap, mergeMap, debounceTime, shareReplay, startWith, scan, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, isDevMode, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, INJECTOR, ViewChildren, inject } from '@angular/core';
+import { WindowRef, provideDefaultConfig, Config, isFeatureLevel, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, AsmModule as AsmModule$1, ProductScope, PromotionLocation, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, EMAIL_PATTERN, PASSWORD_PATTERN, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, isFeatureEnabled, ANONYMOUS_CONSENTS_FEATURE, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Subscription, combineLatest, of, BehaviorSubject, fromEvent, Observable, concat, isObservable, from, asyncScheduler } from 'rxjs';
+import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, filter, shareReplay, startWith, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormGroup, FormControl, FormsModule } from '@angular/forms';
-import { Router, RouterModule, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
-import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
+import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -890,1963 +890,6 @@ PageComponentModule = __decorate([
     })
 ], PageComponentModule);
 
-/**
- * Please don't put that service in public API.
- * */
-let CmsMappingService = class CmsMappingService {
-    constructor(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    isComponentEnabled(flexType) {
-        const isSSR = isPlatformServer(this.platformId);
-        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    }
-    getRoutesForComponents(componentTypes) {
-        const routes = [];
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                routes.push(...this.getRoutesForComponent(componentType));
-            }
-        }
-        return routes;
-    }
-    getGuardsForComponents(componentTypes) {
-        const guards = new Set();
-        for (const componentType of componentTypes) {
-            this.getGuardsForComponent(componentType).forEach((guard) => guards.add(guard));
-        }
-        return Array.from(guards);
-    }
-    getI18nKeysForComponents(componentTypes) {
-        const i18nKeys = new Set();
-        for (const componentType of componentTypes) {
-            if (this.isComponentEnabled(componentType)) {
-                this.getI18nKeysForComponent(componentType).forEach((key) => i18nKeys.add(key));
-            }
-        }
-        return Array.from(i18nKeys);
-    }
-    getRoutesForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    }
-    getGuardsForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    }
-    getI18nKeysForComponent(componentType) {
-        const mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    }
-};
-CmsMappingService.ctorParameters = () => [
-    { type: CmsConfig },
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-];
-CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-CmsMappingService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(1, Inject(PLATFORM_ID))
-], CmsMappingService);
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsGuardsService = class CmsGuardsService {
-    constructor(cmsMapping, injector) {
-        this.cmsMapping = cmsMapping;
-        this.injector = injector;
-    }
-    cmsPageCanActivate(componentTypes, route, state) {
-        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-        if (guards.length) {
-            const canActivateObservables = guards.map((guardClass) => {
-                const guard = this.injector.get(guardClass, null);
-                if (isCanActivate(guard)) {
-                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
-                }
-                else {
-                    throw new Error('Invalid CanActivate guard in cmsMapping');
-                }
-            });
-            return concat(...canActivateObservables).pipe(skipWhile((canActivate) => canActivate === true), endWith(true), first());
-        }
-        else {
-            return of(true);
-        }
-    }
-};
-CmsGuardsService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: Injector }
-];
-CmsGuardsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-CmsGuardsService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CmsGuardsService);
-function wrapIntoObservable(value) {
-    if (isObservable(value)) {
-        return value;
-    }
-    if (isPromise(value)) {
-        return from(Promise.resolve(value));
-    }
-    return of(value);
-}
-function isPromise(obj) {
-    return !!obj && typeof obj.then === 'function';
-}
-function isCanActivate(guard) {
-    return guard && isFunction(guard.canActivate);
-}
-function isFunction(v) {
-    return typeof v === 'function';
-}
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsI18nService = class CmsI18nService {
-    constructor(cmsMapping, translation, translationChunk) {
-        this.cmsMapping = cmsMapping;
-        this.translation = translation;
-        this.translationChunk = translationChunk;
-    }
-    loadChunksForComponents(componentTypes) {
-        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-        const i18nChunks = new Set();
-        for (const key of i18nKeys) {
-            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-        }
-        this.translation.loadChunks(Array.from(i18nChunks));
-    }
-};
-CmsI18nService.ctorParameters = () => [
-    { type: CmsMappingService },
-    { type: TranslationService },
-    { type: TranslationChunkService }
-];
-CmsI18nService.ɵprov = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-CmsI18nService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CmsI18nService);
-
-var BREAKPOINT;
-(function (BREAKPOINT) {
-    BREAKPOINT["xs"] = "xs";
-    BREAKPOINT["sm"] = "sm";
-    BREAKPOINT["md"] = "md";
-    BREAKPOINT["lg"] = "lg";
-    BREAKPOINT["xl"] = "xl";
-})(BREAKPOINT || (BREAKPOINT = {}));
-/**
- * The LayoutConfig supports the configuration of page slots by page templates
- * or page sections, such as headers and footers. The configuration also supports
- * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
- * por a given breakpoint.
- */
-class LayoutConfig {
-}
-
-const DEFAULT_BREAKPOINTS = {
-    [BREAKPOINT.xs]: 576,
-    [BREAKPOINT.sm]: 768,
-    [BREAKPOINT.md]: 992,
-    [BREAKPOINT.lg]: 1200,
-};
-let BreakpointService = class BreakpointService {
-    constructor(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-    }
-    get breakpoint$() {
-        if (!this.window) {
-            return of(BREAKPOINT.xs);
-        }
-        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
-    }
-    /**
-     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-     * configuration. If no configuration is available for the given breakpoint, the
-     * method will return the default values:
-     * - xs: 567
-     * - sm: 768
-     * - md: 992
-     * - lg: 1200
-     */
-    getSize(breakpoint) {
-        var _a;
-        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
-            : DEFAULT_BREAKPOINTS[breakpoint];
-    }
-    /**
-     * Returns all available breakpoints for the system.
-     */
-    get breakpoints() {
-        return [
-            BREAKPOINT.xs,
-            BREAKPOINT.sm,
-            BREAKPOINT.md,
-            BREAKPOINT.lg,
-            BREAKPOINT.xl,
-        ];
-    }
-    /**
-     * Indicates whether the current screen size is smaller than the maximum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
-     */
-    isDown(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size is larger than the minimum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
-     */
-    isUp(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(this.breakpoints.indexOf(breakpoint))
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size fits to the given breakpoint
-     */
-    isEqual(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => br === breakpoint));
-    }
-    getBreakpoint(windowWidth) {
-        const breakpoint = this.getClosest(windowWidth);
-        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-    }
-    getClosest(windowWidth) {
-        if (!windowWidth) {
-            windowWidth = this.window.innerWidth;
-        }
-        return windowWidth > this.getSize(BREAKPOINT.lg)
-            ? BREAKPOINT.xl
-            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
-    }
-    get window() {
-        return this.winRef.nativeWindow;
-    }
-};
-BreakpointService.ctorParameters = () => [
-    { type: WindowRef },
-    { type: LayoutConfig }
-];
-BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-BreakpointService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], BreakpointService);
-
-const PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
-
-let PageLayoutService = class PageLayoutService {
-    constructor(cms, config, breakpointService, handlers) {
-        this.cms = cms;
-        this.config = config;
-        this.breakpointService = breakpointService;
-        this.handlers = handlers;
-        // Prints warn messages for missing layout configs.
-        // The warnings are only printed once per config
-        // to not pollute the console log.
-        this.warnLogMessages = {};
-        this.logSlots = {};
-    }
-    getSlots(section) {
-        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map(([page, breakpoint]) => {
-            const pageTemplate = page.template;
-            const slots = this.resolveSlots(page, section, breakpoint);
-            return { slots, pageTemplate, breakpoint };
-        }), switchMap(({ slots, pageTemplate, breakpoint }) => {
-            let result = of(slots);
-            for (const handler of this.handlers || []) {
-                result = handler.handle(result, pageTemplate, section, breakpoint);
-            }
-            return result;
-        }), distinctUntilChanged((a, b) => {
-            if (a.length !== b.length) {
-                return false;
-            }
-            for (let i = 0; i < a.length; i++) {
-                if (a[i] !== b[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }));
-    }
-    /**
-     * Returns an observable with the last page slot above-the-fold
-     * for the given pageTemplate / breakpoint.
-     *
-     * The page fold is configurable in the `LayoutConfig` for each page layout.
-     */
-    getPageFoldSlot(pageTemplate) {
-        return this.breakpointService.breakpoint$.pipe(map((breakpoint) => {
-            if (!this.config.layoutSlots) {
-                // no layout config available
-                return null;
-            }
-            const pageTemplateConfig = this.config.layoutSlots[pageTemplate];
-            const config = this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
-            return config ? config.pageFold : null;
-        }));
-    }
-    resolveSlots(page, section, breakpoint) {
-        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-        if (config && config.slots) {
-            const pageSlots = Object.keys(page.slots);
-            return config.slots.filter((slot) => pageSlots.includes(slot));
-        }
-        else if (!section) {
-            this.logMissingLayoutConfig(page);
-            return Object.keys(page.slots);
-        }
-        else {
-            this.logMissingLayoutConfig(page, section);
-            return [];
-        }
-    }
-    get page$() {
-        return this.cms.getCurrentPage().pipe(filter((page) => !!page));
-    }
-    get templateName$() {
-        return this.page$.pipe(filter((page) => !!page.template), map((page) => page.template));
-    }
-    /**
-     * load slots from the layout configuration. The breakpoint is used
-     * to load a specific configuration for the given breakpoint. If there's
-     * no configuration available for the given breakpoint the default slot
-     * configuration is returned.
-     */
-    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
-        if (!this.config.layoutSlots) {
-            return null;
-        }
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (section) {
-            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-        }
-        if (pageTemplateConfig) {
-            return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
-        }
-    }
-    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
-        const pageTemplateConfig = this.config.layoutSlots[templateUid];
-        if (!pageTemplateConfig) {
-            return null;
-        }
-        // if there's no section config on the page layout
-        // we fall back to the global section config
-        const sectionConfig = pageTemplateConfig[section]
-            ? pageTemplateConfig[section]
-            : this.config.layoutSlots[section];
-        if (!sectionConfig) {
-            return null;
-        }
-        const responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
-        if (responsiveConfig.hasOwnProperty(configAttribute)) {
-            return responsiveConfig;
-        }
-        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-            return pageTemplateConfig[section];
-        }
-        else if (this.config.layoutSlots[section]) {
-            return this.config.layoutSlots[section];
-        }
-    }
-    /**
-     * Returns a list of slots for a breakpoint specific configuratoin
-     * If there's no specific configuration for the breakpoint,
-     * the closest available configuration will be returned.
-     */
-    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
-        let slotConfig = layoutSlotConfig;
-        // fallback to default slot config
-        if (!layoutSlotConfig || !breakpoint) {
-            return slotConfig;
-        }
-        // we have a config for the specific breakpoint
-        if (layoutSlotConfig[breakpoint] &&
-            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-            return layoutSlotConfig[breakpoint];
-        }
-        // find closest config
-        const all = this.breakpointService.breakpoints;
-        for (const br of all.splice(0, all.indexOf(breakpoint))) {
-            if (layoutSlotConfig[br] &&
-                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                slotConfig = layoutSlotConfig[br];
-            }
-        }
-        return slotConfig;
-    }
-    /**
-     * In order to help developers, we print some detailed log information in
-     * case there's no layout configuration available for the given page template
-     * or section. Additionally, the slot positions are printed in the console
-     * in a format that can be copied / paste to the configuration.
-     */
-    logMissingLayoutConfig(page, section) {
-        if (!isDevMode()) {
-            return;
-        }
-        if (!this.logSlots[page.template]) {
-            // the info log is not printed in production
-            // tslint:disable-next-line: no-console
-            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
-            this.logSlots[page.template] = true;
-        }
-        const cacheKey = section || page.template;
-        if (!this.warnLogMessages[cacheKey]) {
-            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
-            this.warnLogMessages[cacheKey] = true;
-        }
-    }
-};
-PageLayoutService.ctorParameters = () => [
-    { type: CmsService },
-    { type: LayoutConfig },
-    { type: BreakpointService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
-];
-PageLayoutService = __decorate([
-    Injectable(),
-    __param(3, Optional()),
-    __param(3, Inject(PAGE_LAYOUT_HANDLER))
-], PageLayoutService);
-
-let PageLayoutComponent = class PageLayoutComponent {
-    constructor(el, renderer, pageLayoutService) {
-        this.el = el;
-        this.renderer = renderer;
-        this.pageLayoutService = pageLayoutService;
-        this.section$ = new BehaviorSubject(undefined);
-        this.templateName$ = this.pageLayoutService
-            .templateName$;
-        this.layoutName$ = this.section$.pipe(switchMap((section) => (section ? of(section) : this.templateName$)), tap((name) => {
-            this.styleClass = name;
-        }));
-        this.slots$ = this.section$.pipe(switchMap((section) => this.pageLayoutService.getSlots(section)));
-        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((templateName) => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
-    }
-    set section(value) {
-        this.section$.next(value);
-    }
-    set styleClass(cls) {
-        if (this.currentClass) {
-            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-        }
-        this.renderer.addClass(this.el.nativeElement, cls);
-        this.currentClass = cls;
-    }
-};
-PageLayoutComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 },
-    { type: PageLayoutService }
-];
-__decorate([
-    Input()
-], PageLayoutComponent.prototype, "section", null);
-PageLayoutComponent = __decorate([
-    Component({
-        selector: 'cx-page-layout',
-        template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], PageLayoutComponent);
-
-/**
- * Please don't put that service in public API.
- * */
-let CmsRoutesService = class CmsRoutesService {
-    constructor(router, cmsMapping) {
-        this.router = router;
-        this.cmsMapping = cmsMapping;
-    }
-    cmsRouteExist(url) {
-        const isCmsDrivenRoute = url.startsWith('/');
-        if (!isCmsDrivenRoute) {
-            return false;
-        }
-        const routePath = url.substr(1);
-        return (isCmsDrivenRoute &&
-            !!this.router.config.find((route) => route.data && route.data.cxCmsRouteContext && route.path === routePath));
-    }
-    /**
-     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-     *
-     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-     *
-     * @param pageContext
-     * @param currentUrl
-     */
-    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
-        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
-                this.router.navigateByUrl(currentUrl);
-                return false;
-            }
-        }
-        return true;
-    }
-    updateRouting(pageContext, pageLabel, routes) {
-        if (pageContext.type === PageType.CONTENT_PAGE &&
-            pageLabel.startsWith('/') &&
-            pageLabel.length > 1) {
-            const newRoute = {
-                path: pageLabel.substr(1),
-                component: PageLayoutComponent,
-                children: routes,
-                data: {
-                    cxCmsRouteContext: {
-                        type: pageContext.type,
-                        id: pageLabel,
-                    },
-                },
-            };
-            this.router.resetConfig([newRoute, ...this.router.config]);
-            return true;
-        }
-        return false;
-    }
-};
-CmsRoutesService.ctorParameters = () => [
-    { type: Router },
-    { type: CmsMappingService }
-];
-CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-CmsRoutesService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CmsRoutesService);
-
-let CmsPageGuard = class CmsPageGuard {
-    constructor(
-    // expose as `protected` only services from public API:
-    routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-        this.routingService = routingService;
-        this.cmsService = cmsService;
-        this.cmsRoutes = cmsRoutes;
-        this.cmsI18n = cmsI18n;
-        this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-        this.protectedRoutesGuard = protectedRoutesGuard;
-    }
-    canActivate(route, state) {
-        /**
-         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-         */
-        return this.protectedRoutesGuard
-            ? this.protectedRoutesGuard
-                .canActivate(route)
-                .pipe(switchMap((result) => result ? this.getCmsPage(route, state) : of(result)))
-            : this.getCmsPage(route, state);
-    }
-    getCmsPage(route, state) {
-        return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
-            .getPage(pageContext, true)
-            .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
-            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
-            : this.handleNotFoundPage(pageContext, route, state)));
-    }
-    resolveCmsPageLogic(pageContext, pageData, route, state) {
-        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((componentTypes) => this.cmsGuards
-            .cmsPageCanActivate(componentTypes, route, state)
-            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
-            if (canActivate === true) {
-                this.cmsI18n.loadChunksForComponents(componentTypes);
-            }
-        }), map(([canActivate, componentTypes]) => {
-            const pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
-                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
-            }
-            return canActivate;
-        }));
-    }
-    handleNotFoundPage(pageContext, route, state) {
-        const notFoundCmsPageContext = {
-            type: PageType.CONTENT_PAGE,
-            id: this.semanticPathService.get('notFound'),
-        };
-        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((notFoundPage) => {
-            if (notFoundPage) {
-                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((notFoundIndex) => {
-                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                }), switchMap((notFoundIndex) => this.cmsService.getPageIndex(pageContext).pipe(
-                // we have to wait for page index update
-                filter((index) => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
-            }
-            return of(false);
-        }));
-    }
-};
-CmsPageGuard.guardName = 'CmsPageGuard';
-CmsPageGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: CmsService },
-    { type: CmsRoutesService },
-    { type: CmsI18nService },
-    { type: CmsGuardsService },
-    { type: SemanticPathService },
-    { type: ProtectedRoutesGuard }
-];
-CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
-CmsPageGuard = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CmsPageGuard);
-
-var OutletPosition;
-(function (OutletPosition) {
-    OutletPosition["REPLACE"] = "replace";
-    OutletPosition["BEFORE"] = "before";
-    OutletPosition["AFTER"] = "after";
-})(OutletPosition || (OutletPosition = {}));
-const AVOID_STACKED_OUTLETS = false;
-const USE_STACKED_OUTLETS = true;
-
-let OutletService = class OutletService {
-    constructor() {
-        this.templatesRefs = new Map();
-        this.templatesRefsBefore = new Map();
-        this.templatesRefsAfter = new Map();
-    }
-    /**
-     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
-     */
-    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
-        if (position === OutletPosition.BEFORE) {
-            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.store(this.templatesRefs, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.AFTER) {
-            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
-        }
-    }
-    /**
-     *
-     * Returns a single object or multiple objects for the given outlet reference,
-     * depending on the `stacked` argument.
-     *
-     * @param outlet The outlet reference
-     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
-     * @param stacked Indicates whether an array of outlet components is returned
-     */
-    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
-        let templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore.get(outlet);
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter.get(outlet);
-                break;
-            default:
-                templateRef = this.templatesRefs.get(outlet);
-        }
-        if (templateRef && !stacked) {
-            return templateRef[0];
-        }
-        return templateRef;
-    }
-    store(store, outlet, value) {
-        const existing = store.get(outlet) || [];
-        const newValue = existing.concat([value]);
-        store.set(outlet, newValue);
-    }
-};
-OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-OutletService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], OutletService);
-
-let OutletRefDirective = class OutletRefDirective {
-    constructor(tpl, outletService) {
-        this.tpl = tpl;
-        this.outletService = outletService;
-    }
-    ngOnInit() {
-        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-    }
-};
-OutletRefDirective.ctorParameters = () => [
-    { type: TemplateRef },
-    { type: OutletService }
-];
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletRef", void 0);
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletPos", void 0);
-OutletRefDirective = __decorate([
-    Directive({
-        selector: '[cxOutletRef]',
-    })
-], OutletRefDirective);
-
-let OutletRefModule = class OutletRefModule {
-};
-OutletRefModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [OutletRefDirective],
-        exports: [OutletRefDirective],
-    })
-], OutletRefModule);
-
-/**
- * The IntersectionService uses the native IntersectionObserver (v2), which
- * can be used to implement pre-loading and deferred loading of DOM content.
- *
- */
-let IntersectionService = class IntersectionService {
-    constructor(config) {
-        this.config = config;
-    }
-    /**
-     * Returns an Observable that emits only once a boolean value whenever
-     * the given element has shown in the view port.
-     *
-     * The returned obervable will only emit the first value. The
-     * observable must be cleaned up either way, since the value might never emit; it
-     *  depends on whether the element appears in the view port.
-     */
-    isIntersected(element, options) {
-        return this.intersects(element, options).pipe(first((v) => v === true));
-    }
-    /**
-     * Indicates whenever the element intersects the view port. An optional margin
-     * is used to intersects before the element shows up in the viewport.
-     * A value is emitted each time the element intersects.
-     *
-     * This is private for now, but could be exposed as a public API
-     * to introduce additional (css) render effects to the UI.
-     */
-    intersects(element, options) {
-        const elementVisible$ = new Observable((observer) => {
-            const rootMargin = this.getRootMargin(options);
-            const intersectOptions = { rootMargin };
-            const intersectionObserver = new IntersectionObserver((entries) => {
-                observer.next(entries);
-            }, intersectOptions);
-            intersectionObserver.observe(element);
-            return () => {
-                intersectionObserver.disconnect();
-            };
-        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
-        return elementVisible$;
-    }
-    getRootMargin(options) {
-        if (options.rootMargin) {
-            return options.rootMargin;
-        }
-        const layoutConfig = this.config;
-        if (layoutConfig.deferredLoading &&
-            layoutConfig.deferredLoading.intersectionMargin) {
-            return layoutConfig.deferredLoading.intersectionMargin;
-        }
-    }
-};
-IntersectionService.ctorParameters = () => [
-    { type: LayoutConfig }
-];
-IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
-IntersectionService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], IntersectionService);
-
-/**
- * The defer loading serivce is used to defer loading of DOM elements
- * until the elements are required for the user experience.
- */
-let DeferLoaderService = class DeferLoaderService {
-    constructor(platformId, config, intersectionService) {
-        this.platformId = platformId;
-        this.config = config;
-        this.intersectionService = intersectionService;
-        this.globalLoadStrategy = config.deferredLoading
-            ? config.deferredLoading.strategy
-            : DeferLoadingStrategy.INSTANT;
-    }
-    /**
-     * Defer loading till the element intersects the viewport.
-     *
-     * We evalutes whether we instantly load the element for different reasons:
-     * - we run in SSR mode
-     * - there's no global strategy given
-     * - the global loading strategy is set to INSTANT loading,
-     *   and the loading strategy in the given is not set to DEFER
-     * - the loading strategy in the given options is set to INSTANT
-     */
-    load(element, options) {
-        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
-            return of(true);
-        }
-        else {
-            return this.intersectionService.isIntersected(element, options);
-        }
-    }
-    shouldLoadInstantly(elementLoadingStrategy) {
-        return (isPlatformServer(this.platformId) ||
-            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
-            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
-                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
-    }
-};
-DeferLoaderService.ctorParameters = () => [
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: LayoutConfig },
-    { type: IntersectionService }
-];
-DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
-DeferLoaderService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(0, Inject(PLATFORM_ID))
-], DeferLoaderService);
-
-let OutletDirective = class OutletDirective {
-    constructor(vcr, templateRef, outletService, deferLoaderService) {
-        this.vcr = vcr;
-        this.templateRef = templateRef;
-        this.outletService = outletService;
-        this.deferLoaderService = deferLoaderService;
-        this.loaded = new EventEmitter(true);
-        this.subscription = new Subscription();
-    }
-    initializeOutlet() {
-        this.vcr.clear();
-        this.subscription.unsubscribe();
-        this.subscription = new Subscription();
-        if (this.cxOutletDefer) {
-            this.deferLoading();
-        }
-        else {
-            this.render();
-        }
-    }
-    ngOnChanges(changes) {
-        if (changes.cxOutlet) {
-            this.initializeOutlet();
-        }
-    }
-    deferLoading() {
-        this.loaded.emit(false);
-        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
-        // Although the deferLoaderService might emit only once, as long as the hostElement
-        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
-        // the subscription on destroy.
-        this.subscription.add(this.deferLoaderService
-            .load(hostElement, this.cxOutletDefer)
-            .subscribe(() => {
-            this.render();
-            this.loaded.emit(true);
-        }));
-    }
-    render() {
-        this.renderOutlet(OutletPosition.BEFORE);
-        this.renderOutlet(OutletPosition.REPLACE);
-        this.renderOutlet(OutletPosition.AFTER);
-    }
-    renderOutlet(position) {
-        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
-        if (!templates && position === OutletPosition.REPLACE) {
-            templates = [this.templateRef];
-        }
-        // Just in case someone extended the `OutletService` and
-        // returns a singular object.
-        if (!Array.isArray(templates)) {
-            templates = [templates];
-        }
-        templates.forEach((obj) => {
-            this.create(obj);
-        });
-    }
-    create(tmplOrFactory) {
-        if (tmplOrFactory instanceof ComponentFactory) {
-            this.vcr.createComponent(tmplOrFactory);
-        }
-        else if (tmplOrFactory instanceof TemplateRef) {
-            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
-                $implicit: this.cxOutletContext,
-            });
-            // we do not know if content is created dynamically or not
-            // so we apply change detection anyway
-            view.markForCheck();
-        }
-    }
-    /**
-     * Returns the closest `HtmlElement`, by iterating over the
-     * parent elements of the given element.
-     *
-     * @param element
-     */
-    getHostElement(element) {
-        if (element instanceof HTMLElement) {
-            return element;
-        }
-        return this.getHostElement(element.parentElement);
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-};
-OutletDirective.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: OutletService },
-    { type: DeferLoaderService }
-];
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutlet", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletContext", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletDefer", void 0);
-__decorate([
-    Output()
-], OutletDirective.prototype, "loaded", void 0);
-OutletDirective = __decorate([
-    Directive({
-        selector: '[cxOutlet]',
-    })
-], OutletDirective);
-
-let OutletModule = class OutletModule {
-};
-OutletModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [OutletDirective],
-        providers: [OutletService],
-        exports: [OutletDirective],
-    })
-], OutletModule);
-
-let PageSlotComponent = class PageSlotComponent {
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.hostElement = hostElement;
-        this.config = config;
-        this.isPending = true;
-        this.hasComponents = false;
-        this.isPageFold = false;
-        this.position$ = new BehaviorSubject(undefined);
-        /**
-         * observable with `ContentSlotData` for the current position
-         *
-         * @deprecated we'll stop supporting this property in 2.0 as
-         * it is not used separately.
-         */
-        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
-        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
-        this.subscription = new Subscription();
-    }
-    /**
-     * The position is used to find the CMS page slot (and optional outlet)
-     * that is rendered in the PageSlotComponent. Furthermore, the position
-     * is added as a CSS class name to the host element.
-     */
-    set position(position) {
-        this.position$.next(position);
-        this.renderer.addClass(this.hostElement.nativeElement, position);
-    }
-    get position() {
-        return this.position$.value;
-    }
-    ngOnInit() {
-        this.subscription.add(this.components$.subscribe((components) => {
-            this.hasComponents = components && components.length > 0;
-            this.pendingComponentCount = components ? components.length : 0;
-            this.isPending = this.pendingComponentCount > 0;
-        }));
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-    /**
-     * Is triggered when a component is added to the view.
-     * We use this information to dropthe `is-pending` class from the page slot
-     * when all nested components have been added.
-     */
-    isLoaded(loadState) {
-        if (loadState) {
-            this.pendingComponentCount--;
-        }
-        this.isPending = this.pendingComponentCount > 0;
-    }
-    getComponentDeferOptions(componentType) {
-        const deferLoading = this.getDeferLoadingStrategy(componentType);
-        return { deferLoading };
-    }
-    /**
-     * The `DeferLoadingStrategy` indicates whether component rendering
-     * should be deferred.
-     */
-    getDeferLoadingStrategy(componentType) {
-        if (this.config) {
-            return (this.config.cmsComponents[componentType] || {})
-                .deferLoading;
-        }
-    }
-    addSmartEditSlotClass(slot) {
-        if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
-        }
-    }
-    addSmartEditContract(slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-    }
-};
-PageSlotComponent.ctorParameters = () => [
-    { type: CmsService },
-    { type: DynamicAttributeService },
-    { type: Renderer2 },
-    { type: ElementRef },
-    { type: CmsConfig }
-];
-__decorate([
-    Input()
-], PageSlotComponent.prototype, "position", null);
-__decorate([
-    HostBinding('class.cx-pending')
-], PageSlotComponent.prototype, "isPending", void 0);
-__decorate([
-    HostBinding('class.has-components')
-], PageSlotComponent.prototype, "hasComponents", void 0);
-__decorate([
-    HostBinding('class.page-fold'), Input()
-], PageSlotComponent.prototype, "isPageFold", void 0);
-PageSlotComponent = __decorate([
-    Component({
-        selector: 'cx-page-slot,[cx-page-slot]',
-        template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], PageSlotComponent);
-
-let PageSlotModule = class PageSlotModule {
-};
-PageSlotModule = __decorate([
-    NgModule({
-        imports: [CommonModule, OutletModule, PageComponentModule],
-        providers: [],
-        declarations: [PageSlotComponent],
-        exports: [PageSlotComponent],
-    })
-], PageSlotModule);
-
-let PageLayoutModule = class PageLayoutModule {
-};
-PageLayoutModule = __decorate([
-    NgModule({
-        imports: [CommonModule, OutletModule, PageSlotModule],
-        declarations: [PageLayoutComponent],
-        providers: [PageLayoutService],
-        exports: [PageLayoutComponent],
-    })
-], PageLayoutModule);
-
-class PWAModuleConfig {
-}
-const defaultPWAModuleConfig = {
-    pwa: {
-        enabled: false,
-        addToHomeScreen: false,
-    },
-};
-
-let AddToHomeScreenService = class AddToHomeScreenService {
-    constructor(config, globalMessageService, winRef) {
-        this.config = config;
-        this.globalMessageService = globalMessageService;
-        this.winRef = winRef;
-        this.canPrompt = new BehaviorSubject(false);
-        this.canPrompt$ = this.canPrompt.asObservable();
-        if (this.config.pwa.addToHomeScreen) {
-            this.init();
-        }
-    }
-    init() {
-        if (this.winRef.nativeWindow) {
-            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (event) => {
-                event.preventDefault();
-                this.deferredEvent = event;
-                this.enableAddToHomeScreen();
-            });
-            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
-                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                this.disableAddToHomeScreen();
-                this.deferredEvent = null;
-            });
-        }
-    }
-    enableAddToHomeScreen() {
-        this.canPrompt.next(true);
-    }
-    disableAddToHomeScreen() {
-        this.canPrompt.next(false);
-    }
-    firePrompt() {
-        if (this.deferredEvent) {
-            this.deferredEvent.prompt();
-        }
-    }
-};
-AddToHomeScreenService.ctorParameters = () => [
-    { type: PWAModuleConfig },
-    { type: GlobalMessageService },
-    { type: WindowRef }
-];
-AddToHomeScreenService = __decorate([
-    Injectable()
-], AddToHomeScreenService);
-
-class AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-    ngOnInit() {
-        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-    }
-    prompt() {
-        this.addToHomeScreenService.firePrompt();
-    }
-}
-
-let AddToHomeScreenBannerComponent = class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-};
-AddToHomeScreenBannerComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-AddToHomeScreenBannerComponent = __decorate([
-    Component({
-        selector: 'cx-add-to-home-screen-banner',
-        template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-    })
-], AddToHomeScreenBannerComponent);
-
-let AddToHomeScreenBtnComponent = class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
-    constructor(addToHomeScreenService) {
-        super(addToHomeScreenService);
-        this.addToHomeScreenService = addToHomeScreenService;
-    }
-};
-AddToHomeScreenBtnComponent.ctorParameters = () => [
-    { type: AddToHomeScreenService }
-];
-AddToHomeScreenBtnComponent = __decorate([
-    Component({
-        selector: 'cx-add-to-home-screen-btn',
-        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
-    })
-], AddToHomeScreenBtnComponent);
-
-function pwaConfigurationFactory(pwaConfig) {
-    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
-}
-function pwaFactory(addToHomeScreenService) {
-    const result = () => addToHomeScreenService;
-    return result;
-}
-let PwaModule = class PwaModule {
-};
-PwaModule = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            ServiceWorkerModule.register('/ngsw-worker.js'),
-            I18nModule,
-        ],
-        providers: [
-            provideDefaultConfig(defaultPWAModuleConfig),
-            { provide: PWAModuleConfig, useExisting: Config },
-            {
-                provide: SwRegistrationOptions,
-                useFactory: pwaConfigurationFactory,
-                deps: [Config],
-            },
-            {
-                provide: APP_INITIALIZER,
-                useFactory: pwaFactory,
-                deps: [AddToHomeScreenService],
-                multi: true,
-            },
-            AddToHomeScreenService,
-        ],
-        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-    })
-], PwaModule);
-
-const cmsRoute = {
-    path: '**',
-    canActivate: [CmsPageGuard],
-    component: PageLayoutComponent,
-};
-function addCmsRoute(injector) {
-    const result = () => {
-        const router = injector.get(Router);
-        router.config.push(cmsRoute);
-    };
-    return result;
-}
-
-const ɵ0 = addCmsRoute;
-let CmsRouteModule = class CmsRouteModule {
-};
-CmsRouteModule = __decorate([
-    NgModule({
-        providers: [
-            {
-                provide: APP_INITIALIZER,
-                multi: true,
-                deps: [Injector],
-                useFactory: ɵ0,
-            },
-        ],
-    })
-], CmsRouteModule);
-
-const defaultStorefrontRoutesConfig = {
-    home: { paths: [''] },
-    notFound: { paths: ['not-found'] },
-    cart: { paths: ['cart'] },
-    // semantic links for login related pages
-    login: { paths: ['login'], protected: false },
-    register: { paths: ['login/register'], protected: false },
-    forgotPassword: { paths: ['login/forgot-password'], protected: false },
-    resetPassword: { paths: ['login/pw/change'], protected: false },
-    logout: { paths: ['logout'] },
-    checkoutLogin: { paths: ['checkout-login'] },
-    checkout: { paths: ['checkout'] },
-    checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
-    checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
-    checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
-    checkoutReviewOrder: { paths: ['checkout/review-order'] },
-    orderConfirmation: { paths: ['order-confirmation'] },
-    // plp routes
-    search: { paths: ['search/:query'] },
-    category: {
-        paths: ['category/:categoryCode'],
-        paramsMapping: { categoryCode: 'code' },
-    },
-    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
-    // pdp routes
-    product: {
-        paths: ['product/:productCode/:name'],
-        paramsMapping: { productCode: 'code' },
-    },
-    termsAndConditions: { paths: ['terms-and-conditions'] },
-    orders: {
-        paths: ['my-account/orders'],
-    },
-    orderDetails: {
-        paths: ['my-account/order/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderGuest: {
-        paths: ['guest/order/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderReturn: {
-        paths: ['my-account/order/return/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderReturnConfirmation: {
-        paths: ['my-account/order/return/confirmation/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderCancel: {
-        paths: ['my-account/order/cancel/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    orderCancelConfirmation: {
-        paths: ['my-account/order/cancel/confirmation/:orderCode'],
-        paramsMapping: { orderCode: 'code' },
-    },
-    returnRequestDetails: {
-        paths: ['my-account/return-request/:returnCode'],
-        paramsMapping: { returnCode: 'rma' },
-    },
-    coupons: { paths: ['my-account/coupons'] },
-    couponClaim: {
-        paths: ['my-account/coupon/claim/:couponCode'],
-        paramsMapping: { couponCode: 'code' },
-    },
-};
-const defaultRoutingConfig = {
-    routing: {
-        routes: defaultStorefrontRoutesConfig,
-    },
-};
-
-var RoutingModule_1;
-let RoutingModule = RoutingModule_1 = class RoutingModule {
-    static forRoot() {
-        return {
-            ngModule: RoutingModule_1,
-            providers: [provideDefaultConfig(defaultRoutingConfig)],
-        };
-    }
-};
-RoutingModule = RoutingModule_1 = __decorate([
-    NgModule({
-        imports: [RoutingModule$1.forRoot(), CmsRouteModule],
-    })
-], RoutingModule);
-
-/**
- * Matches the pattern '[ ** / ] marker / :paramName'
- *
- * @param marker phrase that indicates the start of the match
- * @param paramName name of the parameter present after the marker
- * @param precedingParamName name of the parameter for every preceding url segment
- *        i.e. `param` will result in `param0`, `param1`, ...
- */
-function getSuffixUrlMatcher({ marker, paramName, precedingParamName, }) {
-    precedingParamName = precedingParamName || 'param';
-    const matcher = function suffixUrlMatcher(segments) {
-        const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
-        const isMarkerLastSegment = markerIndex === segments.length - 1;
-        if (markerIndex === -1 || isMarkerLastSegment) {
-            return null;
-        }
-        const paramIndex = markerIndex + 1;
-        const posParams = {
-            [paramName]: segments[paramIndex],
-        };
-        for (let i = 0; i < markerIndex; i++) {
-            posParams[`${precedingParamName}${i}`] = segments[i];
-        }
-        return { consumed: segments.slice(0, paramIndex + 1), posParams };
-    };
-    if (isDevMode()) {
-        matcher['_suffixRouteConfig'] = { marker, paramName, precedingParamName }; // property added for easier debugging of routes
-    }
-    return matcher;
-}
-function findLastIndex(elements, predicate) {
-    for (let index = elements.length - 1; index >= 0; index--) {
-        if (predicate(elements[index])) {
-            return index;
-        }
-    }
-    return -1;
-}
-
-let SeoMetaService = class SeoMetaService {
-    constructor(ngTitle, ngMeta, pageMetaService) {
-        this.ngTitle = ngTitle;
-        this.ngMeta = ngMeta;
-        this.pageMetaService = pageMetaService;
-    }
-    init() {
-        this.pageMetaService
-            .getMeta()
-            .pipe(filter(Boolean))
-            .subscribe((meta) => (this.meta = meta));
-    }
-    set meta(meta) {
-        this.title = meta.title;
-        this.description = meta.description;
-        this.image = meta.image;
-        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
-    }
-    set title(title) {
-        this.ngTitle.setTitle(title || '');
-    }
-    set description(value) {
-        this.addTag({ name: 'description', content: value });
-    }
-    set image(imageUrl) {
-        if (imageUrl) {
-            this.addTag({ name: 'og:image', content: imageUrl });
-        }
-    }
-    set robots(value) {
-        if (value) {
-            this.addTag({ name: 'robots', content: value.join(', ') });
-        }
-    }
-    addTag(meta) {
-        if (meta.content) {
-            this.ngMeta.updateTag(meta);
-        }
-    }
-};
-SeoMetaService.ctorParameters = () => [
-    { type: Title },
-    { type: Meta },
-    { type: PageMetaService }
-];
-SeoMetaService.ɵprov = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-SeoMetaService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], SeoMetaService);
-
-const htmlLangProvider = {
-    provide: APP_INITIALIZER,
-    multi: true,
-    useFactory: setHtmlLangAttribute,
-    deps: [WindowRef, LanguageService],
-};
-/**
- * Sets active language in <html lang="">
- */
-function setHtmlLangAttribute(winRef, languageService) {
-    const result = () => {
-        languageService.getActive().subscribe((lang) => {
-            winRef.document.documentElement.lang = lang;
-        });
-    };
-    return result;
-}
-
-let JsonLdScriptFactory = class JsonLdScriptFactory {
-    constructor(platformId, winRef, rendererFactory, sanitizer) {
-        this.platformId = platformId;
-        this.winRef = winRef;
-        this.rendererFactory = rendererFactory;
-        this.sanitizer = sanitizer;
-    }
-    build(schema) {
-        if (schema && this.isJsonLdRequired()) {
-            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
-        }
-    }
-    /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
-     */
-    isJsonLdRequired() {
-        return !isPlatformBrowser(this.platformId) || isDevMode();
-    }
-    createJsonLdScriptElement() {
-        const id = 'json-ld';
-        let scriptElement = (this.winRef.document.getElementById(id));
-        if (!scriptElement) {
-            const renderer = this.rendererFactory.createRenderer(null, null);
-            const script = renderer.createElement('script');
-            script.id = id;
-            script.type = 'application/ld+json';
-            renderer.appendChild(this.winRef.document.body, script);
-            scriptElement = script;
-        }
-        return scriptElement;
-    }
-    /**
-     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
-     *
-     * The given schema is not trusted, as malicious code could be injected (XSS)
-     * into the json-ld script.
-     */
-    sanitize(schema) {
-        return JSON.stringify(schema, (_key, value) => typeof value === 'string'
-            ? this.sanitizer.sanitize(SecurityContext.HTML, value)
-            : value);
-    }
-};
-JsonLdScriptFactory.ctorParameters = () => [
-    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: WindowRef },
-    { type: RendererFactory2 },
-    { type: DomSanitizer }
-];
-JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
-JsonLdScriptFactory = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(0, Inject(PLATFORM_ID))
-], JsonLdScriptFactory);
-
-/**
- * Low level directive that adds a json-ld script tag to the component.
- * This code bypasses the strict XSS security, as otherwise we're not able
- * to append a script tag with JS inside.
- */
-let JsonLdDirective = class JsonLdDirective {
-    constructor(jsonLdScriptFactory, sanitizer) {
-        this.jsonLdScriptFactory = jsonLdScriptFactory;
-        this.sanitizer = sanitizer;
-    }
-    set cxJsonLd(schema) {
-        this.writeJsonLd(schema);
-    }
-    writeJsonLd(schema) {
-        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
-            const sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
-            const html = `<script type="application/ld+json">${sanitizedSchema}</script>`;
-            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
-        }
-    }
-};
-JsonLdDirective.ctorParameters = () => [
-    { type: JsonLdScriptFactory },
-    { type: DomSanitizer }
-];
-__decorate([
-    Input()
-], JsonLdDirective.prototype, "cxJsonLd", null);
-__decorate([
-    HostBinding('innerHTML')
-], JsonLdDirective.prototype, "jsonLD", void 0);
-JsonLdDirective = __decorate([
-    Directive({
-        selector: '[cxJsonLd]',
-    })
-], JsonLdDirective);
-
-/**
- * Injection token to extend schema builders for adding structural data (json-ld).
- *
- * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
- * lowever level builder to further extend the schema.
- */
-const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
-/**
- * Injection token to add specific json-ld builders for product related schema's.
- * See see https://schema.org/product for more information.
- */
-const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
-
-let StructuredDataFactory = class StructuredDataFactory {
-    constructor(scriptBuilder, builders) {
-        this.scriptBuilder = scriptBuilder;
-        this.builders = builders;
-    }
-    build() {
-        this.collectSchemas().subscribe((schema) => {
-            this.scriptBuilder.build(schema);
-        });
-    }
-    collectSchemas() {
-        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-            return of();
-        }
-        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
-    }
-};
-StructuredDataFactory.ctorParameters = () => [
-    { type: JsonLdScriptFactory },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
-];
-StructuredDataFactory.ɵprov = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
-StructuredDataFactory = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(1, Optional()),
-    __param(1, Inject(SCHEMA_BUILDER))
-], StructuredDataFactory);
-
-/**
- * Factory to build the structure data
- * without any interaction with the UI.
- */
-function getStructuredDataFactory(injector) {
-    const result = () => {
-        const factory = injector.get(StructuredDataFactory);
-        factory.build();
-    };
-    return result;
-}
-let StructuredDataModule = class StructuredDataModule {
-};
-StructuredDataModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [JsonLdDirective],
-        exports: [JsonLdDirective],
-        providers: [
-            {
-                provide: APP_INITIALIZER,
-                useFactory: getStructuredDataFactory,
-                deps: [Injector],
-                multi: true,
-            },
-        ],
-    })
-], StructuredDataModule);
-
-function initSeoService(injector) {
-    const result = () => {
-        const service = injector.get(SeoMetaService);
-        service.init();
-    };
-    return result;
-}
-let SeoModule = class SeoModule {
-};
-SeoModule = __decorate([
-    NgModule({
-        imports: [StructuredDataModule],
-        providers: [
-            {
-                provide: APP_INITIALIZER,
-                useFactory: initSeoService,
-                deps: [Injector],
-                multi: true,
-            },
-            htmlLangProvider,
-        ],
-    })
-], SeoModule);
-
-let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
-    constructor(pageMetaService) {
-        this.pageMetaService = pageMetaService;
-    }
-    build() {
-        return this.pageMetaService
-            .getMeta()
-            .pipe(map((pageMeta) => this.collect(pageMeta)));
-    }
-    collect(pageMeta) {
-        if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
-            return;
-        }
-        const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {
-            return {
-                '@type': 'ListItem',
-                position: index + 1,
-                item: {
-                    '@id': crumb.link,
-                    name: crumb.label,
-                },
-            };
-        });
-        if (pageMeta.title) {
-            crumbs.push({
-                '@type': 'ListItem',
-                position: crumbs.length + 1,
-                item: {
-                    '@id': pageMeta.title,
-                    name: pageMeta.title,
-                },
-            });
-        }
-        return {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: crumbs,
-        };
-    }
-};
-BreadcrumbSchemaBuilder.ctorParameters = () => [
-    { type: PageMetaService }
-];
-BreadcrumbSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
-BreadcrumbSchemaBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], BreadcrumbSchemaBuilder);
-
-/**
- * Builds the basic structured data for the product, see https://schema.org/product.
- * This builder includes data for sku number, name, description, brand and main image.
- */
-let JsonLdBaseProductBuilder = class JsonLdBaseProductBuilder {
-    build(product) {
-        return of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
-    }
-    getProductBase(product) {
-        const result = { sku: product.code };
-        if (product.name) {
-            result.name = product.name;
-        }
-        if (product.summary) {
-            result.description = product.summary;
-        }
-        return result;
-    }
-    getProductImage(product) {
-        return product.images &&
-            product.images.PRIMARY &&
-            product.images.PRIMARY['zoom'] &&
-            product.images.PRIMARY['zoom'].url
-            ? {
-                image: product.images.PRIMARY['zoom'].url,
-            }
-            : {};
-    }
-    getProductBrand(product) {
-        return product['manufacturer']
-            ? {
-                brand: product['manufacturer'],
-            }
-            : null;
-    }
-};
-JsonLdBaseProductBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
-JsonLdBaseProductBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], JsonLdBaseProductBuilder);
-
-/**
- * Builds the structured data for the product offer, see https://schema.org/offers.
- * The data includes the price, currency and availability level.
- */
-let JsonLdProductOfferBuilder = class JsonLdProductOfferBuilder {
-    build(product) {
-        const schema = { '@type': 'Offer' };
-        if (product.price) {
-            if (product.price.value) {
-                schema.price = product.price.value;
-            }
-            if (product.price.currencyIso) {
-                schema.priceCurrency = product.price.currencyIso;
-            }
-        }
-        if (product.stock && product.stock.stockLevelStatus) {
-            schema.availability =
-                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
-        }
-        return of({
-            offers: schema,
-        });
-    }
-};
-JsonLdProductOfferBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
-JsonLdProductOfferBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], JsonLdProductOfferBuilder);
-
-/**
- * Builds the structured data for the product reviews, see https://schema.org/Review.
- * The data includes the aggregated product rating and the individual reviews.
- */
-let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
-    constructor(reviewService) {
-        this.reviewService = reviewService;
-    }
-    build(product) {
-        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
-            return {
-                aggregateRating: this.buildAggregatedReviews(product, reviews),
-                review: reviews.map((review) => this.buildReviews(review)),
-            };
-        }));
-    }
-    buildAggregatedReviews(product, reviews) {
-        const aggregated = {
-            '@type': 'AggregateRating',
-        };
-        if (product.averageRating) {
-            aggregated.ratingValue = product.averageRating;
-        }
-        if (reviews) {
-            aggregated.ratingCount = reviews.filter((rev) => !!rev.rating).length;
-            aggregated.reviewCount = reviews.filter((rev) => !!rev.comment).length;
-        }
-        return aggregated;
-    }
-    buildReviews(review) {
-        const reviewSchema = {
-            '@type': 'review',
-        };
-        if (review.principal && review.principal.name) {
-            reviewSchema.author = review.principal.name;
-        }
-        if (review.date) {
-            const date = new Date(review.date);
-            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-        }
-        if (review.headline) {
-            reviewSchema.name = review.headline;
-        }
-        if (review.comment) {
-            reviewSchema.description = review.comment;
-        }
-        if (review.rating) {
-            reviewSchema.reviewRating = {
-                '@type': 'Rating',
-                ratingValue: review.rating.toString(),
-            };
-        }
-        return reviewSchema;
-    }
-};
-JsonLdProductReviewBuilder.ctorParameters = () => [
-    { type: ProductReviewService }
-];
-JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
-JsonLdProductReviewBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], JsonLdProductReviewBuilder);
-
-let CurrentProductService = class CurrentProductService {
-    constructor(routingService, productService) {
-        this.routingService = routingService;
-        this.productService = productService;
-        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
-    }
-    /**
-     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
-     *
-     * @param scopes
-     */
-    getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
-            return productCode
-                ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
-                : of(null);
-        }), filter((x) => x !== undefined), distinctUntilChanged());
-    }
-};
-CurrentProductService.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ProductService }
-];
-CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
-CurrentProductService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CurrentProductService);
-
-/**
- * Adds the minimal structured data for the product, see https://schema.org/product.
- * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
- * using the `JSONLD_PRODUCT_BUILDER` token.
- */
-let ProductSchemaBuilder = class ProductSchemaBuilder {
-    constructor(currentProduct, builders) {
-        this.currentProduct = currentProduct;
-        this.builders = builders;
-    }
-    build() {
-        return this.currentProduct.getProduct().pipe(switchMap((product) => {
-            if (product) {
-                return combineLatest(this.collect(product)).pipe(map((res) => Object.assign({}, ...res)));
-            }
-            return of({});
-        }));
-    }
-    collect(product) {
-        if (!product || !product.code) {
-            return [];
-        }
-        const builders = this.builders
-            ? this.builders.map((builder) => builder.build(product))
-            : [];
-        return [
-            of({
-                '@context': 'http://schema.org',
-                '@type': 'Product',
-            }),
-            ...builders,
-        ];
-    }
-};
-ProductSchemaBuilder.ctorParameters = () => [
-    { type: CurrentProductService },
-    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
-];
-ProductSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
-ProductSchemaBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(1, Optional()),
-    __param(1, Inject(JSONLD_PRODUCT_BUILDER))
-], ProductSchemaBuilder);
-
-/**
- * Provides several standard json-ld builders that contribute
- * to colleting and building json-ld data.
- */
-let JsonLdBuilderModule = class JsonLdBuilderModule {
-};
-JsonLdBuilderModule = __decorate([
-    NgModule({
-        providers: [
-            {
-                provide: SCHEMA_BUILDER,
-                useExisting: ProductSchemaBuilder,
-                multi: true,
-            },
-            {
-                provide: SCHEMA_BUILDER,
-                useExisting: BreadcrumbSchemaBuilder,
-                multi: true,
-            },
-            // lower level json-ld builder classes offering fine-graiend control
-            // for product related schema's
-            {
-                provide: JSONLD_PRODUCT_BUILDER,
-                useExisting: JsonLdBaseProductBuilder,
-                multi: true,
-            },
-            {
-                provide: JSONLD_PRODUCT_BUILDER,
-                useExisting: JsonLdProductOfferBuilder,
-                multi: true,
-            },
-            {
-                provide: JSONLD_PRODUCT_BUILDER,
-                useExisting: JsonLdProductReviewBuilder,
-                multi: true,
-            },
-        ],
-    })
-], JsonLdBuilderModule);
-
 const ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
 
 let AsmComponentService = class AsmComponentService {
@@ -2972,735 +1015,6 @@ AsmMainUiComponent = __decorate([
         styles: ["cx-asm-main-ui{font-family:Arial,sans-serif;font-size:14px;width:100%;display:flex;flex-direction:column}cx-asm-main-ui .close,cx-asm-main-ui .logout{cursor:pointer;width:16px;height:16px;border:transparent;background-color:transparent}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{padding:0 12px;white-space:nowrap;border-radius:4px;height:36px;font-weight:400;border-style:solid;border-width:1px}cx-asm-main-ui button[type=submit]:disabled{opacity:.4;cursor:not-allowed}cx-asm-main-ui .spinner{display:flex;justify-content:center;width:100%;color:#0a6ed1}cx-asm-main-ui .spinner>div{width:8px;height:8px;margin:6px;border-radius:100%;background-color:currentColor;-webkit-animation:1s infinite spinner-dots-pulse;animation:1s infinite spinner-dots-pulse}cx-asm-main-ui .spinner>div:nth-child(1){-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{color:#fff;background-color:#354a5f;height:48px;display:flex;padding:0 32px;justify-content:space-between;z-index:1}cx-asm-main-ui .asm-bar-branding{display:flex;align-items:center}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{display:flex;justify-content:flex-end;align-items:center}cx-asm-main-ui>:nth-child(2){margin:32px;display:flex;width:calc(100vw - 4rem)}@media (min-width:767px){cx-asm-main-ui>:nth-child(2){width:50vw}}cx-asm-main-ui input{outline:0;border:1px solid #89919a;color:#32363a;background-color:#fff;border-radius:4px;padding:0 12px;height:36px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-webkit-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
     })
 ], AsmMainUiComponent);
-
-/**
- * The AsmEnablerService is used to enable ASM for those scenario's
- * where it's actually used. This service is added to avoid any polution
- * of the UI and runtime performance for the ordinary production user.
- */
-let AsmEnablerService = class AsmEnablerService {
-    constructor(location, winRef, componentFactoryResolver, outletService) {
-        this.location = location;
-        this.winRef = winRef;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.outletService = outletService;
-        /** indicates whether the ASM UI has been added already */
-        this.isUiAdded = false;
-    }
-    /**
-     * Loads the ASM UI if needed. The ASM UI will be added based on the
-     * existence of a URL parameter or previous usage given by local storage.
-     */
-    load() {
-        if (this.isEnabled()) {
-            this.addUi();
-        }
-    }
-    /**
-     * Indicates whether the ASM module is enabled.
-     */
-    isEnabled() {
-        if (this.isLaunched() && !this.isUsedBefore()) {
-            if (this.winRef.localStorage) {
-                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
-            }
-        }
-        return this.isLaunched() || this.isUsedBefore();
-    }
-    /**
-     * Indicates whether ASM is launched through the URL,
-     * using the asm flag in the URL.
-     */
-    isLaunched() {
-        const params = this.location.path().split('?')[1];
-        return params && params.split('&').includes('asm=true');
-    }
-    /**
-     * Evaluates local storage where we persist the usage of ASM.
-     */
-    isUsedBefore() {
-        return (this.winRef.localStorage &&
-            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
-    }
-    /**
-     * Adds the ASM UI by using the `cx-storefront` outlet.
-     */
-    addUi() {
-        if (this.isUiAdded) {
-            return;
-        }
-        const factory = this.componentFactoryResolver.resolveComponentFactory(AsmMainUiComponent);
-        this.outletService.add('cx-storefront', factory, OutletPosition.BEFORE);
-        this.isUiAdded = true;
-    }
-};
-AsmEnablerService.ctorParameters = () => [
-    { type: Location },
-    { type: WindowRef },
-    { type: ComponentFactoryResolver },
-    { type: OutletService }
-];
-AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletService)); }, token: AsmEnablerService, providedIn: "root" });
-AsmEnablerService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], AsmEnablerService);
-
-/**
- * The ASM loader module takes care of loading the ASM UI
- * only in case there's a reason to do so.
- */
-let AsmLoaderModule = class AsmLoaderModule {
-};
-AsmLoaderModule = __decorate([
-    NgModule({
-        imports: [CommonModule, PageComponentModule],
-        providers: [
-            {
-                provide: APP_INITIALIZER,
-                useFactory: asmFactory,
-                deps: [AsmEnablerService],
-                multi: true,
-            },
-        ],
-    })
-], AsmLoaderModule);
-/**
- *
- * We do not like to block the UI, which is why we delgate loading of ASM
- * to a real component; the router and state aren't available in an optimized
- * way during the APP_INITIALIZER.
- */
-function asmFactory(asmEnablerService) {
-    const isReady = () => {
-        asmEnablerService.load();
-    };
-    return isReady;
-}
-
-let AsmSessionTimerComponent = class AsmSessionTimerComponent {
-    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
-        this.config = config;
-        this.asmComponentService = asmComponentService;
-        this.authService = authService;
-        this.routingService = routingService;
-        this.changeDetectorRef = changeDetectorRef;
-        this.subscriptions = new Subscription();
-        this.maxStartDelayInSeconds = 60000;
-    }
-    ngOnInit() {
-        this.timeLeft = this.getTimerStartDelayInSeconds();
-        this.interval = setInterval(() => {
-            if (this.timeLeft > 0) {
-                this.timeLeft--;
-            }
-            else {
-                clearInterval(this.interval);
-                this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
-            }
-            this.changeDetectorRef.markForCheck();
-        }, 1000);
-        this.resetOnNavigate();
-        this.resetOnCustomerSessionChange();
-    }
-    resetOnNavigate() {
-        this.subscriptions.add(this.routingService.isNavigating().subscribe((isNavigating) => {
-            if (isNavigating) {
-                this.resetTimer();
-            }
-        }));
-    }
-    resetOnCustomerSessionChange() {
-        this.subscriptions.add(this.authService
-            .getOccUserId()
-            .pipe(distinctUntilChanged())
-            .subscribe(() => this.resetTimer()));
-    }
-    resetTimer() {
-        if (this.timeLeft > 0) {
-            this.timeLeft = this.getTimerStartDelayInSeconds();
-        }
-    }
-    getTimerStartDelayInSeconds() {
-        if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
-            this.maxStartDelayInSeconds) {
-            return this.maxStartDelayInSeconds;
-        }
-        else {
-            return this.config.asm.agentSessionTimer.startingDelayInSeconds;
-        }
-    }
-    ngOnDestroy() {
-        this.subscriptions.unsubscribe();
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-};
-AsmSessionTimerComponent.ctorParameters = () => [
-    { type: AsmConfig },
-    { type: AsmComponentService },
-    { type: AuthService },
-    { type: RoutingService },
-    { type: ChangeDetectorRef }
-];
-AsmSessionTimerComponent = __decorate([
-    Component({
-        selector: 'cx-asm-session-timer',
-        template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
-        encapsulation: ViewEncapsulation.None,
-        styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
-    })
-], AsmSessionTimerComponent);
-
-let FormatTimerPipe = class FormatTimerPipe {
-    transform(totalSeconds) {
-        if (totalSeconds < 0) {
-            totalSeconds = 0;
-        }
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        let zeroPaddedMinutes;
-        if (minutes < 10) {
-            zeroPaddedMinutes = ('00' + minutes).slice(-2);
-        }
-        else {
-            zeroPaddedMinutes = minutes + '';
-        }
-        const zeroPaddedSeconds = ('00' + seconds).slice(-2);
-        return `${zeroPaddedMinutes}:${zeroPaddedSeconds}`;
-    }
-};
-FormatTimerPipe = __decorate([
-    Pipe({
-        name: 'formatTimer',
-    })
-], FormatTimerPipe);
-
-/**
- * Utility class when working with forms.
- */
-class FormUtils {
-    /**
-     *
-     * Validates a field of the given form group
-     *
-     * If the field is NOT valid (or invalid), the method returns `true`.
-     *
-     * @param form Form with fields to check
-     * @param formControlName Name of the form field to check
-     * @param submitted Has the form been submitted
-     */
-    static isNotValidField(form, formControlName, submitted) {
-        const control = form.get(formControlName);
-        return control.invalid && (submitted || (control.touched && control.dirty));
-    }
-}
-
-let CSAgentLoginFormComponent = class CSAgentLoginFormComponent {
-    constructor(fb) {
-        this.fb = fb;
-        this.submitClicked = false;
-        this.csAgentTokenLoading = false;
-        this.submitEvent = new EventEmitter();
-    }
-    ngOnInit() {
-        this.form = this.fb.group({
-            userId: ['', [Validators.required]],
-            password: ['', [Validators.required]],
-        });
-    }
-    onSubmit() {
-        this.submitClicked = true;
-        if (this.form.invalid) {
-            return;
-        }
-        this.submitEvent.emit({
-            userId: this.form.controls.userId.value,
-            password: this.form.controls.password.value,
-        });
-    }
-    isNotValid(formControlName) {
-        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-    }
-};
-CSAgentLoginFormComponent.ctorParameters = () => [
-    { type: FormBuilder }
-];
-__decorate([
-    Input()
-], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
-__decorate([
-    Output()
-], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
-CSAgentLoginFormComponent = __decorate([
-    Component({
-        selector: 'cx-csagent-login-form',
-        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
-        encapsulation: ViewEncapsulation.None,
-        styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
-    })
-], CSAgentLoginFormComponent);
-
-let CustomerEmulationComponent = class CustomerEmulationComponent {
-    constructor(asmComponentService, userService) {
-        this.asmComponentService = asmComponentService;
-        this.userService = userService;
-        this.subscription = new Subscription();
-    }
-    ngOnInit() {
-        this.subscription.add(this.userService.get().subscribe((user) => (this.customer = user)));
-        this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
-    }
-    logoutCustomer() {
-        this.asmComponentService.logoutCustomer();
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-};
-CustomerEmulationComponent.ctorParameters = () => [
-    { type: AsmComponentService },
-    { type: UserService }
-];
-CustomerEmulationComponent = __decorate([
-    Component({
-        selector: 'cx-customer-emulation',
-        template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
-        encapsulation: ViewEncapsulation.None,
-        styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
-    })
-], CustomerEmulationComponent);
-
-let CustomerSelectionComponent = class CustomerSelectionComponent {
-    constructor(fb, asmService, config) {
-        this.fb = fb;
-        this.asmService = asmService;
-        this.config = config;
-        this.subscription = new Subscription();
-        this.submitEvent = new EventEmitter();
-    }
-    ngOnInit() {
-        this.form = this.fb.group({
-            searchTerm: [''],
-        });
-        this.asmService.customerSearchReset();
-        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
-        this.searchResults = this.asmService.getCustomerSearchResults();
-        this.subscription.add(this.form.controls.searchTerm.valueChanges
-            .pipe(debounceTime(300))
-            .subscribe((searchTermValue) => {
-            this.handleSearchTerm(searchTermValue);
-        }));
-    }
-    handleSearchTerm(searchTermValue) {
-        if (Boolean(this.selectedCustomer) &&
-            searchTermValue !== this.selectedCustomer.name) {
-            this.selectedCustomer = undefined;
-        }
-        if (Boolean(this.selectedCustomer)) {
-            return;
-        }
-        this.asmService.customerSearchReset();
-        if (searchTermValue.trim().length >= 3) {
-            this.asmService.customerSearch({
-                query: searchTermValue,
-                pageSize: this.config.asm.customerSearch.maxResults,
-            });
-        }
-    }
-    selectCustomerFromList(customer) {
-        this.selectedCustomer = customer;
-        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
-        this.asmService.customerSearchReset();
-    }
-    onSubmit() {
-        if (Boolean(this.selectedCustomer)) {
-            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
-        }
-    }
-    onDocumentClick(event) {
-        if (Boolean(this.resultList)) {
-            if (this.resultList.nativeElement.contains(event.target) ||
-                this.searchTerm.nativeElement.contains(event.target)) {
-                return;
-            }
-            else {
-                this.asmService.customerSearchReset();
-            }
-        }
-    }
-    closeResults() {
-        this.asmService.customerSearchReset();
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.asmService.customerSearchReset();
-    }
-};
-CustomerSelectionComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: AsmService },
-    { type: AsmConfig }
-];
-__decorate([
-    Output()
-], CustomerSelectionComponent.prototype, "submitEvent", void 0);
-__decorate([
-    ViewChild('resultList')
-], CustomerSelectionComponent.prototype, "resultList", void 0);
-__decorate([
-    ViewChild('searchTerm')
-], CustomerSelectionComponent.prototype, "searchTerm", void 0);
-CustomerSelectionComponent = __decorate([
-    Component({
-        selector: 'cx-customer-selection',
-        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
-        encapsulation: ViewEncapsulation.None,
-        // tslint:disable-next-line:no-host-metadata-property
-        host: {
-            '(document:click)': 'onDocumentClick($event)',
-        },
-        styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
-    })
-], CustomerSelectionComponent);
-
-let AsmModule = class AsmModule {
-};
-AsmModule = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            ReactiveFormsModule,
-            I18nModule,
-            AsmModule$1.forRoot(),
-            AsmLoaderModule,
-        ],
-        declarations: [
-            AsmMainUiComponent,
-            CSAgentLoginFormComponent,
-            CustomerSelectionComponent,
-            AsmSessionTimerComponent,
-            FormatTimerPipe,
-            CustomerEmulationComponent,
-        ],
-        entryComponents: [AsmMainUiComponent],
-    })
-], AsmModule);
-
-let OrderDetailsService = class OrderDetailsService {
-    constructor(userOrderService, routingService) {
-        this.userOrderService = userOrderService;
-        this.routingService = routingService;
-        this.orderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map((routingData) => routingData.state.params.orderCode));
-        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
-            if (orderCode) {
-                this.userOrderService.loadOrderDetails(orderCode);
-            }
-            else {
-                this.userOrderService.clearOrderDetails();
-            }
-        }), shareReplay({ bufferSize: 1, refCount: true }));
-    }
-    getOrderDetails() {
-        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
-    }
-};
-OrderDetailsService.ctorParameters = () => [
-    { type: UserOrderService },
-    { type: RoutingService }
-];
-OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
-OrderDetailsService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], OrderDetailsService);
-
-let PromotionService = class PromotionService {
-    constructor(orderDetailsService, checkoutService, activeCartService) {
-        this.orderDetailsService = orderDetailsService;
-        this.checkoutService = checkoutService;
-        this.activeCartService = activeCartService;
-    }
-    getOrderPromotions(promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.getOrderPromotionsFromCart();
-            case PromotionLocation.Checkout:
-                return this.getOrderPromotionsFromCheckout();
-            case PromotionLocation.Order:
-                return this.getOrderPromotionsFromOrder();
-            default:
-                return of([]);
-        }
-    }
-    getOrderPromotionsFromCart() {
-        return this.activeCartService
-            .getActive()
-            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
-    }
-    getOrderPromotionsFromCartHelper(cart) {
-        const potentialPromotions = [];
-        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
-        const appliedPromotions = [];
-        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
-        return [...potentialPromotions, ...appliedPromotions];
-    }
-    getOrderPromotionsFromCheckout() {
-        return this.checkoutService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrder() {
-        return this.orderDetailsService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrderHelper(order) {
-        const appliedOrderPromotions = [];
-        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
-        return appliedOrderPromotions;
-    }
-    getProductPromotionForEntry(item, promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.activeCartService
-                    .getActive()
-                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
-            case PromotionLocation.Checkout:
-                return this.checkoutService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-            case PromotionLocation.Order:
-                return this.orderDetailsService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-        }
-    }
-    getProductPromotion(item, promotions) {
-        const entryPromotions = [];
-        if (promotions && promotions.length > 0) {
-            for (const promotion of promotions) {
-                if (promotion.description &&
-                    promotion.consumedEntries &&
-                    promotion.consumedEntries.length > 0) {
-                    for (const consumedEntry of promotion.consumedEntries) {
-                        if (this.isConsumedByEntry(consumedEntry, item)) {
-                            entryPromotions.push(promotion);
-                        }
-                    }
-                }
-            }
-        }
-        return entryPromotions;
-    }
-    isConsumedByEntry(consumedEntry, entry) {
-        const consumedEntryNumber = consumedEntry.orderEntryNumber;
-        if (entry.entries && entry.entries.length > 0) {
-            for (const subEntry of entry.entries) {
-                if (subEntry.entryNumber === consumedEntryNumber) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else {
-            return consumedEntryNumber === entry.entryNumber;
-        }
-    }
-};
-PromotionService.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: CheckoutService },
-    { type: ActiveCartService }
-];
-PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
-PromotionService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], PromotionService);
-
-let AddedToCartDialogComponent = class AddedToCartDialogComponent {
-    constructor(modalService, cartService, promotionService) {
-        this.modalService = modalService;
-        this.cartService = cartService;
-        this.promotionService = promotionService;
-        this.iconTypes = ICON_TYPE;
-        this.promotionLocation = PromotionLocation.ActiveCart;
-        this.quantity = 0;
-        this.modalIsOpen = false;
-        this.form = new FormGroup({});
-    }
-    /**
-     * Returns an observable formControl with the quantity of the cartEntry,
-     * but also updates the entry in case of a changed value.
-     * The quantity can be set to zero in order to remove the entry.
-     */
-    getQuantityControl() {
-        if (!this.quantityControl$) {
-            this.quantityControl$ = this.entry$.pipe(filter((e) => !!e), map((entry) => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
-            // tslint:disable-next-line:deprecation
-            startWith(null), tap((valueChange) => {
-                if (valueChange) {
-                    this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
-                    if (valueChange.quantity === 0) {
-                        this.dismissModal('Removed');
-                    }
-                }
-                else {
-                    this.form.markAsPristine();
-                }
-            }))), map(() => this.form.get('quantity')));
-        }
-        return this.quantityControl$;
-    }
-    ngOnInit() {
-        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
-    }
-    getFormControl(entry) {
-        if (!this.form.get('quantity')) {
-            const quantity = new FormControl(entry.quantity, { updateOn: 'blur' });
-            this.form.addControl('quantity', quantity);
-            const entryNumber = new FormControl(entry.entryNumber);
-            this.form.addControl('entryNumber', entryNumber);
-        }
-        return this.form.get('quantity');
-    }
-    dismissModal(reason) {
-        this.modalService.dismissActiveModal(reason);
-    }
-};
-AddedToCartDialogComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: ActiveCartService },
-    { type: PromotionService }
-];
-__decorate([
-    ViewChild('dialog', { read: ElementRef })
-], AddedToCartDialogComponent.prototype, "dialog", void 0);
-AddedToCartDialogComponent = __decorate([
-    Component({
-        selector: 'cx-added-to-cart-dialog',
-        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-    })
-], AddedToCartDialogComponent);
-
-let AddToCartComponent = class AddToCartComponent {
-    constructor(modalService, currentProductService, cd, activeCartService) {
-        this.modalService = modalService;
-        this.currentProductService = currentProductService;
-        this.cd = cd;
-        this.activeCartService = activeCartService;
-        this.showQuantity = true;
-        this.hasStock = false;
-        this.quantity = 1;
-        this.increment = false;
-        this.addToCartForm = new FormGroup({
-            quantity: new FormControl(1),
-        });
-    }
-    ngOnInit() {
-        if (this.product) {
-            this.productCode = this.product.code;
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-            this.setStockInfo(this.product);
-            this.cd.markForCheck();
-        }
-        else if (this.productCode) {
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-            // force hasStock and quantity for the time being, as we do not have more info:
-            this.quantity = 1;
-            this.hasStock = true;
-            this.cd.markForCheck();
-        }
-        else {
-            this.subscription = this.currentProductService
-                .getProduct()
-                .pipe(filter(Boolean))
-                .subscribe((product) => {
-                this.productCode = product.code;
-                this.setStockInfo(product);
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                this.cd.markForCheck();
-            });
-        }
-    }
-    setStockInfo(product) {
-        this.quantity = 1;
-        this.hasStock =
-            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
-        if (this.hasStock && product.stock.stockLevel) {
-            this.maxQuantity = product.stock.stockLevel;
-        }
-    }
-    updateCount(value) {
-        this.quantity = value;
-    }
-    addToCart() {
-        const quantity = this.addToCartForm.get('quantity').value;
-        if (!this.productCode || quantity <= 0) {
-            return;
-        }
-        // check item is already present in the cart
-        // so modal will have proper header text displayed
-        this.activeCartService
-            .getEntry(this.productCode)
-            .subscribe((entry) => {
-            if (entry) {
-                this.increment = true;
-            }
-            this.openModal();
-            this.activeCartService.addEntry(this.productCode, quantity);
-            this.increment = false;
-        })
-            .unsubscribe();
-    }
-    openModal() {
-        let modalInstance;
-        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
-        modalInstance = this.modalRef.componentInstance;
-        modalInstance.entry$ = this.cartEntry$;
-        modalInstance.cart$ = this.activeCartService.getActive();
-        modalInstance.loaded$ = this.activeCartService.isStable();
-        modalInstance.quantity = this.quantity;
-        modalInstance.increment = this.increment;
-    }
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
-};
-AddToCartComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: CurrentProductService },
-    { type: ChangeDetectorRef },
-    { type: ActiveCartService }
-];
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "productCode", void 0);
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "showQuantity", void 0);
-__decorate([
-    Input()
-], AddToCartComponent.prototype, "product", void 0);
-AddToCartComponent = __decorate([
-    Component({
-        selector: 'cx-add-to-cart',
-        template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], AddToCartComponent);
 
 /** The element attribute used to store the focus state */
 const FOCUS_ATTR = 'data-cx-focus';
@@ -4770,6 +2084,997 @@ KeyboardFocusModule = __decorate([
     })
 ], KeyboardFocusModule);
 
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
+
+class SkipLinkConfig {
+}
+class SkipLink {
+}
+var SkipLinkScrollPosition;
+(function (SkipLinkScrollPosition) {
+    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
+    SkipLinkScrollPosition["AFTER"] = "AFTER";
+})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
+
+let SkipLinkService = class SkipLinkService {
+    constructor(config, keyboardFocusService) {
+        this.config = config;
+        this.keyboardFocusService = keyboardFocusService;
+        this.skipLinks$ = new BehaviorSubject([]);
+    }
+    getSkipLinks() {
+        return this.skipLinks$;
+    }
+    add(key, target) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            const existing = this.skipLinks$.value;
+            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                target,
+                i18nKey: found.i18nKey,
+                position: found.position,
+                key,
+            });
+            this.skipLinks$.next(existing);
+        }
+    }
+    remove(key) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            let existing = this.skipLinks$.value;
+            existing = existing.filter((skipLink) => skipLink.key !== key);
+            this.skipLinks$.next(existing);
+        }
+    }
+    scrollToTarget(skipLink) {
+        const target = skipLink.target instanceof HTMLElement
+            ? skipLink.target
+            : skipLink.target.parentElement;
+        // focus first focusable element in the
+        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
+        // we force a tabindex if not available, to ensure we can focus into the element
+        const hasTabindex = firstFocusable.hasAttribute('tabindex');
+        if (!hasTabindex) {
+            firstFocusable.setAttribute('tabindex', '-1');
+        }
+        firstFocusable.focus();
+        // drop the tmp tabindex
+        if (!hasTabindex) {
+            firstFocusable.removeAttribute('tabindex');
+        }
+    }
+    getSkipLinkIndexInArray(key) {
+        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
+        while (index > 0) {
+            index--;
+            const previous = this.config.skipLinks[index];
+            if (previous) {
+                const existing = this.skipLinks$.value;
+                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
+                if (found > -1) {
+                    return found + 1;
+                }
+            }
+        }
+        return 0;
+    }
+};
+SkipLinkService.ctorParameters = () => [
+    { type: SkipLinkConfig },
+    { type: KeyboardFocusService }
+];
+SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
+SkipLinkService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], SkipLinkService);
+
+let SkipLinkComponent = class SkipLinkComponent {
+    constructor(skipLinkService) {
+        this.skipLinkService = skipLinkService;
+        this.skipLinks$ = this.skipLinkService.getSkipLinks();
+    }
+    scrollToTarget(skipLink) {
+        this.skipLinkService.scrollToTarget(skipLink);
+    }
+};
+SkipLinkComponent.ctorParameters = () => [
+    { type: SkipLinkService }
+];
+SkipLinkComponent = __decorate([
+    Component({
+        selector: 'cx-skip-link',
+        template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], SkipLinkComponent);
+
+const DEFAULT_LAUNCH_CONFIG = {
+    launch: {
+        ASM: {
+            outlet: 'cx-storefront',
+            component: AsmMainUiComponent,
+        },
+        SKIP_LINKS: {
+            outlet: 'cx-storefront',
+            component: SkipLinkComponent,
+        },
+    },
+};
+
+class LaunchConfig {
+}
+/**
+ * Types of dialog openings supported
+ */
+var DIALOG_TYPE;
+(function (DIALOG_TYPE) {
+    DIALOG_TYPE["POPOVER"] = "POPOVER";
+    DIALOG_TYPE["DIALOG"] = "DIALOG";
+    DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
+    DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
+})(DIALOG_TYPE || (DIALOG_TYPE = {}));
+/**
+ * List of available callers
+ */
+var LAUNCH_CALLER;
+(function (LAUNCH_CALLER) {
+    LAUNCH_CALLER["ASM"] = "ASM";
+    LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
+})(LAUNCH_CALLER || (LAUNCH_CALLER = {}));
+
+class LaunchRenderStrategy {
+    constructor() {
+        // List of called references; only used for rendered elements
+        this.renderedCallers = [];
+    }
+    /**
+     * Determines if element should render
+     *
+     * @param caller
+     * @param config
+     */
+    shouldRender(caller, config) {
+        return this.renderedCallers.some((el) => el.caller === caller)
+            ? !!config.multi
+            : true;
+    }
+    /**
+     * Method to call when rendered element is destroyed
+     * The element will be removed from the list of rendered elements
+     *
+     * @param caller
+     * @param _config optional parameters used in children strategies
+     */
+    remove(caller, _config) {
+        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
+    }
+}
+
+let LaunchDialogService = class LaunchDialogService {
+    constructor(renderStrategies, launchConfig) {
+        this.renderStrategies = renderStrategies;
+        this.launchConfig = launchConfig;
+        // Keep a list of rendered elements
+        this.renderedCallers = [];
+        this.renderStrategies = this.renderStrategies || [];
+    }
+    /**
+     * Render the element based on the strategy from the launch configuration
+     *
+     * @param caller LAUNCH_CALLER
+     * @param vcr View Container Ref of the container for inline rendering
+     */
+    launch(caller, vcr) {
+        const config = this.findConfiguration(caller);
+        const renderer = this.getStrategy(config);
+        // Render if the strategy exists
+        if (renderer) {
+            renderer.render(config, caller, vcr);
+        }
+    }
+    /**
+     * Util method to remove element from rendered elements list
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    clear(caller) {
+        const config = this.findConfiguration(caller);
+        const renderer = this.getStrategy(config);
+        // Render if the strategy exists
+        if (renderer) {
+            renderer.remove(caller, config);
+        }
+    }
+    /**
+     * Returns the configuration for the caller
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    findConfiguration(caller) {
+        var _a;
+        return (_a = this.launchConfig) === null || _a === void 0 ? void 0 : _a.launch[caller];
+    }
+    /**
+     * Returns the render strategy based on the configuration
+     *
+     * @param config Configuration for launch
+     */
+    getStrategy(config) {
+        return this.renderStrategies.find((strategy) => strategy.match(config));
+    }
+};
+LaunchDialogService.ctorParameters = () => [
+    { type: Array, decorators: [{ type: Inject, args: [LaunchRenderStrategy,] }] },
+    { type: LaunchConfig }
+];
+LaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function LaunchDialogService_Factory() { return new LaunchDialogService(ɵɵinject(LaunchRenderStrategy), ɵɵinject(LaunchConfig)); }, token: LaunchDialogService, providedIn: "root" });
+LaunchDialogService = __decorate([
+    Injectable({ providedIn: 'root' }),
+    __param(0, Inject(LaunchRenderStrategy))
+], LaunchDialogService);
+
+/**
+ * The AsmEnablerService is used to enable ASM for those scenario's
+ * where it's actually used. This service is added to avoid any polution
+ * of the UI and runtime performance for the ordinary production user.
+ */
+let AsmEnablerService = class AsmEnablerService {
+    constructor(location, winRef, launchDialogService) {
+        this.location = location;
+        this.winRef = winRef;
+        this.launchDialogService = launchDialogService;
+    }
+    /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     */
+    load() {
+        if (this.isEnabled()) {
+            this.addUi();
+        }
+    }
+    /**
+     * Indicates whether the ASM module is enabled.
+     */
+    isEnabled() {
+        if (this.isLaunched() && !this.isUsedBefore()) {
+            if (this.winRef.localStorage) {
+                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
+            }
+        }
+        return this.isLaunched() || this.isUsedBefore();
+    }
+    /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     */
+    isLaunched() {
+        const params = this.location.path().split('?')[1];
+        return params && params.split('&').includes('asm=true');
+    }
+    /**
+     * Evaluates local storage where we persist the usage of ASM.
+     */
+    isUsedBefore() {
+        return (this.winRef.localStorage &&
+            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
+    }
+    /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     */
+    addUi() {
+        this.launchDialogService.launch(LAUNCH_CALLER.ASM);
+    }
+};
+AsmEnablerService.ctorParameters = () => [
+    { type: Location },
+    { type: WindowRef },
+    { type: LaunchDialogService }
+];
+AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(LaunchDialogService)); }, token: AsmEnablerService, providedIn: "root" });
+AsmEnablerService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], AsmEnablerService);
+
+/**
+ * The ASM loader module takes care of loading the ASM UI
+ * only in case there's a reason to do so.
+ */
+let AsmLoaderModule = class AsmLoaderModule {
+};
+AsmLoaderModule = __decorate([
+    NgModule({
+        imports: [CommonModule, PageComponentModule],
+        providers: [
+            {
+                provide: APP_INITIALIZER,
+                useFactory: asmFactory,
+                deps: [AsmEnablerService],
+                multi: true,
+            },
+        ],
+    })
+], AsmLoaderModule);
+/**
+ *
+ * We do not like to block the UI, which is why we delgate loading of ASM
+ * to a real component; the router and state aren't available in an optimized
+ * way during the APP_INITIALIZER.
+ */
+function asmFactory(asmEnablerService) {
+    const isReady = () => {
+        asmEnablerService.load();
+    };
+    return isReady;
+}
+
+let AsmSessionTimerComponent = class AsmSessionTimerComponent {
+    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
+        this.config = config;
+        this.asmComponentService = asmComponentService;
+        this.authService = authService;
+        this.routingService = routingService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.subscriptions = new Subscription();
+        this.maxStartDelayInSeconds = 60000;
+    }
+    ngOnInit() {
+        this.timeLeft = this.getTimerStartDelayInSeconds();
+        this.interval = setInterval(() => {
+            if (this.timeLeft > 0) {
+                this.timeLeft--;
+            }
+            else {
+                clearInterval(this.interval);
+                this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
+            }
+            this.changeDetectorRef.markForCheck();
+        }, 1000);
+        this.resetOnNavigate();
+        this.resetOnCustomerSessionChange();
+    }
+    resetOnNavigate() {
+        this.subscriptions.add(this.routingService.isNavigating().subscribe((isNavigating) => {
+            if (isNavigating) {
+                this.resetTimer();
+            }
+        }));
+    }
+    resetOnCustomerSessionChange() {
+        this.subscriptions.add(this.authService
+            .getOccUserId()
+            .pipe(distinctUntilChanged())
+            .subscribe(() => this.resetTimer()));
+    }
+    resetTimer() {
+        if (this.timeLeft > 0) {
+            this.timeLeft = this.getTimerStartDelayInSeconds();
+        }
+    }
+    getTimerStartDelayInSeconds() {
+        if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
+            this.maxStartDelayInSeconds) {
+            return this.maxStartDelayInSeconds;
+        }
+        else {
+            return this.config.asm.agentSessionTimer.startingDelayInSeconds;
+        }
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+        if (this.interval) {
+            clearInterval(this.interval);
+        }
+    }
+};
+AsmSessionTimerComponent.ctorParameters = () => [
+    { type: AsmConfig },
+    { type: AsmComponentService },
+    { type: AuthService },
+    { type: RoutingService },
+    { type: ChangeDetectorRef }
+];
+AsmSessionTimerComponent = __decorate([
+    Component({
+        selector: 'cx-asm-session-timer',
+        template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
+        encapsulation: ViewEncapsulation.None,
+        styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
+    })
+], AsmSessionTimerComponent);
+
+let FormatTimerPipe = class FormatTimerPipe {
+    transform(totalSeconds) {
+        if (totalSeconds < 0) {
+            totalSeconds = 0;
+        }
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        let zeroPaddedMinutes;
+        if (minutes < 10) {
+            zeroPaddedMinutes = ('00' + minutes).slice(-2);
+        }
+        else {
+            zeroPaddedMinutes = minutes + '';
+        }
+        const zeroPaddedSeconds = ('00' + seconds).slice(-2);
+        return `${zeroPaddedMinutes}:${zeroPaddedSeconds}`;
+    }
+};
+FormatTimerPipe = __decorate([
+    Pipe({
+        name: 'formatTimer',
+    })
+], FormatTimerPipe);
+
+/**
+ * Utility class when working with forms.
+ */
+class FormUtils {
+    /**
+     *
+     * Validates a field of the given form group
+     *
+     * If the field is NOT valid (or invalid), the method returns `true`.
+     *
+     * @param form Form with fields to check
+     * @param formControlName Name of the form field to check
+     * @param submitted Has the form been submitted
+     */
+    static isNotValidField(form, formControlName, submitted) {
+        const control = form.get(formControlName);
+        return control.invalid && (submitted || (control.touched && control.dirty));
+    }
+}
+
+let CSAgentLoginFormComponent = class CSAgentLoginFormComponent {
+    constructor(fb) {
+        this.fb = fb;
+        this.submitClicked = false;
+        this.csAgentTokenLoading = false;
+        this.submitEvent = new EventEmitter();
+    }
+    ngOnInit() {
+        this.form = this.fb.group({
+            userId: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+        });
+    }
+    onSubmit() {
+        this.submitClicked = true;
+        if (this.form.invalid) {
+            return;
+        }
+        this.submitEvent.emit({
+            userId: this.form.controls.userId.value,
+            password: this.form.controls.password.value,
+        });
+    }
+    isNotValid(formControlName) {
+        return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+    }
+};
+CSAgentLoginFormComponent.ctorParameters = () => [
+    { type: FormBuilder }
+];
+__decorate([
+    Input()
+], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
+__decorate([
+    Output()
+], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
+CSAgentLoginFormComponent = __decorate([
+    Component({
+        selector: 'cx-csagent-login-form',
+        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
+        encapsulation: ViewEncapsulation.None,
+        styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
+    })
+], CSAgentLoginFormComponent);
+
+let CustomerEmulationComponent = class CustomerEmulationComponent {
+    constructor(asmComponentService, userService) {
+        this.asmComponentService = asmComponentService;
+        this.userService = userService;
+        this.subscription = new Subscription();
+    }
+    ngOnInit() {
+        this.subscription.add(this.userService.get().subscribe((user) => (this.customer = user)));
+        this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
+    }
+    logoutCustomer() {
+        this.asmComponentService.logoutCustomer();
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+};
+CustomerEmulationComponent.ctorParameters = () => [
+    { type: AsmComponentService },
+    { type: UserService }
+];
+CustomerEmulationComponent = __decorate([
+    Component({
+        selector: 'cx-customer-emulation',
+        template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
+        encapsulation: ViewEncapsulation.None,
+        styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
+    })
+], CustomerEmulationComponent);
+
+let CustomerSelectionComponent = class CustomerSelectionComponent {
+    constructor(fb, asmService, config) {
+        this.fb = fb;
+        this.asmService = asmService;
+        this.config = config;
+        this.subscription = new Subscription();
+        this.submitEvent = new EventEmitter();
+    }
+    ngOnInit() {
+        this.form = this.fb.group({
+            searchTerm: [''],
+        });
+        this.asmService.customerSearchReset();
+        this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+        this.searchResults = this.asmService.getCustomerSearchResults();
+        this.subscription.add(this.form.controls.searchTerm.valueChanges
+            .pipe(debounceTime(300))
+            .subscribe((searchTermValue) => {
+            this.handleSearchTerm(searchTermValue);
+        }));
+    }
+    handleSearchTerm(searchTermValue) {
+        if (Boolean(this.selectedCustomer) &&
+            searchTermValue !== this.selectedCustomer.name) {
+            this.selectedCustomer = undefined;
+        }
+        if (Boolean(this.selectedCustomer)) {
+            return;
+        }
+        this.asmService.customerSearchReset();
+        if (searchTermValue.trim().length >= 3) {
+            this.asmService.customerSearch({
+                query: searchTermValue,
+                pageSize: this.config.asm.customerSearch.maxResults,
+            });
+        }
+    }
+    selectCustomerFromList(customer) {
+        this.selectedCustomer = customer;
+        this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+        this.asmService.customerSearchReset();
+    }
+    onSubmit() {
+        if (Boolean(this.selectedCustomer)) {
+            this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
+        }
+    }
+    onDocumentClick(event) {
+        if (Boolean(this.resultList)) {
+            if (this.resultList.nativeElement.contains(event.target) ||
+                this.searchTerm.nativeElement.contains(event.target)) {
+                return;
+            }
+            else {
+                this.asmService.customerSearchReset();
+            }
+        }
+    }
+    closeResults() {
+        this.asmService.customerSearchReset();
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+        this.asmService.customerSearchReset();
+    }
+};
+CustomerSelectionComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: AsmService },
+    { type: AsmConfig }
+];
+__decorate([
+    Output()
+], CustomerSelectionComponent.prototype, "submitEvent", void 0);
+__decorate([
+    ViewChild('resultList')
+], CustomerSelectionComponent.prototype, "resultList", void 0);
+__decorate([
+    ViewChild('searchTerm')
+], CustomerSelectionComponent.prototype, "searchTerm", void 0);
+CustomerSelectionComponent = __decorate([
+    Component({
+        selector: 'cx-customer-selection',
+        template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+        encapsulation: ViewEncapsulation.None,
+        // tslint:disable-next-line:no-host-metadata-property
+        host: {
+            '(document:click)': 'onDocumentClick($event)',
+        },
+        styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
+    })
+], CustomerSelectionComponent);
+
+let AsmModule = class AsmModule {
+};
+AsmModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            ReactiveFormsModule,
+            I18nModule,
+            AsmModule$1.forRoot(),
+            AsmLoaderModule,
+        ],
+        declarations: [
+            AsmMainUiComponent,
+            CSAgentLoginFormComponent,
+            CustomerSelectionComponent,
+            AsmSessionTimerComponent,
+            FormatTimerPipe,
+            CustomerEmulationComponent,
+        ],
+        entryComponents: [AsmMainUiComponent],
+    })
+], AsmModule);
+
+let CurrentProductService = class CurrentProductService {
+    constructor(routingService, productService) {
+        this.routingService = routingService;
+        this.productService = productService;
+        this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
+    }
+    /**
+     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+     *
+     * @param scopes
+     */
+    getProduct(scopes) {
+        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
+            return productCode
+                ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
+                : of(null);
+        }), filter((x) => x !== undefined), distinctUntilChanged());
+    }
+};
+CurrentProductService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ProductService }
+];
+CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
+CurrentProductService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CurrentProductService);
+
+let OrderDetailsService = class OrderDetailsService {
+    constructor(userOrderService, routingService) {
+        this.userOrderService = userOrderService;
+        this.routingService = routingService;
+        this.orderCode$ = this.routingService
+            .getRouterState()
+            .pipe(map((routingData) => routingData.state.params.orderCode));
+        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
+            if (orderCode) {
+                this.userOrderService.loadOrderDetails(orderCode);
+            }
+            else {
+                this.userOrderService.clearOrderDetails();
+            }
+        }), shareReplay({ bufferSize: 1, refCount: true }));
+    }
+    getOrderDetails() {
+        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
+    }
+};
+OrderDetailsService.ctorParameters = () => [
+    { type: UserOrderService },
+    { type: RoutingService }
+];
+OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
+OrderDetailsService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OrderDetailsService);
+
+let PromotionService = class PromotionService {
+    constructor(orderDetailsService, checkoutService, activeCartService) {
+        this.orderDetailsService = orderDetailsService;
+        this.checkoutService = checkoutService;
+        this.activeCartService = activeCartService;
+    }
+    getOrderPromotions(promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.getOrderPromotionsFromCart();
+            case PromotionLocation.Checkout:
+                return this.getOrderPromotionsFromCheckout();
+            case PromotionLocation.Order:
+                return this.getOrderPromotionsFromOrder();
+            default:
+                return of([]);
+        }
+    }
+    getOrderPromotionsFromCart() {
+        return this.activeCartService
+            .getActive()
+            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
+    }
+    getOrderPromotionsFromCartHelper(cart) {
+        const potentialPromotions = [];
+        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
+        const appliedPromotions = [];
+        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
+        return [...potentialPromotions, ...appliedPromotions];
+    }
+    getOrderPromotionsFromCheckout() {
+        return this.checkoutService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrder() {
+        return this.orderDetailsService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrderHelper(order) {
+        const appliedOrderPromotions = [];
+        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
+        return appliedOrderPromotions;
+    }
+    getProductPromotionForEntry(item, promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.activeCartService
+                    .getActive()
+                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
+            case PromotionLocation.Checkout:
+                return this.checkoutService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+            case PromotionLocation.Order:
+                return this.orderDetailsService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+        }
+    }
+    getProductPromotion(item, promotions) {
+        const entryPromotions = [];
+        if (promotions && promotions.length > 0) {
+            for (const promotion of promotions) {
+                if (promotion.description &&
+                    promotion.consumedEntries &&
+                    promotion.consumedEntries.length > 0) {
+                    for (const consumedEntry of promotion.consumedEntries) {
+                        if (this.isConsumedByEntry(consumedEntry, item)) {
+                            entryPromotions.push(promotion);
+                        }
+                    }
+                }
+            }
+        }
+        return entryPromotions;
+    }
+    isConsumedByEntry(consumedEntry, entry) {
+        const consumedEntryNumber = consumedEntry.orderEntryNumber;
+        if (entry.entries && entry.entries.length > 0) {
+            for (const subEntry of entry.entries) {
+                if (subEntry.entryNumber === consumedEntryNumber) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return consumedEntryNumber === entry.entryNumber;
+        }
+    }
+};
+PromotionService.ctorParameters = () => [
+    { type: OrderDetailsService },
+    { type: CheckoutService },
+    { type: ActiveCartService }
+];
+PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
+PromotionService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], PromotionService);
+
+let AddedToCartDialogComponent = class AddedToCartDialogComponent {
+    constructor(modalService, cartService, promotionService) {
+        this.modalService = modalService;
+        this.cartService = cartService;
+        this.promotionService = promotionService;
+        this.iconTypes = ICON_TYPE;
+        this.promotionLocation = PromotionLocation.ActiveCart;
+        this.quantity = 0;
+        this.modalIsOpen = false;
+        this.form = new FormGroup({});
+    }
+    /**
+     * Returns an observable formControl with the quantity of the cartEntry,
+     * but also updates the entry in case of a changed value.
+     * The quantity can be set to zero in order to remove the entry.
+     */
+    getQuantityControl() {
+        if (!this.quantityControl$) {
+            this.quantityControl$ = this.entry$.pipe(filter((e) => !!e), map((entry) => this.getFormControl(entry)), switchMap(() => this.form.valueChanges.pipe(
+            // tslint:disable-next-line:deprecation
+            startWith(null), tap((valueChange) => {
+                if (valueChange) {
+                    this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
+                    if (valueChange.quantity === 0) {
+                        this.dismissModal('Removed');
+                    }
+                }
+                else {
+                    this.form.markAsPristine();
+                }
+            }))), map(() => this.form.get('quantity')));
+        }
+        return this.quantityControl$;
+    }
+    ngOnInit() {
+        this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+    }
+    getFormControl(entry) {
+        if (!this.form.get('quantity')) {
+            const quantity = new FormControl(entry.quantity, { updateOn: 'blur' });
+            this.form.addControl('quantity', quantity);
+            const entryNumber = new FormControl(entry.entryNumber);
+            this.form.addControl('entryNumber', entryNumber);
+        }
+        return this.form.get('quantity');
+    }
+    dismissModal(reason) {
+        this.modalService.dismissActiveModal(reason);
+    }
+};
+AddedToCartDialogComponent.ctorParameters = () => [
+    { type: ModalService },
+    { type: ActiveCartService },
+    { type: PromotionService }
+];
+__decorate([
+    ViewChild('dialog', { read: ElementRef })
+], AddedToCartDialogComponent.prototype, "dialog", void 0);
+AddedToCartDialogComponent = __decorate([
+    Component({
+        selector: 'cx-added-to-cart-dialog',
+        template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+    })
+], AddedToCartDialogComponent);
+
+let AddToCartComponent = class AddToCartComponent {
+    constructor(modalService, currentProductService, cd, activeCartService) {
+        this.modalService = modalService;
+        this.currentProductService = currentProductService;
+        this.cd = cd;
+        this.activeCartService = activeCartService;
+        this.showQuantity = true;
+        this.hasStock = false;
+        this.quantity = 1;
+        this.increment = false;
+        this.addToCartForm = new FormGroup({
+            quantity: new FormControl(1),
+        });
+    }
+    ngOnInit() {
+        if (this.product) {
+            this.productCode = this.product.code;
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+            this.setStockInfo(this.product);
+            this.cd.markForCheck();
+        }
+        else if (this.productCode) {
+            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+            // force hasStock and quantity for the time being, as we do not have more info:
+            this.quantity = 1;
+            this.hasStock = true;
+            this.cd.markForCheck();
+        }
+        else {
+            this.subscription = this.currentProductService
+                .getProduct()
+                .pipe(filter(Boolean))
+                .subscribe((product) => {
+                this.productCode = product.code;
+                this.setStockInfo(product);
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                this.cd.markForCheck();
+            });
+        }
+    }
+    setStockInfo(product) {
+        this.quantity = 1;
+        this.hasStock =
+            product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+        if (this.hasStock && product.stock.stockLevel) {
+            this.maxQuantity = product.stock.stockLevel;
+        }
+    }
+    updateCount(value) {
+        this.quantity = value;
+    }
+    addToCart() {
+        const quantity = this.addToCartForm.get('quantity').value;
+        if (!this.productCode || quantity <= 0) {
+            return;
+        }
+        // check item is already present in the cart
+        // so modal will have proper header text displayed
+        this.activeCartService
+            .getEntry(this.productCode)
+            .subscribe((entry) => {
+            if (entry) {
+                this.increment = true;
+            }
+            this.openModal();
+            this.activeCartService.addEntry(this.productCode, quantity);
+            this.increment = false;
+        })
+            .unsubscribe();
+    }
+    openModal() {
+        let modalInstance;
+        this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+            centered: true,
+            size: 'lg',
+        });
+        modalInstance = this.modalRef.componentInstance;
+        modalInstance.entry$ = this.cartEntry$;
+        modalInstance.cart$ = this.activeCartService.getActive();
+        modalInstance.loaded$ = this.activeCartService.isStable();
+        modalInstance.quantity = this.quantity;
+        modalInstance.increment = this.increment;
+    }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+};
+AddToCartComponent.ctorParameters = () => [
+    { type: ModalService },
+    { type: CurrentProductService },
+    { type: ChangeDetectorRef },
+    { type: ActiveCartService }
+];
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "productCode", void 0);
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "showQuantity", void 0);
+__decorate([
+    Input()
+], AddToCartComponent.prototype, "product", void 0);
+AddToCartComponent = __decorate([
+    Component({
+        selector: 'cx-add-to-cart',
+        template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], AddToCartComponent);
+
 let CardComponent = class CardComponent {
     constructor() {
         this.iconTypes = ICON_TYPE;
@@ -4987,6 +3292,123 @@ CarouselComponent = __decorate([
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], CarouselComponent);
+
+var BREAKPOINT;
+(function (BREAKPOINT) {
+    BREAKPOINT["xs"] = "xs";
+    BREAKPOINT["sm"] = "sm";
+    BREAKPOINT["md"] = "md";
+    BREAKPOINT["lg"] = "lg";
+    BREAKPOINT["xl"] = "xl";
+})(BREAKPOINT || (BREAKPOINT = {}));
+/**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ */
+class LayoutConfig {
+}
+
+const DEFAULT_BREAKPOINTS = {
+    [BREAKPOINT.xs]: 576,
+    [BREAKPOINT.sm]: 768,
+    [BREAKPOINT.md]: 992,
+    [BREAKPOINT.lg]: 1200,
+};
+let BreakpointService = class BreakpointService {
+    constructor(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+    }
+    get breakpoint$() {
+        if (!this.window) {
+            return of(BREAKPOINT.xs);
+        }
+        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
+    }
+    /**
+     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+     * configuration. If no configuration is available for the given breakpoint, the
+     * method will return the default values:
+     * - xs: 567
+     * - sm: 768
+     * - md: 992
+     * - lg: 1200
+     */
+    getSize(breakpoint) {
+        var _a;
+        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+            : DEFAULT_BREAKPOINTS[breakpoint];
+    }
+    /**
+     * Returns all available breakpoints for the system.
+     */
+    get breakpoints() {
+        return [
+            BREAKPOINT.xs,
+            BREAKPOINT.sm,
+            BREAKPOINT.md,
+            BREAKPOINT.lg,
+            BREAKPOINT.xl,
+        ];
+    }
+    /**
+     * Indicates whether the current screen size is smaller than the maximum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+     */
+    isDown(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size is larger than the minimum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+     */
+    isUp(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(this.breakpoints.indexOf(breakpoint))
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size fits to the given breakpoint
+     */
+    isEqual(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => br === breakpoint));
+    }
+    getBreakpoint(windowWidth) {
+        const breakpoint = this.getClosest(windowWidth);
+        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+    }
+    getClosest(windowWidth) {
+        if (!windowWidth) {
+            windowWidth = this.window.innerWidth;
+        }
+        return windowWidth > this.getSize(BREAKPOINT.lg)
+            ? BREAKPOINT.xl
+            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
+    }
+    get window() {
+        return this.winRef.nativeWindow;
+    }
+};
+BreakpointService.ctorParameters = () => [
+    { type: WindowRef },
+    { type: LayoutConfig }
+];
+BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+BreakpointService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], BreakpointService);
 
 /** the default format is used for browsers that do not support   */
 const DEFAULT_MEDIA_FORMAT = 'tablet';
@@ -6979,6 +5401,8 @@ CartTotalsModule = __decorate([
         entryComponents: [CartTotalsComponent],
     })
 ], CartTotalsModule);
+
+const PAGE_LAYOUT_HANDLER = new InjectionToken('PageLayoutHandler');
 
 let MiniCartComponent = class MiniCartComponent {
     constructor(activeCartService) {
@@ -9209,122 +7633,6 @@ NotCheckoutAuthGuard = __decorate([
     })
 ], NotCheckoutAuthGuard);
 
-// given that we're likely going to refactor the directives, we're
-// export * from './autofocus/index';
-// export * from './base/index';
-// export * from './block/index';
-// export * from './escape/index';
-// export * from './lock/index';
-// export * from './persist/index';
-// export * from './tab/index';
-// export * from './trap/index';
-// export * from './visible/index';
-// export * from './keyboard-focus.model';
-
-class SkipLinkConfig {
-}
-class SkipLink {
-}
-var SkipLinkScrollPosition;
-(function (SkipLinkScrollPosition) {
-    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
-    SkipLinkScrollPosition["AFTER"] = "AFTER";
-})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
-
-let SkipLinkService = class SkipLinkService {
-    constructor(config, keyboardFocusService) {
-        this.config = config;
-        this.keyboardFocusService = keyboardFocusService;
-        this.skipLinks$ = new BehaviorSubject([]);
-    }
-    getSkipLinks() {
-        return this.skipLinks$;
-    }
-    add(key, target) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            const existing = this.skipLinks$.value;
-            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
-                target,
-                i18nKey: found.i18nKey,
-                position: found.position,
-                key,
-            });
-            this.skipLinks$.next(existing);
-        }
-    }
-    remove(key) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            let existing = this.skipLinks$.value;
-            existing = existing.filter((skipLink) => skipLink.key !== key);
-            this.skipLinks$.next(existing);
-        }
-    }
-    scrollToTarget(skipLink) {
-        const target = skipLink.target instanceof HTMLElement
-            ? skipLink.target
-            : skipLink.target.parentElement;
-        // focus first focusable element in the
-        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
-        // we force a tabindex if not available, to ensure we can focus into the element
-        const hasTabindex = firstFocusable.hasAttribute('tabindex');
-        if (!hasTabindex) {
-            firstFocusable.setAttribute('tabindex', '-1');
-        }
-        firstFocusable.focus();
-        // drop the tmp tabindex
-        if (!hasTabindex) {
-            firstFocusable.removeAttribute('tabindex');
-        }
-    }
-    getSkipLinkIndexInArray(key) {
-        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
-        while (index > 0) {
-            index--;
-            const previous = this.config.skipLinks[index];
-            if (previous) {
-                const existing = this.skipLinks$.value;
-                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
-                if (found > -1) {
-                    return found + 1;
-                }
-            }
-        }
-        return 0;
-    }
-};
-SkipLinkService.ctorParameters = () => [
-    { type: SkipLinkConfig },
-    { type: KeyboardFocusService }
-];
-SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
-SkipLinkService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], SkipLinkService);
-
-let SkipLinkComponent = class SkipLinkComponent {
-    constructor(skipLinkService) {
-        this.skipLinkService = skipLinkService;
-        this.skipLinks$ = this.skipLinkService.getSkipLinks();
-    }
-    scrollToTarget(skipLink) {
-        this.skipLinkService.scrollToTarget(skipLink);
-    }
-};
-SkipLinkComponent.ctorParameters = () => [
-    { type: SkipLinkService }
-];
-SkipLinkComponent = __decorate([
-    Component({
-        selector: 'cx-skip-link',
-        template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], SkipLinkComponent);
-
 const defaultSkipLinkConfig = {
     skipLinks: [
         {
@@ -9363,6 +7671,96 @@ SkipLinkDirective = __decorate([
         selector: '[cxSkipLink]',
     })
 ], SkipLinkDirective);
+
+var OutletPosition;
+(function (OutletPosition) {
+    OutletPosition["REPLACE"] = "replace";
+    OutletPosition["BEFORE"] = "before";
+    OutletPosition["AFTER"] = "after";
+})(OutletPosition || (OutletPosition = {}));
+const AVOID_STACKED_OUTLETS = false;
+const USE_STACKED_OUTLETS = true;
+
+let OutletService = class OutletService {
+    constructor() {
+        this.templatesRefs = new Map();
+        this.templatesRefsBefore = new Map();
+        this.templatesRefsAfter = new Map();
+    }
+    /**
+     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     */
+    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
+        if (position === OutletPosition.BEFORE) {
+            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.REPLACE) {
+            this.store(this.templatesRefs, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.AFTER) {
+            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+        }
+    }
+    /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param outlet The outlet reference
+     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param stacked Indicates whether an array of outlet components is returned
+     */
+    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
+        let templateRef;
+        switch (position) {
+            case OutletPosition.BEFORE:
+                templateRef = this.templatesRefsBefore.get(outlet);
+                break;
+            case OutletPosition.AFTER:
+                templateRef = this.templatesRefsAfter.get(outlet);
+                break;
+            default:
+                templateRef = this.templatesRefs.get(outlet);
+        }
+        if (templateRef && !stacked) {
+            return templateRef[0];
+        }
+        return templateRef;
+    }
+    remove(outlet, position = OutletPosition.REPLACE, value) {
+        switch (position) {
+            case OutletPosition.BEFORE:
+                this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
+                break;
+            case OutletPosition.AFTER:
+                this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
+                break;
+            default:
+                this.removeValueOrAll(this.templatesRefs, outlet, value);
+        }
+    }
+    store(store, outlet, value) {
+        const existing = store.get(outlet) || [];
+        const newValue = existing.concat([value]);
+        store.set(outlet, newValue);
+    }
+    removeValueOrAll(store, outlet, value) {
+        if (!value && store.has(outlet)) {
+            store.delete(outlet);
+        }
+        else if (value && store.has(outlet)) {
+            let existing = store.get(outlet);
+            existing = existing.filter((val) => val === value);
+            store.set(outlet, existing);
+        }
+    }
+};
+OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+OutletService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OutletService);
 
 let SkipLinkModule = class SkipLinkModule {
 };
@@ -9473,15 +7871,1191 @@ HamburgerMenuModule = __decorate([
     })
 ], HamburgerMenuModule);
 
+let InlineRenderStrategy = class InlineRenderStrategy extends LaunchRenderStrategy {
+    constructor(componentFactoryResolver) {
+        super();
+        this.componentFactoryResolver = componentFactoryResolver;
+    }
+    /**
+     * Renders the component from the configuration in the view container ref
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller, vcr) {
+        // Only render if a ViewContainerRef is provided
+        if (vcr && this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            vcr.createComponent(template);
+            this.renderedCallers.push({ caller, element: vcr.element });
+        }
+        else if (isDevMode()) {
+            if (!vcr) {
+                console.warn(`No view container ref provided for ${caller}`);
+            }
+            else {
+                console.warn(`Element for ${caller} already rendered. To allow multi rendering add property multi: true.`);
+            }
+        }
+    }
+    match(config) {
+        return Boolean(config.inline);
+    }
+};
+InlineRenderStrategy.ctorParameters = () => [
+    { type: ComponentFactoryResolver }
+];
+InlineRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function InlineRenderStrategy_Factory() { return new InlineRenderStrategy(ɵɵinject(ComponentFactoryResolver)); }, token: InlineRenderStrategy, providedIn: "root" });
+InlineRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' })
+], InlineRenderStrategy);
+
+let OutletRefDirective = class OutletRefDirective {
+    constructor(tpl, outletService) {
+        this.tpl = tpl;
+        this.outletService = outletService;
+    }
+    ngOnInit() {
+        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+    }
+};
+OutletRefDirective.ctorParameters = () => [
+    { type: TemplateRef },
+    { type: OutletService }
+];
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletRef", void 0);
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletPos", void 0);
+OutletRefDirective = __decorate([
+    Directive({
+        selector: '[cxOutletRef]',
+    })
+], OutletRefDirective);
+
+let OutletRefModule = class OutletRefModule {
+};
+OutletRefModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [OutletRefDirective],
+        exports: [OutletRefDirective],
+    })
+], OutletRefModule);
+
+/**
+ * The IntersectionService uses the native IntersectionObserver (v2), which
+ * can be used to implement pre-loading and deferred loading of DOM content.
+ *
+ */
+let IntersectionService = class IntersectionService {
+    constructor(config) {
+        this.config = config;
+    }
+    /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned obervable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     */
+    isIntersected(element, options) {
+        return this.intersects(element, options).pipe(first((v) => v === true));
+    }
+    /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     */
+    intersects(element, options) {
+        const elementVisible$ = new Observable((observer) => {
+            const rootMargin = this.getRootMargin(options);
+            const intersectOptions = { rootMargin };
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                observer.next(entries);
+            }, intersectOptions);
+            intersectionObserver.observe(element);
+            return () => {
+                intersectionObserver.disconnect();
+            };
+        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
+        return elementVisible$;
+    }
+    getRootMargin(options) {
+        if (options.rootMargin) {
+            return options.rootMargin;
+        }
+        const layoutConfig = this.config;
+        if (layoutConfig.deferredLoading &&
+            layoutConfig.deferredLoading.intersectionMargin) {
+            return layoutConfig.deferredLoading.intersectionMargin;
+        }
+    }
+};
+IntersectionService.ctorParameters = () => [
+    { type: LayoutConfig }
+];
+IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+IntersectionService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], IntersectionService);
+
+/**
+ * The defer loading serivce is used to defer loading of DOM elements
+ * until the elements are required for the user experience.
+ */
+let DeferLoaderService = class DeferLoaderService {
+    constructor(platformId, config, intersectionService) {
+        this.platformId = platformId;
+        this.config = config;
+        this.intersectionService = intersectionService;
+        this.globalLoadStrategy = config.deferredLoading
+            ? config.deferredLoading.strategy
+            : DeferLoadingStrategy.INSTANT;
+    }
+    /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evalutes whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     */
+    load(element, options) {
+        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+            return of(true);
+        }
+        else {
+            return this.intersectionService.isIntersected(element, options);
+        }
+    }
+    shouldLoadInstantly(elementLoadingStrategy) {
+        return (isPlatformServer(this.platformId) ||
+            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
+            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
+                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
+    }
+};
+DeferLoaderService.ctorParameters = () => [
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: LayoutConfig },
+    { type: IntersectionService }
+];
+DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+DeferLoaderService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(0, Inject(PLATFORM_ID))
+], DeferLoaderService);
+
+let OutletRendererService = class OutletRendererService {
+    constructor() {
+        this.outletRefs = new Map();
+    }
+    render(outlet) {
+        if (this.outletRefs.size !== 0) {
+            this.outletRefs.get(outlet).render();
+        }
+    }
+    register(cxOutlet, context) {
+        this.outletRefs.set(cxOutlet, context);
+    }
+};
+OutletRendererService.ɵprov = ɵɵdefineInjectable({ factory: function OutletRendererService_Factory() { return new OutletRendererService(); }, token: OutletRendererService, providedIn: "root" });
+OutletRendererService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OutletRendererService);
+
+let OutletDirective = class OutletDirective {
+    constructor(vcr, templateRef, outletService, deferLoaderService, outletRendererService) {
+        this.vcr = vcr;
+        this.templateRef = templateRef;
+        this.outletService = outletService;
+        this.deferLoaderService = deferLoaderService;
+        this.outletRendererService = outletRendererService;
+        this.renderedTemplate = [];
+        this.loaded = new EventEmitter(true);
+        this.subscription = new Subscription();
+    }
+    render() {
+        this.vcr.clear();
+        this.renderedTemplate = [];
+        this.subscription.unsubscribe();
+        this.subscription = new Subscription();
+        this.outletRendererService.register(this.cxOutlet, this);
+        if (this.cxOutletDefer) {
+            this.deferLoading();
+        }
+        else {
+            this.build();
+        }
+    }
+    ngOnChanges(changes) {
+        if (changes.cxOutlet) {
+            this.render();
+        }
+    }
+    deferLoading() {
+        this.loaded.emit(false);
+        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
+        // Although the deferLoaderService might emit only once, as long as the hostElement
+        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+        // the subscription on destroy.
+        this.subscription.add(this.deferLoaderService
+            .load(hostElement, this.cxOutletDefer)
+            .subscribe(() => {
+            this.build();
+            this.loaded.emit(true);
+        }));
+    }
+    build() {
+        this.buildOutlet(OutletPosition.BEFORE);
+        this.buildOutlet(OutletPosition.REPLACE);
+        this.buildOutlet(OutletPosition.AFTER);
+    }
+    buildOutlet(position) {
+        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
+        templates = templates === null || templates === void 0 ? void 0 : templates.filter((el) => !this.renderedTemplate.includes(el));
+        if (!templates && position === OutletPosition.REPLACE) {
+            templates = [this.templateRef];
+        }
+        // Just in case someone extended the `OutletService` and
+        // returns a singular object.
+        if (!Array.isArray(templates)) {
+            templates = [templates];
+        }
+        templates.forEach((obj) => {
+            this.create(obj);
+        });
+    }
+    create(tmplOrFactory) {
+        if (tmplOrFactory instanceof ComponentFactory) {
+            this.vcr.createComponent(tmplOrFactory);
+        }
+        else if (tmplOrFactory instanceof TemplateRef) {
+            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
+                $implicit: this.cxOutletContext,
+            });
+            // we do not know if content is created dynamically or not
+            // so we apply change detection anyway
+            view.markForCheck();
+        }
+        this.renderedTemplate.push(tmplOrFactory);
+    }
+    /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent elements of the given element.
+     *
+     * @param element
+     */
+    getHostElement(element) {
+        if (element instanceof HTMLElement) {
+            return element;
+        }
+        return this.getHostElement(element.parentElement);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+};
+OutletDirective.ctorParameters = () => [
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: OutletService },
+    { type: DeferLoaderService },
+    { type: OutletRendererService }
+];
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutlet", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletContext", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletDefer", void 0);
+__decorate([
+    Output()
+], OutletDirective.prototype, "loaded", void 0);
+OutletDirective = __decorate([
+    Directive({
+        selector: '[cxOutlet]',
+    })
+], OutletDirective);
+
+let OutletModule = class OutletModule {
+};
+OutletModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [OutletDirective],
+        providers: [OutletService],
+        exports: [OutletDirective],
+    })
+], OutletModule);
+
+let OutletRenderStrategy = class OutletRenderStrategy extends LaunchRenderStrategy {
+    constructor(outletService, componentFactoryResolver, outletRendererService) {
+        super();
+        this.outletService = outletService;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.outletRendererService = outletRendererService;
+    }
+    /**
+     * Renders the element in the configured outlet
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller, vcr) {
+        if (this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            this.outletService.add(config.outlet, template, config.position ? config.position : OutletPosition.BEFORE);
+            this.outletRendererService.render(config.outlet);
+            const element = vcr === null || vcr === void 0 ? void 0 : vcr.element;
+            this.renderedCallers.push({ caller, element });
+        }
+    }
+    match(config) {
+        return Boolean(config.outlet);
+    }
+    remove(caller, config) {
+        const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
+        this.outletService.remove(config.outlet, config.position ? config.position : OutletPosition.BEFORE, template);
+    }
+};
+OutletRenderStrategy.ctorParameters = () => [
+    { type: OutletService },
+    { type: ComponentFactoryResolver },
+    { type: OutletRendererService }
+];
+OutletRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function OutletRenderStrategy_Factory() { return new OutletRenderStrategy(ɵɵinject(OutletService), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletRendererService)); }, token: OutletRenderStrategy, providedIn: "root" });
+OutletRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' })
+], OutletRenderStrategy);
+
+let RoutingRenderStrategy = class RoutingRenderStrategy extends LaunchRenderStrategy {
+    constructor(routingService) {
+        super();
+        this.routingService = routingService;
+    }
+    /**
+     * Navigates to the route configured for the caller
+     */
+    render(config, _caller) {
+        this.routingService.go(config);
+    }
+    match(config) {
+        return Boolean(config.cxRoute);
+    }
+};
+RoutingRenderStrategy.ctorParameters = () => [
+    { type: RoutingService }
+];
+RoutingRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function RoutingRenderStrategy_Factory() { return new RoutingRenderStrategy(ɵɵinject(RoutingService)); }, token: RoutingRenderStrategy, providedIn: "root" });
+RoutingRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' })
+], RoutingRenderStrategy);
+
+var LaunchDialogModule_1;
+let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
+    static forRoot() {
+        return {
+            ngModule: LaunchDialogModule_1,
+            providers: [
+                provideConfig(DEFAULT_LAUNCH_CONFIG),
+                { provide: LaunchConfig, useExisting: Config },
+            ],
+        };
+    }
+};
+LaunchDialogModule = LaunchDialogModule_1 = __decorate([
+    NgModule({
+        providers: [
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: OutletRenderStrategy,
+                multi: true,
+            },
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: InlineRenderStrategy,
+                multi: true,
+            },
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: RoutingRenderStrategy,
+                multi: true,
+            },
+        ],
+    })
+], LaunchDialogModule);
+
 let LayoutModule = class LayoutModule {
 };
 LayoutModule = __decorate([
     NgModule({
-        imports: [OutletRefModule],
+        imports: [OutletRefModule, LaunchDialogModule.forRoot()],
         providers: [{ provide: LayoutConfig, useExisting: Config }],
         exports: [OutletRefModule],
     })
 ], LayoutModule);
+
+let PageSlotComponent = class PageSlotComponent {
+    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+        this.cmsService = cmsService;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.hostElement = hostElement;
+        this.config = config;
+        this.isPending = true;
+        this.hasComponents = false;
+        this.isPageFold = false;
+        this.position$ = new BehaviorSubject(undefined);
+        /**
+         * observable with `ContentSlotData` for the current position
+         *
+         * @deprecated we'll stop supporting this property in 2.0 as
+         * it is not used separately.
+         */
+        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
+        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
+        this.subscription = new Subscription();
+    }
+    /**
+     * The position is used to find the CMS page slot (and optional outlet)
+     * that is rendered in the PageSlotComponent. Furthermore, the position
+     * is added as a CSS class name to the host element.
+     */
+    set position(position) {
+        this.position$.next(position);
+        this.renderer.addClass(this.hostElement.nativeElement, position);
+    }
+    get position() {
+        return this.position$.value;
+    }
+    ngOnInit() {
+        this.subscription.add(this.components$.subscribe((components) => {
+            this.hasComponents = components && components.length > 0;
+            this.pendingComponentCount = components ? components.length : 0;
+            this.isPending = this.pendingComponentCount > 0;
+        }));
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+    /**
+     * Is triggered when a component is added to the view.
+     * We use this information to dropthe `is-pending` class from the page slot
+     * when all nested components have been added.
+     */
+    isLoaded(loadState) {
+        if (loadState) {
+            this.pendingComponentCount--;
+        }
+        this.isPending = this.pendingComponentCount > 0;
+    }
+    getComponentDeferOptions(componentType) {
+        const deferLoading = this.getDeferLoadingStrategy(componentType);
+        return { deferLoading };
+    }
+    /**
+     * The `DeferLoadingStrategy` indicates whether component rendering
+     * should be deferred.
+     */
+    getDeferLoadingStrategy(componentType) {
+        if (this.config) {
+            return (this.config.cmsComponents[componentType] || {})
+                .deferLoading;
+        }
+    }
+    addSmartEditSlotClass(slot) {
+        if (slot && this.cmsService.isLaunchInSmartEdit()) {
+            this.addSmartEditContract(slot);
+        }
+    }
+    addSmartEditContract(slot) {
+        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    }
+};
+PageSlotComponent.ctorParameters = () => [
+    { type: CmsService },
+    { type: DynamicAttributeService },
+    { type: Renderer2 },
+    { type: ElementRef },
+    { type: CmsConfig }
+];
+__decorate([
+    Input()
+], PageSlotComponent.prototype, "position", null);
+__decorate([
+    HostBinding('class.cx-pending')
+], PageSlotComponent.prototype, "isPending", void 0);
+__decorate([
+    HostBinding('class.has-components')
+], PageSlotComponent.prototype, "hasComponents", void 0);
+__decorate([
+    HostBinding('class.page-fold'), Input()
+], PageSlotComponent.prototype, "isPageFold", void 0);
+PageSlotComponent = __decorate([
+    Component({
+        selector: 'cx-page-slot,[cx-page-slot]',
+        template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], PageSlotComponent);
+
+let PageSlotModule = class PageSlotModule {
+};
+PageSlotModule = __decorate([
+    NgModule({
+        imports: [CommonModule, OutletModule, PageComponentModule],
+        providers: [],
+        declarations: [PageSlotComponent],
+        exports: [PageSlotComponent],
+    })
+], PageSlotModule);
+
+let PageLayoutService = class PageLayoutService {
+    constructor(cms, config, breakpointService, handlers) {
+        this.cms = cms;
+        this.config = config;
+        this.breakpointService = breakpointService;
+        this.handlers = handlers;
+        // Prints warn messages for missing layout configs.
+        // The warnings are only printed once per config
+        // to not pollute the console log.
+        this.warnLogMessages = {};
+        this.logSlots = {};
+    }
+    getSlots(section) {
+        return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(map(([page, breakpoint]) => {
+            const pageTemplate = page.template;
+            const slots = this.resolveSlots(page, section, breakpoint);
+            return { slots, pageTemplate, breakpoint };
+        }), switchMap(({ slots, pageTemplate, breakpoint }) => {
+            let result = of(slots);
+            for (const handler of this.handlers || []) {
+                result = handler.handle(result, pageTemplate, section, breakpoint);
+            }
+            return result;
+        }), distinctUntilChanged((a, b) => {
+            if (a.length !== b.length) {
+                return false;
+            }
+            for (let i = 0; i < a.length; i++) {
+                if (a[i] !== b[i]) {
+                    return false;
+                }
+            }
+            return true;
+        }));
+    }
+    /**
+     * Returns an observable with the last page slot above-the-fold
+     * for the given pageTemplate / breakpoint.
+     *
+     * The page fold is configurable in the `LayoutConfig` for each page layout.
+     */
+    getPageFoldSlot(pageTemplate) {
+        return this.breakpointService.breakpoint$.pipe(map((breakpoint) => {
+            if (!this.config.layoutSlots) {
+                // no layout config available
+                return null;
+            }
+            const pageTemplateConfig = this.config.layoutSlots[pageTemplate];
+            const config = this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
+            return config ? config.pageFold : null;
+        }));
+    }
+    resolveSlots(page, section, breakpoint) {
+        const config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+        if (config && config.slots) {
+            const pageSlots = Object.keys(page.slots);
+            return config.slots.filter((slot) => pageSlots.includes(slot));
+        }
+        else if (!section) {
+            this.logMissingLayoutConfig(page);
+            return Object.keys(page.slots);
+        }
+        else {
+            this.logMissingLayoutConfig(page, section);
+            return [];
+        }
+    }
+    get page$() {
+        return this.cms.getCurrentPage().pipe(filter((page) => !!page));
+    }
+    get templateName$() {
+        return this.page$.pipe(filter((page) => !!page.template), map((page) => page.template));
+    }
+    /**
+     * load slots from the layout configuration. The breakpoint is used
+     * to load a specific configuration for the given breakpoint. If there's
+     * no configuration available for the given breakpoint the default slot
+     * configuration is returned.
+     */
+    getSlotConfig(templateUid, configAttribute, section, breakpoint) {
+        if (!this.config.layoutSlots) {
+            return null;
+        }
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (section) {
+            return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+        }
+        if (pageTemplateConfig) {
+            return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
+        }
+    }
+    getSlotConfigForSection(templateUid, configAttribute, section, breakpoint) {
+        const pageTemplateConfig = this.config.layoutSlots[templateUid];
+        if (!pageTemplateConfig) {
+            return null;
+        }
+        // if there's no section config on the page layout
+        // we fall back to the global section config
+        const sectionConfig = pageTemplateConfig[section]
+            ? pageTemplateConfig[section]
+            : this.config.layoutSlots[section];
+        if (!sectionConfig) {
+            return null;
+        }
+        const responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
+        if (responsiveConfig.hasOwnProperty(configAttribute)) {
+            return responsiveConfig;
+        }
+        else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+            return pageTemplateConfig[section];
+        }
+        else if (this.config.layoutSlots[section]) {
+            return this.config.layoutSlots[section];
+        }
+    }
+    /**
+     * Returns a list of slots for a breakpoint specific configuratoin
+     * If there's no specific configuration for the breakpoint,
+     * the closest available configuration will be returned.
+     */
+    getResponsiveSlotConfig(layoutSlotConfig, configAttribute, breakpoint) {
+        let slotConfig = layoutSlotConfig;
+        // fallback to default slot config
+        if (!layoutSlotConfig || !breakpoint) {
+            return slotConfig;
+        }
+        // we have a config for the specific breakpoint
+        if (layoutSlotConfig[breakpoint] &&
+            layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+            return layoutSlotConfig[breakpoint];
+        }
+        // find closest config
+        const all = this.breakpointService.breakpoints;
+        for (const br of all.splice(0, all.indexOf(breakpoint))) {
+            if (layoutSlotConfig[br] &&
+                layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                slotConfig = layoutSlotConfig[br];
+            }
+        }
+        return slotConfig;
+    }
+    /**
+     * In order to help developers, we print some detailed log information in
+     * case there's no layout configuration available for the given page template
+     * or section. Additionally, the slot positions are printed in the console
+     * in a format that can be copied / paste to the configuration.
+     */
+    logMissingLayoutConfig(page, section) {
+        if (!isDevMode()) {
+            return;
+        }
+        if (!this.logSlots[page.template]) {
+            // the info log is not printed in production
+            // tslint:disable-next-line: no-console
+            console.info(`Available CMS page slots: '${Object.keys(page.slots).join(`','`)}'`);
+            this.logSlots[page.template] = true;
+        }
+        const cacheKey = section || page.template;
+        if (!this.warnLogMessages[cacheKey]) {
+            console.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
+            this.warnLogMessages[cacheKey] = true;
+        }
+    }
+};
+PageLayoutService.ctorParameters = () => [
+    { type: CmsService },
+    { type: LayoutConfig },
+    { type: BreakpointService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
+];
+PageLayoutService = __decorate([
+    Injectable(),
+    __param(3, Optional()),
+    __param(3, Inject(PAGE_LAYOUT_HANDLER))
+], PageLayoutService);
+
+let PageLayoutComponent = class PageLayoutComponent {
+    constructor(el, renderer, pageLayoutService) {
+        this.el = el;
+        this.renderer = renderer;
+        this.pageLayoutService = pageLayoutService;
+        this.section$ = new BehaviorSubject(undefined);
+        this.templateName$ = this.pageLayoutService
+            .templateName$;
+        this.layoutName$ = this.section$.pipe(switchMap((section) => (section ? of(section) : this.templateName$)), tap((name) => {
+            this.styleClass = name;
+        }));
+        this.slots$ = this.section$.pipe(switchMap((section) => this.pageLayoutService.getSlots(section)));
+        this.pageFoldSlot$ = this.templateName$.pipe(switchMap((templateName) => this.pageLayoutService.getPageFoldSlot(templateName)), distinctUntilChanged());
+    }
+    set section(value) {
+        this.section$.next(value);
+    }
+    set styleClass(cls) {
+        if (this.currentClass) {
+            this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+        }
+        this.renderer.addClass(this.el.nativeElement, cls);
+        this.currentClass = cls;
+    }
+};
+PageLayoutComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 },
+    { type: PageLayoutService }
+];
+__decorate([
+    Input()
+], PageLayoutComponent.prototype, "section", null);
+PageLayoutComponent = __decorate([
+    Component({
+        selector: 'cx-page-layout',
+        template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], PageLayoutComponent);
+
+let PageLayoutModule = class PageLayoutModule {
+};
+PageLayoutModule = __decorate([
+    NgModule({
+        imports: [CommonModule, OutletModule, PageSlotModule],
+        declarations: [PageLayoutComponent],
+        providers: [PageLayoutService],
+        exports: [PageLayoutComponent],
+    })
+], PageLayoutModule);
+
+class PWAModuleConfig {
+}
+const defaultPWAModuleConfig = {
+    pwa: {
+        enabled: false,
+        addToHomeScreen: false,
+    },
+};
+
+let AddToHomeScreenService = class AddToHomeScreenService {
+    constructor(config, globalMessageService, winRef) {
+        this.config = config;
+        this.globalMessageService = globalMessageService;
+        this.winRef = winRef;
+        this.canPrompt = new BehaviorSubject(false);
+        this.canPrompt$ = this.canPrompt.asObservable();
+        if (this.config.pwa.addToHomeScreen) {
+            this.init();
+        }
+    }
+    init() {
+        if (this.winRef.nativeWindow) {
+            this.winRef.nativeWindow.addEventListener('beforeinstallprompt', (event) => {
+                event.preventDefault();
+                this.deferredEvent = event;
+                this.enableAddToHomeScreen();
+            });
+            this.winRef.nativeWindow.addEventListener('appinstalled', () => {
+                this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                this.disableAddToHomeScreen();
+                this.deferredEvent = null;
+            });
+        }
+    }
+    enableAddToHomeScreen() {
+        this.canPrompt.next(true);
+    }
+    disableAddToHomeScreen() {
+        this.canPrompt.next(false);
+    }
+    firePrompt() {
+        if (this.deferredEvent) {
+            this.deferredEvent.prompt();
+        }
+    }
+};
+AddToHomeScreenService.ctorParameters = () => [
+    { type: PWAModuleConfig },
+    { type: GlobalMessageService },
+    { type: WindowRef }
+];
+AddToHomeScreenService = __decorate([
+    Injectable()
+], AddToHomeScreenService);
+
+class AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+    ngOnInit() {
+        this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+    }
+    prompt() {
+        this.addToHomeScreenService.firePrompt();
+    }
+}
+
+let AddToHomeScreenBannerComponent = class AddToHomeScreenBannerComponent extends AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+};
+AddToHomeScreenBannerComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+AddToHomeScreenBannerComponent = __decorate([
+    Component({
+        selector: 'cx-add-to-home-screen-banner',
+        template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+    })
+], AddToHomeScreenBannerComponent);
+
+let AddToHomeScreenBtnComponent = class AddToHomeScreenBtnComponent extends AddToHomeScreenComponent {
+    constructor(addToHomeScreenService) {
+        super(addToHomeScreenService);
+        this.addToHomeScreenService = addToHomeScreenService;
+    }
+};
+AddToHomeScreenBtnComponent.ctorParameters = () => [
+    { type: AddToHomeScreenService }
+];
+AddToHomeScreenBtnComponent = __decorate([
+    Component({
+        selector: 'cx-add-to-home-screen-btn',
+        template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
+    })
+], AddToHomeScreenBtnComponent);
+
+function pwaConfigurationFactory(pwaConfig) {
+    return { enabled: (!isDevMode() && pwaConfig.pwa.enabled) || false };
+}
+function pwaFactory(addToHomeScreenService) {
+    const result = () => addToHomeScreenService;
+    return result;
+}
+let PwaModule = class PwaModule {
+};
+PwaModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            ServiceWorkerModule.register('/ngsw-worker.js'),
+            I18nModule,
+        ],
+        providers: [
+            provideDefaultConfig(defaultPWAModuleConfig),
+            { provide: PWAModuleConfig, useExisting: Config },
+            {
+                provide: SwRegistrationOptions,
+                useFactory: pwaConfigurationFactory,
+                deps: [Config],
+            },
+            {
+                provide: APP_INITIALIZER,
+                useFactory: pwaFactory,
+                deps: [AddToHomeScreenService],
+                multi: true,
+            },
+            AddToHomeScreenService,
+        ],
+        declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+        exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+    })
+], PwaModule);
+
+const htmlLangProvider = {
+    provide: APP_INITIALIZER,
+    multi: true,
+    useFactory: setHtmlLangAttribute,
+    deps: [WindowRef, LanguageService],
+};
+/**
+ * Sets active language in <html lang="">
+ */
+function setHtmlLangAttribute(winRef, languageService) {
+    const result = () => {
+        languageService.getActive().subscribe((lang) => {
+            winRef.document.documentElement.lang = lang;
+        });
+    };
+    return result;
+}
+
+let SeoMetaService = class SeoMetaService {
+    constructor(ngTitle, ngMeta, pageMetaService) {
+        this.ngTitle = ngTitle;
+        this.ngMeta = ngMeta;
+        this.pageMetaService = pageMetaService;
+    }
+    init() {
+        this.pageMetaService
+            .getMeta()
+            .pipe(filter(Boolean))
+            .subscribe((meta) => (this.meta = meta));
+    }
+    set meta(meta) {
+        this.title = meta.title;
+        this.description = meta.description;
+        this.image = meta.image;
+        this.robots = meta.robots || [PageRobotsMeta.INDEX, PageRobotsMeta.FOLLOW];
+    }
+    set title(title) {
+        this.ngTitle.setTitle(title || '');
+    }
+    set description(value) {
+        this.addTag({ name: 'description', content: value });
+    }
+    set image(imageUrl) {
+        if (imageUrl) {
+            this.addTag({ name: 'og:image', content: imageUrl });
+        }
+    }
+    set robots(value) {
+        if (value) {
+            this.addTag({ name: 'robots', content: value.join(', ') });
+        }
+    }
+    addTag(meta) {
+        if (meta.content) {
+            this.ngMeta.updateTag(meta);
+        }
+    }
+};
+SeoMetaService.ctorParameters = () => [
+    { type: Title },
+    { type: Meta },
+    { type: PageMetaService }
+];
+SeoMetaService.ɵprov = ɵɵdefineInjectable({ factory: function SeoMetaService_Factory() { return new SeoMetaService(ɵɵinject(Title), ɵɵinject(Meta), ɵɵinject(PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+SeoMetaService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], SeoMetaService);
+
+let JsonLdScriptFactory = class JsonLdScriptFactory {
+    constructor(platformId, winRef, rendererFactory, sanitizer) {
+        this.platformId = platformId;
+        this.winRef = winRef;
+        this.rendererFactory = rendererFactory;
+        this.sanitizer = sanitizer;
+    }
+    build(schema) {
+        if (schema && this.isJsonLdRequired()) {
+            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
+        }
+    }
+    /**
+     * Only return schema data in case of SSR or development mode,
+     * to not waste memory unnecessary.
+     */
+    isJsonLdRequired() {
+        return !isPlatformBrowser(this.platformId) || isDevMode();
+    }
+    createJsonLdScriptElement() {
+        const id = 'json-ld';
+        let scriptElement = (this.winRef.document.getElementById(id));
+        if (!scriptElement) {
+            const renderer = this.rendererFactory.createRenderer(null, null);
+            const script = renderer.createElement('script');
+            script.id = id;
+            script.type = 'application/ld+json';
+            renderer.appendChild(this.winRef.document.body, script);
+            scriptElement = script;
+        }
+        return scriptElement;
+    }
+    /**
+     * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+     *
+     * The given schema is not trusted, as malicious code could be injected (XSS)
+     * into the json-ld script.
+     */
+    sanitize(schema) {
+        return JSON.stringify(schema, (_key, value) => typeof value === 'string'
+            ? this.sanitizer.sanitize(SecurityContext.HTML, value)
+            : value);
+    }
+};
+JsonLdScriptFactory.ctorParameters = () => [
+    { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: WindowRef },
+    { type: RendererFactory2 },
+    { type: DomSanitizer }
+];
+JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
+JsonLdScriptFactory = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(0, Inject(PLATFORM_ID))
+], JsonLdScriptFactory);
+
+/**
+ * Low level directive that adds a json-ld script tag to the component.
+ * This code bypasses the strict XSS security, as otherwise we're not able
+ * to append a script tag with JS inside.
+ */
+let JsonLdDirective = class JsonLdDirective {
+    constructor(jsonLdScriptFactory, sanitizer) {
+        this.jsonLdScriptFactory = jsonLdScriptFactory;
+        this.sanitizer = sanitizer;
+    }
+    set cxJsonLd(schema) {
+        this.writeJsonLd(schema);
+    }
+    writeJsonLd(schema) {
+        if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+            const sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
+            const html = `<script type="application/ld+json">${sanitizedSchema}</script>`;
+            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+    }
+};
+JsonLdDirective.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: DomSanitizer }
+];
+__decorate([
+    Input()
+], JsonLdDirective.prototype, "cxJsonLd", null);
+__decorate([
+    HostBinding('innerHTML')
+], JsonLdDirective.prototype, "jsonLD", void 0);
+JsonLdDirective = __decorate([
+    Directive({
+        selector: '[cxJsonLd]',
+    })
+], JsonLdDirective);
+
+/**
+ * Injection token to extend schema builders for adding structural data (json-ld).
+ *
+ * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+ * lowever level builder to further extend the schema.
+ */
+const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
+/**
+ * Injection token to add specific json-ld builders for product related schema's.
+ * See see https://schema.org/product for more information.
+ */
+const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
+
+let StructuredDataFactory = class StructuredDataFactory {
+    constructor(scriptBuilder, builders) {
+        this.scriptBuilder = scriptBuilder;
+        this.builders = builders;
+    }
+    build() {
+        this.collectSchemas().subscribe((schema) => {
+            this.scriptBuilder.build(schema);
+        });
+    }
+    collectSchemas() {
+        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+            return of();
+        }
+        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
+    }
+};
+StructuredDataFactory.ctorParameters = () => [
+    { type: JsonLdScriptFactory },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [SCHEMA_BUILDER,] }] }
+];
+StructuredDataFactory.ɵprov = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+StructuredDataFactory = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(1, Optional()),
+    __param(1, Inject(SCHEMA_BUILDER))
+], StructuredDataFactory);
+
+/**
+ * Factory to build the structure data
+ * without any interaction with the UI.
+ */
+function getStructuredDataFactory(injector) {
+    const result = () => {
+        const factory = injector.get(StructuredDataFactory);
+        factory.build();
+    };
+    return result;
+}
+let StructuredDataModule = class StructuredDataModule {
+};
+StructuredDataModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [JsonLdDirective],
+        exports: [JsonLdDirective],
+        providers: [
+            {
+                provide: APP_INITIALIZER,
+                useFactory: getStructuredDataFactory,
+                deps: [Injector],
+                multi: true,
+            },
+        ],
+    })
+], StructuredDataModule);
+
+function initSeoService(injector) {
+    const result = () => {
+        const service = injector.get(SeoMetaService);
+        service.init();
+    };
+    return result;
+}
+let SeoModule = class SeoModule {
+};
+SeoModule = __decorate([
+    NgModule({
+        imports: [StructuredDataModule],
+        providers: [
+            {
+                provide: APP_INITIALIZER,
+                useFactory: initSeoService,
+                deps: [Injector],
+                multi: true,
+            },
+            htmlLangProvider,
+        ],
+    })
+], SeoModule);
 
 let ConsentManagementFormComponent = class ConsentManagementFormComponent {
     constructor() {
@@ -9868,6 +9442,736 @@ MainModule = __decorate([
         exports: [StorefrontComponent],
     })
 ], MainModule);
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsMappingService = class CmsMappingService {
+    constructor(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+    }
+    isComponentEnabled(flexType) {
+        const isSSR = isPlatformServer(this.platformId);
+        const isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+            .disableSSR;
+        return !(isSSR && isComponentDisabledInSSR);
+    }
+    getRoutesForComponents(componentTypes) {
+        const routes = [];
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                routes.push(...this.getRoutesForComponent(componentType));
+            }
+        }
+        return routes;
+    }
+    getGuardsForComponents(componentTypes) {
+        const guards = new Set();
+        for (const componentType of componentTypes) {
+            this.getGuardsForComponent(componentType).forEach((guard) => guards.add(guard));
+        }
+        return Array.from(guards);
+    }
+    getI18nKeysForComponents(componentTypes) {
+        const i18nKeys = new Set();
+        for (const componentType of componentTypes) {
+            if (this.isComponentEnabled(componentType)) {
+                this.getI18nKeysForComponent(componentType).forEach((key) => i18nKeys.add(key));
+            }
+        }
+        return Array.from(i18nKeys);
+    }
+    getRoutesForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.childRoutes) || [];
+    }
+    getGuardsForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.guards) || [];
+    }
+    getI18nKeysForComponent(componentType) {
+        const mappingConfig = this.config.cmsComponents[componentType];
+        return (mappingConfig && mappingConfig.i18nKeys) || [];
+    }
+};
+CmsMappingService.ctorParameters = () => [
+    { type: CmsConfig },
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+];
+CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+CmsMappingService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(1, Inject(PLATFORM_ID))
+], CmsMappingService);
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsGuardsService = class CmsGuardsService {
+    constructor(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
+    }
+    cmsPageCanActivate(componentTypes, route, state) {
+        const guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+        if (guards.length) {
+            const canActivateObservables = guards.map((guardClass) => {
+                const guard = this.injector.get(guardClass, null);
+                if (isCanActivate(guard)) {
+                    return wrapIntoObservable(guard.canActivate(route, state)).pipe(first());
+                }
+                else {
+                    throw new Error('Invalid CanActivate guard in cmsMapping');
+                }
+            });
+            return concat(...canActivateObservables).pipe(skipWhile((canActivate) => canActivate === true), endWith(true), first());
+        }
+        else {
+            return of(true);
+        }
+    }
+};
+CmsGuardsService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: Injector }
+];
+CmsGuardsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+CmsGuardsService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CmsGuardsService);
+function wrapIntoObservable(value) {
+    if (isObservable(value)) {
+        return value;
+    }
+    if (isPromise(value)) {
+        return from(Promise.resolve(value));
+    }
+    return of(value);
+}
+function isPromise(obj) {
+    return !!obj && typeof obj.then === 'function';
+}
+function isCanActivate(guard) {
+    return guard && isFunction(guard.canActivate);
+}
+function isFunction(v) {
+    return typeof v === 'function';
+}
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsI18nService = class CmsI18nService {
+    constructor(cmsMapping, translation, translationChunk) {
+        this.cmsMapping = cmsMapping;
+        this.translation = translation;
+        this.translationChunk = translationChunk;
+    }
+    loadChunksForComponents(componentTypes) {
+        const i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+        const i18nChunks = new Set();
+        for (const key of i18nKeys) {
+            i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+        }
+        this.translation.loadChunks(Array.from(i18nChunks));
+    }
+};
+CmsI18nService.ctorParameters = () => [
+    { type: CmsMappingService },
+    { type: TranslationService },
+    { type: TranslationChunkService }
+];
+CmsI18nService.ɵprov = ɵɵdefineInjectable({ factory: function CmsI18nService_Factory() { return new CmsI18nService(ɵɵinject(CmsMappingService), ɵɵinject(TranslationService), ɵɵinject(TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+CmsI18nService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CmsI18nService);
+
+/**
+ * Please don't put that service in public API.
+ * */
+let CmsRoutesService = class CmsRoutesService {
+    constructor(router, cmsMapping) {
+        this.router = router;
+        this.cmsMapping = cmsMapping;
+    }
+    cmsRouteExist(url) {
+        const isCmsDrivenRoute = url.startsWith('/');
+        if (!isCmsDrivenRoute) {
+            return false;
+        }
+        const routePath = url.substr(1);
+        return (isCmsDrivenRoute &&
+            !!this.router.config.find((route) => route.data && route.data.cxCmsRouteContext && route.path === routePath));
+    }
+    /**
+     * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+     *
+     * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+     * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+     *
+     * @param pageContext
+     * @param currentUrl
+     */
+    handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
+        const componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+        if (componentRoutes.length) {
+            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+                this.router.navigateByUrl(currentUrl);
+                return false;
+            }
+        }
+        return true;
+    }
+    updateRouting(pageContext, pageLabel, routes) {
+        if (pageContext.type === PageType.CONTENT_PAGE &&
+            pageLabel.startsWith('/') &&
+            pageLabel.length > 1) {
+            const newRoute = {
+                path: pageLabel.substr(1),
+                component: PageLayoutComponent,
+                children: routes,
+                data: {
+                    cxCmsRouteContext: {
+                        type: pageContext.type,
+                        id: pageLabel,
+                    },
+                },
+            };
+            this.router.resetConfig([newRoute, ...this.router.config]);
+            return true;
+        }
+        return false;
+    }
+};
+CmsRoutesService.ctorParameters = () => [
+    { type: Router },
+    { type: CmsMappingService }
+];
+CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+CmsRoutesService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CmsRoutesService);
+
+let CmsPageGuard = class CmsPageGuard {
+    constructor(
+    // expose as `protected` only services from public API:
+    routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.cmsRoutes = cmsRoutes;
+        this.cmsI18n = cmsI18n;
+        this.cmsGuards = cmsGuards;
+        this.semanticPathService = semanticPathService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
+    }
+    canActivate(route, state) {
+        /**
+         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+         */
+        return this.protectedRoutesGuard
+            ? this.protectedRoutesGuard
+                .canActivate(route)
+                .pipe(switchMap((result) => result ? this.getCmsPage(route, state) : of(result)))
+            : this.getCmsPage(route, state);
+    }
+    getCmsPage(route, state) {
+        return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
+            .getPage(pageContext, true)
+            .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
+            ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
+            : this.handleNotFoundPage(pageContext, route, state)));
+    }
+    resolveCmsPageLogic(pageContext, pageData, route, state) {
+        return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap((componentTypes) => this.cmsGuards
+            .cmsPageCanActivate(componentTypes, route, state)
+            .pipe(withLatestFrom(of(componentTypes)))), tap(([canActivate, componentTypes]) => {
+            if (canActivate === true) {
+                this.cmsI18n.loadChunksForComponents(componentTypes);
+            }
+        }), map(([canActivate, componentTypes]) => {
+            const pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
+            if (canActivate === true &&
+                !route.data.cxCmsRouteContext &&
+                !this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                return this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
+            }
+            return canActivate;
+        }));
+    }
+    handleNotFoundPage(pageContext, route, state) {
+        const notFoundCmsPageContext = {
+            type: PageType.CONTENT_PAGE,
+            id: this.semanticPathService.get('notFound'),
+        };
+        return this.cmsService.getPage(notFoundCmsPageContext).pipe(switchMap((notFoundPage) => {
+            if (notFoundPage) {
+                return this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(tap((notFoundIndex) => {
+                    this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                }), switchMap((notFoundIndex) => this.cmsService.getPageIndex(pageContext).pipe(
+                // we have to wait for page index update
+                filter((index) => index === notFoundIndex))), switchMap(() => this.resolveCmsPageLogic(pageContext, notFoundPage, route, state)));
+            }
+            return of(false);
+        }));
+    }
+};
+CmsPageGuard.guardName = 'CmsPageGuard';
+CmsPageGuard.ctorParameters = () => [
+    { type: RoutingService },
+    { type: CmsService },
+    { type: CmsRoutesService },
+    { type: CmsI18nService },
+    { type: CmsGuardsService },
+    { type: SemanticPathService },
+    { type: ProtectedRoutesGuard }
+];
+CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+CmsPageGuard = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CmsPageGuard);
+
+const cmsRoute = {
+    path: '**',
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
+};
+function addCmsRoute(injector) {
+    const result = () => {
+        const router = injector.get(Router);
+        router.config.push(cmsRoute);
+    };
+    return result;
+}
+
+const ɵ0 = addCmsRoute;
+let CmsRouteModule = class CmsRouteModule {
+};
+CmsRouteModule = __decorate([
+    NgModule({
+        providers: [
+            {
+                provide: APP_INITIALIZER,
+                multi: true,
+                deps: [Injector],
+                useFactory: ɵ0,
+            },
+        ],
+    })
+], CmsRouteModule);
+
+const defaultStorefrontRoutesConfig = {
+    home: { paths: [''] },
+    notFound: { paths: ['not-found'] },
+    cart: { paths: ['cart'] },
+    // semantic links for login related pages
+    login: { paths: ['login'], protected: false },
+    register: { paths: ['login/register'], protected: false },
+    forgotPassword: { paths: ['login/forgot-password'], protected: false },
+    resetPassword: { paths: ['login/pw/change'], protected: false },
+    logout: { paths: ['logout'] },
+    checkoutLogin: { paths: ['checkout-login'] },
+    checkout: { paths: ['checkout'] },
+    checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
+    checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
+    checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+    checkoutReviewOrder: { paths: ['checkout/review-order'] },
+    orderConfirmation: { paths: ['order-confirmation'] },
+    // plp routes
+    search: { paths: ['search/:query'] },
+    category: {
+        paths: ['category/:categoryCode'],
+        paramsMapping: { categoryCode: 'code' },
+    },
+    brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+    // pdp routes
+    product: {
+        paths: ['product/:productCode/:name'],
+        paramsMapping: { productCode: 'code' },
+    },
+    termsAndConditions: { paths: ['terms-and-conditions'] },
+    orders: {
+        paths: ['my-account/orders'],
+    },
+    orderDetails: {
+        paths: ['my-account/order/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderGuest: {
+        paths: ['guest/order/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderReturn: {
+        paths: ['my-account/order/return/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderReturnConfirmation: {
+        paths: ['my-account/order/return/confirmation/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderCancel: {
+        paths: ['my-account/order/cancel/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    orderCancelConfirmation: {
+        paths: ['my-account/order/cancel/confirmation/:orderCode'],
+        paramsMapping: { orderCode: 'code' },
+    },
+    returnRequestDetails: {
+        paths: ['my-account/return-request/:returnCode'],
+        paramsMapping: { returnCode: 'rma' },
+    },
+    coupons: { paths: ['my-account/coupons'] },
+    couponClaim: {
+        paths: ['my-account/coupon/claim/:couponCode'],
+        paramsMapping: { couponCode: 'code' },
+    },
+};
+const defaultRoutingConfig = {
+    routing: {
+        routes: defaultStorefrontRoutesConfig,
+    },
+};
+
+var RoutingModule_1;
+let RoutingModule = RoutingModule_1 = class RoutingModule {
+    static forRoot() {
+        return {
+            ngModule: RoutingModule_1,
+            providers: [provideDefaultConfig(defaultRoutingConfig)],
+        };
+    }
+};
+RoutingModule = RoutingModule_1 = __decorate([
+    NgModule({
+        imports: [RoutingModule$1.forRoot(), CmsRouteModule],
+    })
+], RoutingModule);
+
+/**
+ * Matches the pattern '[ ** / ] marker / :paramName'
+ *
+ * @param marker phrase that indicates the start of the match
+ * @param paramName name of the parameter present after the marker
+ * @param precedingParamName name of the parameter for every preceding url segment
+ *        i.e. `param` will result in `param0`, `param1`, ...
+ */
+function getSuffixUrlMatcher({ marker, paramName, precedingParamName, }) {
+    precedingParamName = precedingParamName || 'param';
+    const matcher = function suffixUrlMatcher(segments) {
+        const markerIndex = findLastIndex(segments, ({ path }) => path === marker);
+        const isMarkerLastSegment = markerIndex === segments.length - 1;
+        if (markerIndex === -1 || isMarkerLastSegment) {
+            return null;
+        }
+        const paramIndex = markerIndex + 1;
+        const posParams = {
+            [paramName]: segments[paramIndex],
+        };
+        for (let i = 0; i < markerIndex; i++) {
+            posParams[`${precedingParamName}${i}`] = segments[i];
+        }
+        return { consumed: segments.slice(0, paramIndex + 1), posParams };
+    };
+    if (isDevMode()) {
+        matcher['_suffixRouteConfig'] = { marker, paramName, precedingParamName }; // property added for easier debugging of routes
+    }
+    return matcher;
+}
+function findLastIndex(elements, predicate) {
+    for (let index = elements.length - 1; index >= 0; index--) {
+        if (predicate(elements[index])) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+let BreadcrumbSchemaBuilder = class BreadcrumbSchemaBuilder {
+    constructor(pageMetaService) {
+        this.pageMetaService = pageMetaService;
+    }
+    build() {
+        return this.pageMetaService
+            .getMeta()
+            .pipe(map((pageMeta) => this.collect(pageMeta)));
+    }
+    collect(pageMeta) {
+        if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
+            return;
+        }
+        const crumbs = pageMeta.breadcrumbs.map((crumb, index) => {
+            return {
+                '@type': 'ListItem',
+                position: index + 1,
+                item: {
+                    '@id': crumb.link,
+                    name: crumb.label,
+                },
+            };
+        });
+        if (pageMeta.title) {
+            crumbs.push({
+                '@type': 'ListItem',
+                position: crumbs.length + 1,
+                item: {
+                    '@id': pageMeta.title,
+                    name: pageMeta.title,
+                },
+            });
+        }
+        return {
+            '@context': 'http://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: crumbs,
+        };
+    }
+};
+BreadcrumbSchemaBuilder.ctorParameters = () => [
+    { type: PageMetaService }
+];
+BreadcrumbSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(ɵɵinject(PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+BreadcrumbSchemaBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], BreadcrumbSchemaBuilder);
+
+/**
+ * Builds the basic structured data for the product, see https://schema.org/product.
+ * This builder includes data for sku number, name, description, brand and main image.
+ */
+let JsonLdBaseProductBuilder = class JsonLdBaseProductBuilder {
+    build(product) {
+        return of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
+    }
+    getProductBase(product) {
+        const result = { sku: product.code };
+        if (product.name) {
+            result.name = product.name;
+        }
+        if (product.summary) {
+            result.description = product.summary;
+        }
+        return result;
+    }
+    getProductImage(product) {
+        return product.images &&
+            product.images.PRIMARY &&
+            product.images.PRIMARY['zoom'] &&
+            product.images.PRIMARY['zoom'].url
+            ? {
+                image: product.images.PRIMARY['zoom'].url,
+            }
+            : {};
+    }
+    getProductBrand(product) {
+        return product['manufacturer']
+            ? {
+                brand: product['manufacturer'],
+            }
+            : null;
+    }
+};
+JsonLdBaseProductBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+JsonLdBaseProductBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], JsonLdBaseProductBuilder);
+
+/**
+ * Builds the structured data for the product offer, see https://schema.org/offers.
+ * The data includes the price, currency and availability level.
+ */
+let JsonLdProductOfferBuilder = class JsonLdProductOfferBuilder {
+    build(product) {
+        const schema = { '@type': 'Offer' };
+        if (product.price) {
+            if (product.price.value) {
+                schema.price = product.price.value;
+            }
+            if (product.price.currencyIso) {
+                schema.priceCurrency = product.price.currencyIso;
+            }
+        }
+        if (product.stock && product.stock.stockLevelStatus) {
+            schema.availability =
+                product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+        }
+        return of({
+            offers: schema,
+        });
+    }
+};
+JsonLdProductOfferBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+JsonLdProductOfferBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], JsonLdProductOfferBuilder);
+
+/**
+ * Builds the structured data for the product reviews, see https://schema.org/Review.
+ * The data includes the aggregated product rating and the individual reviews.
+ */
+let JsonLdProductReviewBuilder = class JsonLdProductReviewBuilder {
+    constructor(reviewService) {
+        this.reviewService = reviewService;
+    }
+    build(product) {
+        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
+            return {
+                aggregateRating: this.buildAggregatedReviews(product, reviews),
+                review: reviews.map((review) => this.buildReviews(review)),
+            };
+        }));
+    }
+    buildAggregatedReviews(product, reviews) {
+        const aggregated = {
+            '@type': 'AggregateRating',
+        };
+        if (product.averageRating) {
+            aggregated.ratingValue = product.averageRating;
+        }
+        if (reviews) {
+            aggregated.ratingCount = reviews.filter((rev) => !!rev.rating).length;
+            aggregated.reviewCount = reviews.filter((rev) => !!rev.comment).length;
+        }
+        return aggregated;
+    }
+    buildReviews(review) {
+        const reviewSchema = {
+            '@type': 'review',
+        };
+        if (review.principal && review.principal.name) {
+            reviewSchema.author = review.principal.name;
+        }
+        if (review.date) {
+            const date = new Date(review.date);
+            reviewSchema.datePublished = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        }
+        if (review.headline) {
+            reviewSchema.name = review.headline;
+        }
+        if (review.comment) {
+            reviewSchema.description = review.comment;
+        }
+        if (review.rating) {
+            reviewSchema.reviewRating = {
+                '@type': 'Rating',
+                ratingValue: review.rating.toString(),
+            };
+        }
+        return reviewSchema;
+    }
+};
+JsonLdProductReviewBuilder.ctorParameters = () => [
+    { type: ProductReviewService }
+];
+JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+JsonLdProductReviewBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], JsonLdProductReviewBuilder);
+
+/**
+ * Adds the minimal structured data for the product, see https://schema.org/product.
+ * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+ * using the `JSONLD_PRODUCT_BUILDER` token.
+ */
+let ProductSchemaBuilder = class ProductSchemaBuilder {
+    constructor(currentProduct, builders) {
+        this.currentProduct = currentProduct;
+        this.builders = builders;
+    }
+    build() {
+        return this.currentProduct.getProduct().pipe(switchMap((product) => {
+            if (product) {
+                return combineLatest(this.collect(product)).pipe(map((res) => Object.assign({}, ...res)));
+            }
+            return of({});
+        }));
+    }
+    collect(product) {
+        if (!product || !product.code) {
+            return [];
+        }
+        const builders = this.builders
+            ? this.builders.map((builder) => builder.build(product))
+            : [];
+        return [
+            of({
+                '@context': 'http://schema.org',
+                '@type': 'Product',
+            }),
+            ...builders,
+        ];
+    }
+};
+ProductSchemaBuilder.ctorParameters = () => [
+    { type: CurrentProductService },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+];
+ProductSchemaBuilder.ɵprov = ɵɵdefineInjectable({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(ɵɵinject(CurrentProductService), ɵɵinject(JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+ProductSchemaBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(1, Optional()),
+    __param(1, Inject(JSONLD_PRODUCT_BUILDER))
+], ProductSchemaBuilder);
+
+/**
+ * Provides several standard json-ld builders that contribute
+ * to colleting and building json-ld data.
+ */
+let JsonLdBuilderModule = class JsonLdBuilderModule {
+};
+JsonLdBuilderModule = __decorate([
+    NgModule({
+        providers: [
+            {
+                provide: SCHEMA_BUILDER,
+                useExisting: ProductSchemaBuilder,
+                multi: true,
+            },
+            {
+                provide: SCHEMA_BUILDER,
+                useExisting: BreadcrumbSchemaBuilder,
+                multi: true,
+            },
+            // lower level json-ld builder classes offering fine-graiend control
+            // for product related schema's
+            {
+                provide: JSONLD_PRODUCT_BUILDER,
+                useExisting: JsonLdBaseProductBuilder,
+                multi: true,
+            },
+            {
+                provide: JSONLD_PRODUCT_BUILDER,
+                useExisting: JsonLdProductOfferBuilder,
+                multi: true,
+            },
+            {
+                provide: JSONLD_PRODUCT_BUILDER,
+                useExisting: JsonLdProductReviewBuilder,
+                multi: true,
+            },
+        ],
+    })
+], JsonLdBuilderModule);
 
 /**
  * Generic carousel that renders CMS Components.
@@ -17240,5 +17544,5 @@ const PLPAccessibilityLayoutConfig = {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LanguageCurrencyComponent, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsRoutesService as ɵbj, CmsMappingService as ɵbk, CmsI18nService as ɵbl, CmsGuardsService as ɵbm, ReturnRequestService as ɵbn, AddToHomeScreenService as ɵbo, MyCouponsComponentService as ɵbp, addCmsRoute as ɵbq, defaultStorefrontRoutesConfig as ɵbr, defaultRoutingConfig as ɵbs, htmlLangProvider as ɵbt, setHtmlLangAttribute as ɵbu, KeyboardFocusService as ɵbv, AnonymousConsentsModule as ɵbw, AnonymousConsentDialogComponent as ɵbx, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BillingAddressFormComponent, BillingAddressFormModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PLPAccessibilityLayoutConfig, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsRoutesService as ɵbj, CmsMappingService as ɵbk, CmsI18nService as ɵbl, CmsGuardsService as ɵbm, ReturnRequestService as ɵbn, OutletRendererService as ɵbo, AddToHomeScreenService as ɵbp, MyCouponsComponentService as ɵbq, addCmsRoute as ɵbr, defaultStorefrontRoutesConfig as ɵbs, defaultRoutingConfig as ɵbt, htmlLangProvider as ɵbu, setHtmlLangAttribute as ɵbv, KeyboardFocusService as ɵbw, AnonymousConsentsModule as ɵbx, AnonymousConsentDialogComponent as ɵby, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz, DeferLoaderService as θDeferLoaderService, IntersectionService as θIntersectionService };
 //# sourceMappingURL=spartacus-storefront.js.map

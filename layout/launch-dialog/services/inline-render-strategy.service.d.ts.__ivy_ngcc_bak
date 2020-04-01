@@ -1,0 +1,16 @@
+import { ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
+import { LaunchInlineDialog, LAUNCH_CALLER } from '../config';
+import { LaunchRenderStrategy } from './launch-render.strategy';
+export declare class InlineRenderStrategy extends LaunchRenderStrategy {
+    protected componentFactoryResolver: ComponentFactoryResolver;
+    constructor(componentFactoryResolver: ComponentFactoryResolver);
+    /**
+     * Renders the component from the configuration in the view container ref
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config: LaunchInlineDialog, caller: LAUNCH_CALLER, vcr: ViewContainerRef): void;
+    match(config: LaunchInlineDialog): boolean;
+}

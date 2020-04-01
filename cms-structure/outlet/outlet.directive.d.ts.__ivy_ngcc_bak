@@ -8,6 +8,8 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
     private templateRef;
     private outletService;
     private deferLoaderService?;
+    private outletRendererService?;
+    private renderedTemplate;
     cxOutlet: string;
     cxOutletContext: any;
     /**
@@ -22,11 +24,11 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
      * Use constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, intersectionService?: IntersectionService) instead
      */
     constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>);
-    private initializeOutlet;
+    render(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private deferLoading;
-    private render;
-    private renderOutlet;
+    private build;
+    private buildOutlet;
     private create;
     /**
      * Returns the closest `HtmlElement`, by iterating over the

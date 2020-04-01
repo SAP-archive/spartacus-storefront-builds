@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@spartacus/core'), require('rxjs'), require('rxjs/operators'), require('@angular/platform-browser'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/router'), require('@angular/service-worker'), require('@ng-select/ng-select'), require('@angular/common/http'), require('ngx-infinite-scroll'), require('@ngrx/effects'), require('@ngrx/store')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/common', '@angular/core', '@spartacus/core', 'rxjs', 'rxjs/operators', '@angular/platform-browser', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/router', '@angular/service-worker', '@ng-select/ng-select', '@angular/common/http', 'ngx-infinite-scroll', '@ngrx/effects', '@ngrx/store'], factory) :
-    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.common, global.ng.core, global.core, global.rxjs, global.rxjs.operators, global.ng.platformBrowser, global.ngBootstrap, global.ng.forms, global.ng.router, global.ng['service-worker'], global.ngSelect, global.ng.common.http, global.ngxInfiniteScroll, global.effects, global.store));
-}(this, (function (exports, common, core, core$1, rxjs, operators, platformBrowser, ngBootstrap, forms, router, serviceWorker, ngSelect, http, ngxInfiniteScroll, effects, store) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core'), require('@spartacus/core'), require('rxjs'), require('rxjs/operators'), require('@angular/platform-browser'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@angular/common/http'), require('@angular/service-worker'), require('ngx-infinite-scroll'), require('@ngrx/effects'), require('@ngrx/store')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/common', '@angular/core', '@spartacus/core', 'rxjs', 'rxjs/operators', '@angular/platform-browser', '@ng-bootstrap/ng-bootstrap', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@angular/common/http', '@angular/service-worker', 'ngx-infinite-scroll', '@ngrx/effects', '@ngrx/store'], factory) :
+    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.common, global.ng.core, global.core, global.rxjs, global.rxjs.operators, global.ng.platformBrowser, global.ngBootstrap, global.ng.forms, global.ng.router, global.ngSelect, global.ng.common.http, global.ng['service-worker'], global.ngxInfiniteScroll, global.effects, global.store));
+}(this, (function (exports, common, core, core$1, rxjs, operators, platformBrowser, ngBootstrap, forms, router, ngSelect, http, serviceWorker, ngxInfiniteScroll, effects, store) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -1159,2224 +1159,6 @@
         return PageComponentModule;
     }());
 
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsMappingService = /** @class */ (function () {
-        function CmsMappingService(config, platformId) {
-            this.config = config;
-            this.platformId = platformId;
-        }
-        CmsMappingService.prototype.isComponentEnabled = function (flexType) {
-            var isSSR = common.isPlatformServer(this.platformId);
-            var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-                .disableSSR;
-            return !(isSSR && isComponentDisabledInSSR);
-        };
-        CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
-            var e_1, _a;
-            var routes = [];
-            try {
-                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                    var componentType = componentTypes_1_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return routes;
-        };
-        CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
-            var e_2, _a;
-            var guards = new Set();
-            try {
-                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                    var componentType = componentTypes_2_1.value;
-                    this.getGuardsForComponent(componentType).forEach(function (guard) {
-                        return guards.add(guard);
-                    });
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-            return Array.from(guards);
-        };
-        CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
-            var e_3, _a;
-            var i18nKeys = new Set();
-            try {
-                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                    var componentType = componentTypes_3_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        this.getI18nKeysForComponent(componentType).forEach(function (key) {
-                            return i18nKeys.add(key);
-                        });
-                    }
-                }
-            }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
-            finally {
-                try {
-                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-                }
-                finally { if (e_3) throw e_3.error; }
-            }
-            return Array.from(i18nKeys);
-        };
-        CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.childRoutes) || [];
-        };
-        CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.guards) || [];
-        };
-        CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.i18nKeys) || [];
-        };
-        CmsMappingService.ctorParameters = function () { return [
-            { type: core$1.CmsConfig },
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-        ]; };
-        CmsMappingService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-        CmsMappingService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(1, core.Inject(core.PLATFORM_ID))
-        ], CmsMappingService);
-        return CmsMappingService;
-    }());
-
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsGuardsService = /** @class */ (function () {
-        function CmsGuardsService(cmsMapping, injector) {
-            this.cmsMapping = cmsMapping;
-            this.injector = injector;
-        }
-        CmsGuardsService.prototype.cmsPageCanActivate = function (componentTypes, route, state) {
-            var _this = this;
-            var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
-            if (guards.length) {
-                var canActivateObservables = guards.map(function (guardClass) {
-                    var guard = _this.injector.get(guardClass, null);
-                    if (isCanActivate(guard)) {
-                        return wrapIntoObservable(guard.canActivate(route, state)).pipe(operators.first());
-                    }
-                    else {
-                        throw new Error('Invalid CanActivate guard in cmsMapping');
-                    }
-                });
-                return rxjs.concat.apply(void 0, __spread(canActivateObservables)).pipe(operators.skipWhile(function (canActivate) { return canActivate === true; }), operators.endWith(true), operators.first());
-            }
-            else {
-                return rxjs.of(true);
-            }
-        };
-        CmsGuardsService.ctorParameters = function () { return [
-            { type: CmsMappingService },
-            { type: core.Injector }
-        ]; };
-        CmsGuardsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
-        CmsGuardsService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CmsGuardsService);
-        return CmsGuardsService;
-    }());
-    function wrapIntoObservable(value) {
-        if (rxjs.isObservable(value)) {
-            return value;
-        }
-        if (isPromise(value)) {
-            return rxjs.from(Promise.resolve(value));
-        }
-        return rxjs.of(value);
-    }
-    function isPromise(obj) {
-        return !!obj && typeof obj.then === 'function';
-    }
-    function isCanActivate(guard) {
-        return guard && isFunction(guard.canActivate);
-    }
-    function isFunction(v) {
-        return typeof v === 'function';
-    }
-
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsI18nService = /** @class */ (function () {
-        function CmsI18nService(cmsMapping, translation, translationChunk) {
-            this.cmsMapping = cmsMapping;
-            this.translation = translation;
-            this.translationChunk = translationChunk;
-        }
-        CmsI18nService.prototype.loadChunksForComponents = function (componentTypes) {
-            var e_1, _a;
-            var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
-            var i18nChunks = new Set();
-            try {
-                for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
-                    var key = i18nKeys_1_1.value;
-                    i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            this.translation.loadChunks(Array.from(i18nChunks));
-        };
-        CmsI18nService.ctorParameters = function () { return [
-            { type: CmsMappingService },
-            { type: core$1.TranslationService },
-            { type: core$1.TranslationChunkService }
-        ]; };
-        CmsI18nService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core$1.TranslationService), core["ɵɵinject"](core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
-        CmsI18nService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CmsI18nService);
-        return CmsI18nService;
-    }());
-
-
-    (function (BREAKPOINT) {
-        BREAKPOINT["xs"] = "xs";
-        BREAKPOINT["sm"] = "sm";
-        BREAKPOINT["md"] = "md";
-        BREAKPOINT["lg"] = "lg";
-        BREAKPOINT["xl"] = "xl";
-    })(exports.BREAKPOINT || (exports.BREAKPOINT = {}));
-    /**
-     * The LayoutConfig supports the configuration of page slots by page templates
-     * or page sections, such as headers and footers. The configuration also supports
-     * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
-     * por a given breakpoint.
-     */
-    var LayoutConfig = /** @class */ (function () {
-        function LayoutConfig() {
-        }
-        return LayoutConfig;
-    }());
-
-    var _a;
-    var DEFAULT_BREAKPOINTS = (_a = {},
-        _a[exports.BREAKPOINT.xs] = 576,
-        _a[exports.BREAKPOINT.sm] = 768,
-        _a[exports.BREAKPOINT.md] = 992,
-        _a[exports.BREAKPOINT.lg] = 1200,
-        _a);
-    var BreakpointService = /** @class */ (function () {
-        function BreakpointService(winRef, config) {
-            this.winRef = winRef;
-            this.config = config;
-        }
-        Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
-            get: function () {
-                var _this = this;
-                if (!this.window) {
-                    return rxjs.of(exports.BREAKPOINT.xs);
-                }
-                return this.winRef.resize$.pipe(operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged());
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-         * configuration. If no configuration is available for the given breakpoint, the
-         * method will return the default values:
-         * - xs: 567
-         * - sm: 768
-         * - md: 992
-         * - lg: 1200
-         */
-        BreakpointService.prototype.getSize = function (breakpoint) {
-            var _a;
-            return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
-                : DEFAULT_BREAKPOINTS[breakpoint];
-        };
-        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
-            /**
-             * Returns all available breakpoints for the system.
-             */
-            get: function () {
-                return [
-                    exports.BREAKPOINT.xs,
-                    exports.BREAKPOINT.sm,
-                    exports.BREAKPOINT.md,
-                    exports.BREAKPOINT.lg,
-                    exports.BREAKPOINT.xl,
-                ];
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * Indicates whether the current screen size is smaller than the maximum size of the
-         * given breakpoint.
-         *
-         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-         * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
-         */
-        BreakpointService.prototype.isDown = function (breakpoint) {
-            var _this = this;
-            return this.breakpoint$.pipe(operators.map(function (br) {
-                return _this.breakpoints
-                    .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
-                    .includes(br);
-            }));
-        };
-        /**
-         * Indicates whether the current screen size is larger than the minimum size of the
-         * given breakpoint.
-         *
-         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-         * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
-         */
-        BreakpointService.prototype.isUp = function (breakpoint) {
-            var _this = this;
-            return this.breakpoint$.pipe(operators.map(function (br) {
-                return _this.breakpoints
-                    .slice(_this.breakpoints.indexOf(breakpoint))
-                    .includes(br);
-            }));
-        };
-        /**
-         * Indicates whether the current screen size fits to the given breakpoint
-         */
-        BreakpointService.prototype.isEqual = function (breakpoint) {
-            return this.breakpoint$.pipe(operators.map(function (br) { return br === breakpoint; }));
-        };
-        BreakpointService.prototype.getBreakpoint = function (windowWidth) {
-            var breakpoint = this.getClosest(windowWidth);
-            return exports.BREAKPOINT[breakpoint || exports.BREAKPOINT.lg];
-        };
-        BreakpointService.prototype.getClosest = function (windowWidth) {
-            var _this = this;
-            if (!windowWidth) {
-                windowWidth = this.window.innerWidth;
-            }
-            return windowWidth > this.getSize(exports.BREAKPOINT.lg)
-                ? exports.BREAKPOINT.xl
-                : this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); });
-        };
-        Object.defineProperty(BreakpointService.prototype, "window", {
-            get: function () {
-                return this.winRef.nativeWindow;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        BreakpointService.ctorParameters = function () { return [
-            { type: core$1.WindowRef },
-            { type: LayoutConfig }
-        ]; };
-        BreakpointService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function BreakpointService_Factory() { return new BreakpointService(core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-        BreakpointService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], BreakpointService);
-        return BreakpointService;
-    }());
-
-    var PAGE_LAYOUT_HANDLER = new core.InjectionToken('PageLayoutHandler');
-
-    var PageLayoutService = /** @class */ (function () {
-        function PageLayoutService(cms, config, breakpointService, handlers) {
-            this.cms = cms;
-            this.config = config;
-            this.breakpointService = breakpointService;
-            this.handlers = handlers;
-            // Prints warn messages for missing layout configs.
-            // The warnings are only printed once per config
-            // to not pollute the console log.
-            this.warnLogMessages = {};
-            this.logSlots = {};
-        }
-        PageLayoutService.prototype.getSlots = function (section) {
-            var _this = this;
-            return rxjs.combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(operators.map(function (_a) {
-                var _b = __read(_a, 2), page = _b[0], breakpoint = _b[1];
-                var pageTemplate = page.template;
-                var slots = _this.resolveSlots(page, section, breakpoint);
-                return { slots: slots, pageTemplate: pageTemplate, breakpoint: breakpoint };
-            }), operators.switchMap(function (_a) {
-                var e_1, _b;
-                var slots = _a.slots, pageTemplate = _a.pageTemplate, breakpoint = _a.breakpoint;
-                var result = rxjs.of(slots);
-                try {
-                    for (var _c = __values(_this.handlers || []), _d = _c.next(); !_d.done; _d = _c.next()) {
-                        var handler = _d.value;
-                        result = handler.handle(result, pageTemplate, section, breakpoint);
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-                return result;
-            }), operators.distinctUntilChanged(function (a, b) {
-                if (a.length !== b.length) {
-                    return false;
-                }
-                for (var i = 0; i < a.length; i++) {
-                    if (a[i] !== b[i]) {
-                        return false;
-                    }
-                }
-                return true;
-            }));
-        };
-        /**
-         * Returns an observable with the last page slot above-the-fold
-         * for the given pageTemplate / breakpoint.
-         *
-         * The page fold is configurable in the `LayoutConfig` for each page layout.
-         */
-        PageLayoutService.prototype.getPageFoldSlot = function (pageTemplate) {
-            var _this = this;
-            return this.breakpointService.breakpoint$.pipe(operators.map(function (breakpoint) {
-                if (!_this.config.layoutSlots) {
-                    // no layout config available
-                    return null;
-                }
-                var pageTemplateConfig = _this.config.layoutSlots[pageTemplate];
-                var config = _this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
-                return config ? config.pageFold : null;
-            }));
-        };
-        PageLayoutService.prototype.resolveSlots = function (page, section, breakpoint) {
-            var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
-            if (config && config.slots) {
-                var pageSlots_1 = Object.keys(page.slots);
-                return config.slots.filter(function (slot) { return pageSlots_1.includes(slot); });
-            }
-            else if (!section) {
-                this.logMissingLayoutConfig(page);
-                return Object.keys(page.slots);
-            }
-            else {
-                this.logMissingLayoutConfig(page, section);
-                return [];
-            }
-        };
-        Object.defineProperty(PageLayoutService.prototype, "page$", {
-            get: function () {
-                return this.cms.getCurrentPage().pipe(operators.filter(function (page) { return !!page; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PageLayoutService.prototype, "templateName$", {
-            get: function () {
-                return this.page$.pipe(operators.filter(function (page) { return !!page.template; }), operators.map(function (page) { return page.template; }));
-            },
-            enumerable: true,
-            configurable: true
-        });
-        /**
-         * load slots from the layout configuration. The breakpoint is used
-         * to load a specific configuration for the given breakpoint. If there's
-         * no configuration available for the given breakpoint the default slot
-         * configuration is returned.
-         */
-        PageLayoutService.prototype.getSlotConfig = function (templateUid, configAttribute, section, breakpoint) {
-            if (!this.config.layoutSlots) {
-                return null;
-            }
-            var pageTemplateConfig = this.config.layoutSlots[templateUid];
-            if (section) {
-                return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
-            }
-            if (pageTemplateConfig) {
-                return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
-            }
-        };
-        PageLayoutService.prototype.getSlotConfigForSection = function (templateUid, configAttribute, section, breakpoint) {
-            var pageTemplateConfig = this.config.layoutSlots[templateUid];
-            if (!pageTemplateConfig) {
-                return null;
-            }
-            // if there's no section config on the page layout
-            // we fall back to the global section config
-            var sectionConfig = pageTemplateConfig[section]
-                ? pageTemplateConfig[section]
-                : this.config.layoutSlots[section];
-            if (!sectionConfig) {
-                return null;
-            }
-            var responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
-            if (responsiveConfig.hasOwnProperty(configAttribute)) {
-                return responsiveConfig;
-            }
-            else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
-                return pageTemplateConfig[section];
-            }
-            else if (this.config.layoutSlots[section]) {
-                return this.config.layoutSlots[section];
-            }
-        };
-        /**
-         * Returns a list of slots for a breakpoint specific configuratoin
-         * If there's no specific configuration for the breakpoint,
-         * the closest available configuration will be returned.
-         */
-        PageLayoutService.prototype.getResponsiveSlotConfig = function (layoutSlotConfig, configAttribute, breakpoint) {
-            var e_2, _a;
-            var slotConfig = layoutSlotConfig;
-            // fallback to default slot config
-            if (!layoutSlotConfig || !breakpoint) {
-                return slotConfig;
-            }
-            // we have a config for the specific breakpoint
-            if (layoutSlotConfig[breakpoint] &&
-                layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
-                return layoutSlotConfig[breakpoint];
-            }
-            // find closest config
-            var all = this.breakpointService.breakpoints;
-            try {
-                for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var br = _c.value;
-                    if (layoutSlotConfig[br] &&
-                        layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
-                        slotConfig = layoutSlotConfig[br];
-                    }
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-            return slotConfig;
-        };
-        /**
-         * In order to help developers, we print some detailed log information in
-         * case there's no layout configuration available for the given page template
-         * or section. Additionally, the slot positions are printed in the console
-         * in a format that can be copied / paste to the configuration.
-         */
-        PageLayoutService.prototype.logMissingLayoutConfig = function (page, section) {
-            if (!core.isDevMode()) {
-                return;
-            }
-            if (!this.logSlots[page.template]) {
-                // the info log is not printed in production
-                // tslint:disable-next-line: no-console
-                console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
-                this.logSlots[page.template] = true;
-            }
-            var cacheKey = section || page.template;
-            if (!this.warnLogMessages[cacheKey]) {
-                console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
-                this.warnLogMessages[cacheKey] = true;
-            }
-        };
-        PageLayoutService.ctorParameters = function () { return [
-            { type: core$1.CmsService },
-            { type: LayoutConfig },
-            { type: BreakpointService },
-            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
-        ]; };
-        PageLayoutService = __decorate([
-            core.Injectable(),
-            __param(3, core.Optional()),
-            __param(3, core.Inject(PAGE_LAYOUT_HANDLER))
-        ], PageLayoutService);
-        return PageLayoutService;
-    }());
-
-    var PageLayoutComponent = /** @class */ (function () {
-        function PageLayoutComponent(el, renderer, pageLayoutService) {
-            var _this = this;
-            this.el = el;
-            this.renderer = renderer;
-            this.pageLayoutService = pageLayoutService;
-            this.section$ = new rxjs.BehaviorSubject(undefined);
-            this.templateName$ = this.pageLayoutService
-                .templateName$;
-            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) { return (section ? rxjs.of(section) : _this.templateName$); }), operators.tap(function (name) {
-                _this.styleClass = name;
-            }));
-            this.slots$ = this.section$.pipe(operators.switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
-            this.pageFoldSlot$ = this.templateName$.pipe(operators.switchMap(function (templateName) {
-                return _this.pageLayoutService.getPageFoldSlot(templateName);
-            }), operators.distinctUntilChanged());
-        }
-        Object.defineProperty(PageLayoutComponent.prototype, "section", {
-            set: function (value) {
-                this.section$.next(value);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
-            set: function (cls) {
-                if (this.currentClass) {
-                    this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-                }
-                this.renderer.addClass(this.el.nativeElement, cls);
-                this.currentClass = cls;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        PageLayoutComponent.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: core.Renderer2 },
-            { type: PageLayoutService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], PageLayoutComponent.prototype, "section", null);
-        PageLayoutComponent = __decorate([
-            core.Component({
-                selector: 'cx-page-layout',
-                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], PageLayoutComponent);
-        return PageLayoutComponent;
-    }());
-
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsRoutesService = /** @class */ (function () {
-        function CmsRoutesService(router, cmsMapping) {
-            this.router = router;
-            this.cmsMapping = cmsMapping;
-        }
-        CmsRoutesService.prototype.cmsRouteExist = function (url) {
-            var isCmsDrivenRoute = url.startsWith('/');
-            if (!isCmsDrivenRoute) {
-                return false;
-            }
-            var routePath = url.substr(1);
-            return (isCmsDrivenRoute &&
-                !!this.router.config.find(function (route) {
-                    return route.data && route.data.cxCmsRouteContext && route.path === routePath;
-                }));
-        };
-        /**
-         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
-         *
-         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
-         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
-         *
-         * @param pageContext
-         * @param currentUrl
-         */
-        CmsRoutesService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
-            var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
-            if (componentRoutes.length) {
-                if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
-                    this.router.navigateByUrl(currentUrl);
-                    return false;
-                }
-            }
-            return true;
-        };
-        CmsRoutesService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
-            if (pageContext.type === core$1.PageType.CONTENT_PAGE &&
-                pageLabel.startsWith('/') &&
-                pageLabel.length > 1) {
-                var newRoute = {
-                    path: pageLabel.substr(1),
-                    component: PageLayoutComponent,
-                    children: routes,
-                    data: {
-                        cxCmsRouteContext: {
-                            type: pageContext.type,
-                            id: pageLabel,
-                        },
-                    },
-                };
-                this.router.resetConfig(__spread([newRoute], this.router.config));
-                return true;
-            }
-            return false;
-        };
-        CmsRoutesService.ctorParameters = function () { return [
-            { type: router.Router },
-            { type: CmsMappingService }
-        ]; };
-        CmsRoutesService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
-        CmsRoutesService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CmsRoutesService);
-        return CmsRoutesService;
-    }());
-
-    var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(
-        // expose as `protected` only services from public API:
-        routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-            this.routingService = routingService;
-            this.cmsService = cmsService;
-            this.cmsRoutes = cmsRoutes;
-            this.cmsI18n = cmsI18n;
-            this.cmsGuards = cmsGuards;
-            this.semanticPathService = semanticPathService;
-            this.protectedRoutesGuard = protectedRoutesGuard;
-        }
-        CmsPageGuard.prototype.canActivate = function (route, state) {
-            var _this = this;
-            /**
-             * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-             */
-            return this.protectedRoutesGuard
-                ? this.protectedRoutesGuard
-                    .canActivate(route)
-                    .pipe(operators.switchMap(function (result) {
-                    return result ? _this.getCmsPage(route, state) : rxjs.of(result);
-                }))
-                : this.getCmsPage(route, state);
-        };
-        CmsPageGuard.prototype.getCmsPage = function (route, state) {
-            var _this = this;
-            return this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
-                return _this.cmsService
-                    .getPage(pageContext, true)
-                    .pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
-            }), operators.switchMap(function (_a) {
-                var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
-                return pageData
-                    ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
-                    : _this.handleNotFoundPage(pageContext, route, state);
-            }));
-        };
-        CmsPageGuard.prototype.resolveCmsPageLogic = function (pageContext, pageData, route, state) {
-            var _this = this;
-            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.take(1), operators.switchMap(function (componentTypes) {
-                return _this.cmsGuards
-                    .cmsPageCanActivate(componentTypes, route, state)
-                    .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
-            }), operators.tap(function (_a) {
-                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                if (canActivate === true) {
-                    _this.cmsI18n.loadChunksForComponents(componentTypes);
-                }
-            }), operators.map(function (_a) {
-                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
-                var pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
-                if (canActivate === true &&
-                    !route.data.cxCmsRouteContext &&
-                    !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
-                    return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
-                }
-                return canActivate;
-            }));
-        };
-        CmsPageGuard.prototype.handleNotFoundPage = function (pageContext, route, state) {
-            var _this = this;
-            var notFoundCmsPageContext = {
-                type: core$1.PageType.CONTENT_PAGE,
-                id: this.semanticPathService.get('notFound'),
-            };
-            return this.cmsService.getPage(notFoundCmsPageContext).pipe(operators.switchMap(function (notFoundPage) {
-                if (notFoundPage) {
-                    return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap(function (notFoundIndex) {
-                        _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
-                    }), operators.switchMap(function (notFoundIndex) {
-                        return _this.cmsService.getPageIndex(pageContext).pipe(
-                        // we have to wait for page index update
-                        operators.filter(function (index) { return index === notFoundIndex; }));
-                    }), operators.switchMap(function () {
-                        return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
-                    }));
-                }
-                return rxjs.of(false);
-            }));
-        };
-        CmsPageGuard.guardName = 'CmsPageGuard';
-        CmsPageGuard.ctorParameters = function () { return [
-            { type: core$1.RoutingService },
-            { type: core$1.CmsService },
-            { type: CmsRoutesService },
-            { type: CmsI18nService },
-            { type: CmsGuardsService },
-            { type: core$1.SemanticPathService },
-            { type: core$1.ProtectedRoutesGuard }
-        ]; };
-        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService), core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
-        CmsPageGuard = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CmsPageGuard);
-        return CmsPageGuard;
-    }());
-
-
-    (function (OutletPosition) {
-        OutletPosition["REPLACE"] = "replace";
-        OutletPosition["BEFORE"] = "before";
-        OutletPosition["AFTER"] = "after";
-    })(exports.OutletPosition || (exports.OutletPosition = {}));
-    var AVOID_STACKED_OUTLETS = false;
-    var USE_STACKED_OUTLETS = true;
-
-    var OutletService = /** @class */ (function () {
-        function OutletService() {
-            this.templatesRefs = new Map();
-            this.templatesRefsBefore = new Map();
-            this.templatesRefsAfter = new Map();
-        }
-        /**
-         * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
-         */
-        OutletService.prototype.add = function (outlet, templateOrFactory, position) {
-            if (position === void 0) { position = exports.OutletPosition.REPLACE; }
-            if (position === exports.OutletPosition.BEFORE) {
-                this.store(this.templatesRefsBefore, outlet, templateOrFactory);
-            }
-            if (position === exports.OutletPosition.REPLACE) {
-                this.store(this.templatesRefs, outlet, templateOrFactory);
-            }
-            if (position === exports.OutletPosition.AFTER) {
-                this.store(this.templatesRefsAfter, outlet, templateOrFactory);
-            }
-        };
-        /**
-         *
-         * Returns a single object or multiple objects for the given outlet reference,
-         * depending on the `stacked` argument.
-         *
-         * @param outlet The outlet reference
-         * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
-         * @param stacked Indicates whether an array of outlet components is returned
-         */
-        OutletService.prototype.get = function (outlet, position, stacked) {
-            if (position === void 0) { position = exports.OutletPosition.REPLACE; }
-            if (stacked === void 0) { stacked = AVOID_STACKED_OUTLETS; }
-            var templateRef;
-            switch (position) {
-                case exports.OutletPosition.BEFORE:
-                    templateRef = this.templatesRefsBefore.get(outlet);
-                    break;
-                case exports.OutletPosition.AFTER:
-                    templateRef = this.templatesRefsAfter.get(outlet);
-                    break;
-                default:
-                    templateRef = this.templatesRefs.get(outlet);
-            }
-            if (templateRef && !stacked) {
-                return templateRef[0];
-            }
-            return templateRef;
-        };
-        OutletService.prototype.store = function (store, outlet, value) {
-            var existing = store.get(outlet) || [];
-            var newValue = existing.concat([value]);
-            store.set(outlet, newValue);
-        };
-        OutletService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-        OutletService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], OutletService);
-        return OutletService;
-    }());
-
-    var OutletRefDirective = /** @class */ (function () {
-        function OutletRefDirective(tpl, outletService) {
-            this.tpl = tpl;
-            this.outletService = outletService;
-        }
-        OutletRefDirective.prototype.ngOnInit = function () {
-            this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-        };
-        OutletRefDirective.ctorParameters = function () { return [
-            { type: core.TemplateRef },
-            { type: OutletService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], OutletRefDirective.prototype, "cxOutletRef", void 0);
-        __decorate([
-            core.Input()
-        ], OutletRefDirective.prototype, "cxOutletPos", void 0);
-        OutletRefDirective = __decorate([
-            core.Directive({
-                selector: '[cxOutletRef]',
-            })
-        ], OutletRefDirective);
-        return OutletRefDirective;
-    }());
-
-    var OutletRefModule = /** @class */ (function () {
-        function OutletRefModule() {
-        }
-        OutletRefModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule],
-                declarations: [OutletRefDirective],
-                exports: [OutletRefDirective],
-            })
-        ], OutletRefModule);
-        return OutletRefModule;
-    }());
-
-    /**
-     * The IntersectionService uses the native IntersectionObserver (v2), which
-     * can be used to implement pre-loading and deferred loading of DOM content.
-     *
-     */
-    var IntersectionService = /** @class */ (function () {
-        function IntersectionService(config) {
-            this.config = config;
-        }
-        /**
-         * Returns an Observable that emits only once a boolean value whenever
-         * the given element has shown in the view port.
-         *
-         * The returned obervable will only emit the first value. The
-         * observable must be cleaned up either way, since the value might never emit; it
-         *  depends on whether the element appears in the view port.
-         */
-        IntersectionService.prototype.isIntersected = function (element, options) {
-            return this.intersects(element, options).pipe(operators.first(function (v) { return v === true; }));
-        };
-        /**
-         * Indicates whenever the element intersects the view port. An optional margin
-         * is used to intersects before the element shows up in the viewport.
-         * A value is emitted each time the element intersects.
-         *
-         * This is private for now, but could be exposed as a public API
-         * to introduce additional (css) render effects to the UI.
-         */
-        IntersectionService.prototype.intersects = function (element, options) {
-            var _this = this;
-            var elementVisible$ = new rxjs.Observable(function (observer) {
-                var rootMargin = _this.getRootMargin(options);
-                var intersectOptions = { rootMargin: rootMargin };
-                var intersectionObserver = new IntersectionObserver(function (entries) {
-                    observer.next(entries);
-                }, intersectOptions);
-                intersectionObserver.observe(element);
-                return function () {
-                    intersectionObserver.disconnect();
-                };
-            }).pipe(operators.flatMap(function (entries) { return entries; }), operators.map(function (entry) { return entry.isIntersecting; }), operators.distinctUntilChanged());
-            return elementVisible$;
-        };
-        IntersectionService.prototype.getRootMargin = function (options) {
-            if (options.rootMargin) {
-                return options.rootMargin;
-            }
-            var layoutConfig = this.config;
-            if (layoutConfig.deferredLoading &&
-                layoutConfig.deferredLoading.intersectionMargin) {
-                return layoutConfig.deferredLoading.intersectionMargin;
-            }
-        };
-        IntersectionService.ctorParameters = function () { return [
-            { type: LayoutConfig }
-        ]; };
-        IntersectionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function IntersectionService_Factory() { return new IntersectionService(core["ɵɵinject"](LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
-        IntersectionService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], IntersectionService);
-        return IntersectionService;
-    }());
-
-    /**
-     * The defer loading serivce is used to defer loading of DOM elements
-     * until the elements are required for the user experience.
-     */
-    var DeferLoaderService = /** @class */ (function () {
-        function DeferLoaderService(platformId, config, intersectionService) {
-            this.platformId = platformId;
-            this.config = config;
-            this.intersectionService = intersectionService;
-            this.globalLoadStrategy = config.deferredLoading
-                ? config.deferredLoading.strategy
-                : core$1.DeferLoadingStrategy.INSTANT;
-        }
-        /**
-         * Defer loading till the element intersects the viewport.
-         *
-         * We evalutes whether we instantly load the element for different reasons:
-         * - we run in SSR mode
-         * - there's no global strategy given
-         * - the global loading strategy is set to INSTANT loading,
-         *   and the loading strategy in the given is not set to DEFER
-         * - the loading strategy in the given options is set to INSTANT
-         */
-        DeferLoaderService.prototype.load = function (element, options) {
-            if (this.shouldLoadInstantly((options || {}).deferLoading)) {
-                return rxjs.of(true);
-            }
-            else {
-                return this.intersectionService.isIntersected(element, options);
-            }
-        };
-        DeferLoaderService.prototype.shouldLoadInstantly = function (elementLoadingStrategy) {
-            return (common.isPlatformServer(this.platformId) ||
-                elementLoadingStrategy === core$1.DeferLoadingStrategy.INSTANT ||
-                (elementLoadingStrategy !== core$1.DeferLoadingStrategy.DEFER &&
-                    this.globalLoadStrategy === core$1.DeferLoadingStrategy.INSTANT));
-        };
-        DeferLoaderService.ctorParameters = function () { return [
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
-            { type: LayoutConfig },
-            { type: IntersectionService }
-        ]; };
-        DeferLoaderService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(core["ɵɵinject"](core.PLATFORM_ID), core["ɵɵinject"](LayoutConfig), core["ɵɵinject"](IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
-        DeferLoaderService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(0, core.Inject(core.PLATFORM_ID))
-        ], DeferLoaderService);
-        return DeferLoaderService;
-    }());
-
-    var OutletDirective = /** @class */ (function () {
-        function OutletDirective(vcr, templateRef, outletService, deferLoaderService) {
-            this.vcr = vcr;
-            this.templateRef = templateRef;
-            this.outletService = outletService;
-            this.deferLoaderService = deferLoaderService;
-            this.loaded = new core.EventEmitter(true);
-            this.subscription = new rxjs.Subscription();
-        }
-        OutletDirective.prototype.initializeOutlet = function () {
-            this.vcr.clear();
-            this.subscription.unsubscribe();
-            this.subscription = new rxjs.Subscription();
-            if (this.cxOutletDefer) {
-                this.deferLoading();
-            }
-            else {
-                this.render();
-            }
-        };
-        OutletDirective.prototype.ngOnChanges = function (changes) {
-            if (changes.cxOutlet) {
-                this.initializeOutlet();
-            }
-        };
-        OutletDirective.prototype.deferLoading = function () {
-            var _this = this;
-            this.loaded.emit(false);
-            var hostElement = this.getHostElement(this.vcr.element.nativeElement);
-            // Although the deferLoaderService might emit only once, as long as the hostElement
-            // isn't being loaded, there's no value being emitted. Therefor we need to clean up
-            // the subscription on destroy.
-            this.subscription.add(this.deferLoaderService
-                .load(hostElement, this.cxOutletDefer)
-                .subscribe(function () {
-                _this.render();
-                _this.loaded.emit(true);
-            }));
-        };
-        OutletDirective.prototype.render = function () {
-            this.renderOutlet(exports.OutletPosition.BEFORE);
-            this.renderOutlet(exports.OutletPosition.REPLACE);
-            this.renderOutlet(exports.OutletPosition.AFTER);
-        };
-        OutletDirective.prototype.renderOutlet = function (position) {
-            var _this = this;
-            var templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
-            if (!templates && position === exports.OutletPosition.REPLACE) {
-                templates = [this.templateRef];
-            }
-            // Just in case someone extended the `OutletService` and
-            // returns a singular object.
-            if (!Array.isArray(templates)) {
-                templates = [templates];
-            }
-            templates.forEach(function (obj) {
-                _this.create(obj);
-            });
-        };
-        OutletDirective.prototype.create = function (tmplOrFactory) {
-            if (tmplOrFactory instanceof core.ComponentFactory) {
-                this.vcr.createComponent(tmplOrFactory);
-            }
-            else if (tmplOrFactory instanceof core.TemplateRef) {
-                var view = this.vcr.createEmbeddedView(tmplOrFactory, {
-                    $implicit: this.cxOutletContext,
-                });
-                // we do not know if content is created dynamically or not
-                // so we apply change detection anyway
-                view.markForCheck();
-            }
-        };
-        /**
-         * Returns the closest `HtmlElement`, by iterating over the
-         * parent elements of the given element.
-         *
-         * @param element
-         */
-        OutletDirective.prototype.getHostElement = function (element) {
-            if (element instanceof HTMLElement) {
-                return element;
-            }
-            return this.getHostElement(element.parentElement);
-        };
-        OutletDirective.prototype.ngOnDestroy = function () {
-            this.subscription.unsubscribe();
-        };
-        OutletDirective.ctorParameters = function () { return [
-            { type: core.ViewContainerRef },
-            { type: core.TemplateRef },
-            { type: OutletService },
-            { type: DeferLoaderService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], OutletDirective.prototype, "cxOutlet", void 0);
-        __decorate([
-            core.Input()
-        ], OutletDirective.prototype, "cxOutletContext", void 0);
-        __decorate([
-            core.Input()
-        ], OutletDirective.prototype, "cxOutletDefer", void 0);
-        __decorate([
-            core.Output()
-        ], OutletDirective.prototype, "loaded", void 0);
-        OutletDirective = __decorate([
-            core.Directive({
-                selector: '[cxOutlet]',
-            })
-        ], OutletDirective);
-        return OutletDirective;
-    }());
-
-    var OutletModule = /** @class */ (function () {
-        function OutletModule() {
-        }
-        OutletModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule],
-                declarations: [OutletDirective],
-                providers: [OutletService],
-                exports: [OutletDirective],
-            })
-        ], OutletModule);
-        return OutletModule;
-    }());
-
-    var PageSlotComponent = /** @class */ (function () {
-        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
-            var _this = this;
-            this.cmsService = cmsService;
-            this.dynamicAttributeService = dynamicAttributeService;
-            this.renderer = renderer;
-            this.hostElement = hostElement;
-            this.config = config;
-            this.isPending = true;
-            this.hasComponents = false;
-            this.isPageFold = false;
-            this.position$ = new rxjs.BehaviorSubject(undefined);
-            /**
-             * observable with `ContentSlotData` for the current position
-             *
-             * @deprecated we'll stop supporting this property in 2.0 as
-             * it is not used separately.
-             */
-            this.slot$ = this.position$.pipe(operators.switchMap(function (position) { return _this.cmsService.getContentSlot(position); }), operators.tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
-            this.components$ = this.slot$.pipe(operators.map(function (slot) { return (slot && slot.components ? slot.components : []); }), operators.distinctUntilChanged(function (a, b) {
-                return a.length === b.length && !a.find(function (el, index) { return el.uid !== b[index].uid; });
-            }));
-            this.subscription = new rxjs.Subscription();
-        }
-        Object.defineProperty(PageSlotComponent.prototype, "position", {
-            get: function () {
-                return this.position$.value;
-            },
-            /**
-             * The position is used to find the CMS page slot (and optional outlet)
-             * that is rendered in the PageSlotComponent. Furthermore, the position
-             * is added as a CSS class name to the host element.
-             */
-            set: function (position) {
-                this.position$.next(position);
-                this.renderer.addClass(this.hostElement.nativeElement, position);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        PageSlotComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.subscription.add(this.components$.subscribe(function (components) {
-                _this.hasComponents = components && components.length > 0;
-                _this.pendingComponentCount = components ? components.length : 0;
-                _this.isPending = _this.pendingComponentCount > 0;
-            }));
-        };
-        PageSlotComponent.prototype.ngOnDestroy = function () {
-            this.subscription.unsubscribe();
-        };
-        /**
-         * Is triggered when a component is added to the view.
-         * We use this information to dropthe `is-pending` class from the page slot
-         * when all nested components have been added.
-         */
-        PageSlotComponent.prototype.isLoaded = function (loadState) {
-            if (loadState) {
-                this.pendingComponentCount--;
-            }
-            this.isPending = this.pendingComponentCount > 0;
-        };
-        PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
-            var deferLoading = this.getDeferLoadingStrategy(componentType);
-            return { deferLoading: deferLoading };
-        };
-        /**
-         * The `DeferLoadingStrategy` indicates whether component rendering
-         * should be deferred.
-         */
-        PageSlotComponent.prototype.getDeferLoadingStrategy = function (componentType) {
-            if (this.config) {
-                return (this.config.cmsComponents[componentType] || {})
-                    .deferLoading;
-            }
-        };
-        PageSlotComponent.prototype.addSmartEditSlotClass = function (slot) {
-            if (slot && this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(slot);
-            }
-        };
-        PageSlotComponent.prototype.addSmartEditContract = function (slot) {
-            this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
-        };
-        PageSlotComponent.ctorParameters = function () { return [
-            { type: core$1.CmsService },
-            { type: core$1.DynamicAttributeService },
-            { type: core.Renderer2 },
-            { type: core.ElementRef },
-            { type: core$1.CmsConfig }
-        ]; };
-        __decorate([
-            core.Input()
-        ], PageSlotComponent.prototype, "position", null);
-        __decorate([
-            core.HostBinding('class.cx-pending')
-        ], PageSlotComponent.prototype, "isPending", void 0);
-        __decorate([
-            core.HostBinding('class.has-components')
-        ], PageSlotComponent.prototype, "hasComponents", void 0);
-        __decorate([
-            core.HostBinding('class.page-fold'), core.Input()
-        ], PageSlotComponent.prototype, "isPageFold", void 0);
-        PageSlotComponent = __decorate([
-            core.Component({
-                selector: 'cx-page-slot,[cx-page-slot]',
-                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], PageSlotComponent);
-        return PageSlotComponent;
-    }());
-
-    var PageSlotModule = /** @class */ (function () {
-        function PageSlotModule() {
-        }
-        PageSlotModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule, OutletModule, PageComponentModule],
-                providers: [],
-                declarations: [PageSlotComponent],
-                exports: [PageSlotComponent],
-            })
-        ], PageSlotModule);
-        return PageSlotModule;
-    }());
-
-    var PageLayoutModule = /** @class */ (function () {
-        function PageLayoutModule() {
-        }
-        PageLayoutModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule, OutletModule, PageSlotModule],
-                declarations: [PageLayoutComponent],
-                providers: [PageLayoutService],
-                exports: [PageLayoutComponent],
-            })
-        ], PageLayoutModule);
-        return PageLayoutModule;
-    }());
-
-    var PWAModuleConfig = /** @class */ (function () {
-        function PWAModuleConfig() {
-        }
-        return PWAModuleConfig;
-    }());
-    var defaultPWAModuleConfig = {
-        pwa: {
-            enabled: false,
-            addToHomeScreen: false,
-        },
-    };
-
-    var AddToHomeScreenService = /** @class */ (function () {
-        function AddToHomeScreenService(config, globalMessageService, winRef) {
-            this.config = config;
-            this.globalMessageService = globalMessageService;
-            this.winRef = winRef;
-            this.canPrompt = new rxjs.BehaviorSubject(false);
-            this.canPrompt$ = this.canPrompt.asObservable();
-            if (this.config.pwa.addToHomeScreen) {
-                this.init();
-            }
-        }
-        AddToHomeScreenService.prototype.init = function () {
-            var _this = this;
-            if (this.winRef.nativeWindow) {
-                this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
-                    event.preventDefault();
-                    _this.deferredEvent = event;
-                    _this.enableAddToHomeScreen();
-                });
-                this.winRef.nativeWindow.addEventListener('appinstalled', function () {
-                    _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                    _this.disableAddToHomeScreen();
-                    _this.deferredEvent = null;
-                });
-            }
-        };
-        AddToHomeScreenService.prototype.enableAddToHomeScreen = function () {
-            this.canPrompt.next(true);
-        };
-        AddToHomeScreenService.prototype.disableAddToHomeScreen = function () {
-            this.canPrompt.next(false);
-        };
-        AddToHomeScreenService.prototype.firePrompt = function () {
-            if (this.deferredEvent) {
-                this.deferredEvent.prompt();
-            }
-        };
-        AddToHomeScreenService.ctorParameters = function () { return [
-            { type: PWAModuleConfig },
-            { type: core$1.GlobalMessageService },
-            { type: core$1.WindowRef }
-        ]; };
-        AddToHomeScreenService = __decorate([
-            core.Injectable()
-        ], AddToHomeScreenService);
-        return AddToHomeScreenService;
-    }());
-
-    var AddToHomeScreenComponent = /** @class */ (function () {
-        function AddToHomeScreenComponent(addToHomeScreenService) {
-            this.addToHomeScreenService = addToHomeScreenService;
-        }
-        AddToHomeScreenComponent.prototype.ngOnInit = function () {
-            this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
-        };
-        AddToHomeScreenComponent.prototype.prompt = function () {
-            this.addToHomeScreenService.firePrompt();
-        };
-        return AddToHomeScreenComponent;
-    }());
-
-    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBannerComponent, _super);
-        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBannerComponent.ctorParameters = function () { return [
-            { type: AddToHomeScreenService }
-        ]; };
-        AddToHomeScreenBannerComponent = __decorate([
-            core.Component({
-                selector: 'cx-add-to-home-screen-banner',
-                template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
-            })
-        ], AddToHomeScreenBannerComponent);
-        return AddToHomeScreenBannerComponent;
-    }(AddToHomeScreenComponent));
-
-    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
-        __extends(AddToHomeScreenBtnComponent, _super);
-        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
-            var _this = _super.call(this, addToHomeScreenService) || this;
-            _this.addToHomeScreenService = addToHomeScreenService;
-            return _this;
-        }
-        AddToHomeScreenBtnComponent.ctorParameters = function () { return [
-            { type: AddToHomeScreenService }
-        ]; };
-        AddToHomeScreenBtnComponent = __decorate([
-            core.Component({
-                selector: 'cx-add-to-home-screen-btn',
-                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
-            })
-        ], AddToHomeScreenBtnComponent);
-        return AddToHomeScreenBtnComponent;
-    }(AddToHomeScreenComponent));
-
-    function pwaConfigurationFactory(pwaConfig) {
-        return { enabled: (!core.isDevMode() && pwaConfig.pwa.enabled) || false };
-    }
-    function pwaFactory(addToHomeScreenService) {
-        var result = function () { return addToHomeScreenService; };
-        return result;
-    }
-    var PwaModule = /** @class */ (function () {
-        function PwaModule() {
-        }
-        PwaModule = __decorate([
-            core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
-                    core$1.I18nModule,
-                ],
-                providers: [
-                    core$1.provideDefaultConfig(defaultPWAModuleConfig),
-                    { provide: PWAModuleConfig, useExisting: core$1.Config },
-                    {
-                        provide: serviceWorker.SwRegistrationOptions,
-                        useFactory: pwaConfigurationFactory,
-                        deps: [core$1.Config],
-                    },
-                    {
-                        provide: core.APP_INITIALIZER,
-                        useFactory: pwaFactory,
-                        deps: [AddToHomeScreenService],
-                        multi: true,
-                    },
-                    AddToHomeScreenService,
-                ],
-                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
-            })
-        ], PwaModule);
-        return PwaModule;
-    }());
-
-    var cmsRoute = {
-        path: '**',
-        canActivate: [CmsPageGuard],
-        component: PageLayoutComponent,
-    };
-    function addCmsRoute(injector) {
-        var result = function () {
-            var router$1 = injector.get(router.Router);
-            router$1.config.push(cmsRoute);
-        };
-        return result;
-    }
-
-    var ɵ0 = addCmsRoute;
-    var CmsRouteModule = /** @class */ (function () {
-        function CmsRouteModule() {
-        }
-        CmsRouteModule = __decorate([
-            core.NgModule({
-                providers: [
-                    {
-                        provide: core.APP_INITIALIZER,
-                        multi: true,
-                        deps: [core.Injector],
-                        useFactory: ɵ0,
-                    },
-                ],
-            })
-        ], CmsRouteModule);
-        return CmsRouteModule;
-    }());
-
-    var defaultStorefrontRoutesConfig = {
-        home: { paths: [''] },
-        notFound: { paths: ['not-found'] },
-        cart: { paths: ['cart'] },
-        // semantic links for login related pages
-        login: { paths: ['login'], protected: false },
-        register: { paths: ['login/register'], protected: false },
-        forgotPassword: { paths: ['login/forgot-password'], protected: false },
-        resetPassword: { paths: ['login/pw/change'], protected: false },
-        logout: { paths: ['logout'] },
-        checkoutLogin: { paths: ['checkout-login'] },
-        checkout: { paths: ['checkout'] },
-        checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
-        checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
-        checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
-        checkoutReviewOrder: { paths: ['checkout/review-order'] },
-        orderConfirmation: { paths: ['order-confirmation'] },
-        // plp routes
-        search: { paths: ['search/:query'] },
-        category: {
-            paths: ['category/:categoryCode'],
-            paramsMapping: { categoryCode: 'code' },
-        },
-        brand: { paths: ['Brands/:brandName/c/:brandCode'] },
-        // pdp routes
-        product: {
-            paths: ['product/:productCode/:name'],
-            paramsMapping: { productCode: 'code' },
-        },
-        termsAndConditions: { paths: ['terms-and-conditions'] },
-        orders: {
-            paths: ['my-account/orders'],
-        },
-        orderDetails: {
-            paths: ['my-account/order/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderGuest: {
-            paths: ['guest/order/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderReturn: {
-            paths: ['my-account/order/return/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderReturnConfirmation: {
-            paths: ['my-account/order/return/confirmation/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderCancel: {
-            paths: ['my-account/order/cancel/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        orderCancelConfirmation: {
-            paths: ['my-account/order/cancel/confirmation/:orderCode'],
-            paramsMapping: { orderCode: 'code' },
-        },
-        returnRequestDetails: {
-            paths: ['my-account/return-request/:returnCode'],
-            paramsMapping: { returnCode: 'rma' },
-        },
-        coupons: { paths: ['my-account/coupons'] },
-        couponClaim: {
-            paths: ['my-account/coupon/claim/:couponCode'],
-            paramsMapping: { couponCode: 'code' },
-        },
-    };
-    var defaultRoutingConfig = {
-        routing: {
-            routes: defaultStorefrontRoutesConfig,
-        },
-    };
-
-    var RoutingModule = /** @class */ (function () {
-        function RoutingModule() {
-        }
-        RoutingModule_1 = RoutingModule;
-        RoutingModule.forRoot = function () {
-            return {
-                ngModule: RoutingModule_1,
-                providers: [core$1.provideDefaultConfig(defaultRoutingConfig)],
-            };
-        };
-        var RoutingModule_1;
-        RoutingModule = RoutingModule_1 = __decorate([
-            core.NgModule({
-                imports: [core$1.RoutingModule.forRoot(), CmsRouteModule],
-            })
-        ], RoutingModule);
-        return RoutingModule;
-    }());
-
-    /**
-     * Matches the pattern '[ ** / ] marker / :paramName'
-     *
-     * @param marker phrase that indicates the start of the match
-     * @param paramName name of the parameter present after the marker
-     * @param precedingParamName name of the parameter for every preceding url segment
-     *        i.e. `param` will result in `param0`, `param1`, ...
-     */
-    function getSuffixUrlMatcher(_a) {
-        var marker = _a.marker, paramName = _a.paramName, precedingParamName = _a.precedingParamName;
-        precedingParamName = precedingParamName || 'param';
-        var matcher = function suffixUrlMatcher(segments) {
-            var _a;
-            var markerIndex = findLastIndex(segments, function (_a) {
-                var path = _a.path;
-                return path === marker;
-            });
-            var isMarkerLastSegment = markerIndex === segments.length - 1;
-            if (markerIndex === -1 || isMarkerLastSegment) {
-                return null;
-            }
-            var paramIndex = markerIndex + 1;
-            var posParams = (_a = {},
-                _a[paramName] = segments[paramIndex],
-                _a);
-            for (var i = 0; i < markerIndex; i++) {
-                posParams["" + precedingParamName + i] = segments[i];
-            }
-            return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
-        };
-        if (core.isDevMode()) {
-            matcher['_suffixRouteConfig'] = { marker: marker, paramName: paramName, precedingParamName: precedingParamName }; // property added for easier debugging of routes
-        }
-        return matcher;
-    }
-    function findLastIndex(elements, predicate) {
-        for (var index = elements.length - 1; index >= 0; index--) {
-            if (predicate(elements[index])) {
-                return index;
-            }
-        }
-        return -1;
-    }
-
-    var SeoMetaService = /** @class */ (function () {
-        function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
-            this.ngTitle = ngTitle;
-            this.ngMeta = ngMeta;
-            this.pageMetaService = pageMetaService;
-        }
-        SeoMetaService.prototype.init = function () {
-            var _this = this;
-            this.pageMetaService
-                .getMeta()
-                .pipe(operators.filter(Boolean))
-                .subscribe(function (meta) { return (_this.meta = meta); });
-        };
-        Object.defineProperty(SeoMetaService.prototype, "meta", {
-            set: function (meta) {
-                this.title = meta.title;
-                this.description = meta.description;
-                this.image = meta.image;
-                this.robots = meta.robots || [core$1.PageRobotsMeta.INDEX, core$1.PageRobotsMeta.FOLLOW];
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SeoMetaService.prototype, "title", {
-            set: function (title) {
-                this.ngTitle.setTitle(title || '');
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SeoMetaService.prototype, "description", {
-            set: function (value) {
-                this.addTag({ name: 'description', content: value });
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SeoMetaService.prototype, "image", {
-            set: function (imageUrl) {
-                if (imageUrl) {
-                    this.addTag({ name: 'og:image', content: imageUrl });
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(SeoMetaService.prototype, "robots", {
-            set: function (value) {
-                if (value) {
-                    this.addTag({ name: 'robots', content: value.join(', ') });
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-        SeoMetaService.prototype.addTag = function (meta) {
-            if (meta.content) {
-                this.ngMeta.updateTag(meta);
-            }
-        };
-        SeoMetaService.ctorParameters = function () { return [
-            { type: platformBrowser.Title },
-            { type: platformBrowser.Meta },
-            { type: core$1.PageMetaService }
-        ]; };
-        SeoMetaService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SeoMetaService_Factory() { return new SeoMetaService(core["ɵɵinject"](platformBrowser.Title), core["ɵɵinject"](platformBrowser.Meta), core["ɵɵinject"](core$1.PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
-        SeoMetaService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], SeoMetaService);
-        return SeoMetaService;
-    }());
-
-    var htmlLangProvider = {
-        provide: core.APP_INITIALIZER,
-        multi: true,
-        useFactory: setHtmlLangAttribute,
-        deps: [core$1.WindowRef, core$1.LanguageService],
-    };
-    /**
-     * Sets active language in <html lang="">
-     */
-    function setHtmlLangAttribute(winRef, languageService) {
-        var result = function () {
-            languageService.getActive().subscribe(function (lang) {
-                winRef.document.documentElement.lang = lang;
-            });
-        };
-        return result;
-    }
-
-    var JsonLdScriptFactory = /** @class */ (function () {
-        function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer) {
-            this.platformId = platformId;
-            this.winRef = winRef;
-            this.rendererFactory = rendererFactory;
-            this.sanitizer = sanitizer;
-        }
-        JsonLdScriptFactory.prototype.build = function (schema) {
-            if (schema && this.isJsonLdRequired()) {
-                this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
-            }
-        };
-        /**
-         * Only return schema data in case of SSR or development mode,
-         * to not waste memory unnecessary.
-         */
-        JsonLdScriptFactory.prototype.isJsonLdRequired = function () {
-            return !common.isPlatformBrowser(this.platformId) || core.isDevMode();
-        };
-        JsonLdScriptFactory.prototype.createJsonLdScriptElement = function () {
-            var id = 'json-ld';
-            var scriptElement = (this.winRef.document.getElementById(id));
-            if (!scriptElement) {
-                var renderer = this.rendererFactory.createRenderer(null, null);
-                var script = renderer.createElement('script');
-                script.id = id;
-                script.type = 'application/ld+json';
-                renderer.appendChild(this.winRef.document.body, script);
-                scriptElement = script;
-            }
-            return scriptElement;
-        };
-        /**
-         * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
-         *
-         * The given schema is not trusted, as malicious code could be injected (XSS)
-         * into the json-ld script.
-         */
-        JsonLdScriptFactory.prototype.sanitize = function (schema) {
-            var _this = this;
-            return JSON.stringify(schema, function (_key, value) {
-                return typeof value === 'string'
-                    ? _this.sanitizer.sanitize(core.SecurityContext.HTML, value)
-                    : value;
-            });
-        };
-        JsonLdScriptFactory.ctorParameters = function () { return [
-            { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
-            { type: core$1.WindowRef },
-            { type: core.RendererFactory2 },
-            { type: platformBrowser.DomSanitizer }
-        ]; };
-        JsonLdScriptFactory.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(core["ɵɵinject"](core.PLATFORM_ID), core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](core.RendererFactory2), core["ɵɵinject"](platformBrowser.DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
-        JsonLdScriptFactory = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(0, core.Inject(core.PLATFORM_ID))
-        ], JsonLdScriptFactory);
-        return JsonLdScriptFactory;
-    }());
-
-    /**
-     * Low level directive that adds a json-ld script tag to the component.
-     * This code bypasses the strict XSS security, as otherwise we're not able
-     * to append a script tag with JS inside.
-     */
-    var JsonLdDirective = /** @class */ (function () {
-        function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
-            this.jsonLdScriptFactory = jsonLdScriptFactory;
-            this.sanitizer = sanitizer;
-        }
-        Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
-            set: function (schema) {
-                this.writeJsonLd(schema);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        JsonLdDirective.prototype.writeJsonLd = function (schema) {
-            if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
-                var sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
-                var html = "<script type=\"application/ld+json\">" + sanitizedSchema + "</script>";
-                this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
-            }
-        };
-        JsonLdDirective.ctorParameters = function () { return [
-            { type: JsonLdScriptFactory },
-            { type: platformBrowser.DomSanitizer }
-        ]; };
-        __decorate([
-            core.Input()
-        ], JsonLdDirective.prototype, "cxJsonLd", null);
-        __decorate([
-            core.HostBinding('innerHTML')
-        ], JsonLdDirective.prototype, "jsonLD", void 0);
-        JsonLdDirective = __decorate([
-            core.Directive({
-                selector: '[cxJsonLd]',
-            })
-        ], JsonLdDirective);
-        return JsonLdDirective;
-    }());
-
-    /**
-     * Injection token to extend schema builders for adding structural data (json-ld).
-     *
-     * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
-     * lowever level builder to further extend the schema.
-     */
-    var SCHEMA_BUILDER = new core.InjectionToken('SchemaBuilderToken');
-    /**
-     * Injection token to add specific json-ld builders for product related schema's.
-     * See see https://schema.org/product for more information.
-     */
-    var JSONLD_PRODUCT_BUILDER = new core.InjectionToken('JsonLdProductBuilderToken');
-
-    var StructuredDataFactory = /** @class */ (function () {
-        function StructuredDataFactory(scriptBuilder, builders) {
-            this.scriptBuilder = scriptBuilder;
-            this.builders = builders;
-        }
-        StructuredDataFactory.prototype.build = function () {
-            var _this = this;
-            this.collectSchemas().subscribe(function (schema) {
-                _this.scriptBuilder.build(schema);
-            });
-        };
-        StructuredDataFactory.prototype.collectSchemas = function () {
-            if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-                return rxjs.of();
-            }
-            return rxjs.combineLatest(this.builders.map(function (builder) { return builder.build(); })).pipe();
-        };
-        StructuredDataFactory.ctorParameters = function () { return [
-            { type: JsonLdScriptFactory },
-            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [SCHEMA_BUILDER,] }] }
-        ]; };
-        StructuredDataFactory.ɵprov = core["ɵɵdefineInjectable"]({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(core["ɵɵinject"](JsonLdScriptFactory), core["ɵɵinject"](SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
-        StructuredDataFactory = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(1, core.Optional()),
-            __param(1, core.Inject(SCHEMA_BUILDER))
-        ], StructuredDataFactory);
-        return StructuredDataFactory;
-    }());
-
-    /**
-     * Factory to build the structure data
-     * without any interaction with the UI.
-     */
-    function getStructuredDataFactory(injector) {
-        var result = function () {
-            var factory = injector.get(StructuredDataFactory);
-            factory.build();
-        };
-        return result;
-    }
-    var StructuredDataModule = /** @class */ (function () {
-        function StructuredDataModule() {
-        }
-        StructuredDataModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule],
-                declarations: [JsonLdDirective],
-                exports: [JsonLdDirective],
-                providers: [
-                    {
-                        provide: core.APP_INITIALIZER,
-                        useFactory: getStructuredDataFactory,
-                        deps: [core.Injector],
-                        multi: true,
-                    },
-                ],
-            })
-        ], StructuredDataModule);
-        return StructuredDataModule;
-    }());
-
-    function initSeoService(injector) {
-        var result = function () {
-            var service = injector.get(SeoMetaService);
-            service.init();
-        };
-        return result;
-    }
-    var SeoModule = /** @class */ (function () {
-        function SeoModule() {
-        }
-        SeoModule = __decorate([
-            core.NgModule({
-                imports: [StructuredDataModule],
-                providers: [
-                    {
-                        provide: core.APP_INITIALIZER,
-                        useFactory: initSeoService,
-                        deps: [core.Injector],
-                        multi: true,
-                    },
-                    htmlLangProvider,
-                ],
-            })
-        ], SeoModule);
-        return SeoModule;
-    }());
-
-    var BreadcrumbSchemaBuilder = /** @class */ (function () {
-        function BreadcrumbSchemaBuilder(pageMetaService) {
-            this.pageMetaService = pageMetaService;
-        }
-        BreadcrumbSchemaBuilder.prototype.build = function () {
-            var _this = this;
-            return this.pageMetaService
-                .getMeta()
-                .pipe(operators.map(function (pageMeta) { return _this.collect(pageMeta); }));
-        };
-        BreadcrumbSchemaBuilder.prototype.collect = function (pageMeta) {
-            if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
-                return;
-            }
-            var crumbs = pageMeta.breadcrumbs.map(function (crumb, index) {
-                return {
-                    '@type': 'ListItem',
-                    position: index + 1,
-                    item: {
-                        '@id': crumb.link,
-                        name: crumb.label,
-                    },
-                };
-            });
-            if (pageMeta.title) {
-                crumbs.push({
-                    '@type': 'ListItem',
-                    position: crumbs.length + 1,
-                    item: {
-                        '@id': pageMeta.title,
-                        name: pageMeta.title,
-                    },
-                });
-            }
-            return {
-                '@context': 'http://schema.org',
-                '@type': 'BreadcrumbList',
-                itemListElement: crumbs,
-            };
-        };
-        BreadcrumbSchemaBuilder.ctorParameters = function () { return [
-            { type: core$1.PageMetaService }
-        ]; };
-        BreadcrumbSchemaBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(core["ɵɵinject"](core$1.PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
-        BreadcrumbSchemaBuilder = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], BreadcrumbSchemaBuilder);
-        return BreadcrumbSchemaBuilder;
-    }());
-
-    /**
-     * Builds the basic structured data for the product, see https://schema.org/product.
-     * This builder includes data for sku number, name, description, brand and main image.
-     */
-    var JsonLdBaseProductBuilder = /** @class */ (function () {
-        function JsonLdBaseProductBuilder() {
-        }
-        JsonLdBaseProductBuilder.prototype.build = function (product) {
-            return rxjs.of(__assign(__assign(__assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
-        };
-        JsonLdBaseProductBuilder.prototype.getProductBase = function (product) {
-            var result = { sku: product.code };
-            if (product.name) {
-                result.name = product.name;
-            }
-            if (product.summary) {
-                result.description = product.summary;
-            }
-            return result;
-        };
-        JsonLdBaseProductBuilder.prototype.getProductImage = function (product) {
-            return product.images &&
-                product.images.PRIMARY &&
-                product.images.PRIMARY['zoom'] &&
-                product.images.PRIMARY['zoom'].url
-                ? {
-                    image: product.images.PRIMARY['zoom'].url,
-                }
-                : {};
-        };
-        JsonLdBaseProductBuilder.prototype.getProductBrand = function (product) {
-            return product['manufacturer']
-                ? {
-                    brand: product['manufacturer'],
-                }
-                : null;
-        };
-        JsonLdBaseProductBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
-        JsonLdBaseProductBuilder = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], JsonLdBaseProductBuilder);
-        return JsonLdBaseProductBuilder;
-    }());
-
-    /**
-     * Builds the structured data for the product offer, see https://schema.org/offers.
-     * The data includes the price, currency and availability level.
-     */
-    var JsonLdProductOfferBuilder = /** @class */ (function () {
-        function JsonLdProductOfferBuilder() {
-        }
-        JsonLdProductOfferBuilder.prototype.build = function (product) {
-            var schema = { '@type': 'Offer' };
-            if (product.price) {
-                if (product.price.value) {
-                    schema.price = product.price.value;
-                }
-                if (product.price.currencyIso) {
-                    schema.priceCurrency = product.price.currencyIso;
-                }
-            }
-            if (product.stock && product.stock.stockLevelStatus) {
-                schema.availability =
-                    product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
-            }
-            return rxjs.of({
-                offers: schema,
-            });
-        };
-        JsonLdProductOfferBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
-        JsonLdProductOfferBuilder = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], JsonLdProductOfferBuilder);
-        return JsonLdProductOfferBuilder;
-    }());
-
-    /**
-     * Builds the structured data for the product reviews, see https://schema.org/Review.
-     * The data includes the aggregated product rating and the individual reviews.
-     */
-    var JsonLdProductReviewBuilder = /** @class */ (function () {
-        function JsonLdProductReviewBuilder(reviewService) {
-            this.reviewService = reviewService;
-        }
-        JsonLdProductReviewBuilder.prototype.build = function (product) {
-            var _this = this;
-            return this.reviewService.getByProductCode(product.code).pipe(operators.filter(Boolean), operators.map(function (reviews) {
-                return {
-                    aggregateRating: _this.buildAggregatedReviews(product, reviews),
-                    review: reviews.map(function (review) { return _this.buildReviews(review); }),
-                };
-            }));
-        };
-        JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = function (product, reviews) {
-            var aggregated = {
-                '@type': 'AggregateRating',
-            };
-            if (product.averageRating) {
-                aggregated.ratingValue = product.averageRating;
-            }
-            if (reviews) {
-                aggregated.ratingCount = reviews.filter(function (rev) { return !!rev.rating; }).length;
-                aggregated.reviewCount = reviews.filter(function (rev) { return !!rev.comment; }).length;
-            }
-            return aggregated;
-        };
-        JsonLdProductReviewBuilder.prototype.buildReviews = function (review) {
-            var reviewSchema = {
-                '@type': 'review',
-            };
-            if (review.principal && review.principal.name) {
-                reviewSchema.author = review.principal.name;
-            }
-            if (review.date) {
-                var date = new Date(review.date);
-                reviewSchema.datePublished = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-            }
-            if (review.headline) {
-                reviewSchema.name = review.headline;
-            }
-            if (review.comment) {
-                reviewSchema.description = review.comment;
-            }
-            if (review.rating) {
-                reviewSchema.reviewRating = {
-                    '@type': 'Rating',
-                    ratingValue: review.rating.toString(),
-                };
-            }
-            return reviewSchema;
-        };
-        JsonLdProductReviewBuilder.ctorParameters = function () { return [
-            { type: core$1.ProductReviewService }
-        ]; };
-        JsonLdProductReviewBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(core["ɵɵinject"](core$1.ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
-        JsonLdProductReviewBuilder = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], JsonLdProductReviewBuilder);
-        return JsonLdProductReviewBuilder;
-    }());
-
-    var CurrentProductService = /** @class */ (function () {
-        function CurrentProductService(routingService, productService) {
-            this.routingService = routingService;
-            this.productService = productService;
-            this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
-        }
-        /**
-         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
-         *
-         * @param scopes
-         */
-        CurrentProductService.prototype.getProduct = function (scopes) {
-            var _this = this;
-            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
-                return productCode
-                    ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
-                    : rxjs.of(null);
-            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
-        };
-        CurrentProductService.ctorParameters = function () { return [
-            { type: core$1.RoutingService },
-            { type: core$1.ProductService }
-        ]; };
-        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService)); }, token: CurrentProductService, providedIn: "root" });
-        CurrentProductService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CurrentProductService);
-        return CurrentProductService;
-    }());
-
-    /**
-     * Adds the minimal structured data for the product, see https://schema.org/product.
-     * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
-     * using the `JSONLD_PRODUCT_BUILDER` token.
-     */
-    var ProductSchemaBuilder = /** @class */ (function () {
-        function ProductSchemaBuilder(currentProduct, builders) {
-            this.currentProduct = currentProduct;
-            this.builders = builders;
-        }
-        ProductSchemaBuilder.prototype.build = function () {
-            var _this = this;
-            return this.currentProduct.getProduct().pipe(operators.switchMap(function (product) {
-                if (product) {
-                    return rxjs.combineLatest(_this.collect(product)).pipe(operators.map(function (res) { return Object.assign.apply(Object, __spread([{}], res)); }));
-                }
-                return rxjs.of({});
-            }));
-        };
-        ProductSchemaBuilder.prototype.collect = function (product) {
-            if (!product || !product.code) {
-                return [];
-            }
-            var builders = this.builders
-                ? this.builders.map(function (builder) { return builder.build(product); })
-                : [];
-            return __spread([
-                rxjs.of({
-                    '@context': 'http://schema.org',
-                    '@type': 'Product',
-                })
-            ], builders);
-        };
-        ProductSchemaBuilder.ctorParameters = function () { return [
-            { type: CurrentProductService },
-            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
-        ]; };
-        ProductSchemaBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(core["ɵɵinject"](CurrentProductService), core["ɵɵinject"](JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
-        ProductSchemaBuilder = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(1, core.Optional()),
-            __param(1, core.Inject(JSONLD_PRODUCT_BUILDER))
-        ], ProductSchemaBuilder);
-        return ProductSchemaBuilder;
-    }());
-
-    /**
-     * Provides several standard json-ld builders that contribute
-     * to colleting and building json-ld data.
-     */
-    var JsonLdBuilderModule = /** @class */ (function () {
-        function JsonLdBuilderModule() {
-        }
-        JsonLdBuilderModule = __decorate([
-            core.NgModule({
-                providers: [
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: ProductSchemaBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: SCHEMA_BUILDER,
-                        useExisting: BreadcrumbSchemaBuilder,
-                        multi: true,
-                    },
-                    // lower level json-ld builder classes offering fine-graiend control
-                    // for product related schema's
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdBaseProductBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductOfferBuilder,
-                        multi: true,
-                    },
-                    {
-                        provide: JSONLD_PRODUCT_BUILDER,
-                        useExisting: JsonLdProductReviewBuilder,
-                        multi: true,
-                    },
-                ],
-            })
-        ], JsonLdBuilderModule);
-        return JsonLdBuilderModule;
-    }());
-
     var ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
 
     var AsmComponentService = /** @class */ (function () {
@@ -3513,810 +1295,6 @@
             })
         ], AsmMainUiComponent);
         return AsmMainUiComponent;
-    }());
-
-    /**
-     * The AsmEnablerService is used to enable ASM for those scenario's
-     * where it's actually used. This service is added to avoid any polution
-     * of the UI and runtime performance for the ordinary production user.
-     */
-    var AsmEnablerService = /** @class */ (function () {
-        function AsmEnablerService(location, winRef, componentFactoryResolver, outletService) {
-            this.location = location;
-            this.winRef = winRef;
-            this.componentFactoryResolver = componentFactoryResolver;
-            this.outletService = outletService;
-            /** indicates whether the ASM UI has been added already */
-            this.isUiAdded = false;
-        }
-        /**
-         * Loads the ASM UI if needed. The ASM UI will be added based on the
-         * existence of a URL parameter or previous usage given by local storage.
-         */
-        AsmEnablerService.prototype.load = function () {
-            if (this.isEnabled()) {
-                this.addUi();
-            }
-        };
-        /**
-         * Indicates whether the ASM module is enabled.
-         */
-        AsmEnablerService.prototype.isEnabled = function () {
-            if (this.isLaunched() && !this.isUsedBefore()) {
-                if (this.winRef.localStorage) {
-                    this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
-                }
-            }
-            return this.isLaunched() || this.isUsedBefore();
-        };
-        /**
-         * Indicates whether ASM is launched through the URL,
-         * using the asm flag in the URL.
-         */
-        AsmEnablerService.prototype.isLaunched = function () {
-            var params = this.location.path().split('?')[1];
-            return params && params.split('&').includes('asm=true');
-        };
-        /**
-         * Evaluates local storage where we persist the usage of ASM.
-         */
-        AsmEnablerService.prototype.isUsedBefore = function () {
-            return (this.winRef.localStorage &&
-                this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
-        };
-        /**
-         * Adds the ASM UI by using the `cx-storefront` outlet.
-         */
-        AsmEnablerService.prototype.addUi = function () {
-            if (this.isUiAdded) {
-                return;
-            }
-            var factory = this.componentFactoryResolver.resolveComponentFactory(AsmMainUiComponent);
-            this.outletService.add('cx-storefront', factory, exports.OutletPosition.BEFORE);
-            this.isUiAdded = true;
-        };
-        AsmEnablerService.ctorParameters = function () { return [
-            { type: common.Location },
-            { type: core$1.WindowRef },
-            { type: core.ComponentFactoryResolver },
-            { type: OutletService }
-        ]; };
-        AsmEnablerService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(core["ɵɵinject"](common.Location), core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](core.ComponentFactoryResolver), core["ɵɵinject"](OutletService)); }, token: AsmEnablerService, providedIn: "root" });
-        AsmEnablerService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], AsmEnablerService);
-        return AsmEnablerService;
-    }());
-
-    /**
-     * The ASM loader module takes care of loading the ASM UI
-     * only in case there's a reason to do so.
-     */
-    var AsmLoaderModule = /** @class */ (function () {
-        function AsmLoaderModule() {
-        }
-        AsmLoaderModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule, PageComponentModule],
-                providers: [
-                    {
-                        provide: core.APP_INITIALIZER,
-                        useFactory: asmFactory,
-                        deps: [AsmEnablerService],
-                        multi: true,
-                    },
-                ],
-            })
-        ], AsmLoaderModule);
-        return AsmLoaderModule;
-    }());
-    /**
-     *
-     * We do not like to block the UI, which is why we delgate loading of ASM
-     * to a real component; the router and state aren't available in an optimized
-     * way during the APP_INITIALIZER.
-     */
-    function asmFactory(asmEnablerService) {
-        var isReady = function () {
-            asmEnablerService.load();
-        };
-        return isReady;
-    }
-
-    var AsmSessionTimerComponent = /** @class */ (function () {
-        function AsmSessionTimerComponent(config, asmComponentService, authService, routingService, changeDetectorRef) {
-            this.config = config;
-            this.asmComponentService = asmComponentService;
-            this.authService = authService;
-            this.routingService = routingService;
-            this.changeDetectorRef = changeDetectorRef;
-            this.subscriptions = new rxjs.Subscription();
-            this.maxStartDelayInSeconds = 60000;
-        }
-        AsmSessionTimerComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.timeLeft = this.getTimerStartDelayInSeconds();
-            this.interval = setInterval(function () {
-                if (_this.timeLeft > 0) {
-                    _this.timeLeft--;
-                }
-                else {
-                    clearInterval(_this.interval);
-                    _this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
-                }
-                _this.changeDetectorRef.markForCheck();
-            }, 1000);
-            this.resetOnNavigate();
-            this.resetOnCustomerSessionChange();
-        };
-        AsmSessionTimerComponent.prototype.resetOnNavigate = function () {
-            var _this = this;
-            this.subscriptions.add(this.routingService.isNavigating().subscribe(function (isNavigating) {
-                if (isNavigating) {
-                    _this.resetTimer();
-                }
-            }));
-        };
-        AsmSessionTimerComponent.prototype.resetOnCustomerSessionChange = function () {
-            var _this = this;
-            this.subscriptions.add(this.authService
-                .getOccUserId()
-                .pipe(operators.distinctUntilChanged())
-                .subscribe(function () { return _this.resetTimer(); }));
-        };
-        AsmSessionTimerComponent.prototype.resetTimer = function () {
-            if (this.timeLeft > 0) {
-                this.timeLeft = this.getTimerStartDelayInSeconds();
-            }
-        };
-        AsmSessionTimerComponent.prototype.getTimerStartDelayInSeconds = function () {
-            if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
-                this.maxStartDelayInSeconds) {
-                return this.maxStartDelayInSeconds;
-            }
-            else {
-                return this.config.asm.agentSessionTimer.startingDelayInSeconds;
-            }
-        };
-        AsmSessionTimerComponent.prototype.ngOnDestroy = function () {
-            this.subscriptions.unsubscribe();
-            if (this.interval) {
-                clearInterval(this.interval);
-            }
-        };
-        AsmSessionTimerComponent.ctorParameters = function () { return [
-            { type: core$1.AsmConfig },
-            { type: AsmComponentService },
-            { type: core$1.AuthService },
-            { type: core$1.RoutingService },
-            { type: core.ChangeDetectorRef }
-        ]; };
-        AsmSessionTimerComponent = __decorate([
-            core.Component({
-                selector: 'cx-asm-session-timer',
-                template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
-                encapsulation: core.ViewEncapsulation.None,
-                styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
-            })
-        ], AsmSessionTimerComponent);
-        return AsmSessionTimerComponent;
-    }());
-
-    var FormatTimerPipe = /** @class */ (function () {
-        function FormatTimerPipe() {
-        }
-        FormatTimerPipe.prototype.transform = function (totalSeconds) {
-            if (totalSeconds < 0) {
-                totalSeconds = 0;
-            }
-            var minutes = Math.floor(totalSeconds / 60);
-            var seconds = totalSeconds % 60;
-            var zeroPaddedMinutes;
-            if (minutes < 10) {
-                zeroPaddedMinutes = ('00' + minutes).slice(-2);
-            }
-            else {
-                zeroPaddedMinutes = minutes + '';
-            }
-            var zeroPaddedSeconds = ('00' + seconds).slice(-2);
-            return zeroPaddedMinutes + ":" + zeroPaddedSeconds;
-        };
-        FormatTimerPipe = __decorate([
-            core.Pipe({
-                name: 'formatTimer',
-            })
-        ], FormatTimerPipe);
-        return FormatTimerPipe;
-    }());
-
-    /**
-     * Utility class when working with forms.
-     */
-    var FormUtils = /** @class */ (function () {
-        function FormUtils() {
-        }
-        /**
-         *
-         * Validates a field of the given form group
-         *
-         * If the field is NOT valid (or invalid), the method returns `true`.
-         *
-         * @param form Form with fields to check
-         * @param formControlName Name of the form field to check
-         * @param submitted Has the form been submitted
-         */
-        FormUtils.isNotValidField = function (form, formControlName, submitted) {
-            var control = form.get(formControlName);
-            return control.invalid && (submitted || (control.touched && control.dirty));
-        };
-        return FormUtils;
-    }());
-
-    var CSAgentLoginFormComponent = /** @class */ (function () {
-        function CSAgentLoginFormComponent(fb) {
-            this.fb = fb;
-            this.submitClicked = false;
-            this.csAgentTokenLoading = false;
-            this.submitEvent = new core.EventEmitter();
-        }
-        CSAgentLoginFormComponent.prototype.ngOnInit = function () {
-            this.form = this.fb.group({
-                userId: ['', [forms.Validators.required]],
-                password: ['', [forms.Validators.required]],
-            });
-        };
-        CSAgentLoginFormComponent.prototype.onSubmit = function () {
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
-            }
-            this.submitEvent.emit({
-                userId: this.form.controls.userId.value,
-                password: this.form.controls.password.value,
-            });
-        };
-        CSAgentLoginFormComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-        };
-        CSAgentLoginFormComponent.ctorParameters = function () { return [
-            { type: forms.FormBuilder }
-        ]; };
-        __decorate([
-            core.Input()
-        ], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
-        __decorate([
-            core.Output()
-        ], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
-        CSAgentLoginFormComponent = __decorate([
-            core.Component({
-                selector: 'cx-csagent-login-form',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
-                encapsulation: core.ViewEncapsulation.None,
-                styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
-            })
-        ], CSAgentLoginFormComponent);
-        return CSAgentLoginFormComponent;
-    }());
-
-    var CustomerEmulationComponent = /** @class */ (function () {
-        function CustomerEmulationComponent(asmComponentService, userService) {
-            this.asmComponentService = asmComponentService;
-            this.userService = userService;
-            this.subscription = new rxjs.Subscription();
-        }
-        CustomerEmulationComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.subscription.add(this.userService.get().subscribe(function (user) { return (_this.customer = user); }));
-            this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
-        };
-        CustomerEmulationComponent.prototype.logoutCustomer = function () {
-            this.asmComponentService.logoutCustomer();
-        };
-        CustomerEmulationComponent.prototype.ngOnDestroy = function () {
-            this.subscription.unsubscribe();
-        };
-        CustomerEmulationComponent.ctorParameters = function () { return [
-            { type: AsmComponentService },
-            { type: core$1.UserService }
-        ]; };
-        CustomerEmulationComponent = __decorate([
-            core.Component({
-                selector: 'cx-customer-emulation',
-                template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
-                encapsulation: core.ViewEncapsulation.None,
-                styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
-            })
-        ], CustomerEmulationComponent);
-        return CustomerEmulationComponent;
-    }());
-
-    var CustomerSelectionComponent = /** @class */ (function () {
-        function CustomerSelectionComponent(fb, asmService, config) {
-            this.fb = fb;
-            this.asmService = asmService;
-            this.config = config;
-            this.subscription = new rxjs.Subscription();
-            this.submitEvent = new core.EventEmitter();
-        }
-        CustomerSelectionComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.form = this.fb.group({
-                searchTerm: [''],
-            });
-            this.asmService.customerSearchReset();
-            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
-            this.searchResults = this.asmService.getCustomerSearchResults();
-            this.subscription.add(this.form.controls.searchTerm.valueChanges
-                .pipe(operators.debounceTime(300))
-                .subscribe(function (searchTermValue) {
-                _this.handleSearchTerm(searchTermValue);
-            }));
-        };
-        CustomerSelectionComponent.prototype.handleSearchTerm = function (searchTermValue) {
-            if (Boolean(this.selectedCustomer) &&
-                searchTermValue !== this.selectedCustomer.name) {
-                this.selectedCustomer = undefined;
-            }
-            if (Boolean(this.selectedCustomer)) {
-                return;
-            }
-            this.asmService.customerSearchReset();
-            if (searchTermValue.trim().length >= 3) {
-                this.asmService.customerSearch({
-                    query: searchTermValue,
-                    pageSize: this.config.asm.customerSearch.maxResults,
-                });
-            }
-        };
-        CustomerSelectionComponent.prototype.selectCustomerFromList = function (customer) {
-            this.selectedCustomer = customer;
-            this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
-            this.asmService.customerSearchReset();
-        };
-        CustomerSelectionComponent.prototype.onSubmit = function () {
-            if (Boolean(this.selectedCustomer)) {
-                this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
-            }
-        };
-        CustomerSelectionComponent.prototype.onDocumentClick = function (event) {
-            if (Boolean(this.resultList)) {
-                if (this.resultList.nativeElement.contains(event.target) ||
-                    this.searchTerm.nativeElement.contains(event.target)) {
-                    return;
-                }
-                else {
-                    this.asmService.customerSearchReset();
-                }
-            }
-        };
-        CustomerSelectionComponent.prototype.closeResults = function () {
-            this.asmService.customerSearchReset();
-        };
-        CustomerSelectionComponent.prototype.ngOnDestroy = function () {
-            this.subscription.unsubscribe();
-            this.asmService.customerSearchReset();
-        };
-        CustomerSelectionComponent.ctorParameters = function () { return [
-            { type: forms.FormBuilder },
-            { type: core$1.AsmService },
-            { type: core$1.AsmConfig }
-        ]; };
-        __decorate([
-            core.Output()
-        ], CustomerSelectionComponent.prototype, "submitEvent", void 0);
-        __decorate([
-            core.ViewChild('resultList')
-        ], CustomerSelectionComponent.prototype, "resultList", void 0);
-        __decorate([
-            core.ViewChild('searchTerm')
-        ], CustomerSelectionComponent.prototype, "searchTerm", void 0);
-        CustomerSelectionComponent = __decorate([
-            core.Component({
-                selector: 'cx-customer-selection',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
-                encapsulation: core.ViewEncapsulation.None,
-                // tslint:disable-next-line:no-host-metadata-property
-                host: {
-                    '(document:click)': 'onDocumentClick($event)',
-                },
-                styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
-            })
-        ], CustomerSelectionComponent);
-        return CustomerSelectionComponent;
-    }());
-
-    var AsmModule = /** @class */ (function () {
-        function AsmModule() {
-        }
-        AsmModule = __decorate([
-            core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    forms.ReactiveFormsModule,
-                    core$1.I18nModule,
-                    core$1.AsmModule.forRoot(),
-                    AsmLoaderModule,
-                ],
-                declarations: [
-                    AsmMainUiComponent,
-                    CSAgentLoginFormComponent,
-                    CustomerSelectionComponent,
-                    AsmSessionTimerComponent,
-                    FormatTimerPipe,
-                    CustomerEmulationComponent,
-                ],
-                entryComponents: [AsmMainUiComponent],
-            })
-        ], AsmModule);
-        return AsmModule;
-    }());
-
-    var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(userOrderService, routingService) {
-            var _this = this;
-            this.userOrderService = userOrderService;
-            this.routingService = routingService;
-            this.orderCode$ = this.routingService
-                .getRouterState()
-                .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
-            this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
-                if (orderCode) {
-                    _this.userOrderService.loadOrderDetails(orderCode);
-                }
-                else {
-                    _this.userOrderService.clearOrderDetails();
-                }
-            }), operators.shareReplay({ bufferSize: 1, refCount: true }));
-        }
-        OrderDetailsService.prototype.getOrderDetails = function () {
-            var _this = this;
-            return this.orderLoad$.pipe(operators.switchMap(function () { return _this.userOrderService.getOrderDetails(); }));
-        };
-        OrderDetailsService.ctorParameters = function () { return [
-            { type: core$1.UserOrderService },
-            { type: core$1.RoutingService }
-        ]; };
-        OrderDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(core["ɵɵinject"](core$1.UserOrderService), core["ɵɵinject"](core$1.RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
-        OrderDetailsService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], OrderDetailsService);
-        return OrderDetailsService;
-    }());
-
-    var PromotionService = /** @class */ (function () {
-        function PromotionService(orderDetailsService, checkoutService, activeCartService) {
-            this.orderDetailsService = orderDetailsService;
-            this.checkoutService = checkoutService;
-            this.activeCartService = activeCartService;
-        }
-        PromotionService.prototype.getOrderPromotions = function (promotionLocation) {
-            switch (promotionLocation) {
-                case core$1.PromotionLocation.ActiveCart:
-                    return this.getOrderPromotionsFromCart();
-                case core$1.PromotionLocation.Checkout:
-                    return this.getOrderPromotionsFromCheckout();
-                case core$1.PromotionLocation.Order:
-                    return this.getOrderPromotionsFromOrder();
-                default:
-                    return rxjs.of([]);
-            }
-        };
-        PromotionService.prototype.getOrderPromotionsFromCart = function () {
-            var _this = this;
-            return this.activeCartService
-                .getActive()
-                .pipe(operators.map(function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromCartHelper = function (cart) {
-            var potentialPromotions = [];
-            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
-            var appliedPromotions = [];
-            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
-            return __spread(potentialPromotions, appliedPromotions);
-        };
-        PromotionService.prototype.getOrderPromotionsFromCheckout = function () {
-            var _this = this;
-            return this.checkoutService
-                .getOrderDetails()
-                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromOrder = function () {
-            var _this = this;
-            return this.orderDetailsService
-                .getOrderDetails()
-                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromOrderHelper = function (order) {
-            var appliedOrderPromotions = [];
-            appliedOrderPromotions.push.apply(appliedOrderPromotions, __spread((order.appliedOrderPromotions || [])));
-            return appliedOrderPromotions;
-        };
-        PromotionService.prototype.getProductPromotionForEntry = function (item, promotionLocation) {
-            var _this = this;
-            switch (promotionLocation) {
-                case core$1.PromotionLocation.ActiveCart:
-                    return this.activeCartService
-                        .getActive()
-                        .pipe(operators.map(function (cart) {
-                        return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
-                    }));
-                case core$1.PromotionLocation.Checkout:
-                    return this.checkoutService
-                        .getOrderDetails()
-                        .pipe(operators.map(function (order) {
-                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
-                    }));
-                case core$1.PromotionLocation.Order:
-                    return this.orderDetailsService
-                        .getOrderDetails()
-                        .pipe(operators.map(function (order) {
-                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
-                    }));
-            }
-        };
-        PromotionService.prototype.getProductPromotion = function (item, promotions) {
-            var e_1, _a, e_2, _b;
-            var entryPromotions = [];
-            if (promotions && promotions.length > 0) {
-                try {
-                    for (var promotions_1 = __values(promotions), promotions_1_1 = promotions_1.next(); !promotions_1_1.done; promotions_1_1 = promotions_1.next()) {
-                        var promotion = promotions_1_1.value;
-                        if (promotion.description &&
-                            promotion.consumedEntries &&
-                            promotion.consumedEntries.length > 0) {
-                            try {
-                                for (var _c = (e_2 = void 0, __values(promotion.consumedEntries)), _d = _c.next(); !_d.done; _d = _c.next()) {
-                                    var consumedEntry = _d.value;
-                                    if (this.isConsumedByEntry(consumedEntry, item)) {
-                                        entryPromotions.push(promotion);
-                                    }
-                                }
-                            }
-                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                            finally {
-                                try {
-                                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-                                }
-                                finally { if (e_2) throw e_2.error; }
-                            }
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (promotions_1_1 && !promotions_1_1.done && (_a = promotions_1.return)) _a.call(promotions_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-            }
-            return entryPromotions;
-        };
-        PromotionService.prototype.isConsumedByEntry = function (consumedEntry, entry) {
-            var e_3, _a;
-            var consumedEntryNumber = consumedEntry.orderEntryNumber;
-            if (entry.entries && entry.entries.length > 0) {
-                try {
-                    for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var subEntry = _c.value;
-                        if (subEntry.entryNumber === consumedEntryNumber) {
-                            return true;
-                        }
-                    }
-                }
-                catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                    }
-                    finally { if (e_3) throw e_3.error; }
-                }
-                return false;
-            }
-            else {
-                return consumedEntryNumber === entry.entryNumber;
-            }
-        };
-        PromotionService.ctorParameters = function () { return [
-            { type: OrderDetailsService },
-            { type: core$1.CheckoutService },
-            { type: core$1.ActiveCartService }
-        ]; };
-        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: PromotionService, providedIn: "root" });
-        PromotionService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], PromotionService);
-        return PromotionService;
-    }());
-
-    var AddedToCartDialogComponent = /** @class */ (function () {
-        function AddedToCartDialogComponent(modalService, cartService, promotionService) {
-            this.modalService = modalService;
-            this.cartService = cartService;
-            this.promotionService = promotionService;
-            this.iconTypes = exports.ICON_TYPE;
-            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
-            this.quantity = 0;
-            this.modalIsOpen = false;
-            this.form = new forms.FormGroup({});
-        }
-        /**
-         * Returns an observable formControl with the quantity of the cartEntry,
-         * but also updates the entry in case of a changed value.
-         * The quantity can be set to zero in order to remove the entry.
-         */
-        AddedToCartDialogComponent.prototype.getQuantityControl = function () {
-            var _this = this;
-            if (!this.quantityControl$) {
-                this.quantityControl$ = this.entry$.pipe(operators.filter(function (e) { return !!e; }), operators.map(function (entry) { return _this.getFormControl(entry); }), operators.switchMap(function () {
-                    return _this.form.valueChanges.pipe(
-                    // tslint:disable-next-line:deprecation
-                    operators.startWith(null), operators.tap(function (valueChange) {
-                        if (valueChange) {
-                            _this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
-                            if (valueChange.quantity === 0) {
-                                _this.dismissModal('Removed');
-                            }
-                        }
-                        else {
-                            _this.form.markAsPristine();
-                        }
-                    }));
-                }), operators.map(function () { return _this.form.get('quantity'); }));
-            }
-            return this.quantityControl$;
-        };
-        AddedToCartDialogComponent.prototype.ngOnInit = function () {
-            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
-        };
-        AddedToCartDialogComponent.prototype.getFormControl = function (entry) {
-            if (!this.form.get('quantity')) {
-                var quantity = new forms.FormControl(entry.quantity, { updateOn: 'blur' });
-                this.form.addControl('quantity', quantity);
-                var entryNumber = new forms.FormControl(entry.entryNumber);
-                this.form.addControl('entryNumber', entryNumber);
-            }
-            return this.form.get('quantity');
-        };
-        AddedToCartDialogComponent.prototype.dismissModal = function (reason) {
-            this.modalService.dismissActiveModal(reason);
-        };
-        AddedToCartDialogComponent.ctorParameters = function () { return [
-            { type: ModalService },
-            { type: core$1.ActiveCartService },
-            { type: PromotionService }
-        ]; };
-        __decorate([
-            core.ViewChild('dialog', { read: core.ElementRef })
-        ], AddedToCartDialogComponent.prototype, "dialog", void 0);
-        AddedToCartDialogComponent = __decorate([
-            core.Component({
-                selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-            })
-        ], AddedToCartDialogComponent);
-        return AddedToCartDialogComponent;
-    }());
-
-    var AddToCartComponent = /** @class */ (function () {
-        function AddToCartComponent(modalService, currentProductService, cd, activeCartService) {
-            this.modalService = modalService;
-            this.currentProductService = currentProductService;
-            this.cd = cd;
-            this.activeCartService = activeCartService;
-            this.showQuantity = true;
-            this.hasStock = false;
-            this.quantity = 1;
-            this.increment = false;
-            this.addToCartForm = new forms.FormGroup({
-                quantity: new forms.FormControl(1),
-            });
-        }
-        AddToCartComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            if (this.product) {
-                this.productCode = this.product.code;
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                this.setStockInfo(this.product);
-                this.cd.markForCheck();
-            }
-            else if (this.productCode) {
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                // force hasStock and quantity for the time being, as we do not have more info:
-                this.quantity = 1;
-                this.hasStock = true;
-                this.cd.markForCheck();
-            }
-            else {
-                this.subscription = this.currentProductService
-                    .getProduct()
-                    .pipe(operators.filter(Boolean))
-                    .subscribe(function (product) {
-                    _this.productCode = product.code;
-                    _this.setStockInfo(product);
-                    _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
-                    _this.cd.markForCheck();
-                });
-            }
-        };
-        AddToCartComponent.prototype.setStockInfo = function (product) {
-            this.quantity = 1;
-            this.hasStock =
-                product.stock && product.stock.stockLevelStatus !== 'outOfStock';
-            if (this.hasStock && product.stock.stockLevel) {
-                this.maxQuantity = product.stock.stockLevel;
-            }
-        };
-        AddToCartComponent.prototype.updateCount = function (value) {
-            this.quantity = value;
-        };
-        AddToCartComponent.prototype.addToCart = function () {
-            var _this = this;
-            var quantity = this.addToCartForm.get('quantity').value;
-            if (!this.productCode || quantity <= 0) {
-                return;
-            }
-            // check item is already present in the cart
-            // so modal will have proper header text displayed
-            this.activeCartService
-                .getEntry(this.productCode)
-                .subscribe(function (entry) {
-                if (entry) {
-                    _this.increment = true;
-                }
-                _this.openModal();
-                _this.activeCartService.addEntry(_this.productCode, quantity);
-                _this.increment = false;
-            })
-                .unsubscribe();
-        };
-        AddToCartComponent.prototype.openModal = function () {
-            var modalInstance;
-            this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-                centered: true,
-                size: 'lg',
-            });
-            modalInstance = this.modalRef.componentInstance;
-            modalInstance.entry$ = this.cartEntry$;
-            modalInstance.cart$ = this.activeCartService.getActive();
-            modalInstance.loaded$ = this.activeCartService.isStable();
-            modalInstance.quantity = this.quantity;
-            modalInstance.increment = this.increment;
-        };
-        AddToCartComponent.prototype.ngOnDestroy = function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
-        };
-        AddToCartComponent.ctorParameters = function () { return [
-            { type: ModalService },
-            { type: CurrentProductService },
-            { type: core.ChangeDetectorRef },
-            { type: core$1.ActiveCartService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "productCode", void 0);
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "showQuantity", void 0);
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "product", void 0);
-        AddToCartComponent = __decorate([
-            core.Component({
-                selector: 'cx-add-to-cart',
-                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], AddToCartComponent);
-        return AddToCartComponent;
     }());
 
     /** The element attribute used to store the focus state */
@@ -5520,6 +2498,1093 @@
         return KeyboardFocusModule;
     }());
 
+    // given that we're likely going to refactor the directives, we're
+    // export * from './autofocus/index';
+    // export * from './base/index';
+    // export * from './block/index';
+    // export * from './escape/index';
+    // export * from './lock/index';
+    // export * from './persist/index';
+    // export * from './tab/index';
+    // export * from './trap/index';
+    // export * from './visible/index';
+    // export * from './keyboard-focus.model';
+
+    var SkipLinkConfig = /** @class */ (function () {
+        function SkipLinkConfig() {
+        }
+        return SkipLinkConfig;
+    }());
+    var SkipLink = /** @class */ (function () {
+        function SkipLink() {
+        }
+        return SkipLink;
+    }());
+
+    (function (SkipLinkScrollPosition) {
+        SkipLinkScrollPosition["BEFORE"] = "BEFORE";
+        SkipLinkScrollPosition["AFTER"] = "AFTER";
+    })(exports.SkipLinkScrollPosition || (exports.SkipLinkScrollPosition = {}));
+
+    var SkipLinkService = /** @class */ (function () {
+        function SkipLinkService(config, keyboardFocusService) {
+            this.config = config;
+            this.keyboardFocusService = keyboardFocusService;
+            this.skipLinks$ = new rxjs.BehaviorSubject([]);
+        }
+        SkipLinkService.prototype.getSkipLinks = function () {
+            return this.skipLinks$;
+        };
+        SkipLinkService.prototype.add = function (key, target) {
+            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
+            if (found) {
+                var existing = this.skipLinks$.value;
+                existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                    target: target,
+                    i18nKey: found.i18nKey,
+                    position: found.position,
+                    key: key,
+                });
+                this.skipLinks$.next(existing);
+            }
+        };
+        SkipLinkService.prototype.remove = function (key) {
+            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
+            if (found) {
+                var existing = this.skipLinks$.value;
+                existing = existing.filter(function (skipLink) { return skipLink.key !== key; });
+                this.skipLinks$.next(existing);
+            }
+        };
+        SkipLinkService.prototype.scrollToTarget = function (skipLink) {
+            var target = skipLink.target instanceof HTMLElement
+                ? skipLink.target
+                : skipLink.target.parentElement;
+            // focus first focusable element in the
+            var firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
+            // we force a tabindex if not available, to ensure we can focus into the element
+            var hasTabindex = firstFocusable.hasAttribute('tabindex');
+            if (!hasTabindex) {
+                firstFocusable.setAttribute('tabindex', '-1');
+            }
+            firstFocusable.focus();
+            // drop the tmp tabindex
+            if (!hasTabindex) {
+                firstFocusable.removeAttribute('tabindex');
+            }
+        };
+        SkipLinkService.prototype.getSkipLinkIndexInArray = function (key) {
+            var index = this.config.skipLinks.findIndex(function (skipLink) { return skipLink.key === key; });
+            var _loop_1 = function () {
+                index--;
+                var previous = this_1.config.skipLinks[index];
+                if (previous) {
+                    var existing = this_1.skipLinks$.value;
+                    var found = existing.findIndex(function (skipLink) { return skipLink.key === previous.key; });
+                    if (found > -1) {
+                        return { value: found + 1 };
+                    }
+                }
+            };
+            var this_1 = this;
+            while (index > 0) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+            return 0;
+        };
+        SkipLinkService.ctorParameters = function () { return [
+            { type: SkipLinkConfig },
+            { type: KeyboardFocusService }
+        ]; };
+        SkipLinkService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SkipLinkService_Factory() { return new SkipLinkService(core["ɵɵinject"](SkipLinkConfig), core["ɵɵinject"](KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
+        SkipLinkService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SkipLinkService);
+        return SkipLinkService;
+    }());
+
+    var SkipLinkComponent = /** @class */ (function () {
+        function SkipLinkComponent(skipLinkService) {
+            this.skipLinkService = skipLinkService;
+            this.skipLinks$ = this.skipLinkService.getSkipLinks();
+        }
+        SkipLinkComponent.prototype.scrollToTarget = function (skipLink) {
+            this.skipLinkService.scrollToTarget(skipLink);
+        };
+        SkipLinkComponent.ctorParameters = function () { return [
+            { type: SkipLinkService }
+        ]; };
+        SkipLinkComponent = __decorate([
+            core.Component({
+                selector: 'cx-skip-link',
+                template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], SkipLinkComponent);
+        return SkipLinkComponent;
+    }());
+
+    var DEFAULT_LAUNCH_CONFIG = {
+        launch: {
+            ASM: {
+                outlet: 'cx-storefront',
+                component: AsmMainUiComponent,
+            },
+            SKIP_LINKS: {
+                outlet: 'cx-storefront',
+                component: SkipLinkComponent,
+            },
+        },
+    };
+
+    var LaunchConfig = /** @class */ (function () {
+        function LaunchConfig() {
+        }
+        return LaunchConfig;
+    }());
+    /**
+     * Types of dialog openings supported
+     */
+
+    (function (DIALOG_TYPE) {
+        DIALOG_TYPE["POPOVER"] = "POPOVER";
+        DIALOG_TYPE["DIALOG"] = "DIALOG";
+        DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
+        DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
+    })(exports.DIALOG_TYPE || (exports.DIALOG_TYPE = {}));
+    /**
+     * List of available callers
+     */
+
+    (function (LAUNCH_CALLER) {
+        LAUNCH_CALLER["ASM"] = "ASM";
+        LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
+    })(exports.LAUNCH_CALLER || (exports.LAUNCH_CALLER = {}));
+
+    var LaunchRenderStrategy = /** @class */ (function () {
+        function LaunchRenderStrategy() {
+            // List of called references; only used for rendered elements
+            this.renderedCallers = [];
+        }
+        /**
+         * Determines if element should render
+         *
+         * @param caller
+         * @param config
+         */
+        LaunchRenderStrategy.prototype.shouldRender = function (caller, config) {
+            return this.renderedCallers.some(function (el) { return el.caller === caller; })
+                ? !!config.multi
+                : true;
+        };
+        /**
+         * Method to call when rendered element is destroyed
+         * The element will be removed from the list of rendered elements
+         *
+         * @param caller
+         * @param _config optional parameters used in children strategies
+         */
+        LaunchRenderStrategy.prototype.remove = function (caller, _config) {
+            this.renderedCallers = this.renderedCallers.filter(function (el) { return el.caller === caller; });
+        };
+        return LaunchRenderStrategy;
+    }());
+
+    var LaunchDialogService = /** @class */ (function () {
+        function LaunchDialogService(renderStrategies, launchConfig) {
+            this.renderStrategies = renderStrategies;
+            this.launchConfig = launchConfig;
+            // Keep a list of rendered elements
+            this.renderedCallers = [];
+            this.renderStrategies = this.renderStrategies || [];
+        }
+        /**
+         * Render the element based on the strategy from the launch configuration
+         *
+         * @param caller LAUNCH_CALLER
+         * @param vcr View Container Ref of the container for inline rendering
+         */
+        LaunchDialogService.prototype.launch = function (caller, vcr) {
+            var config = this.findConfiguration(caller);
+            var renderer = this.getStrategy(config);
+            // Render if the strategy exists
+            if (renderer) {
+                renderer.render(config, caller, vcr);
+            }
+        };
+        /**
+         * Util method to remove element from rendered elements list
+         *
+         * @param caller LAUNCH_CALLER
+         */
+        LaunchDialogService.prototype.clear = function (caller) {
+            var config = this.findConfiguration(caller);
+            var renderer = this.getStrategy(config);
+            // Render if the strategy exists
+            if (renderer) {
+                renderer.remove(caller, config);
+            }
+        };
+        /**
+         * Returns the configuration for the caller
+         *
+         * @param caller LAUNCH_CALLER
+         */
+        LaunchDialogService.prototype.findConfiguration = function (caller) {
+            var _a;
+            return (_a = this.launchConfig) === null || _a === void 0 ? void 0 : _a.launch[caller];
+        };
+        /**
+         * Returns the render strategy based on the configuration
+         *
+         * @param config Configuration for launch
+         */
+        LaunchDialogService.prototype.getStrategy = function (config) {
+            return this.renderStrategies.find(function (strategy) { return strategy.match(config); });
+        };
+        LaunchDialogService.ctorParameters = function () { return [
+            { type: Array, decorators: [{ type: core.Inject, args: [LaunchRenderStrategy,] }] },
+            { type: LaunchConfig }
+        ]; };
+        LaunchDialogService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function LaunchDialogService_Factory() { return new LaunchDialogService(core["ɵɵinject"](LaunchRenderStrategy), core["ɵɵinject"](LaunchConfig)); }, token: LaunchDialogService, providedIn: "root" });
+        LaunchDialogService = __decorate([
+            core.Injectable({ providedIn: 'root' }),
+            __param(0, core.Inject(LaunchRenderStrategy))
+        ], LaunchDialogService);
+        return LaunchDialogService;
+    }());
+
+    /**
+     * The AsmEnablerService is used to enable ASM for those scenario's
+     * where it's actually used. This service is added to avoid any polution
+     * of the UI and runtime performance for the ordinary production user.
+     */
+    var AsmEnablerService = /** @class */ (function () {
+        function AsmEnablerService(location, winRef, launchDialogService) {
+            this.location = location;
+            this.winRef = winRef;
+            this.launchDialogService = launchDialogService;
+        }
+        /**
+         * Loads the ASM UI if needed. The ASM UI will be added based on the
+         * existence of a URL parameter or previous usage given by local storage.
+         */
+        AsmEnablerService.prototype.load = function () {
+            if (this.isEnabled()) {
+                this.addUi();
+            }
+        };
+        /**
+         * Indicates whether the ASM module is enabled.
+         */
+        AsmEnablerService.prototype.isEnabled = function () {
+            if (this.isLaunched() && !this.isUsedBefore()) {
+                if (this.winRef.localStorage) {
+                    this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
+                }
+            }
+            return this.isLaunched() || this.isUsedBefore();
+        };
+        /**
+         * Indicates whether ASM is launched through the URL,
+         * using the asm flag in the URL.
+         */
+        AsmEnablerService.prototype.isLaunched = function () {
+            var params = this.location.path().split('?')[1];
+            return params && params.split('&').includes('asm=true');
+        };
+        /**
+         * Evaluates local storage where we persist the usage of ASM.
+         */
+        AsmEnablerService.prototype.isUsedBefore = function () {
+            return (this.winRef.localStorage &&
+                this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
+        };
+        /**
+         * Adds the ASM UI by using the `cx-storefront` outlet.
+         */
+        AsmEnablerService.prototype.addUi = function () {
+            this.launchDialogService.launch(exports.LAUNCH_CALLER.ASM);
+        };
+        AsmEnablerService.ctorParameters = function () { return [
+            { type: common.Location },
+            { type: core$1.WindowRef },
+            { type: LaunchDialogService }
+        ]; };
+        AsmEnablerService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(core["ɵɵinject"](common.Location), core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](LaunchDialogService)); }, token: AsmEnablerService, providedIn: "root" });
+        AsmEnablerService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], AsmEnablerService);
+        return AsmEnablerService;
+    }());
+
+    /**
+     * The ASM loader module takes care of loading the ASM UI
+     * only in case there's a reason to do so.
+     */
+    var AsmLoaderModule = /** @class */ (function () {
+        function AsmLoaderModule() {
+        }
+        AsmLoaderModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule, PageComponentModule],
+                providers: [
+                    {
+                        provide: core.APP_INITIALIZER,
+                        useFactory: asmFactory,
+                        deps: [AsmEnablerService],
+                        multi: true,
+                    },
+                ],
+            })
+        ], AsmLoaderModule);
+        return AsmLoaderModule;
+    }());
+    /**
+     *
+     * We do not like to block the UI, which is why we delgate loading of ASM
+     * to a real component; the router and state aren't available in an optimized
+     * way during the APP_INITIALIZER.
+     */
+    function asmFactory(asmEnablerService) {
+        var isReady = function () {
+            asmEnablerService.load();
+        };
+        return isReady;
+    }
+
+    var AsmSessionTimerComponent = /** @class */ (function () {
+        function AsmSessionTimerComponent(config, asmComponentService, authService, routingService, changeDetectorRef) {
+            this.config = config;
+            this.asmComponentService = asmComponentService;
+            this.authService = authService;
+            this.routingService = routingService;
+            this.changeDetectorRef = changeDetectorRef;
+            this.subscriptions = new rxjs.Subscription();
+            this.maxStartDelayInSeconds = 60000;
+        }
+        AsmSessionTimerComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.timeLeft = this.getTimerStartDelayInSeconds();
+            this.interval = setInterval(function () {
+                if (_this.timeLeft > 0) {
+                    _this.timeLeft--;
+                }
+                else {
+                    clearInterval(_this.interval);
+                    _this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
+                }
+                _this.changeDetectorRef.markForCheck();
+            }, 1000);
+            this.resetOnNavigate();
+            this.resetOnCustomerSessionChange();
+        };
+        AsmSessionTimerComponent.prototype.resetOnNavigate = function () {
+            var _this = this;
+            this.subscriptions.add(this.routingService.isNavigating().subscribe(function (isNavigating) {
+                if (isNavigating) {
+                    _this.resetTimer();
+                }
+            }));
+        };
+        AsmSessionTimerComponent.prototype.resetOnCustomerSessionChange = function () {
+            var _this = this;
+            this.subscriptions.add(this.authService
+                .getOccUserId()
+                .pipe(operators.distinctUntilChanged())
+                .subscribe(function () { return _this.resetTimer(); }));
+        };
+        AsmSessionTimerComponent.prototype.resetTimer = function () {
+            if (this.timeLeft > 0) {
+                this.timeLeft = this.getTimerStartDelayInSeconds();
+            }
+        };
+        AsmSessionTimerComponent.prototype.getTimerStartDelayInSeconds = function () {
+            if (this.config.asm.agentSessionTimer.startingDelayInSeconds >
+                this.maxStartDelayInSeconds) {
+                return this.maxStartDelayInSeconds;
+            }
+            else {
+                return this.config.asm.agentSessionTimer.startingDelayInSeconds;
+            }
+        };
+        AsmSessionTimerComponent.prototype.ngOnDestroy = function () {
+            this.subscriptions.unsubscribe();
+            if (this.interval) {
+                clearInterval(this.interval);
+            }
+        };
+        AsmSessionTimerComponent.ctorParameters = function () { return [
+            { type: core$1.AsmConfig },
+            { type: AsmComponentService },
+            { type: core$1.AuthService },
+            { type: core$1.RoutingService },
+            { type: core.ChangeDetectorRef }
+        ]; };
+        AsmSessionTimerComponent = __decorate([
+            core.Component({
+                selector: 'cx-asm-session-timer',
+                template: "<span class=\"label\">{{ 'asm.agentSessionTimer.label' | cxTranslate }}:</span>\n<span class=\"time\"\n  >{{ timeLeft | formatTimer }}\n  {{ 'asm.agentSessionTimer.minutes' | cxTranslate }}</span\n>\n<button\n  class=\"reset\"\n  title=\"{{ 'asm.agentSessionTimer.reset' | cxTranslate }}\"\n  (click)=\"resetTimer()\"\n></button>\n",
+                encapsulation: core.ViewEncapsulation.None,
+                styles: ["cx-asm-session-timer{display:flex;align-items:center;height:16px;margin:0 15px}cx-asm-session-timer .label{margin:0 6px}@media (max-width:575px){cx-asm-session-timer .label{display:none}}cx-asm-session-timer .time{font-weight:600}cx-asm-session-timer .reset{margin:0 15px;cursor:pointer;width:16px;height:16px;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M14.9,7.5l-1,0.2c0.2,0.9,0.1,1.7-0.1,2.5c-0.3,1-0.8,2-1.5,2.7c-1.1,1.1-2.7,1.8-4.2,1.8 c-0.8,0-1.5-0.1-2.3-0.4c-1.5-0.6-2.7-1.8-3.3-3.3C2.1,10.2,2,9.5,2,8.7c0-1.6,0.7-3.1,1.8-4.3c0.7-0.8,1.7-1.3,2.7-1.5 c1-0.3,2-0.2,3,0l0,0v-1c-1-0.2-2.1-0.2-3.1,0C4.2,2.4,2.4,4,1.5,6.1C1.2,6.9,1,7.8,1,8.7c0,0.9,0.2,1.8,0.5,2.6 c0.4,0.9,0.9,1.7,1.5,2.3c0.7,0.7,1.4,1.2,2.3,1.5c0.8,0.3,1.7,0.5,2.6,0.5c0.9,0,1.8-0.2,2.6-0.5c2.1-0.9,3.7-2.7,4.2-5 C15,9.3,15,8.4,14.9,7.5z'/%3E%3Cpolygon fill='%23d1e3ff' points='11.5,2.8 9.2,4.5 9.7,0.5 '/%3E%3C/svg%3E%0A\") center center no-repeat;border:transparent}"]
+            })
+        ], AsmSessionTimerComponent);
+        return AsmSessionTimerComponent;
+    }());
+
+    var FormatTimerPipe = /** @class */ (function () {
+        function FormatTimerPipe() {
+        }
+        FormatTimerPipe.prototype.transform = function (totalSeconds) {
+            if (totalSeconds < 0) {
+                totalSeconds = 0;
+            }
+            var minutes = Math.floor(totalSeconds / 60);
+            var seconds = totalSeconds % 60;
+            var zeroPaddedMinutes;
+            if (minutes < 10) {
+                zeroPaddedMinutes = ('00' + minutes).slice(-2);
+            }
+            else {
+                zeroPaddedMinutes = minutes + '';
+            }
+            var zeroPaddedSeconds = ('00' + seconds).slice(-2);
+            return zeroPaddedMinutes + ":" + zeroPaddedSeconds;
+        };
+        FormatTimerPipe = __decorate([
+            core.Pipe({
+                name: 'formatTimer',
+            })
+        ], FormatTimerPipe);
+        return FormatTimerPipe;
+    }());
+
+    /**
+     * Utility class when working with forms.
+     */
+    var FormUtils = /** @class */ (function () {
+        function FormUtils() {
+        }
+        /**
+         *
+         * Validates a field of the given form group
+         *
+         * If the field is NOT valid (or invalid), the method returns `true`.
+         *
+         * @param form Form with fields to check
+         * @param formControlName Name of the form field to check
+         * @param submitted Has the form been submitted
+         */
+        FormUtils.isNotValidField = function (form, formControlName, submitted) {
+            var control = form.get(formControlName);
+            return control.invalid && (submitted || (control.touched && control.dirty));
+        };
+        return FormUtils;
+    }());
+
+    var CSAgentLoginFormComponent = /** @class */ (function () {
+        function CSAgentLoginFormComponent(fb) {
+            this.fb = fb;
+            this.submitClicked = false;
+            this.csAgentTokenLoading = false;
+            this.submitEvent = new core.EventEmitter();
+        }
+        CSAgentLoginFormComponent.prototype.ngOnInit = function () {
+            this.form = this.fb.group({
+                userId: ['', [forms.Validators.required]],
+                password: ['', [forms.Validators.required]],
+            });
+        };
+        CSAgentLoginFormComponent.prototype.onSubmit = function () {
+            this.submitClicked = true;
+            if (this.form.invalid) {
+                return;
+            }
+            this.submitEvent.emit({
+                userId: this.form.controls.userId.value,
+                password: this.form.controls.password.value,
+            });
+        };
+        CSAgentLoginFormComponent.prototype.isNotValid = function (formControlName) {
+            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+        };
+        CSAgentLoginFormComponent.ctorParameters = function () { return [
+            { type: forms.FormBuilder }
+        ]; };
+        __decorate([
+            core.Input()
+        ], CSAgentLoginFormComponent.prototype, "csAgentTokenLoading", void 0);
+        __decorate([
+            core.Output()
+        ], CSAgentLoginFormComponent.prototype, "submitEvent", void 0);
+        CSAgentLoginFormComponent = __decorate([
+            core.Component({
+                selector: 'cx-csagent-login-form',
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
+                encapsulation: core.ViewEncapsulation.None,
+                styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
+            })
+        ], CSAgentLoginFormComponent);
+        return CSAgentLoginFormComponent;
+    }());
+
+    var CustomerEmulationComponent = /** @class */ (function () {
+        function CustomerEmulationComponent(asmComponentService, userService) {
+            this.asmComponentService = asmComponentService;
+            this.userService = userService;
+            this.subscription = new rxjs.Subscription();
+        }
+        CustomerEmulationComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription.add(this.userService.get().subscribe(function (user) { return (_this.customer = user); }));
+            this.isCustomerEmulationSessionInProgress$ = this.asmComponentService.isCustomerEmulationSessionInProgress();
+        };
+        CustomerEmulationComponent.prototype.logoutCustomer = function () {
+            this.asmComponentService.logoutCustomer();
+        };
+        CustomerEmulationComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        CustomerEmulationComponent.ctorParameters = function () { return [
+            { type: AsmComponentService },
+            { type: core$1.UserService }
+        ]; };
+        CustomerEmulationComponent = __decorate([
+            core.Component({
+                selector: 'cx-customer-emulation',
+                template: "<ng-container\n  *ngIf=\"\n    isCustomerEmulationSessionInProgress$ | async;\n    else realCustomerSession\n  \"\n>\n  <input\n    formcontrolname=\"customer\"\n    type=\"text\"\n    disabled=\"true\"\n    placeholder=\"{{ customer?.name }}, {{ customer?.uid }}\"\n  />\n  <button (click)=\"logoutCustomer()\">\n    {{ 'asm.endSession' | cxTranslate }}\n  </button>\n</ng-container>\n\n<ng-template #realCustomerSession>\n  <div class=\"asm-alert\" role=\"alert\">\n    {{ 'asm.standardSessionInProgress' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                encapsulation: core.ViewEncapsulation.None,
+                styles: ["cx-customer-emulation{display:flex}@media (max-width:575px){cx-customer-emulation{flex-direction:column}cx-customer-emulation>*{margin-bottom:12px}}cx-customer-emulation button{padding-left:35px;color:#b00;border-color:#b00;background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23bb0000' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat}@media (min-width:575px){cx-customer-emulation input{flex:1}cx-customer-emulation button{-webkit-margin-start:8px;margin-inline-start:8px}}cx-customer-emulation button:hover{background:url(\"data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M14.8,8c0-3.7-3-6.8-6.8-6.8S1.3,4.2,1.3,8s3,6.8,6.8,6.8S14.8,11.7,14.8,8z M2.6,8c0-3,2.4-5.5,5.5-5.5S13.5,5,13.5,8 s-2.4,5.5-5.5,5.5S2.6,11,2.6,8z M10.7,5.8v4.4c0,0.2-0.2,0.4-0.4,0.4H5.9c-0.2,0-0.4-0.2-0.4-0.4V5.8c0-0.2,0.2-0.4,0.4-0.4h4.4 C10.5,5.4,10.7,5.6,10.7,5.8z'/%3E%3C/svg%3E%0A\") 10px center no-repeat #b00;color:#fff;fill:#fff}.asm-alert{padding:9px 12px;border-radius:4px;border:1px solid #89919a;background-color:#f4f4f4;color:#32363a;text-align:center;flex:1}"]
+            })
+        ], CustomerEmulationComponent);
+        return CustomerEmulationComponent;
+    }());
+
+    var CustomerSelectionComponent = /** @class */ (function () {
+        function CustomerSelectionComponent(fb, asmService, config) {
+            this.fb = fb;
+            this.asmService = asmService;
+            this.config = config;
+            this.subscription = new rxjs.Subscription();
+            this.submitEvent = new core.EventEmitter();
+        }
+        CustomerSelectionComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.form = this.fb.group({
+                searchTerm: [''],
+            });
+            this.asmService.customerSearchReset();
+            this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
+            this.searchResults = this.asmService.getCustomerSearchResults();
+            this.subscription.add(this.form.controls.searchTerm.valueChanges
+                .pipe(operators.debounceTime(300))
+                .subscribe(function (searchTermValue) {
+                _this.handleSearchTerm(searchTermValue);
+            }));
+        };
+        CustomerSelectionComponent.prototype.handleSearchTerm = function (searchTermValue) {
+            if (Boolean(this.selectedCustomer) &&
+                searchTermValue !== this.selectedCustomer.name) {
+                this.selectedCustomer = undefined;
+            }
+            if (Boolean(this.selectedCustomer)) {
+                return;
+            }
+            this.asmService.customerSearchReset();
+            if (searchTermValue.trim().length >= 3) {
+                this.asmService.customerSearch({
+                    query: searchTermValue,
+                    pageSize: this.config.asm.customerSearch.maxResults,
+                });
+            }
+        };
+        CustomerSelectionComponent.prototype.selectCustomerFromList = function (customer) {
+            this.selectedCustomer = customer;
+            this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+            this.asmService.customerSearchReset();
+        };
+        CustomerSelectionComponent.prototype.onSubmit = function () {
+            if (Boolean(this.selectedCustomer)) {
+                this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
+            }
+        };
+        CustomerSelectionComponent.prototype.onDocumentClick = function (event) {
+            if (Boolean(this.resultList)) {
+                if (this.resultList.nativeElement.contains(event.target) ||
+                    this.searchTerm.nativeElement.contains(event.target)) {
+                    return;
+                }
+                else {
+                    this.asmService.customerSearchReset();
+                }
+            }
+        };
+        CustomerSelectionComponent.prototype.closeResults = function () {
+            this.asmService.customerSearchReset();
+        };
+        CustomerSelectionComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+            this.asmService.customerSearchReset();
+        };
+        CustomerSelectionComponent.ctorParameters = function () { return [
+            { type: forms.FormBuilder },
+            { type: core$1.AsmService },
+            { type: core$1.AsmConfig }
+        ]; };
+        __decorate([
+            core.Output()
+        ], CustomerSelectionComponent.prototype, "submitEvent", void 0);
+        __decorate([
+            core.ViewChild('resultList')
+        ], CustomerSelectionComponent.prototype, "resultList", void 0);
+        __decorate([
+            core.ViewChild('searchTerm')
+        ], CustomerSelectionComponent.prototype, "searchTerm", void 0);
+        CustomerSelectionComponent = __decorate([
+            core.Component({
+                selector: 'cx-customer-selection',
+                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+                encapsulation: core.ViewEncapsulation.None,
+                // tslint:disable-next-line:no-host-metadata-property
+                host: {
+                    '(document:click)': 'onDocumentClick($event)',
+                },
+                styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
+            })
+        ], CustomerSelectionComponent);
+        return CustomerSelectionComponent;
+    }());
+
+    var AsmModule = /** @class */ (function () {
+        function AsmModule() {
+        }
+        AsmModule = __decorate([
+            core.NgModule({
+                imports: [
+                    common.CommonModule,
+                    forms.ReactiveFormsModule,
+                    core$1.I18nModule,
+                    core$1.AsmModule.forRoot(),
+                    AsmLoaderModule,
+                ],
+                declarations: [
+                    AsmMainUiComponent,
+                    CSAgentLoginFormComponent,
+                    CustomerSelectionComponent,
+                    AsmSessionTimerComponent,
+                    FormatTimerPipe,
+                    CustomerEmulationComponent,
+                ],
+                entryComponents: [AsmMainUiComponent],
+            })
+        ], AsmModule);
+        return AsmModule;
+    }());
+
+    var CurrentProductService = /** @class */ (function () {
+        function CurrentProductService(routingService, productService) {
+            this.routingService = routingService;
+            this.productService = productService;
+            this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
+        }
+        /**
+         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+         *
+         * @param scopes
+         */
+        CurrentProductService.prototype.getProduct = function (scopes) {
+            var _this = this;
+            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
+                return productCode
+                    ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
+                    : rxjs.of(null);
+            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
+        };
+        CurrentProductService.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.ProductService }
+        ]; };
+        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService)); }, token: CurrentProductService, providedIn: "root" });
+        CurrentProductService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CurrentProductService);
+        return CurrentProductService;
+    }());
+
+    var OrderDetailsService = /** @class */ (function () {
+        function OrderDetailsService(userOrderService, routingService) {
+            var _this = this;
+            this.userOrderService = userOrderService;
+            this.routingService = routingService;
+            this.orderCode$ = this.routingService
+                .getRouterState()
+                .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
+            this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
+                if (orderCode) {
+                    _this.userOrderService.loadOrderDetails(orderCode);
+                }
+                else {
+                    _this.userOrderService.clearOrderDetails();
+                }
+            }), operators.shareReplay({ bufferSize: 1, refCount: true }));
+        }
+        OrderDetailsService.prototype.getOrderDetails = function () {
+            var _this = this;
+            return this.orderLoad$.pipe(operators.switchMap(function () { return _this.userOrderService.getOrderDetails(); }));
+        };
+        OrderDetailsService.ctorParameters = function () { return [
+            { type: core$1.UserOrderService },
+            { type: core$1.RoutingService }
+        ]; };
+        OrderDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(core["ɵɵinject"](core$1.UserOrderService), core["ɵɵinject"](core$1.RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
+        OrderDetailsService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], OrderDetailsService);
+        return OrderDetailsService;
+    }());
+
+    var PromotionService = /** @class */ (function () {
+        function PromotionService(orderDetailsService, checkoutService, activeCartService) {
+            this.orderDetailsService = orderDetailsService;
+            this.checkoutService = checkoutService;
+            this.activeCartService = activeCartService;
+        }
+        PromotionService.prototype.getOrderPromotions = function (promotionLocation) {
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.getOrderPromotionsFromCart();
+                case core$1.PromotionLocation.Checkout:
+                    return this.getOrderPromotionsFromCheckout();
+                case core$1.PromotionLocation.Order:
+                    return this.getOrderPromotionsFromOrder();
+                default:
+                    return rxjs.of([]);
+            }
+        };
+        PromotionService.prototype.getOrderPromotionsFromCart = function () {
+            var _this = this;
+            return this.activeCartService
+                .getActive()
+                .pipe(operators.map(function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromCartHelper = function (cart) {
+            var potentialPromotions = [];
+            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
+            var appliedPromotions = [];
+            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
+            return __spread(potentialPromotions, appliedPromotions);
+        };
+        PromotionService.prototype.getOrderPromotionsFromCheckout = function () {
+            var _this = this;
+            return this.checkoutService
+                .getOrderDetails()
+                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromOrder = function () {
+            var _this = this;
+            return this.orderDetailsService
+                .getOrderDetails()
+                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromOrderHelper = function (order) {
+            var appliedOrderPromotions = [];
+            appliedOrderPromotions.push.apply(appliedOrderPromotions, __spread((order.appliedOrderPromotions || [])));
+            return appliedOrderPromotions;
+        };
+        PromotionService.prototype.getProductPromotionForEntry = function (item, promotionLocation) {
+            var _this = this;
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.activeCartService
+                        .getActive()
+                        .pipe(operators.map(function (cart) {
+                        return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
+                    }));
+                case core$1.PromotionLocation.Checkout:
+                    return this.checkoutService
+                        .getOrderDetails()
+                        .pipe(operators.map(function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    }));
+                case core$1.PromotionLocation.Order:
+                    return this.orderDetailsService
+                        .getOrderDetails()
+                        .pipe(operators.map(function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    }));
+            }
+        };
+        PromotionService.prototype.getProductPromotion = function (item, promotions) {
+            var e_1, _a, e_2, _b;
+            var entryPromotions = [];
+            if (promotions && promotions.length > 0) {
+                try {
+                    for (var promotions_1 = __values(promotions), promotions_1_1 = promotions_1.next(); !promotions_1_1.done; promotions_1_1 = promotions_1.next()) {
+                        var promotion = promotions_1_1.value;
+                        if (promotion.description &&
+                            promotion.consumedEntries &&
+                            promotion.consumedEntries.length > 0) {
+                            try {
+                                for (var _c = (e_2 = void 0, __values(promotion.consumedEntries)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                    var consumedEntry = _d.value;
+                                    if (this.isConsumedByEntry(consumedEntry, item)) {
+                                        entryPromotions.push(promotion);
+                                    }
+                                }
+                            }
+                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                            finally {
+                                try {
+                                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+                                }
+                                finally { if (e_2) throw e_2.error; }
+                            }
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (promotions_1_1 && !promotions_1_1.done && (_a = promotions_1.return)) _a.call(promotions_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+            }
+            return entryPromotions;
+        };
+        PromotionService.prototype.isConsumedByEntry = function (consumedEntry, entry) {
+            var e_3, _a;
+            var consumedEntryNumber = consumedEntry.orderEntryNumber;
+            if (entry.entries && entry.entries.length > 0) {
+                try {
+                    for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var subEntry = _c.value;
+                        if (subEntry.entryNumber === consumedEntryNumber) {
+                            return true;
+                        }
+                    }
+                }
+                catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                    }
+                    finally { if (e_3) throw e_3.error; }
+                }
+                return false;
+            }
+            else {
+                return consumedEntryNumber === entry.entryNumber;
+            }
+        };
+        PromotionService.ctorParameters = function () { return [
+            { type: OrderDetailsService },
+            { type: core$1.CheckoutService },
+            { type: core$1.ActiveCartService }
+        ]; };
+        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: PromotionService, providedIn: "root" });
+        PromotionService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], PromotionService);
+        return PromotionService;
+    }());
+
+    var AddedToCartDialogComponent = /** @class */ (function () {
+        function AddedToCartDialogComponent(modalService, cartService, promotionService) {
+            this.modalService = modalService;
+            this.cartService = cartService;
+            this.promotionService = promotionService;
+            this.iconTypes = exports.ICON_TYPE;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
+            this.quantity = 0;
+            this.modalIsOpen = false;
+            this.form = new forms.FormGroup({});
+        }
+        /**
+         * Returns an observable formControl with the quantity of the cartEntry,
+         * but also updates the entry in case of a changed value.
+         * The quantity can be set to zero in order to remove the entry.
+         */
+        AddedToCartDialogComponent.prototype.getQuantityControl = function () {
+            var _this = this;
+            if (!this.quantityControl$) {
+                this.quantityControl$ = this.entry$.pipe(operators.filter(function (e) { return !!e; }), operators.map(function (entry) { return _this.getFormControl(entry); }), operators.switchMap(function () {
+                    return _this.form.valueChanges.pipe(
+                    // tslint:disable-next-line:deprecation
+                    operators.startWith(null), operators.tap(function (valueChange) {
+                        if (valueChange) {
+                            _this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
+                            if (valueChange.quantity === 0) {
+                                _this.dismissModal('Removed');
+                            }
+                        }
+                        else {
+                            _this.form.markAsPristine();
+                        }
+                    }));
+                }), operators.map(function () { return _this.form.get('quantity'); }));
+            }
+            return this.quantityControl$;
+        };
+        AddedToCartDialogComponent.prototype.ngOnInit = function () {
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+        };
+        AddedToCartDialogComponent.prototype.getFormControl = function (entry) {
+            if (!this.form.get('quantity')) {
+                var quantity = new forms.FormControl(entry.quantity, { updateOn: 'blur' });
+                this.form.addControl('quantity', quantity);
+                var entryNumber = new forms.FormControl(entry.entryNumber);
+                this.form.addControl('entryNumber', entryNumber);
+            }
+            return this.form.get('quantity');
+        };
+        AddedToCartDialogComponent.prototype.dismissModal = function (reason) {
+            this.modalService.dismissActiveModal(reason);
+        };
+        AddedToCartDialogComponent.ctorParameters = function () { return [
+            { type: ModalService },
+            { type: core$1.ActiveCartService },
+            { type: PromotionService }
+        ]; };
+        __decorate([
+            core.ViewChild('dialog', { read: core.ElementRef })
+        ], AddedToCartDialogComponent.prototype, "dialog", void 0);
+        AddedToCartDialogComponent = __decorate([
+            core.Component({
+                selector: 'cx-added-to-cart-dialog',
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+            })
+        ], AddedToCartDialogComponent);
+        return AddedToCartDialogComponent;
+    }());
+
+    var AddToCartComponent = /** @class */ (function () {
+        function AddToCartComponent(modalService, currentProductService, cd, activeCartService) {
+            this.modalService = modalService;
+            this.currentProductService = currentProductService;
+            this.cd = cd;
+            this.activeCartService = activeCartService;
+            this.showQuantity = true;
+            this.hasStock = false;
+            this.quantity = 1;
+            this.increment = false;
+            this.addToCartForm = new forms.FormGroup({
+                quantity: new forms.FormControl(1),
+            });
+        }
+        AddToCartComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            if (this.product) {
+                this.productCode = this.product.code;
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                this.setStockInfo(this.product);
+                this.cd.markForCheck();
+            }
+            else if (this.productCode) {
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                // force hasStock and quantity for the time being, as we do not have more info:
+                this.quantity = 1;
+                this.hasStock = true;
+                this.cd.markForCheck();
+            }
+            else {
+                this.subscription = this.currentProductService
+                    .getProduct()
+                    .pipe(operators.filter(Boolean))
+                    .subscribe(function (product) {
+                    _this.productCode = product.code;
+                    _this.setStockInfo(product);
+                    _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
+                    _this.cd.markForCheck();
+                });
+            }
+        };
+        AddToCartComponent.prototype.setStockInfo = function (product) {
+            this.quantity = 1;
+            this.hasStock =
+                product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+            if (this.hasStock && product.stock.stockLevel) {
+                this.maxQuantity = product.stock.stockLevel;
+            }
+        };
+        AddToCartComponent.prototype.updateCount = function (value) {
+            this.quantity = value;
+        };
+        AddToCartComponent.prototype.addToCart = function () {
+            var _this = this;
+            var quantity = this.addToCartForm.get('quantity').value;
+            if (!this.productCode || quantity <= 0) {
+                return;
+            }
+            // check item is already present in the cart
+            // so modal will have proper header text displayed
+            this.activeCartService
+                .getEntry(this.productCode)
+                .subscribe(function (entry) {
+                if (entry) {
+                    _this.increment = true;
+                }
+                _this.openModal();
+                _this.activeCartService.addEntry(_this.productCode, quantity);
+                _this.increment = false;
+            })
+                .unsubscribe();
+        };
+        AddToCartComponent.prototype.openModal = function () {
+            var modalInstance;
+            this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+                centered: true,
+                size: 'lg',
+            });
+            modalInstance = this.modalRef.componentInstance;
+            modalInstance.entry$ = this.cartEntry$;
+            modalInstance.cart$ = this.activeCartService.getActive();
+            modalInstance.loaded$ = this.activeCartService.isStable();
+            modalInstance.quantity = this.quantity;
+            modalInstance.increment = this.increment;
+        };
+        AddToCartComponent.prototype.ngOnDestroy = function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
+        };
+        AddToCartComponent.ctorParameters = function () { return [
+            { type: ModalService },
+            { type: CurrentProductService },
+            { type: core.ChangeDetectorRef },
+            { type: core$1.ActiveCartService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "productCode", void 0);
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "showQuantity", void 0);
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "product", void 0);
+        AddToCartComponent = __decorate([
+            core.Component({
+                selector: 'cx-add-to-cart',
+                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], AddToCartComponent);
+        return AddToCartComponent;
+    }());
+
     var CardComponent = /** @class */ (function () {
         function CardComponent() {
             this.iconTypes = exports.ICON_TYPE;
@@ -5748,6 +3813,148 @@
             })
         ], CarouselComponent);
         return CarouselComponent;
+    }());
+
+
+    (function (BREAKPOINT) {
+        BREAKPOINT["xs"] = "xs";
+        BREAKPOINT["sm"] = "sm";
+        BREAKPOINT["md"] = "md";
+        BREAKPOINT["lg"] = "lg";
+        BREAKPOINT["xl"] = "xl";
+    })(exports.BREAKPOINT || (exports.BREAKPOINT = {}));
+    /**
+     * The LayoutConfig supports the configuration of page slots by page templates
+     * or page sections, such as headers and footers. The configuration also supports
+     * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+     * por a given breakpoint.
+     */
+    var LayoutConfig = /** @class */ (function () {
+        function LayoutConfig() {
+        }
+        return LayoutConfig;
+    }());
+
+    var _a;
+    var DEFAULT_BREAKPOINTS = (_a = {},
+        _a[exports.BREAKPOINT.xs] = 576,
+        _a[exports.BREAKPOINT.sm] = 768,
+        _a[exports.BREAKPOINT.md] = 992,
+        _a[exports.BREAKPOINT.lg] = 1200,
+        _a);
+    var BreakpointService = /** @class */ (function () {
+        function BreakpointService(winRef, config) {
+            this.winRef = winRef;
+            this.config = config;
+        }
+        Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
+            get: function () {
+                var _this = this;
+                if (!this.window) {
+                    return rxjs.of(exports.BREAKPOINT.xs);
+                }
+                return this.winRef.resize$.pipe(operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged());
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+         * configuration. If no configuration is available for the given breakpoint, the
+         * method will return the default values:
+         * - xs: 567
+         * - sm: 768
+         * - md: 992
+         * - lg: 1200
+         */
+        BreakpointService.prototype.getSize = function (breakpoint) {
+            var _a;
+            return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+                : DEFAULT_BREAKPOINTS[breakpoint];
+        };
+        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+            /**
+             * Returns all available breakpoints for the system.
+             */
+            get: function () {
+                return [
+                    exports.BREAKPOINT.xs,
+                    exports.BREAKPOINT.sm,
+                    exports.BREAKPOINT.md,
+                    exports.BREAKPOINT.lg,
+                    exports.BREAKPOINT.xl,
+                ];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * Indicates whether the current screen size is smaller than the maximum size of the
+         * given breakpoint.
+         *
+         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+         * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+         */
+        BreakpointService.prototype.isDown = function (breakpoint) {
+            var _this = this;
+            return this.breakpoint$.pipe(operators.map(function (br) {
+                return _this.breakpoints
+                    .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
+                    .includes(br);
+            }));
+        };
+        /**
+         * Indicates whether the current screen size is larger than the minimum size of the
+         * given breakpoint.
+         *
+         * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+         * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+         */
+        BreakpointService.prototype.isUp = function (breakpoint) {
+            var _this = this;
+            return this.breakpoint$.pipe(operators.map(function (br) {
+                return _this.breakpoints
+                    .slice(_this.breakpoints.indexOf(breakpoint))
+                    .includes(br);
+            }));
+        };
+        /**
+         * Indicates whether the current screen size fits to the given breakpoint
+         */
+        BreakpointService.prototype.isEqual = function (breakpoint) {
+            return this.breakpoint$.pipe(operators.map(function (br) { return br === breakpoint; }));
+        };
+        BreakpointService.prototype.getBreakpoint = function (windowWidth) {
+            var breakpoint = this.getClosest(windowWidth);
+            return exports.BREAKPOINT[breakpoint || exports.BREAKPOINT.lg];
+        };
+        BreakpointService.prototype.getClosest = function (windowWidth) {
+            var _this = this;
+            if (!windowWidth) {
+                windowWidth = this.window.innerWidth;
+            }
+            return windowWidth > this.getSize(exports.BREAKPOINT.lg)
+                ? exports.BREAKPOINT.xl
+                : this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); });
+        };
+        Object.defineProperty(BreakpointService.prototype, "window", {
+            get: function () {
+                return this.winRef.nativeWindow;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        BreakpointService.ctorParameters = function () { return [
+            { type: core$1.WindowRef },
+            { type: LayoutConfig }
+        ]; };
+        BreakpointService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function BreakpointService_Factory() { return new BreakpointService(core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+        BreakpointService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], BreakpointService);
+        return BreakpointService;
     }());
 
     /** the default format is used for browsers that do not support   */
@@ -7942,6 +6149,8 @@
         ], CartTotalsModule);
         return CartTotalsModule;
     }());
+
+    var PAGE_LAYOUT_HANDLER = new core.InjectionToken('PageLayoutHandler');
 
     var MiniCartComponent = /** @class */ (function () {
         function MiniCartComponent(activeCartService) {
@@ -10356,136 +8565,6 @@
         return NotCheckoutAuthGuard;
     }());
 
-    // given that we're likely going to refactor the directives, we're
-    // export * from './autofocus/index';
-    // export * from './base/index';
-    // export * from './block/index';
-    // export * from './escape/index';
-    // export * from './lock/index';
-    // export * from './persist/index';
-    // export * from './tab/index';
-    // export * from './trap/index';
-    // export * from './visible/index';
-    // export * from './keyboard-focus.model';
-
-    var SkipLinkConfig = /** @class */ (function () {
-        function SkipLinkConfig() {
-        }
-        return SkipLinkConfig;
-    }());
-    var SkipLink = /** @class */ (function () {
-        function SkipLink() {
-        }
-        return SkipLink;
-    }());
-
-    (function (SkipLinkScrollPosition) {
-        SkipLinkScrollPosition["BEFORE"] = "BEFORE";
-        SkipLinkScrollPosition["AFTER"] = "AFTER";
-    })(exports.SkipLinkScrollPosition || (exports.SkipLinkScrollPosition = {}));
-
-    var SkipLinkService = /** @class */ (function () {
-        function SkipLinkService(config, keyboardFocusService) {
-            this.config = config;
-            this.keyboardFocusService = keyboardFocusService;
-            this.skipLinks$ = new rxjs.BehaviorSubject([]);
-        }
-        SkipLinkService.prototype.getSkipLinks = function () {
-            return this.skipLinks$;
-        };
-        SkipLinkService.prototype.add = function (key, target) {
-            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
-            if (found) {
-                var existing = this.skipLinks$.value;
-                existing.splice(this.getSkipLinkIndexInArray(key), 0, {
-                    target: target,
-                    i18nKey: found.i18nKey,
-                    position: found.position,
-                    key: key,
-                });
-                this.skipLinks$.next(existing);
-            }
-        };
-        SkipLinkService.prototype.remove = function (key) {
-            var found = this.config.skipLinks.find(function (skipLink) { return skipLink.key === key; });
-            if (found) {
-                var existing = this.skipLinks$.value;
-                existing = existing.filter(function (skipLink) { return skipLink.key !== key; });
-                this.skipLinks$.next(existing);
-            }
-        };
-        SkipLinkService.prototype.scrollToTarget = function (skipLink) {
-            var target = skipLink.target instanceof HTMLElement
-                ? skipLink.target
-                : skipLink.target.parentElement;
-            // focus first focusable element in the
-            var firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
-            // we force a tabindex if not available, to ensure we can focus into the element
-            var hasTabindex = firstFocusable.hasAttribute('tabindex');
-            if (!hasTabindex) {
-                firstFocusable.setAttribute('tabindex', '-1');
-            }
-            firstFocusable.focus();
-            // drop the tmp tabindex
-            if (!hasTabindex) {
-                firstFocusable.removeAttribute('tabindex');
-            }
-        };
-        SkipLinkService.prototype.getSkipLinkIndexInArray = function (key) {
-            var index = this.config.skipLinks.findIndex(function (skipLink) { return skipLink.key === key; });
-            var _loop_1 = function () {
-                index--;
-                var previous = this_1.config.skipLinks[index];
-                if (previous) {
-                    var existing = this_1.skipLinks$.value;
-                    var found = existing.findIndex(function (skipLink) { return skipLink.key === previous.key; });
-                    if (found > -1) {
-                        return { value: found + 1 };
-                    }
-                }
-            };
-            var this_1 = this;
-            while (index > 0) {
-                var state_1 = _loop_1();
-                if (typeof state_1 === "object")
-                    return state_1.value;
-            }
-            return 0;
-        };
-        SkipLinkService.ctorParameters = function () { return [
-            { type: SkipLinkConfig },
-            { type: KeyboardFocusService }
-        ]; };
-        SkipLinkService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SkipLinkService_Factory() { return new SkipLinkService(core["ɵɵinject"](SkipLinkConfig), core["ɵɵinject"](KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
-        SkipLinkService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], SkipLinkService);
-        return SkipLinkService;
-    }());
-
-    var SkipLinkComponent = /** @class */ (function () {
-        function SkipLinkComponent(skipLinkService) {
-            this.skipLinkService = skipLinkService;
-            this.skipLinks$ = this.skipLinkService.getSkipLinks();
-        }
-        SkipLinkComponent.prototype.scrollToTarget = function (skipLink) {
-            this.skipLinkService.scrollToTarget(skipLink);
-        };
-        SkipLinkComponent.ctorParameters = function () { return [
-            { type: SkipLinkService }
-        ]; };
-        SkipLinkComponent = __decorate([
-            core.Component({
-                selector: 'cx-skip-link',
-                template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], SkipLinkComponent);
-        return SkipLinkComponent;
-    }());
-
     var defaultSkipLinkConfig = {
         skipLinks: [
             {
@@ -10524,6 +8603,101 @@
             })
         ], SkipLinkDirective);
         return SkipLinkDirective;
+    }());
+
+
+    (function (OutletPosition) {
+        OutletPosition["REPLACE"] = "replace";
+        OutletPosition["BEFORE"] = "before";
+        OutletPosition["AFTER"] = "after";
+    })(exports.OutletPosition || (exports.OutletPosition = {}));
+    var AVOID_STACKED_OUTLETS = false;
+    var USE_STACKED_OUTLETS = true;
+
+    var OutletService = /** @class */ (function () {
+        function OutletService() {
+            this.templatesRefs = new Map();
+            this.templatesRefsBefore = new Map();
+            this.templatesRefsAfter = new Map();
+        }
+        /**
+         * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+         */
+        OutletService.prototype.add = function (outlet, templateOrFactory, position) {
+            if (position === void 0) { position = exports.OutletPosition.REPLACE; }
+            if (position === exports.OutletPosition.BEFORE) {
+                this.store(this.templatesRefsBefore, outlet, templateOrFactory);
+            }
+            if (position === exports.OutletPosition.REPLACE) {
+                this.store(this.templatesRefs, outlet, templateOrFactory);
+            }
+            if (position === exports.OutletPosition.AFTER) {
+                this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+            }
+        };
+        /**
+         *
+         * Returns a single object or multiple objects for the given outlet reference,
+         * depending on the `stacked` argument.
+         *
+         * @param outlet The outlet reference
+         * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+         * @param stacked Indicates whether an array of outlet components is returned
+         */
+        OutletService.prototype.get = function (outlet, position, stacked) {
+            if (position === void 0) { position = exports.OutletPosition.REPLACE; }
+            if (stacked === void 0) { stacked = AVOID_STACKED_OUTLETS; }
+            var templateRef;
+            switch (position) {
+                case exports.OutletPosition.BEFORE:
+                    templateRef = this.templatesRefsBefore.get(outlet);
+                    break;
+                case exports.OutletPosition.AFTER:
+                    templateRef = this.templatesRefsAfter.get(outlet);
+                    break;
+                default:
+                    templateRef = this.templatesRefs.get(outlet);
+            }
+            if (templateRef && !stacked) {
+                return templateRef[0];
+            }
+            return templateRef;
+        };
+        OutletService.prototype.remove = function (outlet, position, value) {
+            if (position === void 0) { position = exports.OutletPosition.REPLACE; }
+            switch (position) {
+                case exports.OutletPosition.BEFORE:
+                    this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
+                    break;
+                case exports.OutletPosition.AFTER:
+                    this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
+                    break;
+                default:
+                    this.removeValueOrAll(this.templatesRefs, outlet, value);
+            }
+        };
+        OutletService.prototype.store = function (store, outlet, value) {
+            var existing = store.get(outlet) || [];
+            var newValue = existing.concat([value]);
+            store.set(outlet, newValue);
+        };
+        OutletService.prototype.removeValueOrAll = function (store, outlet, value) {
+            if (!value && store.has(outlet)) {
+                store.delete(outlet);
+            }
+            else if (value && store.has(outlet)) {
+                var existing = store.get(outlet);
+                existing = existing.filter(function (val) { return val === value; });
+                store.set(outlet, existing);
+            }
+        };
+        OutletService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+        OutletService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], OutletService);
+        return OutletService;
     }());
 
     var SkipLinkModule = /** @class */ (function () {
@@ -10648,17 +8822,1336 @@
         return HamburgerMenuModule;
     }());
 
+    var InlineRenderStrategy = /** @class */ (function (_super) {
+        __extends(InlineRenderStrategy, _super);
+        function InlineRenderStrategy(componentFactoryResolver) {
+            var _this = _super.call(this) || this;
+            _this.componentFactoryResolver = componentFactoryResolver;
+            return _this;
+        }
+        /**
+         * Renders the component from the configuration in the view container ref
+         *
+         * @param config
+         * @param caller
+         * @param vcr
+         */
+        InlineRenderStrategy.prototype.render = function (config, caller, vcr) {
+            // Only render if a ViewContainerRef is provided
+            if (vcr && this.shouldRender(caller, config)) {
+                var template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+                vcr.createComponent(template);
+                this.renderedCallers.push({ caller: caller, element: vcr.element });
+            }
+            else if (core.isDevMode()) {
+                if (!vcr) {
+                    console.warn("No view container ref provided for " + caller);
+                }
+                else {
+                    console.warn("Element for " + caller + " already rendered. To allow multi rendering add property multi: true.");
+                }
+            }
+        };
+        InlineRenderStrategy.prototype.match = function (config) {
+            return Boolean(config.inline);
+        };
+        InlineRenderStrategy.ctorParameters = function () { return [
+            { type: core.ComponentFactoryResolver }
+        ]; };
+        InlineRenderStrategy.ɵprov = core["ɵɵdefineInjectable"]({ factory: function InlineRenderStrategy_Factory() { return new InlineRenderStrategy(core["ɵɵinject"](core.ComponentFactoryResolver)); }, token: InlineRenderStrategy, providedIn: "root" });
+        InlineRenderStrategy = __decorate([
+            core.Injectable({ providedIn: 'root' })
+        ], InlineRenderStrategy);
+        return InlineRenderStrategy;
+    }(LaunchRenderStrategy));
+
+    var OutletRefDirective = /** @class */ (function () {
+        function OutletRefDirective(tpl, outletService) {
+            this.tpl = tpl;
+            this.outletService = outletService;
+        }
+        OutletRefDirective.prototype.ngOnInit = function () {
+            this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+        };
+        OutletRefDirective.ctorParameters = function () { return [
+            { type: core.TemplateRef },
+            { type: OutletService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], OutletRefDirective.prototype, "cxOutletRef", void 0);
+        __decorate([
+            core.Input()
+        ], OutletRefDirective.prototype, "cxOutletPos", void 0);
+        OutletRefDirective = __decorate([
+            core.Directive({
+                selector: '[cxOutletRef]',
+            })
+        ], OutletRefDirective);
+        return OutletRefDirective;
+    }());
+
+    var OutletRefModule = /** @class */ (function () {
+        function OutletRefModule() {
+        }
+        OutletRefModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule],
+                declarations: [OutletRefDirective],
+                exports: [OutletRefDirective],
+            })
+        ], OutletRefModule);
+        return OutletRefModule;
+    }());
+
+    /**
+     * The IntersectionService uses the native IntersectionObserver (v2), which
+     * can be used to implement pre-loading and deferred loading of DOM content.
+     *
+     */
+    var IntersectionService = /** @class */ (function () {
+        function IntersectionService(config) {
+            this.config = config;
+        }
+        /**
+         * Returns an Observable that emits only once a boolean value whenever
+         * the given element has shown in the view port.
+         *
+         * The returned obervable will only emit the first value. The
+         * observable must be cleaned up either way, since the value might never emit; it
+         *  depends on whether the element appears in the view port.
+         */
+        IntersectionService.prototype.isIntersected = function (element, options) {
+            return this.intersects(element, options).pipe(operators.first(function (v) { return v === true; }));
+        };
+        /**
+         * Indicates whenever the element intersects the view port. An optional margin
+         * is used to intersects before the element shows up in the viewport.
+         * A value is emitted each time the element intersects.
+         *
+         * This is private for now, but could be exposed as a public API
+         * to introduce additional (css) render effects to the UI.
+         */
+        IntersectionService.prototype.intersects = function (element, options) {
+            var _this = this;
+            var elementVisible$ = new rxjs.Observable(function (observer) {
+                var rootMargin = _this.getRootMargin(options);
+                var intersectOptions = { rootMargin: rootMargin };
+                var intersectionObserver = new IntersectionObserver(function (entries) {
+                    observer.next(entries);
+                }, intersectOptions);
+                intersectionObserver.observe(element);
+                return function () {
+                    intersectionObserver.disconnect();
+                };
+            }).pipe(operators.flatMap(function (entries) { return entries; }), operators.map(function (entry) { return entry.isIntersecting; }), operators.distinctUntilChanged());
+            return elementVisible$;
+        };
+        IntersectionService.prototype.getRootMargin = function (options) {
+            if (options.rootMargin) {
+                return options.rootMargin;
+            }
+            var layoutConfig = this.config;
+            if (layoutConfig.deferredLoading &&
+                layoutConfig.deferredLoading.intersectionMargin) {
+                return layoutConfig.deferredLoading.intersectionMargin;
+            }
+        };
+        IntersectionService.ctorParameters = function () { return [
+            { type: LayoutConfig }
+        ]; };
+        IntersectionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function IntersectionService_Factory() { return new IntersectionService(core["ɵɵinject"](LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+        IntersectionService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], IntersectionService);
+        return IntersectionService;
+    }());
+
+    /**
+     * The defer loading serivce is used to defer loading of DOM elements
+     * until the elements are required for the user experience.
+     */
+    var DeferLoaderService = /** @class */ (function () {
+        function DeferLoaderService(platformId, config, intersectionService) {
+            this.platformId = platformId;
+            this.config = config;
+            this.intersectionService = intersectionService;
+            this.globalLoadStrategy = config.deferredLoading
+                ? config.deferredLoading.strategy
+                : core$1.DeferLoadingStrategy.INSTANT;
+        }
+        /**
+         * Defer loading till the element intersects the viewport.
+         *
+         * We evalutes whether we instantly load the element for different reasons:
+         * - we run in SSR mode
+         * - there's no global strategy given
+         * - the global loading strategy is set to INSTANT loading,
+         *   and the loading strategy in the given is not set to DEFER
+         * - the loading strategy in the given options is set to INSTANT
+         */
+        DeferLoaderService.prototype.load = function (element, options) {
+            if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+                return rxjs.of(true);
+            }
+            else {
+                return this.intersectionService.isIntersected(element, options);
+            }
+        };
+        DeferLoaderService.prototype.shouldLoadInstantly = function (elementLoadingStrategy) {
+            return (common.isPlatformServer(this.platformId) ||
+                elementLoadingStrategy === core$1.DeferLoadingStrategy.INSTANT ||
+                (elementLoadingStrategy !== core$1.DeferLoadingStrategy.DEFER &&
+                    this.globalLoadStrategy === core$1.DeferLoadingStrategy.INSTANT));
+        };
+        DeferLoaderService.ctorParameters = function () { return [
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+            { type: LayoutConfig },
+            { type: IntersectionService }
+        ]; };
+        DeferLoaderService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(core["ɵɵinject"](core.PLATFORM_ID), core["ɵɵinject"](LayoutConfig), core["ɵɵinject"](IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+        DeferLoaderService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(0, core.Inject(core.PLATFORM_ID))
+        ], DeferLoaderService);
+        return DeferLoaderService;
+    }());
+
+    var OutletRendererService = /** @class */ (function () {
+        function OutletRendererService() {
+            this.outletRefs = new Map();
+        }
+        OutletRendererService.prototype.render = function (outlet) {
+            if (this.outletRefs.size !== 0) {
+                this.outletRefs.get(outlet).render();
+            }
+        };
+        OutletRendererService.prototype.register = function (cxOutlet, context) {
+            this.outletRefs.set(cxOutlet, context);
+        };
+        OutletRendererService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OutletRendererService_Factory() { return new OutletRendererService(); }, token: OutletRendererService, providedIn: "root" });
+        OutletRendererService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], OutletRendererService);
+        return OutletRendererService;
+    }());
+
+    var OutletDirective = /** @class */ (function () {
+        function OutletDirective(vcr, templateRef, outletService, deferLoaderService, outletRendererService) {
+            this.vcr = vcr;
+            this.templateRef = templateRef;
+            this.outletService = outletService;
+            this.deferLoaderService = deferLoaderService;
+            this.outletRendererService = outletRendererService;
+            this.renderedTemplate = [];
+            this.loaded = new core.EventEmitter(true);
+            this.subscription = new rxjs.Subscription();
+        }
+        OutletDirective.prototype.render = function () {
+            this.vcr.clear();
+            this.renderedTemplate = [];
+            this.subscription.unsubscribe();
+            this.subscription = new rxjs.Subscription();
+            this.outletRendererService.register(this.cxOutlet, this);
+            if (this.cxOutletDefer) {
+                this.deferLoading();
+            }
+            else {
+                this.build();
+            }
+        };
+        OutletDirective.prototype.ngOnChanges = function (changes) {
+            if (changes.cxOutlet) {
+                this.render();
+            }
+        };
+        OutletDirective.prototype.deferLoading = function () {
+            var _this = this;
+            this.loaded.emit(false);
+            var hostElement = this.getHostElement(this.vcr.element.nativeElement);
+            // Although the deferLoaderService might emit only once, as long as the hostElement
+            // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+            // the subscription on destroy.
+            this.subscription.add(this.deferLoaderService
+                .load(hostElement, this.cxOutletDefer)
+                .subscribe(function () {
+                _this.build();
+                _this.loaded.emit(true);
+            }));
+        };
+        OutletDirective.prototype.build = function () {
+            this.buildOutlet(exports.OutletPosition.BEFORE);
+            this.buildOutlet(exports.OutletPosition.REPLACE);
+            this.buildOutlet(exports.OutletPosition.AFTER);
+        };
+        OutletDirective.prototype.buildOutlet = function (position) {
+            var _this = this;
+            var templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
+            templates = templates === null || templates === void 0 ? void 0 : templates.filter(function (el) { return !_this.renderedTemplate.includes(el); });
+            if (!templates && position === exports.OutletPosition.REPLACE) {
+                templates = [this.templateRef];
+            }
+            // Just in case someone extended the `OutletService` and
+            // returns a singular object.
+            if (!Array.isArray(templates)) {
+                templates = [templates];
+            }
+            templates.forEach(function (obj) {
+                _this.create(obj);
+            });
+        };
+        OutletDirective.prototype.create = function (tmplOrFactory) {
+            if (tmplOrFactory instanceof core.ComponentFactory) {
+                this.vcr.createComponent(tmplOrFactory);
+            }
+            else if (tmplOrFactory instanceof core.TemplateRef) {
+                var view = this.vcr.createEmbeddedView(tmplOrFactory, {
+                    $implicit: this.cxOutletContext,
+                });
+                // we do not know if content is created dynamically or not
+                // so we apply change detection anyway
+                view.markForCheck();
+            }
+            this.renderedTemplate.push(tmplOrFactory);
+        };
+        /**
+         * Returns the closest `HtmlElement`, by iterating over the
+         * parent elements of the given element.
+         *
+         * @param element
+         */
+        OutletDirective.prototype.getHostElement = function (element) {
+            if (element instanceof HTMLElement) {
+                return element;
+            }
+            return this.getHostElement(element.parentElement);
+        };
+        OutletDirective.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        OutletDirective.ctorParameters = function () { return [
+            { type: core.ViewContainerRef },
+            { type: core.TemplateRef },
+            { type: OutletService },
+            { type: DeferLoaderService },
+            { type: OutletRendererService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], OutletDirective.prototype, "cxOutlet", void 0);
+        __decorate([
+            core.Input()
+        ], OutletDirective.prototype, "cxOutletContext", void 0);
+        __decorate([
+            core.Input()
+        ], OutletDirective.prototype, "cxOutletDefer", void 0);
+        __decorate([
+            core.Output()
+        ], OutletDirective.prototype, "loaded", void 0);
+        OutletDirective = __decorate([
+            core.Directive({
+                selector: '[cxOutlet]',
+            })
+        ], OutletDirective);
+        return OutletDirective;
+    }());
+
+    var OutletModule = /** @class */ (function () {
+        function OutletModule() {
+        }
+        OutletModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule],
+                declarations: [OutletDirective],
+                providers: [OutletService],
+                exports: [OutletDirective],
+            })
+        ], OutletModule);
+        return OutletModule;
+    }());
+
+    var OutletRenderStrategy = /** @class */ (function (_super) {
+        __extends(OutletRenderStrategy, _super);
+        function OutletRenderStrategy(outletService, componentFactoryResolver, outletRendererService) {
+            var _this = _super.call(this) || this;
+            _this.outletService = outletService;
+            _this.componentFactoryResolver = componentFactoryResolver;
+            _this.outletRendererService = outletRendererService;
+            return _this;
+        }
+        /**
+         * Renders the element in the configured outlet
+         *
+         * @param config
+         * @param caller
+         * @param vcr
+         */
+        OutletRenderStrategy.prototype.render = function (config, caller, vcr) {
+            if (this.shouldRender(caller, config)) {
+                var template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+                this.outletService.add(config.outlet, template, config.position ? config.position : exports.OutletPosition.BEFORE);
+                this.outletRendererService.render(config.outlet);
+                var element = vcr === null || vcr === void 0 ? void 0 : vcr.element;
+                this.renderedCallers.push({ caller: caller, element: element });
+            }
+        };
+        OutletRenderStrategy.prototype.match = function (config) {
+            return Boolean(config.outlet);
+        };
+        OutletRenderStrategy.prototype.remove = function (caller, config) {
+            var template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            this.renderedCallers = this.renderedCallers.filter(function (el) { return el.caller === caller; });
+            this.outletService.remove(config.outlet, config.position ? config.position : exports.OutletPosition.BEFORE, template);
+        };
+        OutletRenderStrategy.ctorParameters = function () { return [
+            { type: OutletService },
+            { type: core.ComponentFactoryResolver },
+            { type: OutletRendererService }
+        ]; };
+        OutletRenderStrategy.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OutletRenderStrategy_Factory() { return new OutletRenderStrategy(core["ɵɵinject"](OutletService), core["ɵɵinject"](core.ComponentFactoryResolver), core["ɵɵinject"](OutletRendererService)); }, token: OutletRenderStrategy, providedIn: "root" });
+        OutletRenderStrategy = __decorate([
+            core.Injectable({ providedIn: 'root' })
+        ], OutletRenderStrategy);
+        return OutletRenderStrategy;
+    }(LaunchRenderStrategy));
+
+    var RoutingRenderStrategy = /** @class */ (function (_super) {
+        __extends(RoutingRenderStrategy, _super);
+        function RoutingRenderStrategy(routingService) {
+            var _this = _super.call(this) || this;
+            _this.routingService = routingService;
+            return _this;
+        }
+        /**
+         * Navigates to the route configured for the caller
+         */
+        RoutingRenderStrategy.prototype.render = function (config, _caller) {
+            this.routingService.go(config);
+        };
+        RoutingRenderStrategy.prototype.match = function (config) {
+            return Boolean(config.cxRoute);
+        };
+        RoutingRenderStrategy.ctorParameters = function () { return [
+            { type: core$1.RoutingService }
+        ]; };
+        RoutingRenderStrategy.ɵprov = core["ɵɵdefineInjectable"]({ factory: function RoutingRenderStrategy_Factory() { return new RoutingRenderStrategy(core["ɵɵinject"](core$1.RoutingService)); }, token: RoutingRenderStrategy, providedIn: "root" });
+        RoutingRenderStrategy = __decorate([
+            core.Injectable({ providedIn: 'root' })
+        ], RoutingRenderStrategy);
+        return RoutingRenderStrategy;
+    }(LaunchRenderStrategy));
+
+    var LaunchDialogModule = /** @class */ (function () {
+        function LaunchDialogModule() {
+        }
+        LaunchDialogModule_1 = LaunchDialogModule;
+        LaunchDialogModule.forRoot = function () {
+            return {
+                ngModule: LaunchDialogModule_1,
+                providers: [
+                    core$1.provideConfig(DEFAULT_LAUNCH_CONFIG),
+                    { provide: LaunchConfig, useExisting: core$1.Config },
+                ],
+            };
+        };
+        var LaunchDialogModule_1;
+        LaunchDialogModule = LaunchDialogModule_1 = __decorate([
+            core.NgModule({
+                providers: [
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: OutletRenderStrategy,
+                        multi: true,
+                    },
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: InlineRenderStrategy,
+                        multi: true,
+                    },
+                    {
+                        provide: LaunchRenderStrategy,
+                        useExisting: RoutingRenderStrategy,
+                        multi: true,
+                    },
+                ],
+            })
+        ], LaunchDialogModule);
+        return LaunchDialogModule;
+    }());
+
     var LayoutModule = /** @class */ (function () {
         function LayoutModule() {
         }
         LayoutModule = __decorate([
             core.NgModule({
-                imports: [OutletRefModule],
+                imports: [OutletRefModule, LaunchDialogModule.forRoot()],
                 providers: [{ provide: LayoutConfig, useExisting: core$1.Config }],
                 exports: [OutletRefModule],
             })
         ], LayoutModule);
         return LayoutModule;
+    }());
+
+    var PageSlotComponent = /** @class */ (function () {
+        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+            var _this = this;
+            this.cmsService = cmsService;
+            this.dynamicAttributeService = dynamicAttributeService;
+            this.renderer = renderer;
+            this.hostElement = hostElement;
+            this.config = config;
+            this.isPending = true;
+            this.hasComponents = false;
+            this.isPageFold = false;
+            this.position$ = new rxjs.BehaviorSubject(undefined);
+            /**
+             * observable with `ContentSlotData` for the current position
+             *
+             * @deprecated we'll stop supporting this property in 2.0 as
+             * it is not used separately.
+             */
+            this.slot$ = this.position$.pipe(operators.switchMap(function (position) { return _this.cmsService.getContentSlot(position); }), operators.tap(function (slot) { return _this.addSmartEditSlotClass(slot); }));
+            this.components$ = this.slot$.pipe(operators.map(function (slot) { return (slot && slot.components ? slot.components : []); }), operators.distinctUntilChanged(function (a, b) {
+                return a.length === b.length && !a.find(function (el, index) { return el.uid !== b[index].uid; });
+            }));
+            this.subscription = new rxjs.Subscription();
+        }
+        Object.defineProperty(PageSlotComponent.prototype, "position", {
+            get: function () {
+                return this.position$.value;
+            },
+            /**
+             * The position is used to find the CMS page slot (and optional outlet)
+             * that is rendered in the PageSlotComponent. Furthermore, the position
+             * is added as a CSS class name to the host element.
+             */
+            set: function (position) {
+                this.position$.next(position);
+                this.renderer.addClass(this.hostElement.nativeElement, position);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        PageSlotComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription.add(this.components$.subscribe(function (components) {
+                _this.hasComponents = components && components.length > 0;
+                _this.pendingComponentCount = components ? components.length : 0;
+                _this.isPending = _this.pendingComponentCount > 0;
+            }));
+        };
+        PageSlotComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        /**
+         * Is triggered when a component is added to the view.
+         * We use this information to dropthe `is-pending` class from the page slot
+         * when all nested components have been added.
+         */
+        PageSlotComponent.prototype.isLoaded = function (loadState) {
+            if (loadState) {
+                this.pendingComponentCount--;
+            }
+            this.isPending = this.pendingComponentCount > 0;
+        };
+        PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
+            var deferLoading = this.getDeferLoadingStrategy(componentType);
+            return { deferLoading: deferLoading };
+        };
+        /**
+         * The `DeferLoadingStrategy` indicates whether component rendering
+         * should be deferred.
+         */
+        PageSlotComponent.prototype.getDeferLoadingStrategy = function (componentType) {
+            if (this.config) {
+                return (this.config.cmsComponents[componentType] || {})
+                    .deferLoading;
+            }
+        };
+        PageSlotComponent.prototype.addSmartEditSlotClass = function (slot) {
+            if (slot && this.cmsService.isLaunchInSmartEdit()) {
+                this.addSmartEditContract(slot);
+            }
+        };
+        PageSlotComponent.prototype.addSmartEditContract = function (slot) {
+            this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+        };
+        PageSlotComponent.ctorParameters = function () { return [
+            { type: core$1.CmsService },
+            { type: core$1.DynamicAttributeService },
+            { type: core.Renderer2 },
+            { type: core.ElementRef },
+            { type: core$1.CmsConfig }
+        ]; };
+        __decorate([
+            core.Input()
+        ], PageSlotComponent.prototype, "position", null);
+        __decorate([
+            core.HostBinding('class.cx-pending')
+        ], PageSlotComponent.prototype, "isPending", void 0);
+        __decorate([
+            core.HostBinding('class.has-components')
+        ], PageSlotComponent.prototype, "hasComponents", void 0);
+        __decorate([
+            core.HostBinding('class.page-fold'), core.Input()
+        ], PageSlotComponent.prototype, "isPageFold", void 0);
+        PageSlotComponent = __decorate([
+            core.Component({
+                selector: 'cx-page-slot,[cx-page-slot]',
+                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], PageSlotComponent);
+        return PageSlotComponent;
+    }());
+
+    var PageSlotModule = /** @class */ (function () {
+        function PageSlotModule() {
+        }
+        PageSlotModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule, OutletModule, PageComponentModule],
+                providers: [],
+                declarations: [PageSlotComponent],
+                exports: [PageSlotComponent],
+            })
+        ], PageSlotModule);
+        return PageSlotModule;
+    }());
+
+    var PageLayoutService = /** @class */ (function () {
+        function PageLayoutService(cms, config, breakpointService, handlers) {
+            this.cms = cms;
+            this.config = config;
+            this.breakpointService = breakpointService;
+            this.handlers = handlers;
+            // Prints warn messages for missing layout configs.
+            // The warnings are only printed once per config
+            // to not pollute the console log.
+            this.warnLogMessages = {};
+            this.logSlots = {};
+        }
+        PageLayoutService.prototype.getSlots = function (section) {
+            var _this = this;
+            return rxjs.combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(operators.map(function (_a) {
+                var _b = __read(_a, 2), page = _b[0], breakpoint = _b[1];
+                var pageTemplate = page.template;
+                var slots = _this.resolveSlots(page, section, breakpoint);
+                return { slots: slots, pageTemplate: pageTemplate, breakpoint: breakpoint };
+            }), operators.switchMap(function (_a) {
+                var e_1, _b;
+                var slots = _a.slots, pageTemplate = _a.pageTemplate, breakpoint = _a.breakpoint;
+                var result = rxjs.of(slots);
+                try {
+                    for (var _c = __values(_this.handlers || []), _d = _c.next(); !_d.done; _d = _c.next()) {
+                        var handler = _d.value;
+                        result = handler.handle(result, pageTemplate, section, breakpoint);
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                return result;
+            }), operators.distinctUntilChanged(function (a, b) {
+                if (a.length !== b.length) {
+                    return false;
+                }
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i] !== b[i]) {
+                        return false;
+                    }
+                }
+                return true;
+            }));
+        };
+        /**
+         * Returns an observable with the last page slot above-the-fold
+         * for the given pageTemplate / breakpoint.
+         *
+         * The page fold is configurable in the `LayoutConfig` for each page layout.
+         */
+        PageLayoutService.prototype.getPageFoldSlot = function (pageTemplate) {
+            var _this = this;
+            return this.breakpointService.breakpoint$.pipe(operators.map(function (breakpoint) {
+                if (!_this.config.layoutSlots) {
+                    // no layout config available
+                    return null;
+                }
+                var pageTemplateConfig = _this.config.layoutSlots[pageTemplate];
+                var config = _this.getResponsiveSlotConfig(pageTemplateConfig, 'pageFold', breakpoint);
+                return config ? config.pageFold : null;
+            }));
+        };
+        PageLayoutService.prototype.resolveSlots = function (page, section, breakpoint) {
+            var config = this.getSlotConfig(page.template, 'slots', section, breakpoint);
+            if (config && config.slots) {
+                var pageSlots_1 = Object.keys(page.slots);
+                return config.slots.filter(function (slot) { return pageSlots_1.includes(slot); });
+            }
+            else if (!section) {
+                this.logMissingLayoutConfig(page);
+                return Object.keys(page.slots);
+            }
+            else {
+                this.logMissingLayoutConfig(page, section);
+                return [];
+            }
+        };
+        Object.defineProperty(PageLayoutService.prototype, "page$", {
+            get: function () {
+                return this.cms.getCurrentPage().pipe(operators.filter(function (page) { return !!page; }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PageLayoutService.prototype, "templateName$", {
+            get: function () {
+                return this.page$.pipe(operators.filter(function (page) { return !!page.template; }), operators.map(function (page) { return page.template; }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * load slots from the layout configuration. The breakpoint is used
+         * to load a specific configuration for the given breakpoint. If there's
+         * no configuration available for the given breakpoint the default slot
+         * configuration is returned.
+         */
+        PageLayoutService.prototype.getSlotConfig = function (templateUid, configAttribute, section, breakpoint) {
+            if (!this.config.layoutSlots) {
+                return null;
+            }
+            var pageTemplateConfig = this.config.layoutSlots[templateUid];
+            if (section) {
+                return this.getSlotConfigForSection(templateUid, configAttribute, section, breakpoint);
+            }
+            if (pageTemplateConfig) {
+                return this.getResponsiveSlotConfig(pageTemplateConfig, configAttribute, breakpoint);
+            }
+        };
+        PageLayoutService.prototype.getSlotConfigForSection = function (templateUid, configAttribute, section, breakpoint) {
+            var pageTemplateConfig = this.config.layoutSlots[templateUid];
+            if (!pageTemplateConfig) {
+                return null;
+            }
+            // if there's no section config on the page layout
+            // we fall back to the global section config
+            var sectionConfig = pageTemplateConfig[section]
+                ? pageTemplateConfig[section]
+                : this.config.layoutSlots[section];
+            if (!sectionConfig) {
+                return null;
+            }
+            var responsiveConfig = this.getResponsiveSlotConfig(sectionConfig, configAttribute, breakpoint);
+            if (responsiveConfig.hasOwnProperty(configAttribute)) {
+                return responsiveConfig;
+            }
+            else if (pageTemplateConfig[section].hasOwnProperty(configAttribute)) {
+                return pageTemplateConfig[section];
+            }
+            else if (this.config.layoutSlots[section]) {
+                return this.config.layoutSlots[section];
+            }
+        };
+        /**
+         * Returns a list of slots for a breakpoint specific configuratoin
+         * If there's no specific configuration for the breakpoint,
+         * the closest available configuration will be returned.
+         */
+        PageLayoutService.prototype.getResponsiveSlotConfig = function (layoutSlotConfig, configAttribute, breakpoint) {
+            var e_2, _a;
+            var slotConfig = layoutSlotConfig;
+            // fallback to default slot config
+            if (!layoutSlotConfig || !breakpoint) {
+                return slotConfig;
+            }
+            // we have a config for the specific breakpoint
+            if (layoutSlotConfig[breakpoint] &&
+                layoutSlotConfig[breakpoint].hasOwnProperty(configAttribute)) {
+                return layoutSlotConfig[breakpoint];
+            }
+            // find closest config
+            var all = this.breakpointService.breakpoints;
+            try {
+                for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var br = _c.value;
+                    if (layoutSlotConfig[br] &&
+                        layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
+                        slotConfig = layoutSlotConfig[br];
+                    }
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            return slotConfig;
+        };
+        /**
+         * In order to help developers, we print some detailed log information in
+         * case there's no layout configuration available for the given page template
+         * or section. Additionally, the slot positions are printed in the console
+         * in a format that can be copied / paste to the configuration.
+         */
+        PageLayoutService.prototype.logMissingLayoutConfig = function (page, section) {
+            if (!core.isDevMode()) {
+                return;
+            }
+            if (!this.logSlots[page.template]) {
+                // the info log is not printed in production
+                // tslint:disable-next-line: no-console
+                console.info("Available CMS page slots: '" + Object.keys(page.slots).join("','") + "'");
+                this.logSlots[page.template] = true;
+            }
+            var cacheKey = section || page.template;
+            if (!this.warnLogMessages[cacheKey]) {
+                console.warn("No layout config found for " + cacheKey + ", you can configure a 'LayoutConfig' to control the rendering of page slots.");
+                this.warnLogMessages[cacheKey] = true;
+            }
+        };
+        PageLayoutService.ctorParameters = function () { return [
+            { type: core$1.CmsService },
+            { type: LayoutConfig },
+            { type: BreakpointService },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
+        ]; };
+        PageLayoutService = __decorate([
+            core.Injectable(),
+            __param(3, core.Optional()),
+            __param(3, core.Inject(PAGE_LAYOUT_HANDLER))
+        ], PageLayoutService);
+        return PageLayoutService;
+    }());
+
+    var PageLayoutComponent = /** @class */ (function () {
+        function PageLayoutComponent(el, renderer, pageLayoutService) {
+            var _this = this;
+            this.el = el;
+            this.renderer = renderer;
+            this.pageLayoutService = pageLayoutService;
+            this.section$ = new rxjs.BehaviorSubject(undefined);
+            this.templateName$ = this.pageLayoutService
+                .templateName$;
+            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) { return (section ? rxjs.of(section) : _this.templateName$); }), operators.tap(function (name) {
+                _this.styleClass = name;
+            }));
+            this.slots$ = this.section$.pipe(operators.switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
+            this.pageFoldSlot$ = this.templateName$.pipe(operators.switchMap(function (templateName) {
+                return _this.pageLayoutService.getPageFoldSlot(templateName);
+            }), operators.distinctUntilChanged());
+        }
+        Object.defineProperty(PageLayoutComponent.prototype, "section", {
+            set: function (value) {
+                this.section$.next(value);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
+            set: function (cls) {
+                if (this.currentClass) {
+                    this.renderer.removeClass(this.el.nativeElement, this.currentClass);
+                }
+                this.renderer.addClass(this.el.nativeElement, cls);
+                this.currentClass = cls;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        PageLayoutComponent.ctorParameters = function () { return [
+            { type: core.ElementRef },
+            { type: core.Renderer2 },
+            { type: PageLayoutService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], PageLayoutComponent.prototype, "section", null);
+        PageLayoutComponent = __decorate([
+            core.Component({
+                selector: 'cx-page-layout',
+                template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], PageLayoutComponent);
+        return PageLayoutComponent;
+    }());
+
+    var PageLayoutModule = /** @class */ (function () {
+        function PageLayoutModule() {
+        }
+        PageLayoutModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule, OutletModule, PageSlotModule],
+                declarations: [PageLayoutComponent],
+                providers: [PageLayoutService],
+                exports: [PageLayoutComponent],
+            })
+        ], PageLayoutModule);
+        return PageLayoutModule;
+    }());
+
+    var PWAModuleConfig = /** @class */ (function () {
+        function PWAModuleConfig() {
+        }
+        return PWAModuleConfig;
+    }());
+    var defaultPWAModuleConfig = {
+        pwa: {
+            enabled: false,
+            addToHomeScreen: false,
+        },
+    };
+
+    var AddToHomeScreenService = /** @class */ (function () {
+        function AddToHomeScreenService(config, globalMessageService, winRef) {
+            this.config = config;
+            this.globalMessageService = globalMessageService;
+            this.winRef = winRef;
+            this.canPrompt = new rxjs.BehaviorSubject(false);
+            this.canPrompt$ = this.canPrompt.asObservable();
+            if (this.config.pwa.addToHomeScreen) {
+                this.init();
+            }
+        }
+        AddToHomeScreenService.prototype.init = function () {
+            var _this = this;
+            if (this.winRef.nativeWindow) {
+                this.winRef.nativeWindow.addEventListener('beforeinstallprompt', function (event) {
+                    event.preventDefault();
+                    _this.deferredEvent = event;
+                    _this.enableAddToHomeScreen();
+                });
+                this.winRef.nativeWindow.addEventListener('appinstalled', function () {
+                    _this.globalMessageService.add({ key: 'pwa.addedToHomeScreen' }, core$1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                    _this.disableAddToHomeScreen();
+                    _this.deferredEvent = null;
+                });
+            }
+        };
+        AddToHomeScreenService.prototype.enableAddToHomeScreen = function () {
+            this.canPrompt.next(true);
+        };
+        AddToHomeScreenService.prototype.disableAddToHomeScreen = function () {
+            this.canPrompt.next(false);
+        };
+        AddToHomeScreenService.prototype.firePrompt = function () {
+            if (this.deferredEvent) {
+                this.deferredEvent.prompt();
+            }
+        };
+        AddToHomeScreenService.ctorParameters = function () { return [
+            { type: PWAModuleConfig },
+            { type: core$1.GlobalMessageService },
+            { type: core$1.WindowRef }
+        ]; };
+        AddToHomeScreenService = __decorate([
+            core.Injectable()
+        ], AddToHomeScreenService);
+        return AddToHomeScreenService;
+    }());
+
+    var AddToHomeScreenComponent = /** @class */ (function () {
+        function AddToHomeScreenComponent(addToHomeScreenService) {
+            this.addToHomeScreenService = addToHomeScreenService;
+        }
+        AddToHomeScreenComponent.prototype.ngOnInit = function () {
+            this.canPrompt$ = this.addToHomeScreenService.canPrompt$;
+        };
+        AddToHomeScreenComponent.prototype.prompt = function () {
+            this.addToHomeScreenService.firePrompt();
+        };
+        return AddToHomeScreenComponent;
+    }());
+
+    var AddToHomeScreenBannerComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBannerComponent, _super);
+        function AddToHomeScreenBannerComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBannerComponent.ctorParameters = function () { return [
+            { type: AddToHomeScreenService }
+        ]; };
+        AddToHomeScreenBannerComponent = __decorate([
+            core.Component({
+                selector: 'cx-add-to-home-screen-banner',
+                template: "<div *ngIf=\"canPrompt$ | async\">\n  <div class=\"cx-add-to-home-screen-banner\">\n    <div class=\"cx-add-to-home-screen-banner-inner\">\n      <p>\n        {{ 'pwa.addToHomeScreenDescription' | cxTranslate }}\n      </p>\n      <ul>\n        <li>{{ 'pwa.noInstallationNeeded' | cxTranslate }}</li>\n        <li>{{ 'pwa.fastAccessToApplication' | cxTranslate }}</li>\n      </ul>\n      <button (click)=\"prompt()\" class=\"btn btn-primary\">\n        {{ 'pwa.addToHomeScreen' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n"
+            })
+        ], AddToHomeScreenBannerComponent);
+        return AddToHomeScreenBannerComponent;
+    }(AddToHomeScreenComponent));
+
+    var AddToHomeScreenBtnComponent = /** @class */ (function (_super) {
+        __extends(AddToHomeScreenBtnComponent, _super);
+        function AddToHomeScreenBtnComponent(addToHomeScreenService) {
+            var _this = _super.call(this, addToHomeScreenService) || this;
+            _this.addToHomeScreenService = addToHomeScreenService;
+            return _this;
+        }
+        AddToHomeScreenBtnComponent.ctorParameters = function () { return [
+            { type: AddToHomeScreenService }
+        ]; };
+        AddToHomeScreenBtnComponent = __decorate([
+            core.Component({
+                selector: 'cx-add-to-home-screen-btn',
+                template: "<span (click)=\"prompt()\">\n  <ng-content *ngIf=\"canPrompt$ | async\"></ng-content>\n</span>\n"
+            })
+        ], AddToHomeScreenBtnComponent);
+        return AddToHomeScreenBtnComponent;
+    }(AddToHomeScreenComponent));
+
+    function pwaConfigurationFactory(pwaConfig) {
+        return { enabled: (!core.isDevMode() && pwaConfig.pwa.enabled) || false };
+    }
+    function pwaFactory(addToHomeScreenService) {
+        var result = function () { return addToHomeScreenService; };
+        return result;
+    }
+    var PwaModule = /** @class */ (function () {
+        function PwaModule() {
+        }
+        PwaModule = __decorate([
+            core.NgModule({
+                imports: [
+                    common.CommonModule,
+                    serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
+                    core$1.I18nModule,
+                ],
+                providers: [
+                    core$1.provideDefaultConfig(defaultPWAModuleConfig),
+                    { provide: PWAModuleConfig, useExisting: core$1.Config },
+                    {
+                        provide: serviceWorker.SwRegistrationOptions,
+                        useFactory: pwaConfigurationFactory,
+                        deps: [core$1.Config],
+                    },
+                    {
+                        provide: core.APP_INITIALIZER,
+                        useFactory: pwaFactory,
+                        deps: [AddToHomeScreenService],
+                        multi: true,
+                    },
+                    AddToHomeScreenService,
+                ],
+                declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+                exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
+            })
+        ], PwaModule);
+        return PwaModule;
+    }());
+
+    var htmlLangProvider = {
+        provide: core.APP_INITIALIZER,
+        multi: true,
+        useFactory: setHtmlLangAttribute,
+        deps: [core$1.WindowRef, core$1.LanguageService],
+    };
+    /**
+     * Sets active language in <html lang="">
+     */
+    function setHtmlLangAttribute(winRef, languageService) {
+        var result = function () {
+            languageService.getActive().subscribe(function (lang) {
+                winRef.document.documentElement.lang = lang;
+            });
+        };
+        return result;
+    }
+
+    var SeoMetaService = /** @class */ (function () {
+        function SeoMetaService(ngTitle, ngMeta, pageMetaService) {
+            this.ngTitle = ngTitle;
+            this.ngMeta = ngMeta;
+            this.pageMetaService = pageMetaService;
+        }
+        SeoMetaService.prototype.init = function () {
+            var _this = this;
+            this.pageMetaService
+                .getMeta()
+                .pipe(operators.filter(Boolean))
+                .subscribe(function (meta) { return (_this.meta = meta); });
+        };
+        Object.defineProperty(SeoMetaService.prototype, "meta", {
+            set: function (meta) {
+                this.title = meta.title;
+                this.description = meta.description;
+                this.image = meta.image;
+                this.robots = meta.robots || [core$1.PageRobotsMeta.INDEX, core$1.PageRobotsMeta.FOLLOW];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SeoMetaService.prototype, "title", {
+            set: function (title) {
+                this.ngTitle.setTitle(title || '');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SeoMetaService.prototype, "description", {
+            set: function (value) {
+                this.addTag({ name: 'description', content: value });
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SeoMetaService.prototype, "image", {
+            set: function (imageUrl) {
+                if (imageUrl) {
+                    this.addTag({ name: 'og:image', content: imageUrl });
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SeoMetaService.prototype, "robots", {
+            set: function (value) {
+                if (value) {
+                    this.addTag({ name: 'robots', content: value.join(', ') });
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SeoMetaService.prototype.addTag = function (meta) {
+            if (meta.content) {
+                this.ngMeta.updateTag(meta);
+            }
+        };
+        SeoMetaService.ctorParameters = function () { return [
+            { type: platformBrowser.Title },
+            { type: platformBrowser.Meta },
+            { type: core$1.PageMetaService }
+        ]; };
+        SeoMetaService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SeoMetaService_Factory() { return new SeoMetaService(core["ɵɵinject"](platformBrowser.Title), core["ɵɵinject"](platformBrowser.Meta), core["ɵɵinject"](core$1.PageMetaService)); }, token: SeoMetaService, providedIn: "root" });
+        SeoMetaService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SeoMetaService);
+        return SeoMetaService;
+    }());
+
+    var JsonLdScriptFactory = /** @class */ (function () {
+        function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer) {
+            this.platformId = platformId;
+            this.winRef = winRef;
+            this.rendererFactory = rendererFactory;
+            this.sanitizer = sanitizer;
+        }
+        JsonLdScriptFactory.prototype.build = function (schema) {
+            if (schema && this.isJsonLdRequired()) {
+                this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
+            }
+        };
+        /**
+         * Only return schema data in case of SSR or development mode,
+         * to not waste memory unnecessary.
+         */
+        JsonLdScriptFactory.prototype.isJsonLdRequired = function () {
+            return !common.isPlatformBrowser(this.platformId) || core.isDevMode();
+        };
+        JsonLdScriptFactory.prototype.createJsonLdScriptElement = function () {
+            var id = 'json-ld';
+            var scriptElement = (this.winRef.document.getElementById(id));
+            if (!scriptElement) {
+                var renderer = this.rendererFactory.createRenderer(null, null);
+                var script = renderer.createElement('script');
+                script.id = id;
+                script.type = 'application/ld+json';
+                renderer.appendChild(this.winRef.document.body, script);
+                scriptElement = script;
+            }
+            return scriptElement;
+        };
+        /**
+         * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
+         *
+         * The given schema is not trusted, as malicious code could be injected (XSS)
+         * into the json-ld script.
+         */
+        JsonLdScriptFactory.prototype.sanitize = function (schema) {
+            var _this = this;
+            return JSON.stringify(schema, function (_key, value) {
+                return typeof value === 'string'
+                    ? _this.sanitizer.sanitize(core.SecurityContext.HTML, value)
+                    : value;
+            });
+        };
+        JsonLdScriptFactory.ctorParameters = function () { return [
+            { type: String, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+            { type: core$1.WindowRef },
+            { type: core.RendererFactory2 },
+            { type: platformBrowser.DomSanitizer }
+        ]; };
+        JsonLdScriptFactory.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(core["ɵɵinject"](core.PLATFORM_ID), core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](core.RendererFactory2), core["ɵɵinject"](platformBrowser.DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
+        JsonLdScriptFactory = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(0, core.Inject(core.PLATFORM_ID))
+        ], JsonLdScriptFactory);
+        return JsonLdScriptFactory;
+    }());
+
+    /**
+     * Low level directive that adds a json-ld script tag to the component.
+     * This code bypasses the strict XSS security, as otherwise we're not able
+     * to append a script tag with JS inside.
+     */
+    var JsonLdDirective = /** @class */ (function () {
+        function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
+            this.jsonLdScriptFactory = jsonLdScriptFactory;
+            this.sanitizer = sanitizer;
+        }
+        Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
+            set: function (schema) {
+                this.writeJsonLd(schema);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        JsonLdDirective.prototype.writeJsonLd = function (schema) {
+            if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
+                var sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
+                var html = "<script type=\"application/ld+json\">" + sanitizedSchema + "</script>";
+                this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+            }
+        };
+        JsonLdDirective.ctorParameters = function () { return [
+            { type: JsonLdScriptFactory },
+            { type: platformBrowser.DomSanitizer }
+        ]; };
+        __decorate([
+            core.Input()
+        ], JsonLdDirective.prototype, "cxJsonLd", null);
+        __decorate([
+            core.HostBinding('innerHTML')
+        ], JsonLdDirective.prototype, "jsonLD", void 0);
+        JsonLdDirective = __decorate([
+            core.Directive({
+                selector: '[cxJsonLd]',
+            })
+        ], JsonLdDirective);
+        return JsonLdDirective;
+    }());
+
+    /**
+     * Injection token to extend schema builders for adding structural data (json-ld).
+     *
+     * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
+     * lowever level builder to further extend the schema.
+     */
+    var SCHEMA_BUILDER = new core.InjectionToken('SchemaBuilderToken');
+    /**
+     * Injection token to add specific json-ld builders for product related schema's.
+     * See see https://schema.org/product for more information.
+     */
+    var JSONLD_PRODUCT_BUILDER = new core.InjectionToken('JsonLdProductBuilderToken');
+
+    var StructuredDataFactory = /** @class */ (function () {
+        function StructuredDataFactory(scriptBuilder, builders) {
+            this.scriptBuilder = scriptBuilder;
+            this.builders = builders;
+        }
+        StructuredDataFactory.prototype.build = function () {
+            var _this = this;
+            this.collectSchemas().subscribe(function (schema) {
+                _this.scriptBuilder.build(schema);
+            });
+        };
+        StructuredDataFactory.prototype.collectSchemas = function () {
+            if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
+                return rxjs.of();
+            }
+            return rxjs.combineLatest(this.builders.map(function (builder) { return builder.build(); })).pipe();
+        };
+        StructuredDataFactory.ctorParameters = function () { return [
+            { type: JsonLdScriptFactory },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [SCHEMA_BUILDER,] }] }
+        ]; };
+        StructuredDataFactory.ɵprov = core["ɵɵdefineInjectable"]({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(core["ɵɵinject"](JsonLdScriptFactory), core["ɵɵinject"](SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
+        StructuredDataFactory = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(1, core.Optional()),
+            __param(1, core.Inject(SCHEMA_BUILDER))
+        ], StructuredDataFactory);
+        return StructuredDataFactory;
+    }());
+
+    /**
+     * Factory to build the structure data
+     * without any interaction with the UI.
+     */
+    function getStructuredDataFactory(injector) {
+        var result = function () {
+            var factory = injector.get(StructuredDataFactory);
+            factory.build();
+        };
+        return result;
+    }
+    var StructuredDataModule = /** @class */ (function () {
+        function StructuredDataModule() {
+        }
+        StructuredDataModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule],
+                declarations: [JsonLdDirective],
+                exports: [JsonLdDirective],
+                providers: [
+                    {
+                        provide: core.APP_INITIALIZER,
+                        useFactory: getStructuredDataFactory,
+                        deps: [core.Injector],
+                        multi: true,
+                    },
+                ],
+            })
+        ], StructuredDataModule);
+        return StructuredDataModule;
+    }());
+
+    function initSeoService(injector) {
+        var result = function () {
+            var service = injector.get(SeoMetaService);
+            service.init();
+        };
+        return result;
+    }
+    var SeoModule = /** @class */ (function () {
+        function SeoModule() {
+        }
+        SeoModule = __decorate([
+            core.NgModule({
+                imports: [StructuredDataModule],
+                providers: [
+                    {
+                        provide: core.APP_INITIALIZER,
+                        useFactory: initSeoService,
+                        deps: [core.Injector],
+                        multi: true,
+                    },
+                    htmlLangProvider,
+                ],
+            })
+        ], SeoModule);
+        return SeoModule;
     }());
 
     var ConsentManagementFormComponent = /** @class */ (function () {
@@ -11084,6 +10577,837 @@
             })
         ], MainModule);
         return MainModule;
+    }());
+
+    /**
+     * Please don't put that service in public API.
+     * */
+    var CmsMappingService = /** @class */ (function () {
+        function CmsMappingService(config, platformId) {
+            this.config = config;
+            this.platformId = platformId;
+        }
+        CmsMappingService.prototype.isComponentEnabled = function (flexType) {
+            var isSSR = common.isPlatformServer(this.platformId);
+            var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
+                .disableSSR;
+            return !(isSSR && isComponentDisabledInSSR);
+        };
+        CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
+            var e_1, _a;
+            var routes = [];
+            try {
+                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                    var componentType = componentTypes_1_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return routes;
+        };
+        CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
+            var e_2, _a;
+            var guards = new Set();
+            try {
+                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                    var componentType = componentTypes_2_1.value;
+                    this.getGuardsForComponent(componentType).forEach(function (guard) {
+                        return guards.add(guard);
+                    });
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            return Array.from(guards);
+        };
+        CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
+            var e_3, _a;
+            var i18nKeys = new Set();
+            try {
+                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                    var componentType = componentTypes_3_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        this.getI18nKeysForComponent(componentType).forEach(function (key) {
+                            return i18nKeys.add(key);
+                        });
+                    }
+                }
+            }
+            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            finally {
+                try {
+                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+                }
+                finally { if (e_3) throw e_3.error; }
+            }
+            return Array.from(i18nKeys);
+        };
+        CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.childRoutes) || [];
+        };
+        CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.guards) || [];
+        };
+        CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
+            var mappingConfig = this.config.cmsComponents[componentType];
+            return (mappingConfig && mappingConfig.i18nKeys) || [];
+        };
+        CmsMappingService.ctorParameters = function () { return [
+            { type: core$1.CmsConfig },
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        ]; };
+        CmsMappingService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+        CmsMappingService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(1, core.Inject(core.PLATFORM_ID))
+        ], CmsMappingService);
+        return CmsMappingService;
+    }());
+
+    /**
+     * Please don't put that service in public API.
+     * */
+    var CmsGuardsService = /** @class */ (function () {
+        function CmsGuardsService(cmsMapping, injector) {
+            this.cmsMapping = cmsMapping;
+            this.injector = injector;
+        }
+        CmsGuardsService.prototype.cmsPageCanActivate = function (componentTypes, route, state) {
+            var _this = this;
+            var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+            if (guards.length) {
+                var canActivateObservables = guards.map(function (guardClass) {
+                    var guard = _this.injector.get(guardClass, null);
+                    if (isCanActivate(guard)) {
+                        return wrapIntoObservable(guard.canActivate(route, state)).pipe(operators.first());
+                    }
+                    else {
+                        throw new Error('Invalid CanActivate guard in cmsMapping');
+                    }
+                });
+                return rxjs.concat.apply(void 0, __spread(canActivateObservables)).pipe(operators.skipWhile(function (canActivate) { return canActivate === true; }), operators.endWith(true), operators.first());
+            }
+            else {
+                return rxjs.of(true);
+            }
+        };
+        CmsGuardsService.ctorParameters = function () { return [
+            { type: CmsMappingService },
+            { type: core.Injector }
+        ]; };
+        CmsGuardsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+        CmsGuardsService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsGuardsService);
+        return CmsGuardsService;
+    }());
+    function wrapIntoObservable(value) {
+        if (rxjs.isObservable(value)) {
+            return value;
+        }
+        if (isPromise(value)) {
+            return rxjs.from(Promise.resolve(value));
+        }
+        return rxjs.of(value);
+    }
+    function isPromise(obj) {
+        return !!obj && typeof obj.then === 'function';
+    }
+    function isCanActivate(guard) {
+        return guard && isFunction(guard.canActivate);
+    }
+    function isFunction(v) {
+        return typeof v === 'function';
+    }
+
+    /**
+     * Please don't put that service in public API.
+     * */
+    var CmsI18nService = /** @class */ (function () {
+        function CmsI18nService(cmsMapping, translation, translationChunk) {
+            this.cmsMapping = cmsMapping;
+            this.translation = translation;
+            this.translationChunk = translationChunk;
+        }
+        CmsI18nService.prototype.loadChunksForComponents = function (componentTypes) {
+            var e_1, _a;
+            var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+            var i18nChunks = new Set();
+            try {
+                for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
+                    var key = i18nKeys_1_1.value;
+                    i18nChunks.add(this.translationChunk.getChunkNameForKey(key));
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (i18nKeys_1_1 && !i18nKeys_1_1.done && (_a = i18nKeys_1.return)) _a.call(i18nKeys_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            this.translation.loadChunks(Array.from(i18nChunks));
+        };
+        CmsI18nService.ctorParameters = function () { return [
+            { type: CmsMappingService },
+            { type: core$1.TranslationService },
+            { type: core$1.TranslationChunkService }
+        ]; };
+        CmsI18nService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core$1.TranslationService), core["ɵɵinject"](core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+        CmsI18nService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsI18nService);
+        return CmsI18nService;
+    }());
+
+    /**
+     * Please don't put that service in public API.
+     * */
+    var CmsRoutesService = /** @class */ (function () {
+        function CmsRoutesService(router, cmsMapping) {
+            this.router = router;
+            this.cmsMapping = cmsMapping;
+        }
+        CmsRoutesService.prototype.cmsRouteExist = function (url) {
+            var isCmsDrivenRoute = url.startsWith('/');
+            if (!isCmsDrivenRoute) {
+                return false;
+            }
+            var routePath = url.substr(1);
+            return (isCmsDrivenRoute &&
+                !!this.router.config.find(function (route) {
+                    return route.data && route.data.cxCmsRouteContext && route.path === routePath;
+                }));
+        };
+        /**
+         * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.
+         *
+         * Will return true, when logic wont have to modify routing (so canActivate could be easily resolved to true)
+         * or will return false, when routing configuration was updated and redirection to newly generated route was initiated.
+         *
+         * @param pageContext
+         * @param currentUrl
+         */
+        CmsRoutesService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+            var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+            if (componentRoutes.length) {
+                if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+                    this.router.navigateByUrl(currentUrl);
+                    return false;
+                }
+            }
+            return true;
+        };
+        CmsRoutesService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
+            if (pageContext.type === core$1.PageType.CONTENT_PAGE &&
+                pageLabel.startsWith('/') &&
+                pageLabel.length > 1) {
+                var newRoute = {
+                    path: pageLabel.substr(1),
+                    component: PageLayoutComponent,
+                    children: routes,
+                    data: {
+                        cxCmsRouteContext: {
+                            type: pageContext.type,
+                            id: pageLabel,
+                        },
+                    },
+                };
+                this.router.resetConfig(__spread([newRoute], this.router.config));
+                return true;
+            }
+            return false;
+        };
+        CmsRoutesService.ctorParameters = function () { return [
+            { type: router.Router },
+            { type: CmsMappingService }
+        ]; };
+        CmsRoutesService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+        CmsRoutesService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsRoutesService);
+        return CmsRoutesService;
+    }());
+
+    var CmsPageGuard = /** @class */ (function () {
+        function CmsPageGuard(
+        // expose as `protected` only services from public API:
+        routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
+            this.routingService = routingService;
+            this.cmsService = cmsService;
+            this.cmsRoutes = cmsRoutes;
+            this.cmsI18n = cmsI18n;
+            this.cmsGuards = cmsGuards;
+            this.semanticPathService = semanticPathService;
+            this.protectedRoutesGuard = protectedRoutesGuard;
+        }
+        CmsPageGuard.prototype.canActivate = function (route, state) {
+            var _this = this;
+            /**
+             * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
+             */
+            return this.protectedRoutesGuard
+                ? this.protectedRoutesGuard
+                    .canActivate(route)
+                    .pipe(operators.switchMap(function (result) {
+                    return result ? _this.getCmsPage(route, state) : rxjs.of(result);
+                }))
+                : this.getCmsPage(route, state);
+        };
+        CmsPageGuard.prototype.getCmsPage = function (route, state) {
+            var _this = this;
+            return this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
+                return _this.cmsService
+                    .getPage(pageContext, true)
+                    .pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
+            }), operators.switchMap(function (_a) {
+                var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
+                return pageData
+                    ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
+                    : _this.handleNotFoundPage(pageContext, route, state);
+            }));
+        };
+        CmsPageGuard.prototype.resolveCmsPageLogic = function (pageContext, pageData, route, state) {
+            var _this = this;
+            return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.take(1), operators.switchMap(function (componentTypes) {
+                return _this.cmsGuards
+                    .cmsPageCanActivate(componentTypes, route, state)
+                    .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
+            }), operators.tap(function (_a) {
+                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                if (canActivate === true) {
+                    _this.cmsI18n.loadChunksForComponents(componentTypes);
+                }
+            }), operators.map(function (_a) {
+                var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                var pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
+                if (canActivate === true &&
+                    !route.data.cxCmsRouteContext &&
+                    !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                    return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
+                }
+                return canActivate;
+            }));
+        };
+        CmsPageGuard.prototype.handleNotFoundPage = function (pageContext, route, state) {
+            var _this = this;
+            var notFoundCmsPageContext = {
+                type: core$1.PageType.CONTENT_PAGE,
+                id: this.semanticPathService.get('notFound'),
+            };
+            return this.cmsService.getPage(notFoundCmsPageContext).pipe(operators.switchMap(function (notFoundPage) {
+                if (notFoundPage) {
+                    return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap(function (notFoundIndex) {
+                        _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                    }), operators.switchMap(function (notFoundIndex) {
+                        return _this.cmsService.getPageIndex(pageContext).pipe(
+                        // we have to wait for page index update
+                        operators.filter(function (index) { return index === notFoundIndex; }));
+                    }), operators.switchMap(function () {
+                        return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
+                    }));
+                }
+                return rxjs.of(false);
+            }));
+        };
+        CmsPageGuard.guardName = 'CmsPageGuard';
+        CmsPageGuard.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.CmsService },
+            { type: CmsRoutesService },
+            { type: CmsI18nService },
+            { type: CmsGuardsService },
+            { type: core$1.SemanticPathService },
+            { type: core$1.ProtectedRoutesGuard }
+        ]; };
+        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService), core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+        CmsPageGuard = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsPageGuard);
+        return CmsPageGuard;
+    }());
+
+    var cmsRoute = {
+        path: '**',
+        canActivate: [CmsPageGuard],
+        component: PageLayoutComponent,
+    };
+    function addCmsRoute(injector) {
+        var result = function () {
+            var router$1 = injector.get(router.Router);
+            router$1.config.push(cmsRoute);
+        };
+        return result;
+    }
+
+    var ɵ0 = addCmsRoute;
+    var CmsRouteModule = /** @class */ (function () {
+        function CmsRouteModule() {
+        }
+        CmsRouteModule = __decorate([
+            core.NgModule({
+                providers: [
+                    {
+                        provide: core.APP_INITIALIZER,
+                        multi: true,
+                        deps: [core.Injector],
+                        useFactory: ɵ0,
+                    },
+                ],
+            })
+        ], CmsRouteModule);
+        return CmsRouteModule;
+    }());
+
+    var defaultStorefrontRoutesConfig = {
+        home: { paths: [''] },
+        notFound: { paths: ['not-found'] },
+        cart: { paths: ['cart'] },
+        // semantic links for login related pages
+        login: { paths: ['login'], protected: false },
+        register: { paths: ['login/register'], protected: false },
+        forgotPassword: { paths: ['login/forgot-password'], protected: false },
+        resetPassword: { paths: ['login/pw/change'], protected: false },
+        logout: { paths: ['logout'] },
+        checkoutLogin: { paths: ['checkout-login'] },
+        checkout: { paths: ['checkout'] },
+        checkoutShippingAddress: { paths: ['checkout/shipping-address'] },
+        checkoutDeliveryMode: { paths: ['checkout/delivery-mode'] },
+        checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
+        checkoutReviewOrder: { paths: ['checkout/review-order'] },
+        orderConfirmation: { paths: ['order-confirmation'] },
+        // plp routes
+        search: { paths: ['search/:query'] },
+        category: {
+            paths: ['category/:categoryCode'],
+            paramsMapping: { categoryCode: 'code' },
+        },
+        brand: { paths: ['Brands/:brandName/c/:brandCode'] },
+        // pdp routes
+        product: {
+            paths: ['product/:productCode/:name'],
+            paramsMapping: { productCode: 'code' },
+        },
+        termsAndConditions: { paths: ['terms-and-conditions'] },
+        orders: {
+            paths: ['my-account/orders'],
+        },
+        orderDetails: {
+            paths: ['my-account/order/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderGuest: {
+            paths: ['guest/order/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderReturn: {
+            paths: ['my-account/order/return/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderReturnConfirmation: {
+            paths: ['my-account/order/return/confirmation/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderCancel: {
+            paths: ['my-account/order/cancel/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        orderCancelConfirmation: {
+            paths: ['my-account/order/cancel/confirmation/:orderCode'],
+            paramsMapping: { orderCode: 'code' },
+        },
+        returnRequestDetails: {
+            paths: ['my-account/return-request/:returnCode'],
+            paramsMapping: { returnCode: 'rma' },
+        },
+        coupons: { paths: ['my-account/coupons'] },
+        couponClaim: {
+            paths: ['my-account/coupon/claim/:couponCode'],
+            paramsMapping: { couponCode: 'code' },
+        },
+    };
+    var defaultRoutingConfig = {
+        routing: {
+            routes: defaultStorefrontRoutesConfig,
+        },
+    };
+
+    var RoutingModule = /** @class */ (function () {
+        function RoutingModule() {
+        }
+        RoutingModule_1 = RoutingModule;
+        RoutingModule.forRoot = function () {
+            return {
+                ngModule: RoutingModule_1,
+                providers: [core$1.provideDefaultConfig(defaultRoutingConfig)],
+            };
+        };
+        var RoutingModule_1;
+        RoutingModule = RoutingModule_1 = __decorate([
+            core.NgModule({
+                imports: [core$1.RoutingModule.forRoot(), CmsRouteModule],
+            })
+        ], RoutingModule);
+        return RoutingModule;
+    }());
+
+    /**
+     * Matches the pattern '[ ** / ] marker / :paramName'
+     *
+     * @param marker phrase that indicates the start of the match
+     * @param paramName name of the parameter present after the marker
+     * @param precedingParamName name of the parameter for every preceding url segment
+     *        i.e. `param` will result in `param0`, `param1`, ...
+     */
+    function getSuffixUrlMatcher(_a) {
+        var marker = _a.marker, paramName = _a.paramName, precedingParamName = _a.precedingParamName;
+        precedingParamName = precedingParamName || 'param';
+        var matcher = function suffixUrlMatcher(segments) {
+            var _a;
+            var markerIndex = findLastIndex(segments, function (_a) {
+                var path = _a.path;
+                return path === marker;
+            });
+            var isMarkerLastSegment = markerIndex === segments.length - 1;
+            if (markerIndex === -1 || isMarkerLastSegment) {
+                return null;
+            }
+            var paramIndex = markerIndex + 1;
+            var posParams = (_a = {},
+                _a[paramName] = segments[paramIndex],
+                _a);
+            for (var i = 0; i < markerIndex; i++) {
+                posParams["" + precedingParamName + i] = segments[i];
+            }
+            return { consumed: segments.slice(0, paramIndex + 1), posParams: posParams };
+        };
+        if (core.isDevMode()) {
+            matcher['_suffixRouteConfig'] = { marker: marker, paramName: paramName, precedingParamName: precedingParamName }; // property added for easier debugging of routes
+        }
+        return matcher;
+    }
+    function findLastIndex(elements, predicate) {
+        for (var index = elements.length - 1; index >= 0; index--) {
+            if (predicate(elements[index])) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    var BreadcrumbSchemaBuilder = /** @class */ (function () {
+        function BreadcrumbSchemaBuilder(pageMetaService) {
+            this.pageMetaService = pageMetaService;
+        }
+        BreadcrumbSchemaBuilder.prototype.build = function () {
+            var _this = this;
+            return this.pageMetaService
+                .getMeta()
+                .pipe(operators.map(function (pageMeta) { return _this.collect(pageMeta); }));
+        };
+        BreadcrumbSchemaBuilder.prototype.collect = function (pageMeta) {
+            if (!(pageMeta === null || pageMeta === void 0 ? void 0 : pageMeta.breadcrumbs)) {
+                return;
+            }
+            var crumbs = pageMeta.breadcrumbs.map(function (crumb, index) {
+                return {
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    item: {
+                        '@id': crumb.link,
+                        name: crumb.label,
+                    },
+                };
+            });
+            if (pageMeta.title) {
+                crumbs.push({
+                    '@type': 'ListItem',
+                    position: crumbs.length + 1,
+                    item: {
+                        '@id': pageMeta.title,
+                        name: pageMeta.title,
+                    },
+                });
+            }
+            return {
+                '@context': 'http://schema.org',
+                '@type': 'BreadcrumbList',
+                itemListElement: crumbs,
+            };
+        };
+        BreadcrumbSchemaBuilder.ctorParameters = function () { return [
+            { type: core$1.PageMetaService }
+        ]; };
+        BreadcrumbSchemaBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function BreadcrumbSchemaBuilder_Factory() { return new BreadcrumbSchemaBuilder(core["ɵɵinject"](core$1.PageMetaService)); }, token: BreadcrumbSchemaBuilder, providedIn: "root" });
+        BreadcrumbSchemaBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], BreadcrumbSchemaBuilder);
+        return BreadcrumbSchemaBuilder;
+    }());
+
+    /**
+     * Builds the basic structured data for the product, see https://schema.org/product.
+     * This builder includes data for sku number, name, description, brand and main image.
+     */
+    var JsonLdBaseProductBuilder = /** @class */ (function () {
+        function JsonLdBaseProductBuilder() {
+        }
+        JsonLdBaseProductBuilder.prototype.build = function (product) {
+            return rxjs.of(__assign(__assign(__assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
+        };
+        JsonLdBaseProductBuilder.prototype.getProductBase = function (product) {
+            var result = { sku: product.code };
+            if (product.name) {
+                result.name = product.name;
+            }
+            if (product.summary) {
+                result.description = product.summary;
+            }
+            return result;
+        };
+        JsonLdBaseProductBuilder.prototype.getProductImage = function (product) {
+            return product.images &&
+                product.images.PRIMARY &&
+                product.images.PRIMARY['zoom'] &&
+                product.images.PRIMARY['zoom'].url
+                ? {
+                    image: product.images.PRIMARY['zoom'].url,
+                }
+                : {};
+        };
+        JsonLdBaseProductBuilder.prototype.getProductBrand = function (product) {
+            return product['manufacturer']
+                ? {
+                    brand: product['manufacturer'],
+                }
+                : null;
+        };
+        JsonLdBaseProductBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
+        JsonLdBaseProductBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], JsonLdBaseProductBuilder);
+        return JsonLdBaseProductBuilder;
+    }());
+
+    /**
+     * Builds the structured data for the product offer, see https://schema.org/offers.
+     * The data includes the price, currency and availability level.
+     */
+    var JsonLdProductOfferBuilder = /** @class */ (function () {
+        function JsonLdProductOfferBuilder() {
+        }
+        JsonLdProductOfferBuilder.prototype.build = function (product) {
+            var schema = { '@type': 'Offer' };
+            if (product.price) {
+                if (product.price.value) {
+                    schema.price = product.price.value;
+                }
+                if (product.price.currencyIso) {
+                    schema.priceCurrency = product.price.currencyIso;
+                }
+            }
+            if (product.stock && product.stock.stockLevelStatus) {
+                schema.availability =
+                    product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
+            }
+            return rxjs.of({
+                offers: schema,
+            });
+        };
+        JsonLdProductOfferBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
+        JsonLdProductOfferBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], JsonLdProductOfferBuilder);
+        return JsonLdProductOfferBuilder;
+    }());
+
+    /**
+     * Builds the structured data for the product reviews, see https://schema.org/Review.
+     * The data includes the aggregated product rating and the individual reviews.
+     */
+    var JsonLdProductReviewBuilder = /** @class */ (function () {
+        function JsonLdProductReviewBuilder(reviewService) {
+            this.reviewService = reviewService;
+        }
+        JsonLdProductReviewBuilder.prototype.build = function (product) {
+            var _this = this;
+            return this.reviewService.getByProductCode(product.code).pipe(operators.filter(Boolean), operators.map(function (reviews) {
+                return {
+                    aggregateRating: _this.buildAggregatedReviews(product, reviews),
+                    review: reviews.map(function (review) { return _this.buildReviews(review); }),
+                };
+            }));
+        };
+        JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = function (product, reviews) {
+            var aggregated = {
+                '@type': 'AggregateRating',
+            };
+            if (product.averageRating) {
+                aggregated.ratingValue = product.averageRating;
+            }
+            if (reviews) {
+                aggregated.ratingCount = reviews.filter(function (rev) { return !!rev.rating; }).length;
+                aggregated.reviewCount = reviews.filter(function (rev) { return !!rev.comment; }).length;
+            }
+            return aggregated;
+        };
+        JsonLdProductReviewBuilder.prototype.buildReviews = function (review) {
+            var reviewSchema = {
+                '@type': 'review',
+            };
+            if (review.principal && review.principal.name) {
+                reviewSchema.author = review.principal.name;
+            }
+            if (review.date) {
+                var date = new Date(review.date);
+                reviewSchema.datePublished = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            }
+            if (review.headline) {
+                reviewSchema.name = review.headline;
+            }
+            if (review.comment) {
+                reviewSchema.description = review.comment;
+            }
+            if (review.rating) {
+                reviewSchema.reviewRating = {
+                    '@type': 'Rating',
+                    ratingValue: review.rating.toString(),
+                };
+            }
+            return reviewSchema;
+        };
+        JsonLdProductReviewBuilder.ctorParameters = function () { return [
+            { type: core$1.ProductReviewService }
+        ]; };
+        JsonLdProductReviewBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(core["ɵɵinject"](core$1.ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+        JsonLdProductReviewBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], JsonLdProductReviewBuilder);
+        return JsonLdProductReviewBuilder;
+    }());
+
+    /**
+     * Adds the minimal structured data for the product, see https://schema.org/product.
+     * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
+     * using the `JSONLD_PRODUCT_BUILDER` token.
+     */
+    var ProductSchemaBuilder = /** @class */ (function () {
+        function ProductSchemaBuilder(currentProduct, builders) {
+            this.currentProduct = currentProduct;
+            this.builders = builders;
+        }
+        ProductSchemaBuilder.prototype.build = function () {
+            var _this = this;
+            return this.currentProduct.getProduct().pipe(operators.switchMap(function (product) {
+                if (product) {
+                    return rxjs.combineLatest(_this.collect(product)).pipe(operators.map(function (res) { return Object.assign.apply(Object, __spread([{}], res)); }));
+                }
+                return rxjs.of({});
+            }));
+        };
+        ProductSchemaBuilder.prototype.collect = function (product) {
+            if (!product || !product.code) {
+                return [];
+            }
+            var builders = this.builders
+                ? this.builders.map(function (builder) { return builder.build(product); })
+                : [];
+            return __spread([
+                rxjs.of({
+                    '@context': 'http://schema.org',
+                    '@type': 'Product',
+                })
+            ], builders);
+        };
+        ProductSchemaBuilder.ctorParameters = function () { return [
+            { type: CurrentProductService },
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [JSONLD_PRODUCT_BUILDER,] }] }
+        ]; };
+        ProductSchemaBuilder.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ProductSchemaBuilder_Factory() { return new ProductSchemaBuilder(core["ɵɵinject"](CurrentProductService), core["ɵɵinject"](JSONLD_PRODUCT_BUILDER, 8)); }, token: ProductSchemaBuilder, providedIn: "root" });
+        ProductSchemaBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(1, core.Optional()),
+            __param(1, core.Inject(JSONLD_PRODUCT_BUILDER))
+        ], ProductSchemaBuilder);
+        return ProductSchemaBuilder;
+    }());
+
+    /**
+     * Provides several standard json-ld builders that contribute
+     * to colleting and building json-ld data.
+     */
+    var JsonLdBuilderModule = /** @class */ (function () {
+        function JsonLdBuilderModule() {
+        }
+        JsonLdBuilderModule = __decorate([
+            core.NgModule({
+                providers: [
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: ProductSchemaBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: SCHEMA_BUILDER,
+                        useExisting: BreadcrumbSchemaBuilder,
+                        multi: true,
+                    },
+                    // lower level json-ld builder classes offering fine-graiend control
+                    // for product related schema's
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdBaseProductBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductOfferBuilder,
+                        multi: true,
+                    },
+                    {
+                        provide: JSONLD_PRODUCT_BUILDER,
+                        useExisting: JsonLdProductReviewBuilder,
+                        multi: true,
+                    },
+                ],
+            })
+        ], JsonLdBuilderModule);
+        return JsonLdBuilderModule;
     }());
 
     /**
@@ -19112,6 +19436,7 @@
     exports.CouponDialogComponent = CouponDialogComponent;
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
+    exports.DEFAULT_LAUNCH_CONFIG = DEFAULT_LAUNCH_CONFIG;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
@@ -19134,6 +19459,7 @@
     exports.IconConfig = IconConfig;
     exports.IconLoaderService = IconLoaderService;
     exports.IconModule = IconModule;
+    exports.InlineRenderStrategy = InlineRenderStrategy;
     exports.ItemCounterComponent = ItemCounterComponent;
     exports.ItemCounterModule = ItemCounterModule;
     exports.JSONLD_PRODUCT_BUILDER = JSONLD_PRODUCT_BUILDER;
@@ -19146,6 +19472,10 @@
     exports.KeyboardFocusModule = KeyboardFocusModule;
     exports.KeyboardFocusService = KeyboardFocusService;
     exports.LanguageCurrencyComponent = LanguageCurrencyComponent;
+    exports.LaunchConfig = LaunchConfig;
+    exports.LaunchDialogModule = LaunchDialogModule;
+    exports.LaunchDialogService = LaunchDialogService;
+    exports.LaunchRenderStrategy = LaunchRenderStrategy;
     exports.LayoutConfig = LayoutConfig;
     exports.LayoutModule = LayoutModule;
     exports.LinkComponent = LinkComponent;
@@ -19206,6 +19536,7 @@
     exports.OutletModule = OutletModule;
     exports.OutletRefDirective = OutletRefDirective;
     exports.OutletRefModule = OutletRefModule;
+    exports.OutletRenderStrategy = OutletRenderStrategy;
     exports.OutletService = OutletService;
     exports.PAGE_LAYOUT_HANDLER = PAGE_LAYOUT_HANDLER;
     exports.PLPAccessibilityLayoutConfig = PLPAccessibilityLayoutConfig;
@@ -19288,6 +19619,7 @@
     exports.ReviewSubmitComponent = ReviewSubmitComponent;
     exports.ReviewSubmitModule = ReviewSubmitModule;
     exports.RoutingModule = RoutingModule;
+    exports.RoutingRenderStrategy = RoutingRenderStrategy;
     exports.SCHEMA_BUILDER = SCHEMA_BUILDER;
     exports.SaveForLaterComponent = SaveForLaterComponent;
     exports.SaveForLaterModule = SaveForLaterModule;
@@ -19395,16 +19727,17 @@
     exports.ɵbl = CmsI18nService;
     exports.ɵbm = CmsGuardsService;
     exports.ɵbn = ReturnRequestService;
-    exports.ɵbo = AddToHomeScreenService;
-    exports.ɵbp = MyCouponsComponentService;
-    exports.ɵbq = addCmsRoute;
-    exports.ɵbr = defaultStorefrontRoutesConfig;
-    exports.ɵbs = defaultRoutingConfig;
-    exports.ɵbt = htmlLangProvider;
-    exports.ɵbu = setHtmlLangAttribute;
-    exports.ɵbv = KeyboardFocusService;
-    exports.ɵbw = AnonymousConsentsModule;
-    exports.ɵbx = AnonymousConsentDialogComponent;
+    exports.ɵbo = OutletRendererService;
+    exports.ɵbp = AddToHomeScreenService;
+    exports.ɵbq = MyCouponsComponentService;
+    exports.ɵbr = addCmsRoute;
+    exports.ɵbs = defaultStorefrontRoutesConfig;
+    exports.ɵbt = defaultRoutingConfig;
+    exports.ɵbu = htmlLangProvider;
+    exports.ɵbv = setHtmlLangAttribute;
+    exports.ɵbw = KeyboardFocusService;
+    exports.ɵbx = AnonymousConsentsModule;
+    exports.ɵby = AnonymousConsentDialogComponent;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;

@@ -1,0 +1,6 @@
+import { OutletDirective } from './outlet.directive';
+export declare class OutletRendererService {
+    private outletRefs;
+    render(outlet: string): void;
+    register(cxOutlet: string, context: OutletDirective): void;
+}
