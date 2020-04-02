@@ -11,4 +11,5 @@ export declare class CmsGuardsService {
     private injector;
     constructor(cmsMapping: CmsMappingService, injector: Injector);
     cmsPageCanActivate(componentTypes: string[], route: CmsActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>;
+    shouldForceRefreshPage(): boolean;
 }

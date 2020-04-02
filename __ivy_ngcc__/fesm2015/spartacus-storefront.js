@@ -18640,6 +18640,10 @@ let CmsGuardsService = class CmsGuardsService {
             return of(true);
         }
     }
+    shouldForceRefreshPage() {
+        const config = this.injector.get(Config);
+        return !isFeatureEnabled(config, 'cmsPageLoadOnce');
+    }
 };
 CmsGuardsService.ɵfac = function CmsGuardsService_Factory(t) { return new (t || CmsGuardsService)(ɵngcc0.ɵɵinject(CmsMappingService), ɵngcc0.ɵɵinject(ɵngcc0.Injector)); };
 CmsGuardsService.ctorParameters = () => [
@@ -18780,7 +18784,7 @@ let CmsPageGuard = class CmsPageGuard {
     }
     getCmsPage(route, state) {
         return this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
-            .getPage(pageContext, true)
+            .getPage(pageContext, this.cmsGuards.shouldForceRefreshPage())
             .pipe(first(), withLatestFrom(of(pageContext)))), switchMap(([pageData, pageContext]) => pageData
             ? this.resolveCmsPageLogic(pageContext, pageData, route, state)
             : this.handleNotFoundPage(pageContext, route, state)));

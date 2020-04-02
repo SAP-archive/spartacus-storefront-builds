@@ -10712,6 +10712,10 @@
                 return rxjs.of(true);
             }
         };
+        CmsGuardsService.prototype.shouldForceRefreshPage = function () {
+            var config = this.injector.get(core$1.Config);
+            return !core$1.isFeatureEnabled(config, 'cmsPageLoadOnce');
+        };
         CmsGuardsService.ctorParameters = function () { return [
             { type: CmsMappingService },
             { type: core.Injector }
@@ -10885,7 +10889,7 @@
             var _this = this;
             return this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
                 return _this.cmsService
-                    .getPage(pageContext, true)
+                    .getPage(pageContext, _this.cmsGuards.shouldForceRefreshPage())
                     .pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
             }), operators.switchMap(function (_a) {
                 var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];

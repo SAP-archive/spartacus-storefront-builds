@@ -10527,6 +10527,10 @@ var CmsGuardsService = /** @class */ (function () {
             return of(true);
         }
     };
+    CmsGuardsService.prototype.shouldForceRefreshPage = function () {
+        var config = this.injector.get(Config);
+        return !isFeatureEnabled(config, 'cmsPageLoadOnce');
+    };
     CmsGuardsService.ctorParameters = function () { return [
         { type: CmsMappingService },
         { type: Injector }
@@ -10700,7 +10704,7 @@ var CmsPageGuard = /** @class */ (function () {
         var _this = this;
         return this.routingService.getNextPageContext().pipe(switchMap(function (pageContext) {
             return _this.cmsService
-                .getPage(pageContext, true)
+                .getPage(pageContext, _this.cmsGuards.shouldForceRefreshPage())
                 .pipe(first(), withLatestFrom(of(pageContext)));
         }), switchMap(function (_a) {
             var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
