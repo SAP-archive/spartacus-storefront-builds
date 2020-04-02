@@ -8318,12 +8318,13 @@ LayoutModule = __decorate([
 ], LayoutModule);
 
 let PageSlotComponent = class PageSlotComponent {
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config, cdRef) {
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
         this.config = config;
+        this.cdRef = cdRef;
         this.isPending = true;
         this.hasComponents = false;
         this.isPageFold = false;
@@ -8366,10 +8367,12 @@ let PageSlotComponent = class PageSlotComponent {
      * when all nested components have been added.
      */
     isLoaded(loadState) {
+        var _a;
         if (loadState) {
             this.pendingComponentCount--;
         }
         this.isPending = this.pendingComponentCount > 0;
+        (_a = this.cdRef) === null || _a === void 0 ? void 0 : _a.markForCheck();
     }
     getComponentDeferOptions(componentType) {
         const deferLoading = this.getDeferLoadingStrategy(componentType);
@@ -8399,7 +8402,8 @@ PageSlotComponent.ctorParameters = () => [
     { type: DynamicAttributeService },
     { type: Renderer2 },
     { type: ElementRef },
-    { type: CmsConfig }
+    { type: CmsConfig },
+    { type: ChangeDetectorRef }
 ];
 __decorate([
     Input()

@@ -17439,12 +17439,13 @@ LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule
         OutletRefModule] });
 
 let PageSlotComponent = class PageSlotComponent {
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config, cdRef) {
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
         this.config = config;
+        this.cdRef = cdRef;
         this.isPending = true;
         this.hasComponents = false;
         this.isPageFold = false;
@@ -17487,10 +17488,12 @@ let PageSlotComponent = class PageSlotComponent {
      * when all nested components have been added.
      */
     isLoaded(loadState) {
+        var _a;
         if (loadState) {
             this.pendingComponentCount--;
         }
         this.isPending = this.pendingComponentCount > 0;
+        (_a = this.cdRef) === null || _a === void 0 ? void 0 : _a.markForCheck();
     }
     getComponentDeferOptions(componentType) {
         const deferLoading = this.getDeferLoadingStrategy(componentType);
@@ -17515,7 +17518,7 @@ let PageSlotComponent = class PageSlotComponent {
         this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
     }
 };
-PageSlotComponent.ɵfac = function PageSlotComponent_Factory(t) { return new (t || PageSlotComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.DynamicAttributeService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsConfig)); };
+PageSlotComponent.ɵfac = function PageSlotComponent_Factory(t) { return new (t || PageSlotComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.DynamicAttributeService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsConfig), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
 PageSlotComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageSlotComponent, selectors: [["cx-page-slot"], ["", "cx-page-slot", ""]], hostVars: 6, hostBindings: function PageSlotComponent_HostBindings(rf, ctx) { if (rf & 2) {
         ɵngcc0.ɵɵclassProp("cx-pending", ctx.isPending)("has-components", ctx.hasComponents)("page-fold", ctx.isPageFold);
     } }, inputs: { isPageFold: "isPageFold", position: "position" }, decls: 1, vars: 4, consts: [[3, "cxOutlet", "cxOutletContext"], [4, "ngFor", "ngForOf"], [3, "cxOutlet", "cxOutletContext", "cxOutletDefer", "loaded"], [3, "cxComponentWrapper"]], template: function PageSlotComponent_Template(rf, ctx) { if (rf & 1) {
@@ -17528,7 +17531,8 @@ PageSlotComponent.ctorParameters = () => [
     { type: DynamicAttributeService },
     { type: Renderer2 },
     { type: ElementRef },
-    { type: CmsConfig }
+    { type: CmsConfig },
+    { type: ChangeDetectorRef }
 ];
 __decorate([
     Input()
@@ -29397,7 +29401,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }]; }, { isPending: [{
+    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }, { type: ɵngcc0.ChangeDetectorRef }]; }, { isPending: [{
             type: HostBinding,
             args: ['class.cx-pending']
         }], hasComponents: [{

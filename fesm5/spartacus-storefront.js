@@ -9114,13 +9114,14 @@ var LayoutModule = /** @class */ (function () {
 }());
 
 var PageSlotComponent = /** @class */ (function () {
-    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+    function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config, cdRef) {
         var _this = this;
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
         this.hostElement = hostElement;
         this.config = config;
+        this.cdRef = cdRef;
         this.isPending = true;
         this.hasComponents = false;
         this.isPageFold = false;
@@ -9170,10 +9171,12 @@ var PageSlotComponent = /** @class */ (function () {
      * when all nested components have been added.
      */
     PageSlotComponent.prototype.isLoaded = function (loadState) {
+        var _a;
         if (loadState) {
             this.pendingComponentCount--;
         }
         this.isPending = this.pendingComponentCount > 0;
+        (_a = this.cdRef) === null || _a === void 0 ? void 0 : _a.markForCheck();
     };
     PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
         var deferLoading = this.getDeferLoadingStrategy(componentType);
@@ -9202,7 +9205,8 @@ var PageSlotComponent = /** @class */ (function () {
         { type: DynamicAttributeService },
         { type: Renderer2 },
         { type: ElementRef },
-        { type: CmsConfig }
+        { type: CmsConfig },
+        { type: ChangeDetectorRef }
     ]; };
     __decorate([
         Input()

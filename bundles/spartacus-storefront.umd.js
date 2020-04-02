@@ -9299,13 +9299,14 @@
     }());
 
     var PageSlotComponent = /** @class */ (function () {
-        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config) {
+        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, hostElement, config, cdRef) {
             var _this = this;
             this.cmsService = cmsService;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
             this.hostElement = hostElement;
             this.config = config;
+            this.cdRef = cdRef;
             this.isPending = true;
             this.hasComponents = false;
             this.isPageFold = false;
@@ -9355,10 +9356,12 @@
          * when all nested components have been added.
          */
         PageSlotComponent.prototype.isLoaded = function (loadState) {
+            var _a;
             if (loadState) {
                 this.pendingComponentCount--;
             }
             this.isPending = this.pendingComponentCount > 0;
+            (_a = this.cdRef) === null || _a === void 0 ? void 0 : _a.markForCheck();
         };
         PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
             var deferLoading = this.getDeferLoadingStrategy(componentType);
@@ -9387,7 +9390,8 @@
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
             { type: core.ElementRef },
-            { type: core$1.CmsConfig }
+            { type: core$1.CmsConfig },
+            { type: core.ChangeDetectorRef }
         ]; };
         __decorate([
             core.Input()

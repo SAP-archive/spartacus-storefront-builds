@@ -1,4 +1,4 @@
-import { ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CmsConfig, CmsService, ContentSlotComponentData, ContentSlotData, DynamicAttributeService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IntersectionOptions } from '../../../layout/loading/intersection.model';
@@ -8,6 +8,7 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected renderer: Renderer2;
     protected hostElement: ElementRef;
     protected config?: CmsConfig;
+    protected cdRef?: ChangeDetectorRef;
     /**
      * The position is used to find the CMS page slot (and optional outlet)
      * that is rendered in the PageSlotComponent. Furthermore, the position
