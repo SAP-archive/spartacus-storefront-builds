@@ -32,6 +32,7 @@ export declare class NavigationUIComponent implements OnDestroy {
     private resize;
     onResize(): void;
     constructor(router: Router, renderer: Renderer2, elemRef: ElementRef);
+    handleFocus(event: UIEvent): void;
     toggleOpen(event: UIEvent): void;
     back(): void;
     clear(): void;
