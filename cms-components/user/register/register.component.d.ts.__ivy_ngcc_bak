@@ -16,10 +16,11 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
         consent: AnonymousConsent;
         template: string;
     }>;
-    userRegistrationForm: FormGroup;
+    registerForm: FormGroup;
     constructor(userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, router: RoutingService, anonymousConsentsService: AnonymousConsentsService, anonymousConsentsConfig: AnonymousConsentsConfig);
     ngOnInit(): void;
-    submit(): void;
+    submitForm(): void;
+    registerUser(): void;
     titleSelected(title: Title): void;
     collectDataFromRegisterForm(formData: any): UserSignUp;
     isConsentGiven(consent: AnonymousConsent): boolean;

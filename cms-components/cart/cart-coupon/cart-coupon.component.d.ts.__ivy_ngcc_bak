@@ -10,7 +10,7 @@ export declare class CartCouponComponent implements OnInit, OnDestroy {
     protected featureConfig: FeatureConfigService;
     protected activeCartService: ActiveCartService;
     MAX_CUSTOMER_COUPON_PAGE: number;
-    form: FormGroup;
+    couponForm: FormGroup;
     cartIsLoading$: Observable<boolean>;
     cart$: Observable<Cart>;
     cartId: string;

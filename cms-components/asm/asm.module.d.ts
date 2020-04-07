@@ -9,9 +9,10 @@ import * as ɵngcc7 from '@angular/common';
 import * as ɵngcc8 from '@angular/forms';
 import * as ɵngcc9 from '@spartacus/core';
 import * as ɵngcc10 from './asm-loader.module';
+import * as ɵngcc11 from '../../shared/components/form/form-errors/form-errors.module';
 export declare class AsmModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<AsmModule, [typeof ɵngcc1.AsmMainUiComponent, typeof ɵngcc2.CSAgentLoginFormComponent, typeof ɵngcc3.CustomerSelectionComponent, typeof ɵngcc4.AsmSessionTimerComponent, typeof ɵngcc5.FormatTimerPipe, typeof ɵngcc6.CustomerEmulationComponent], [typeof ɵngcc7.CommonModule, typeof ɵngcc8.ReactiveFormsModule, typeof ɵngcc9.I18nModule, typeof ɵngcc9.AsmModule, typeof ɵngcc10.AsmLoaderModule], never>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<AsmModule, [typeof ɵngcc1.AsmMainUiComponent, typeof ɵngcc2.CSAgentLoginFormComponent, typeof ɵngcc3.CustomerSelectionComponent, typeof ɵngcc4.AsmSessionTimerComponent, typeof ɵngcc5.FormatTimerPipe, typeof ɵngcc6.CustomerEmulationComponent], [typeof ɵngcc7.CommonModule, typeof ɵngcc8.ReactiveFormsModule, typeof ɵngcc9.I18nModule, typeof ɵngcc9.AsmModule, typeof ɵngcc10.AsmLoaderModule, typeof ɵngcc11.FormErrorsModule], never>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<AsmModule>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXNtLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJhc20ubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQTs7O0FBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVjbGFyZSBjbGFzcyBBc21Nb2R1bGUge1xufVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXNtLm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJhc20ubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQUE7OztBQUNBIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgQXNtTW9kdWxlIHtcbn1cbiJdfQ==

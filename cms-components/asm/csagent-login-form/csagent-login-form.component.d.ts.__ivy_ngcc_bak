@@ -2,8 +2,7 @@ import { EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 export declare class CSAgentLoginFormComponent implements OnInit {
     private fb;
-    form: FormGroup;
-    private submitClicked;
+    csAgentLoginForm: FormGroup;
     csAgentTokenLoading: boolean;
     submitEvent: EventEmitter<{
         userId: string;
@@ -12,5 +11,4 @@ export declare class CSAgentLoginFormComponent implements OnInit {
     constructor(fb: FormBuilder);
     ngOnInit(): void;
     onSubmit(): void;
-    isNotValid(formControlName: string): boolean;
 }

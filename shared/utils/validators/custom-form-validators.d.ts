@@ -1,9 +1,69 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
 export declare class CustomFormValidators {
-    static emailDomainValidator(control: AbstractControl): ValidationErrors | null;
+    /**
+     * Checks control's value with predefined email regexp
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxInvalidEmail' validator error
+     * @memberof CustomFormValidators
+     */
     static emailValidator(control: AbstractControl): ValidationErrors | null;
+    /**
+     * Checks control's value with predefined password regexp
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxInvalidPassword' validator error
+     * @memberof CustomFormValidators
+     */
     static passwordValidator(control: AbstractControl): ValidationErrors | null;
-    static matchPassword(control: AbstractControl): {
-        NotEqual: boolean;
-    };
+    /**
+     * Checks if control's value is between 1 and 5
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxStarRatingEmpty' validator error
+     * @memberof CustomFormValidators
+     */
+    static starRatingEmpty(control: AbstractControl): ValidationErrors | null;
+    /**
+     * Checks if two password controls match
+     *
+     * NOTE: Use it as a form validator and pass password control names as parameters
+     *
+     * @static
+     * @param {string} password First password control name
+     * @param {string} passwordConfirmation Second password control name
+     * @returns Uses 'cxPasswordsMustMatch' validator error
+     * @memberof CustomFormValidators
+     */
+    static passwordsMustMatch(password: string, passwordConfirmation: string): any;
+    /**
+     * Checks if two email controls match
+     *
+     * NOTE: Use it as a form validator and pass email control names as parameters
+     *
+     * @static
+     * @param {string} email First email control name
+     * @param {string} emailConfirmation Second email control name
+     * @returns Uses 'cxEmailsMustMatch' validator error
+     * @memberof CustomFormValidators
+     */
+    static emailsMustMatch(email: string, emailConfirmation: string): any;
 }
+/**
+ * Generic function for validators, which checks if two passed controls match.
+ *
+ * @param formGroup
+ * @param firstControlName First control to check
+ * @param secondControlName Second control to check
+ * @param errorName Error which will be returned by validator
+ */
+export declare function controlsMustMatch(formGroup: FormGroup, firstControlName: string, secondControlName: string, errorName: string): void;

@@ -6,13 +6,9 @@ export declare class CheckoutLoginComponent implements OnDestroy {
     protected formBuilder: FormBuilder;
     protected authRedirectService: AuthRedirectService;
     protected activeCartService: ActiveCartService;
-    form: FormGroup;
+    checkoutLoginForm: FormGroup;
     sub: Subscription;
-    private submitClicked;
     constructor(formBuilder: FormBuilder, authRedirectService: AuthRedirectService, activeCartService: ActiveCartService);
-    isNotValid(formControlName: string): boolean;
-    isEmailConfirmInvalid(): boolean;
     onSubmit(): void;
     ngOnDestroy(): void;
-    private emailsMatch;
 }

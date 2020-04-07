@@ -6,19 +6,17 @@ export declare class UpdateProfileFormComponent implements OnInit {
     private fb;
     user: User;
     titles: Title[];
-    submited: EventEmitter<{
+    submitted: EventEmitter<{
         userUpdates: User;
     }>;
     cancelled: EventEmitter<void>;
-    form: import("@angular/forms").FormGroup;
-    private submitClicked;
+    updateProfileForm: import("@angular/forms").FormGroup;
     constructor(fb: FormBuilder);
     ngOnInit(): void;
-    isNotValid(formControlName: string): boolean;
     onSubmit(): void;
     onCancel(): void;
     static ɵfac: ɵngcc0.ɵɵFactoryDef<UpdateProfileFormComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<UpdateProfileFormComponent, "cx-update-profile-form", never, { "user": "user"; "titles": "titles"; }, { "submited": "submited"; "cancelled": "cancelled"; }, never, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<UpdateProfileFormComponent, "cx-update-profile-form", never, { "user": "user"; "titles": "titles"; }, { "submitted": "submitted"; "cancelled": "cancelled"; }, never, never>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7OztBQUdBOzs7Ozs7Ozs7Ozs7Ozs7OztBQWVBIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgRXZlbnRFbWl0dGVyLCBPbkluaXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEZvcm1CdWlsZGVyIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgVGl0bGUsIFVzZXIgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuZXhwb3J0IGRlY2xhcmUgY2xhc3MgVXBkYXRlUHJvZmlsZUZvcm1Db21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICAgIHByaXZhdGUgZmI7XG4gICAgdXNlcjogVXNlcjtcbiAgICB0aXRsZXM6IFRpdGxlW107XG4gICAgc3VibWl0ZWQ6IEV2ZW50RW1pdHRlcjx7XG4gICAgICAgIHVzZXJVcGRhdGVzOiBVc2VyO1xuICAgIH0+O1xuICAgIGNhbmNlbGxlZDogRXZlbnRFbWl0dGVyPHZvaWQ+O1xuICAgIGZvcm06IGltcG9ydChcIkBhbmd1bGFyL2Zvcm1zXCIpLkZvcm1Hcm91cDtcbiAgICBwcml2YXRlIHN1Ym1pdENsaWNrZWQ7XG4gICAgY29uc3RydWN0b3IoZmI6IEZvcm1CdWlsZGVyKTtcbiAgICBuZ09uSW5pdCgpOiB2b2lkO1xuICAgIGlzTm90VmFsaWQoZm9ybUNvbnRyb2xOYW1lOiBzdHJpbmcpOiBib29sZWFuO1xuICAgIG9uU3VibWl0KCk6IHZvaWQ7XG4gICAgb25DYW5jZWwoKTogdm9pZDtcbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7OztBQUdBOzs7Ozs7Ozs7Ozs7Ozs7QUFhQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEV2ZW50RW1pdHRlciwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBGb3JtQnVpbGRlciB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcbmltcG9ydCB7IFRpdGxlLCBVc2VyIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIFVwZGF0ZVByb2ZpbGVGb3JtQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgICBwcml2YXRlIGZiO1xuICAgIHVzZXI6IFVzZXI7XG4gICAgdGl0bGVzOiBUaXRsZVtdO1xuICAgIHN1Ym1pdHRlZDogRXZlbnRFbWl0dGVyPHtcbiAgICAgICAgdXNlclVwZGF0ZXM6IFVzZXI7XG4gICAgfT47XG4gICAgY2FuY2VsbGVkOiBFdmVudEVtaXR0ZXI8dm9pZD47XG4gICAgdXBkYXRlUHJvZmlsZUZvcm06IGltcG9ydChcIkBhbmd1bGFyL2Zvcm1zXCIpLkZvcm1Hcm91cDtcbiAgICBjb25zdHJ1Y3RvcihmYjogRm9ybUJ1aWxkZXIpO1xuICAgIG5nT25Jbml0KCk6IHZvaWQ7XG4gICAgb25TdWJtaXQoKTogdm9pZDtcbiAgICBvbkNhbmNlbCgpOiB2b2lkO1xufVxuIl19

@@ -1291,7 +1291,7 @@
                 selector: 'cx-asm-main-ui',
                 template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,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\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-session-timer\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n    ></cx-asm-session-timer>\n\n    <button\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(csAgentToken$ | async)?.access_token &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></button>\n\n    <button\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n      (click)=\"logout()\"\n    ></button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\">\n  <cx-customer-emulation\n    *ngIf=\"customer$ | async as customer; else showCustomerSelection\"\n  ></cx-customer-emulation>\n  <ng-template #showCustomerSelection>\n    <cx-customer-selection\n      (submitEvent)=\"startCustomerEmulationSession($event)\"\n    ></cx-customer-selection>\n  </ng-template>\n</ng-container>\n\n<ng-template #showLoginForm>\n  <cx-csagent-login-form\n    (submitEvent)=\"loginCustomerSupportAgent($event)\"\n    [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n  ></cx-csagent-login-form>\n</ng-template>\n",
                 encapsulation: core.ViewEncapsulation.None,
-                styles: ["cx-asm-main-ui{font-family:Arial,sans-serif;font-size:14px;width:100%;display:flex;flex-direction:column}cx-asm-main-ui .close,cx-asm-main-ui .logout{cursor:pointer;width:16px;height:16px;border:transparent;background-color:transparent}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{padding:0 12px;white-space:nowrap;border-radius:4px;height:36px;font-weight:400;border-style:solid;border-width:1px}cx-asm-main-ui button[type=submit]:disabled{opacity:.4;cursor:not-allowed}cx-asm-main-ui .spinner{display:flex;justify-content:center;width:100%;color:#0a6ed1}cx-asm-main-ui .spinner>div{width:8px;height:8px;margin:6px;border-radius:100%;background-color:currentColor;-webkit-animation:1s infinite spinner-dots-pulse;animation:1s infinite spinner-dots-pulse}cx-asm-main-ui .spinner>div:nth-child(1){-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{color:#fff;background-color:#354a5f;height:48px;display:flex;padding:0 32px;justify-content:space-between;z-index:1}cx-asm-main-ui .asm-bar-branding{display:flex;align-items:center}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{display:flex;justify-content:flex-end;align-items:center}cx-asm-main-ui>:nth-child(2){margin:32px;display:flex;width:calc(100vw - 4rem)}@media (min-width:767px){cx-asm-main-ui>:nth-child(2){width:50vw}}cx-asm-main-ui input{outline:0;border:1px solid #89919a;color:#32363a;background-color:#fff;border-radius:4px;padding:0 12px;height:36px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-webkit-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
+                styles: ["cx-asm-main-ui{font-family:Arial,sans-serif;font-size:14px;width:100%;display:flex;flex-direction:column}cx-asm-main-ui .close,cx-asm-main-ui .logout{cursor:pointer;width:16px;height:16px;border:transparent;background-color:transparent}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{padding:0 12px;white-space:nowrap;border-radius:4px;height:36px;font-weight:400;border-style:solid;border-width:1px}cx-asm-main-ui button[type=submit]:disabled{opacity:.4;cursor:not-allowed}cx-asm-main-ui .spinner{display:flex;justify-content:center;width:100%;color:#0a6ed1}cx-asm-main-ui .spinner>div{width:8px;height:8px;margin:6px;border-radius:100%;background-color:currentColor;-webkit-animation:1s infinite spinner-dots-pulse;animation:1s infinite spinner-dots-pulse}cx-asm-main-ui .spinner>div:nth-child(1){-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{color:#fff;background-color:#354a5f;height:48px;display:flex;padding:0 2rem;justify-content:space-between;z-index:1}cx-asm-main-ui .asm-bar-branding{display:flex;align-items:center}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{display:flex;justify-content:flex-end;align-items:center}cx-asm-main-ui>:nth-child(2){padding:1rem 2rem;display:flex;width:100%}cx-asm-main-ui input{outline:0;border:1px solid #89919a;color:#32363a;background-color:#fff;border-radius:4px;padding:0 12px;height:36px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-webkit-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
             })
         ], AsmMainUiComponent);
         return AsmMainUiComponent;
@@ -2965,54 +2965,28 @@
         return FormatTimerPipe;
     }());
 
-    /**
-     * Utility class when working with forms.
-     */
-    var FormUtils = /** @class */ (function () {
-        function FormUtils() {
-        }
-        /**
-         *
-         * Validates a field of the given form group
-         *
-         * If the field is NOT valid (or invalid), the method returns `true`.
-         *
-         * @param form Form with fields to check
-         * @param formControlName Name of the form field to check
-         * @param submitted Has the form been submitted
-         */
-        FormUtils.isNotValidField = function (form, formControlName, submitted) {
-            var control = form.get(formControlName);
-            return control.invalid && (submitted || (control.touched && control.dirty));
-        };
-        return FormUtils;
-    }());
-
     var CSAgentLoginFormComponent = /** @class */ (function () {
         function CSAgentLoginFormComponent(fb) {
             this.fb = fb;
-            this.submitClicked = false;
             this.csAgentTokenLoading = false;
             this.submitEvent = new core.EventEmitter();
         }
         CSAgentLoginFormComponent.prototype.ngOnInit = function () {
-            this.form = this.fb.group({
+            this.csAgentLoginForm = this.fb.group({
                 userId: ['', [forms.Validators.required]],
                 password: ['', [forms.Validators.required]],
             });
         };
         CSAgentLoginFormComponent.prototype.onSubmit = function () {
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
+            if (this.csAgentLoginForm.valid) {
+                this.submitEvent.emit({
+                    userId: this.csAgentLoginForm.get('userId').value,
+                    password: this.csAgentLoginForm.get('password').value,
+                });
             }
-            this.submitEvent.emit({
-                userId: this.form.controls.userId.value,
-                password: this.form.controls.password.value,
-            });
-        };
-        CSAgentLoginFormComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
+            else {
+                this.csAgentLoginForm.markAllAsTouched();
+            }
         };
         CSAgentLoginFormComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder }
@@ -3026,9 +3000,9 @@
         CSAgentLoginFormComponent = __decorate([
             core.Component({
                 selector: 'cx-csagent-login-form',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\" *ngIf=\"!csAgentTokenLoading\">\n  <label>\n    <input\n      type=\"text\"\n      [class.is-invalid]=\"isNotValid('userId')\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('userId')\">\n      <span>{{ 'asm.loginForm.userId.required' | cxTranslate }}</span>\n    </div>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      [class.is-invalid]=\"isNotValid('password')\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n      <span>{{ 'asm.loginForm.password.required' | cxTranslate }}</span>\n    </div>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
+                template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"csAgentLoginForm\"\n  *ngIf=\"!csAgentTokenLoading\"\n>\n  <label>\n    <input\n      type=\"text\"\n      formControlName=\"userId\"\n      placeholder=\"{{ 'asm.loginForm.userId.label' | cxTranslate }}\"\n    />\n    <cx-form-errors [control]=\"csAgentLoginForm.get('userId')\"></cx-form-errors>\n  </label>\n\n  <label>\n    <input\n      type=\"password\"\n      placeholder=\"{{ 'asm.loginForm.password.label' | cxTranslate }}\"\n      formControlName=\"password\"\n    />\n    <cx-form-errors\n      [control]=\"csAgentLoginForm.get('password')\"\n    ></cx-form-errors>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.loginForm.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div\n  *ngIf=\"csAgentTokenLoading\"\n  class=\"spinner\"\n  aria-hidden=\"false\"\n  aria-label=\"Loading\"\n>\n  <div></div>\n  <div></div>\n  <div></div>\n</div>\n",
                 encapsulation: core.ViewEncapsulation.None,
-                styles: ["cx-csagent-login-form .invalid-feedback{display:block}cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}cx-csagent-login-form form>*{margin-bottom:12px}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}@media (min-width:575px){cx-csagent-login-form label:nth-child(2){margin:0 8px}}"]
+                styles: ["cx-csagent-login-form form{display:flex;width:100%}@media (max-width:575px){cx-csagent-login-form form{flex-direction:column}}cx-csagent-login-form form label{margin:0 0 15px;min-width:auto}@media (min-width:575px){cx-csagent-login-form form label{margin:0 15px 0 0;min-width:15rem}}cx-csagent-login-form form label input{width:100%}cx-csagent-login-form button[type=submit]{color:#fff;border-color:#0a6ed1;background-color:#0a6ed1}cx-csagent-login-form button[type=submit]:hover{background-color:#085caf}"]
             })
         ], CSAgentLoginFormComponent);
         return CSAgentLoginFormComponent;
@@ -3076,13 +3050,13 @@
         }
         CustomerSelectionComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.form = this.fb.group({
-                searchTerm: [''],
+            this.customerSelectionForm = this.fb.group({
+                searchTerm: ['', forms.Validators.required],
             });
             this.asmService.customerSearchReset();
             this.searchResultsLoading$ = this.asmService.getCustomerSearchResultsLoading();
             this.searchResults = this.asmService.getCustomerSearchResults();
-            this.subscription.add(this.form.controls.searchTerm.valueChanges
+            this.subscription.add(this.customerSelectionForm.controls.searchTerm.valueChanges
                 .pipe(operators.debounceTime(300))
                 .subscribe(function (searchTermValue) {
                 _this.handleSearchTerm(searchTermValue);
@@ -3106,12 +3080,15 @@
         };
         CustomerSelectionComponent.prototype.selectCustomerFromList = function (customer) {
             this.selectedCustomer = customer;
-            this.form.controls.searchTerm.setValue(this.selectedCustomer.name);
+            this.customerSelectionForm.controls.searchTerm.setValue(this.selectedCustomer.name);
             this.asmService.customerSearchReset();
         };
         CustomerSelectionComponent.prototype.onSubmit = function () {
-            if (Boolean(this.selectedCustomer)) {
+            if (this.customerSelectionForm.valid && Boolean(this.selectedCustomer)) {
                 this.submitEvent.emit({ customerId: this.selectedCustomer.customerId });
+            }
+            else {
+                this.customerSelectionForm.markAllAsTouched();
             }
         };
         CustomerSelectionComponent.prototype.onDocumentClick = function (event) {
@@ -3149,440 +3126,16 @@
         CustomerSelectionComponent = __decorate([
             core.Component({
                 selector: 'cx-customer-selection',
-                template: "<form (submit)=\"onSubmit()\" [formGroup]=\"form\">\n  <input\n    #searchTerm\n    type=\"text\"\n    formControlName=\"searchTerm\"\n    placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n  />\n  <button type=\"submit\" [disabled]=\"!selectedCustomer\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
+                template: "<form (ngSubmit)=\"onSubmit()\" [formGroup]=\"customerSelectionForm\">\n  <label>\n    <input\n      #searchTerm\n      type=\"text\"\n      formControlName=\"searchTerm\"\n      placeholder=\"{{ 'asm.customerSearch.searchTerm.label' | cxTranslate }}\"\n    />\n    <cx-form-errors\n      [control]=\"customerSelectionForm.get('searchTerm')\"\n    ></cx-form-errors>\n  </label>\n  <button type=\"submit\">\n    {{ 'asm.customerSearch.submit' | cxTranslate }}\n  </button>\n</form>\n\n<div *ngIf=\"searchResults | async as results\" class=\"asm-results\" #resultList>\n  <button\n    *ngFor=\"let result of results.entries\"\n    (click)=\"selectCustomerFromList(result)\"\n  >\n    <span class=\"result-name\">{{ result.name }}</span>\n    <span class=\"result-id\">{{ result.uid }}</span>\n  </button>\n  <button\n    (click)=\"closeResults()\"\n    *ngIf=\"\n      !(searchResultsLoading$ | async) &&\n      searchTerm.value.length >= 3 &&\n      !!results.entries &&\n      results.entries.length <= 0\n    \"\n  >\n    {{ 'asm.customerSearch.noMatch' | cxTranslate }}\n  </button>\n</div>\n\n<div class=\"asm-results\" *ngIf=\"searchResultsLoading$ | async\">\n  <div class=\"spinner\" aria-hidden=\"false\" aria-label=\"Loading\">\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</div>\n",
                 encapsulation: core.ViewEncapsulation.None,
                 // tslint:disable-next-line:no-host-metadata-property
                 host: {
                     '(document:click)': 'onDocumentClick($event)',
                 },
-                styles: ["cx-customer-selection button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAKtmlDQ1BEaXNwbGF5AABIx62Wd1BT+RbHf/fe9EILICAl9N6lSwk9dOkgKiEJJJQYEoKIDZHFFVwLKiKgrugiRcFGkbUgFiwsgg2sC7IoqOtiwYbKu8Aj7L6Z98ebeWfm3N9nzpzf+Z1z7/3NfAGgApZQmA7LAZAhyBKF+3nSY+Pi6fghAAEYEIE+cGaxxUJGWFgQQG12/ad9uIdmo3bbfKoW+N9MnsMVswGAwlBO4ojZGSifQv0ZWyjKAgCpROO6K7KEU9yOsqIIbRDlO1OcMsMjU5w0w1+ncyLDvQDAoFMRKCyWKAUAijoap2ezU9A6lIUoWwk4fAHKU/26sXksDspHUDbLyFg+xf0oGyX9rU7KP2omSWuyWClSnpll2gjefLEwnbUS/L8tI10ye4YB6hSeyD8cXWXQd9aftjxQyoKkkNBZ5nOm86eZJ/GPmmW22Ct+ljks70Dp3vSQoFlO5vsypXWymJGzzBX7RMyyaHm49KxkkRdjllmiuXMlaVHSOI/LlNbP5UXGzHI2PzpklsVpEYFzOV7SuEgSLu2fK/DznDvXVzp7hvhv8/KZ0r1ZvEh/6eysuf65AsZcTXGstDcO19tnLidKmi/M8pSeJUwPk+Zz0/2kcXF2hHRvFvpDzu0Nk77DVFZA2CwDfxAG6MAGWIEcwAcgi5uTNTWE13LhShE/hZdFZ6C3i0tnCtgWZnQbK2snAKbu6syv8K5/+g5CyoS5WGY+AE7ofUCC52JLFwNwvAEAhdC5mMFn9Mqg3+DsdrZElD0Tw0w9sIAEZIEiUAWaQBcYAXO0O3vgAjyADwgAoSASxIGlgA14IAOIwAqwGqwHhaAYbAO7QDnYDw6CGnAUnAAt4Ay4AK6AG6AH3AUPwQAYBi/BGPgAJiAIwkNUiAapQlqQPmQK2UCOkBvkAwVB4VAclAilQAJIAq2GNkDFUAlUDh2AaqHj0GnoAnQN6oXuQ4PQKPQW+gIjMAVWhDVgA9gSdoQZcCAcCS+BU+BMOBcugLfAZXAVfARuhi/AN+C78AD8Eh5HAEJGlBFtxBxxRLyQUCQeSUZEyFqkCClFqpAGpA3pRG4jA8gr5DMGh6Fh6BhzjAvGHxOFYWMyMWsxmzHlmBpMM+YS5jZmEDOG+Y6lYtWxplhnLBMbi03BrsAWYkux1dgm7GXsXeww9gMOh1PGGeIccP64OFwqbhVuM24vrhHXjuvFDeHG8Xi8Kt4U74oPxbPwWfhC/B78Efx5/C38MP4TgUzQItgQfAnxBAEhn1BKqCOcI9wiPCdMEOWI+kRnYiiRQ1xJ3Eo8RGwj3iQOEydI8iRDkispkpRKWk8qIzWQLpMekd6RyWQdshN5EZlPziOXkY+Rr5IHyZ8pChQTihclgSKhbKEcprRT7lPeUalUA6oHNZ6aRd1CraVepD6hfpKhyVjIMGU4MutkKmSaZW7JvJYlyurLMmSXyubKlsqelL0p+0qOKGcg5yXHklsrVyF3Wq5PblyeJm8tHyqfIb9Zvk7+mvyIAl7BQMFHgaNQoHBQ4aLCEA2h6dK8aGzaBtoh2mXasCJO0VCRqZiqWKx4VLFbcUxJQWmBUrRSjlKF0lmlAWVE2UCZqZyuvFX5hPI95S/zNOYx5nHnbZrXMO/WvI8q81U8VLgqRSqNKndVvqjSVX1U01S3q7aoPlbDqJmoLVJbobZP7bLaq/mK813ms+cXzT8x/4E6rG6iHq6+Sv2gepf6uIamhp+GUGOPxkWNV5rKmh6aqZo7Nc9pjmrRtNy0+Fo7tc5rvaAr0Rn0dHoZ/RJ9TFtd219bon1Au1t7QsdQJ0onX6dR57EuSddRN1l3p26H7piell6w3mq9er0H+kR9R32e/m79Tv2PBoYGMQYbDVoMRgxVDJmGuYb1ho+MqEbuRplGVUZ3jHHGjsZpxnuNe0xgEzsTnkmFyU1T2NTelG+617TXDGvmZCYwqzLrM6eYM8yzzevNBy2ULYIs8i1aLF5b6lnGW2637LT8bmVnlW51yOqhtYJ1gHW+dZv1WxsTG7ZNhc0dW6qtr+0621bbNwtMF3AX7FvQb0ezC7bbaNdh983ewV5k32A/6qDnkOhQ6dDnqOgY5rjZ8aoT1snTaZ3TGafPzvbOWc4nnP9yMXdJc6lzGVlouJC78NDCIVcdV5brAdcBN7pbotvPbgPu2u4s9yr3px66HhyPao/nDGNGKuMI47WnlafIs8nzo5ez1xqvdm/E28+7yLvbR8Enyqfc54mvjm+Kb73vmJ+d3yq/dn+sf6D/dv8+pgaTzaxljgU4BKwJuBRICYwILA98GmQSJApqC4aDA4J3BD8K0Q8RhLSEglBm6I7Qx2GGYZlhvy7CLQpbVLHoWbh1+OrwzghaxLKIuogPkZ6RWyMfRhlFSaI6omWjE6Jroz/GeMeUxAzEWsauib0RpxbHj2uNx8dHx1fHjy/2Wbxr8XCCXUJhwr0lhktyllxbqrY0fenZZbLLWMtOJmITYxLrEr+yQllVrPEkZlJl0hjbi72b/ZLjwdnJGeW6cku4z5Ndk0uSR1JcU3akjPLceaW8V3wvfjn/Tap/6v7Uj2mhaYfTJtNj0hszCBmJGacFCoI0waXlmstzlvcKTYWFwoFM58xdmWOiQFG1GBIvEbdmKaKiqEtiJPlBMpjtll2R/WlF9IqTOfI5gpyulSYrN618nuub+8sqzCr2qo7V2qvXrx5cw1hzYC20NmltxzrddQXrhvP88mrWk9anrf8t3yq/JP/9hpgNbQUaBXkFQz/4/VBfKFMoKuzb6LJx/4+YH/k/dm+y3bRn0/ciTtH1Yqvi0uKvm9mbr/9k/VPZT5Nbkrd0b7Xfum8bbptg273t7ttrSuRLckuGdgTvaN5J31m08/2uZbuulS4o3b+btFuye6AsqKx1j96ebXu+lvPK71Z4VjRWqlduqvy4l7P31j6PfQ37NfYX7//yM//n/gN+B5qrDKpKD+IOZh98dij6UOcvjr/UVqtVF1d/Oyw4PFATXnOp1qG2tk69bms9XC+pHz2ScKTnqPfR1gbzhgONyo3Fx8AxybEXxxOP3zsReKLjpOPJhlP6pyqbaE1FzVDzyuaxFl7LQGtca+/pgNMdbS5tTb9a/Hr4jPaZirNKZ7eeI50rODd5Pvf8eLuw/dWFlAtDHcs6Hl6MvXjn0qJL3ZcDL1+94nvlYiej8/xV16tnrjlfO33d8XrLDfsbzV12XU2/2f3W1G3f3XzT4WZrj1NPW+/C3nO33G9duO19+8od5p0bd0Pu9t6Lutffl9A30M/pH7mffv/Ng+wHEw/zHmEfFT2We1z6RP1J1e/GvzcO2A+cHfQe7Hoa8fThEHvo5R/iP74OFzyjPit9rvW8dsRm5Myo72jPi8Uvhl8KX068KvxT/s/K10avT/3l8VfXWOzY8BvRm8m3m9+pvjv8fsH7jvGw8ScfMj5MfCz6pPqp5rPj584vMV+eT6z4iv9a9s34W9v3wO+PJjMmJ4UsEWtaCiCow8nJALw9DAA1DgBaDwCkxTNaetqgGf0/TeC/8YzenjZ7AA55ABCJ6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection form{display:flex;width:100%}@media (min-width:575px){cx-customer-selection button[type=submit]{-webkit-margin-start:8px;margin-inline-start:8px}cx-customer-selection form input{flex:1}}@media (max-width:575px){cx-customer-selection form{flex-direction:column}cx-customer-selection form>*{margin-bottom:12px}}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{width:calc(100vw - 4rem);border:1px solid #89919a;position:absolute;z-index:11;margin-top:40px;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;min-height:50px}cx-customer-selection .asm-results a{color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px}@media (min-width:767px){cx-customer-selection .asm-results,cx-customer-selection form{width:50vw}cx-customer-selection .asm-results a{flex-direction:row}}cx-customer-selection .asm-results a *{flex:1}cx-customer-selection .asm-results a:hover{color:#32363a;background-color:#fafafa}"]
+                styles: ["cx-customer-selection{position:relative}cx-customer-selection form{display:flex;width:100%}@media (max-width:575px){cx-customer-selection form{flex-direction:column}}cx-customer-selection form label{margin:0 0 15px;min-width:auto}cx-customer-selection form label input{width:100%}cx-customer-selection form button[type=submit]{border-color:#0a7e3e;color:#fff;padding-left:35px;background:url(data:image/png;base64,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6vkQdN2HukEeqklQD5uKewDY1lbq/zZxsq3NTC1yCypNSicn36GaBW8MwLe+ycmJlsnJb9Vosw8AaP8wo+GnTGcMlfreU9SdM5H3n1r6X/dYEDmGJmdAAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGL2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDUgNzkuMTYzNDk5LCAyMDE4LzA4LzEzLTE2OjQwOjIyICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIGV4aWY6UGl4ZWxYRGltZW5zaW9uPSIyNSIgZXhpZjpQaXhlbFlEaW1lbnNpb249IjI3IiB4bXA6Q3JlYXRlRGF0ZT0iMjAxOS0wOS0yNVQxMjoyODo1MS0wNDowMCIgeG1wOk1vZGlmeURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0iRGlzcGxheSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHhtcE1NOkRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDozYmMzNWI0YS0wNjkxLTRmNDEtODk5OC1lYWFmOTI2NGQ2NmMiIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiPiA8eG1wTU06SGlzdG9yeT4gPHJkZjpTZXE+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpjZWE4Y2FhMC0yMGU1LTQzN2ItYmQ5YS03YjlmMGZiNmYyZTYiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDxyZGY6bGkgc3RFdnQ6YWN0aW9uPSJzYXZlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowZTIyOTVhMC0yYWY0LTQ2Y2UtOThlNy0zZTU2YTM0YjFkZjUiIHN0RXZ0OndoZW49IjIwMTktMDktMjVUMTI6MzI6MjAtMDQ6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuzZx/kAAAEoSURBVDjLY/z//z8DNQATA5UAhkGNe+f8f/757f+09e2kORXkNWR86P75/zCw7cax/6o9If/R1WDDOA368/cvmH7/7dP/tHXt/8k2KGlNy/8dN4/DXbf95rH/anhch9Mgz/kFYE3p6zv+f/j+GSwGokF8sgwCYZBLQC6CAZBL0V1HlEEwnLquDRxmMNfFrmyAqyEpHd1+85jh5Zd3YDYfOzeDlrgi4ehHdpFYi8f/KcdW///7DxKTQAP/e8zLJ81rfgtL/j949wws9vvvn/+9h5f9F212/090YEetqP2/+Nx2eABfeHbrv/WMNNKj/8fvX2D6+++f/+t3z/ov2Ojyn6wECQJHHlz8bzgplrws0rBn9v9XX97/L9zS/5+vwYkoQ0CYcdCVRwBmUrSjUTYI3gAAAABJRU5ErkJggg==) 10px center no-repeat #0a7e3e}cx-customer-selection .spinner{height:42px;align-items:center}cx-customer-selection .asm-results{border:1px solid #89919a;position:absolute;line-height:1.5rem;left:2rem;top:4rem;z-index:11;box-shadow:0 5px 20px 0 #d9d9d9,0 2px 8px 0 #ededed;background-color:#fff;border-radius:4px;width:100%;max-width:50vw}@media (max-width:1200px){cx-customer-selection .asm-results{max-width:calc(100% - 4rem)}}cx-customer-selection .asm-results button{margin:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0;border:0;text-decoration:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;vertical-align:middle;white-space:nowrap;background-color:transparent;color:#51555a;display:flex;flex-direction:column;cursor:pointer;padding:10px;width:100%;align-items:flex-start;justify-content:flex-start}@media (min-width:767px){cx-customer-selection .asm-results button{flex-direction:row}}cx-customer-selection .asm-results button:hover{color:#32363a;background-color:#fafafa}cx-customer-selection .asm-results button span{margin:0 15px 0 0;word-break:break-all;white-space:normal;text-align:left}@media (min-width:575px){cx-customer-selection form label{margin:0 15px 0 0;min-width:20rem}cx-customer-selection .asm-results button span:last-of-type{margin:0}}"]
             })
         ], CustomerSelectionComponent);
         return CustomerSelectionComponent;
-    }());
-
-    var AsmModule = /** @class */ (function () {
-        function AsmModule() {
-        }
-        AsmModule = __decorate([
-            core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    forms.ReactiveFormsModule,
-                    core$1.I18nModule,
-                    core$1.AsmModule.forRoot(),
-                    AsmLoaderModule,
-                ],
-                declarations: [
-                    AsmMainUiComponent,
-                    CSAgentLoginFormComponent,
-                    CustomerSelectionComponent,
-                    AsmSessionTimerComponent,
-                    FormatTimerPipe,
-                    CustomerEmulationComponent,
-                ],
-                entryComponents: [AsmMainUiComponent],
-            })
-        ], AsmModule);
-        return AsmModule;
-    }());
-
-    var CurrentProductService = /** @class */ (function () {
-        function CurrentProductService(routingService, productService) {
-            this.routingService = routingService;
-            this.productService = productService;
-            this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
-        }
-        /**
-         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
-         *
-         * @param scopes
-         */
-        CurrentProductService.prototype.getProduct = function (scopes) {
-            var _this = this;
-            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
-                return productCode
-                    ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
-                    : rxjs.of(null);
-            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
-        };
-        CurrentProductService.ctorParameters = function () { return [
-            { type: core$1.RoutingService },
-            { type: core$1.ProductService }
-        ]; };
-        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService)); }, token: CurrentProductService, providedIn: "root" });
-        CurrentProductService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CurrentProductService);
-        return CurrentProductService;
-    }());
-
-    var OrderDetailsService = /** @class */ (function () {
-        function OrderDetailsService(userOrderService, routingService) {
-            var _this = this;
-            this.userOrderService = userOrderService;
-            this.routingService = routingService;
-            this.orderCode$ = this.routingService
-                .getRouterState()
-                .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
-            this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
-                if (orderCode) {
-                    _this.userOrderService.loadOrderDetails(orderCode);
-                }
-                else {
-                    _this.userOrderService.clearOrderDetails();
-                }
-            }), operators.shareReplay({ bufferSize: 1, refCount: true }));
-        }
-        OrderDetailsService.prototype.getOrderDetails = function () {
-            var _this = this;
-            return this.orderLoad$.pipe(operators.switchMap(function () { return _this.userOrderService.getOrderDetails(); }));
-        };
-        OrderDetailsService.ctorParameters = function () { return [
-            { type: core$1.UserOrderService },
-            { type: core$1.RoutingService }
-        ]; };
-        OrderDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(core["ɵɵinject"](core$1.UserOrderService), core["ɵɵinject"](core$1.RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
-        OrderDetailsService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], OrderDetailsService);
-        return OrderDetailsService;
-    }());
-
-    var PromotionService = /** @class */ (function () {
-        function PromotionService(orderDetailsService, checkoutService, activeCartService) {
-            this.orderDetailsService = orderDetailsService;
-            this.checkoutService = checkoutService;
-            this.activeCartService = activeCartService;
-        }
-        PromotionService.prototype.getOrderPromotions = function (promotionLocation) {
-            switch (promotionLocation) {
-                case core$1.PromotionLocation.ActiveCart:
-                    return this.getOrderPromotionsFromCart();
-                case core$1.PromotionLocation.Checkout:
-                    return this.getOrderPromotionsFromCheckout();
-                case core$1.PromotionLocation.Order:
-                    return this.getOrderPromotionsFromOrder();
-                default:
-                    return rxjs.of([]);
-            }
-        };
-        PromotionService.prototype.getOrderPromotionsFromCart = function () {
-            var _this = this;
-            return this.activeCartService
-                .getActive()
-                .pipe(operators.map(function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromCartHelper = function (cart) {
-            var potentialPromotions = [];
-            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
-            var appliedPromotions = [];
-            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
-            return __spread(potentialPromotions, appliedPromotions);
-        };
-        PromotionService.prototype.getOrderPromotionsFromCheckout = function () {
-            var _this = this;
-            return this.checkoutService
-                .getOrderDetails()
-                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromOrder = function () {
-            var _this = this;
-            return this.orderDetailsService
-                .getOrderDetails()
-                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
-        };
-        PromotionService.prototype.getOrderPromotionsFromOrderHelper = function (order) {
-            var appliedOrderPromotions = [];
-            appliedOrderPromotions.push.apply(appliedOrderPromotions, __spread((order.appliedOrderPromotions || [])));
-            return appliedOrderPromotions;
-        };
-        PromotionService.prototype.getProductPromotionForEntry = function (item, promotionLocation) {
-            var _this = this;
-            switch (promotionLocation) {
-                case core$1.PromotionLocation.ActiveCart:
-                    return this.activeCartService
-                        .getActive()
-                        .pipe(operators.map(function (cart) {
-                        return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
-                    }));
-                case core$1.PromotionLocation.Checkout:
-                    return this.checkoutService
-                        .getOrderDetails()
-                        .pipe(operators.map(function (order) {
-                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
-                    }));
-                case core$1.PromotionLocation.Order:
-                    return this.orderDetailsService
-                        .getOrderDetails()
-                        .pipe(operators.map(function (order) {
-                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
-                    }));
-            }
-        };
-        PromotionService.prototype.getProductPromotion = function (item, promotions) {
-            var e_1, _a, e_2, _b;
-            var entryPromotions = [];
-            if (promotions && promotions.length > 0) {
-                try {
-                    for (var promotions_1 = __values(promotions), promotions_1_1 = promotions_1.next(); !promotions_1_1.done; promotions_1_1 = promotions_1.next()) {
-                        var promotion = promotions_1_1.value;
-                        if (promotion.description &&
-                            promotion.consumedEntries &&
-                            promotion.consumedEntries.length > 0) {
-                            try {
-                                for (var _c = (e_2 = void 0, __values(promotion.consumedEntries)), _d = _c.next(); !_d.done; _d = _c.next()) {
-                                    var consumedEntry = _d.value;
-                                    if (this.isConsumedByEntry(consumedEntry, item)) {
-                                        entryPromotions.push(promotion);
-                                    }
-                                }
-                            }
-                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                            finally {
-                                try {
-                                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
-                                }
-                                finally { if (e_2) throw e_2.error; }
-                            }
-                        }
-                    }
-                }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                finally {
-                    try {
-                        if (promotions_1_1 && !promotions_1_1.done && (_a = promotions_1.return)) _a.call(promotions_1);
-                    }
-                    finally { if (e_1) throw e_1.error; }
-                }
-            }
-            return entryPromotions;
-        };
-        PromotionService.prototype.isConsumedByEntry = function (consumedEntry, entry) {
-            var e_3, _a;
-            var consumedEntryNumber = consumedEntry.orderEntryNumber;
-            if (entry.entries && entry.entries.length > 0) {
-                try {
-                    for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var subEntry = _c.value;
-                        if (subEntry.entryNumber === consumedEntryNumber) {
-                            return true;
-                        }
-                    }
-                }
-                catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                    }
-                    finally { if (e_3) throw e_3.error; }
-                }
-                return false;
-            }
-            else {
-                return consumedEntryNumber === entry.entryNumber;
-            }
-        };
-        PromotionService.ctorParameters = function () { return [
-            { type: OrderDetailsService },
-            { type: core$1.CheckoutService },
-            { type: core$1.ActiveCartService }
-        ]; };
-        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: PromotionService, providedIn: "root" });
-        PromotionService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], PromotionService);
-        return PromotionService;
-    }());
-
-    var AddedToCartDialogComponent = /** @class */ (function () {
-        function AddedToCartDialogComponent(modalService, cartService, promotionService) {
-            this.modalService = modalService;
-            this.cartService = cartService;
-            this.promotionService = promotionService;
-            this.iconTypes = exports.ICON_TYPE;
-            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
-            this.quantity = 0;
-            this.modalIsOpen = false;
-            this.form = new forms.FormGroup({});
-        }
-        /**
-         * Returns an observable formControl with the quantity of the cartEntry,
-         * but also updates the entry in case of a changed value.
-         * The quantity can be set to zero in order to remove the entry.
-         */
-        AddedToCartDialogComponent.prototype.getQuantityControl = function () {
-            var _this = this;
-            if (!this.quantityControl$) {
-                this.quantityControl$ = this.entry$.pipe(operators.filter(function (e) { return !!e; }), operators.map(function (entry) { return _this.getFormControl(entry); }), operators.switchMap(function () {
-                    return _this.form.valueChanges.pipe(
-                    // tslint:disable-next-line:deprecation
-                    operators.startWith(null), operators.tap(function (valueChange) {
-                        if (valueChange) {
-                            _this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
-                            if (valueChange.quantity === 0) {
-                                _this.dismissModal('Removed');
-                            }
-                        }
-                        else {
-                            _this.form.markAsPristine();
-                        }
-                    }));
-                }), operators.map(function () { return _this.form.get('quantity'); }));
-            }
-            return this.quantityControl$;
-        };
-        AddedToCartDialogComponent.prototype.ngOnInit = function () {
-            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
-        };
-        AddedToCartDialogComponent.prototype.getFormControl = function (entry) {
-            if (!this.form.get('quantity')) {
-                var quantity = new forms.FormControl(entry.quantity, { updateOn: 'blur' });
-                this.form.addControl('quantity', quantity);
-                var entryNumber = new forms.FormControl(entry.entryNumber);
-                this.form.addControl('entryNumber', entryNumber);
-            }
-            return this.form.get('quantity');
-        };
-        AddedToCartDialogComponent.prototype.dismissModal = function (reason) {
-            this.modalService.dismissActiveModal(reason);
-        };
-        AddedToCartDialogComponent.ctorParameters = function () { return [
-            { type: ModalService },
-            { type: core$1.ActiveCartService },
-            { type: PromotionService }
-        ]; };
-        __decorate([
-            core.ViewChild('dialog', { read: core.ElementRef })
-        ], AddedToCartDialogComponent.prototype, "dialog", void 0);
-        AddedToCartDialogComponent = __decorate([
-            core.Component({
-                selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
-            })
-        ], AddedToCartDialogComponent);
-        return AddedToCartDialogComponent;
-    }());
-
-    var AddToCartComponent = /** @class */ (function () {
-        function AddToCartComponent(modalService, currentProductService, cd, activeCartService) {
-            this.modalService = modalService;
-            this.currentProductService = currentProductService;
-            this.cd = cd;
-            this.activeCartService = activeCartService;
-            this.showQuantity = true;
-            this.hasStock = false;
-            this.quantity = 1;
-            this.increment = false;
-            this.addToCartForm = new forms.FormGroup({
-                quantity: new forms.FormControl(1),
-            });
-        }
-        AddToCartComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            if (this.product) {
-                this.productCode = this.product.code;
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                this.setStockInfo(this.product);
-                this.cd.markForCheck();
-            }
-            else if (this.productCode) {
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
-                // force hasStock and quantity for the time being, as we do not have more info:
-                this.quantity = 1;
-                this.hasStock = true;
-                this.cd.markForCheck();
-            }
-            else {
-                this.subscription = this.currentProductService
-                    .getProduct()
-                    .pipe(operators.filter(Boolean))
-                    .subscribe(function (product) {
-                    _this.productCode = product.code;
-                    _this.setStockInfo(product);
-                    _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
-                    _this.cd.markForCheck();
-                });
-            }
-        };
-        AddToCartComponent.prototype.setStockInfo = function (product) {
-            this.quantity = 1;
-            this.hasStock =
-                product.stock && product.stock.stockLevelStatus !== 'outOfStock';
-            if (this.hasStock && product.stock.stockLevel) {
-                this.maxQuantity = product.stock.stockLevel;
-            }
-        };
-        AddToCartComponent.prototype.updateCount = function (value) {
-            this.quantity = value;
-        };
-        AddToCartComponent.prototype.addToCart = function () {
-            var _this = this;
-            var quantity = this.addToCartForm.get('quantity').value;
-            if (!this.productCode || quantity <= 0) {
-                return;
-            }
-            // check item is already present in the cart
-            // so modal will have proper header text displayed
-            this.activeCartService
-                .getEntry(this.productCode)
-                .subscribe(function (entry) {
-                if (entry) {
-                    _this.increment = true;
-                }
-                _this.openModal();
-                _this.activeCartService.addEntry(_this.productCode, quantity);
-                _this.increment = false;
-            })
-                .unsubscribe();
-        };
-        AddToCartComponent.prototype.openModal = function () {
-            var modalInstance;
-            this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
-                centered: true,
-                size: 'lg',
-            });
-            modalInstance = this.modalRef.componentInstance;
-            modalInstance.entry$ = this.cartEntry$;
-            modalInstance.cart$ = this.activeCartService.getActive();
-            modalInstance.loaded$ = this.activeCartService.isStable();
-            modalInstance.quantity = this.quantity;
-            modalInstance.increment = this.increment;
-        };
-        AddToCartComponent.prototype.ngOnDestroy = function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
-        };
-        AddToCartComponent.ctorParameters = function () { return [
-            { type: ModalService },
-            { type: CurrentProductService },
-            { type: core.ChangeDetectorRef },
-            { type: core$1.ActiveCartService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "productCode", void 0);
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "showQuantity", void 0);
-        __decorate([
-            core.Input()
-        ], AddToCartComponent.prototype, "product", void 0);
-        AddToCartComponent = __decorate([
-            core.Component({
-                selector: 'cx-add-to-cart',
-                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], AddToCartComponent);
-        return AddToCartComponent;
     }());
 
     var CardComponent = /** @class */ (function () {
@@ -5321,6 +4874,83 @@
         return StarRatingModule;
     }());
 
+    /**
+     * This component renders form errors.
+     */
+    var FormErrorsComponent = /** @class */ (function () {
+        function FormErrorsComponent() {
+        }
+        Object.defineProperty(FormErrorsComponent.prototype, "control", {
+            get: function () {
+                return this._control;
+            },
+            set: function (control) {
+                this._control = control;
+                this.errors$ = control === null || control === void 0 ? void 0 : control.statusChanges.pipe(operators.startWith({}), operators.map(function () { return control.errors || {}; }), operators.map(function (errors) {
+                    return Object.entries(errors)
+                        .filter(function (error) { return error[1]; })
+                        .map(function (error) { return error[0]; });
+                }));
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormErrorsComponent.prototype, "invalid", {
+            get: function () {
+                return this.control.invalid;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormErrorsComponent.prototype, "dirty", {
+            get: function () {
+                return this.control.dirty;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormErrorsComponent.prototype, "touched", {
+            get: function () {
+                return this.control.touched;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        __decorate([
+            core.Input()
+        ], FormErrorsComponent.prototype, "control", null);
+        __decorate([
+            core.HostBinding('class.control-invalid')
+        ], FormErrorsComponent.prototype, "invalid", null);
+        __decorate([
+            core.HostBinding('class.control-dirty')
+        ], FormErrorsComponent.prototype, "dirty", null);
+        __decorate([
+            core.HostBinding('class.control-touched')
+        ], FormErrorsComponent.prototype, "touched", null);
+        FormErrorsComponent = __decorate([
+            core.Component({
+                selector: 'cx-form-errors',
+                template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate }}\n</p>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], FormErrorsComponent);
+        return FormErrorsComponent;
+    }());
+
+    var FormErrorsModule = /** @class */ (function () {
+        function FormErrorsModule() {
+        }
+        FormErrorsModule = __decorate([
+            core.NgModule({
+                imports: [common.CommonModule, core$1.I18nModule],
+                declarations: [FormErrorsComponent],
+                exports: [FormErrorsComponent],
+            })
+        ], FormErrorsModule);
+        return FormErrorsModule;
+    }());
+
     var ViewConfig = /** @class */ (function () {
         function ViewConfig() {
         }
@@ -5352,29 +4982,290 @@
         return ViewConfigModule;
     }());
 
+    var OrderDetailsService = /** @class */ (function () {
+        function OrderDetailsService(userOrderService, routingService) {
+            var _this = this;
+            this.userOrderService = userOrderService;
+            this.routingService = routingService;
+            this.orderCode$ = this.routingService
+                .getRouterState()
+                .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
+            this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
+                if (orderCode) {
+                    _this.userOrderService.loadOrderDetails(orderCode);
+                }
+                else {
+                    _this.userOrderService.clearOrderDetails();
+                }
+            }), operators.shareReplay({ bufferSize: 1, refCount: true }));
+        }
+        OrderDetailsService.prototype.getOrderDetails = function () {
+            var _this = this;
+            return this.orderLoad$.pipe(operators.switchMap(function () { return _this.userOrderService.getOrderDetails(); }));
+        };
+        OrderDetailsService.ctorParameters = function () { return [
+            { type: core$1.UserOrderService },
+            { type: core$1.RoutingService }
+        ]; };
+        OrderDetailsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(core["ɵɵinject"](core$1.UserOrderService), core["ɵɵinject"](core$1.RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
+        OrderDetailsService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], OrderDetailsService);
+        return OrderDetailsService;
+    }());
+
+    var PromotionService = /** @class */ (function () {
+        function PromotionService(orderDetailsService, checkoutService, activeCartService) {
+            this.orderDetailsService = orderDetailsService;
+            this.checkoutService = checkoutService;
+            this.activeCartService = activeCartService;
+        }
+        PromotionService.prototype.getOrderPromotions = function (promotionLocation) {
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.getOrderPromotionsFromCart();
+                case core$1.PromotionLocation.Checkout:
+                    return this.getOrderPromotionsFromCheckout();
+                case core$1.PromotionLocation.Order:
+                    return this.getOrderPromotionsFromOrder();
+                default:
+                    return rxjs.of([]);
+            }
+        };
+        PromotionService.prototype.getOrderPromotionsFromCart = function () {
+            var _this = this;
+            return this.activeCartService
+                .getActive()
+                .pipe(operators.map(function (cart) { return _this.getOrderPromotionsFromCartHelper(cart); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromCartHelper = function (cart) {
+            var potentialPromotions = [];
+            potentialPromotions.push.apply(potentialPromotions, __spread((cart.potentialOrderPromotions || [])));
+            var appliedPromotions = [];
+            appliedPromotions.push.apply(appliedPromotions, __spread((cart.appliedOrderPromotions || [])));
+            return __spread(potentialPromotions, appliedPromotions);
+        };
+        PromotionService.prototype.getOrderPromotionsFromCheckout = function () {
+            var _this = this;
+            return this.checkoutService
+                .getOrderDetails()
+                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromOrder = function () {
+            var _this = this;
+            return this.orderDetailsService
+                .getOrderDetails()
+                .pipe(operators.map(function (order) { return _this.getOrderPromotionsFromOrderHelper(order); }));
+        };
+        PromotionService.prototype.getOrderPromotionsFromOrderHelper = function (order) {
+            var appliedOrderPromotions = [];
+            appliedOrderPromotions.push.apply(appliedOrderPromotions, __spread((order.appliedOrderPromotions || [])));
+            return appliedOrderPromotions;
+        };
+        PromotionService.prototype.getProductPromotionForEntry = function (item, promotionLocation) {
+            var _this = this;
+            switch (promotionLocation) {
+                case core$1.PromotionLocation.ActiveCart:
+                    return this.activeCartService
+                        .getActive()
+                        .pipe(operators.map(function (cart) {
+                        return _this.getProductPromotion(item, cart.appliedProductPromotions || []);
+                    }));
+                case core$1.PromotionLocation.Checkout:
+                    return this.checkoutService
+                        .getOrderDetails()
+                        .pipe(operators.map(function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    }));
+                case core$1.PromotionLocation.Order:
+                    return this.orderDetailsService
+                        .getOrderDetails()
+                        .pipe(operators.map(function (order) {
+                        return _this.getProductPromotion(item, order.appliedProductPromotions || []);
+                    }));
+            }
+        };
+        PromotionService.prototype.getProductPromotion = function (item, promotions) {
+            var e_1, _a, e_2, _b;
+            var entryPromotions = [];
+            if (promotions && promotions.length > 0) {
+                try {
+                    for (var promotions_1 = __values(promotions), promotions_1_1 = promotions_1.next(); !promotions_1_1.done; promotions_1_1 = promotions_1.next()) {
+                        var promotion = promotions_1_1.value;
+                        if (promotion.description &&
+                            promotion.consumedEntries &&
+                            promotion.consumedEntries.length > 0) {
+                            try {
+                                for (var _c = (e_2 = void 0, __values(promotion.consumedEntries)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                    var consumedEntry = _d.value;
+                                    if (this.isConsumedByEntry(consumedEntry, item)) {
+                                        entryPromotions.push(promotion);
+                                    }
+                                }
+                            }
+                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                            finally {
+                                try {
+                                    if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+                                }
+                                finally { if (e_2) throw e_2.error; }
+                            }
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (promotions_1_1 && !promotions_1_1.done && (_a = promotions_1.return)) _a.call(promotions_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+            }
+            return entryPromotions;
+        };
+        PromotionService.prototype.isConsumedByEntry = function (consumedEntry, entry) {
+            var e_3, _a;
+            var consumedEntryNumber = consumedEntry.orderEntryNumber;
+            if (entry.entries && entry.entries.length > 0) {
+                try {
+                    for (var _b = __values(entry.entries), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var subEntry = _c.value;
+                        if (subEntry.entryNumber === consumedEntryNumber) {
+                            return true;
+                        }
+                    }
+                }
+                catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                    }
+                    finally { if (e_3) throw e_3.error; }
+                }
+                return false;
+            }
+            else {
+                return consumedEntryNumber === entry.entryNumber;
+            }
+        };
+        PromotionService.ctorParameters = function () { return [
+            { type: OrderDetailsService },
+            { type: core$1.CheckoutService },
+            { type: core$1.ActiveCartService }
+        ]; };
+        PromotionService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PromotionService_Factory() { return new PromotionService(core["ɵɵinject"](OrderDetailsService), core["ɵɵinject"](core$1.CheckoutService), core["ɵɵinject"](core$1.ActiveCartService)); }, token: PromotionService, providedIn: "root" });
+        PromotionService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], PromotionService);
+        return PromotionService;
+    }());
+
     var CustomFormValidators = /** @class */ (function () {
         function CustomFormValidators() {
         }
-        CustomFormValidators.emailDomainValidator = function (control) {
-            var email = control.value;
-            return email.match('[.][a-zA-Z]+$') ? null : { InvalidEmail: true };
-        };
+        /**
+         * Checks control's value with predefined email regexp
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {AbstractControl} control
+         * @returns {(ValidationErrors | null)} Uses 'cxInvalidEmail' validator error
+         * @memberof CustomFormValidators
+         */
         CustomFormValidators.emailValidator = function (control) {
             var email = control.value;
-            return email.match(core$1.EMAIL_PATTERN) ? null : { InvalidEmail: true };
+            return !email.length || email.match(core$1.EMAIL_PATTERN)
+                ? null
+                : { cxInvalidEmail: true };
         };
+        /**
+         * Checks control's value with predefined password regexp
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {AbstractControl} control
+         * @returns {(ValidationErrors | null)} Uses 'cxInvalidPassword' validator error
+         * @memberof CustomFormValidators
+         */
         CustomFormValidators.passwordValidator = function (control) {
             var password = control.value;
-            return password.match(core$1.PASSWORD_PATTERN) ? null : { InvalidPassword: true };
+            return !password.length || password.match(core$1.PASSWORD_PATTERN)
+                ? null
+                : { cxInvalidPassword: true };
         };
-        CustomFormValidators.matchPassword = function (control) {
-            if (control.get('password').value !== control.get('passwordconf').value) {
-                return { NotEqual: true };
-            }
-            return null;
+        /**
+         * Checks if control's value is between 1 and 5
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {AbstractControl} control
+         * @returns {(ValidationErrors | null)} Uses 'cxStarRatingEmpty' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.starRatingEmpty = function (control) {
+            var rating = control.value;
+            return rating >= 1 && rating <= 5 ? null : { cxStarRatingEmpty: true };
+        };
+        /**
+         * Checks if two password controls match
+         *
+         * NOTE: Use it as a form validator and pass password control names as parameters
+         *
+         * @static
+         * @param {string} password First password control name
+         * @param {string} passwordConfirmation Second password control name
+         * @returns Uses 'cxPasswordsMustMatch' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.passwordsMustMatch = function (password, passwordConfirmation) {
+            var validator = function (formGroup) {
+                return controlsMustMatch(formGroup, password, passwordConfirmation, 'cxPasswordsMustMatch');
+            };
+            return validator;
+        };
+        /**
+         * Checks if two email controls match
+         *
+         * NOTE: Use it as a form validator and pass email control names as parameters
+         *
+         * @static
+         * @param {string} email First email control name
+         * @param {string} emailConfirmation Second email control name
+         * @returns Uses 'cxEmailsMustMatch' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.emailsMustMatch = function (email, emailConfirmation) {
+            var validator = function (formGroup) {
+                return controlsMustMatch(formGroup, email, emailConfirmation, 'cxEmailsMustMatch');
+            };
+            return validator;
         };
         return CustomFormValidators;
     }());
+    /**
+     * Generic function for validators, which checks if two passed controls match.
+     *
+     * @param formGroup
+     * @param firstControlName First control to check
+     * @param secondControlName Second control to check
+     * @param errorName Error which will be returned by validator
+     */
+    function controlsMustMatch(formGroup, firstControlName, secondControlName, errorName) {
+        var _a;
+        var firstControl = formGroup.controls[firstControlName];
+        var secondControl = formGroup.controls[secondControlName];
+        if (secondControl.errors && !secondControl.errors[errorName]) {
+            return;
+        }
+        secondControl.setErrors(firstControl.value !== secondControl.value ? (_a = {}, _a[errorName] = true, _a) : null);
+    }
 
     var titleScores = {
         mr: 1,
@@ -5392,6 +5283,249 @@
             return titleScores[title1.code] - titleScores[title2.code];
         }
     }
+
+    var AsmModule = /** @class */ (function () {
+        function AsmModule() {
+        }
+        AsmModule = __decorate([
+            core.NgModule({
+                imports: [
+                    common.CommonModule,
+                    forms.ReactiveFormsModule,
+                    core$1.I18nModule,
+                    core$1.AsmModule.forRoot(),
+                    AsmLoaderModule,
+                    FormErrorsModule,
+                ],
+                declarations: [
+                    AsmMainUiComponent,
+                    CSAgentLoginFormComponent,
+                    CustomerSelectionComponent,
+                    AsmSessionTimerComponent,
+                    FormatTimerPipe,
+                    CustomerEmulationComponent,
+                ],
+                entryComponents: [AsmMainUiComponent],
+            })
+        ], AsmModule);
+        return AsmModule;
+    }());
+
+    var CurrentProductService = /** @class */ (function () {
+        function CurrentProductService(routingService, productService) {
+            this.routingService = routingService;
+            this.productService = productService;
+            this.DEFAULT_PRODUCT_SCOPE = core$1.ProductScope.DETAILS;
+        }
+        /**
+         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+         *
+         * @param scopes
+         */
+        CurrentProductService.prototype.getProduct = function (scopes) {
+            var _this = this;
+            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
+                return productCode
+                    ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
+                    : rxjs.of(null);
+            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
+        };
+        CurrentProductService.ctorParameters = function () { return [
+            { type: core$1.RoutingService },
+            { type: core$1.ProductService }
+        ]; };
+        CurrentProductService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CurrentProductService_Factory() { return new CurrentProductService(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.ProductService)); }, token: CurrentProductService, providedIn: "root" });
+        CurrentProductService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CurrentProductService);
+        return CurrentProductService;
+    }());
+
+    var AddedToCartDialogComponent = /** @class */ (function () {
+        function AddedToCartDialogComponent(modalService, cartService, promotionService) {
+            this.modalService = modalService;
+            this.cartService = cartService;
+            this.promotionService = promotionService;
+            this.iconTypes = exports.ICON_TYPE;
+            this.promotionLocation = core$1.PromotionLocation.ActiveCart;
+            this.quantity = 0;
+            this.modalIsOpen = false;
+            this.form = new forms.FormGroup({});
+        }
+        /**
+         * Returns an observable formControl with the quantity of the cartEntry,
+         * but also updates the entry in case of a changed value.
+         * The quantity can be set to zero in order to remove the entry.
+         */
+        AddedToCartDialogComponent.prototype.getQuantityControl = function () {
+            var _this = this;
+            if (!this.quantityControl$) {
+                this.quantityControl$ = this.entry$.pipe(operators.filter(function (e) { return !!e; }), operators.map(function (entry) { return _this.getFormControl(entry); }), operators.switchMap(function () {
+                    return _this.form.valueChanges.pipe(
+                    // tslint:disable-next-line:deprecation
+                    operators.startWith(null), operators.tap(function (valueChange) {
+                        if (valueChange) {
+                            _this.cartService.updateEntry(valueChange.entryNumber, valueChange.quantity);
+                            if (valueChange.quantity === 0) {
+                                _this.dismissModal('Removed');
+                            }
+                        }
+                        else {
+                            _this.form.markAsPristine();
+                        }
+                    }));
+                }), operators.map(function () { return _this.form.get('quantity'); }));
+            }
+            return this.quantityControl$;
+        };
+        AddedToCartDialogComponent.prototype.ngOnInit = function () {
+            this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+        };
+        AddedToCartDialogComponent.prototype.getFormControl = function (entry) {
+            if (!this.form.get('quantity')) {
+                var quantity = new forms.FormControl(entry.quantity, { updateOn: 'blur' });
+                this.form.addControl('quantity', quantity);
+                var entryNumber = new forms.FormControl(entry.entryNumber);
+                this.form.addControl('entryNumber', entryNumber);
+            }
+            return this.form.get('quantity');
+        };
+        AddedToCartDialogComponent.prototype.dismissModal = function (reason) {
+            this.modalService.dismissActiveModal(reason);
+        };
+        AddedToCartDialogComponent.ctorParameters = function () { return [
+            { type: ModalService },
+            { type: core$1.ActiveCartService },
+            { type: PromotionService }
+        ]; };
+        __decorate([
+            core.ViewChild('dialog', { read: core.ElementRef })
+        ], AddedToCartDialogComponent.prototype, "dialog", void 0);
+        AddedToCartDialogComponent = __decorate([
+            core.Component({
+                selector: 'cx-added-to-cart-dialog',
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+            })
+        ], AddedToCartDialogComponent);
+        return AddedToCartDialogComponent;
+    }());
+
+    var AddToCartComponent = /** @class */ (function () {
+        function AddToCartComponent(modalService, currentProductService, cd, activeCartService) {
+            this.modalService = modalService;
+            this.currentProductService = currentProductService;
+            this.cd = cd;
+            this.activeCartService = activeCartService;
+            this.showQuantity = true;
+            this.hasStock = false;
+            this.quantity = 1;
+            this.increment = false;
+            this.addToCartForm = new forms.FormGroup({
+                quantity: new forms.FormControl(1),
+            });
+        }
+        AddToCartComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            if (this.product) {
+                this.productCode = this.product.code;
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                this.setStockInfo(this.product);
+                this.cd.markForCheck();
+            }
+            else if (this.productCode) {
+                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
+                // force hasStock and quantity for the time being, as we do not have more info:
+                this.quantity = 1;
+                this.hasStock = true;
+                this.cd.markForCheck();
+            }
+            else {
+                this.subscription = this.currentProductService
+                    .getProduct()
+                    .pipe(operators.filter(Boolean))
+                    .subscribe(function (product) {
+                    _this.productCode = product.code;
+                    _this.setStockInfo(product);
+                    _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
+                    _this.cd.markForCheck();
+                });
+            }
+        };
+        AddToCartComponent.prototype.setStockInfo = function (product) {
+            this.quantity = 1;
+            this.hasStock =
+                product.stock && product.stock.stockLevelStatus !== 'outOfStock';
+            if (this.hasStock && product.stock.stockLevel) {
+                this.maxQuantity = product.stock.stockLevel;
+            }
+        };
+        AddToCartComponent.prototype.updateCount = function (value) {
+            this.quantity = value;
+        };
+        AddToCartComponent.prototype.addToCart = function () {
+            var _this = this;
+            var quantity = this.addToCartForm.get('quantity').value;
+            if (!this.productCode || quantity <= 0) {
+                return;
+            }
+            // check item is already present in the cart
+            // so modal will have proper header text displayed
+            this.activeCartService
+                .getEntry(this.productCode)
+                .subscribe(function (entry) {
+                if (entry) {
+                    _this.increment = true;
+                }
+                _this.openModal();
+                _this.activeCartService.addEntry(_this.productCode, quantity);
+                _this.increment = false;
+            })
+                .unsubscribe();
+        };
+        AddToCartComponent.prototype.openModal = function () {
+            var modalInstance;
+            this.modalRef = this.modalService.open(AddedToCartDialogComponent, {
+                centered: true,
+                size: 'lg',
+            });
+            modalInstance = this.modalRef.componentInstance;
+            modalInstance.entry$ = this.cartEntry$;
+            modalInstance.cart$ = this.activeCartService.getActive();
+            modalInstance.loaded$ = this.activeCartService.isStable();
+            modalInstance.quantity = this.quantity;
+            modalInstance.increment = this.increment;
+        };
+        AddToCartComponent.prototype.ngOnDestroy = function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
+        };
+        AddToCartComponent.ctorParameters = function () { return [
+            { type: ModalService },
+            { type: CurrentProductService },
+            { type: core.ChangeDetectorRef },
+            { type: core$1.ActiveCartService }
+        ]; };
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "productCode", void 0);
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "showQuantity", void 0);
+        __decorate([
+            core.Input()
+        ], AddToCartComponent.prototype, "product", void 0);
+        AddToCartComponent = __decorate([
+            core.Component({
+                selector: 'cx-add-to-cart',
+                template: "<form *ngIf=\"productCode\" [formGroup]=\"addToCartForm\" (submit)=\"addToCart()\">\n  <div class=\"quantity\" *ngIf=\"showQuantity\">\n    <label>{{ 'addToCart.quantity' | cxTranslate }}</label>\n    <cx-item-counter\n      *ngIf=\"hasStock\"\n      [max]=\"maxQuantity\"\n      [control]=\"addToCartForm.get('quantity')\"\n    ></cx-item-counter>\n    <span class=\"info\">{{\n      hasStock\n        ? ('addToCart.inStock' | cxTranslate)\n        : ('addToCart.outOfStock' | cxTranslate)\n    }}</span>\n  </div>\n\n  <button\n    *ngIf=\"hasStock\"\n    class=\"btn btn-primary btn-block\"\n    type=\"submit\"\n    [disabled]=\"quantity <= 0 || quantity > maxQuantity\"\n  >\n    {{ 'addToCart.addToCart' | cxTranslate }}\n  </button>\n</form>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], AddToCartComponent);
+        return AddToCartComponent;
+    }());
 
     var PromotionsComponent = /** @class */ (function () {
         function PromotionsComponent() {
@@ -5516,7 +5650,7 @@
                 .isStable()
                 .pipe(operators.map(function (loaded) { return !loaded; }));
             this.cartVoucherService.resetAddVoucherProcessingState();
-            this.form = this.formBuilder.group({
+            this.couponForm = this.formBuilder.group({
                 couponCode: ['', [forms.Validators.required]],
             });
             this.subscription.add(this.cartVoucherService
@@ -5536,7 +5670,7 @@
         };
         CartCouponComponent.prototype.onSuccess = function (success) {
             if (success) {
-                this.form.reset();
+                this.couponForm.reset();
                 this.cartVoucherService.resetAddVoucherProcessingState();
             }
         };
@@ -5550,11 +5684,12 @@
             }
         };
         CartCouponComponent.prototype.applyVoucher = function () {
-            if (!this.form.valid) {
-                this.form.markAsTouched();
-                return;
+            if (this.couponForm.valid) {
+                this.cartVoucherService.addVoucher(this.couponForm.value.couponCode, this.cartId);
             }
-            this.cartVoucherService.addVoucher(this.form.value.couponCode, this.cartId);
+            else {
+                this.couponForm.markAllAsTouched();
+            }
         };
         CartCouponComponent.prototype.applyCustomerCoupon = function (couponId) {
             this.cartVoucherService.addVoucher(couponId, this.cartId);
@@ -5589,7 +5724,7 @@
         CartCouponComponent = __decorate([
             core.Component({
                 selector: 'cx-cart-coupon',
-                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group\">\n    <form (submit)=\"applyVoucher()\" [formGroup]=\"form\">\n      <div class=\"row\">\n        <div class=\"col-md-8\">\n          <input\n            type=\"text\"\n            class=\"form-control input-coupon-code\"\n            id=\"applyVoucher\"\n            formControlName=\"couponCode\"\n            placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n          />\n        </div>\n        <div class=\"col-md-4\">\n          <button\n            class=\"btn btn-block btn-action apply-coupon-button\"\n            type=\"submit\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ 'voucher.apply' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card\" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <div class=\"cx-cart-coupon-title\">\n    {{ 'voucher.coupon' | cxTranslate }}\n  </div>\n  <div class=\"form-group\">\n    <form (ngSubmit)=\"applyVoucher()\" [formGroup]=\"couponForm\">\n      <div class=\"cx-cart-coupon-container\">\n        <input\n          type=\"text\"\n          class=\"form-control input-coupon-code\"\n          formControlName=\"couponCode\"\n          placeholder=\"{{ 'voucher.placeholder' | cxTranslate }}\"\n        />\n        <button\n          class=\"btn btn-block btn-action apply-coupon-button\"\n          type=\"submit\"\n          [disabled]=\"cartIsLoading$ | async\"\n          [class.disabled]=\"cartIsLoading$ | async\"\n        >\n          {{ 'voucher.apply' | cxTranslate }}\n        </button>\n        <cx-form-errors\n          [control]=\"couponForm.get('couponCode')\"\n        ></cx-form-errors>\n      </div>\n    </form>\n  </div>\n\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [cartIsLoading]=\"cartIsLoading$ | async\"\n    [isReadOnly]=\"false\"\n  >\n  </cx-applied-coupons>\n\n  <ng-container *ngIf=\"applicableCoupons && applicableCoupons.length > 0\">\n    <div class=\"cx-available-coupon\">\n      <div class=\"title cx-cart-coupon-title\">\n        {{ 'voucher.availableCoupons' | cxTranslate }}\n      </div>\n      <div class=\"message\">\n        {{ 'voucher.availableCouponsLabel' | cxTranslate }}\n      </div>\n      <div class=\"scroll\">\n        <div class=\"coupons card\" *ngFor=\"let coupon of applicableCoupons\">\n          <button\n            (click)=\"applyCustomerCoupon(coupon.couponId)\"\n            class=\"coupon-id link\"\n            [disabled]=\"cartIsLoading$ | async\"\n            [class.disabled]=\"cartIsLoading$ | async\"\n          >\n            {{ coupon.couponId }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
             })
         ], CartCouponComponent);
         return CartCouponComponent;
@@ -5610,6 +5745,7 @@
                     forms.ReactiveFormsModule,
                     core$1.I18nModule,
                     IconModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -7300,69 +7436,6 @@
         return DeliveryModeSetGuard;
     }());
 
-    var BillingAddressFormComponent = /** @class */ (function () {
-        function BillingAddressFormComponent(userAddressService) {
-            this.userAddressService = userAddressService;
-            this.selectedCountry$ = new rxjs.BehaviorSubject('');
-        }
-        BillingAddressFormComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.regions$ = this.selectedCountry$.pipe(operators.switchMap(function (country) { return _this.userAddressService.getRegions(country); }), operators.tap(function (regions) {
-                var regionControl = _this.billingAddress.get('region.isocodeShort');
-                if (regions.length > 0) {
-                    regionControl.enable();
-                }
-                else {
-                    regionControl.disable();
-                }
-            }));
-        };
-        BillingAddressFormComponent.prototype.countrySelected = function (country) {
-            this.billingAddress['controls'].country['controls'].isocode.setValue(country.isocode);
-            this.selectedCountry$.next(country.isocode);
-        };
-        BillingAddressFormComponent.prototype.regionSelected = function (region) {
-            this.billingAddress['controls'].region['controls'].isocodeShort.setValue(region.isocodeShort);
-        };
-        BillingAddressFormComponent.ctorParameters = function () { return [
-            { type: core$1.UserAddressService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], BillingAddressFormComponent.prototype, "billingAddress", void 0);
-        __decorate([
-            core.Input()
-        ], BillingAddressFormComponent.prototype, "countries$", void 0);
-        BillingAddressFormComponent = __decorate([
-            core.Component({
-                selector: 'cx-billing-address-form',
-                template: "<div [formGroup]=\"billingAddress\">\n  <div class=\"form-group\">\n    <ng-container *ngIf=\"countries$ | async as countries\">\n      <div *ngIf=\"countries.length !== 0\">\n        <label aria-required=\"true\">\n          <span class=\"label-content required\">{{\n            'addressForm.country' | cxTranslate\n          }}</span>\n          <ng-select\n            [searchable]=\"true\"\n            [clearable]=\"false\"\n            [items]=\"countries\"\n            bindLabel=\"name\"\n            bindValue=\"isocode\"\n            placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n            (change)=\"countrySelected($event)\"\n          >\n          </ng-select>\n        </label>\n      </div>\n    </ng-container>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.firstName.label' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"text\"\n        required\n        placeholder=\"{{ 'addressForm.firstName.placeholder' | cxTranslate }}\"\n        formControlName=\"firstName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.lastName.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n        formControlName=\"lastName\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content required\">{{\n        'addressForm.address1' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        required\n        placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n        formControlName=\"line1\"\n      />\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'addressForm.address2' | cxTranslate\n      }}</span>\n      <input\n        type=\"text\"\n        class=\"form-control\"\n        placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n        formControlName=\"line2\"\n      />\n    </label>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.city.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n          formControlName=\"town\"\n        />\n      </label>\n    </div>\n    <div class=\"form-group col-md-6\">\n      <ng-container *ngIf=\"regions$ | async as regions\" formGroupName=\"region\">\n        <div *ngIf=\"regions.length !== 0\">\n          <label aria-required=\"true\">\n            <span class=\"label-content required\">{{\n              'addressForm.state' | cxTranslate\n            }}</span>\n            <ng-select\n              class=\"region-select\"\n              formControlName=\"isocodeShort\"\n              [searchable]=\"true\"\n              [clearable]=\"false\"\n              [items]=\"regions\"\n              bindLabel=\"{{ regions[0].name ? 'name' : 'isocodeShort' }}\"\n              bindValue=\"{{ regions[0].name ? 'isocodeShort' : 'region' }}\"\n              placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n              (change)=\"regionSelected($event)\"\n            >\n            </ng-select>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n  <div class=\"row\">\n    <div class=\"form-group col-md-6\">\n      <label>\n        <span class=\"label-content required\">{{\n          'addressForm.zipCode.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          required\n          placeholder=\"{{ 'addressForm.zipCode.placeholder' | cxTranslate }}\"\n          formControlName=\"postalCode\"\n        />\n      </label>\n    </div>\n  </div>\n</div>\n",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            })
-        ], BillingAddressFormComponent);
-        return BillingAddressFormComponent;
-    }());
-
-    var BillingAddressFormModule = /** @class */ (function () {
-        function BillingAddressFormModule() {
-        }
-        BillingAddressFormModule = __decorate([
-            core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    forms.ReactiveFormsModule,
-                    forms.FormsModule,
-                    router.RouterModule,
-                    ngSelect.NgSelectModule,
-                    core$1.I18nModule,
-                ],
-                declarations: [BillingAddressFormComponent],
-                exports: [BillingAddressFormComponent],
-            })
-        ], BillingAddressFormModule);
-        return BillingAddressFormModule;
-    }());
-
     var SuggestedAddressDialogComponent = /** @class */ (function () {
         function SuggestedAddressDialogComponent(modalService) {
             this.modalService = modalService;
@@ -7396,32 +7469,34 @@
     }());
 
     var PaymentFormComponent = /** @class */ (function () {
-        function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userPaymentService, globalMessageService, fb, modalService) {
+        function PaymentFormComponent(checkoutPaymentService, checkoutDeliveryService, userPaymentService, globalMessageService, fb, modalService, userAddressService) {
             this.checkoutPaymentService = checkoutPaymentService;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.userPaymentService = userPaymentService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.modalService = modalService;
+            this.userAddressService = userAddressService;
             this.iconTypes = exports.ICON_TYPE;
             this.months = [];
             this.years = [];
             this.sameAsShippingAddress = true;
+            this.selectedCountry$ = new rxjs.BehaviorSubject('');
             this.goBack = new core.EventEmitter();
             this.closeForm = new core.EventEmitter();
             this.setPaymentDetails = new core.EventEmitter();
-            this.payment = this.fb.group({
-                defaultPayment: [false],
+            this.paymentForm = this.fb.group({
+                cardType: this.fb.group({
+                    code: [null, forms.Validators.required],
+                }),
                 accountHolderName: ['', forms.Validators.required],
                 cardNumber: ['', forms.Validators.required],
-                cardType: this.fb.group({
-                    code: ['', forms.Validators.required],
-                }),
-                expiryMonth: ['', forms.Validators.required],
-                expiryYear: ['', forms.Validators.required],
+                expiryMonth: [null, forms.Validators.required],
+                expiryYear: [null, forms.Validators.required],
                 cvn: ['', forms.Validators.required],
+                defaultPayment: [false],
             });
-            this.billingAddress = this.fb.group({
+            this.billingAddressForm = this.fb.group({
                 firstName: ['', forms.Validators.required],
                 lastName: ['', forms.Validators.required],
                 line1: ['', forms.Validators.required],
@@ -7474,32 +7549,42 @@
                     _this.openSuggestedAddress(results);
                 }
             });
+            this.regions$ = this.selectedCountry$.pipe(operators.switchMap(function (country) { return _this.userAddressService.getRegions(country); }), operators.tap(function (regions) {
+                var regionControl = _this.billingAddressForm.get('region.isocodeShort');
+                if (regions.length > 0) {
+                    regionControl.enable();
+                }
+                else {
+                    regionControl.disable();
+                }
+            }));
         };
         PaymentFormComponent.prototype.expMonthAndYear = function () {
             var year = new Date().getFullYear();
             for (var i = 0; i < 10; i++) {
-                this.years.push({ id: i + 1, name: year + i });
+                this.years.push(year + i);
             }
             for (var j = 1; j <= 12; j++) {
                 if (j < 10) {
-                    this.months.push({ id: j, name: '0' + j.toString() });
+                    this.months.push("0" + j);
                 }
                 else {
-                    this.months.push({ id: j, name: j.toString() });
+                    this.months.push(j.toString());
                 }
             }
         };
         PaymentFormComponent.prototype.toggleDefaultPaymentMethod = function () {
-            this.payment.value.defaultPayment = !this.payment.value.defaultPayment;
+            this.paymentForm.value.defaultPayment = !this.paymentForm.value
+                .defaultPayment;
         };
         PaymentFormComponent.prototype.paymentSelected = function (card) {
-            this.payment['controls'].cardType['controls'].code.setValue(card.code);
+            this.paymentForm.get('cardType.code').setValue(card.code);
         };
         PaymentFormComponent.prototype.monthSelected = function (month) {
-            this.payment['controls'].expiryMonth.setValue(month.name);
+            this.paymentForm.get('expiryMonth').setValue(month);
         };
         PaymentFormComponent.prototype.yearSelected = function (year) {
-            this.payment['controls'].expiryYear.setValue(year.name);
+            this.paymentForm.get('expiryYear').setValue(year);
         };
         PaymentFormComponent.prototype.toggleSameAsShippingAddress = function () {
             this.sameAsShippingAddress = !this.sameAsShippingAddress;
@@ -7512,8 +7597,7 @@
         PaymentFormComponent.prototype.showSameAsShippingAddressCheckbox = function () {
             return rxjs.combineLatest([this.countries$, this.shippingAddress$]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), countries = _b[0], address = _b[1];
-                return (address !== undefined &&
-                    address.country !== undefined &&
+                return ((address === null || address === void 0 ? void 0 : address.country) &&
                     !!countries.filter(function (country) {
                         return country.isocode === address.country.isocode;
                     }).length);
@@ -7539,7 +7623,7 @@
             var _this = this;
             if (!this.suggestedAddressModalRef) {
                 this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
-                this.suggestedAddressModalRef.componentInstance.enteredAddress = this.billingAddress.value;
+                this.suggestedAddressModalRef.componentInstance.enteredAddress = this.billingAddressForm.value;
                 this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
                     results.suggestedAddresses;
                 this.suggestedAddressModalRef.result
@@ -7565,16 +7649,44 @@
                 this.next();
             }
             else {
-                this.checkoutDeliveryService.verifyAddress(this.billingAddress.value);
+                this.checkoutDeliveryService.verifyAddress(this.billingAddressForm.value);
             }
         };
+        PaymentFormComponent.prototype.countrySelected = function (country) {
+            this.billingAddressForm.get('country.isocode').setValue(country.isocode);
+            this.selectedCountry$.next(country.isocode);
+        };
+        PaymentFormComponent.prototype.regionSelected = function (region) {
+            this.billingAddressForm
+                .get('region.isocodeShort')
+                .setValue(region.isocodeShort);
+        };
         PaymentFormComponent.prototype.next = function () {
-            this.setPaymentDetails.emit({
-                paymentDetails: this.payment.value,
-                billingAddress: this.sameAsShippingAddress
-                    ? null
-                    : this.billingAddress.value,
-            });
+            if (this.paymentForm.valid) {
+                if (this.sameAsShippingAddress) {
+                    this.setPaymentDetails.emit({
+                        paymentDetails: this.paymentForm.value,
+                        billingAddress: null,
+                    });
+                }
+                else {
+                    if (this.billingAddressForm.valid) {
+                        this.setPaymentDetails.emit({
+                            paymentDetails: this.paymentForm.value,
+                            billingAddress: this.billingAddressForm.value,
+                        });
+                    }
+                    else {
+                        this.billingAddressForm.markAllAsTouched();
+                    }
+                }
+            }
+            else {
+                this.paymentForm.markAllAsTouched();
+                if (!this.sameAsShippingAddress) {
+                    this.billingAddressForm.markAllAsTouched();
+                }
+            }
         };
         PaymentFormComponent.prototype.ngOnDestroy = function () {
             if (this.checkboxSub) {
@@ -7590,7 +7702,8 @@
             { type: core$1.UserPaymentService },
             { type: core$1.GlobalMessageService },
             { type: forms.FormBuilder },
-            { type: ModalService }
+            { type: ModalService },
+            { type: core$1.UserAddressService }
         ]; };
         __decorate([
             core.Input()
@@ -7610,7 +7723,7 @@
         PaymentFormComponent = __decorate([
             core.Component({
                 selector: 'cx-payment-form',
-                template: "<!-- FORM -->\n<div *ngIf=\"!(loading$ | async).loading; else spinner\" [formGroup]=\"payment\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\">\n        <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n          <div *ngIf=\"cardTypes.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'paymentForm.paymentType' | cxTranslate\n              }}</span>\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"cardTypes\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                (change)=\"paymentSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.accountHolderName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'paymentForm.accountHolderName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"accountHolderName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'paymentForm.cardNumber' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            formControlName=\"cardNumber\"\n          />\n        </label>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.expirationDate' | cxTranslate\n            }}</span>\n          </label>\n          <div class=\"cx-payment-form-exp-date row\">\n            <div class=\"col-sm-6 col-md-5\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"months\"\n                bindLabel=\"name\"\n                bindValue=\"expiryMonth\"\n                placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                (change)=\"monthSelected($event)\"\n              >\n              </ng-select>\n            </div>\n            <div class=\"col-sm-6 col-md-7\">\n              <ng-select\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"years\"\n                bindLabel=\"name\"\n                bindValue=\"expiryYear\"\n                placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                (change)=\"yearSelected($event)\"\n              >\n              </ng-select>\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content\">\n              {{ 'paymentForm.securityCode' | cxTranslate }}\n              <cx-icon\n                [type]=\"iconTypes.INFO\"\n                class=\"cx-payment-form-tooltip\"\n                placement=\"right\"\n                title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                alt=\"\"\n              ></cx-icon>\n            </span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"cVVNumber\"\n              required\n              formControlName=\"cvn\"\n            />\n          </label>\n        </div>\n      </div>\n\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              (change)=\"toggleDefaultPaymentMethod()\"\n            />\n            <span class=\"form-check-label\">{{\n              'paymentForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n\n      <!-- BILLING -->\n      <div class=\"cx-payment-form-billing\">\n        <div class=\"cx-payment-form-billing-address\">\n          {{ 'paymentForm.billingAddress' | cxTranslate }}\n        </div>\n\n        <!-- SAME AS SHIPPING CHECKBOX -->\n        <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  class=\"form-check-input\"\n                  [checked]=\"sameAsShippingAddress\"\n                  (change)=\"toggleSameAsShippingAddress()\"\n                />\n                <span class=\"form-check-label\">{{\n                  'paymentForm.sameAsShippingAddress' | cxTranslate\n                }}</span>\n              </label>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- BILLING INFO COMPONENT -->\n        <ng-container\n          *ngIf=\"\n            sameAsShippingAddress && shippingAddress$\n              | async as shippingAddress;\n            else billingAddressForm\n          \"\n        >\n          <cx-card [content]=\"getAddressCardContent(shippingAddress)\"></cx-card>\n        </ng-container>\n\n        <ng-template #billingAddressForm>\n          <cx-billing-address-form\n            [billingAddress]=\"billingAddress\"\n            [countries$]=\"countries$\"\n          >\n          </cx-billing-address-form>\n        </ng-template>\n      </div>\n    </div>\n  </div>\n\n  <!-- BUTTON SECTION -->\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\">\n      <button\n        *ngIf=\"paymentMethodsCount === 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"back()\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n      <button\n        *ngIf=\"paymentMethodsCount > 0\"\n        class=\"btn btn-block btn-action\"\n        (click)=\"close()\"\n      >\n        {{ 'paymentForm.changePayment' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"next()\">\n        {{ 'common.continue' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</div>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
+                template: "<!-- FORM -->\n<ng-container *ngIf=\"!(loading$ | async).loading; else spinner\">\n  <form (ngSubmit)=\"next()\" [formGroup]=\"paymentForm\">\n    <div class=\"row\">\n      <div class=\"col-md-12 col-xl-10\">\n        <div class=\"form-group\" formGroupName=\"cardType\">\n          <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n            <div *ngIf=\"cardTypes.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'paymentForm.paymentType' | cxTranslate\n                }}</span>\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"cardTypes\"\n                  bindLabel=\"name\"\n                  bindValue=\"code\"\n                  placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                  (change)=\"paymentSelected($event)\"\n                  formControlName=\"code\"\n                >\n                </ng-select>\n                <cx-form-errors\n                  [control]=\"paymentForm.get('cardType.code')\"\n                ></cx-form-errors>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.accountHolderName.label' | cxTranslate\n            }}</span>\n            <input\n              class=\"form-control\"\n              type=\"text\"\n              placeholder=\"{{\n                'paymentForm.accountHolderName.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"accountHolderName\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('accountHolderName')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.cardNumber' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              formControlName=\"cardNumber\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('cardNumber')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"form-group col-md-8\">\n            <label>\n              <span class=\"label-content\">{{\n                'paymentForm.expirationDate' | cxTranslate\n              }}</span>\n              <div class=\"cx-payment-form-exp-date\">\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"months\"\n                    placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                    (change)=\"monthSelected($event)\"\n                    formControlName=\"expiryMonth\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryMonth')\"\n                  ></cx-form-errors>\n                </div>\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"years\"\n                    placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                    (change)=\"yearSelected($event)\"\n                    formControlName=\"expiryYear\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryYear')\"\n                  ></cx-form-errors>\n                </div>\n              </div>\n            </label>\n          </div>\n          <div class=\"form-group col-md-4\">\n            <label>\n              <span class=\"label-content\">\n                {{ 'paymentForm.securityCode' | cxTranslate }}\n                <cx-icon\n                  [type]=\"iconTypes.INFO\"\n                  class=\"cx-payment-form-tooltip\"\n                  placement=\"right\"\n                  title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                  alt=\"\"\n                ></cx-icon>\n              </span>\n              <input\n                type=\"text\"\n                class=\"form-control\"\n                id=\"cVVNumber\"\n                formControlName=\"cvn\"\n              />\n              <cx-form-errors\n                [control]=\"paymentForm.get('cvn')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n        </div>\n\n        <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n          <div class=\"form-check\">\n            <label>\n              <input\n                type=\"checkbox\"\n                class=\"form-check-input\"\n                (change)=\"toggleDefaultPaymentMethod()\"\n              />\n              <span class=\"form-check-label\">{{\n                'paymentForm.setAsDefault' | cxTranslate\n              }}</span>\n            </label>\n          </div>\n        </div>\n\n        <!-- BILLING -->\n        <div class=\"cx-payment-form-billing\">\n          <div class=\"cx-payment-form-billing-address\">\n            {{ 'paymentForm.billingAddress' | cxTranslate }}\n          </div>\n\n          <!-- SAME AS SHIPPING CHECKBOX -->\n          <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n            <div class=\"form-group\">\n              <div class=\"form-check\">\n                <label>\n                  <input\n                    type=\"checkbox\"\n                    class=\"form-check-input\"\n                    [checked]=\"sameAsShippingAddress\"\n                    (change)=\"toggleSameAsShippingAddress()\"\n                  />\n                  <span class=\"form-check-label\">{{\n                    'paymentForm.sameAsShippingAddress' | cxTranslate\n                  }}</span>\n                </label>\n              </div>\n            </div>\n          </ng-container>\n\n          <!-- BILLING INFO COMPONENT -->\n          <ng-container\n            *ngIf=\"\n              sameAsShippingAddress && shippingAddress$\n                | async as shippingAddress;\n              else billingAddress\n            \"\n          >\n            <cx-card\n              [content]=\"getAddressCardContent(shippingAddress)\"\n            ></cx-card>\n          </ng-container>\n\n          <ng-template #billingAddress>\n            <div [formGroup]=\"billingAddressForm\">\n              <div class=\"form-group\" formGroupName=\"country\">\n                <ng-container *ngIf=\"countries$ | async as countries\">\n                  <div *ngIf=\"countries.length !== 0\">\n                    <label aria-required=\"true\">\n                      <span class=\"label-content required\">{{\n                        'addressForm.country' | cxTranslate\n                      }}</span>\n                      <ng-select\n                        [searchable]=\"true\"\n                        [clearable]=\"false\"\n                        [items]=\"countries\"\n                        bindLabel=\"name\"\n                        bindValue=\"isocode\"\n                        placeholder=\"{{\n                          'addressForm.selectOne' | cxTranslate\n                        }}\"\n                        (change)=\"countrySelected($event)\"\n                        formControlName=\"isocode\"\n                      >\n                      </ng-select>\n                      <cx-form-errors\n                        [control]=\"billingAddressForm.get('country.isocode')\"\n                      ></cx-form-errors>\n                    </label>\n                  </div>\n                </ng-container>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.firstName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    class=\"form-control\"\n                    type=\"text\"\n                    placeholder=\"{{\n                      'addressForm.firstName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"firstName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('firstName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.lastName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.lastName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"lastName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('lastName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.address1' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.streetAddress' | cxTranslate\n                    }}\"\n                    formControlName=\"line1\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('line1')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content\">{{\n                    'addressForm.address2' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n                    formControlName=\"line2\"\n                  />\n                </label>\n              </div>\n              <div class=\"row\">\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.city.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.city.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"town\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('town')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.zipCode.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.zipCode.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"postalCode\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('postalCode')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <ng-container\n                  *ngIf=\"regions$ | async as regions\"\n                  formGroupName=\"region\"\n                >\n                  <ng-container *ngIf=\"regions.length !== 0\">\n                    <div class=\"form-group col-md-6\">\n                      <label aria-required=\"true\">\n                        <span class=\"label-content required\">{{\n                          'addressForm.state' | cxTranslate\n                        }}</span>\n                        <ng-select\n                          class=\"region-select\"\n                          formControlName=\"isocodeShort\"\n                          [searchable]=\"true\"\n                          [clearable]=\"false\"\n                          [items]=\"regions\"\n                          bindLabel=\"{{\n                            regions[0].name ? 'name' : 'isocodeShort'\n                          }}\"\n                          bindValue=\"{{\n                            regions[0].name ? 'isocodeShort' : 'region'\n                          }}\"\n                          placeholder=\"{{\n                            'addressForm.selectOne' | cxTranslate\n                          }}\"\n                          (change)=\"regionSelected($event)\"\n                        >\n                        </ng-select>\n                        <cx-form-errors\n                          [control]=\"\n                            billingAddressForm.get('region.isocodeShort')\n                          \"\n                        ></cx-form-errors>\n                      </label>\n                    </div>\n                  </ng-container>\n                </ng-container>\n              </div>\n            </div>\n          </ng-template>\n        </div>\n      </div>\n    </div>\n\n    <!-- BUTTON SECTION -->\n    <div class=\"cx-checkout-btns row\">\n      <div class=\"col-md-12 col-lg-6\">\n        <button\n          *ngIf=\"paymentMethodsCount === 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"back()\"\n        >\n          {{ 'common.back' | cxTranslate }}\n        </button>\n        <button\n          *ngIf=\"paymentMethodsCount > 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"close()\"\n        >\n          {{ 'paymentForm.changePayment' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-12 col-lg-6\">\n        <button class=\"btn btn-block btn-primary\" type=\"submit\">\n          {{ 'common.continue' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], PaymentFormComponent);
@@ -7627,10 +7740,10 @@
                     forms.ReactiveFormsModule,
                     ngSelect.NgSelectModule,
                     CardModule,
-                    BillingAddressFormModule,
                     core$1.I18nModule,
                     IconModule,
                     SpinnerModule,
+                    FormErrorsModule,
                 ],
                 declarations: [PaymentFormComponent],
                 entryComponents: [PaymentFormComponent],
@@ -7852,16 +7965,21 @@
     }());
 
     var PlaceOrderComponent = /** @class */ (function () {
-        function PlaceOrderComponent(checkoutService, routingService) {
+        function PlaceOrderComponent(checkoutService, routingService, fb) {
             this.checkoutService = checkoutService;
             this.routingService = routingService;
-            this.tAndCToggler = false;
+            this.fb = fb;
+            this.checkoutSubmitForm = this.fb.group({
+                termsAndConditions: [false, forms.Validators.requiredTrue],
+            });
         }
-        PlaceOrderComponent.prototype.toggleTAndC = function () {
-            this.tAndCToggler = !this.tAndCToggler;
-        };
-        PlaceOrderComponent.prototype.placeOrder = function () {
-            this.checkoutService.placeOrder();
+        PlaceOrderComponent.prototype.submitForm = function () {
+            if (this.checkoutSubmitForm.valid) {
+                this.checkoutService.placeOrder();
+            }
+            else {
+                this.checkoutSubmitForm.markAllAsTouched();
+            }
         };
         PlaceOrderComponent.prototype.ngOnInit = function () {
             var _this = this;
@@ -7879,12 +7997,13 @@
         };
         PlaceOrderComponent.ctorParameters = function () { return [
             { type: core$1.CheckoutService },
-            { type: core$1.RoutingService }
+            { type: core$1.RoutingService },
+            { type: forms.FormBuilder }
         ]; };
         PlaceOrderComponent = __decorate([
             core.Component({
                 selector: 'cx-place-order',
-                template: "<div class=\"cx-place-order-form form-check\">\n  <label>\n    <input class=\"form-check-input\" type=\"checkbox\" (change)=\"toggleTAndC()\" />\n    <span class=\"form-check-label\">\n      {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n      <a\n        [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n        class=\"cx-tc-link\"\n        target=\"_blank\"\n      >\n        {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n      </a>\n    </span>\n  </label>\n</div>\n<button\n  [disabled]=\"!tAndCToggler\"\n  (click)=\"placeOrder()\"\n  class=\"btn btn-primary btn-block\"\n>\n  {{ 'checkoutReview.placeOrder' | cxTranslate }}\n</button>\n",
+                template: "<form\n  (ngSubmit)=\"submitForm()\"\n  class=\"cx-place-order-form form-check\"\n  [formGroup]=\"checkoutSubmitForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <input\n        formControlName=\"termsAndConditions\"\n        class=\"form-check-input\"\n        type=\"checkbox\"\n      />\n      <span class=\"form-check-label\">\n        {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n        <a\n          [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n          class=\"cx-tc-link\"\n          target=\"_blank\"\n        >\n          {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n        </a>\n      </span>\n      <cx-form-errors\n        [control]=\"checkoutSubmitForm.get('termsAndConditions')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary btn-block\">\n    {{ 'checkoutReview.placeOrder' | cxTranslate }}\n  </button>\n</form>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], PlaceOrderComponent);
@@ -7896,7 +8015,14 @@
         }
         PlaceOrderModule = __decorate([
             core.NgModule({
-                imports: [common.CommonModule, router.RouterModule, core$1.UrlModule, core$1.I18nModule],
+                imports: [
+                    common.CommonModule,
+                    router.RouterModule,
+                    core$1.UrlModule,
+                    core$1.I18nModule,
+                    forms.ReactiveFormsModule,
+                    FormErrorsModule,
+                ],
                 providers: [
                     core$1.provideDefaultConfig({
                         cmsComponents: {
@@ -8113,8 +8239,10 @@
             this.showCancelBtn = true;
             this.submitAddress = new core.EventEmitter();
             this.backToAddress = new core.EventEmitter();
-            this.address = this.fb.group({
-                defaultAddress: [false],
+            this.addressForm = this.fb.group({
+                country: this.fb.group({
+                    isocode: [null, forms.Validators.required],
+                }),
                 titleCode: [''],
                 firstName: ['', forms.Validators.required],
                 lastName: ['', forms.Validators.required],
@@ -8124,11 +8252,9 @@
                 region: this.fb.group({
                     isocode: [null, forms.Validators.required],
                 }),
-                country: this.fb.group({
-                    isocode: [null, forms.Validators.required],
-                }),
                 postalCode: ['', forms.Validators.required],
                 phone: '',
+                defaultAddress: [false],
             });
         }
         AddressFormComponent.prototype.ngOnInit = function () {
@@ -8151,7 +8277,7 @@
             }));
             // Fetching regions
             this.regions$ = this.selectedCountry$.pipe(operators.switchMap(function (country) { return _this.userAddressService.getRegions(country); }), operators.tap(function (regions) {
-                var regionControl = _this.address.get('region.isocode');
+                var regionControl = _this.addressForm.get('region.isocode');
                 if (regions && regions.length > 0) {
                     regionControl.enable();
                 }
@@ -8167,7 +8293,7 @@
                     _this.checkoutDeliveryService.clearAddressVerificationResults();
                 }
                 else if (results.decision === 'ACCEPT') {
-                    _this.submitAddress.emit(_this.address.value);
+                    _this.submitAddress.emit(_this.addressForm.value);
                 }
                 else if (results.decision === 'REJECT') {
                     // TODO: Workaround: allow server for decide is titleCode mandatory (if yes, provide personalized message)
@@ -8184,7 +8310,7 @@
                 }
             });
             if (this.addressData && Object.keys(this.addressData).length !== 0) {
-                this.address.patchValue(this.addressData);
+                this.addressForm.patchValue(this.addressData);
                 this.countrySelected(this.addressData.country);
                 if (this.addressData.region) {
                     this.regionSelected(this.addressData.region);
@@ -8192,47 +8318,53 @@
             }
         };
         AddressFormComponent.prototype.titleSelected = function (title) {
-            this.address['controls'].titleCode.setValue(title.code);
+            this.addressForm['controls'].titleCode.setValue(title.code);
         };
         AddressFormComponent.prototype.countrySelected = function (country) {
-            this.address['controls'].country['controls'].isocode.setValue(country.isocode);
+            this.addressForm['controls'].country['controls'].isocode.setValue(country.isocode);
             this.selectedCountry$.next(country.isocode);
         };
         AddressFormComponent.prototype.regionSelected = function (region) {
-            this.address['controls'].region['controls'].isocode.setValue(region.isocode);
+            this.addressForm['controls'].region['controls'].isocode.setValue(region.isocode);
         };
         AddressFormComponent.prototype.toggleDefaultAddress = function () {
-            this.address['controls'].defaultAddress.setValue(this.address.value.defaultAddress);
+            this.addressForm['controls'].defaultAddress.setValue(this.addressForm.value.defaultAddress);
         };
         AddressFormComponent.prototype.back = function () {
             this.backToAddress.emit();
         };
         AddressFormComponent.prototype.verifyAddress = function () {
             var _this = this;
-            if (this.address.controls['region'].value.isocode) {
-                this.regionsSub = this.regions$.pipe(operators.take(1)).subscribe(function (regions) {
-                    var obj = regions.find(function (region) {
-                        return region.isocode === _this.address.controls['region'].value.isocode;
+            if (this.addressForm.valid) {
+                if (this.addressForm.get('region').value.isocode) {
+                    this.regionsSub = this.regions$.pipe(operators.take(1)).subscribe(function (regions) {
+                        var obj = regions.find(function (region) {
+                            return region.isocode ===
+                                _this.addressForm.controls['region'].value.isocode;
+                        });
+                        Object.assign(_this.addressForm.value.region, {
+                            isocodeShort: obj.isocodeShort,
+                        });
                     });
-                    Object.assign(_this.address.value.region, {
-                        isocodeShort: obj.isocodeShort,
-                    });
-                });
-            }
-            if (this.address.dirty) {
-                this.checkoutDeliveryService.verifyAddress(this.address.value);
+                }
+                if (this.addressForm.dirty) {
+                    this.checkoutDeliveryService.verifyAddress(this.addressForm.value);
+                }
+                else {
+                    // address form value not changed
+                    // ignore duplicate address
+                    this.submitAddress.emit(undefined);
+                }
             }
             else {
-                // address form value not changed
-                // ignore duplicate address
-                this.submitAddress.emit(undefined);
+                this.addressForm.markAllAsTouched();
             }
         };
         AddressFormComponent.prototype.openSuggestedAddress = function (results) {
             var _this = this;
             if (!this.suggestedAddressModalRef) {
                 this.suggestedAddressModalRef = this.modalService.open(SuggestedAddressDialogComponent, { centered: true, size: 'lg' });
-                this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
+                this.suggestedAddressModalRef.componentInstance.enteredAddress = this.addressForm.value;
                 this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
                     results.suggestedAddresses;
                 this.suggestedAddressModalRef.result
@@ -8240,8 +8372,8 @@
                     _this.checkoutDeliveryService.clearAddressVerificationResults();
                     if (address) {
                         address = Object.assign({
-                            titleCode: _this.address.value.titleCode,
-                            phone: _this.address.value.phone,
+                            titleCode: _this.addressForm.value.titleCode,
+                            phone: _this.addressForm.value.phone,
                             selected: true,
                         }, address);
                         _this.submitAddress.emit(address);
@@ -8253,7 +8385,7 @@
                     _this.checkoutDeliveryService.clearAddressVerificationResults();
                     var address = Object.assign({
                         selected: true,
-                    }, _this.address.value);
+                    }, _this.addressForm.value);
                     _this.submitAddress.emit(address);
                     _this.suggestedAddressModalRef = null;
                 });
@@ -8303,7 +8435,7 @@
         AddressFormComponent = __decorate([
             core.Component({
                 selector: 'cx-address-form',
-                template: "<div [formGroup]=\"address\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"countries$ | async as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"true\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"titles$ | async as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            required\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            required\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <ng-container\n            *ngIf=\"regions$ | async as regions\"\n            formGroupName=\"region\"\n          >\n            <div *ngIf=\"regions.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-select\n                  class=\"region-select\"\n                  formControlName=\"isocode\"\n                  [searchable]=\"true\"\n                  [clearable]=\"false\"\n                  [items]=\"regions\"\n                  bindLabel=\"{{ regions[0].name ? 'name' : 'isocode' }}\"\n                  bindValue=\"{{ regions[0].name ? 'isocode' : 'region' }}\"\n                  placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                  (change)=\"regionSelected($event)\"\n                >\n                </ng-select>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              required\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n          </label>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" (click)=\"verifyAddress()\">\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</div>\n",
+                template: "<form (ngSubmit)=\"verifyAddress()\" [formGroup]=\"addressForm\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-9\">\n      <div class=\"form-group\" formGroupName=\"country\">\n        <ng-container *ngIf=\"countries$ | async as countries\">\n          <div *ngIf=\"countries.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.country' | cxTranslate\n              }}</span>\n              <ng-select\n                class=\"country-select\"\n                formControlName=\"isocode\"\n                [searchable]=\"true\"\n                [clearable]=\"false\"\n                [items]=\"countries\"\n                bindLabel=\"name\"\n                bindValue=\"isocode\"\n                placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                (change)=\"countrySelected($event)\"\n              >\n              </ng-select>\n              <cx-form-errors\n                [control]=\"addressForm.get('country.isocode')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\" *ngIf=\"showTitleCode\">\n        <ng-container *ngIf=\"titles$ | async as titles\">\n          <div *ngIf=\"titles.length !== 0\">\n            <label aria-required=\"true\">\n              <span class=\"label-content required\">{{\n                'addressForm.title' | cxTranslate\n              }}</span>\n              <ng-select\n                formControlName=\"titleCode\"\n                [searchable]=\"false\"\n                [clearable]=\"false\"\n                [items]=\"titles\"\n                bindLabel=\"name\"\n                bindValue=\"code\"\n                (change)=\"titleSelected($event)\"\n              >\n              </ng-select>\n            </label>\n          </div>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.firstName.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"text\"\n            placeholder=\"{{\n              'addressForm.firstName.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"firstName\"\n          />\n          <cx-form-errors\n            [control]=\"addressForm.get('firstName')\"\n          ></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.lastName.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.lastName.placeholder' | cxTranslate }}\"\n            formControlName=\"lastName\"\n          />\n          <cx-form-errors\n            [control]=\"addressForm.get('lastName')\"\n          ></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content required\">{{\n            'addressForm.address1' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.streetAddress' | cxTranslate }}\"\n            formControlName=\"line1\"\n          />\n          <cx-form-errors [control]=\"addressForm.get('line1')\"></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.address2' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n            formControlName=\"line2\"\n          />\n        </label>\n      </div>\n      <div class=\"row\">\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.city.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              placeholder=\"{{ 'addressForm.city.placeholder' | cxTranslate }}\"\n              formControlName=\"town\"\n            />\n            <cx-form-errors\n              [control]=\"addressForm.get('town')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n        <div class=\"form-group col-md-6\">\n          <label>\n            <span class=\"label-content required\">{{\n              'addressForm.zipCode.label' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              placeholder=\"{{\n                'addressForm.zipCode.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"postalCode\"\n            />\n            <cx-form-errors\n              [control]=\"addressForm.get('postalCode')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n        <ng-container\n          *ngIf=\"regions$ | async as regions\"\n          formGroupName=\"region\"\n        >\n          <ng-container *ngIf=\"regions.length !== 0\">\n            <div class=\"form-group col-md-6\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'addressForm.state' | cxTranslate\n                }}</span>\n                <ng-select\n                  class=\"region-select\"\n                  formControlName=\"isocode\"\n                  [searchable]=\"true\"\n                  [clearable]=\"false\"\n                  [items]=\"regions\"\n                  bindLabel=\"{{ regions[0].name ? 'name' : 'isocode' }}\"\n                  bindValue=\"{{ regions[0].name ? 'isocode' : 'region' }}\"\n                  placeholder=\"{{ 'addressForm.selectOne' | cxTranslate }}\"\n                  (change)=\"regionSelected($event)\"\n                >\n                </ng-select>\n                <cx-form-errors\n                  [control]=\"addressForm.get('region.isocode')\"\n                ></cx-form-errors>\n              </label>\n            </div>\n          </ng-container>\n        </ng-container>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'addressForm.phoneNumber.label' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            placeholder=\"{{\n              'addressForm.phoneNumber.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"phone\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n        <div class=\"form-check\">\n          <label>\n            <input\n              type=\"checkbox\"\n              class=\"form-check-input\"\n              formControlName=\"defaultAddress\"\n              (change)=\"toggleDefaultAddress()\"\n            />\n            <span class=\"form-check-label\">{{\n              'addressForm.setAsDefault' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"cx-checkout-btns row\">\n    <div class=\"col-md-12 col-lg-6\" *ngIf=\"showCancelBtn\">\n      <button class=\"btn btn-block btn-action\" (click)=\"back()\">\n        {{ cancelBtnLabel || ('addressForm.chooseAddress' | cxTranslate) }}\n      </button>\n    </div>\n    <div class=\"col-md-12 col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ actionBtnLabel || ('common.continue' | cxTranslate) }}\n      </button>\n    </div>\n  </div>\n</form>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], AddressFormComponent);
@@ -8323,6 +8455,7 @@
                     ngSelect.NgSelectModule,
                     IconModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 declarations: [AddressFormComponent, SuggestedAddressDialogComponent],
                 entryComponents: [SuggestedAddressDialogComponent],
@@ -12022,10 +12155,9 @@
             this.fb = fb;
             this.userService = userService;
             this.routingService = routingService;
-            this.submited = false;
         }
         ForgotPasswordComponent.prototype.ngOnInit = function () {
-            this.form = this.fb.group({
+            this.forgotPasswordForm = this.fb.group({
                 userEmail: [
                     '',
                     [forms.Validators.required, CustomFormValidators.emailValidator],
@@ -12033,12 +12165,13 @@
             });
         };
         ForgotPasswordComponent.prototype.requestForgotPasswordEmail = function () {
-            this.submited = true;
-            if (this.form.invalid) {
-                return;
+            if (this.forgotPasswordForm.valid) {
+                this.userService.requestForgotPasswordEmail(this.forgotPasswordForm.value.userEmail);
+                this.routingService.go({ cxRoute: 'login' });
             }
-            this.userService.requestForgotPasswordEmail(this.form.value.userEmail);
-            this.routingService.go({ cxRoute: 'login' });
+            else {
+                this.forgotPasswordForm.markAllAsTouched();
+            }
         };
         ForgotPasswordComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
@@ -12048,7 +12181,7 @@
         ForgotPasswordComponent = __decorate([
             core.Component({
                 selector: 'cx-forgot-password',
-                template: "<form (submit)=\"requestForgotPasswordEmail()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n        [ngClass]=\"{\n          'is-invalid':\n            form.controls['userEmail'].invalid &&\n            (submited ||\n              (form.controls['userEmail'].touched &&\n                form.controls['userEmail'].dirty))\n        }\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.controls['userEmail'].invalid &&\n          (submited ||\n            (form.controls['userEmail'].touched &&\n              form.controls['userEmail'].dirty))\n        \"\n      >\n        <span>{{ 'forgottenPassword.enterValidEmail' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n"
+                template: "<form\n  (ngSubmit)=\"requestForgotPasswordEmail()\"\n  [formGroup]=\"forgotPasswordForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'forgottenPassword.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        placeholder=\"{{\n          'forgottenPassword.emailAddress.placeholder' | cxTranslate\n        }}\"\n        formControlName=\"userEmail\"\n      />\n      <cx-form-errors\n        [control]=\"forgotPasswordForm.get('userEmail')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'common.submit' | cxTranslate }}\n  </button>\n  <a\n    class=\"btn btn-block btn-secondary\"\n    [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n    >{{ 'common.cancel' | cxTranslate }}</a\n  >\n</form>\n"
             })
         ], ForgotPasswordComponent);
         return ForgotPasswordComponent;
@@ -12065,6 +12198,7 @@
                     router.RouterModule,
                     core$1.UrlModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -13708,14 +13842,15 @@
             this.routingService = routingService;
             this.userService = userService;
             this.subscription = new rxjs.Subscription();
-            this.submited = false;
-            this.form = this.fb.group({
+            this.resetPasswordForm = this.fb.group({
                 password: [
                     '',
                     [forms.Validators.required, CustomFormValidators.passwordValidator],
                 ],
                 repassword: ['', [forms.Validators.required]],
-            }, { validator: this.matchPassword });
+            }, {
+                validators: CustomFormValidators.passwordsMustMatch('password', 'repassword'),
+            });
         }
         ResetPasswordFormComponent.prototype.ngOnInit = function () {
             var _this = this;
@@ -13728,22 +13863,18 @@
                 }
             }));
         };
+        ResetPasswordFormComponent.prototype.resetPassword = function () {
+            if (this.resetPasswordForm.valid) {
+                var password = this.resetPasswordForm.get('password').value;
+                this.userService.resetPassword(this.token, password);
+            }
+            else {
+                this.resetPasswordForm.markAllAsTouched();
+            }
+        };
         ResetPasswordFormComponent.prototype.ngOnDestroy = function () {
             if (this.subscription) {
                 this.subscription.unsubscribe();
-            }
-        };
-        ResetPasswordFormComponent.prototype.resetPassword = function () {
-            this.submited = true;
-            if (this.form.invalid) {
-                return;
-            }
-            var password = this.form.value['password'];
-            this.userService.resetPassword(this.token, password);
-        };
-        ResetPasswordFormComponent.prototype.matchPassword = function (ac) {
-            if (ac.get('password').value !== ac.get('repassword').value) {
-                return { NotEqual: true };
             }
         };
         ResetPasswordFormComponent.ctorParameters = function () { return [
@@ -13754,7 +13885,7 @@
         ResetPasswordFormComponent = __decorate([
             core.Component({
                 selector: 'cx-reset-password-form',
-                template: "<form\n  (submit)=\"resetPassword()\"\n  [formGroup]=\"form\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.get('password').invalid &&\n          (submited ||\n            (form.get('password').dirty && form.get('password').touched))\n        \"\n      >\n        <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <div\n        class=\"invalid-feedback\"\n        *ngIf=\"\n          form.hasError('NotEqual') &&\n          (submited ||\n            (form.get('repassword').dirty && form.get('repassword').touched))\n        \"\n      >\n        <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n"
+                template: "<form\n  (ngSubmit)=\"resetPassword()\"\n  [formGroup]=\"resetPasswordForm\"\n  class=\"cx-reset-password-form-component\"\n>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.newPassword' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <cx-form-errors\n        [control]=\"resetPasswordForm.get('password')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'register.passwordMinRequirements' | cxTranslate\n      }}</span>\n      <input\n        class=\"form-control\"\n        type=\"password\"\n        name=\"confirmpassword\"\n        placeholder=\"{{ 'register.confirmPassword.placeholder' | cxTranslate }}\"\n        formControlName=\"repassword\"\n      />\n      <cx-form-errors\n        [control]=\"resetPasswordForm.get('repassword')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <button class=\"btn btn-block btn-primary\" type=\"submit\">\n      {{ 'register.resetPassword' | cxTranslate }}\n    </button>\n  </div>\n</form>\n"
             })
         ], ResetPasswordFormComponent);
         return ResetPasswordFormComponent;
@@ -13771,6 +13902,7 @@
                     forms.ReactiveFormsModule,
                     router.RouterModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -13793,40 +13925,28 @@
     var UpdateEmailFormComponent = /** @class */ (function () {
         function UpdateEmailFormComponent(fb) {
             this.fb = fb;
-            this.submited = false;
             this.saveEmail = new core.EventEmitter();
             this.cancelEmail = new core.EventEmitter();
-            this.form = this.fb.group({
+            this.updateEmailForm = this.fb.group({
                 email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                 confirmEmail: ['', [forms.Validators.required]],
                 password: ['', [forms.Validators.required]],
-            }, { validator: this.matchEmail });
+            }, {
+                validators: CustomFormValidators.emailsMustMatch('email', 'confirmEmail'),
+            });
         }
-        UpdateEmailFormComponent.prototype.isEmailConfirmNotValid = function (formControlName) {
-            return (this.form.hasError('NotEqual') &&
-                (this.submited ||
-                    (this.form.get(formControlName).touched &&
-                        this.form.get(formControlName).dirty)));
-        };
-        UpdateEmailFormComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submited);
-        };
         UpdateEmailFormComponent.prototype.onSubmit = function () {
-            this.submited = true;
-            if (this.form.invalid) {
-                return;
+            if (this.updateEmailForm.valid) {
+                var newUid = this.updateEmailForm.get('confirmEmail').value;
+                var password = this.updateEmailForm.get('password').value;
+                this.saveEmail.emit({ newUid: newUid, password: password });
             }
-            var newUid = this.form.value.confirmEmail;
-            var password = this.form.value.password;
-            this.saveEmail.emit({ newUid: newUid, password: password });
+            else {
+                this.updateEmailForm.markAllAsTouched();
+            }
         };
         UpdateEmailFormComponent.prototype.onCancel = function () {
             this.cancelEmail.emit();
-        };
-        UpdateEmailFormComponent.prototype.matchEmail = function (ac) {
-            if (ac.get('email').value !== ac.get('confirmEmail').value) {
-                return { NotEqual: true };
-            }
         };
         UpdateEmailFormComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder }
@@ -13840,7 +13960,7 @@
         UpdateEmailFormComponent = __decorate([
             core.Component({
                 selector: 'cx-update-email-form',
-                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('email')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n          <span>{{ 'updateEmailForm.enterValidEmail' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isEmailConfirmNotValid('confirmEmail')\"\n        />\n        <div\n          class=\"invalid-feedback\"\n          *ngIf=\"isEmailConfirmNotValid('confirmEmail')\"\n        >\n          <span>{{ 'updateEmailForm.bothEmailMustMatch' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('password')\"\n          autocomplete=\"new-password\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('password')\">\n          <span>{{ 'updateEmailForm.pleaseInputPassword' | cxTranslate }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
+                template: "<form (ngSubmit)=\"onSubmit()\" [formGroup]=\"updateEmailForm\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.newEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"email\"\n          formControlName=\"email\"\n          placeholder=\"{{\n            'updateEmailForm.newEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n        />\n        <cx-form-errors\n          [control]=\"updateEmailForm.get('email')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.confirmNewEmailAddress.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"email\"\n          name=\"confirmEmail\"\n          formControlName=\"confirmEmail\"\n          placeholder=\"{{\n            'updateEmailForm.confirmNewEmailAddress.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n        />\n        <cx-form-errors\n          [control]=\"updateEmailForm.get('confirmEmail')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-sm-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateEmailForm.password.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"password\"\n          name=\"password\"\n          formControlName=\"password\"\n          placeholder=\"{{\n            'updateEmailForm.password.placeholder' | cxTranslate\n          }}\"\n          class=\"form-control\"\n          autocomplete=\"new-password\"\n        />\n        <cx-form-errors\n          [control]=\"updateEmailForm.get('password')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             })
         ], UpdateEmailFormComponent);
         return UpdateEmailFormComponent;
@@ -13914,6 +14034,7 @@
                     forms.ReactiveFormsModule,
                     SpinnerModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -13936,62 +14057,48 @@
     var UpdatePasswordFormComponent = /** @class */ (function () {
         function UpdatePasswordFormComponent(fb) {
             this.fb = fb;
-            this.submitClicked = false;
-            this.submited = new core.EventEmitter();
+            this.submitted = new core.EventEmitter();
             this.cancelled = new core.EventEmitter();
         }
         UpdatePasswordFormComponent.prototype.ngOnInit = function () {
-            this.form = this.fb.group({
+            this.updatePasswordForm = this.fb.group({
                 oldPassword: ['', [forms.Validators.required]],
                 newPassword: [
                     '',
                     [forms.Validators.required, CustomFormValidators.passwordValidator],
                 ],
                 newPasswordConfirm: ['', [forms.Validators.required]],
-            }, { validator: this.matchPassword });
-        };
-        UpdatePasswordFormComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-        };
-        UpdatePasswordFormComponent.prototype.isPasswordConfirmNotValid = function () {
-            return (this.form.hasError('NotEqual') &&
-                (this.submitClicked ||
-                    (this.form.get('newPasswordConfirm').touched &&
-                        this.form.get('newPasswordConfirm').dirty)));
+            }, {
+                validators: CustomFormValidators.passwordsMustMatch('newPassword', 'newPasswordConfirm'),
+            });
         };
         UpdatePasswordFormComponent.prototype.onSubmit = function () {
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
+            if (this.updatePasswordForm.valid) {
+                this.submitted.emit({
+                    oldPassword: this.updatePasswordForm.value.oldPassword,
+                    newPassword: this.updatePasswordForm.value.newPassword,
+                });
             }
-            this.submited.emit({
-                oldPassword: this.form.value.oldPassword,
-                newPassword: this.form.value.newPassword,
-            });
+            else {
+                this.updatePasswordForm.markAllAsTouched();
+            }
         };
         UpdatePasswordFormComponent.prototype.onCancel = function () {
             this.cancelled.emit();
-        };
-        UpdatePasswordFormComponent.prototype.matchPassword = function (abstractControl) {
-            if (abstractControl.get('newPassword').value !==
-                abstractControl.get('newPasswordConfirm').value) {
-                return { NotEqual: true };
-            }
-            return null;
         };
         UpdatePasswordFormComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder }
         ]; };
         __decorate([
             core.Output()
-        ], UpdatePasswordFormComponent.prototype, "submited", void 0);
+        ], UpdatePasswordFormComponent.prototype, "submitted", void 0);
         __decorate([
             core.Output()
         ], UpdatePasswordFormComponent.prototype, "cancelled", void 0);
         UpdatePasswordFormComponent = __decorate([
             core.Component({
                 selector: 'cx-update-password-form',
-                template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"form\"\n  class=\"cx-update-password-component\"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('oldPassword')\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('oldPassword')\">\n          <span>{{\n            'updatePasswordForm.oldPasswordIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isNotValid('newPassword')\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('newPassword')\">\n          <span>{{\n            'updatePasswordForm.passwordMinRequirements' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          [class.is-invalid]=\"isPasswordConfirmNotValid()\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isPasswordConfirmNotValid()\">\n          <span>{{\n            'updatePasswordForm.bothPasswordMustMatch' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
+                template: "<form\n  (ngSubmit)=\"onSubmit()\"\n  [formGroup]=\"updatePasswordForm\"\n  class=\"cx-update-password-component\"\n>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.oldPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          type=\"password\"\n          name=\"oldPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.oldPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"oldPassword\"\n        />\n        <cx-form-errors\n          [control]=\"updatePasswordForm.get('oldPassword')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.newPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          type=\"password\"\n          name=\"newPassword\"\n          placeholder=\"{{\n            'updatePasswordForm.newPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPassword\"\n        />\n        <cx-form-errors\n          [control]=\"updatePasswordForm.get('newPassword')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updatePasswordForm.confirmPassword.label' | cxTranslate\n        }}</span>\n        <input\n          class=\"form-control\"\n          type=\"password\"\n          name=\"newPasswordConfirm\"\n          placeholder=\"{{\n            'updatePasswordForm.confirmPassword.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"newPasswordConfirm\"\n        />\n        <cx-form-errors\n          [control]=\"updatePasswordForm.get('newPasswordConfirm')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             })
         ], UpdatePasswordFormComponent);
         return UpdatePasswordFormComponent;
@@ -14037,7 +14144,7 @@
         UpdatePasswordComponent = __decorate([
             core.Component({
                 selector: 'cx-update-password',
-                template: "<ng-container>\n  <div *ngIf=\"loading$ | async; else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-password-form\n          class=\"col-md-6\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-password-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                template: "<ng-container>\n  <div *ngIf=\"loading$ | async; else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-password-form\n          class=\"col-md-6\"\n          (cancelled)=\"onCancel()\"\n          (submitted)=\"onSubmit($event)\"\n        ></cx-update-password-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
             })
         ], UpdatePasswordComponent);
         return UpdatePasswordComponent;
@@ -14054,6 +14161,7 @@
                     forms.ReactiveFormsModule,
                     SpinnerModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -14076,31 +14184,28 @@
     var UpdateProfileFormComponent = /** @class */ (function () {
         function UpdateProfileFormComponent(fb) {
             this.fb = fb;
-            this.submited = new core.EventEmitter();
+            this.submitted = new core.EventEmitter();
             this.cancelled = new core.EventEmitter();
-            this.form = this.fb.group({
+            this.updateProfileForm = this.fb.group({
                 titleCode: [''],
                 firstName: ['', forms.Validators.required],
                 lastName: ['', forms.Validators.required],
             });
-            this.submitClicked = false;
         }
         UpdateProfileFormComponent.prototype.ngOnInit = function () {
             if (this.user) {
-                this.form.patchValue(this.user);
+                this.updateProfileForm.patchValue(this.user);
             }
-        };
-        UpdateProfileFormComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
         };
         UpdateProfileFormComponent.prototype.onSubmit = function () {
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
+            if (this.updateProfileForm.valid) {
+                this.submitted.emit({
+                    userUpdates: __assign({}, this.updateProfileForm.value),
+                });
             }
-            this.submited.emit({
-                userUpdates: __assign({}, this.form.value),
-            });
+            else {
+                this.updateProfileForm.markAllAsTouched();
+            }
         };
         UpdateProfileFormComponent.prototype.onCancel = function () {
             this.cancelled.emit();
@@ -14116,14 +14221,14 @@
         ], UpdateProfileFormComponent.prototype, "titles", void 0);
         __decorate([
             core.Output()
-        ], UpdateProfileFormComponent.prototype, "submited", void 0);
+        ], UpdateProfileFormComponent.prototype, "submitted", void 0);
         __decorate([
             core.Output()
         ], UpdateProfileFormComponent.prototype, "cancelled", void 0);
         UpdateProfileFormComponent = __decorate([
             core.Component({
                 selector: 'cx-update-profile-form',
-                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.title' | cxTranslate\n        }}</span>\n        <select formControlName=\"titleCode\" class=\"form-control\">\n          <option value=\"\">{{ 'updateProfileForm.none' | cxTranslate }}</option>\n          <option *ngFor=\"let title of titles\" [value]=\"title.code\">{{\n            title.name\n          }}</option>\n        </select>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.firstName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"firstName\"\n          placeholder=\"{{\n            'updateProfileForm.firstName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"firstName\"\n          [class.is-invalid]=\"isNotValid('firstName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('firstName')\">\n          <span>{{\n            'updateProfileForm.firstNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.lastName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"lastName\"\n          placeholder=\"{{\n            'updateProfileForm.lastName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"lastName\"\n          [class.is-invalid]=\"isNotValid('lastName')\"\n        />\n        <div class=\"invalid-feedback\" *ngIf=\"isNotValid('lastName')\">\n          <span>{{\n            'updateProfileForm.lastNameIsRequired' | cxTranslate\n          }}</span>\n        </div>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
+                template: "<form (ngSubmit)=\"onSubmit()\" [formGroup]=\"updateProfileForm\">\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.title' | cxTranslate\n        }}</span>\n        <select formControlName=\"titleCode\" class=\"form-control\">\n          <option value=\"\">{{ 'updateProfileForm.none' | cxTranslate }}</option>\n          <option *ngFor=\"let title of titles\" [value]=\"title.code\">{{\n            title.name\n          }}</option>\n        </select>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.firstName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"firstName\"\n          placeholder=\"{{\n            'updateProfileForm.firstName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"firstName\"\n        />\n        <cx-form-errors\n          [control]=\"updateProfileForm.get('firstName')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n  <div class=\"form-group row\">\n    <div class=\"col-md-12\">\n      <label>\n        <span class=\"label-content\">{{\n          'updateProfileForm.lastName.label' | cxTranslate\n        }}</span>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          name=\"lastName\"\n          placeholder=\"{{\n            'updateProfileForm.lastName.placeholder' | cxTranslate\n          }}\"\n          formControlName=\"lastName\"\n        />\n        <cx-form-errors\n          [control]=\"updateProfileForm.get('lastName')\"\n        ></cx-form-errors>\n      </label>\n    </div>\n  </div>\n\n  <div class=\"form-group row\">\n    <div class=\"col-lg-6 col-md-12\">\n      <button\n        class=\"btn btn-block btn-secondary\"\n        type=\"button\"\n        (click)=\"onCancel()\"\n      >\n        {{ 'common.cancel' | cxTranslate }}\n      </button>\n    </div>\n    <div class=\"col-lg-6 col-md-12\">\n      <button class=\"btn btn-block btn-primary\" type=\"submit\">\n        {{ 'common.save' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n</form>\n"
             })
         ], UpdateProfileFormComponent);
         return UpdateProfileFormComponent;
@@ -14177,7 +14282,7 @@
         UpdateProfileComponent = __decorate([
             core.Component({
                 selector: 'cx-update-profile',
-                template: "<ng-container>\n  <div *ngIf=\"loading$ | async; else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-profile-form\n          *ngIf=\"(user$ | async)?.uid\"\n          class=\"col-md-6\"\n          [user]=\"user$ | async\"\n          [titles]=\"titles$ | async\"\n          (cancelled)=\"onCancel()\"\n          (submited)=\"onSubmit($event)\"\n        ></cx-update-profile-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
+                template: "<ng-container>\n  <div *ngIf=\"loading$ | async; else updateForm\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #updateForm>\n    <div class=\"container\">\n      <div class=\"row d-flex justify-content-center\">\n        <cx-update-profile-form\n          *ngIf=\"(user$ | async)?.uid\"\n          class=\"col-md-6\"\n          [user]=\"user$ | async\"\n          [titles]=\"titles$ | async\"\n          (cancelled)=\"onCancel()\"\n          (submitted)=\"onSubmit($event)\"\n        ></cx-update-profile-form>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n"
             })
         ], UpdateProfileComponent);
         return UpdateProfileComponent;
@@ -14194,6 +14299,7 @@
                     forms.ReactiveFormsModule,
                     SpinnerModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -15833,17 +15939,26 @@
                     [forms.Validators.required, CustomFormValidators.passwordValidator],
                 ],
                 passwordconf: ['', forms.Validators.required],
-            }, { validator: CustomFormValidators.matchPassword });
+            }, {
+                validators: CustomFormValidators.passwordsMustMatch('password', 'passwordconf'),
+            });
         }
         GuestRegisterFormComponent.prototype.submit = function () {
             var _this = this;
-            this.userService.registerGuest(this.guid, this.guestRegisterForm.value.password);
-            if (!this.subscription) {
-                this.subscription = this.authService.getUserToken().subscribe(function (token) {
-                    if (token.access_token) {
-                        _this.routingService.go({ cxRoute: 'home' });
-                    }
-                });
+            if (this.guestRegisterForm.valid) {
+                this.userService.registerGuest(this.guid, this.guestRegisterForm.value.password);
+                if (!this.subscription) {
+                    this.subscription = this.authService
+                        .getUserToken()
+                        .subscribe(function (token) {
+                        if (token.access_token) {
+                            _this.routingService.go({ cxRoute: 'home' });
+                        }
+                    });
+                }
+            }
+            else {
+                this.guestRegisterForm.markAllAsTouched();
             }
         };
         GuestRegisterFormComponent.prototype.ngOnDestroy = function () {
@@ -15866,7 +15981,7 @@
         GuestRegisterFormComponent = __decorate([
             core.Component({
                 selector: 'cx-guest-register-form',
-                template: "<div class=\"register-guest\">\n  <div class=\"col-md-6 col-lg-4\">\n    <h3>{{ 'checkoutOrderConfirmation.createAccount' | cxTranslate }}</h3>\n    <p>\n      {{\n        'checkoutOrderConfirmation.createAccountForNext'\n          | cxTranslate: { email: email }\n      }}\n    </p>\n\n    <form [formGroup]=\"guestRegisterForm\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.password.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            [class.is-invalid]=\"\n              guestRegisterForm.get('password').invalid &&\n              guestRegisterForm.get('password').dirty\n            \"\n            type=\"password\"\n            name=\"password\"\n            placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n            formControlName=\"password\"\n          />\n          <div\n            class=\"invalid-feedback\"\n            *ngIf=\"\n              guestRegisterForm.get('password').invalid &&\n              guestRegisterForm.get('password').dirty\n            \"\n          >\n            <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>\n          </div>\n        </label>\n      </div>\n\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.confirmPassword.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            [class.is-invalid]=\"\n              guestRegisterForm.get('password').value !==\n              guestRegisterForm.get('passwordconf').value\n            \"\n            type=\"password\"\n            name=\"confirmpassword\"\n            placeholder=\"{{\n              'register.confirmPassword.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"passwordconf\"\n          />\n          <div\n            class=\"invalid-feedback\"\n            *ngIf=\"\n              guestRegisterForm.get('password').value !==\n                guestRegisterForm.get('passwordconf').value &&\n              guestRegisterForm.get('passwordconf').value\n            \"\n          >\n            <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>\n          </div>\n        </label>\n      </div>\n\n      <button\n        type=\"submit\"\n        (click)=\"submit()\"\n        [disabled]=\"guestRegisterForm.invalid\"\n        class=\"btn btn-block btn-primary\"\n      >\n        {{ 'common.submit' | cxTranslate }}\n      </button>\n    </form>\n  </div>\n</div>\n"
+                template: "<div class=\"register-guest\">\n  <div class=\"col-md-6 col-lg-4\">\n    <h3>{{ 'checkoutOrderConfirmation.createAccount' | cxTranslate }}</h3>\n    <p>\n      {{\n        'checkoutOrderConfirmation.createAccountForNext'\n          | cxTranslate: { email: email }\n      }}\n    </p>\n\n    <form (ngSubmit)=\"submit()\" [formGroup]=\"guestRegisterForm\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.password.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"password\"\n            name=\"password\"\n            placeholder=\"{{ 'register.password.placeholder' | cxTranslate }}\"\n            formControlName=\"password\"\n          />\n          <cx-form-errors\n            [control]=\"guestRegisterForm.get('password')\"\n          ></cx-form-errors>\n        </label>\n      </div>\n\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'register.confirmPassword.label' | cxTranslate\n          }}</span>\n          <input\n            class=\"form-control\"\n            type=\"password\"\n            name=\"passwordconf\"\n            placeholder=\"{{\n              'register.confirmPassword.placeholder' | cxTranslate\n            }}\"\n            formControlName=\"passwordconf\"\n          />\n          <cx-form-errors\n            [control]=\"guestRegisterForm.get('passwordconf')\"\n          ></cx-form-errors>\n        </label>\n      </div>\n\n      <button type=\"submit\" class=\"btn btn-block btn-primary\">\n        {{ 'common.submit' | cxTranslate }}\n      </button>\n    </form>\n  </div>\n</div>\n"
             })
         ], GuestRegisterFormComponent);
         return GuestRegisterFormComponent;
@@ -15924,6 +16039,7 @@
                     core$1.I18nModule,
                     forms.ReactiveFormsModule,
                     core$1.FeaturesConfigModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -17421,18 +17537,12 @@
         ProductReviewsComponent.prototype.setRating = function (rating) {
             this.reviewForm.controls.rating.setValue(rating);
         };
-        ProductReviewsComponent.prototype.markFormAsTouched = function () {
-            var _this = this;
-            Object.keys(this.reviewForm.controls).forEach(function (key) {
-                _this.reviewForm.controls[key].markAsTouched();
-            });
-        };
         ProductReviewsComponent.prototype.submitReview = function (product) {
             if (this.reviewForm.valid) {
                 this.addReview(product);
             }
             else {
-                this.markFormAsTouched();
+                this.reviewForm.markAllAsTouched();
             }
         };
         ProductReviewsComponent.prototype.addReview = function (product) {
@@ -17455,7 +17565,7 @@
             this.reviewForm = this.fb.group({
                 title: ['', forms.Validators.required],
                 comment: ['', forms.Validators.required],
-                rating: [0, [forms.Validators.min(1), forms.Validators.max(5)]],
+                rating: [null, CustomFormValidators.starRatingEmpty],
                 reviewerName: '',
             });
         };
@@ -17474,7 +17584,7 @@
         ProductReviewsComponent = __decorate([
             core.Component({
                 selector: 'cx-product-reviews',
-                template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button\n        #writeReviewButton\n        class=\"btn btn-primary\"\n        (click)=\"initiateWriteReview()\"\n      >\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form [formGroup]=\"reviewForm\" (ngSubmit)=\"submitReview(product)\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input\n            #titleInput\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"title\"\n            [class.is-invalid]=\"\n              reviewForm.controls['title'].invalid &&\n              (reviewForm.controls['title'].touched ||\n                reviewForm.controls['title'].dirty)\n            \"\n          />\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n            [class.is-invalid]=\"\n              reviewForm.controls['comment'].invalid &&\n              (reviewForm.controls['comment'].touched ||\n                reviewForm.controls['comment'].dirty)\n            \"\n          ></textarea>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"button\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"submit\"\n            class=\"btn btn-block btn-primary\"\n            [ngClass]=\"{ 'submit-btn': reviewForm.valid }\"\n          >\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
+                template: "<div class=\"container\" *ngIf=\"product$ | async as product\">\n  <h2>\n    {{ 'productDetails.reviews' | cxTranslate }} ({{ product.numberOfReviews }})\n  </h2>\n  <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n    <div class=\"header\">\n      <h3>{{ 'productReview.overallRating' | cxTranslate }}</h3>\n      <button\n        #writeReviewButton\n        class=\"btn btn-primary\"\n        (click)=\"initiateWriteReview()\"\n      >\n        {{ 'productReview.writeReview' | cxTranslate }}\n      </button>\n      <cx-star-rating\n        *ngIf=\"product.averageRating\"\n        class=\"rating\"\n        [rating]=\"product.averageRating\"\n        [disabled]=\"true\"\n      ></cx-star-rating>\n      <div class=\"rating\" *ngIf=\"!product.averageRating\">\n        {{ 'productDetails.noReviews' | cxTranslate }}\n      </div>\n    </div>\n\n    <ng-container *ngIf=\"!isWritingReview; else writeReview\">\n      <ng-container *ngIf=\"reviews$ | async as reviews\">\n        <div\n          class=\"review\"\n          tabindex=\"0\"\n          *ngFor=\"let review of reviews | slice: 0:maxListItems\"\n        >\n          <div class=\"title\">{{ review.headline }}</div>\n          <cx-star-rating\n            [rating]=\"review.rating\"\n            [disabled]=\"true\"\n          ></cx-star-rating>\n          <div class=\"name\">\n            {{ review.alias ? review.alias : review.principal?.name }}\n          </div>\n          <div class=\"date\">{{ review.date | cxDate }}</div>\n          <div class=\"text\">{{ review.comment }}</div>\n        </div>\n        <div *ngIf=\"reviews.length > initialMaxListItems\">\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = reviews.length\"\n            *ngIf=\"maxListItems === initialMaxListItems\"\n          >\n            {{ 'productReview.more' | cxTranslate }}\n          </button>\n          <button\n            class=\"btn btn-primary\"\n            (click)=\"maxListItems = initialMaxListItems\"\n            *ngIf=\"maxListItems !== initialMaxListItems\"\n          >\n            {{ 'productReview.less' | cxTranslate }}\n          </button>\n        </div>\n      </ng-container>\n    </ng-container>\n  </ng-container>\n\n  <ng-template #writeReview>\n    <form (ngSubmit)=\"submitReview(product)\" [formGroup]=\"reviewForm\">\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewTitle' | cxTranslate\n          }}</span>\n          <input\n            #titleInput\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"title\"\n          />\n          <cx-form-errors [control]=\"reviewForm.get('title')\"></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.writeYourComments' | cxTranslate\n          }}</span>\n          <textarea\n            class=\"form-control\"\n            rows=\"3\"\n            formControlName=\"comment\"\n          ></textarea>\n          <cx-form-errors\n            [control]=\"reviewForm.get('comment')\"\n          ></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.rating' | cxTranslate\n          }}</span>\n          <input type=\"number\" formControlName=\"rating\" class=\"rating-input\" />\n          <cx-star-rating (change)=\"setRating($event)\"></cx-star-rating>\n          <cx-form-errors [control]=\"reviewForm.get('rating')\"></cx-form-errors>\n        </label>\n      </div>\n      <div class=\"form-group\">\n        <label>\n          <span class=\"label-content\">{{\n            'productReview.reviewerName' | cxTranslate\n          }}</span>\n          <input\n            type=\"text\"\n            class=\"form-control\"\n            formControlName=\"reviewerName\"\n          />\n        </label>\n      </div>\n      <div class=\"form-group row\">\n        <div class=\"col-12 col-md-4\">\n          <button\n            type=\"button\"\n            class=\"btn btn-block btn-secondary\"\n            (click)=\"cancelWriteReview()\"\n          >\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-12 col-md-4\">\n          <button type=\"submit\" class=\"btn btn-block btn-primary\">\n            {{ 'common.submit' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </form>\n  </ng-template>\n</div>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], ProductReviewsComponent);
@@ -17492,6 +17602,7 @@
                     forms.FormsModule,
                     core$1.I18nModule,
                     StarRatingModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -18094,7 +18205,7 @@
         StoreFinderSearchComponent = __decorate([
             core.Component({
                 selector: 'cx-store-finder-search',
-                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-7\">\n      <div class=\"form-group search-wrapper\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n          required\n        />\n        <cx-icon\n          [type]=\"iconTypes.SEARCH\"\n          aria-label=\"search\"\n          class=\"search\"\n          (keyup)=\"onKey($event)\"\n          [routerLink]=\"['/store-finder/find']\"\n          [queryParams]=\"{ query: queryInput.value }\"\n          [ngClass]=\"{\n            'disabled-action': !(queryInput.value && queryInput.value.length)\n          }\"\n        ></cx-icon>\n      </div>\n    </div>\n    <div class=\"col-md-12 col-lg-5\">\n      <div class=\"row cx-search-links mb-3\">\n        <div class=\"col-6\">\n          <button\n            (click)=\"viewStoresWithMyLoc()\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.useMyLocation' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-6\">\n          <button\n            [routerLink]=\"['/store-finder/view-all']\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.viewAllStores' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                template: "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-lg-7\">\n      <div class=\"form-group search-wrapper\">\n        <input\n          #queryInput\n          [formControl]=\"searchBox\"\n          (keyup)=\"onKey($event)\"\n          type=\"text\"\n          class=\"form-control\"\n          placeholder=\"{{ 'storeFinder.searchBox' | cxTranslate }}\"\n        />\n        <cx-icon\n          [type]=\"iconTypes.SEARCH\"\n          aria-label=\"search\"\n          class=\"search\"\n          (keyup)=\"onKey($event)\"\n          [routerLink]=\"['/store-finder/find']\"\n          [queryParams]=\"{ query: queryInput.value }\"\n          [ngClass]=\"{\n            'disabled-action': !(queryInput.value && queryInput.value.length)\n          }\"\n        ></cx-icon>\n      </div>\n    </div>\n    <div class=\"col-md-12 col-lg-5\">\n      <div class=\"row cx-search-links mb-3\">\n        <div class=\"col-6\">\n          <button\n            (click)=\"viewStoresWithMyLoc()\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.useMyLocation' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-6\">\n          <button\n            [routerLink]=\"['/store-finder/view-all']\"\n            class=\"btn btn-primary btn-block\"\n          >\n            {{ 'storeFinder.viewAllStores' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
             })
         ], StoreFinderSearchComponent);
         return StoreFinderSearchComponent;
@@ -18304,47 +18415,34 @@
             this.formBuilder = formBuilder;
             this.authRedirectService = authRedirectService;
             this.activeCartService = activeCartService;
-            this.form = this.formBuilder.group({
+            this.checkoutLoginForm = this.formBuilder.group({
                 email: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
                 emailConfirmation: ['', [forms.Validators.required]],
-            }, { validator: this.emailsMatch });
-            this.submitClicked = false;
+            }, {
+                validators: CustomFormValidators.emailsMustMatch('email', 'emailConfirmation'),
+            });
         }
-        CheckoutLoginComponent.prototype.isNotValid = function (formControlName) {
-            return FormUtils.isNotValidField(this.form, formControlName, this.submitClicked);
-        };
-        CheckoutLoginComponent.prototype.isEmailConfirmInvalid = function () {
-            return (this.form.hasError('NotEqual') &&
-                (this.submitClicked ||
-                    (this.form.get('emailConfirmation').touched &&
-                        this.form.get('emailConfirmation').dirty)));
-        };
         CheckoutLoginComponent.prototype.onSubmit = function () {
             var _this = this;
-            this.submitClicked = true;
-            if (this.form.invalid) {
-                return;
+            if (this.checkoutLoginForm.valid) {
+                var email = this.checkoutLoginForm.get('email').value;
+                this.activeCartService.addEmail(email);
+                if (!this.sub) {
+                    this.sub = this.activeCartService.getAssignedUser().subscribe(function () {
+                        if (_this.activeCartService.isGuestCart()) {
+                            _this.authRedirectService.redirect();
+                        }
+                    });
+                }
             }
-            var email = this.form.value.email;
-            this.activeCartService.addEmail(email);
-            if (!this.sub) {
-                this.sub = this.activeCartService.getAssignedUser().subscribe(function () {
-                    if (_this.activeCartService.isGuestCart()) {
-                        _this.authRedirectService.redirect();
-                    }
-                });
+            else {
+                this.checkoutLoginForm.markAllAsTouched();
             }
         };
         CheckoutLoginComponent.prototype.ngOnDestroy = function () {
             if (this.sub) {
                 this.sub.unsubscribe();
             }
-        };
-        CheckoutLoginComponent.prototype.emailsMatch = function (abstractControl) {
-            return abstractControl.get('email').value !==
-                abstractControl.get('emailConfirmation').value
-                ? { NotEqual: true }
-                : null;
         };
         CheckoutLoginComponent.ctorParameters = function () { return [
             { type: forms.FormBuilder },
@@ -18354,7 +18452,7 @@
         CheckoutLoginComponent = __decorate([
             core.Component({
                 selector: 'cx-checkout-login',
-                template: "<form [formGroup]=\"form\" (ngSubmit)=\"onSubmit()\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isNotValid('email')\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isNotValid('email')\">\n        <span>{{ 'checkoutLogin.emailIsRequired' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n        [class.is-invalid]=\"isEmailConfirmInvalid()\"\n      />\n      <div class=\"invalid-feedback\" *ngIf=\"isEmailConfirmInvalid()\">\n        <span>{{ 'checkoutLogin.emailsMustMatch' | cxTranslate }}</span>\n      </div>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
+                template: "<form (ngSubmit)=\"onSubmit()\" [formGroup]=\"checkoutLoginForm\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"email\"\n        class=\"form-control\"\n        formControlName=\"email\"\n        placeholder=\"{{\n          'checkoutLogin.emailAddress.placeholder' | cxTranslate\n        }}\"\n      />\n      <cx-form-errors\n        [control]=\"checkoutLoginForm.get('email')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'checkoutLogin.confirmEmail.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        name=\"emailConfirmation\"\n        class=\"form-control\"\n        formControlName=\"emailConfirmation\"\n        placeholder=\"{{\n          'checkoutLogin.confirmEmail.placeholder' | cxTranslate\n        }}\"\n      />\n      <cx-form-errors\n        [control]=\"checkoutLoginForm.get('emailConfirmation')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'checkoutLogin.continue' | cxTranslate }}\n  </button>\n</form>\n"
             })
         ], CheckoutLoginComponent);
         return CheckoutLoginComponent;
@@ -18372,6 +18470,7 @@
                     forms.ReactiveFormsModule,
                     forms.FormsModule,
                     forms.ReactiveFormsModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -18403,30 +18502,36 @@
             this.loginAsGuest = false;
         }
         LoginFormComponent.prototype.ngOnInit = function () {
-            var _a, _b, _c, _d, _e, _f, _g;
-            this.form = this.fb.group({
-                userId: ['', [forms.Validators.required, CustomFormValidators.emailValidator]],
+            var _a, _b, _c, _d, _e;
+            var routeState = (_b = (_a = this.winRef.nativeWindow) === null || _a === void 0 ? void 0 : _a.history) === null || _b === void 0 ? void 0 : _b.state;
+            var prefilledEmail = routeState === null || routeState === void 0 ? void 0 : routeState['newUid'];
+            this.loginForm = this.fb.group({
+                userId: [
+                    (prefilledEmail === null || prefilledEmail === void 0 ? void 0 : prefilledEmail.length) ? prefilledEmail : '',
+                    [forms.Validators.required, CustomFormValidators.emailValidator],
+                ],
                 password: ['', forms.Validators.required],
             });
             if (this.checkoutConfigService.isGuestCheckout()) {
-                this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
-            }
-            var prefilledEmail = (_g = (_f = (_e = (_d = this.winRef) === null || _d === void 0 ? void 0 : _d.nativeWindow) === null || _e === void 0 ? void 0 : _e.history) === null || _f === void 0 ? void 0 : _f.state) === null || _g === void 0 ? void 0 : _g['newUid'];
-            if (prefilledEmail === null || prefilledEmail === void 0 ? void 0 : prefilledEmail.length) {
-                this.prefillForm('userId', prefilledEmail);
+                this.loginAsGuest = (_e = (_d = (_c = this.activatedRoute) === null || _c === void 0 ? void 0 : _c.snapshot) === null || _d === void 0 ? void 0 : _d.queryParams) === null || _e === void 0 ? void 0 : _e['forced'];
             }
         };
-        LoginFormComponent.prototype.login = function () {
-            if (this.form.valid) {
-                this.submitLogin();
+        LoginFormComponent.prototype.submitForm = function () {
+            if (this.loginForm.valid) {
+                this.loginUser();
             }
             else {
-                this.markFormAsTouched();
+                this.loginForm.markAllAsTouched();
             }
         };
-        LoginFormComponent.prototype.submitLogin = function () {
+        LoginFormComponent.prototype.ngOnDestroy = function () {
+            if (this.sub) {
+                this.sub.unsubscribe();
+            }
+        };
+        LoginFormComponent.prototype.loginUser = function () {
             var _this = this;
-            var _a = this.form.controls, userId = _a.userId, password = _a.password;
+            var _a = this.loginForm.controls, userId = _a.userId, password = _a.password;
             this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
             password.value);
             if (!this.sub) {
@@ -18437,24 +18542,6 @@
                     }
                 });
             }
-        };
-        LoginFormComponent.prototype.markFormAsTouched = function () {
-            var _this = this;
-            Object.keys(this.form.controls).forEach(function (key) {
-                _this.form.controls[key].markAsTouched();
-            });
-        };
-        LoginFormComponent.prototype.ngOnDestroy = function () {
-            if (this.sub) {
-                this.sub.unsubscribe();
-            }
-        };
-        LoginFormComponent.prototype.prefillForm = function (field, value) {
-            var _a;
-            this.form.patchValue((_a = {},
-                _a[field] = value,
-                _a));
-            this.form.get(field).markAsTouched(); // this action will check field validity on load
         };
         LoginFormComponent.ctorParameters = function () { return [
             { type: core$1.AuthService },
@@ -18468,7 +18555,7 @@
         LoginFormComponent = __decorate([
             core.Component({
                 selector: 'cx-login-form',
-                template: "<form (submit)=\"login()\" [formGroup]=\"form\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        [class.is-invalid]=\"\n          form.controls['userId'].invalid &&\n          (form.controls['userId'].touched || form.controls['userId'].dirty)\n        \"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n    </label>\n    <div\n      class=\"invalid-feedback\"\n      *ngIf=\"\n        form.controls['userId'].invalid &&\n        (form.controls['userId'].touched || form.controls['userId'].dirty)\n      \"\n    >\n      <span>{{ 'loginForm.wrongEmailFormat' | cxTranslate }}</span>\n    </div>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
+                template: "<form (ngSubmit)=\"submitForm()\" [formGroup]=\"loginForm\">\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.emailAddress.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"email\"\n        class=\"form-control\"\n        formControlName=\"userId\"\n        placeholder=\"{{ 'loginForm.emailAddress.placeholder' | cxTranslate }}\"\n      />\n      <cx-form-errors [control]=\"loginForm.get('userId')\"></cx-form-errors>\n    </label>\n  </div>\n  <div class=\"form-group\">\n    <label>\n      <span class=\"label-content\">{{\n        'loginForm.password.label' | cxTranslate\n      }}</span>\n      <input\n        type=\"password\"\n        class=\"form-control\"\n        placeholder=\"{{ 'loginForm.password.placeholder' | cxTranslate }}\"\n        formControlName=\"password\"\n      />\n      <cx-form-errors [control]=\"loginForm.get('password')\"></cx-form-errors>\n    </label>\n  </div>\n  <p>\n    <a\n      [routerLink]=\"{ cxRoute: 'forgotPassword' } | cxUrl\"\n      aria-controls=\"reset-password\"\n      class=\"btn-link\"\n      >{{ 'loginForm.forgotPassword' | cxTranslate }}</a\n    >\n  </p>\n\n  <button type=\"submit\" class=\"btn btn-block btn-primary\">\n    {{ 'loginForm.signIn' | cxTranslate }}\n  </button>\n</form>\n\n<div class=\"register\">\n  <h3 class=\"cx-section-title cx-section-title-alt\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </h3>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
             })
         ], LoginFormComponent);
         return LoginFormComponent;
@@ -18486,6 +18573,7 @@
                     router.RouterModule,
                     core$1.UrlModule,
                     core$1.I18nModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -18646,7 +18734,7 @@
             this.anonymousConsentsService = anonymousConsentsService;
             this.anonymousConsentsConfig = anonymousConsentsConfig;
             this.subscription = new rxjs.Subscription();
-            this.userRegistrationForm = this.fb.group({
+            this.registerForm = this.fb.group({
                 titleCode: [''],
                 firstName: ['', forms.Validators.required],
                 lastName: ['', forms.Validators.required],
@@ -18661,7 +18749,9 @@
                     disabled: this.isConsentRequired(),
                 }),
                 termsandconditions: [false, forms.Validators.requiredTrue],
-            }, { validator: CustomFormValidators.matchPassword });
+            }, {
+                validators: CustomFormValidators.passwordsMustMatch('password', 'passwordconf'),
+            });
         }
         RegisterComponent.prototype.ngOnInit = function () {
             var _this = this;
@@ -18699,15 +18789,23 @@
                     template: template ? template.description : '',
                 };
             }));
-            this.subscription.add(this.userRegistrationForm.get('newsletter').valueChanges.subscribe(function () {
+            this.subscription.add(this.registerForm.get('newsletter').valueChanges.subscribe(function () {
                 _this.toggleAnonymousConsent();
             }));
         };
-        RegisterComponent.prototype.submit = function () {
-            this.userService.register(this.collectDataFromRegisterForm(this.userRegistrationForm.value));
+        RegisterComponent.prototype.submitForm = function () {
+            if (this.registerForm.valid) {
+                this.registerUser();
+            }
+            else {
+                this.registerForm.markAllAsTouched();
+            }
+        };
+        RegisterComponent.prototype.registerUser = function () {
+            this.userService.register(this.collectDataFromRegisterForm(this.registerForm.value));
         };
         RegisterComponent.prototype.titleSelected = function (title) {
-            this.userRegistrationForm['controls'].titleCode.setValue(title.code);
+            this.registerForm['controls'].titleCode.setValue(title.code);
         };
         RegisterComponent.prototype.collectDataFromRegisterForm = function (formData) {
             var firstName = formData.firstName, lastName = formData.lastName, email = formData.email, password = formData.password, titleCode = formData.titleCode;
@@ -18738,7 +18836,7 @@
         };
         RegisterComponent.prototype.toggleAnonymousConsent = function () {
             var registerConsent = this.anonymousConsentsConfig.anonymousConsents.registerConsent;
-            if (Boolean(this.userRegistrationForm.get('newsletter').value)) {
+            if (Boolean(this.registerForm.get('newsletter').value)) {
                 this.anonymousConsentsService.giveConsent(registerConsent);
             }
             else {
@@ -18767,7 +18865,7 @@
         RegisterComponent = __decorate([
             core.Component({
                 selector: 'cx-register',
-                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form [formGroup]=\"userRegistrationForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('email').errors &&\n                  (userRegistrationForm.get('email').errors['email'] ||\n                    userRegistrationForm.get('email').errors['InvalidEmail']) &&\n                  userRegistrationForm.get('email').dirty\n                \"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').invalid &&\n                  userRegistrationForm.get('password').dirty\n                \"\n              >\n                <span>{{\n                  'register.passwordMinRequirements' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                [class.is-invalid]=\"\n                  userRegistrationForm.get('password').value !==\n                  userRegistrationForm.get('passwordconf').value\n                \"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <div\n                class=\"invalid-feedback\"\n                *ngIf=\"\n                  userRegistrationForm.get('password').value !==\n                    userRegistrationForm.get('passwordconf').value &&\n                  userRegistrationForm.get('passwordconf').value\n                \"\n              >\n                <span>{{\n                  'register.bothPasswordMustMatch' | cxTranslate\n                }}</span>\n              </div>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                  [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                />\n                <span class=\"form-check-label\">\n                  {{ anonymousConsent.template }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n              </label>\n            </div>\n          </div>\n          <button\n            type=\"submit\"\n            (click)=\"submit()\"\n            class=\"btn btn-block btn-primary\"\n          >\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
+                template: "<section\n  class=\"cx-page-section container\"\n  *ngIf=\"!(loading$ | async); else loading\"\n>\n  <div class=\"row justify-content-center\">\n    <div class=\"col-md-6\">\n      <div class=\"cx-section\">\n        <form (ngSubmit)=\"submitForm()\" [formGroup]=\"registerForm\">\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.title' | cxTranslate\n              }}</span>\n              <select formControlName=\"titleCode\" class=\"form-control\">\n                <option selected value=\"\" disabled>{{\n                  'register.selectTitle' | cxTranslate\n                }}</option>\n                <option\n                  *ngFor=\"let title of titles$ | async\"\n                  [value]=\"title.code\"\n                  >{{ title.name }}</option\n                >\n              </select>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.firstName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"firstname\"\n                placeholder=\"{{\n                  'register.firstName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"firstName\"\n              />\n              <cx-form-errors\n                [control]=\"registerForm.get('firstName')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.lastName.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"text\"\n                name=\"lastname\"\n                placeholder=\"{{\n                  'register.lastName.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"lastName\"\n              />\n              <cx-form-errors\n                [control]=\"registerForm.get('lastName')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.emailAddress.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"email\"\n                name=\"email\"\n                placeholder=\"{{\n                  'register.emailAddress.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"email\"\n              />\n              <cx-form-errors\n                [control]=\"registerForm.get('email')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.password.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"password\"\n                name=\"password\"\n                placeholder=\"{{\n                  'register.password.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"password\"\n              />\n              <cx-form-errors\n                [control]=\"registerForm.get('password')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <label>\n              <span class=\"label-content\">{{\n                'register.confirmPassword.label' | cxTranslate\n              }}</span>\n              <input\n                class=\"form-control\"\n                type=\"password\"\n                name=\"confirmpassword\"\n                placeholder=\"{{\n                  'register.confirmPassword.placeholder' | cxTranslate\n                }}\"\n                formControlName=\"passwordconf\"\n              />\n              <cx-form-errors\n                [control]=\"registerForm.get('passwordconf')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label *ngIf=\"anonymousConsent$ | async as anonymousConsent\">\n                <input\n                  type=\"checkbox\"\n                  name=\"newsletter\"\n                  class=\"form-check-input\"\n                  formControlName=\"newsletter\"\n                  [checked]=\"isConsentGiven(anonymousConsent.consent)\"\n                />\n                <span class=\"form-check-label\">\n                  {{ anonymousConsent.template }}\n                </span>\n              </label>\n            </div>\n          </div>\n\n          <div class=\"form-group\">\n            <div class=\"form-check\">\n              <label>\n                <input\n                  type=\"checkbox\"\n                  name=\"termsandconditions\"\n                  formControlName=\"termsandconditions\"\n                />\n                <span class=\"form-check-label\">\n                  {{ 'register.confirmThatRead' | cxTranslate }}\n                  <a\n                    [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n                    target=\"_blank\"\n                  >\n                    {{ 'register.termsAndConditions' | cxTranslate }}\n                  </a>\n                </span>\n                <cx-form-errors\n                  [control]=\"registerForm.get('termsandconditions')\"\n                ></cx-form-errors>\n              </label>\n            </div>\n          </div>\n          <button type=\"submit\" class=\"btn btn-block btn-primary\">\n            {{ 'register.register' | cxTranslate }}\n          </button>\n          <a\n            class=\"cx-login-link btn-link\"\n            [routerLink]=\"{ cxRoute: 'login' } | cxUrl\"\n            >{{ 'register.signIn' | cxTranslate }}</a\n          >\n        </form>\n      </div>\n    </div>\n  </div>\n</section>\n\n<ng-template #loading>\n  <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n</ng-template>\n"
             })
         ], RegisterComponent);
         return RegisterComponent;
@@ -18786,6 +18884,7 @@
                     core$1.UrlModule,
                     core$1.I18nModule,
                     SpinnerModule,
+                    FormErrorsModule,
                 ],
                 providers: [
                     core$1.provideDefaultConfig({
@@ -19384,8 +19483,6 @@
     exports.BannerCarouselModule = BannerCarouselModule;
     exports.BannerComponent = BannerComponent;
     exports.BannerModule = BannerModule;
-    exports.BillingAddressFormComponent = BillingAddressFormComponent;
-    exports.BillingAddressFormModule = BillingAddressFormModule;
     exports.BreadcrumbComponent = BreadcrumbComponent;
     exports.BreadcrumbModule = BreadcrumbModule;
     exports.BreadcrumbSchemaBuilder = BreadcrumbSchemaBuilder;
@@ -19460,7 +19557,8 @@
     exports.FooterNavigationModule = FooterNavigationModule;
     exports.ForgotPasswordComponent = ForgotPasswordComponent;
     exports.ForgotPasswordModule = ForgotPasswordModule;
-    exports.FormUtils = FormUtils;
+    exports.FormErrorsComponent = FormErrorsComponent;
+    exports.FormErrorsModule = FormErrorsModule;
     exports.GenericLinkComponent = GenericLinkComponent;
     exports.GenericLinkModule = GenericLinkModule;
     exports.GlobalMessageComponent = GlobalMessageComponent;
@@ -19711,6 +19809,7 @@
     exports.WishListItemComponent = WishListItemComponent;
     exports.WishListModule = WishListModule;
     exports.b2cLayoutConfig = b2cLayoutConfig;
+    exports.controlsMustMatch = controlsMustMatch;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;

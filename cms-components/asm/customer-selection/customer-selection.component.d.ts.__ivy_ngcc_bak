@@ -6,7 +6,7 @@ export declare class CustomerSelectionComponent implements OnInit, OnDestroy {
     private fb;
     private asmService;
     private config;
-    form: FormGroup;
+    customerSelectionForm: FormGroup;
     private subscription;
     searchResultsLoading$: Observable<boolean>;
     searchResults: Observable<CustomerSearchPage>;

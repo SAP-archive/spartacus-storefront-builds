@@ -5,15 +5,13 @@ export declare class UpdateProfileFormComponent implements OnInit {
     private fb;
     user: User;
     titles: Title[];
-    submited: EventEmitter<{
+    submitted: EventEmitter<{
         userUpdates: User;
     }>;
     cancelled: EventEmitter<void>;
-    form: import("@angular/forms").FormGroup;
-    private submitClicked;
+    updateProfileForm: import("@angular/forms").FormGroup;
     constructor(fb: FormBuilder);
     ngOnInit(): void;
-    isNotValid(formControlName: string): boolean;
     onSubmit(): void;
     onCancel(): void;
 }
