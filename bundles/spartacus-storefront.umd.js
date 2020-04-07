@@ -15177,9 +15177,6 @@
             });
             this.isOpen = this.openNodes.length > 0;
         };
-        NavigationUIComponent.prototype.isTabbable = function (node) {
-            return this.flyout && node.children && node.children.length;
-        };
         NavigationUIComponent.ctorParameters = function () { return [
             { type: router.Router },
             { type: core.Renderer2 },

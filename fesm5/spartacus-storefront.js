@@ -14992,9 +14992,6 @@ var NavigationUIComponent = /** @class */ (function () {
         });
         this.isOpen = this.openNodes.length > 0;
     };
-    NavigationUIComponent.prototype.isTabbable = function (node) {
-        return this.flyout && node.children && node.children.length;
-    };
     NavigationUIComponent.ctorParameters = function () { return [
         { type: Router },
         { type: Renderer2 },

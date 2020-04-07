@@ -22892,9 +22892,6 @@ let NavigationUIComponent = class NavigationUIComponent {
         });
         this.isOpen = this.openNodes.length > 0;
     }
-    isTabbable(node) {
-        return this.flyout && node.children && node.children.length;
-    }
 };
 NavigationUIComponent.ɵfac = function NavigationUIComponent_Factory(t) { return new (t || NavigationUIComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc6.Router), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
 NavigationUIComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: NavigationUIComponent, selectors: [["cx-navigation-ui"]], hostVars: 4, hostBindings: function NavigationUIComponent_HostBindings(rf, ctx) { if (rf & 1) {

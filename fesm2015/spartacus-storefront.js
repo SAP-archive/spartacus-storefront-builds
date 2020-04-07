@@ -13652,9 +13652,6 @@ let NavigationUIComponent = class NavigationUIComponent {
         });
         this.isOpen = this.openNodes.length > 0;
     }
-    isTabbable(node) {
-        return this.flyout && node.children && node.children.length;
-    }
 };
 NavigationUIComponent.ctorParameters = () => [
     { type: Router },
