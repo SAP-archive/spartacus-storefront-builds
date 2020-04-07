@@ -19412,18 +19412,6 @@
         return B2cStorefrontModule;
     }());
 
-    /**
-     * @deprecated since 2.0.0
-     * NOTE: delete this file altogether, move below slots to the main default layout config
-     */
-    var PLPAccessibilityLayoutConfig = {
-        layoutSlots: {
-            ProductListPageTemplate: {
-                slots: ['ProductLeftRefinements', 'ProductListSlot'],
-            },
-        },
-    };
-
     exports.AVOID_STACKED_OUTLETS = AVOID_STACKED_OUTLETS;
     exports.AbstractStoreItemComponent = AbstractStoreItemComponent;
     exports.AddToCartComponent = AddToCartComponent;
@@ -19621,7 +19609,6 @@
     exports.OutletRenderStrategy = OutletRenderStrategy;
     exports.OutletService = OutletService;
     exports.PAGE_LAYOUT_HANDLER = PAGE_LAYOUT_HANDLER;
-    exports.PLPAccessibilityLayoutConfig = PLPAccessibilityLayoutConfig;
     exports.PRODUCT_DETAILS_URL_MATCHER = PRODUCT_DETAILS_URL_MATCHER;
     exports.PRODUCT_LISTING_URL_MATCHER = PRODUCT_LISTING_URL_MATCHER;
     exports.PWAModuleConfig = PWAModuleConfig;
