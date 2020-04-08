@@ -9048,7 +9048,7 @@
          * Returns an Observable that emits only once a boolean value whenever
          * the given element has shown in the view port.
          *
-         * The returned obervable will only emit the first value. The
+         * The returned observable will only emit the first value. The
          * observable must be cleaned up either way, since the value might never emit; it
          *  depends on whether the element appears in the view port.
          */
@@ -9079,6 +9079,7 @@
             return elementVisible$;
         };
         IntersectionService.prototype.getRootMargin = function (options) {
+            if (options === void 0) { options = {}; }
             if (options.rootMargin) {
                 return options.rootMargin;
             }
@@ -9116,7 +9117,7 @@
         /**
          * Defer loading till the element intersects the viewport.
          *
-         * We evalutes whether we instantly load the element for different reasons:
+         * We evaluate whether we instantly load the element for different reasons:
          * - we run in SSR mode
          * - there's no global strategy given
          * - the global loading strategy is set to INSTANT loading,
@@ -19506,6 +19507,7 @@
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
     exports.DEFAULT_LAUNCH_CONFIG = DEFAULT_LAUNCH_CONFIG;
+    exports.DeferLoaderService = DeferLoaderService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
@@ -19530,6 +19532,7 @@
     exports.IconLoaderService = IconLoaderService;
     exports.IconModule = IconModule;
     exports.InlineRenderStrategy = InlineRenderStrategy;
+    exports.IntersectionService = IntersectionService;
     exports.ItemCounterComponent = ItemCounterComponent;
     exports.ItemCounterModule = ItemCounterModule;
     exports.JSONLD_PRODUCT_BUILDER = JSONLD_PRODUCT_BUILDER;
@@ -19832,8 +19835,6 @@
     exports.ɵx = VisibleFocusDirective;
     exports.ɵy = BaseFocusDirective;
     exports.ɵz = BaseFocusService;
-    exports.θDeferLoaderService = DeferLoaderService;
-    exports.θIntersectionService = IntersectionService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
