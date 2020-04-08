@@ -10824,10 +10824,6 @@
                 return rxjs.of(true);
             }
         };
-        CmsGuardsService.prototype.shouldForceRefreshPage = function () {
-            var config = this.injector.get(core$1.Config);
-            return !core$1.isFeatureEnabled(config, 'cmsPageLoadOnce');
-        };
         CmsGuardsService.ctorParameters = function () { return [
             { type: CmsMappingService },
             { type: core.Injector }
@@ -10868,7 +10864,7 @@
             this.translation = translation;
             this.translationChunk = translationChunk;
         }
-        CmsI18nService.prototype.loadChunksForComponents = function (componentTypes) {
+        CmsI18nService.prototype.loadForComponents = function (componentTypes) {
             var e_1, _a;
             var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
             var i18nChunks = new Set();
@@ -10901,15 +10897,13 @@
         return CmsI18nService;
     }());
 
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsRoutesService = /** @class */ (function () {
-        function CmsRoutesService(router, cmsMapping) {
+    // This service should be exposed in public API only after the refactor planned in https://github.com/SAP/spartacus/issues/7070
+    var CmsRoutesImplService = /** @class */ (function () {
+        function CmsRoutesImplService(router, cmsMapping) {
             this.router = router;
             this.cmsMapping = cmsMapping;
         }
-        CmsRoutesService.prototype.cmsRouteExist = function (url) {
+        CmsRoutesImplService.prototype.cmsRouteExists = function (url) {
             var isCmsDrivenRoute = url.startsWith('/');
             if (!isCmsDrivenRoute) {
                 return false;
@@ -10929,7 +10923,10 @@
          * @param pageContext
          * @param currentUrl
          */
-        CmsRoutesService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+        CmsRoutesImplService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+            if (this.cmsRouteExists(currentPageLabel)) {
+                return true;
+            }
             var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
             if (componentRoutes.length) {
                 if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
@@ -10939,7 +10936,7 @@
             }
             return true;
         };
-        CmsRoutesService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
+        CmsRoutesImplService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
             if (pageContext.type === core$1.PageType.CONTENT_PAGE &&
                 pageLabel.startsWith('/') &&
                 pageLabel.length > 1) {
@@ -10959,58 +10956,60 @@
             }
             return false;
         };
-        CmsRoutesService.ctorParameters = function () { return [
+        CmsRoutesImplService.ctorParameters = function () { return [
             { type: router.Router },
             { type: CmsMappingService }
         ]; };
-        CmsRoutesService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+        CmsRoutesImplService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsMappingService)); }, token: CmsRoutesImplService, providedIn: "root" });
+        CmsRoutesImplService = __decorate([
+            core.Injectable({ providedIn: 'root' })
+        ], CmsRoutesImplService);
+        return CmsRoutesImplService;
+    }());
+
+    // Public injection token for the private implementation of the service `CmsRoutesImplService`.
+    // After #7070, this class should be replaced with a real implementation.
+    var CmsRoutesService = /** @class */ (function () {
+        function CmsRoutesService() {
+        }
+        CmsRoutesService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesService_Factory() { return core["ɵɵinject"](CmsRoutesImplService); }, token: CmsRoutesService, providedIn: "root" });
         CmsRoutesService = __decorate([
             core.Injectable({
                 providedIn: 'root',
+                useExisting: CmsRoutesImplService,
             })
         ], CmsRoutesService);
         return CmsRoutesService;
     }());
 
-    var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(
-        // expose as `protected` only services from public API:
-        routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-            this.routingService = routingService;
+    /**
+     * Helper service for `CmsPageGuard`
+     */
+    var CmsPageGuardService = /** @class */ (function () {
+        function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+            this.semanticPathService = semanticPathService;
             this.cmsService = cmsService;
             this.cmsRoutes = cmsRoutes;
             this.cmsI18n = cmsI18n;
             this.cmsGuards = cmsGuards;
-            this.semanticPathService = semanticPathService;
-            this.protectedRoutesGuard = protectedRoutesGuard;
         }
-        CmsPageGuard.prototype.canActivate = function (route, state) {
-            var _this = this;
-            /**
-             * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-             */
-            return this.protectedRoutesGuard
-                ? this.protectedRoutesGuard
-                    .canActivate(route)
-                    .pipe(operators.switchMap(function (result) {
-                    return result ? _this.getCmsPage(route, state) : rxjs.of(result);
-                }))
-                : this.getCmsPage(route, state);
-        };
-        CmsPageGuard.prototype.getCmsPage = function (route, state) {
-            var _this = this;
-            return this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
-                return _this.cmsService
-                    .getPage(pageContext, _this.cmsGuards.shouldForceRefreshPage())
-                    .pipe(operators.first(), operators.withLatestFrom(rxjs.of(pageContext)));
-            }), operators.switchMap(function (_a) {
-                var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
-                return pageData
-                    ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
-                    : _this.handleNotFoundPage(pageContext, route, state);
-            }));
-        };
-        CmsPageGuard.prototype.resolveCmsPageLogic = function (pageContext, pageData, route, state) {
+        /**
+         * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
+         *
+         * Based on `cmsComponents` config for the components in the page:
+         * - Evaluates components' guards; if one of them emits false or UrlTree - the route cannot be activated or redirects to the given UrlTree, respectively.
+         * - If all components' guards emitted true, then the route can be activated
+         * - Then we trigger loading of configured i18n chunks in parallel
+         * - And we register the configured children routes of cms components
+         *
+         * @param pageContext current cms page context
+         * @param pageData cms page data
+         * @param route activated route snapshot
+         * @param state router state snapshot
+         *
+         * @returns boolean observable - whether the route can be activated
+         */
+        CmsPageGuardService.prototype.canActivatePage = function (pageContext, pageData, route, state) {
             var _this = this;
             return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.take(1), operators.switchMap(function (componentTypes) {
                 return _this.cmsGuards
@@ -11019,20 +11018,25 @@
             }), operators.tap(function (_a) {
                 var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
                 if (canActivate === true) {
-                    _this.cmsI18n.loadChunksForComponents(componentTypes);
+                    _this.cmsI18n.loadForComponents(componentTypes);
                 }
             }), operators.map(function (_a) {
                 var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+                var _c;
                 var pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
-                if (canActivate === true &&
-                    !route.data.cxCmsRouteContext &&
-                    !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
+                if (canActivate === true && !((_c = route === null || route === void 0 ? void 0 : route.data) === null || _c === void 0 ? void 0 : _c.cxCmsRouteContext)) {
                     return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
                 }
                 return canActivate;
             }));
         };
-        CmsPageGuard.prototype.handleNotFoundPage = function (pageContext, route, state) {
+        /**
+         * Activates the "NOT FOUND" cms page.
+         *
+         * It loads cms page data for the "NOT FOUND" page and puts it in the state of the the requested page label.
+         * Then it processes its CMS components with the method `canActivatePage()` of this service. For more, see its docs.
+         */
+        CmsPageGuardService.prototype.canActivateNotFoundPage = function (pageContext, route, state) {
             var _this = this;
             var notFoundCmsPageContext = {
                 type: core$1.PageType.CONTENT_PAGE,
@@ -11047,27 +11051,83 @@
                         // we have to wait for page index update
                         operators.filter(function (index) { return index === notFoundIndex; }));
                     }), operators.switchMap(function () {
-                        return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
+                        return _this.canActivatePage(pageContext, notFoundPage, route, state);
                     }));
                 }
                 return rxjs.of(false);
             }));
         };
+        CmsPageGuardService.ctorParameters = function () { return [
+            { type: core$1.SemanticPathService },
+            { type: core$1.CmsService },
+            { type: CmsRoutesService },
+            { type: CmsI18nService },
+            { type: CmsGuardsService }
+        ]; };
+        CmsPageGuardService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService)); }, token: CmsPageGuardService, providedIn: "root" });
+        CmsPageGuardService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsPageGuardService);
+        return CmsPageGuardService;
+    }());
+
+    var CmsPageGuard = /** @class */ (function () {
+        function CmsPageGuard(routingService, cmsService, protectedRoutesGuard, service, config) {
+            this.routingService = routingService;
+            this.cmsService = cmsService;
+            this.protectedRoutesGuard = protectedRoutesGuard;
+            this.service = service;
+            this.config = config;
+        }
+        /**
+         * Tries to load the CMS page data for the anticipated route and returns:
+         * - `true` - if it can be activated
+         * - `false` - if it cannot be activated
+         * - `UrlTree` - if user should be redirected to a given `UrlTree`
+         *
+         * If the route can be activated, it fires additional calculations on the CMS components present on this CMS page,
+         * based on their configuration (`cmsComponents` config).
+         *
+         * For more, see docs of the `CmsPageGuardService.canActivatePage`.
+         */
+        CmsPageGuard.prototype.canActivate = function (route, state) {
+            var _this = this;
+            return this.protectedRoutesGuard.canActivate(route).pipe(operators.switchMap(function (canActivate) {
+                return canActivate
+                    ? _this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
+                        return _this.cmsService
+                            .getPage(pageContext, _this.shouldReloadCmsData())
+                            .pipe(operators.first(), operators.switchMap(function (pageData) {
+                            return pageData
+                                ? _this.service.canActivatePage(pageContext, pageData, route, state)
+                                : _this.service.canActivateNotFoundPage(pageContext, route, state);
+                        }));
+                    }))
+                    : rxjs.of(false);
+            }));
+        };
+        /**
+         * Returns whether we should reload the CMS page data, even when it was loaded before.
+         */
+        CmsPageGuard.prototype.shouldReloadCmsData = function () {
+            return !core$1.isFeatureEnabled(this.config, 'cmsPageLoadOnce');
+        };
         CmsPageGuard.guardName = 'CmsPageGuard';
         CmsPageGuard.ctorParameters = function () { return [
             { type: core$1.RoutingService },
             { type: core$1.CmsService },
-            { type: CmsRoutesService },
-            { type: CmsI18nService },
-            { type: CmsGuardsService },
-            { type: core$1.SemanticPathService },
-            { type: core$1.ProtectedRoutesGuard }
+            { type: core$1.ProtectedRoutesGuard },
+            { type: CmsPageGuardService },
+            { type: undefined, decorators: [{ type: core.Inject, args: [core$1.Config,] }] }
         ]; };
-        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService), core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](core$1.ProtectedRoutesGuard), core["ɵɵinject"](CmsPageGuardService), core["ɵɵinject"](core$1.Config)); }, token: CmsPageGuard, providedIn: "root" });
         CmsPageGuard = __decorate([
             core.Injectable({
                 providedIn: 'root',
-            })
+            }),
+            __param(4, core.Inject(core$1.Config))
         ], CmsPageGuard);
         return CmsPageGuard;
     }());
@@ -19492,10 +19552,14 @@
     exports.CloseAccountModalComponent = CloseAccountModalComponent;
     exports.CloseAccountModule = CloseAccountModule;
     exports.CmsComponentData = CmsComponentData;
+    exports.CmsGuardsService = CmsGuardsService;
+    exports.CmsI18nService = CmsI18nService;
     exports.CmsLibModule = CmsLibModule;
+    exports.CmsMappingService = CmsMappingService;
     exports.CmsPageGuard = CmsPageGuard;
     exports.CmsParagraphModule = CmsParagraphModule;
     exports.CmsRouteModule = CmsRouteModule;
+    exports.CmsRoutesService = CmsRoutesService;
     exports.ComponentWrapperDirective = ComponentWrapperDirective;
     exports.ConsentManagementComponent = ConsentManagementComponent;
     exports.ConsentManagementFormComponent = ConsentManagementFormComponent;
@@ -19795,22 +19859,20 @@
     exports.ɵbg = defaultCheckoutConfig;
     exports.ɵbh = ExpressCheckoutService;
     exports.ɵbi = defaultQualtricsConfig;
-    exports.ɵbj = CmsRoutesService;
-    exports.ɵbk = CmsMappingService;
-    exports.ɵbl = CmsI18nService;
-    exports.ɵbm = CmsGuardsService;
-    exports.ɵbn = ReturnRequestService;
-    exports.ɵbo = OutletRendererService;
-    exports.ɵbp = AddToHomeScreenService;
-    exports.ɵbq = MyCouponsComponentService;
-    exports.ɵbr = addCmsRoute;
-    exports.ɵbs = defaultStorefrontRoutesConfig;
-    exports.ɵbt = defaultRoutingConfig;
-    exports.ɵbu = htmlLangProvider;
-    exports.ɵbv = setHtmlLangAttribute;
-    exports.ɵbw = KeyboardFocusService;
-    exports.ɵbx = AnonymousConsentsModule;
-    exports.ɵby = AnonymousConsentDialogComponent;
+    exports.ɵbj = CmsPageGuardService;
+    exports.ɵbk = CmsRoutesImplService;
+    exports.ɵbl = ReturnRequestService;
+    exports.ɵbm = OutletRendererService;
+    exports.ɵbn = AddToHomeScreenService;
+    exports.ɵbo = MyCouponsComponentService;
+    exports.ɵbp = addCmsRoute;
+    exports.ɵbq = defaultStorefrontRoutesConfig;
+    exports.ɵbr = defaultRoutingConfig;
+    exports.ɵbs = htmlLangProvider;
+    exports.ɵbt = setHtmlLangAttribute;
+    exports.ɵbu = KeyboardFocusService;
+    exports.ɵbv = AnonymousConsentsModule;
+    exports.ɵbw = AnonymousConsentDialogComponent;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;

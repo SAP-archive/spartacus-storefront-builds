@@ -1,7 +1,7 @@
 import { __decorate, __extends, __read, __values, __param, __awaiter, __generator, __assign, __spread } from 'tslib';
 import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, isDevMode, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, INJECTOR, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, isFeatureEnabled, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, of, BehaviorSubject, fromEvent, Observable, concat, isObservable, from, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -10639,10 +10639,6 @@ var CmsGuardsService = /** @class */ (function () {
             return of(true);
         }
     };
-    CmsGuardsService.prototype.shouldForceRefreshPage = function () {
-        var config = this.injector.get(Config);
-        return !isFeatureEnabled(config, 'cmsPageLoadOnce');
-    };
     CmsGuardsService.ctorParameters = function () { return [
         { type: CmsMappingService },
         { type: Injector }
@@ -10683,7 +10679,7 @@ var CmsI18nService = /** @class */ (function () {
         this.translation = translation;
         this.translationChunk = translationChunk;
     }
-    CmsI18nService.prototype.loadChunksForComponents = function (componentTypes) {
+    CmsI18nService.prototype.loadForComponents = function (componentTypes) {
         var e_1, _a;
         var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
         var i18nChunks = new Set();
@@ -10716,15 +10712,13 @@ var CmsI18nService = /** @class */ (function () {
     return CmsI18nService;
 }());
 
-/**
- * Please don't put that service in public API.
- * */
-var CmsRoutesService = /** @class */ (function () {
-    function CmsRoutesService(router, cmsMapping) {
+// This service should be exposed in public API only after the refactor planned in https://github.com/SAP/spartacus/issues/7070
+var CmsRoutesImplService = /** @class */ (function () {
+    function CmsRoutesImplService(router, cmsMapping) {
         this.router = router;
         this.cmsMapping = cmsMapping;
     }
-    CmsRoutesService.prototype.cmsRouteExist = function (url) {
+    CmsRoutesImplService.prototype.cmsRouteExists = function (url) {
         var isCmsDrivenRoute = url.startsWith('/');
         if (!isCmsDrivenRoute) {
             return false;
@@ -10744,7 +10738,10 @@ var CmsRoutesService = /** @class */ (function () {
      * @param pageContext
      * @param currentUrl
      */
-    CmsRoutesService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+    CmsRoutesImplService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+        if (this.cmsRouteExists(currentPageLabel)) {
+            return true;
+        }
         var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
         if (componentRoutes.length) {
             if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
@@ -10754,7 +10751,7 @@ var CmsRoutesService = /** @class */ (function () {
         }
         return true;
     };
-    CmsRoutesService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
+    CmsRoutesImplService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
         if (pageContext.type === PageType.CONTENT_PAGE &&
             pageLabel.startsWith('/') &&
             pageLabel.length > 1) {
@@ -10774,58 +10771,60 @@ var CmsRoutesService = /** @class */ (function () {
         }
         return false;
     };
-    CmsRoutesService.ctorParameters = function () { return [
+    CmsRoutesImplService.ctorParameters = function () { return [
         { type: Router },
         { type: CmsMappingService }
     ]; };
-    CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return new CmsRoutesService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesService, providedIn: "root" });
+    CmsRoutesImplService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(ɵɵinject(Router), ɵɵinject(CmsMappingService)); }, token: CmsRoutesImplService, providedIn: "root" });
+    CmsRoutesImplService = __decorate([
+        Injectable({ providedIn: 'root' })
+    ], CmsRoutesImplService);
+    return CmsRoutesImplService;
+}());
+
+// Public injection token for the private implementation of the service `CmsRoutesImplService`.
+// After #7070, this class should be replaced with a real implementation.
+var CmsRoutesService = /** @class */ (function () {
+    function CmsRoutesService() {
+    }
+    CmsRoutesService.ɵprov = ɵɵdefineInjectable({ factory: function CmsRoutesService_Factory() { return ɵɵinject(CmsRoutesImplService); }, token: CmsRoutesService, providedIn: "root" });
     CmsRoutesService = __decorate([
         Injectable({
             providedIn: 'root',
+            useExisting: CmsRoutesImplService,
         })
     ], CmsRoutesService);
     return CmsRoutesService;
 }());
 
-var CmsPageGuard = /** @class */ (function () {
-    function CmsPageGuard(
-    // expose as `protected` only services from public API:
-    routingService, cmsService, cmsRoutes, cmsI18n, cmsGuards, semanticPathService, protectedRoutesGuard) {
-        this.routingService = routingService;
+/**
+ * Helper service for `CmsPageGuard`
+ */
+var CmsPageGuardService = /** @class */ (function () {
+    function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+        this.semanticPathService = semanticPathService;
         this.cmsService = cmsService;
         this.cmsRoutes = cmsRoutes;
         this.cmsI18n = cmsI18n;
         this.cmsGuards = cmsGuards;
-        this.semanticPathService = semanticPathService;
-        this.protectedRoutesGuard = protectedRoutesGuard;
     }
-    CmsPageGuard.prototype.canActivate = function (route, state) {
-        var _this = this;
-        /**
-         * TODO(issue:4646) Expect that `ProtectedRoutesGuard` dependency is required (remove `if` logic)
-         */
-        return this.protectedRoutesGuard
-            ? this.protectedRoutesGuard
-                .canActivate(route)
-                .pipe(switchMap(function (result) {
-                return result ? _this.getCmsPage(route, state) : of(result);
-            }))
-            : this.getCmsPage(route, state);
-    };
-    CmsPageGuard.prototype.getCmsPage = function (route, state) {
-        var _this = this;
-        return this.routingService.getNextPageContext().pipe(switchMap(function (pageContext) {
-            return _this.cmsService
-                .getPage(pageContext, _this.cmsGuards.shouldForceRefreshPage())
-                .pipe(first(), withLatestFrom(of(pageContext)));
-        }), switchMap(function (_a) {
-            var _b = __read(_a, 2), pageData = _b[0], pageContext = _b[1];
-            return pageData
-                ? _this.resolveCmsPageLogic(pageContext, pageData, route, state)
-                : _this.handleNotFoundPage(pageContext, route, state);
-        }));
-    };
-    CmsPageGuard.prototype.resolveCmsPageLogic = function (pageContext, pageData, route, state) {
+    /**
+     * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
+     *
+     * Based on `cmsComponents` config for the components in the page:
+     * - Evaluates components' guards; if one of them emits false or UrlTree - the route cannot be activated or redirects to the given UrlTree, respectively.
+     * - If all components' guards emitted true, then the route can be activated
+     * - Then we trigger loading of configured i18n chunks in parallel
+     * - And we register the configured children routes of cms components
+     *
+     * @param pageContext current cms page context
+     * @param pageData cms page data
+     * @param route activated route snapshot
+     * @param state router state snapshot
+     *
+     * @returns boolean observable - whether the route can be activated
+     */
+    CmsPageGuardService.prototype.canActivatePage = function (pageContext, pageData, route, state) {
         var _this = this;
         return this.cmsService.getPageComponentTypes(pageContext).pipe(take(1), switchMap(function (componentTypes) {
             return _this.cmsGuards
@@ -10834,20 +10833,25 @@ var CmsPageGuard = /** @class */ (function () {
         }), tap(function (_a) {
             var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
             if (canActivate === true) {
-                _this.cmsI18n.loadChunksForComponents(componentTypes);
+                _this.cmsI18n.loadForComponents(componentTypes);
             }
         }), map(function (_a) {
             var _b = __read(_a, 2), canActivate = _b[0], componentTypes = _b[1];
+            var _c;
             var pageLabel = pageData.label || pageContext.id; // for content pages the page label returned from backend can be different than ID initially assumed from route
-            if (canActivate === true &&
-                !route.data.cxCmsRouteContext &&
-                !_this.cmsRoutes.cmsRouteExist(pageLabel)) {
+            if (canActivate === true && !((_c = route === null || route === void 0 ? void 0 : route.data) === null || _c === void 0 ? void 0 : _c.cxCmsRouteContext)) {
                 return _this.cmsRoutes.handleCmsRoutesInGuard(pageContext, componentTypes, state.url, pageLabel);
             }
             return canActivate;
         }));
     };
-    CmsPageGuard.prototype.handleNotFoundPage = function (pageContext, route, state) {
+    /**
+     * Activates the "NOT FOUND" cms page.
+     *
+     * It loads cms page data for the "NOT FOUND" page and puts it in the state of the the requested page label.
+     * Then it processes its CMS components with the method `canActivatePage()` of this service. For more, see its docs.
+     */
+    CmsPageGuardService.prototype.canActivateNotFoundPage = function (pageContext, route, state) {
         var _this = this;
         var notFoundCmsPageContext = {
             type: PageType.CONTENT_PAGE,
@@ -10862,27 +10866,83 @@ var CmsPageGuard = /** @class */ (function () {
                     // we have to wait for page index update
                     filter(function (index) { return index === notFoundIndex; }));
                 }), switchMap(function () {
-                    return _this.resolveCmsPageLogic(pageContext, notFoundPage, route, state);
+                    return _this.canActivatePage(pageContext, notFoundPage, route, state);
                 }));
             }
             return of(false);
         }));
     };
+    CmsPageGuardService.ctorParameters = function () { return [
+        { type: SemanticPathService },
+        { type: CmsService },
+        { type: CmsRoutesService },
+        { type: CmsI18nService },
+        { type: CmsGuardsService }
+    ]; };
+    CmsPageGuardService.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(ɵɵinject(SemanticPathService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService)); }, token: CmsPageGuardService, providedIn: "root" });
+    CmsPageGuardService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        })
+    ], CmsPageGuardService);
+    return CmsPageGuardService;
+}());
+
+var CmsPageGuard = /** @class */ (function () {
+    function CmsPageGuard(routingService, cmsService, protectedRoutesGuard, service, config) {
+        this.routingService = routingService;
+        this.cmsService = cmsService;
+        this.protectedRoutesGuard = protectedRoutesGuard;
+        this.service = service;
+        this.config = config;
+    }
+    /**
+     * Tries to load the CMS page data for the anticipated route and returns:
+     * - `true` - if it can be activated
+     * - `false` - if it cannot be activated
+     * - `UrlTree` - if user should be redirected to a given `UrlTree`
+     *
+     * If the route can be activated, it fires additional calculations on the CMS components present on this CMS page,
+     * based on their configuration (`cmsComponents` config).
+     *
+     * For more, see docs of the `CmsPageGuardService.canActivatePage`.
+     */
+    CmsPageGuard.prototype.canActivate = function (route, state) {
+        var _this = this;
+        return this.protectedRoutesGuard.canActivate(route).pipe(switchMap(function (canActivate) {
+            return canActivate
+                ? _this.routingService.getNextPageContext().pipe(switchMap(function (pageContext) {
+                    return _this.cmsService
+                        .getPage(pageContext, _this.shouldReloadCmsData())
+                        .pipe(first(), switchMap(function (pageData) {
+                        return pageData
+                            ? _this.service.canActivatePage(pageContext, pageData, route, state)
+                            : _this.service.canActivateNotFoundPage(pageContext, route, state);
+                    }));
+                }))
+                : of(false);
+        }));
+    };
+    /**
+     * Returns whether we should reload the CMS page data, even when it was loaded before.
+     */
+    CmsPageGuard.prototype.shouldReloadCmsData = function () {
+        return !isFeatureEnabled(this.config, 'cmsPageLoadOnce');
+    };
     CmsPageGuard.guardName = 'CmsPageGuard';
     CmsPageGuard.ctorParameters = function () { return [
         { type: RoutingService },
         { type: CmsService },
-        { type: CmsRoutesService },
-        { type: CmsI18nService },
-        { type: CmsGuardsService },
-        { type: SemanticPathService },
-        { type: ProtectedRoutesGuard }
+        { type: ProtectedRoutesGuard },
+        { type: CmsPageGuardService },
+        { type: undefined, decorators: [{ type: Inject, args: [Config,] }] }
     ]; };
-    CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesGuard)); }, token: CmsPageGuard, providedIn: "root" });
+    CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(ProtectedRoutesGuard), ɵɵinject(CmsPageGuardService), ɵɵinject(Config)); }, token: CmsPageGuard, providedIn: "root" });
     CmsPageGuard = __decorate([
         Injectable({
             providedIn: 'root',
-        })
+        }),
+        __param(4, Inject(Config))
     ], CmsPageGuard);
     return CmsPageGuard;
 }());
@@ -19236,5 +19296,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsRoutesService as ɵbj, CmsMappingService as ɵbk, CmsI18nService as ɵbl, CmsGuardsService as ɵbm, ReturnRequestService as ɵbn, OutletRendererService as ɵbo, AddToHomeScreenService as ɵbp, MyCouponsComponentService as ɵbq, addCmsRoute as ɵbr, defaultStorefrontRoutesConfig as ɵbs, defaultRoutingConfig as ɵbt, htmlLangProvider as ɵbu, setHtmlLangAttribute as ɵbv, KeyboardFocusService as ɵbw, AnonymousConsentsModule as ɵbx, AnonymousConsentDialogComponent as ɵby, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, KeyboardFocusService as ɵbu, AnonymousConsentsModule as ɵbv, AnonymousConsentDialogComponent as ɵbw, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
