@@ -9817,7 +9817,7 @@ var htmlLangProvider = {
 function setHtmlLangAttribute(winRef, languageService) {
     var result = function () {
         languageService.getActive().subscribe(function (lang) {
-            winRef.document.documentElement.lang = lang;
+            winRef.document.documentElement.lang = lang.replace(/_/g, '-');
         });
     };
     return result;

@@ -1,5 +1,5 @@
 import { Provider } from '@angular/core';
-import { WindowRef, LanguageService } from '@spartacus/core';
+import { LanguageService, WindowRef } from '@spartacus/core';
 export declare const htmlLangProvider: Provider;
 /**
  * Sets active language in <html lang="">

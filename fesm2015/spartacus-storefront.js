@@ -8922,7 +8922,7 @@ const htmlLangProvider = {
 function setHtmlLangAttribute(winRef, languageService) {
     const result = () => {
         languageService.getActive().subscribe((lang) => {
-            winRef.document.documentElement.lang = lang;
+            winRef.document.documentElement.lang = lang.replace(/_/g, '-');
         });
     };
     return result;
