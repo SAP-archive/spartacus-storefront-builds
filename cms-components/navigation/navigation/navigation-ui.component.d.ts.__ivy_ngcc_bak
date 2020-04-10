@@ -23,7 +23,7 @@ export declare class NavigationUIComponent implements OnDestroy {
     /**
      * Indicates whether the navigation should support flyout.
      * If flyout is set to true, the
-     * nested child navitation nodes will only appear on hover or focus.
+     * nested child navigation nodes will only appear on hover or focus.
      */
     flyout: boolean;
     isOpen: boolean;
@@ -32,12 +32,11 @@ export declare class NavigationUIComponent implements OnDestroy {
     private resize;
     onResize(): void;
     constructor(router: Router, renderer: Renderer2, elemRef: ElementRef);
-    handleFocus(event: UIEvent): void;
     toggleOpen(event: UIEvent): void;
     back(): void;
     clear(): void;
     onMouseEnter(event: MouseEvent): void;
-    getDepth(node: NavigationNode, depth?: number): number;
+    getTotalDepth(node: NavigationNode, depth?: number): number;
     getColumnCount(length: number): number;
     focusAfterPreviousClicked(event: MouseEvent): Document;
     ngOnDestroy(): void;
