@@ -1,23 +1,23 @@
 import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
-import { AuthService, CmsService, PageType, RoutingService, SemanticPathService, ProtectedRoutesService, FeatureConfigService, } from '@spartacus/core';
+import { AuthService, CmsService, PageType, ProtectedRoutesService, RoutingService, SemanticPathService, } from '@spartacus/core';
 import { tap } from 'rxjs/operators';
 import * as i0 from "@angular/core";
 import * as i1 from "@spartacus/core";
+/**
+ * Guards the _logout_ route.
+ *
+ * Takes care of routing the user to a logout page (if available) or redirects to
+ * the homepage. If the homepage is protected, the user is redirected
+ * to the login route instead.
+ */
 let LogoutGuard = class LogoutGuard {
-    /**
-     * @deprecated since 1.4
-     * Check #5666 for more info
-     *
-     * TODO(issue:5666) Deprecated since 1.4
-     */
-    constructor(auth, cms, routing, semanticPathService, protectedRoutes, featureConfig) {
+    constructor(auth, cms, routing, semanticPathService, protectedRoutes) {
         this.auth = auth;
         this.cms = cms;
         this.routing = routing;
         this.semanticPathService = semanticPathService;
         this.protectedRoutes = protectedRoutes;
-        this.featureConfig = featureConfig;
     }
     canActivate() {
         this.logout();
@@ -32,15 +32,22 @@ let LogoutGuard = class LogoutGuard {
             }
         }));
     }
+    /**
+     * Whenever there is no specific "logout" page configured in the CMS,
+     * we redirect after the user is logged out.
+     *
+     * The user gets redirected to the homepage, unless the homepage is protected
+     * (in case of a closed shop). We'll redirect to the login page instead.
+     */
     redirect() {
-        // TODO(issue:5666) Deprecated since 1.4
-        const cxRoute = this.featureConfig.isLevel('1.4') &&
-            this.protectedRoutes &&
-            this.protectedRoutes.shouldProtect
-            ? 'login'
-            : 'home';
+        const cxRoute = this.protectedRoutes.shouldProtect ? 'login' : 'home';
         this.routing.go({ cxRoute });
     }
+    /**
+     * Log user out.
+     *
+     * This is delegated to the `AuthService`.
+     */
     logout() {
         this.auth.logout();
     }
@@ -50,14 +57,13 @@ LogoutGuard.ctorParameters = () => [
     { type: CmsService },
     { type: RoutingService },
     { type: SemanticPathService },
-    { type: ProtectedRoutesService },
-    { type: FeatureConfigService }
+    { type: ProtectedRoutesService }
 ];
-LogoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.ProtectedRoutesService), i0.ɵɵinject(i1.FeatureConfigService)); }, token: LogoutGuard, providedIn: "root" });
+LogoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.ProtectedRoutesService)); }, token: LogoutGuard, providedIn: "root" });
 LogoutGuard = __decorate([
     Injectable({
         providedIn: 'root',
     })
 ], LogoutGuard);
 export { LogoutGuard };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nb3V0LWd1YXJkLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvdXNlci9sb2dvdXQvbG9nb3V0LWd1YXJkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRTNDLE9BQU8sRUFDTCxXQUFXLEVBQ1gsVUFBVSxFQUNWLFFBQVEsRUFDUixjQUFjLEVBQ2QsbUJBQW1CLEVBQ25CLHNCQUFzQixFQUN0QixvQkFBb0IsR0FDckIsTUFBTSxpQkFBaUIsQ0FBQztBQUV6QixPQUFPLEVBQUUsR0FBRyxFQUFFLE1BQU0sZ0JBQWdCLENBQUM7OztBQUtyQyxJQUFhLFdBQVcsR0FBeEIsTUFBYSxXQUFXO0lBQ3RCOzs7OztPQUtHO0lBQ0gsWUFDWSxJQUFpQixFQUNqQixHQUFlLEVBQ2YsT0FBdUIsRUFDdkIsbUJBQXdDLEVBQ3hDLGVBQXdDLEVBQ3hDLGFBQW9DO1FBTHBDLFNBQUksR0FBSixJQUFJLENBQWE7UUFDakIsUUFBRyxHQUFILEdBQUcsQ0FBWTtRQUNmLFlBQU8sR0FBUCxPQUFPLENBQWdCO1FBQ3ZCLHdCQUFtQixHQUFuQixtQkFBbUIsQ0FBcUI7UUFDeEMsb0JBQWUsR0FBZixlQUFlLENBQXlCO1FBQ3hDLGtCQUFhLEdBQWIsYUFBYSxDQUF1QjtJQUM3QyxDQUFDO0lBRUosV0FBVztRQUNULElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQztRQUVkLE9BQU8sSUFBSSxDQUFDLEdBQUc7YUFDWixPQUFPLENBQUM7WUFDUCxFQUFFLEVBQUUsSUFBSSxDQUFDLG1CQUFtQixDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUM7WUFDMUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxZQUFZO1NBQzVCLENBQUM7YUFDRCxJQUFJLENBQ0gsR0FBRyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDZCxJQUFJLENBQUMsT0FBTyxFQUFFO2dCQUNaLElBQUksQ0FBQyxRQUFRLEVBQUUsQ0FBQzthQUNqQjtRQUNILENBQUMsQ0FBQyxDQUNILENBQUM7SUFDTixDQUFDO0lBRVMsUUFBUTtRQUNoQix3Q0FBd0M7UUFDeEMsTUFBTSxPQUFPLEdBQ1gsSUFBSSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDO1lBQ2pDLElBQUksQ0FBQyxlQUFlO1lBQ3BCLElBQUksQ0FBQyxlQUFlLENBQUMsYUFBYTtZQUNoQyxDQUFDLENBQUMsT0FBTztZQUNULENBQUMsQ0FBQyxNQUFNLENBQUM7UUFFYixJQUFJLENBQUMsT0FBTyxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sRUFBRSxDQUFDLENBQUM7SUFDL0IsQ0FBQztJQUVTLE1BQU07UUFDZCxJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDO0lBQ3JCLENBQUM7Q0FDRixDQUFBOztZQXhDbUIsV0FBVztZQUNaLFVBQVU7WUFDTixjQUFjO1lBQ0YsbUJBQW1CO1lBQ3RCLHNCQUFzQjtZQUN4QixvQkFBb0I7OztBQWJyQyxXQUFXO0lBSHZCLFVBQVUsQ0FBQztRQUNWLFVBQVUsRUFBRSxNQUFNO0tBQ25CLENBQUM7R0FDVyxXQUFXLENBZ0R2QjtTQWhEWSxXQUFXIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSW5qZWN0YWJsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ2FuQWN0aXZhdGUgfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInO1xuaW1wb3J0IHtcbiAgQXV0aFNlcnZpY2UsXG4gIENtc1NlcnZpY2UsXG4gIFBhZ2VUeXBlLFxuICBSb3V0aW5nU2VydmljZSxcbiAgU2VtYW50aWNQYXRoU2VydmljZSxcbiAgUHJvdGVjdGVkUm91dGVzU2VydmljZSxcbiAgRmVhdHVyZUNvbmZpZ1NlcnZpY2UsXG59IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQgeyBPYnNlcnZhYmxlIH0gZnJvbSAncnhqcyc7XG5pbXBvcnQgeyB0YXAgfSBmcm9tICdyeGpzL29wZXJhdG9ycyc7XG5cbkBJbmplY3RhYmxlKHtcbiAgcHJvdmlkZWRJbjogJ3Jvb3QnLFxufSlcbmV4cG9ydCBjbGFzcyBMb2dvdXRHdWFyZCBpbXBsZW1lbnRzIENhbkFjdGl2YXRlIHtcbiAgLyoqXG4gICAqIEBkZXByZWNhdGVkIHNpbmNlIDEuNFxuICAgKiBDaGVjayAjNTY2NiBmb3IgbW9yZSBpbmZvXG4gICAqXG4gICAqIFRPRE8oaXNzdWU6NTY2NikgRGVwcmVjYXRlZCBzaW5jZSAxLjRcbiAgICovXG4gIGNvbnN0cnVjdG9yKFxuICAgIHByb3RlY3RlZCBhdXRoOiBBdXRoU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgY21zOiBDbXNTZXJ2aWNlLFxuICAgIHByb3RlY3RlZCByb3V0aW5nOiBSb3V0aW5nU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgc2VtYW50aWNQYXRoU2VydmljZTogU2VtYW50aWNQYXRoU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgcHJvdGVjdGVkUm91dGVzPzogUHJvdGVjdGVkUm91dGVzU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgZmVhdHVyZUNvbmZpZz86IEZlYXR1cmVDb25maWdTZXJ2aWNlXG4gICkge31cblxuICBjYW5BY3RpdmF0ZSgpOiBPYnNlcnZhYmxlPGFueT4ge1xuICAgIHRoaXMubG9nb3V0KCk7XG5cbiAgICByZXR1cm4gdGhpcy5jbXNcbiAgICAgIC5oYXNQYWdlKHtcbiAgICAgICAgaWQ6IHRoaXMuc2VtYW50aWNQYXRoU2VydmljZS5nZXQoJ2xvZ291dCcpLFxuICAgICAgICB0eXBlOiBQYWdlVHlwZS5DT05URU5UX1BBR0UsXG4gICAgICB9KVxuICAgICAgLnBpcGUoXG4gICAgICAgIHRhcCgoaGFzUGFnZSkgPT4ge1xuICAgICAgICAgIGlmICghaGFzUGFnZSkge1xuICAgICAgICAgICAgdGhpcy5yZWRpcmVjdCgpO1xuICAgICAgICAgIH1cbiAgICAgICAgfSlcbiAgICAgICk7XG4gIH1cblxuICBwcm90ZWN0ZWQgcmVkaXJlY3QoKTogdm9pZCB7XG4gICAgLy8gVE9ETyhpc3N1ZTo1NjY2KSBEZXByZWNhdGVkIHNpbmNlIDEuNFxuICAgIGNvbnN0IGN4Um91dGU6IHN0cmluZyA9XG4gICAgICB0aGlzLmZlYXR1cmVDb25maWcuaXNMZXZlbCgnMS40JykgJiZcbiAgICAgIHRoaXMucHJvdGVjdGVkUm91dGVzICYmXG4gICAgICB0aGlzLnByb3RlY3RlZFJvdXRlcy5zaG91bGRQcm90ZWN0XG4gICAgICAgID8gJ2xvZ2luJ1xuICAgICAgICA6ICdob21lJztcblxuICAgIHRoaXMucm91dGluZy5nbyh7IGN4Um91dGUgfSk7XG4gIH1cblxuICBwcm90ZWN0ZWQgbG9nb3V0KCk6IHZvaWQge1xuICAgIHRoaXMuYXV0aC5sb2dvdXQoKTtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nb3V0LWd1YXJkLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvdXNlci9sb2dvdXQvbG9nb3V0LWd1YXJkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRTNDLE9BQU8sRUFDTCxXQUFXLEVBQ1gsVUFBVSxFQUNWLFFBQVEsRUFDUixzQkFBc0IsRUFDdEIsY0FBYyxFQUNkLG1CQUFtQixHQUNwQixNQUFNLGlCQUFpQixDQUFDO0FBRXpCLE9BQU8sRUFBRSxHQUFHLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQzs7O0FBRXJDOzs7Ozs7R0FNRztBQUlILElBQWEsV0FBVyxHQUF4QixNQUFhLFdBQVc7SUFDdEIsWUFDWSxJQUFpQixFQUNqQixHQUFlLEVBQ2YsT0FBdUIsRUFDdkIsbUJBQXdDLEVBQ3hDLGVBQXVDO1FBSnZDLFNBQUksR0FBSixJQUFJLENBQWE7UUFDakIsUUFBRyxHQUFILEdBQUcsQ0FBWTtRQUNmLFlBQU8sR0FBUCxPQUFPLENBQWdCO1FBQ3ZCLHdCQUFtQixHQUFuQixtQkFBbUIsQ0FBcUI7UUFDeEMsb0JBQWUsR0FBZixlQUFlLENBQXdCO0lBQ2hELENBQUM7SUFFSixXQUFXO1FBQ1QsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBRWQsT0FBTyxJQUFJLENBQUMsR0FBRzthQUNaLE9BQU8sQ0FBQztZQUNQLEVBQUUsRUFBRSxJQUFJLENBQUMsbUJBQW1CLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQztZQUMxQyxJQUFJLEVBQUUsUUFBUSxDQUFDLFlBQVk7U0FDNUIsQ0FBQzthQUNELElBQUksQ0FDSCxHQUFHLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtZQUNkLElBQUksQ0FBQyxPQUFPLEVBQUU7Z0JBQ1osSUFBSSxDQUFDLFFBQVEsRUFBRSxDQUFDO2FBQ2pCO1FBQ0gsQ0FBQyxDQUFDLENBQ0gsQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7O09BTUc7SUFDTyxRQUFRO1FBQ2hCLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxlQUFlLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQztRQUN0RSxJQUFJLENBQUMsT0FBTyxDQUFDLEVBQUUsQ0FBQyxFQUFFLE9BQU8sRUFBRSxDQUFDLENBQUM7SUFDL0IsQ0FBQztJQUVEOzs7O09BSUc7SUFDTyxNQUFNO1FBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQztJQUNyQixDQUFDO0NBQ0YsQ0FBQTs7WUE1Q21CLFdBQVc7WUFDWixVQUFVO1lBQ04sY0FBYztZQUNGLG1CQUFtQjtZQUN2QixzQkFBc0I7OztBQU54QyxXQUFXO0lBSHZCLFVBQVUsQ0FBQztRQUNWLFVBQVUsRUFBRSxNQUFNO0tBQ25CLENBQUM7R0FDVyxXQUFXLENBOEN2QjtTQTlDWSxXQUFXIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSW5qZWN0YWJsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ2FuQWN0aXZhdGUgfSBmcm9tICdAYW5ndWxhci9yb3V0ZXInO1xuaW1wb3J0IHtcbiAgQXV0aFNlcnZpY2UsXG4gIENtc1NlcnZpY2UsXG4gIFBhZ2VUeXBlLFxuICBQcm90ZWN0ZWRSb3V0ZXNTZXJ2aWNlLFxuICBSb3V0aW5nU2VydmljZSxcbiAgU2VtYW50aWNQYXRoU2VydmljZSxcbn0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IHRhcCB9IGZyb20gJ3J4anMvb3BlcmF0b3JzJztcblxuLyoqXG4gKiBHdWFyZHMgdGhlIF9sb2dvdXRfIHJvdXRlLlxuICpcbiAqIFRha2VzIGNhcmUgb2Ygcm91dGluZyB0aGUgdXNlciB0byBhIGxvZ291dCBwYWdlIChpZiBhdmFpbGFibGUpIG9yIHJlZGlyZWN0cyB0b1xuICogdGhlIGhvbWVwYWdlLiBJZiB0aGUgaG9tZXBhZ2UgaXMgcHJvdGVjdGVkLCB0aGUgdXNlciBpcyByZWRpcmVjdGVkXG4gKiB0byB0aGUgbG9naW4gcm91dGUgaW5zdGVhZC5cbiAqL1xuQEluamVjdGFibGUoe1xuICBwcm92aWRlZEluOiAncm9vdCcsXG59KVxuZXhwb3J0IGNsYXNzIExvZ291dEd1YXJkIGltcGxlbWVudHMgQ2FuQWN0aXZhdGUge1xuICBjb25zdHJ1Y3RvcihcbiAgICBwcm90ZWN0ZWQgYXV0aDogQXV0aFNlcnZpY2UsXG4gICAgcHJvdGVjdGVkIGNtczogQ21zU2VydmljZSxcbiAgICBwcm90ZWN0ZWQgcm91dGluZzogUm91dGluZ1NlcnZpY2UsXG4gICAgcHJvdGVjdGVkIHNlbWFudGljUGF0aFNlcnZpY2U6IFNlbWFudGljUGF0aFNlcnZpY2UsXG4gICAgcHJvdGVjdGVkIHByb3RlY3RlZFJvdXRlczogUHJvdGVjdGVkUm91dGVzU2VydmljZVxuICApIHt9XG5cbiAgY2FuQWN0aXZhdGUoKTogT2JzZXJ2YWJsZTxhbnk+IHtcbiAgICB0aGlzLmxvZ291dCgpO1xuXG4gICAgcmV0dXJuIHRoaXMuY21zXG4gICAgICAuaGFzUGFnZSh7XG4gICAgICAgIGlkOiB0aGlzLnNlbWFudGljUGF0aFNlcnZpY2UuZ2V0KCdsb2dvdXQnKSxcbiAgICAgICAgdHlwZTogUGFnZVR5cGUuQ09OVEVOVF9QQUdFLFxuICAgICAgfSlcbiAgICAgIC5waXBlKFxuICAgICAgICB0YXAoKGhhc1BhZ2UpID0+IHtcbiAgICAgICAgICBpZiAoIWhhc1BhZ2UpIHtcbiAgICAgICAgICAgIHRoaXMucmVkaXJlY3QoKTtcbiAgICAgICAgICB9XG4gICAgICAgIH0pXG4gICAgICApO1xuICB9XG5cbiAgLyoqXG4gICAqIFdoZW5ldmVyIHRoZXJlIGlzIG5vIHNwZWNpZmljIFwibG9nb3V0XCIgcGFnZSBjb25maWd1cmVkIGluIHRoZSBDTVMsXG4gICAqIHdlIHJlZGlyZWN0IGFmdGVyIHRoZSB1c2VyIGlzIGxvZ2dlZCBvdXQuXG4gICAqXG4gICAqIFRoZSB1c2VyIGdldHMgcmVkaXJlY3RlZCB0byB0aGUgaG9tZXBhZ2UsIHVubGVzcyB0aGUgaG9tZXBhZ2UgaXMgcHJvdGVjdGVkXG4gICAqIChpbiBjYXNlIG9mIGEgY2xvc2VkIHNob3ApLiBXZSdsbCByZWRpcmVjdCB0byB0aGUgbG9naW4gcGFnZSBpbnN0ZWFkLlxuICAgKi9cbiAgcHJvdGVjdGVkIHJlZGlyZWN0KCk6IHZvaWQge1xuICAgIGNvbnN0IGN4Um91dGUgPSB0aGlzLnByb3RlY3RlZFJvdXRlcy5zaG91bGRQcm90ZWN0ID8gJ2xvZ2luJyA6ICdob21lJztcbiAgICB0aGlzLnJvdXRpbmcuZ28oeyBjeFJvdXRlIH0pO1xuICB9XG5cbiAgLyoqXG4gICAqIExvZyB1c2VyIG91dC5cbiAgICpcbiAgICogVGhpcyBpcyBkZWxlZ2F0ZWQgdG8gdGhlIGBBdXRoU2VydmljZWAuXG4gICAqL1xuICBwcm90ZWN0ZWQgbG9nb3V0KCk6IHZvaWQge1xuICAgIHRoaXMuYXV0aC5sb2dvdXQoKTtcbiAgfVxufVxuIl19

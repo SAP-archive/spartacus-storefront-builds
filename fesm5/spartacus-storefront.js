@@ -18485,20 +18485,20 @@ var LoginModule = /** @class */ (function () {
     return LoginModule;
 }());
 
+/**
+ * Guards the _logout_ route.
+ *
+ * Takes care of routing the user to a logout page (if available) or redirects to
+ * the homepage. If the homepage is protected, the user is redirected
+ * to the login route instead.
+ */
 var LogoutGuard = /** @class */ (function () {
-    /**
-     * @deprecated since 1.4
-     * Check #5666 for more info
-     *
-     * TODO(issue:5666) Deprecated since 1.4
-     */
-    function LogoutGuard(auth, cms, routing, semanticPathService, protectedRoutes, featureConfig) {
+    function LogoutGuard(auth, cms, routing, semanticPathService, protectedRoutes) {
         this.auth = auth;
         this.cms = cms;
         this.routing = routing;
         this.semanticPathService = semanticPathService;
         this.protectedRoutes = protectedRoutes;
-        this.featureConfig = featureConfig;
     }
     LogoutGuard.prototype.canActivate = function () {
         var _this = this;
@@ -18514,15 +18514,22 @@ var LogoutGuard = /** @class */ (function () {
             }
         }));
     };
+    /**
+     * Whenever there is no specific "logout" page configured in the CMS,
+     * we redirect after the user is logged out.
+     *
+     * The user gets redirected to the homepage, unless the homepage is protected
+     * (in case of a closed shop). We'll redirect to the login page instead.
+     */
     LogoutGuard.prototype.redirect = function () {
-        // TODO(issue:5666) Deprecated since 1.4
-        var cxRoute = this.featureConfig.isLevel('1.4') &&
-            this.protectedRoutes &&
-            this.protectedRoutes.shouldProtect
-            ? 'login'
-            : 'home';
+        var cxRoute = this.protectedRoutes.shouldProtect ? 'login' : 'home';
         this.routing.go({ cxRoute: cxRoute });
     };
+    /**
+     * Log user out.
+     *
+     * This is delegated to the `AuthService`.
+     */
     LogoutGuard.prototype.logout = function () {
         this.auth.logout();
     };
@@ -18531,10 +18538,9 @@ var LogoutGuard = /** @class */ (function () {
         { type: CmsService },
         { type: RoutingService },
         { type: SemanticPathService },
-        { type: ProtectedRoutesService },
-        { type: FeatureConfigService }
+        { type: ProtectedRoutesService }
     ]; };
-    LogoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesService), ɵɵinject(FeatureConfigService)); }, token: LogoutGuard, providedIn: "root" });
+    LogoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesService)); }, token: LogoutGuard, providedIn: "root" });
     LogoutGuard = __decorate([
         Injectable({
             providedIn: 'root',
