@@ -4930,11 +4930,13 @@ let CartCouponComponent = class CartCouponComponent {
         this.couponForm = this.formBuilder.group({
             couponCode: ['', [Validators.required]],
         });
+        // TODO(#7241): Replace process subscriptions with event listeners and drop process for ADD_VOUCHER
         this.subscription.add(this.cartVoucherService
             .getAddVoucherResultSuccess()
             .subscribe((success) => {
             this.onSuccess(success);
         }));
+        // TODO(#7241): Replace process subscriptions with event listeners and drop process for ADD_VOUCHER
         this.subscription.add(this.cartVoucherService.getAddVoucherResultError().subscribe((error) => {
             this.onError(error);
         }));
