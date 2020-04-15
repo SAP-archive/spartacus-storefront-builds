@@ -24397,9 +24397,6 @@ let ProductScrollComponent = class ProductScrollComponent {
         this.productLimit = isButton ? 1 : configProductLimit;
     }
     infiniteScrollOperations(inputModel) {
-        if (this.isSamePage(inputModel)) {
-            return;
-        }
         if (this.appendProducts) {
             this.model = Object.assign(Object.assign({}, inputModel), { products: this.model.products.concat(inputModel.products) });
         }
@@ -24436,35 +24433,6 @@ let ProductScrollComponent = class ProductScrollComponent {
         }
         this.resetList = false;
         this.appendProducts = false;
-    }
-    /**
-     * @deprecated at release 2.0.
-     * If the new list is the same and it is not intended to reset the list then return true
-     * Return false otherwise.
-     */
-    isSamePage(inputModel) {
-        if (!this.resetList &&
-            this.model &&
-            this.model.breadcrumbs &&
-            inputModel.breadcrumbs &&
-            this.model.breadcrumbs.length > 0 &&
-            inputModel.breadcrumbs.length > 0) {
-            if (this.model.breadcrumbs.length === inputModel.breadcrumbs.length) {
-                for (let i = 0; i < this.model.breadcrumbs.length; i++) {
-                    if (this.model.breadcrumbs[i].facetCode ===
-                        inputModel.breadcrumbs[i].facetCode &&
-                        this.model.breadcrumbs[i].facetValueCode ===
-                            inputModel.breadcrumbs[i].facetValueCode &&
-                        this.model.breadcrumbs[i].removeQuery.query.value ===
-                            inputModel.breadcrumbs[i].removeQuery.query.value &&
-                        this.model.pagination.currentPage ===
-                            inputModel.pagination.currentPage) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

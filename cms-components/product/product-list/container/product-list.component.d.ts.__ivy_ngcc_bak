@@ -8,21 +8,13 @@ import { ProductListComponentService } from './product-list-component.service';
 export declare class ProductListComponent implements OnInit, OnDestroy {
     private pageLayoutService;
     private productListComponentService;
-    scrollConfig?: ViewConfig;
+    scrollConfig: ViewConfig;
     private subscription;
     isInfiniteScroll: boolean;
     model$: Observable<ProductSearchPage>;
     viewMode$: BehaviorSubject<ViewModes>;
     ViewModes: typeof ViewModes;
     constructor(pageLayoutService: PageLayoutService, productListComponentService: ProductListComponentService, scrollConfig: ViewConfig);
-    /**
-     * @deprecated since version 1.x
-     *  Use constructor(pageLayoutService: PageLayoutService,
-     *  productListComponentService: ProductListComponentService,
-     *  ref: ChangeDetectorRef,
-     *  scrollConfig: ViewConfig) instead
-     */
-    constructor(pageLayoutService: PageLayoutService, productListComponentService: ProductListComponentService);
     ngOnInit(): void;
     sortList(sortCode: string): void;
     setViewMode(mode: ViewModes): void;

@@ -29,11 +29,5 @@ export declare class ProductScrollComponent implements OnDestroy {
     private infiniteScrollOperations;
     private resetListOnViewModeChange;
     private setConditions;
-    /**
-     * @deprecated at release 2.0.
-     * If the new list is the same and it is not intended to reset the list then return true
-     * Return false otherwise.
-     */
-    private isSamePage;
     ngOnDestroy(): void;
 }
