@@ -15140,7 +15140,9 @@
             this.resize.next();
         };
         NavigationUIComponent.prototype.toggleOpen = function (event) {
-            event.preventDefault();
+            if (event.type === 'keydown') {
+                event.preventDefault();
+            }
             var node = event.currentTarget;
             if (this.openNodes.includes(node)) {
                 if (event.type === 'keydown') {

@@ -22854,7 +22854,9 @@ let NavigationUIComponent = class NavigationUIComponent {
         this.resize.next();
     }
     toggleOpen(event) {
-        event.preventDefault();
+        if (event.type === 'keydown') {
+            event.preventDefault();
+        }
         const node = event.currentTarget;
         if (this.openNodes.includes(node)) {
             if (event.type === 'keydown') {
