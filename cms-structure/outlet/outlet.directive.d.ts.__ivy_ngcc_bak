@@ -2,12 +2,13 @@ import { ComponentFactory, EventEmitter, OnChanges, OnDestroy, SimpleChanges, Te
 import { Subscription } from 'rxjs';
 import { DeferLoaderService } from '../../layout/loading/defer-loader.service';
 import { IntersectionOptions } from '../../layout/loading/intersection.model';
+import { OutletRendererService } from './outlet-renderer.service';
 import { OutletService } from './outlet.service';
 export declare class OutletDirective implements OnDestroy, OnChanges {
     private vcr;
     private templateRef;
     private outletService;
-    private deferLoaderService?;
+    private deferLoaderService;
     private outletRendererService?;
     private renderedTemplate;
     cxOutlet: string;
@@ -18,12 +19,7 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
     cxOutletDefer: IntersectionOptions;
     loaded: EventEmitter<Boolean>;
     subscription: Subscription;
-    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, intersectionService: DeferLoaderService);
-    /**
-     * @deprecated since version 1.4
-     * Use constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, intersectionService?: IntersectionService) instead
-     */
-    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>);
+    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, deferLoaderService: DeferLoaderService, outletRendererService?: OutletRendererService);
     render(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private deferLoading;
