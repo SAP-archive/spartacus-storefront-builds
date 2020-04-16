@@ -18,7 +18,7 @@ export { MyCouponsComponentService as ɵbo } from './cms-components/myaccount/my
 export { ReturnRequestService as ɵbl } from './cms-components/myaccount/order/return-request-detail/return-request.service';
 export { CmsPageGuardService as ɵbj } from './cms-structure/guards/cms-page-guard.service';
 export { OutletRendererService as ɵbm } from './cms-structure/outlet/outlet-renderer.service';
-export { ComponentMapperService as ɵh } from './cms-structure/page/component/component-mapper.service';
+export { WebComponentHandler as ɵh } from './cms-structure/page/component/handlers/web-component.handler';
 export { pwaConfigurationFactory as ɵa, pwaFactory as ɵb } from './cms-structure/pwa/pwa.module';
 export { AddToHomeScreenService as ɵbn } from './cms-structure/pwa/services/add-to-home-screen.service';
 export { addCmsRoute as ɵbp } from './cms-structure/routing/cms-route/add-cms-route';

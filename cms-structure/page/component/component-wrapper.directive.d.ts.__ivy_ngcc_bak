@@ -1,25 +1,33 @@
 import { ComponentRef, Injector, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { CmsConfig, CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
-import { ComponentMapperService } from './component-mapper.service';
+import { CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
+import { CmsMappingService } from '../../services/cms-mapping.service';
+import { ComponentHandlerService } from './services/component-handler.service';
+import { CmsInjectorService } from './services/cms-injector.service';
+/**
+ * Directive used to facilitate instantiation of CMS driven dynamic components
+ */
 export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
-    private vcr;
-    private componentMapper;
-    private injector;
-    private cmsService;
-    private dynamicAttributeService;
-    private renderer;
-    private config;
-    private platformId;
+    protected vcr: ViewContainerRef;
+    protected cmsMappingService: CmsMappingService;
+    protected injector: Injector;
+    protected dynamicAttributeService: DynamicAttributeService;
+    protected renderer: Renderer2;
+    protected componentHandler: ComponentHandlerService;
+    protected cmsInjector: CmsInjectorService;
+    protected cmsService: CmsService;
     cxComponentWrapper: ContentSlotComponentData;
-    cmpRef: ComponentRef<any>;
-    webElement: any;
-    constructor(vcr: ViewContainerRef, componentMapper: ComponentMapperService, injector: Injector, cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, config: CmsConfig, platformId: Object);
+    /**
+     * @deprecated since 2.0
+     *
+     * This property in unsafe, i.e.
+     * - cmpRef can be set later because of lazy loading or deferred loading
+     * - cmpRef can be not set at all if for example, web components are used as cms components
+     */
+    cmpRef?: ComponentRef<any>;
+    private launcherResource?;
+    constructor(vcr: ViewContainerRef, cmsMappingService: CmsMappingService, injector: Injector, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, componentHandler: ComponentHandlerService, cmsInjector: CmsInjectorService, cmsService: CmsService);
     ngOnInit(): void;
-    private shouldRenderComponent;
     private launchComponent;
-    private launchWebComponent;
-    private getCmsDataForComponent;
-    private getInjectorForComponent;
-    private addSmartEditContract;
+    private decorate;
     ngOnDestroy(): void;
 }

@@ -1,8 +1,8 @@
-import { __decorate, __extends, __read, __values, __param, __awaiter, __generator, __assign, __spread } from 'tslib';
-import { CommonModule, isPlatformBrowser, DOCUMENT, isPlatformServer, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, ComponentFactoryResolver, Inject, PLATFORM_ID, Optional, NgZone, Injector, ViewContainerRef, Directive, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, isDevMode, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, INJECTOR, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, CmsService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, DynamicAttributeService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, of, BehaviorSubject, fromEvent, Observable, concat, isObservable, from, asyncScheduler } from 'rxjs';
+import { __decorate, __extends, __read, __values, __spread, __param, __assign } from 'tslib';
+import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
+import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, OccConfig, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
@@ -605,116 +605,351 @@ var AnonymousConsentManagementBannerModule = /** @class */ (function () {
     return AnonymousConsentManagementBannerModule;
 }());
 
+/**
+ * Please don't put that service in public API.
+ * */
+var CmsMappingService = /** @class */ (function () {
+    function CmsMappingService(config, platformId) {
+        this.config = config;
+        this.platformId = platformId;
+        this.missingComponents = [];
+    }
+    CmsMappingService.prototype.getComponentMapping = function (componentType) {
+        var _a;
+        var componentConfig = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType];
+        if (!componentConfig) {
+            if (!this.missingComponents.includes(componentType)) {
+                this.missingComponents.push(componentType);
+                console.warn("No component implementation found for the CMS component type '" + componentType + "'.\n", "Make sure you implement a component and register it in the mapper.");
+            }
+        }
+        return componentConfig;
+    };
+    CmsMappingService.prototype.isComponentEnabled = function (componentType) {
+        var _a;
+        var isSSR = isPlatformServer(this.platformId);
+        return !(isSSR && ((_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.disableSSR));
+    };
+    CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
+        var e_1, _a;
+        var routes = [];
+        try {
+            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                var componentType = componentTypes_1_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return routes;
+    };
+    CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
+        var e_2, _a;
+        var guards = new Set();
+        try {
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
+                this.getGuardsForComponent(componentType).forEach(function (guard) {
+                    return guards.add(guard);
+                });
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        return Array.from(guards);
+    };
+    CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
+        var e_3, _a;
+        var i18nKeys = new Set();
+        try {
+            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                var componentType = componentTypes_3_1.value;
+                if (this.isComponentEnabled(componentType)) {
+                    this.getI18nKeysForComponent(componentType).forEach(function (key) {
+                        return i18nKeys.add(key);
+                    });
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        return Array.from(i18nKeys);
+    };
+    CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
+        var _a, _b;
+        return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : [];
+    };
+    CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
+        var _a, _b;
+        return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.guards) !== null && _b !== void 0 ? _b : [];
+    };
+    CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
+        var _a, _b;
+        return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.i18nKeys) !== null && _b !== void 0 ? _b : [];
+    };
+    CmsMappingService.ctorParameters = function () { return [
+        { type: CmsConfig },
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    ]; };
+    CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+    CmsMappingService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        }),
+        __param(1, Inject(PLATFORM_ID))
+    ], CmsMappingService);
+    return CmsMappingService;
+}());
+
+/**
+ * ComponentHandler implementations can be used for instantiating and launching
+ * different types of CMS mapped components
+ */
+var ComponentHandler = /** @class */ (function () {
+    function ComponentHandler() {
+    }
+    return ComponentHandler;
+}());
+
+/**
+ * Responsible for obtaining component handler for specified component mapping
+ */
+var ComponentHandlerService = /** @class */ (function () {
+    function ComponentHandlerService(handlers) {
+        this.handlers = handlers;
+        this.invalidMappings = new Set();
+    }
+    /**
+     * Get best matching component handler
+     *
+     * @param componentMapping
+     */
+    ComponentHandlerService.prototype.resolve = function (componentMapping) {
+        var _a;
+        var matchedHandlers = ((_a = this.handlers) !== null && _a !== void 0 ? _a : []).filter(function (handler) {
+            return handler.hasMatch(componentMapping);
+        });
+        if (matchedHandlers.length > 1) {
+            matchedHandlers.sort(function (a, b) {
+                return (a.getPriority ? a.getPriority() : 0) -
+                    (b.getPriority ? b.getPriority() : 0);
+            });
+        }
+        if (isDevMode() && matchedHandlers.length === 0) {
+            if (!this.invalidMappings.has(componentMapping)) {
+                this.invalidMappings.add(componentMapping);
+                console.warn("Can't resolve handler for component mapping: ", componentMapping);
+            }
+        }
+        return matchedHandlers[matchedHandlers.length - 1];
+    };
+    /**
+     * Get launcher for specified component mapping
+     *
+     * @param componentMapping
+     * @param viewContainerRef
+     * @param elementInjector
+     */
+    ComponentHandlerService.prototype.getLauncher = function (componentMapping, viewContainerRef, elementInjector) {
+        var _a;
+        return (_a = this.resolve(componentMapping)) === null || _a === void 0 ? void 0 : _a.launcher(componentMapping, viewContainerRef, elementInjector);
+    };
+    ComponentHandlerService.ctorParameters = function () { return [
+        { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [ComponentHandler,] }] }
+    ]; };
+    ComponentHandlerService.ɵprov = ɵɵdefineInjectable({ factory: function ComponentHandlerService_Factory() { return new ComponentHandlerService(ɵɵinject(ComponentHandler, 8)); }, token: ComponentHandlerService, providedIn: "root" });
+    ComponentHandlerService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        }),
+        __param(0, Optional()),
+        __param(0, Inject(ComponentHandler))
+    ], ComponentHandlerService);
+    return ComponentHandlerService;
+}());
+
 var CmsComponentData = /** @class */ (function () {
     function CmsComponentData() {
     }
     return CmsComponentData;
 }());
 
-var ComponentMapperService = /** @class */ (function () {
-    function ComponentMapperService(componentFactoryResolver, config, document, platform) {
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.config = config;
-        this.document = document;
-        this.platform = platform;
-        this.missingComponents = [];
-        this.loadedWebComponents = {};
+/**
+ * Used to prepare injector for CMS components.
+ *
+ * Injector will take into account configured providers and provides CmsComponentData
+ * for specified component's uid
+ */
+var CmsInjectorService = /** @class */ (function () {
+    function CmsInjectorService(cmsMapping, injector) {
+        this.cmsMapping = cmsMapping;
+        this.injector = injector;
     }
-    /**
-     * @desc
-     * returns a web component for the CMS typecode.
-     *
-     * The mapping of CMS components to web componetns requires a mapping.
-     * This is configurable when the module is loaded.
-     *
-     * For example:
-     *
-     *  {
-     *      'CMSLinkComponent': 'LinkComponent',
-     *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
-     *      [etc.]
-     *  }
-     *
-     * The type codes are dynamic since they depend on the implementation.
-     * Customer will add, extend or ingore standard components.
-     *
-     * @param typeCode the component type
-     */
-    ComponentMapperService.prototype.getComponent = function (typeCode) {
-        var componentConfig = this.config.cmsComponents[typeCode];
-        if (!componentConfig) {
-            if (!this.missingComponents.includes(typeCode)) {
-                this.missingComponents.push(typeCode);
-                console.warn("No component implementation found for the CMS component type '" + typeCode + "'.\n", "Make sure you implement a component and register it in the mapper.");
-            }
-        }
-        return componentConfig ? componentConfig.component : null;
+    CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
+        return {
+            uid: uid,
+            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
+                .get(CmsService)
+                .getComponentData(uid),
+        };
     };
-    ComponentMapperService.prototype.getComponentFactoryByCode = function (typeCode) {
-        var component = this.getComponent(typeCode);
+    CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
+        var _a, _b;
+        var configProviders = (_b = (_a = this.cmsMapping.getComponentMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+        return Injector.create({
+            providers: __spread([
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsData(uid),
+                }
+            ], configProviders),
+            parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
+        });
+    };
+    CmsInjectorService.ctorParameters = function () { return [
+        { type: CmsMappingService },
+        { type: Injector }
+    ]; };
+    CmsInjectorService.ɵprov = ɵɵdefineInjectable({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(ɵɵinject(CmsMappingService), ɵɵinject(INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+    CmsInjectorService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        })
+    ], CmsInjectorService);
+    return CmsInjectorService;
+}());
+
+/**
+ * Directive used to facilitate instantiation of CMS driven dynamic components
+ */
+var ComponentWrapperDirective = /** @class */ (function () {
+    function ComponentWrapperDirective(vcr, cmsMappingService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
+    ) {
+        this.vcr = vcr;
+        this.cmsMappingService = cmsMappingService;
+        this.injector = injector;
+        this.dynamicAttributeService = dynamicAttributeService;
+        this.renderer = renderer;
+        this.componentHandler = componentHandler;
+        this.cmsInjector = cmsInjector;
+        this.cmsService = cmsService;
+    }
+    ComponentWrapperDirective.prototype.ngOnInit = function () {
+        if (this.cmsMappingService.isComponentEnabled(this.cxComponentWrapper.flexType)) {
+            this.launchComponent();
+        }
+    };
+    ComponentWrapperDirective.prototype.launchComponent = function () {
+        var _this = this;
+        var _a;
+        var componentMapping = this.cmsMappingService.getComponentMapping(this.cxComponentWrapper.flexType);
+        if (!componentMapping) {
+            return;
+        }
+        this.launcherResource = (_a = this.componentHandler
+            .getLauncher(componentMapping, this.vcr, this.cmsInjector.getInjector(this.cxComponentWrapper.flexType, this.cxComponentWrapper.uid, this.injector))) === null || _a === void 0 ? void 0 : _a.subscribe(function (_a) {
+            var elementRef = _a.elementRef, componentRef = _a.componentRef;
+            _this.cmpRef = componentRef;
+            _this.decorate(elementRef);
+        });
+    };
+    ComponentWrapperDirective.prototype.decorate = function (elementRef) {
+        if (this.cmsService.isLaunchInSmartEdit()) {
+            this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, elementRef.nativeElement, this.renderer);
+        }
+    };
+    ComponentWrapperDirective.prototype.ngOnDestroy = function () {
+        if (this.launcherResource) {
+            this.launcherResource.unsubscribe();
+        }
+    };
+    ComponentWrapperDirective.ctorParameters = function () { return [
+        { type: ViewContainerRef },
+        { type: CmsMappingService },
+        { type: Injector },
+        { type: DynamicAttributeService },
+        { type: Renderer2 },
+        { type: ComponentHandlerService },
+        { type: CmsInjectorService },
+        { type: CmsService // TODO: remove, move smartedit detection responsibility to different layer/service
+         }
+    ]; };
+    __decorate([
+        Input()
+    ], ComponentWrapperDirective.prototype, "cxComponentWrapper", void 0);
+    ComponentWrapperDirective = __decorate([
+        Directive({
+            selector: '[cxComponentWrapper]',
+        })
+    ], ComponentWrapperDirective);
+    return ComponentWrapperDirective;
+}());
+
+/**
+ * Default component handler used for dynamically launching cms components implemented
+ * as native Angular components.
+ */
+var DefaultComponentHandler = /** @class */ (function () {
+    function DefaultComponentHandler() {
+    }
+    DefaultComponentHandler.prototype.hasMatch = function (componentMapping) {
+        return (typeof componentMapping.component === 'function' &&
+            componentMapping.component.prototype);
+    };
+    DefaultComponentHandler.prototype.getPriority = function () {
+        return -50 /* FALLBACK */;
+    };
+    DefaultComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
+        var _this = this;
+        return new Observable(function (subscriber) {
+            var componentRef;
+            var injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
+            var dispose = function () {
+                if (componentRef) {
+                    componentRef.destroy();
+                }
+            };
+            var factory = _this.getComponentFactory(injector, componentMapping.component);
+            if (factory) {
+                componentRef = viewContainerRef.createComponent(factory, undefined, injector);
+                subscriber.next({ elementRef: componentRef.location, componentRef: componentRef });
+            }
+            return dispose;
+        });
+    };
+    DefaultComponentHandler.prototype.getComponentFactory = function (injector, component) {
         if (!component) {
             return null;
         }
-        var factory = this.componentFactoryResolver.resolveComponentFactory(component);
-        if (!factory) {
-            console.warn("No component factory found for the CMS component type '" + typeCode + "'.\n", "Make sure you add a component to the 'entryComponents' array in the NgModule.");
-            return null;
-        }
+        var factory = injector
+            .get(ComponentFactoryResolver)
+            .resolveComponentFactory(component);
         return factory;
     };
-    ComponentMapperService.prototype.isWebComponent = function (typeCode) {
-        var component = this.getComponent(typeCode);
-        return typeof component === 'string' && (component || '').includes('#');
-    };
-    ComponentMapperService.prototype.initWebComponent = function (componentType, renderer) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            var _a = __read(_this.getComponent(componentType).split('#'), 2), path = _a[0], selector = _a[1];
-            var script = _this.loadedWebComponents[path];
-            if (!script) {
-                if (path) {
-                    script = renderer.createElement('script');
-                    _this.loadedWebComponents[path] = script;
-                    script.setAttribute('src', path);
-                    renderer.appendChild(_this.document.body, script);
-                    if (isPlatformBrowser(_this.platform)) {
-                        script.onload = function () {
-                            script.onload = null;
-                        };
-                    }
-                }
-                else {
-                    script = {};
-                }
-            }
-            if (script.onload) {
-                // If script is still loading (has onload callback defined)
-                // add new callback and chain it with the existing one.
-                // Needed to support loading multiple components from one script
-                var chainedOnload_1 = script.onload;
-                script.onload = function () {
-                    chainedOnload_1();
-                    resolve(selector);
-                };
-            }
-            else {
-                resolve(selector);
-            }
-        });
-    };
-    ComponentMapperService.ctorParameters = function () { return [
-        { type: ComponentFactoryResolver },
-        { type: CmsConfig },
-        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
-        { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    ComponentMapperService.ɵprov = ɵɵdefineInjectable({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(ɵɵinject(ComponentFactoryResolver), ɵɵinject(CmsConfig), ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
-    ComponentMapperService = __decorate([
-        Injectable({ providedIn: 'root' }),
-        __param(2, Inject(DOCUMENT)),
-        __param(3, Inject(PLATFORM_ID))
-    ], ComponentMapperService);
-    return ComponentMapperService;
+    DefaultComponentHandler.ɵprov = ɵɵdefineInjectable({ factory: function DefaultComponentHandler_Factory() { return new DefaultComponentHandler(); }, token: DefaultComponentHandler, providedIn: "root" });
+    DefaultComponentHandler = __decorate([
+        Injectable({
+            providedIn: 'root',
+        })
+    ], DefaultComponentHandler);
+    return DefaultComponentHandler;
 }());
 
 var CxApiService = /** @class */ (function () {
@@ -848,114 +1083,99 @@ var CxApiService = /** @class */ (function () {
     return CxApiService;
 }());
 
-var ComponentWrapperDirective = /** @class */ (function () {
-    function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
-        this.vcr = vcr;
-        this.componentMapper = componentMapper;
-        this.injector = injector;
-        this.cmsService = cmsService;
-        this.dynamicAttributeService = dynamicAttributeService;
-        this.renderer = renderer;
-        this.config = config;
-        this.platformId = platformId;
+/**
+ * Component handler responsible for launching cms web components.
+ */
+var WebComponentHandler = /** @class */ (function () {
+    function WebComponentHandler(document, platform) {
+        this.document = document;
+        this.platform = platform;
+        this.loadedWebComponents = {};
     }
-    ComponentWrapperDirective.prototype.ngOnInit = function () {
-        if (!this.shouldRenderComponent()) {
-            return;
-        }
-        if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-            this.launchWebComponent();
-        }
-        else {
-            this.launchComponent();
-        }
+    WebComponentHandler.prototype.hasMatch = function (componentMapping) {
+        return (typeof componentMapping.component === 'string' &&
+            componentMapping.component.includes('#'));
     };
-    ComponentWrapperDirective.prototype.shouldRenderComponent = function () {
-        var isSSR = isPlatformServer(this.platformId);
-        var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
+    WebComponentHandler.prototype.getPriority = function () {
+        return -10 /* LOW */; // low, as it's a default matcher
     };
-    ComponentWrapperDirective.prototype.launchComponent = function () {
-        var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-        if (factory) {
-            this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.addSmartEditContract(this.cmpRef.location.nativeElement);
-            }
-        }
-    };
-    ComponentWrapperDirective.prototype.launchWebComponent = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var elementName, cmsComponentData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
-                    case 1:
-                        elementName = _a.sent();
-                        if (elementName) {
-                            this.webElement = this.renderer.createElement(elementName);
-                            cmsComponentData = this.getCmsDataForComponent();
-                            this.webElement.cxApi = __assign(__assign({}, this.injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
-                            this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-                            if (this.cmsService.isLaunchInSmartEdit()) {
-                                this.addSmartEditContract(this.webElement);
-                            }
-                        }
-                        return [2 /*return*/];
+    WebComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
+        var _this = this;
+        return new Observable(function (subscriber) {
+            var webElement;
+            var active = true;
+            var injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
+            var renderer = injector.get(Renderer2);
+            var disposeFunc = function () {
+                active = false;
+                if (webElement) {
+                    webElement.remove();
+                }
+            };
+            _this.initWebComponent(componentMapping.component, renderer).then(function (elementName) {
+                if (elementName) {
+                    webElement = renderer.createElement(elementName);
+                    var cmsComponentData = injector.get(CmsComponentData, null);
+                    webElement.cxApi = __assign(__assign({}, injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
+                    renderer.appendChild(viewContainerRef.element.nativeElement.parentElement, webElement);
+                    subscriber.next({ elementRef: new ElementRef(webElement) });
+                    if (!active) {
+                        disposeFunc();
+                    }
                 }
             });
+            return disposeFunc;
         });
     };
-    ComponentWrapperDirective.prototype.getCmsDataForComponent = function () {
-        return {
-            uid: this.cxComponentWrapper.uid,
-            data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-        };
-    };
-    ComponentWrapperDirective.prototype.getInjectorForComponent = function () {
-        var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-            .providers || [];
-        return Injector.create({
-            providers: __spread([
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsDataForComponent(),
+    WebComponentHandler.prototype.initWebComponent = function (component, renderer) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var _a = __read(component.split('#'), 2), path = _a[0], selector = _a[1];
+            var script = _this.loadedWebComponents[path];
+            if (!script) {
+                if (path) {
+                    script = renderer.createElement('script');
+                    _this.loadedWebComponents[path] = script;
+                    script.setAttribute('src', path);
+                    renderer.appendChild(_this.document.body, script);
+                    if (isPlatformBrowser(_this.platform)) {
+                        script.onload = function () {
+                            script.onload = null;
+                        };
+                    }
                 }
-            ], configProviders),
-            parent: this.injector,
+                else {
+                    script = {};
+                }
+            }
+            if (script.onload) {
+                // If script is still loading (has onload callback defined)
+                // add new callback and chain it with the existing one.
+                // Needed to support loading multiple components from one script
+                var chainedOnload_1 = script.onload;
+                script.onload = function () {
+                    chainedOnload_1();
+                    resolve(selector);
+                };
+            }
+            else {
+                resolve(selector);
+            }
         });
     };
-    ComponentWrapperDirective.prototype.addSmartEditContract = function (element) {
-        this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
-    };
-    ComponentWrapperDirective.prototype.ngOnDestroy = function () {
-        if (this.cmpRef) {
-            this.cmpRef.destroy();
-        }
-        if (this.webElement) {
-            this.webElement.remove();
-        }
-    };
-    ComponentWrapperDirective.ctorParameters = function () { return [
-        { type: ViewContainerRef },
-        { type: ComponentMapperService },
-        { type: Injector },
-        { type: CmsService },
-        { type: DynamicAttributeService },
-        { type: Renderer2 },
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+    WebComponentHandler.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+        { type: undefined, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
     ]; };
-    __decorate([
-        Input()
-    ], ComponentWrapperDirective.prototype, "cxComponentWrapper", void 0);
-    ComponentWrapperDirective = __decorate([
-        Directive({
-            selector: '[cxComponentWrapper]',
+    WebComponentHandler.ɵprov = ɵɵdefineInjectable({ factory: function WebComponentHandler_Factory() { return new WebComponentHandler(ɵɵinject(DOCUMENT), ɵɵinject(PLATFORM_ID)); }, token: WebComponentHandler, providedIn: "root" });
+    WebComponentHandler = __decorate([
+        Injectable({
+            providedIn: 'root',
         }),
-        __param(7, Inject(PLATFORM_ID))
-    ], ComponentWrapperDirective);
-    return ComponentWrapperDirective;
+        __param(0, Inject(DOCUMENT)),
+        __param(1, Inject(PLATFORM_ID))
+    ], WebComponentHandler);
+    return WebComponentHandler;
 }());
 
 var PageComponentModule = /** @class */ (function () {
@@ -964,7 +1184,18 @@ var PageComponentModule = /** @class */ (function () {
     PageComponentModule = __decorate([
         NgModule({
             imports: [CommonModule],
-            providers: [],
+            providers: [
+                {
+                    provide: ComponentHandler,
+                    useExisting: DefaultComponentHandler,
+                    multi: true,
+                },
+                {
+                    provide: ComponentHandler,
+                    useExisting: WebComponentHandler,
+                    multi: true,
+                },
+            ],
             declarations: [ComponentWrapperDirective],
             exports: [ComponentWrapperDirective],
         })
@@ -10478,108 +10709,6 @@ var MainModule = /** @class */ (function () {
 /**
  * Please don't put that service in public API.
  * */
-var CmsMappingService = /** @class */ (function () {
-    function CmsMappingService(config, platformId) {
-        this.config = config;
-        this.platformId = platformId;
-    }
-    CmsMappingService.prototype.isComponentEnabled = function (flexType) {
-        var isSSR = isPlatformServer(this.platformId);
-        var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-            .disableSSR;
-        return !(isSSR && isComponentDisabledInSSR);
-    };
-    CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
-        var e_1, _a;
-        var routes = [];
-        try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
-        var e_2, _a;
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                this.getGuardsForComponent(componentType).forEach(function (guard) {
-                    return guards.add(guard);
-                });
-            }
-        }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-        return Array.from(guards);
-    };
-    CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
-        var e_3, _a;
-        var i18nKeys = new Set();
-        try {
-            for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                var componentType = componentTypes_3_1.value;
-                if (this.isComponentEnabled(componentType)) {
-                    this.getI18nKeysForComponent(componentType).forEach(function (key) {
-                        return i18nKeys.add(key);
-                    });
-                }
-            }
-        }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-        finally {
-            try {
-                if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-            }
-            finally { if (e_3) throw e_3.error; }
-        }
-        return Array.from(i18nKeys);
-    };
-    CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.childRoutes) || [];
-    };
-    CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.guards) || [];
-    };
-    CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
-        var mappingConfig = this.config.cmsComponents[componentType];
-        return (mappingConfig && mappingConfig.i18nKeys) || [];
-    };
-    CmsMappingService.ctorParameters = function () { return [
-        { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
-    ]; };
-    CmsMappingService.ɵprov = ɵɵdefineInjectable({ factory: function CmsMappingService_Factory() { return new CmsMappingService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-    CmsMappingService = __decorate([
-        Injectable({
-            providedIn: 'root',
-        }),
-        __param(1, Inject(PLATFORM_ID))
-    ], CmsMappingService);
-    return CmsMappingService;
-}());
-
-/**
- * Please don't put that service in public API.
- * */
 var CmsGuardsService = /** @class */ (function () {
     function CmsGuardsService(cmsMapping, injector) {
         this.cmsMapping = cmsMapping;
@@ -19230,5 +19359,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, KeyboardFocusService as ɵbu, AnonymousConsentsModule as ɵbv, AnonymousConsentDialogComponent as ɵbw, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, ComponentMapperService as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, KeyboardFocusService as ɵbu, AnonymousConsentsModule as ɵbv, AnonymousConsentDialogComponent as ɵbw, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

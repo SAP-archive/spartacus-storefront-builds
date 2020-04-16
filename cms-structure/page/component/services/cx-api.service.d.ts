@@ -1,6 +1,6 @@
 import { NgZone } from '@angular/core';
 import { ActiveCartService, AuthService, BaseSiteService, CheckoutDeliveryService, CheckoutPaymentService, CheckoutService, CmsService, CurrencyService, FeatureConfigService, GlobalMessageService, KymaService, LanguageService, OccEndpointsService, PageMetaService, ProductReferenceService, ProductReviewService, ProductSearchService, ProductService, RoutingService, SearchboxService, SelectiveCartService, TranslationService, UserAddressService, UserConsentService, UserInterestsService, UserNotificationPreferenceService, UserOrderService, UserPaymentService, UserService } from '@spartacus/core';
-import { CmsComponentData } from '../model';
+import { CmsComponentData } from '../../model';
 export declare class CxApiService {
     auth: AuthService;
     cart: ActiveCartService;

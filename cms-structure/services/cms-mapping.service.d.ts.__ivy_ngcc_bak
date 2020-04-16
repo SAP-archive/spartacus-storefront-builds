@@ -1,4 +1,4 @@
-import { CmsConfig } from '@spartacus/core';
+import { CmsComponentMapping, CmsConfig } from '@spartacus/core';
 import { Route } from '@angular/router';
 /**
  * Please don't put that service in public API.
@@ -6,8 +6,10 @@ import { Route } from '@angular/router';
 export declare class CmsMappingService {
     private config;
     private platformId;
+    private missingComponents;
     constructor(config: CmsConfig, platformId: Object);
-    isComponentEnabled(flexType: string): boolean;
+    getComponentMapping(componentType: string): CmsComponentMapping;
+    isComponentEnabled(componentType: string): boolean;
     getRoutesForComponents(componentTypes: string[]): Route[];
     getGuardsForComponents(componentTypes: string[]): any[];
     getI18nKeysForComponents(componentTypes: string[]): string[];

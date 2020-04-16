@@ -790,116 +790,351 @@
         return AnonymousConsentManagementBannerModule;
     }());
 
+    /**
+     * Please don't put that service in public API.
+     * */
+    var CmsMappingService = /** @class */ (function () {
+        function CmsMappingService(config, platformId) {
+            this.config = config;
+            this.platformId = platformId;
+            this.missingComponents = [];
+        }
+        CmsMappingService.prototype.getComponentMapping = function (componentType) {
+            var _a;
+            var componentConfig = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType];
+            if (!componentConfig) {
+                if (!this.missingComponents.includes(componentType)) {
+                    this.missingComponents.push(componentType);
+                    console.warn("No component implementation found for the CMS component type '" + componentType + "'.\n", "Make sure you implement a component and register it in the mapper.");
+                }
+            }
+            return componentConfig;
+        };
+        CmsMappingService.prototype.isComponentEnabled = function (componentType) {
+            var _a;
+            var isSSR = common.isPlatformServer(this.platformId);
+            return !(isSSR && ((_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.disableSSR));
+        };
+        CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
+            var e_1, _a;
+            var routes = [];
+            try {
+                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                    var componentType = componentTypes_1_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            return routes;
+        };
+        CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
+            var e_2, _a;
+            var guards = new Set();
+            try {
+                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                    var componentType = componentTypes_2_1.value;
+                    this.getGuardsForComponent(componentType).forEach(function (guard) {
+                        return guards.add(guard);
+                    });
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
+            return Array.from(guards);
+        };
+        CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
+            var e_3, _a;
+            var i18nKeys = new Set();
+            try {
+                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
+                    var componentType = componentTypes_3_1.value;
+                    if (this.isComponentEnabled(componentType)) {
+                        this.getI18nKeysForComponent(componentType).forEach(function (key) {
+                            return i18nKeys.add(key);
+                        });
+                    }
+                }
+            }
+            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            finally {
+                try {
+                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
+                }
+                finally { if (e_3) throw e_3.error; }
+            }
+            return Array.from(i18nKeys);
+        };
+        CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
+            var _a, _b;
+            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : [];
+        };
+        CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
+            var _a, _b;
+            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.guards) !== null && _b !== void 0 ? _b : [];
+        };
+        CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
+            var _a, _b;
+            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.i18nKeys) !== null && _b !== void 0 ? _b : [];
+        };
+        CmsMappingService.ctorParameters = function () { return [
+            { type: core$1.CmsConfig },
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        ]; };
+        CmsMappingService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
+        CmsMappingService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(1, core.Inject(core.PLATFORM_ID))
+        ], CmsMappingService);
+        return CmsMappingService;
+    }());
+
+    /**
+     * ComponentHandler implementations can be used for instantiating and launching
+     * different types of CMS mapped components
+     */
+    var ComponentHandler = /** @class */ (function () {
+        function ComponentHandler() {
+        }
+        return ComponentHandler;
+    }());
+
+    /**
+     * Responsible for obtaining component handler for specified component mapping
+     */
+    var ComponentHandlerService = /** @class */ (function () {
+        function ComponentHandlerService(handlers) {
+            this.handlers = handlers;
+            this.invalidMappings = new Set();
+        }
+        /**
+         * Get best matching component handler
+         *
+         * @param componentMapping
+         */
+        ComponentHandlerService.prototype.resolve = function (componentMapping) {
+            var _a;
+            var matchedHandlers = ((_a = this.handlers) !== null && _a !== void 0 ? _a : []).filter(function (handler) {
+                return handler.hasMatch(componentMapping);
+            });
+            if (matchedHandlers.length > 1) {
+                matchedHandlers.sort(function (a, b) {
+                    return (a.getPriority ? a.getPriority() : 0) -
+                        (b.getPriority ? b.getPriority() : 0);
+                });
+            }
+            if (core.isDevMode() && matchedHandlers.length === 0) {
+                if (!this.invalidMappings.has(componentMapping)) {
+                    this.invalidMappings.add(componentMapping);
+                    console.warn("Can't resolve handler for component mapping: ", componentMapping);
+                }
+            }
+            return matchedHandlers[matchedHandlers.length - 1];
+        };
+        /**
+         * Get launcher for specified component mapping
+         *
+         * @param componentMapping
+         * @param viewContainerRef
+         * @param elementInjector
+         */
+        ComponentHandlerService.prototype.getLauncher = function (componentMapping, viewContainerRef, elementInjector) {
+            var _a;
+            return (_a = this.resolve(componentMapping)) === null || _a === void 0 ? void 0 : _a.launcher(componentMapping, viewContainerRef, elementInjector);
+        };
+        ComponentHandlerService.ctorParameters = function () { return [
+            { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [ComponentHandler,] }] }
+        ]; };
+        ComponentHandlerService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ComponentHandlerService_Factory() { return new ComponentHandlerService(core["ɵɵinject"](ComponentHandler, 8)); }, token: ComponentHandlerService, providedIn: "root" });
+        ComponentHandlerService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            }),
+            __param(0, core.Optional()),
+            __param(0, core.Inject(ComponentHandler))
+        ], ComponentHandlerService);
+        return ComponentHandlerService;
+    }());
+
     var CmsComponentData = /** @class */ (function () {
         function CmsComponentData() {
         }
         return CmsComponentData;
     }());
 
-    var ComponentMapperService = /** @class */ (function () {
-        function ComponentMapperService(componentFactoryResolver, config, document, platform) {
-            this.componentFactoryResolver = componentFactoryResolver;
-            this.config = config;
-            this.document = document;
-            this.platform = platform;
-            this.missingComponents = [];
-            this.loadedWebComponents = {};
+    /**
+     * Used to prepare injector for CMS components.
+     *
+     * Injector will take into account configured providers and provides CmsComponentData
+     * for specified component's uid
+     */
+    var CmsInjectorService = /** @class */ (function () {
+        function CmsInjectorService(cmsMapping, injector) {
+            this.cmsMapping = cmsMapping;
+            this.injector = injector;
         }
-        /**
-         * @desc
-         * returns a web component for the CMS typecode.
-         *
-         * The mapping of CMS components to web componetns requires a mapping.
-         * This is configurable when the module is loaded.
-         *
-         * For example:
-         *
-         *  {
-         *      'CMSLinkComponent': 'LinkComponent',
-         *      'SimpleResponsiveBannerComponent': 'SimpleResponsiveBannerComponent',
-         *      [etc.]
-         *  }
-         *
-         * The type codes are dynamic since they depend on the implementation.
-         * Customer will add, extend or ingore standard components.
-         *
-         * @param typeCode the component type
-         */
-        ComponentMapperService.prototype.getComponent = function (typeCode) {
-            var componentConfig = this.config.cmsComponents[typeCode];
-            if (!componentConfig) {
-                if (!this.missingComponents.includes(typeCode)) {
-                    this.missingComponents.push(typeCode);
-                    console.warn("No component implementation found for the CMS component type '" + typeCode + "'.\n", "Make sure you implement a component and register it in the mapper.");
-                }
-            }
-            return componentConfig ? componentConfig.component : null;
+        CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
+            return {
+                uid: uid,
+                data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
+                    .get(core$1.CmsService)
+                    .getComponentData(uid),
+            };
         };
-        ComponentMapperService.prototype.getComponentFactoryByCode = function (typeCode) {
-            var component = this.getComponent(typeCode);
+        CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
+            var _a, _b;
+            var configProviders = (_b = (_a = this.cmsMapping.getComponentMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+            return core.Injector.create({
+                providers: __spread([
+                    {
+                        provide: CmsComponentData,
+                        useValue: this.getCmsData(uid),
+                    }
+                ], configProviders),
+                parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
+            });
+        };
+        CmsInjectorService.ctorParameters = function () { return [
+            { type: CmsMappingService },
+            { type: core.Injector }
+        ]; };
+        CmsInjectorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+        CmsInjectorService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsInjectorService);
+        return CmsInjectorService;
+    }());
+
+    /**
+     * Directive used to facilitate instantiation of CMS driven dynamic components
+     */
+    var ComponentWrapperDirective = /** @class */ (function () {
+        function ComponentWrapperDirective(vcr, cmsMappingService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
+        ) {
+            this.vcr = vcr;
+            this.cmsMappingService = cmsMappingService;
+            this.injector = injector;
+            this.dynamicAttributeService = dynamicAttributeService;
+            this.renderer = renderer;
+            this.componentHandler = componentHandler;
+            this.cmsInjector = cmsInjector;
+            this.cmsService = cmsService;
+        }
+        ComponentWrapperDirective.prototype.ngOnInit = function () {
+            if (this.cmsMappingService.isComponentEnabled(this.cxComponentWrapper.flexType)) {
+                this.launchComponent();
+            }
+        };
+        ComponentWrapperDirective.prototype.launchComponent = function () {
+            var _this = this;
+            var _a;
+            var componentMapping = this.cmsMappingService.getComponentMapping(this.cxComponentWrapper.flexType);
+            if (!componentMapping) {
+                return;
+            }
+            this.launcherResource = (_a = this.componentHandler
+                .getLauncher(componentMapping, this.vcr, this.cmsInjector.getInjector(this.cxComponentWrapper.flexType, this.cxComponentWrapper.uid, this.injector))) === null || _a === void 0 ? void 0 : _a.subscribe(function (_a) {
+                var elementRef = _a.elementRef, componentRef = _a.componentRef;
+                _this.cmpRef = componentRef;
+                _this.decorate(elementRef);
+            });
+        };
+        ComponentWrapperDirective.prototype.decorate = function (elementRef) {
+            if (this.cmsService.isLaunchInSmartEdit()) {
+                this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, elementRef.nativeElement, this.renderer);
+            }
+        };
+        ComponentWrapperDirective.prototype.ngOnDestroy = function () {
+            if (this.launcherResource) {
+                this.launcherResource.unsubscribe();
+            }
+        };
+        ComponentWrapperDirective.ctorParameters = function () { return [
+            { type: core.ViewContainerRef },
+            { type: CmsMappingService },
+            { type: core.Injector },
+            { type: core$1.DynamicAttributeService },
+            { type: core.Renderer2 },
+            { type: ComponentHandlerService },
+            { type: CmsInjectorService },
+            { type: core$1.CmsService // TODO: remove, move smartedit detection responsibility to different layer/service
+             }
+        ]; };
+        __decorate([
+            core.Input()
+        ], ComponentWrapperDirective.prototype, "cxComponentWrapper", void 0);
+        ComponentWrapperDirective = __decorate([
+            core.Directive({
+                selector: '[cxComponentWrapper]',
+            })
+        ], ComponentWrapperDirective);
+        return ComponentWrapperDirective;
+    }());
+
+    /**
+     * Default component handler used for dynamically launching cms components implemented
+     * as native Angular components.
+     */
+    var DefaultComponentHandler = /** @class */ (function () {
+        function DefaultComponentHandler() {
+        }
+        DefaultComponentHandler.prototype.hasMatch = function (componentMapping) {
+            return (typeof componentMapping.component === 'function' &&
+                componentMapping.component.prototype);
+        };
+        DefaultComponentHandler.prototype.getPriority = function () {
+            return -50 /* FALLBACK */;
+        };
+        DefaultComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
+            var _this = this;
+            return new rxjs.Observable(function (subscriber) {
+                var componentRef;
+                var injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
+                var dispose = function () {
+                    if (componentRef) {
+                        componentRef.destroy();
+                    }
+                };
+                var factory = _this.getComponentFactory(injector, componentMapping.component);
+                if (factory) {
+                    componentRef = viewContainerRef.createComponent(factory, undefined, injector);
+                    subscriber.next({ elementRef: componentRef.location, componentRef: componentRef });
+                }
+                return dispose;
+            });
+        };
+        DefaultComponentHandler.prototype.getComponentFactory = function (injector, component) {
             if (!component) {
                 return null;
             }
-            var factory = this.componentFactoryResolver.resolveComponentFactory(component);
-            if (!factory) {
-                console.warn("No component factory found for the CMS component type '" + typeCode + "'.\n", "Make sure you add a component to the 'entryComponents' array in the NgModule.");
-                return null;
-            }
+            var factory = injector
+                .get(core.ComponentFactoryResolver)
+                .resolveComponentFactory(component);
             return factory;
         };
-        ComponentMapperService.prototype.isWebComponent = function (typeCode) {
-            var component = this.getComponent(typeCode);
-            return typeof component === 'string' && (component || '').includes('#');
-        };
-        ComponentMapperService.prototype.initWebComponent = function (componentType, renderer) {
-            var _this = this;
-            return new Promise(function (resolve) {
-                var _a = __read(_this.getComponent(componentType).split('#'), 2), path = _a[0], selector = _a[1];
-                var script = _this.loadedWebComponents[path];
-                if (!script) {
-                    if (path) {
-                        script = renderer.createElement('script');
-                        _this.loadedWebComponents[path] = script;
-                        script.setAttribute('src', path);
-                        renderer.appendChild(_this.document.body, script);
-                        if (common.isPlatformBrowser(_this.platform)) {
-                            script.onload = function () {
-                                script.onload = null;
-                            };
-                        }
-                    }
-                    else {
-                        script = {};
-                    }
-                }
-                if (script.onload) {
-                    // If script is still loading (has onload callback defined)
-                    // add new callback and chain it with the existing one.
-                    // Needed to support loading multiple components from one script
-                    var chainedOnload_1 = script.onload;
-                    script.onload = function () {
-                        chainedOnload_1();
-                        resolve(selector);
-                    };
-                }
-                else {
-                    resolve(selector);
-                }
-            });
-        };
-        ComponentMapperService.ctorParameters = function () { return [
-            { type: core.ComponentFactoryResolver },
-            { type: core$1.CmsConfig },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-        ]; };
-        ComponentMapperService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ComponentMapperService_Factory() { return new ComponentMapperService(core["ɵɵinject"](core.ComponentFactoryResolver), core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](common.DOCUMENT), core["ɵɵinject"](core.PLATFORM_ID)); }, token: ComponentMapperService, providedIn: "root" });
-        ComponentMapperService = __decorate([
-            core.Injectable({ providedIn: 'root' }),
-            __param(2, core.Inject(common.DOCUMENT)),
-            __param(3, core.Inject(core.PLATFORM_ID))
-        ], ComponentMapperService);
-        return ComponentMapperService;
+        DefaultComponentHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function DefaultComponentHandler_Factory() { return new DefaultComponentHandler(); }, token: DefaultComponentHandler, providedIn: "root" });
+        DefaultComponentHandler = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], DefaultComponentHandler);
+        return DefaultComponentHandler;
     }());
 
     var CxApiService = /** @class */ (function () {
@@ -1033,114 +1268,99 @@
         return CxApiService;
     }());
 
-    var ComponentWrapperDirective = /** @class */ (function () {
-        function ComponentWrapperDirective(vcr, componentMapper, injector, cmsService, dynamicAttributeService, renderer, config, platformId) {
-            this.vcr = vcr;
-            this.componentMapper = componentMapper;
-            this.injector = injector;
-            this.cmsService = cmsService;
-            this.dynamicAttributeService = dynamicAttributeService;
-            this.renderer = renderer;
-            this.config = config;
-            this.platformId = platformId;
+    /**
+     * Component handler responsible for launching cms web components.
+     */
+    var WebComponentHandler = /** @class */ (function () {
+        function WebComponentHandler(document, platform) {
+            this.document = document;
+            this.platform = platform;
+            this.loadedWebComponents = {};
         }
-        ComponentWrapperDirective.prototype.ngOnInit = function () {
-            if (!this.shouldRenderComponent()) {
-                return;
-            }
-            if (this.componentMapper.isWebComponent(this.cxComponentWrapper.flexType)) {
-                this.launchWebComponent();
-            }
-            else {
-                this.launchComponent();
-            }
+        WebComponentHandler.prototype.hasMatch = function (componentMapping) {
+            return (typeof componentMapping.component === 'string' &&
+                componentMapping.component.includes('#'));
         };
-        ComponentWrapperDirective.prototype.shouldRenderComponent = function () {
-            var isSSR = common.isPlatformServer(this.platformId);
-            var isComponentDisabledInSSR = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {}).disableSSR;
-            return !(isSSR && isComponentDisabledInSSR);
+        WebComponentHandler.prototype.getPriority = function () {
+            return -10 /* LOW */; // low, as it's a default matcher
         };
-        ComponentWrapperDirective.prototype.launchComponent = function () {
-            var factory = this.componentMapper.getComponentFactoryByCode(this.cxComponentWrapper.flexType);
-            if (factory) {
-                this.cmpRef = this.vcr.createComponent(factory, undefined, this.getInjectorForComponent());
-                if (this.cmsService.isLaunchInSmartEdit()) {
-                    this.addSmartEditContract(this.cmpRef.location.nativeElement);
-                }
-            }
-        };
-        ComponentWrapperDirective.prototype.launchWebComponent = function () {
-            return __awaiter(this, void 0, void 0, function () {
-                var elementName, cmsComponentData;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, this.componentMapper.initWebComponent(this.cxComponentWrapper.flexType, this.renderer)];
-                        case 1:
-                            elementName = _a.sent();
-                            if (elementName) {
-                                this.webElement = this.renderer.createElement(elementName);
-                                cmsComponentData = this.getCmsDataForComponent();
-                                this.webElement.cxApi = __assign(__assign({}, this.injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
-                                this.renderer.appendChild(this.vcr.element.nativeElement.parentElement, this.webElement);
-                                if (this.cmsService.isLaunchInSmartEdit()) {
-                                    this.addSmartEditContract(this.webElement);
-                                }
-                            }
-                            return [2 /*return*/];
+        WebComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
+            var _this = this;
+            return new rxjs.Observable(function (subscriber) {
+                var webElement;
+                var active = true;
+                var injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
+                var renderer = injector.get(core.Renderer2);
+                var disposeFunc = function () {
+                    active = false;
+                    if (webElement) {
+                        webElement.remove();
+                    }
+                };
+                _this.initWebComponent(componentMapping.component, renderer).then(function (elementName) {
+                    if (elementName) {
+                        webElement = renderer.createElement(elementName);
+                        var cmsComponentData = injector.get(CmsComponentData, null);
+                        webElement.cxApi = __assign(__assign({}, injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
+                        renderer.appendChild(viewContainerRef.element.nativeElement.parentElement, webElement);
+                        subscriber.next({ elementRef: new core.ElementRef(webElement) });
+                        if (!active) {
+                            disposeFunc();
+                        }
                     }
                 });
+                return disposeFunc;
             });
         };
-        ComponentWrapperDirective.prototype.getCmsDataForComponent = function () {
-            return {
-                uid: this.cxComponentWrapper.uid,
-                data$: this.cmsService.getComponentData(this.cxComponentWrapper.uid),
-            };
-        };
-        ComponentWrapperDirective.prototype.getInjectorForComponent = function () {
-            var configProviders = (this.config.cmsComponents[this.cxComponentWrapper.flexType] || {})
-                .providers || [];
-            return core.Injector.create({
-                providers: __spread([
-                    {
-                        provide: CmsComponentData,
-                        useValue: this.getCmsDataForComponent(),
+        WebComponentHandler.prototype.initWebComponent = function (component, renderer) {
+            var _this = this;
+            return new Promise(function (resolve) {
+                var _a = __read(component.split('#'), 2), path = _a[0], selector = _a[1];
+                var script = _this.loadedWebComponents[path];
+                if (!script) {
+                    if (path) {
+                        script = renderer.createElement('script');
+                        _this.loadedWebComponents[path] = script;
+                        script.setAttribute('src', path);
+                        renderer.appendChild(_this.document.body, script);
+                        if (common.isPlatformBrowser(_this.platform)) {
+                            script.onload = function () {
+                                script.onload = null;
+                            };
+                        }
                     }
-                ], configProviders),
-                parent: this.injector,
+                    else {
+                        script = {};
+                    }
+                }
+                if (script.onload) {
+                    // If script is still loading (has onload callback defined)
+                    // add new callback and chain it with the existing one.
+                    // Needed to support loading multiple components from one script
+                    var chainedOnload_1 = script.onload;
+                    script.onload = function () {
+                        chainedOnload_1();
+                        resolve(selector);
+                    };
+                }
+                else {
+                    resolve(selector);
+                }
             });
         };
-        ComponentWrapperDirective.prototype.addSmartEditContract = function (element) {
-            this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, element, this.renderer);
-        };
-        ComponentWrapperDirective.prototype.ngOnDestroy = function () {
-            if (this.cmpRef) {
-                this.cmpRef.destroy();
-            }
-            if (this.webElement) {
-                this.webElement.remove();
-            }
-        };
-        ComponentWrapperDirective.ctorParameters = function () { return [
-            { type: core.ViewContainerRef },
-            { type: ComponentMapperService },
-            { type: core.Injector },
-            { type: core$1.CmsService },
-            { type: core$1.DynamicAttributeService },
-            { type: core.Renderer2 },
-            { type: core$1.CmsConfig },
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+        WebComponentHandler.ctorParameters = function () { return [
+            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+            { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
         ]; };
-        __decorate([
-            core.Input()
-        ], ComponentWrapperDirective.prototype, "cxComponentWrapper", void 0);
-        ComponentWrapperDirective = __decorate([
-            core.Directive({
-                selector: '[cxComponentWrapper]',
+        WebComponentHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function WebComponentHandler_Factory() { return new WebComponentHandler(core["ɵɵinject"](common.DOCUMENT), core["ɵɵinject"](core.PLATFORM_ID)); }, token: WebComponentHandler, providedIn: "root" });
+        WebComponentHandler = __decorate([
+            core.Injectable({
+                providedIn: 'root',
             }),
-            __param(7, core.Inject(core.PLATFORM_ID))
-        ], ComponentWrapperDirective);
-        return ComponentWrapperDirective;
+            __param(0, core.Inject(common.DOCUMENT)),
+            __param(1, core.Inject(core.PLATFORM_ID))
+        ], WebComponentHandler);
+        return WebComponentHandler;
     }());
 
     var PageComponentModule = /** @class */ (function () {
@@ -1149,7 +1369,18 @@
         PageComponentModule = __decorate([
             core.NgModule({
                 imports: [common.CommonModule],
-                providers: [],
+                providers: [
+                    {
+                        provide: ComponentHandler,
+                        useExisting: DefaultComponentHandler,
+                        multi: true,
+                    },
+                    {
+                        provide: ComponentHandler,
+                        useExisting: WebComponentHandler,
+                        multi: true,
+                    },
+                ],
                 declarations: [ComponentWrapperDirective],
                 exports: [ComponentWrapperDirective],
             })
@@ -10663,108 +10894,6 @@
     /**
      * Please don't put that service in public API.
      * */
-    var CmsMappingService = /** @class */ (function () {
-        function CmsMappingService(config, platformId) {
-            this.config = config;
-            this.platformId = platformId;
-        }
-        CmsMappingService.prototype.isComponentEnabled = function (flexType) {
-            var isSSR = common.isPlatformServer(this.platformId);
-            var isComponentDisabledInSSR = (this.config.cmsComponents[flexType] || {})
-                .disableSSR;
-            return !(isSSR && isComponentDisabledInSSR);
-        };
-        CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
-            var e_1, _a;
-            var routes = [];
-            try {
-                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                    var componentType = componentTypes_1_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return routes;
-        };
-        CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
-            var e_2, _a;
-            var guards = new Set();
-            try {
-                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                    var componentType = componentTypes_2_1.value;
-                    this.getGuardsForComponent(componentType).forEach(function (guard) {
-                        return guards.add(guard);
-                    });
-                }
-            }
-            catch (e_2_1) { e_2 = { error: e_2_1 }; }
-            finally {
-                try {
-                    if (componentTypes_2_1 && !componentTypes_2_1.done && (_a = componentTypes_2.return)) _a.call(componentTypes_2);
-                }
-                finally { if (e_2) throw e_2.error; }
-            }
-            return Array.from(guards);
-        };
-        CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
-            var e_3, _a;
-            var i18nKeys = new Set();
-            try {
-                for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
-                    var componentType = componentTypes_3_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        this.getI18nKeysForComponent(componentType).forEach(function (key) {
-                            return i18nKeys.add(key);
-                        });
-                    }
-                }
-            }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
-            finally {
-                try {
-                    if (componentTypes_3_1 && !componentTypes_3_1.done && (_a = componentTypes_3.return)) _a.call(componentTypes_3);
-                }
-                finally { if (e_3) throw e_3.error; }
-            }
-            return Array.from(i18nKeys);
-        };
-        CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.childRoutes) || [];
-        };
-        CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.guards) || [];
-        };
-        CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
-            var mappingConfig = this.config.cmsComponents[componentType];
-            return (mappingConfig && mappingConfig.i18nKeys) || [];
-        };
-        CmsMappingService.ctorParameters = function () { return [
-            { type: core$1.CmsConfig },
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-        ]; };
-        CmsMappingService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-        CmsMappingService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(1, core.Inject(core.PLATFORM_ID))
-        ], CmsMappingService);
-        return CmsMappingService;
-    }());
-
-    /**
-     * Please don't put that service in public API.
-     * */
     var CmsGuardsService = /** @class */ (function () {
         function CmsGuardsService(cmsMapping, injector) {
             this.cmsMapping = cmsMapping;
@@ -19488,12 +19617,15 @@
     exports.CmsComponentData = CmsComponentData;
     exports.CmsGuardsService = CmsGuardsService;
     exports.CmsI18nService = CmsI18nService;
+    exports.CmsInjectorService = CmsInjectorService;
     exports.CmsLibModule = CmsLibModule;
     exports.CmsMappingService = CmsMappingService;
     exports.CmsPageGuard = CmsPageGuard;
     exports.CmsParagraphModule = CmsParagraphModule;
     exports.CmsRouteModule = CmsRouteModule;
     exports.CmsRoutesService = CmsRoutesService;
+    exports.ComponentHandler = ComponentHandler;
+    exports.ComponentHandlerService = ComponentHandlerService;
     exports.ComponentWrapperDirective = ComponentWrapperDirective;
     exports.ConsentManagementComponent = ConsentManagementComponent;
     exports.ConsentManagementFormComponent = ConsentManagementFormComponent;
@@ -19505,6 +19637,7 @@
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
     exports.DEFAULT_LAUNCH_CONFIG = DEFAULT_LAUNCH_CONFIG;
+    exports.DefaultComponentHandler = DefaultComponentHandler;
     exports.DeferLoaderService = DeferLoaderService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
@@ -19812,7 +19945,7 @@
     exports.ɵe = skipLinkFactory;
     exports.ɵf = AsmLoaderModule;
     exports.ɵg = asmFactory;
-    exports.ɵh = ComponentMapperService;
+    exports.ɵh = WebComponentHandler;
     exports.ɵi = AsmEnablerService;
     exports.ɵj = AsmMainUiComponent;
     exports.ɵk = AsmComponentService;

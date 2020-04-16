@@ -1,0 +1,19 @@
+import { ElementRef, Injector, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ComponentHandler } from './component-handler';
+import { CmsComponentMapping, Priority } from '@spartacus/core';
+/**
+ * Component handler responsible for launching cms web components.
+ */
+export declare class WebComponentHandler implements ComponentHandler {
+    protected document: any;
+    protected platform: any;
+    constructor(document: any, platform: any);
+    private loadedWebComponents;
+    hasMatch(componentMapping: CmsComponentMapping): boolean;
+    getPriority(): Priority;
+    launcher(componentMapping: CmsComponentMapping, viewContainerRef: ViewContainerRef, elementInjector?: Injector): Observable<{
+        elementRef: ElementRef;
+    }>;
+    private initWebComponent;
+}
