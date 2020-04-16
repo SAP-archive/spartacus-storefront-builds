@@ -1,11 +1,10 @@
 import { FormGroup } from '@angular/forms';
-import { ActiveCartService, FeatureConfigService, PromotionLocation, SelectiveCartService } from '@spartacus/core';
+import { ActiveCartService, PromotionLocation, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CartItemComponentOptions, Item } from '../cart-item/cart-item.component';
 export declare class CartItemListComponent {
     protected activeCartService: ActiveCartService;
     protected selectiveCartService: SelectiveCartService;
-    protected featureConfig: FeatureConfigService;
     readonly: boolean;
     hasHeader: boolean;
     options: CartItemComponentOptions;
@@ -15,8 +14,7 @@ export declare class CartItemListComponent {
     get items(): Item[];
     promotionLocation: PromotionLocation;
     set setLoading(value: boolean);
-    constructor(activeCartService: ActiveCartService, selectiveCartService: SelectiveCartService, featureConfig: FeatureConfigService);
-    isSaveForLaterEnabled(): boolean;
+    constructor(activeCartService: ActiveCartService, selectiveCartService: SelectiveCartService);
     /**
      * The items we're getting form the input do not have a consistent model.
      * In case of a `consignmentEntry`, we need to normalize the data from the orderEntry.

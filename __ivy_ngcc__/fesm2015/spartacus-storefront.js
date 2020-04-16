@@ -1408,7 +1408,7 @@ function CartItemListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(10, 9, "cartItems.quantity"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r248.isSaveForLaterEnabled() && ctx_r248.options.isSaveForLater)("ngIfElse", _r250);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r248.options.isSaveForLater)("ngIfElse", _r250);
 } }
 function CartItemListComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 12);
@@ -1775,7 +1775,7 @@ function CartDetailsComponent_ng_container_0_ng_container_1_div_1_Template(rf, c
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 9, ctx_r295.orderPromotions$));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("items", entries_r294)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(7, 11, ctx_r295.cartLoaded$))("promotionLocation", ctx_r295.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(15, _c16, ctx_r295.isSaveForLaterEnabled() ? _r290 : null));
+    ɵngcc0.ɵɵproperty("items", entries_r294)("cartIsLoading", !ɵngcc0.ɵɵpipeBind1(7, 11, ctx_r295.cartLoaded$))("promotionLocation", ctx_r295.promotionLocation)("options", ɵngcc0.ɵɵpureFunction1(15, _c16, _r290));
 } }
 function CartDetailsComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -13747,10 +13747,9 @@ CartCouponModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartCoup
         ]] });
 
 let CartItemListComponent = class CartItemListComponent {
-    constructor(activeCartService, selectiveCartService, featureConfig) {
+    constructor(activeCartService, selectiveCartService) {
         this.activeCartService = activeCartService;
         this.selectiveCartService = selectiveCartService;
-        this.featureConfig = featureConfig;
         this.readonly = false;
         this.hasHeader = true;
         this.options = {
@@ -13776,14 +13775,6 @@ let CartItemListComponent = class CartItemListComponent {
                 : this.form.enable({ emitEvent: false });
         }
     }
-    //TODO remove feature flag for #5958
-    isSaveForLaterEnabled() {
-        if (this.featureConfig) {
-            return this.featureConfig.isEnabled('saveForLater');
-        }
-        return false;
-    }
-    //TODO remove feature flag for #5958
     /**
      * The items we're getting form the input do not have a consistent model.
      * In case of a `consignmentEntry`, we need to normalize the data from the orderEntry.
@@ -13836,7 +13827,7 @@ let CartItemListComponent = class CartItemListComponent {
         }), map(() => this.form.get(item.product.code)));
     }
 };
-CartItemListComponent.ɵfac = function CartItemListComponent_Factory(t) { return new (t || CartItemListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartItemListComponent.ɵfac = function CartItemListComponent_Factory(t) { return new (t || CartItemListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService)); };
 CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListComponent, selectors: [["cx-cart-item-list"]], inputs: { readonly: "readonly", hasHeader: "hasHeader", options: "options", promotionLocation: "promotionLocation", items: "items", setLoading: ["cartIsLoading", "setLoading"] }, decls: 4, vars: 2, consts: [["class", "d-none d-md-block d-lg-block d-xl-block", 4, "ngIf"], ["class", "cx-item-list-row", 4, "ngFor", "ngForOf"], ["totalHeader", ""], [1, "d-none", "d-md-block", "d-lg-block", "d-xl-block"], [1, "cx-item-list-header", "row"], [1, "cx-item-list-desc", "col-md-5", "col-lg-5", "col-xl-6"], [1, "cx-item-list-price", "col-md-3", "col-lg-2", "col-xl-2"], [1, "cx-item-list-qty", "col-md-2", "col-lg-3", "col-xl-2"], [4, "ngIf", "ngIfElse"], [1, "cx-item-list-total", "col-md-2", "col-lg-2", "col-xl-2"], [1, "cx-item-list-row"], ["class", "cx-item-list-items", 3, "is-changed", 4, "ngIf"], [1, "cx-item-list-items"], [3, "item", "quantityControl", "readonly", "promotionLocation", "options"]], template: function CartItemListComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartItemListComponent_div_0_Template, 12, 11, "div", 0);
         ɵngcc0.ɵɵtemplate(1, CartItemListComponent_div_1_Template, 3, 3, "div", 1);
@@ -13848,8 +13839,7 @@ CartItemListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemListCo
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, CartItemComponent]; }, pipes: function () { return [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe]; }, encapsulation: 2, changeDetection: 0 });
 CartItemListComponent.ctorParameters = () => [
     { type: ActiveCartService },
-    { type: SelectiveCartService },
-    { type: FeatureConfigService }
+    { type: SelectiveCartService }
 ];
 __decorate([
     Input()
@@ -13871,9 +13861,8 @@ __decorate([
 ], CartItemListComponent.prototype, "setLoading", null);
 
 let CartItemComponent = class CartItemComponent {
-    constructor(promotionService, featureConfig) {
+    constructor(promotionService) {
         this.promotionService = promotionService;
-        this.featureConfig = featureConfig;
         this.compact = false;
         this.readonly = false;
         this.view = new EventEmitter();
@@ -13887,14 +13876,6 @@ let CartItemComponent = class CartItemComponent {
     ngOnInit() {
         this.appliedProductPromotions$ = this.promotionService.getProductPromotionForEntry(this.item, this.promotionLocation);
     }
-    //TODO remove feature flag for #5958
-    isSaveForLaterEnabled() {
-        if (this.featureConfig) {
-            return this.featureConfig.isEnabled('saveForLater');
-        }
-        return false;
-    }
-    //TODO remove feature flag for #5958
     isProductOutOfStock(product) {
         // TODO Move stocklevelstatuses across the app to an enum
         return (product &&
@@ -13909,7 +13890,7 @@ let CartItemComponent = class CartItemComponent {
         this.view.emit();
     }
 };
-CartItemComponent.ɵfac = function CartItemComponent_Factory(t) { return new (t || CartItemComponent)(ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartItemComponent.ɵfac = function CartItemComponent_Factory(t) { return new (t || CartItemComponent)(ɵngcc0.ɵɵdirectiveInject(PromotionService)); };
 CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent, selectors: [["cx-cart-item"]], inputs: { compact: "compact", readonly: "readonly", promotionLocation: "promotionLocation", options: "options", item: "item", quantityControl: "quantityControl" }, outputs: { view: "view" }, decls: 26, vars: 31, consts: [[3, "ngClass"], [1, "col-2", "cx-image-container"], ["tabindex", "-1", 3, "routerLink", "click"], ["format", "thumbnail", 3, "container"], [1, "cx-info", "col-10"], [1, "cx-info-container", "row"], ["class", "cx-name", 4, "ngIf"], ["class", "cx-code", 4, "ngIf"], [4, "ngIf"], ["class", "cx-price", 3, "ngClass", 4, "ngIf"], [1, "cx-quantity", 3, "ngClass"], ["placement", "left", 1, "cx-label", 3, "ngClass", "title"], [1, "cx-value"], [3, "control", "readonly", "max", "allowZero"], [4, "ngIf", "ngIfElse"], ["class", "cx-availability col-12", 4, "ngIf"], ["class", "cx-actions col-12", 4, "ngIf"], ["total", ""], [1, "cx-name"], [1, "cx-link", 3, "routerLink", "click"], [1, "cx-code"], ["class", "cx-property", 4, "ngFor", "ngForOf"], [1, "cx-property"], ["class", "cx-label", 4, "ngIf"], [1, "cx-label"], [1, "cx-price", 3, "ngClass"], [1, "cx-label", 3, "ngClass"], ["class", "cx-value", 4, "ngIf"], [1, "cx-total", 3, "ngClass"], ["class", "cx-value", 4, "ngIf", "ngIfElse"], ["forceInstock", ""], [1, "cx-availability", "col-12"], [3, "promotions"], [1, "cx-actions", "col-12"], [1, "col-md-3", "cx-remove-btn"], [1, "link", 3, "disabled", "click"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["class", "cx-total", 3, "ngClass", 4, "ngIf"]], template: function CartItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "div", 0);
         ɵngcc0.ɵɵelementStart(1, "div", 1);
@@ -13971,9 +13952,9 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(16, 25, "cartItems.quantity"), " ");
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("control", ctx.quantityControl)("readonly", !ctx.item.updateable || ctx.readonly || ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("max", (ctx.item.product.stock == null ? null : ctx.item.product.stock.stockLevel) || 1000)("allowZero", true);
+        ɵngcc0.ɵɵproperty("control", ctx.quantityControl)("readonly", !ctx.item.updateable || ctx.readonly || ctx.options.isSaveForLater)("max", (ctx.item.product.stock == null ? null : ctx.item.product.stock.stockLevel) || 1000)("allowZero", true);
         ɵngcc0.ɵɵadvance(1);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.isSaveForLaterEnabled() && ctx.options.isSaveForLater)("ngIfElse", _r266);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.options.isSaveForLater)("ngIfElse", _r266);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.isProductOutOfStock(ctx.item.product));
         ɵngcc0.ɵɵadvance(1);
@@ -13982,8 +13963,7 @@ CartItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartItemComponent,
         ɵngcc0.ɵɵproperty("ngIf", (!ctx.readonly || ctx.options.isSaveForLater) && ctx.item.updateable);
     } }, directives: [ɵngcc4.NgClass, ɵngcc6.RouterLinkWithHref, MediaComponent, ɵngcc4.NgIf, ItemCounterComponent, ɵngcc4.NgForOf, PromotionsComponent, ɵngcc4.NgTemplateOutlet], pipes: [ɵngcc1.UrlPipe, ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 CartItemComponent.ctorParameters = () => [
-    { type: PromotionService },
-    { type: FeatureConfigService }
+    { type: PromotionService }
 ];
 __decorate([
     Input()
@@ -14073,13 +14053,12 @@ AddToCartModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function AddToCart
         ]] });
 
 let CartDetailsComponent = class CartDetailsComponent {
-    constructor(activeCartService, promotionService, selectiveCartService, authService, routingService, featureConfig) {
+    constructor(activeCartService, promotionService, selectiveCartService, authService, routingService) {
         this.activeCartService = activeCartService;
         this.promotionService = promotionService;
         this.selectiveCartService = selectiveCartService;
         this.authService = authService;
         this.routingService = routingService;
-        this.featureConfig = featureConfig;
         this.loggedIn = false;
         this.promotionLocation = PromotionLocation.ActiveCart;
     }
@@ -14089,28 +14068,13 @@ let CartDetailsComponent = class CartDetailsComponent {
         this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter((entries) => entries.length > 0));
-        if (this.isSaveForLaterEnabled()) {
-            this.cartLoaded$ = combineLatest([
-                this.activeCartService.isStable(),
-                this.selectiveCartService.getLoaded(),
-                this.authService.isUserLoggedIn(),
-            ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded));
-        }
-        //TODO remove for #5958
-        else {
-            this.cartLoaded$ = this.activeCartService.isStable();
-        }
-        //TODO  remove for #5958 end
+        this.cartLoaded$ = combineLatest([
+            this.activeCartService.isStable(),
+            this.selectiveCartService.getLoaded(),
+            this.authService.isUserLoggedIn(),
+        ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded));
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
     }
-    //TODO remove feature flag for #5958
-    isSaveForLaterEnabled() {
-        if (this.featureConfig) {
-            return this.featureConfig.isEnabled('saveForLater');
-        }
-        return false;
-    }
-    //TODO remove feature flag for #5958 end
     saveForLater(item) {
         if (this.loggedIn) {
             this.activeCartService.removeEntry(item);
@@ -14121,7 +14085,7 @@ let CartDetailsComponent = class CartDetailsComponent {
         }
     }
 };
-CartDetailsComponent.ɵfac = function CartDetailsComponent_Factory(t) { return new (t || CartDetailsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.FeatureConfigService)); };
+CartDetailsComponent.ɵfac = function CartDetailsComponent_Factory(t) { return new (t || CartDetailsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ActiveCartService), ɵngcc0.ɵɵdirectiveInject(PromotionService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.SelectiveCartService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.AuthService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
 CartDetailsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CartDetailsComponent, selectors: [["cx-cart-details"]], decls: 4, vars: 3, consts: [[4, "ngIf"], ["saveForLaterBtn", ""], ["class", "cart-details-wrapper", 4, "ngIf"], [1, "cart-details-wrapper"], [1, "cx-total"], [3, "items", "cartIsLoading", "promotionLocation", "options"], [3, "promotions"], [1, "col-md-3", "col-lg-3", "col-xl-3", "cx-sfl-btn"], ["type", "button", 1, "link", 3, "disabled", "click"]], template: function CartDetailsComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CartDetailsComponent_ng_container_0_Template, 3, 3, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -14135,8 +14099,7 @@ CartDetailsComponent.ctorParameters = () => [
     { type: PromotionService },
     { type: SelectiveCartService },
     { type: AuthService },
-    { type: RoutingService },
-    { type: FeatureConfigService }
+    { type: RoutingService }
 ];
 
 let CartDetailsModule = class CartDetailsModule {
@@ -28198,10 +28161,10 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-cart-item-list',
-                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container\n      *ngIf=\"\n        isSaveForLaterEnabled() && options.isSaveForLater;\n        else totalHeader\n      \"\n    >\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
+                template: "<div *ngIf=\"hasHeader\" class=\"d-none d-md-block d-lg-block d-xl-block\">\n  <div class=\"cx-item-list-header row\">\n    <div class=\"cx-item-list-desc col-md-5 col-lg-5 col-xl-6\">\n      {{ 'cartItems.description' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-price col-md-3 col-lg-2 col-xl-2\">\n      {{ 'cartItems.itemPrice' | cxTranslate }}\n    </div>\n    <div class=\"cx-item-list-qty col-md-2 col-lg-3 col-xl-2\">\n      {{ 'cartItems.quantity' | cxTranslate }}\n    </div>\n\n    <ng-container *ngIf=\"options.isSaveForLater; else totalHeader\">\n      <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n        {{ 'saveForLaterItems.stock' | cxTranslate }}\n      </div>\n    </ng-container>\n  </div>\n</div>\n\n<div class=\"cx-item-list-row\" *ngFor=\"let item of items; let i = index\">\n  <div\n    class=\"cx-item-list-items\"\n    *ngIf=\"getControl(item) | async as control\"\n    [class.is-changed]=\"control.get('quantity').dirty\"\n  >\n    <cx-cart-item\n      [item]=\"item\"\n      [quantityControl]=\"control.get('quantity')\"\n      [readonly]=\"readonly\"\n      [promotionLocation]=\"promotionLocation\"\n      [options]=\"options\"\n    >\n    </cx-cart-item>\n  </div>\n</div>\n\n<ng-template #totalHeader>\n  <div class=\"cx-item-list-total col-md-2 col-lg-2 col-xl-2\">\n    {{ 'cartItems.total' | cxTranslate }}\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.FeatureConfigService }]; }, { readonly: [{
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: ɵngcc1.SelectiveCartService }]; }, { readonly: [{
             type: Input
         }], hasHeader: [{
             type: Input
@@ -28220,9 +28183,9 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-cart-item',
-                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row\">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"item.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"\n              !item.updateable ||\n              readonly ||\n              (isSaveForLaterEnabled() && options.isSaveForLater)\n            \"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container\n        *ngIf=\"isSaveForLaterEnabled() && options.isSaveForLater; else total\"\n      >\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n\n    <ng-container\n      *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n    >\n      <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
+                template: "<div [ngClass]=\"compact ? 'cx-compact row' : 'row'\">\n  <!-- Item Image -->\n  <div class=\"col-2 cx-image-container\">\n    <a\n      [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n      (click)=\"viewItem()\"\n      tabindex=\"-1\"\n    >\n      <cx-media\n        [container]=\"item.product.images?.PRIMARY\"\n        format=\"thumbnail\"\n      ></cx-media>\n    </a>\n  </div>\n  <!-- Item Information -->\n  <div class=\"cx-info col-10\">\n    <div class=\"cx-info-container row\">\n      <!-- Item Description -->\n      <div [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-5'\">\n        <div *ngIf=\"item.product.name\" class=\"cx-name\">\n          <a\n            class=\"cx-link\"\n            [routerLink]=\"{ cxRoute: 'product', params: item.product } | cxUrl\"\n            (click)=\"viewItem()\"\n            >{{ item.product.name }}</a\n          >\n        </div>\n        <div *ngIf=\"item.product.code\" class=\"cx-code\">\n          {{ 'cartItems.id' | cxTranslate }} {{ item.product.code }}\n        </div>\n        <!-- Variants -->\n        <ng-container *ngIf=\"item.product.baseOptions?.length\">\n          <div\n            *ngFor=\"\n              let variant of item.product.baseOptions[0]?.selected\n                ?.variantOptionQualifiers\n            \"\n            class=\"cx-property\"\n          >\n            <div class=\"cx-label\" *ngIf=\"variant.name && variant.value\">\n              {{ variant.name }}: {{ variant.value }}\n            </div>\n          </div>\n        </ng-container>\n      </div>\n      <!-- Item Price -->\n      <div\n        *ngIf=\"item.basePrice\"\n        class=\"cx-price\"\n        [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n      >\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n        >\n          {{ 'cartItems.itemPrice' | cxTranslate }}\n        </div>\n        <div *ngIf=\"item.basePrice\" class=\"cx-value\">\n          {{ item.basePrice?.formattedValue }}\n        </div>\n      </div>\n      <!-- Item Quantity -->\n      <div class=\"cx-quantity\" [ngClass]=\"compact ? '' : ' col-3'\">\n        <div\n          class=\"cx-label\"\n          [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          placement=\"left\"\n          title=\"{{ 'cartItems.quantityTitle' | cxTranslate }}\"\n        >\n          {{ 'cartItems.quantity' | cxTranslate }}\n        </div>\n        <div class=\"cx-value\">\n          <cx-item-counter\n            [control]=\"quantityControl\"\n            [readonly]=\"!item.updateable || readonly || options.isSaveForLater\"\n            [max]=\"item.product.stock?.stockLevel || 1000\"\n            [allowZero]=\"true\"\n          >\n          </cx-item-counter>\n        </div>\n      </div>\n      <!-- Total -->\n      <ng-container *ngIf=\"options.isSaveForLater; else total\">\n        <div\n          class=\"cx-total\"\n          [ngClass]=\"compact ? '' : ' col-md-3 col-lg-3 col-xl-2'\"\n        >\n          <div\n            class=\"cx-label\"\n            [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n          >\n            {{ 'saveForLaterItems.stock' | cxTranslate }}\n          </div>\n          <div\n            *ngIf=\"item.product?.stock?.stockLevel >= 0; else forceInstock\"\n            class=\"cx-value\"\n          >\n            {{ item.product.stock.stockLevel }}\n          </div>\n          <ng-template #forceInstock\n            ><div class=\"cx-value\">\n              {{ 'saveForLaterItems.forceInStock' | cxTranslate }}\n            </div></ng-template\n          >\n        </div>\n      </ng-container>\n    </div>\n    <!-- Availability -->\n    <div\n      *ngIf=\"isProductOutOfStock(item.product)\"\n      class=\"cx-availability col-12\"\n    >\n      {{ 'productSummary.outOfStock' | cxTranslate }}\n    </div>\n    <!-- Promotion -->\n\n    <ng-container\n      *ngIf=\"appliedProductPromotions$ | async as appliedProductPromotions\"\n    >\n      <cx-promotions [promotions]=\"appliedProductPromotions\"></cx-promotions>\n    </ng-container>\n\n    <!-- Actions -->\n    <div\n      *ngIf=\"(!readonly || options.isSaveForLater) && item.updateable\"\n      class=\"cx-actions col-12\"\n    >\n      <ng-container *ngIf=\"!isProductOutOfStock(item.product)\">\n        <ng-container\n          *ngTemplateOutlet=\"\n            options.optionalBtn;\n            context: {\n              $implicit: { loading: quantityControl.disabled, item: item }\n            }\n          \"\n        ></ng-container>\n      </ng-container>\n\n      <div class=\"col-md-3 cx-remove-btn\">\n        <button\n          class=\"link\"\n          [disabled]=\"quantityControl.disabled\"\n          (click)=\"removeItem()\"\n        >\n          {{ 'common.remove' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #total>\n  <div\n    *ngIf=\"item.totalPrice\"\n    class=\"cx-total\"\n    [ngClass]=\"compact ? '' : ' col-md-3 col-xl-2'\"\n  >\n    <div\n      class=\"cx-label\"\n      [ngClass]=\"compact ? '' : ' d-block d-md-none d-lg-none d-xl-none'\"\n    >\n      {{ 'cartItems.total' | cxTranslate }}\n    </div>\n    <div class=\"cx-value\">{{ item.totalPrice.formattedValue }}</div>\n  </div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: PromotionService }, { type: ɵngcc1.FeatureConfigService }]; }, { compact: [{
+    }], function () { return [{ type: PromotionService }]; }, { compact: [{
             type: Input
         }], readonly: [{
             type: Input
@@ -28334,10 +28297,10 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-cart-details',
-                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [promotionLocation]=\"promotionLocation\"\n        [options]=\"{\n          isSaveForLater: false,\n          optionalBtn: isSaveForLaterEnabled() ? saveForLaterBtn : null\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
+                template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [promotionLocation]=\"promotionLocation\"\n        [options]=\"{\n          isSaveForLater: false,\n          optionalBtn: saveForLaterBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: PromotionService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }, { type: ɵngcc1.FeatureConfigService }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.ActiveCartService }, { type: PromotionService }, { type: ɵngcc1.SelectiveCartService }, { type: ɵngcc1.AuthService }, { type: ɵngcc1.RoutingService }]; }, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(CartDetailsModule, { declarations: function () { return [CartDetailsComponent]; }, imports: function () { return [CartSharedModule,
         CommonModule,
         CartCouponModule,

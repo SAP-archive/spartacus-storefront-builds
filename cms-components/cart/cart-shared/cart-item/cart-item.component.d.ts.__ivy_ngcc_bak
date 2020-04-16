@@ -1,6 +1,6 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FeatureConfigService, PromotionLocation, PromotionResult } from '@spartacus/core';
+import { PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
 export interface Item {
@@ -16,7 +16,6 @@ export interface CartItemComponentOptions {
 }
 export declare class CartItemComponent implements OnInit {
     protected promotionService: PromotionService;
-    private featureConfig?;
     compact: boolean;
     item: Item;
     readonly: boolean;
@@ -25,15 +24,8 @@ export declare class CartItemComponent implements OnInit {
     promotionLocation: PromotionLocation;
     options: CartItemComponentOptions;
     appliedProductPromotions$: Observable<PromotionResult[]>;
-    constructor(promotionService: PromotionService, featureConfig: FeatureConfigService);
-    /**
-     * @deprecated Since 1.5
-     * Add featureConfig for save for later.
-     * Remove issue: #5958
-     */
     constructor(promotionService: PromotionService);
     ngOnInit(): void;
-    isSaveForLaterEnabled(): boolean;
     isProductOutOfStock(product: any): boolean;
     removeItem(): void;
     viewItem(): void;
