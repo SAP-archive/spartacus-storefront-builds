@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-import { Media } from './media.model';
+import { Media, MediaContainer } from './media.model';
 import { MediaService } from './media.service';
 export declare class MediaComponent implements OnChanges {
     protected mediaService: MediaService;
@@ -9,7 +9,7 @@ export declare class MediaComponent implements OnChanges {
      * can be provided in a `srcset` so the browser will figure out
      * the best media for the device.
      */
-    container: any;
+    container: MediaContainer;
     /**
      * if a media format is given, a media for the given format will be rendered
      */
@@ -50,7 +50,7 @@ export declare class MediaComponent implements OnChanges {
     /**
      * Creates the `Media` object
      */
-    private create;
+    protected create(): void;
     /**
      * This handler is called from the UI when the image is loaded.
      */
@@ -60,5 +60,5 @@ export declare class MediaComponent implements OnChanges {
      * with css classes to have a missing media.
      */
     errorHandler(): void;
-    private handleMissing;
+    protected handleMissing(): void;
 }
