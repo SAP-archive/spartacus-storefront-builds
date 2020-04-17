@@ -1,6 +1,6 @@
 import { EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Address, AddressValidation, CardType, CheckoutDeliveryService, CheckoutPaymentService, Country, GlobalMessageService, LoaderState, UserPaymentService, Region, UserAddressService } from '@spartacus/core';
+import { Address, AddressValidation, CardType, CheckoutDeliveryService, CheckoutPaymentService, Country, GlobalMessageService, UserPaymentService, Region, UserAddressService, StateUtils } from '@spartacus/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
@@ -22,7 +22,7 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     cardTypes$: Observable<CardType[]>;
     shippingAddress$: Observable<Address>;
     countries$: Observable<Country[]>;
-    loading$: Observable<LoaderState<void>>;
+    loading$: Observable<StateUtils.LoaderState<void>>;
     sameAsShippingAddress: boolean;
     regions$: Observable<Region[]>;
     selectedCountry$: BehaviorSubject<string>;
