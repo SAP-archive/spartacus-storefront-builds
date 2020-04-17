@@ -26,7 +26,6 @@ export { defaultRoutingConfig as ɵbr, defaultStorefrontRoutesConfig as ɵbq } f
 export { htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt } from './cms-structure/seo/html-lang-provider';
 export { getStructuredDataFactory as ɵc } from './cms-structure/seo/structured-data/structured-data.module';
 export { CmsRoutesImplService as ɵbk } from './cms-structure/services/cms-routes-impl.service';
-export { KeyboardFocusService as ɵbu } from './layout/a11y/keyboard-focus';
 export { AutoFocusDirective as ɵt } from './layout/a11y/keyboard-focus/autofocus/auto-focus.directive';
 export { AutoFocusService as ɵbc } from './layout/a11y/keyboard-focus/autofocus/auto-focus.service';
 export { BaseFocusDirective as ɵy } from './layout/a11y/keyboard-focus/base/base-focus.directive';
@@ -45,5 +44,5 @@ export { TrapFocusDirective as ɵr } from './layout/a11y/keyboard-focus/trap/tra
 export { TrapFocusService as ɵbe } from './layout/a11y/keyboard-focus/trap/trap-focus.service';
 export { VisibleFocusDirective as ɵx } from './layout/a11y/keyboard-focus/visible/visible-focus.directive';
 export { skipLinkFactory as ɵe } from './layout/a11y/skip-link/skip-link.module';
-export { AnonymousConsentsModule as ɵbv } from './shared/components/anonymous-consents/anonymous-consents.module';
-export { AnonymousConsentDialogComponent as ɵbw } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
+export { AnonymousConsentsModule as ɵbu } from './shared/components/anonymous-consents/anonymous-consents.module';
+export { AnonymousConsentDialogComponent as ɵbv } from './shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';

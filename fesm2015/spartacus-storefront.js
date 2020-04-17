@@ -1,9 +1,9 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
 import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler } from 'rxjs';
-import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
+import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
@@ -41,6 +41,7 @@ var ICON_TYPE;
     ICON_TYPE["CIRCLE"] = "CIRCLE";
     ICON_TYPE["HEART"] = "HEART";
     ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
+    ICON_TYPE["FILTER"] = "FILTER";
 })(ICON_TYPE || (ICON_TYPE = {}));
 class IconConfig {
 }
@@ -93,6 +94,7 @@ const fontawesomeIconConfig = {
             CIRCLE: 'fas fa-circle',
             HEART: 'fas fa-heart',
             EMPTY_HEART: 'far fa-heart',
+            FILTER: 'fas fa-filter',
         },
         resources: [
             {
@@ -1199,11 +1201,6 @@ AsmMainUiComponent = __decorate([
     })
 ], AsmMainUiComponent);
 
-/** The element attribute used to store the focus state */
-const FOCUS_ATTR = 'data-cx-focus';
-/** The element attribute used to store the focus group state */
-const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
-
 let BaseFocusService = class BaseFocusService {
 };
 BaseFocusService.ɵprov = ɵɵdefineInjectable({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
@@ -1213,149 +1210,10 @@ BaseFocusService = __decorate([
     })
 ], BaseFocusService);
 
-/**
- * Abstract directive that provides a common interface for all focus directives:
- * - Block Focus
- * - Persist Focus
- * - Escape Focus
- * - Auto Focus
- * - Tab Focus
- * - Trap Focus
- * - Lock Focus
- */
-let BaseFocusDirective = class BaseFocusDirective {
-    constructor(elementRef, service) {
-        this.elementRef = elementRef;
-        this.service = service;
-        /**
-         * A default config can be provided for each directive if a specific focus directive
-         * is used directly. i.e. `<div cxAutoFocus></div>`
-         */
-        this.defaultConfig = {};
-    }
-    ngOnInit() {
-        this.setDefaultConfiguration();
-        this.requiredTabindex = -1;
-    }
-    /**
-     * Override the (input) config if it undefined or an empty string, with the
-     * `defaultConfig`. The `defaultConfig` might be specified for each directive
-     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
-     * specific (inherited) defaultConfig will be used.
-     */
-    setDefaultConfiguration() {
-        if ((!this.config || this.config === '') && this.defaultConfig) {
-            this.config = this.defaultConfig;
-        }
-    }
-    /**
-     * Helper method to return the host element for the directive
-     * given by the `elementRef`.
-     */
-    get host() {
-        return this.elementRef.nativeElement;
-    }
-    /**
-     * Force a tabindex on the host element if it is _requried_ to make the element
-     * focusable. If the element is focusable by nature or by a given tabindex, the
-     * `tabindex` is not applied.
-     *
-     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
-     */
-    set requiredTabindex(tabindex) {
-        if (this.requiresExplicitTabIndex) {
-            this.tabindex = tabindex;
-        }
-    }
-    /**
-     * Returns true if the host element does not have a tabindex defined
-     * and it also doesn't get focus by browsers nature (i.e. button or
-     * active link).
-     */
-    get requiresExplicitTabIndex() {
-        return (this.tabindex === undefined &&
-            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
-            !(this.host.tagName === 'A' &&
-                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
-    }
-};
-BaseFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
-__decorate([
-    Input(), HostBinding('attr.tabindex')
-], BaseFocusDirective.prototype, "tabindex", void 0);
-BaseFocusDirective = __decorate([
-    Directive()
-], BaseFocusDirective);
-
-/**
- * Directive implementation that adds a CSS class to the host element
- * when the moused is used to focus an element. As soon as the keyboard
- * is used, the class is removed.
- */
-let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = { disableMouseFocus: true };
-        /** controls a polyfill class for the lacking focus-visible feature */
-        this.mouseFocus = false;
-    }
-    handleMousedown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = true;
-        }
-    }
-    handleKeydown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = false;
-        }
-    }
-    get shouldFocusVisible() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
-    }
-};
-__decorate([
-    HostBinding('class.mouse-focus')
-], VisibleFocusDirective.prototype, "mouseFocus", void 0);
-__decorate([
-    HostListener('mousedown')
-], VisibleFocusDirective.prototype, "handleMousedown", null);
-__decorate([
-    HostListener('keydown')
-], VisibleFocusDirective.prototype, "handleKeydown", null);
-VisibleFocusDirective = __decorate([
-    Directive() // selector: '[cxVisibleFocus]'
-], VisibleFocusDirective);
-
-let BlockFocusDirective = 
-// { selector: '[cxBlockFocus]' }
-class BlockFocusDirective extends VisibleFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { block: true };
-        // @Input('cxBlockFocus')
-        this.config = {};
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        if (this.config.block) {
-            this.tabindex = -1;
-        }
-    }
-};
-BlockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
-BlockFocusDirective = __decorate([
-    Directive()
-    // { selector: '[cxBlockFocus]' }
-], BlockFocusDirective);
+/** The element attribute used to store the focus state */
+const FOCUS_ATTR = 'data-cx-focus';
+/** The element attribute used to store the focus group state */
+const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
 
 const GLOBAL_GROUP = '_g_';
 /**
@@ -1403,101 +1261,6 @@ PersistFocusService = __decorate([
         providedIn: 'root',
     })
 ], PersistFocusService);
-
-/**
- * Directive that provides persistence of the focused state. This is useful
- * when a group of focusable elements got refocused or even recreated. That
- * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
- *
- * The focus state is based on a configured _key_, which can be passed in the
- * config input, either by using a string primitive or `PersistFocusConfig.key`:
- *
- * ```html
- * <button cxPersistFocus="myKey"></button>
- * <button cxFocus="myKey"></button>
- * <button [cxFocus]="{{key:'myKey'}"></button>
- * ```
- *
- * The focus state can be part of a focus _group_, so that the state is shared
- * and remember for the given group. In order to detect the persistence for a
- * given element, we store the persistence key as a data attribute (`data-cx-focus`):
- *
- * ```html
- * <button data-cx-focus="myKey"></button>
- * ```
- *
- * Other keyboard focus directives can read the key to understand whether the element
- * should retrieve focus.
- *
- */
-let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = {};
-        /**
-         * The persistence key can be passed directly or through the `FocusConfig.key`.
-         * While this could be considered a global key, the likeliness of conflicts
-         * is very small since the key is cleared when the focus is changed.
-         */
-        // @Input('cxPersistFocus')
-        this.config = {};
-    }
-    handleFocus(event) {
-        this.service.set(this.key, this.group);
-        event === null || event === void 0 ? void 0 : event.preventDefault();
-        event === null || event === void 0 ? void 0 : event.stopPropagation();
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        this.attr = this.key ? this.key : undefined;
-    }
-    setDefaultConfiguration() {
-        if (typeof this.config === 'string' && this.config !== '') {
-            this.config = { key: this.config };
-        }
-        super.setDefaultConfiguration();
-    }
-    /**
-     * Focus the element explicitly if it was focused before.
-     */
-    ngAfterViewInit() {
-        if (this.isPersisted) {
-            this.host.focus({ preventScroll: true });
-        }
-    }
-    get isPersisted() {
-        return !!this.key && this.service.get(this.group) === this.key;
-    }
-    /**
-     * Returns the key for the host element, which is used to persist the
-     * focus state. This is useful in cases where the DOM is rebuild.
-     */
-    get key() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
-    }
-    /**
-     * returns the persistence group (if any) for the focusable elements.
-     */
-    get group() {
-        return this.service.getPersistenceGroup(this.host, this.config);
-    }
-};
-PersistFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: PersistFocusService }
-];
-__decorate([
-    HostBinding(`attr.${FOCUS_ATTR}`)
-], PersistFocusDirective.prototype, "attr", void 0);
-__decorate([
-    HostListener('focus', ['$event'])
-], PersistFocusDirective.prototype, "handleFocus", null);
-PersistFocusDirective = __decorate([
-    Directive() // selector: '[cxPersistFocus]',
-], PersistFocusDirective);
 
 let SelectFocusUtility = class SelectFocusUtility {
     constructor() {
@@ -1605,52 +1368,6 @@ EscapeFocusService = __decorate([
     })
 ], EscapeFocusService);
 
-/**
- * Directive to focus the host element whenever the `escape` key is captured.
- * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
- * on a tree of elements. Each time the escape key is used, the focus will
- * move up in the DOM tree.
- *
- */
-let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { focusOnEscape: true };
-        this.esc = new EventEmitter();
-    }
-    /**
-     * Handles the escape key event.
-     * @param event the native keyboard event which contains the escape keydown event
-     */
-    handleEscape(event) {
-        if (this.service.shouldFocus(this.config)) {
-            this.service.handleEscape(this.host, this.config, event);
-        }
-        this.esc.emit(this.service.shouldFocus(this.config));
-    }
-    ngOnInit() {
-        if (this.service.shouldFocus(this.config)) {
-            this.requiredTabindex = -1;
-        }
-        super.ngOnInit();
-    }
-};
-EscapeFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: EscapeFocusService }
-];
-__decorate([
-    Output()
-], EscapeFocusDirective.prototype, "esc", void 0);
-__decorate([
-    HostListener('keydown.escape', ['$event'])
-], EscapeFocusDirective.prototype, "handleEscape", null);
-EscapeFocusDirective = __decorate([
-    Directive() // selector: '[cxEscFocus]',
-], EscapeFocusDirective);
-
 let AutoFocusService = class AutoFocusService extends EscapeFocusService {
     /**
      * Returns the first focusable child element of the host element.
@@ -1693,92 +1410,6 @@ AutoFocusService = __decorate([
         providedIn: 'root',
     })
 ], AutoFocusService);
-
-/**
- * Directive that focus the first nested _focusable_ element based on state and configuration:
- *
- * 1. focusable element that was left in a focused state (aka _persisted_ focus)
- * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
- * 3. focusable element marked with the native HTML5 `autofocus` attribute
- * 4. first focusable element
- * 5. the host element, in case the configured CSS selector is `:host`.
- *
- * Example configurations:
- *
- * `<div cxAutoFocus>[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
- *
- */
-let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** The AutoFocusDirective will be using autofocus by default  */
-        this.defaultConfig = { autofocus: true };
-    }
-    /**
-     * Focus the element explicitly if it was focussed before.
-     */
-    ngAfterViewInit() {
-        if (this.shouldAutofocus) {
-            this.handleFocus();
-        }
-        if (!this.shouldAutofocus || this.hasPersistedFocus) {
-            super.ngAfterViewInit();
-        }
-    }
-    /**
-     * Mimic the focus without setting the actual focus on the host. The first
-     * focusable child element will be focussed.
-     */
-    handleFocus(event) {
-        var _a;
-        if (this.shouldAutofocus) {
-            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
-                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
-            }
-            else {
-                event.target.focus();
-            }
-        }
-        super.handleFocus(event);
-    }
-    /**
-     * Helper function to get the first focusable child element
-     */
-    get hasPersistedFocus() {
-        return this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Helper function to indicate whether we should use autofocus for the
-     * child elements.
-     */
-    get shouldAutofocus() {
-        var _a;
-        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
-    }
-    /**
-     * Helper function to get the first focusable child element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get firstFocusable() {
-        return this.service.findFirstFocusable(this.host, this.config);
-    }
-};
-AutoFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: AutoFocusService }
-];
-AutoFocusDirective = __decorate([
-    Directive() // selector: '[cxAutoFocus]'
-], AutoFocusDirective);
 
 let TabFocusService = class TabFocusService extends AutoFocusService {
     /**
@@ -1884,48 +1515,6 @@ TabFocusService = __decorate([
     })
 ], TabFocusService);
 
-/**
- * Directive to move the focus of ("locked") child elements. This is useful
- * for a nested list of tabs, carousel slides or any group of elements that
- * requires horizontal navigation.
- */
-let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
-        this.defaultConfig = { tab: true };
-        // @Input('cxTabFocus')
-        this.config = {};
-    }
-    handleNextTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
-        }
-    }
-    handlePreviousTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
-        }
-    }
-};
-TabFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TabFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowRight', ['$event'])
-], TabFocusDirective.prototype, "handleNextTab", null);
-__decorate([
-    HostListener('keydown.arrowLeft', ['$event'])
-], TabFocusDirective.prototype, "handlePreviousTab", null);
-TabFocusDirective = __decorate([
-    Directive() // selector: '[cxTabFocus]'
-], TabFocusDirective);
-
 let TrapFocusService = class TrapFocusService extends TabFocusService {
     /**
      * Indicates whether any of the child elements of the host are focusable.
@@ -1973,59 +1562,6 @@ TrapFocusService = __decorate([
     })
 ], TrapFocusService);
 
-/**
- * Directive that keeps the focus inside the focussable child elements,
- * also known as a _focus trap_.
- */
-let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { trap: true };
-        // @Input('cxTrapFocus')
-        this.config = {};
-        this.handleTrapDown = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, 1 /* NEXT */);
-            }
-        };
-        this.handleTrapUp = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, -1 /* PREV */);
-            }
-        };
-    }
-    /**
-     * Moves the focus of the element reference up or down, depending on the increment.
-     * The focus of the element is trapped to avoid it from going out of the group.
-     *
-     * @param event UIEvent that is used to get the target element. The event is blocked
-     *   from standard execution and further bubbling.
-     * @param increment indicates whether the next or previous is focussed.
-     */
-    moveFocus(event, increment) {
-        if (this.service.hasFocusableChildren(this.host)) {
-            this.service.moveFocus(this.host, this.config, increment, event);
-        }
-    }
-};
-TrapFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TrapFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowdown', ['$event']),
-    HostListener('keydown.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapDown", void 0);
-__decorate([
-    HostListener('keydown.arrowup', ['$event']),
-    HostListener('keydown.shift.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapUp", void 0);
-TrapFocusDirective = __decorate([
-    Directive() // selector: '[cxTrapFocus]'
-], TrapFocusDirective);
-
 let LockFocusService = class LockFocusService extends TrapFocusService {
 };
 LockFocusService.ɵprov = ɵɵdefineInjectable({ factory: function LockFocusService_Factory() { return new LockFocusService(ɵɵinject(SelectFocusUtility)); }, token: LockFocusService, providedIn: "root" });
@@ -2035,183 +1571,6 @@ LockFocusService = __decorate([
     })
 ], LockFocusService);
 
-/**
- * Focusable elements exclude hidden elements by default, but this contradicts with
- * unlocking (hidden) elements.
- */
-const UNLOCK_HIDDEN_ELEMENTS = true;
-/**
- * Directive that adds persistence for focussed element in case
- * the elements are being rebuild. This happens often when change
- * detection kicks in because of new data set from the backend.
- */
-let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = { lock: true };
-        // @Input('cxLockFocus')
-        this.config = {};
-        /**
-         * Emits an event when the host is unlocked.
-         */
-        this.unlock = new EventEmitter();
-    }
-    /**
-     * When the user selects enter or space, the focusable childs are
-     * unlocked, which means that the tabindex is set to 0.
-     */
-    handleEnter(event) {
-        if (this.shouldLock && this.host === event.target) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    /**
-     * In case any of the children elements is touched by the mouse,
-     * we unlock the group to not break the mouse-experience.
-     */
-    handleClick(event) {
-        if (this.shouldLock && this.isLocked) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    lockFocus() {
-        this.addTabindexToChildren(-1);
-    }
-    unlockFocus(event) {
-        this.unlock.emit(true);
-        this.addTabindexToChildren(0);
-        // we focus the host if the event was triggered from a child
-        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
-            super.handleFocus(event);
-        }
-    }
-    ngOnInit() {
-        var _a, _b;
-        super.ngOnInit();
-        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
-        if (this.shouldLock) {
-            this.tabindex = 0;
-            // Locked elements will be set to `autofocus` by default if it's not
-            // been configured. This will ensure that autofocus kicks in upon unlock.
-            if (!this.config.hasOwnProperty('autofocus')) {
-                this.config.autofocus = true;
-            }
-            // Locked elements will be set to `focusOnEscape` by default if it's not
-            // been configured. This will ensure that  the host gets locked again when
-            // `escape` is pressed.
-            if (!this.config.hasOwnProperty('focusOnEscape')) {
-                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
-            }
-        }
-    }
-    ngAfterViewInit() {
-        if (this.shouldLock) {
-            /**
-             * If the component hosts a group of focusable children elmenents,
-             * we persist the group key to the children, so that they can taken this
-             * into account when they persist their focus state.
-             */
-            if (!!this.group) {
-                this.service.findFocusable(this.host).forEach((el) => 
-                // we must do this in after view init as
-                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
-            }
-            if (this.shouldAutofocus) {
-                this.handleFocus();
-            }
-        }
-        super.ngAfterViewInit();
-    }
-    handleFocus(event) {
-        if (this.shouldLock) {
-            if (this.shouldUnlockAfterAutofocus(event)) {
-                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
-                setTimeout(() => this.unlockFocus(event));
-            }
-            else {
-                setTimeout(() => this.lockFocus());
-                event === null || event === void 0 ? void 0 : event.stopPropagation();
-                return;
-            }
-        }
-        super.handleFocus(event);
-    }
-    handleEscape(event) {
-        if (this.shouldLock) {
-            this.service.clear(this.config.group);
-        }
-        super.handleEscape(event);
-    }
-    /**
-     * When the handleFocus is called without an actual event, it's coming from Autofocus.
-     * In this case we unlock the focusable children in case there's a focusable child that
-     * was unlocked before.
-     *
-     * We keep this private to not polute the API.
-     */
-    shouldUnlockAfterAutofocus(event) {
-        return !event && this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Add the tabindex attribute to the focusable children elements
-     */
-    addTabindexToChildren(i = 0) {
-        if (this.shouldLock) {
-            this.isLocked = i === -1;
-            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
-                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
-            }
-        }
-    }
-    /**
-     * Utility method, returns all focusable children for the host element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get hasFocusableChildren() {
-        return this.service.hasFocusableChildren(this.host);
-    }
-    /**
-     * Returns the focusable children of the host element. If the host element
-     * is configured to be locked, the query is restricted to child elements
-     * with a tabindex !== `-1`.
-     *
-     * We keep this private to not polute the API.
-     */
-    get focusable() {
-        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
-    }
-};
-LockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: LockFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    HostBinding('class.focus-lock')
-], LockFocusDirective.prototype, "shouldLock", void 0);
-__decorate([
-    HostBinding('class.is-locked')
-], LockFocusDirective.prototype, "isLocked", void 0);
-__decorate([
-    Output()
-], LockFocusDirective.prototype, "unlock", void 0);
-__decorate([
-    HostListener('keydown.enter', ['$event']),
-    HostListener('keydown.space', ['$event'])
-], LockFocusDirective.prototype, "handleEnter", null);
-__decorate([
-    HostListener('click', ['$event'])
-], LockFocusDirective.prototype, "handleClick", null);
-LockFocusDirective = __decorate([
-    Directive() // selector: '[cxLockFocus]'
-], LockFocusDirective);
-
 let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
 };
 KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
@@ -2220,64 +1579,6 @@ KeyboardFocusService = __decorate([
         providedIn: 'root',
     })
 ], KeyboardFocusService);
-
-let FocusDirective = class FocusDirective extends LockFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service, renderer);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = {};
-        // tslint:disable-next-line: no-input-rename
-        this.config = {};
-    }
-};
-FocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyboardFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    Input('cxFocus')
-], FocusDirective.prototype, "config", void 0);
-FocusDirective = __decorate([
-    Directive({
-        selector: '[cxFocus]',
-    })
-], FocusDirective);
-
-const directives = [
-    // PersistFocusDirective,
-    // VisibleFocusDirective,
-    // BlockFocusDirective,
-    // AutoFocusDirective,
-    // EscapeFocusDirective,
-    // LockFocusDirective,
-    // TrapFocusDirective,
-    // TabFocusDirective,
-    FocusDirective,
-];
-let KeyboardFocusModule = class KeyboardFocusModule {
-};
-KeyboardFocusModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [...directives],
-        exports: [...directives],
-    })
-], KeyboardFocusModule);
-
-// given that we're likely going to refactor the directives, we're
-// export * from './autofocus/index';
-// export * from './base/index';
-// export * from './block/index';
-// export * from './escape/index';
-// export * from './lock/index';
-// export * from './persist/index';
-// export * from './tab/index';
-// export * from './trap/index';
-// export * from './visible/index';
-// export * from './keyboard-focus.model';
 
 class SkipLinkConfig {
 }
@@ -5058,6 +4359,695 @@ AddToCartComponent = __decorate([
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], AddToCartComponent);
+
+/**
+ * Abstract directive that provides a common interface for all focus directives:
+ * - Block Focus
+ * - Persist Focus
+ * - Escape Focus
+ * - Auto Focus
+ * - Tab Focus
+ * - Trap Focus
+ * - Lock Focus
+ */
+let BaseFocusDirective = class BaseFocusDirective {
+    constructor(elementRef, service) {
+        this.elementRef = elementRef;
+        this.service = service;
+        /**
+         * A default config can be provided for each directive if a specific focus directive
+         * is used directly. i.e. `<div cxAutoFocus></div>`
+         */
+        this.defaultConfig = {};
+    }
+    ngOnInit() {
+        this.setDefaultConfiguration();
+        this.requiredTabindex = -1;
+    }
+    /**
+     * Override the (input) config if it undefined or an empty string, with the
+     * `defaultConfig`. The `defaultConfig` might be specified for each directive
+     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
+     * specific (inherited) defaultConfig will be used.
+     */
+    setDefaultConfiguration() {
+        if ((!this.config || this.config === '') && this.defaultConfig) {
+            this.config = this.defaultConfig;
+        }
+    }
+    /**
+     * Helper method to return the host element for the directive
+     * given by the `elementRef`.
+     */
+    get host() {
+        return this.elementRef.nativeElement;
+    }
+    /**
+     * Force a tabindex on the host element if it is _requried_ to make the element
+     * focusable. If the element is focusable by nature or by a given tabindex, the
+     * `tabindex` is not applied.
+     *
+     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
+     */
+    set requiredTabindex(tabindex) {
+        if (this.requiresExplicitTabIndex) {
+            this.tabindex = tabindex;
+        }
+    }
+    /**
+     * Returns true if the host element does not have a tabindex defined
+     * and it also doesn't get focus by browsers nature (i.e. button or
+     * active link).
+     */
+    get requiresExplicitTabIndex() {
+        return (this.tabindex === undefined &&
+            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
+            !(this.host.tagName === 'A' &&
+                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
+    }
+};
+BaseFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+__decorate([
+    Input(), HostBinding('attr.tabindex')
+], BaseFocusDirective.prototype, "tabindex", void 0);
+BaseFocusDirective = __decorate([
+    Directive()
+], BaseFocusDirective);
+
+/**
+ * Directive implementation that adds a CSS class to the host element
+ * when the moused is used to focus an element. As soon as the keyboard
+ * is used, the class is removed.
+ */
+let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
+    constructor() {
+        super(...arguments);
+        this.defaultConfig = { disableMouseFocus: true };
+        /** controls a polyfill class for the lacking focus-visible feature */
+        this.mouseFocus = false;
+    }
+    handleMousedown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = true;
+        }
+    }
+    handleKeydown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = false;
+        }
+    }
+    get shouldFocusVisible() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
+    }
+};
+__decorate([
+    HostBinding('class.mouse-focus')
+], VisibleFocusDirective.prototype, "mouseFocus", void 0);
+__decorate([
+    HostListener('mousedown')
+], VisibleFocusDirective.prototype, "handleMousedown", null);
+__decorate([
+    HostListener('keydown')
+], VisibleFocusDirective.prototype, "handleKeydown", null);
+VisibleFocusDirective = __decorate([
+    Directive() // selector: '[cxVisibleFocus]'
+], VisibleFocusDirective);
+
+let BlockFocusDirective = 
+// { selector: '[cxBlockFocus]' }
+class BlockFocusDirective extends VisibleFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { block: true };
+        // @Input('cxBlockFocus')
+        this.config = {};
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        if (this.config.block) {
+            this.tabindex = -1;
+        }
+    }
+};
+BlockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+BlockFocusDirective = __decorate([
+    Directive()
+    // { selector: '[cxBlockFocus]' }
+], BlockFocusDirective);
+
+/**
+ * Directive that provides persistence of the focused state. This is useful
+ * when a group of focusable elements got refocused or even recreated. That
+ * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
+ *
+ * The focus state is based on a configured _key_, which can be passed in the
+ * config input, either by using a string primitive or `PersistFocusConfig.key`:
+ *
+ * ```html
+ * <button cxPersistFocus="myKey"></button>
+ * <button cxFocus="myKey"></button>
+ * <button [cxFocus]="{{key:'myKey'}"></button>
+ * ```
+ *
+ * The focus state can be part of a focus _group_, so that the state is shared
+ * and remember for the given group. In order to detect the persistence for a
+ * given element, we store the persistence key as a data attribute (`data-cx-focus`):
+ *
+ * ```html
+ * <button data-cx-focus="myKey"></button>
+ * ```
+ *
+ * Other keyboard focus directives can read the key to understand whether the element
+ * should retrieve focus.
+ *
+ */
+let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = {};
+        /**
+         * The persistence key can be passed directly or through the `FocusConfig.key`.
+         * While this could be considered a global key, the likeliness of conflicts
+         * is very small since the key is cleared when the focus is changed.
+         */
+        // @Input('cxPersistFocus')
+        this.config = {};
+    }
+    handleFocus(event) {
+        this.service.set(this.key, this.group);
+        event === null || event === void 0 ? void 0 : event.preventDefault();
+        event === null || event === void 0 ? void 0 : event.stopPropagation();
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.attr = this.key ? this.key : undefined;
+    }
+    setDefaultConfiguration() {
+        if (typeof this.config === 'string' && this.config !== '') {
+            this.config = { key: this.config };
+        }
+        super.setDefaultConfiguration();
+    }
+    /**
+     * Focus the element explicitly if it was focused before.
+     */
+    ngAfterViewInit() {
+        if (this.isPersisted) {
+            this.host.focus({ preventScroll: true });
+        }
+    }
+    get isPersisted() {
+        return !!this.key && this.service.get(this.group) === this.key;
+    }
+    /**
+     * Returns the key for the host element, which is used to persist the
+     * focus state. This is useful in cases where the DOM is rebuild.
+     */
+    get key() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
+    }
+    /**
+     * returns the persistence group (if any) for the focusable elements.
+     */
+    get group() {
+        return this.service.getPersistenceGroup(this.host, this.config);
+    }
+};
+PersistFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: PersistFocusService }
+];
+__decorate([
+    HostBinding(`attr.${FOCUS_ATTR}`)
+], PersistFocusDirective.prototype, "attr", void 0);
+__decorate([
+    HostListener('focus', ['$event'])
+], PersistFocusDirective.prototype, "handleFocus", null);
+PersistFocusDirective = __decorate([
+    Directive() // selector: '[cxPersistFocus]',
+], PersistFocusDirective);
+
+/**
+ * Directive to focus the host element whenever the `escape` key is captured.
+ * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
+ * on a tree of elements. Each time the escape key is used, the focus will
+ * move up in the DOM tree.
+ *
+ */
+let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { focusOnEscape: true };
+        this.esc = new EventEmitter();
+    }
+    /**
+     * Handles the escape key event.
+     * @param event the native keyboard event which contains the escape keydown event
+     */
+    handleEscape(event) {
+        if (this.service.shouldFocus(this.config)) {
+            this.service.handleEscape(this.host, this.config, event);
+        }
+        this.esc.emit(this.service.shouldFocus(this.config));
+    }
+    ngOnInit() {
+        if (this.service.shouldFocus(this.config)) {
+            this.requiredTabindex = -1;
+        }
+        super.ngOnInit();
+    }
+};
+EscapeFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EscapeFocusService }
+];
+__decorate([
+    Output()
+], EscapeFocusDirective.prototype, "esc", void 0);
+__decorate([
+    HostListener('keydown.escape', ['$event'])
+], EscapeFocusDirective.prototype, "handleEscape", null);
+EscapeFocusDirective = __decorate([
+    Directive() // selector: '[cxEscFocus]',
+], EscapeFocusDirective);
+
+/**
+ * Directive that focus the first nested _focusable_ element based on state and configuration:
+ *
+ * 1. focusable element that was left in a focused state (aka _persisted_ focus)
+ * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
+ * 3. focusable element marked with the native HTML5 `autofocus` attribute
+ * 4. first focusable element
+ * 5. the host element, in case the configured CSS selector is `:host`.
+ *
+ * Example configurations:
+ *
+ * `<div cxAutoFocus>[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
+ *
+ */
+let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** The AutoFocusDirective will be using autofocus by default  */
+        this.defaultConfig = { autofocus: true };
+    }
+    /**
+     * Focus the element explicitly if it was focussed before.
+     */
+    ngAfterViewInit() {
+        if (this.shouldAutofocus) {
+            this.handleFocus();
+        }
+        if (!this.shouldAutofocus || this.hasPersistedFocus) {
+            super.ngAfterViewInit();
+        }
+    }
+    /**
+     * Mimic the focus without setting the actual focus on the host. The first
+     * focusable child element will be focussed.
+     */
+    handleFocus(event) {
+        var _a;
+        if (this.shouldAutofocus) {
+            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
+                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
+            }
+            else {
+                event.target.focus();
+            }
+        }
+        super.handleFocus(event);
+    }
+    /**
+     * Helper function to get the first focusable child element
+     */
+    get hasPersistedFocus() {
+        return this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Helper function to indicate whether we should use autofocus for the
+     * child elements.
+     */
+    get shouldAutofocus() {
+        var _a;
+        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
+    }
+    /**
+     * Helper function to get the first focusable child element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get firstFocusable() {
+        return this.service.findFirstFocusable(this.host, this.config);
+    }
+};
+AutoFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: AutoFocusService }
+];
+AutoFocusDirective = __decorate([
+    Directive() // selector: '[cxAutoFocus]'
+], AutoFocusDirective);
+
+/**
+ * Directive to move the focus of ("locked") child elements. This is useful
+ * for a nested list of tabs, carousel slides or any group of elements that
+ * requires horizontal navigation.
+ */
+let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
+        this.defaultConfig = { tab: true };
+        // @Input('cxTabFocus')
+        this.config = {};
+    }
+    handleNextTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
+        }
+    }
+    handlePreviousTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
+        }
+    }
+};
+TabFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TabFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowRight', ['$event'])
+], TabFocusDirective.prototype, "handleNextTab", null);
+__decorate([
+    HostListener('keydown.arrowLeft', ['$event'])
+], TabFocusDirective.prototype, "handlePreviousTab", null);
+TabFocusDirective = __decorate([
+    Directive() // selector: '[cxTabFocus]'
+], TabFocusDirective);
+
+/**
+ * Directive that keeps the focus inside the focussable child elements,
+ * also known as a _focus trap_.
+ */
+let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { trap: true };
+        // @Input('cxTrapFocus')
+        this.config = {};
+        this.handleTrapDown = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, 1 /* NEXT */);
+            }
+        };
+        this.handleTrapUp = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, -1 /* PREV */);
+            }
+        };
+    }
+    /**
+     * Moves the focus of the element reference up or down, depending on the increment.
+     * The focus of the element is trapped to avoid it from going out of the group.
+     *
+     * @param event UIEvent that is used to get the target element. The event is blocked
+     *   from standard execution and further bubbling.
+     * @param increment indicates whether the next or previous is focussed.
+     */
+    moveFocus(event, increment) {
+        if (this.service.hasFocusableChildren(this.host)) {
+            this.service.moveFocus(this.host, this.config, increment, event);
+        }
+    }
+};
+TrapFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TrapFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowdown', ['$event']),
+    HostListener('keydown.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapDown", void 0);
+__decorate([
+    HostListener('keydown.arrowup', ['$event']),
+    HostListener('keydown.shift.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapUp", void 0);
+TrapFocusDirective = __decorate([
+    Directive() // selector: '[cxTrapFocus]'
+], TrapFocusDirective);
+
+/**
+ * Focusable elements exclude hidden elements by default, but this contradicts with
+ * unlocking (hidden) elements.
+ */
+const UNLOCK_HIDDEN_ELEMENTS = true;
+/**
+ * Directive that adds persistence for focussed element in case
+ * the elements are being rebuild. This happens often when change
+ * detection kicks in because of new data set from the backend.
+ */
+let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = { lock: true };
+        // @Input('cxLockFocus')
+        this.config = {};
+        /**
+         * Emits an event when the host is unlocked.
+         */
+        this.unlock = new EventEmitter();
+    }
+    /**
+     * When the user selects enter or space, the focusable childs are
+     * unlocked, which means that the tabindex is set to 0.
+     */
+    handleEnter(event) {
+        if (this.shouldLock && this.host === event.target) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    /**
+     * In case any of the children elements is touched by the mouse,
+     * we unlock the group to not break the mouse-experience.
+     */
+    handleClick(event) {
+        if (this.shouldLock && this.isLocked) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    lockFocus() {
+        this.addTabindexToChildren(-1);
+    }
+    unlockFocus(event) {
+        this.unlock.emit(true);
+        this.addTabindexToChildren(0);
+        // we focus the host if the event was triggered from a child
+        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
+            super.handleFocus(event);
+        }
+    }
+    ngOnInit() {
+        var _a, _b;
+        super.ngOnInit();
+        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
+        if (this.shouldLock) {
+            this.tabindex = 0;
+            // Locked elements will be set to `autofocus` by default if it's not
+            // been configured. This will ensure that autofocus kicks in upon unlock.
+            if (!this.config.hasOwnProperty('autofocus')) {
+                this.config.autofocus = true;
+            }
+            // Locked elements will be set to `focusOnEscape` by default if it's not
+            // been configured. This will ensure that  the host gets locked again when
+            // `escape` is pressed.
+            if (!this.config.hasOwnProperty('focusOnEscape')) {
+                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
+            }
+        }
+    }
+    ngAfterViewInit() {
+        if (this.shouldLock) {
+            /**
+             * If the component hosts a group of focusable children elmenents,
+             * we persist the group key to the children, so that they can taken this
+             * into account when they persist their focus state.
+             */
+            if (!!this.group) {
+                this.service.findFocusable(this.host).forEach((el) => 
+                // we must do this in after view init as
+                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
+            }
+            if (this.shouldAutofocus) {
+                this.handleFocus();
+            }
+        }
+        super.ngAfterViewInit();
+    }
+    handleFocus(event) {
+        if (this.shouldLock) {
+            if (this.shouldUnlockAfterAutofocus(event)) {
+                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
+                setTimeout(() => this.unlockFocus(event));
+            }
+            else {
+                setTimeout(() => this.lockFocus());
+                event === null || event === void 0 ? void 0 : event.stopPropagation();
+                return;
+            }
+        }
+        super.handleFocus(event);
+    }
+    handleEscape(event) {
+        if (this.shouldLock) {
+            this.service.clear(this.config.group);
+        }
+        super.handleEscape(event);
+    }
+    /**
+     * When the handleFocus is called without an actual event, it's coming from Autofocus.
+     * In this case we unlock the focusable children in case there's a focusable child that
+     * was unlocked before.
+     *
+     * We keep this private to not polute the API.
+     */
+    shouldUnlockAfterAutofocus(event) {
+        return !event && this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Add the tabindex attribute to the focusable children elements
+     */
+    addTabindexToChildren(i = 0) {
+        if (this.shouldLock) {
+            this.isLocked = i === -1;
+            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
+                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
+            }
+        }
+    }
+    /**
+     * Utility method, returns all focusable children for the host element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get hasFocusableChildren() {
+        return this.service.hasFocusableChildren(this.host);
+    }
+    /**
+     * Returns the focusable children of the host element. If the host element
+     * is configured to be locked, the query is restricted to child elements
+     * with a tabindex !== `-1`.
+     *
+     * We keep this private to not polute the API.
+     */
+    get focusable() {
+        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
+    }
+};
+LockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: LockFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    HostBinding('class.focus-lock')
+], LockFocusDirective.prototype, "shouldLock", void 0);
+__decorate([
+    HostBinding('class.is-locked')
+], LockFocusDirective.prototype, "isLocked", void 0);
+__decorate([
+    Output()
+], LockFocusDirective.prototype, "unlock", void 0);
+__decorate([
+    HostListener('keydown.enter', ['$event']),
+    HostListener('keydown.space', ['$event'])
+], LockFocusDirective.prototype, "handleEnter", null);
+__decorate([
+    HostListener('click', ['$event'])
+], LockFocusDirective.prototype, "handleClick", null);
+LockFocusDirective = __decorate([
+    Directive() // selector: '[cxLockFocus]'
+], LockFocusDirective);
+
+let FocusDirective = class FocusDirective extends LockFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service, renderer);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = {};
+        // tslint:disable-next-line: no-input-rename
+        this.config = {};
+    }
+};
+FocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyboardFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    Input('cxFocus')
+], FocusDirective.prototype, "config", void 0);
+FocusDirective = __decorate([
+    Directive({
+        selector: '[cxFocus]',
+    })
+], FocusDirective);
+
+const directives = [
+    // PersistFocusDirective,
+    // VisibleFocusDirective,
+    // BlockFocusDirective,
+    // AutoFocusDirective,
+    // EscapeFocusDirective,
+    // LockFocusDirective,
+    // TrapFocusDirective,
+    // TabFocusDirective,
+    FocusDirective,
+];
+let KeyboardFocusModule = class KeyboardFocusModule {
+};
+KeyboardFocusModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [...directives],
+        exports: [...directives],
+    })
+], KeyboardFocusModule);
 
 let PromotionsComponent = class PromotionsComponent {
     constructor() { }
@@ -7941,6 +7931,18 @@ NotCheckoutAuthGuard = __decorate([
         providedIn: 'root',
     })
 ], NotCheckoutAuthGuard);
+
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
 
 const defaultSkipLinkConfig = {
     skipLinks: [
@@ -15312,82 +15314,518 @@ ProductScrollComponent = __decorate([
     })
 ], ProductScrollComponent);
 
-let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
-    constructor(modalService, activatedRoute, productListComponentService) {
-        this.modalService = modalService;
-        this.activatedRoute = activatedRoute;
+var FacetGroupCollapsedState;
+(function (FacetGroupCollapsedState) {
+    FacetGroupCollapsedState["EXPANDED"] = "EXPANDED";
+    FacetGroupCollapsedState["COLLAPSED"] = "COLLAPSED";
+})(FacetGroupCollapsedState || (FacetGroupCollapsedState = {}));
+
+/**
+ * Provides access to all the facets and active facets for the Product Listing Page.
+ */
+let ProductFacetService = class ProductFacetService {
+    constructor(routing, productListComponentService) {
+        this.routing = routing;
         this.productListComponentService = productListComponentService;
+        this.routeState$ = this.routing
+            .getRouterState()
+            .pipe(pluck('state'));
+        this.searchResult$ = this.routeState$.pipe(switchMap((state) => this.productListComponentService.model$.pipe(filter((page) => this.filterForPage(state, page)), map((page) => this.mapResults(state, page)))));
+        /**
+         * Observes the facets and active facets for the given page. The facet data
+         * is provided in a `FacetList`.
+         */
+        this.facetList$ = this.searchResult$.pipe(map((result) => ({
+            facets: result.facets,
+            activeFacets: result.breadcrumbs,
+        })));
+    }
+    /**
+     * Filters the current result by verifying if the result is related to the page.
+     * This is done to avoid a combination of the next page and the current search results.
+     */
+    filterForPage(state, page) {
+        var _a, _b, _c;
+        if (state.context.type === PageType.CATEGORY_PAGE) {
+            return (((_c = (_b = (_a = page.currentQuery) === null || _a === void 0 ? void 0 : _a.query) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.indexOf(`allCategories:${state.context.id}`)) > -1);
+        }
+        if (state.context.type === PageType.CONTENT_PAGE &&
+            state.context.id === 'search') {
+            return page.currentQuery.query.value.startsWith(`${state.params.query}:`);
+        }
+        return false;
+    }
+    mapResults(state, page) {
+        return Object.assign(Object.assign({}, page), { breadcrumbs: this.filterBreadcrumbs(page.breadcrumbs, state.params) });
+    }
+    /**
+     * filter breadcrumbs which are not actively selected
+     * but coming from the route navigation
+     */
+    filterBreadcrumbs(breadcrumbs, params) {
+        return breadcrumbs
+            ? breadcrumbs.filter((breadcrumb) => !this.hasBreadcrumb(breadcrumb, params))
+            : [];
+    }
+    /**
+     * Indicates whether the breadcrumb is related to navigation parameters,
+     * since either the category or brand code should match those codes.
+     */
+    hasBreadcrumb(breadcrumb, params) {
+        return (breadcrumb.facetCode === 'allCategories' &&
+            breadcrumb.facetValueCode === params.categoryCode);
+    }
+};
+ProductFacetService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: ProductListComponentService }
+];
+ProductFacetService.ɵprov = ɵɵdefineInjectable({ factory: function ProductFacetService_Factory() { return new ProductFacetService(ɵɵinject(RoutingService), ɵɵinject(ProductListComponentService)); }, token: ProductFacetService, providedIn: "root" });
+ProductFacetService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], ProductFacetService);
+
+/**
+ * Provides access to the facets as well as their UI state. The UI state
+ * represents user related changes on the facets, such as expanding or
+ * collapsing a facet group or expanding the number of _visible_ facet values.
+ */
+let FacetService = class FacetService {
+    constructor(productFacetService) {
+        this.productFacetService = productFacetService;
+        /**
+         * An internal map where we keep the UI state of the facets.
+         */
+        this.facetState = new Map();
+        /**
+         * Observes the facets for the given page and configures the initial UI state.
+         *
+         * Facets are configured on each emission so that we keep the facet UI state.
+         * This is mainly done to keep the state during usage of the facet, but also
+         * benefitial when the facets are rebuild while using them.
+         */
+        this.facetList$ = this.productFacetService.facetList$.pipe(tap((facetList) => {
+            facetList.facets.forEach((facet) => this.initialize(facet));
+        }));
+    }
+    /**
+     * Returns the observed UI state for the facet.
+     *
+     * The state is initialized using the `initialize` method.
+     */
+    getState(facet) {
+        this.initialize(facet);
+        return this.facetState.get(facet.name);
+    }
+    /**
+     * Returns the UI state for the facet.
+     *
+     * The state is initialized using the `initialize` method.
+     */
+    getStateSnapshot(facet) {
+        return this.getState(facet).value;
+    }
+    /**
+     * Toggles the facet expanded state. If the expanded state becomes false,
+     * the visible values will decrease to the top values only.
+     *
+     * If the optional value argument is provided the expanded state will be set
+     * to this value, regardless of the current `expanded` state.
+     */
+    toggle(facet, isExpanded) {
+        const state = this.getStateSnapshot(facet);
+        const toggledState = {
+            toggled: isExpanded
+                ? FacetGroupCollapsedState.COLLAPSED
+                : FacetGroupCollapsedState.EXPANDED,
+        };
+        if (toggledState.toggled === FacetGroupCollapsedState.COLLAPSED) {
+            toggledState.maxVisible = state.topVisible;
+        }
+        this.updateState(facet, toggledState);
+    }
+    /**
+     * Increases the visible values to the maximum values of the facet.
+     */
+    increaseVisibleValues(facet) {
+        this.updateState(facet, { maxVisible: facet.values.length });
+    }
+    /**
+     * Decreases the visible values to the topValueCount.
+     *
+     * The topValueCount defaults to 6, but can be controlled in
+     * the backend as well.
+     */
+    decreaseVisibleValues(facet) {
+        this.updateState(facet, { maxVisible: facet.topValueCount });
+    }
+    /**
+     * Persists the facet state and initializes the default values for the top
+     * and max visible values.
+     */
+    initialize(facet) {
+        if (!this.hasState(facet)) {
+            this.facetState.set(facet.name, new BehaviorSubject({
+                topVisible: facet.topValueCount || 0,
+                maxVisible: facet.topValueCount || 0,
+            }));
+        }
+    }
+    /**
+     * Updates the state of the facet in the local facet map.
+     */
+    updateState(facet, property) {
+        const state = Object.assign(Object.assign({}, this.getStateSnapshot(facet)), property);
+        this.facetState.get(facet.name).next(state);
+    }
+    hasState(facet) {
+        return this.facetState.has(facet.name);
+    }
+    getLinkParams(query) {
+        return { query: new HttpUrlEncodingCodec().decodeValue(query) };
+    }
+};
+FacetService.ctorParameters = () => [
+    { type: ProductFacetService }
+];
+FacetService.ɵprov = ɵɵdefineInjectable({ factory: function FacetService_Factory() { return new FacetService(ɵɵinject(ProductFacetService)); }, token: FacetService, providedIn: "root" });
+FacetService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], FacetService);
+
+/**
+ * Active facets render the applied facet values as a list of focusable buttons
+ * which can be used to remove the applied facet value.
+ */
+let ActiveFacetsComponent = class ActiveFacetsComponent {
+    constructor(facetService) {
+        this.facetService = facetService;
+        /** Active facets which are applied to the product results. */
+        this.facetList$ = this.facetService.facetList$;
+        /** Configurable icon which is used for the active facet close button */
+        this.closeIcon = ICON_TYPE.CLOSE;
+    }
+    getLinkParams(facet) {
+        var _a, _b;
+        return this.facetService.getLinkParams((_b = (_a = facet.removeQuery) === null || _a === void 0 ? void 0 : _a.query) === null || _b === void 0 ? void 0 : _b.value);
+    }
+    /**
+     * The focus key is used to persist the focus on the facet when the DOM is being
+     * recreated. We only apply the focus key for the given facet when there are no
+     * facets available. This is a great experience for the keyboard user, who keep the
+     * focus on the activated facet all the time.
+     */
+    getFocusKey(facetList, facet) {
+        var _a;
+        return !((_a = facetList.facets) === null || _a === void 0 ? void 0 : _a.length) ? facet.facetValueName : '';
+    }
+};
+ActiveFacetsComponent.ctorParameters = () => [
+    { type: FacetService }
+];
+__decorate([
+    Input()
+], ActiveFacetsComponent.prototype, "closeIcon", void 0);
+ActiveFacetsComponent = __decorate([
+    Component({
+        selector: 'cx-active-facets',
+        template: "<ng-container *ngIf=\"facetList$ | async as facetList\">\n  <h4 *ngIf=\"facetList?.activeFacets?.length > 0\">\n    {{ 'productList.appliedFilter' | cxTranslate }}\n  </h4>\n\n  <a\n    *ngFor=\"let facet of facetList?.activeFacets\"\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(facet)\"\n    [cxFocus]=\"getFocusKey(facetList, facet)\"\n  >\n    <span>{{ facet.facetValueName }}</span>\n    <cx-icon aria-hidden=\"true\" [type]=\"closeIcon\"></cx-icon>\n  </a>\n</ng-container>\n",
+        changeDetection: ChangeDetectionStrategy.Default
+    })
+], ActiveFacetsComponent);
+
+let ActiveFacetsModule = class ActiveFacetsModule {
+};
+ActiveFacetsModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            RouterModule,
+            I18nModule,
+            IconModule,
+            KeyboardFocusModule,
+        ],
+        declarations: [ActiveFacetsComponent],
+        exports: [ActiveFacetsComponent],
+    })
+], ActiveFacetsModule);
+
+let FacetListComponent = class FacetListComponent {
+    constructor(facetService, elementRef) {
+        this.facetService = facetService;
+        this.elementRef = elementRef;
+        /** Emits when the list must close */
+        this.closeList = new EventEmitter();
+        /** The list of all facet and values related to the products in the list */
+        this.facetList$ = this.facetService.facetList$;
         this.iconTypes = ICON_TYPE;
-        this.collapsedFacets = new Set();
-        this.showAllPerFacetMap = new Map();
-        this.queryCodec = new HttpUrlEncodingCodec();
+        this.dialogFocusConfig = {
+            trap: true,
+            block: true,
+            focusOnEscape: true,
+            autofocus: 'cx-facet',
+        };
     }
-    ngOnInit() {
-        this.sub = this.activatedRoute.params.subscribe((params) => {
-            this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        });
-        this.searchResult$ = this.productListComponentService.model$.pipe(tap((searchResult) => {
-            if (searchResult.facets) {
-                searchResult.facets.forEach((el) => {
-                    this.showAllPerFacetMap.set(el.name, false);
-                });
-            }
-        }));
-        this.visibleFacets$ = this.searchResult$.pipe(map((searchResult) => {
-            return searchResult.facets
-                ? searchResult.facets.filter((facet) => facet.visible)
-                : [];
-        }));
-    }
-    openFilterModal(content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    }
-    toggleValue(query) {
-        this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
-    }
-    showLess(facetName) {
-        this.updateShowAllPerFacetMap(facetName, false);
-    }
-    showMore(facetName) {
-        this.updateShowAllPerFacetMap(facetName, true);
-    }
-    updateShowAllPerFacetMap(facetName, showAll) {
-        this.showAllPerFacetMap.set(facetName, showAll);
-    }
-    isFacetCollapsed(facetName) {
-        return this.collapsedFacets.has(facetName);
-    }
-    toggleFacet(facetName) {
-        if (this.collapsedFacets.has(facetName)) {
-            this.collapsedFacets.delete(facetName);
-        }
-        else {
-            this.collapsedFacets.add(facetName);
+    /**
+     * Toggles the facet group in case it is not expanded.
+     */
+    expandFacetGroup(facet, ref) {
+        if (!ref.isExpanded) {
+            this.facetService.toggle(facet, ref.isExpanded);
         }
     }
-    getVisibleFacetValues(facet) {
-        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-            ? facet.values.length
-            : facet.topValueCount);
+    /**
+     * Indicates that the facet group has been expanded.
+     */
+    isExpanded(facet) {
+        return this.facetService
+            .getState(facet)
+            .pipe(map((value) => value.toggled === FacetGroupCollapsedState.EXPANDED));
     }
-    ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
+    /**
+     * Indicates that the facet group has been collapsed.
+     */
+    isCollapsed(facet) {
+        return this.facetService
+            .getState(facet)
+            .pipe(map((value) => value.toggled === FacetGroupCollapsedState.COLLAPSED));
+    }
+    close(event) {
+        this.closeList.emit(event);
+    }
+};
+FacetListComponent.ctorParameters = () => [
+    { type: FacetService },
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], FacetListComponent.prototype, "isDialog", void 0);
+__decorate([
+    Output()
+], FacetListComponent.prototype, "closeList", void 0);
+FacetListComponent = __decorate([
+    Component({
+        selector: 'cx-facet-list',
+        template: "<div\n  *ngIf=\"(facetList$ | async)?.facets as facets\"\n  [cxFocus]=\"isDialog ? dialogFocusConfig : {}\"\n  (esc)=\"closeList.emit($event)\"\n>\n  <h4>\n    {{ 'productList.filterBy.label' | cxTranslate }}\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeList.emit()\"\n    >\n      <cx-icon aria-hidden=\"true\" [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </h4>\n\n  <!-- \n      Here we'd like to introduce configurable facet components, \n      either by using specific configuration or generic sproutlets \n  -->\n  <cx-facet\n    *ngFor=\"let facet of facets\"\n    #facetRef\n    [facet]=\"facet\"\n    [cxFocus]=\"{ lock: true, trap: true, autofocus: 'a' }\"\n    (unlock)=\"expandFacetGroup(facet, facetRef)\"\n    [class.expanded]=\"isExpanded(facet) | async\"\n    [class.collapsed]=\"isCollapsed(facet) | async\"\n  ></cx-facet>\n</div>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], FacetListComponent);
+
+let FacetComponent = class FacetComponent {
+    constructor(facetService, elementRef, cd) {
+        this.facetService = facetService;
+        this.elementRef = elementRef;
+        this.cd = cd;
+        /** configurable icon that is used to collapse the facet group  */
+        this.expandIcon = ICON_TYPE.EXPAND;
+        this.collapseIcon = ICON_TYPE.COLLAPSE;
+    }
+    set facet(value) {
+        this._facet = value;
+        this.isMultiSelect = !!value.multiSelect;
+        this.state$ = this.facetService.getState(value);
+    }
+    get facet() {
+        return this._facet;
+    }
+    /**
+     * Handles clicking the heading of the facet group, which means toggling
+     * the visibility of the group (collapse / expand) and optionally focusing
+     * the group.
+     */
+    toggleGroup(event) {
+        var _a;
+        const host = this.elementRef.nativeElement;
+        const isLocked = (_a = this.keyboardFocus) === null || _a === void 0 ? void 0 : _a.isLocked;
+        this.facetService.toggle(this.facet, this.isExpanded);
+        if (!isLocked || this.isExpanded) {
+            host.focus();
+            // we stop propagating the event as otherwise the focus on the host will trigger
+            // an unlock event from the LockFocus directive.
+            event.stopPropagation();
         }
+    }
+    get isExpanded() {
+        return this.values.first.nativeElement.offsetParent !== null;
+    }
+    openLink(event) {
+        event.target.click();
+        event.preventDefault();
+    }
+    /**
+     * Increases the number of visible values for the facet. This is delegated
+     * to `facetService.increaseVisibleValues`.
+     */
+    increaseVisibleValues() {
+        this.facetService.increaseVisibleValues(this.facet);
+    }
+    /**
+     * Decreases the number of visible values for the facet. This is delegated
+     * to `facetService.decreaseVisibleValues`.
+     */
+    decreaseVisibleValues() {
+        this.facetService.decreaseVisibleValues(this.facet);
+    }
+    getLinkParams(value) {
+        var _a;
+        return this.facetService.getLinkParams((_a = value.query) === null || _a === void 0 ? void 0 : _a.query.value);
+    }
+};
+FacetComponent.ctorParameters = () => [
+    { type: FacetService },
+    { type: ElementRef },
+    { type: ChangeDetectorRef }
+];
+__decorate([
+    Input()
+], FacetComponent.prototype, "expandIcon", void 0);
+__decorate([
+    Input()
+], FacetComponent.prototype, "collapseIcon", void 0);
+__decorate([
+    HostBinding('class.multi-select')
+], FacetComponent.prototype, "isMultiSelect", void 0);
+__decorate([
+    ViewChildren('facetValue')
+], FacetComponent.prototype, "values", void 0);
+__decorate([
+    ViewChild(FocusDirective)
+], FacetComponent.prototype, "keyboardFocus", void 0);
+__decorate([
+    Input()
+], FacetComponent.prototype, "facet", null);
+FacetComponent = __decorate([
+    Component({
+        selector: 'cx-facet',
+        template: "<ng-container *ngIf=\"state$ | async as state\">\n  <button class=\"heading\" (click)=\"toggleGroup($event)\">\n    {{ facet.name }}\n    <cx-icon class=\"collapse-icon\" [type]=\"collapseIcon\"></cx-icon>\n    <cx-icon class=\"expand-icon\" [type]=\"expandIcon\"></cx-icon>\n  </button>\n\n  <a\n    *ngFor=\"let value of facet.values | slice: 0:state.topVisible\"\n    #facetValue\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(value)\"\n    class=\"value\"\n    [class.selected]=\"value.selected\"\n    [cxFocus]=\"value.name\"\n    (keydown.space)=\"openLink($event)\"\n  >\n    <span>\n      <span class=\"label\">{{ value.name }}</span>\n      <span class=\"count\">{{ value.count }}</span>\n    </span>\n  </a>\n\n  <div class=\"more\">\n    <a\n      *ngFor=\"\n        let value of facet.values | slice: state.topVisible:state.maxVisible\n      \"\n      #facetValue\n      routerLink=\"./\"\n      [queryParams]=\"getLinkParams(value)\"\n      class=\"value\"\n      [class.selected]=\"value.selected\"\n      [cxFocus]=\"value.name\"\n      (keydown.space)=\"openLink($event)\"\n    >\n      <span\n        >{{ value.name }}<span class=\"count\">{{ value.count }}</span></span\n      >\n    </a>\n\n    <button\n      *ngIf=\"state.maxVisible > state.topVisible\"\n      (click)=\"decreaseVisibleValues()\"\n      cxFocus=\"moreorless\"\n    >\n      {{ 'productList.showLess' | cxTranslate }}\n    </button>\n\n    <button\n      *ngIf=\"state.maxVisible > 0 && state.maxVisible < facet.values.length\"\n      (click)=\"increaseVisibleValues()\"\n    >\n      {{ 'productList.showMore' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], FacetComponent);
+
+let FacetModule = class FacetModule {
+};
+FacetModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            RouterModule,
+            UrlModule,
+            I18nModule,
+            IconModule,
+            KeyboardFocusModule,
+        ],
+        declarations: [FacetComponent],
+        exports: [FacetComponent],
+    })
+], FacetModule);
+
+let FacetListModule = class FacetListModule {
+};
+FacetListModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            I18nModule,
+            IconModule,
+            FacetModule,
+            KeyboardFocusModule,
+        ],
+        declarations: [FacetListComponent],
+        exports: [FacetListComponent],
+    })
+], FacetListModule);
+
+let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
+    constructor(breakpointService) {
+        this.breakpointService = breakpointService;
+        this.iconTypes = ICON_TYPE;
+        /**
+         * We delay the removal of DOM so that animations can finish playing before the
+         * DOM is removed. Removing the DOM, as hidding is not enough to stop elements
+         * to be focused.
+         */
+        this.CLOSE_DELAY = 300;
+        this.open$ = new BehaviorSubject(false);
+        /**
+         * Emits the open state that indicates whether the facet list should be rendered.
+         * This is either done instantly, or after the user triggers this by using the trigger
+         * button. This driven by the visiibility of the trigger, so that the CSS drives
+         * the behaviour. This can differ per breakpoint.
+         *
+         * There's a configurable delay for the closed state, so that the DOM is not removed
+         * before some CSS animations are done.
+         */
+        this.isOpen$ = this.breakpointService.breakpoint$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure that the `hasTrigger`
+        // method represents the actual UI state.
+        observeOn(asapScheduler), switchMap(() => (this.hasTrigger ? this.open$ : of(true))), delayWhen((launched) => interval(launched ? 0 : this.CLOSE_DELAY)));
+        /**
+         * Emits the active state that indicates whether the facet list is activated. Activation
+         * is related to the css, so that a animation or transition can visualize opening/closing
+         * the list (i.e. dialog).
+         */
+        this.isActive$ = this.open$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure the active class is
+        //  applied after the DOM is created
+        observeOn(asapScheduler));
+    }
+    launch() {
+        this.open$.next(true);
+    }
+    close() {
+        this.open$.next(false);
+        this.trigger.nativeElement.focus();
+    }
+    /**
+     * Indicates that the facet navigation should be open explicitely by a trigger.
+     * This is fully controlled by CSS, where the trigger button can be hidden
+     * (display:none) for certain screen sizes.
+     */
+    get hasTrigger() {
+        return this.trigger.nativeElement.offsetParent !== null;
     }
 };
 ProductFacetNavigationComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: ActivatedRoute },
-    { type: ProductListComponentService }
+    { type: BreakpointService }
 ];
+__decorate([
+    ViewChild('trigger')
+], ProductFacetNavigationComponent.prototype, "trigger", void 0);
 ProductFacetNavigationComponent = __decorate([
     Component({
         selector: 'cx-product-facet-navigation',
-        template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n              tabindex=\"0\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n                tabindex=\"0\"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
+        template: "<button\n  #trigger\n  class=\"btn btn-action btn-block dialog-trigger\"\n  (click)=\"launch()\"\n>\n  <cx-icon [type]=\"iconTypes.FILTER\"></cx-icon>\n  {{ 'productList.filterBy.label' | cxTranslate }}\n</button>\n\n<cx-active-facets></cx-active-facets>\n\n<cx-facet-list\n  *ngIf=\"isOpen$ | async\"\n  [isDialog]=\"hasTrigger\"\n  (closeList)=\"close()\"\n  [class.active]=\"isActive$ | async\"\n></cx-facet-list>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], ProductFacetNavigationComponent);
+
+let ProductFacetNavigationModule = class ProductFacetNavigationModule {
+};
+ProductFacetNavigationModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            FacetListModule,
+            ActiveFacetsModule,
+            IconModule,
+            I18nModule,
+            ConfigModule.withConfig({
+                cmsComponents: {
+                    ProductRefinementComponent: {
+                        component: ProductFacetNavigationComponent,
+                    },
+                },
+            }),
+        ],
+        declarations: [ProductFacetNavigationComponent],
+        exports: [ProductFacetNavigationComponent],
+    })
+], ProductFacetNavigationModule);
 
 let ProductGridItemComponent = class ProductGridItemComponent {
 };
@@ -15771,15 +16209,11 @@ ProductListModule = __decorate([
                     SearchResultsListComponent: {
                         component: ProductListComponent,
                     },
-                    ProductRefinementComponent: {
-                        component: ProductFacetNavigationComponent,
-                    },
                 },
             }),
         ],
         declarations: [
             ProductListComponent,
-            ProductFacetNavigationComponent,
             ProductListItemComponent,
             ProductGridItemComponent,
             ProductViewComponent,
@@ -15787,7 +16221,6 @@ ProductListModule = __decorate([
         ],
         exports: [
             ProductListComponent,
-            ProductFacetNavigationComponent,
             ProductListItemComponent,
             ProductGridItemComponent,
             ProductViewComponent,
@@ -17366,6 +17799,7 @@ CmsLibModule = __decorate([
             ReturnRequestListModule,
             ReturnRequestDetailModule,
             ProductListModule,
+            ProductFacetNavigationModule,
             ProductTabsModule,
             ProductCarouselModule,
             ProductReferencesModule,
@@ -17794,5 +18228,5 @@ B2cStorefrontModule = B2cStorefrontModule_1 = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, KeyboardFocusService as ɵbu, AnonymousConsentsModule as ɵbv, AnonymousConsentDialogComponent as ɵbw, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, AnonymousConsentsModule as ɵbu, AnonymousConsentDialogComponent as ɵbv, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

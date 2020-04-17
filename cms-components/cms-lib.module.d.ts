@@ -19,37 +19,38 @@ import * as ɵngcc17 from './myaccount/order/amend-order/returns/order-return.mo
 import * as ɵngcc18 from './myaccount/order/return-request-list/order-return-request-list.module';
 import * as ɵngcc19 from './myaccount/order/return-request-detail/return-request-detail.module';
 import * as ɵngcc20 from './product/product-list/product-list.module';
-import * as ɵngcc21 from './product/product-tabs/product-tabs.module';
-import * as ɵngcc22 from './product/carousel/product-carousel/product-carousel.module';
-import * as ɵngcc23 from './product/carousel/product-references/product-references.module';
-import * as ɵngcc24 from './myaccount/order/order-details/order-details.module';
-import * as ɵngcc25 from './myaccount/payment-methods/payment-methods.module';
-import * as ɵngcc26 from './myaccount/update-email/update-email.module';
-import * as ɵngcc27 from './myaccount/update-password/update-password.module';
-import * as ɵngcc28 from './myaccount/update-profile/update-profile.module';
-import * as ɵngcc29 from './myaccount/consent-management/consent-management.module';
-import * as ɵngcc30 from './myaccount/close-account/close-account.module';
-import * as ɵngcc31 from './cart/cart.module';
-import * as ɵngcc32 from './content/tab-paragraph-container/tab-paragraph-container.module';
-import * as ɵngcc33 from './order-confirmation/order-confirmation.module';
-import * as ɵngcc34 from './storefinder/store-finder.module';
-import * as ɵngcc35 from './product/product-images/product-images.module';
-import * as ɵngcc36 from './product/product-summary/product-summary.module';
-import * as ɵngcc37 from './product/product-variants/product-variants.module';
-import * as ɵngcc38 from './product/product-intro/product-intro.module';
-import * as ɵngcc39 from './checkout/checkout.module';
-import * as ɵngcc40 from './myaccount/forgot-password/forgot-password.module';
-import * as ɵngcc41 from './myaccount/reset-password/reset-password.module';
-import * as ɵngcc42 from './content/banner-carousel/banner-carousel.module';
-import * as ɵngcc43 from './user/user.module';
-import * as ɵngcc44 from './myaccount/my-coupons/my-coupons.module';
-import * as ɵngcc45 from './wish-list/wish-list.module';
-import * as ɵngcc46 from './myaccount/notification-preference/notification-preference.module';
-import * as ɵngcc47 from './myaccount/my-interests/my-interests.module';
-import * as ɵngcc48 from './product/stock-notification/stock-notification.module';
+import * as ɵngcc21 from './product/product-list/product-facet-navigation/product-facet-navigation.module';
+import * as ɵngcc22 from './product/product-tabs/product-tabs.module';
+import * as ɵngcc23 from './product/carousel/product-carousel/product-carousel.module';
+import * as ɵngcc24 from './product/carousel/product-references/product-references.module';
+import * as ɵngcc25 from './myaccount/order/order-details/order-details.module';
+import * as ɵngcc26 from './myaccount/payment-methods/payment-methods.module';
+import * as ɵngcc27 from './myaccount/update-email/update-email.module';
+import * as ɵngcc28 from './myaccount/update-password/update-password.module';
+import * as ɵngcc29 from './myaccount/update-profile/update-profile.module';
+import * as ɵngcc30 from './myaccount/consent-management/consent-management.module';
+import * as ɵngcc31 from './myaccount/close-account/close-account.module';
+import * as ɵngcc32 from './cart/cart.module';
+import * as ɵngcc33 from './content/tab-paragraph-container/tab-paragraph-container.module';
+import * as ɵngcc34 from './order-confirmation/order-confirmation.module';
+import * as ɵngcc35 from './storefinder/store-finder.module';
+import * as ɵngcc36 from './product/product-images/product-images.module';
+import * as ɵngcc37 from './product/product-summary/product-summary.module';
+import * as ɵngcc38 from './product/product-variants/product-variants.module';
+import * as ɵngcc39 from './product/product-intro/product-intro.module';
+import * as ɵngcc40 from './checkout/checkout.module';
+import * as ɵngcc41 from './myaccount/forgot-password/forgot-password.module';
+import * as ɵngcc42 from './myaccount/reset-password/reset-password.module';
+import * as ɵngcc43 from './content/banner-carousel/banner-carousel.module';
+import * as ɵngcc44 from './user/user.module';
+import * as ɵngcc45 from './myaccount/my-coupons/my-coupons.module';
+import * as ɵngcc46 from './wish-list/wish-list.module';
+import * as ɵngcc47 from './myaccount/notification-preference/notification-preference.module';
+import * as ɵngcc48 from './myaccount/my-interests/my-interests.module';
+import * as ɵngcc49 from './product/stock-notification/stock-notification.module';
 export declare class CmsLibModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CmsLibModule, never, [typeof ɵngcc1.AnonymousConsentManagementBannerModule, typeof ɵngcc2.AsmModule, typeof ɵngcc3.HamburgerMenuModule, typeof ɵngcc4.CmsParagraphModule, typeof ɵngcc5.LinkModule, typeof ɵngcc6.BannerModule, typeof ɵngcc7.CategoryNavigationModule, typeof ɵngcc8.NavigationModule, typeof ɵngcc9.FooterNavigationModule, typeof ɵngcc10.BreadcrumbModule, typeof ɵngcc11.SearchBoxModule, typeof ɵngcc12.SiteContextSelectorModule, typeof ɵngcc13.QualtricsModule, typeof ɵngcc14.AddressBookModule, typeof ɵngcc15.OrderHistoryModule, typeof ɵngcc16.OrderCancellationModule, typeof ɵngcc17.OrderReturnModule, typeof ɵngcc18.ReturnRequestListModule, typeof ɵngcc19.ReturnRequestDetailModule, typeof ɵngcc20.ProductListModule, typeof ɵngcc21.ProductTabsModule, typeof ɵngcc22.ProductCarouselModule, typeof ɵngcc23.ProductReferencesModule, typeof ɵngcc24.OrderDetailsModule, typeof ɵngcc25.PaymentMethodsModule, typeof ɵngcc26.UpdateEmailModule, typeof ɵngcc27.UpdatePasswordModule, typeof ɵngcc28.UpdateProfileModule, typeof ɵngcc29.ConsentManagementModule, typeof ɵngcc30.CloseAccountModule, typeof ɵngcc31.CartComponentModule, typeof ɵngcc32.TabParagraphContainerModule, typeof ɵngcc33.OrderConfirmationModule, typeof ɵngcc34.StoreFinderModule, typeof ɵngcc35.ProductImagesModule, typeof ɵngcc36.ProductSummaryModule, typeof ɵngcc37.ProductVariantsModule, typeof ɵngcc38.ProductIntroModule, typeof ɵngcc39.CheckoutComponentModule, typeof ɵngcc40.ForgotPasswordModule, typeof ɵngcc41.ResetPasswordModule, typeof ɵngcc42.BannerCarouselModule, typeof ɵngcc43.UserComponentModule, typeof ɵngcc44.MyCouponsModule, typeof ɵngcc45.WishListModule, typeof ɵngcc46.NotificationPreferenceModule, typeof ɵngcc47.MyInterestsModule, typeof ɵngcc48.StockNotificationModule], never>;
+    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<CmsLibModule, never, [typeof ɵngcc1.AnonymousConsentManagementBannerModule, typeof ɵngcc2.AsmModule, typeof ɵngcc3.HamburgerMenuModule, typeof ɵngcc4.CmsParagraphModule, typeof ɵngcc5.LinkModule, typeof ɵngcc6.BannerModule, typeof ɵngcc7.CategoryNavigationModule, typeof ɵngcc8.NavigationModule, typeof ɵngcc9.FooterNavigationModule, typeof ɵngcc10.BreadcrumbModule, typeof ɵngcc11.SearchBoxModule, typeof ɵngcc12.SiteContextSelectorModule, typeof ɵngcc13.QualtricsModule, typeof ɵngcc14.AddressBookModule, typeof ɵngcc15.OrderHistoryModule, typeof ɵngcc16.OrderCancellationModule, typeof ɵngcc17.OrderReturnModule, typeof ɵngcc18.ReturnRequestListModule, typeof ɵngcc19.ReturnRequestDetailModule, typeof ɵngcc20.ProductListModule, typeof ɵngcc21.ProductFacetNavigationModule, typeof ɵngcc22.ProductTabsModule, typeof ɵngcc23.ProductCarouselModule, typeof ɵngcc24.ProductReferencesModule, typeof ɵngcc25.OrderDetailsModule, typeof ɵngcc26.PaymentMethodsModule, typeof ɵngcc27.UpdateEmailModule, typeof ɵngcc28.UpdatePasswordModule, typeof ɵngcc29.UpdateProfileModule, typeof ɵngcc30.ConsentManagementModule, typeof ɵngcc31.CloseAccountModule, typeof ɵngcc32.CartComponentModule, typeof ɵngcc33.TabParagraphContainerModule, typeof ɵngcc34.OrderConfirmationModule, typeof ɵngcc35.StoreFinderModule, typeof ɵngcc36.ProductImagesModule, typeof ɵngcc37.ProductSummaryModule, typeof ɵngcc38.ProductVariantsModule, typeof ɵngcc39.ProductIntroModule, typeof ɵngcc40.CheckoutComponentModule, typeof ɵngcc41.ForgotPasswordModule, typeof ɵngcc42.ResetPasswordModule, typeof ɵngcc43.BannerCarouselModule, typeof ɵngcc44.UserComponentModule, typeof ɵngcc45.MyCouponsModule, typeof ɵngcc46.WishListModule, typeof ɵngcc47.NotificationPreferenceModule, typeof ɵngcc48.MyInterestsModule, typeof ɵngcc49.StockNotificationModule], never>;
     static ɵinj: ɵngcc0.ɵɵInjectorDef<CmsLibModule>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY21zLWxpYi5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsiY21zLWxpYi5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7OztBQUNBIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlY2xhcmUgY2xhc3MgQ21zTGliTW9kdWxlIHtcbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY21zLWxpYi5tb2R1bGUuZC50cyIsInNvdXJjZXMiOlsiY21zLWxpYi5tb2R1bGUuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBOzs7QUFDQSIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWNsYXJlIGNsYXNzIENtc0xpYk1vZHVsZSB7XG59XG4iXX0=

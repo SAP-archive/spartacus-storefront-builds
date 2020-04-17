@@ -1,9 +1,9 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, HostListener, EventEmitter, Output, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, ViewChild, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
 import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler } from 'rxjs';
-import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
+import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
@@ -6718,70 +6718,132 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngIf", ctx_r1030.appendProducts);
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1063 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵelementStart(1, "span", 11);
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1063); const breadcrumb_r1061 = ctx.$implicit; const ctx_r1062 = ɵngcc0.ɵɵnextContext(3); return ctx_r1062.toggleValue(breadcrumb_r1061.removeQuery.query.value); });
-    ɵngcc0.ɵɵelementStart(4, "span", 13);
-    ɵngcc0.ɵɵelement(5, "cx-icon", 14);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
+function ActiveFacetsComponent_ng_container_0_h4_1_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "h4");
+    ɵngcc0.ɵɵtext(1);
+    ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const breadcrumb_r1061 = ctx.$implicit;
-    const ctx_r1060 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("hidden", breadcrumb_r1061.facetValueCode === ctx_r1060.activeFacetValueCode);
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(breadcrumb_r1061.facetValueName);
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1060.iconTypes.CLOSE);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.appliedFilter"), " ");
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelementStart(1, "h4", 7);
+function ActiveFacetsComponent_ng_container_0_a_2_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementStart(0, "a", 2);
+    ɵngcc0.ɵɵelementStart(1, "span");
     ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "div", 8);
-    ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_ng_container_2_div_5_Template, 6, 3, "div", 9);
+    ɵngcc0.ɵɵelement(3, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const facet_r1057 = ctx.$implicit;
+    const facetList_r1054 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1056 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1056.getLinkParams(facet_r1057))("cxFocus", ctx_r1056.getFocusKey(facetList_r1054, facet_r1057));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate(facet_r1057.facetValueName);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("type", ctx_r1056.closeIcon);
+} }
+function ActiveFacetsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
+    ɵngcc0.ɵɵelementContainerStart(0);
+    ɵngcc0.ɵɵtemplate(1, ActiveFacetsComponent_ng_container_0_h4_1_Template, 3, 3, "h4", 0);
+    ɵngcc0.ɵɵtemplate(2, ActiveFacetsComponent_ng_container_0_a_2_Template, 4, 4, "a", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1054 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "productList.filterBy.label"), " ");
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1054.breadcrumbs);
+    const facetList_r1054 = ctx.ngIf;
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngIf", (facetList_r1054 == null ? null : facetList_r1054.activeFacets == null ? null : facetList_r1054.activeFacets.length) > 0);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", facetList_r1054 == null ? null : facetList_r1054.activeFacets);
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1076 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li");
-    ɵngcc0.ɵɵelementStart(1, "div", 22);
-    ɵngcc0.ɵɵelementStart(2, "label", 23);
-    ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1076); const value_r1073 = ctx.$implicit; const ctx_r1075 = ɵngcc0.ɵɵnextContext(5); return ctx_r1075.toggleValue(value_r1073.query.query.value); });
+const _c45 = function () { return { lock: true, trap: true, autofocus: "a" }; };
+function FacetListComponent_div_0_cx_facet_6_Template(rf, ctx) { if (rf & 1) {
+    const _r1065 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "cx-facet", 5, 6);
+    ɵngcc0.ɵɵlistener("unlock", function FacetListComponent_div_0_cx_facet_6_Template_cx_facet_unlock_0_listener() { ɵngcc0.ɵɵrestoreView(_r1065); const facet_r1062 = ctx.$implicit; const _r1063 = ɵngcc0.ɵɵreference(1); const ctx_r1064 = ɵngcc0.ɵɵnextContext(2); return ctx_r1064.expandFacetGroup(facet_r1062, _r1063); });
+    ɵngcc0.ɵɵpipe(2, "async");
+    ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "span", 25);
+} if (rf & 2) {
+    const facet_r1062 = ctx.$implicit;
+    const ctx_r1061 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("expanded", ɵngcc0.ɵɵpipeBind1(2, 6, ctx_r1061.isExpanded(facet_r1062)))("collapsed", ɵngcc0.ɵɵpipeBind1(3, 8, ctx_r1061.isCollapsed(facet_r1062)));
+    ɵngcc0.ɵɵproperty("facet", facet_r1062)("cxFocus", ɵngcc0.ɵɵpureFunction0(10, _c45));
+} }
+function FacetListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    const _r1067 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "div", 1);
+    ɵngcc0.ɵɵlistener("esc", function FacetListComponent_div_0_Template_div_esc_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1067); const ctx_r1066 = ɵngcc0.ɵɵnextContext(); return ctx_r1066.closeList.emit($event); });
+    ɵngcc0.ɵɵelementStart(1, "h4");
+    ɵngcc0.ɵɵtext(2);
+    ɵngcc0.ɵɵpipe(3, "cxTranslate");
+    ɵngcc0.ɵɵelementStart(4, "button", 2);
+    ɵngcc0.ɵɵlistener("click", function FacetListComponent_div_0_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r1067); const ctx_r1068 = ɵngcc0.ɵɵnextContext(); return ctx_r1068.closeList.emit(); });
+    ɵngcc0.ɵɵelement(5, "cx-icon", 3);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵtemplate(6, FacetListComponent_div_0_cx_facet_6_Template, 4, 11, "cx-facet", 4);
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const facets_r1060 = ctx.ngIf;
+    const ctx_r1059 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("cxFocus", ctx_r1059.isDialog ? ctx_r1059.dialogFocusConfig : ɵngcc0.ɵɵpureFunction0(6, _c28));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productList.filterBy.label"), " ");
+    ɵngcc0.ɵɵadvance(3);
+    ɵngcc0.ɵɵproperty("type", ctx_r1059.iconTypes.CLOSE);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", facets_r1060);
+} }
+const _c46 = ["facetValue"];
+function FacetComponent_ng_container_0_a_5_Template(rf, ctx) { if (rf & 1) {
+    const _r1078 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
+    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_5_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1078); const ctx_r1077 = ɵngcc0.ɵɵnextContext(2); return ctx_r1077.openLink($event); });
+    ɵngcc0.ɵɵelementStart(2, "span");
+    ɵngcc0.ɵɵelementStart(3, "span", 10);
+    ɵngcc0.ɵɵtext(4);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementStart(5, "span", 11);
+    ɵngcc0.ɵɵtext(6);
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const value_r1075 = ctx.$implicit;
+    const ctx_r1071 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("selected", value_r1075.selected);
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1071.getLinkParams(value_r1075))("cxFocus", value_r1075.name);
+    ɵngcc0.ɵɵadvance(4);
+    ɵngcc0.ɵɵtextInterpolate(value_r1075.name);
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵtextInterpolate(value_r1075.count);
+} }
+function FacetComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
+    const _r1082 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
+    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_8_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1082); const ctx_r1081 = ɵngcc0.ɵɵnextContext(2); return ctx_r1081.openLink($event); });
+    ɵngcc0.ɵɵelementStart(2, "span");
+    ɵngcc0.ɵɵtext(3);
+    ɵngcc0.ɵɵelementStart(4, "span", 11);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1073 = ctx.$implicit;
+    const value_r1079 = ctx.$implicit;
+    const ctx_r1072 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("selected", value_r1079.selected);
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1072.getLinkParams(value_r1079))("cxFocus", value_r1079.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1073.selected);
+    ɵngcc0.ɵɵtextInterpolate(value_r1079.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1073.name, " (", value_r1073.count, ")");
+    ɵngcc0.ɵɵtextInterpolate(value_r1079.count);
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1079 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li", 26);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1079); const facet_r1067 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1077 = ɵngcc0.ɵɵnextContext(3); return ctx_r1077.showLess(facet_r1067.name); });
+function FacetComponent_ng_container_0_button_10_Template(rf, ctx) { if (rf & 1) {
+    const _r1084 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "button", 12);
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1084); const ctx_r1083 = ɵngcc0.ɵɵnextContext(2); return ctx_r1083.decreaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6789,10 +6851,10 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showLess"), " ");
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1082 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li", 27);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template_li_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1082); const facet_r1067 = ɵngcc0.ɵɵnextContext(2).$implicit; const ctx_r1080 = ɵngcc0.ɵɵnextContext(3); return ctx_r1080.showMore(facet_r1067.name); });
+function FacetComponent_ng_container_0_button_11_Template(rf, ctx) { if (rf & 1) {
+    const _r1086 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "button", 13);
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_11_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1086); const ctx_r1085 = ɵngcc0.ɵɵnextContext(2); return ctx_r1085.increaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6800,203 +6862,59 @@ function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_contai
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showMore"), " ");
 } }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_Template(rf, ctx) { if (rf & 1) {
+function FacetComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
+    const _r1088 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelementStart(1, "ul", 19);
-    ɵngcc0.ɵɵtemplate(2, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_2_Template, 6, 3, "li", 15);
-    ɵngcc0.ɵɵtemplate(3, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_3_Template, 3, 3, "li", 20);
-    ɵngcc0.ɵɵtemplate(4, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_li_4_Template, 3, 3, "li", 21);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const facet_r1067 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1069 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1069.getVisibleFacetValues(facet_r1067));
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1069.showAllPerFacetMap.get(facet_r1067.name));
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1069.showAllPerFacetMap.get(facet_r1067.name) && facet_r1067.values.length > facet_r1067.topValueCount);
-} }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1085 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelementStart(1, "div", 16);
-    ɵngcc0.ɵɵelementStart(2, "div", 17);
-    ɵngcc0.ɵɵelementStart(3, "a", 18);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template_a_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1085); const facet_r1067 = ctx.$implicit; const ctx_r1084 = ɵngcc0.ɵɵnextContext(3); return ctx_r1084.toggleFacet(facet_r1067.name); });
-    ɵngcc0.ɵɵtext(4);
-    ɵngcc0.ɵɵelement(5, "cx-icon", 14);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(6, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_ng_container_6_Template, 5, 3, "ng-container", 0);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const facet_r1067 = ctx.$implicit;
-    const ctx_r1066 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵattribute("aria-expanded", !ctx_r1066.isFacetCollapsed(facet_r1067.name));
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1067.name, " ");
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1066.isFacetCollapsed(facet_r1067.name) ? ctx_r1066.iconTypes.EXPAND : ctx_r1066.iconTypes.COLLAPSE);
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1066.isFacetCollapsed(facet_r1067.name));
-} }
-function ProductFacetNavigationComponent_ng_container_0_ng_container_3_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, ProductFacetNavigationComponent_ng_container_0_ng_container_3_ng_container_1_Template, 7, 4, "ng-container", 15);
-    ɵngcc0.ɵɵelementContainerEnd();
-} if (rf & 2) {
-    const visibleFacets_r1065 = ctx.ngIf;
-    ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", visibleFacets_r1065);
-} }
-function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1089 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "div", 29);
-    ɵngcc0.ɵɵelementStart(1, "span", 11);
+    ɵngcc0.ɵɵelementStart(1, "button", 1);
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1088); const ctx_r1087 = ɵngcc0.ɵɵnextContext(); return ctx_r1087.toggleGroup($event); });
     ɵngcc0.ɵɵtext(2);
+    ɵngcc0.ɵɵelement(3, "cx-icon", 2);
+    ɵngcc0.ɵɵelement(4, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1089); const breadcrumb_r1087 = ctx.$implicit; const ctx_r1088 = ɵngcc0.ɵɵnextContext(3); return ctx_r1088.toggleValue(breadcrumb_r1087.removeQuery.query.value); });
-    ɵngcc0.ɵɵelementStart(4, "span", 13);
-    ɵngcc0.ɵɵelement(5, "cx-icon", 14);
+    ɵngcc0.ɵɵtemplate(5, FacetComponent_ng_container_0_a_5_Template, 7, 6, "a", 4);
+    ɵngcc0.ɵɵpipe(6, "slice");
+    ɵngcc0.ɵɵelementStart(7, "div", 5);
+    ɵngcc0.ɵɵtemplate(8, FacetComponent_ng_container_0_a_8_Template, 6, 6, "a", 4);
+    ɵngcc0.ɵɵpipe(9, "slice");
+    ɵngcc0.ɵɵtemplate(10, FacetComponent_ng_container_0_button_10_Template, 3, 3, "button", 6);
+    ɵngcc0.ɵɵtemplate(11, FacetComponent_ng_container_0_button_11_Template, 3, 3, "button", 7);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const breadcrumb_r1087 = ctx.$implicit;
-    const ctx_r1086 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", breadcrumb_r1087.facetValueName, " ");
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1086.iconTypes.CLOSE);
-} }
-function ProductFacetNavigationComponent_ng_container_0_div_11_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 2);
-    ɵngcc0.ɵɵelementStart(1, "div", 8);
-    ɵngcc0.ɵɵelementStart(2, "h4", 7);
-    ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵpipe(4, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_div_11_div_5_Template, 6, 2, "div", 28);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const searchResult_r1054 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 2, "productList.appliedFilter"), " ");
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1054.breadcrumbs);
-} }
-function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1100 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "li");
-    ɵngcc0.ɵɵelementStart(1, "div", 22);
-    ɵngcc0.ɵɵelementStart(2, "label", 23);
-    ɵngcc0.ɵɵelementStart(3, "input", 24);
-    ɵngcc0.ɵɵlistener("change", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template_input_change_3_listener() { ɵngcc0.ɵɵrestoreView(_r1100); const value_r1097 = ctx.$implicit; const ctx_r1099 = ɵngcc0.ɵɵnextContext(4); return ctx_r1099.toggleValue(value_r1097.query.query.value); });
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "span", 25);
-    ɵngcc0.ɵɵtext(5);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const value_r1097 = ctx.$implicit;
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("checked", value_r1097.selected);
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2("", value_r1097.name, " (", value_r1097.count, ")");
-} }
-function ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 34);
-    ɵngcc0.ɵɵelementStart(1, "h4", 35);
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(3, "div", 36);
-    ɵngcc0.ɵɵelementStart(4, "ul", 19);
-    ɵngcc0.ɵɵtemplate(5, ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_li_5_Template, 6, 3, "li", 15);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const facet_r1094 = ctx.$implicit;
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", facet_r1094.name, " ");
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", facet_r1094.values);
-} }
-function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelementStart(0, "div", 30);
-    ɵngcc0.ɵɵelementStart(1, "h4", 31);
-    ɵngcc0.ɵɵtext(2);
-    ɵngcc0.ɵɵpipe(3, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(4, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template_button_click_4_listener() { const d_r1092 = ctx.dismiss; return d_r1092("Cross click"); });
-    ɵngcc0.ɵɵelementStart(5, "span", 13);
-    ɵngcc0.ɵɵelement(6, "cx-icon", 14);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(7, "div", 32);
-    ɵngcc0.ɵɵelementStart(8, "form");
-    ɵngcc0.ɵɵtemplate(9, ProductFacetNavigationComponent_ng_container_0_ng_template_12_div_9_Template, 6, 2, "div", 33);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-} if (rf & 2) {
-    const searchResult_r1054 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1059 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "productList.filterBy.label"), " ");
-    ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1059.iconTypes.CLOSE);
-    ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", searchResult_r1054.facets);
-} }
-function ProductFacetNavigationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1104 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵtemplate(2, ProductFacetNavigationComponent_ng_container_0_ng_container_2_Template, 6, 4, "ng-container", 0);
-    ɵngcc0.ɵɵtemplate(3, ProductFacetNavigationComponent_ng_container_0_ng_container_3_Template, 2, 1, "ng-container", 0);
-    ɵngcc0.ɵɵpipe(4, "async");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "div", 2);
-    ɵngcc0.ɵɵelementStart(6, "div", 3);
-    ɵngcc0.ɵɵelementStart(7, "button", 4);
-    ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_ng_container_0_Template_button_click_7_listener() { ɵngcc0.ɵɵrestoreView(_r1104); const _r1058 = ɵngcc0.ɵɵreference(13); const ctx_r1103 = ɵngcc0.ɵɵnextContext(); return ctx_r1103.openFilterModal(_r1058); });
-    ɵngcc0.ɵɵtext(8);
-    ɵngcc0.ɵɵpipe(9, "cxTranslate");
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(10, "div", 3);
-    ɵngcc0.ɵɵtemplate(11, ProductFacetNavigationComponent_ng_container_0_div_11_Template, 6, 4, "div", 5);
-    ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵtemplate(12, ProductFacetNavigationComponent_ng_container_0_ng_template_12_Template, 10, 5, "ng-template", null, 6, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const searchResult_r1054 = ctx.ngIf;
-    const ctx_r1053 = ɵngcc0.ɵɵnextContext();
+    const state_r1070 = ctx.ngIf;
+    const ctx_r1069 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1054.breadcrumbs == null ? null : searchResult_r1054.breadcrumbs.length);
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1069.facet.name, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(4, 4, ctx_r1053.visibleFacets$));
-    ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 6, "productList.filterBy.action"), " ");
+    ɵngcc0.ɵɵproperty("type", ctx_r1069.collapseIcon);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("type", ctx_r1069.expandIcon);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(6, 7, ctx_r1069.facet.values, 0, state_r1070.topVisible));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", searchResult_r1054.breadcrumbs == null ? null : searchResult_r1054.breadcrumbs.length);
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(9, 11, ctx_r1069.facet.values, state_r1070.topVisible, state_r1070.maxVisible));
+    ɵngcc0.ɵɵadvance(2);
+    ɵngcc0.ɵɵproperty("ngIf", state_r1070.maxVisible > state_r1070.topVisible);
+    ɵngcc0.ɵɵadvance(1);
+    ɵngcc0.ɵɵproperty("ngIf", state_r1070.maxVisible > 0 && state_r1070.maxVisible < ctx_r1069.facet.values.length);
+} }
+const _c47 = ["trigger"];
+function ProductFacetNavigationComponent_cx_facet_list_6_Template(rf, ctx) { if (rf & 1) {
+    const _r1092 = ɵngcc0.ɵɵgetCurrentView();
+    ɵngcc0.ɵɵelementStart(0, "cx-facet-list", 4);
+    ɵngcc0.ɵɵlistener("closeList", function ProductFacetNavigationComponent_cx_facet_list_6_Template_cx_facet_list_closeList_0_listener() { ɵngcc0.ɵɵrestoreView(_r1092); const ctx_r1091 = ɵngcc0.ɵɵnextContext(); return ctx_r1091.close(); });
+    ɵngcc0.ɵɵpipe(1, "async");
+    ɵngcc0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r1090 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r1090.isActive$));
+    ɵngcc0.ɵɵproperty("isDialog", ctx_r1090.hasTrigger);
 } }
 function ProductGridItemComponent_cx_star_rating_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 10);
 } if (rf & 2) {
-    const ctx_r1105 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1105.product == null ? null : ctx_r1105.product.averageRating)("disabled", true);
+    const ctx_r1093 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1093.product == null ? null : ctx_r1093.product.averageRating)("disabled", true);
 } }
 function ProductGridItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -7012,21 +6930,21 @@ function ProductGridItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "cx-variant-style-icons", 12);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1107 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1095 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1107.product.variantOptions);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1095.product.variantOptions);
 } }
 function ProductGridItemComponent_cx_add_to_cart_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 13);
 } if (rf & 2) {
-    const ctx_r1108 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1108.product);
+    const ctx_r1096 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1096.product);
 } }
 function ProductListItemComponent_cx_star_rating_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 12);
 } if (rf & 2) {
-    const ctx_r1109 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1109.product == null ? null : ctx_r1109.product.averageRating)("disabled", true);
+    const ctx_r1097 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1097.product == null ? null : ctx_r1097.product.averageRating)("disabled", true);
 } }
 function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -7040,34 +6958,34 @@ function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 function ProductListItemComponent_cx_variant_style_icons_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-icons", 14);
 } if (rf & 2) {
-    const ctx_r1111 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("variants", ctx_r1111.product.variantOptions);
+    const ctx_r1099 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("variants", ctx_r1099.product.variantOptions);
 } }
 function ProductListItemComponent_cx_add_to_cart_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 15);
 } if (rf & 2) {
-    const ctx_r1112 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1112.product);
+    const ctx_r1100 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1100.product);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_style_selector_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-selector", 5);
 } if (rf & 2) {
-    const ctx_r1116 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1116.variants[ctx_r1116.variantType.STYLE]);
+    const ctx_r1104 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1104.variants[ctx_r1104.variantType.STYLE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_size_selector_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-size-selector", 6);
 } if (rf & 2) {
-    const product_r1114 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1117 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1114)("variants", ctx_r1117.variants[ctx_r1117.variantType.SIZE]);
+    const product_r1102 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1105 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1102)("variants", ctx_r1105.variants[ctx_r1105.variantType.SIZE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-color-selector", 6);
 } if (rf & 2) {
-    const product_r1114 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1118 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1114)("variants", ctx_r1118.variants[ctx_r1118.variantType.COLOR]);
+    const product_r1102 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1106 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1102)("variants", ctx_r1106.variants[ctx_r1106.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7076,22 +6994,22 @@ function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtemplate(3, ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template, 1, 2, "cx-variant-color-selector", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1115 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1103 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1115.variants[ctx_r1115.variantType.STYLE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1103.variants[ctx_r1103.variantType.STYLE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1115.variants[ctx_r1115.variantType.SIZE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1103.variants[ctx_r1103.variantType.SIZE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1115.variants[ctx_r1115.variantType.COLOR]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1103.variants[ctx_r1103.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductVariantsComponent_ng_container_0_div_1_Template, 4, 3, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1114 = ctx.ngIf;
+    const product_r1102 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1114.baseOptions == null ? null : product_r1114.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1102.baseOptions == null ? null : product_r1102.baseOptions.length);
 } }
 function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -7102,100 +7020,100 @@ function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1121 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1109 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "variant.style"), ": ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1121.getVariantOptionValue(ctx_r1121.variants == null ? null : ctx_r1121.variants.selected.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1109.getVariantOptionValue(ctx_r1109.variants == null ? null : ctx_r1109.variants.selected.variantOptionQualifiers));
 } }
-const _c45 = function (a0) { return { "selected-variant": a0 }; };
+const _c48 = function (a0) { return { "selected-variant": a0 }; };
 function VariantStyleSelectorComponent_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1125 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1113 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 6);
     ɵngcc0.ɵɵelementStart(1, "img", 7);
-    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1125); const v_r1123 = ctx.$implicit; const ctx_r1124 = ɵngcc0.ɵɵnextContext(); return ctx_r1124.changeStyle(v_r1123.code); });
+    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1113); const v_r1111 = ctx.$implicit; const ctx_r1112 = ɵngcc0.ɵɵnextContext(); return ctx_r1112.changeStyle(v_r1111.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1123 = ctx.$implicit;
-    const ctx_r1122 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c45, v_r1123.code === (ctx_r1122.variants == null ? null : ctx_r1122.variants.selected.code)));
+    const v_r1111 = ctx.$implicit;
+    const ctx_r1110 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c48, v_r1111.code === (ctx_r1110.variants == null ? null : ctx_r1110.variants.selected.code)));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1122.getVariantThumbnailUrl(v_r1123.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1122.getVariantOptionValue(v_r1123.variantOptionQualifiers));
-    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1122.getVariantOptionValue(v_r1123.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1110.getVariantThumbnailUrl(v_r1111.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1110.getVariantOptionValue(v_r1111.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1110.getVariantOptionValue(v_r1111.variantOptionQualifiers));
 } }
 function VariantSizeSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1127 = ctx.$implicit;
-    const ctx_r1126 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1127.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1127.code === (ctx_r1126.product == null ? null : ctx_r1126.product.code));
+    const v_r1115 = ctx.$implicit;
+    const ctx_r1114 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1115.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1115.code === (ctx_r1114.product == null ? null : ctx_r1114.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1126.getVariantOptionValue(v_r1127.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1114.getVariantOptionValue(v_r1115.variantOptionQualifiers));
 } }
 function VariantColorSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 4);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1129 = ctx.$implicit;
-    const ctx_r1128 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1129.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1129.code === (ctx_r1128.product == null ? null : ctx_r1128.product.code));
+    const v_r1117 = ctx.$implicit;
+    const ctx_r1116 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1117.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1117.code === (ctx_r1116.product == null ? null : ctx_r1116.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1128.getVariantOptionValue(v_r1129.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1116.getVariantOptionValue(v_r1117.variantOptionQualifiers));
 } }
 function VariantStyleIconsComponent_li_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelement(1, "img");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1131 = ctx.$implicit;
-    const ctx_r1130 = ɵngcc0.ɵɵnextContext();
+    const v_r1119 = ctx.$implicit;
+    const ctx_r1118 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("src", ctx_r1130.getVariantThumbnailUrl(v_r1131.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1130.variantNames[v_r1131.code])("alt", ctx_r1130.variantNames[v_r1131.code]);
+    ɵngcc0.ɵɵattribute("src", ctx_r1118.getVariantThumbnailUrl(v_r1119.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1118.variantNames[v_r1119.code])("alt", ctx_r1118.variantNames[v_r1119.code]);
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1133 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r1121 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1133 == null ? null : product_r1133.price == null ? null : product_r1133.price.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1121 == null ? null : product_r1121.price == null ? null : product_r1121.price.formattedValue, " ");
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const product_r1133 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1133 == null ? null : product_r1133.summary, ɵngcc0.ɵɵsanitizeHtml);
+    const product_r1121 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1121 == null ? null : product_r1121.summary, ɵngcc0.ɵɵsanitizeHtml);
 } }
-const _c46 = function (a0) { return { product: a0 }; };
+const _c49 = function (a0) { return { product: a0 }; };
 function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductSummaryComponent_ng_container_0_ng_template_1_Template, 2, 1, "ng-template", 1);
     ɵngcc0.ɵɵtemplate(2, ProductSummaryComponent_ng_container_0_ng_template_2_Template, 1, 1, "ng-template", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1133 = ctx.ngIf;
-    const ctx_r1132 = ɵngcc0.ɵɵnextContext();
+    const product_r1121 = ctx.ngIf;
+    const ctx_r1120 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1132.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c46, product_r1133));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1120.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c49, product_r1121));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1132.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c46, product_r1133));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1120.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c49, product_r1121));
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_li_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const featureValue_r1145 = ctx.$implicit;
+    const featureValue_r1133 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1145 == null ? null : featureValue_r1145.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1133 == null ? null : featureValue_r1133.value, " ");
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "tr");
@@ -7209,11 +7127,11 @@ function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1143 = ctx.$implicit;
+    const feature_r1131 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1143.name);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1131.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", feature_r1143 == null ? null : feature_r1143.featureValues);
+    ɵngcc0.ɵɵproperty("ngForOf", feature_r1131 == null ? null : feature_r1131.featureValues);
 } }
 function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "table");
@@ -7225,11 +7143,11 @@ function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(4, ProductAttributesComponent_ng_container_0_table_5_tr_4_Template, 6, 2, "tr", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const class_r1141 = ctx.$implicit;
+    const class_r1129 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(class_r1141.name);
+    ɵngcc0.ɵɵtextInterpolate(class_r1129.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", class_r1141.features);
+    ɵngcc0.ɵɵproperty("ngForOf", class_r1129.features);
 } }
 function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7242,28 +7160,28 @@ function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1139 = ctx.ngIf;
+    const product_r1127 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "productDetails.specification"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r1139 == null ? null : product_r1139.classifications);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r1127 == null ? null : product_r1127.classifications);
 } }
 function ProductDetailsTabComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1147 = ctx.ngIf;
+    const product_r1135 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1147 == null ? null : product_r1147.description, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1135 == null ? null : product_r1135.description, ɵngcc0.ɵɵsanitizeHtml);
 } }
-const _c47 = ["titleInput"];
-const _c48 = ["writeReviewButton"];
+const _c50 = ["titleInput"];
+const _c51 = ["writeReviewButton"];
 function ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 9);
 } if (rf & 2) {
-    const product_r1149 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("rating", product_r1149.averageRating)("disabled", true);
+    const product_r1137 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("rating", product_r1137.averageRating)("disabled", true);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -7292,22 +7210,22 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const review_r1162 = ctx.$implicit;
+    const review_r1150 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(review_r1162.headline);
+    ɵngcc0.ɵɵtextInterpolate(review_r1150.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", review_r1162.rating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", review_r1150.rating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1162.alias ? review_r1162.alias : review_r1162.principal == null ? null : review_r1162.principal.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1150.alias ? review_r1150.alias : review_r1150.principal == null ? null : review_r1150.principal.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1162.date));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1150.date));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(review_r1162.comment);
+    ɵngcc0.ɵɵtextInterpolate(review_r1150.comment);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1166 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1154 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1166); const reviews_r1159 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1165 = ɵngcc0.ɵɵnextContext(4); return ctx_r1165.maxListItems = reviews_r1159.length; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1154); const reviews_r1147 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1153 = ɵngcc0.ɵɵnextContext(4); return ctx_r1153.maxListItems = reviews_r1147.length; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7316,9 +7234,9 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productReview.more"), " ");
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1169 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1157 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1169); const ctx_r1168 = ɵngcc0.ɵɵnextContext(6); return ctx_r1168.maxListItems = ctx_r1168.initialMaxListItems; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1157); const ctx_r1156 = ɵngcc0.ɵɵnextContext(6); return ctx_r1156.maxListItems = ctx_r1156.initialMaxListItems; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7332,11 +7250,11 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(2, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template, 3, 3, "button", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1161 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r1149 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1161.maxListItems === ctx_r1161.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1149.maxListItems === ctx_r1149.initialMaxListItems);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1161.maxListItems !== ctx_r1161.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1149.maxListItems !== ctx_r1149.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7345,12 +7263,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(3, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const reviews_r1159 = ctx.ngIf;
-    const ctx_r1158 = ɵngcc0.ɵɵnextContext(4);
+    const reviews_r1147 = ctx.ngIf;
+    const ctx_r1146 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1159, 0, ctx_r1158.maxListItems));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1147, 0, ctx_r1146.maxListItems));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", reviews_r1159.length > ctx_r1158.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", reviews_r1147.length > ctx_r1146.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7358,12 +7276,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(r
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1156 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1144 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1156.reviews$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1144.reviews$));
 } }
 function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1171 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1159 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "h3");
@@ -7371,7 +7289,7 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5, 6);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1171); const ctx_r1170 = ɵngcc0.ɵɵnextContext(2); return ctx_r1170.initiateWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1159); const ctx_r1158 = ɵngcc0.ɵɵnextContext(2); return ctx_r1158.initiateWriteReview(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7381,24 +7299,24 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵtemplate(11, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template, 3, 3, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1149 = ɵngcc0.ɵɵnextContext().ngIf;
-    const _r1151 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1150 = ɵngcc0.ɵɵnextContext();
+    const product_r1137 = ɵngcc0.ɵɵnextContext().ngIf;
+    const _r1139 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1138 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 6, "productReview.overallRating"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "productReview.writeReview"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1149.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1137.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1149.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1137.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1150.isWritingReview)("ngIfElse", _r1151);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1138.isWritingReview)("ngIfElse", _r1139);
 } }
 function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1176 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1164 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 20);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1176); const product_r1149 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1174 = ɵngcc0.ɵɵnextContext(); return ctx_r1174.submitReview(product_r1149); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1164); const product_r1137 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1162 = ɵngcc0.ɵɵnextContext(); return ctx_r1162.submitReview(product_r1137); });
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "span", 22);
@@ -7427,7 +7345,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(21, "input", 27);
     ɵngcc0.ɵɵelementStart(22, "cx-star-rating", 28);
-    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1176); const ctx_r1177 = ɵngcc0.ɵɵnextContext(2); return ctx_r1177.setRating($event); });
+    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1164); const ctx_r1165 = ɵngcc0.ɵɵnextContext(2); return ctx_r1165.setRating($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(23, "cx-form-errors", 25);
     ɵngcc0.ɵɵelementEnd();
@@ -7444,7 +7362,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementStart(30, "div", 30);
     ɵngcc0.ɵɵelementStart(31, "div", 31);
     ɵngcc0.ɵɵelementStart(32, "button", 32);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_32_listener() { ɵngcc0.ɵɵrestoreView(_r1176); const ctx_r1178 = ɵngcc0.ɵɵnextContext(2); return ctx_r1178.cancelWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_32_listener() { ɵngcc0.ɵɵrestoreView(_r1164); const ctx_r1166 = ɵngcc0.ɵɵnextContext(2); return ctx_r1166.cancelWriteReview(); });
     ɵngcc0.ɵɵtext(33);
     ɵngcc0.ɵɵpipe(34, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7458,20 +7376,20 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1152 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1152.reviewForm);
+    const ctx_r1140 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1140.reviewForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 10, "productReview.reviewTitle"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("control", ctx_r1152.reviewForm.get("title"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1140.reviewForm.get("title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 12, "productReview.writeYourComments"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("control", ctx_r1152.reviewForm.get("comment"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1140.reviewForm.get("comment"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 14, "productReview.rating"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("control", ctx_r1152.reviewForm.get("rating"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1140.reviewForm.get("rating"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(28, 16, "productReview.reviewerName"));
     ɵngcc0.ɵɵadvance(6);
@@ -7489,22 +7407,22 @@ function ProductReviewsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ProductReviewsComponent_div_0_ng_template_5_Template, 39, 22, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1149 = ctx.ngIf;
-    const _r1151 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1148 = ɵngcc0.ɵɵnextContext();
+    const product_r1137 = ctx.ngIf;
+    const _r1139 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1136 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1149.numberOfReviews, ") ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1137.numberOfReviews, ") ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1148.isWritingReview)("ngIfElse", _r1151);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1136.isWritingReview)("ngIfElse", _r1139);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1183 = ɵngcc0.ɵɵnextContext().$implicit;
+    const preference_r1171 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1183.value);
+    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1171.value);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 14);
@@ -7514,15 +7432,15 @@ function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) {
     ɵngcc0.ɵɵtemplate(3, StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template, 2, 1, "span", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1183 = ctx.$implicit;
+    const preference_r1171 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(preference_r1183.channel);
+    ɵngcc0.ɵɵtextInterpolate(preference_r1171.channel);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r1183.value);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r1171.value);
 } }
-const _c49 = function () { return ["/my-account/my-interests"]; };
+const _c52 = function () { return ["/my-account/my-interests"]; };
 function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1187 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1175 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
@@ -7539,7 +7457,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementStart(13, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1187); const ctx_r1186 = ɵngcc0.ɵɵnextContext(); return ctx_r1186.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1175); const ctx_r1174 = ɵngcc0.ɵɵnextContext(); return ctx_r1174.close(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7550,7 +7468,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
     ɵngcc0.ɵɵelementStart(21, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1187); const ctx_r1188 = ɵngcc0.ɵɵnextContext(); return ctx_r1188.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1175); const ctx_r1176 = ɵngcc0.ɵɵnextContext(); return ctx_r1176.close(); });
     ɵngcc0.ɵɵtext(22);
     ɵngcc0.ɵɵpipe(23, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7560,7 +7478,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(26, "div", 11);
     ɵngcc0.ɵɵelementStart(27, "div", 12);
     ɵngcc0.ɵɵelementStart(28, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1187); const ctx_r1189 = ɵngcc0.ɵɵnextContext(); return ctx_r1189.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1175); const ctx_r1177 = ɵngcc0.ɵɵnextContext(); return ctx_r1177.close(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7570,11 +7488,11 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1179 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1167 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 12, "stockNotification.subscriptionDialog.notifiedPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1179.enabledPrefs);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1167.enabledPrefs);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 14, "stockNotification.subscriptionDialog.notifiedSuffix"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -7588,7 +7506,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(20, 22, "stockNotification.subscriptionDialog.manageSubscriptionsPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(31, _c49));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(31, _c52));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(23, 24, "stockNotification.subscriptionDialog.manageSubscriptionsLink"), "");
     ɵngcc0.ɵɵadvance(2);
@@ -7613,7 +7531,7 @@ function StockNotificationDialogComponent_ng_template_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "stockNotification.subscriptionDialog.subscribing"), " ");
 } }
 function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1200 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1188 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -7622,7 +7540,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1200); const ctx_r1199 = ɵngcc0.ɵɵnextContext(3); return ctx_r1199.subscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1188); const ctx_r1187 = ɵngcc0.ɵɵnextContext(3); return ctx_r1187.subscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7639,10 +7557,10 @@ function StockNotificationComponent_ng_container_0_ng_container_1_Template(rf, c
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1197 = ɵngcc0.ɵɵnextContext(2);
-    const _r1191 = ɵngcc0.ɵɵreference(3);
+    const ctx_r1185 = ɵngcc0.ɵɵnextContext(2);
+    const _r1179 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1197.prefsEnabled$))("ngIfElse", _r1191);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1185.prefsEnabled$))("ngIfElse", _r1179);
 } }
 function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7650,10 +7568,10 @@ function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1190 = ɵngcc0.ɵɵnextContext();
-    const _r1193 = ɵngcc0.ɵɵreference(5);
+    const ctx_r1178 = ɵngcc0.ɵɵnextContext();
+    const _r1181 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1190.hasProductInterests$))("ngIfElse", _r1193);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1178.hasProductInterests$))("ngIfElse", _r1181);
 } }
 function StockNotificationComponent_ng_template_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7709,15 +7627,15 @@ function StockNotificationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1202 = ɵngcc0.ɵɵreference(4);
-    const ctx_r1192 = ɵngcc0.ɵɵnextContext();
+    const _r1190 = ɵngcc0.ɵɵreference(4);
+    const ctx_r1180 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1192.anonymous)("ngIfElse", _r1202);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1180.anonymous)("ngIfElse", _r1190);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 3, "stockNotification.notifyMe"), " ");
 } }
 function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1206 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1194 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "label");
@@ -7726,7 +7644,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1206); const ctx_r1205 = ɵngcc0.ɵɵnextContext(2); return ctx_r1205.unsubscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1194); const ctx_r1193 = ɵngcc0.ɵɵnextContext(2); return ctx_r1193.unsubscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7741,9 +7659,9 @@ function StockNotificationComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵtemplate(0, StockNotificationComponent_ng_template_4_ng_container_0_Template, 8, 6, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r1194 = ɵngcc0.ɵɵnextContext();
-    const _r1195 = ɵngcc0.ɵɵreference(7);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1194.isRemoveInterestLoading$))("ngIfElse", _r1195);
+    const ctx_r1182 = ɵngcc0.ɵɵnextContext();
+    const _r1183 = ɵngcc0.ɵɵreference(7);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1182.isRemoveInterestLoading$))("ngIfElse", _r1183);
 } }
 function StockNotificationComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -7759,10 +7677,10 @@ function ScheduleComponent_div_1_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1209 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1210 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1197 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1198 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1210.getStoreOpeningTime(day_r1209), " - ", ctx_r1210.getStoreClosingTime(day_r1209), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1198.getStoreOpeningTime(day_r1197), " - ", ctx_r1198.getStoreClosingTime(day_r1197), " ");
 } }
 function ScheduleComponent_div_1_div_1_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -7783,32 +7701,32 @@ function ScheduleComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ScheduleComponent_div_1_div_1_div_5_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1209 = ctx.$implicit;
-    const ctx_r1208 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1197 = ctx.$implicit;
+    const ctx_r1196 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1209, "EEE"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1197, "EEE"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1208.getStoreOpeningTime(day_r1209) !== "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1196.getStoreOpeningTime(day_r1197) !== "closed");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1208.getStoreOpeningTime(day_r1209) === "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1196.getStoreOpeningTime(day_r1197) === "closed");
 } }
 function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
     ɵngcc0.ɵɵtemplate(1, ScheduleComponent_div_1_div_1_Template, 6, 6, "div", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1207 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1195 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1207.displayDays);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1195.displayDays);
 } }
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1218 = ctx.$implicit;
+    const location_r1206 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1218);
+    ɵngcc0.ɵɵproperty("location", location_r1206);
 } }
 function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7819,9 +7737,9 @@ function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1216 = ctx.ngIf;
+    const locations_r1204 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1216 == null ? null : locations_r1216.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1204 == null ? null : locations_r1204.stores);
 } }
 function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -7829,36 +7747,36 @@ function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderListItemComponent_button_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1223 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1211 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1223); const ctx_r1222 = ɵngcc0.ɵɵnextContext(); return ctx_r1222.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1223); const ctx_r1224 = ɵngcc0.ɵɵnextContext(); return ctx_r1224.onKey($event); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1211); const ctx_r1210 = ɵngcc0.ɵɵnextContext(); return ctx_r1210.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1211); const ctx_r1212 = ɵngcc0.ɵɵnextContext(); return ctx_r1212.onKey($event); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1219 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1207 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1219.location.displayName || ctx_r1219.location.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1207.location.displayName || ctx_r1207.location.name, " ");
 } }
 function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 7);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1220 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("href", ctx_r1220.prepareRouteUrl(ctx_r1220.location), ɵngcc0.ɵɵsanitizeUrl);
+    const ctx_r1208 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("href", ctx_r1208.prepareRouteUrl(ctx_r1208.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1220.location.displayName || ctx_r1220.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1208.location.displayName || ctx_r1208.location.name);
 } }
 function StoreFinderListItemComponent_div_7_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1225 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1213 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1225.location.formattedDistance, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1213.location.formattedDistance, " ");
 } }
-const _c50 = function (a0, a1, a2) { return [a0, a1, a2]; };
+const _c53 = function (a0, a1, a2) { return [a0, a1, a2]; };
 function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "div", 9);
@@ -7868,28 +7786,28 @@ function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_7_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1221 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1209 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1221.location.address.line1, " ", ctx_r1221.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1209.location.address.line1, " ", ctx_r1209.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1221.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c50, ctx_r1221.location.address.town, ctx_r1221.location.address.postalCode, ctx_r1221.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1209.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c53, ctx_r1209.location.address.town, ctx_r1209.location.address.postalCode, ctx_r1209.location.address.country.isocode)), " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1221.location.formattedDistance && ctx_r1221.displayDistance);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1209.location.formattedDistance && ctx_r1209.displayDistance);
 } }
-const _c51 = ["mapElement"];
-const _c52 = ["storeMap"];
+const _c54 = ["mapElement"];
+const _c55 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1234 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1222 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1234); const ctx_r1233 = ɵngcc0.ɵɵnextContext(3); return ctx_r1233.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1222); const ctx_r1221 = ɵngcc0.ɵɵnextContext(3); return ctx_r1221.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1232 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1220 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1232.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1220.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "storeFinder.backToList"), " ");
 } }
@@ -7903,49 +7821,49 @@ function StoreFinderListComponent_ng_container_0_div_2_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1228 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1216 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r1228.locations.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r1216.locations.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1228.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1216.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1235 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1223 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1235.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1223.storeDetails)("disableMap", true);
 } }
-const _c53 = function (a0) { return { "cx-selected-item": a0 }; };
+const _c56 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1242 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1230 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1242); const location_r1239 = ctx.$implicit; const ctx_r1241 = ɵngcc0.ɵɵnextContext(4); return ctx_r1241.centerStoreOnMapByIndex($event, location_r1239); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1230); const location_r1227 = ctx.$implicit; const ctx_r1229 = ɵngcc0.ɵɵnextContext(4); return ctx_r1229.centerStoreOnMapByIndex($event, location_r1227); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1239 = ctx.$implicit;
-    const i_r1240 = ctx.index;
-    const ctx_r1238 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1240);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c53, ctx_r1238.selectedStoreIndex === i_r1240));
+    const location_r1227 = ctx.$implicit;
+    const i_r1228 = ctx.index;
+    const ctx_r1226 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1228);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c56, ctx_r1226.selectedStoreIndex === i_r1228));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1239)("locationIndex", i_r1240)("displayDistance", ctx_r1238.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1240 + ctx_r1238.locations.pagination.currentPage * ctx_r1238.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1227)("locationIndex", i_r1228)("displayDistance", ctx_r1226.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1228 + ctx_r1226.locations.pagination.currentPage * ctx_r1226.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1236 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1224 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1236.locations == null ? null : ctx_r1236.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1224.locations == null ? null : ctx_r1224.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1244 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1232 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "div", 13);
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_3_div_2_Template, 2, 2, "div", 14);
@@ -7953,18 +7871,18 @@ function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵelementStart(5, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1244); const ctx_r1243 = ɵngcc0.ɵɵnextContext(2); return ctx_r1243.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1232); const ctx_r1231 = ɵngcc0.ɵɵnextContext(2); return ctx_r1231.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1229 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1217 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1229.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1217.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1229.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1217.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1229.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1217.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -7977,34 +7895,34 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_div_1_Templ
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1249 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1237 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1249.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1237.storeDetails)("disableMap", true);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1255 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1243 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1255); const location_r1252 = ctx.$implicit; const ctx_r1254 = ɵngcc0.ɵɵnextContext(5); return ctx_r1254.centerStoreOnMapByIndex($event, location_r1252); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1243); const location_r1240 = ctx.$implicit; const ctx_r1242 = ɵngcc0.ɵɵnextContext(5); return ctx_r1242.centerStoreOnMapByIndex($event, location_r1240); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1252 = ctx.$implicit;
-    const i_r1253 = ctx.index;
-    const ctx_r1251 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1253);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c53, ctx_r1251.selectedStoreIndex === i_r1253));
+    const location_r1240 = ctx.$implicit;
+    const i_r1241 = ctx.index;
+    const ctx_r1239 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1241);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c56, ctx_r1239.selectedStoreIndex === i_r1241));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1252)("locationIndex", i_r1253)("displayDistance", ctx_r1251.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1253 + ctx_r1251.locations.pagination.currentPage * ctx_r1251.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1240)("locationIndex", i_r1241)("displayDistance", ctx_r1239.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1241 + ctx_r1239.locations.pagination.currentPage * ctx_r1239.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1250 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1238 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1250.locations == null ? null : ctx_r1250.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1238.locations == null ? null : ctx_r1238.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -8012,11 +7930,11 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template, 2, 1, "ol", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1246 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1234 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1246.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1234.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1246.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1234.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -8024,18 +7942,18 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
 } if (rf & 2) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(1, 1, "storeFinder.mapView"), " ");
 } }
-const _c54 = function (a0) { return [a0]; };
+const _c57 = function (a0) { return [a0]; };
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1258 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1246 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1258); const ctx_r1257 = ɵngcc0.ɵɵnextContext(3); return ctx_r1257.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1246); const ctx_r1245 = ɵngcc0.ɵɵnextContext(3); return ctx_r1245.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1248 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1236 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1248.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c54, ctx_r1248.selectedStore) : ctx_r1248.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1236.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c57, ctx_r1236.selectedStore) : ctx_r1236.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8072,36 +7990,36 @@ function StoreFinderListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1227 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1215 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1227.locations == null ? null : ctx_r1227.locations.pagination);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1215.locations == null ? null : ctx_r1215.locations.pagination);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1227.locations == null ? null : ctx_r1227.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1215.locations == null ? null : ctx_r1215.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1227.locations == null ? null : ctx_r1227.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1215.locations == null ? null : ctx_r1215.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1227.locations == null ? null : ctx_r1227.locations.stores));
+    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1215.locations == null ? null : ctx_r1215.locations.stores));
 } }
 function StoreFinderSearchResultComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1267 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1255 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "cx-pagination", 6);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1267); const ctx_r1266 = ɵngcc0.ɵɵnextContext(2); return ctx_r1266.viewPage($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1255); const ctx_r1254 = ɵngcc0.ɵɵnextContext(2); return ctx_r1254.viewPage($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1262 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1250 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", locations_r1262.pagination);
+    ɵngcc0.ɵɵproperty("pagination", locations_r1250.pagination);
 } }
 function StoreFinderSearchResultComponent_div_0_cx_store_finder_list_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-store-finder-list", 7);
 } if (rf & 2) {
-    const locations_r1262 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1264 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("locations", locations_r1262)("useMylocation", ctx_r1264.useMyLocation);
+    const locations_r1250 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1252 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("locations", locations_r1250)("useMylocation", ctx_r1252.useMyLocation);
 } }
 function StoreFinderSearchResultComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8123,22 +8041,22 @@ function StoreFinderSearchResultComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_div_0_div_3_Template, 5, 3, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1262 = ctx.ngIf;
+    const locations_r1250 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1262 == null ? null : locations_r1262.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1250 == null ? null : locations_r1250.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1262 == null ? null : locations_r1262.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1250 == null ? null : locations_r1250.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1262 == null ? null : locations_r1262.stores.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1250 == null ? null : locations_r1250.stores.length));
 } }
 function StoreFinderSearchResultComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
-const _c55 = function () { return ["/store-finder/find"]; };
-const _c56 = function (a0) { return { "disabled-action": a0 }; };
-const _c57 = function () { return ["/store-finder/view-all"]; };
+const _c58 = function () { return ["/store-finder/find"]; };
+const _c59 = function (a0) { return { "disabled-action": a0 }; };
+const _c60 = function () { return ["/store-finder/view-all"]; };
 function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 13);
     ɵngcc0.ɵɵtext(1);
@@ -8146,11 +8064,11 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1272 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1260 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1272.location.address.line1, " ", ctx_r1272.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1260.location.address.line1, " ", ctx_r1260.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1272.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c50, ctx_r1272.location.address.town, ctx_r1272.location.address.postalCode, ctx_r1272.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1260.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c53, ctx_r1260.location.address.town, ctx_r1260.location.address.postalCode, ctx_r1260.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8158,9 +8076,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1273 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1261 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1273.location.address == null ? null : ctx_r1273.location.address.phone, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1261.location.address == null ? null : ctx_r1261.location.address.phone, " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -8172,9 +8090,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1274 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1262 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1274.location);
+    ɵngcc0.ɵɵproperty("location", ctx_r1262.location);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "storeFinder.storeHours"));
 } }
@@ -8185,9 +8103,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_div_7_Templa
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1278 = ctx.$implicit;
+    const feature_r1266 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1278.value);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1266.value);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
@@ -8204,20 +8122,20 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1275 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1263 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 2, "storeFinder.storeFeatures"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1275.location.features == null ? null : ctx_r1275.location.features.entry);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1263.location.features == null ? null : ctx_r1263.location.features.entry);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "article", 22);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-map", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1276 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1264 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c54, ctx_r1276.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c57, ctx_r1264.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8248,35 +8166,35 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1271 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1259 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1271.location.displayName || ctx_r1271.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1259.location.displayName || ctx_r1259.location.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1271.location.address);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1259.location.address);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("href", ctx_r1271.getDirections(ctx_r1271.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", ctx_r1259.getDirections(ctx_r1259.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "storeFinder.getDirections"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1271.location.address == null ? null : ctx_r1271.location.address.phone);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1259.location.address == null ? null : ctx_r1259.location.address.phone);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1271.location.openingHours);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1259.location.openingHours);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1271.location.features) != "{}");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1259.location.features) != "{}");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1271.disableMap);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1259.disableMap);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_span_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1286 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1286 == null ? null : country_r1286.storeCountDataList) ? "country-header" : "country-header-link");
+    const country_r1274 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1274 == null ? null : country_r1274.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1("(", country_r1286.count, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", country_r1274.count, ")");
 } }
-const _c58 = function (a1) { return ["../country", a1]; };
+const _c61 = function (a1) { return ["../country", a1]; };
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "a", 7);
@@ -8289,24 +8207,24 @@ function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1286 = ctx.$implicit;
+    const country_r1274 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c58, country_r1286.isoCode));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c61, country_r1274.isoCode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1286 == null ? null : country_r1286.storeCountDataList) ? "country-header" : "country-header-link");
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1274 == null ? null : country_r1274.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(country_r1286.name);
+    ɵngcc0.ɵɵtextInterpolate(country_r1274.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(country_r1286 == null ? null : country_r1286.storeCountDataList));
+    ɵngcc0.ɵɵproperty("ngIf", !(country_r1274 == null ? null : country_r1274.storeCountDataList));
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtemplate(1, StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template, 6, 6, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1282 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1270 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1282);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1270);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -8327,11 +8245,11 @@ function StoreFinderStoresCountComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1282 = ctx.ngIf;
+    const locations_r1270 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1282 == null ? null : locations_r1282.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1270 == null ? null : locations_r1270.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1282 == null ? null : locations_r1282.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1270 == null ? null : locations_r1270.length));
 } }
 function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -8339,12 +8257,12 @@ function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1295 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1283 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1295); const ctx_r1294 = ɵngcc0.ɵɵnextContext(); return ctx_r1294.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1283); const ctx_r1282 = ɵngcc0.ɵɵnextContext(); return ctx_r1282.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -8358,21 +8276,21 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1293 = ctx.ngIf;
-    const ctx_r1290 = ɵngcc0.ɵɵnextContext();
+    const location_r1281 = ctx.ngIf;
+    const ctx_r1278 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1290.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1278.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 4, "storeFinder.backToList"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("disableMap", ctx_r1290.disableMap)("location", location_r1293);
+    ɵngcc0.ɵɵproperty("disableMap", ctx_r1278.disableMap)("location", location_r1281);
 } }
 function StoreFinderStoreComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
     ɵngcc0.ɵɵelement(1, "cx-spinner");
     ɵngcc0.ɵɵelementEnd();
 } }
-const _c59 = function () { return { cxRoute: "register" }; };
+const _c62 = function () { return { cxRoute: "register" }; };
 function LoginFormComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "a", 11);
@@ -8383,11 +8301,11 @@ function LoginFormComponent_ng_container_29_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c59)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c62)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "loginForm.register"));
 } }
-const _c60 = function () { return { cxRoute: "checkoutLogin" }; };
+const _c63 = function () { return { cxRoute: "checkoutLogin" }; };
 function LoginFormComponent_ng_container_30_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "a", 12);
@@ -8398,12 +8316,12 @@ function LoginFormComponent_ng_container_30_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c60)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction0(6, _c63)));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 4, "loginForm.guestCheckout"));
 } }
-const _c61 = function () { return { cxRoute: "forgotPassword" }; };
-const _c62 = function (a0) { return { name: a0 }; };
+const _c64 = function () { return { cxRoute: "forgotPassword" }; };
+const _c65 = function (a0) { return { name: a0 }; };
 function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 2);
@@ -8413,9 +8331,9 @@ function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const user_r1301 = ctx.ngIf;
+    const user_r1289 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c62, user_r1301.name)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c65, user_r1289.name)), " ");
 } }
 function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
@@ -8433,10 +8351,10 @@ function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1307 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1307.code);
+    const title_r1295 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1295.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1307.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1295.name);
 } }
 function RegisterComponent_section_0_label_58_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
@@ -8446,21 +8364,21 @@ function RegisterComponent_section_0_label_58_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1308 = ctx.ngIf;
-    const ctx_r1306 = ɵngcc0.ɵɵnextContext(2);
+    const anonymousConsent_r1296 = ctx.ngIf;
+    const ctx_r1294 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1306.isConsentGiven(anonymousConsent_r1308.consent));
+    ɵngcc0.ɵɵproperty("checked", ctx_r1294.isConsentGiven(anonymousConsent_r1296.consent));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1308.template, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1296.template, " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1310 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1298 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "div", 5);
     ɵngcc0.ɵɵelementStart(4, "form", 6);
-    ɵngcc0.ɵɵlistener("ngSubmit", function RegisterComponent_section_0_Template_form_ngSubmit_4_listener() { ɵngcc0.ɵɵrestoreView(_r1310); const ctx_r1309 = ɵngcc0.ɵɵnextContext(); return ctx_r1309.submitForm(); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function RegisterComponent_section_0_Template_form_ngSubmit_4_listener() { ɵngcc0.ɵɵrestoreView(_r1298); const ctx_r1297 = ɵngcc0.ɵɵnextContext(); return ctx_r1297.submitForm(); });
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "label");
     ɵngcc0.ɵɵelementStart(7, "span", 8);
@@ -8570,47 +8488,47 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1302 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1290 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1302.registerForm);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1290.registerForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 27, "register.title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 29, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 31, ctx_r1302.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 31, ctx_r1290.titles$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 33, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 35, "register.firstName.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("firstName"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("firstName"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(28, 37, "register.lastName.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(30, 39, "register.lastName.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("lastName"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("lastName"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(36, 41, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(38, 43, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("email"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("email"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(44, 45, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(46, 47, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("password"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("password"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(52, 49, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(54, 51, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("passwordconf"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("passwordconf"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(59, 53, ctx_r1302.anonymousConsent$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(59, 53, ctx_r1290.anonymousConsent$));
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(66, 55, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -8618,7 +8536,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(70, 59, "register.termsAndConditions"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1302.registerForm.get("termsandconditions"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1290.registerForm.get("termsandconditions"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(74, 61, "register.register"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -8639,11 +8557,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1311 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1299 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r1311.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r1299.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1311.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1299.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -8651,45 +8569,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1312 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1300 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1312.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1300.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1319 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1307 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1319.name, ": ", variant_r1319.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1307.name, ": ", variant_r1307.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1319 = ctx.$implicit;
+    const variant_r1307 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1319.name && variant_r1319.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1307.name && variant_r1307.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1313 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1301 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1313.cartEntry.product.baseOptions[0] == null ? null : ctx_r1313.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1313.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1301.cartEntry.product.baseOptions[0] == null ? null : ctx_r1301.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1301.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1322 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1310 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1322.cartEntry.basePrice == null ? null : ctx_r1322.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1310.cartEntry.basePrice == null ? null : ctx_r1310.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -8700,17 +8618,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1314 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1302 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1314.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1302.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1315 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1315.cartEntry.product);
+    const ctx_r1303 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1303.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -8722,18 +8640,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1331 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1319 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1331); const ctx_r1330 = ɵngcc0.ɵɵnextContext(3); return ctx_r1330.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1319); const ctx_r1318 = ɵngcc0.ɵɵnextContext(3); return ctx_r1318.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1329 = ctx.$implicit;
-    const ctx_r1328 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1317 = ctx.$implicit;
+    const ctx_r1316 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1329)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1328.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1317)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1316.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8756,7 +8674,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1326 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1314 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -8764,18 +8682,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1326 == null ? null : wishList_r1326.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1314 == null ? null : wishList_r1314.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1326 = ctx.ngIf;
+    const wishList_r1314 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1324 = ɵngcc0.ɵɵreference(3);
+    const _r1312 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1326 == null ? null : wishList_r1326.entries == null ? null : wishList_r1326.entries.length) > 0)("ngIfElse", _r1324);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1314 == null ? null : wishList_r1314.entries == null ? null : wishList_r1314.entries.length) > 0)("ngIfElse", _r1312);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -8812,6 +8730,7 @@ var ICON_TYPE;
     ICON_TYPE["CIRCLE"] = "CIRCLE";
     ICON_TYPE["HEART"] = "HEART";
     ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
+    ICON_TYPE["FILTER"] = "FILTER";
 })(ICON_TYPE || (ICON_TYPE = {}));
 class IconConfig {
 }
@@ -8864,6 +8783,7 @@ const fontawesomeIconConfig = {
             CIRCLE: 'fas fa-circle',
             HEART: 'fas fa-heart',
             EMPTY_HEART: 'far fa-heart',
+            FILTER: 'fas fa-filter',
         },
         resources: [
             {
@@ -9968,161 +9888,15 @@ __decorate([
     HostBinding('class.hidden')
 ], AsmMainUiComponent.prototype, "disabled", void 0);
 
-/** The element attribute used to store the focus state */
-const FOCUS_ATTR = 'data-cx-focus';
-/** The element attribute used to store the focus group state */
-const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
-
 let BaseFocusService = class BaseFocusService {
 };
 BaseFocusService.ɵfac = function BaseFocusService_Factory(t) { return new (t || BaseFocusService)(); };
 BaseFocusService.ɵprov = ɵɵdefineInjectable({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
 
-/**
- * Abstract directive that provides a common interface for all focus directives:
- * - Block Focus
- * - Persist Focus
- * - Escape Focus
- * - Auto Focus
- * - Tab Focus
- * - Trap Focus
- * - Lock Focus
- */
-let BaseFocusDirective = class BaseFocusDirective {
-    constructor(elementRef, service) {
-        this.elementRef = elementRef;
-        this.service = service;
-        /**
-         * A default config can be provided for each directive if a specific focus directive
-         * is used directly. i.e. `<div cxAutoFocus></div>`
-         */
-        this.defaultConfig = {};
-    }
-    ngOnInit() {
-        this.setDefaultConfiguration();
-        this.requiredTabindex = -1;
-    }
-    /**
-     * Override the (input) config if it undefined or an empty string, with the
-     * `defaultConfig`. The `defaultConfig` might be specified for each directive
-     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
-     * specific (inherited) defaultConfig will be used.
-     */
-    setDefaultConfiguration() {
-        if ((!this.config || this.config === '') && this.defaultConfig) {
-            this.config = this.defaultConfig;
-        }
-    }
-    /**
-     * Helper method to return the host element for the directive
-     * given by the `elementRef`.
-     */
-    get host() {
-        return this.elementRef.nativeElement;
-    }
-    /**
-     * Force a tabindex on the host element if it is _requried_ to make the element
-     * focusable. If the element is focusable by nature or by a given tabindex, the
-     * `tabindex` is not applied.
-     *
-     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
-     */
-    set requiredTabindex(tabindex) {
-        if (this.requiresExplicitTabIndex) {
-            this.tabindex = tabindex;
-        }
-    }
-    /**
-     * Returns true if the host element does not have a tabindex defined
-     * and it also doesn't get focus by browsers nature (i.e. button or
-     * active link).
-     */
-    get requiresExplicitTabIndex() {
-        return (this.tabindex === undefined &&
-            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
-            !(this.host.tagName === 'A' &&
-                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
-    }
-};
-BaseFocusDirective.ɵfac = function BaseFocusDirective_Factory(t) { return new (t || BaseFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(BaseFocusService)); };
-BaseFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: BaseFocusDirective, hostVars: 1, hostBindings: function BaseFocusDirective_HostBindings(rf, ctx) { if (rf & 2) {
-        ɵngcc0.ɵɵattribute("tabindex", ctx.tabindex);
-    } }, inputs: { tabindex: "tabindex" } });
-BaseFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
-__decorate([
-    Input(), HostBinding('attr.tabindex')
-], BaseFocusDirective.prototype, "tabindex", void 0);
-
-/**
- * Directive implementation that adds a CSS class to the host element
- * when the moused is used to focus an element. As soon as the keyboard
- * is used, the class is removed.
- */
-let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = { disableMouseFocus: true };
-        /** controls a polyfill class for the lacking focus-visible feature */
-        this.mouseFocus = false;
-    }
-    handleMousedown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = true;
-        }
-    }
-    handleKeydown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = false;
-        }
-    }
-    get shouldFocusVisible() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
-    }
-};
-VisibleFocusDirective.ɵfac = function VisibleFocusDirective_Factory(t) { return ɵVisibleFocusDirective_BaseFactory(t || VisibleFocusDirective); };
-VisibleFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: VisibleFocusDirective, hostVars: 2, hostBindings: function VisibleFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("mousedown", function VisibleFocusDirective_mousedown_HostBindingHandler() { return ctx.handleMousedown(); })("keydown", function VisibleFocusDirective_keydown_HostBindingHandler() { return ctx.handleKeydown(); });
-    } if (rf & 2) {
-        ɵngcc0.ɵɵclassProp("mouse-focus", ctx.mouseFocus);
-    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-__decorate([
-    HostBinding('class.mouse-focus')
-], VisibleFocusDirective.prototype, "mouseFocus", void 0);
-__decorate([
-    HostListener('mousedown')
-], VisibleFocusDirective.prototype, "handleMousedown", null);
-__decorate([
-    HostListener('keydown')
-], VisibleFocusDirective.prototype, "handleKeydown", null);
-
-let BlockFocusDirective = 
-// { selector: '[cxBlockFocus]' }
-class BlockFocusDirective extends VisibleFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { block: true };
-        // @Input('cxBlockFocus')
-        this.config = {};
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        if (this.config.block) {
-            this.tabindex = -1;
-        }
-    }
-};
-BlockFocusDirective.ɵfac = function BlockFocusDirective_Factory(t) { return new (t || BlockFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(BaseFocusService)); };
-BlockFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: BlockFocusDirective, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-BlockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
+/** The element attribute used to store the focus state */
+const FOCUS_ATTR = 'data-cx-focus';
+/** The element attribute used to store the focus group state */
+const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
 
 const GLOBAL_GROUP = '_g_';
 /**
@@ -10166,104 +9940,6 @@ let PersistFocusService = class PersistFocusService extends BaseFocusService {
 };
 PersistFocusService.ɵfac = function PersistFocusService_Factory(t) { return ɵPersistFocusService_BaseFactory(t || PersistFocusService); };
 PersistFocusService.ɵprov = ɵɵdefineInjectable({ factory: function PersistFocusService_Factory() { return new PersistFocusService(); }, token: PersistFocusService, providedIn: "root" });
-
-/**
- * Directive that provides persistence of the focused state. This is useful
- * when a group of focusable elements got refocused or even recreated. That
- * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
- *
- * The focus state is based on a configured _key_, which can be passed in the
- * config input, either by using a string primitive or `PersistFocusConfig.key`:
- *
- * ```html
- * <button cxPersistFocus="myKey"></button>
- * <button cxFocus="myKey"></button>
- * <button [cxFocus]="{{key:'myKey'}"></button>
- * ```
- *
- * The focus state can be part of a focus _group_, so that the state is shared
- * and remember for the given group. In order to detect the persistence for a
- * given element, we store the persistence key as a data attribute (`data-cx-focus`):
- *
- * ```html
- * <button data-cx-focus="myKey"></button>
- * ```
- *
- * Other keyboard focus directives can read the key to understand whether the element
- * should retrieve focus.
- *
- */
-let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = {};
-        /**
-         * The persistence key can be passed directly or through the `FocusConfig.key`.
-         * While this could be considered a global key, the likeliness of conflicts
-         * is very small since the key is cleared when the focus is changed.
-         */
-        // @Input('cxPersistFocus')
-        this.config = {};
-    }
-    handleFocus(event) {
-        this.service.set(this.key, this.group);
-        event === null || event === void 0 ? void 0 : event.preventDefault();
-        event === null || event === void 0 ? void 0 : event.stopPropagation();
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        this.attr = this.key ? this.key : undefined;
-    }
-    setDefaultConfiguration() {
-        if (typeof this.config === 'string' && this.config !== '') {
-            this.config = { key: this.config };
-        }
-        super.setDefaultConfiguration();
-    }
-    /**
-     * Focus the element explicitly if it was focused before.
-     */
-    ngAfterViewInit() {
-        if (this.isPersisted) {
-            this.host.focus({ preventScroll: true });
-        }
-    }
-    get isPersisted() {
-        return !!this.key && this.service.get(this.group) === this.key;
-    }
-    /**
-     * Returns the key for the host element, which is used to persist the
-     * focus state. This is useful in cases where the DOM is rebuild.
-     */
-    get key() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
-    }
-    /**
-     * returns the persistence group (if any) for the focusable elements.
-     */
-    get group() {
-        return this.service.getPersistenceGroup(this.host, this.config);
-    }
-};
-PersistFocusDirective.ɵfac = function PersistFocusDirective_Factory(t) { return new (t || PersistFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(PersistFocusService)); };
-PersistFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: PersistFocusDirective, hostVars: 1, hostBindings: function PersistFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("focus", function PersistFocusDirective_focus_HostBindingHandler($event) { return ctx.handleFocus($event); });
-    } if (rf & 2) {
-        ɵngcc0.ɵɵattribute("data-cx-focus", ctx.attr);
-    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-PersistFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: PersistFocusService }
-];
-__decorate([
-    HostBinding(`attr.${FOCUS_ATTR}`)
-], PersistFocusDirective.prototype, "attr", void 0);
-__decorate([
-    HostListener('focus', ['$event'])
-], PersistFocusDirective.prototype, "handleFocus", null);
 
 let SelectFocusUtility = class SelectFocusUtility {
     constructor() {
@@ -10363,53 +10039,6 @@ EscapeFocusService.ctorParameters = () => [
 ];
 EscapeFocusService.ɵprov = ɵɵdefineInjectable({ factory: function EscapeFocusService_Factory() { return new EscapeFocusService(ɵɵinject(SelectFocusUtility)); }, token: EscapeFocusService, providedIn: "root" });
 
-/**
- * Directive to focus the host element whenever the `escape` key is captured.
- * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
- * on a tree of elements. Each time the escape key is used, the focus will
- * move up in the DOM tree.
- *
- */
-let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { focusOnEscape: true };
-        this.esc = new EventEmitter();
-    }
-    /**
-     * Handles the escape key event.
-     * @param event the native keyboard event which contains the escape keydown event
-     */
-    handleEscape(event) {
-        if (this.service.shouldFocus(this.config)) {
-            this.service.handleEscape(this.host, this.config, event);
-        }
-        this.esc.emit(this.service.shouldFocus(this.config));
-    }
-    ngOnInit() {
-        if (this.service.shouldFocus(this.config)) {
-            this.requiredTabindex = -1;
-        }
-        super.ngOnInit();
-    }
-};
-EscapeFocusDirective.ɵfac = function EscapeFocusDirective_Factory(t) { return new (t || EscapeFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(EscapeFocusService)); };
-EscapeFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: EscapeFocusDirective, hostBindings: function EscapeFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("keydown.escape", function EscapeFocusDirective_keydown_escape_HostBindingHandler($event) { return ctx.handleEscape($event); });
-    } }, outputs: { esc: "esc" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-EscapeFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: EscapeFocusService }
-];
-__decorate([
-    Output()
-], EscapeFocusDirective.prototype, "esc", void 0);
-__decorate([
-    HostListener('keydown.escape', ['$event'])
-], EscapeFocusDirective.prototype, "handleEscape", null);
-
 let AutoFocusService = class AutoFocusService extends EscapeFocusService {
     /**
      * Returns the first focusable child element of the host element.
@@ -10448,91 +10077,6 @@ let AutoFocusService = class AutoFocusService extends EscapeFocusService {
 };
 AutoFocusService.ɵfac = function AutoFocusService_Factory(t) { return ɵAutoFocusService_BaseFactory(t || AutoFocusService); };
 AutoFocusService.ɵprov = ɵɵdefineInjectable({ factory: function AutoFocusService_Factory() { return new AutoFocusService(ɵɵinject(SelectFocusUtility)); }, token: AutoFocusService, providedIn: "root" });
-
-/**
- * Directive that focus the first nested _focusable_ element based on state and configuration:
- *
- * 1. focusable element that was left in a focused state (aka _persisted_ focus)
- * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
- * 3. focusable element marked with the native HTML5 `autofocus` attribute
- * 4. first focusable element
- * 5. the host element, in case the configured CSS selector is `:host`.
- *
- * Example configurations:
- *
- * `<div cxAutoFocus>[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
- *
- */
-let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** The AutoFocusDirective will be using autofocus by default  */
-        this.defaultConfig = { autofocus: true };
-    }
-    /**
-     * Focus the element explicitly if it was focussed before.
-     */
-    ngAfterViewInit() {
-        if (this.shouldAutofocus) {
-            this.handleFocus();
-        }
-        if (!this.shouldAutofocus || this.hasPersistedFocus) {
-            super.ngAfterViewInit();
-        }
-    }
-    /**
-     * Mimic the focus without setting the actual focus on the host. The first
-     * focusable child element will be focussed.
-     */
-    handleFocus(event) {
-        var _a;
-        if (this.shouldAutofocus) {
-            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
-                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
-            }
-            else {
-                event.target.focus();
-            }
-        }
-        super.handleFocus(event);
-    }
-    /**
-     * Helper function to get the first focusable child element
-     */
-    get hasPersistedFocus() {
-        return this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Helper function to indicate whether we should use autofocus for the
-     * child elements.
-     */
-    get shouldAutofocus() {
-        var _a;
-        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
-    }
-    /**
-     * Helper function to get the first focusable child element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get firstFocusable() {
-        return this.service.findFirstFocusable(this.host, this.config);
-    }
-};
-AutoFocusDirective.ɵfac = function AutoFocusDirective_Factory(t) { return new (t || AutoFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(AutoFocusService)); };
-AutoFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: AutoFocusDirective, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-AutoFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: AutoFocusService }
-];
 
 let TabFocusService = class TabFocusService extends AutoFocusService {
     /**
@@ -10634,49 +10178,6 @@ let TabFocusService = class TabFocusService extends AutoFocusService {
 TabFocusService.ɵfac = function TabFocusService_Factory(t) { return ɵTabFocusService_BaseFactory(t || TabFocusService); };
 TabFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TabFocusService_Factory() { return new TabFocusService(ɵɵinject(SelectFocusUtility)); }, token: TabFocusService, providedIn: "root" });
 
-/**
- * Directive to move the focus of ("locked") child elements. This is useful
- * for a nested list of tabs, carousel slides or any group of elements that
- * requires horizontal navigation.
- */
-let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
-        this.defaultConfig = { tab: true };
-        // @Input('cxTabFocus')
-        this.config = {};
-    }
-    handleNextTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
-        }
-    }
-    handlePreviousTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
-        }
-    }
-};
-TabFocusDirective.ɵfac = function TabFocusDirective_Factory(t) { return new (t || TabFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(TabFocusService)); };
-TabFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: TabFocusDirective, hostBindings: function TabFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("keydown.arrowRight", function TabFocusDirective_keydown_arrowRight_HostBindingHandler($event) { return ctx.handleNextTab($event); })("keydown.arrowLeft", function TabFocusDirective_keydown_arrowLeft_HostBindingHandler($event) { return ctx.handlePreviousTab($event); });
-    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-TabFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TabFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowRight', ['$event'])
-], TabFocusDirective.prototype, "handleNextTab", null);
-__decorate([
-    HostListener('keydown.arrowLeft', ['$event'])
-], TabFocusDirective.prototype, "handlePreviousTab", null);
-
 let TrapFocusService = class TrapFocusService extends TabFocusService {
     /**
      * Indicates whether any of the child elements of the host are focusable.
@@ -10720,299 +10221,15 @@ let TrapFocusService = class TrapFocusService extends TabFocusService {
 TrapFocusService.ɵfac = function TrapFocusService_Factory(t) { return ɵTrapFocusService_BaseFactory(t || TrapFocusService); };
 TrapFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TrapFocusService_Factory() { return new TrapFocusService(ɵɵinject(SelectFocusUtility)); }, token: TrapFocusService, providedIn: "root" });
 
-/**
- * Directive that keeps the focus inside the focussable child elements,
- * also known as a _focus trap_.
- */
-let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { trap: true };
-        // @Input('cxTrapFocus')
-        this.config = {};
-        this.handleTrapDown = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, 1 /* NEXT */);
-            }
-        };
-        this.handleTrapUp = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, -1 /* PREV */);
-            }
-        };
-    }
-    /**
-     * Moves the focus of the element reference up or down, depending on the increment.
-     * The focus of the element is trapped to avoid it from going out of the group.
-     *
-     * @param event UIEvent that is used to get the target element. The event is blocked
-     *   from standard execution and further bubbling.
-     * @param increment indicates whether the next or previous is focussed.
-     */
-    moveFocus(event, increment) {
-        if (this.service.hasFocusableChildren(this.host)) {
-            this.service.moveFocus(this.host, this.config, increment, event);
-        }
-    }
-};
-TrapFocusDirective.ɵfac = function TrapFocusDirective_Factory(t) { return new (t || TrapFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(TrapFocusService)); };
-TrapFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: TrapFocusDirective, hostBindings: function TrapFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("keydown.arrowdown", function TrapFocusDirective_keydown_arrowdown_HostBindingHandler($event) { return ctx.handleTrapDown($event); })("keydown.tab", function TrapFocusDirective_keydown_tab_HostBindingHandler($event) { return ctx.handleTrapDown($event); })("keydown.arrowup", function TrapFocusDirective_keydown_arrowup_HostBindingHandler($event) { return ctx.handleTrapUp($event); })("keydown.shift.tab", function TrapFocusDirective_keydown_shift_tab_HostBindingHandler($event) { return ctx.handleTrapUp($event); });
-    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-TrapFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TrapFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowdown', ['$event']),
-    HostListener('keydown.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapDown", void 0);
-__decorate([
-    HostListener('keydown.arrowup', ['$event']),
-    HostListener('keydown.shift.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapUp", void 0);
-
 let LockFocusService = class LockFocusService extends TrapFocusService {
 };
 LockFocusService.ɵfac = function LockFocusService_Factory(t) { return ɵLockFocusService_BaseFactory(t || LockFocusService); };
 LockFocusService.ɵprov = ɵɵdefineInjectable({ factory: function LockFocusService_Factory() { return new LockFocusService(ɵɵinject(SelectFocusUtility)); }, token: LockFocusService, providedIn: "root" });
 
-/**
- * Focusable elements exclude hidden elements by default, but this contradicts with
- * unlocking (hidden) elements.
- */
-const UNLOCK_HIDDEN_ELEMENTS = true;
-/**
- * Directive that adds persistence for focussed element in case
- * the elements are being rebuild. This happens often when change
- * detection kicks in because of new data set from the backend.
- */
-let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = { lock: true };
-        // @Input('cxLockFocus')
-        this.config = {};
-        /**
-         * Emits an event when the host is unlocked.
-         */
-        this.unlock = new EventEmitter();
-    }
-    /**
-     * When the user selects enter or space, the focusable childs are
-     * unlocked, which means that the tabindex is set to 0.
-     */
-    handleEnter(event) {
-        if (this.shouldLock && this.host === event.target) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    /**
-     * In case any of the children elements is touched by the mouse,
-     * we unlock the group to not break the mouse-experience.
-     */
-    handleClick(event) {
-        if (this.shouldLock && this.isLocked) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    lockFocus() {
-        this.addTabindexToChildren(-1);
-    }
-    unlockFocus(event) {
-        this.unlock.emit(true);
-        this.addTabindexToChildren(0);
-        // we focus the host if the event was triggered from a child
-        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
-            super.handleFocus(event);
-        }
-    }
-    ngOnInit() {
-        var _a, _b;
-        super.ngOnInit();
-        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
-        if (this.shouldLock) {
-            this.tabindex = 0;
-            // Locked elements will be set to `autofocus` by default if it's not
-            // been configured. This will ensure that autofocus kicks in upon unlock.
-            if (!this.config.hasOwnProperty('autofocus')) {
-                this.config.autofocus = true;
-            }
-            // Locked elements will be set to `focusOnEscape` by default if it's not
-            // been configured. This will ensure that  the host gets locked again when
-            // `escape` is pressed.
-            if (!this.config.hasOwnProperty('focusOnEscape')) {
-                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
-            }
-        }
-    }
-    ngAfterViewInit() {
-        if (this.shouldLock) {
-            /**
-             * If the component hosts a group of focusable children elmenents,
-             * we persist the group key to the children, so that they can taken this
-             * into account when they persist their focus state.
-             */
-            if (!!this.group) {
-                this.service.findFocusable(this.host).forEach((el) => 
-                // we must do this in after view init as
-                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
-            }
-            if (this.shouldAutofocus) {
-                this.handleFocus();
-            }
-        }
-        super.ngAfterViewInit();
-    }
-    handleFocus(event) {
-        if (this.shouldLock) {
-            if (this.shouldUnlockAfterAutofocus(event)) {
-                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
-                setTimeout(() => this.unlockFocus(event));
-            }
-            else {
-                setTimeout(() => this.lockFocus());
-                event === null || event === void 0 ? void 0 : event.stopPropagation();
-                return;
-            }
-        }
-        super.handleFocus(event);
-    }
-    handleEscape(event) {
-        if (this.shouldLock) {
-            this.service.clear(this.config.group);
-        }
-        super.handleEscape(event);
-    }
-    /**
-     * When the handleFocus is called without an actual event, it's coming from Autofocus.
-     * In this case we unlock the focusable children in case there's a focusable child that
-     * was unlocked before.
-     *
-     * We keep this private to not polute the API.
-     */
-    shouldUnlockAfterAutofocus(event) {
-        return !event && this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Add the tabindex attribute to the focusable children elements
-     */
-    addTabindexToChildren(i = 0) {
-        if (this.shouldLock) {
-            this.isLocked = i === -1;
-            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
-                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
-            }
-        }
-    }
-    /**
-     * Utility method, returns all focusable children for the host element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get hasFocusableChildren() {
-        return this.service.hasFocusableChildren(this.host);
-    }
-    /**
-     * Returns the focusable children of the host element. If the host element
-     * is configured to be locked, the query is restricted to child elements
-     * with a tabindex !== `-1`.
-     *
-     * We keep this private to not polute the API.
-     */
-    get focusable() {
-        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
-    }
-};
-LockFocusDirective.ɵfac = function LockFocusDirective_Factory(t) { return new (t || LockFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(LockFocusService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2)); };
-LockFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: LockFocusDirective, hostVars: 4, hostBindings: function LockFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵlistener("keydown.enter", function LockFocusDirective_keydown_enter_HostBindingHandler($event) { return ctx.handleEnter($event); })("keydown.space", function LockFocusDirective_keydown_space_HostBindingHandler($event) { return ctx.handleEnter($event); })("click", function LockFocusDirective_click_HostBindingHandler($event) { return ctx.handleClick($event); });
-    } if (rf & 2) {
-        ɵngcc0.ɵɵclassProp("focus-lock", ctx.shouldLock)("is-locked", ctx.isLocked);
-    } }, outputs: { unlock: "unlock" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-LockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: LockFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    HostBinding('class.focus-lock')
-], LockFocusDirective.prototype, "shouldLock", void 0);
-__decorate([
-    HostBinding('class.is-locked')
-], LockFocusDirective.prototype, "isLocked", void 0);
-__decorate([
-    Output()
-], LockFocusDirective.prototype, "unlock", void 0);
-__decorate([
-    HostListener('keydown.enter', ['$event']),
-    HostListener('keydown.space', ['$event'])
-], LockFocusDirective.prototype, "handleEnter", null);
-__decorate([
-    HostListener('click', ['$event'])
-], LockFocusDirective.prototype, "handleClick", null);
-
 let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
 };
 KeyboardFocusService.ɵfac = function KeyboardFocusService_Factory(t) { return ɵKeyboardFocusService_BaseFactory(t || KeyboardFocusService); };
 KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
-
-let FocusDirective = class FocusDirective extends LockFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service, renderer);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = {};
-        // tslint:disable-next-line: no-input-rename
-        this.config = {};
-    }
-};
-FocusDirective.ɵfac = function FocusDirective_Factory(t) { return new (t || FocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(KeyboardFocusService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2)); };
-FocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: FocusDirective, selectors: [["", "cxFocus", ""]], inputs: { config: ["cxFocus", "config"] }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
-FocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyboardFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    Input('cxFocus')
-], FocusDirective.prototype, "config", void 0);
-
-const directives = [
-    // PersistFocusDirective,
-    // VisibleFocusDirective,
-    // BlockFocusDirective,
-    // AutoFocusDirective,
-    // EscapeFocusDirective,
-    // LockFocusDirective,
-    // TrapFocusDirective,
-    // TabFocusDirective,
-    FocusDirective,
-];
-let KeyboardFocusModule = class KeyboardFocusModule {
-};
-KeyboardFocusModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: KeyboardFocusModule });
-KeyboardFocusModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function KeyboardFocusModule_Factory(t) { return new (t || KeyboardFocusModule)(); }, imports: [[CommonModule]] });
-
-// given that we're likely going to refactor the directives, we're
-// export * from './autofocus/index';
-// export * from './base/index';
-// export * from './block/index';
-// export * from './escape/index';
-// export * from './lock/index';
-// export * from './persist/index';
-// export * from './tab/index';
-// export * from './trap/index';
-// export * from './visible/index';
-// export * from './keyboard-focus.model';
 
 class SkipLinkConfig {
 }
@@ -11109,7 +10326,7 @@ SkipLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: SkipLinkComponent,
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.skipLinks$));
-    } }, directives: [ɵngcc4.NgIf, FocusDirective, ɵngcc4.NgForOf], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: function () { return [ɵngcc4.NgIf, FocusDirective, ɵngcc4.NgForOf]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
 SkipLinkComponent.ctorParameters = () => [
     { type: SkipLinkService }
 ];
@@ -13762,6 +12979,697 @@ __decorate([
 __decorate([
     Input()
 ], AddToCartComponent.prototype, "product", void 0);
+
+/**
+ * Abstract directive that provides a common interface for all focus directives:
+ * - Block Focus
+ * - Persist Focus
+ * - Escape Focus
+ * - Auto Focus
+ * - Tab Focus
+ * - Trap Focus
+ * - Lock Focus
+ */
+let BaseFocusDirective = class BaseFocusDirective {
+    constructor(elementRef, service) {
+        this.elementRef = elementRef;
+        this.service = service;
+        /**
+         * A default config can be provided for each directive if a specific focus directive
+         * is used directly. i.e. `<div cxAutoFocus></div>`
+         */
+        this.defaultConfig = {};
+    }
+    ngOnInit() {
+        this.setDefaultConfiguration();
+        this.requiredTabindex = -1;
+    }
+    /**
+     * Override the (input) config if it undefined or an empty string, with the
+     * `defaultConfig`. The `defaultConfig` might be specified for each directive
+     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
+     * specific (inherited) defaultConfig will be used.
+     */
+    setDefaultConfiguration() {
+        if ((!this.config || this.config === '') && this.defaultConfig) {
+            this.config = this.defaultConfig;
+        }
+    }
+    /**
+     * Helper method to return the host element for the directive
+     * given by the `elementRef`.
+     */
+    get host() {
+        return this.elementRef.nativeElement;
+    }
+    /**
+     * Force a tabindex on the host element if it is _requried_ to make the element
+     * focusable. If the element is focusable by nature or by a given tabindex, the
+     * `tabindex` is not applied.
+     *
+     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
+     */
+    set requiredTabindex(tabindex) {
+        if (this.requiresExplicitTabIndex) {
+            this.tabindex = tabindex;
+        }
+    }
+    /**
+     * Returns true if the host element does not have a tabindex defined
+     * and it also doesn't get focus by browsers nature (i.e. button or
+     * active link).
+     */
+    get requiresExplicitTabIndex() {
+        return (this.tabindex === undefined &&
+            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
+            !(this.host.tagName === 'A' &&
+                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
+    }
+};
+BaseFocusDirective.ɵfac = function BaseFocusDirective_Factory(t) { return new (t || BaseFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(BaseFocusService)); };
+BaseFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: BaseFocusDirective, hostVars: 1, hostBindings: function BaseFocusDirective_HostBindings(rf, ctx) { if (rf & 2) {
+        ɵngcc0.ɵɵattribute("tabindex", ctx.tabindex);
+    } }, inputs: { tabindex: "tabindex" } });
+BaseFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+__decorate([
+    Input(), HostBinding('attr.tabindex')
+], BaseFocusDirective.prototype, "tabindex", void 0);
+
+/**
+ * Directive implementation that adds a CSS class to the host element
+ * when the moused is used to focus an element. As soon as the keyboard
+ * is used, the class is removed.
+ */
+let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
+    constructor() {
+        super(...arguments);
+        this.defaultConfig = { disableMouseFocus: true };
+        /** controls a polyfill class for the lacking focus-visible feature */
+        this.mouseFocus = false;
+    }
+    handleMousedown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = true;
+        }
+    }
+    handleKeydown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = false;
+        }
+    }
+    get shouldFocusVisible() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
+    }
+};
+VisibleFocusDirective.ɵfac = function VisibleFocusDirective_Factory(t) { return ɵVisibleFocusDirective_BaseFactory(t || VisibleFocusDirective); };
+VisibleFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: VisibleFocusDirective, hostVars: 2, hostBindings: function VisibleFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("mousedown", function VisibleFocusDirective_mousedown_HostBindingHandler() { return ctx.handleMousedown(); })("keydown", function VisibleFocusDirective_keydown_HostBindingHandler() { return ctx.handleKeydown(); });
+    } if (rf & 2) {
+        ɵngcc0.ɵɵclassProp("mouse-focus", ctx.mouseFocus);
+    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+__decorate([
+    HostBinding('class.mouse-focus')
+], VisibleFocusDirective.prototype, "mouseFocus", void 0);
+__decorate([
+    HostListener('mousedown')
+], VisibleFocusDirective.prototype, "handleMousedown", null);
+__decorate([
+    HostListener('keydown')
+], VisibleFocusDirective.prototype, "handleKeydown", null);
+
+let BlockFocusDirective = 
+// { selector: '[cxBlockFocus]' }
+class BlockFocusDirective extends VisibleFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { block: true };
+        // @Input('cxBlockFocus')
+        this.config = {};
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        if (this.config.block) {
+            this.tabindex = -1;
+        }
+    }
+};
+BlockFocusDirective.ɵfac = function BlockFocusDirective_Factory(t) { return new (t || BlockFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(BaseFocusService)); };
+BlockFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: BlockFocusDirective, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+BlockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+
+/**
+ * Directive that provides persistence of the focused state. This is useful
+ * when a group of focusable elements got refocused or even recreated. That
+ * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
+ *
+ * The focus state is based on a configured _key_, which can be passed in the
+ * config input, either by using a string primitive or `PersistFocusConfig.key`:
+ *
+ * ```html
+ * <button cxPersistFocus="myKey"></button>
+ * <button cxFocus="myKey"></button>
+ * <button [cxFocus]="{{key:'myKey'}"></button>
+ * ```
+ *
+ * The focus state can be part of a focus _group_, so that the state is shared
+ * and remember for the given group. In order to detect the persistence for a
+ * given element, we store the persistence key as a data attribute (`data-cx-focus`):
+ *
+ * ```html
+ * <button data-cx-focus="myKey"></button>
+ * ```
+ *
+ * Other keyboard focus directives can read the key to understand whether the element
+ * should retrieve focus.
+ *
+ */
+let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = {};
+        /**
+         * The persistence key can be passed directly or through the `FocusConfig.key`.
+         * While this could be considered a global key, the likeliness of conflicts
+         * is very small since the key is cleared when the focus is changed.
+         */
+        // @Input('cxPersistFocus')
+        this.config = {};
+    }
+    handleFocus(event) {
+        this.service.set(this.key, this.group);
+        event === null || event === void 0 ? void 0 : event.preventDefault();
+        event === null || event === void 0 ? void 0 : event.stopPropagation();
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.attr = this.key ? this.key : undefined;
+    }
+    setDefaultConfiguration() {
+        if (typeof this.config === 'string' && this.config !== '') {
+            this.config = { key: this.config };
+        }
+        super.setDefaultConfiguration();
+    }
+    /**
+     * Focus the element explicitly if it was focused before.
+     */
+    ngAfterViewInit() {
+        if (this.isPersisted) {
+            this.host.focus({ preventScroll: true });
+        }
+    }
+    get isPersisted() {
+        return !!this.key && this.service.get(this.group) === this.key;
+    }
+    /**
+     * Returns the key for the host element, which is used to persist the
+     * focus state. This is useful in cases where the DOM is rebuild.
+     */
+    get key() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
+    }
+    /**
+     * returns the persistence group (if any) for the focusable elements.
+     */
+    get group() {
+        return this.service.getPersistenceGroup(this.host, this.config);
+    }
+};
+PersistFocusDirective.ɵfac = function PersistFocusDirective_Factory(t) { return new (t || PersistFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(PersistFocusService)); };
+PersistFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: PersistFocusDirective, hostVars: 1, hostBindings: function PersistFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("focus", function PersistFocusDirective_focus_HostBindingHandler($event) { return ctx.handleFocus($event); });
+    } if (rf & 2) {
+        ɵngcc0.ɵɵattribute("data-cx-focus", ctx.attr);
+    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+PersistFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: PersistFocusService }
+];
+__decorate([
+    HostBinding(`attr.${FOCUS_ATTR}`)
+], PersistFocusDirective.prototype, "attr", void 0);
+__decorate([
+    HostListener('focus', ['$event'])
+], PersistFocusDirective.prototype, "handleFocus", null);
+
+/**
+ * Directive to focus the host element whenever the `escape` key is captured.
+ * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
+ * on a tree of elements. Each time the escape key is used, the focus will
+ * move up in the DOM tree.
+ *
+ */
+let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { focusOnEscape: true };
+        this.esc = new EventEmitter();
+    }
+    /**
+     * Handles the escape key event.
+     * @param event the native keyboard event which contains the escape keydown event
+     */
+    handleEscape(event) {
+        if (this.service.shouldFocus(this.config)) {
+            this.service.handleEscape(this.host, this.config, event);
+        }
+        this.esc.emit(this.service.shouldFocus(this.config));
+    }
+    ngOnInit() {
+        if (this.service.shouldFocus(this.config)) {
+            this.requiredTabindex = -1;
+        }
+        super.ngOnInit();
+    }
+};
+EscapeFocusDirective.ɵfac = function EscapeFocusDirective_Factory(t) { return new (t || EscapeFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(EscapeFocusService)); };
+EscapeFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: EscapeFocusDirective, hostBindings: function EscapeFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("keydown.escape", function EscapeFocusDirective_keydown_escape_HostBindingHandler($event) { return ctx.handleEscape($event); });
+    } }, outputs: { esc: "esc" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+EscapeFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EscapeFocusService }
+];
+__decorate([
+    Output()
+], EscapeFocusDirective.prototype, "esc", void 0);
+__decorate([
+    HostListener('keydown.escape', ['$event'])
+], EscapeFocusDirective.prototype, "handleEscape", null);
+
+/**
+ * Directive that focus the first nested _focusable_ element based on state and configuration:
+ *
+ * 1. focusable element that was left in a focused state (aka _persisted_ focus)
+ * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
+ * 3. focusable element marked with the native HTML5 `autofocus` attribute
+ * 4. first focusable element
+ * 5. the host element, in case the configured CSS selector is `:host`.
+ *
+ * Example configurations:
+ *
+ * `<div cxAutoFocus>[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
+ *
+ */
+let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** The AutoFocusDirective will be using autofocus by default  */
+        this.defaultConfig = { autofocus: true };
+    }
+    /**
+     * Focus the element explicitly if it was focussed before.
+     */
+    ngAfterViewInit() {
+        if (this.shouldAutofocus) {
+            this.handleFocus();
+        }
+        if (!this.shouldAutofocus || this.hasPersistedFocus) {
+            super.ngAfterViewInit();
+        }
+    }
+    /**
+     * Mimic the focus without setting the actual focus on the host. The first
+     * focusable child element will be focussed.
+     */
+    handleFocus(event) {
+        var _a;
+        if (this.shouldAutofocus) {
+            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
+                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
+            }
+            else {
+                event.target.focus();
+            }
+        }
+        super.handleFocus(event);
+    }
+    /**
+     * Helper function to get the first focusable child element
+     */
+    get hasPersistedFocus() {
+        return this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Helper function to indicate whether we should use autofocus for the
+     * child elements.
+     */
+    get shouldAutofocus() {
+        var _a;
+        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
+    }
+    /**
+     * Helper function to get the first focusable child element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get firstFocusable() {
+        return this.service.findFirstFocusable(this.host, this.config);
+    }
+};
+AutoFocusDirective.ɵfac = function AutoFocusDirective_Factory(t) { return new (t || AutoFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(AutoFocusService)); };
+AutoFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: AutoFocusDirective, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+AutoFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: AutoFocusService }
+];
+
+/**
+ * Directive to move the focus of ("locked") child elements. This is useful
+ * for a nested list of tabs, carousel slides or any group of elements that
+ * requires horizontal navigation.
+ */
+let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
+        this.defaultConfig = { tab: true };
+        // @Input('cxTabFocus')
+        this.config = {};
+    }
+    handleNextTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
+        }
+    }
+    handlePreviousTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
+        }
+    }
+};
+TabFocusDirective.ɵfac = function TabFocusDirective_Factory(t) { return new (t || TabFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(TabFocusService)); };
+TabFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: TabFocusDirective, hostBindings: function TabFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("keydown.arrowRight", function TabFocusDirective_keydown_arrowRight_HostBindingHandler($event) { return ctx.handleNextTab($event); })("keydown.arrowLeft", function TabFocusDirective_keydown_arrowLeft_HostBindingHandler($event) { return ctx.handlePreviousTab($event); });
+    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+TabFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TabFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowRight', ['$event'])
+], TabFocusDirective.prototype, "handleNextTab", null);
+__decorate([
+    HostListener('keydown.arrowLeft', ['$event'])
+], TabFocusDirective.prototype, "handlePreviousTab", null);
+
+/**
+ * Directive that keeps the focus inside the focussable child elements,
+ * also known as a _focus trap_.
+ */
+let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { trap: true };
+        // @Input('cxTrapFocus')
+        this.config = {};
+        this.handleTrapDown = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, 1 /* NEXT */);
+            }
+        };
+        this.handleTrapUp = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, -1 /* PREV */);
+            }
+        };
+    }
+    /**
+     * Moves the focus of the element reference up or down, depending on the increment.
+     * The focus of the element is trapped to avoid it from going out of the group.
+     *
+     * @param event UIEvent that is used to get the target element. The event is blocked
+     *   from standard execution and further bubbling.
+     * @param increment indicates whether the next or previous is focussed.
+     */
+    moveFocus(event, increment) {
+        if (this.service.hasFocusableChildren(this.host)) {
+            this.service.moveFocus(this.host, this.config, increment, event);
+        }
+    }
+};
+TrapFocusDirective.ɵfac = function TrapFocusDirective_Factory(t) { return new (t || TrapFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(TrapFocusService)); };
+TrapFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: TrapFocusDirective, hostBindings: function TrapFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("keydown.arrowdown", function TrapFocusDirective_keydown_arrowdown_HostBindingHandler($event) { return ctx.handleTrapDown($event); })("keydown.tab", function TrapFocusDirective_keydown_tab_HostBindingHandler($event) { return ctx.handleTrapDown($event); })("keydown.arrowup", function TrapFocusDirective_keydown_arrowup_HostBindingHandler($event) { return ctx.handleTrapUp($event); })("keydown.shift.tab", function TrapFocusDirective_keydown_shift_tab_HostBindingHandler($event) { return ctx.handleTrapUp($event); });
+    } }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+TrapFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TrapFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowdown', ['$event']),
+    HostListener('keydown.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapDown", void 0);
+__decorate([
+    HostListener('keydown.arrowup', ['$event']),
+    HostListener('keydown.shift.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapUp", void 0);
+
+/**
+ * Focusable elements exclude hidden elements by default, but this contradicts with
+ * unlocking (hidden) elements.
+ */
+const UNLOCK_HIDDEN_ELEMENTS = true;
+/**
+ * Directive that adds persistence for focussed element in case
+ * the elements are being rebuild. This happens often when change
+ * detection kicks in because of new data set from the backend.
+ */
+let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = { lock: true };
+        // @Input('cxLockFocus')
+        this.config = {};
+        /**
+         * Emits an event when the host is unlocked.
+         */
+        this.unlock = new EventEmitter();
+    }
+    /**
+     * When the user selects enter or space, the focusable childs are
+     * unlocked, which means that the tabindex is set to 0.
+     */
+    handleEnter(event) {
+        if (this.shouldLock && this.host === event.target) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    /**
+     * In case any of the children elements is touched by the mouse,
+     * we unlock the group to not break the mouse-experience.
+     */
+    handleClick(event) {
+        if (this.shouldLock && this.isLocked) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    lockFocus() {
+        this.addTabindexToChildren(-1);
+    }
+    unlockFocus(event) {
+        this.unlock.emit(true);
+        this.addTabindexToChildren(0);
+        // we focus the host if the event was triggered from a child
+        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
+            super.handleFocus(event);
+        }
+    }
+    ngOnInit() {
+        var _a, _b;
+        super.ngOnInit();
+        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
+        if (this.shouldLock) {
+            this.tabindex = 0;
+            // Locked elements will be set to `autofocus` by default if it's not
+            // been configured. This will ensure that autofocus kicks in upon unlock.
+            if (!this.config.hasOwnProperty('autofocus')) {
+                this.config.autofocus = true;
+            }
+            // Locked elements will be set to `focusOnEscape` by default if it's not
+            // been configured. This will ensure that  the host gets locked again when
+            // `escape` is pressed.
+            if (!this.config.hasOwnProperty('focusOnEscape')) {
+                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
+            }
+        }
+    }
+    ngAfterViewInit() {
+        if (this.shouldLock) {
+            /**
+             * If the component hosts a group of focusable children elmenents,
+             * we persist the group key to the children, so that they can taken this
+             * into account when they persist their focus state.
+             */
+            if (!!this.group) {
+                this.service.findFocusable(this.host).forEach((el) => 
+                // we must do this in after view init as
+                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
+            }
+            if (this.shouldAutofocus) {
+                this.handleFocus();
+            }
+        }
+        super.ngAfterViewInit();
+    }
+    handleFocus(event) {
+        if (this.shouldLock) {
+            if (this.shouldUnlockAfterAutofocus(event)) {
+                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
+                setTimeout(() => this.unlockFocus(event));
+            }
+            else {
+                setTimeout(() => this.lockFocus());
+                event === null || event === void 0 ? void 0 : event.stopPropagation();
+                return;
+            }
+        }
+        super.handleFocus(event);
+    }
+    handleEscape(event) {
+        if (this.shouldLock) {
+            this.service.clear(this.config.group);
+        }
+        super.handleEscape(event);
+    }
+    /**
+     * When the handleFocus is called without an actual event, it's coming from Autofocus.
+     * In this case we unlock the focusable children in case there's a focusable child that
+     * was unlocked before.
+     *
+     * We keep this private to not polute the API.
+     */
+    shouldUnlockAfterAutofocus(event) {
+        return !event && this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Add the tabindex attribute to the focusable children elements
+     */
+    addTabindexToChildren(i = 0) {
+        if (this.shouldLock) {
+            this.isLocked = i === -1;
+            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
+                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
+            }
+        }
+    }
+    /**
+     * Utility method, returns all focusable children for the host element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get hasFocusableChildren() {
+        return this.service.hasFocusableChildren(this.host);
+    }
+    /**
+     * Returns the focusable children of the host element. If the host element
+     * is configured to be locked, the query is restricted to child elements
+     * with a tabindex !== `-1`.
+     *
+     * We keep this private to not polute the API.
+     */
+    get focusable() {
+        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
+    }
+};
+LockFocusDirective.ɵfac = function LockFocusDirective_Factory(t) { return new (t || LockFocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(LockFocusService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2)); };
+LockFocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: LockFocusDirective, hostVars: 4, hostBindings: function LockFocusDirective_HostBindings(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵlistener("keydown.enter", function LockFocusDirective_keydown_enter_HostBindingHandler($event) { return ctx.handleEnter($event); })("keydown.space", function LockFocusDirective_keydown_space_HostBindingHandler($event) { return ctx.handleEnter($event); })("click", function LockFocusDirective_click_HostBindingHandler($event) { return ctx.handleClick($event); });
+    } if (rf & 2) {
+        ɵngcc0.ɵɵclassProp("focus-lock", ctx.shouldLock)("is-locked", ctx.isLocked);
+    } }, outputs: { unlock: "unlock" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+LockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: LockFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    HostBinding('class.focus-lock')
+], LockFocusDirective.prototype, "shouldLock", void 0);
+__decorate([
+    HostBinding('class.is-locked')
+], LockFocusDirective.prototype, "isLocked", void 0);
+__decorate([
+    Output()
+], LockFocusDirective.prototype, "unlock", void 0);
+__decorate([
+    HostListener('keydown.enter', ['$event']),
+    HostListener('keydown.space', ['$event'])
+], LockFocusDirective.prototype, "handleEnter", null);
+__decorate([
+    HostListener('click', ['$event'])
+], LockFocusDirective.prototype, "handleClick", null);
+
+let FocusDirective = class FocusDirective extends LockFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service, renderer);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = {};
+        // tslint:disable-next-line: no-input-rename
+        this.config = {};
+    }
+};
+FocusDirective.ɵfac = function FocusDirective_Factory(t) { return new (t || FocusDirective)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(KeyboardFocusService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2)); };
+FocusDirective.ɵdir = ɵngcc0.ɵɵdefineDirective({ type: FocusDirective, selectors: [["", "cxFocus", ""]], inputs: { config: ["cxFocus", "config"] }, features: [ɵngcc0.ɵɵInheritDefinitionFeature] });
+FocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyboardFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    Input('cxFocus')
+], FocusDirective.prototype, "config", void 0);
+
+const directives = [
+    // PersistFocusDirective,
+    // VisibleFocusDirective,
+    // BlockFocusDirective,
+    // AutoFocusDirective,
+    // EscapeFocusDirective,
+    // LockFocusDirective,
+    // TrapFocusDirective,
+    // TabFocusDirective,
+    FocusDirective,
+];
+let KeyboardFocusModule = class KeyboardFocusModule {
+};
+KeyboardFocusModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: KeyboardFocusModule });
+KeyboardFocusModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function KeyboardFocusModule_Factory(t) { return new (t || KeyboardFocusModule)(); }, imports: [[CommonModule]] });
 
 let PromotionsComponent = class PromotionsComponent {
     constructor() { }
@@ -16920,6 +16828,18 @@ NotCheckoutAuthGuard.ctorParameters = () => [
     { type: ActiveCartService }
 ];
 NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
 
 const defaultSkipLinkConfig = {
     skipLinks: [
@@ -24585,82 +24505,521 @@ __decorate([
     Input('inputViewMode')
 ], ProductScrollComponent.prototype, "setViewMode", null);
 
-let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
-    constructor(modalService, activatedRoute, productListComponentService) {
-        this.modalService = modalService;
-        this.activatedRoute = activatedRoute;
+var FacetGroupCollapsedState;
+(function (FacetGroupCollapsedState) {
+    FacetGroupCollapsedState["EXPANDED"] = "EXPANDED";
+    FacetGroupCollapsedState["COLLAPSED"] = "COLLAPSED";
+})(FacetGroupCollapsedState || (FacetGroupCollapsedState = {}));
+
+/**
+ * Provides access to all the facets and active facets for the Product Listing Page.
+ */
+let ProductFacetService = class ProductFacetService {
+    constructor(routing, productListComponentService) {
+        this.routing = routing;
         this.productListComponentService = productListComponentService;
-        this.iconTypes = ICON_TYPE;
-        this.collapsedFacets = new Set();
-        this.showAllPerFacetMap = new Map();
-        this.queryCodec = new HttpUrlEncodingCodec();
+        this.routeState$ = this.routing
+            .getRouterState()
+            .pipe(pluck('state'));
+        this.searchResult$ = this.routeState$.pipe(switchMap((state) => this.productListComponentService.model$.pipe(filter((page) => this.filterForPage(state, page)), map((page) => this.mapResults(state, page)))));
+        /**
+         * Observes the facets and active facets for the given page. The facet data
+         * is provided in a `FacetList`.
+         */
+        this.facetList$ = this.searchResult$.pipe(map((result) => ({
+            facets: result.facets,
+            activeFacets: result.breadcrumbs,
+        })));
     }
-    ngOnInit() {
-        this.sub = this.activatedRoute.params.subscribe((params) => {
-            this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        });
-        this.searchResult$ = this.productListComponentService.model$.pipe(tap((searchResult) => {
-            if (searchResult.facets) {
-                searchResult.facets.forEach((el) => {
-                    this.showAllPerFacetMap.set(el.name, false);
-                });
-            }
-        }));
-        this.visibleFacets$ = this.searchResult$.pipe(map((searchResult) => {
-            return searchResult.facets
-                ? searchResult.facets.filter((facet) => facet.visible)
-                : [];
-        }));
-    }
-    openFilterModal(content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
-    }
-    toggleValue(query) {
-        this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
-    }
-    showLess(facetName) {
-        this.updateShowAllPerFacetMap(facetName, false);
-    }
-    showMore(facetName) {
-        this.updateShowAllPerFacetMap(facetName, true);
-    }
-    updateShowAllPerFacetMap(facetName, showAll) {
-        this.showAllPerFacetMap.set(facetName, showAll);
-    }
-    isFacetCollapsed(facetName) {
-        return this.collapsedFacets.has(facetName);
-    }
-    toggleFacet(facetName) {
-        if (this.collapsedFacets.has(facetName)) {
-            this.collapsedFacets.delete(facetName);
+    /**
+     * Filters the current result by verifying if the result is related to the page.
+     * This is done to avoid a combination of the next page and the current search results.
+     */
+    filterForPage(state, page) {
+        var _a, _b, _c;
+        if (state.context.type === PageType.CATEGORY_PAGE) {
+            return (((_c = (_b = (_a = page.currentQuery) === null || _a === void 0 ? void 0 : _a.query) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.indexOf(`allCategories:${state.context.id}`)) > -1);
         }
-        else {
-            this.collapsedFacets.add(facetName);
+        if (state.context.type === PageType.CONTENT_PAGE &&
+            state.context.id === 'search') {
+            return page.currentQuery.query.value.startsWith(`${state.params.query}:`);
         }
+        return false;
     }
-    getVisibleFacetValues(facet) {
-        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-            ? facet.values.length
-            : facet.topValueCount);
+    mapResults(state, page) {
+        return Object.assign(Object.assign({}, page), { breadcrumbs: this.filterBreadcrumbs(page.breadcrumbs, state.params) });
     }
-    ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
+    /**
+     * filter breadcrumbs which are not actively selected
+     * but coming from the route navigation
+     */
+    filterBreadcrumbs(breadcrumbs, params) {
+        return breadcrumbs
+            ? breadcrumbs.filter((breadcrumb) => !this.hasBreadcrumb(breadcrumb, params))
+            : [];
+    }
+    /**
+     * Indicates whether the breadcrumb is related to navigation parameters,
+     * since either the category or brand code should match those codes.
+     */
+    hasBreadcrumb(breadcrumb, params) {
+        return (breadcrumb.facetCode === 'allCategories' &&
+            breadcrumb.facetValueCode === params.categoryCode);
     }
 };
-ProductFacetNavigationComponent.ɵfac = function ProductFacetNavigationComponent_Factory(t) { return new (t || ProductFacetNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(ModalService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ProductListComponentService)); };
-ProductFacetNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductFacetNavigationComponent, selectors: [["cx-product-facet-navigation"]], decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "cx-search-facet"], [1, "cx-facet-mobile"], [1, "container"], [1, "btn", "btn-action", "btn-block", "cx-facet-mobile-btn", 3, "click"], ["class", "cx-facet-mobile", 4, "ngIf"], ["content", ""], [1, "cx-facet-filter-header"], [1, "cx-facet-filter-container"], ["class", "cx-facet-filter-pill", "role", "filter", 3, "hidden", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill", 3, "hidden"], [1, "cx-facet-pill-value"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true"], [3, "type"], [4, "ngFor", "ngForOf"], [1, "cx-facet-group"], [1, "cx-facet-header"], ["aria-controls", "", "tabindex", "0", 1, "cx-facet-header-link", 3, "click"], [1, "cx-facet-list"], ["class", "cx-facet-toggle-btn", 3, "click", 4, "ngIf"], ["class", "cx-facet-toggle-btn", "tabindex", "0", 3, "click", 4, "ngIf"], [1, "form-check"], [1, "form-checkbox", "cx-facet-label"], ["role", "checkbox", "type", "checkbox", "aria-checked", "true", 1, "form-check-input", "cx-facet-checkbox", 3, "checked", "change"], [1, "cx-facet-text"], [1, "cx-facet-toggle-btn", 3, "click"], ["tabindex", "0", 1, "cx-facet-toggle-btn", 3, "click"], ["class", "cx-facet-filter-pill", "role", "filter", 4, "ngFor", "ngForOf"], ["role", "filter", 1, "cx-facet-filter-pill"], [1, "modal-header"], ["id", "modal-title", 1, "cx-facet-modal-title"], [1, "modal-body", "cx-facet-modal-body"], ["class", "form-group", 4, "ngFor", "ngForOf"], [1, "form-group"], ["for", "megapixels", 1, "cx-facet-modal-label"], [1, "input-group"]], template: function ProductFacetNavigationComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, ProductFacetNavigationComponent_ng_container_0_Template, 14, 8, "ng-container", 0);
-        ɵngcc0.ɵɵpipe(1, "async");
-    } if (rf & 2) {
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.searchResult$));
-    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, IconComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
-ProductFacetNavigationComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: ActivatedRoute },
+ProductFacetService.ɵfac = function ProductFacetService_Factory(t) { return new (t || ProductFacetService)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ProductListComponentService)); };
+ProductFacetService.ctorParameters = () => [
+    { type: RoutingService },
     { type: ProductListComponentService }
 ];
+ProductFacetService.ɵprov = ɵɵdefineInjectable({ factory: function ProductFacetService_Factory() { return new ProductFacetService(ɵɵinject(RoutingService), ɵɵinject(ProductListComponentService)); }, token: ProductFacetService, providedIn: "root" });
+
+/**
+ * Provides access to the facets as well as their UI state. The UI state
+ * represents user related changes on the facets, such as expanding or
+ * collapsing a facet group or expanding the number of _visible_ facet values.
+ */
+let FacetService = class FacetService {
+    constructor(productFacetService) {
+        this.productFacetService = productFacetService;
+        /**
+         * An internal map where we keep the UI state of the facets.
+         */
+        this.facetState = new Map();
+        /**
+         * Observes the facets for the given page and configures the initial UI state.
+         *
+         * Facets are configured on each emission so that we keep the facet UI state.
+         * This is mainly done to keep the state during usage of the facet, but also
+         * benefitial when the facets are rebuild while using them.
+         */
+        this.facetList$ = this.productFacetService.facetList$.pipe(tap((facetList) => {
+            facetList.facets.forEach((facet) => this.initialize(facet));
+        }));
+    }
+    /**
+     * Returns the observed UI state for the facet.
+     *
+     * The state is initialized using the `initialize` method.
+     */
+    getState(facet) {
+        this.initialize(facet);
+        return this.facetState.get(facet.name);
+    }
+    /**
+     * Returns the UI state for the facet.
+     *
+     * The state is initialized using the `initialize` method.
+     */
+    getStateSnapshot(facet) {
+        return this.getState(facet).value;
+    }
+    /**
+     * Toggles the facet expanded state. If the expanded state becomes false,
+     * the visible values will decrease to the top values only.
+     *
+     * If the optional value argument is provided the expanded state will be set
+     * to this value, regardless of the current `expanded` state.
+     */
+    toggle(facet, isExpanded) {
+        const state = this.getStateSnapshot(facet);
+        const toggledState = {
+            toggled: isExpanded
+                ? FacetGroupCollapsedState.COLLAPSED
+                : FacetGroupCollapsedState.EXPANDED,
+        };
+        if (toggledState.toggled === FacetGroupCollapsedState.COLLAPSED) {
+            toggledState.maxVisible = state.topVisible;
+        }
+        this.updateState(facet, toggledState);
+    }
+    /**
+     * Increases the visible values to the maximum values of the facet.
+     */
+    increaseVisibleValues(facet) {
+        this.updateState(facet, { maxVisible: facet.values.length });
+    }
+    /**
+     * Decreases the visible values to the topValueCount.
+     *
+     * The topValueCount defaults to 6, but can be controlled in
+     * the backend as well.
+     */
+    decreaseVisibleValues(facet) {
+        this.updateState(facet, { maxVisible: facet.topValueCount });
+    }
+    /**
+     * Persists the facet state and initializes the default values for the top
+     * and max visible values.
+     */
+    initialize(facet) {
+        if (!this.hasState(facet)) {
+            this.facetState.set(facet.name, new BehaviorSubject({
+                topVisible: facet.topValueCount || 0,
+                maxVisible: facet.topValueCount || 0,
+            }));
+        }
+    }
+    /**
+     * Updates the state of the facet in the local facet map.
+     */
+    updateState(facet, property) {
+        const state = Object.assign(Object.assign({}, this.getStateSnapshot(facet)), property);
+        this.facetState.get(facet.name).next(state);
+    }
+    hasState(facet) {
+        return this.facetState.has(facet.name);
+    }
+    getLinkParams(query) {
+        return { query: new HttpUrlEncodingCodec().decodeValue(query) };
+    }
+};
+FacetService.ɵfac = function FacetService_Factory(t) { return new (t || FacetService)(ɵngcc0.ɵɵinject(ProductFacetService)); };
+FacetService.ctorParameters = () => [
+    { type: ProductFacetService }
+];
+FacetService.ɵprov = ɵɵdefineInjectable({ factory: function FacetService_Factory() { return new FacetService(ɵɵinject(ProductFacetService)); }, token: FacetService, providedIn: "root" });
+
+/**
+ * Active facets render the applied facet values as a list of focusable buttons
+ * which can be used to remove the applied facet value.
+ */
+let ActiveFacetsComponent = class ActiveFacetsComponent {
+    constructor(facetService) {
+        this.facetService = facetService;
+        /** Active facets which are applied to the product results. */
+        this.facetList$ = this.facetService.facetList$;
+        /** Configurable icon which is used for the active facet close button */
+        this.closeIcon = ICON_TYPE.CLOSE;
+    }
+    getLinkParams(facet) {
+        var _a, _b;
+        return this.facetService.getLinkParams((_b = (_a = facet.removeQuery) === null || _a === void 0 ? void 0 : _a.query) === null || _b === void 0 ? void 0 : _b.value);
+    }
+    /**
+     * The focus key is used to persist the focus on the facet when the DOM is being
+     * recreated. We only apply the focus key for the given facet when there are no
+     * facets available. This is a great experience for the keyboard user, who keep the
+     * focus on the activated facet all the time.
+     */
+    getFocusKey(facetList, facet) {
+        var _a;
+        return !((_a = facetList.facets) === null || _a === void 0 ? void 0 : _a.length) ? facet.facetValueName : '';
+    }
+};
+ActiveFacetsComponent.ɵfac = function ActiveFacetsComponent_Factory(t) { return new (t || ActiveFacetsComponent)(ɵngcc0.ɵɵdirectiveInject(FacetService)); };
+ActiveFacetsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ActiveFacetsComponent, selectors: [["cx-active-facets"]], inputs: { closeIcon: "closeIcon" }, decls: 2, vars: 3, consts: [[4, "ngIf"], ["routerLink", "./", 3, "queryParams", "cxFocus", 4, "ngFor", "ngForOf"], ["routerLink", "./", 3, "queryParams", "cxFocus"], ["aria-hidden", "true", 3, "type"]], template: function ActiveFacetsComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, ActiveFacetsComponent_ng_container_0_Template, 3, 2, "ng-container", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.facetList$));
+    } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, FocusDirective,
+        IconComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
+ActiveFacetsComponent.ctorParameters = () => [
+    { type: FacetService }
+];
+__decorate([
+    Input()
+], ActiveFacetsComponent.prototype, "closeIcon", void 0);
+
+let ActiveFacetsModule = class ActiveFacetsModule {
+};
+ActiveFacetsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ActiveFacetsModule });
+ActiveFacetsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ActiveFacetsModule_Factory(t) { return new (t || ActiveFacetsModule)(); }, imports: [[
+            CommonModule,
+            RouterModule,
+            I18nModule,
+            IconModule,
+            KeyboardFocusModule,
+        ]] });
+
+let FacetListComponent = class FacetListComponent {
+    constructor(facetService, elementRef) {
+        this.facetService = facetService;
+        this.elementRef = elementRef;
+        /** Emits when the list must close */
+        this.closeList = new EventEmitter();
+        /** The list of all facet and values related to the products in the list */
+        this.facetList$ = this.facetService.facetList$;
+        this.iconTypes = ICON_TYPE;
+        this.dialogFocusConfig = {
+            trap: true,
+            block: true,
+            focusOnEscape: true,
+            autofocus: 'cx-facet',
+        };
+    }
+    /**
+     * Toggles the facet group in case it is not expanded.
+     */
+    expandFacetGroup(facet, ref) {
+        if (!ref.isExpanded) {
+            this.facetService.toggle(facet, ref.isExpanded);
+        }
+    }
+    /**
+     * Indicates that the facet group has been expanded.
+     */
+    isExpanded(facet) {
+        return this.facetService
+            .getState(facet)
+            .pipe(map((value) => value.toggled === FacetGroupCollapsedState.EXPANDED));
+    }
+    /**
+     * Indicates that the facet group has been collapsed.
+     */
+    isCollapsed(facet) {
+        return this.facetService
+            .getState(facet)
+            .pipe(map((value) => value.toggled === FacetGroupCollapsedState.COLLAPSED));
+    }
+    close(event) {
+        this.closeList.emit(event);
+    }
+};
+FacetListComponent.ɵfac = function FacetListComponent_Factory(t) { return new (t || FacetListComponent)(ɵngcc0.ɵɵdirectiveInject(FacetService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef)); };
+FacetListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: FacetListComponent, selectors: [["cx-facet-list"]], inputs: { isDialog: "isDialog" }, outputs: { closeList: "closeList" }, decls: 2, vars: 3, consts: [[3, "cxFocus", "esc", 4, "ngIf"], [3, "cxFocus", "esc"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], ["aria-hidden", "true", 3, "type"], [3, "facet", "cxFocus", "expanded", "collapsed", "unlock", 4, "ngFor", "ngForOf"], [3, "facet", "cxFocus", "unlock"], ["facetRef", ""]], template: function FacetListComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, FacetListComponent_div_0_Template, 7, 7, "div", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        var tmp_0_0 = null;
+        const currVal_0 = (tmp_0_0 = ɵngcc0.ɵɵpipeBind1(1, 1, ctx.facetList$)) == null ? null : tmp_0_0.facets;
+        ɵngcc0.ɵɵproperty("ngIf", currVal_0);
+    } }, directives: function () { return [ɵngcc4.NgIf, FocusDirective,
+        IconComponent, ɵngcc4.NgForOf, FacetComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe]; }, encapsulation: 2, changeDetection: 0 });
+FacetListComponent.ctorParameters = () => [
+    { type: FacetService },
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], FacetListComponent.prototype, "isDialog", void 0);
+__decorate([
+    Output()
+], FacetListComponent.prototype, "closeList", void 0);
+
+let FacetComponent = class FacetComponent {
+    constructor(facetService, elementRef, cd) {
+        this.facetService = facetService;
+        this.elementRef = elementRef;
+        this.cd = cd;
+        /** configurable icon that is used to collapse the facet group  */
+        this.expandIcon = ICON_TYPE.EXPAND;
+        this.collapseIcon = ICON_TYPE.COLLAPSE;
+    }
+    set facet(value) {
+        this._facet = value;
+        this.isMultiSelect = !!value.multiSelect;
+        this.state$ = this.facetService.getState(value);
+    }
+    get facet() {
+        return this._facet;
+    }
+    /**
+     * Handles clicking the heading of the facet group, which means toggling
+     * the visibility of the group (collapse / expand) and optionally focusing
+     * the group.
+     */
+    toggleGroup(event) {
+        var _a;
+        const host = this.elementRef.nativeElement;
+        const isLocked = (_a = this.keyboardFocus) === null || _a === void 0 ? void 0 : _a.isLocked;
+        this.facetService.toggle(this.facet, this.isExpanded);
+        if (!isLocked || this.isExpanded) {
+            host.focus();
+            // we stop propagating the event as otherwise the focus on the host will trigger
+            // an unlock event from the LockFocus directive.
+            event.stopPropagation();
+        }
+    }
+    get isExpanded() {
+        return this.values.first.nativeElement.offsetParent !== null;
+    }
+    openLink(event) {
+        event.target.click();
+        event.preventDefault();
+    }
+    /**
+     * Increases the number of visible values for the facet. This is delegated
+     * to `facetService.increaseVisibleValues`.
+     */
+    increaseVisibleValues() {
+        this.facetService.increaseVisibleValues(this.facet);
+    }
+    /**
+     * Decreases the number of visible values for the facet. This is delegated
+     * to `facetService.decreaseVisibleValues`.
+     */
+    decreaseVisibleValues() {
+        this.facetService.decreaseVisibleValues(this.facet);
+    }
+    getLinkParams(value) {
+        var _a;
+        return this.facetService.getLinkParams((_a = value.query) === null || _a === void 0 ? void 0 : _a.query.value);
+    }
+};
+FacetComponent.ɵfac = function FacetComponent_Factory(t) { return new (t || FacetComponent)(ɵngcc0.ɵɵdirectiveInject(FacetService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
+FacetComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: FacetComponent, selectors: [["cx-facet"]], viewQuery: function FacetComponent_Query(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵviewQuery(FocusDirective, true);
+        ɵngcc0.ɵɵviewQuery(_c46, true);
+    } if (rf & 2) {
+        var _t;
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.keyboardFocus = _t.first);
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.values = _t);
+    } }, hostVars: 2, hostBindings: function FacetComponent_HostBindings(rf, ctx) { if (rf & 2) {
+        ɵngcc0.ɵɵclassProp("multi-select", ctx.isMultiSelect);
+    } }, inputs: { expandIcon: "expandIcon", collapseIcon: "collapseIcon", facet: "facet" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "heading", 3, "click"], [1, "collapse-icon", 3, "type"], [1, "expand-icon", 3, "type"], ["routerLink", "./", "class", "value", 3, "queryParams", "selected", "cxFocus", "keydown.space", 4, "ngFor", "ngForOf"], [1, "more"], ["cxFocus", "moreorless", 3, "click", 4, "ngIf"], [3, "click", 4, "ngIf"], ["routerLink", "./", 1, "value", 3, "queryParams", "cxFocus", "keydown.space"], ["facetValue", ""], [1, "label"], [1, "count"], ["cxFocus", "moreorless", 3, "click"], [3, "click"]], template: function FacetComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, FacetComponent_ng_container_0_Template, 12, 15, "ng-container", 0);
+        ɵngcc0.ɵɵpipe(1, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.state$));
+    } }, directives: [ɵngcc4.NgIf, IconComponent, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, FocusDirective], pipes: [ɵngcc4.AsyncPipe, ɵngcc4.SlicePipe, ɵngcc1.TranslatePipe], encapsulation: 2, changeDetection: 0 });
+FacetComponent.ctorParameters = () => [
+    { type: FacetService },
+    { type: ElementRef },
+    { type: ChangeDetectorRef }
+];
+__decorate([
+    Input()
+], FacetComponent.prototype, "expandIcon", void 0);
+__decorate([
+    Input()
+], FacetComponent.prototype, "collapseIcon", void 0);
+__decorate([
+    HostBinding('class.multi-select')
+], FacetComponent.prototype, "isMultiSelect", void 0);
+__decorate([
+    ViewChildren('facetValue')
+], FacetComponent.prototype, "values", void 0);
+__decorate([
+    ViewChild(FocusDirective)
+], FacetComponent.prototype, "keyboardFocus", void 0);
+__decorate([
+    Input()
+], FacetComponent.prototype, "facet", null);
+
+let FacetModule = class FacetModule {
+};
+FacetModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: FacetModule });
+FacetModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FacetModule_Factory(t) { return new (t || FacetModule)(); }, imports: [[
+            CommonModule,
+            RouterModule,
+            UrlModule,
+            I18nModule,
+            IconModule,
+            KeyboardFocusModule,
+        ]] });
+
+let FacetListModule = class FacetListModule {
+};
+FacetListModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: FacetListModule });
+FacetListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FacetListModule_Factory(t) { return new (t || FacetListModule)(); }, imports: [[
+            CommonModule,
+            I18nModule,
+            IconModule,
+            FacetModule,
+            KeyboardFocusModule,
+        ]] });
+
+let ProductFacetNavigationComponent = class ProductFacetNavigationComponent {
+    constructor(breakpointService) {
+        this.breakpointService = breakpointService;
+        this.iconTypes = ICON_TYPE;
+        /**
+         * We delay the removal of DOM so that animations can finish playing before the
+         * DOM is removed. Removing the DOM, as hidding is not enough to stop elements
+         * to be focused.
+         */
+        this.CLOSE_DELAY = 300;
+        this.open$ = new BehaviorSubject(false);
+        /**
+         * Emits the open state that indicates whether the facet list should be rendered.
+         * This is either done instantly, or after the user triggers this by using the trigger
+         * button. This driven by the visiibility of the trigger, so that the CSS drives
+         * the behaviour. This can differ per breakpoint.
+         *
+         * There's a configurable delay for the closed state, so that the DOM is not removed
+         * before some CSS animations are done.
+         */
+        this.isOpen$ = this.breakpointService.breakpoint$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure that the `hasTrigger`
+        // method represents the actual UI state.
+        observeOn(asapScheduler), switchMap(() => (this.hasTrigger ? this.open$ : of(true))), delayWhen((launched) => interval(launched ? 0 : this.CLOSE_DELAY)));
+        /**
+         * Emits the active state that indicates whether the facet list is activated. Activation
+         * is related to the css, so that a animation or transition can visualize opening/closing
+         * the list (i.e. dialog).
+         */
+        this.isActive$ = this.open$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure the active class is
+        //  applied after the DOM is created
+        observeOn(asapScheduler));
+    }
+    launch() {
+        this.open$.next(true);
+    }
+    close() {
+        this.open$.next(false);
+        this.trigger.nativeElement.focus();
+    }
+    /**
+     * Indicates that the facet navigation should be open explicitely by a trigger.
+     * This is fully controlled by CSS, where the trigger button can be hidden
+     * (display:none) for certain screen sizes.
+     */
+    get hasTrigger() {
+        return this.trigger.nativeElement.offsetParent !== null;
+    }
+};
+ProductFacetNavigationComponent.ɵfac = function ProductFacetNavigationComponent_Factory(t) { return new (t || ProductFacetNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(BreakpointService)); };
+ProductFacetNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductFacetNavigationComponent, selectors: [["cx-product-facet-navigation"]], viewQuery: function ProductFacetNavigationComponent_Query(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵviewQuery(_c47, true);
+    } if (rf & 2) {
+        var _t;
+        ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.trigger = _t.first);
+    } }, decls: 8, vars: 7, consts: [[1, "btn", "btn-action", "btn-block", "dialog-trigger", 3, "click"], ["trigger", ""], [3, "type"], [3, "isDialog", "active", "closeList", 4, "ngIf"], [3, "isDialog", "closeList"]], template: function ProductFacetNavigationComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵelementStart(0, "button", 0, 1);
+        ɵngcc0.ɵɵlistener("click", function ProductFacetNavigationComponent_Template_button_click_0_listener() { return ctx.launch(); });
+        ɵngcc0.ɵɵelement(2, "cx-icon", 2);
+        ɵngcc0.ɵɵtext(3);
+        ɵngcc0.ɵɵpipe(4, "cxTranslate");
+        ɵngcc0.ɵɵelementEnd();
+        ɵngcc0.ɵɵelement(5, "cx-active-facets");
+        ɵngcc0.ɵɵtemplate(6, ProductFacetNavigationComponent_cx_facet_list_6_Template, 2, 5, "cx-facet-list", 3);
+        ɵngcc0.ɵɵpipe(7, "async");
+    } if (rf & 2) {
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.FILTER);
+        ɵngcc0.ɵɵadvance(1);
+        ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(4, 3, "productList.filterBy.label"), "\n");
+        ɵngcc0.ɵɵadvance(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(7, 5, ctx.isOpen$));
+    } }, directives: [IconComponent,
+        ActiveFacetsComponent, ɵngcc4.NgIf, FacetListComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+ProductFacetNavigationComponent.ctorParameters = () => [
+    { type: BreakpointService }
+];
+__decorate([
+    ViewChild('trigger')
+], ProductFacetNavigationComponent.prototype, "trigger", void 0);
+
+let ProductFacetNavigationModule = class ProductFacetNavigationModule {
+};
+ProductFacetNavigationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ProductFacetNavigationModule });
+ProductFacetNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ProductFacetNavigationModule_Factory(t) { return new (t || ProductFacetNavigationModule)(); }, imports: [[
+            CommonModule,
+            FacetListModule,
+            ActiveFacetsModule,
+            IconModule,
+            I18nModule,
+            ConfigModule.withConfig({
+                cmsComponents: {
+                    ProductRefinementComponent: {
+                        component: ProductFacetNavigationComponent
+                    }
+                }
+            }),
+        ]] });
 
 let ProductGridItemComponent = class ProductGridItemComponent {
 };
@@ -25115,9 +25474,6 @@ ProductListModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Product
                 },
                 SearchResultsListComponent: {
                     component: ProductListComponent
-                },
-                ProductRefinementComponent: {
-                    component: ProductFacetNavigationComponent
                 }
             }
         }),
@@ -25308,8 +25664,8 @@ let ProductReviewsComponent = class ProductReviewsComponent {
 };
 ProductReviewsComponent.ɵfac = function ProductReviewsComponent_Factory(t) { return new (t || ProductReviewsComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReviewService), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc5.FormBuilder), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
 ProductReviewsComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReviewsComponent, selectors: [["cx-product-reviews"]], viewQuery: function ProductReviewsComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c47, true);
-        ɵngcc0.ɵɵviewQuery(_c48, true);
+        ɵngcc0.ɵɵviewQuery(_c50, true);
+        ɵngcc0.ɵɵviewQuery(_c51, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.titleInput = _t.first);
@@ -25401,11 +25757,11 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(8, "async");
         ɵngcc0.ɵɵtemplate(9, StockNotificationDialogComponent_ng_template_9_Template, 7, 3, "ng-template", null, 5, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1180 = ɵngcc0.ɵɵreference(10);
+        const _r1168 = ɵngcc0.ɵɵreference(10);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "stockNotification.subscriptionDialog.header"), " ");
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1180);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1168);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 StockNotificationDialogComponent.ctorParameters = () => [
     { type: ModalService },
@@ -25612,8 +25968,8 @@ StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderGridComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1214 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1214);
+        const _r1202 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1202);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, StoreFinderListItemComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 StoreFinderGridComponent.ctorParameters = () => [
@@ -25769,7 +26125,7 @@ let StoreFinderMapComponent = class StoreFinderMapComponent {
 };
 StoreFinderMapComponent.ɵfac = function StoreFinderMapComponent_Factory(t) { return new (t || StoreFinderMapComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GoogleMapRendererService)); };
 StoreFinderMapComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderMapComponent, selectors: [["cx-store-finder-map"]], viewQuery: function StoreFinderMapComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵstaticViewQuery(_c51, true);
+        ɵngcc0.ɵɵstaticViewQuery(_c54, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.mapElement = _t.first);
@@ -25853,7 +26209,7 @@ let StoreFinderListComponent = class StoreFinderListComponent {
 };
 StoreFinderListComponent.ɵfac = function StoreFinderListComponent_Factory(t) { return new (t || StoreFinderListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(DOCUMENT)); };
 StoreFinderListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListComponent, selectors: [["cx-store-finder-list"]], viewQuery: function StoreFinderListComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c52, true);
+        ɵngcc0.ɵɵviewQuery(_c55, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.storeMap = _t.first);
@@ -25931,8 +26287,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1260 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1260);
+        const _r1248 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1248);
     } }, directives: [ɵngcc4.NgIf, PaginationComponent,
         StoreFinderListComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -25996,16 +26352,16 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1270 = ɵngcc0.ɵɵreference(5);
+        const _r1258 = ɵngcc0.ɵɵreference(5);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "storeFinder.searchBox"));
         ɵngcc0.ɵɵproperty("formControl", ctx.searchBox);
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c55))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c42, _r1270.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c56, !(_r1270.value && _r1270.value.length)));
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c58))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c42, _r1258.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c59, !(_r1258.value && _r1258.value.length)));
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, "storeFinder.useMyLocation"), " ");
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(20, _c57));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction0(20, _c60));
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(17, 13, "storeFinder.viewAllStores"), " ");
     } }, directives: [ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlDirective, IconComponent, ɵngcc6.RouterLink, ɵngcc4.NgClass], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -26052,8 +26408,8 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoresCountComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1280 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1280);
+        const _r1268 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1268);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
@@ -26101,8 +26457,8 @@ StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinde
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoreComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1291 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1291);
+        const _r1279 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1279);
     } }, directives: [ɵngcc4.NgIf, IconComponent,
         StoreFinderStoreDescriptionComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -26397,7 +26753,7 @@ LoginFormComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginFormComponen
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("control", ctx.loginForm.get("password"));
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(19, 21, ɵngcc0.ɵɵpureFunction0(29, _c61)));
+        ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(19, 21, ɵngcc0.ɵɵpureFunction0(29, _c64)));
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(21, 23, "loginForm.forgotPassword"));
         ɵngcc0.ɵɵadvance(3);
@@ -26463,8 +26819,8 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, LoginComponent_ng_template_2_Template, 4, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1299 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1299);
+        const _r1287 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1287);
     } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
@@ -26691,8 +27047,8 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1303 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1303);
+        const _r1291 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1291);
     } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.SelectControlValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc5.NgSelectOption, ɵngcc5.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc5.DefaultValueAccessor, FormErrorsComponent, ɵngcc5.CheckboxControlValueAccessor, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: UserService },
@@ -26782,7 +27138,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1316 = ɵngcc0.ɵɵreference(15);
+        const _r1304 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c12, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -26796,7 +27152,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1316);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1304);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -26881,6 +27237,7 @@ CmsLibModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CmsLibModule
             ReturnRequestListModule,
             ReturnRequestDetailModule,
             ProductListModule,
+            ProductFacetNavigationModule,
             ProductTabsModule,
             ProductCarouselModule,
             ProductReferencesModule,
@@ -27532,30 +27889,6 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BaseFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: BaseFocusService }]; }, { tabindex: [{
-            type: Input
-        }, {
-            type: HostBinding,
-            args: ['attr.tabindex']
-        }] }); })();
-const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(VisibleFocusDirective);
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(VisibleFocusDirective, [{
-        type: Directive
-    }], null, { mouseFocus: [{
-            type: HostBinding,
-            args: ['class.mouse-focus']
-        }], handleMousedown: [{
-            type: HostListener,
-            args: ['mousedown']
-        }], handleKeydown: [{
-            type: HostListener,
-            args: ['keydown']
-        }] }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BlockFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: BaseFocusService }]; }, null); })();
 const ɵPersistFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(PersistFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PersistFocusService, [{
         type: Injectable,
@@ -27563,15 +27896,6 @@ const ɵPersistFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Persis
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PersistFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: PersistFocusService }]; }, { handleFocus: [{
-            type: HostListener,
-            args: ['focus', ['$event']]
-        }], attr: [{
-            type: HostBinding,
-            args: [`attr.${FOCUS_ATTR}`]
-        }] }); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SelectFocusUtility, [{
         type: Injectable,
         args: [{
@@ -27584,14 +27908,6 @@ const ɵPersistFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Persis
                 providedIn: 'root'
             }]
     }], function () { return [{ type: SelectFocusUtility }]; }, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(EscapeFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: EscapeFocusService }]; }, { esc: [{
-            type: Output
-        }], handleEscape: [{
-            type: HostListener,
-            args: ['keydown.escape', ['$event']]
-        }] }); })();
 const ɵAutoFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(AutoFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AutoFocusService, [{
         type: Injectable,
@@ -27599,9 +27915,6 @@ const ɵAutoFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(AutoFocus
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AutoFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: AutoFocusService }]; }, null); })();
 const ɵTabFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(TabFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TabFocusService, [{
         type: Injectable,
@@ -27609,15 +27922,6 @@ const ɵTabFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(TabFocusSe
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TabFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: TabFocusService }]; }, { handleNextTab: [{
-            type: HostListener,
-            args: ['keydown.arrowRight', ['$event']]
-        }], handlePreviousTab: [{
-            type: HostListener,
-            args: ['keydown.arrowLeft', ['$event']]
-        }] }); })();
 const ɵTrapFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(TrapFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TrapFocusService, [{
         type: Injectable,
@@ -27625,21 +27929,6 @@ const ɵTrapFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(TrapFocus
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TrapFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: TrapFocusService }]; }, { handleTrapDown: [{
-            type: HostListener,
-            args: ['keydown.arrowdown', ['$event']]
-        }, {
-            type: HostListener,
-            args: ['keydown.tab', ['$event']]
-        }], handleTrapUp: [{
-            type: HostListener,
-            args: ['keydown.arrowup', ['$event']]
-        }, {
-            type: HostListener,
-            args: ['keydown.shift.tab', ['$event']]
-        }] }); })();
 const ɵLockFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(LockFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LockFocusService, [{
         type: Injectable,
@@ -27647,49 +27936,11 @@ const ɵLockFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(LockFocus
                 providedIn: 'root'
             }]
     }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LockFocusDirective, [{
-        type: Directive
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: LockFocusService }, { type: ɵngcc0.Renderer2 }]; }, { unlock: [{
-            type: Output
-        }], handleEnter: [{
-            type: HostListener,
-            args: ['keydown.enter', ['$event']]
-        }, {
-            type: HostListener,
-            args: ['keydown.space', ['$event']]
-        }], handleClick: [{
-            type: HostListener,
-            args: ['click', ['$event']]
-        }], shouldLock: [{
-            type: HostBinding,
-            args: ['class.focus-lock']
-        }], isLocked: [{
-            type: HostBinding,
-            args: ['class.is-locked']
-        }] }); })();
 const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(KeyboardFocusService);
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(KeyboardFocusService, [{
         type: Injectable,
         args: [{
                 providedIn: 'root'
-            }]
-    }], null, null); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FocusDirective, [{
-        type: Directive,
-        args: [{
-                selector: '[cxFocus]'
-            }]
-    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: KeyboardFocusService }, { type: ɵngcc0.Renderer2 }]; }, { config: [{
-            type: Input,
-            args: ['cxFocus']
-        }] }); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(KeyboardFocusModule, { declarations: function () { return [FocusDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [FocusDirective]; } }); })();
-/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(KeyboardFocusModule, [{
-        type: NgModule,
-        args: [{
-                imports: [CommonModule],
-                declarations: [...directives],
-                exports: [...directives]
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkService, [{
@@ -28314,6 +28565,112 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         }], product: [{
             type: Input
         }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BaseFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: BaseFocusService }]; }, { tabindex: [{
+            type: Input
+        }, {
+            type: HostBinding,
+            args: ['attr.tabindex']
+        }] }); })();
+const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(VisibleFocusDirective);
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(VisibleFocusDirective, [{
+        type: Directive
+    }], null, { mouseFocus: [{
+            type: HostBinding,
+            args: ['class.mouse-focus']
+        }], handleMousedown: [{
+            type: HostListener,
+            args: ['mousedown']
+        }], handleKeydown: [{
+            type: HostListener,
+            args: ['keydown']
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BlockFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: BaseFocusService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PersistFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: PersistFocusService }]; }, { handleFocus: [{
+            type: HostListener,
+            args: ['focus', ['$event']]
+        }], attr: [{
+            type: HostBinding,
+            args: [`attr.${FOCUS_ATTR}`]
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(EscapeFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: EscapeFocusService }]; }, { esc: [{
+            type: Output
+        }], handleEscape: [{
+            type: HostListener,
+            args: ['keydown.escape', ['$event']]
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AutoFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: AutoFocusService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TabFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: TabFocusService }]; }, { handleNextTab: [{
+            type: HostListener,
+            args: ['keydown.arrowRight', ['$event']]
+        }], handlePreviousTab: [{
+            type: HostListener,
+            args: ['keydown.arrowLeft', ['$event']]
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TrapFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: TrapFocusService }]; }, { handleTrapDown: [{
+            type: HostListener,
+            args: ['keydown.arrowdown', ['$event']]
+        }, {
+            type: HostListener,
+            args: ['keydown.tab', ['$event']]
+        }], handleTrapUp: [{
+            type: HostListener,
+            args: ['keydown.arrowup', ['$event']]
+        }, {
+            type: HostListener,
+            args: ['keydown.shift.tab', ['$event']]
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LockFocusDirective, [{
+        type: Directive
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: LockFocusService }, { type: ɵngcc0.Renderer2 }]; }, { unlock: [{
+            type: Output
+        }], handleEnter: [{
+            type: HostListener,
+            args: ['keydown.enter', ['$event']]
+        }, {
+            type: HostListener,
+            args: ['keydown.space', ['$event']]
+        }], handleClick: [{
+            type: HostListener,
+            args: ['click', ['$event']]
+        }], shouldLock: [{
+            type: HostBinding,
+            args: ['class.focus-lock']
+        }], isLocked: [{
+            type: HostBinding,
+            args: ['class.is-locked']
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FocusDirective, [{
+        type: Directive,
+        args: [{
+                selector: '[cxFocus]'
+            }]
+    }], function () { return [{ type: ɵngcc0.ElementRef }, { type: KeyboardFocusService }, { type: ɵngcc0.Renderer2 }]; }, { config: [{
+            type: Input,
+            args: ['cxFocus']
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(KeyboardFocusModule, { declarations: function () { return [FocusDirective]; }, imports: function () { return [CommonModule]; }, exports: function () { return [FocusDirective]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(KeyboardFocusModule, [{
+        type: NgModule,
+        args: [{
+                imports: [CommonModule],
+                declarations: [...directives],
+                exports: [...directives]
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PromotionsComponent, [{
         type: Component,
         args: [{
@@ -31757,14 +32114,159 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
             type: Input,
             args: ['inputViewMode']
         }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductFacetService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ProductListComponentService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FacetService, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: ProductFacetService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ActiveFacetsComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-active-facets',
+                template: "<ng-container *ngIf=\"facetList$ | async as facetList\">\n  <h4 *ngIf=\"facetList?.activeFacets?.length > 0\">\n    {{ 'productList.appliedFilter' | cxTranslate }}\n  </h4>\n\n  <a\n    *ngFor=\"let facet of facetList?.activeFacets\"\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(facet)\"\n    [cxFocus]=\"getFocusKey(facetList, facet)\"\n  >\n    <span>{{ facet.facetValueName }}</span>\n    <cx-icon aria-hidden=\"true\" [type]=\"closeIcon\"></cx-icon>\n  </a>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.Default
+            }]
+    }], function () { return [{ type: FacetService }]; }, { closeIcon: [{
+            type: Input
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ActiveFacetsModule, { declarations: function () { return [ActiveFacetsComponent]; }, imports: function () { return [CommonModule,
+        RouterModule,
+        I18nModule,
+        IconModule,
+        KeyboardFocusModule]; }, exports: function () { return [ActiveFacetsComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ActiveFacetsModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    I18nModule,
+                    IconModule,
+                    KeyboardFocusModule,
+                ],
+                declarations: [ActiveFacetsComponent],
+                exports: [ActiveFacetsComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FacetListComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-facet-list',
+                template: "<div\n  *ngIf=\"(facetList$ | async)?.facets as facets\"\n  [cxFocus]=\"isDialog ? dialogFocusConfig : {}\"\n  (esc)=\"closeList.emit($event)\"\n>\n  <h4>\n    {{ 'productList.filterBy.label' | cxTranslate }}\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeList.emit()\"\n    >\n      <cx-icon aria-hidden=\"true\" [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </h4>\n\n  <!-- \n      Here we'd like to introduce configurable facet components, \n      either by using specific configuration or generic sproutlets \n  -->\n  <cx-facet\n    *ngFor=\"let facet of facets\"\n    #facetRef\n    [facet]=\"facet\"\n    [cxFocus]=\"{ lock: true, trap: true, autofocus: 'a' }\"\n    (unlock)=\"expandFacetGroup(facet, facetRef)\"\n    [class.expanded]=\"isExpanded(facet) | async\"\n    [class.collapsed]=\"isCollapsed(facet) | async\"\n  ></cx-facet>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: FacetService }, { type: ɵngcc0.ElementRef }]; }, { closeList: [{
+            type: Output
+        }], isDialog: [{
+            type: Input
+        }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FacetComponent, [{
+        type: Component,
+        args: [{
+                selector: 'cx-facet',
+                template: "<ng-container *ngIf=\"state$ | async as state\">\n  <button class=\"heading\" (click)=\"toggleGroup($event)\">\n    {{ facet.name }}\n    <cx-icon class=\"collapse-icon\" [type]=\"collapseIcon\"></cx-icon>\n    <cx-icon class=\"expand-icon\" [type]=\"expandIcon\"></cx-icon>\n  </button>\n\n  <a\n    *ngFor=\"let value of facet.values | slice: 0:state.topVisible\"\n    #facetValue\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(value)\"\n    class=\"value\"\n    [class.selected]=\"value.selected\"\n    [cxFocus]=\"value.name\"\n    (keydown.space)=\"openLink($event)\"\n  >\n    <span>\n      <span class=\"label\">{{ value.name }}</span>\n      <span class=\"count\">{{ value.count }}</span>\n    </span>\n  </a>\n\n  <div class=\"more\">\n    <a\n      *ngFor=\"\n        let value of facet.values | slice: state.topVisible:state.maxVisible\n      \"\n      #facetValue\n      routerLink=\"./\"\n      [queryParams]=\"getLinkParams(value)\"\n      class=\"value\"\n      [class.selected]=\"value.selected\"\n      [cxFocus]=\"value.name\"\n      (keydown.space)=\"openLink($event)\"\n    >\n      <span\n        >{{ value.name }}<span class=\"count\">{{ value.count }}</span></span\n      >\n    </a>\n\n    <button\n      *ngIf=\"state.maxVisible > state.topVisible\"\n      (click)=\"decreaseVisibleValues()\"\n      cxFocus=\"moreorless\"\n    >\n      {{ 'productList.showLess' | cxTranslate }}\n    </button>\n\n    <button\n      *ngIf=\"state.maxVisible > 0 && state.maxVisible < facet.values.length\"\n      (click)=\"increaseVisibleValues()\"\n    >\n      {{ 'productList.showMore' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            }]
+    }], function () { return [{ type: FacetService }, { type: ɵngcc0.ElementRef }, { type: ɵngcc0.ChangeDetectorRef }]; }, { expandIcon: [{
+            type: Input
+        }], collapseIcon: [{
+            type: Input
+        }], facet: [{
+            type: Input
+        }], isMultiSelect: [{
+            type: HostBinding,
+            args: ['class.multi-select']
+        }], values: [{
+            type: ViewChildren,
+            args: ['facetValue']
+        }], keyboardFocus: [{
+            type: ViewChild,
+            args: [FocusDirective]
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(FacetModule, { declarations: function () { return [FacetComponent]; }, imports: function () { return [CommonModule,
+        RouterModule,
+        UrlModule,
+        I18nModule,
+        IconModule,
+        KeyboardFocusModule]; }, exports: function () { return [FacetComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FacetModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    UrlModule,
+                    I18nModule,
+                    IconModule,
+                    KeyboardFocusModule,
+                ],
+                declarations: [FacetComponent],
+                exports: [FacetComponent]
+            }]
+    }], null, null); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(FacetListModule, { declarations: function () { return [FacetListComponent]; }, imports: function () { return [CommonModule,
+        I18nModule,
+        IconModule,
+        FacetModule,
+        KeyboardFocusModule]; }, exports: function () { return [FacetListComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(FacetListModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    I18nModule,
+                    IconModule,
+                    FacetModule,
+                    KeyboardFocusModule,
+                ],
+                declarations: [FacetListComponent],
+                exports: [FacetListComponent]
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductFacetNavigationComponent, [{
         type: Component,
         args: [{
                 selector: 'cx-product-facet-navigation',
-                template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n              tabindex=\"0\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n                tabindex=\"0\"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                template: "<button\n  #trigger\n  class=\"btn btn-action btn-block dialog-trigger\"\n  (click)=\"launch()\"\n>\n  <cx-icon [type]=\"iconTypes.FILTER\"></cx-icon>\n  {{ 'productList.filterBy.label' | cxTranslate }}\n</button>\n\n<cx-active-facets></cx-active-facets>\n\n<cx-facet-list\n  *ngIf=\"isOpen$ | async\"\n  [isDialog]=\"hasTrigger\"\n  (closeList)=\"close()\"\n  [class.active]=\"isActive$ | async\"\n></cx-facet-list>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ModalService }, { type: ɵngcc6.ActivatedRoute }, { type: ProductListComponentService }]; }, null); })();
+    }], function () { return [{ type: BreakpointService }]; }, { trigger: [{
+            type: ViewChild,
+            args: ['trigger']
+        }] }); })();
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductFacetNavigationModule, { declarations: function () { return [ProductFacetNavigationComponent]; }, imports: function () { return [CommonModule,
+        FacetListModule,
+        ActiveFacetsModule,
+        IconModule,
+        I18nModule, ɵngcc1.ConfigModule]; }, exports: function () { return [ProductFacetNavigationComponent]; } }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductFacetNavigationModule, [{
+        type: NgModule,
+        args: [{
+                imports: [
+                    CommonModule,
+                    FacetListModule,
+                    ActiveFacetsModule,
+                    IconModule,
+                    I18nModule,
+                    ConfigModule.withConfig({
+                        cmsComponents: {
+                            ProductRefinementComponent: {
+                                component: ProductFacetNavigationComponent
+                            }
+                        }
+                    }),
+                ],
+                declarations: [ProductFacetNavigationComponent],
+                exports: [ProductFacetNavigationComponent]
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ProductGridItemComponent, [{
         type: Component,
         args: [{
@@ -31921,7 +32423,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
             }]
     }], null, null); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(ProductListModule, { declarations: function () { return [ProductListComponent,
-        ProductFacetNavigationComponent,
         ProductListItemComponent,
         ProductGridItemComponent,
         ProductViewComponent,
@@ -31940,7 +32441,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         ViewConfigModule,
         ProductVariantsModule,
         FeaturesConfigModule]; }, exports: function () { return [ProductListComponent,
-        ProductFacetNavigationComponent,
         ProductListItemComponent,
         ProductGridItemComponent,
         ProductViewComponent,
@@ -31977,16 +32477,12 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                             },
                             SearchResultsListComponent: {
                                 component: ProductListComponent
-                            },
-                            ProductRefinementComponent: {
-                                component: ProductFacetNavigationComponent
                             }
                         }
                     }),
                 ],
                 declarations: [
                     ProductListComponent,
-                    ProductFacetNavigationComponent,
                     ProductListItemComponent,
                     ProductGridItemComponent,
                     ProductViewComponent,
@@ -31994,7 +32490,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 ],
                 exports: [
                     ProductListComponent,
-                    ProductFacetNavigationComponent,
                     ProductListItemComponent,
                     ProductGridItemComponent,
                     ProductViewComponent,
@@ -32728,6 +33223,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         ReturnRequestListModule,
         ReturnRequestDetailModule,
         ProductListModule,
+        ProductFacetNavigationModule,
         ProductTabsModule,
         ProductCarouselModule,
         ProductReferencesModule,
@@ -32780,6 +33276,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                     ReturnRequestListModule,
                     ReturnRequestDetailModule,
                     ProductListModule,
+                    ProductFacetNavigationModule,
                     ProductTabsModule,
                     ProductCarouselModule,
                     ProductReferencesModule,
@@ -32974,6 +33471,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, KeyboardFocusService as ɵbu, AnonymousConsentsModule as ɵbv, AnonymousConsentDialogComponent as ɵbw, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsMappingService, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, ExpressCheckoutService as ɵbh, defaultQualtricsConfig as ɵbi, CmsPageGuardService as ɵbj, CmsRoutesImplService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, AnonymousConsentsModule as ɵbu, AnonymousConsentDialogComponent as ɵbv, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
 
 //# sourceMappingURL=spartacus-storefront.js.map

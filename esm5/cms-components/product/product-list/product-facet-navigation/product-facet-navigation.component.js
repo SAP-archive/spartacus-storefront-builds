@@ -1,88 +1,77 @@
 import { __decorate } from "tslib";
-import { HttpUrlEncodingCodec } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, ViewChild, } from '@angular/core';
+import { asapScheduler, BehaviorSubject, interval, of } from 'rxjs';
+import { delayWhen, observeOn, switchMap } from 'rxjs/operators';
 import { ICON_TYPE } from '../../../../cms-components/misc/icon/icon.model';
-import { ModalService } from '../../../../shared/components/modal/modal.service';
-import { ProductListComponentService } from '../container/product-list-component.service';
+import { BreakpointService } from '../../../../layout/breakpoint/breakpoint.service';
 var ProductFacetNavigationComponent = /** @class */ (function () {
-    function ProductFacetNavigationComponent(modalService, activatedRoute, productListComponentService) {
-        this.modalService = modalService;
-        this.activatedRoute = activatedRoute;
-        this.productListComponentService = productListComponentService;
-        this.iconTypes = ICON_TYPE;
-        this.collapsedFacets = new Set();
-        this.showAllPerFacetMap = new Map();
-        this.queryCodec = new HttpUrlEncodingCodec();
-    }
-    ProductFacetNavigationComponent.prototype.ngOnInit = function () {
+    function ProductFacetNavigationComponent(breakpointService) {
         var _this = this;
-        this.sub = this.activatedRoute.params.subscribe(function (params) {
-            _this.activeFacetValueCode = params.categoryCode || params.brandCode;
-        });
-        this.searchResult$ = this.productListComponentService.model$.pipe(tap(function (searchResult) {
-            if (searchResult.facets) {
-                searchResult.facets.forEach(function (el) {
-                    _this.showAllPerFacetMap.set(el.name, false);
-                });
-            }
-        }));
-        this.visibleFacets$ = this.searchResult$.pipe(map(function (searchResult) {
-            return searchResult.facets
-                ? searchResult.facets.filter(function (facet) { return facet.visible; })
-                : [];
-        }));
+        this.breakpointService = breakpointService;
+        this.iconTypes = ICON_TYPE;
+        /**
+         * We delay the removal of DOM so that animations can finish playing before the
+         * DOM is removed. Removing the DOM, as hidding is not enough to stop elements
+         * to be focused.
+         */
+        this.CLOSE_DELAY = 300;
+        this.open$ = new BehaviorSubject(false);
+        /**
+         * Emits the open state that indicates whether the facet list should be rendered.
+         * This is either done instantly, or after the user triggers this by using the trigger
+         * button. This driven by the visiibility of the trigger, so that the CSS drives
+         * the behaviour. This can differ per breakpoint.
+         *
+         * There's a configurable delay for the closed state, so that the DOM is not removed
+         * before some CSS animations are done.
+         */
+        this.isOpen$ = this.breakpointService.breakpoint$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure that the `hasTrigger`
+        // method represents the actual UI state.
+        observeOn(asapScheduler), switchMap(function () { return (_this.hasTrigger ? _this.open$ : of(true)); }), delayWhen(function (launched) { return interval(launched ? 0 : _this.CLOSE_DELAY); }));
+        /**
+         * Emits the active state that indicates whether the facet list is activated. Activation
+         * is related to the css, so that a animation or transition can visualize opening/closing
+         * the list (i.e. dialog).
+         */
+        this.isActive$ = this.open$.pipe(
+        // deffer emitting a new value to the next micro-task to ensure the active class is
+        //  applied after the DOM is created
+        observeOn(asapScheduler));
+    }
+    ProductFacetNavigationComponent.prototype.launch = function () {
+        this.open$.next(true);
     };
-    ProductFacetNavigationComponent.prototype.openFilterModal = function (content) {
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+    ProductFacetNavigationComponent.prototype.close = function () {
+        this.open$.next(false);
+        this.trigger.nativeElement.focus();
     };
-    ProductFacetNavigationComponent.prototype.toggleValue = function (query) {
-        this.productListComponentService.setQuery(this.queryCodec.decodeValue(query));
-    };
-    ProductFacetNavigationComponent.prototype.showLess = function (facetName) {
-        this.updateShowAllPerFacetMap(facetName, false);
-    };
-    ProductFacetNavigationComponent.prototype.showMore = function (facetName) {
-        this.updateShowAllPerFacetMap(facetName, true);
-    };
-    ProductFacetNavigationComponent.prototype.updateShowAllPerFacetMap = function (facetName, showAll) {
-        this.showAllPerFacetMap.set(facetName, showAll);
-    };
-    ProductFacetNavigationComponent.prototype.isFacetCollapsed = function (facetName) {
-        return this.collapsedFacets.has(facetName);
-    };
-    ProductFacetNavigationComponent.prototype.toggleFacet = function (facetName) {
-        if (this.collapsedFacets.has(facetName)) {
-            this.collapsedFacets.delete(facetName);
-        }
-        else {
-            this.collapsedFacets.add(facetName);
-        }
-    };
-    ProductFacetNavigationComponent.prototype.getVisibleFacetValues = function (facet) {
-        return facet.values.slice(0, this.showAllPerFacetMap.get(facet.name)
-            ? facet.values.length
-            : facet.topValueCount);
-    };
-    ProductFacetNavigationComponent.prototype.ngOnDestroy = function () {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    };
+    Object.defineProperty(ProductFacetNavigationComponent.prototype, "hasTrigger", {
+        /**
+         * Indicates that the facet navigation should be open explicitely by a trigger.
+         * This is fully controlled by CSS, where the trigger button can be hidden
+         * (display:none) for certain screen sizes.
+         */
+        get: function () {
+            return this.trigger.nativeElement.offsetParent !== null;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ProductFacetNavigationComponent.ctorParameters = function () { return [
-        { type: ModalService },
-        { type: ActivatedRoute },
-        { type: ProductListComponentService }
+        { type: BreakpointService }
     ]; };
+    __decorate([
+        ViewChild('trigger')
+    ], ProductFacetNavigationComponent.prototype, "trigger", void 0);
     ProductFacetNavigationComponent = __decorate([
         Component({
             selector: 'cx-product-facet-navigation',
-            template: "<ng-container *ngIf=\"searchResult$ | async as searchResult\">\n  <div class=\"cx-search-facet\">\n    <ng-container *ngIf=\"searchResult.breadcrumbs?.length\">\n      <h4 class=\"cx-facet-filter-header\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <div class=\"cx-facet-filter-container\">\n        <div\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n          [hidden]=\"breadcrumb.facetValueCode === activeFacetValueCode\"\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n        >\n          <span class=\"cx-facet-pill-value\">{{\n            breadcrumb.facetValueName\n          }}</span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-container *ngIf=\"visibleFacets$ | async as visibleFacets\">\n      <ng-container *ngFor=\"let facet of visibleFacets; let facetId = index\">\n        <div class=\"cx-facet-group\">\n          <div class=\"cx-facet-header\">\n            <a\n              class=\"cx-facet-header-link\"\n              (click)=\"toggleFacet(facet.name)\"\n              [attr.aria-expanded]=\"!isFacetCollapsed(facet.name)\"\n              aria-controls=\"\"\n              tabindex=\"0\"\n            >\n              {{ facet.name }}\n              <cx-icon\n                [type]=\"\n                  isFacetCollapsed(facet.name)\n                    ? iconTypes.EXPAND\n                    : iconTypes.COLLAPSE\n                \"\n              ></cx-icon>\n            </a>\n          </div>\n          <ng-container *ngIf=\"!isFacetCollapsed(facet.name)\">\n            <ul class=\"cx-facet-list\">\n              <li\n                *ngFor=\"\n                  let value of getVisibleFacetValues(facet);\n                  index as facetValueId\n                \"\n              >\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showLess(facet.name)\"\n                *ngIf=\"showAllPerFacetMap.get(facet.name)\"\n              >\n                {{ 'productList.showLess' | cxTranslate }}\n              </li>\n              <li\n                class=\"cx-facet-toggle-btn\"\n                (click)=\"showMore(facet.name)\"\n                *ngIf=\"\n                  !showAllPerFacetMap.get(facet.name) &&\n                  facet.values.length > facet.topValueCount\n                \"\n                tabindex=\"0\"\n              >\n                {{ 'productList.showMore' | cxTranslate }}\n              </li>\n            </ul>\n          </ng-container>\n        </div>\n      </ng-container>\n    </ng-container>\n  </div>\n\n  <div class=\"cx-facet-mobile\">\n    <div class=\"container\">\n      <button\n        class=\"btn btn-action btn-block cx-facet-mobile-btn\"\n        (click)=\"openFilterModal(content)\"\n      >\n        {{ 'productList.filterBy.action' | cxTranslate }}\n      </button>\n    </div>\n  </div>\n\n  <!-- START ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n  <div class=\"container\">\n    <div class=\"cx-facet-mobile\" *ngIf=\"searchResult.breadcrumbs?.length\">\n      <div class=\"cx-facet-filter-container\">\n        <h4 class=\"cx-facet-filter-header\">\n          {{ 'productList.appliedFilter' | cxTranslate }}\n        </h4>\n        <div\n          class=\"cx-facet-filter-pill\"\n          role=\"filter\"\n          *ngFor=\"let breadcrumb of searchResult.breadcrumbs\"\n        >\n          <span class=\"cx-facet-pill-value\">\n            {{ breadcrumb.facetValueName }}\n          </span>\n          <button\n            type=\"button\"\n            class=\"close\"\n            aria-label=\"Close\"\n            (click)=\"toggleValue(breadcrumb.removeQuery.query.value)\"\n          >\n            <span aria-hidden=\"true\">\n              <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n            </span>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <!-- END ONLY SHOW FILTER SECTION IN MOBILE WHEN THEY ARE SELECTED -->\n\n  <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n    <div class=\"modal-header\">\n      <h4 class=\"cx-facet-modal-title\" id=\"modal-title\">\n        {{ 'productList.filterBy.label' | cxTranslate }}\n      </h4>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"d('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <div class=\"modal-body cx-facet-modal-body\">\n      <form>\n        <div\n          class=\"form-group\"\n          *ngFor=\"let facet of searchResult.facets; index as facetId\"\n        >\n          <h4 class=\"cx-facet-modal-label\" for=\"megapixels\">\n            {{ facet.name }}\n          </h4>\n          <div class=\"input-group\">\n            <ul class=\"cx-facet-list\">\n              <li *ngFor=\"let value of facet.values; index as facetValueId\">\n                <div class=\"form-check\">\n                  <label class=\"form-checkbox cx-facet-label\">\n                    <input\n                      class=\"form-check-input cx-facet-checkbox\"\n                      role=\"checkbox\"\n                      type=\"checkbox\"\n                      aria-checked=\"true\"\n                      [checked]=\"value.selected\"\n                      (change)=\"toggleValue(value.query.query.value)\"\n                    />\n                    <span class=\"cx-facet-text\"\n                      >{{ value.name }} ({{ value.count }})</span\n                    >\n                  </label>\n                </div>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </form>\n    </div>\n  </ng-template>\n</ng-container>\n",
+            template: "<button\n  #trigger\n  class=\"btn btn-action btn-block dialog-trigger\"\n  (click)=\"launch()\"\n>\n  <cx-icon [type]=\"iconTypes.FILTER\"></cx-icon>\n  {{ 'productList.filterBy.label' | cxTranslate }}\n</button>\n\n<cx-active-facets></cx-active-facets>\n\n<cx-facet-list\n  *ngIf=\"isOpen$ | async\"\n  [isDialog]=\"hasTrigger\"\n  (closeList)=\"close()\"\n  [class.active]=\"isActive$ | async\"\n></cx-facet-list>\n",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], ProductFacetNavigationComponent);
     return ProductFacetNavigationComponent;
 }());
 export { ProductFacetNavigationComponent };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1mYWNldC1uYXZpZ2F0aW9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL3Byb2R1Y3QvcHJvZHVjdC1saXN0L3Byb2R1Y3QtZmFjZXQtbmF2aWdhdGlvbi9wcm9kdWN0LWZhY2V0LW5hdmlnYXRpb24uY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUM1RCxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsR0FHVixNQUFNLGVBQWUsQ0FBQztBQUN2QixPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFHakQsT0FBTyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUMxQyxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0saURBQWlELENBQUM7QUFDNUUsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLG1EQUFtRCxDQUFDO0FBQ2pGLE9BQU8sRUFBRSwyQkFBMkIsRUFBRSxNQUFNLDZDQUE2QyxDQUFDO0FBTzFGO0lBYUUseUNBQ1UsWUFBMEIsRUFDMUIsY0FBOEIsRUFDOUIsMkJBQXdEO1FBRnhELGlCQUFZLEdBQVosWUFBWSxDQUFjO1FBQzFCLG1CQUFjLEdBQWQsY0FBYyxDQUFnQjtRQUM5QixnQ0FBMkIsR0FBM0IsMkJBQTJCLENBQTZCO1FBYmxFLGNBQVMsR0FBRyxTQUFTLENBQUM7UUFNZCxvQkFBZSxHQUFHLElBQUksR0FBRyxFQUFVLENBQUM7UUFTMUMsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksR0FBRyxFQUFtQixDQUFDO1FBQ3JELElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxvQkFBb0IsRUFBRSxDQUFDO0lBQy9DLENBQUM7SUFFRCxrREFBUSxHQUFSO1FBQUEsaUJBc0JDO1FB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QVcsR0FBWDtRQUNFLElBQUksSUFBSSxDQUFDLEdBQUcsRUFBRTtZQUNaLElBQUksQ0FBQyxHQUFHLENBQUMsV0FBVyxFQUFFLENBQUM7U0FDeEI7SUFDSCxDQUFDOztnQkEvRXVCLFlBQVk7Z0JBQ1YsY0FBYztnQkFDRCwyQkFBMkI7O0lBaEJ2RCwrQkFBK0I7UUFMM0MsU0FBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLDZCQUE2QjtZQUN2Qyxvc05BQXdEO1lBQ3hELGVBQWUsRUFBRSx1QkFBdUIsQ0FBQyxNQUFNO1NBQ2hELENBQUM7T0FDVywrQkFBK0IsQ0E4RjNDO0lBQUQsc0NBQUM7Q0FBQSxBQTlGRCxJQThGQztTQTlGWSwrQkFBK0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBIdHRwVXJsRW5jb2RpbmdDb2RlYyB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbi9odHRwJztcbmltcG9ydCB7XG4gIENoYW5nZURldGVjdGlvblN0cmF0ZWd5LFxuICBDb21wb25lbnQsXG4gIE9uRGVzdHJveSxcbiAgT25Jbml0LFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEFjdGl2YXRlZFJvdXRlIH0gZnJvbSAnQGFuZ3VsYXIvcm91dGVyJztcbmltcG9ydCB7IEZhY2V0LCBQcm9kdWN0U2VhcmNoUGFnZSB9IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQgeyBPYnNlcnZhYmxlLCBTdWJzY3JpcHRpb24gfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IG1hcCwgdGFwIH0gZnJvbSAncnhqcy9vcGVyYXRvcnMnO1xuaW1wb3J0IHsgSUNPTl9UWVBFIH0gZnJvbSAnLi4vLi4vLi4vLi4vY21zLWNvbXBvbmVudHMvbWlzYy9pY29uL2ljb24ubW9kZWwnO1xuaW1wb3J0IHsgTW9kYWxTZXJ2aWNlIH0gZnJvbSAnLi4vLi4vLi4vLi4vc2hhcmVkL2NvbXBvbmVudHMvbW9kYWwvbW9kYWwuc2VydmljZSc7XG5pbXBvcnQgeyBQcm9kdWN0TGlzdENvbXBvbmVudFNlcnZpY2UgfSBmcm9tICcuLi9jb250YWluZXIvcHJvZHVjdC1saXN0LWNvbXBvbmVudC5zZXJ2aWNlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnY3gtcHJvZHVjdC1mYWNldC1uYXZpZ2F0aW9uJyxcbiAgdGVtcGxhdGVVcmw6ICcuL3Byb2R1Y3QtZmFjZXQtbmF2aWdhdGlvbi5jb21wb25lbnQuaHRtbCcsXG4gIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxufSlcbmV4cG9ydCBjbGFzcyBQcm9kdWN0RmFjZXROYXZpZ2F0aW9uQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0LCBPbkRlc3Ryb3kge1xuICBwcml2YXRlIHN1YjogU3Vic2NyaXB0aW9uO1xuXG4gIGljb25UeXBlcyA9IElDT05fVFlQRTtcblxuICBhY3RpdmVGYWNldFZhbHVlQ29kZTogc3RyaW5nO1xuICBzZWFyY2hSZXN1bHQ6IFByb2R1Y3RTZWFyY2hQYWdlO1xuICBzaG93QWxsUGVyRmFjZXRNYXA6IE1hcDxTdHJpbmcsIGJvb2xlYW4+O1xuICBwcm90ZWN0ZWQgcXVlcnlDb2RlYzogSHR0cFVybEVuY29kaW5nQ29kZWM7XG4gIHByaXZhdGUgY29sbGFwc2VkRmFjZXRzID0gbmV3IFNldDxzdHJpbmc+KCk7XG4gIHNlYXJjaFJlc3VsdCQ6IE9ic2VydmFibGU8UHJvZHVjdFNlYXJjaFBhZ2U+O1xuICB2aXNpYmxlRmFjZXRzJDogT2JzZXJ2YWJsZTxGYWNldFtdPjtcblxuICBjb25zdHJ1Y3RvcihcbiAgICBwcml2YXRlIG1vZGFsU2VydmljZTogTW9kYWxTZXJ2aWNlLFxuICAgIHByaXZhdGUgYWN0aXZhdGVkUm91dGU6IEFjdGl2YXRlZFJvdXRlLFxuICAgIHByaXZhdGUgcHJvZHVjdExpc3RDb21wb25lbnRTZXJ2aWNlOiBQcm9kdWN0TGlzdENvbXBvbmVudFNlcnZpY2VcbiAgKSB7XG4gICAgdGhpcy5zaG93QWxsUGVyRmFjZXRNYXAgPSBuZXcgTWFwPFN0cmluZywgYm9vbGVhbj4oKTtcbiAgICB0aGlzLnF1ZXJ5Q29kZWMgPSBuZXcgSHR0cFVybEVuY29kaW5nQ29kZWMoKTtcbiAgfVxuXG4gIG5nT25Jbml0KCk6IHZvaWQge1xuICAgIHRoaXMuc3ViID0gdGhpcy5hY3RpdmF0ZWRSb3V0ZS5wYXJhbXMuc3Vic2NyaWJlKChwYXJhbXMpID0+IHtcbiAgICAgIHRoaXMuYWN0aXZlRmFjZXRWYWx1ZUNvZGUgPSBwYXJhbXMuY2F0ZWdvcnlDb2RlIHx8IHBhcmFtcy5icmFuZENvZGU7XG4gICAgfSk7XG5cbiAgICB0aGlzLnNlYXJjaFJlc3VsdCQgPSB0aGlzLnByb2R1Y3RMaXN0Q29tcG9uZW50U2VydmljZS5tb2RlbCQucGlwZShcbiAgICAgIHRhcCgoc2VhcmNoUmVzdWx0KSA9PiB7XG4gICAgICAgIGlmIChzZWFyY2hSZXN1bHQuZmFjZXRzKSB7XG4gICAgICAgICAgc2VhcmNoUmVzdWx0LmZhY2V0cy5mb3JFYWNoKChlbCkgPT4ge1xuICAgICAgICAgICAgdGhpcy5zaG93QWxsUGVyRmFjZXRNYXAuc2V0KGVsLm5hbWUsIGZhbHNlKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgfVxuICAgICAgfSlcbiAgICApO1xuXG4gICAgdGhpcy52aXNpYmxlRmFjZXRzJCA9IHRoaXMuc2VhcmNoUmVzdWx0JC5waXBlKFxuICAgICAgbWFwKChzZWFyY2hSZXN1bHQpID0+IHtcbiAgICAgICAgcmV0dXJuIHNlYXJjaFJlc3VsdC5mYWNldHNcbiAgICAgICAgICA/IHNlYXJjaFJlc3VsdC5mYWNldHMuZmlsdGVyKChmYWNldCkgPT4gZmFjZXQudmlzaWJsZSlcbiAgICAgICAgICA6IFtdO1xuICAgICAgfSlcbiAgICApO1xuICB9XG5cbiAgb3BlbkZpbHRlck1vZGFsKGNvbnRlbnQpOiB2b2lkIHtcbiAgICB0aGlzLm1vZGFsU2VydmljZS5vcGVuKGNvbnRlbnQsIHsgYXJpYUxhYmVsbGVkQnk6ICdtb2RhbC1iYXNpYy10aXRsZScgfSk7XG4gIH1cblxuICB0b2dnbGVWYWx1ZShxdWVyeTogc3RyaW5nKTogdm9pZCB7XG4gICAgdGhpcy5wcm9kdWN0TGlzdENvbXBvbmVudFNlcnZpY2Uuc2V0UXVlcnkoXG4gICAgICB0aGlzLnF1ZXJ5Q29kZWMuZGVjb2RlVmFsdWUocXVlcnkpXG4gICAgKTtcbiAgfVxuXG4gIHNob3dMZXNzKGZhY2V0TmFtZTogU3RyaW5nKTogdm9pZCB7XG4gICAgdGhpcy51cGRhdGVTaG93QWxsUGVyRmFjZXRNYXAoZmFjZXROYW1lLCBmYWxzZSk7XG4gIH1cblxuICBzaG93TW9yZShmYWNldE5hbWU6IFN0cmluZyk6IHZvaWQge1xuICAgIHRoaXMudXBkYXRlU2hvd0FsbFBlckZhY2V0TWFwKGZhY2V0TmFtZSwgdHJ1ZSk7XG4gIH1cblxuICBwcml2YXRlIHVwZGF0ZVNob3dBbGxQZXJGYWNldE1hcChmYWNldE5hbWU6IFN0cmluZywgc2hvd0FsbDogYm9vbGVhbik6IHZvaWQge1xuICAgIHRoaXMuc2hvd0FsbFBlckZhY2V0TWFwLnNldChmYWNldE5hbWUsIHNob3dBbGwpO1xuICB9XG5cbiAgaXNGYWNldENvbGxhcHNlZChmYWNldE5hbWU6IHN0cmluZyk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0aGlzLmNvbGxhcHNlZEZhY2V0cy5oYXMoZmFjZXROYW1lKTtcbiAgfVxuXG4gIHRvZ2dsZUZhY2V0KGZhY2V0TmFtZTogc3RyaW5nKTogdm9pZCB7XG4gICAgaWYgKHRoaXMuY29sbGFwc2VkRmFjZXRzLmhhcyhmYWNldE5hbWUpKSB7XG4gICAgICB0aGlzLmNvbGxhcHNlZEZhY2V0cy5kZWxldGUoZmFjZXROYW1lKTtcbiAgICB9IGVsc2Uge1xuICAgICAgdGhpcy5jb2xsYXBzZWRGYWNldHMuYWRkKGZhY2V0TmFtZSk7XG4gICAgfVxuICB9XG5cbiAgZ2V0VmlzaWJsZUZhY2V0VmFsdWVzKGZhY2V0OiBGYWNldCk6IEZhY2V0W10ge1xuICAgIHJldHVybiBmYWNldC52YWx1ZXMuc2xpY2UoXG4gICAgICAwLFxuICAgICAgdGhpcy5zaG93QWxsUGVyRmFjZXRNYXAuZ2V0KGZhY2V0Lm5hbWUpXG4gICAgICAgID8gZmFjZXQudmFsdWVzLmxlbmd0aFxuICAgICAgICA6IGZhY2V0LnRvcFZhbHVlQ291bnRcbiAgICApO1xuICB9XG5cbiAgbmdPbkRlc3Ryb3koKSB7XG4gICAgaWYgKHRoaXMuc3ViKSB7XG4gICAgICB0aGlzLnN1Yi51bnN1YnNjcmliZSgpO1xuICAgIH1cbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1mYWNldC1uYXZpZ2F0aW9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL3Byb2R1Y3QvcHJvZHVjdC1saXN0L3Byb2R1Y3QtZmFjZXQtbmF2aWdhdGlvbi9wcm9kdWN0LWZhY2V0LW5hdmlnYXRpb24uY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsRUFFVCxTQUFTLEdBQ1YsTUFBTSxlQUFlLENBQUM7QUFDdkIsT0FBTyxFQUFFLGFBQWEsRUFBRSxlQUFlLEVBQUUsUUFBUSxFQUFjLEVBQUUsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUNoRixPQUFPLEVBQUUsU0FBUyxFQUFFLFNBQVMsRUFBRSxTQUFTLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUNqRSxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0saURBQWlELENBQUM7QUFDNUUsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sa0RBQWtELENBQUM7QUFPckY7SUFnREUseUNBQXNCLGlCQUFvQztRQUExRCxpQkFBOEQ7UUFBeEMsc0JBQWlCLEdBQWpCLGlCQUFpQixDQUFtQjtRQS9DMUQsY0FBUyxHQUFHLFNBQVMsQ0FBQztRQUV0Qjs7OztXQUlHO1FBQ08sZ0JBQVcsR0FBRyxHQUFHLENBQUM7UUFVbEIsVUFBSyxHQUFHLElBQUksZUFBZSxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRTdDOzs7Ozs7OztXQVFHO1FBQ0gsWUFBTyxHQUF3QixJQUFJLENBQUMsaUJBQWlCLENBQUMsV0FBVyxDQUFDLElBQUk7UUFDcEUscUZBQXFGO1FBQ3JGLHlDQUF5QztRQUN6QyxTQUFTLENBQUMsYUFBYSxDQUFDLEVBQ3hCLFNBQVMsQ0FBQyxjQUFNLE9BQUEsQ0FBQyxLQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxLQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLENBQUMsRUFBekMsQ0FBeUMsQ0FBQyxFQUMxRCxTQUFTLENBQUMsVUFBQyxRQUFRLElBQUssT0FBQSxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUksQ0FBQyxXQUFXLENBQUMsRUFBekMsQ0FBeUMsQ0FBQyxDQUNuRSxDQUFDO1FBRUY7Ozs7V0FJRztRQUNILGNBQVMsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUk7UUFDekIsbUZBQW1GO1FBQ25GLG9DQUFvQztRQUNwQyxTQUFTLENBQUMsYUFBYSxDQUFDLENBQ3pCLENBQUM7SUFFMkQsQ0FBQztJQUU5RCxnREFBTSxHQUFOO1FBQ0UsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDeEIsQ0FBQztJQUVELCtDQUFLLEdBQUw7UUFDRSxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUN2QixJQUFJLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxLQUFLLEVBQUUsQ0FBQztJQUNyQyxDQUFDO0lBT0Qsc0JBQUksdURBQVU7UUFMZDs7OztXQUlHO2FBQ0g7WUFDRSxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLFlBQVksS0FBSyxJQUFJLENBQUM7UUFDMUQsQ0FBQzs7O09BQUE7O2dCQWxCd0MsaUJBQWlCOztJQWhDcEM7UUFBckIsU0FBUyxDQUFDLFNBQVMsQ0FBQztvRUFBa0M7SUFoQjVDLCtCQUErQjtRQUwzQyxTQUFTLENBQUM7WUFDVCxRQUFRLEVBQUUsNkJBQTZCO1lBQ3ZDLDhhQUF3RDtZQUN4RCxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTtTQUNoRCxDQUFDO09BQ1csK0JBQStCLENBbUUzQztJQUFELHNDQUFDO0NBQUEsQUFuRUQsSUFtRUM7U0FuRVksK0JBQStCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksXG4gIENvbXBvbmVudCxcbiAgRWxlbWVudFJlZixcbiAgVmlld0NoaWxkLFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IGFzYXBTY2hlZHVsZXIsIEJlaGF2aW9yU3ViamVjdCwgaW50ZXJ2YWwsIE9ic2VydmFibGUsIG9mIH0gZnJvbSAncnhqcyc7XG5pbXBvcnQgeyBkZWxheVdoZW4sIG9ic2VydmVPbiwgc3dpdGNoTWFwIH0gZnJvbSAncnhqcy9vcGVyYXRvcnMnO1xuaW1wb3J0IHsgSUNPTl9UWVBFIH0gZnJvbSAnLi4vLi4vLi4vLi4vY21zLWNvbXBvbmVudHMvbWlzYy9pY29uL2ljb24ubW9kZWwnO1xuaW1wb3J0IHsgQnJlYWtwb2ludFNlcnZpY2UgfSBmcm9tICcuLi8uLi8uLi8uLi9sYXlvdXQvYnJlYWtwb2ludC9icmVha3BvaW50LnNlcnZpY2UnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdjeC1wcm9kdWN0LWZhY2V0LW5hdmlnYXRpb24nLFxuICB0ZW1wbGF0ZVVybDogJy4vcHJvZHVjdC1mYWNldC1uYXZpZ2F0aW9uLmNvbXBvbmVudC5odG1sJyxcbiAgY2hhbmdlRGV0ZWN0aW9uOiBDaGFuZ2VEZXRlY3Rpb25TdHJhdGVneS5PblB1c2gsXG59KVxuZXhwb3J0IGNsYXNzIFByb2R1Y3RGYWNldE5hdmlnYXRpb25Db21wb25lbnQge1xuICBpY29uVHlwZXMgPSBJQ09OX1RZUEU7XG5cbiAgLyoqXG4gICAqIFdlIGRlbGF5IHRoZSByZW1vdmFsIG9mIERPTSBzbyB0aGF0IGFuaW1hdGlvbnMgY2FuIGZpbmlzaCBwbGF5aW5nIGJlZm9yZSB0aGVcbiAgICogRE9NIGlzIHJlbW92ZWQuIFJlbW92aW5nIHRoZSBET00sIGFzIGhpZGRpbmcgaXMgbm90IGVub3VnaCB0byBzdG9wIGVsZW1lbnRzXG4gICAqIHRvIGJlIGZvY3VzZWQuXG4gICAqL1xuICBwcm90ZWN0ZWQgQ0xPU0VfREVMQVkgPSAzMDA7XG5cbiAgLyoqXG4gICAqIFVzZWQgdG8gb3BlbiB0aGUgZmFjZXQgbmF2aWdhdGlvbiBpbiBhIGRpYWxvZy4gVGhlIHVzYWdlIG9mIHRoZSBkaWFsb2cgZGVwZW5kc1xuICAgKiBvbiB0aGUgYXZhaWxhYmlsaXR5IG9mIHRoZSB0cmlnZ2VyIGVsZW1lbnQsIHdoaWNoIGlzIGRyaXZlbiBieSBDU1MuXG4gICAqXG4gICAqIFRoZSByZWZlcmVuY2UgaXMgYWxzbyB1c2VkIHRvIHJlZm9jdXMgdGhlIHRyaWdnZXIgYWZ0ZXIgdGhlIGRpYWxvZyBpcyBjbG9zZWQuXG4gICAqL1xuICBAVmlld0NoaWxkKCd0cmlnZ2VyJykgdHJpZ2dlcjogRWxlbWVudFJlZjxIVE1MRWxlbWVudD47XG5cbiAgcHJvdGVjdGVkIG9wZW4kID0gbmV3IEJlaGF2aW9yU3ViamVjdChmYWxzZSk7XG5cbiAgLyoqXG4gICAqIEVtaXRzIHRoZSBvcGVuIHN0YXRlIHRoYXQgaW5kaWNhdGVzIHdoZXRoZXIgdGhlIGZhY2V0IGxpc3Qgc2hvdWxkIGJlIHJlbmRlcmVkLlxuICAgKiBUaGlzIGlzIGVpdGhlciBkb25lIGluc3RhbnRseSwgb3IgYWZ0ZXIgdGhlIHVzZXIgdHJpZ2dlcnMgdGhpcyBieSB1c2luZyB0aGUgdHJpZ2dlclxuICAgKiBidXR0b24uIFRoaXMgZHJpdmVuIGJ5IHRoZSB2aXNpaWJpbGl0eSBvZiB0aGUgdHJpZ2dlciwgc28gdGhhdCB0aGUgQ1NTIGRyaXZlc1xuICAgKiB0aGUgYmVoYXZpb3VyLiBUaGlzIGNhbiBkaWZmZXIgcGVyIGJyZWFrcG9pbnQuXG4gICAqXG4gICAqIFRoZXJlJ3MgYSBjb25maWd1cmFibGUgZGVsYXkgZm9yIHRoZSBjbG9zZWQgc3RhdGUsIHNvIHRoYXQgdGhlIERPTSBpcyBub3QgcmVtb3ZlZFxuICAgKiBiZWZvcmUgc29tZSBDU1MgYW5pbWF0aW9ucyBhcmUgZG9uZS5cbiAgICovXG4gIGlzT3BlbiQ6IE9ic2VydmFibGU8Ym9vbGVhbj4gPSB0aGlzLmJyZWFrcG9pbnRTZXJ2aWNlLmJyZWFrcG9pbnQkLnBpcGUoXG4gICAgLy8gZGVmZmVyIGVtaXR0aW5nIGEgbmV3IHZhbHVlIHRvIHRoZSBuZXh0IG1pY3JvLXRhc2sgdG8gZW5zdXJlIHRoYXQgdGhlIGBoYXNUcmlnZ2VyYFxuICAgIC8vIG1ldGhvZCByZXByZXNlbnRzIHRoZSBhY3R1YWwgVUkgc3RhdGUuXG4gICAgb2JzZXJ2ZU9uKGFzYXBTY2hlZHVsZXIpLFxuICAgIHN3aXRjaE1hcCgoKSA9PiAodGhpcy5oYXNUcmlnZ2VyID8gdGhpcy5vcGVuJCA6IG9mKHRydWUpKSksXG4gICAgZGVsYXlXaGVuKChsYXVuY2hlZCkgPT4gaW50ZXJ2YWwobGF1bmNoZWQgPyAwIDogdGhpcy5DTE9TRV9ERUxBWSkpXG4gICk7XG5cbiAgLyoqXG4gICAqIEVtaXRzIHRoZSBhY3RpdmUgc3RhdGUgdGhhdCBpbmRpY2F0ZXMgd2hldGhlciB0aGUgZmFjZXQgbGlzdCBpcyBhY3RpdmF0ZWQuIEFjdGl2YXRpb25cbiAgICogaXMgcmVsYXRlZCB0byB0aGUgY3NzLCBzbyB0aGF0IGEgYW5pbWF0aW9uIG9yIHRyYW5zaXRpb24gY2FuIHZpc3VhbGl6ZSBvcGVuaW5nL2Nsb3NpbmdcbiAgICogdGhlIGxpc3QgKGkuZS4gZGlhbG9nKS5cbiAgICovXG4gIGlzQWN0aXZlJCA9IHRoaXMub3BlbiQucGlwZShcbiAgICAvLyBkZWZmZXIgZW1pdHRpbmcgYSBuZXcgdmFsdWUgdG8gdGhlIG5leHQgbWljcm8tdGFzayB0byBlbnN1cmUgdGhlIGFjdGl2ZSBjbGFzcyBpc1xuICAgIC8vICBhcHBsaWVkIGFmdGVyIHRoZSBET00gaXMgY3JlYXRlZFxuICAgIG9ic2VydmVPbihhc2FwU2NoZWR1bGVyKVxuICApO1xuXG4gIGNvbnN0cnVjdG9yKHByb3RlY3RlZCBicmVha3BvaW50U2VydmljZTogQnJlYWtwb2ludFNlcnZpY2UpIHt9XG5cbiAgbGF1bmNoKCkge1xuICAgIHRoaXMub3BlbiQubmV4dCh0cnVlKTtcbiAgfVxuXG4gIGNsb3NlKCkge1xuICAgIHRoaXMub3BlbiQubmV4dChmYWxzZSk7XG4gICAgdGhpcy50cmlnZ2VyLm5hdGl2ZUVsZW1lbnQuZm9jdXMoKTtcbiAgfVxuXG4gIC8qKlxuICAgKiBJbmRpY2F0ZXMgdGhhdCB0aGUgZmFjZXQgbmF2aWdhdGlvbiBzaG91bGQgYmUgb3BlbiBleHBsaWNpdGVseSBieSBhIHRyaWdnZXIuXG4gICAqIFRoaXMgaXMgZnVsbHkgY29udHJvbGxlZCBieSBDU1MsIHdoZXJlIHRoZSB0cmlnZ2VyIGJ1dHRvbiBjYW4gYmUgaGlkZGVuXG4gICAqIChkaXNwbGF5Om5vbmUpIGZvciBjZXJ0YWluIHNjcmVlbiBzaXplcy5cbiAgICovXG4gIGdldCBoYXNUcmlnZ2VyKCkge1xuICAgIHJldHVybiB0aGlzLnRyaWdnZXIubmF0aXZlRWxlbWVudC5vZmZzZXRQYXJlbnQgIT09IG51bGw7XG4gIH1cbn1cbiJdfQ==

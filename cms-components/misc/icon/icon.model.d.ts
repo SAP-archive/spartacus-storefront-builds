@@ -22,7 +22,8 @@ export declare enum ICON_TYPE {
     RESET = "RESET",
     CIRCLE = "CIRCLE",
     HEART = "HEART",
-    EMPTY_HEART = "EMPTY_HEART"
+    EMPTY_HEART = "EMPTY_HEART",
+    FILTER = "FILTER"
 }
 export declare abstract class IconConfig {
     icon?: IconOptions;
