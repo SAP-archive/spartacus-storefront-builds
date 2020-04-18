@@ -11231,12 +11231,12 @@
     }());
 
     var CmsPageGuard = /** @class */ (function () {
-        function CmsPageGuard(routingService, cmsService, protectedRoutesGuard, service, config) {
+        function CmsPageGuard(routingService, cmsService, protectedRoutesGuard, service, routingConfig) {
             this.routingService = routingService;
             this.cmsService = cmsService;
             this.protectedRoutesGuard = protectedRoutesGuard;
             this.service = service;
-            this.config = config;
+            this.routingConfig = routingConfig;
         }
         /**
          * Tries to load the CMS page data for the anticipated route and returns:
@@ -11254,9 +11254,7 @@
             return this.protectedRoutesGuard.canActivate(route).pipe(operators.switchMap(function (canActivate) {
                 return canActivate
                     ? _this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) {
-                        return _this.cmsService
-                            .getPage(pageContext, _this.shouldReloadCmsData())
-                            .pipe(operators.first(), operators.switchMap(function (pageData) {
+                        return _this.cmsService.getPage(pageContext, _this.shouldReload()).pipe(operators.first(), operators.switchMap(function (pageData) {
                             return pageData
                                 ? _this.service.canActivatePage(pageContext, pageData, route, state)
                                 : _this.service.canActivateNotFoundPage(pageContext, route, state);
@@ -11268,8 +11266,8 @@
         /**
          * Returns whether we should reload the CMS page data, even when it was loaded before.
          */
-        CmsPageGuard.prototype.shouldReloadCmsData = function () {
-            return !core$1.isFeatureEnabled(this.config, 'cmsPageLoadOnce');
+        CmsPageGuard.prototype.shouldReload = function () {
+            return this.routingConfig.getLoadStrategy() !== "once" /* ONCE */;
         };
         CmsPageGuard.guardName = 'CmsPageGuard';
         CmsPageGuard.ctorParameters = function () { return [
@@ -11277,14 +11275,13 @@
             { type: core$1.CmsService },
             { type: core$1.ProtectedRoutesGuard },
             { type: CmsPageGuardService },
-            { type: undefined, decorators: [{ type: core.Inject, args: [core$1.Config,] }] }
+            { type: core$1.RoutingConfigService }
         ]; };
-        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](core$1.ProtectedRoutesGuard), core["ɵɵinject"](CmsPageGuardService), core["ɵɵinject"](core$1.Config)); }, token: CmsPageGuard, providedIn: "root" });
+        CmsPageGuard.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(core["ɵɵinject"](core$1.RoutingService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](core$1.ProtectedRoutesGuard), core["ɵɵinject"](CmsPageGuardService), core["ɵɵinject"](core$1.RoutingConfigService)); }, token: CmsPageGuard, providedIn: "root" });
         CmsPageGuard = __decorate([
             core.Injectable({
                 providedIn: 'root',
-            }),
-            __param(4, core.Inject(core$1.Config))
+            })
         ], CmsPageGuard);
         return CmsPageGuard;
     }());

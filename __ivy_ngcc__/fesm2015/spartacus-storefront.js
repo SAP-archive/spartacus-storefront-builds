@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, resolveHandler, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, isFeatureEnabled, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, resolveHandler, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -18789,12 +18789,12 @@ CmsPageGuardService.ctorParameters = () => [
 CmsPageGuardService.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(ɵɵinject(SemanticPathService), ɵɵinject(CmsService), ɵɵinject(CmsRoutesService), ɵɵinject(CmsI18nService), ɵɵinject(CmsGuardsService)); }, token: CmsPageGuardService, providedIn: "root" });
 
 let CmsPageGuard = class CmsPageGuard {
-    constructor(routingService, cmsService, protectedRoutesGuard, service, config) {
+    constructor(routingService, cmsService, protectedRoutesGuard, service, routingConfig) {
         this.routingService = routingService;
         this.cmsService = cmsService;
         this.protectedRoutesGuard = protectedRoutesGuard;
         this.service = service;
-        this.config = config;
+        this.routingConfig = routingConfig;
     }
     /**
      * Tries to load the CMS page data for the anticipated route and returns:
@@ -18809,9 +18809,7 @@ let CmsPageGuard = class CmsPageGuard {
      */
     canActivate(route, state) {
         return this.protectedRoutesGuard.canActivate(route).pipe(switchMap((canActivate) => canActivate
-            ? this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService
-                .getPage(pageContext, this.shouldReloadCmsData())
-                .pipe(first(), switchMap((pageData) => pageData
+            ? this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService.getPage(pageContext, this.shouldReload()).pipe(first(), switchMap((pageData) => pageData
                 ? this.service.canActivatePage(pageContext, pageData, route, state)
                 : this.service.canActivateNotFoundPage(pageContext, route, state)))))
             : of(false)));
@@ -18819,22 +18817,20 @@ let CmsPageGuard = class CmsPageGuard {
     /**
      * Returns whether we should reload the CMS page data, even when it was loaded before.
      */
-    shouldReloadCmsData() {
-        return !isFeatureEnabled(this.config, 'cmsPageLoadOnce');
+    shouldReload() {
+        return this.routingConfig.getLoadStrategy() !== "once" /* ONCE */;
     }
 };
-CmsPageGuard.ɵfac = function CmsPageGuard_Factory(t) { return new (t || CmsPageGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(ɵngcc1.ProtectedRoutesGuard), ɵngcc0.ɵɵinject(CmsPageGuardService), ɵngcc0.ɵɵinject(Config)); };
+CmsPageGuard.ɵfac = function CmsPageGuard_Factory(t) { return new (t || CmsPageGuard)(ɵngcc0.ɵɵinject(ɵngcc1.RoutingService), ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(ɵngcc1.ProtectedRoutesGuard), ɵngcc0.ɵɵinject(CmsPageGuardService), ɵngcc0.ɵɵinject(ɵngcc1.RoutingConfigService)); };
 CmsPageGuard.guardName = 'CmsPageGuard';
 CmsPageGuard.ctorParameters = () => [
     { type: RoutingService },
     { type: CmsService },
     { type: ProtectedRoutesGuard },
     { type: CmsPageGuardService },
-    { type: undefined, decorators: [{ type: Inject, args: [Config,] }] }
+    { type: RoutingConfigService }
 ];
-CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(ProtectedRoutesGuard), ɵɵinject(CmsPageGuardService), ɵɵinject(Config)); }, token: CmsPageGuard, providedIn: "root" });
-CmsPageGuard = __decorate([ __param(4, Inject(Config))
-], CmsPageGuard);
+CmsPageGuard.ɵprov = ɵɵdefineInjectable({ factory: function CmsPageGuard_Factory() { return new CmsPageGuard(ɵɵinject(RoutingService), ɵɵinject(CmsService), ɵɵinject(ProtectedRoutesGuard), ɵɵinject(CmsPageGuardService), ɵɵinject(RoutingConfigService)); }, token: CmsPageGuard, providedIn: "root" });
 
 const cmsRoute = {
     path: '**',
@@ -30198,10 +30194,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.CmsService }, { type: ɵngcc1.ProtectedRoutesGuard }, { type: CmsPageGuardService }, { type: undefined, decorators: [{
-                type: Inject,
-                args: [Config]
-            }] }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.RoutingService }, { type: ɵngcc1.CmsService }, { type: ɵngcc1.ProtectedRoutesGuard }, { type: CmsPageGuardService }, { type: ɵngcc1.RoutingConfigService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CmsRouteModule, [{
         type: NgModule,
         args: [{

@@ -1,5 +1,5 @@
 import { CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { CmsActivatedRouteSnapshot, CmsService, ProtectedRoutesGuard, RoutingService } from '@spartacus/core';
+import { CmsActivatedRouteSnapshot, CmsService, ProtectedRoutesGuard, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsPageGuardService } from './cms-page-guard.service';
 export declare class CmsPageGuard implements CanActivate {
@@ -7,9 +7,9 @@ export declare class CmsPageGuard implements CanActivate {
     protected cmsService: CmsService;
     protected protectedRoutesGuard: ProtectedRoutesGuard;
     protected service: CmsPageGuardService;
-    protected config: any;
+    protected routingConfig: RoutingConfigService;
     static guardName: string;
-    constructor(routingService: RoutingService, cmsService: CmsService, protectedRoutesGuard: ProtectedRoutesGuard, service: CmsPageGuardService, config: any);
+    constructor(routingService: RoutingService, cmsService: CmsService, protectedRoutesGuard: ProtectedRoutesGuard, service: CmsPageGuardService, routingConfig: RoutingConfigService);
     /**
      * Tries to load the CMS page data for the anticipated route and returns:
      * - `true` - if it can be activated
@@ -25,5 +25,5 @@ export declare class CmsPageGuard implements CanActivate {
     /**
      * Returns whether we should reload the CMS page data, even when it was loaded before.
      */
-    private shouldReloadCmsData;
+    private shouldReload;
 }
