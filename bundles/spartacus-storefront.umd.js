@@ -2190,7 +2190,7 @@
          * @param config Configuration for launch
          */
         LaunchDialogService.prototype.getStrategy = function (config) {
-            return this.renderStrategies.find(function (strategy) { return strategy.match(config); });
+            return core$1.resolveHandler(this.renderStrategies, [config]);
         };
         LaunchDialogService.ctorParameters = function () { return [
             { type: Array, decorators: [{ type: core.Inject, args: [LaunchRenderStrategy,] }] },
@@ -9241,7 +9241,7 @@
                 }
             }
         };
-        InlineRenderStrategy.prototype.match = function (config) {
+        InlineRenderStrategy.prototype.hasMatch = function (config) {
             return Boolean(config.inline);
         };
         InlineRenderStrategy.ctorParameters = function () { return [
@@ -9592,7 +9592,7 @@
                 this.renderedCallers.push({ caller: caller, element: element });
             }
         };
-        OutletRenderStrategy.prototype.match = function (config) {
+        OutletRenderStrategy.prototype.hasMatch = function (config) {
             return Boolean(config.outlet);
         };
         OutletRenderStrategy.prototype.remove = function (caller, config) {
@@ -9625,7 +9625,7 @@
         RoutingRenderStrategy.prototype.render = function (config, _caller) {
             this.routingService.go(config);
         };
-        RoutingRenderStrategy.prototype.match = function (config) {
+        RoutingRenderStrategy.prototype.hasMatch = function (config) {
             return Boolean(config.cxRoute);
         };
         RoutingRenderStrategy.ctorParameters = function () { return [

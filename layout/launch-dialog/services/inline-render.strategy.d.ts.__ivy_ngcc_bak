@@ -12,5 +12,5 @@ export declare class InlineRenderStrategy extends LaunchRenderStrategy {
      * @param vcr
      */
     render(config: LaunchInlineDialog, caller: LAUNCH_CALLER, vcr: ViewContainerRef): void;
-    match(config: LaunchInlineDialog): boolean;
+    hasMatch(config: LaunchInlineDialog): boolean;
 }

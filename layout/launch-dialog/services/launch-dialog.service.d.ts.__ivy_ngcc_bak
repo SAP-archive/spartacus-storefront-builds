@@ -1,5 +1,5 @@
 import { ViewContainerRef } from '@angular/core';
-import { LaunchConfig, LaunchOptions, LAUNCH_CALLER } from '../config/launch-config';
+import { LAUNCH_CALLER, LaunchConfig, LaunchOptions } from '../config/launch-config';
 import { LaunchRenderStrategy } from './launch-render.strategy';
 export declare class LaunchDialogService {
     protected renderStrategies: LaunchRenderStrategy[];

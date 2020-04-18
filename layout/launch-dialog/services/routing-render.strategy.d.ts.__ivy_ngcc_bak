@@ -8,5 +8,5 @@ export declare class RoutingRenderStrategy extends LaunchRenderStrategy {
      * Navigates to the route configured for the caller
      */
     render(config: LaunchRoute, _caller: LAUNCH_CALLER): void;
-    match(config: LaunchRoute): boolean;
+    hasMatch(config: LaunchRoute): boolean;
 }
