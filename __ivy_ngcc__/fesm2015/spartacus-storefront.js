@@ -17154,10 +17154,10 @@ let IntersectionService = class IntersectionService {
      * This is private for now, but could be exposed as a public API
      * to introduce additional (css) render effects to the UI.
      */
-    intersects(element, options) {
+    intersects(element, options = {}) {
         const elementVisible$ = new Observable((observer) => {
             const rootMargin = this.getRootMargin(options);
-            const intersectOptions = { rootMargin };
+            const intersectOptions = { rootMargin, thresholds: options.threshold };
             const intersectionObserver = new IntersectionObserver((entries) => {
                 observer.next(entries);
             }, intersectOptions);
