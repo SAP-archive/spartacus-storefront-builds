@@ -929,23 +929,14 @@
          * @param componentMapping
          */
         ComponentHandlerService.prototype.resolve = function (componentMapping) {
-            var _a;
-            var matchedHandlers = ((_a = this.handlers) !== null && _a !== void 0 ? _a : []).filter(function (handler) {
-                return handler.hasMatch(componentMapping);
-            });
-            if (matchedHandlers.length > 1) {
-                matchedHandlers.sort(function (a, b) {
-                    return (a.getPriority ? a.getPriority() : 0) -
-                        (b.getPriority ? b.getPriority() : 0);
-                });
-            }
-            if (core.isDevMode() && matchedHandlers.length === 0) {
+            var handler = core$1.resolveHandler(this.handlers, [componentMapping]);
+            if (core.isDevMode() && !handler) {
                 if (!this.invalidMappings.has(componentMapping)) {
                     this.invalidMappings.add(componentMapping);
                     console.warn("Can't resolve handler for component mapping: ", componentMapping);
                 }
             }
-            return matchedHandlers[matchedHandlers.length - 1];
+            return handler;
         };
         /**
          * Get launcher for specified component mapping
