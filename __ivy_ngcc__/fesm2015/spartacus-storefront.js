@@ -3241,10 +3241,9 @@ function PageSlotComponent_ng_template_0_0_Template(rf, ctx) { if (rf & 1) {
 } }
 function PageSlotComponent_ng_template_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_0_Template, 1, 5, undefined, 1);
-    ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
     const ctx_r514 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx_r514.components$));
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r514.components);
 } }
 const _c23 = function (a0) { return { components$: a0 }; };
 function PageLayoutComponent_ng_template_0_cx_page_slot_1_Template(rf, ctx) { if (rf & 1) {
@@ -17439,94 +17438,137 @@ LayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LayoutModule });
 LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule_Factory(t) { return new (t || LayoutModule)(); }, providers: [{ provide: LayoutConfig, useExisting: Config }], imports: [[OutletRefModule, LaunchDialogModule.forRoot()],
         OutletRefModule] });
 
+/**
+ * The `PageSlotComponent` is used to render the CMS page slot and it's components.
+ *
+ * The Page slot host element will be supplemented with css classes so that the layout
+ * can be fully controlled by customers:
+ * - The page slot _position_ is added as a css class by default.
+ * - The `cx-pending` is added for as long as the slot hasn't start loading.
+ * - The `page-fold` style class is added for the page slot which is configured as the page fold.
+ */
 let PageSlotComponent = class PageSlotComponent {
-    constructor(cmsService, dynamicAttributeService, renderer, hostElement, config, cdRef) {
+    constructor(cmsService, dynamicAttributeService, renderer, elementRef, config, cd) {
         this.cmsService = cmsService;
         this.dynamicAttributeService = dynamicAttributeService;
         this.renderer = renderer;
-        this.hostElement = hostElement;
+        this.elementRef = elementRef;
         this.config = config;
-        this.cdRef = cdRef;
-        this.isPending = true;
-        this.hasComponents = false;
-        this.isPageFold = false;
-        this.position$ = new BehaviorSubject(undefined);
+        this.cd = cd;
         /**
-         * observable with `ContentSlotData` for the current position
-         *
-         * @deprecated we'll stop supporting this property in 2.0 as
-         * it is not used separately.
+         * Indicates that the page slot is the last page slot above the fold.
          */
-        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), tap((slot) => this.addSmartEditSlotClass(slot)));
-        this.components$ = this.slot$.pipe(map((slot) => (slot && slot.components ? slot.components : [])), distinctUntilChanged((a, b) => a.length === b.length && !a.find((el, index) => el.uid !== b[index].uid)));
+        this.isPageFold = false;
+        /**
+         * Indicates that the components of the page slot haven't been loaded as long
+         * as the isPending state is true.
+         */
+        this.isPending = true;
+        /**
+         * Indicates that the page slot doesn't contain any components. This is no
+         * longer used in spartacus, but kept for backwards compatibility.
+         */
+        this.hasComponents = false;
+        this.position$ = new BehaviorSubject(undefined);
+        this.slot$ = this.position$.pipe(switchMap((position) => this.cmsService.getContentSlot(position)), distinctUntilChanged(this.isDistinct));
+        /** Observes the components for the given page slot. */
+        this.components$ = this.slot$.pipe(map((slot) => { var _a; return (_a = slot === null || slot === void 0 ? void 0 : slot.components) !== null && _a !== void 0 ? _a : []; }));
         this.subscription = new Subscription();
+        /** Keeps track of the pending components that must be loaded for the page slot */
+        this.pendingComponentCount = 0;
     }
     /**
-     * The position is used to find the CMS page slot (and optional outlet)
-     * that is rendered in the PageSlotComponent. Furthermore, the position
-     * is added as a CSS class name to the host element.
+     * The position represents the unique key for a page slot on a single page, but can
+     * be reused cross pages.
+     *
+     * The position is used to find the CMS components for the page slot. It is also
+     * added as an additional CSS class so that layoutt can be applied.
      */
-    set position(position) {
-        this.position$.next(position);
-        this.renderer.addClass(this.hostElement.nativeElement, position);
+    set position(value) {
+        this.position$.next(value);
     }
     get position() {
         return this.position$.value;
     }
     ngOnInit() {
-        this.subscription.add(this.components$.subscribe((components) => {
-            this.hasComponents = components && components.length > 0;
-            this.pendingComponentCount = components ? components.length : 0;
-            this.isPending = this.pendingComponentCount > 0;
+        this.subscription.add(this.slot$.pipe(tap((slot) => this.decorate(slot))).subscribe((value) => {
+            this.components = (value === null || value === void 0 ? void 0 : value.components) || [];
+            this.cd.markForCheck();
         }));
     }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+    decorate(slot) {
+        var _a, _b;
+        let cls = this.class || '';
+        if (this.lastPosition && cls.indexOf(this.lastPosition) > -1) {
+            cls = cls.replace(this.lastPosition, '');
+        }
+        if (this.position$.value) {
+            cls += ` ${this.position$.value}`;
+            this.lastPosition = this.position$.value;
+        }
+        // host bindings
+        this.pending = ((_a = slot === null || slot === void 0 ? void 0 : slot.components) === null || _a === void 0 ? void 0 : _a.length) || 0;
+        this.hasComponents = ((_b = slot === null || slot === void 0 ? void 0 : slot.components) === null || _b === void 0 ? void 0 : _b.length) > 0;
+        if (cls && cls !== this.class) {
+            this.class = cls;
+        }
+        this.addSmartEditSlotClass(slot);
     }
     /**
-     * Is triggered when a component is added to the view.
-     * We use this information to dropthe `is-pending` class from the page slot
-     * when all nested components have been added.
+     * Sets the pending count for the page slot components. Once all pending components are
+     * loaded, the `isPending` flag is updated, so that the associated class can be updated
+     */
+    set pending(count) {
+        this.pendingComponentCount = count;
+        this.isPending = this.pendingComponentCount > 0;
+    }
+    get pending() {
+        return this.pendingComponentCount;
+    }
+    /*
+     * Is triggered when a component is added to the view. This is used to
+     * update the pending count
      */
     isLoaded(loadState) {
-        var _a;
         if (loadState) {
-            this.pendingComponentCount--;
+            this.pending--;
+            this.cd.markForCheck();
         }
-        this.isPending = this.pendingComponentCount > 0;
-        (_a = this.cdRef) === null || _a === void 0 ? void 0 : _a.markForCheck();
-    }
-    getComponentDeferOptions(componentType) {
-        const deferLoading = this.getDeferLoadingStrategy(componentType);
-        return { deferLoading };
     }
     /**
-     * The `DeferLoadingStrategy` indicates whether component rendering
-     * should be deferred.
+     * The `DeferLoadingStrategy` indicates whether the component should be
+     * rendered instantly or whether it should be deferred.
      */
-    getDeferLoadingStrategy(componentType) {
-        if (this.config) {
-            return (this.config.cmsComponents[componentType] || {})
-                .deferLoading;
-        }
+    getComponentDeferOptions(componentType) {
+        const deferLoading = (this.config.cmsComponents[componentType] || {})
+            .deferLoading;
+        return { deferLoading };
+    }
+    isDistinct(old, current) {
+        var _a;
+        return (current.components &&
+            ((_a = old.components) === null || _a === void 0 ? void 0 : _a.length) === current.components.length &&
+            !old.components.find((el, index) => el.uid !== current.components[index].uid));
     }
     addSmartEditSlotClass(slot) {
         if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.addSmartEditContract(slot);
+            this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.elementRef.nativeElement, this.renderer);
         }
     }
-    addSmartEditContract(slot) {
-        this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.hostElement.nativeElement, this.renderer);
+    ngOnDestroy() {
+        var _a;
+        (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     }
 };
 PageSlotComponent.ɵfac = function PageSlotComponent_Factory(t) { return new (t || PageSlotComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.DynamicAttributeService), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.Renderer2), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.CmsConfig), ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ChangeDetectorRef)); };
-PageSlotComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageSlotComponent, selectors: [["cx-page-slot"], ["", "cx-page-slot", ""]], hostVars: 6, hostBindings: function PageSlotComponent_HostBindings(rf, ctx) { if (rf & 2) {
-        ɵngcc0.ɵɵclassProp("cx-pending", ctx.isPending)("has-components", ctx.hasComponents)("page-fold", ctx.isPageFold);
-    } }, inputs: { isPageFold: "isPageFold", position: "position" }, decls: 1, vars: 4, consts: [[3, "cxOutlet", "cxOutletContext"], [4, "ngFor", "ngForOf"], [3, "cxOutlet", "cxOutletContext", "cxOutletDefer", "loaded"], [3, "cxComponentWrapper"]], template: function PageSlotComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_Template, 2, 3, "ng-template", 0);
+PageSlotComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: PageSlotComponent, selectors: [["cx-page-slot"], ["", "cx-page-slot", ""]], hostVars: 8, hostBindings: function PageSlotComponent_HostBindings(rf, ctx) { if (rf & 2) {
+        ɵngcc0.ɵɵclassMap(ctx.class);
+        ɵngcc0.ɵɵclassProp("page-fold", ctx.isPageFold)("cx-pending", ctx.isPending)("has-components", ctx.hasComponents);
+    } }, inputs: { isPageFold: "isPageFold", hasComponents: "hasComponents", position: "position", class: "class" }, decls: 1, vars: 4, consts: [[3, "cxOutlet", "cxOutletContext"], [4, "ngFor", "ngForOf"], [3, "cxOutlet", "cxOutletContext", "cxOutletDefer", "loaded"], [3, "cxComponentWrapper"]], template: function PageSlotComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, PageSlotComponent_ng_template_0_Template, 1, 1, "ng-template", 0);
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("cxOutlet", ctx.position)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(2, _c23, ctx.components$));
-    } }, directives: [OutletDirective, ɵngcc4.NgForOf, ComponentWrapperDirective], pipes: [ɵngcc4.AsyncPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [OutletDirective, ɵngcc4.NgForOf, ComponentWrapperDirective], encapsulation: 2, changeDetection: 0 });
 PageSlotComponent.ctorParameters = () => [
     { type: CmsService },
     { type: DynamicAttributeService },
@@ -17539,14 +17581,17 @@ __decorate([
     Input()
 ], PageSlotComponent.prototype, "position", null);
 __decorate([
-    HostBinding('class.cx-pending')
-], PageSlotComponent.prototype, "isPending", void 0);
-__decorate([
-    HostBinding('class.has-components')
-], PageSlotComponent.prototype, "hasComponents", void 0);
+    Input(), HostBinding()
+], PageSlotComponent.prototype, "class", void 0);
 __decorate([
     HostBinding('class.page-fold'), Input()
 ], PageSlotComponent.prototype, "isPageFold", void 0);
+__decorate([
+    HostBinding('class.cx-pending')
+], PageSlotComponent.prototype, "isPending", void 0);
+__decorate([
+    HostBinding('class.has-components'), Input()
+], PageSlotComponent.prototype, "hasComponents", void 0);
 
 let PageSlotModule = class PageSlotModule {
 };
@@ -29820,22 +29865,28 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-page-slot,[cx-page-slot]',
-                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components$ | async\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
+                template: "<ng-template\n  [cxOutlet]=\"position\"\n  [cxOutletContext]=\"{ components$: components$ }\"\n>\n  <ng-template\n    *ngFor=\"let component of components\"\n    [cxOutlet]=\"component.flexType\"\n    [cxOutletContext]=\"{ component: component }\"\n    [cxOutletDefer]=\"getComponentDeferOptions(component.flexType)\"\n    (loaded)=\"isLoaded($event)\"\n  >\n    <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n  </ng-template>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }, { type: ɵngcc0.ChangeDetectorRef }]; }, { isPending: [{
+    }], function () { return [{ type: ɵngcc1.CmsService }, { type: ɵngcc1.DynamicAttributeService }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }, { type: ɵngcc1.CmsConfig }, { type: ɵngcc0.ChangeDetectorRef }]; }, { isPageFold: [{
+            type: HostBinding,
+            args: ['class.page-fold']
+        }, {
+            type: Input
+        }], isPending: [{
             type: HostBinding,
             args: ['class.cx-pending']
         }], hasComponents: [{
             type: HostBinding,
             args: ['class.has-components']
-        }], isPageFold: [{
-            type: HostBinding,
-            args: ['class.page-fold']
         }, {
             type: Input
         }], position: [{
             type: Input
+        }], class: [{
+            type: Input
+        }, {
+            type: HostBinding
         }] }); })();
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵngcc0.ɵɵsetNgModuleScope(PageSlotModule, { declarations: function () { return [PageSlotComponent]; }, imports: function () { return [CommonModule,
         OutletModule,

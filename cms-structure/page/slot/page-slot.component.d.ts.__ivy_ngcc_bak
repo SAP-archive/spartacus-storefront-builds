@@ -1,55 +1,76 @@
 import { ChangeDetectorRef, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { CmsConfig, CmsService, ContentSlotComponentData, ContentSlotData, DynamicAttributeService } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { IntersectionOptions } from '../../../layout/loading/intersection.model';
+/**
+ * The `PageSlotComponent` is used to render the CMS page slot and it's components.
+ *
+ * The Page slot host element will be supplemented with css classes so that the layout
+ * can be fully controlled by customers:
+ * - The page slot _position_ is added as a css class by default.
+ * - The `cx-pending` is added for as long as the slot hasn't start loading.
+ * - The `page-fold` style class is added for the page slot which is configured as the page fold.
+ */
 export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected cmsService: CmsService;
     protected dynamicAttributeService: DynamicAttributeService;
     protected renderer: Renderer2;
-    protected hostElement: ElementRef;
-    protected config?: CmsConfig;
-    protected cdRef?: ChangeDetectorRef;
+    protected elementRef: ElementRef;
+    protected config: CmsConfig;
+    protected cd: ChangeDetectorRef;
     /**
-     * The position is used to find the CMS page slot (and optional outlet)
-     * that is rendered in the PageSlotComponent. Furthermore, the position
-     * is added as a CSS class name to the host element.
-     */
-    set position(position: string);
-    get position(): string;
-    isPending: boolean;
-    hasComponents: boolean;
-    isPageFold: boolean;
-    private pendingComponentCount;
-    readonly position$: BehaviorSubject<string>;
-    /**
-     * observable with `ContentSlotData` for the current position
+     * The position represents the unique key for a page slot on a single page, but can
+     * be reused cross pages.
      *
-     * @deprecated we'll stop supporting this property in 2.0 as
-     * it is not used separately.
+     * The position is used to find the CMS components for the page slot. It is also
+     * added as an additional CSS class so that layoutt can be applied.
      */
-    readonly slot$: Observable<ContentSlotData>;
-    readonly components$: Observable<ContentSlotComponentData[]>;
-    private subscription;
-    constructor(cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, hostElement: ElementRef, config: CmsConfig);
+    set position(value: string);
+    get position(): string;
     /**
-     * @deprecated since version 1.4
-     * Use constructor(cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, hostElement: ElementRef, config?: CmsConfig) instead
+     * Maintains css classes introduced by the host and adds additional classes.
      */
-    constructor(cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, hostElement: ElementRef);
+    class: string;
+    /**
+     * Indicates that the page slot is the last page slot above the fold.
+     */
+    isPageFold: boolean;
+    /**
+     * Indicates that the components of the page slot haven't been loaded as long
+     * as the isPending state is true.
+     */
+    isPending: boolean;
+    /**
+     * Indicates that the page slot doesn't contain any components. This is no
+     * longer used in spartacus, but kept for backwards compatibility.
+     */
+    hasComponents: boolean;
+    protected position$: BehaviorSubject<string>;
+    components: ContentSlotComponentData[];
+    protected slot$: Observable<ContentSlotData>;
+    /** Observes the components for the given page slot. */
+    components$: Observable<ContentSlotComponentData[]>;
+    protected subscription: Subscription;
+    /** Keeps track of the pending components that must be loaded for the page slot */
+    private pendingComponentCount;
+    /** Tracks the last used position, in case the page slot is used dynamically */
+    private lastPosition;
+    constructor(cmsService: CmsService, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, elementRef: ElementRef, config: CmsConfig, cd: ChangeDetectorRef);
     ngOnInit(): void;
-    ngOnDestroy(): void;
+    protected decorate(slot: ContentSlotData): void;
     /**
-     * Is triggered when a component is added to the view.
-     * We use this information to dropthe `is-pending` class from the page slot
-     * when all nested components have been added.
+     * Sets the pending count for the page slot components. Once all pending components are
+     * loaded, the `isPending` flag is updated, so that the associated class can be updated
      */
+    protected set pending(count: number);
+    protected get pending(): number;
     isLoaded(loadState: boolean): void;
-    getComponentDeferOptions(componentType: string): IntersectionOptions;
     /**
-     * The `DeferLoadingStrategy` indicates whether component rendering
-     * should be deferred.
+     * The `DeferLoadingStrategy` indicates whether the component should be
+     * rendered instantly or whether it should be deferred.
      */
-    private getDeferLoadingStrategy;
+    getComponentDeferOptions(componentType: string): IntersectionOptions;
+    protected isDistinct(old: ContentSlotData, current: ContentSlotData): boolean;
     private addSmartEditSlotClass;
-    private addSmartEditContract;
+    ngOnDestroy(): void;
 }
