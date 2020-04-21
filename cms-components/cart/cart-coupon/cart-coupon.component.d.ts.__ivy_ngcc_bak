@@ -1,13 +1,11 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActiveCartService, AuthService, Cart, CartVoucherService, CustomerCoupon, CustomerCouponService, FeatureConfigService } from '@spartacus/core';
+import { ActiveCartService, Cart, CartVoucherService, CustomerCoupon, CustomerCouponService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 export declare class CartCouponComponent implements OnInit, OnDestroy {
-    protected authService: AuthService;
     protected cartVoucherService: CartVoucherService;
     protected formBuilder: FormBuilder;
     protected customerCouponService: CustomerCouponService;
-    protected featureConfig: FeatureConfigService;
     protected activeCartService: ActiveCartService;
     MAX_CUSTOMER_COUPON_PAGE: number;
     couponForm: FormGroup;
@@ -18,7 +16,7 @@ export declare class CartCouponComponent implements OnInit, OnDestroy {
     private ignoreCloseEvent;
     private subscription;
     couponBoxIsActive: boolean;
-    constructor(authService: AuthService, cartVoucherService: CartVoucherService, formBuilder: FormBuilder, customerCouponService: CustomerCouponService, featureConfig: FeatureConfigService, activeCartService: ActiveCartService);
+    constructor(cartVoucherService: CartVoucherService, formBuilder: FormBuilder, customerCouponService: CustomerCouponService, activeCartService: ActiveCartService);
     ngOnInit(): void;
     protected onError(error: boolean): void;
     onSuccess(success: boolean): void;

@@ -17,41 +17,37 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected translation: TranslationService;
     protected activeCartService: ActiveCartService;
     iconTypes: typeof ICON_TYPE;
-    newPaymentFormManuallyOpened: boolean;
     existingPaymentMethods$: Observable<PaymentDetails[]>;
     isLoading$: Observable<boolean>;
-    selectedPayment: PaymentDetails;
-    allowRouting: boolean;
+    cards$: Observable<{
+        content: Card;
+        paymentMethod: PaymentDetails;
+    }[]>;
+    selectedMethod$: Observable<PaymentDetails>;
     isGuestCheckout: boolean;
-    private getPaymentDetailsSub;
-    private deliveryAddress;
-    private checkoutStepUrlNext;
-    private checkoutStepUrlPrevious;
+    newPaymentFormManuallyOpened: boolean;
+    protected shouldRedirect: boolean;
+    protected deliveryAddress: Address;
+    protected checkoutStepUrlNext: string;
+    protected checkoutStepUrlPrevious: string;
     constructor(userPaymentService: UserPaymentService, checkoutService: CheckoutService, checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, globalMessageService: GlobalMessageService, routingService: RoutingService, checkoutConfigService: CheckoutConfigService, activatedRoute: ActivatedRoute, translation: TranslationService, activeCartService: ActiveCartService);
     ngOnInit(): void;
-    getCardContent(payment: PaymentDetails): Observable<Card>;
     selectPaymentMethod(paymentDetails: PaymentDetails): void;
     showNewPaymentForm(): void;
     hideNewPaymentForm(): void;
-    setPaymentDetails({ paymentDetails, billingAddress, isNewPayment, }: {
+    setPaymentDetails({ paymentDetails, billingAddress, }: {
         paymentDetails: PaymentDetails;
         billingAddress?: Address;
-        isNewPayment?: boolean;
     }): void;
     ngOnDestroy(): void;
     protected getCardIcon(code: string): string;
-    protected sendPaymentMethodFailGlobalMessage(msg: string): void;
-    protected createCard(paymentDetails: any, cardLabels: any): {
-        title: any;
-        textBold: any;
-        text: any[];
-        img: string;
-        actions: {
-            name: any;
-            event: string;
-        }[];
-        header: any;
-    };
+    protected sendPaymentMethodFailGlobalMessage(field: string): void;
+    protected createCard(paymentDetails: PaymentDetails, cardLabels: {
+        textDefaultPaymentMethod: string;
+        textExpires: string;
+        textUseThisPayment: string;
+        textSelected: string;
+    }, selected: PaymentDetails): Card;
     goNext(): void;
     goPrevious(): void;
 }

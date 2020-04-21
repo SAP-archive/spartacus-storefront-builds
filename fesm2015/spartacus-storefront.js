@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, OCC_USER_ID_ANONYMOUS, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -2679,8 +2679,9 @@ let MediaComponent = class MediaComponent {
      * Creates the `Media` object
      */
     create() {
+        var _a;
         this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
-        if (!this.media.src) {
+        if (!((_a = this.media) === null || _a === void 0 ? void 0 : _a.src)) {
             this.handleMissing();
         }
     }
@@ -5106,12 +5107,10 @@ AppliedCouponsComponent = __decorate([
 ], AppliedCouponsComponent);
 
 let CartCouponComponent = class CartCouponComponent {
-    constructor(authService, cartVoucherService, formBuilder, customerCouponService, featureConfig, activeCartService) {
-        this.authService = authService;
+    constructor(cartVoucherService, formBuilder, customerCouponService, activeCartService) {
         this.cartVoucherService = cartVoucherService;
         this.formBuilder = formBuilder;
         this.customerCouponService = customerCouponService;
-        this.featureConfig = featureConfig;
         this.activeCartService = activeCartService;
         this.MAX_CUSTOMER_COUPON_PAGE = 100;
         this.ignoreCloseEvent = false;
@@ -5122,26 +5121,14 @@ let CartCouponComponent = class CartCouponComponent {
         if (this.customerCouponService) {
             this.customerCouponService.loadCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE);
         }
-        if (this.featureConfig && this.featureConfig.isLevel('1.5')) {
-            this.cart$ = combineLatest([
-                this.activeCartService.getActive(),
-                this.authService.getOccUserId(),
-                this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
-            ]).pipe(tap(([cart, userId, customerCoupons]) => {
-                this.cartId =
-                    userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code;
-                this.getApplicableCustomerCoupons(cart, customerCoupons.coupons);
-            }), map(([cart]) => cart));
-        }
-        //TODO(issue:#5971) Deprecated since 1.5
-        else {
-            this.cart$ = combineLatest([
-                this.activeCartService.getActive(),
-                this.authService.getOccUserId(),
-            ]).pipe(tap(([cart, userId]) => (this.cartId =
-                userId === OCC_USER_ID_ANONYMOUS ? cart.guid : cart.code)), map(([cart]) => cart));
-        }
-        //TODO(issue:#5971) Deprecated since 1.5
+        this.cart$ = combineLatest([
+            this.activeCartService.getActive(),
+            this.activeCartService.getActiveCartId(),
+            this.customerCouponService.getCustomerCoupons(this.MAX_CUSTOMER_COUPON_PAGE),
+        ]).pipe(tap(([cart, activeCardId, customerCoupons]) => {
+            this.cartId = activeCardId;
+            this.getApplicableCustomerCoupons(cart, customerCoupons.coupons);
+        }), map(([cart]) => cart));
         this.cartIsLoading$ = this.activeCartService
             .isStable()
             .pipe(map((loaded) => !loaded));
@@ -5212,11 +5199,9 @@ let CartCouponComponent = class CartCouponComponent {
     }
 };
 CartCouponComponent.ctorParameters = () => [
-    { type: AuthService },
     { type: CartVoucherService },
     { type: FormBuilder },
     { type: CustomerCouponService },
-    { type: FeatureConfigService },
     { type: ActiveCartService }
 ];
 CartCouponComponent = __decorate([
@@ -5233,7 +5218,6 @@ CartCouponModule = __decorate([
         declarations: [CartCouponComponent, AppliedCouponsComponent],
         exports: [CartCouponComponent, AppliedCouponsComponent],
         imports: [
-            FeaturesConfigModule,
             CommonModule,
             NgSelectModule,
             FormsModule,
@@ -6814,10 +6798,15 @@ let PaymentFormComponent = class PaymentFormComponent {
         }));
         this.shippingAddress$ = this.checkoutDeliveryService.getDeliveryAddress();
         this.loading$ = this.checkoutPaymentService.getSetPaymentDetailsResultProcess();
-        this.checkboxSub = this.showSameAsShippingAddressCheckbox().subscribe((shouldShowCheckbox) => {
-            // this operation makes sure the checkbox is not checked if not shown and vice versa
+        this.showSameAsShippingAddressCheckbox$ = combineLatest([
+            this.countries$,
+            this.shippingAddress$,
+        ]).pipe(map(([countries, address]) => {
+            return ((address === null || address === void 0 ? void 0 : address.country) &&
+                !!countries.filter((country) => country.isocode === address.country.isocode).length);
+        }), tap((shouldShowCheckbox) => {
             this.sameAsShippingAddress = shouldShowCheckbox;
-        });
+        }));
         // verify the new added address
         this.addressVerifySub = this.checkoutDeliveryService
             .getAddressVerificationResults()
@@ -6875,17 +6864,6 @@ let PaymentFormComponent = class PaymentFormComponent {
     }
     toggleSameAsShippingAddress() {
         this.sameAsShippingAddress = !this.sameAsShippingAddress;
-    }
-    /**
-     * Check if the shipping address can also be a billing address
-     *
-     * @memberof PaymentFormComponent
-     */
-    showSameAsShippingAddressCheckbox() {
-        return combineLatest([this.countries$, this.shippingAddress$]).pipe(map(([countries, address]) => {
-            return ((address === null || address === void 0 ? void 0 : address.country) &&
-                !!countries.filter((country) => country.isocode === address.country.isocode).length);
-        }));
     }
     getAddressCardContent(address) {
         let region = '';
@@ -6972,9 +6950,6 @@ let PaymentFormComponent = class PaymentFormComponent {
         }
     }
     ngOnDestroy() {
-        if (this.checkboxSub) {
-            this.checkboxSub.unsubscribe();
-        }
         if (this.addressVerifySub) {
             this.addressVerifySub.unsubscribe();
         }
@@ -7007,7 +6982,7 @@ __decorate([
 PaymentFormComponent = __decorate([
     Component({
         selector: 'cx-payment-form',
-        template: "<!-- FORM -->\n<ng-container *ngIf=\"!(loading$ | async).loading; else spinner\">\n  <form (ngSubmit)=\"next()\" [formGroup]=\"paymentForm\">\n    <div class=\"row\">\n      <div class=\"col-md-12 col-xl-10\">\n        <div class=\"form-group\" formGroupName=\"cardType\">\n          <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n            <div *ngIf=\"cardTypes.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'paymentForm.paymentType' | cxTranslate\n                }}</span>\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"cardTypes\"\n                  bindLabel=\"name\"\n                  bindValue=\"code\"\n                  placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                  (change)=\"paymentSelected($event)\"\n                  formControlName=\"code\"\n                >\n                </ng-select>\n                <cx-form-errors\n                  [control]=\"paymentForm.get('cardType.code')\"\n                ></cx-form-errors>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.accountHolderName.label' | cxTranslate\n            }}</span>\n            <input\n              class=\"form-control\"\n              type=\"text\"\n              placeholder=\"{{\n                'paymentForm.accountHolderName.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"accountHolderName\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('accountHolderName')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.cardNumber' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              formControlName=\"cardNumber\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('cardNumber')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"form-group col-md-8\">\n            <label>\n              <span class=\"label-content\">{{\n                'paymentForm.expirationDate' | cxTranslate\n              }}</span>\n              <div class=\"cx-payment-form-exp-date\">\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"months\"\n                    placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                    (change)=\"monthSelected($event)\"\n                    formControlName=\"expiryMonth\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryMonth')\"\n                  ></cx-form-errors>\n                </div>\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"years\"\n                    placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                    (change)=\"yearSelected($event)\"\n                    formControlName=\"expiryYear\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryYear')\"\n                  ></cx-form-errors>\n                </div>\n              </div>\n            </label>\n          </div>\n          <div class=\"form-group col-md-4\">\n            <label>\n              <span class=\"label-content\">\n                {{ 'paymentForm.securityCode' | cxTranslate }}\n                <cx-icon\n                  [type]=\"iconTypes.INFO\"\n                  class=\"cx-payment-form-tooltip\"\n                  placement=\"right\"\n                  title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                  alt=\"\"\n                ></cx-icon>\n              </span>\n              <input\n                type=\"text\"\n                class=\"form-control\"\n                id=\"cVVNumber\"\n                formControlName=\"cvn\"\n              />\n              <cx-form-errors\n                [control]=\"paymentForm.get('cvn')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n        </div>\n\n        <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n          <div class=\"form-check\">\n            <label>\n              <input\n                type=\"checkbox\"\n                class=\"form-check-input\"\n                (change)=\"toggleDefaultPaymentMethod()\"\n              />\n              <span class=\"form-check-label\">{{\n                'paymentForm.setAsDefault' | cxTranslate\n              }}</span>\n            </label>\n          </div>\n        </div>\n\n        <!-- BILLING -->\n        <div class=\"cx-payment-form-billing\">\n          <div class=\"cx-payment-form-billing-address\">\n            {{ 'paymentForm.billingAddress' | cxTranslate }}\n          </div>\n\n          <!-- SAME AS SHIPPING CHECKBOX -->\n          <ng-container *ngIf=\"showSameAsShippingAddressCheckbox() | async\">\n            <div class=\"form-group\">\n              <div class=\"form-check\">\n                <label>\n                  <input\n                    type=\"checkbox\"\n                    class=\"form-check-input\"\n                    [checked]=\"sameAsShippingAddress\"\n                    (change)=\"toggleSameAsShippingAddress()\"\n                  />\n                  <span class=\"form-check-label\">{{\n                    'paymentForm.sameAsShippingAddress' | cxTranslate\n                  }}</span>\n                </label>\n              </div>\n            </div>\n          </ng-container>\n\n          <!-- BILLING INFO COMPONENT -->\n          <ng-container\n            *ngIf=\"\n              sameAsShippingAddress && shippingAddress$\n                | async as shippingAddress;\n              else billingAddress\n            \"\n          >\n            <cx-card\n              [content]=\"getAddressCardContent(shippingAddress)\"\n            ></cx-card>\n          </ng-container>\n\n          <ng-template #billingAddress>\n            <div [formGroup]=\"billingAddressForm\">\n              <div class=\"form-group\" formGroupName=\"country\">\n                <ng-container *ngIf=\"countries$ | async as countries\">\n                  <div *ngIf=\"countries.length !== 0\">\n                    <label aria-required=\"true\">\n                      <span class=\"label-content required\">{{\n                        'addressForm.country' | cxTranslate\n                      }}</span>\n                      <ng-select\n                        [searchable]=\"true\"\n                        [clearable]=\"false\"\n                        [items]=\"countries\"\n                        bindLabel=\"name\"\n                        bindValue=\"isocode\"\n                        placeholder=\"{{\n                          'addressForm.selectOne' | cxTranslate\n                        }}\"\n                        (change)=\"countrySelected($event)\"\n                        formControlName=\"isocode\"\n                      >\n                      </ng-select>\n                      <cx-form-errors\n                        [control]=\"billingAddressForm.get('country.isocode')\"\n                      ></cx-form-errors>\n                    </label>\n                  </div>\n                </ng-container>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.firstName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    class=\"form-control\"\n                    type=\"text\"\n                    placeholder=\"{{\n                      'addressForm.firstName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"firstName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('firstName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.lastName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.lastName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"lastName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('lastName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.address1' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.streetAddress' | cxTranslate\n                    }}\"\n                    formControlName=\"line1\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('line1')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content\">{{\n                    'addressForm.address2' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n                    formControlName=\"line2\"\n                  />\n                </label>\n              </div>\n              <div class=\"row\">\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.city.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.city.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"town\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('town')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.zipCode.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.zipCode.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"postalCode\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('postalCode')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <ng-container\n                  *ngIf=\"regions$ | async as regions\"\n                  formGroupName=\"region\"\n                >\n                  <ng-container *ngIf=\"regions.length !== 0\">\n                    <div class=\"form-group col-md-6\">\n                      <label aria-required=\"true\">\n                        <span class=\"label-content required\">{{\n                          'addressForm.state' | cxTranslate\n                        }}</span>\n                        <ng-select\n                          class=\"region-select\"\n                          formControlName=\"isocodeShort\"\n                          [searchable]=\"true\"\n                          [clearable]=\"false\"\n                          [items]=\"regions\"\n                          bindLabel=\"{{\n                            regions[0].name ? 'name' : 'isocodeShort'\n                          }}\"\n                          bindValue=\"{{\n                            regions[0].name ? 'isocodeShort' : 'region'\n                          }}\"\n                          placeholder=\"{{\n                            'addressForm.selectOne' | cxTranslate\n                          }}\"\n                          (change)=\"regionSelected($event)\"\n                        >\n                        </ng-select>\n                        <cx-form-errors\n                          [control]=\"\n                            billingAddressForm.get('region.isocodeShort')\n                          \"\n                        ></cx-form-errors>\n                      </label>\n                    </div>\n                  </ng-container>\n                </ng-container>\n              </div>\n            </div>\n          </ng-template>\n        </div>\n      </div>\n    </div>\n\n    <!-- BUTTON SECTION -->\n    <div class=\"cx-checkout-btns row\">\n      <div class=\"col-md-12 col-lg-6\">\n        <button\n          *ngIf=\"paymentMethodsCount === 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"back()\"\n        >\n          {{ 'common.back' | cxTranslate }}\n        </button>\n        <button\n          *ngIf=\"paymentMethodsCount > 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"close()\"\n        >\n          {{ 'paymentForm.changePayment' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-12 col-lg-6\">\n        <button class=\"btn btn-block btn-primary\" type=\"submit\">\n          {{ 'common.continue' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
+        template: "<!-- FORM -->\n<ng-container *ngIf=\"!(loading$ | async).loading; else spinner\">\n  <form (ngSubmit)=\"next()\" [formGroup]=\"paymentForm\">\n    <div class=\"row\">\n      <div class=\"col-md-12 col-xl-10\">\n        <div class=\"form-group\" formGroupName=\"cardType\">\n          <ng-container *ngIf=\"cardTypes$ | async as cardTypes\">\n            <div *ngIf=\"cardTypes.length !== 0\">\n              <label aria-required=\"true\">\n                <span class=\"label-content required\">{{\n                  'paymentForm.paymentType' | cxTranslate\n                }}</span>\n                <ng-select\n                  [searchable]=\"false\"\n                  [clearable]=\"false\"\n                  [items]=\"cardTypes\"\n                  bindLabel=\"name\"\n                  bindValue=\"code\"\n                  placeholder=\"{{ 'paymentForm.selectOne' | cxTranslate }}\"\n                  (change)=\"paymentSelected($event)\"\n                  formControlName=\"code\"\n                >\n                </ng-select>\n                <cx-form-errors\n                  [control]=\"paymentForm.get('cardType.code')\"\n                ></cx-form-errors>\n              </label>\n            </div>\n          </ng-container>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.accountHolderName.label' | cxTranslate\n            }}</span>\n            <input\n              class=\"form-control\"\n              type=\"text\"\n              placeholder=\"{{\n                'paymentForm.accountHolderName.placeholder' | cxTranslate\n              }}\"\n              formControlName=\"accountHolderName\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('accountHolderName')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n        <div class=\"form-group\">\n          <label>\n            <span class=\"label-content\">{{\n              'paymentForm.cardNumber' | cxTranslate\n            }}</span>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              formControlName=\"cardNumber\"\n            />\n            <cx-form-errors\n              [control]=\"paymentForm.get('cardNumber')\"\n            ></cx-form-errors>\n          </label>\n        </div>\n\n        <div class=\"row\">\n          <div class=\"form-group col-md-8\">\n            <label>\n              <span class=\"label-content\">{{\n                'paymentForm.expirationDate' | cxTranslate\n              }}</span>\n              <div class=\"cx-payment-form-exp-date\">\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"months\"\n                    placeholder=\"{{ 'paymentForm.monthMask' | cxTranslate }}\"\n                    (change)=\"monthSelected($event)\"\n                    formControlName=\"expiryMonth\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryMonth')\"\n                  ></cx-form-errors>\n                </div>\n                <div class=\"cx-payment-form-exp-date-wrapper\">\n                  <ng-select\n                    [searchable]=\"false\"\n                    [clearable]=\"false\"\n                    [items]=\"years\"\n                    placeholder=\"{{ 'paymentForm.yearMask' | cxTranslate }}\"\n                    (change)=\"yearSelected($event)\"\n                    formControlName=\"expiryYear\"\n                  >\n                  </ng-select>\n                  <cx-form-errors\n                    [control]=\"paymentForm.get('expiryYear')\"\n                  ></cx-form-errors>\n                </div>\n              </div>\n            </label>\n          </div>\n          <div class=\"form-group col-md-4\">\n            <label>\n              <span class=\"label-content\">\n                {{ 'paymentForm.securityCode' | cxTranslate }}\n                <cx-icon\n                  [type]=\"iconTypes.INFO\"\n                  class=\"cx-payment-form-tooltip\"\n                  placement=\"right\"\n                  title=\"{{ 'paymentForm.securityCodeTitle' | cxTranslate }}\"\n                  alt=\"\"\n                ></cx-icon>\n              </span>\n              <input\n                type=\"text\"\n                class=\"form-control\"\n                id=\"cVVNumber\"\n                formControlName=\"cvn\"\n              />\n              <cx-form-errors\n                [control]=\"paymentForm.get('cvn')\"\n              ></cx-form-errors>\n            </label>\n          </div>\n        </div>\n\n        <div class=\"form-group\" *ngIf=\"setAsDefaultField\">\n          <div class=\"form-check\">\n            <label>\n              <input\n                type=\"checkbox\"\n                class=\"form-check-input\"\n                (change)=\"toggleDefaultPaymentMethod()\"\n              />\n              <span class=\"form-check-label\">{{\n                'paymentForm.setAsDefault' | cxTranslate\n              }}</span>\n            </label>\n          </div>\n        </div>\n\n        <!-- BILLING -->\n        <div class=\"cx-payment-form-billing\">\n          <div class=\"cx-payment-form-billing-address\">\n            {{ 'paymentForm.billingAddress' | cxTranslate }}\n          </div>\n\n          <!-- SAME AS SHIPPING CHECKBOX -->\n          <ng-container *ngIf=\"showSameAsShippingAddressCheckbox$ | async\">\n            <div class=\"form-group\">\n              <div class=\"form-check\">\n                <label>\n                  <input\n                    type=\"checkbox\"\n                    class=\"form-check-input\"\n                    [checked]=\"sameAsShippingAddress\"\n                    (change)=\"toggleSameAsShippingAddress()\"\n                  />\n                  <span class=\"form-check-label\">{{\n                    'paymentForm.sameAsShippingAddress' | cxTranslate\n                  }}</span>\n                </label>\n              </div>\n            </div>\n          </ng-container>\n\n          <!-- BILLING INFO COMPONENT -->\n          <ng-container\n            *ngIf=\"\n              sameAsShippingAddress && shippingAddress$\n                | async as shippingAddress;\n              else billingAddress\n            \"\n          >\n            <cx-card\n              [content]=\"getAddressCardContent(shippingAddress)\"\n            ></cx-card>\n          </ng-container>\n\n          <ng-template #billingAddress>\n            <div [formGroup]=\"billingAddressForm\">\n              <div class=\"form-group\" formGroupName=\"country\">\n                <ng-container *ngIf=\"countries$ | async as countries\">\n                  <div *ngIf=\"countries.length !== 0\">\n                    <label aria-required=\"true\">\n                      <span class=\"label-content required\">{{\n                        'addressForm.country' | cxTranslate\n                      }}</span>\n                      <ng-select\n                        [searchable]=\"true\"\n                        [clearable]=\"false\"\n                        [items]=\"countries\"\n                        bindLabel=\"name\"\n                        bindValue=\"isocode\"\n                        placeholder=\"{{\n                          'addressForm.selectOne' | cxTranslate\n                        }}\"\n                        (change)=\"countrySelected($event)\"\n                        formControlName=\"isocode\"\n                      >\n                      </ng-select>\n                      <cx-form-errors\n                        [control]=\"billingAddressForm.get('country.isocode')\"\n                      ></cx-form-errors>\n                    </label>\n                  </div>\n                </ng-container>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.firstName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    class=\"form-control\"\n                    type=\"text\"\n                    placeholder=\"{{\n                      'addressForm.firstName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"firstName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('firstName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.lastName.label' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.lastName.placeholder' | cxTranslate\n                    }}\"\n                    formControlName=\"lastName\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('lastName')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content required\">{{\n                    'addressForm.address1' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{\n                      'addressForm.streetAddress' | cxTranslate\n                    }}\"\n                    formControlName=\"line1\"\n                  />\n                  <cx-form-errors\n                    [control]=\"billingAddressForm.get('line1')\"\n                  ></cx-form-errors>\n                </label>\n              </div>\n              <div class=\"form-group\">\n                <label>\n                  <span class=\"label-content\">{{\n                    'addressForm.address2' | cxTranslate\n                  }}</span>\n                  <input\n                    type=\"text\"\n                    class=\"form-control\"\n                    placeholder=\"{{ 'addressForm.aptSuite' | cxTranslate }}\"\n                    formControlName=\"line2\"\n                  />\n                </label>\n              </div>\n              <div class=\"row\">\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.city.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.city.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"town\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('town')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <div class=\"form-group col-md-6\">\n                  <label>\n                    <span class=\"label-content required\">{{\n                      'addressForm.zipCode.label' | cxTranslate\n                    }}</span>\n                    <input\n                      type=\"text\"\n                      class=\"form-control\"\n                      placeholder=\"{{\n                        'addressForm.zipCode.placeholder' | cxTranslate\n                      }}\"\n                      formControlName=\"postalCode\"\n                    />\n                    <cx-form-errors\n                      [control]=\"billingAddressForm.get('postalCode')\"\n                    ></cx-form-errors>\n                  </label>\n                </div>\n                <ng-container\n                  *ngIf=\"regions$ | async as regions\"\n                  formGroupName=\"region\"\n                >\n                  <ng-container *ngIf=\"regions.length !== 0\">\n                    <div class=\"form-group col-md-6\">\n                      <label aria-required=\"true\">\n                        <span class=\"label-content required\">{{\n                          'addressForm.state' | cxTranslate\n                        }}</span>\n                        <ng-select\n                          class=\"region-select\"\n                          formControlName=\"isocodeShort\"\n                          [searchable]=\"true\"\n                          [clearable]=\"false\"\n                          [items]=\"regions\"\n                          bindLabel=\"{{\n                            regions[0].name ? 'name' : 'isocodeShort'\n                          }}\"\n                          bindValue=\"{{\n                            regions[0].name ? 'isocodeShort' : 'region'\n                          }}\"\n                          placeholder=\"{{\n                            'addressForm.selectOne' | cxTranslate\n                          }}\"\n                          (change)=\"regionSelected($event)\"\n                        >\n                        </ng-select>\n                        <cx-form-errors\n                          [control]=\"\n                            billingAddressForm.get('region.isocodeShort')\n                          \"\n                        ></cx-form-errors>\n                      </label>\n                    </div>\n                  </ng-container>\n                </ng-container>\n              </div>\n            </div>\n          </ng-template>\n        </div>\n      </div>\n    </div>\n\n    <!-- BUTTON SECTION -->\n    <div class=\"cx-checkout-btns row\">\n      <div class=\"col-md-12 col-lg-6\">\n        <button\n          *ngIf=\"paymentMethodsCount === 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"back()\"\n        >\n          {{ 'common.back' | cxTranslate }}\n        </button>\n        <button\n          *ngIf=\"paymentMethodsCount > 0\"\n          class=\"btn btn-block btn-action\"\n          (click)=\"close()\"\n        >\n          {{ 'paymentForm.changePayment' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-12 col-lg-6\">\n        <button class=\"btn btn-block btn-primary\" type=\"submit\">\n          {{ 'common.continue' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n  </form>\n</ng-container>\n\n<ng-template #spinner>\n  <cx-spinner></cx-spinner>\n</ng-template>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], PaymentFormComponent);
@@ -7045,11 +7020,11 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         this.translation = translation;
         this.activeCartService = activeCartService;
         this.iconTypes = ICON_TYPE;
-        this.newPaymentFormManuallyOpened = false;
         this.isGuestCheckout = false;
+        this.newPaymentFormManuallyOpened = false;
     }
     ngOnInit() {
-        this.allowRouting = false;
+        this.shouldRedirect = false;
         this.isLoading$ = this.userPaymentService.getPaymentMethodsLoading();
         if (!this.activeCartService.isGuestCart()) {
             this.userPaymentService.loadPaymentMethods();
@@ -7066,49 +7041,62 @@ let PaymentMethodComponent = class PaymentMethodComponent {
             this.deliveryAddress = address;
         });
         this.existingPaymentMethods$ = this.userPaymentService.getPaymentMethods();
-        this.getPaymentDetailsSub = this.checkoutPaymentService
-            .getPaymentDetails()
-            .pipe(filter((paymentInfo) => paymentInfo && !!Object.keys(paymentInfo).length))
-            .subscribe((paymentInfo) => {
-            if (this.allowRouting) {
-                this.routingService.go(this.checkoutStepUrlNext);
+        this.selectedMethod$ = this.checkoutPaymentService.getPaymentDetails().pipe(tap((paymentInfo) => {
+            if (paymentInfo && !!Object.keys(paymentInfo).length) {
+                if (paymentInfo['hasError']) {
+                    Object.keys(paymentInfo).forEach((key) => {
+                        if (key.startsWith('InvalidField')) {
+                            this.sendPaymentMethodFailGlobalMessage(paymentInfo[key]);
+                        }
+                    });
+                    this.checkoutService.clearCheckoutStep(3);
+                }
+                else if (this.shouldRedirect) {
+                    this.routingService.go(this.checkoutStepUrlNext);
+                }
             }
-            if (!paymentInfo['hasError']) {
-                this.selectedPayment = paymentInfo;
-            }
-            else {
-                Object.keys(paymentInfo).forEach((key) => {
-                    if (key.startsWith('InvalidField')) {
-                        this.sendPaymentMethodFailGlobalMessage(paymentInfo[key]);
-                    }
-                });
-                this.checkoutService.clearCheckoutStep(3);
-            }
-        });
-    }
-    getCardContent(payment) {
-        if (!this.selectedPayment && payment.defaultPayment) {
-            this.selectedPayment = payment;
-        }
-        return combineLatest([
-            this.translation.translate('paymentCard.expires', {
-                month: payment.expiryMonth,
-                year: payment.expiryYear,
-            }),
+        }));
+        this.cards$ = combineLatest([
+            this.existingPaymentMethods$.pipe(switchMap((methods) => {
+                return !(methods === null || methods === void 0 ? void 0 : methods.length)
+                    ? of([])
+                    : combineLatest(methods.map((method) => combineLatest([
+                        of(method),
+                        this.translation.translate('paymentCard.expires', {
+                            month: method.expiryMonth,
+                            year: method.expiryYear,
+                        }),
+                    ]).pipe(map(([payment, translation]) => ({
+                        payment,
+                        expiryTranslation: translation,
+                    })))));
+            })),
+            this.selectedMethod$,
             this.translation.translate('paymentForm.useThisPayment'),
             this.translation.translate('paymentCard.defaultPaymentMethod'),
             this.translation.translate('paymentCard.selected'),
-        ]).pipe(map(([textExpires, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
-            return this.createCard(payment, {
-                textExpires,
-                textUseThisPayment,
-                textDefaultPaymentMethod,
-                textSelected,
-            });
+        ]).pipe(map(([paymentMethods, selectedMethod, textUseThisPayment, textDefaultPaymentMethod, textSelected,]) => {
+            if (paymentMethods.length &&
+                (!selectedMethod || Object.keys(selectedMethod).length === 0)) {
+                const defaultPaymentMethod = paymentMethods.find((paymentMethod) => paymentMethod.payment.defaultPayment);
+                if (defaultPaymentMethod) {
+                    selectedMethod = defaultPaymentMethod.payment;
+                    this.checkoutPaymentService.setPaymentDetails(selectedMethod);
+                }
+            }
+            return paymentMethods.map((payment) => ({
+                content: this.createCard(payment.payment, {
+                    textExpires: payment.expiryTranslation,
+                    textUseThisPayment,
+                    textDefaultPaymentMethod,
+                    textSelected,
+                }, selectedMethod),
+                paymentMethod: payment.payment,
+            }));
         }));
     }
     selectPaymentMethod(paymentDetails) {
-        this.selectedPayment = paymentDetails;
+        this.checkoutPaymentService.setPaymentDetails(paymentDetails);
     }
     showNewPaymentForm() {
         this.newPaymentFormManuallyOpened = true;
@@ -7116,21 +7104,13 @@ let PaymentMethodComponent = class PaymentMethodComponent {
     hideNewPaymentForm() {
         this.newPaymentFormManuallyOpened = false;
     }
-    setPaymentDetails({ paymentDetails, billingAddress, isNewPayment = true, }) {
+    setPaymentDetails({ paymentDetails, billingAddress, }) {
         const details = Object.assign({}, paymentDetails);
         details.billingAddress = billingAddress || this.deliveryAddress;
-        if (isNewPayment) {
-            this.checkoutPaymentService.createPaymentDetails(details);
-        }
-        else if (this.selectedPayment && this.selectedPayment.id === details.id) {
-            this.checkoutPaymentService.setPaymentDetails(details);
-        }
-        this.allowRouting = true;
+        this.checkoutPaymentService.createPaymentDetails(details);
+        this.shouldRedirect = true;
     }
     ngOnDestroy() {
-        if (this.getPaymentDetailsSub) {
-            this.getPaymentDetailsSub.unsubscribe();
-        }
         this.checkoutPaymentService.paymentProcessSuccess();
     }
     getCardIcon(code) {
@@ -7152,13 +7132,13 @@ let PaymentMethodComponent = class PaymentMethodComponent {
         }
         return ccIcon;
     }
-    sendPaymentMethodFailGlobalMessage(msg) {
+    sendPaymentMethodFailGlobalMessage(field) {
         this.globalMessageService.add({
             key: 'paymentMethods.invalidField',
-            params: { field: msg },
+            params: { field },
         }, GlobalMessageType.MSG_TYPE_ERROR);
     }
-    createCard(paymentDetails, cardLabels) {
+    createCard(paymentDetails, cardLabels, selected) {
         return {
             title: paymentDetails.defaultPayment
                 ? cardLabels.textDefaultPaymentMethod
@@ -7167,16 +7147,13 @@ let PaymentMethodComponent = class PaymentMethodComponent {
             text: [paymentDetails.cardNumber, cardLabels.textExpires],
             img: this.getCardIcon(paymentDetails.cardType.code),
             actions: [{ name: cardLabels.textUseThisPayment, event: 'send' }],
-            header: this.selectedPayment && this.selectedPayment.id === paymentDetails.id
+            header: (selected === null || selected === void 0 ? void 0 : selected.id) === paymentDetails.id
                 ? cardLabels.textSelected
                 : undefined,
         };
     }
     goNext() {
-        this.setPaymentDetails({
-            paymentDetails: this.selectedPayment,
-            isNewPayment: false,
-        });
+        this.routingService.go(this.checkoutStepUrlNext);
     }
     goPrevious() {
         this.routingService.go(this.checkoutStepUrlPrevious);
@@ -7197,7 +7174,7 @@ PaymentMethodComponent.ctorParameters = () => [
 PaymentMethodComponent = __decorate([
     Component({
         selector: 'cx-payment-method',
-        template: "<ng-container *ngIf=\"existingPaymentMethods$ | async as existingPaymentMethods\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        (existingPaymentMethods$ | async).length &&\n          !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let method of existingPaymentMethods; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"getCardContent(method) | async\"\n              (sendCard)=\"selectPaymentMethod(method)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"goPrevious()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!selectedPayment\"\n            (click)=\"goNext()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"goPrevious()\"\n        [paymentMethodsCount]=\"existingPaymentMethods?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
+        template: "<ng-container *ngIf=\"cards$ | async as cards\">\n  <h3 class=\"cx-checkout-title d-none d-lg-block d-xl-block\">\n    {{ 'paymentForm.payment' | cxTranslate }}\n  </h3>\n  <ng-container *ngIf=\"!(isLoading$ | async); else loading\">\n    <ng-container\n      *ngIf=\"\n        cards?.length && !newPaymentFormManuallyOpened;\n        else newPaymentForm\n      \"\n    >\n      <p class=\"cx-checkout-text\">\n        {{ 'paymentForm.choosePaymentMethod' | cxTranslate }}\n      </p>\n      <div class=\"cx-checkout-btns row\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"showNewPaymentForm()\"\n          >\n            {{ 'paymentForm.addNewPayment' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n\n      <div class=\"cx-checkout-body row\">\n        <div\n          class=\"cx-payment-card col-md-12 col-lg-6\"\n          *ngFor=\"let card of cards; let i = index\"\n        >\n          <div class=\"cx-payment-card-inner\">\n            <cx-card\n              [border]=\"true\"\n              [fitToContainer]=\"true\"\n              [content]=\"card.content\"\n              (sendCard)=\"selectPaymentMethod(card.paymentMethod)\"\n            ></cx-card>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"row cx-checkout-btns\">\n        <div class=\"col-md-12 col-lg-6\">\n          <button class=\"btn btn-block btn-action\" (click)=\"goPrevious()\">\n            {{ 'common.back' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-12 col-lg-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            [disabled]=\"!(selectedMethod$ | async)?.id\"\n            (click)=\"goNext()\"\n          >\n            {{ 'common.continue' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </ng-container>\n\n    <ng-template #newPaymentForm>\n      <cx-payment-form\n        (setPaymentDetails)=\"setPaymentDetails($event)\"\n        (closeForm)=\"hideNewPaymentForm()\"\n        (goBack)=\"goPrevious()\"\n        [paymentMethodsCount]=\"cards?.length || 0\"\n        [setAsDefaultField]=\"!isGuestCheckout\"\n      ></cx-payment-form>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-spinner\"><cx-spinner></cx-spinner></div>\n  </ng-template>\n</ng-container>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], PaymentMethodComponent);
