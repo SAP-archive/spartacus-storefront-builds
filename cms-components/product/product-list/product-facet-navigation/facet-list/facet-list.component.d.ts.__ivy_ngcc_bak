@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter } from '@angular/core';
+import { ElementRef, EventEmitter, Renderer2 } from '@angular/core';
 import { Facet } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FocusConfig } from '../../../../../layout/a11y/keyboard-focus/index';
@@ -9,17 +9,21 @@ import { FacetService } from '../services/facet.service';
 export declare class FacetListComponent {
     protected facetService: FacetService;
     protected elementRef: ElementRef;
+    protected renderer: Renderer2;
+    private _isDialog;
     /**
      * Indicates that the facet navigation is rendered in dialog.
      */
-    isDialog: boolean;
+    set isDialog(value: boolean);
+    get isDialog(): boolean;
     /** Emits when the list must close */
     closeList: EventEmitter<any>;
     /** The list of all facet and values related to the products in the list */
     facetList$: Observable<FacetList>;
     iconTypes: typeof ICON_TYPE;
     dialogFocusConfig: FocusConfig;
-    constructor(facetService: FacetService, elementRef: ElementRef);
+    handleClick(): void;
+    constructor(facetService: FacetService, elementRef: ElementRef, renderer: Renderer2);
     /**
      * Toggles the facet group in case it is not expanded.
      */
@@ -33,4 +37,5 @@ export declare class FacetListComponent {
      */
     isCollapsed(facet: Facet): Observable<boolean>;
     close(event?: boolean): void;
+    block(event?: MouseEvent): void;
 }

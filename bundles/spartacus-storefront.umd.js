@@ -1092,8 +1092,7 @@
         function DefaultComponentHandler() {
         }
         DefaultComponentHandler.prototype.hasMatch = function (componentMapping) {
-            return (typeof componentMapping.component === 'function' &&
-                componentMapping.component.prototype);
+            return typeof componentMapping.component === 'function';
         };
         DefaultComponentHandler.prototype.getPriority = function () {
             return -50 /* FALLBACK */;
@@ -1360,6 +1359,46 @@
         return WebComponentHandler;
     }());
 
+    /**
+     * Lazy component handler used for launching lazy loaded cms components implemented
+     * as native Angular components.
+     */
+    var LazyComponentHandler = /** @class */ (function () {
+        function LazyComponentHandler(defaultHandler) {
+            this.defaultHandler = defaultHandler;
+        }
+        /**
+         * We want to mach dynamic import signature () => import('')
+         */
+        LazyComponentHandler.prototype.hasMatch = function (componentMapping) {
+            return (typeof componentMapping.component === 'function' &&
+                this.isNotClass(componentMapping.component));
+        };
+        LazyComponentHandler.prototype.isNotClass = function (symbol) {
+            var signature = symbol.toString().substr(0, 20).replace(' ', '');
+            return signature.startsWith('function()') || signature.startsWith('()=>');
+        };
+        LazyComponentHandler.prototype.getPriority = function () {
+            return -10 /* LOW */;
+        };
+        LazyComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
+            var _this = this;
+            return rxjs.from(componentMapping.component()).pipe(operators.switchMap(function (component) {
+                return _this.defaultHandler.launcher(__assign(__assign({}, componentMapping), { component: component }), viewContainerRef, elementInjector);
+            }));
+        };
+        LazyComponentHandler.ctorParameters = function () { return [
+            { type: DefaultComponentHandler }
+        ]; };
+        LazyComponentHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function LazyComponentHandler_Factory() { return new LazyComponentHandler(core["ɵɵinject"](DefaultComponentHandler)); }, token: LazyComponentHandler, providedIn: "root" });
+        LazyComponentHandler = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], LazyComponentHandler);
+        return LazyComponentHandler;
+    }());
+
     var PageComponentModule = /** @class */ (function () {
         function PageComponentModule() {
         }
@@ -1370,6 +1409,11 @@
                     {
                         provide: ComponentHandler,
                         useExisting: DefaultComponentHandler,
+                        multi: true,
+                    },
+                    {
+                        provide: ComponentHandler,
+                        useExisting: LazyComponentHandler,
                         multi: true,
                     },
                     {
@@ -17301,9 +17345,10 @@
     }());
 
     var FacetListComponent = /** @class */ (function () {
-        function FacetListComponent(facetService, elementRef) {
+        function FacetListComponent(facetService, elementRef, renderer) {
             this.facetService = facetService;
             this.elementRef = elementRef;
+            this.renderer = renderer;
             /** Emits when the list must close */
             this.closeList = new core.EventEmitter();
             /** The list of all facet and values related to the products in the list */
@@ -17316,6 +17361,25 @@
                 autofocus: 'cx-facet',
             };
         }
+        Object.defineProperty(FacetListComponent.prototype, "isDialog", {
+            get: function () {
+                return this._isDialog;
+            },
+            /**
+             * Indicates that the facet navigation is rendered in dialog.
+             */
+            set: function (value) {
+                this._isDialog = value;
+                if (value) {
+                    this.renderer.addClass(document.body, 'modal-open');
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        FacetListComponent.prototype.handleClick = function () {
+            this.close();
+        };
         /**
          * Toggles the facet group in case it is not expanded.
          */
@@ -17341,22 +17405,30 @@
                 .pipe(operators.map(function (value) { return value.toggled === exports.FacetGroupCollapsedState.COLLAPSED; }));
         };
         FacetListComponent.prototype.close = function (event) {
+            this.renderer.removeClass(document.body, 'modal-open');
             this.closeList.emit(event);
+        };
+        FacetListComponent.prototype.block = function (event) {
+            event.stopPropagation();
         };
         FacetListComponent.ctorParameters = function () { return [
             { type: FacetService },
-            { type: core.ElementRef }
+            { type: core.ElementRef },
+            { type: core.Renderer2 }
         ]; };
         __decorate([
             core.Input()
-        ], FacetListComponent.prototype, "isDialog", void 0);
+        ], FacetListComponent.prototype, "isDialog", null);
         __decorate([
             core.Output()
         ], FacetListComponent.prototype, "closeList", void 0);
+        __decorate([
+            core.HostListener('click')
+        ], FacetListComponent.prototype, "handleClick", null);
         FacetListComponent = __decorate([
             core.Component({
                 selector: 'cx-facet-list',
-                template: "<div\n  *ngIf=\"(facetList$ | async)?.facets as facets\"\n  [cxFocus]=\"isDialog ? dialogFocusConfig : {}\"\n  (esc)=\"closeList.emit($event)\"\n>\n  <h4>\n    {{ 'productList.filterBy.label' | cxTranslate }}\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"closeList.emit()\"\n    >\n      <cx-icon aria-hidden=\"true\" [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </h4>\n\n  <!-- \n      Here we'd like to introduce configurable facet components, \n      either by using specific configuration or generic sproutlets \n  -->\n  <cx-facet\n    *ngFor=\"let facet of facets\"\n    #facetRef\n    [facet]=\"facet\"\n    [cxFocus]=\"{ lock: true, trap: true, autofocus: 'a' }\"\n    (unlock)=\"expandFacetGroup(facet, facetRef)\"\n    [class.expanded]=\"isExpanded(facet) | async\"\n    [class.collapsed]=\"isCollapsed(facet) | async\"\n  ></cx-facet>\n</div>\n",
+                template: "<div\n  class=\"inner\"\n  *ngIf=\"(facetList$ | async)?.facets as facets\"\n  [cxFocus]=\"isDialog ? dialogFocusConfig : {}\"\n  (esc)=\"close($event)\"\n  (click)=\"block($event)\"\n>\n  <h4>\n    {{ 'productList.filterBy.label' | cxTranslate }}\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"close()\">\n      <cx-icon aria-hidden=\"true\" [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </h4>\n\n  <!-- \n      Here we'd like to introduce configurable facet components, \n      either by using specific configuration or generic sproutlets \n  -->\n  <cx-facet\n    *ngFor=\"let facet of facets\"\n    #facetRef\n    [facet]=\"facet\"\n    [cxFocus]=\"{ lock: true, trap: true, autofocus: 'a' }\"\n    (unlock)=\"expandFacetGroup(facet, facetRef)\"\n    [class.expanded]=\"isExpanded(facet) | async\"\n    [class.collapsed]=\"isCollapsed(facet) | async\"\n  ></cx-facet>\n</div>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], FacetListComponent);
@@ -17565,7 +17637,7 @@
         ProductFacetNavigationComponent = __decorate([
             core.Component({
                 selector: 'cx-product-facet-navigation',
-                template: "<button\n  #trigger\n  class=\"btn btn-action btn-block dialog-trigger\"\n  (click)=\"launch()\"\n>\n  <cx-icon [type]=\"iconTypes.FILTER\"></cx-icon>\n  {{ 'productList.filterBy.label' | cxTranslate }}\n</button>\n\n<cx-active-facets></cx-active-facets>\n\n<cx-facet-list\n  *ngIf=\"isOpen$ | async\"\n  [isDialog]=\"hasTrigger\"\n  (closeList)=\"close()\"\n  [class.active]=\"isActive$ | async\"\n></cx-facet-list>\n",
+                template: "<button\n  #trigger\n  class=\"btn btn-action btn-block dialog-trigger\"\n  (click)=\"launch()\"\n>\n  <cx-icon [type]=\"iconTypes.FILTER\"></cx-icon>\n  {{ 'productList.filterBy.label' | cxTranslate }}\n</button>\n\n<cx-active-facets></cx-active-facets>\n\n<cx-facet-list\n  *ngIf=\"isOpen$ | async\"\n  [isDialog]=\"hasTrigger\"\n  (closeList)=\"close()\"\n  [class.active]=\"isActive$ | async\"\n  [class.dialog]=\"hasTrigger\"\n></cx-facet-list>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], ProductFacetNavigationComponent);
@@ -20304,6 +20376,7 @@
     exports.LaunchRenderStrategy = LaunchRenderStrategy;
     exports.LayoutConfig = LayoutConfig;
     exports.LayoutModule = LayoutModule;
+    exports.LazyComponentHandler = LazyComponentHandler;
     exports.LinkComponent = LinkComponent;
     exports.LinkModule = LinkModule;
     exports.ListNavigationModule = ListNavigationModule;
