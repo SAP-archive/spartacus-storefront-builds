@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -43,8 +43,15 @@ var ICON_TYPE;
     ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
     ICON_TYPE["FILTER"] = "FILTER";
 })(ICON_TYPE || (ICON_TYPE = {}));
-class IconConfig {
-}
+let IconConfig = class IconConfig {
+};
+IconConfig.ɵprov = ɵɵdefineInjectable({ factory: function IconConfig_Factory() { return ɵɵinject(Config); }, token: IconConfig, providedIn: "root" });
+IconConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], IconConfig);
 /**
  * Each ICON type can have an companied resource type, such as SVG, LINK (font) or just TEXT.
  * The resources will be automitacally loaded in case they're required for the `ICON_TYPE`.
@@ -299,10 +306,7 @@ IconModule = __decorate([
     NgModule({
         declarations: [IconComponent],
         imports: [CommonModule],
-        providers: [
-            provideDefaultConfig(fontawesomeIconConfig),
-            { provide: IconConfig, useExisting: Config },
-        ],
+        providers: [provideDefaultConfig(fontawesomeIconConfig)],
         exports: [IconComponent],
     })
 ], IconModule);
@@ -1575,8 +1579,15 @@ KeyboardFocusService = __decorate([
     })
 ], KeyboardFocusService);
 
-class SkipLinkConfig {
-}
+let SkipLinkConfig = class SkipLinkConfig {
+};
+SkipLinkConfig.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkConfig_Factory() { return ɵɵinject(Config); }, token: SkipLinkConfig, providedIn: "root" });
+SkipLinkConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], SkipLinkConfig);
 class SkipLink {
 }
 var SkipLinkScrollPosition;
@@ -1692,8 +1703,15 @@ const DEFAULT_LAUNCH_CONFIG = {
     },
 };
 
-class LaunchConfig {
-}
+let LaunchConfig = class LaunchConfig {
+};
+LaunchConfig.ɵprov = ɵɵdefineInjectable({ factory: function LaunchConfig_Factory() { return ɵɵinject(Config); }, token: LaunchConfig, providedIn: "root" });
+LaunchConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], LaunchConfig);
 /**
  * Types of dialog openings supported
  */
@@ -2400,8 +2418,15 @@ var BREAKPOINT;
  * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
  * por a given breakpoint.
  */
-class LayoutConfig {
-}
+let LayoutConfig = class LayoutConfig {
+};
+LayoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function LayoutConfig_Factory() { return ɵɵinject(Config); }, token: LayoutConfig, providedIn: "root" });
+LayoutConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], LayoutConfig);
 
 const DEFAULT_BREAKPOINTS = {
     [BREAKPOINT.xs]: 576,
@@ -2740,24 +2765,11 @@ MediaComponent = __decorate([
     })
 ], MediaComponent);
 
-/**
- * Provides configuration specific to Media, such as images. This is used to optimize
- * rendering of the media, SEO and performance.
- */
-class MediaConfig {
-}
-
 var MediaModule_1;
 let MediaModule = MediaModule_1 = class MediaModule {
     static forRoot() {
         return {
             ngModule: MediaModule_1,
-            providers: [
-                {
-                    provide: MediaConfig,
-                    useExisting: Config,
-                },
-            ],
         };
     }
 };
@@ -2957,8 +2969,15 @@ const defaultPaginationConfig = {
     },
 };
 
-class PaginationConfig {
-}
+let PaginationConfig = class PaginationConfig {
+};
+PaginationConfig.ɵprov = ɵɵdefineInjectable({ factory: function PaginationConfig_Factory() { return ɵɵinject(Config); }, token: PaginationConfig, providedIn: "root" });
+PaginationConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], PaginationConfig);
 
 /**
  * The item type is used to add semantic structure to the
@@ -3357,10 +3376,7 @@ let PaginationModule = class PaginationModule {
 PaginationModule = __decorate([
     NgModule({
         imports: [CommonModule, RouterModule],
-        providers: [
-            provideDefaultConfig(defaultPaginationConfig),
-            { provide: PaginationConfig, useExisting: Config },
-        ],
+        providers: [provideDefaultConfig(defaultPaginationConfig)],
         declarations: [PaginationComponent],
         exports: [PaginationComponent],
     })
@@ -3406,6 +3422,20 @@ ListNavigationModule = __decorate([
         exports: [SortingComponent, PaginationComponent],
     })
 ], ListNavigationModule);
+
+/**
+ * Provides configuration specific to Media, such as images. This is used to optimize
+ * rendering of the media, SEO and performance.
+ */
+let MediaConfig = class MediaConfig {
+};
+MediaConfig.ɵprov = ɵɵdefineInjectable({ factory: function MediaConfig_Factory() { return ɵɵinject(Config); }, token: MediaConfig, providedIn: "root" });
+MediaConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], MediaConfig);
 
 // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
 let SpinnerComponent = class SpinnerComponent {
@@ -3461,8 +3491,15 @@ GlobalMessageComponentModule = __decorate([
     })
 ], GlobalMessageComponentModule);
 
-class QualtricsConfig {
-}
+let QualtricsConfig = class QualtricsConfig {
+};
+QualtricsConfig.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsConfig_Factory() { return ɵɵinject(Config); }, token: QualtricsConfig, providedIn: "root" });
+QualtricsConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], QualtricsConfig);
 
 let QualtricsLoaderService = class QualtricsLoaderService {
     constructor(winRef, config) {
@@ -3561,10 +3598,6 @@ QualtricsModule = __decorate([
                 },
             }),
             provideDefaultConfig(defaultQualtricsConfig),
-            {
-                provide: QualtricsConfig,
-                useExisting: Config,
-            },
         ],
     })
 ], QualtricsModule);
@@ -3853,8 +3886,15 @@ FormErrorsModule = __decorate([
     })
 ], FormErrorsModule);
 
-class ViewConfig {
-}
+let ViewConfig = class ViewConfig {
+};
+ViewConfig.ɵprov = ɵɵdefineInjectable({ factory: function ViewConfig_Factory() { return ɵɵinject(Config); }, token: ViewConfig, providedIn: "root" });
+ViewConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], ViewConfig);
 
 var ViewConfigModule_1;
 let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
@@ -3865,10 +3905,6 @@ let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
                 provideDefaultConfig({
                     view: {},
                 }),
-                {
-                    provide: ViewConfig,
-                    useExisting: Config,
-                },
             ],
         };
     }
@@ -5871,15 +5907,6 @@ CartComponentModule = __decorate([
     })
 ], CartComponentModule);
 
-var DeliveryModePreferences;
-(function (DeliveryModePreferences) {
-    DeliveryModePreferences["FREE"] = "FREE";
-    DeliveryModePreferences["LEAST_EXPENSIVE"] = "LEAST_EXPENSIVE";
-    DeliveryModePreferences["MOST_EXPENSIVE"] = "MOST_EXPENSIVE";
-})(DeliveryModePreferences || (DeliveryModePreferences = {}));
-class CheckoutConfig {
-}
-
 var CheckoutStepType;
 (function (CheckoutStepType) {
     CheckoutStepType["SHIPPING_ADDRESS"] = "shippingAddress";
@@ -5887,6 +5914,22 @@ var CheckoutStepType;
     CheckoutStepType["PAYMENT_DETAILS"] = "paymentDetails";
     CheckoutStepType["REVIEW_ORDER"] = "reviewOrder";
 })(CheckoutStepType || (CheckoutStepType = {}));
+
+var DeliveryModePreferences;
+(function (DeliveryModePreferences) {
+    DeliveryModePreferences["FREE"] = "FREE";
+    DeliveryModePreferences["LEAST_EXPENSIVE"] = "LEAST_EXPENSIVE";
+    DeliveryModePreferences["MOST_EXPENSIVE"] = "MOST_EXPENSIVE";
+})(DeliveryModePreferences || (DeliveryModePreferences = {}));
+let CheckoutConfig = class CheckoutConfig {
+};
+CheckoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutConfig_Factory() { return ɵɵinject(Config); }, token: CheckoutConfig, providedIn: "root" });
+CheckoutConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], CheckoutConfig);
 
 const defaultCheckoutConfig = {
     checkout: {
@@ -6323,7 +6366,6 @@ CheckoutOrchestratorModule = __decorate([
                     },
                 },
             }),
-            { provide: CheckoutConfig, useExisting: Config },
         ],
         declarations: [CheckoutOrchestratorComponent],
         entryComponents: [CheckoutOrchestratorComponent],
@@ -6536,7 +6578,6 @@ CheckoutProgressModule = __decorate([
                     },
                 },
             }),
-            { provide: CheckoutConfig, useExisting: Config },
         ],
     })
 ], CheckoutProgressModule);
@@ -8060,7 +8101,6 @@ SkipLinkModule = __decorate([
         entryComponents: [SkipLinkComponent],
         providers: [
             provideDefaultConfig(defaultSkipLinkConfig),
-            { provide: SkipLinkConfig, useExisting: Config },
             {
                 provide: APP_INITIALIZER,
                 useFactory: skipLinkFactory,
@@ -8561,10 +8601,7 @@ let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
     static forRoot() {
         return {
             ngModule: LaunchDialogModule_1,
-            providers: [
-                provideConfig(DEFAULT_LAUNCH_CONFIG),
-                { provide: LaunchConfig, useExisting: Config },
-            ],
+            providers: [provideConfig(DEFAULT_LAUNCH_CONFIG)],
         };
     }
 };
@@ -8595,7 +8632,6 @@ let LayoutModule = class LayoutModule {
 LayoutModule = __decorate([
     NgModule({
         imports: [OutletRefModule, LaunchDialogModule.forRoot()],
-        providers: [{ provide: LayoutConfig, useExisting: Config }],
         exports: [OutletRefModule],
     })
 ], LayoutModule);
@@ -8992,8 +9028,15 @@ PageLayoutModule = __decorate([
     })
 ], PageLayoutModule);
 
-class PWAModuleConfig {
-}
+let PWAModuleConfig = class PWAModuleConfig {
+};
+PWAModuleConfig.ɵprov = ɵɵdefineInjectable({ factory: function PWAModuleConfig_Factory() { return ɵɵinject(Config); }, token: PWAModuleConfig, providedIn: "root" });
+PWAModuleConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], PWAModuleConfig);
 const defaultPWAModuleConfig = {
     pwa: {
         enabled: false,
@@ -9109,7 +9152,6 @@ PwaModule = __decorate([
         ],
         providers: [
             provideDefaultConfig(defaultPWAModuleConfig),
-            { provide: PWAModuleConfig, useExisting: Config },
             {
                 provide: SwRegistrationOptions,
                 useFactory: pwaConfigurationFactory,

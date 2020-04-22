@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { WindowRef, provideDefaultConfig, Config, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveHandler, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, Observable, of, BehaviorSubject, fromEvent, concat, isObservable, from, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, mergeMap, switchMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -8775,8 +8775,10 @@ var ICON_TYPE;
     ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
     ICON_TYPE["FILTER"] = "FILTER";
 })(ICON_TYPE || (ICON_TYPE = {}));
-class IconConfig {
-}
+let IconConfig = class IconConfig {
+};
+IconConfig.ɵfac = function IconConfig_Factory(t) { return new (t || IconConfig)(); };
+IconConfig.ɵprov = ɵɵdefineInjectable({ factory: function IconConfig_Factory() { return ɵɵinject(Config); }, token: IconConfig, providedIn: "root" });
 /**
  * Each ICON type can have an companied resource type, such as SVG, LINK (font) or just TEXT.
  * The resources will be automitacally loaded in case they're required for the `ICON_TYPE`.
@@ -9026,10 +9028,7 @@ __decorate([
 let IconModule = class IconModule {
 };
 IconModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: IconModule });
-IconModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function IconModule_Factory(t) { return new (t || IconModule)(); }, providers: [
-        provideDefaultConfig(fontawesomeIconConfig),
-        { provide: IconConfig, useExisting: Config },
-    ], imports: [[CommonModule]] });
+IconModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function IconModule_Factory(t) { return new (t || IconModule)(); }, providers: [provideDefaultConfig(fontawesomeIconConfig)], imports: [[CommonModule]] });
 
 /**
  * A reference to a newly opened modal
@@ -10269,8 +10268,10 @@ let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
 KeyboardFocusService.ɵfac = function KeyboardFocusService_Factory(t) { return ɵKeyboardFocusService_BaseFactory(t || KeyboardFocusService); };
 KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
 
-class SkipLinkConfig {
-}
+let SkipLinkConfig = class SkipLinkConfig {
+};
+SkipLinkConfig.ɵfac = function SkipLinkConfig_Factory(t) { return new (t || SkipLinkConfig)(); };
+SkipLinkConfig.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkConfig_Factory() { return ɵɵinject(Config); }, token: SkipLinkConfig, providedIn: "root" });
 class SkipLink {
 }
 var SkipLinkScrollPosition;
@@ -10382,8 +10383,10 @@ const DEFAULT_LAUNCH_CONFIG = {
     },
 };
 
-class LaunchConfig {
-}
+let LaunchConfig = class LaunchConfig {
+};
+LaunchConfig.ɵfac = function LaunchConfig_Factory(t) { return new (t || LaunchConfig)(); };
+LaunchConfig.ɵprov = ɵɵdefineInjectable({ factory: function LaunchConfig_Factory() { return ɵɵinject(Config); }, token: LaunchConfig, providedIn: "root" });
 /**
  * Types of dialog openings supported
  */
@@ -11114,8 +11117,10 @@ var BREAKPOINT;
  * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
  * por a given breakpoint.
  */
-class LayoutConfig {
-}
+let LayoutConfig = class LayoutConfig {
+};
+LayoutConfig.ɵfac = function LayoutConfig_Factory(t) { return new (t || LayoutConfig)(); };
+LayoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function LayoutConfig_Factory() { return ɵɵinject(Config); }, token: LayoutConfig, providedIn: "root" });
 
 const DEFAULT_BREAKPOINTS = {
     [BREAKPOINT.xs]: 576,
@@ -11448,24 +11453,11 @@ __decorate([
     HostBinding('class.is-missing')
 ], MediaComponent.prototype, "isMissing", void 0);
 
-/**
- * Provides configuration specific to Media, such as images. This is used to optimize
- * rendering of the media, SEO and performance.
- */
-class MediaConfig {
-}
-
 var MediaModule_1;
 let MediaModule = MediaModule_1 = class MediaModule {
     static forRoot() {
         return {
             ngModule: MediaModule_1,
-            providers: [
-                {
-                    provide: MediaConfig,
-                    useExisting: Config,
-                },
-            ],
         };
     }
 };
@@ -11672,8 +11664,10 @@ const defaultPaginationConfig = {
     },
 };
 
-class PaginationConfig {
-}
+let PaginationConfig = class PaginationConfig {
+};
+PaginationConfig.ɵfac = function PaginationConfig_Factory(t) { return new (t || PaginationConfig)(); };
+PaginationConfig.ɵprov = ɵɵdefineInjectable({ factory: function PaginationConfig_Factory() { return ɵɵinject(Config); }, token: PaginationConfig, providedIn: "root" });
 
 /**
  * The item type is used to add semantic structure to the
@@ -12065,10 +12059,7 @@ __decorate([
 let PaginationModule = class PaginationModule {
 };
 PaginationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PaginationModule });
-PaginationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaginationModule_Factory(t) { return new (t || PaginationModule)(); }, providers: [
-        provideDefaultConfig(defaultPaginationConfig),
-        { provide: PaginationConfig, useExisting: Config },
-    ], imports: [[CommonModule, RouterModule]] });
+PaginationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PaginationModule_Factory(t) { return new (t || PaginationModule)(); }, providers: [provideDefaultConfig(defaultPaginationConfig)], imports: [[CommonModule, RouterModule]] });
 
 let SortingComponent = class SortingComponent {
     constructor() {
@@ -12110,6 +12101,15 @@ let ListNavigationModule = class ListNavigationModule {
 };
 ListNavigationModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: ListNavigationModule });
 ListNavigationModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function ListNavigationModule_Factory(t) { return new (t || ListNavigationModule)(); }, imports: [[CommonModule, NgSelectModule, FormsModule, PaginationModule]] });
+
+/**
+ * Provides configuration specific to Media, such as images. This is used to optimize
+ * rendering of the media, SEO and performance.
+ */
+let MediaConfig = class MediaConfig {
+};
+MediaConfig.ɵfac = function MediaConfig_Factory(t) { return new (t || MediaConfig)(); };
+MediaConfig.ɵprov = ɵɵdefineInjectable({ factory: function MediaConfig_Factory() { return ɵɵinject(Config); }, token: MediaConfig, providedIn: "root" });
 
 // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
 let SpinnerComponent = class SpinnerComponent {
@@ -12162,8 +12162,10 @@ let GlobalMessageComponentModule = class GlobalMessageComponentModule {
 GlobalMessageComponentModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: GlobalMessageComponentModule });
 GlobalMessageComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function GlobalMessageComponentModule_Factory(t) { return new (t || GlobalMessageComponentModule)(); }, imports: [[CommonModule, HttpClientModule, IconModule, I18nModule]] });
 
-class QualtricsConfig {
-}
+let QualtricsConfig = class QualtricsConfig {
+};
+QualtricsConfig.ɵfac = function QualtricsConfig_Factory(t) { return new (t || QualtricsConfig)(); };
+QualtricsConfig.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsConfig_Factory() { return ɵɵinject(Config); }, token: QualtricsConfig, providedIn: "root" });
 
 let QualtricsLoaderService = class QualtricsLoaderService {
     constructor(winRef, config) {
@@ -12255,10 +12257,6 @@ QualtricsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Qualtrics
             }
         }),
         provideDefaultConfig(defaultQualtricsConfig),
-        {
-            provide: QualtricsConfig,
-            useExisting: Config
-        },
     ], imports: [[CommonModule, HttpClientModule]] });
 
 let LanguageCurrencyComponent = class LanguageCurrencyComponent {
@@ -12529,8 +12527,10 @@ let FormErrorsModule = class FormErrorsModule {
 FormErrorsModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: FormErrorsModule });
 FormErrorsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FormErrorsModule_Factory(t) { return new (t || FormErrorsModule)(); }, imports: [[CommonModule, I18nModule]] });
 
-class ViewConfig {
-}
+let ViewConfig = class ViewConfig {
+};
+ViewConfig.ɵfac = function ViewConfig_Factory(t) { return new (t || ViewConfig)(); };
+ViewConfig.ɵprov = ɵɵdefineInjectable({ factory: function ViewConfig_Factory() { return ɵɵinject(Config); }, token: ViewConfig, providedIn: "root" });
 
 var ViewConfigModule_1;
 let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
@@ -12541,10 +12541,6 @@ let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
                 provideDefaultConfig({
                     view: {},
                 }),
-                {
-                    provide: ViewConfig,
-                    useExisting: Config,
-                },
             ],
         };
     }
@@ -14569,15 +14565,6 @@ CartComponentModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function CartC
         CartModule,
         SaveForLaterModule] });
 
-var DeliveryModePreferences;
-(function (DeliveryModePreferences) {
-    DeliveryModePreferences["FREE"] = "FREE";
-    DeliveryModePreferences["LEAST_EXPENSIVE"] = "LEAST_EXPENSIVE";
-    DeliveryModePreferences["MOST_EXPENSIVE"] = "MOST_EXPENSIVE";
-})(DeliveryModePreferences || (DeliveryModePreferences = {}));
-class CheckoutConfig {
-}
-
 var CheckoutStepType;
 (function (CheckoutStepType) {
     CheckoutStepType["SHIPPING_ADDRESS"] = "shippingAddress";
@@ -14585,6 +14572,17 @@ var CheckoutStepType;
     CheckoutStepType["PAYMENT_DETAILS"] = "paymentDetails";
     CheckoutStepType["REVIEW_ORDER"] = "reviewOrder";
 })(CheckoutStepType || (CheckoutStepType = {}));
+
+var DeliveryModePreferences;
+(function (DeliveryModePreferences) {
+    DeliveryModePreferences["FREE"] = "FREE";
+    DeliveryModePreferences["LEAST_EXPENSIVE"] = "LEAST_EXPENSIVE";
+    DeliveryModePreferences["MOST_EXPENSIVE"] = "MOST_EXPENSIVE";
+})(DeliveryModePreferences || (DeliveryModePreferences = {}));
+let CheckoutConfig = class CheckoutConfig {
+};
+CheckoutConfig.ɵfac = function CheckoutConfig_Factory(t) { return new (t || CheckoutConfig)(); };
+CheckoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutConfig_Factory() { return ɵɵinject(Config); }, token: CheckoutConfig, providedIn: "root" });
 
 const defaultCheckoutConfig = {
     checkout: {
@@ -14994,7 +14992,6 @@ CheckoutOrchestratorModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: functio
                 }
             }
         }),
-        { provide: CheckoutConfig, useExisting: Config },
     ], imports: [[CommonModule]] });
 
 let CheckoutOrderSummaryComponent = class CheckoutOrderSummaryComponent {
@@ -15178,7 +15175,6 @@ CheckoutProgressModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Ch
                 }
             }
         }),
-        { provide: CheckoutConfig, useExisting: Config },
     ], imports: [[CommonModule, UrlModule, I18nModule, RouterModule]] });
 
 let ShippingAddressSetGuard = class ShippingAddressSetGuard {
@@ -16983,7 +16979,6 @@ let SkipLinkModule = class SkipLinkModule {
 SkipLinkModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: SkipLinkModule });
 SkipLinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function SkipLinkModule_Factory(t) { return new (t || SkipLinkModule)(); }, providers: [
         provideDefaultConfig(defaultSkipLinkConfig),
-        { provide: SkipLinkConfig, useExisting: Config },
         {
             provide: APP_INITIALIZER,
             useFactory: skipLinkFactory,
@@ -17449,10 +17444,7 @@ let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
     static forRoot() {
         return {
             ngModule: LaunchDialogModule_1,
-            providers: [
-                provideConfig(DEFAULT_LAUNCH_CONFIG),
-                { provide: LaunchConfig, useExisting: Config },
-            ],
+            providers: [provideConfig(DEFAULT_LAUNCH_CONFIG)],
         };
     }
 };
@@ -17478,7 +17470,7 @@ LaunchDialogModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Launch
 let LayoutModule = class LayoutModule {
 };
 LayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: LayoutModule });
-LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule_Factory(t) { return new (t || LayoutModule)(); }, providers: [{ provide: LayoutConfig, useExisting: Config }], imports: [[OutletRefModule, LaunchDialogModule.forRoot()],
+LayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function LayoutModule_Factory(t) { return new (t || LayoutModule)(); }, imports: [[OutletRefModule, LaunchDialogModule.forRoot()],
         OutletRefModule] });
 
 /**
@@ -17864,8 +17856,10 @@ let PageLayoutModule = class PageLayoutModule {
 PageLayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageLayoutModule });
 PageLayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageLayoutModule_Factory(t) { return new (t || PageLayoutModule)(); }, providers: [PageLayoutService], imports: [[CommonModule, OutletModule, PageSlotModule]] });
 
-class PWAModuleConfig {
-}
+let PWAModuleConfig = class PWAModuleConfig {
+};
+PWAModuleConfig.ɵfac = function PWAModuleConfig_Factory(t) { return new (t || PWAModuleConfig)(); };
+PWAModuleConfig.ɵprov = ɵɵdefineInjectable({ factory: function PWAModuleConfig_Factory() { return ɵɵinject(Config); }, token: PWAModuleConfig, providedIn: "root" });
 const defaultPWAModuleConfig = {
     pwa: {
         enabled: false,
@@ -17983,7 +17977,6 @@ let PwaModule = class PwaModule {
 PwaModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PwaModule });
 PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Factory(t) { return new (t || PwaModule)(); }, providers: [
         provideDefaultConfig(defaultPWAModuleConfig),
-        { provide: PWAModuleConfig, useExisting: Config },
         {
             provide: SwRegistrationOptions,
             useFactory: pwaConfigurationFactory,
@@ -27695,6 +27688,13 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
             CmsLibModule,
         ],
         StorefrontModule] });
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(IconConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(IconLoaderService, [{
         type: Injectable,
         args: [{
@@ -27718,10 +27718,7 @@ B2cStorefrontModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function B2cSt
         args: [{
                 declarations: [IconComponent],
                 imports: [CommonModule],
-                providers: [
-                    provideDefaultConfig(fontawesomeIconConfig),
-                    { provide: IconConfig, useExisting: Config },
-                ],
+                providers: [provideDefaultConfig(fontawesomeIconConfig)],
                 exports: [IconComponent]
             }]
     }], null, null); })();
@@ -28001,6 +27998,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 providedIn: 'root'
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SkipLinkService, [{
         type: Injectable,
         args: [{
@@ -28015,6 +28019,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: SkipLinkService }]; }, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LaunchConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LaunchDialogService, [{
         type: Injectable,
         args: [{ providedIn: 'root' }]
@@ -28170,6 +28181,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         }], template: [{
             type: Input
         }] }); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(LayoutConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(BreakpointService, [{
         type: Injectable,
         args: [{
@@ -28296,6 +28314,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 exports: [GenericLinkComponent]
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PaginationConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PaginationBuilder, [{
         type: Injectable,
         args: [{
@@ -28325,10 +28350,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: NgModule,
         args: [{
                 imports: [CommonModule, RouterModule],
-                providers: [
-                    provideDefaultConfig(defaultPaginationConfig),
-                    { provide: PaginationConfig, useExisting: Config },
-                ],
+                providers: [provideDefaultConfig(defaultPaginationConfig)],
                 declarations: [PaginationComponent],
                 exports: [PaginationComponent]
             }]
@@ -28360,6 +28382,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 imports: [CommonModule, NgSelectModule, FormsModule, PaginationModule],
                 declarations: [SortingComponent],
                 exports: [SortingComponent, PaginationComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(MediaConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(SpinnerComponent, [{
@@ -28396,6 +28425,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 exports: [GlobalMessageComponent]
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(QualtricsConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(QualtricsLoaderService, [{
         type: Injectable,
         args: [{
@@ -28425,10 +28461,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                         }
                     }),
                     provideDefaultConfig(defaultQualtricsConfig),
-                    {
-                        provide: QualtricsConfig,
-                        useExisting: Config
-                    },
                 ]
             }]
     }], null, null); })();
@@ -28544,6 +28576,13 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                 imports: [CommonModule, I18nModule],
                 declarations: [FormErrorsComponent],
                 exports: [FormErrorsComponent]
+            }]
+    }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ViewConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(ViewConfigModule, [{
@@ -29164,6 +29203,13 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 ]
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(CheckoutConfigService, [{
         type: Injectable,
         args: [{
@@ -29217,7 +29263,6 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                             }
                         }
                     }),
-                    { provide: CheckoutConfig, useExisting: Config },
                 ],
                 declarations: [CheckoutOrchestratorComponent],
                 entryComponents: [CheckoutOrchestratorComponent],
@@ -29334,7 +29379,6 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                             }
                         }
                     }),
-                    { provide: CheckoutConfig, useExisting: Config },
                 ]
             }]
     }], null, null); })();
@@ -29754,7 +29798,6 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 entryComponents: [SkipLinkComponent],
                 providers: [
                     provideDefaultConfig(defaultSkipLinkConfig),
-                    { provide: SkipLinkConfig, useExisting: Config },
                     {
                         provide: APP_INITIALIZER,
                         useFactory: skipLinkFactory,
@@ -29901,7 +29944,6 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: NgModule,
         args: [{
                 imports: [OutletRefModule, LaunchDialogModule.forRoot()],
-                providers: [{ provide: LayoutConfig, useExisting: Config }],
                 exports: [OutletRefModule]
             }]
     }], null, null); })();
@@ -29974,6 +30016,13 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 exports: [PageLayoutComponent]
             }]
     }], null, null); })();
+/*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PWAModuleConfig, [{
+        type: Injectable,
+        args: [{
+                providedIn: 'root',
+                useExisting: Config
+            }]
+    }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenService, [{
         type: Injectable
     }], function () { return [{ type: PWAModuleConfig }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.WindowRef }]; }, null); })();
@@ -30005,7 +30054,6 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 ],
                 providers: [
                     provideDefaultConfig(defaultPWAModuleConfig),
-                    { provide: PWAModuleConfig, useExisting: Config },
                     {
                         provide: SwRegistrationOptions,
                         useFactory: pwaConfigurationFactory,

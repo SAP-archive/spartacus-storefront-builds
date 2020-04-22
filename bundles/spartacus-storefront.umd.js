@@ -231,6 +231,13 @@
     var IconConfig = /** @class */ (function () {
         function IconConfig() {
         }
+        IconConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function IconConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: IconConfig, providedIn: "root" });
+        IconConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], IconConfig);
         return IconConfig;
     }());
     /**
@@ -515,10 +522,7 @@
             core.NgModule({
                 declarations: [IconComponent],
                 imports: [common.CommonModule],
-                providers: [
-                    core$1.provideDefaultConfig(fontawesomeIconConfig),
-                    { provide: IconConfig, useExisting: core$1.Config },
-                ],
+                providers: [core$1.provideDefaultConfig(fontawesomeIconConfig)],
                 exports: [IconComponent],
             })
         ], IconModule);
@@ -1950,6 +1954,13 @@
     var SkipLinkConfig = /** @class */ (function () {
         function SkipLinkConfig() {
         }
+        SkipLinkConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function SkipLinkConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: SkipLinkConfig, providedIn: "root" });
+        SkipLinkConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], SkipLinkConfig);
         return SkipLinkConfig;
     }());
     var SkipLink = /** @class */ (function () {
@@ -2081,6 +2092,13 @@
     var LaunchConfig = /** @class */ (function () {
         function LaunchConfig() {
         }
+        LaunchConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function LaunchConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: LaunchConfig, providedIn: "root" });
+        LaunchConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], LaunchConfig);
         return LaunchConfig;
     }());
     /**
@@ -2822,6 +2840,13 @@
     var LayoutConfig = /** @class */ (function () {
         function LayoutConfig() {
         }
+        LayoutConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function LayoutConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: LayoutConfig, providedIn: "root" });
+        LayoutConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], LayoutConfig);
         return LayoutConfig;
     }());
 
@@ -3198,16 +3223,6 @@
         return MediaComponent;
     }());
 
-    /**
-     * Provides configuration specific to Media, such as images. This is used to optimize
-     * rendering of the media, SEO and performance.
-     */
-    var MediaConfig = /** @class */ (function () {
-        function MediaConfig() {
-        }
-        return MediaConfig;
-    }());
-
     var MediaModule = /** @class */ (function () {
         function MediaModule() {
         }
@@ -3215,12 +3230,6 @@
         MediaModule.forRoot = function () {
             return {
                 ngModule: MediaModule_1,
-                providers: [
-                    {
-                        provide: MediaConfig,
-                        useExisting: core$1.Config,
-                    },
-                ],
             };
         };
         var MediaModule_1;
@@ -3447,6 +3456,13 @@
     var PaginationConfig = /** @class */ (function () {
         function PaginationConfig() {
         }
+        PaginationConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PaginationConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: PaginationConfig, providedIn: "root" });
+        PaginationConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], PaginationConfig);
         return PaginationConfig;
     }());
 
@@ -3861,10 +3877,7 @@
         PaginationModule = __decorate([
             core.NgModule({
                 imports: [common.CommonModule, router.RouterModule],
-                providers: [
-                    core$1.provideDefaultConfig(defaultPaginationConfig),
-                    { provide: PaginationConfig, useExisting: core$1.Config },
-                ],
+                providers: [core$1.provideDefaultConfig(defaultPaginationConfig)],
                 declarations: [PaginationComponent],
                 exports: [PaginationComponent],
             })
@@ -3915,6 +3928,23 @@
             })
         ], ListNavigationModule);
         return ListNavigationModule;
+    }());
+
+    /**
+     * Provides configuration specific to Media, such as images. This is used to optimize
+     * rendering of the media, SEO and performance.
+     */
+    var MediaConfig = /** @class */ (function () {
+        function MediaConfig() {
+        }
+        MediaConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function MediaConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: MediaConfig, providedIn: "root" });
+        MediaConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], MediaConfig);
+        return MediaConfig;
     }());
 
     // TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
@@ -3983,6 +4013,13 @@
     var QualtricsConfig = /** @class */ (function () {
         function QualtricsConfig() {
         }
+        QualtricsConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function QualtricsConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: QualtricsConfig, providedIn: "root" });
+        QualtricsConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], QualtricsConfig);
         return QualtricsConfig;
     }());
 
@@ -4090,10 +4127,6 @@
                         },
                     }),
                     core$1.provideDefaultConfig(defaultQualtricsConfig),
-                    {
-                        provide: QualtricsConfig,
-                        useExisting: core$1.Config,
-                    },
                 ],
             })
         ], QualtricsModule);
@@ -4452,6 +4485,13 @@
     var ViewConfig = /** @class */ (function () {
         function ViewConfig() {
         }
+        ViewConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function ViewConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: ViewConfig, providedIn: "root" });
+        ViewConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], ViewConfig);
         return ViewConfig;
     }());
 
@@ -4466,10 +4506,6 @@
                     core$1.provideDefaultConfig({
                         view: {},
                     }),
-                    {
-                        provide: ViewConfig,
-                        useExisting: core$1.Config,
-                    },
                 ],
             };
         };
@@ -6712,6 +6748,14 @@
     }());
 
 
+    (function (CheckoutStepType) {
+        CheckoutStepType["SHIPPING_ADDRESS"] = "shippingAddress";
+        CheckoutStepType["DELIVERY_MODE"] = "deliveryMode";
+        CheckoutStepType["PAYMENT_DETAILS"] = "paymentDetails";
+        CheckoutStepType["REVIEW_ORDER"] = "reviewOrder";
+    })(exports.CheckoutStepType || (exports.CheckoutStepType = {}));
+
+
     (function (DeliveryModePreferences) {
         DeliveryModePreferences["FREE"] = "FREE";
         DeliveryModePreferences["LEAST_EXPENSIVE"] = "LEAST_EXPENSIVE";
@@ -6720,16 +6764,15 @@
     var CheckoutConfig = /** @class */ (function () {
         function CheckoutConfig() {
         }
+        CheckoutConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CheckoutConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: CheckoutConfig, providedIn: "root" });
+        CheckoutConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], CheckoutConfig);
         return CheckoutConfig;
     }());
-
-
-    (function (CheckoutStepType) {
-        CheckoutStepType["SHIPPING_ADDRESS"] = "shippingAddress";
-        CheckoutStepType["DELIVERY_MODE"] = "deliveryMode";
-        CheckoutStepType["PAYMENT_DETAILS"] = "paymentDetails";
-        CheckoutStepType["REVIEW_ORDER"] = "reviewOrder";
-    })(exports.CheckoutStepType || (exports.CheckoutStepType = {}));
 
     var defaultCheckoutConfig = {
         checkout: {
@@ -7222,7 +7265,6 @@
                             },
                         },
                     }),
-                    { provide: CheckoutConfig, useExisting: core$1.Config },
                 ],
                 declarations: [CheckoutOrchestratorComponent],
                 entryComponents: [CheckoutOrchestratorComponent],
@@ -7454,7 +7496,6 @@
                             },
                         },
                     }),
-                    { provide: CheckoutConfig, useExisting: core$1.Config },
                 ],
             })
         ], CheckoutProgressModule);
@@ -9071,7 +9112,6 @@
                 entryComponents: [SkipLinkComponent],
                 providers: [
                     core$1.provideDefaultConfig(defaultSkipLinkConfig),
-                    { provide: SkipLinkConfig, useExisting: core$1.Config },
                     {
                         provide: core.APP_INITIALIZER,
                         useFactory: skipLinkFactory,
@@ -9611,10 +9651,7 @@
         LaunchDialogModule.forRoot = function () {
             return {
                 ngModule: LaunchDialogModule_1,
-                providers: [
-                    core$1.provideConfig(DEFAULT_LAUNCH_CONFIG),
-                    { provide: LaunchConfig, useExisting: core$1.Config },
-                ],
+                providers: [core$1.provideConfig(DEFAULT_LAUNCH_CONFIG)],
             };
         };
         var LaunchDialogModule_1;
@@ -9648,7 +9685,6 @@
         LayoutModule = __decorate([
             core.NgModule({
                 imports: [OutletRefModule, LaunchDialogModule.forRoot()],
-                providers: [{ provide: LayoutConfig, useExisting: core$1.Config }],
                 exports: [OutletRefModule],
             })
         ], LayoutModule);
@@ -10114,6 +10150,13 @@
     var PWAModuleConfig = /** @class */ (function () {
         function PWAModuleConfig() {
         }
+        PWAModuleConfig.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PWAModuleConfig_Factory() { return core["ɵɵinject"](core$1.Config); }, token: PWAModuleConfig, providedIn: "root" });
+        PWAModuleConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], PWAModuleConfig);
         return PWAModuleConfig;
     }());
     var defaultPWAModuleConfig = {
@@ -10241,7 +10284,6 @@
                 ],
                 providers: [
                     core$1.provideDefaultConfig(defaultPWAModuleConfig),
-                    { provide: PWAModuleConfig, useExisting: core$1.Config },
                     {
                         provide: serviceWorker.SwRegistrationOptions,
                         useFactory: pwaConfigurationFactory,
