@@ -1,7 +1,7 @@
 import { ViewContainerRef } from '@angular/core';
 import { LAUNCH_CALLER, LaunchDialog, LaunchOptions } from '../config';
-import { Handler } from '@spartacus/core';
-export declare abstract class LaunchRenderStrategy implements Handler {
+import { Applicable } from '@spartacus/core';
+export declare abstract class LaunchRenderStrategy implements Applicable {
     protected renderedCallers: Array<{
         caller: LAUNCH_CALLER;
         element?: any;

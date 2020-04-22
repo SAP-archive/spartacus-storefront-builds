@@ -1,11 +1,11 @@
 import { ComponentRef, ElementRef, Injector, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CmsComponentMapping, Handler, Priority } from '@spartacus/core';
+import { Applicable, CmsComponentMapping, Priority } from '@spartacus/core';
 /**
  * ComponentHandler implementations can be used for instantiating and launching
  * different types of CMS mapped components
  */
-export declare abstract class ComponentHandler implements Handler {
+export declare abstract class ComponentHandler implements Applicable {
     /**
      * Returns component resource - an observable stream used to launch and dispose
      * component.

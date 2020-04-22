@@ -933,7 +933,7 @@
          * @param componentMapping
          */
         ComponentHandlerService.prototype.resolve = function (componentMapping) {
-            var handler = core$1.resolveHandler(this.handlers, [componentMapping]);
+            var handler = core$1.resolveApplicable(this.handlers, [componentMapping]);
             if (core.isDevMode() && !handler) {
                 if (!this.invalidMappings.has(componentMapping)) {
                     this.invalidMappings.add(componentMapping);
@@ -2199,7 +2199,7 @@
          * @param config Configuration for launch
          */
         LaunchDialogService.prototype.getStrategy = function (config) {
-            return core$1.resolveHandler(this.renderStrategies, [config]);
+            return core$1.resolveApplicable(this.renderStrategies, [config]);
         };
         LaunchDialogService.ctorParameters = function () { return [
             { type: Array, decorators: [{ type: core.Inject, args: [LaunchRenderStrategy,] }] },
