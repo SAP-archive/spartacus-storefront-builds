@@ -9563,7 +9563,11 @@
         };
         /**
          * Returns the closest `HtmlElement`, by iterating over the
-         * parent elements of the given element.
+         * parent nodes of the given element.
+         *
+         * We avoid traversing the parent _elements_, as this is blocking
+         * ie11 implementations. One of the spare exclusions we make to not
+         * supporting ie11.
          *
          * @param element
          */
@@ -9571,7 +9575,7 @@
             if (element instanceof HTMLElement) {
                 return element;
             }
-            return this.getHostElement(element.parentElement);
+            return this.getHostElement(element.parentNode);
         };
         OutletDirective.prototype.ngOnDestroy = function () {
             this.subscription.unsubscribe();
@@ -18864,9 +18868,10 @@
     }());
 
     var StoreFinderSearchResultComponent = /** @class */ (function () {
-        function StoreFinderSearchResultComponent(storeFinderService, route) {
+        function StoreFinderSearchResultComponent(storeFinderService, route, config) {
             this.storeFinderService = storeFinderService;
             this.route = route;
+            this.config = config;
             this.countryCode = null;
             this.searchConfig = {
                 currentPage: 0,
@@ -18885,13 +18890,14 @@
         };
         StoreFinderSearchResultComponent.prototype.viewPage = function (pageNumber) {
             this.searchConfig = __assign(__assign({}, this.searchConfig), { currentPage: pageNumber });
-            this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+            this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation, this.radius);
         };
         StoreFinderSearchResultComponent.prototype.initialize = function (params) {
             this.searchQuery = this.parseParameters(params);
             this.useMyLocation = params && params.useMyLocation ? true : false;
             this.searchConfig = __assign(__assign({}, this.searchConfig), { currentPage: 0 });
-            this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+            this.radius = this.config.googleMaps.radius;
+            this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation, this.radius);
             this.isLoading$ = this.storeFinderService.getStoresLoading();
             this.locations$ = this.storeFinderService.getFindStoresEntities();
         };
@@ -18910,7 +18916,8 @@
         };
         StoreFinderSearchResultComponent.ctorParameters = function () { return [
             { type: core$1.StoreFinderService },
-            { type: router.ActivatedRoute }
+            { type: router.ActivatedRoute },
+            { type: core$1.StoreFinderConfig }
         ]; };
         StoreFinderSearchResultComponent = __decorate([
             core.Component({

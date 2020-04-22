@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveApplicable, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveApplicable, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, Observable, from, of, BehaviorSubject, fromEvent, concat, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -17373,7 +17373,11 @@ let OutletDirective = class OutletDirective {
     }
     /**
      * Returns the closest `HtmlElement`, by iterating over the
-     * parent elements of the given element.
+     * parent nodes of the given element.
+     *
+     * We avoid traversing the parent _elements_, as this is blocking
+     * ie11 implementations. One of the spare exclusions we make to not
+     * supporting ie11.
      *
      * @param element
      */
@@ -17381,7 +17385,7 @@ let OutletDirective = class OutletDirective {
         if (element instanceof HTMLElement) {
             return element;
         }
-        return this.getHostElement(element.parentElement);
+        return this.getHostElement(element.parentNode);
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
@@ -26351,9 +26355,10 @@ StoreFinderListComponent = __decorate([ __param(1, Inject(DOCUMENT))
 ], StoreFinderListComponent);
 
 let StoreFinderSearchResultComponent = class StoreFinderSearchResultComponent {
-    constructor(storeFinderService, route) {
+    constructor(storeFinderService, route, config) {
         this.storeFinderService = storeFinderService;
         this.route = route;
+        this.config = config;
         this.countryCode = null;
         this.searchConfig = {
             currentPage: 0,
@@ -26369,13 +26374,14 @@ let StoreFinderSearchResultComponent = class StoreFinderSearchResultComponent {
     }
     viewPage(pageNumber) {
         this.searchConfig = Object.assign(Object.assign({}, this.searchConfig), { currentPage: pageNumber });
-        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation, this.radius);
     }
     initialize(params) {
         this.searchQuery = this.parseParameters(params);
         this.useMyLocation = params && params.useMyLocation ? true : false;
         this.searchConfig = Object.assign(Object.assign({}, this.searchConfig), { currentPage: 0 });
-        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation);
+        this.radius = this.config.googleMaps.radius;
+        this.storeFinderService.findStoresAction(this.searchQuery.queryText, this.searchConfig, this.geolocation, this.countryCode, this.useMyLocation, this.radius);
         this.isLoading$ = this.storeFinderService.getStoresLoading();
         this.locations$ = this.storeFinderService.getFindStoresEntities();
     }
@@ -26393,7 +26399,7 @@ let StoreFinderSearchResultComponent = class StoreFinderSearchResultComponent {
         return searchQuery;
     }
 };
-StoreFinderSearchResultComponent.ɵfac = function StoreFinderSearchResultComponent_Factory(t) { return new (t || StoreFinderSearchResultComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute)); };
+StoreFinderSearchResultComponent.ɵfac = function StoreFinderSearchResultComponent_Factory(t) { return new (t || StoreFinderSearchResultComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreFinderConfig)); };
 StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderSearchResultComponent, selectors: [["cx-store-finder-search-result"]], decls: 5, vars: 6, consts: [[4, "ngIf", "ngIfElse"], ["loading", ""], [4, "ngIf"], [3, "locations", "useMylocation", 4, "ngIf"], ["class", "container", 4, "ngIf"], [1, "cx-pagination"], [3, "pagination", "viewPageEvent"], [3, "locations", "useMylocation"], [1, "container"], [1, "row"], [1, "cx-no-stores"], [1, "cx-spinner"]], template: function StoreFinderSearchResultComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, StoreFinderSearchResultComponent_div_0_Template, 4, 3, "div", 0);
         ɵngcc0.ɵɵpipe(1, "async");
@@ -26407,7 +26413,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderSearchResultComponent.ctorParameters = () => [
     { type: StoreFinderService },
-    { type: ActivatedRoute }
+    { type: ActivatedRoute },
+    { type: StoreFinderConfig }
 ];
 
 let StoreFinderSearchComponent = class StoreFinderSearchComponent {
@@ -32954,7 +32961,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 selector: 'cx-store-finder-search-result',
                 template: "<div\n  *ngIf=\"\n    !(isLoading$ | async) && (locations$ | async) as locations;\n    else loading\n  \"\n>\n  <div *ngIf=\"locations?.stores.length\">\n    <div class=\"cx-pagination\">\n      <cx-pagination\n        [pagination]=\"locations.pagination\"\n        (viewPageEvent)=\"viewPage($event)\"\n      ></cx-pagination>\n    </div>\n  </div>\n  <cx-store-finder-list\n    *ngIf=\"locations?.stores.length\"\n    [locations]=\"locations\"\n    [useMylocation]=\"useMyLocation\"\n  ></cx-store-finder-list>\n  <div class=\"container\" *ngIf=\"!locations?.stores.length\">\n    <div class=\"row\">\n      <span class=\"cx-no-stores\">{{\n        'storeFinder.noStoresMessage' | cxTranslate\n      }}</span>\n    </div>\n  </div>\n</div>\n<ng-template #loading>\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</ng-template>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc6.ActivatedRoute }]; }, null); })();
+    }], function () { return [{ type: ɵngcc1.StoreFinderService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.StoreFinderConfig }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(StoreFinderSearchComponent, [{
         type: Component,
         args: [{
