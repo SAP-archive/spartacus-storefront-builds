@@ -4,16 +4,18 @@ import { Observable } from 'rxjs';
 import { CmsGuardsService } from '../services/cms-guards.service';
 import { CmsI18nService } from '../services/cms-i18n.service';
 import { CmsRoutesService } from '../services/cms-routes.service';
+import { CmsComponentsService } from '../services';
 /**
  * Helper service for `CmsPageGuard`
  */
 export declare class CmsPageGuardService {
     protected semanticPathService: SemanticPathService;
-    private cmsService;
-    private cmsRoutes;
-    private cmsI18n;
-    private cmsGuards;
-    constructor(semanticPathService: SemanticPathService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService);
+    protected cmsService: CmsService;
+    protected cmsRoutes: CmsRoutesService;
+    protected cmsI18n: CmsI18nService;
+    protected cmsGuards: CmsGuardsService;
+    protected cmsComponentsService: CmsComponentsService;
+    constructor(semanticPathService: SemanticPathService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService, cmsComponentsService: CmsComponentsService);
     /**
      * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
      *

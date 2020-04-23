@@ -1,5 +1,5 @@
 import { Injector } from '@angular/core';
-import { CmsMappingService } from '../../../services/cms-mapping.service';
+import { CmsComponentsService } from '../../../services/cms-components.service';
 /**
  * Used to prepare injector for CMS components.
  *
@@ -7,9 +7,9 @@ import { CmsMappingService } from '../../../services/cms-mapping.service';
  * for specified component's uid
  */
 export declare class CmsInjectorService {
-    protected cmsMapping: CmsMappingService;
+    protected cmsComponentsService: CmsComponentsService;
     protected injector: Injector;
-    constructor(cmsMapping: CmsMappingService, injector: Injector);
+    constructor(cmsComponentsService: CmsComponentsService, injector: Injector);
     private getCmsData;
     getInjector(type: string, uid: string, parentInjector?: Injector): Injector;
 }

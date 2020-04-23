@@ -796,16 +796,34 @@
         return AnonymousConsentManagementBannerModule;
     }());
 
-    /**
-     * Please don't put that service in public API.
-     * */
-    var CmsMappingService = /** @class */ (function () {
-        function CmsMappingService(config, platformId) {
+    var CmsComponentsService = /** @class */ (function () {
+        function CmsComponentsService(config, platformId) {
             this.config = config;
             this.platformId = platformId;
             this.missingComponents = [];
         }
-        CmsMappingService.prototype.getComponentMapping = function (componentType) {
+        /**
+         * Should be called to make sure all component mappings are determined,
+         * especially lazy loaded ones.
+         *
+         * It's recommended way to make sure all other methods of CmsComponentService
+         * will be able to work synchronously for asked component types and avoid risk
+         * of potential errors that could be thrown otherwise.
+         */
+        CmsComponentsService.prototype.determineMappings = function (componentTypes) {
+            return rxjs.of(componentTypes);
+        };
+        /**
+         * Return collection of component mapping configuration for specified list of
+         * component types.
+         *
+         * If component mapping can't be determined synchronously, for example, lazy
+         * loaded one, it will throw an error.
+         *
+         * To make sure component mapping is available, determineMappings()
+         * should be called and completed first.
+         */
+        CmsComponentsService.prototype.getMapping = function (componentType) {
             var _a;
             var componentConfig = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType];
             if (!componentConfig) {
@@ -816,19 +834,34 @@
             }
             return componentConfig;
         };
-        CmsMappingService.prototype.isComponentEnabled = function (componentType) {
+        /**
+         * Checks, if component should be rendered as some components
+         * could be disabled for server side renderings
+         */
+        CmsComponentsService.prototype.shouldRender = function (componentType) {
             var _a;
             var isSSR = common.isPlatformServer(this.platformId);
-            return !(isSSR && ((_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.disableSSR));
+            return !(isSSR && ((_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.disableSSR));
         };
-        CmsMappingService.prototype.getRoutesForComponents = function (componentTypes) {
+        /**
+         * Return DeferLoadingStrategy for component type.
+         */
+        CmsComponentsService.prototype.getDeferLoadingStrategy = function (componentType) {
+            var _a, _b;
+            return (_b = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType]) === null || _b === void 0 ? void 0 : _b.deferLoading;
+        };
+        /**
+         * Get cms driven child routes for components
+         */
+        CmsComponentsService.prototype.getChildRoutes = function (componentTypes) {
             var e_1, _a;
+            var _b, _c;
             var routes = [];
             try {
                 for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
                     var componentType = componentTypes_1_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        routes.push.apply(routes, __spread(this.getRoutesForComponent(componentType)));
+                    if (this.shouldRender(componentType)) {
+                        routes.push.apply(routes, __spread(((_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.childRoutes) !== null && _c !== void 0 ? _c : [])));
                     }
                 }
             }
@@ -841,13 +874,17 @@
             }
             return routes;
         };
-        CmsMappingService.prototype.getGuardsForComponents = function (componentTypes) {
+        /**
+         * Get cms driven guards for components
+         */
+        CmsComponentsService.prototype.getGuards = function (componentTypes) {
             var e_2, _a;
+            var _b, _c;
             var guards = new Set();
             try {
                 for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
                     var componentType = componentTypes_2_1.value;
-                    this.getGuardsForComponent(componentType).forEach(function (guard) {
+                    (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.guards) === null || _c === void 0 ? void 0 : _c.forEach(function (guard) {
                         return guards.add(guard);
                     });
                 }
@@ -861,14 +898,18 @@
             }
             return Array.from(guards);
         };
-        CmsMappingService.prototype.getI18nKeysForComponents = function (componentTypes) {
+        /**
+         * Get i18n keys associated with components
+         */
+        CmsComponentsService.prototype.getI18nKeys = function (componentTypes) {
             var e_3, _a;
+            var _b, _c;
             var i18nKeys = new Set();
             try {
                 for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
                     var componentType = componentTypes_3_1.value;
-                    if (this.isComponentEnabled(componentType)) {
-                        this.getI18nKeysForComponent(componentType).forEach(function (key) {
+                    if (this.shouldRender(componentType)) {
+                        (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.i18nKeys) === null || _c === void 0 ? void 0 : _c.forEach(function (key) {
                             return i18nKeys.add(key);
                         });
                     }
@@ -883,30 +924,18 @@
             }
             return Array.from(i18nKeys);
         };
-        CmsMappingService.prototype.getRoutesForComponent = function (componentType) {
-            var _a, _b;
-            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : [];
-        };
-        CmsMappingService.prototype.getGuardsForComponent = function (componentType) {
-            var _a, _b;
-            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.guards) !== null && _b !== void 0 ? _b : [];
-        };
-        CmsMappingService.prototype.getI18nKeysForComponent = function (componentType) {
-            var _a, _b;
-            return (_b = (_a = this.getComponentMapping(componentType)) === null || _a === void 0 ? void 0 : _a.i18nKeys) !== null && _b !== void 0 ? _b : [];
-        };
-        CmsMappingService.ctorParameters = function () { return [
+        CmsComponentsService.ctorParameters = function () { return [
             { type: core$1.CmsConfig },
             { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
         ]; };
-        CmsMappingService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsMappingService_Factory() { return new CmsMappingService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsMappingService, providedIn: "root" });
-        CmsMappingService = __decorate([
+        CmsComponentsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsComponentsService_Factory() { return new CmsComponentsService(core["ɵɵinject"](core$1.CmsConfig), core["ɵɵinject"](core.PLATFORM_ID)); }, token: CmsComponentsService, providedIn: "root" });
+        CmsComponentsService = __decorate([
             core.Injectable({
                 providedIn: 'root',
             }),
             __param(1, core.Inject(core.PLATFORM_ID))
-        ], CmsMappingService);
-        return CmsMappingService;
+        ], CmsComponentsService);
+        return CmsComponentsService;
     }());
 
     /**
@@ -980,8 +1009,8 @@
      * for specified component's uid
      */
     var CmsInjectorService = /** @class */ (function () {
-        function CmsInjectorService(cmsMapping, injector) {
-            this.cmsMapping = cmsMapping;
+        function CmsInjectorService(cmsComponentsService, injector) {
+            this.cmsComponentsService = cmsComponentsService;
             this.injector = injector;
         }
         CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
@@ -994,7 +1023,7 @@
         };
         CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
             var _a, _b;
-            var configProviders = (_b = (_a = this.cmsMapping.getComponentMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+            var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
             return core.Injector.create({
                 providers: __spread([
                     {
@@ -1006,10 +1035,10 @@
             });
         };
         CmsInjectorService.ctorParameters = function () { return [
-            { type: CmsMappingService },
+            { type: CmsComponentsService },
             { type: core.Injector }
         ]; };
-        CmsInjectorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+        CmsInjectorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(core["ɵɵinject"](CmsComponentsService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
         CmsInjectorService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -1022,10 +1051,10 @@
      * Directive used to facilitate instantiation of CMS driven dynamic components
      */
     var ComponentWrapperDirective = /** @class */ (function () {
-        function ComponentWrapperDirective(vcr, cmsMappingService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
+        function ComponentWrapperDirective(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
         ) {
             this.vcr = vcr;
-            this.cmsMappingService = cmsMappingService;
+            this.cmsComponentsService = cmsComponentsService;
             this.injector = injector;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
@@ -1034,14 +1063,19 @@
             this.cmsService = cmsService;
         }
         ComponentWrapperDirective.prototype.ngOnInit = function () {
-            if (this.cmsMappingService.isComponentEnabled(this.cxComponentWrapper.flexType)) {
-                this.launchComponent();
-            }
+            var _this = this;
+            this.cmsComponentsService
+                .determineMappings([this.cxComponentWrapper.flexType])
+                .subscribe(function () {
+                if (_this.cmsComponentsService.shouldRender(_this.cxComponentWrapper.flexType)) {
+                    _this.launchComponent();
+                }
+            });
         };
         ComponentWrapperDirective.prototype.launchComponent = function () {
             var _this = this;
             var _a;
-            var componentMapping = this.cmsMappingService.getComponentMapping(this.cxComponentWrapper.flexType);
+            var componentMapping = this.cmsComponentsService.getMapping(this.cxComponentWrapper.flexType);
             if (!componentMapping) {
                 return;
             }
@@ -1064,7 +1098,7 @@
         };
         ComponentWrapperDirective.ctorParameters = function () { return [
             { type: core.ViewContainerRef },
-            { type: CmsMappingService },
+            { type: CmsComponentsService },
             { type: core.Injector },
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
@@ -9749,13 +9783,13 @@
      * - The `page-fold` style class is added for the page slot which is configured as the page fold.
      */
     var PageSlotComponent = /** @class */ (function () {
-        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, elementRef, config, cd) {
+        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, elementRef, cmsComponentsService, cd) {
             var _this = this;
             this.cmsService = cmsService;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
             this.elementRef = elementRef;
-            this.config = config;
+            this.cmsComponentsService = cmsComponentsService;
             this.cd = cd;
             /**
              * Indicates that the page slot is the last page slot above the fold.
@@ -9851,8 +9885,7 @@
          * rendered instantly or whether it should be deferred.
          */
         PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
-            var deferLoading = (this.config.cmsComponents[componentType] || {})
-                .deferLoading;
+            var deferLoading = this.cmsComponentsService.getDeferLoadingStrategy(componentType);
             return { deferLoading: deferLoading };
         };
         PageSlotComponent.prototype.isDistinct = function (old, current) {
@@ -9875,7 +9908,7 @@
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
             { type: core.ElementRef },
-            { type: core$1.CmsConfig },
+            { type: CmsComponentsService },
             { type: core.ChangeDetectorRef }
         ]; };
         __decorate([
@@ -11057,17 +11090,14 @@
         return MainModule;
     }());
 
-    /**
-     * Please don't put that service in public API.
-     * */
     var CmsGuardsService = /** @class */ (function () {
-        function CmsGuardsService(cmsMapping, injector) {
-            this.cmsMapping = cmsMapping;
+        function CmsGuardsService(cmsComponentsService, injector) {
+            this.cmsComponentsService = cmsComponentsService;
             this.injector = injector;
         }
         CmsGuardsService.prototype.cmsPageCanActivate = function (componentTypes, route, state) {
             var _this = this;
-            var guards = this.cmsMapping.getGuardsForComponents(componentTypes);
+            var guards = this.cmsComponentsService.getGuards(componentTypes);
             if (guards.length) {
                 var canActivateObservables = guards.map(function (guardClass) {
                     var guard = _this.injector.get(guardClass, null);
@@ -11085,10 +11115,10 @@
             }
         };
         CmsGuardsService.ctorParameters = function () { return [
-            { type: CmsMappingService },
+            { type: CmsComponentsService },
             { type: core.Injector }
         ]; };
-        CmsGuardsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
+        CmsGuardsService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsGuardsService_Factory() { return new CmsGuardsService(core["ɵɵinject"](CmsComponentsService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsGuardsService, providedIn: "root" });
         CmsGuardsService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -11115,18 +11145,15 @@
         return typeof v === 'function';
     }
 
-    /**
-     * Please don't put that service in public API.
-     * */
     var CmsI18nService = /** @class */ (function () {
-        function CmsI18nService(cmsMapping, translation, translationChunk) {
-            this.cmsMapping = cmsMapping;
+        function CmsI18nService(cmsComponentsService, translation, translationChunk) {
+            this.cmsComponentsService = cmsComponentsService;
             this.translation = translation;
             this.translationChunk = translationChunk;
         }
         CmsI18nService.prototype.loadForComponents = function (componentTypes) {
             var e_1, _a;
-            var i18nKeys = this.cmsMapping.getI18nKeysForComponents(componentTypes);
+            var i18nKeys = this.cmsComponentsService.getI18nKeys(componentTypes);
             var i18nChunks = new Set();
             try {
                 for (var i18nKeys_1 = __values(i18nKeys), i18nKeys_1_1 = i18nKeys_1.next(); !i18nKeys_1_1.done; i18nKeys_1_1 = i18nKeys_1.next()) {
@@ -11144,11 +11171,11 @@
             this.translation.loadChunks(Array.from(i18nChunks));
         };
         CmsI18nService.ctorParameters = function () { return [
-            { type: CmsMappingService },
+            { type: CmsComponentsService },
             { type: core$1.TranslationService },
             { type: core$1.TranslationChunkService }
         ]; };
-        CmsI18nService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core["ɵɵinject"](CmsMappingService), core["ɵɵinject"](core$1.TranslationService), core["ɵɵinject"](core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
+        CmsI18nService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsI18nService_Factory() { return new CmsI18nService(core["ɵɵinject"](CmsComponentsService), core["ɵɵinject"](core$1.TranslationService), core["ɵɵinject"](core$1.TranslationChunkService)); }, token: CmsI18nService, providedIn: "root" });
         CmsI18nService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -11159,9 +11186,9 @@
 
     // This service should be exposed in public API only after the refactor planned in https://github.com/SAP/spartacus/issues/7070
     var CmsRoutesImplService = /** @class */ (function () {
-        function CmsRoutesImplService(router, cmsMapping) {
+        function CmsRoutesImplService(router, cmsComponentsService) {
             this.router = router;
-            this.cmsMapping = cmsMapping;
+            this.cmsComponentsService = cmsComponentsService;
         }
         CmsRoutesImplService.prototype.cmsRouteExists = function (url) {
             var isCmsDrivenRoute = url.startsWith('/');
@@ -11187,7 +11214,7 @@
             if (this.cmsRouteExists(currentPageLabel)) {
                 return true;
             }
-            var componentRoutes = this.cmsMapping.getRoutesForComponents(componentTypes);
+            var componentRoutes = this.cmsComponentsService.getChildRoutes(componentTypes);
             if (componentRoutes.length) {
                 if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
                     this.router.navigateByUrl(currentUrl);
@@ -11218,9 +11245,9 @@
         };
         CmsRoutesImplService.ctorParameters = function () { return [
             { type: router.Router },
-            { type: CmsMappingService }
+            { type: CmsComponentsService }
         ]; };
-        CmsRoutesImplService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsMappingService)); }, token: CmsRoutesImplService, providedIn: "root" });
+        CmsRoutesImplService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(core["ɵɵinject"](router.Router), core["ɵɵinject"](CmsComponentsService)); }, token: CmsRoutesImplService, providedIn: "root" });
         CmsRoutesImplService = __decorate([
             core.Injectable({ providedIn: 'root' })
         ], CmsRoutesImplService);
@@ -11246,12 +11273,13 @@
      * Helper service for `CmsPageGuard`
      */
     var CmsPageGuardService = /** @class */ (function () {
-        function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards) {
+        function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards, cmsComponentsService) {
             this.semanticPathService = semanticPathService;
             this.cmsService = cmsService;
             this.cmsRoutes = cmsRoutes;
             this.cmsI18n = cmsI18n;
             this.cmsGuards = cmsGuards;
+            this.cmsComponentsService = cmsComponentsService;
         }
         /**
          * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
@@ -11272,6 +11300,8 @@
         CmsPageGuardService.prototype.canActivatePage = function (pageContext, pageData, route, state) {
             var _this = this;
             return this.cmsService.getPageComponentTypes(pageContext).pipe(operators.take(1), operators.switchMap(function (componentTypes) {
+                return _this.cmsComponentsService.determineMappings(componentTypes);
+            }), operators.switchMap(function (componentTypes) {
                 return _this.cmsGuards
                     .cmsPageCanActivate(componentTypes, route, state)
                     .pipe(operators.withLatestFrom(rxjs.of(componentTypes)));
@@ -11322,9 +11352,10 @@
             { type: core$1.CmsService },
             { type: CmsRoutesService },
             { type: CmsI18nService },
-            { type: CmsGuardsService }
+            { type: CmsGuardsService },
+            { type: CmsComponentsService }
         ]; };
-        CmsPageGuardService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService)); }, token: CmsPageGuardService, providedIn: "root" });
+        CmsPageGuardService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(core["ɵɵinject"](core$1.SemanticPathService), core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](CmsRoutesService), core["ɵɵinject"](CmsI18nService), core["ɵɵinject"](CmsGuardsService), core["ɵɵinject"](CmsComponentsService)); }, token: CmsPageGuardService, providedIn: "root" });
         CmsPageGuardService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -20289,11 +20320,11 @@
     exports.CloseAccountModalComponent = CloseAccountModalComponent;
     exports.CloseAccountModule = CloseAccountModule;
     exports.CmsComponentData = CmsComponentData;
+    exports.CmsComponentsService = CmsComponentsService;
     exports.CmsGuardsService = CmsGuardsService;
     exports.CmsI18nService = CmsI18nService;
     exports.CmsInjectorService = CmsInjectorService;
     exports.CmsLibModule = CmsLibModule;
-    exports.CmsMappingService = CmsMappingService;
     exports.CmsPageGuard = CmsPageGuard;
     exports.CmsParagraphModule = CmsParagraphModule;
     exports.CmsRouteModule = CmsRouteModule;
@@ -20612,17 +20643,18 @@
     exports.ɵbi = defaultQualtricsConfig;
     exports.ɵbj = CmsPageGuardService;
     exports.ɵbk = CmsRoutesImplService;
-    exports.ɵbl = ReturnRequestService;
-    exports.ɵbm = OutletRendererService;
-    exports.ɵbn = AddToHomeScreenService;
-    exports.ɵbo = MyCouponsComponentService;
-    exports.ɵbp = addCmsRoute;
-    exports.ɵbq = defaultStorefrontRoutesConfig;
-    exports.ɵbr = defaultRoutingConfig;
-    exports.ɵbs = htmlLangProvider;
-    exports.ɵbt = setHtmlLangAttribute;
-    exports.ɵbu = AnonymousConsentsModule;
-    exports.ɵbv = AnonymousConsentDialogComponent;
+    exports.ɵbl = CmsComponentsService;
+    exports.ɵbm = ReturnRequestService;
+    exports.ɵbn = OutletRendererService;
+    exports.ɵbo = AddToHomeScreenService;
+    exports.ɵbp = MyCouponsComponentService;
+    exports.ɵbq = addCmsRoute;
+    exports.ɵbr = defaultStorefrontRoutesConfig;
+    exports.ɵbs = defaultRoutingConfig;
+    exports.ɵbt = htmlLangProvider;
+    exports.ɵbu = setHtmlLangAttribute;
+    exports.ɵbv = AnonymousConsentsModule;
+    exports.ɵbw = AnonymousConsentDialogComponent;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;

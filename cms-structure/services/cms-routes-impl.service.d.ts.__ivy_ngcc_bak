@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
 import { PageContext } from '@spartacus/core';
-import { CmsMappingService } from './cms-mapping.service';
+import { CmsComponentsService } from './cms-components.service';
 export declare class CmsRoutesImplService {
     private router;
-    private cmsMapping;
-    constructor(router: Router, cmsMapping: CmsMappingService);
+    private cmsComponentsService;
+    constructor(router: Router, cmsComponentsService: CmsComponentsService);
     private cmsRouteExists;
     /**
      * Contains Cms driven routing logic intended for use use in guards, especially in canActivate method.

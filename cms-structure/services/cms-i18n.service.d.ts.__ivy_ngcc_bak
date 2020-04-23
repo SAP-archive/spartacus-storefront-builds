@@ -1,12 +1,9 @@
 import { TranslationChunkService, TranslationService } from '@spartacus/core';
-import { CmsMappingService } from './cms-mapping.service';
-/**
- * Please don't put that service in public API.
- * */
+import { CmsComponentsService } from './cms-components.service';
 export declare class CmsI18nService {
-    private cmsMapping;
-    private translation;
-    private translationChunk;
-    constructor(cmsMapping: CmsMappingService, translation: TranslationService, translationChunk: TranslationChunkService);
+    protected cmsComponentsService: CmsComponentsService;
+    protected translation: TranslationService;
+    protected translationChunk: TranslationChunkService;
+    constructor(cmsComponentsService: CmsComponentsService, translation: TranslationService, translationChunk: TranslationChunkService);
     loadForComponents(componentTypes: string[]): void;
 }

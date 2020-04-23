@@ -1,6 +1,6 @@
 import { ComponentRef, Injector, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
-import { CmsMappingService } from '../../services/cms-mapping.service';
+import { CmsComponentsService } from '../../services/cms-components.service';
 import { ComponentHandlerService } from './services/component-handler.service';
 import { CmsInjectorService } from './services/cms-injector.service';
 /**
@@ -8,7 +8,7 @@ import { CmsInjectorService } from './services/cms-injector.service';
  */
 export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     protected vcr: ViewContainerRef;
-    protected cmsMappingService: CmsMappingService;
+    protected cmsComponentsService: CmsComponentsService;
     protected injector: Injector;
     protected dynamicAttributeService: DynamicAttributeService;
     protected renderer: Renderer2;
@@ -25,7 +25,7 @@ export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
      */
     cmpRef?: ComponentRef<any>;
     private launcherResource?;
-    constructor(vcr: ViewContainerRef, cmsMappingService: CmsMappingService, injector: Injector, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, componentHandler: ComponentHandlerService, cmsInjector: CmsInjectorService, cmsService: CmsService);
+    constructor(vcr: ViewContainerRef, cmsComponentsService: CmsComponentsService, injector: Injector, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, componentHandler: ComponentHandlerService, cmsInjector: CmsInjectorService, cmsService: CmsService);
     ngOnInit(): void;
     private launchComponent;
     private decorate;
