@@ -7800,13 +7800,14 @@ function StoreFinderListItemComponent_button_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1213.location.displayName || ctx_r1213.location.name, " ");
 } }
+const _c53 = function (a0) { return [a0]; };
 function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 7);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r1214 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("href", ctx_r1214.prepareRouteUrl(ctx_r1214.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(2, _c53, ctx_r1214.location.name));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ctx_r1214.location.displayName || ctx_r1214.location.name);
 } }
@@ -7819,7 +7820,7 @@ function StoreFinderListItemComponent_div_7_div_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1219.location.formattedDistance, " ");
 } }
-const _c53 = function (a0, a1, a2) { return [a0, a1, a2]; };
+const _c54 = function (a0, a1, a2) { return [a0, a1, a2]; };
 function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
     ɵngcc0.ɵɵelementStart(1, "div", 9);
@@ -7833,12 +7834,12 @@ function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1215.location.address.line1, " ", ctx_r1215.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1215.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c53, ctx_r1215.location.address.town, ctx_r1215.location.address.postalCode, ctx_r1215.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1215.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c54, ctx_r1215.location.address.town, ctx_r1215.location.address.postalCode, ctx_r1215.location.address.country.isocode)), " ");
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngIf", ctx_r1215.location.formattedDistance && ctx_r1215.displayDistance);
 } }
-const _c54 = ["mapElement"];
-const _c55 = ["storeMap"];
+const _c55 = ["mapElement"];
+const _c56 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
     const _r1228 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
@@ -7879,7 +7880,7 @@ function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) {
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("location", ctx_r1229.storeDetails)("disableMap", true);
 } }
-const _c56 = function (a0) { return { "cx-selected-item": a0 }; };
+const _c57 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
     const _r1236 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
@@ -7892,7 +7893,7 @@ function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ct
     const i_r1234 = ctx.index;
     const ctx_r1232 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1234);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c56, ctx_r1232.selectedStoreIndex === i_r1234));
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1232.selectedStoreIndex === i_r1234));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("location", location_r1233)("locationIndex", i_r1234)("displayDistance", ctx_r1232.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1234 + ctx_r1232.locations.pagination.currentPage * ctx_r1232.locations.pagination.pageSize + 1);
 } }
@@ -7954,7 +7955,7 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_T
     const i_r1247 = ctx.index;
     const ctx_r1245 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1247);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c56, ctx_r1245.selectedStoreIndex === i_r1247));
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1245.selectedStoreIndex === i_r1247));
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("location", location_r1246)("locationIndex", i_r1247)("displayDistance", ctx_r1245.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1247 + ctx_r1245.locations.pagination.currentPage * ctx_r1245.locations.pagination.pageSize + 1);
 } }
@@ -7985,7 +7986,6 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
 } if (rf & 2) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(1, 1, "storeFinder.mapView"), " ");
 } }
-const _c57 = function (a0) { return [a0]; };
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
     const _r1252 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
@@ -7996,7 +7996,7 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf
 } if (rf & 2) {
     const ctx_r1242 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1242.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c57, ctx_r1242.selectedStore) : ctx_r1242.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1242.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1242.selectedStore) : ctx_r1242.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8111,7 +8111,7 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1266.location.address.line1, " ", ctx_r1266.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1266.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c53, ctx_r1266.location.address.town, ctx_r1266.location.address.postalCode, ctx_r1266.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1266.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c54, ctx_r1266.location.address.town, ctx_r1266.location.address.postalCode, ctx_r1266.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8178,7 +8178,7 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template
 } if (rf & 2) {
     const ctx_r1270 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c57, ctx_r1270.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1270.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -26122,11 +26122,9 @@ __decorate([
 ], AbstractStoreItemComponent.prototype, "location", void 0);
 
 let StoreFinderListItemComponent = class StoreFinderListItemComponent extends AbstractStoreItemComponent {
-    constructor(storeDataService, route, routingService) {
+    constructor(storeDataService) {
         super(storeDataService);
         this.storeDataService = storeDataService;
-        this.route = route;
-        this.routingService = routingService;
         this.locationIndex = null;
         this.storeItemClick = new EventEmitter();
     }
@@ -26135,26 +26133,14 @@ let StoreFinderListItemComponent = class StoreFinderListItemComponent extends Ab
             this.storeItemClick.emit(this.locationIndex);
         }
     }
-    viewStore(location) {
-        this.routingService.go([this.prepareRouteUrl(location)]);
-    }
-    prepareRouteUrl(location) {
-        const countryParam = this.route.snapshot.params.country
-            ? `country/${this.route.snapshot.params.country}/`
-            : '';
-        const regionParam = this.route.snapshot.params.region
-            ? `region/${this.route.snapshot.params.region}/`
-            : '';
-        return `store-finder/${countryParam}${regionParam}${location.name}`;
-    }
     onKey(event) {
         if (event.key === 'Enter') {
             this.handleStoreItemClick();
         }
     }
 };
-StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(ɵngcc6.ActivatedRoute), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.RoutingService)); };
-StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance", useClickEvent: "useClickEvent" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 11, vars: 8, consts: [[1, "cx-store-list-order"], [1, "cx-store-name"], [3, "click", "keyup", 4, "ngIf"], [3, "href", 4, "ngIf"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [3, "click", "keyup"], [3, "href"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
+StoreFinderListItemComponent.ɵfac = function StoreFinderListItemComponent_Factory(t) { return new (t || StoreFinderListItemComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService)); };
+StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListItemComponent, selectors: [["cx-store-finder-list-item"]], inputs: { locationIndex: "locationIndex", listOrderLabel: "listOrderLabel", displayDistance: "displayDistance", useClickEvent: "useClickEvent" }, outputs: { storeItemClick: "storeItemClick" }, features: [ɵngcc0.ɵɵInheritDefinitionFeature], decls: 11, vars: 8, consts: [[1, "cx-store-list-order"], [1, "cx-store-name"], [3, "click", "keyup", 4, "ngIf"], [3, "routerLink", 4, "ngIf"], ["class", "cx-store-address", 4, "ngIf"], ["target", "_blank", 1, "btn", "btn-sm", "btn-action", "btn-block", "cx-button", 3, "href", "click"], [3, "click", "keyup"], [3, "routerLink"], [1, "cx-store-address"], [1, "cx-store-address-street"], ["class", "cx-store-distance", 4, "ngIf"], [1, "cx-store-distance"]], template: function StoreFinderListItemComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementContainerStart(0);
         ɵngcc0.ɵɵelementStart(1, "div");
         ɵngcc0.ɵɵelementStart(2, "div", 0);
@@ -26162,7 +26148,7 @@ StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFi
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementStart(4, "div", 1);
         ɵngcc0.ɵɵtemplate(5, StoreFinderListItemComponent_button_5_Template, 2, 1, "button", 2);
-        ɵngcc0.ɵɵtemplate(6, StoreFinderListItemComponent_a_6_Template, 2, 2, "a", 3);
+        ɵngcc0.ɵɵtemplate(6, StoreFinderListItemComponent_a_6_Template, 2, 4, "a", 3);
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵtemplate(7, StoreFinderListItemComponent_div_7_Template, 5, 8, "div", 4);
         ɵngcc0.ɵɵelementStart(8, "a", 5);
@@ -26185,11 +26171,9 @@ StoreFinderListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFi
         ɵngcc0.ɵɵpropertyInterpolate("href", ctx.getDirections(ctx.location), ɵngcc0.ɵɵsanitizeUrl);
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(10, 6, "storeFinder.getDirections"));
-    } }, directives: [ɵngcc4.NgIf], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
+    } }, directives: [ɵngcc4.NgIf, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderListItemComponent.ctorParameters = () => [
-    { type: StoreDataService },
-    { type: ActivatedRoute },
-    { type: RoutingService }
+    { type: StoreDataService }
 ];
 __decorate([
     Input()
@@ -26236,7 +26220,7 @@ let StoreFinderMapComponent = class StoreFinderMapComponent {
 };
 StoreFinderMapComponent.ɵfac = function StoreFinderMapComponent_Factory(t) { return new (t || StoreFinderMapComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.GoogleMapRendererService)); };
 StoreFinderMapComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderMapComponent, selectors: [["cx-store-finder-map"]], viewQuery: function StoreFinderMapComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵstaticViewQuery(_c54, true);
+        ɵngcc0.ɵɵstaticViewQuery(_c55, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.mapElement = _t.first);
@@ -26320,7 +26304,7 @@ let StoreFinderListComponent = class StoreFinderListComponent {
 };
 StoreFinderListComponent.ɵfac = function StoreFinderListComponent_Factory(t) { return new (t || StoreFinderListComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc1.StoreDataService), ɵngcc0.ɵɵdirectiveInject(DOCUMENT)); };
 StoreFinderListComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinderListComponent, selectors: [["cx-store-finder-list"]], viewQuery: function StoreFinderListComponent_Query(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵviewQuery(_c55, true);
+        ɵngcc0.ɵɵviewQuery(_c56, true);
     } if (rf & 2) {
         var _t;
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.storeMap = _t.first);
@@ -32894,9 +32878,9 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-store-finder-list-item',
-                template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [href]=\"prepareRouteUrl(location)\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+                template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [routerLink]=\"[location.name]\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
             }]
-    }], function () { return [{ type: ɵngcc1.StoreDataService }, { type: ɵngcc6.ActivatedRoute }, { type: ɵngcc1.RoutingService }]; }, { locationIndex: [{
+    }], function () { return [{ type: ɵngcc1.StoreDataService }]; }, { locationIndex: [{
             type: Input
         }], storeItemClick: [{
             type: Output

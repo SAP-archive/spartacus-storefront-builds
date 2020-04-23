@@ -16870,11 +16870,9 @@ AbstractStoreItemComponent = __decorate([
 ], AbstractStoreItemComponent);
 
 let StoreFinderListItemComponent = class StoreFinderListItemComponent extends AbstractStoreItemComponent {
-    constructor(storeDataService, route, routingService) {
+    constructor(storeDataService) {
         super(storeDataService);
         this.storeDataService = storeDataService;
-        this.route = route;
-        this.routingService = routingService;
         this.locationIndex = null;
         this.storeItemClick = new EventEmitter();
     }
@@ -16883,18 +16881,6 @@ let StoreFinderListItemComponent = class StoreFinderListItemComponent extends Ab
             this.storeItemClick.emit(this.locationIndex);
         }
     }
-    viewStore(location) {
-        this.routingService.go([this.prepareRouteUrl(location)]);
-    }
-    prepareRouteUrl(location) {
-        const countryParam = this.route.snapshot.params.country
-            ? `country/${this.route.snapshot.params.country}/`
-            : '';
-        const regionParam = this.route.snapshot.params.region
-            ? `region/${this.route.snapshot.params.region}/`
-            : '';
-        return `store-finder/${countryParam}${regionParam}${location.name}`;
-    }
     onKey(event) {
         if (event.key === 'Enter') {
             this.handleStoreItemClick();
@@ -16902,9 +16888,7 @@ let StoreFinderListItemComponent = class StoreFinderListItemComponent extends Ab
     }
 };
 StoreFinderListItemComponent.ctorParameters = () => [
-    { type: StoreDataService },
-    { type: ActivatedRoute },
-    { type: RoutingService }
+    { type: StoreDataService }
 ];
 __decorate([
     Input()
@@ -16924,7 +16908,7 @@ __decorate([
 StoreFinderListItemComponent = __decorate([
     Component({
         selector: 'cx-store-finder-list-item',
-        template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [href]=\"prepareRouteUrl(location)\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+        template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [routerLink]=\"[location.name]\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
     })
 ], StoreFinderListItemComponent);
 

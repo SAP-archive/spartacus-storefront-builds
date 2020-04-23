@@ -18486,11 +18486,9 @@ var AbstractStoreItemComponent = /** @class */ (function () {
 
 var StoreFinderListItemComponent = /** @class */ (function (_super) {
     __extends(StoreFinderListItemComponent, _super);
-    function StoreFinderListItemComponent(storeDataService, route, routingService) {
+    function StoreFinderListItemComponent(storeDataService) {
         var _this = _super.call(this, storeDataService) || this;
         _this.storeDataService = storeDataService;
-        _this.route = route;
-        _this.routingService = routingService;
         _this.locationIndex = null;
         _this.storeItemClick = new EventEmitter();
         return _this;
@@ -18500,27 +18498,13 @@ var StoreFinderListItemComponent = /** @class */ (function (_super) {
             this.storeItemClick.emit(this.locationIndex);
         }
     };
-    StoreFinderListItemComponent.prototype.viewStore = function (location) {
-        this.routingService.go([this.prepareRouteUrl(location)]);
-    };
-    StoreFinderListItemComponent.prototype.prepareRouteUrl = function (location) {
-        var countryParam = this.route.snapshot.params.country
-            ? "country/" + this.route.snapshot.params.country + "/"
-            : '';
-        var regionParam = this.route.snapshot.params.region
-            ? "region/" + this.route.snapshot.params.region + "/"
-            : '';
-        return "store-finder/" + countryParam + regionParam + location.name;
-    };
     StoreFinderListItemComponent.prototype.onKey = function (event) {
         if (event.key === 'Enter') {
             this.handleStoreItemClick();
         }
     };
     StoreFinderListItemComponent.ctorParameters = function () { return [
-        { type: StoreDataService },
-        { type: ActivatedRoute },
-        { type: RoutingService }
+        { type: StoreDataService }
     ]; };
     __decorate([
         Input()
@@ -18540,7 +18524,7 @@ var StoreFinderListItemComponent = /** @class */ (function (_super) {
     StoreFinderListItemComponent = __decorate([
         Component({
             selector: 'cx-store-finder-list-item',
-            template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [href]=\"prepareRouteUrl(location)\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
+            template: "<ng-container>\n  <div>\n    <div class=\"cx-store-list-order\">\n      {{ listOrderLabel }}\n    </div>\n    <div class=\"cx-store-name\">\n      <button\n        *ngIf=\"useClickEvent\"\n        (click)=\"handleStoreItemClick()\"\n        (keyup)=\"onKey($event)\"\n      >\n        {{ location.displayName || location.name }}\n      </button>\n      <a *ngIf=\"!useClickEvent\" [routerLink]=\"[location.name]\">{{\n        location.displayName || location.name\n      }}</a>\n    </div>\n    <div class=\"cx-store-address\" *ngIf=\"location.address\">\n      <div class=\"cx-store-address-street\">\n        {{ location.address.line1 }} {{ location.address.line2 }}\n      </div>\n      {{\n        getFormattedStoreAddress([\n          location.address.town,\n          location.address.postalCode,\n          location.address.country.isocode\n        ])\n      }}\n      <div\n        class=\"cx-store-distance\"\n        *ngIf=\"location.formattedDistance && displayDistance\"\n      >\n        {{ location.formattedDistance }}\n      </div>\n    </div>\n    <a\n      href=\"{{ getDirections(location) }}\"\n      target=\"_blank\"\n      class=\"btn btn-sm btn-action btn-block cx-button\"\n      (click)=\"$event.stopPropagation()\"\n      >{{ 'storeFinder.getDirections' | cxTranslate }}</a\n    >\n  </div>\n</ng-container>\n"
         })
     ], StoreFinderListItemComponent);
     return StoreFinderListItemComponent;
