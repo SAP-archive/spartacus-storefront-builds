@@ -5966,7 +5966,7 @@ function CategoryNavigationComponent_cx_navigation_ui_0_Template(rf, ctx) { if (
 } if (rf & 2) {
     const data_r902 = ctx.ngIf;
     const ctx_r901 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 4, ctx_r901.node$))("ngClass", data_r902.styleClass)("wrapAfter", data_r902.wrapAfter)("allowAlignToRight", true);
+    ɵngcc0.ɵɵproperty("node", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r901.node$))("ngClass", data_r902.styleClass)("wrapAfter", data_r902.wrapAfter);
 } }
 function NavigationUIComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r908 = ɵngcc0.ɵɵgetCurrentView();
@@ -22942,8 +22942,8 @@ let CategoryNavigationComponent = class CategoryNavigationComponent {
     }
 };
 CategoryNavigationComponent.ɵfac = function CategoryNavigationComponent_Factory(t) { return new (t || CategoryNavigationComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(NavigationService)); };
-CategoryNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CategoryNavigationComponent, selectors: [["cx-category-navigation"]], decls: 2, vars: 3, consts: [[3, "node", "ngClass", "wrapAfter", "allowAlignToRight", 4, "ngIf"], [3, "node", "ngClass", "wrapAfter", "allowAlignToRight"]], template: function CategoryNavigationComponent_Template(rf, ctx) { if (rf & 1) {
-        ɵngcc0.ɵɵtemplate(0, CategoryNavigationComponent_cx_navigation_ui_0_Template, 2, 6, "cx-navigation-ui", 0);
+CategoryNavigationComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CategoryNavigationComponent, selectors: [["cx-category-navigation"]], decls: 2, vars: 3, consts: [[3, "node", "ngClass", "wrapAfter", 4, "ngIf"], [3, "node", "ngClass", "wrapAfter"]], template: function CategoryNavigationComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵngcc0.ɵɵtemplate(0, CategoryNavigationComponent_cx_navigation_ui_0_Template, 2, 5, "cx-navigation-ui", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
         ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 1, ctx.data$));
@@ -22958,7 +22958,6 @@ let NavigationUIComponent = class NavigationUIComponent {
         this.router = router;
         this.renderer = renderer;
         this.elemRef = elemRef;
-        this.allowAlignToRight = false;
         /**
          * the icon type that will be used for navigation nodes
          * with children.
@@ -23045,15 +23044,13 @@ let NavigationUIComponent = class NavigationUIComponent {
         }
     }
     alignWrapperToRightIfStickOut(node) {
-        if (this.allowAlignToRight) {
-            const wrapper = node.querySelector('.wrapper');
-            const navBar = this.elemRef.nativeElement;
-            if (wrapper) {
-                this.renderer.removeStyle(wrapper, 'margin-left');
-                if (wrapper.offsetLeft + wrapper.offsetWidth >
-                    navBar.offsetLeft + navBar.offsetWidth) {
-                    this.renderer.setStyle(wrapper, 'margin-left', `${node.offsetWidth - wrapper.offsetWidth}px`);
-                }
+        const wrapper = node.querySelector('.wrapper');
+        const body = node.closest('body');
+        if (wrapper) {
+            this.renderer.removeStyle(wrapper, 'margin-left');
+            if (wrapper.offsetLeft + wrapper.offsetWidth >
+                body.offsetLeft + body.offsetWidth) {
+                this.renderer.setStyle(wrapper, 'margin-left', `${node.offsetWidth - wrapper.offsetWidth}px`);
             }
         }
     }
@@ -23082,7 +23079,7 @@ NavigationUIComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: NavigationUICo
         ɵngcc0.ɵɵlistener("resize", function NavigationUIComponent_resize_HostBindingHandler() { return ctx.onResize(); }, false, ɵngcc0.ɵɵresolveWindow);
     } if (rf & 2) {
         ɵngcc0.ɵɵclassProp("flyout", ctx.flyout)("is-open", ctx.isOpen);
-    } }, inputs: { allowAlignToRight: "allowAlignToRight", flyout: "flyout", isOpen: "isOpen", node: "node", wrapAfter: "wrapAfter" }, decls: 4, vars: 2, consts: [["class", "back is-open", 3, "click", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["nav", ""], [1, "back", "is-open", 3, "click"], [3, "type"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "click", "mouseenter", "keydown.space", "keydown.esc"], [3, "url", "target", 4, "ngIf", "ngIfElse"], ["heading", ""], ["class", "wrapper", 4, "ngIf"], [3, "url", "target"], [3, "type", 4, "ngIf"], [1, "wrapper"], ["class", "all", 3, "url", "target", 4, "ngIf"], [1, "childs"], [1, "all", 3, "url", "target"]], template: function NavigationUIComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { flyout: "flyout", isOpen: "isOpen", node: "node", wrapAfter: "wrapAfter" }, decls: 4, vars: 2, consts: [["class", "back is-open", 3, "click", 4, "ngIf"], [4, "ngFor", "ngForOf"], ["nav", ""], [1, "back", "is-open", 3, "click"], [3, "type"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], [3, "click", "mouseenter", "keydown.space", "keydown.esc"], [3, "url", "target", 4, "ngIf", "ngIfElse"], ["heading", ""], ["class", "wrapper", 4, "ngIf"], [3, "url", "target"], [3, "type", 4, "ngIf"], [1, "wrapper"], ["class", "all", 3, "url", "target", 4, "ngIf"], [1, "childs"], [1, "all", 3, "url", "target"]], template: function NavigationUIComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, NavigationUIComponent_div_0_Template, 5, 4, "div", 0);
         ɵngcc0.ɵɵtemplate(1, NavigationUIComponent_ng_container_1_Template, 2, 4, "ng-container", 1);
         ɵngcc0.ɵɵtemplate(2, NavigationUIComponent_ng_template_2_Template, 5, 3, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
@@ -23102,9 +23099,6 @@ __decorate([
 __decorate([
     Input()
 ], NavigationUIComponent.prototype, "wrapAfter", void 0);
-__decorate([
-    Input()
-], NavigationUIComponent.prototype, "allowAlignToRight", void 0);
 __decorate([
     Input(), HostBinding('class.flyout')
 ], NavigationUIComponent.prototype, "flyout", void 0);
@@ -31842,7 +31836,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-category-navigation',
-                template: "<cx-navigation-ui\n  *ngIf=\"data$ | async as data\"\n  [node]=\"node$ | async\"\n  [ngClass]=\"data.styleClass\"\n  [wrapAfter]=\"data.wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
+                template: "<cx-navigation-ui\n  *ngIf=\"data$ | async as data\"\n  [node]=\"node$ | async\"\n  [ngClass]=\"data.styleClass\"\n  [wrapAfter]=\"data.wrapAfter\"\n></cx-navigation-ui>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: NavigationService }]; }, null); })();
@@ -31853,9 +31847,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
                 template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child, depth: 0 }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\" let-depth=\"depth\">\n  <nav\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n    (keydown.space)=\"toggleOpen($event)\"\n    (keydown.esc)=\"back()\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5\n        [attr.aria-label]=\"node.title\"\n        [attr.tabindex]=\"flyout && (depth === 0 || node.url) ? 0 : -1\"\n      >\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getTotalDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container\n            *ngTemplateOutlet=\"nav; context: { node: child, depth: depth + 1 }\"\n          >\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
-    }], function () { return [{ type: ɵngcc6.Router }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }]; }, { allowAlignToRight: [{
-            type: Input
-        }], flyout: [{
+    }], function () { return [{ type: ɵngcc6.Router }, { type: ɵngcc0.Renderer2 }, { type: ɵngcc0.ElementRef }]; }, { flyout: [{
             type: Input
         }, {
             type: HostBinding,

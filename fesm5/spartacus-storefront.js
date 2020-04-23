@@ -15170,7 +15170,7 @@ var CategoryNavigationComponent = /** @class */ (function () {
     CategoryNavigationComponent = __decorate([
         Component({
             selector: 'cx-category-navigation',
-            template: "<cx-navigation-ui\n  *ngIf=\"data$ | async as data\"\n  [node]=\"node$ | async\"\n  [ngClass]=\"data.styleClass\"\n  [wrapAfter]=\"data.wrapAfter\"\n  [allowAlignToRight]=\"true\"\n></cx-navigation-ui>\n",
+            template: "<cx-navigation-ui\n  *ngIf=\"data$ | async as data\"\n  [node]=\"node$ | async\"\n  [ngClass]=\"data.styleClass\"\n  [wrapAfter]=\"data.wrapAfter\"\n></cx-navigation-ui>\n",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], CategoryNavigationComponent);
@@ -15183,7 +15183,6 @@ var NavigationUIComponent = /** @class */ (function () {
         this.router = router;
         this.renderer = renderer;
         this.elemRef = elemRef;
-        this.allowAlignToRight = false;
         /**
          * the icon type that will be used for navigation nodes
          * with children.
@@ -15272,15 +15271,13 @@ var NavigationUIComponent = /** @class */ (function () {
         }
     };
     NavigationUIComponent.prototype.alignWrapperToRightIfStickOut = function (node) {
-        if (this.allowAlignToRight) {
-            var wrapper = node.querySelector('.wrapper');
-            var navBar = this.elemRef.nativeElement;
-            if (wrapper) {
-                this.renderer.removeStyle(wrapper, 'margin-left');
-                if (wrapper.offsetLeft + wrapper.offsetWidth >
-                    navBar.offsetLeft + navBar.offsetWidth) {
-                    this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
-                }
+        var wrapper = node.querySelector('.wrapper');
+        var body = node.closest('body');
+        if (wrapper) {
+            this.renderer.removeStyle(wrapper, 'margin-left');
+            if (wrapper.offsetLeft + wrapper.offsetWidth >
+                body.offsetLeft + body.offsetWidth) {
+                this.renderer.setStyle(wrapper, 'margin-left', node.offsetWidth - wrapper.offsetWidth + "px");
             }
         }
     };
@@ -15316,9 +15313,6 @@ var NavigationUIComponent = /** @class */ (function () {
     __decorate([
         Input()
     ], NavigationUIComponent.prototype, "wrapAfter", void 0);
-    __decorate([
-        Input()
-    ], NavigationUIComponent.prototype, "allowAlignToRight", void 0);
     __decorate([
         Input(), HostBinding('class.flyout')
     ], NavigationUIComponent.prototype, "flyout", void 0);
