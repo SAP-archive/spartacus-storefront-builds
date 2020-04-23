@@ -5,5 +5,5 @@ export declare class CartPageLayoutHandler implements PageLayoutHandler {
     protected activeCartService: ActiveCartService;
     protected selectiveCartService: SelectiveCartService;
     constructor(activeCartService: ActiveCartService, selectiveCartService: SelectiveCartService);
-    handle(slots$: Observable<string[]>, pageTemplate?: string, section?: string): Observable<string[]>;
+    handle(slots$: Observable<string[]>, pageTemplate?: string, section?: string): Observable<any>;
 }

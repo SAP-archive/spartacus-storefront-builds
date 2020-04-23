@@ -5711,17 +5711,23 @@ let CartPageLayoutHandler = class CartPageLayoutHandler {
                 slots$,
                 this.activeCartService.getActive(),
                 this.selectiveCartService.getCart(),
-            ]).pipe(map(([slots, cart, selectiveCart]) => {
-                if (cart.totalItems) {
-                    return slots.filter((slot) => slot !== 'EmptyCartMiddleContent');
-                }
-                else if (selectiveCart.totalItems) {
-                    return slots.filter((slot) => slot !== 'EmptyCartMiddleContent' &&
-                        slot !== 'CenterRightContentSlot');
-                }
-                else {
-                    return slots.filter((slot) => slot !== 'TopContent' && slot !== 'CenterRightContentSlot');
-                }
+                this.activeCartService.getLoading(),
+            ]).pipe(map(([slots, cart, selectiveCart, loadingCart]) => {
+                const exclude = (arr, args) => arr.filter((item) => args.every((arg) => arg !== item));
+                return Object.keys(cart).length === 0 && loadingCart
+                    ? exclude(slots, [
+                        'TopContent',
+                        'CenterRightContentSlot',
+                        'EmptyCartMiddleContent',
+                    ])
+                    : cart.totalItems
+                        ? exclude(slots, ['EmptyCartMiddleContent'])
+                        : selectiveCart.totalItems
+                            ? exclude(slots, [
+                                'EmptyCartMiddleContent',
+                                'CenterRightContentSlot',
+                            ])
+                            : exclude(slots, ['TopContent', 'CenterRightContentSlot']);
             }));
         }
         return slots$;

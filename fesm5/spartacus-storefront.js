@@ -6342,22 +6342,26 @@ var CartPageLayoutHandler = /** @class */ (function () {
                 slots$,
                 this.activeCartService.getActive(),
                 this.selectiveCartService.getCart(),
+                this.activeCartService.getLoading(),
             ]).pipe(map(function (_a) {
-                var _b = __read(_a, 3), slots = _b[0], cart = _b[1], selectiveCart = _b[2];
-                if (cart.totalItems) {
-                    return slots.filter(function (slot) { return slot !== 'EmptyCartMiddleContent'; });
-                }
-                else if (selectiveCart.totalItems) {
-                    return slots.filter(function (slot) {
-                        return slot !== 'EmptyCartMiddleContent' &&
-                            slot !== 'CenterRightContentSlot';
-                    });
-                }
-                else {
-                    return slots.filter(function (slot) {
-                        return slot !== 'TopContent' && slot !== 'CenterRightContentSlot';
-                    });
-                }
+                var _b = __read(_a, 4), slots = _b[0], cart = _b[1], selectiveCart = _b[2], loadingCart = _b[3];
+                var exclude = function (arr, args) {
+                    return arr.filter(function (item) { return args.every(function (arg) { return arg !== item; }); });
+                };
+                return Object.keys(cart).length === 0 && loadingCart
+                    ? exclude(slots, [
+                        'TopContent',
+                        'CenterRightContentSlot',
+                        'EmptyCartMiddleContent',
+                    ])
+                    : cart.totalItems
+                        ? exclude(slots, ['EmptyCartMiddleContent'])
+                        : selectiveCart.totalItems
+                            ? exclude(slots, [
+                                'EmptyCartMiddleContent',
+                                'CenterRightContentSlot',
+                            ])
+                            : exclude(slots, ['TopContent', 'CenterRightContentSlot']);
             }));
         }
         return slots$;
