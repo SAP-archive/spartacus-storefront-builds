@@ -7577,7 +7577,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     const _r1194 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
-    ɵngcc0.ɵɵelementStart(2, "label");
+    ɵngcc0.ɵɵelementStart(2, "p");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7660,7 +7660,7 @@ function StockNotificationComponent_ng_template_2_ng_template_3_Template(rf, ctx
 } }
 function StockNotificationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
-    ɵngcc0.ɵɵelementStart(1, "label");
+    ɵngcc0.ɵɵelementStart(1, "p");
     ɵngcc0.ɵɵtemplate(2, StockNotificationComponent_ng_template_2_ng_container_2_Template, 8, 10, "ng-container", 4);
     ɵngcc0.ɵɵtemplate(3, StockNotificationComponent_ng_template_2_ng_template_3_Template, 10, 14, "ng-template", null, 7, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
@@ -7681,7 +7681,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     const _r1200 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
-    ɵngcc0.ɵɵelementStart(2, "label");
+    ɵngcc0.ɵɵelementStart(2, "p");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -32844,7 +32844,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-stock-notification',
-                template: "<ng-container *ngIf=\"outOfStock$ | async\">\n  <ng-container *ngIf=\"!(hasProductInterests$ | async); else stopNotify\">\n    <ng-container *ngIf=\"prefsEnabled$ | async; else disableNotify\">\n      <div class=\"stock-notification-notes\">\n        <label>{{ 'stockNotification.getNotified' | cxTranslate }}</label>\n      </div>\n      <button\n        class=\"btn btn-primary btn-block btn-notify\"\n        type=\"button\"\n        (click)=\"subscribe()\"\n      >\n        {{ 'stockNotification.notifyMe' | cxTranslate }}\n      </button>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #disableNotify>\n  <div class=\"stock-notification-notes\">\n    <label>\n      <ng-container *ngIf=\"anonymous; else loggedIn\">\n        <a [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">\n          {{ 'miniLogin.signInRegister' | cxTranslate }}</a\n        >\n        {{ 'stockNotification.getNotifySuffix' | cxTranslate }}<br />\n      </ng-container>\n      <ng-template #loggedIn>\n        {{ 'stockNotification.getNotify' | cxTranslate }}<br />\n        {{ 'stockNotification.activateChannelsPrefix' | cxTranslate\n        }}<a [routerLink]=\"['/my-account/notification-preference']\">{{\n          'stockNotification.channelsLink' | cxTranslate\n        }}</a\n        >{{ 'stockNotification.activateChannelsSuffix' | cxTranslate }}\n      </ng-template>\n    </label>\n  </div>\n  <button\n    class=\"btn btn-primary btn-block btn-notify\"\n    type=\"button\"\n    disabled=\"true\"\n  >\n    {{ 'stockNotification.notifyMe' | cxTranslate }}\n  </button>\n</ng-template>\n\n<ng-template #stopNotify>\n  <ng-container *ngIf=\"!(isRemoveInterestLoading$ | async); else loading\">\n    <div class=\"stock-notification-notes\">\n      <label>{{ 'stockNotification.notified' | cxTranslate }}</label>\n    </div>\n    <button\n      class=\"btn btn-primary btn-block btn-stop-notify\"\n      type=\"button\"\n      (click)=\"unsubscribe()\"\n    >\n      {{ 'stockNotification.stopNotify' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-template>\n\n<ng-template #loading>\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"cx-dialog-row\">\n      <div class=\"col-sm-12\">\n        <cx-spinner></cx-spinner>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
+                template: "<ng-container *ngIf=\"outOfStock$ | async\">\n  <ng-container *ngIf=\"!(hasProductInterests$ | async); else stopNotify\">\n    <ng-container *ngIf=\"prefsEnabled$ | async; else disableNotify\">\n      <div class=\"stock-notification-notes\">\n        <p>{{ 'stockNotification.getNotified' | cxTranslate }}</p>\n      </div>\n      <button\n        class=\"btn btn-primary btn-block btn-notify\"\n        type=\"button\"\n        (click)=\"subscribe()\"\n      >\n        {{ 'stockNotification.notifyMe' | cxTranslate }}\n      </button>\n    </ng-container>\n  </ng-container>\n</ng-container>\n\n<ng-template #disableNotify>\n  <div class=\"stock-notification-notes\">\n    <p>\n      <ng-container *ngIf=\"anonymous; else loggedIn\">\n        <a [routerLink]=\"{ cxRoute: 'login' } | cxUrl\">\n          {{ 'miniLogin.signInRegister' | cxTranslate }}</a\n        >\n        {{ 'stockNotification.getNotifySuffix' | cxTranslate }}<br />\n      </ng-container>\n      <ng-template #loggedIn>\n        {{ 'stockNotification.getNotify' | cxTranslate }}<br />\n        {{ 'stockNotification.activateChannelsPrefix' | cxTranslate\n        }}<a [routerLink]=\"['/my-account/notification-preference']\">{{\n          'stockNotification.channelsLink' | cxTranslate\n        }}</a\n        >{{ 'stockNotification.activateChannelsSuffix' | cxTranslate }}\n      </ng-template>\n    </p>\n  </div>\n  <button\n    class=\"btn btn-primary btn-block btn-notify\"\n    type=\"button\"\n    disabled=\"true\"\n  >\n    {{ 'stockNotification.notifyMe' | cxTranslate }}\n  </button>\n</ng-template>\n\n<ng-template #stopNotify>\n  <ng-container *ngIf=\"!(isRemoveInterestLoading$ | async); else loading\">\n    <div class=\"stock-notification-notes\">\n      <p>{{ 'stockNotification.notified' | cxTranslate }}</p>\n    </div>\n    <button\n      class=\"btn btn-primary btn-block btn-stop-notify\"\n      type=\"button\"\n      (click)=\"unsubscribe()\"\n    >\n      {{ 'stockNotification.stopNotify' | cxTranslate }}\n    </button>\n  </ng-container>\n</ng-template>\n\n<ng-template #loading>\n  <div class=\"cx-dialog-body modal-body\">\n    <div class=\"cx-dialog-row\">\n      <div class=\"col-sm-12\">\n        <cx-spinner></cx-spinner>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc1.AuthService }, { type: CurrentProductService }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.TranslationService }, { type: ɵngcc1.UserInterestsService }, { type: ModalService }, { type: ɵngcc1.UserNotificationPreferenceService }]; }, null); })();
