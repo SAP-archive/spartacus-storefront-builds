@@ -5,19 +5,13 @@ import { ComponentWrapperDirective } from '../../../cms-structure/page/component
 import { CmsComponentData } from '../../../cms-structure/page/model/index';
 export declare class TabParagraphContainerComponent implements AfterViewInit, OnInit, OnDestroy {
     componentData: CmsComponentData<CMSTabParagraphContainer>;
-    private cmsService;
-    private winRef?;
+    protected cmsService: CmsService;
+    protected winRef: WindowRef;
     activeTabNum: number;
     children: QueryList<ComponentWrapperDirective>;
     tabTitleParams: Observable<any>[];
     subscription: Subscription;
     constructor(componentData: CmsComponentData<CMSTabParagraphContainer>, cmsService: CmsService, winRef: WindowRef);
-    /**
-     * @deprecated since 1.4
-     *
-     * TODO(issue:#5813) Deprecated since 1.4
-     */
-    constructor(componentData: CmsComponentData<CMSTabParagraphContainer>, cmsService: CmsService);
     components$: Observable<any[]>;
     select(tabNum: number): void;
     ngOnInit(): void;

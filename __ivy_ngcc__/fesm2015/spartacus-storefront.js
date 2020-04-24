@@ -19528,13 +19528,8 @@ let TabParagraphContainerComponent = class TabParagraphContainerComponent {
         this.activeTabNum = tabNum;
     }
     ngOnInit() {
-        if (this.winRef && this.winRef.nativeWindow) {
-            const routeState = this.winRef.nativeWindow.history &&
-                this.winRef.nativeWindow.history.state;
-            if (routeState && routeState['activeTab']) {
-                this.activeTabNum = routeState['activeTab'];
-            }
-        }
+        var _a, _b, _c;
+        this.activeTabNum = (_c = (_b = (_a = this.winRef.nativeWindow.history) === null || _a === void 0 ? void 0 : _a.state) === null || _b === void 0 ? void 0 : _b.activeTab) !== null && _c !== void 0 ? _c : this.activeTabNum;
     }
     ngAfterViewInit() {
         // If the sub cms components data exist, the components created before ngAfterViewInit are called.
