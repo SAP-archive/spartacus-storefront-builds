@@ -938,6 +938,57 @@
         return CmsComponentsService;
     }());
 
+    var CmsComponentData = /** @class */ (function () {
+        function CmsComponentData() {
+        }
+        return CmsComponentData;
+    }());
+
+    /**
+     * Used to prepare injector for CMS components.
+     *
+     * Injector will take into account configured providers and provides CmsComponentData
+     * for specified component's uid
+     */
+    var CmsInjectorService = /** @class */ (function () {
+        function CmsInjectorService(cmsComponentsService, injector) {
+            this.cmsComponentsService = cmsComponentsService;
+            this.injector = injector;
+        }
+        CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
+            return {
+                uid: uid,
+                data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
+                    .get(core$1.CmsService)
+                    .getComponentData(uid),
+            };
+        };
+        CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
+            var _a, _b;
+            var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+            return core.Injector.create({
+                providers: __spread([
+                    {
+                        provide: CmsComponentData,
+                        useValue: this.getCmsData(uid),
+                    }
+                ], configProviders),
+                parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
+            });
+        };
+        CmsInjectorService.ctorParameters = function () { return [
+            { type: CmsComponentsService },
+            { type: core.Injector }
+        ]; };
+        CmsInjectorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(core["ɵɵinject"](CmsComponentsService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+        CmsInjectorService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CmsInjectorService);
+        return CmsInjectorService;
+    }());
+
     /**
      * ComponentHandler implementations can be used for instantiating and launching
      * different types of CMS mapped components
@@ -996,63 +1047,11 @@
         return ComponentHandlerService;
     }());
 
-    var CmsComponentData = /** @class */ (function () {
-        function CmsComponentData() {
-        }
-        return CmsComponentData;
-    }());
-
-    /**
-     * Used to prepare injector for CMS components.
-     *
-     * Injector will take into account configured providers and provides CmsComponentData
-     * for specified component's uid
-     */
-    var CmsInjectorService = /** @class */ (function () {
-        function CmsInjectorService(cmsComponentsService, injector) {
-            this.cmsComponentsService = cmsComponentsService;
-            this.injector = injector;
-        }
-        CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
-            return {
-                uid: uid,
-                data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
-                    .get(core$1.CmsService)
-                    .getComponentData(uid),
-            };
-        };
-        CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
-            var _a, _b;
-            var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
-            return core.Injector.create({
-                providers: __spread([
-                    {
-                        provide: CmsComponentData,
-                        useValue: this.getCmsData(uid),
-                    }
-                ], configProviders),
-                parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
-            });
-        };
-        CmsInjectorService.ctorParameters = function () { return [
-            { type: CmsComponentsService },
-            { type: core.Injector }
-        ]; };
-        CmsInjectorService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(core["ɵɵinject"](CmsComponentsService), core["ɵɵinject"](core.INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
-        CmsInjectorService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
-        ], CmsInjectorService);
-        return CmsInjectorService;
-    }());
-
     /**
      * Directive used to facilitate instantiation of CMS driven dynamic components
      */
     var ComponentWrapperDirective = /** @class */ (function () {
-        function ComponentWrapperDirective(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-        ) {
+        function ComponentWrapperDirective(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector) {
             this.vcr = vcr;
             this.cmsComponentsService = cmsComponentsService;
             this.injector = injector;
@@ -1060,7 +1059,6 @@
             this.renderer = renderer;
             this.componentHandler = componentHandler;
             this.cmsInjector = cmsInjector;
-            this.cmsService = cmsService;
         }
         ComponentWrapperDirective.prototype.ngOnInit = function () {
             var _this = this;
@@ -1087,9 +1085,7 @@
             });
         };
         ComponentWrapperDirective.prototype.decorate = function (elementRef) {
-            if (this.cmsService.isLaunchInSmartEdit()) {
-                this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, elementRef.nativeElement, this.renderer);
-            }
+            this.dynamicAttributeService.addDynamicAttributes(elementRef.nativeElement, this.renderer, { componentData: this.cxComponentWrapper });
         };
         ComponentWrapperDirective.prototype.ngOnDestroy = function () {
             if (this.launcherResource) {
@@ -1103,9 +1099,7 @@
             { type: core$1.DynamicAttributeService },
             { type: core.Renderer2 },
             { type: ComponentHandlerService },
-            { type: CmsInjectorService },
-            { type: core$1.CmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-             }
+            { type: CmsInjectorService }
         ]; };
         __decorate([
             core.Input()
@@ -9899,8 +9893,8 @@
                 !old.components.find(function (el, index) { return el.uid !== current.components[index].uid; }));
         };
         PageSlotComponent.prototype.addSmartEditSlotClass = function (slot) {
-            if (slot && this.cmsService.isLaunchInSmartEdit()) {
-                this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.elementRef.nativeElement, this.renderer);
+            if (slot) {
+                this.dynamicAttributeService.addDynamicAttributes(this.elementRef.nativeElement, this.renderer, { slotData: slot });
             }
         };
         PageSlotComponent.prototype.ngOnDestroy = function () {

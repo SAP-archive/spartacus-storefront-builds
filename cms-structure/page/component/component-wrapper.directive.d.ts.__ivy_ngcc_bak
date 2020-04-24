@@ -1,8 +1,8 @@
 import { ComponentRef, Injector, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
-import { CmsService, ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
+import { ContentSlotComponentData, DynamicAttributeService } from '@spartacus/core';
 import { CmsComponentsService } from '../../services/cms-components.service';
-import { ComponentHandlerService } from './services/component-handler.service';
 import { CmsInjectorService } from './services/cms-injector.service';
+import { ComponentHandlerService } from './services/component-handler.service';
 /**
  * Directive used to facilitate instantiation of CMS driven dynamic components
  */
@@ -14,7 +14,6 @@ export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     protected renderer: Renderer2;
     protected componentHandler: ComponentHandlerService;
     protected cmsInjector: CmsInjectorService;
-    protected cmsService: CmsService;
     cxComponentWrapper: ContentSlotComponentData;
     /**
      * @deprecated since 2.0
@@ -25,7 +24,7 @@ export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
      */
     cmpRef?: ComponentRef<any>;
     private launcherResource?;
-    constructor(vcr: ViewContainerRef, cmsComponentsService: CmsComponentsService, injector: Injector, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, componentHandler: ComponentHandlerService, cmsInjector: CmsInjectorService, cmsService: CmsService);
+    constructor(vcr: ViewContainerRef, cmsComponentsService: CmsComponentsService, injector: Injector, dynamicAttributeService: DynamicAttributeService, renderer: Renderer2, componentHandler: ComponentHandlerService, cmsInjector: CmsInjectorService);
     ngOnInit(): void;
     private launchComponent;
     private decorate;

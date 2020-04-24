@@ -1,7 +1,7 @@
 import { __decorate, __param } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveApplicable, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, Injector, INJECTOR, isDevMode, Optional, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
+import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, resolveApplicable, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, of, Observable, from, BehaviorSubject, fromEvent, concat, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -648,6 +648,54 @@ CmsComponentsService = __decorate([
     __param(1, Inject(PLATFORM_ID))
 ], CmsComponentsService);
 
+class CmsComponentData {
+}
+
+/**
+ * Used to prepare injector for CMS components.
+ *
+ * Injector will take into account configured providers and provides CmsComponentData
+ * for specified component's uid
+ */
+let CmsInjectorService = class CmsInjectorService {
+    constructor(cmsComponentsService, injector) {
+        this.cmsComponentsService = cmsComponentsService;
+        this.injector = injector;
+    }
+    getCmsData(uid, parentInjector) {
+        return {
+            uid: uid,
+            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
+                .get(CmsService)
+                .getComponentData(uid),
+        };
+    }
+    getInjector(type, uid, parentInjector) {
+        var _a, _b;
+        const configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+        return Injector.create({
+            providers: [
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsData(uid),
+                },
+                ...configProviders,
+            ],
+            parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
+        });
+    }
+};
+CmsInjectorService.ctorParameters = () => [
+    { type: CmsComponentsService },
+    { type: Injector }
+];
+CmsInjectorService.ɵprov = ɵɵdefineInjectable({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(ɵɵinject(CmsComponentsService), ɵɵinject(INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+CmsInjectorService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CmsInjectorService);
+
 /**
  * ComponentHandler implementations can be used for instantiating and launching
  * different types of CMS mapped components
@@ -702,60 +750,11 @@ ComponentHandlerService = __decorate([
     __param(0, Inject(ComponentHandler))
 ], ComponentHandlerService);
 
-class CmsComponentData {
-}
-
-/**
- * Used to prepare injector for CMS components.
- *
- * Injector will take into account configured providers and provides CmsComponentData
- * for specified component's uid
- */
-let CmsInjectorService = class CmsInjectorService {
-    constructor(cmsComponentsService, injector) {
-        this.cmsComponentsService = cmsComponentsService;
-        this.injector = injector;
-    }
-    getCmsData(uid, parentInjector) {
-        return {
-            uid: uid,
-            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
-                .get(CmsService)
-                .getComponentData(uid),
-        };
-    }
-    getInjector(type, uid, parentInjector) {
-        var _a, _b;
-        const configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
-        return Injector.create({
-            providers: [
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsData(uid),
-                },
-                ...configProviders,
-            ],
-            parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
-        });
-    }
-};
-CmsInjectorService.ctorParameters = () => [
-    { type: CmsComponentsService },
-    { type: Injector }
-];
-CmsInjectorService.ɵprov = ɵɵdefineInjectable({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(ɵɵinject(CmsComponentsService), ɵɵinject(INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
-CmsInjectorService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CmsInjectorService);
-
 /**
  * Directive used to facilitate instantiation of CMS driven dynamic components
  */
 let ComponentWrapperDirective = class ComponentWrapperDirective {
-    constructor(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-    ) {
+    constructor(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector) {
         this.vcr = vcr;
         this.cmsComponentsService = cmsComponentsService;
         this.injector = injector;
@@ -763,7 +762,6 @@ let ComponentWrapperDirective = class ComponentWrapperDirective {
         this.renderer = renderer;
         this.componentHandler = componentHandler;
         this.cmsInjector = cmsInjector;
-        this.cmsService = cmsService;
     }
     ngOnInit() {
         this.cmsComponentsService
@@ -787,9 +785,7 @@ let ComponentWrapperDirective = class ComponentWrapperDirective {
         });
     }
     decorate(elementRef) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
-            this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, elementRef.nativeElement, this.renderer);
-        }
+        this.dynamicAttributeService.addDynamicAttributes(elementRef.nativeElement, this.renderer, { componentData: this.cxComponentWrapper });
     }
     ngOnDestroy() {
         if (this.launcherResource) {
@@ -804,9 +800,7 @@ ComponentWrapperDirective.ctorParameters = () => [
     { type: DynamicAttributeService },
     { type: Renderer2 },
     { type: ComponentHandlerService },
-    { type: CmsInjectorService },
-    { type: CmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-     }
+    { type: CmsInjectorService }
 ];
 __decorate([
     Input()
@@ -8831,8 +8825,8 @@ let PageSlotComponent = class PageSlotComponent {
             !old.components.find((el, index) => el.uid !== current.components[index].uid));
     }
     addSmartEditSlotClass(slot) {
-        if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.elementRef.nativeElement, this.renderer);
+        if (slot) {
+            this.dynamicAttributeService.addDynamicAttributes(this.elementRef.nativeElement, this.renderer, { slotData: slot });
         }
     }
     ngOnDestroy() {

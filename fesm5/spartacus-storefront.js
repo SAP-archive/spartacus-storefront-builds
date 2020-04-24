@@ -1,7 +1,7 @@
 import { __decorate, __extends, __read, __values, __spread, __param, __assign } from 'tslib';
 import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, isDevMode, Optional, Injector, INJECTOR, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, resolveApplicable, CmsService, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, Injector, INJECTOR, isDevMode, Optional, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
+import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, resolveApplicable, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, of, Observable, from, BehaviorSubject, fromEvent, concat, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
 import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -753,6 +753,57 @@ var CmsComponentsService = /** @class */ (function () {
     return CmsComponentsService;
 }());
 
+var CmsComponentData = /** @class */ (function () {
+    function CmsComponentData() {
+    }
+    return CmsComponentData;
+}());
+
+/**
+ * Used to prepare injector for CMS components.
+ *
+ * Injector will take into account configured providers and provides CmsComponentData
+ * for specified component's uid
+ */
+var CmsInjectorService = /** @class */ (function () {
+    function CmsInjectorService(cmsComponentsService, injector) {
+        this.cmsComponentsService = cmsComponentsService;
+        this.injector = injector;
+    }
+    CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
+        return {
+            uid: uid,
+            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
+                .get(CmsService)
+                .getComponentData(uid),
+        };
+    };
+    CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
+        var _a, _b;
+        var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+        return Injector.create({
+            providers: __spread([
+                {
+                    provide: CmsComponentData,
+                    useValue: this.getCmsData(uid),
+                }
+            ], configProviders),
+            parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
+        });
+    };
+    CmsInjectorService.ctorParameters = function () { return [
+        { type: CmsComponentsService },
+        { type: Injector }
+    ]; };
+    CmsInjectorService.ɵprov = ɵɵdefineInjectable({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(ɵɵinject(CmsComponentsService), ɵɵinject(INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
+    CmsInjectorService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        })
+    ], CmsInjectorService);
+    return CmsInjectorService;
+}());
+
 /**
  * ComponentHandler implementations can be used for instantiating and launching
  * different types of CMS mapped components
@@ -811,63 +862,11 @@ var ComponentHandlerService = /** @class */ (function () {
     return ComponentHandlerService;
 }());
 
-var CmsComponentData = /** @class */ (function () {
-    function CmsComponentData() {
-    }
-    return CmsComponentData;
-}());
-
-/**
- * Used to prepare injector for CMS components.
- *
- * Injector will take into account configured providers and provides CmsComponentData
- * for specified component's uid
- */
-var CmsInjectorService = /** @class */ (function () {
-    function CmsInjectorService(cmsComponentsService, injector) {
-        this.cmsComponentsService = cmsComponentsService;
-        this.injector = injector;
-    }
-    CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
-        return {
-            uid: uid,
-            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
-                .get(CmsService)
-                .getComponentData(uid),
-        };
-    };
-    CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
-        var _a, _b;
-        var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
-        return Injector.create({
-            providers: __spread([
-                {
-                    provide: CmsComponentData,
-                    useValue: this.getCmsData(uid),
-                }
-            ], configProviders),
-            parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
-        });
-    };
-    CmsInjectorService.ctorParameters = function () { return [
-        { type: CmsComponentsService },
-        { type: Injector }
-    ]; };
-    CmsInjectorService.ɵprov = ɵɵdefineInjectable({ factory: function CmsInjectorService_Factory() { return new CmsInjectorService(ɵɵinject(CmsComponentsService), ɵɵinject(INJECTOR)); }, token: CmsInjectorService, providedIn: "root" });
-    CmsInjectorService = __decorate([
-        Injectable({
-            providedIn: 'root',
-        })
-    ], CmsInjectorService);
-    return CmsInjectorService;
-}());
-
 /**
  * Directive used to facilitate instantiation of CMS driven dynamic components
  */
 var ComponentWrapperDirective = /** @class */ (function () {
-    function ComponentWrapperDirective(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector, cmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-    ) {
+    function ComponentWrapperDirective(vcr, cmsComponentsService, injector, dynamicAttributeService, renderer, componentHandler, cmsInjector) {
         this.vcr = vcr;
         this.cmsComponentsService = cmsComponentsService;
         this.injector = injector;
@@ -875,7 +874,6 @@ var ComponentWrapperDirective = /** @class */ (function () {
         this.renderer = renderer;
         this.componentHandler = componentHandler;
         this.cmsInjector = cmsInjector;
-        this.cmsService = cmsService;
     }
     ComponentWrapperDirective.prototype.ngOnInit = function () {
         var _this = this;
@@ -902,9 +900,7 @@ var ComponentWrapperDirective = /** @class */ (function () {
         });
     };
     ComponentWrapperDirective.prototype.decorate = function (elementRef) {
-        if (this.cmsService.isLaunchInSmartEdit()) {
-            this.dynamicAttributeService.addDynamicAttributes(this.cxComponentWrapper.properties, elementRef.nativeElement, this.renderer);
-        }
+        this.dynamicAttributeService.addDynamicAttributes(elementRef.nativeElement, this.renderer, { componentData: this.cxComponentWrapper });
     };
     ComponentWrapperDirective.prototype.ngOnDestroy = function () {
         if (this.launcherResource) {
@@ -918,9 +914,7 @@ var ComponentWrapperDirective = /** @class */ (function () {
         { type: DynamicAttributeService },
         { type: Renderer2 },
         { type: ComponentHandlerService },
-        { type: CmsInjectorService },
-        { type: CmsService // TODO: remove, move smartedit detection responsibility to different layer/service
-         }
+        { type: CmsInjectorService }
     ]; };
     __decorate([
         Input()
@@ -9714,8 +9708,8 @@ var PageSlotComponent = /** @class */ (function () {
             !old.components.find(function (el, index) { return el.uid !== current.components[index].uid; }));
     };
     PageSlotComponent.prototype.addSmartEditSlotClass = function (slot) {
-        if (slot && this.cmsService.isLaunchInSmartEdit()) {
-            this.dynamicAttributeService.addDynamicAttributes(slot.properties, this.elementRef.nativeElement, this.renderer);
+        if (slot) {
+            this.dynamicAttributeService.addDynamicAttributes(this.elementRef.nativeElement, this.renderer, { slotData: slot });
         }
     };
     PageSlotComponent.prototype.ngOnDestroy = function () {
