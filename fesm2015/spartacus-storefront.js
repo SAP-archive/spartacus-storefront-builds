@@ -5601,11 +5601,16 @@ let CartDetailsComponent = class CartDetailsComponent {
         this.entries$ = this.activeCartService
             .getEntries()
             .pipe(filter((entries) => entries.length > 0));
+        this.selectiveCartEnabled = this.selectiveCartService.isEnabled();
         this.cartLoaded$ = combineLatest([
             this.activeCartService.isStable(),
-            this.selectiveCartService.getLoaded(),
+            this.selectiveCartEnabled
+                ? this.selectiveCartService.getLoaded()
+                : of(false),
             this.authService.isUserLoggedIn(),
-        ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn ? cartLoaded && sflLoaded : cartLoaded));
+        ]).pipe(tap(([, , loggedIn]) => (this.loggedIn = loggedIn)), map(([cartLoaded, sflLoaded, loggedIn]) => loggedIn && this.selectiveCartEnabled
+            ? cartLoaded && sflLoaded
+            : cartLoaded));
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
     }
     saveForLater(item) {
@@ -5628,7 +5633,7 @@ CartDetailsComponent.ctorParameters = () => [
 CartDetailsComponent = __decorate([
     Component({
         selector: 'cx-cart-details',
-        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [promotionLocation]=\"promotionLocation\"\n        [options]=\"{\n          isSaveForLater: false,\n          optionalBtn: saveForLaterBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\">\n    <button\n      class=\"link cx-action-link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
+        template: "<ng-container *ngIf=\"cart$ | async as cart\">\n  <ng-container *ngIf=\"entries$ | async as entries\">\n    <div *ngIf=\"cart.totalItems > 0\" class=\"cart-details-wrapper\">\n      <div class=\"cx-total\">\n        {{ 'cartDetails.cartName' | cxTranslate: { code: cart.code } }}\n      </div>\n\n      <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n        <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n      </ng-container>\n\n      <cx-cart-item-list\n        [items]=\"entries\"\n        [cartIsLoading]=\"!(cartLoaded$ | async)\"\n        [promotionLocation]=\"promotionLocation\"\n        [options]=\"{\n          isSaveForLater: false,\n          optionalBtn: saveForLaterBtn\n        }\"\n      ></cx-cart-item-list>\n    </div>\n  </ng-container>\n</ng-container>\n\n<ng-template let-ctx #saveForLaterBtn>\n  <div\n    *ngIf=\"selectiveCartEnabled\"\n    class=\"col-md-3 col-lg-3 col-xl-3 cx-sfl-btn\"\n  >\n    <button\n      class=\"link cx-action-link\"\n      [disabled]=\"ctx.loading\"\n      (click)=\"saveForLater(ctx.item)\"\n      type=\"button\"\n    >\n      {{ 'saveForLaterItems.saveForLater' | cxTranslate }}\n    </button>\n  </div>\n</ng-template>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], CartDetailsComponent);
@@ -5704,7 +5709,9 @@ let CartPageLayoutHandler = class CartPageLayoutHandler {
             return combineLatest([
                 slots$,
                 this.activeCartService.getActive(),
-                this.selectiveCartService.getCart(),
+                this.selectiveCartService.isEnabled()
+                    ? this.selectiveCartService.getCart()
+                    : of({}),
                 this.activeCartService.getLoading(),
             ]).pipe(map(([slots, cart, selectiveCart, loadingCart]) => {
                 const exclude = (arr, args) => arr.filter((item) => args.every((arg) => arg !== item));
@@ -5936,9 +5943,6 @@ SaveForLaterModule = __decorate([
                     SaveForLaterComponent: {
                         component: SaveForLaterComponent,
                     },
-                },
-                features: {
-                    saveForLater: '1.5',
                 },
             }),
         ],
@@ -14063,7 +14067,6 @@ let FooterNavigationComponent = class FooterNavigationComponent {
         this.service = service;
         this.node$ = this.service.getNavigationNode(this.componentData.data$);
         this.styleClass$ = this.componentData.data$.pipe(map((d) => d.styleClass));
-        this.data$ = this.componentData.data$;
     }
 };
 FooterNavigationComponent.ctorParameters = () => [
@@ -14073,7 +14076,7 @@ FooterNavigationComponent.ctorParameters = () => [
 FooterNavigationComponent = __decorate([
     Component({
         selector: 'cx-footer-navigation',
-        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n\n<div class=\"notice\" *ngIf=\"data$ | async as data\">\n  {{ data.notice }}\n</div>\n",
+        template: "<cx-navigation-ui\n  [node]=\"node$ | async\"\n  [flyout]=\"false\"\n  [ngClass]=\"styleClass$ | async\"\n></cx-navigation-ui>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], FooterNavigationComponent);

@@ -8,6 +8,5 @@ export declare class FooterNavigationComponent {
     protected service: NavigationService;
     node$: Observable<NavigationNode>;
     styleClass$: Observable<string>;
-    data$: Observable<CmsNavigationComponent>;
     constructor(componentData: CmsComponentData<CmsNavigationComponent>, service: NavigationService);
 }
