@@ -3,7 +3,7 @@ import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, 
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, Injector, INJECTOR, isDevMode, Optional, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
 import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, resolveApplicable, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { Subscription, combineLatest, of, Observable, from, BehaviorSubject, fromEvent, concat, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
-import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, distinctUntilKeyChanged, observeOn, pluck, delayWhen } from 'rxjs/operators';
+import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, observeOn, pluck, delayWhen } from 'rxjs/operators';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
@@ -3244,7 +3244,7 @@ var ItemCounterComponent = /** @class */ (function () {
     ItemCounterComponent = __decorate([
         Component({
             selector: 'cx-item-counter',
-            template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+            template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
         })
     ], ItemCounterComponent);
     return ItemCounterComponent;
@@ -4084,14 +4084,14 @@ var SiteContextComponentService = /** @class */ (function () {
     };
     SiteContextComponentService.prototype.getService = function (context) {
         var _this = this;
-        return this.getContext(context).pipe(map(function (ctx) { return _this.getInjectedService(ctx); }), filter(function (s) { return !!s; }));
+        return this.getContext(context).pipe(map(function (ctx) { return (ctx ? _this.getInjectedService(ctx) : undefined); }), filter(function (s) { return !!s; }));
     };
     SiteContextComponentService.prototype.getContext = function (context) {
         if (context) {
             return of(context);
         }
         else if (this.componentData) {
-            return this.componentData.data$.pipe(map(function (data) { return data.context; }), map(function (ctx) {
+            return this.componentData.data$.pipe(map(function (data) { return data === null || data === void 0 ? void 0 : data.context; }), map(function (ctx) {
                 switch (ctx) {
                     case 'LANGUAGE':
                         return LANGUAGE_CONTEXT_ID;
@@ -11894,9 +11894,13 @@ var TabParagraphContainerComponent = /** @class */ (function () {
         this.winRef = winRef;
         this.activeTabNum = 0;
         this.tabTitleParams = [];
-        this.components$ = this.componentData.data$.pipe(distinctUntilKeyChanged('components'), switchMap(function (data) {
-            return combineLatest(data.components.split(' ').map(function (component) {
+        this.components$ = this.componentData.data$.pipe(distinctUntilChanged(function (x, y) { return (x === null || x === void 0 ? void 0 : x.components) === (y === null || y === void 0 ? void 0 : y.components); }), switchMap(function (data) {
+            var _a;
+            return combineLatest(((_a = data === null || data === void 0 ? void 0 : data.components) !== null && _a !== void 0 ? _a : '').split(' ').map(function (component) {
                 return _this.cmsService.getComponentData(component).pipe(distinctUntilChanged(), map(function (tab) {
+                    if (!tab) {
+                        return undefined;
+                    }
                     if (!tab.flexType) {
                         tab = __assign(__assign({}, tab), { flexType: tab.typeCode });
                     }
@@ -11954,7 +11958,7 @@ var TabParagraphContainerComponent = /** @class */ (function () {
     TabParagraphContainerComponent = __decorate([
         Component({
             selector: 'cx-tab-paragraph-container',
-            template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n  </button>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
+            template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], TabParagraphContainerComponent);
@@ -15045,10 +15049,12 @@ var NavigationService = /** @class */ (function () {
     NavigationService.prototype.createNavigation = function (data$) {
         return combineLatest([data$, this.getNavigationNode(data$)]).pipe(map(function (_a) {
             var _b = __read(_a, 2), data = _b[0], nav = _b[1];
-            return {
-                title: data.name,
-                children: [nav],
-            };
+            return data
+                ? {
+                    title: data.name,
+                    children: [nav],
+                }
+                : undefined;
         }));
     };
     /**
@@ -15365,7 +15371,7 @@ var NavigationComponent = /** @class */ (function () {
         this.componentData = componentData;
         this.service = service;
         this.node$ = this.service.createNavigation(this.componentData.data$);
-        this.styleClass$ = this.componentData.data$.pipe(map(function (d) { return d.styleClass; }));
+        this.styleClass$ = this.componentData.data$.pipe(map(function (d) { return d === null || d === void 0 ? void 0 : d.styleClass; }));
     }
     NavigationComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
@@ -15438,7 +15444,7 @@ var FooterNavigationComponent = /** @class */ (function () {
         this.componentData = componentData;
         this.service = service;
         this.node$ = this.service.getNavigationNode(this.componentData.data$);
-        this.styleClass$ = this.componentData.data$.pipe(map(function (d) { return d.styleClass; }));
+        this.styleClass$ = this.componentData.data$.pipe(map(function (d) { return d === null || d === void 0 ? void 0 : d.styleClass; }));
     }
     FooterNavigationComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
@@ -15700,9 +15706,9 @@ var SearchBoxComponent = /** @class */ (function () {
                 // Since the backend returns string values (i.e. displayProducts: "true") for
                 // boolean values, we replace them with boolean values.
                 map(function (c) {
-                    return __assign(__assign({}, c), { displayProducts: c.displayProducts === 'true' || c.displayProducts === true, displayProductImages: c.displayProductImages === 'true' ||
-                            c.displayProductImages === true, displaySuggestions: c.displaySuggestions === 'true' ||
-                            c.displaySuggestions === true });
+                    return __assign(__assign({}, c), { displayProducts: (c === null || c === void 0 ? void 0 : c.displayProducts) === 'true' || (c === null || c === void 0 ? void 0 : c.displayProducts) === true, displayProductImages: (c === null || c === void 0 ? void 0 : c.displayProductImages) === 'true' ||
+                            (c === null || c === void 0 ? void 0 : c.displayProductImages) === true, displaySuggestions: (c === null || c === void 0 ? void 0 : c.displaySuggestions) === 'true' ||
+                            (c === null || c === void 0 ? void 0 : c.displaySuggestions) === true });
                 }));
             }
             else {
@@ -16315,7 +16321,7 @@ var ProductReferencesComponent = /** @class */ (function () {
         /**
          * returns an Obervable string for the title
          */
-        this.title$ = this.component.data$.pipe(map(function (d) { return d.title; }));
+        this.title$ = this.component.data$.pipe(map(function (d) { return d === null || d === void 0 ? void 0 : d.title; }));
         this.currentProductCode$ = this.current.getProduct().pipe(filter(Boolean), map(function (p) { return p.code; }), distinctUntilChanged(), tap(function () { return _this.referenceService.cleanReferences(); }));
         /**
          * Obervable with an Array of Observables. This is done, so that
@@ -16327,7 +16333,7 @@ var ProductReferencesComponent = /** @class */ (function () {
             this.component.data$,
         ]).pipe(switchMap(function (_a) {
             var _b = __read(_a, 2), code = _b[0], data = _b[1];
-            return _this.getProductReferences(code, data.productReferenceTypes);
+            return _this.getProductReferences(code, data === null || data === void 0 ? void 0 : data.productReferenceTypes);
         }));
     }
     ProductReferencesComponent.prototype.getProductReferences = function (code, referenceType) {

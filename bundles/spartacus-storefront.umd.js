@@ -3429,7 +3429,7 @@
         ItemCounterComponent = __decorate([
             core.Component({
                 selector: 'cx-item-counter',
-                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
             })
         ], ItemCounterComponent);
         return ItemCounterComponent;
@@ -4269,14 +4269,14 @@
         };
         SiteContextComponentService.prototype.getService = function (context) {
             var _this = this;
-            return this.getContext(context).pipe(operators.map(function (ctx) { return _this.getInjectedService(ctx); }), operators.filter(function (s) { return !!s; }));
+            return this.getContext(context).pipe(operators.map(function (ctx) { return (ctx ? _this.getInjectedService(ctx) : undefined); }), operators.filter(function (s) { return !!s; }));
         };
         SiteContextComponentService.prototype.getContext = function (context) {
             if (context) {
                 return rxjs.of(context);
             }
             else if (this.componentData) {
-                return this.componentData.data$.pipe(operators.map(function (data) { return data.context; }), operators.map(function (ctx) {
+                return this.componentData.data$.pipe(operators.map(function (data) { return data === null || data === void 0 ? void 0 : data.context; }), operators.map(function (ctx) {
                     switch (ctx) {
                         case 'LANGUAGE':
                             return core$1.LANGUAGE_CONTEXT_ID;
@@ -12079,9 +12079,13 @@
             this.winRef = winRef;
             this.activeTabNum = 0;
             this.tabTitleParams = [];
-            this.components$ = this.componentData.data$.pipe(operators.distinctUntilKeyChanged('components'), operators.switchMap(function (data) {
-                return rxjs.combineLatest(data.components.split(' ').map(function (component) {
+            this.components$ = this.componentData.data$.pipe(operators.distinctUntilChanged(function (x, y) { return (x === null || x === void 0 ? void 0 : x.components) === (y === null || y === void 0 ? void 0 : y.components); }), operators.switchMap(function (data) {
+                var _a;
+                return rxjs.combineLatest(((_a = data === null || data === void 0 ? void 0 : data.components) !== null && _a !== void 0 ? _a : '').split(' ').map(function (component) {
                     return _this.cmsService.getComponentData(component).pipe(operators.distinctUntilChanged(), operators.map(function (tab) {
+                        if (!tab) {
+                            return undefined;
+                        }
                         if (!tab.flexType) {
                             tab = __assign(__assign({}, tab), { flexType: tab.typeCode });
                         }
@@ -12139,7 +12143,7 @@
         TabParagraphContainerComponent = __decorate([
             core.Component({
                 selector: 'cx-tab-paragraph-container',
-                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n    {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n  </button>\n  <div [class.active]=\"i === activeTabNum\">\n    <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n      <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n    </ng-template>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], TabParagraphContainerComponent);
@@ -15230,10 +15234,12 @@
         NavigationService.prototype.createNavigation = function (data$) {
             return rxjs.combineLatest([data$, this.getNavigationNode(data$)]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), data = _b[0], nav = _b[1];
-                return {
-                    title: data.name,
-                    children: [nav],
-                };
+                return data
+                    ? {
+                        title: data.name,
+                        children: [nav],
+                    }
+                    : undefined;
             }));
         };
         /**
@@ -15550,7 +15556,7 @@
             this.componentData = componentData;
             this.service = service;
             this.node$ = this.service.createNavigation(this.componentData.data$);
-            this.styleClass$ = this.componentData.data$.pipe(operators.map(function (d) { return d.styleClass; }));
+            this.styleClass$ = this.componentData.data$.pipe(operators.map(function (d) { return d === null || d === void 0 ? void 0 : d.styleClass; }));
         }
         NavigationComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
@@ -15623,7 +15629,7 @@
             this.componentData = componentData;
             this.service = service;
             this.node$ = this.service.getNavigationNode(this.componentData.data$);
-            this.styleClass$ = this.componentData.data$.pipe(operators.map(function (d) { return d.styleClass; }));
+            this.styleClass$ = this.componentData.data$.pipe(operators.map(function (d) { return d === null || d === void 0 ? void 0 : d.styleClass; }));
         }
         FooterNavigationComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
@@ -15885,9 +15891,9 @@
                     // Since the backend returns string values (i.e. displayProducts: "true") for
                     // boolean values, we replace them with boolean values.
                     operators.map(function (c) {
-                        return __assign(__assign({}, c), { displayProducts: c.displayProducts === 'true' || c.displayProducts === true, displayProductImages: c.displayProductImages === 'true' ||
-                                c.displayProductImages === true, displaySuggestions: c.displaySuggestions === 'true' ||
-                                c.displaySuggestions === true });
+                        return __assign(__assign({}, c), { displayProducts: (c === null || c === void 0 ? void 0 : c.displayProducts) === 'true' || (c === null || c === void 0 ? void 0 : c.displayProducts) === true, displayProductImages: (c === null || c === void 0 ? void 0 : c.displayProductImages) === 'true' ||
+                                (c === null || c === void 0 ? void 0 : c.displayProductImages) === true, displaySuggestions: (c === null || c === void 0 ? void 0 : c.displaySuggestions) === 'true' ||
+                                (c === null || c === void 0 ? void 0 : c.displaySuggestions) === true });
                     }));
                 }
                 else {
@@ -16500,7 +16506,7 @@
             /**
              * returns an Obervable string for the title
              */
-            this.title$ = this.component.data$.pipe(operators.map(function (d) { return d.title; }));
+            this.title$ = this.component.data$.pipe(operators.map(function (d) { return d === null || d === void 0 ? void 0 : d.title; }));
             this.currentProductCode$ = this.current.getProduct().pipe(operators.filter(Boolean), operators.map(function (p) { return p.code; }), operators.distinctUntilChanged(), operators.tap(function () { return _this.referenceService.cleanReferences(); }));
             /**
              * Obervable with an Array of Observables. This is done, so that
@@ -16512,7 +16518,7 @@
                 this.component.data$,
             ]).pipe(operators.switchMap(function (_a) {
                 var _b = __read(_a, 2), code = _b[0], data = _b[1];
-                return _this.getProductReferences(code, data.productReferenceTypes);
+                return _this.getProductReferences(code, data === null || data === void 0 ? void 0 : data.productReferenceTypes);
             }));
         }
         ProductReferencesComponent.prototype.getProductReferences = function (code, referenceType) {
