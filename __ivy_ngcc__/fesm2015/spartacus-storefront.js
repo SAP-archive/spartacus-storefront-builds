@@ -6841,13 +6841,13 @@ function FacetListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
 const _c46 = ["facetValue"];
 function FacetComponent_ng_container_0_a_5_Template(rf, ctx) { if (rf & 1) {
     const _r1081 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
+    ɵngcc0.ɵɵelementStart(0, "a", 7, 8);
     ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_5_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1081); const ctx_r1080 = ɵngcc0.ɵɵnextContext(2); return ctx_r1080.openLink($event); });
     ɵngcc0.ɵɵelementStart(2, "span");
-    ɵngcc0.ɵɵelementStart(3, "span", 10);
+    ɵngcc0.ɵɵelementStart(3, "span", 9);
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelementEnd();
-    ɵngcc0.ɵɵelementStart(5, "span", 11);
+    ɵngcc0.ɵɵelementStart(5, "span", 10);
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6864,11 +6864,11 @@ function FacetComponent_ng_container_0_a_5_Template(rf, ctx) { if (rf & 1) {
 } }
 function FacetComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
     const _r1085 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
+    ɵngcc0.ɵɵelementStart(0, "a", 7, 8);
     ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_8_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1085); const ctx_r1084 = ɵngcc0.ɵɵnextContext(2); return ctx_r1084.openLink($event); });
     ɵngcc0.ɵɵelementStart(2, "span");
     ɵngcc0.ɵɵtext(3);
-    ɵngcc0.ɵɵelementStart(4, "span", 11);
+    ɵngcc0.ɵɵelementStart(4, "span", 10);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6885,7 +6885,7 @@ function FacetComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
 } }
 function FacetComponent_ng_container_0_button_10_Template(rf, ctx) { if (rf & 1) {
     const _r1087 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "button", 12);
+    ɵngcc0.ɵɵelementStart(0, "button", 11);
     ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1087); const ctx_r1086 = ɵngcc0.ɵɵnextContext(2); return ctx_r1086.decreaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -6896,7 +6896,7 @@ function FacetComponent_ng_container_0_button_10_Template(rf, ctx) { if (rf & 1)
 } }
 function FacetComponent_ng_container_0_button_11_Template(rf, ctx) { if (rf & 1) {
     const _r1089 = ɵngcc0.ɵɵgetCurrentView();
-    ɵngcc0.ɵɵelementStart(0, "button", 13);
+    ɵngcc0.ɵɵelementStart(0, "button", 11);
     ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_11_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1089); const ctx_r1088 = ɵngcc0.ɵɵnextContext(2); return ctx_r1088.increaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
@@ -6920,7 +6920,7 @@ function FacetComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(8, FacetComponent_ng_container_0_a_8_Template, 6, 6, "a", 4);
     ɵngcc0.ɵɵpipe(9, "slice");
     ɵngcc0.ɵɵtemplate(10, FacetComponent_ng_container_0_button_10_Template, 3, 3, "button", 6);
-    ɵngcc0.ɵɵtemplate(11, FacetComponent_ng_container_0_button_11_Template, 3, 3, "button", 7);
+    ɵngcc0.ɵɵtemplate(11, FacetComponent_ng_container_0_button_11_Template, 3, 3, "button", 6);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
@@ -25014,7 +25014,7 @@ FacetComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: FacetComponent, selec
         ɵngcc0.ɵɵqueryRefresh(_t = ɵngcc0.ɵɵloadQuery()) && (ctx.values = _t);
     } }, hostVars: 2, hostBindings: function FacetComponent_HostBindings(rf, ctx) { if (rf & 2) {
         ɵngcc0.ɵɵclassProp("multi-select", ctx.isMultiSelect);
-    } }, inputs: { expandIcon: "expandIcon", collapseIcon: "collapseIcon", facet: "facet" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "heading", 3, "click"], [1, "collapse-icon", 3, "type"], [1, "expand-icon", 3, "type"], ["routerLink", "./", "class", "value", 3, "queryParams", "selected", "cxFocus", "keydown.space", 4, "ngFor", "ngForOf"], [1, "more"], ["class", "cx-action-link", "cxFocus", "moreorless", 3, "click", 4, "ngIf"], ["class", "cx-action-link", 3, "click", 4, "ngIf"], ["routerLink", "./", 1, "value", 3, "queryParams", "cxFocus", "keydown.space"], ["facetValue", ""], [1, "label"], [1, "count"], ["cxFocus", "moreorless", 1, "cx-action-link", 3, "click"], [1, "cx-action-link", 3, "click"]], template: function FacetComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { expandIcon: "expandIcon", collapseIcon: "collapseIcon", facet: "facet" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "heading", 3, "click"], [1, "collapse-icon", 3, "type"], [1, "expand-icon", 3, "type"], ["routerLink", "./", "class", "value", 3, "queryParams", "selected", "cxFocus", "keydown.space", 4, "ngFor", "ngForOf"], [1, "more"], ["class", "cx-action-link", "cxFocus", "moreorless", 3, "click", 4, "ngIf"], ["routerLink", "./", 1, "value", 3, "queryParams", "cxFocus", "keydown.space"], ["facetValue", ""], [1, "label"], [1, "count"], ["cxFocus", "moreorless", 1, "cx-action-link", 3, "click"]], template: function FacetComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, FacetComponent_ng_container_0_Template, 12, 15, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -32373,7 +32373,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-facet',
-                template: "<ng-container *ngIf=\"state$ | async as state\">\n  <button class=\"heading\" (click)=\"toggleGroup($event)\">\n    {{ facet.name }}\n    <cx-icon class=\"collapse-icon\" [type]=\"collapseIcon\"></cx-icon>\n    <cx-icon class=\"expand-icon\" [type]=\"expandIcon\"></cx-icon>\n  </button>\n\n  <a\n    *ngFor=\"let value of facet.values | slice: 0:state.topVisible\"\n    #facetValue\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(value)\"\n    class=\"value\"\n    [class.selected]=\"value.selected\"\n    [cxFocus]=\"value.name\"\n    (keydown.space)=\"openLink($event)\"\n  >\n    <span>\n      <span class=\"label\">{{ value.name }}</span>\n      <span class=\"count\">{{ value.count }}</span>\n    </span>\n  </a>\n\n  <div class=\"more\">\n    <a\n      *ngFor=\"\n        let value of facet.values | slice: state.topVisible:state.maxVisible\n      \"\n      #facetValue\n      routerLink=\"./\"\n      [queryParams]=\"getLinkParams(value)\"\n      class=\"value\"\n      [class.selected]=\"value.selected\"\n      [cxFocus]=\"value.name\"\n      (keydown.space)=\"openLink($event)\"\n    >\n      <span\n        >{{ value.name }}<span class=\"count\">{{ value.count }}</span></span\n      >\n    </a>\n\n    <button\n      *ngIf=\"state.maxVisible > state.topVisible\"\n      (click)=\"decreaseVisibleValues()\"\n      class=\"cx-action-link\"\n      cxFocus=\"moreorless\"\n    >\n      {{ 'productList.showLess' | cxTranslate }}\n    </button>\n\n    <button\n      *ngIf=\"state.maxVisible > 0 && state.maxVisible < facet.values.length\"\n      (click)=\"increaseVisibleValues()\"\n      class=\"cx-action-link\"\n    >\n      {{ 'productList.showMore' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"state$ | async as state\">\n  <button class=\"heading\" (click)=\"toggleGroup($event)\">\n    {{ facet.name }}\n    <cx-icon class=\"collapse-icon\" [type]=\"collapseIcon\"></cx-icon>\n    <cx-icon class=\"expand-icon\" [type]=\"expandIcon\"></cx-icon>\n  </button>\n\n  <a\n    *ngFor=\"let value of facet.values | slice: 0:state.topVisible\"\n    #facetValue\n    routerLink=\"./\"\n    [queryParams]=\"getLinkParams(value)\"\n    class=\"value\"\n    [class.selected]=\"value.selected\"\n    [cxFocus]=\"value.name\"\n    (keydown.space)=\"openLink($event)\"\n  >\n    <span>\n      <span class=\"label\">{{ value.name }}</span>\n      <span class=\"count\">{{ value.count }}</span>\n    </span>\n  </a>\n\n  <div class=\"more\">\n    <a\n      *ngFor=\"\n        let value of facet.values | slice: state.topVisible:state.maxVisible\n      \"\n      #facetValue\n      routerLink=\"./\"\n      [queryParams]=\"getLinkParams(value)\"\n      class=\"value\"\n      [class.selected]=\"value.selected\"\n      [cxFocus]=\"value.name\"\n      (keydown.space)=\"openLink($event)\"\n    >\n      <span\n        >{{ value.name }}<span class=\"count\">{{ value.count }}</span></span\n      >\n    </a>\n\n    <button\n      *ngIf=\"state.maxVisible > state.topVisible\"\n      (click)=\"decreaseVisibleValues()\"\n      class=\"cx-action-link\"\n      cxFocus=\"moreorless\"\n    >\n      {{ 'productList.showLess' | cxTranslate }}\n    </button>\n\n    <button\n      *ngIf=\"state.maxVisible > 0 && state.maxVisible < facet.values.length\"\n      (click)=\"increaseVisibleValues()\"\n      class=\"cx-action-link\"\n      cxFocus=\"moreorless\"\n    >\n      {{ 'productList.showMore' | cxTranslate }}\n    </button>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: FacetService }, { type: ɵngcc0.ElementRef }, { type: ɵngcc0.ChangeDetectorRef }]; }, { expandIcon: [{
