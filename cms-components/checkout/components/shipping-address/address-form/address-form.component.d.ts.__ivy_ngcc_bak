@@ -28,7 +28,6 @@ export declare class AddressFormComponent implements OnInit, OnDestroy {
     addressForm: FormGroup;
     constructor(fb: FormBuilder, checkoutDeliveryService: CheckoutDeliveryService, userService: UserService, userAddressService: UserAddressService, globalMessageService: GlobalMessageService, modalService: ModalService);
     ngOnInit(): void;
-    titleSelected(title: Title): void;
     countrySelected(country: Country): void;
     regionSelected(region: Region): void;
     toggleDefaultAddress(): void;

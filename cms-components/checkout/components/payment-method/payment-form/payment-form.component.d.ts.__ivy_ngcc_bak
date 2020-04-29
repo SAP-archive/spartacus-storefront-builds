@@ -37,9 +37,6 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     expMonthAndYear(): void;
     toggleDefaultPaymentMethod(): void;
-    paymentSelected(card: CardType): void;
-    monthSelected(month: string): void;
-    yearSelected(year: number): void;
     toggleSameAsShippingAddress(): void;
     getAddressCardContent(address: Address): Card;
     openSuggestedAddress(results: AddressValidation): void;
@@ -47,7 +44,6 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     back(): void;
     verifyAddress(): void;
     countrySelected(country: Country): void;
-    regionSelected(region: Region): void;
     next(): void;
     ngOnDestroy(): void;
 }
