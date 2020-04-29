@@ -10165,7 +10165,7 @@ let AutoFocusService = class AutoFocusService extends EscapeFocusService {
      *
      * @param host the `HTMLElement` used to query for focusable children
      * @param group the optional group for the persistent state, to separate different focus
-     *   groups and remain the persistance
+     *   groups and remain the persistence
      */
     getPersisted(host, group) {
         if (!this.get(group)) {

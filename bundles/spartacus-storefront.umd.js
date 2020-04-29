@@ -1810,7 +1810,7 @@
          *
          * @param host the `HTMLElement` used to query for focusable children
          * @param group the optional group for the persistent state, to separate different focus
-         *   groups and remain the persistance
+         *   groups and remain the persistence
          */
         AutoFocusService.prototype.getPersisted = function (host, group) {
             if (!this.get(group)) {
