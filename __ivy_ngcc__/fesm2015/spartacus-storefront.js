@@ -6331,16 +6331,10 @@ function OrderConfirmationTotalsComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵproperty("cart", order_r975);
 } }
 const _c44 = function (a0) { return { email: a0 }; };
-function ProductCarouselComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-media", 5);
-} if (rf & 2) {
-    const item_r978 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r978.images == null ? null : item_r978.images.PRIMARY);
-} }
 function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
     ɵngcc0.ɵɵpipe(1, "cxUrl");
-    ɵngcc0.ɵɵtemplate(2, ProductCarouselComponent_ng_template_3_cx_media_2_Template, 1, 1, "cx-media", 3);
+    ɵngcc0.ɵɵelement(2, "cx-media", 3);
     ɵngcc0.ɵɵelementStart(3, "h4");
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelementEnd();
@@ -6352,22 +6346,16 @@ function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     const item_r978 = ctx.item;
     ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c12, item_r978)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r978.images == null ? null : item_r978.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", item_r978.images == null ? null : item_r978.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(item_r978.name);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(item_r978.price == null ? null : item_r978.price.formattedValue);
 } }
-function ProductReferencesComponent_ng_template_3_cx_media_2_Template(rf, ctx) { if (rf & 1) {
-    ɵngcc0.ɵɵelement(0, "cx-media", 5);
-} if (rf & 2) {
-    const item_r983 = ɵngcc0.ɵɵnextContext().item;
-    ɵngcc0.ɵɵproperty("container", item_r983.images == null ? null : item_r983.images.PRIMARY);
-} }
 function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
     ɵngcc0.ɵɵpipe(1, "cxUrl");
-    ɵngcc0.ɵɵtemplate(2, ProductReferencesComponent_ng_template_3_cx_media_2_Template, 1, 1, "cx-media", 3);
+    ɵngcc0.ɵɵelement(2, "cx-media", 3);
     ɵngcc0.ɵɵelementStart(3, "h4");
     ɵngcc0.ɵɵtext(4);
     ɵngcc0.ɵɵelementEnd();
@@ -6376,57 +6364,57 @@ function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r983 = ctx.item;
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c12, item_r983)));
+    const item_r981 = ctx.item;
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(1, 4, ɵngcc0.ɵɵpureFunction1(6, _c12, item_r981)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", item_r983.images == null ? null : item_r983.images.PRIMARY);
+    ɵngcc0.ɵɵproperty("container", item_r981.images == null ? null : item_r981.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r983.name);
+    ɵngcc0.ɵɵtextInterpolate(item_r981.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r983.price == null ? null : item_r983.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate(item_r981.price == null ? null : item_r981.price.formattedValue);
 } }
 function ProductImagesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "cx-media", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const main_r990 = ctx.ngIf;
+    const main_r986 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("container", main_r990);
+    ɵngcc0.ɵɵproperty("container", main_r986);
 } }
 function ProductImagesComponent_ng_container_2_cx_carousel_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-carousel", 4);
 } if (rf & 2) {
-    const thumbs_r991 = ɵngcc0.ɵɵnextContext().ngIf;
+    const thumbs_r987 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r988 = ɵngcc0.ɵɵreference(5);
-    ɵngcc0.ɵɵproperty("items", thumbs_r991)("hideIndicators", false)("template", _r988);
+    const _r984 = ɵngcc0.ɵɵreference(5);
+    ɵngcc0.ɵɵproperty("items", thumbs_r987)("hideIndicators", false)("template", _r984);
 } }
 function ProductImagesComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductImagesComponent_ng_container_2_cx_carousel_1_Template, 1, 3, "cx-carousel", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const thumbs_r991 = ctx.ngIf;
+    const thumbs_r987 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", thumbs_r991.length);
+    ɵngcc0.ɵɵproperty("ngIf", thumbs_r987.length);
 } }
 function ProductImagesComponent_ng_template_4_Template(rf, ctx) { if (rf & 1) {
-    const _r996 = ɵngcc0.ɵɵgetCurrentView();
+    const _r992 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-media", 5);
-    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r996); const item_r994 = ctx.item; const ctx_r995 = ɵngcc0.ɵɵnextContext(); return ctx_r995.openImage(item_r994.container); });
+    ɵngcc0.ɵɵlistener("focus", function ProductImagesComponent_ng_template_4_Template_cx_media_focus_0_listener() { ɵngcc0.ɵɵrestoreView(_r992); const item_r990 = ctx.item; const ctx_r991 = ɵngcc0.ɵɵnextContext(); return ctx_r991.openImage(item_r990.container); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const item_r994 = ctx.item;
-    const ctx_r989 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r989.isActive(item_r994.container)));
-    ɵngcc0.ɵɵproperty("container", item_r994.container);
+    const item_r990 = ctx.item;
+    const ctx_r985 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("is-active", ɵngcc0.ɵɵpipeBind1(1, 3, ctx_r985.isActive(item_r990.container)));
+    ɵngcc0.ɵɵproperty("container", item_r990.container);
 } }
 function ProductIntroComponent_ng_container_0_div_1_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1003 = ɵngcc0.ɵɵgetCurrentView();
+    const _r999 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 7);
-    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1003); const ctx_r1002 = ɵngcc0.ɵɵnextContext(3); return ctx_r1002.showReviews(); });
+    ɵngcc0.ɵɵlistener("click", function ProductIntroComponent_ng_container_0_div_1_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r999); const ctx_r998 = ɵngcc0.ɵɵnextContext(3); return ctx_r998.showReviews(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6444,14 +6432,14 @@ function ProductIntroComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf &
     ɵngcc0.ɵɵpipe(5, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r998 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r999 = ɵngcc0.ɵɵnextContext();
+    const product_r994 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r995 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", product_r998 == null ? null : product_r998.averageRating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", product_r994 == null ? null : product_r994.averageRating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1("(", product_r998 == null ? null : product_r998.numberOfReviews, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", product_r994 == null ? null : product_r994.numberOfReviews, ")");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r999.reviewsTabAvailable));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 4, ctx_r995.reviewsTabAvailable));
 } }
 function ProductIntroComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 3);
@@ -6472,25 +6460,25 @@ function ProductIntroComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r998 = ctx.ngIf;
+    const product_r994 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r998.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r994.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r998.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r994.averageRating);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r998 == null ? null : product_r998.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "productSummary.id"), " ", product_r994 == null ? null : product_r994.code, " ");
 } }
 function ProductViewComponent_cx_icon_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 2);
 } if (rf & 2) {
-    const ctx_r1005 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1005.iconTypes.GRID);
+    const ctx_r1001 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1001.iconTypes.GRID);
 } }
 function ProductViewComponent_cx_icon_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-icon", 2);
 } if (rf & 2) {
-    const ctx_r1006 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("type", ctx_r1006.iconTypes.LIST);
+    const ctx_r1002 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("type", ctx_r1002.iconTypes.LIST);
 } }
 function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
@@ -6499,15 +6487,15 @@ function ProductListComponent_div_0_div_4_div_7_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1008 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1004 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1008.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1004.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_cx_product_grid_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 24);
 } if (rf & 2) {
-    const product_r1020 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1020);
+    const product_r1016 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1016);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6516,24 +6504,24 @@ function ProductListComponent_div_0_div_4_ng_container_11_ng_container_1_Templat
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1008 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1004 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1008 == null ? null : model_r1008.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1004 == null ? null : model_r1004.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 26);
 } if (rf & 2) {
-    const product_r1023 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1023);
+    const product_r1019 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1019);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_cx_product_list_item_1_Template, 1, 1, "cx-product-list-item", 25);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const model_r1008 = ɵngcc0.ɵɵnextContext(3).ngIf;
+    const model_r1004 = ɵngcc0.ɵɵnextContext(3).ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", model_r1008 == null ? null : model_r1008.products);
+    ɵngcc0.ɵɵproperty("ngForOf", model_r1004 == null ? null : model_r1004.products);
 } }
 function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6541,20 +6529,20 @@ function ProductListComponent_div_0_div_4_ng_container_11_Template(rf, ctx) { if
     ɵngcc0.ɵɵtemplate(2, ProductListComponent_div_0_div_4_ng_container_11_ng_container_2_Template, 2, 1, "ng-container", 22);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const viewMode_r1010 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1012 = ɵngcc0.ɵɵnextContext(2);
+    const viewMode_r1006 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1008 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1010 === ctx_r1012.ViewModes.Grid);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1006 === ctx_r1008.ViewModes.Grid);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1010 === ctx_r1012.ViewModes.List);
+    ɵngcc0.ɵɵproperty("ngIf", viewMode_r1006 === ctx_r1008.ViewModes.List);
 } }
 function ProductListComponent_div_0_div_4_ng_template_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-scroll", 27);
 } if (rf & 2) {
-    const viewMode_r1010 = ɵngcc0.ɵɵnextContext().ngIf;
-    const model_r1008 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1014 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1014.scrollConfig)("model", model_r1008)("inputViewMode", viewMode_r1010);
+    const viewMode_r1006 = ɵngcc0.ɵɵnextContext().ngIf;
+    const model_r1004 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1010 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("scrollConfig", ctx_r1010.scrollConfig)("model", model_r1004)("inputViewMode", viewMode_r1006);
 } }
 function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 28);
@@ -6563,19 +6551,19 @@ function ProductListComponent_div_0_div_4_div_20_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const model_r1008 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const model_r1004 = ɵngcc0.ɵɵnextContext(2).ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", model_r1008.pagination)("defaultPage", 0);
+    ɵngcc0.ɵɵproperty("pagination", model_r1004.pagination)("defaultPage", 0);
 } }
 function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1030 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1026 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 6);
     ɵngcc0.ɵɵelementStart(1, "div", 7);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "div", 8);
     ɵngcc0.ɵɵelementStart(4, "div", 9);
     ɵngcc0.ɵɵelementStart(5, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1030); const ctx_r1029 = ɵngcc0.ɵɵnextContext(2); return ctx_r1029.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1025 = ɵngcc0.ɵɵnextContext(2); return ctx_r1025.sortList($event); });
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6583,7 +6571,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(7, ProductListComponent_div_0_div_4_div_7_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementStart(8, "div", 12);
     ɵngcc0.ɵɵelementStart(9, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1030); const ctx_r1031 = ɵngcc0.ɵɵnextContext(2); return ctx_r1031.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_9_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1027 = ɵngcc0.ɵɵnextContext(2); return ctx_r1027.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6597,7 +6585,7 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(16, "div", 8);
     ɵngcc0.ɵɵelementStart(17, "div", 9);
     ɵngcc0.ɵɵelementStart(18, "cx-sorting", 10);
-    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1030); const ctx_r1032 = ɵngcc0.ɵɵnextContext(2); return ctx_r1032.sortList($event); });
+    ɵngcc0.ɵɵlistener("sortListEvent", function ProductListComponent_div_0_div_4_Template_cx_sorting_sortListEvent_18_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1028 = ɵngcc0.ɵɵnextContext(2); return ctx_r1028.sortList($event); });
     ɵngcc0.ɵɵpipe(19, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
@@ -6605,33 +6593,33 @@ function ProductListComponent_div_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(20, ProductListComponent_div_0_div_4_div_20_Template, 3, 2, "div", 18);
     ɵngcc0.ɵɵelementStart(21, "div", 12);
     ɵngcc0.ɵɵelementStart(22, "cx-product-view", 13);
-    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1030); const ctx_r1033 = ɵngcc0.ɵɵnextContext(2); return ctx_r1033.setViewMode($event); });
+    ɵngcc0.ɵɵlistener("modeChange", function ProductListComponent_div_0_div_4_Template_cx_product_view_modeChange_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1026); const ctx_r1029 = ɵngcc0.ɵɵnextContext(2); return ctx_r1029.setViewMode($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const viewMode_r1010 = ctx.ngIf;
-    const _r1013 = ɵngcc0.ɵɵreference(13);
-    const model_r1008 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1009 = ɵngcc0.ɵɵnextContext();
+    const viewMode_r1006 = ctx.ngIf;
+    const _r1009 = ɵngcc0.ɵɵreference(13);
+    const model_r1004 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1005 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 12, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1008.sorts)("selectedOption", model_r1008.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1004.sorts)("selectedOption", model_r1004.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1009.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1005.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1010);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1006);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1009.isInfiniteScroll)("ngIfElse", _r1013);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1005.isInfiniteScroll)("ngIfElse", _r1009);
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(19, 14, "productList.sortByRelevance"));
-    ɵngcc0.ɵɵproperty("sortOptions", model_r1008.sorts)("selectedOption", model_r1008.pagination.sort);
+    ɵngcc0.ɵɵproperty("sortOptions", model_r1004.sorts)("selectedOption", model_r1004.pagination.sort);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1009.isInfiniteScroll);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1005.isInfiniteScroll);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("mode", viewMode_r1010);
+    ɵngcc0.ɵɵproperty("mode", viewMode_r1006);
 } }
 function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
@@ -6645,20 +6633,20 @@ function ProductListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1007 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1003 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1007.viewMode$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(5, 1, ctx_r1003.viewMode$));
 } }
 function ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-grid-item", 8);
 } if (rf & 2) {
-    const product_r1041 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1041);
+    const product_r1037 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1037);
 } }
 function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1043 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1039 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1043); const ctx_r1042 = ɵngcc0.ɵɵnextContext(2); return ctx_r1042.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1039); const ctx_r1038 = ɵngcc0.ɵɵnextContext(2); return ctx_r1038.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6667,9 +6655,9 @@ function ProductScrollComponent_ng_container_0_div_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_0_div_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1045 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1041 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1045); const ctx_r1044 = ɵngcc0.ɵɵnextContext(2); return ctx_r1044.loadNextPage((ctx_r1044.model == null ? null : ctx_r1044.model.pagination == null ? null : ctx_r1044.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_0_div_6_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1041); const ctx_r1040 = ɵngcc0.ɵɵnextContext(2); return ctx_r1040.loadNextPage((ctx_r1040.model == null ? null : ctx_r1040.model.pagination == null ? null : ctx_r1040.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6683,10 +6671,10 @@ function ProductScrollComponent_ng_container_0_div_7_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1047 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1043 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1047); const ctx_r1046 = ɵngcc0.ɵɵnextContext(); return ctx_r1046.scrollPage((ctx_r1046.model == null ? null : ctx_r1046.model.pagination == null ? null : ctx_r1046.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_0_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1043); const ctx_r1042 = ɵngcc0.ɵɵnextContext(); return ctx_r1042.scrollPage((ctx_r1042.model == null ? null : ctx_r1042.model.pagination == null ? null : ctx_r1042.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵelementStart(2, "div", 2);
     ɵngcc0.ɵɵtemplate(3, ProductScrollComponent_ng_container_0_cx_product_grid_item_3_Template, 1, 1, "cx-product-grid-item", 3);
     ɵngcc0.ɵɵelementEnd();
@@ -6698,30 +6686,30 @@ function ProductScrollComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1035 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1031 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1035.isMaxProducts || ctx_r1035.isLastPage || ctx_r1035.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 5)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1031.isMaxProducts || ctx_r1031.isLastPage || ctx_r1031.isEmpty);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1035.model == null ? null : ctx_r1035.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1031.model == null ? null : ctx_r1031.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("className", !ctx_r1035.isLastPage && (ctx_r1035.model == null ? null : ctx_r1035.model.pagination == null ? null : ctx_r1035.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1031.isLastPage && (ctx_r1031.model == null ? null : ctx_r1031.model.pagination == null ? null : ctx_r1031.model.pagination.currentPage) > 0 ? "cx-double-btn-container grid-btn-padding" : "cx-single-btn-container grid-btn-padding");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1035.isMaxProducts || ctx_r1035.isLastPage) && (ctx_r1035.model == null ? null : ctx_r1035.model.pagination == null ? null : ctx_r1035.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1031.isMaxProducts || ctx_r1031.isLastPage) && (ctx_r1031.model == null ? null : ctx_r1031.model.pagination == null ? null : ctx_r1031.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1035.isMaxProducts && !ctx_r1035.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1031.isMaxProducts && !ctx_r1031.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1035.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1031.appendProducts);
 } }
 function ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-product-list-item", 13);
 } if (rf & 2) {
-    const product_r1052 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("product", product_r1052);
+    const product_r1048 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("product", product_r1048);
 } }
 function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1054 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1050 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1054); const ctx_r1053 = ɵngcc0.ɵɵnextContext(2); return ctx_r1053.scrollToTop(); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_4_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1050); const ctx_r1049 = ɵngcc0.ɵɵnextContext(2); return ctx_r1049.scrollToTop(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6730,9 +6718,9 @@ function ProductScrollComponent_ng_container_1_div_4_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.backToTopBtn"), " ");
 } }
 function ProductScrollComponent_ng_container_1_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1056 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1052 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 10);
-    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1056); const ctx_r1055 = ɵngcc0.ɵɵnextContext(2); return ctx_r1055.loadNextPage((ctx_r1055.model == null ? null : ctx_r1055.model.pagination == null ? null : ctx_r1055.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("click", function ProductScrollComponent_ng_container_1_div_5_Template_div_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1052); const ctx_r1051 = ɵngcc0.ɵɵnextContext(2); return ctx_r1051.loadNextPage((ctx_r1051.model == null ? null : ctx_r1051.model.pagination == null ? null : ctx_r1051.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6746,10 +6734,10 @@ function ProductScrollComponent_ng_container_1_div_6_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
 } }
 function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1058 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1054 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 1);
-    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1058); const ctx_r1057 = ɵngcc0.ɵɵnextContext(); return ctx_r1057.scrollPage((ctx_r1057.model == null ? null : ctx_r1057.model.pagination == null ? null : ctx_r1057.model.pagination.currentPage) + 1); });
+    ɵngcc0.ɵɵlistener("scrolled", function ProductScrollComponent_ng_container_1_Template_div_scrolled_1_listener() { ɵngcc0.ɵɵrestoreView(_r1054); const ctx_r1053 = ɵngcc0.ɵɵnextContext(); return ctx_r1053.scrollPage((ctx_r1053.model == null ? null : ctx_r1053.model.pagination == null ? null : ctx_r1053.model.pagination.currentPage) + 1); });
     ɵngcc0.ɵɵtemplate(2, ProductScrollComponent_ng_container_1_cx_product_list_item_2_Template, 1, 1, "cx-product-list-item", 12);
     ɵngcc0.ɵɵelementStart(3, "div", 4);
     ɵngcc0.ɵɵtemplate(4, ProductScrollComponent_ng_container_1_div_4_Template, 3, 3, "div", 5);
@@ -6759,19 +6747,19 @@ function ProductScrollComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1036 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1032 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1036.isMaxProducts || ctx_r1036.isLastPage || ctx_r1036.isEmpty);
+    ɵngcc0.ɵɵproperty("infiniteScrollDistance", 3)("infiniteScrollThrottle", 50)("infiniteScrollDisabled", ctx_r1032.isMaxProducts || ctx_r1032.isLastPage || ctx_r1032.isEmpty);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1036.model == null ? null : ctx_r1036.model.products);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1032.model == null ? null : ctx_r1032.model.products);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("className", !ctx_r1036.isLastPage && (ctx_r1036.model == null ? null : ctx_r1036.model.pagination == null ? null : ctx_r1036.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
+    ɵngcc0.ɵɵproperty("className", !ctx_r1032.isLastPage && (ctx_r1032.model == null ? null : ctx_r1032.model.pagination == null ? null : ctx_r1032.model.pagination.currentPage) > 0 ? "cx-double-btn-container" : "cx-single-btn-container");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1036.isMaxProducts || ctx_r1036.isLastPage) && (ctx_r1036.model == null ? null : ctx_r1036.model.pagination == null ? null : ctx_r1036.model.pagination.currentPage) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (ctx_r1032.isMaxProducts || ctx_r1032.isLastPage) && (ctx_r1032.model == null ? null : ctx_r1032.model.pagination == null ? null : ctx_r1032.model.pagination.currentPage) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1036.isMaxProducts && !ctx_r1036.isLastPage);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1032.isMaxProducts && !ctx_r1032.isLastPage);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1036.appendProducts);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1032.appendProducts);
 } }
 function ActiveFacetsComponent_ng_container_0_h4_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h4");
@@ -6790,14 +6778,14 @@ function ActiveFacetsComponent_ng_container_0_a_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelement(3, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const facet_r1063 = ctx.$implicit;
-    const facetList_r1060 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1062 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("queryParams", ctx_r1062.getLinkParams(facet_r1063))("cxFocus", ctx_r1062.getFocusKey(facetList_r1060, facet_r1063));
+    const facet_r1059 = ctx.$implicit;
+    const facetList_r1056 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1058 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1058.getLinkParams(facet_r1059))("cxFocus", ctx_r1058.getFocusKey(facetList_r1056, facet_r1059));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(facet_r1063.facetValueName);
+    ɵngcc0.ɵɵtextInterpolate(facet_r1059.facetValueName);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1062.closeIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r1058.closeIcon);
 } }
 function ActiveFacetsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -6805,56 +6793,56 @@ function ActiveFacetsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(2, ActiveFacetsComponent_ng_container_0_a_2_Template, 4, 4, "a", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const facetList_r1060 = ctx.ngIf;
+    const facetList_r1056 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (facetList_r1060 == null ? null : facetList_r1060.activeFacets == null ? null : facetList_r1060.activeFacets.length) > 0);
+    ɵngcc0.ɵɵproperty("ngIf", (facetList_r1056 == null ? null : facetList_r1056.activeFacets == null ? null : facetList_r1056.activeFacets.length) > 0);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", facetList_r1060 == null ? null : facetList_r1060.activeFacets);
+    ɵngcc0.ɵɵproperty("ngForOf", facetList_r1056 == null ? null : facetList_r1056.activeFacets);
 } }
 const _c45 = function () { return { lock: true, trap: true, autofocus: "a" }; };
 function FacetListComponent_div_0_cx_facet_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1071 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1067 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-facet", 5, 6);
-    ɵngcc0.ɵɵlistener("unlock", function FacetListComponent_div_0_cx_facet_6_Template_cx_facet_unlock_0_listener() { ɵngcc0.ɵɵrestoreView(_r1071); const facet_r1068 = ctx.$implicit; const _r1069 = ɵngcc0.ɵɵreference(1); const ctx_r1070 = ɵngcc0.ɵɵnextContext(2); return ctx_r1070.expandFacetGroup(facet_r1068, _r1069); });
+    ɵngcc0.ɵɵlistener("unlock", function FacetListComponent_div_0_cx_facet_6_Template_cx_facet_unlock_0_listener() { ɵngcc0.ɵɵrestoreView(_r1067); const facet_r1064 = ctx.$implicit; const _r1065 = ɵngcc0.ɵɵreference(1); const ctx_r1066 = ɵngcc0.ɵɵnextContext(2); return ctx_r1066.expandFacetGroup(facet_r1064, _r1065); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵpipe(3, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const facet_r1068 = ctx.$implicit;
-    const ctx_r1067 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("expanded", ɵngcc0.ɵɵpipeBind1(2, 6, ctx_r1067.isExpanded(facet_r1068)))("collapsed", ɵngcc0.ɵɵpipeBind1(3, 8, ctx_r1067.isCollapsed(facet_r1068)));
-    ɵngcc0.ɵɵproperty("facet", facet_r1068)("cxFocus", ɵngcc0.ɵɵpureFunction0(10, _c45));
+    const facet_r1064 = ctx.$implicit;
+    const ctx_r1063 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("expanded", ɵngcc0.ɵɵpipeBind1(2, 6, ctx_r1063.isExpanded(facet_r1064)))("collapsed", ɵngcc0.ɵɵpipeBind1(3, 8, ctx_r1063.isCollapsed(facet_r1064)));
+    ɵngcc0.ɵɵproperty("facet", facet_r1064)("cxFocus", ɵngcc0.ɵɵpureFunction0(10, _c45));
 } }
 function FacetListComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1073 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1069 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 1);
-    ɵngcc0.ɵɵlistener("esc", function FacetListComponent_div_0_Template_div_esc_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1073); const ctx_r1072 = ɵngcc0.ɵɵnextContext(); return ctx_r1072.close($event); })("click", function FacetListComponent_div_0_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1073); const ctx_r1074 = ɵngcc0.ɵɵnextContext(); return ctx_r1074.block($event); });
+    ɵngcc0.ɵɵlistener("esc", function FacetListComponent_div_0_Template_div_esc_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1069); const ctx_r1068 = ɵngcc0.ɵɵnextContext(); return ctx_r1068.close($event); })("click", function FacetListComponent_div_0_Template_div_click_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1069); const ctx_r1070 = ɵngcc0.ɵɵnextContext(); return ctx_r1070.block($event); });
     ɵngcc0.ɵɵelementStart(1, "h4");
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementStart(4, "button", 2);
-    ɵngcc0.ɵɵlistener("click", function FacetListComponent_div_0_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r1073); const ctx_r1075 = ɵngcc0.ɵɵnextContext(); return ctx_r1075.close(); });
+    ɵngcc0.ɵɵlistener("click", function FacetListComponent_div_0_Template_button_click_4_listener() { ɵngcc0.ɵɵrestoreView(_r1069); const ctx_r1071 = ɵngcc0.ɵɵnextContext(); return ctx_r1071.close(); });
     ɵngcc0.ɵɵelement(5, "cx-icon", 3);
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵtemplate(6, FacetListComponent_div_0_cx_facet_6_Template, 4, 11, "cx-facet", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const facets_r1066 = ctx.ngIf;
-    const ctx_r1065 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("cxFocus", ctx_r1065.isDialog ? ctx_r1065.dialogFocusConfig : ɵngcc0.ɵɵpureFunction0(6, _c28));
+    const facets_r1062 = ctx.ngIf;
+    const ctx_r1061 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("cxFocus", ctx_r1061.isDialog ? ctx_r1061.dialogFocusConfig : ɵngcc0.ɵɵpureFunction0(6, _c28));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productList.filterBy.label"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("type", ctx_r1065.iconTypes.CLOSE);
+    ɵngcc0.ɵɵproperty("type", ctx_r1061.iconTypes.CLOSE);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", facets_r1066);
+    ɵngcc0.ɵɵproperty("ngForOf", facets_r1062);
 } }
 const _c46 = ["facetValue"];
 function FacetComponent_ng_container_0_a_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1085 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1081 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
-    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_5_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1085); const ctx_r1084 = ɵngcc0.ɵɵnextContext(2); return ctx_r1084.openLink($event); });
+    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_5_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1081); const ctx_r1080 = ɵngcc0.ɵɵnextContext(2); return ctx_r1080.openLink($event); });
     ɵngcc0.ɵɵelementStart(2, "span");
     ɵngcc0.ɵɵelementStart(3, "span", 10);
     ɵngcc0.ɵɵtext(4);
@@ -6865,19 +6853,19 @@ function FacetComponent_ng_container_0_a_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1082 = ctx.$implicit;
-    const ctx_r1078 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("selected", value_r1082.selected);
-    ɵngcc0.ɵɵproperty("queryParams", ctx_r1078.getLinkParams(value_r1082))("cxFocus", value_r1082.name);
+    const value_r1078 = ctx.$implicit;
+    const ctx_r1074 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("selected", value_r1078.selected);
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1074.getLinkParams(value_r1078))("cxFocus", value_r1078.name);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate(value_r1082.name);
+    ɵngcc0.ɵɵtextInterpolate(value_r1078.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(value_r1082.count);
+    ɵngcc0.ɵɵtextInterpolate(value_r1078.count);
 } }
 function FacetComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
-    const _r1089 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1085 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "a", 8, 9);
-    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_8_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1089); const ctx_r1088 = ɵngcc0.ɵɵnextContext(2); return ctx_r1088.openLink($event); });
+    ɵngcc0.ɵɵlistener("keydown.space", function FacetComponent_ng_container_0_a_8_Template_a_keydown_space_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1085); const ctx_r1084 = ɵngcc0.ɵɵnextContext(2); return ctx_r1084.openLink($event); });
     ɵngcc0.ɵɵelementStart(2, "span");
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementStart(4, "span", 11);
@@ -6886,19 +6874,19 @@ function FacetComponent_ng_container_0_a_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const value_r1086 = ctx.$implicit;
-    const ctx_r1079 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵclassProp("selected", value_r1086.selected);
-    ɵngcc0.ɵɵproperty("queryParams", ctx_r1079.getLinkParams(value_r1086))("cxFocus", value_r1086.name);
+    const value_r1082 = ctx.$implicit;
+    const ctx_r1075 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵclassProp("selected", value_r1082.selected);
+    ɵngcc0.ɵɵproperty("queryParams", ctx_r1075.getLinkParams(value_r1082))("cxFocus", value_r1082.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(value_r1086.name);
+    ɵngcc0.ɵɵtextInterpolate(value_r1082.name);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(value_r1086.count);
+    ɵngcc0.ɵɵtextInterpolate(value_r1082.count);
 } }
 function FacetComponent_ng_container_0_button_10_Template(rf, ctx) { if (rf & 1) {
-    const _r1091 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1087 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 12);
-    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1091); const ctx_r1090 = ɵngcc0.ɵɵnextContext(2); return ctx_r1090.decreaseVisibleValues(); });
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_10_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1087); const ctx_r1086 = ɵngcc0.ɵɵnextContext(2); return ctx_r1086.decreaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6907,9 +6895,9 @@ function FacetComponent_ng_container_0_button_10_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showLess"), " ");
 } }
 function FacetComponent_ng_container_0_button_11_Template(rf, ctx) { if (rf & 1) {
-    const _r1093 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1089 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_11_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1093); const ctx_r1092 = ɵngcc0.ɵɵnextContext(2); return ctx_r1092.increaseVisibleValues(); });
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_button_11_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1089); const ctx_r1088 = ɵngcc0.ɵɵnextContext(2); return ctx_r1088.increaseVisibleValues(); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -6918,10 +6906,10 @@ function FacetComponent_ng_container_0_button_11_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productList.showMore"), " ");
 } }
 function FacetComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1095 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1091 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "button", 1);
-    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1095); const ctx_r1094 = ɵngcc0.ɵɵnextContext(); return ctx_r1094.toggleGroup($event); });
+    ɵngcc0.ɵɵlistener("click", function FacetComponent_ng_container_0_Template_button_click_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1091); const ctx_r1090 = ɵngcc0.ɵɵnextContext(); return ctx_r1090.toggleGroup($event); });
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵelement(3, "cx-icon", 2);
     ɵngcc0.ɵɵelement(4, "cx-icon", 3);
@@ -6936,40 +6924,40 @@ function FacetComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const state_r1077 = ctx.ngIf;
-    const ctx_r1076 = ɵngcc0.ɵɵnextContext();
+    const state_r1073 = ctx.ngIf;
+    const ctx_r1072 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1076.facet.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1072.facet.name, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1076.collapseIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r1072.collapseIcon);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1076.expandIcon);
+    ɵngcc0.ɵɵproperty("type", ctx_r1072.expandIcon);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(6, 7, ctx_r1076.facet.values, 0, state_r1077.topVisible));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(6, 7, ctx_r1072.facet.values, 0, state_r1073.topVisible));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(9, 11, ctx_r1076.facet.values, state_r1077.topVisible, state_r1077.maxVisible));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(9, 11, ctx_r1072.facet.values, state_r1073.topVisible, state_r1073.maxVisible));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", state_r1077.maxVisible > state_r1077.topVisible);
+    ɵngcc0.ɵɵproperty("ngIf", state_r1073.maxVisible > state_r1073.topVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", state_r1077.maxVisible > 0 && state_r1077.maxVisible < ctx_r1076.facet.values.length);
+    ɵngcc0.ɵɵproperty("ngIf", state_r1073.maxVisible > 0 && state_r1073.maxVisible < ctx_r1072.facet.values.length);
 } }
 const _c47 = ["trigger"];
 function ProductFacetNavigationComponent_cx_facet_list_6_Template(rf, ctx) { if (rf & 1) {
-    const _r1099 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1095 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "cx-facet-list", 4);
-    ɵngcc0.ɵɵlistener("closeList", function ProductFacetNavigationComponent_cx_facet_list_6_Template_cx_facet_list_closeList_0_listener() { ɵngcc0.ɵɵrestoreView(_r1099); const ctx_r1098 = ɵngcc0.ɵɵnextContext(); return ctx_r1098.close(); });
+    ɵngcc0.ɵɵlistener("closeList", function ProductFacetNavigationComponent_cx_facet_list_6_Template_cx_facet_list_closeList_0_listener() { ɵngcc0.ɵɵrestoreView(_r1095); const ctx_r1094 = ɵngcc0.ɵɵnextContext(); return ctx_r1094.close(); });
     ɵngcc0.ɵɵpipe(1, "async");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1097 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵclassProp("active", ɵngcc0.ɵɵpipeBind1(1, 5, ctx_r1097.isActive$))("dialog", ctx_r1097.hasTrigger);
-    ɵngcc0.ɵɵproperty("isDialog", ctx_r1097.hasTrigger);
+    const ctx_r1093 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("active", ɵngcc0.ɵɵpipeBind1(1, 5, ctx_r1093.isActive$))("dialog", ctx_r1093.hasTrigger);
+    ɵngcc0.ɵɵproperty("isDialog", ctx_r1093.hasTrigger);
 } }
 function ProductGridItemComponent_cx_star_rating_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 10);
 } if (rf & 2) {
-    const ctx_r1100 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1100.product == null ? null : ctx_r1100.product.averageRating)("disabled", true);
+    const ctx_r1096 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1096.product == null ? null : ctx_r1096.product.averageRating)("disabled", true);
 } }
 function ProductGridItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div");
@@ -6985,21 +6973,21 @@ function ProductGridItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(1, "cx-variant-style-icons", 12);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1102 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1098 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1102.product.variantOptions);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1098.product.variantOptions);
 } }
 function ProductGridItemComponent_cx_add_to_cart_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 13);
 } if (rf & 2) {
-    const ctx_r1103 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1103.product);
+    const ctx_r1099 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1099.product);
 } }
 function ProductListItemComponent_cx_star_rating_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 12);
 } if (rf & 2) {
-    const ctx_r1104 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("rating", ctx_r1104.product == null ? null : ctx_r1104.product.averageRating)("disabled", true);
+    const ctx_r1100 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("rating", ctx_r1100.product == null ? null : ctx_r1100.product.averageRating)("disabled", true);
 } }
 function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -7013,34 +7001,34 @@ function ProductListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
 function ProductListItemComponent_cx_variant_style_icons_12_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-icons", 14);
 } if (rf & 2) {
-    const ctx_r1106 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("variants", ctx_r1106.product.variantOptions);
+    const ctx_r1102 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("variants", ctx_r1102.product.variantOptions);
 } }
 function ProductListItemComponent_cx_add_to_cart_18_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 15);
 } if (rf & 2) {
-    const ctx_r1107 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1107.product);
+    const ctx_r1103 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1103.product);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_style_selector_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-style-selector", 5);
 } if (rf & 2) {
-    const ctx_r1111 = ɵngcc0.ɵɵnextContext(3);
-    ɵngcc0.ɵɵproperty("variants", ctx_r1111.variants[ctx_r1111.variantType.STYLE]);
+    const ctx_r1107 = ɵngcc0.ɵɵnextContext(3);
+    ɵngcc0.ɵɵproperty("variants", ctx_r1107.variants[ctx_r1107.variantType.STYLE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_size_selector_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-size-selector", 6);
 } if (rf & 2) {
-    const product_r1109 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1112 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1109)("variants", ctx_r1112.variants[ctx_r1112.variantType.SIZE]);
+    const product_r1105 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1108 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1105)("variants", ctx_r1108.variants[ctx_r1108.variantType.SIZE]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-variant-color-selector", 6);
 } if (rf & 2) {
-    const product_r1109 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    const ctx_r1113 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("product", product_r1109)("variants", ctx_r1113.variants[ctx_r1113.variantType.COLOR]);
+    const product_r1105 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    const ctx_r1109 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("product", product_r1105)("variants", ctx_r1109.variants[ctx_r1109.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
@@ -7049,22 +7037,22 @@ function ProductVariantsComponent_ng_container_0_div_1_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵtemplate(3, ProductVariantsComponent_ng_container_0_div_1_cx_variant_color_selector_3_Template, 1, 2, "cx-variant-color-selector", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1110 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1106 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1110.variants[ctx_r1110.variantType.STYLE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1106.variants[ctx_r1106.variantType.STYLE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1110.variants[ctx_r1110.variantType.SIZE]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1106.variants[ctx_r1106.variantType.SIZE]);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1110.variants[ctx_r1110.variantType.COLOR]);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1106.variants[ctx_r1106.variantType.COLOR]);
 } }
 function ProductVariantsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, ProductVariantsComponent_ng_container_0_div_1_Template, 4, 3, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1109 = ctx.ngIf;
+    const product_r1105 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1109.baseOptions == null ? null : product_r1109.baseOptions.length);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1105.baseOptions == null ? null : product_r1105.baseOptions.length);
 } }
 function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -7075,77 +7063,77 @@ function VariantStyleSelectorComponent_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1116 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1112 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "variant.style"), ": ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1116.getVariantOptionValue(ctx_r1116.variants == null ? null : ctx_r1116.variants.selected.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1112.getVariantOptionValue(ctx_r1112.variants == null ? null : ctx_r1112.variants.selected.variantOptionQualifiers));
 } }
 const _c48 = function (a0) { return { "selected-variant": a0 }; };
 function VariantStyleSelectorComponent_li_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1120 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1116 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 6);
     ɵngcc0.ɵɵelementStart(1, "img", 7);
-    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1120); const v_r1118 = ctx.$implicit; const ctx_r1119 = ɵngcc0.ɵɵnextContext(); return ctx_r1119.changeStyle(v_r1118.code); });
+    ɵngcc0.ɵɵlistener("click", function VariantStyleSelectorComponent_li_4_Template_img_click_1_listener() { ɵngcc0.ɵɵrestoreView(_r1116); const v_r1114 = ctx.$implicit; const ctx_r1115 = ɵngcc0.ɵɵnextContext(); return ctx_r1115.changeStyle(v_r1114.code); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1118 = ctx.$implicit;
-    const ctx_r1117 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c48, v_r1118.code === (ctx_r1117.variants == null ? null : ctx_r1117.variants.selected.code)));
+    const v_r1114 = ctx.$implicit;
+    const ctx_r1113 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(4, _c48, v_r1114.code === (ctx_r1113.variants == null ? null : ctx_r1113.variants.selected.code)));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1117.getVariantThumbnailUrl(v_r1118.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
-    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1117.getVariantOptionValue(v_r1118.variantOptionQualifiers));
-    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1117.getVariantOptionValue(v_r1118.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("src", ctx_r1113.getVariantThumbnailUrl(v_r1114.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵpropertyInterpolate("title", ctx_r1113.getVariantOptionValue(v_r1114.variantOptionQualifiers));
+    ɵngcc0.ɵɵpropertyInterpolate("alt", ctx_r1113.getVariantOptionValue(v_r1114.variantOptionQualifiers));
 } }
 function VariantSizeSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 5);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1122 = ctx.$implicit;
-    const ctx_r1121 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1122.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1122.code === (ctx_r1121.product == null ? null : ctx_r1121.product.code));
+    const v_r1118 = ctx.$implicit;
+    const ctx_r1117 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1118.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1118.code === (ctx_r1117.product == null ? null : ctx_r1117.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1121.getVariantOptionValue(v_r1122.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1117.getVariantOptionValue(v_r1118.variantOptionQualifiers));
 } }
 function VariantColorSelectorComponent_option_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "option", 4);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1124 = ctx.$implicit;
-    const ctx_r1123 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1124.code);
-    ɵngcc0.ɵɵproperty("selected", v_r1124.code === (ctx_r1123.product == null ? null : ctx_r1123.product.code));
+    const v_r1120 = ctx.$implicit;
+    const ctx_r1119 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵpropertyInterpolate("value", v_r1120.code);
+    ɵngcc0.ɵɵproperty("selected", v_r1120.code === (ctx_r1119.product == null ? null : ctx_r1119.product.code));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1123.getVariantOptionValue(v_r1124.variantOptionQualifiers));
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1119.getVariantOptionValue(v_r1120.variantOptionQualifiers));
 } }
 function VariantStyleIconsComponent_li_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵelement(1, "img");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const v_r1126 = ctx.$implicit;
-    const ctx_r1125 = ɵngcc0.ɵɵnextContext();
+    const v_r1122 = ctx.$implicit;
+    const ctx_r1121 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵattribute("src", ctx_r1125.getVariantThumbnailUrl(v_r1126.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1125.variantNames[v_r1126.code])("alt", ctx_r1125.variantNames[v_r1126.code]);
+    ɵngcc0.ɵɵattribute("src", ctx_r1121.getVariantThumbnailUrl(v_r1122.variantOptionQualifiers), ɵngcc0.ɵɵsanitizeUrl)("title", ctx_r1121.variantNames[v_r1122.code])("alt", ctx_r1121.variantNames[v_r1122.code]);
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1128 = ɵngcc0.ɵɵnextContext().ngIf;
+    const product_r1124 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1128 == null ? null : product_r1128.price == null ? null : product_r1128.price.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", product_r1124 == null ? null : product_r1124.price == null ? null : product_r1124.price.formattedValue, " ");
 } }
 function ProductSummaryComponent_ng_container_0_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "p", 3);
 } if (rf & 2) {
-    const product_r1128 = ɵngcc0.ɵɵnextContext().ngIf;
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1128 == null ? null : product_r1128.summary, ɵngcc0.ɵɵsanitizeHtml);
+    const product_r1124 = ɵngcc0.ɵɵnextContext().ngIf;
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1124 == null ? null : product_r1124.summary, ɵngcc0.ɵɵsanitizeHtml);
 } }
 const _c49 = function (a0) { return { product: a0 }; };
 function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
@@ -7154,21 +7142,21 @@ function ProductSummaryComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(2, ProductSummaryComponent_ng_container_0_ng_template_2_Template, 1, 1, "ng-template", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1128 = ctx.ngIf;
-    const ctx_r1127 = ɵngcc0.ɵɵnextContext();
+    const product_r1124 = ctx.ngIf;
+    const ctx_r1123 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1127.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c49, product_r1128));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1123.outlets.PRICE)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(4, _c49, product_r1124));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1127.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c49, product_r1128));
+    ɵngcc0.ɵɵproperty("cxOutlet", ctx_r1123.outlets.SUMMARY)("cxOutletContext", ɵngcc0.ɵɵpureFunction1(6, _c49, product_r1124));
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_li_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const featureValue_r1140 = ctx.$implicit;
+    const featureValue_r1136 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1140 == null ? null : featureValue_r1140.value, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", featureValue_r1136 == null ? null : featureValue_r1136.value, " ");
 } }
 function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "tr");
@@ -7182,11 +7170,11 @@ function ProductAttributesComponent_ng_container_0_table_5_tr_4_Template(rf, ctx
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1138 = ctx.$implicit;
+    const feature_r1134 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1138.name);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1134.name);
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", feature_r1138 == null ? null : feature_r1138.featureValues);
+    ɵngcc0.ɵɵproperty("ngForOf", feature_r1134 == null ? null : feature_r1134.featureValues);
 } }
 function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "table");
@@ -7198,11 +7186,11 @@ function ProductAttributesComponent_ng_container_0_table_5_Template(rf, ctx) { i
     ɵngcc0.ɵɵtemplate(4, ProductAttributesComponent_ng_container_0_table_5_tr_4_Template, 6, 2, "tr", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const class_r1136 = ctx.$implicit;
+    const class_r1132 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(class_r1136.name);
+    ɵngcc0.ɵɵtextInterpolate(class_r1132.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", class_r1136.features);
+    ɵngcc0.ɵɵproperty("ngForOf", class_r1132.features);
 } }
 function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7215,28 +7203,28 @@ function ProductAttributesComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1134 = ctx.ngIf;
+    const product_r1130 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "productDetails.specification"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", product_r1134 == null ? null : product_r1134.classifications);
+    ɵngcc0.ɵɵproperty("ngForOf", product_r1130 == null ? null : product_r1130.classifications);
 } }
 function ProductDetailsTabComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelement(1, "div", 1);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1142 = ctx.ngIf;
+    const product_r1138 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("innerHTML", product_r1142 == null ? null : product_r1142.description, ɵngcc0.ɵɵsanitizeHtml);
+    ɵngcc0.ɵɵproperty("innerHTML", product_r1138 == null ? null : product_r1138.description, ɵngcc0.ɵɵsanitizeHtml);
 } }
 const _c50 = ["titleInput"];
 const _c51 = ["writeReviewButton"];
 function ProductReviewsComponent_div_0_ng_container_4_cx_star_rating_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-star-rating", 9);
 } if (rf & 2) {
-    const product_r1144 = ɵngcc0.ɵɵnextContext(2).ngIf;
-    ɵngcc0.ɵɵproperty("rating", product_r1144.averageRating)("disabled", true);
+    const product_r1140 = ɵngcc0.ɵɵnextContext(2).ngIf;
+    ɵngcc0.ɵɵproperty("rating", product_r1140.averageRating)("disabled", true);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_div_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -7265,22 +7253,22 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const review_r1157 = ctx.$implicit;
+    const review_r1153 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(review_r1157.headline);
+    ɵngcc0.ɵɵtextInterpolate(review_r1153.headline);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("rating", review_r1157.rating)("disabled", true);
+    ɵngcc0.ɵɵproperty("rating", review_r1153.rating)("disabled", true);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1157.alias ? review_r1157.alias : review_r1157.principal == null ? null : review_r1157.principal.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", review_r1153.alias ? review_r1153.alias : review_r1153.principal == null ? null : review_r1153.principal.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1157.date));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(8, 6, review_r1153.date));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵtextInterpolate(review_r1157.comment);
+    ɵngcc0.ɵɵtextInterpolate(review_r1153.comment);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1161 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1157 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1161); const reviews_r1154 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1160 = ɵngcc0.ɵɵnextContext(4); return ctx_r1160.maxListItems = reviews_r1154.length; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_1_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1157); const reviews_r1150 = ɵngcc0.ɵɵnextContext(2).ngIf; const ctx_r1156 = ɵngcc0.ɵɵnextContext(4); return ctx_r1156.maxListItems = reviews_r1150.length; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7289,9 +7277,9 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "productReview.more"), " ");
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template(rf, ctx) { if (rf & 1) {
-    const _r1164 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1160 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1164); const ctx_r1163 = ɵngcc0.ɵɵnextContext(6); return ctx_r1163.maxListItems = ctx_r1163.initialMaxListItems; });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1160); const ctx_r1159 = ɵngcc0.ɵɵnextContext(6); return ctx_r1159.maxListItems = ctx_r1159.initialMaxListItems; });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7305,11 +7293,11 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(2, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_button_2_Template, 3, 3, "button", 19);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1156 = ɵngcc0.ɵɵnextContext(5);
+    const ctx_r1152 = ɵngcc0.ɵɵnextContext(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1156.maxListItems === ctx_r1156.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1152.maxListItems === ctx_r1152.initialMaxListItems);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1156.maxListItems !== ctx_r1156.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1152.maxListItems !== ctx_r1152.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7318,12 +7306,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_contain
     ɵngcc0.ɵɵtemplate(3, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_ng_container_1_div_3_Template, 3, 2, "div", 11);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const reviews_r1154 = ctx.ngIf;
-    const ctx_r1153 = ɵngcc0.ɵɵnextContext(4);
+    const reviews_r1150 = ctx.ngIf;
+    const ctx_r1149 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1154, 0, ctx_r1153.maxListItems));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 2, reviews_r1150, 0, ctx_r1149.maxListItems));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", reviews_r1154.length > ctx_r1153.initialMaxListItems);
+    ɵngcc0.ɵɵproperty("ngIf", reviews_r1150.length > ctx_r1149.initialMaxListItems);
 } }
 function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7331,12 +7319,12 @@ function ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template(r
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1151 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1147 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1151.reviews$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 1, ctx_r1147.reviews$));
 } }
 function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1166 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1162 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 4);
     ɵngcc0.ɵɵelementStart(2, "h3");
@@ -7344,7 +7332,7 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵpipe(4, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 5, 6);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1166); const ctx_r1165 = ɵngcc0.ɵɵnextContext(2); return ctx_r1165.initiateWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_container_4_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1162); const ctx_r1161 = ɵngcc0.ɵɵnextContext(2); return ctx_r1161.initiateWriteReview(); });
     ɵngcc0.ɵɵtext(7);
     ɵngcc0.ɵɵpipe(8, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7354,24 +7342,24 @@ function ProductReviewsComponent_div_0_ng_container_4_Template(rf, ctx) { if (rf
     ɵngcc0.ɵɵtemplate(11, ProductReviewsComponent_div_0_ng_container_4_ng_container_11_Template, 3, 3, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const product_r1144 = ɵngcc0.ɵɵnextContext().ngIf;
-    const _r1146 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1145 = ɵngcc0.ɵɵnextContext();
+    const product_r1140 = ɵngcc0.ɵɵnextContext().ngIf;
+    const _r1142 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1141 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 6, "productReview.overallRating"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(8, 8, "productReview.writeReview"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", product_r1144.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", product_r1140.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !product_r1144.averageRating);
+    ɵngcc0.ɵɵproperty("ngIf", !product_r1140.averageRating);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1145.isWritingReview)("ngIfElse", _r1146);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1141.isWritingReview)("ngIfElse", _r1142);
 } }
 function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1171 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1167 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "form", 20);
-    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1171); const product_r1144 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1169 = ɵngcc0.ɵɵnextContext(); return ctx_r1169.submitReview(product_r1144); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function ProductReviewsComponent_div_0_ng_template_5_Template_form_ngSubmit_0_listener() { ɵngcc0.ɵɵrestoreView(_r1167); const product_r1140 = ɵngcc0.ɵɵnextContext().ngIf; const ctx_r1165 = ɵngcc0.ɵɵnextContext(); return ctx_r1165.submitReview(product_r1140); });
     ɵngcc0.ɵɵelementStart(1, "div", 21);
     ɵngcc0.ɵɵelementStart(2, "label");
     ɵngcc0.ɵɵelementStart(3, "span", 22);
@@ -7400,7 +7388,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(21, "input", 27);
     ɵngcc0.ɵɵelementStart(22, "cx-star-rating", 28);
-    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1171); const ctx_r1172 = ɵngcc0.ɵɵnextContext(2); return ctx_r1172.setRating($event); });
+    ɵngcc0.ɵɵlistener("change", function ProductReviewsComponent_div_0_ng_template_5_Template_cx_star_rating_change_22_listener($event) { ɵngcc0.ɵɵrestoreView(_r1167); const ctx_r1168 = ɵngcc0.ɵɵnextContext(2); return ctx_r1168.setRating($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelement(23, "cx-form-errors", 25);
     ɵngcc0.ɵɵelementEnd();
@@ -7417,7 +7405,7 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementStart(30, "div", 30);
     ɵngcc0.ɵɵelementStart(31, "div", 31);
     ɵngcc0.ɵɵelementStart(32, "button", 32);
-    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_32_listener() { ɵngcc0.ɵɵrestoreView(_r1171); const ctx_r1173 = ɵngcc0.ɵɵnextContext(2); return ctx_r1173.cancelWriteReview(); });
+    ɵngcc0.ɵɵlistener("click", function ProductReviewsComponent_div_0_ng_template_5_Template_button_click_32_listener() { ɵngcc0.ɵɵrestoreView(_r1167); const ctx_r1169 = ɵngcc0.ɵɵnextContext(2); return ctx_r1169.cancelWriteReview(); });
     ɵngcc0.ɵɵtext(33);
     ɵngcc0.ɵɵpipe(34, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7431,20 +7419,20 @@ function ProductReviewsComponent_div_0_ng_template_5_Template(rf, ctx) { if (rf 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1147 = ɵngcc0.ɵɵnextContext(2);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1147.reviewForm);
+    const ctx_r1143 = ɵngcc0.ɵɵnextContext(2);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1143.reviewForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(5, 10, "productReview.reviewTitle"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("control", ctx_r1147.reviewForm.get("title"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1143.reviewForm.get("title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 12, "productReview.writeYourComments"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("control", ctx_r1147.reviewForm.get("comment"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1143.reviewForm.get("comment"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 14, "productReview.rating"));
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("control", ctx_r1147.reviewForm.get("rating"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1143.reviewForm.get("rating"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(28, 16, "productReview.reviewerName"));
     ɵngcc0.ɵɵadvance(6);
@@ -7462,22 +7450,22 @@ function ProductReviewsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ProductReviewsComponent_div_0_ng_template_5_Template, 39, 22, "ng-template", null, 3, ɵngcc0.ɵɵtemplateRefExtractor);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const product_r1144 = ctx.ngIf;
-    const _r1146 = ɵngcc0.ɵɵreference(6);
-    const ctx_r1143 = ɵngcc0.ɵɵnextContext();
+    const product_r1140 = ctx.ngIf;
+    const _r1142 = ɵngcc0.ɵɵreference(6);
+    const ctx_r1139 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1144.numberOfReviews, ") ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(3, 4, "productDetails.reviews"), " (", product_r1140.numberOfReviews, ") ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1143.isWritingReview)("ngIfElse", _r1146);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1139.isWritingReview)("ngIfElse", _r1142);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span");
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1178 = ɵngcc0.ɵɵnextContext().$implicit;
+    const preference_r1174 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1178.value);
+    ɵngcc0.ɵɵtextInterpolate(": " + preference_r1174.value);
 } }
 function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "p", 14);
@@ -7487,15 +7475,15 @@ function StockNotificationDialogComponent_ng_container_7_p_6_Template(rf, ctx) {
     ɵngcc0.ɵɵtemplate(3, StockNotificationDialogComponent_ng_container_7_p_6_span_3_Template, 2, 1, "span", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const preference_r1178 = ctx.$implicit;
+    const preference_r1174 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(preference_r1178.channel);
+    ɵngcc0.ɵɵtextInterpolate(preference_r1174.channel);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", preference_r1178.value);
+    ɵngcc0.ɵɵproperty("ngIf", preference_r1174.value);
 } }
 const _c52 = function () { return ["/my-account/my-interests"]; };
 function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1182 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1178 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 6);
     ɵngcc0.ɵɵelementStart(2, "div", 7);
@@ -7512,7 +7500,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(11);
     ɵngcc0.ɵɵpipe(12, "cxTranslate");
     ɵngcc0.ɵɵelementStart(13, "a", 9);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1182); const ctx_r1181 = ɵngcc0.ɵɵnextContext(); return ctx_r1181.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_13_listener() { ɵngcc0.ɵɵrestoreView(_r1178); const ctx_r1177 = ɵngcc0.ɵɵnextContext(); return ctx_r1177.close(); });
     ɵngcc0.ɵɵtext(14);
     ɵngcc0.ɵɵpipe(15, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7523,7 +7511,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtext(19);
     ɵngcc0.ɵɵpipe(20, "cxTranslate");
     ɵngcc0.ɵɵelementStart(21, "a", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1182); const ctx_r1183 = ɵngcc0.ɵɵnextContext(); return ctx_r1183.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_a_click_21_listener() { ɵngcc0.ɵɵrestoreView(_r1178); const ctx_r1179 = ɵngcc0.ɵɵnextContext(); return ctx_r1179.close(); });
     ɵngcc0.ɵɵtext(22);
     ɵngcc0.ɵɵpipe(23, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7533,7 +7521,7 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementStart(26, "div", 11);
     ɵngcc0.ɵɵelementStart(27, "div", 12);
     ɵngcc0.ɵɵelementStart(28, "button", 13);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1182); const ctx_r1184 = ɵngcc0.ɵɵnextContext(); return ctx_r1184.close(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationDialogComponent_ng_container_7_Template_button_click_28_listener() { ɵngcc0.ɵɵrestoreView(_r1178); const ctx_r1180 = ɵngcc0.ɵɵnextContext(); return ctx_r1180.close(); });
     ɵngcc0.ɵɵtext(29);
     ɵngcc0.ɵɵpipe(30, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7543,11 +7531,11 @@ function StockNotificationDialogComponent_ng_container_7_Template(rf, ctx) { if 
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1174 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1170 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 12, "stockNotification.subscriptionDialog.notifiedPrefix"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1174.enabledPrefs);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1170.enabledPrefs);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(9, 14, "stockNotification.subscriptionDialog.notifiedSuffix"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -7586,7 +7574,7 @@ function StockNotificationDialogComponent_ng_template_9_Template(rf, ctx) { if (
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 1, "stockNotification.subscriptionDialog.subscribing"), " ");
 } }
 function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1195 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1191 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "p");
@@ -7595,7 +7583,7 @@ function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1195); const ctx_r1194 = ɵngcc0.ɵɵnextContext(3); return ctx_r1194.subscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_container_0_ng_container_1_ng_container_1_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1191); const ctx_r1190 = ɵngcc0.ɵɵnextContext(3); return ctx_r1190.subscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7612,10 +7600,10 @@ function StockNotificationComponent_ng_container_0_ng_container_1_Template(rf, c
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1192 = ɵngcc0.ɵɵnextContext(2);
-    const _r1186 = ɵngcc0.ɵɵreference(3);
+    const ctx_r1188 = ɵngcc0.ɵɵnextContext(2);
+    const _r1182 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1192.prefsEnabled$))("ngIfElse", _r1186);
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1188.prefsEnabled$))("ngIfElse", _r1182);
 } }
 function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7623,10 +7611,10 @@ function StockNotificationComponent_ng_container_0_Template(rf, ctx) { if (rf & 
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1185 = ɵngcc0.ɵɵnextContext();
-    const _r1188 = ɵngcc0.ɵɵreference(5);
+    const ctx_r1181 = ɵngcc0.ɵɵnextContext();
+    const _r1184 = ɵngcc0.ɵɵreference(5);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1185.hasProductInterests$))("ngIfElse", _r1188);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1181.hasProductInterests$))("ngIfElse", _r1184);
 } }
 function StockNotificationComponent_ng_template_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7682,15 +7670,15 @@ function StockNotificationComponent_ng_template_2_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const _r1197 = ɵngcc0.ɵɵreference(4);
-    const ctx_r1187 = ɵngcc0.ɵɵnextContext();
+    const _r1193 = ɵngcc0.ɵɵreference(4);
+    const ctx_r1183 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1187.anonymous)("ngIfElse", _r1197);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1183.anonymous)("ngIfElse", _r1193);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(7, 3, "stockNotification.notifyMe"), " ");
 } }
 function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1201 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1197 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "p");
@@ -7699,7 +7687,7 @@ function StockNotificationComponent_ng_template_4_ng_container_0_Template(rf, ct
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(5, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1201); const ctx_r1200 = ɵngcc0.ɵɵnextContext(2); return ctx_r1200.unsubscribe(); });
+    ɵngcc0.ɵɵlistener("click", function StockNotificationComponent_ng_template_4_ng_container_0_Template_button_click_5_listener() { ɵngcc0.ɵɵrestoreView(_r1197); const ctx_r1196 = ɵngcc0.ɵɵnextContext(2); return ctx_r1196.unsubscribe(); });
     ɵngcc0.ɵɵtext(6);
     ɵngcc0.ɵɵpipe(7, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
@@ -7714,9 +7702,9 @@ function StockNotificationComponent_ng_template_4_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵtemplate(0, StockNotificationComponent_ng_template_4_ng_container_0_Template, 8, 6, "ng-container", 4);
     ɵngcc0.ɵɵpipe(1, "async");
 } if (rf & 2) {
-    const ctx_r1189 = ɵngcc0.ɵɵnextContext();
-    const _r1190 = ɵngcc0.ɵɵreference(7);
-    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1189.isRemoveInterestLoading$))("ngIfElse", _r1190);
+    const ctx_r1185 = ɵngcc0.ɵɵnextContext();
+    const _r1186 = ɵngcc0.ɵɵreference(7);
+    ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx_r1185.isRemoveInterestLoading$))("ngIfElse", _r1186);
 } }
 function StockNotificationComponent_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -7732,10 +7720,10 @@ function ScheduleComponent_div_1_div_1_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1204 = ɵngcc0.ɵɵnextContext().$implicit;
-    const ctx_r1205 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1200 = ɵngcc0.ɵɵnextContext().$implicit;
+    const ctx_r1201 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1205.getStoreOpeningTime(day_r1204), " - ", ctx_r1205.getStoreClosingTime(day_r1204), " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1201.getStoreOpeningTime(day_r1200), " - ", ctx_r1201.getStoreClosingTime(day_r1200), " ");
 } }
 function ScheduleComponent_div_1_div_1_div_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -7756,32 +7744,32 @@ function ScheduleComponent_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(5, ScheduleComponent_div_1_div_1_div_5_Template, 3, 3, "div", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const day_r1204 = ctx.$implicit;
-    const ctx_r1203 = ɵngcc0.ɵɵnextContext(2);
+    const day_r1200 = ctx.$implicit;
+    const ctx_r1199 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1204, "EEE"));
+    ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind2(3, 3, day_r1200, "EEE"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1203.getStoreOpeningTime(day_r1204) !== "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1199.getStoreOpeningTime(day_r1200) !== "closed");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1203.getStoreOpeningTime(day_r1204) === "closed");
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1199.getStoreOpeningTime(day_r1200) === "closed");
 } }
 function ScheduleComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 1);
     ɵngcc0.ɵɵtemplate(1, ScheduleComponent_div_1_div_1_Template, 6, 6, "div", 2);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1202 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1198 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1202.displayDays);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1198.displayDays);
 } }
 function StoreFinderGridComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 5);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-list-item", 6);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1213 = ctx.$implicit;
+    const location_r1209 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1213);
+    ɵngcc0.ɵɵproperty("location", location_r1209);
 } }
 function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -7792,9 +7780,9 @@ function StoreFinderGridComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1211 = ctx.ngIf;
+    const locations_r1207 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1211 == null ? null : locations_r1211.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1207 == null ? null : locations_r1207.stores);
 } }
 function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 7);
@@ -7802,15 +7790,15 @@ function StoreFinderGridComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderListItemComponent_button_5_Template(rf, ctx) { if (rf & 1) {
-    const _r1218 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1214 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 6);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1218); const ctx_r1217 = ɵngcc0.ɵɵnextContext(); return ctx_r1217.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1218); const ctx_r1219 = ɵngcc0.ɵɵnextContext(); return ctx_r1219.onKey($event); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListItemComponent_button_5_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1214); const ctx_r1213 = ɵngcc0.ɵɵnextContext(); return ctx_r1213.handleStoreItemClick(); })("keyup", function StoreFinderListItemComponent_button_5_Template_button_keyup_0_listener($event) { ɵngcc0.ɵɵrestoreView(_r1214); const ctx_r1215 = ɵngcc0.ɵɵnextContext(); return ctx_r1215.onKey($event); });
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1214 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1210 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1214.location.displayName || ctx_r1214.location.name, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1210.location.displayName || ctx_r1210.location.name, " ");
 } }
 const _c53 = function (a0) { return [a0]; };
 function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
@@ -7818,19 +7806,19 @@ function StoreFinderListItemComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1215 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(2, _c53, ctx_r1215.location.name));
+    const ctx_r1211 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(2, _c53, ctx_r1211.location.name));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1215.location.displayName || ctx_r1215.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1211.location.displayName || ctx_r1211.location.name);
 } }
 function StoreFinderListItemComponent_div_7_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1220 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1216 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1220.location.formattedDistance, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1216.location.formattedDistance, " ");
 } }
 const _c54 = function (a0, a1, a2) { return [a0, a1, a2]; };
 function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
@@ -7842,28 +7830,28 @@ function StoreFinderListItemComponent_div_7_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, StoreFinderListItemComponent_div_7_div_4_Template, 2, 1, "div", 10);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1216 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1212 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1216.location.address.line1, " ", ctx_r1216.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1212.location.address.line1, " ", ctx_r1212.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1216.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c54, ctx_r1216.location.address.town, ctx_r1216.location.address.postalCode, ctx_r1216.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1212.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(4, _c54, ctx_r1212.location.address.town, ctx_r1212.location.address.postalCode, ctx_r1212.location.address.country.isocode)), " ");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1216.location.formattedDistance && ctx_r1216.displayDistance);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1212.location.formattedDistance && ctx_r1212.displayDistance);
 } }
 const _c55 = ["mapElement"];
 const _c56 = ["storeMap"];
 function StoreFinderListComponent_ng_container_0_div_2_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r1229 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1225 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "button", 10);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1229); const ctx_r1228 = ɵngcc0.ɵɵnextContext(3); return ctx_r1228.hideStoreDetails(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderListComponent_ng_container_0_div_2_button_4_Template_button_click_0_listener() { ɵngcc0.ɵɵrestoreView(_r1225); const ctx_r1224 = ɵngcc0.ɵɵnextContext(3); return ctx_r1224.hideStoreDetails(); });
     ɵngcc0.ɵɵelement(1, "cx-icon", 11);
     ɵngcc0.ɵɵtext(2);
     ɵngcc0.ɵɵpipe(3, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1227 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1223 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("type", ctx_r1227.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1223.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "storeFinder.backToList"), " ");
 } }
@@ -7877,49 +7865,49 @@ function StoreFinderListComponent_ng_container_0_div_2_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1223 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1219 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", ctx_r1223.locations.pagination);
+    ɵngcc0.ɵɵproperty("pagination", ctx_r1219.locations.pagination);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1223.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1219.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 19);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1230 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1226 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1230.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1226.storeDetails)("disableMap", true);
 } }
 const _c57 = function (a0) { return { "cx-selected-item": a0 }; };
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1237 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1233 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1237); const location_r1234 = ctx.$implicit; const ctx_r1236 = ɵngcc0.ɵɵnextContext(4); return ctx_r1236.centerStoreOnMapByIndex($event, location_r1234); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1233); const location_r1230 = ctx.$implicit; const ctx_r1232 = ɵngcc0.ɵɵnextContext(4); return ctx_r1232.centerStoreOnMapByIndex($event, location_r1230); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1234 = ctx.$implicit;
-    const i_r1235 = ctx.index;
-    const ctx_r1233 = ɵngcc0.ɵɵnextContext(4);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1235);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1233.selectedStoreIndex === i_r1235));
+    const location_r1230 = ctx.$implicit;
+    const i_r1231 = ctx.index;
+    const ctx_r1229 = ɵngcc0.ɵɵnextContext(4);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1231);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1229.selectedStoreIndex === i_r1231));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1234)("locationIndex", i_r1235)("displayDistance", ctx_r1233.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1235 + ctx_r1233.locations.pagination.currentPage * ctx_r1233.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1230)("locationIndex", i_r1231)("displayDistance", ctx_r1229.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1231 + ctx_r1229.locations.pagination.currentPage * ctx_r1229.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_ol_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_3_ol_3_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1231 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1227 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1231.locations == null ? null : ctx_r1231.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1227.locations == null ? null : ctx_r1227.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
-    const _r1239 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1235 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 12);
     ɵngcc0.ɵɵelementStart(1, "div", 13);
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_3_div_2_Template, 2, 2, "div", 14);
@@ -7927,18 +7915,18 @@ function StoreFinderListComponent_ng_container_0_div_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementStart(4, "div", 16);
     ɵngcc0.ɵɵelementStart(5, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1239); const ctx_r1238 = ɵngcc0.ɵɵnextContext(2); return ctx_r1238.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_3_Template_cx_store_finder_map_selectedStoreItem_5_listener($event) { ɵngcc0.ɵɵrestoreView(_r1235); const ctx_r1234 = ɵngcc0.ɵɵnextContext(2); return ctx_r1234.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1224 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1220 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1224.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1220.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1224.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1220.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1224.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1220.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -7951,34 +7939,34 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_div_1_Templ
     ɵngcc0.ɵɵelement(1, "cx-store-finder-store-description", 20);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1244 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1240 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1244.storeDetails)("disableMap", true);
+    ɵngcc0.ɵɵproperty("location", ctx_r1240.storeDetails)("disableMap", true);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1250 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1246 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "li", 23);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-list-item", 24);
-    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1250); const location_r1247 = ctx.$implicit; const ctx_r1249 = ɵngcc0.ɵɵnextContext(5); return ctx_r1249.centerStoreOnMapByIndex($event, location_r1247); });
+    ɵngcc0.ɵɵlistener("storeItemClick", function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template_cx_store_finder_list_item_storeItemClick_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1246); const location_r1243 = ctx.$implicit; const ctx_r1245 = ɵngcc0.ɵɵnextContext(5); return ctx_r1245.centerStoreOnMapByIndex($event, location_r1243); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1247 = ctx.$implicit;
-    const i_r1248 = ctx.index;
-    const ctx_r1246 = ɵngcc0.ɵɵnextContext(5);
-    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1248);
-    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1246.selectedStoreIndex === i_r1248));
+    const location_r1243 = ctx.$implicit;
+    const i_r1244 = ctx.index;
+    const ctx_r1242 = ɵngcc0.ɵɵnextContext(5);
+    ɵngcc0.ɵɵpropertyInterpolate("id", "item-" + i_r1244);
+    ɵngcc0.ɵɵproperty("ngClass", ɵngcc0.ɵɵpureFunction1(7, _c57, ctx_r1242.selectedStoreIndex === i_r1244));
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", location_r1247)("locationIndex", i_r1248)("displayDistance", ctx_r1246.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1248 + ctx_r1246.locations.pagination.currentPage * ctx_r1246.locations.pagination.pageSize + 1);
+    ɵngcc0.ɵɵproperty("location", location_r1243)("locationIndex", i_r1244)("displayDistance", ctx_r1242.useMylocation)("useClickEvent", true)("listOrderLabel", i_r1244 + ctx_r1242.locations.pagination.currentPage * ctx_r1242.locations.pagination.pageSize + 1);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "ol", 21);
     ɵngcc0.ɵɵtemplate(1, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_li_1_Template, 2, 9, "li", 22);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1245 = ɵngcc0.ɵɵnextContext(4);
+    const ctx_r1241 = ɵngcc0.ɵɵnextContext(4);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1245.locations == null ? null : ctx_r1245.locations.stores);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1241.locations == null ? null : ctx_r1241.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 29);
@@ -7986,11 +7974,11 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_4_Template(rf
     ɵngcc0.ɵɵtemplate(2, StoreFinderListComponent_ng_container_0_div_4_ng_template_4_ol_2_Template, 2, 1, "ol", 15);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1241 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1237 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1241.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1237.isDetailsModeVisible);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1241.isDetailsModeVisible);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1237.isDetailsModeVisible);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(0);
@@ -7999,16 +7987,16 @@ function StoreFinderListComponent_ng_container_0_div_4_ng_template_6_Template(rf
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(1, 1, "storeFinder.mapView"), " ");
 } }
 function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template(rf, ctx) { if (rf & 1) {
-    const _r1253 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1249 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 30);
     ɵngcc0.ɵɵelementStart(1, "cx-store-finder-map", 17, 18);
-    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1253); const ctx_r1252 = ɵngcc0.ɵɵnextContext(3); return ctx_r1252.selectStoreItemList($event); });
+    ɵngcc0.ɵɵlistener("selectedStoreItem", function StoreFinderListComponent_ng_container_0_div_4_ng_template_7_Template_cx_store_finder_map_selectedStoreItem_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1249); const ctx_r1248 = ɵngcc0.ɵɵnextContext(3); return ctx_r1248.selectStoreItemList($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1243 = ɵngcc0.ɵɵnextContext(3);
+    const ctx_r1239 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ctx_r1243.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1243.selectedStore) : ctx_r1243.locations.stores);
+    ɵngcc0.ɵɵproperty("locations", ctx_r1239.selectedStore ? ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1239.selectedStore) : ctx_r1239.locations.stores);
 } }
 function StoreFinderListComponent_ng_container_0_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 25);
@@ -8045,36 +8033,36 @@ function StoreFinderListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1)
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1222 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1218 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1222.locations == null ? null : ctx_r1222.locations.pagination);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1218.locations == null ? null : ctx_r1218.locations.pagination);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1222.locations == null ? null : ctx_r1222.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1218.locations == null ? null : ctx_r1218.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1222.locations == null ? null : ctx_r1222.locations.stores);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1218.locations == null ? null : ctx_r1218.locations.stores);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1222.locations == null ? null : ctx_r1222.locations.stores));
+    ɵngcc0.ɵɵproperty("ngIf", !(ctx_r1218.locations == null ? null : ctx_r1218.locations.stores));
 } }
 function StoreFinderSearchResultComponent_div_0_div_1_Template(rf, ctx) { if (rf & 1) {
-    const _r1262 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1258 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div");
     ɵngcc0.ɵɵelementStart(1, "div", 5);
     ɵngcc0.ɵɵelementStart(2, "cx-pagination", 6);
-    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1262); const ctx_r1261 = ɵngcc0.ɵɵnextContext(2); return ctx_r1261.viewPage($event); });
+    ɵngcc0.ɵɵlistener("viewPageEvent", function StoreFinderSearchResultComponent_div_0_div_1_Template_cx_pagination_viewPageEvent_2_listener($event) { ɵngcc0.ɵɵrestoreView(_r1258); const ctx_r1257 = ɵngcc0.ɵɵnextContext(2); return ctx_r1257.viewPage($event); });
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1257 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1253 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("pagination", locations_r1257.pagination);
+    ɵngcc0.ɵɵproperty("pagination", locations_r1253.pagination);
 } }
 function StoreFinderSearchResultComponent_div_0_cx_store_finder_list_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-store-finder-list", 7);
 } if (rf & 2) {
-    const locations_r1257 = ɵngcc0.ɵɵnextContext().ngIf;
-    const ctx_r1259 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("locations", locations_r1257)("useMylocation", ctx_r1259.useMyLocation);
+    const locations_r1253 = ɵngcc0.ɵɵnextContext().ngIf;
+    const ctx_r1255 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("locations", locations_r1253)("useMylocation", ctx_r1255.useMyLocation);
 } }
 function StoreFinderSearchResultComponent_div_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 8);
@@ -8096,13 +8084,13 @@ function StoreFinderSearchResultComponent_div_0_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_div_0_div_3_Template, 5, 3, "div", 4);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1257 = ctx.ngIf;
+    const locations_r1253 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1257 == null ? null : locations_r1257.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1253 == null ? null : locations_r1253.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1257 == null ? null : locations_r1257.stores.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1253 == null ? null : locations_r1253.stores.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1257 == null ? null : locations_r1257.stores.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1253 == null ? null : locations_r1253.stores.length));
 } }
 function StoreFinderSearchResultComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 11);
@@ -8119,11 +8107,11 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_p_6_Template(rf, ct
     ɵngcc0.ɵɵtext(3);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1267 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1263 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1267.location.address.line1, " ", ctx_r1267.location.address.line2, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ctx_r1263.location.address.line1, " ", ctx_r1263.location.address.line2, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1267.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c54, ctx_r1267.location.address.town, ctx_r1267.location.address.postalCode, ctx_r1267.location.address.country.isocode)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1263.getFormattedStoreAddress(ɵngcc0.ɵɵpureFunction3(3, _c54, ctx_r1263.location.address.town, ctx_r1263.location.address.postalCode, ctx_r1263.location.address.country.isocode)), " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "li", 7);
@@ -8131,9 +8119,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_li_13_Template(rf, 
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1268 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1264 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1268.location.address == null ? null : ctx_r1268.location.address.phone, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "storeFinder.call"), " ", ctx_r1264.location.address == null ? null : ctx_r1264.location.address.phone, " ");
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 14);
@@ -8145,9 +8133,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_14_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1269 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1265 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("location", ctx_r1269.location);
+    ɵngcc0.ɵɵproperty("location", ctx_r1265.location);
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(4, 2, "storeFinder.storeHours"));
 } }
@@ -8158,9 +8146,9 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_div_7_Templa
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const feature_r1273 = ctx.$implicit;
+    const feature_r1269 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(feature_r1273.value);
+    ɵngcc0.ɵɵtextInterpolate(feature_r1269.value);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 16);
@@ -8177,20 +8165,20 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_div_15_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1270 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1266 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 2, "storeFinder.storeFeatures"), " ");
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1270.location.features == null ? null : ctx_r1270.location.features.entry);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1266.location.features == null ? null : ctx_r1266.location.features.entry);
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_article_17_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "article", 22);
     ɵngcc0.ɵɵelement(1, "cx-store-finder-map", 23);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1271 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1267 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1271.location));
+    ɵngcc0.ɵɵproperty("locations", ɵngcc0.ɵɵpureFunction1(1, _c53, ctx_r1267.location));
 } }
 function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8221,33 +8209,33 @@ function StoreFinderStoreDescriptionComponent_ng_container_0_Template(rf, ctx) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1266 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1262 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(5);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1266.location.displayName || ctx_r1266.location.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1262.location.displayName || ctx_r1262.location.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1266.location.address);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1262.location.address);
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("href", ctx_r1266.getDirections(ctx_r1266.location), ɵngcc0.ɵɵsanitizeUrl);
+    ɵngcc0.ɵɵproperty("href", ctx_r1262.getDirections(ctx_r1262.location), ɵngcc0.ɵɵsanitizeUrl);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(12, 8, "storeFinder.getDirections"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1266.location.address == null ? null : ctx_r1266.location.address.phone);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1262.location.address == null ? null : ctx_r1262.location.address.phone);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1266.location.openingHours);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1262.location.openingHours);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1266.location.features) != "{}");
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(16, 10, ctx_r1262.location.features) != "{}");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1266.disableMap);
+    ɵngcc0.ɵɵproperty("ngIf", !ctx_r1262.disableMap);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_span_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 11);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1281 = ɵngcc0.ɵɵnextContext().$implicit;
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1281 == null ? null : country_r1281.storeCountDataList) ? "country-header" : "country-header-link");
+    const country_r1277 = ɵngcc0.ɵɵnextContext().$implicit;
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1277 == null ? null : country_r1277.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1("(", country_r1281.count, ")");
+    ɵngcc0.ɵɵtextInterpolate1("(", country_r1277.count, ")");
 } }
 const _c61 = function (a1) { return ["../country", a1]; };
 function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf, ctx) { if (rf & 1) {
@@ -8262,24 +8250,24 @@ function StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template(rf,
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const country_r1281 = ctx.$implicit;
+    const country_r1277 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c61, country_r1281.isoCode));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpureFunction1(4, _c61, country_r1277.isoCode));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngClass", (country_r1281 == null ? null : country_r1281.storeCountDataList) ? "country-header" : "country-header-link");
+    ɵngcc0.ɵɵproperty("ngClass", (country_r1277 == null ? null : country_r1277.storeCountDataList) ? "country-header" : "country-header-link");
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(country_r1281.name);
+    ɵngcc0.ɵɵtextInterpolate(country_r1277.name);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(country_r1281 == null ? null : country_r1281.storeCountDataList));
+    ɵngcc0.ɵɵproperty("ngIf", !(country_r1277 == null ? null : country_r1277.storeCountDataList));
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
     ɵngcc0.ɵɵtemplate(1, StoreFinderStoresCountComponent_ng_container_0_div_2_div_1_Template, 6, 6, "div", 5);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const locations_r1277 = ɵngcc0.ɵɵnextContext().ngIf;
+    const locations_r1273 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", locations_r1277);
+    ɵngcc0.ɵɵproperty("ngForOf", locations_r1273);
 } }
 function StoreFinderStoresCountComponent_ng_container_0_div_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 4);
@@ -8300,11 +8288,11 @@ function StoreFinderStoresCountComponent_ng_container_0_Template(rf, ctx) { if (
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const locations_r1277 = ctx.ngIf;
+    const locations_r1273 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", locations_r1277 == null ? null : locations_r1277.length);
+    ɵngcc0.ɵɵproperty("ngIf", locations_r1273 == null ? null : locations_r1273.length);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1277 == null ? null : locations_r1277.length));
+    ɵngcc0.ɵɵproperty("ngIf", !(locations_r1273 == null ? null : locations_r1273.length));
 } }
 function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 13);
@@ -8312,12 +8300,12 @@ function StoreFinderStoresCountComponent_ng_template_3_Template(rf, ctx) { if (r
     ɵngcc0.ɵɵelementEnd();
 } }
 function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1290 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1286 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "button", 5);
-    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1290); const ctx_r1289 = ɵngcc0.ɵɵnextContext(); return ctx_r1289.goBack(); });
+    ɵngcc0.ɵɵlistener("click", function StoreFinderStoreComponent_div_0_Template_button_click_3_listener() { ɵngcc0.ɵɵrestoreView(_r1286); const ctx_r1285 = ɵngcc0.ɵɵnextContext(); return ctx_r1285.goBack(); });
     ɵngcc0.ɵɵelement(4, "cx-icon", 6);
     ɵngcc0.ɵɵtext(5);
     ɵngcc0.ɵɵpipe(6, "cxTranslate");
@@ -8331,14 +8319,14 @@ function StoreFinderStoreComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const location_r1288 = ctx.ngIf;
-    const ctx_r1285 = ɵngcc0.ɵɵnextContext();
+    const location_r1284 = ctx.ngIf;
+    const ctx_r1281 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("type", ctx_r1285.iconTypes.CARET_LEFT);
+    ɵngcc0.ɵɵproperty("type", ctx_r1281.iconTypes.CARET_LEFT);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(6, 4, "storeFinder.backToList"), " ");
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("disableMap", ctx_r1285.disableMap)("location", location_r1288);
+    ɵngcc0.ɵɵproperty("disableMap", ctx_r1281.disableMap)("location", location_r1284);
 } }
 function StoreFinderStoreComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 10);
@@ -8386,9 +8374,9 @@ function LoginComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(4, "cx-page-slot", 3);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const user_r1296 = ctx.ngIf;
+    const user_r1292 = ctx.ngIf;
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c65, user_r1296.name)), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(3, 1, "miniLogin.userGreeting", ɵngcc0.ɵɵpureFunction1(4, _c65, user_r1292.name)), " ");
 } }
 function LoginComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 4);
@@ -8406,10 +8394,10 @@ function RegisterComponent_section_0_option_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const title_r1302 = ctx.$implicit;
-    ɵngcc0.ɵɵproperty("value", title_r1302.code);
+    const title_r1298 = ctx.$implicit;
+    ɵngcc0.ɵɵproperty("value", title_r1298.code);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate(title_r1302.name);
+    ɵngcc0.ɵɵtextInterpolate(title_r1298.name);
 } }
 function RegisterComponent_section_0_label_58_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "label");
@@ -8419,21 +8407,21 @@ function RegisterComponent_section_0_label_58_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const anonymousConsent_r1303 = ctx.ngIf;
-    const ctx_r1301 = ɵngcc0.ɵɵnextContext(2);
+    const anonymousConsent_r1299 = ctx.ngIf;
+    const ctx_r1297 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("checked", ctx_r1301.isConsentGiven(anonymousConsent_r1303.consent));
+    ɵngcc0.ɵɵproperty("checked", ctx_r1297.isConsentGiven(anonymousConsent_r1299.consent));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1303.template, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", anonymousConsent_r1299.template, " ");
 } }
 function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
-    const _r1305 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1301 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "section", 2);
     ɵngcc0.ɵɵelementStart(1, "div", 3);
     ɵngcc0.ɵɵelementStart(2, "div", 4);
     ɵngcc0.ɵɵelementStart(3, "div", 5);
     ɵngcc0.ɵɵelementStart(4, "form", 6);
-    ɵngcc0.ɵɵlistener("ngSubmit", function RegisterComponent_section_0_Template_form_ngSubmit_4_listener() { ɵngcc0.ɵɵrestoreView(_r1305); const ctx_r1304 = ɵngcc0.ɵɵnextContext(); return ctx_r1304.submitForm(); });
+    ɵngcc0.ɵɵlistener("ngSubmit", function RegisterComponent_section_0_Template_form_ngSubmit_4_listener() { ɵngcc0.ɵɵrestoreView(_r1301); const ctx_r1300 = ɵngcc0.ɵɵnextContext(); return ctx_r1300.submitForm(); });
     ɵngcc0.ɵɵelementStart(5, "div", 7);
     ɵngcc0.ɵɵelementStart(6, "label");
     ɵngcc0.ɵɵelementStart(7, "span", 8);
@@ -8543,47 +8531,47 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1297 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1293 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵproperty("formGroup", ctx_r1297.registerForm);
+    ɵngcc0.ɵɵproperty("formGroup", ctx_r1293.registerForm);
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(9, 27, "register.title"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(13, 29, "register.selectTitle"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 31, ctx_r1297.titles$));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind1(15, 31, ctx_r1293.titles$));
     ɵngcc0.ɵɵadvance(5);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(20, 33, "register.firstName.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(22, 35, "register.firstName.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("firstName"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("firstName"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(28, 37, "register.lastName.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(30, 39, "register.lastName.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("lastName"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("lastName"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(36, 41, "register.emailAddress.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(38, 43, "register.emailAddress.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("email"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("email"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(44, 45, "register.password.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(46, 47, "register.password.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("password"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("password"));
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate(ɵngcc0.ɵɵpipeBind1(52, 49, "register.confirmPassword.label"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(54, 51, "register.confirmPassword.placeholder"));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("passwordconf"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("passwordconf"));
     ɵngcc0.ɵɵadvance(3);
-    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(59, 53, ctx_r1297.anonymousConsent$));
+    ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(59, 53, ctx_r1293.anonymousConsent$));
     ɵngcc0.ɵɵadvance(7);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(66, 55, "register.confirmThatRead"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -8591,7 +8579,7 @@ function RegisterComponent_section_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(70, 59, "register.termsAndConditions"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("control", ctx_r1297.registerForm.get("termsandconditions"));
+    ɵngcc0.ɵɵproperty("control", ctx_r1293.registerForm.get("termsandconditions"));
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(74, 61, "register.register"), " ");
     ɵngcc0.ɵɵadvance(2);
@@ -8612,11 +8600,11 @@ function WishListItemComponent_div_8_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1306 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1302 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r1306.cartEntry.product)));
+    ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(2, 2, ɵngcc0.ɵɵpureFunction1(4, _c12, ctx_r1302.cartEntry.product)));
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(ctx_r1306.cartEntry.product.name);
+    ɵngcc0.ɵɵtextInterpolate(ctx_r1302.cartEntry.product.name);
 } }
 function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 18);
@@ -8624,45 +8612,45 @@ function WishListItemComponent_div_9_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵpipe(2, "cxTranslate");
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1307 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1303 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1307.cartEntry.product.code, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", ɵngcc0.ɵɵpipeBind1(2, 2, "cartItems.id"), " ", ctx_r1303.cartEntry.product.code, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 22);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1314 = ɵngcc0.ɵɵnextContext().$implicit;
+    const variant_r1310 = ɵngcc0.ɵɵnextContext().$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1314.name, ": ", variant_r1314.value, " ");
+    ɵngcc0.ɵɵtextInterpolate2(" ", variant_r1310.name, ": ", variant_r1310.value, " ");
 } }
 function WishListItemComponent_ng_container_10_div_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 20);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_div_1_Template, 2, 2, "div", 21);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const variant_r1314 = ctx.$implicit;
+    const variant_r1310 = ctx.$implicit;
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", variant_r1314.name && variant_r1314.value);
+    ɵngcc0.ɵɵproperty("ngIf", variant_r1310.name && variant_r1310.value);
 } }
 function WishListItemComponent_ng_container_10_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListItemComponent_ng_container_10_div_1_Template, 2, 1, "div", 19);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const ctx_r1308 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1304 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1308.cartEntry.product.baseOptions[0] == null ? null : ctx_r1308.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1308.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
+    ɵngcc0.ɵɵproperty("ngForOf", ctx_r1304.cartEntry.product.baseOptions[0] == null ? null : ctx_r1304.cartEntry.product.baseOptions[0].selected == null ? null : ctx_r1304.cartEntry.product.baseOptions[0].selected.variantOptionQualifiers);
 } }
 function WishListItemComponent_div_11_div_4_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 26);
     ɵngcc0.ɵɵtext(1);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1317 = ɵngcc0.ɵɵnextContext(2);
+    const ctx_r1313 = ɵngcc0.ɵɵnextContext(2);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1317.cartEntry.basePrice == null ? null : ctx_r1317.cartEntry.basePrice.formattedValue, " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ctx_r1313.cartEntry.basePrice == null ? null : ctx_r1313.cartEntry.basePrice.formattedValue, " ");
 } }
 function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "div", 23);
@@ -8673,17 +8661,17 @@ function WishListItemComponent_div_11_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtemplate(4, WishListItemComponent_div_11_div_4_Template, 2, 1, "div", 25);
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r1309 = ɵngcc0.ɵɵnextContext();
+    const ctx_r1305 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 2, "cartItems.itemPrice"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngIf", ctx_r1309.cartEntry.basePrice);
+    ɵngcc0.ɵɵproperty("ngIf", ctx_r1305.cartEntry.basePrice);
 } }
 function WishListItemComponent_cx_add_to_cart_13_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelement(0, "cx-add-to-cart", 27);
 } if (rf & 2) {
-    const ctx_r1310 = ɵngcc0.ɵɵnextContext();
-    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1310.cartEntry.product);
+    const ctx_r1306 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵproperty("showQuantity", false)("product", ctx_r1306.cartEntry.product);
 } }
 function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "span", 28);
@@ -8695,18 +8683,18 @@ function WishListItemComponent_ng_template_14_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(2, 1, "addToCart.outOfStock"), " ");
 } }
 function WishListComponent_ng_container_0_ng_container_1_div_12_Template(rf, ctx) { if (rf & 1) {
-    const _r1326 = ɵngcc0.ɵɵgetCurrentView();
+    const _r1322 = ɵngcc0.ɵɵgetCurrentView();
     ɵngcc0.ɵɵelementStart(0, "div", 9);
     ɵngcc0.ɵɵelementStart(1, "cx-wish-list-item", 10);
-    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1326); const ctx_r1325 = ɵngcc0.ɵɵnextContext(3); return ctx_r1325.removeEntry($event); });
+    ɵngcc0.ɵɵlistener("remove", function WishListComponent_ng_container_0_ng_container_1_div_12_Template_cx_wish_list_item_remove_1_listener($event) { ɵngcc0.ɵɵrestoreView(_r1322); const ctx_r1321 = ɵngcc0.ɵɵnextContext(3); return ctx_r1321.removeEntry($event); });
     ɵngcc0.ɵɵpipe(2, "async");
     ɵngcc0.ɵɵelementEnd();
     ɵngcc0.ɵɵelementEnd();
 } if (rf & 2) {
-    const entry_r1324 = ctx.$implicit;
-    const ctx_r1323 = ɵngcc0.ɵɵnextContext(3);
+    const entry_r1320 = ctx.$implicit;
+    const ctx_r1319 = ɵngcc0.ɵɵnextContext(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("cartEntry", entry_r1324)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1323.loading$));
+    ɵngcc0.ɵɵproperty("cartEntry", entry_r1320)("isLoading", ɵngcc0.ɵɵpipeBind1(2, 2, ctx_r1319.loading$));
 } }
 function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
@@ -8729,7 +8717,7 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵtemplate(12, WishListComponent_ng_container_0_ng_container_1_div_12_Template, 3, 4, "div", 8);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1321 = ɵngcc0.ɵɵnextContext().ngIf;
+    const wishList_r1317 = ɵngcc0.ɵɵnextContext().ngIf;
     ɵngcc0.ɵɵadvance(4);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "cartItems.description"), " ");
     ɵngcc0.ɵɵadvance(3);
@@ -8737,18 +8725,18 @@ function WishListComponent_ng_container_0_ng_container_1_Template(rf, ctx) { if 
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(11, 8, "cartItems.total"), " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1321 == null ? null : wishList_r1321.entries);
+    ɵngcc0.ɵɵproperty("ngForOf", wishList_r1317 == null ? null : wishList_r1317.entries);
 } }
 function WishListComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, WishListComponent_ng_container_0_ng_container_1_Template, 13, 10, "ng-container", 2);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
-    const wishList_r1321 = ctx.ngIf;
+    const wishList_r1317 = ctx.ngIf;
     ɵngcc0.ɵɵnextContext();
-    const _r1319 = ɵngcc0.ɵɵreference(3);
+    const _r1315 = ɵngcc0.ɵɵreference(3);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1321 == null ? null : wishList_r1321.entries == null ? null : wishList_r1321.entries.length) > 0)("ngIfElse", _r1319);
+    ɵngcc0.ɵɵproperty("ngIf", (wishList_r1317 == null ? null : wishList_r1317.entries == null ? null : wishList_r1317.entries.length) > 0)("ngIfElse", _r1315);
 } }
 function WishListComponent_ng_template_2_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "h2");
@@ -24046,7 +24034,7 @@ let ProductCarouselComponent = class ProductCarouselComponent {
     }
 };
 ProductCarouselComponent.ɵfac = function ProductCarouselComponent_Factory(t) { return new (t || ProductCarouselComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductService)); };
-ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCarouselComponent, selectors: [["cx-product-carousel"]], decls: 5, vars: 7, consts: [["itemWidth", "285px", 3, "items", "title", "template"], ["carouselItem", ""], ["tabindex", "0", 3, "routerLink"], [3, "container", 4, "ngIf"], [1, "price"], [3, "container"]], template: function ProductCarouselComponent_Template(rf, ctx) { if (rf & 1) {
+ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCarouselComponent, selectors: [["cx-product-carousel"]], decls: 5, vars: 7, consts: [["itemWidth", "285px", 3, "items", "title", "template"], ["carouselItem", ""], ["tabindex", "0", 3, "routerLink"], [3, "container"], [1, "price"]], template: function ProductCarouselComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelement(0, "cx-carousel", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵpipe(2, "async");
@@ -24054,7 +24042,7 @@ ProductCarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductCaro
     } if (rf & 2) {
         const _r976 = ɵngcc0.ɵɵreference(4);
         ɵngcc0.ɵɵproperty("items", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.items$))("title", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.title$))("template", _r976);
-    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductCarouselComponent.ctorParameters = () => [
     { type: CmsComponentData },
     { type: ProductService }
@@ -24098,15 +24086,15 @@ let ProductReferencesComponent = class ProductReferencesComponent {
     }
 };
 ProductReferencesComponent.ɵfac = function ProductReferencesComponent_Factory(t) { return new (t || ProductReferencesComponent)(ɵngcc0.ɵɵdirectiveInject(CmsComponentData), ɵngcc0.ɵɵdirectiveInject(CurrentProductService), ɵngcc0.ɵɵdirectiveInject(ɵngcc1.ProductReferenceService)); };
-ProductReferencesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReferencesComponent, selectors: [["cx-product-references"]], decls: 5, vars: 7, consts: [[3, "title", "items", "template"], ["carouselItem", ""], ["tabindex", "0", 3, "routerLink"], [3, "container", 4, "ngIf"], [1, "price"], [3, "container"]], template: function ProductReferencesComponent_Template(rf, ctx) { if (rf & 1) {
+ProductReferencesComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ProductReferencesComponent, selectors: [["cx-product-references"]], decls: 5, vars: 7, consts: [[3, "title", "items", "template"], ["carouselItem", ""], ["tabindex", "0", 3, "routerLink"], [3, "container"], [1, "price"]], template: function ProductReferencesComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelement(0, "cx-carousel", 0);
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, ProductReferencesComponent_ng_template_3_Template, 7, 8, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r981 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r981);
-    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgIf, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
+        const _r979 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("title", ɵngcc0.ɵɵpipeBind1(1, 3, ctx.title$))("items", ɵngcc0.ɵɵpipeBind1(2, 5, ctx.items$))("template", _r979);
+    } }, directives: [CarouselComponent, ɵngcc6.RouterLinkWithHref, MediaComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.UrlPipe], encapsulation: 2, changeDetection: 0 });
 ProductReferencesComponent.ctorParameters = () => [
     { type: CmsComponentData },
     { type: CurrentProductService },
@@ -25915,11 +25903,11 @@ StockNotificationDialogComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(8, "async");
         ɵngcc0.ɵɵtemplate(9, StockNotificationDialogComponent_ng_template_9_Template, 7, 3, "ng-template", null, 5, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1175 = ɵngcc0.ɵɵreference(10);
+        const _r1171 = ɵngcc0.ɵɵreference(10);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(3, 3, "stockNotification.subscriptionDialog.header"), " ");
         ɵngcc0.ɵɵadvance(5);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1175);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(8, 5, ctx.subscribeSuccess$))("ngIfElse", _r1171);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc1.TranslatePipe, ɵngcc4.AsyncPipe], encapsulation: 2 });
 StockNotificationDialogComponent.ctorParameters = () => [
     { type: ModalService },
@@ -26126,8 +26114,8 @@ StoreFinderGridComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinder
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderGridComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1209 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1209);
+        const _r1205 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1205);
     } }, directives: function () { return [ɵngcc4.NgIf, ɵngcc4.NgForOf, StoreFinderListItemComponent,
         SpinnerComponent]; }, pipes: function () { return [ɵngcc4.AsyncPipe]; }, encapsulation: 2 });
 StoreFinderGridComponent.ctorParameters = () => [
@@ -26431,8 +26419,8 @@ StoreFinderSearchResultComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Sto
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderSearchResultComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1255 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1255);
+        const _r1251 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1251);
     } }, directives: [ɵngcc4.NgIf, PaginationComponent,
         StoreFinderListComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -26497,12 +26485,12 @@ StoreFinderSearchComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFind
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1265 = ɵngcc0.ɵɵreference(5);
+        const _r1261 = ɵngcc0.ɵɵreference(5);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵpropertyInterpolate("placeholder", ɵngcc0.ɵɵpipeBind1(6, 9, "storeFinder.searchBox"));
         ɵngcc0.ɵɵproperty("formControl", ctx.searchBox);
         ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c58))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c42, _r1265.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c59, !(_r1265.value && _r1265.value.length)));
+        ɵngcc0.ɵɵproperty("type", ctx.iconTypes.SEARCH)("routerLink", ɵngcc0.ɵɵpureFunction0(15, _c58))("queryParams", ɵngcc0.ɵɵpureFunction1(16, _c42, _r1261.value))("ngClass", ɵngcc0.ɵɵpureFunction1(18, _c59, !(_r1261.value && _r1261.value.length)));
         ɵngcc0.ɵɵadvance(5);
         ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(13, 11, "storeFinder.useMyLocation"), " ");
         ɵngcc0.ɵɵadvance(3);
@@ -26553,8 +26541,8 @@ StoreFinderStoresCountComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: Stor
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoresCountComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1275 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1275);
+        const _r1271 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.locations$))("ngIfElse", _r1271);
     } }, directives: [ɵngcc4.NgIf, ɵngcc4.NgForOf, ɵngcc6.RouterLinkWithHref, ɵngcc4.NgClass, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
 StoreFinderStoresCountComponent.ctorParameters = () => [
     { type: StoreFinderService }
@@ -26602,8 +26590,8 @@ StoreFinderStoreComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: StoreFinde
         ɵngcc0.ɵɵpipe(2, "async");
         ɵngcc0.ɵɵtemplate(3, StoreFinderStoreComponent_ng_template_3_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1286 = ɵngcc0.ɵɵreference(4);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1286);
+        const _r1282 = ɵngcc0.ɵɵreference(4);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.location || !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.isLoading$) && ɵngcc0.ɵɵpipeBind1(2, 4, ctx.location$))("ngIfElse", _r1282);
     } }, directives: [ɵngcc4.NgIf, IconComponent,
         StoreFinderStoreDescriptionComponent,
         SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe], encapsulation: 2 });
@@ -26964,8 +26952,8 @@ LoginComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: LoginComponent, selec
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, LoginComponent_ng_template_2_Template, 4, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1294 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1294);
+        const _r1290 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", ɵngcc0.ɵɵpipeBind1(1, 2, ctx.user$))("ngIfElse", _r1290);
     } }, directives: [ɵngcc4.NgIf, PageSlotComponent, ɵngcc6.RouterLinkWithHref], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 LoginComponent.ctorParameters = () => [
     { type: AuthService },
@@ -27192,8 +27180,8 @@ RegisterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: RegisterComponent,
         ɵngcc0.ɵɵpipe(1, "async");
         ɵngcc0.ɵɵtemplate(2, RegisterComponent_ng_template_2_Template, 2, 0, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
-        const _r1298 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1298);
+        const _r1294 = ɵngcc0.ɵɵreference(3);
+        ɵngcc0.ɵɵproperty("ngIf", !ɵngcc0.ɵɵpipeBind1(1, 2, ctx.loading$))("ngIfElse", _r1294);
     } }, directives: [ɵngcc4.NgIf, ɵngcc5.ɵangular_packages_forms_forms_y, ɵngcc5.NgControlStatusGroup, ɵngcc5.FormGroupDirective, ɵngcc5.SelectControlValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlName, ɵngcc5.NgSelectOption, ɵngcc5.ɵangular_packages_forms_forms_x, ɵngcc4.NgForOf, ɵngcc5.DefaultValueAccessor, FormErrorsComponent, ɵngcc5.CheckboxControlValueAccessor, ɵngcc6.RouterLinkWithHref, SpinnerComponent], pipes: [ɵngcc4.AsyncPipe, ɵngcc1.TranslatePipe, ɵngcc1.UrlPipe], encapsulation: 2 });
 RegisterComponent.ctorParameters = () => [
     { type: UserService },
@@ -27283,7 +27271,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r1311 = ɵngcc0.ɵɵreference(15);
+        const _r1307 = ɵngcc0.ɵɵreference(15);
         ɵngcc0.ɵɵadvance(2);
         ɵngcc0.ɵɵproperty("routerLink", ɵngcc0.ɵɵpipeBind1(3, 10, ɵngcc0.ɵɵpureFunction1(14, _c12, ctx.cartEntry.product)));
         ɵngcc0.ɵɵadvance(2);
@@ -27297,7 +27285,7 @@ WishListItemComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: WishListItemCo
         ɵngcc0.ɵɵadvance(1);
         ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.basePrice);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1311);
+        ɵngcc0.ɵɵproperty("ngIf", ctx.cartEntry.product.stock.stockLevelStatus !== "outOfStock")("ngIfElse", _r1307);
         ɵngcc0.ɵɵadvance(4);
         ɵngcc0.ɵɵproperty("disabled", ctx.isLoading);
         ɵngcc0.ɵɵadvance(1);
@@ -32165,7 +32153,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-product-carousel',
-                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media\n      *ngIf=\"item.images?.PRIMARY\"\n      [container]=\"item.images?.PRIMARY\"\n    ></cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
+                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media [container]=\"item.images?.PRIMARY\"></cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.ProductService }]; }, null); })();
@@ -32195,7 +32183,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-product-references',
-                template: "<cx-carousel\n  [title]=\"title$ | async\"\n  [items]=\"items$ | async\"\n  [template]=\"carouselItem\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media *ngIf=\"item.images?.PRIMARY\" [container]=\"item.images?.PRIMARY\">\n    </cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
+                template: "<cx-carousel\n  [title]=\"title$ | async\"\n  [items]=\"items$ | async\"\n  [template]=\"carouselItem\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media [container]=\"item.images?.PRIMARY\"></cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: CurrentProductService }, { type: ɵngcc1.ProductReferenceService }]; }, null); })();
