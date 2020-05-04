@@ -4251,7 +4251,7 @@ function OrderDetailItemsComponent_ng_container_0_ng_container_3_Template(rf, ct
     const order_r684 = ɵngcc0.ɵɵnextContext().ngIf;
     const ctx_r687 = ɵngcc0.ɵɵnextContext();
     ɵngcc0.ɵɵadvance(4);
-    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind1(5, 4, "orderDetails.pending"), " ");
+    ɵngcc0.ɵɵtextInterpolate1(" ", ɵngcc0.ɵɵpipeBind2(5, 4, "orderDetails.statusDisplay", ɵngcc0.ɵɵpureFunction1(7, _c31, order_r684.statusDisplay)), " ");
     ɵngcc0.ɵɵadvance(3);
     ɵngcc0.ɵɵproperty("items", order_r684 == null ? null : order_r684.unconsignedEntries)("readonly", true)("promotionLocation", ctx_r687.promotionLocation);
 } }
@@ -4259,7 +4259,7 @@ function OrderDetailItemsComponent_ng_container_0_Template(rf, ctx) { if (rf & 1
     ɵngcc0.ɵɵelementContainerStart(0);
     ɵngcc0.ɵɵtemplate(1, OrderDetailItemsComponent_ng_container_0_ng_container_1_Template, 3, 3, "ng-container", 0);
     ɵngcc0.ɵɵtemplate(2, OrderDetailItemsComponent_ng_container_0_ng_container_2_Template, 7, 9, "ng-container", 0);
-    ɵngcc0.ɵɵtemplate(3, OrderDetailItemsComponent_ng_container_0_ng_container_3_Template, 8, 6, "ng-container", 0);
+    ɵngcc0.ɵɵtemplate(3, OrderDetailItemsComponent_ng_container_0_ng_container_3_Template, 8, 9, "ng-container", 0);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     const order_r684 = ctx.ngIf;
@@ -31102,7 +31102,7 @@ const ɵVisibleFocusDirective_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Visi
         type: Component,
         args: [{
                 selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{ 'orderDetails.pending' | cxTranslate }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay'\n              | cxTranslate: { context: order.statusDisplay }\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
             }]
     }], function () { return [{ type: OrderDetailsService }, { type: PromotionService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(TrackingEventsComponent, [{
