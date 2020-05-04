@@ -7569,6 +7569,7 @@ let AddressFormComponent = class AddressFormComponent {
         this.globalMessageService = globalMessageService;
         this.modalService = modalService;
         this.selectedCountry$ = new BehaviorSubject('');
+        this.setAsDefaultField = true;
         this.showCancelBtn = true;
         this.submitAddress = new EventEmitter();
         this.backToAddress = new EventEmitter();

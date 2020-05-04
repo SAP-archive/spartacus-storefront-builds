@@ -8553,6 +8553,7 @@
             this.globalMessageService = globalMessageService;
             this.modalService = modalService;
             this.selectedCountry$ = new rxjs.BehaviorSubject('');
+            this.setAsDefaultField = true;
             this.showCancelBtn = true;
             this.submitAddress = new core.EventEmitter();
             this.backToAddress = new core.EventEmitter();
