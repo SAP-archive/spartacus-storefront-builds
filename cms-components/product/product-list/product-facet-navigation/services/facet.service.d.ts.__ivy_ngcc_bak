@@ -64,6 +64,6 @@ export declare class FacetService {
     protected updateState(facet: Facet, property: FacetCollapseState): void;
     protected hasState(facet: Facet): boolean;
     getLinkParams(query: string): {
-        query: string;
+        [key: string]: string;
     };
 }

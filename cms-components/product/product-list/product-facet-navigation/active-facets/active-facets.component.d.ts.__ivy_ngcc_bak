@@ -15,7 +15,7 @@ export declare class ActiveFacetsComponent {
     closeIcon: ICON_TYPE;
     constructor(facetService: FacetService);
     getLinkParams(facet: Breadcrumb): {
-        query: string;
+        [key: string]: string;
     };
     /**
      * The focus key is used to persist the focus on the facet when the DOM is being
