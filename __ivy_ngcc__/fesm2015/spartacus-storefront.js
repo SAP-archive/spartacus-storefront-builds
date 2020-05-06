@@ -21138,7 +21138,7 @@ OrderDetailsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function OrderD
             RouterModule.forChild([
                 {
                     path: null,
-                    canActivate: [CmsPageGuard],
+                    canActivate: [AuthGuard, CmsPageGuard],
                     component: PageLayoutComponent,
                     data: ɵ0$5
                 },
@@ -31418,7 +31418,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                     RouterModule.forChild([
                         {
                             path: null,
-                            canActivate: [CmsPageGuard],
+                            canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
                             data: ɵ0$5
                         },

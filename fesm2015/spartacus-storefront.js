@@ -12335,7 +12335,7 @@ OrderDetailsModule = __decorate([
             RouterModule.forChild([
                 {
                     path: null,
-                    canActivate: [CmsPageGuard],
+                    canActivate: [AuthGuard, CmsPageGuard],
                     component: PageLayoutComponent,
                     data: ɵ0$5,
                 },

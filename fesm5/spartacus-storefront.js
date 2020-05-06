@@ -13583,7 +13583,7 @@ var OrderDetailsModule = /** @class */ (function () {
                 RouterModule.forChild([
                     {
                         path: null,
-                        canActivate: [CmsPageGuard],
+                        canActivate: [AuthGuard, CmsPageGuard],
                         component: PageLayoutComponent,
                         data: ɵ0$5,
                     },

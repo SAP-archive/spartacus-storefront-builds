@@ -13769,7 +13769,7 @@
                     router.RouterModule.forChild([
                         {
                             path: null,
-                            canActivate: [CmsPageGuard],
+                            canActivate: [core$1.AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
                             data: ɵ0$5,
                         },
