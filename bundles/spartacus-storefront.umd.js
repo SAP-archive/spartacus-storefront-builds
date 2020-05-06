@@ -9396,7 +9396,7 @@
             if (options === void 0) { options = {}; }
             var elementVisible$ = new rxjs.Observable(function (observer) {
                 var rootMargin = _this.getRootMargin(options);
-                var intersectOptions = { rootMargin: rootMargin, thresholds: options.threshold };
+                var intersectOptions = { rootMargin: rootMargin, threshold: options.threshold };
                 var intersectionObserver = new IntersectionObserver(function (entries) {
                     observer.next(entries);
                 }, intersectOptions);
