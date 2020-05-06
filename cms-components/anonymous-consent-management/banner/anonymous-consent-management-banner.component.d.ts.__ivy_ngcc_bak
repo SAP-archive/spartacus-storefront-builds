@@ -1,13 +1,14 @@
-import { OnDestroy } from '@angular/core';
+import { OnDestroy, ViewContainerRef } from '@angular/core';
 import { AnonymousConsentsService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ModalService } from '../../../shared/components/modal/modal.service';
+import { AnonymousConsentLaunchDialogService } from '../anonymous-consent-launch-dialog.service';
 export declare class AnonymousConsentManagementBannerComponent implements OnDestroy {
-    private modalService;
-    private anonymousConsentsService;
+    protected anonymousConsentsService: AnonymousConsentsService;
+    protected anonymousConsentLaunchDialogService: AnonymousConsentLaunchDialogService;
+    protected vcr: ViewContainerRef;
     private subscriptions;
     bannerVisible$: Observable<boolean>;
-    constructor(modalService: ModalService, anonymousConsentsService: AnonymousConsentsService);
+    constructor(anonymousConsentsService: AnonymousConsentsService, anonymousConsentLaunchDialogService: AnonymousConsentLaunchDialogService, vcr: ViewContainerRef);
     viewDetails(): void;
     allowAll(): void;
     hideBanner(): void;

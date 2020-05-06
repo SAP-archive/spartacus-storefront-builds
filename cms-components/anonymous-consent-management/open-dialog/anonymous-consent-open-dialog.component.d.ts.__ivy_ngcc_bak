@@ -1,6 +1,9 @@
-import { ModalService } from '../../../shared/components/modal/modal.service';
+import { ElementRef, ViewContainerRef } from '@angular/core';
+import { AnonymousConsentLaunchDialogService } from '../anonymous-consent-launch-dialog.service';
 export declare class AnonymousConsentOpenDialogComponent {
-    protected modalService: ModalService;
-    constructor(modalService: ModalService);
+    protected vcr: ViewContainerRef;
+    protected anonymousConsentLaunchDialogService: AnonymousConsentLaunchDialogService;
+    openElement: ElementRef;
+    constructor(vcr: ViewContainerRef, anonymousConsentLaunchDialogService: AnonymousConsentLaunchDialogService);
     openDialog(): void;
 }

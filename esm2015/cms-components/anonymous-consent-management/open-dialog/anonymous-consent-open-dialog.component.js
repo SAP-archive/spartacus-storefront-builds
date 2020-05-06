@@ -1,26 +1,31 @@
 import { __decorate } from "tslib";
-import { Component } from '@angular/core';
-import { AnonymousConsentDialogComponent } from '../../../shared/components/anonymous-consents/dialog/anonymous-consent-dialog.component';
-import { ModalService } from '../../../shared/components/modal/modal.service';
+import { Component, ElementRef, ViewChild, ViewContainerRef, } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { AnonymousConsentLaunchDialogService } from '../anonymous-consent-launch-dialog.service';
 let AnonymousConsentOpenDialogComponent = class AnonymousConsentOpenDialogComponent {
-    constructor(modalService) {
-        this.modalService = modalService;
+    constructor(vcr, anonymousConsentLaunchDialogService) {
+        this.vcr = vcr;
+        this.anonymousConsentLaunchDialogService = anonymousConsentLaunchDialogService;
     }
     openDialog() {
-        this.modalService.open(AnonymousConsentDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
+        const dialog = this.anonymousConsentLaunchDialogService.openDialog(this.openElement, this.vcr);
+        if (dialog) {
+            dialog.pipe(take(1)).subscribe();
+        }
     }
 };
 AnonymousConsentOpenDialogComponent.ctorParameters = () => [
-    { type: ModalService }
+    { type: ViewContainerRef },
+    { type: AnonymousConsentLaunchDialogService }
 ];
+__decorate([
+    ViewChild('open')
+], AnonymousConsentOpenDialogComponent.prototype, "openElement", void 0);
 AnonymousConsentOpenDialogComponent = __decorate([
     Component({
         selector: 'cx-anonymous-consent-open-dialog',
-        template: "<div class=\"anonymous-consents\">\n  <button class=\"btn btn-link\" (click)=\"openDialog()\">\n    {{ 'anonymousConsents.preferences' | cxTranslate }}\n  </button>\n</div>\n"
+        template: "<button #open class=\"btn btn-link\" (click)=\"openDialog()\">\n  {{ 'anonymousConsents.preferences' | cxTranslate }}\n</button>\n"
     })
 ], AnonymousConsentOpenDialogComponent);
 export { AnonymousConsentOpenDialogComponent };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYW5vbnltb3VzLWNvbnNlbnQtb3Blbi1kaWFsb2cuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvYW5vbnltb3VzLWNvbnNlbnQtbWFuYWdlbWVudC9vcGVuLWRpYWxvZy9hbm9ueW1vdXMtY29uc2VudC1vcGVuLWRpYWxvZy5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDMUMsT0FBTyxFQUFFLCtCQUErQixFQUFFLE1BQU0seUZBQXlGLENBQUM7QUFDMUksT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGdEQUFnRCxDQUFDO0FBTTlFLElBQWEsbUNBQW1DLEdBQWhELE1BQWEsbUNBQW1DO0lBQzlDLFlBQXNCLFlBQTBCO1FBQTFCLGlCQUFZLEdBQVosWUFBWSxDQUFjO0lBQUcsQ0FBQztJQUVwRCxVQUFVO1FBQ1IsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLENBQUMsK0JBQStCLEVBQUU7WUFDdEQsUUFBUSxFQUFFLElBQUk7WUFDZCxJQUFJLEVBQUUsSUFBSTtTQUNYLENBQUMsQ0FBQztJQUNMLENBQUM7Q0FDRixDQUFBOztZQVJxQyxZQUFZOztBQURyQyxtQ0FBbUM7SUFKL0MsU0FBUyxDQUFDO1FBQ1QsUUFBUSxFQUFFLGtDQUFrQztRQUM1QywwTEFBNkQ7S0FDOUQsQ0FBQztHQUNXLG1DQUFtQyxDQVMvQztTQVRZLG1DQUFtQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQW5vbnltb3VzQ29uc2VudERpYWxvZ0NvbXBvbmVudCB9IGZyb20gJy4uLy4uLy4uL3NoYXJlZC9jb21wb25lbnRzL2Fub255bW91cy1jb25zZW50cy9kaWFsb2cvYW5vbnltb3VzLWNvbnNlbnQtZGlhbG9nLmNvbXBvbmVudCc7XG5pbXBvcnQgeyBNb2RhbFNlcnZpY2UgfSBmcm9tICcuLi8uLi8uLi9zaGFyZWQvY29tcG9uZW50cy9tb2RhbC9tb2RhbC5zZXJ2aWNlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAnY3gtYW5vbnltb3VzLWNvbnNlbnQtb3Blbi1kaWFsb2cnLFxuICB0ZW1wbGF0ZVVybDogJy4vYW5vbnltb3VzLWNvbnNlbnQtb3Blbi1kaWFsb2cuY29tcG9uZW50Lmh0bWwnLFxufSlcbmV4cG9ydCBjbGFzcyBBbm9ueW1vdXNDb25zZW50T3BlbkRpYWxvZ0NvbXBvbmVudCB7XG4gIGNvbnN0cnVjdG9yKHByb3RlY3RlZCBtb2RhbFNlcnZpY2U6IE1vZGFsU2VydmljZSkge31cblxuICBvcGVuRGlhbG9nKCk6IHZvaWQge1xuICAgIHRoaXMubW9kYWxTZXJ2aWNlLm9wZW4oQW5vbnltb3VzQ29uc2VudERpYWxvZ0NvbXBvbmVudCwge1xuICAgICAgY2VudGVyZWQ6IHRydWUsXG4gICAgICBzaXplOiAnbGcnLFxuICAgIH0pO1xuICB9XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYW5vbnltb3VzLWNvbnNlbnQtb3Blbi1kaWFsb2cuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvYW5vbnltb3VzLWNvbnNlbnQtbWFuYWdlbWVudC9vcGVuLWRpYWxvZy9hbm9ueW1vdXMtY29uc2VudC1vcGVuLWRpYWxvZy5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFDTCxTQUFTLEVBQ1QsVUFBVSxFQUNWLFNBQVMsRUFDVCxnQkFBZ0IsR0FDakIsTUFBTSxlQUFlLENBQUM7QUFDdkIsT0FBTyxFQUFFLElBQUksRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBQ3RDLE9BQU8sRUFBRSxtQ0FBbUMsRUFBRSxNQUFNLDRDQUE0QyxDQUFDO0FBTWpHLElBQWEsbUNBQW1DLEdBQWhELE1BQWEsbUNBQW1DO0lBRzlDLFlBQ1ksR0FBcUIsRUFDckIsbUNBQXdFO1FBRHhFLFFBQUcsR0FBSCxHQUFHLENBQWtCO1FBQ3JCLHdDQUFtQyxHQUFuQyxtQ0FBbUMsQ0FBcUM7SUFDakYsQ0FBQztJQUVKLFVBQVU7UUFDUixNQUFNLE1BQU0sR0FBRyxJQUFJLENBQUMsbUNBQW1DLENBQUMsVUFBVSxDQUNoRSxJQUFJLENBQUMsV0FBVyxFQUNoQixJQUFJLENBQUMsR0FBRyxDQUNULENBQUM7UUFDRixJQUFJLE1BQU0sRUFBRTtZQUNWLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsU0FBUyxFQUFFLENBQUM7U0FDbEM7SUFDSCxDQUFDO0NBQ0YsQ0FBQTs7WUFia0IsZ0JBQWdCO1lBQ2dCLG1DQUFtQzs7QUFKakU7SUFBbEIsU0FBUyxDQUFDLE1BQU0sQ0FBQzt3RUFBeUI7QUFEaEMsbUNBQW1DO0lBSi9DLFNBQVMsQ0FBQztRQUNULFFBQVEsRUFBRSxrQ0FBa0M7UUFDNUMsOElBQTZEO0tBQzlELENBQUM7R0FDVyxtQ0FBbUMsQ0FpQi9DO1NBakJZLG1DQUFtQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIENvbXBvbmVudCxcbiAgRWxlbWVudFJlZixcbiAgVmlld0NoaWxkLFxuICBWaWV3Q29udGFpbmVyUmVmLFxufSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IHRha2UgfSBmcm9tICdyeGpzL29wZXJhdG9ycyc7XG5pbXBvcnQgeyBBbm9ueW1vdXNDb25zZW50TGF1bmNoRGlhbG9nU2VydmljZSB9IGZyb20gJy4uL2Fub255bW91cy1jb25zZW50LWxhdW5jaC1kaWFsb2cuc2VydmljZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ2N4LWFub255bW91cy1jb25zZW50LW9wZW4tZGlhbG9nJyxcbiAgdGVtcGxhdGVVcmw6ICcuL2Fub255bW91cy1jb25zZW50LW9wZW4tZGlhbG9nLmNvbXBvbmVudC5odG1sJyxcbn0pXG5leHBvcnQgY2xhc3MgQW5vbnltb3VzQ29uc2VudE9wZW5EaWFsb2dDb21wb25lbnQge1xuICBAVmlld0NoaWxkKCdvcGVuJykgb3BlbkVsZW1lbnQ6IEVsZW1lbnRSZWY7XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJvdGVjdGVkIHZjcjogVmlld0NvbnRhaW5lclJlZixcbiAgICBwcm90ZWN0ZWQgYW5vbnltb3VzQ29uc2VudExhdW5jaERpYWxvZ1NlcnZpY2U6IEFub255bW91c0NvbnNlbnRMYXVuY2hEaWFsb2dTZXJ2aWNlXG4gICkge31cblxuICBvcGVuRGlhbG9nKCk6IHZvaWQge1xuICAgIGNvbnN0IGRpYWxvZyA9IHRoaXMuYW5vbnltb3VzQ29uc2VudExhdW5jaERpYWxvZ1NlcnZpY2Uub3BlbkRpYWxvZyhcbiAgICAgIHRoaXMub3BlbkVsZW1lbnQsXG4gICAgICB0aGlzLnZjclxuICAgICk7XG4gICAgaWYgKGRpYWxvZykge1xuICAgICAgZGlhbG9nLnBpcGUodGFrZSgxKSkuc3Vic2NyaWJlKCk7XG4gICAgfVxuICB9XG59XG4iXX0=

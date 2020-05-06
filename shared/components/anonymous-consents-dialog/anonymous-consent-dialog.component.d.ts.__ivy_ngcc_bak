@@ -1,12 +1,16 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { AnonymousConsent, AnonymousConsentsConfig, AnonymousConsentsService, ConsentTemplate } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ICON_TYPE } from '../../../../cms-components/misc/icon/index';
-import { ModalService } from '../../modal/index';
+import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
+import { FocusConfig } from '../../../layout/a11y/keyboard-focus/index';
+import { LaunchDialogService } from '../../../layout/launch-dialog/services/launch-dialog.service';
 export declare class AnonymousConsentDialogComponent implements OnInit, OnDestroy {
-    private config;
-    private modalService;
-    private anonymousConsentsService;
+    protected config: AnonymousConsentsConfig;
+    protected anonymousConsentsService: AnonymousConsentsService;
+    protected el: ElementRef;
+    protected launchDialogService: LaunchDialogService;
+    role: string;
+    modal: boolean;
     private subscriptions;
     showLegalDescription: boolean;
     iconTypes: typeof ICON_TYPE;
@@ -14,9 +18,11 @@ export declare class AnonymousConsentDialogComponent implements OnInit, OnDestro
     loading$: Observable<boolean>;
     templates$: Observable<ConsentTemplate[]>;
     consents$: Observable<AnonymousConsent[]>;
-    constructor(config: AnonymousConsentsConfig, modalService: ModalService, anonymousConsentsService: AnonymousConsentsService);
+    focusConfig: FocusConfig;
+    handleClick(event: UIEvent): void;
+    constructor(config: AnonymousConsentsConfig, anonymousConsentsService: AnonymousConsentsService, el: ElementRef, launchDialogService: LaunchDialogService);
     ngOnInit(): void;
-    closeModal(reason?: any): void;
+    close(reason?: any): void;
     rejectAll(): void;
     allowAll(): void;
     private isRequiredConsent;

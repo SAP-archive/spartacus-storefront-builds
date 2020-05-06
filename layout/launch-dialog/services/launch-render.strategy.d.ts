@@ -1,17 +1,39 @@
-import { ViewContainerRef } from '@angular/core';
-import { LAUNCH_CALLER, LaunchDialog, LaunchOptions } from '../config';
-import { Applicable } from '@spartacus/core';
+import { ComponentRef, Renderer2, RendererFactory2, ViewContainerRef } from '@angular/core';
+import { Applicable, Priority } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { DIALOG_TYPE, LaunchDialog, LaunchOptions, LAUNCH_CALLER } from '../config';
 export declare abstract class LaunchRenderStrategy implements Applicable {
+    protected document: any;
+    protected rendererFactory: RendererFactory2;
     protected renderedCallers: Array<{
-        caller: LAUNCH_CALLER;
+        caller: LAUNCH_CALLER | string;
         element?: any;
+        component?: ComponentRef<any>;
     }>;
+    /**
+     * Classes to apply to the component when the dialog is a DIALOG
+     */
+    protected dialogClasses: string[];
+    /**
+     * Classes to apply to the component when the dialog is a POPOVER
+     */
+    protected popoverClasses: any[];
+    /**
+     * Classes to apply to the component when the dialog is a SIDEBAR_END
+     */
+    protected sidebarEndClasses: any[];
+    /**
+     * Classes to apply to the component when the dialog is a SIDEBAR_START
+     */
+    protected sidebarStartClasses: any[];
+    protected renderer: Renderer2;
+    constructor(document: any, rendererFactory: RendererFactory2);
     /**
      * Render method to implement based on the strategy
      *
      * @param config Launch configuration
      */
-    abstract render(config: LaunchOptions, caller: LAUNCH_CALLER, vcr?: ViewContainerRef): void;
+    abstract render(config: LaunchOptions, caller: LAUNCH_CALLER | string, vcr?: ViewContainerRef): void | Observable<ComponentRef<any>>;
     /**
      * Determines if the strategy is the right one for the provided configuration
      *
@@ -24,7 +46,8 @@ export declare abstract class LaunchRenderStrategy implements Applicable {
      * @param caller
      * @param config
      */
-    protected shouldRender(caller: LAUNCH_CALLER, config: LaunchDialog): boolean;
+    protected shouldRender(caller: LAUNCH_CALLER | string, config: LaunchDialog): boolean;
+    protected applyClasses(component: ComponentRef<any>, dialogType: DIALOG_TYPE): void;
     /**
      * Method to call when rendered element is destroyed
      * The element will be removed from the list of rendered elements
@@ -32,5 +55,6 @@ export declare abstract class LaunchRenderStrategy implements Applicable {
      * @param caller
      * @param _config optional parameters used in children strategies
      */
-    remove(caller: LAUNCH_CALLER, _config?: LaunchOptions): void;
+    remove(caller: LAUNCH_CALLER | string, config: LaunchOptions): void;
+    getPriority(): Priority;
 }

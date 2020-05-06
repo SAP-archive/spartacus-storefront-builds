@@ -1,19 +1,1946 @@
 import { __decorate, __param } from 'tslib';
-import { CommonModule, isPlatformServer, isPlatformBrowser, DOCUMENT, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, ElementRef, Renderer2, Input, Component, NgModule, Inject, PLATFORM_ID, Injector, INJECTOR, isDevMode, Optional, ViewContainerRef, Directive, ComponentFactoryResolver, NgZone, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, APP_INITIALIZER, ChangeDetectorRef, Pipe, EventEmitter, Output, ViewChild, HostListener, InjectionToken, TemplateRef, ComponentFactory, SecurityContext, RendererFactory2, ViewChildren, inject } from '@angular/core';
-import { Config, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, AnonymousConsentsService, I18nModule, FeaturesConfigModule, DeferLoadingStrategy, CmsConfig, CmsService, resolveApplicable, DynamicAttributeService, AuthService, ActiveCartService, CheckoutService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, GlobalMessageService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, RoutingService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserConsentService, UserOrderService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, GlobalMessageType, AsmConfig, AsmService, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, PromotionLocation, EMAIL_PATTERN, PASSWORD_PATTERN, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, provideConfig, PageRobotsMeta, ANONYMOUS_CONSENT_STATUS, AuthGuard, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule as AnonymousConsentsModule$1, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
-import { Subscription, combineLatest, of, Observable, from, BehaviorSubject, fromEvent, concat, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
-import { take, distinctUntilChanged, tap, switchMap, mergeMap, debounceTime, map, startWith, filter, shareReplay, skipWhile, withLatestFrom, first, flatMap, scan, endWith, observeOn, pluck, delayWhen } from 'rxjs/operators';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, isDevMode, RendererFactory2, ComponentFactoryResolver, TemplateRef, Input, Directive, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, Optional, Injector, INJECTOR, NgZone, APP_INITIALIZER, ViewEncapsulation, ChangeDetectorRef, Pipe, InjectionToken, SecurityContext, ViewChildren, inject } from '@angular/core';
+import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, fromEvent, from, isObservable, asyncScheduler, asapScheduler, interval } from 'rxjs';
+import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, switchMap, shareReplay, mergeMap, debounceTime, endWith, observeOn, pluck, delayWhen } from 'rxjs/operators';
+import { Config, resolveApplicable, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, CmsConfig, CmsService, DynamicAttributeService, CheckoutDeliveryService, CheckoutPaymentService, PageMetaService, FeatureConfigService, TranslationService, KymaService, OccEndpointsService, ProductService, ProductSearchService, ProductReviewService, ProductReferenceService, SearchboxService, CurrencyService, LanguageService, BaseSiteService, UserService, UserAddressService, UserPaymentService, UserNotificationPreferenceService, UserInterestsService, SelectiveCartService, AsmAuthService, AsmConfig, AsmService, AsmModule as AsmModule$1, ProductScope, CartVoucherService, CustomerCouponService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, ConfigModule, PageRobotsMeta, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, NotAuthGuard, OrderReturnRequestService, CmsPageTitleModule, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
-import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { Validators, FormBuilder, ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+
+/**
+ * Types of dialog openings supported
+ */
+var DIALOG_TYPE;
+(function (DIALOG_TYPE) {
+    DIALOG_TYPE["POPOVER"] = "POPOVER";
+    DIALOG_TYPE["DIALOG"] = "DIALOG";
+    DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
+    DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
+})(DIALOG_TYPE || (DIALOG_TYPE = {}));
+/**
+ * List of available callers
+ */
+var LAUNCH_CALLER;
+(function (LAUNCH_CALLER) {
+    LAUNCH_CALLER["ASM"] = "ASM";
+    LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
+    LAUNCH_CALLER["ANONYMOUS_CONSENT"] = "ANONYMOUS_CONSENT";
+})(LAUNCH_CALLER || (LAUNCH_CALLER = {}));
+
+var BREAKPOINT;
+(function (BREAKPOINT) {
+    BREAKPOINT["xs"] = "xs";
+    BREAKPOINT["sm"] = "sm";
+    BREAKPOINT["md"] = "md";
+    BREAKPOINT["lg"] = "lg";
+    BREAKPOINT["xl"] = "xl";
+})(BREAKPOINT || (BREAKPOINT = {}));
+/**
+ * The LayoutConfig supports the configuration of page slots by page templates
+ * or page sections, such as headers and footers. The configuration also supports
+ * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+ * por a given breakpoint.
+ */
+let LayoutConfig = class LayoutConfig {
+};
+LayoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function LayoutConfig_Factory() { return ɵɵinject(Config); }, token: LayoutConfig, providedIn: "root" });
+LayoutConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], LayoutConfig);
+
+let LaunchRenderStrategy = class LaunchRenderStrategy {
+    constructor(document, rendererFactory) {
+        this.document = document;
+        this.rendererFactory = rendererFactory;
+        // List of called references; only used for rendered elements
+        this.renderedCallers = [];
+        /**
+         * Classes to apply to the component when the dialog is a DIALOG
+         */
+        this.dialogClasses = ['d-block', 'fade', 'modal', 'show'];
+        /**
+         * Classes to apply to the component when the dialog is a POPOVER
+         */
+        this.popoverClasses = [];
+        /**
+         * Classes to apply to the component when the dialog is a SIDEBAR_END
+         */
+        this.sidebarEndClasses = [];
+        /**
+         * Classes to apply to the component when the dialog is a SIDEBAR_START
+         */
+        this.sidebarStartClasses = [];
+        this.renderer = rendererFactory.createRenderer(null, null);
+    }
+    /**
+     * Determines if element should render
+     *
+     * @param caller
+     * @param config
+     */
+    shouldRender(caller, config) {
+        return (Boolean(config.component) &&
+            (this.renderedCallers.some((el) => el.caller === caller)
+                ? !!config.multi
+                : true));
+    }
+    applyClasses(component, dialogType) {
+        let classes = [];
+        // TODO: make classes configurable
+        switch (dialogType) {
+            case DIALOG_TYPE.DIALOG:
+                classes = this.dialogClasses;
+                this.renderer.addClass(this.document.body, 'modal-open');
+                break;
+            case DIALOG_TYPE.POPOVER:
+                classes = this.popoverClasses;
+                break;
+            case DIALOG_TYPE.SIDEBAR_END:
+                classes = this.sidebarEndClasses;
+                break;
+            case DIALOG_TYPE.SIDEBAR_START:
+                classes = this.sidebarStartClasses;
+                break;
+        }
+        for (const newClass of classes) {
+            this.renderer.addClass(component.location.nativeElement, newClass);
+        }
+    }
+    /**
+     * Method to call when rendered element is destroyed
+     * The element will be removed from the list of rendered elements
+     *
+     * @param caller
+     * @param _config optional parameters used in children strategies
+     */
+    remove(caller, config) {
+        var _a;
+        this.renderedCallers = this.renderedCallers.filter((el) => el.caller !== caller);
+        if (((_a = config) === null || _a === void 0 ? void 0 : _a.dialogType) === DIALOG_TYPE.DIALOG) {
+            this.renderer.removeClass(this.document.body, 'modal-open');
+        }
+    }
+    getPriority() {
+        return -10 /* LOW */; // low, as it's a default matcher
+    }
+};
+LaunchRenderStrategy = __decorate([
+    __param(0, Inject(DOCUMENT))
+], LaunchRenderStrategy);
+
+let InlineRenderStrategy = class InlineRenderStrategy extends LaunchRenderStrategy {
+    constructor(document, rendererFactory, componentFactoryResolver) {
+        super(document, rendererFactory);
+        this.document = document;
+        this.rendererFactory = rendererFactory;
+        this.componentFactoryResolver = componentFactoryResolver;
+    }
+    /**
+     * Renders the component from the configuration in the view container ref
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller, vcr) {
+        // Only render if a ViewContainerRef is provided
+        if (vcr && this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            const component = vcr.createComponent(template);
+            if (config === null || config === void 0 ? void 0 : config.dialogType) {
+                this.applyClasses(component, config === null || config === void 0 ? void 0 : config.dialogType);
+            }
+            this.renderedCallers.push({ caller, element: vcr.element, component });
+            return of(component);
+        }
+        else if (isDevMode()) {
+            if (!vcr) {
+                console.warn(`No view container ref provided for ${caller}`);
+            }
+            else {
+                console.warn(`Element for ${caller} already rendered. To allow multi rendering add property multi: true.`);
+            }
+        }
+    }
+    hasMatch(config) {
+        return Boolean(config.inline);
+    }
+};
+InlineRenderStrategy.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: RendererFactory2 },
+    { type: ComponentFactoryResolver }
+];
+InlineRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function InlineRenderStrategy_Factory() { return new InlineRenderStrategy(ɵɵinject(DOCUMENT), ɵɵinject(RendererFactory2), ɵɵinject(ComponentFactoryResolver)); }, token: InlineRenderStrategy, providedIn: "root" });
+InlineRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' }),
+    __param(0, Inject(DOCUMENT))
+], InlineRenderStrategy);
+
+let LaunchDialogService = class LaunchDialogService {
+    constructor(renderStrategies, layoutConfig) {
+        this.renderStrategies = renderStrategies;
+        this.layoutConfig = layoutConfig;
+        this._dialogClose = new BehaviorSubject(undefined);
+        this.renderStrategies = this.renderStrategies || [];
+    }
+    /**
+     * Render the element based on the strategy from the launch configuration
+     *
+     * @param caller LAUNCH_CALLER
+     * @param vcr View Container Ref of the container for inline rendering
+     */
+    launch(caller, vcr) {
+        const config = this.findConfiguration(caller);
+        if (config) {
+            const renderer = this.getStrategy(config);
+            // Render if the strategy exists
+            if (renderer) {
+                this._dialogClose.next(undefined);
+                return renderer.render(config, caller, vcr);
+            }
+        }
+        else if (isDevMode()) {
+            console.warn('No configuration provided for caller ' + caller);
+        }
+    }
+    /**
+     * Util method to remove element from rendered elements list
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    clear(caller) {
+        const config = this.findConfiguration(caller);
+        const renderer = this.getStrategy(config);
+        // Render if the strategy exists
+        if (renderer) {
+            renderer.remove(caller, config);
+        }
+    }
+    get dialogClose() {
+        return this._dialogClose.asObservable();
+    }
+    closeDialog(reason) {
+        this._dialogClose.next(reason);
+    }
+    /**
+     * Returns the configuration for the caller
+     *
+     * @param caller LAUNCH_CALLER
+     */
+    findConfiguration(caller) {
+        var _a;
+        if ((_a = this.layoutConfig) === null || _a === void 0 ? void 0 : _a.launch) {
+            return this.layoutConfig.launch[caller];
+        }
+        return undefined;
+    }
+    /**
+     * Returns the render strategy based on the configuration
+     *
+     * @param config Configuration for launch
+     */
+    getStrategy(config) {
+        return resolveApplicable(this.renderStrategies, [config]);
+    }
+};
+LaunchDialogService.ctorParameters = () => [
+    { type: Array, decorators: [{ type: Inject, args: [LaunchRenderStrategy,] }] },
+    { type: LayoutConfig }
+];
+LaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function LaunchDialogService_Factory() { return new LaunchDialogService(ɵɵinject(LaunchRenderStrategy), ɵɵinject(LayoutConfig)); }, token: LaunchDialogService, providedIn: "root" });
+LaunchDialogService = __decorate([
+    Injectable({ providedIn: 'root' }),
+    __param(0, Inject(LaunchRenderStrategy))
+], LaunchDialogService);
+
+var OutletPosition;
+(function (OutletPosition) {
+    OutletPosition["REPLACE"] = "replace";
+    OutletPosition["BEFORE"] = "before";
+    OutletPosition["AFTER"] = "after";
+})(OutletPosition || (OutletPosition = {}));
+const AVOID_STACKED_OUTLETS = false;
+const USE_STACKED_OUTLETS = true;
+
+let OutletService = class OutletService {
+    constructor() {
+        this.templatesRefs = new Map();
+        this.templatesRefsBefore = new Map();
+        this.templatesRefsAfter = new Map();
+    }
+    /**
+     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
+     */
+    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
+        if (position === OutletPosition.BEFORE) {
+            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.REPLACE) {
+            this.store(this.templatesRefs, outlet, templateOrFactory);
+        }
+        if (position === OutletPosition.AFTER) {
+            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+        }
+    }
+    /**
+     *
+     * Returns a single object or multiple objects for the given outlet reference,
+     * depending on the `stacked` argument.
+     *
+     * @param outlet The outlet reference
+     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
+     * @param stacked Indicates whether an array of outlet components is returned
+     */
+    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
+        let templateRef;
+        switch (position) {
+            case OutletPosition.BEFORE:
+                templateRef = this.templatesRefsBefore.get(outlet);
+                break;
+            case OutletPosition.AFTER:
+                templateRef = this.templatesRefsAfter.get(outlet);
+                break;
+            default:
+                templateRef = this.templatesRefs.get(outlet);
+        }
+        if (templateRef && !stacked) {
+            return templateRef[0];
+        }
+        return templateRef;
+    }
+    remove(outlet, position = OutletPosition.REPLACE, value) {
+        switch (position) {
+            case OutletPosition.BEFORE:
+                this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
+                break;
+            case OutletPosition.AFTER:
+                this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
+                break;
+            default:
+                this.removeValueOrAll(this.templatesRefs, outlet, value);
+        }
+    }
+    store(store, outlet, value) {
+        const existing = store.get(outlet) || [];
+        const newValue = existing.concat([value]);
+        store.set(outlet, newValue);
+    }
+    removeValueOrAll(store, outlet, value) {
+        if (!value && store.has(outlet)) {
+            store.delete(outlet);
+        }
+        else if (value && store.has(outlet)) {
+            let existing = store.get(outlet);
+            existing = existing.filter((val) => val === value);
+            store.set(outlet, existing);
+        }
+    }
+};
+OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
+OutletService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OutletService);
+
+let OutletRefDirective = class OutletRefDirective {
+    constructor(tpl, outletService) {
+        this.tpl = tpl;
+        this.outletService = outletService;
+    }
+    ngOnInit() {
+        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
+    }
+};
+OutletRefDirective.ctorParameters = () => [
+    { type: TemplateRef },
+    { type: OutletService }
+];
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletRef", void 0);
+__decorate([
+    Input()
+], OutletRefDirective.prototype, "cxOutletPos", void 0);
+OutletRefDirective = __decorate([
+    Directive({
+        selector: '[cxOutletRef]',
+    })
+], OutletRefDirective);
+
+let OutletRefModule = class OutletRefModule {
+};
+OutletRefModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [OutletRefDirective],
+        exports: [OutletRefDirective],
+    })
+], OutletRefModule);
+
+let OutletRendererService = class OutletRendererService {
+    constructor() {
+        this.outletRefs = new BehaviorSubject(new Map());
+    }
+    /**
+     * Dynamically render the templates in the specified array
+     *
+     * @param outlet
+     */
+    render(outlet) {
+        if (this.outletRefs.value.size !== 0) {
+            this.outletRefs.value.get(outlet).render();
+        }
+    }
+    /**
+     * Register outlet to be available to render dynamically
+     *
+     * @param cxOutlet
+     * @param context
+     */
+    register(cxOutlet, context) {
+        this.outletRefs.next(this.outletRefs.value.set(cxOutlet, context));
+    }
+    /**
+     * Returns map of outlets
+     *
+     */
+    getOutletRef(outlet) {
+        return this.outletRefs.asObservable().pipe(map((val) => val.get(outlet)), filter((val) => Boolean(val)));
+    }
+};
+OutletRendererService.ɵprov = ɵɵdefineInjectable({ factory: function OutletRendererService_Factory() { return new OutletRendererService(); }, token: OutletRendererService, providedIn: "root" });
+OutletRendererService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OutletRendererService);
+
+/**
+ * The IntersectionService uses the native IntersectionObserver (v2), which
+ * can be used to implement pre-loading and deferred loading of DOM content.
+ *
+ */
+let IntersectionService = class IntersectionService {
+    constructor(config) {
+        this.config = config;
+    }
+    /**
+     * Returns an Observable that emits only once a boolean value whenever
+     * the given element has shown in the view port.
+     *
+     * The returned observable will only emit the first value. The
+     * observable must be cleaned up either way, since the value might never emit; it
+     *  depends on whether the element appears in the view port.
+     */
+    isIntersected(element, options) {
+        return this.intersects(element, options).pipe(first((v) => v === true));
+    }
+    /**
+     * Indicates whenever the element intersects the view port. An optional margin
+     * is used to intersects before the element shows up in the viewport.
+     * A value is emitted each time the element intersects.
+     *
+     * This is private for now, but could be exposed as a public API
+     * to introduce additional (css) render effects to the UI.
+     */
+    intersects(element, options = {}) {
+        const elementVisible$ = new Observable((observer) => {
+            const rootMargin = this.getRootMargin(options);
+            const intersectOptions = { rootMargin, threshold: options.threshold };
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                observer.next(entries);
+            }, intersectOptions);
+            intersectionObserver.observe(element);
+            return () => {
+                intersectionObserver.disconnect();
+            };
+        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
+        return elementVisible$;
+    }
+    getRootMargin(options = {}) {
+        if (options.rootMargin) {
+            return options.rootMargin;
+        }
+        const layoutConfig = this.config;
+        if (layoutConfig.deferredLoading &&
+            layoutConfig.deferredLoading.intersectionMargin) {
+            return layoutConfig.deferredLoading.intersectionMargin;
+        }
+    }
+};
+IntersectionService.ctorParameters = () => [
+    { type: LayoutConfig }
+];
+IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
+IntersectionService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], IntersectionService);
+
+/**
+ * The defer loading serivce is used to defer loading of DOM elements
+ * until the elements are required for the user experience.
+ */
+let DeferLoaderService = class DeferLoaderService {
+    constructor(platformId, config, intersectionService) {
+        this.platformId = platformId;
+        this.config = config;
+        this.intersectionService = intersectionService;
+        this.globalLoadStrategy = config.deferredLoading
+            ? config.deferredLoading.strategy
+            : DeferLoadingStrategy.INSTANT;
+    }
+    /**
+     * Defer loading till the element intersects the viewport.
+     *
+     * We evaluate whether we instantly load the element for different reasons:
+     * - we run in SSR mode
+     * - there's no global strategy given
+     * - the global loading strategy is set to INSTANT loading,
+     *   and the loading strategy in the given is not set to DEFER
+     * - the loading strategy in the given options is set to INSTANT
+     */
+    load(element, options) {
+        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
+            return of(true);
+        }
+        else {
+            return this.intersectionService.isIntersected(element, options);
+        }
+    }
+    shouldLoadInstantly(elementLoadingStrategy) {
+        return (isPlatformServer(this.platformId) ||
+            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
+            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
+                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
+    }
+};
+DeferLoaderService.ctorParameters = () => [
+    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+    { type: LayoutConfig },
+    { type: IntersectionService }
+];
+DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
+DeferLoaderService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(0, Inject(PLATFORM_ID))
+], DeferLoaderService);
+
+let OutletDirective = class OutletDirective {
+    constructor(vcr, templateRef, outletService, deferLoaderService, outletRendererService) {
+        this.vcr = vcr;
+        this.templateRef = templateRef;
+        this.outletService = outletService;
+        this.deferLoaderService = deferLoaderService;
+        this.outletRendererService = outletRendererService;
+        this.renderedTemplate = [];
+        this.renderedComponents = new Map();
+        this.loaded = new EventEmitter(true);
+        this.subscription = new Subscription();
+    }
+    render() {
+        this.vcr.clear();
+        this.renderedTemplate = [];
+        this.renderedComponents.clear();
+        this.subscription.unsubscribe();
+        this.subscription = new Subscription();
+        if (this.cxOutletDefer) {
+            this.deferLoading();
+        }
+        else {
+            this.build();
+        }
+    }
+    ngOnChanges(changes) {
+        if (changes.cxOutlet) {
+            this.render();
+            this.outletRendererService.register(this.cxOutlet, this);
+        }
+    }
+    deferLoading() {
+        this.loaded.emit(false);
+        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
+        // Although the deferLoaderService might emit only once, as long as the hostElement
+        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+        // the subscription on destroy.
+        this.subscription.add(this.deferLoaderService
+            .load(hostElement, this.cxOutletDefer)
+            .subscribe(() => {
+            this.build();
+            this.loaded.emit(true);
+        }));
+    }
+    build() {
+        this.buildOutlet(OutletPosition.BEFORE);
+        this.buildOutlet(OutletPosition.REPLACE);
+        this.buildOutlet(OutletPosition.AFTER);
+    }
+    buildOutlet(position) {
+        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
+        templates = templates === null || templates === void 0 ? void 0 : templates.filter((el) => !this.renderedTemplate.includes(el));
+        if (!templates && position === OutletPosition.REPLACE) {
+            templates = [this.templateRef];
+        }
+        // Just in case someone extended the `OutletService` and
+        // returns a singular object.
+        if (!Array.isArray(templates)) {
+            templates = [templates];
+        }
+        const components = [];
+        templates.forEach((obj) => {
+            const component = this.create(obj);
+            components.push(component);
+        });
+        this.renderedComponents.set(position, components);
+    }
+    create(tmplOrFactory) {
+        this.renderedTemplate.push(tmplOrFactory);
+        if (tmplOrFactory instanceof ComponentFactory) {
+            const component = this.vcr.createComponent(tmplOrFactory);
+            return component;
+        }
+        else if (tmplOrFactory instanceof TemplateRef) {
+            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
+                $implicit: this.cxOutletContext,
+            });
+            // we do not know if content is created dynamically or not
+            // so we apply change detection anyway
+            view.markForCheck();
+            return view;
+        }
+    }
+    /**
+     * Returns the closest `HtmlElement`, by iterating over the
+     * parent nodes of the given element.
+     *
+     * We avoid traversing the parent _elements_, as this is blocking
+     * ie11 implementations. One of the spare exclusions we make to not
+     * supporting ie11.
+     *
+     * @param element
+     */
+    getHostElement(element) {
+        if (element instanceof HTMLElement) {
+            return element;
+        }
+        return this.getHostElement(element.parentNode);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+};
+OutletDirective.ctorParameters = () => [
+    { type: ViewContainerRef },
+    { type: TemplateRef },
+    { type: OutletService },
+    { type: DeferLoaderService },
+    { type: OutletRendererService }
+];
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutlet", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletContext", void 0);
+__decorate([
+    Input()
+], OutletDirective.prototype, "cxOutletDefer", void 0);
+__decorate([
+    Output()
+], OutletDirective.prototype, "loaded", void 0);
+OutletDirective = __decorate([
+    Directive({
+        selector: '[cxOutlet]',
+    })
+], OutletDirective);
+
+let OutletModule = class OutletModule {
+};
+OutletModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [OutletDirective],
+        providers: [OutletService],
+        exports: [OutletDirective],
+    })
+], OutletModule);
+
+let OutletRenderStrategy = class OutletRenderStrategy extends LaunchRenderStrategy {
+    constructor(document, rendererFactory, outletService, componentFactoryResolver, outletRendererService) {
+        super(document, rendererFactory);
+        this.document = document;
+        this.rendererFactory = rendererFactory;
+        this.outletService = outletService;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.outletRendererService = outletRendererService;
+    }
+    /**
+     * Renders the element in the configured outlet
+     *
+     * @param config
+     * @param caller
+     * @param vcr
+     */
+    render(config, caller) {
+        if (this.shouldRender(caller, config)) {
+            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+            this.outletService.add(config.outlet, template, config.position ? config.position : OutletPosition.BEFORE);
+            this.outletRendererService.render(config.outlet);
+            this.renderedCallers.push({ caller });
+            return this.outletRendererService.getOutletRef(config.outlet).pipe(map((outletDirective) => {
+                const components = outletDirective.renderedComponents.get(config.position ? config.position : OutletPosition.BEFORE);
+                return components
+                    .reverse()
+                    .find((component) => component.componentType === template.componentType);
+            }), tap((component) => {
+                if (config === null || config === void 0 ? void 0 : config.dialogType) {
+                    this.applyClasses(component, config === null || config === void 0 ? void 0 : config.dialogType);
+                }
+            }));
+        }
+    }
+    hasMatch(config) {
+        return Boolean(config.outlet);
+    }
+    remove(caller, config) {
+        const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
+        this.outletService.remove(config.outlet, config.position ? config.position : OutletPosition.BEFORE, template);
+        super.remove(caller, config);
+    }
+};
+OutletRenderStrategy.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: RendererFactory2 },
+    { type: OutletService },
+    { type: ComponentFactoryResolver },
+    { type: OutletRendererService }
+];
+OutletRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function OutletRenderStrategy_Factory() { return new OutletRenderStrategy(ɵɵinject(DOCUMENT), ɵɵinject(RendererFactory2), ɵɵinject(OutletService), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletRendererService)); }, token: OutletRenderStrategy, providedIn: "root" });
+OutletRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' }),
+    __param(0, Inject(DOCUMENT))
+], OutletRenderStrategy);
+
+let RoutingRenderStrategy = class RoutingRenderStrategy extends LaunchRenderStrategy {
+    constructor(document, rendererFactory, routingService) {
+        super(document, rendererFactory);
+        this.document = document;
+        this.rendererFactory = rendererFactory;
+        this.routingService = routingService;
+    }
+    /**
+     * Navigates to the route configured for the caller
+     */
+    render(config, _caller) {
+        this.routingService.go(config);
+    }
+    hasMatch(config) {
+        return Boolean(config.cxRoute);
+    }
+};
+RoutingRenderStrategy.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
+    { type: RendererFactory2 },
+    { type: RoutingService }
+];
+RoutingRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function RoutingRenderStrategy_Factory() { return new RoutingRenderStrategy(ɵɵinject(DOCUMENT), ɵɵinject(RendererFactory2), ɵɵinject(RoutingService)); }, token: RoutingRenderStrategy, providedIn: "root" });
+RoutingRenderStrategy = __decorate([
+    Injectable({ providedIn: 'root' }),
+    __param(0, Inject(DOCUMENT))
+], RoutingRenderStrategy);
+
+var LaunchDialogModule_1;
+let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
+    static forRoot() {
+        return {
+            ngModule: LaunchDialogModule_1,
+            providers: [{ provide: LayoutConfig, useExisting: Config }],
+        };
+    }
+};
+LaunchDialogModule = LaunchDialogModule_1 = __decorate([
+    NgModule({
+        providers: [
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: OutletRenderStrategy,
+                multi: true,
+            },
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: InlineRenderStrategy,
+                multi: true,
+            },
+            {
+                provide: LaunchRenderStrategy,
+                useExisting: RoutingRenderStrategy,
+                multi: true,
+            },
+        ],
+    })
+], LaunchDialogModule);
+
+let AnonymousConsentLaunchDialogService = class AnonymousConsentLaunchDialogService {
+    constructor(launchDialogService) {
+        this.launchDialogService = launchDialogService;
+    }
+    openDialog(openElement, vcr) {
+        const component = this.launchDialogService.launch(LAUNCH_CALLER.ANONYMOUS_CONSENT, vcr);
+        if (component) {
+            return combineLatest([
+                component,
+                this.launchDialogService.dialogClose,
+            ]).pipe(filter(([, close]) => close && close !== undefined), tap(([comp]) => {
+                openElement === null || openElement === void 0 ? void 0 : openElement.nativeElement.focus();
+                this.launchDialogService.clear(LAUNCH_CALLER.ANONYMOUS_CONSENT);
+                comp.destroy();
+            }), map(([comp]) => comp));
+        }
+    }
+};
+AnonymousConsentLaunchDialogService.ctorParameters = () => [
+    { type: LaunchDialogService }
+];
+AnonymousConsentLaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function AnonymousConsentLaunchDialogService_Factory() { return new AnonymousConsentLaunchDialogService(ɵɵinject(LaunchDialogService)); }, token: AnonymousConsentLaunchDialogService, providedIn: "root" });
+AnonymousConsentLaunchDialogService = __decorate([
+    Injectable({ providedIn: 'root' })
+], AnonymousConsentLaunchDialogService);
+
+/** The element attribute used to store the focus state */
+const FOCUS_ATTR = 'data-cx-focus';
+/** The element attribute used to store the focus group state */
+const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
+
+let BaseFocusService = class BaseFocusService {
+};
+BaseFocusService.ɵprov = ɵɵdefineInjectable({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
+BaseFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], BaseFocusService);
+
+/**
+ * Abstract directive that provides a common interface for all focus directives:
+ * - Block Focus
+ * - Persist Focus
+ * - Escape Focus
+ * - Auto Focus
+ * - Tab Focus
+ * - Trap Focus
+ * - Lock Focus
+ */
+let BaseFocusDirective = class BaseFocusDirective {
+    constructor(elementRef, service) {
+        this.elementRef = elementRef;
+        this.service = service;
+        /**
+         * A default config can be provided for each directive if a specific focus directive
+         * is used directly. i.e. `<div cxAutoFocus></div>`
+         */
+        this.defaultConfig = {};
+    }
+    ngOnInit() {
+        this.setDefaultConfiguration();
+        this.requiredTabindex = -1;
+    }
+    /**
+     * Override the (input) config if it undefined or an empty string, with the
+     * `defaultConfig`. The `defaultConfig` might be specified for each directive
+     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
+     * specific (inherited) defaultConfig will be used.
+     */
+    setDefaultConfiguration() {
+        if ((!this.config || this.config === '') && this.defaultConfig) {
+            this.config = this.defaultConfig;
+        }
+    }
+    /**
+     * Helper method to return the host element for the directive
+     * given by the `elementRef`.
+     */
+    get host() {
+        return this.elementRef.nativeElement;
+    }
+    /**
+     * Force a tabindex on the host element if it is _requried_ to make the element
+     * focusable. If the element is focusable by nature or by a given tabindex, the
+     * `tabindex` is not applied.
+     *
+     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
+     */
+    set requiredTabindex(tabindex) {
+        if (this.requiresExplicitTabIndex) {
+            this.tabindex = tabindex;
+        }
+    }
+    /**
+     * Returns true if the host element does not have a tabindex defined
+     * and it also doesn't get focus by browsers nature (i.e. button or
+     * active link).
+     */
+    get requiresExplicitTabIndex() {
+        return (this.tabindex === undefined &&
+            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
+            !(this.host.tagName === 'A' &&
+                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
+    }
+};
+BaseFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+__decorate([
+    Input(), HostBinding('attr.tabindex')
+], BaseFocusDirective.prototype, "tabindex", void 0);
+BaseFocusDirective = __decorate([
+    Directive()
+], BaseFocusDirective);
+
+/**
+ * Directive implementation that adds a CSS class to the host element
+ * when the moused is used to focus an element. As soon as the keyboard
+ * is used, the class is removed.
+ */
+let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
+    constructor() {
+        super(...arguments);
+        this.defaultConfig = { disableMouseFocus: true };
+        /** controls a polyfill class for the lacking focus-visible feature */
+        this.mouseFocus = false;
+    }
+    handleMousedown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = true;
+        }
+    }
+    handleKeydown() {
+        if (this.shouldFocusVisible) {
+            this.mouseFocus = false;
+        }
+    }
+    get shouldFocusVisible() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
+    }
+};
+__decorate([
+    HostBinding('class.mouse-focus')
+], VisibleFocusDirective.prototype, "mouseFocus", void 0);
+__decorate([
+    HostListener('mousedown')
+], VisibleFocusDirective.prototype, "handleMousedown", null);
+__decorate([
+    HostListener('keydown')
+], VisibleFocusDirective.prototype, "handleKeydown", null);
+VisibleFocusDirective = __decorate([
+    Directive() // selector: '[cxVisibleFocus]'
+], VisibleFocusDirective);
+
+let BlockFocusDirective = 
+// { selector: '[cxBlockFocus]' }
+class BlockFocusDirective extends VisibleFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { block: true };
+        // @Input('cxBlockFocus')
+        this.config = {};
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        if (this.config.block) {
+            this.tabindex = -1;
+        }
+    }
+};
+BlockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: BaseFocusService }
+];
+BlockFocusDirective = __decorate([
+    Directive()
+    // { selector: '[cxBlockFocus]' }
+], BlockFocusDirective);
+
+const GLOBAL_GROUP = '_g_';
+/**
+ * Shared service to persist the focus for an element or a group
+ * of elements. The persisted element focus can be used to persist
+ * the focus for a DOM tree, so that the focus remains after a repaint
+ * or reoccurs when a DOM tree is "unlocked".
+ */
+let PersistFocusService = class PersistFocusService extends BaseFocusService {
+    constructor() {
+        super(...arguments);
+        // this is going to fail as we have sub services. They will al have their own map.
+        // We must bring this to a singlton map.
+        this.focus = new Map();
+    }
+    get(group) {
+        return this.focus.get(group || GLOBAL_GROUP);
+    }
+    /**
+     * Persist the keyboard focus state for the given key. The focus is stored globally
+     * or for the given group.
+     */
+    set(key, group) {
+        if (key) {
+            this.focus.set(group || GLOBAL_GROUP, key);
+        }
+    }
+    /**
+     * Clears the persisted keyboard focus state globally or for the given group.
+     */
+    clear(group) {
+        this.focus.delete(group || GLOBAL_GROUP);
+    }
+    /**
+     * Returns the group for the host element based on the configured group or
+     * by the `data-cx-focus-group` attribute stored on the host.
+     */
+    getPersistenceGroup(host, config) {
+        return (config === null || config === void 0 ? void 0 : config.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
+    }
+};
+PersistFocusService.ɵprov = ɵɵdefineInjectable({ factory: function PersistFocusService_Factory() { return new PersistFocusService(); }, token: PersistFocusService, providedIn: "root" });
+PersistFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], PersistFocusService);
+
+/**
+ * Directive that provides persistence of the focused state. This is useful
+ * when a group of focusable elements got refocused or even recreated. That
+ * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
+ *
+ * The focus state is based on a configured _key_, which can be passed in the
+ * config input, either by using a string primitive or `PersistFocusConfig.key`:
+ *
+ * ```html
+ * <button cxPersistFocus="myKey"></button>
+ * <button cxFocus="myKey"></button>
+ * <button [cxFocus]="{{key:'myKey'}"></button>
+ * ```
+ *
+ * The focus state can be part of a focus _group_, so that the state is shared
+ * and remember for the given group. In order to detect the persistence for a
+ * given element, we store the persistence key as a data attribute (`data-cx-focus`):
+ *
+ * ```html
+ * <button data-cx-focus="myKey"></button>
+ * ```
+ *
+ * Other keyboard focus directives can read the key to understand whether the element
+ * should retrieve focus.
+ *
+ */
+let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = {};
+        /**
+         * The persistence key can be passed directly or through the `FocusConfig.key`.
+         * While this could be considered a global key, the likeliness of conflicts
+         * is very small since the key is cleared when the focus is changed.
+         */
+        // @Input('cxPersistFocus')
+        this.config = {};
+    }
+    handleFocus(event) {
+        this.service.set(this.key, this.group);
+        event === null || event === void 0 ? void 0 : event.preventDefault();
+        event === null || event === void 0 ? void 0 : event.stopPropagation();
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.attr = this.key ? this.key : undefined;
+    }
+    setDefaultConfiguration() {
+        if (typeof this.config === 'string' && this.config !== '') {
+            this.config = { key: this.config };
+        }
+        super.setDefaultConfiguration();
+    }
+    /**
+     * Focus the element explicitly if it was focused before.
+     */
+    ngAfterViewInit() {
+        if (this.isPersisted) {
+            this.host.focus({ preventScroll: true });
+        }
+    }
+    get isPersisted() {
+        return !!this.key && this.service.get(this.group) === this.key;
+    }
+    /**
+     * Returns the key for the host element, which is used to persist the
+     * focus state. This is useful in cases where the DOM is rebuild.
+     */
+    get key() {
+        var _a;
+        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
+    }
+    /**
+     * returns the persistence group (if any) for the focusable elements.
+     */
+    get group() {
+        return this.service.getPersistenceGroup(this.host, this.config);
+    }
+};
+PersistFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: PersistFocusService }
+];
+__decorate([
+    HostBinding(`attr.${FOCUS_ATTR}`)
+], PersistFocusDirective.prototype, "attr", void 0);
+__decorate([
+    HostListener('focus', ['$event'])
+], PersistFocusDirective.prototype, "handleFocus", null);
+PersistFocusDirective = __decorate([
+    Directive() // selector: '[cxPersistFocus]',
+], PersistFocusDirective);
+
+let SelectFocusUtility = class SelectFocusUtility {
+    constructor() {
+        /**
+         * Query selectors used to query focusable child elements of the host element.
+         * The selectors are supplemented with `:not([disabled])` and `:not([hidden])`.
+         */
+        this.focusableSelectors = [
+            'a[href]',
+            'button',
+            '[tabindex]',
+            'input',
+            'select',
+            'textarea',
+        ];
+        // like to leave out the following as we don't use it, and make this list exensible.
+        //   `[contentEditable=true]`, // very unlikely to suport as we're not a business tool
+        //   `iframe`, // we really don't like iframes...
+        //   `area[href]`, // very debatable!
+        this.focusableSelectorSuffix = ':not([disabled]):not([hidden])';
+    }
+    query(host, selector) {
+        if (!selector || selector === '') {
+            return [];
+        }
+        return Array.from(host.querySelectorAll(selector));
+    }
+    findFirstFocusable(host, config = { autofocus: true }) {
+        const selector = typeof (config === null || config === void 0 ? void 0 : config.autofocus) === 'string' ? config.autofocus : '[autofocus]';
+        // fallback to first focusable
+        return (this.query(host, selector).find((el) => !this.isHidden(el)) ||
+            this.findFocusable(host).find((el) => Boolean(el)));
+    }
+    /**
+     * returns all focusable child elements of the host element. The element selectors
+     * are build from the `focusableSelectors`.
+     *
+     * @param host the `HTMLElement` used to query focusable elements
+     * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returned
+     * @param invisible indicates whether hidden focusable elements should be returned
+     */
+    findFocusable(host, locked = false, invisible = false) {
+        let suffix = this.focusableSelectorSuffix;
+        if (!locked) {
+            suffix += `:not([tabindex='-1'])`;
+        }
+        const selector = this.focusableSelectors
+            .map((s) => (s += suffix))
+            .join(',');
+        return this.query(host, selector).filter((el) => !invisible ? !this.isHidden(el) : Boolean(el));
+    }
+    /**
+     * Indicates whether the element is hidden by CSS. There are various CSS rules and
+     * HTML structures which can lead to an hidden or invisible element. An `offsetParent`
+     * of null indicates that the element or any of it's decendants is hidden (`display:none`).
+     *
+     * Oother techniques use the visibility (`visibility: hidden`), opacity (`opacity`) or
+     * phyisical location on the element itself or any of it's anchestor elements. Those
+     * technique require to work with the _computed styles_, which will cause a performance
+     * downgrade. We don't do this in the standard implementaton.
+     */
+    isHidden(el) {
+        return el.offsetParent === null;
+    }
+};
+SelectFocusUtility.ɵprov = ɵɵdefineInjectable({ factory: function SelectFocusUtility_Factory() { return new SelectFocusUtility(); }, token: SelectFocusUtility, providedIn: "root" });
+SelectFocusUtility = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], SelectFocusUtility);
+
+let EscapeFocusService = class EscapeFocusService extends PersistFocusService {
+    constructor(selectFocusUtil) {
+        super();
+        this.selectFocusUtil = selectFocusUtil;
+    }
+    shouldFocus(config) {
+        return !!(config === null || config === void 0 ? void 0 : config.focusOnEscape);
+    }
+    handleEscape(host, config, event) {
+        var _a;
+        if (this.shouldFocus(config)) {
+            if (host !== event.target) {
+                host.focus({ preventScroll: true });
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            else {
+                if (config === null || config === void 0 ? void 0 : config.focusOnDoubleEscape) {
+                    (_a = this.selectFocusUtil
+                        .findFirstFocusable(host, { autofocus: true })) === null || _a === void 0 ? void 0 : _a.focus();
+                }
+            }
+        }
+    }
+};
+EscapeFocusService.ctorParameters = () => [
+    { type: SelectFocusUtility }
+];
+EscapeFocusService.ɵprov = ɵɵdefineInjectable({ factory: function EscapeFocusService_Factory() { return new EscapeFocusService(ɵɵinject(SelectFocusUtility)); }, token: EscapeFocusService, providedIn: "root" });
+EscapeFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], EscapeFocusService);
+
+/**
+ * Directive to focus the host element whenever the `escape` key is captured.
+ * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
+ * on a tree of elements. Each time the escape key is used, the focus will
+ * move up in the DOM tree.
+ *
+ */
+let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { focusOnEscape: true };
+        this.esc = new EventEmitter();
+    }
+    /**
+     * Handles the escape key event.
+     * @param event the native keyboard event which contains the escape keydown event
+     */
+    handleEscape(event) {
+        if (this.service.shouldFocus(this.config)) {
+            this.service.handleEscape(this.host, this.config, event);
+        }
+        this.esc.emit(this.service.shouldFocus(this.config));
+    }
+    ngOnInit() {
+        if (this.service.shouldFocus(this.config)) {
+            this.requiredTabindex = -1;
+        }
+        super.ngOnInit();
+    }
+};
+EscapeFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: EscapeFocusService }
+];
+__decorate([
+    Output()
+], EscapeFocusDirective.prototype, "esc", void 0);
+__decorate([
+    HostListener('keydown.escape', ['$event'])
+], EscapeFocusDirective.prototype, "handleEscape", null);
+EscapeFocusDirective = __decorate([
+    Directive() // selector: '[cxEscFocus]',
+], EscapeFocusDirective);
+
+let AutoFocusService = class AutoFocusService extends EscapeFocusService {
+    /**
+     * Returns the first focusable child element of the host element.
+     */
+    findFirstFocusable(host, config = { autofocus: true }) {
+        if ((config === null || config === void 0 ? void 0 : config.autofocus) === ':host') {
+            return host;
+        }
+        else if (this.hasPersistedFocus(host, config)) {
+            return this.getPersisted(host, this.getPersistenceGroup(host, config));
+        }
+        else {
+            return this.selectFocusUtil.findFirstFocusable(host, config) || host;
+        }
+    }
+    /**
+     * Indicates whether any of the focusabe child elements is focused.
+     */
+    hasPersistedFocus(host, config) {
+        return !!this.getPersisted(host, this.getPersistenceGroup(host, config));
+    }
+    /**
+     * Returns the element that has a persisted focus state.
+     *
+     * @param host the `HTMLElement` used to query for focusable children
+     * @param group the optional group for the persistent state, to separate different focus
+     *   groups and remain the persistence
+     */
+    getPersisted(host, group) {
+        if (!this.get(group)) {
+            return;
+        }
+        const focussed = Array.from(host.querySelectorAll(`[${FOCUS_ATTR}='${this.get(group)}']`));
+        return focussed.length > 0 ? focussed[0] : null;
+    }
+};
+AutoFocusService.ɵprov = ɵɵdefineInjectable({ factory: function AutoFocusService_Factory() { return new AutoFocusService(ɵɵinject(SelectFocusUtility)); }, token: AutoFocusService, providedIn: "root" });
+AutoFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], AutoFocusService);
+
+/**
+ * Directive that focus the first nested _focusable_ element based on state and configuration:
+ *
+ * 1. focusable element that was left in a focused state (aka _persisted_ focus)
+ * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
+ * 3. focusable element marked with the native HTML5 `autofocus` attribute
+ * 4. first focusable element
+ * 5. the host element, in case the configured CSS selector is `:host`.
+ *
+ * Example configurations:
+ *
+ * `<div cxAutoFocus>[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
+ *
+ * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
+ *
+ */
+let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** The AutoFocusDirective will be using autofocus by default  */
+        this.defaultConfig = { autofocus: true };
+    }
+    /**
+     * Focus the element explicitly if it was focussed before.
+     */
+    ngAfterViewInit() {
+        if (this.shouldAutofocus) {
+            this.handleFocus();
+        }
+        if (!this.shouldAutofocus || this.hasPersistedFocus) {
+            super.ngAfterViewInit();
+        }
+    }
+    /**
+     * Mimic the focus without setting the actual focus on the host. The first
+     * focusable child element will be focussed.
+     */
+    handleFocus(event) {
+        var _a;
+        if (this.shouldAutofocus) {
+            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
+                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
+            }
+            else {
+                event.target.focus();
+            }
+        }
+        super.handleFocus(event);
+    }
+    /**
+     * Helper function to get the first focusable child element
+     */
+    get hasPersistedFocus() {
+        return this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Helper function to indicate whether we should use autofocus for the
+     * child elements.
+     */
+    get shouldAutofocus() {
+        var _a;
+        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
+    }
+    /**
+     * Helper function to get the first focusable child element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get firstFocusable() {
+        return this.service.findFirstFocusable(this.host, this.config);
+    }
+};
+AutoFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: AutoFocusService }
+];
+AutoFocusDirective = __decorate([
+    Directive() // selector: '[cxAutoFocus]'
+], AutoFocusDirective);
+
+let TabFocusService = class TabFocusService extends AutoFocusService {
+    /**
+     * Moves to the next (or previous) tab.
+     */
+    moveTab(host, config, increment, event) {
+        if (config === null || config === void 0 ? void 0 : config.tab) {
+            const next = config.tab === 'scroll'
+                ? this.findNextScrollable(host, config, increment)
+                : this.findNext(host, config, increment);
+            next === null || next === void 0 ? void 0 : next.focus();
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
+    /**
+     * builds out virtual slides out of the full scrollable area, to allow
+     * for maximum flexibility for the underlying layout without using hardcoded
+     * slide sizes.
+     */
+    findNextScrollable(host, config, increment) {
+        var _a;
+        const active = this.getActiveChild(host, config);
+        if (!active) {
+            return;
+        }
+        // slide count
+        const virtualSlideCount = Math.round(host.scrollWidth / host.clientWidth);
+        // find current virtual slide
+        const currentVirtualSlide = Math.round(active.offsetLeft / (host.scrollWidth / virtualSlideCount));
+        let nextVirtualSlide = currentVirtualSlide + increment;
+        if (increment === 1 /* NEXT */ &&
+            nextVirtualSlide >= virtualSlideCount) {
+            nextVirtualSlide = 0;
+        }
+        if (increment === -1 /* PREV */ && nextVirtualSlide < 0) {
+            nextVirtualSlide = virtualSlideCount - 1;
+        }
+        const firstItemOnNextSlide = (_a = this.getChildren(host, config)) === null || _a === void 0 ? void 0 : _a.find((tab) => tab.offsetLeft >=
+            (host.scrollWidth / virtualSlideCount) * nextVirtualSlide);
+        return firstItemOnNextSlide;
+    }
+    findNext(host, config, increment) {
+        const childs = this.getChildren(host, config);
+        let activeIndex = childs === null || childs === void 0 ? void 0 : childs.findIndex((c) => c === this.getActiveChild(host, config));
+        if (!activeIndex || activeIndex === -1) {
+            activeIndex = 0;
+        }
+        activeIndex += increment;
+        if (increment === 1 /* NEXT */ && activeIndex >= (childs === null || childs === void 0 ? void 0 : childs.length)) {
+            activeIndex = childs.length - 1;
+        }
+        if (increment === -1 /* PREV */ && activeIndex < 0) {
+            activeIndex = 0;
+        }
+        return childs ? childs[activeIndex] : undefined;
+    }
+    /**
+     * Returns the active focusable child element. If there's no active
+     * focusable child element, the first focusable child is returned.
+     */
+    getActiveChild(host, config) {
+        const persisted = this.getPersisted(host, config === null || config === void 0 ? void 0 : config.group);
+        if (persisted) {
+            return persisted;
+        }
+        const children = this.getChildren(host, config);
+        let index = children.findIndex((tab) => this.isActive(tab));
+        if (!index || index === -1) {
+            index = 0;
+        }
+        return children[index];
+    }
+    getChildren(host, config) {
+        if (typeof config.tab === 'string' && config.tab !== 'scroll') {
+            return this.selectFocusUtil.query(host, config.tab);
+        }
+        else {
+            return this.findFocusable(host, true);
+        }
+    }
+    /**
+     * Returns all focusable child elements of the host element.
+     *
+     * @param host The host element is used to query child focusable elements.
+     * @param locked Indicates if locked elements (tabindex=-1) should be returned, defaults to false.
+     * @param invisible Indicates if invisible child elements should be returned, defaults to false.
+     */
+    findFocusable(host, locked = false, invisible = false) {
+        return this.selectFocusUtil.findFocusable(host, locked, invisible);
+    }
+    isActive(el) {
+        const child = document.activeElement;
+        const selector = child.tagName;
+        return (el === child ||
+            !!Array.from(el.querySelectorAll(selector)).find((e) => e === child));
+    }
+};
+TabFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TabFocusService_Factory() { return new TabFocusService(ɵɵinject(SelectFocusUtility)); }, token: TabFocusService, providedIn: "root" });
+TabFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], TabFocusService);
+
+/**
+ * Directive to move the focus of ("locked") child elements. This is useful
+ * for a nested list of tabs, carousel slides or any group of elements that
+ * requires horizontal navigation.
+ */
+let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
+        this.defaultConfig = { tab: true };
+        // @Input('cxTabFocus')
+        this.config = {};
+    }
+    handleNextTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
+        }
+    }
+    handlePreviousTab(event) {
+        var _a;
+        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
+            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
+        }
+    }
+};
+TabFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TabFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowRight', ['$event'])
+], TabFocusDirective.prototype, "handleNextTab", null);
+__decorate([
+    HostListener('keydown.arrowLeft', ['$event'])
+], TabFocusDirective.prototype, "handlePreviousTab", null);
+TabFocusDirective = __decorate([
+    Directive() // selector: '[cxTabFocus]'
+], TabFocusDirective);
+
+let TrapFocusService = class TrapFocusService extends TabFocusService {
+    /**
+     * Indicates whether any of the child elements of the host are focusable.
+     *
+     * @param host `HTMLElement` that is used to query the focusable elements.
+     */
+    hasFocusableChildren(host) {
+        return this.findFocusable(host).length > 0;
+    }
+    /**
+     * Focus the next or previous element of all available focusable elements.
+     * The focus is _trapped_ in case there's no next or previous available element.
+     * The focus will automatically move the start or end of the list.
+     */
+    moveFocus(host, config, increment, event) {
+        const focusable = this.findFocusable(host);
+        let index = focusable.findIndex((v) => v === event.target) + increment;
+        const shouldMoveFocus = (index >= 0 && index < focusable.length) ||
+            (index < 0 && this.getTrapStart(config.trap)) ||
+            (index >= focusable.length && this.getTrapEnd(config.trap));
+        if (shouldMoveFocus) {
+            if (index >= focusable.length) {
+                index = 0;
+            }
+            if (index < 0) {
+                index = focusable.length - 1;
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            const el = focusable[index];
+            el.focus();
+        }
+    }
+    getTrapStart(trap) {
+        return trap === true || trap === 'start';
+    }
+    getTrapEnd(trap) {
+        return trap === true || trap === 'end';
+    }
+};
+TrapFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TrapFocusService_Factory() { return new TrapFocusService(ɵɵinject(SelectFocusUtility)); }, token: TrapFocusService, providedIn: "root" });
+TrapFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], TrapFocusService);
+
+/**
+ * Directive that keeps the focus inside the focussable child elements,
+ * also known as a _focus trap_.
+ */
+let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
+    constructor(elementRef, service) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.defaultConfig = { trap: true };
+        // @Input('cxTrapFocus')
+        this.config = {};
+        this.handleTrapDown = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, 1 /* NEXT */);
+            }
+        };
+        this.handleTrapUp = (event) => {
+            if (!!this.config.trap) {
+                this.moveFocus(event, -1 /* PREV */);
+            }
+        };
+    }
+    /**
+     * Moves the focus of the element reference up or down, depending on the increment.
+     * The focus of the element is trapped to avoid it from going out of the group.
+     *
+     * @param event UIEvent that is used to get the target element. The event is blocked
+     *   from standard execution and further bubbling.
+     * @param increment indicates whether the next or previous is focussed.
+     */
+    moveFocus(event, increment) {
+        if (this.service.hasFocusableChildren(this.host)) {
+            this.service.moveFocus(this.host, this.config, increment, event);
+        }
+    }
+};
+TrapFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: TrapFocusService }
+];
+__decorate([
+    HostListener('keydown.arrowdown', ['$event']),
+    HostListener('keydown.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapDown", void 0);
+__decorate([
+    HostListener('keydown.arrowup', ['$event']),
+    HostListener('keydown.shift.tab', ['$event'])
+], TrapFocusDirective.prototype, "handleTrapUp", void 0);
+TrapFocusDirective = __decorate([
+    Directive() // selector: '[cxTrapFocus]'
+], TrapFocusDirective);
+
+let LockFocusService = class LockFocusService extends TrapFocusService {
+};
+LockFocusService.ɵprov = ɵɵdefineInjectable({ factory: function LockFocusService_Factory() { return new LockFocusService(ɵɵinject(SelectFocusUtility)); }, token: LockFocusService, providedIn: "root" });
+LockFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], LockFocusService);
+
+/**
+ * Focusable elements exclude hidden elements by default, but this contradicts with
+ * unlocking (hidden) elements.
+ */
+const UNLOCK_HIDDEN_ELEMENTS = true;
+/**
+ * Directive that adds persistence for focussed element in case
+ * the elements are being rebuild. This happens often when change
+ * detection kicks in because of new data set from the backend.
+ */
+let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = { lock: true };
+        // @Input('cxLockFocus')
+        this.config = {};
+        /**
+         * Emits an event when the host is unlocked.
+         */
+        this.unlock = new EventEmitter();
+    }
+    /**
+     * When the user selects enter or space, the focusable childs are
+     * unlocked, which means that the tabindex is set to 0.
+     */
+    handleEnter(event) {
+        if (this.shouldLock && this.host === event.target) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    /**
+     * In case any of the children elements is touched by the mouse,
+     * we unlock the group to not break the mouse-experience.
+     */
+    handleClick(event) {
+        if (this.shouldLock && this.isLocked) {
+            this.unlockFocus(event);
+            event.stopPropagation();
+        }
+    }
+    lockFocus() {
+        this.addTabindexToChildren(-1);
+    }
+    unlockFocus(event) {
+        this.unlock.emit(true);
+        this.addTabindexToChildren(0);
+        // we focus the host if the event was triggered from a child
+        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
+            super.handleFocus(event);
+        }
+    }
+    ngOnInit() {
+        var _a, _b;
+        super.ngOnInit();
+        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
+        if (this.shouldLock) {
+            this.tabindex = 0;
+            // Locked elements will be set to `autofocus` by default if it's not
+            // been configured. This will ensure that autofocus kicks in upon unlock.
+            if (!this.config.hasOwnProperty('autofocus')) {
+                this.config.autofocus = true;
+            }
+            // Locked elements will be set to `focusOnEscape` by default if it's not
+            // been configured. This will ensure that  the host gets locked again when
+            // `escape` is pressed.
+            if (!this.config.hasOwnProperty('focusOnEscape')) {
+                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
+            }
+        }
+    }
+    ngAfterViewInit() {
+        if (this.shouldLock) {
+            /**
+             * If the component hosts a group of focusable children elmenents,
+             * we persist the group key to the children, so that they can taken this
+             * into account when they persist their focus state.
+             */
+            if (!!this.group) {
+                this.service.findFocusable(this.host).forEach((el) => 
+                // we must do this in after view init as
+                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
+            }
+            if (this.shouldAutofocus) {
+                this.handleFocus();
+            }
+        }
+        super.ngAfterViewInit();
+    }
+    handleFocus(event) {
+        if (this.shouldLock) {
+            if (this.shouldUnlockAfterAutofocus(event)) {
+                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
+                setTimeout(() => this.unlockFocus(event));
+            }
+            else {
+                setTimeout(() => this.lockFocus());
+                event === null || event === void 0 ? void 0 : event.stopPropagation();
+                return;
+            }
+        }
+        super.handleFocus(event);
+    }
+    handleEscape(event) {
+        if (this.shouldLock) {
+            this.service.clear(this.config.group);
+        }
+        super.handleEscape(event);
+    }
+    /**
+     * When the handleFocus is called without an actual event, it's coming from Autofocus.
+     * In this case we unlock the focusable children in case there's a focusable child that
+     * was unlocked before.
+     *
+     * We keep this private to not polute the API.
+     */
+    shouldUnlockAfterAutofocus(event) {
+        return !event && this.service.hasPersistedFocus(this.host, this.config);
+    }
+    /**
+     * Add the tabindex attribute to the focusable children elements
+     */
+    addTabindexToChildren(i = 0) {
+        if (this.shouldLock) {
+            this.isLocked = i === -1;
+            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
+                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
+            }
+        }
+    }
+    /**
+     * Utility method, returns all focusable children for the host element.
+     *
+     * We keep this private to not polute the API.
+     */
+    get hasFocusableChildren() {
+        return this.service.hasFocusableChildren(this.host);
+    }
+    /**
+     * Returns the focusable children of the host element. If the host element
+     * is configured to be locked, the query is restricted to child elements
+     * with a tabindex !== `-1`.
+     *
+     * We keep this private to not polute the API.
+     */
+    get focusable() {
+        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
+    }
+};
+LockFocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: LockFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    HostBinding('class.focus-lock')
+], LockFocusDirective.prototype, "shouldLock", void 0);
+__decorate([
+    HostBinding('class.is-locked')
+], LockFocusDirective.prototype, "isLocked", void 0);
+__decorate([
+    Output()
+], LockFocusDirective.prototype, "unlock", void 0);
+__decorate([
+    HostListener('keydown.enter', ['$event']),
+    HostListener('keydown.space', ['$event'])
+], LockFocusDirective.prototype, "handleEnter", null);
+__decorate([
+    HostListener('click', ['$event'])
+], LockFocusDirective.prototype, "handleClick", null);
+LockFocusDirective = __decorate([
+    Directive() // selector: '[cxLockFocus]'
+], LockFocusDirective);
+
+let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
+};
+KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
+KeyboardFocusService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], KeyboardFocusService);
+
+let FocusDirective = class FocusDirective extends LockFocusDirective {
+    constructor(elementRef, service, renderer) {
+        super(elementRef, service, renderer);
+        this.elementRef = elementRef;
+        this.service = service;
+        this.renderer = renderer;
+        this.defaultConfig = {};
+        // tslint:disable-next-line: no-input-rename
+        this.config = {};
+    }
+};
+FocusDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: KeyboardFocusService },
+    { type: Renderer2 }
+];
+__decorate([
+    Input('cxFocus')
+], FocusDirective.prototype, "config", void 0);
+FocusDirective = __decorate([
+    Directive({
+        selector: '[cxFocus]',
+    })
+], FocusDirective);
+
+const directives = [
+    // PersistFocusDirective,
+    // VisibleFocusDirective,
+    // BlockFocusDirective,
+    // AutoFocusDirective,
+    // EscapeFocusDirective,
+    // LockFocusDirective,
+    // TrapFocusDirective,
+    // TabFocusDirective,
+    FocusDirective,
+];
+let KeyboardFocusModule = class KeyboardFocusModule {
+};
+KeyboardFocusModule = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [...directives],
+        exports: [...directives],
+    })
+], KeyboardFocusModule);
+
+// given that we're likely going to refactor the directives, we're
+// export * from './autofocus/index';
+// export * from './base/index';
+// export * from './block/index';
+// export * from './escape/index';
+// export * from './lock/index';
+// export * from './persist/index';
+// export * from './tab/index';
+// export * from './trap/index';
+// export * from './visible/index';
+// export * from './keyboard-focus.model';
+
+let AnonymousConsentManagementBannerComponent = class AnonymousConsentManagementBannerComponent {
+    constructor(anonymousConsentsService, anonymousConsentLaunchDialogService, vcr) {
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.anonymousConsentLaunchDialogService = anonymousConsentLaunchDialogService;
+        this.vcr = vcr;
+        this.subscriptions = new Subscription();
+        this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
+    }
+    viewDetails() {
+        this.hideBanner();
+        const dialog = this.anonymousConsentLaunchDialogService.openDialog(null, this.vcr);
+        if (dialog) {
+            this.subscriptions.add(dialog.subscribe());
+        }
+    }
+    allowAll() {
+        this.subscriptions.add(this.anonymousConsentsService
+            .giveAllConsents()
+            .pipe(tap(() => this.hideBanner()))
+            .subscribe());
+    }
+    hideBanner() {
+        this.anonymousConsentsService.toggleBannerDismissed(true);
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
+};
+AnonymousConsentManagementBannerComponent.ctorParameters = () => [
+    { type: AnonymousConsentsService },
+    { type: AnonymousConsentLaunchDialogService },
+    { type: ViewContainerRef }
+];
+AnonymousConsentManagementBannerComponent = __decorate([
+    Component({
+        selector: 'cx-anonymous-consent-management-banner',
+        template: "<ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n  <div\n    [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n    class=\"anonymous-consent-banner\"\n  >\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-xs-12\">\n          <div class=\"cx-banner-title\">\n            {{ 'anonymousConsents.banner.title' | cxTranslate }}\n          </div>\n          <div class=\"cx-banner-description\">\n            {{ 'anonymousConsents.banner.description' | cxTranslate }}\n          </div>\n        </div>\n\n        <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n          <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n            {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n          </button>\n          <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n            {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+    })
+], AnonymousConsentManagementBannerComponent);
 
 var ICON_TYPE;
 (function (ICON_TYPE) {
@@ -311,6 +2238,1773 @@ IconModule = __decorate([
     })
 ], IconModule);
 
+let AnonymousConsentDialogComponent = class AnonymousConsentDialogComponent {
+    constructor(config, anonymousConsentsService, el, launchDialogService) {
+        this.config = config;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.el = el;
+        this.launchDialogService = launchDialogService;
+        this.role = 'dialog';
+        this.modal = true;
+        this.subscriptions = new Subscription();
+        this.showLegalDescription = true;
+        this.iconTypes = ICON_TYPE;
+        this.requiredConsents = [];
+        this.focusConfig = {
+            trap: true,
+            block: true,
+            autofocus: 'input[type="checkbox"]',
+            focusOnEscape: true,
+        };
+        if (Boolean(this.config.anonymousConsents)) {
+            this.showLegalDescription = this.config.anonymousConsents.showLegalDescriptionInDialog;
+            if (Boolean(this.config.anonymousConsents.requiredConsents)) {
+                this.requiredConsents = this.config.anonymousConsents.requiredConsents;
+            }
+        }
+    }
+    handleClick(event) {
+        // Close on click outside the dialog window
+        if (event.target.tagName === this.el.nativeElement.tagName) {
+            this.close('Cross click');
+        }
+    }
+    ngOnInit() {
+        this.templates$ = this.anonymousConsentsService.getTemplates();
+        this.consents$ = this.anonymousConsentsService.getConsents();
+        this.loading$ = this.anonymousConsentsService.getLoadTemplatesLoading();
+    }
+    close(reason) {
+        this.launchDialogService.closeDialog(reason);
+    }
+    rejectAll() {
+        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
+            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
+            const consent = this.getCorrespondingConsent(template, consents);
+            if (this.anonymousConsentsService.isConsentGiven(consent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                this.anonymousConsentsService.withdrawConsent(template.id);
+            }
+        })))
+            .subscribe());
+        this.close('rejectAll');
+    }
+    allowAll() {
+        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
+            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
+            const consent = this.getCorrespondingConsent(template, consents);
+            if ((consent && consent.consentState == null) ||
+                this.anonymousConsentsService.isConsentWithdrawn(consent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                this.anonymousConsentsService.giveConsent(template.id);
+            }
+        })))
+            .subscribe());
+        this.close('allowAll');
+    }
+    isRequiredConsent(template) {
+        return (Boolean(this.config.anonymousConsents) &&
+            Boolean(this.config.anonymousConsents.requiredConsents) &&
+            this.config.anonymousConsents.requiredConsents.includes(template.id));
+    }
+    onConsentChange({ given, template, }) {
+        if (given) {
+            this.anonymousConsentsService.giveConsent(template.id);
+        }
+        else {
+            this.anonymousConsentsService.withdrawConsent(template.id);
+        }
+    }
+    getCorrespondingConsent(template, consents = []) {
+        for (const consent of consents) {
+            if (template.id === consent.templateCode) {
+                return consent;
+            }
+        }
+        return null;
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+    }
+};
+AnonymousConsentDialogComponent.ctorParameters = () => [
+    { type: AnonymousConsentsConfig },
+    { type: AnonymousConsentsService },
+    { type: ElementRef },
+    { type: LaunchDialogService }
+];
+__decorate([
+    HostBinding('attr.role')
+], AnonymousConsentDialogComponent.prototype, "role", void 0);
+__decorate([
+    HostBinding('attr.aria-modal')
+], AnonymousConsentDialogComponent.prototype, "modal", void 0);
+__decorate([
+    HostListener('click', ['$event'])
+], AnonymousConsentDialogComponent.prototype, "handleClick", null);
+AnonymousConsentDialogComponent = __decorate([
+    Component({
+        selector: 'cx-anonymous-consent-dialog',
+        template: "<div\n  class=\"cx-anonymous-consent-dialog\"\n  [cxFocus]=\"focusConfig\"\n  (esc)=\"close('Escape clicked')\"\n>\n  <div class=\"cx-dialog-content\">\n    <div *ngIf=\"loading$ | async; else dialogBody\">\n      <cx-spinner></cx-spinner>\n    </div>\n    <ng-template #dialogBody>\n      <div class=\"cx-dialog-header\">\n        <h3>\n          {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n        </h3>\n        <button\n          type=\"button\"\n          class=\"close\"\n          aria-label=\"Close\"\n          (click)=\"close('Cross click')\"\n        >\n          <span aria-hidden=\"true\">\n            <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n          </span>\n        </button>\n      </div>\n      <!-- Separator -->\n      <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n        {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n      </div>\n      <!-- Actions -->\n      <div class=\"cx-dialog-buttons\">\n        <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n          'anonymousConsents.dialog.clearAll' | cxTranslate\n        }}</a>\n        <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n          'anonymousConsents.dialog.selectAll' | cxTranslate\n        }}</a>\n      </div>\n      <!-- Modal Body -->\n      <div class=\"cx-dialog-body\" *ngIf=\"templates$ | async as templates\">\n        <ng-container *ngIf=\"consents$ | async as consents\">\n          <div\n            class=\"cx-dialog-row col-sm-12 col-md-6\"\n            *ngFor=\"let template of templates\"\n          >\n            <cx-consent-management-form\n              [consentTemplate]=\"template\"\n              [requiredConsents]=\"requiredConsents\"\n              [consent]=\"getCorrespondingConsent(template, consents)\"\n              (consentChanged)=\"onConsentChange($event)\"\n            ></cx-consent-management-form>\n          </div>\n        </ng-container>\n      </div>\n    </ng-template>\n  </div>\n</div>\n"
+    })
+], AnonymousConsentDialogComponent);
+
+const defaultAnonymousConsentLayoutConfig = {
+    launch: {
+        ANONYMOUS_CONSENT: {
+            inline: true,
+            component: AnonymousConsentDialogComponent,
+            dialogType: DIALOG_TYPE.DIALOG,
+        },
+    },
+};
+
+let AnonymousConsentOpenDialogComponent = class AnonymousConsentOpenDialogComponent {
+    constructor(vcr, anonymousConsentLaunchDialogService) {
+        this.vcr = vcr;
+        this.anonymousConsentLaunchDialogService = anonymousConsentLaunchDialogService;
+    }
+    openDialog() {
+        const dialog = this.anonymousConsentLaunchDialogService.openDialog(this.openElement, this.vcr);
+        if (dialog) {
+            dialog.pipe(take(1)).subscribe();
+        }
+    }
+};
+AnonymousConsentOpenDialogComponent.ctorParameters = () => [
+    { type: ViewContainerRef },
+    { type: AnonymousConsentLaunchDialogService }
+];
+__decorate([
+    ViewChild('open')
+], AnonymousConsentOpenDialogComponent.prototype, "openElement", void 0);
+AnonymousConsentOpenDialogComponent = __decorate([
+    Component({
+        selector: 'cx-anonymous-consent-open-dialog',
+        template: "<button #open class=\"btn btn-link\" (click)=\"openDialog()\">\n  {{ 'anonymousConsents.preferences' | cxTranslate }}\n</button>\n"
+    })
+], AnonymousConsentOpenDialogComponent);
+
+let AnonymousConsentManagementBannerModule = class AnonymousConsentManagementBannerModule {
+};
+AnonymousConsentManagementBannerModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            I18nModule,
+            FeaturesConfigModule,
+            KeyboardFocusModule,
+        ],
+        providers: [
+            provideConfig(defaultAnonymousConsentLayoutConfig),
+            provideDefaultConfig({
+                cmsComponents: {
+                    AnonymousConsentManagementBannerComponent: {
+                        component: AnonymousConsentManagementBannerComponent,
+                        deferLoading: DeferLoadingStrategy.INSTANT,
+                    },
+                    AnonymousConsentOpenDialogComponent: {
+                        component: AnonymousConsentOpenDialogComponent,
+                    },
+                },
+            }),
+        ],
+        declarations: [
+            AnonymousConsentManagementBannerComponent,
+            AnonymousConsentOpenDialogComponent,
+        ],
+        exports: [
+            AnonymousConsentManagementBannerComponent,
+            AnonymousConsentOpenDialogComponent,
+        ],
+        entryComponents: [
+            AnonymousConsentManagementBannerComponent,
+            AnonymousConsentOpenDialogComponent,
+        ],
+    })
+], AnonymousConsentManagementBannerModule);
+
+// TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
+let SpinnerComponent = class SpinnerComponent {
+    constructor() { }
+};
+SpinnerComponent = __decorate([
+    Component({
+        selector: 'cx-spinner',
+        template: "<div class=\"loader-container\">\n  <div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n</div>\n"
+    })
+], SpinnerComponent);
+
+let SpinnerModule = class SpinnerModule {
+};
+SpinnerModule = __decorate([
+    NgModule({
+        imports: [CommonModule, I18nModule],
+        declarations: [SpinnerComponent],
+        exports: [SpinnerComponent],
+    })
+], SpinnerModule);
+
+let ConsentManagementFormComponent = class ConsentManagementFormComponent {
+    constructor() {
+        this.consentGiven = false;
+        this.requiredConsents = [];
+        this.consentChanged = new EventEmitter();
+    }
+    ngOnInit() {
+        if (this.consent) {
+            this.consentGiven = Boolean(this.consent.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN);
+        }
+        else {
+            if (this.consentTemplate && this.consentTemplate.currentConsent) {
+                if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
+                    this.consentGiven = false;
+                }
+                else if (this.consentTemplate.currentConsent.consentGivenDate) {
+                    this.consentGiven = true;
+                }
+            }
+        }
+    }
+    onConsentChange() {
+        this.consentGiven = !this.consentGiven;
+        this.consentChanged.emit({
+            given: this.consentGiven,
+            template: this.consentTemplate,
+        });
+    }
+    isRequired(templateId) {
+        return this.requiredConsents.includes(templateId);
+    }
+};
+__decorate([
+    Input()
+], ConsentManagementFormComponent.prototype, "consentTemplate", void 0);
+__decorate([
+    Input()
+], ConsentManagementFormComponent.prototype, "requiredConsents", void 0);
+__decorate([
+    Input()
+], ConsentManagementFormComponent.prototype, "consent", void 0);
+__decorate([
+    Output()
+], ConsentManagementFormComponent.prototype, "consentChanged", void 0);
+ConsentManagementFormComponent = __decorate([
+    Component({
+        selector: 'cx-consent-management-form',
+        template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      (change)=\"onConsentChange()\"\n      [checked]=\"consentGiven\"\n      [disabled]=\"isRequired(consentTemplate?.id)\"\n    />\n    <span class=\"form-check-label cx-be-bold\">\n      {{ consentTemplate?.name }}\n    </span>\n    <br />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
+    })
+], ConsentManagementFormComponent);
+
+let ConsentManagementComponent = class ConsentManagementComponent {
+    constructor(userConsentService, globalMessageService, anonymousConsentsConfig, anonymousConsentsService, authService) {
+        this.userConsentService = userConsentService;
+        this.globalMessageService = globalMessageService;
+        this.anonymousConsentsConfig = anonymousConsentsConfig;
+        this.anonymousConsentsService = anonymousConsentsService;
+        this.authService = authService;
+        this.subscriptions = new Subscription();
+        this.allConsentsLoading = new BehaviorSubject(false);
+        this.requiredConsents = [];
+    }
+    ngOnInit() {
+        this.loading$ = combineLatest([
+            this.userConsentService.getConsentsResultLoading(),
+            this.userConsentService.getGiveConsentResultLoading(),
+            this.userConsentService.getWithdrawConsentResultLoading(),
+            this.authService.isUserLoggedIn(),
+            this.allConsentsLoading,
+        ]).pipe(map(([consentLoading, giveConsentLoading, withdrawConsentLoading, isUserLoggedIn, allConsentsLoading,]) => consentLoading ||
+            giveConsentLoading ||
+            withdrawConsentLoading ||
+            !isUserLoggedIn ||
+            allConsentsLoading));
+        this.consentListInit();
+        this.giveConsentInit();
+        this.withdrawConsentInit();
+    }
+    consentListInit() {
+        this.templateList$ = this.userConsentService.getConsents().pipe(withLatestFrom(this.anonymousConsentsService.getTemplates(), this.authService.isUserLoggedIn()), filter(([_templateList, _anonymousTemplates, isUserLoggedIn]) => isUserLoggedIn), tap(([templateList, _anonymousTemplates]) => {
+            if (!this.consentsExists(templateList)) {
+                this.userConsentService.loadConsents();
+            }
+        }), map(([templateList, anonymousTemplates]) => {
+            if (Boolean(this.anonymousConsentsConfig.anonymousConsents)) {
+                if (Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
+                    this.requiredConsents = this.anonymousConsentsConfig.anonymousConsents.requiredConsents;
+                }
+                if (Boolean(this.anonymousConsentsConfig.anonymousConsents
+                    .consentManagementPage)) {
+                    return this.hideAnonymousConsents(templateList, anonymousTemplates);
+                }
+            }
+            return templateList;
+        }));
+    }
+    hideAnonymousConsents(templateList, anonymousTemplates = []) {
+        let hideTemplateIds = [];
+        if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+            .showAnonymousConsents) {
+            hideTemplateIds = anonymousTemplates.map((template) => template.id);
+            return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
+        }
+        if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+            .hideConsents) &&
+            this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
+                .hideConsents.length > 0) {
+            hideTemplateIds = this.anonymousConsentsConfig.anonymousConsents
+                .consentManagementPage.hideConsents;
+        }
+        return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
+    }
+    giveConsentInit() {
+        this.userConsentService.resetGiveConsentProcessState();
+        this.subscriptions.add(this.userConsentService
+            .getGiveConsentResultSuccess()
+            .subscribe((success) => this.onConsentGivenSuccess(success)));
+    }
+    withdrawConsentInit() {
+        this.userConsentService.resetWithdrawConsentProcessState();
+        this.subscriptions.add(this.userConsentService
+            .getWithdrawConsentResultLoading()
+            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map(([, withdrawalSuccess]) => withdrawalSuccess), tap((withdrawalSuccess) => {
+            if (withdrawalSuccess) {
+                this.userConsentService.loadConsents();
+            }
+        }))
+            .subscribe((withdrawalSuccess) => this.onConsentWithdrawnSuccess(withdrawalSuccess)));
+    }
+    consentsExists(templateList) {
+        return Boolean(templateList) && templateList.length > 0;
+    }
+    onConsentChange({ given, template, }) {
+        if (given) {
+            this.userConsentService.giveConsent(template.id, template.version);
+        }
+        else {
+            this.userConsentService.withdrawConsent(template.currentConsent.code);
+        }
+    }
+    onConsentGivenSuccess(success) {
+        if (success) {
+            this.userConsentService.resetGiveConsentProcessState();
+            this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+    }
+    onConsentWithdrawnSuccess(success) {
+        if (success) {
+            this.userConsentService.resetWithdrawConsentProcessState();
+            this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+    }
+    rejectAll(templates = []) {
+        const consentsToWithdraw = [];
+        templates.forEach((template) => {
+            if (this.userConsentService.isConsentGiven(template.currentConsent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                consentsToWithdraw.push(template);
+            }
+        });
+        this.allConsentsLoading.next(true);
+        this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
+            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
+            .subscribe());
+    }
+    setupWithdrawalStream(consentsToWithdraw = []) {
+        const loading$ = concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
+        const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
+        const withdraw$ = count$.pipe(tap((i) => {
+            if (i < consentsToWithdraw.length) {
+                this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
+            }
+        }));
+        const checkTimesLoaded$ = withdraw$.pipe(filter((timesLoaded) => timesLoaded === consentsToWithdraw.length));
+        return checkTimesLoaded$;
+    }
+    allowAll(templates = []) {
+        const consentsToGive = [];
+        templates.forEach((template) => {
+            if (this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
+                if (this.isRequiredConsent(template)) {
+                    return;
+                }
+                consentsToGive.push(template);
+            }
+        });
+        this.allConsentsLoading.next(true);
+        this.subscriptions.add(this.setupGiveStream(consentsToGive)
+            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
+            .subscribe());
+    }
+    setupGiveStream(consentsToGive = []) {
+        const loading$ = concat(this.userConsentService.getGiveConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
+        const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
+        const giveConsent$ = count$.pipe(tap((i) => {
+            if (i < consentsToGive.length) {
+                this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
+            }
+        }));
+        const checkTimesLoaded$ = giveConsent$.pipe(filter((timesLoaded) => timesLoaded === consentsToGive.length));
+        return checkTimesLoaded$;
+    }
+    isRequiredConsent(template) {
+        return (Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
+            Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents) &&
+            this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(template.id));
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
+        this.allConsentsLoading.unsubscribe();
+        this.userConsentService.resetGiveConsentProcessState();
+        this.userConsentService.resetWithdrawConsentProcessState();
+    }
+};
+ConsentManagementComponent.ctorParameters = () => [
+    { type: UserConsentService },
+    { type: GlobalMessageService },
+    { type: AnonymousConsentsConfig },
+    { type: AnonymousConsentsService },
+    { type: AuthService }
+];
+ConsentManagementComponent = __decorate([
+    Component({
+        selector: 'cx-consent-management',
+        template: "<div *ngIf=\"loading$ | async; else consentManagementForm\">\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</div>\n\n<ng-template #consentManagementForm>\n  <ng-container *ngIf=\"templateList$ | async as templateList\">\n    <div class=\"cx-consent-action-links\">\n      <div class=\"col-sm-12 col-md-8 col-lg-6\">\n        <button\n          tabindex=\"0\"\n          class=\"btn btn-link cx-action-link\"\n          (click)=\"rejectAll(templateList)\"\n        >\n          {{ 'consentManagementForm.clearAll' | cxTranslate }}\n        </button>\n        <button\n          tabindex=\"0\"\n          class=\"btn btn-link cx-action-link\"\n          (click)=\"allowAll(templateList)\"\n        >\n          {{ 'consentManagementForm.selectAll' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div class=\"cx-consent-toggles\">\n      <div class=\"col-sm-12 col-md-8 col-lg-6\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList\"\n          [consentTemplate]=\"consentTemplate\"\n          [requiredConsents]=\"requiredConsents\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-container>\n</ng-template>\n"
+    })
+], ConsentManagementComponent);
+
+let ConsentManagementModule = class ConsentManagementModule {
+};
+ConsentManagementModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            FormsModule,
+            ReactiveFormsModule,
+            SpinnerModule,
+            I18nModule,
+            IconModule,
+        ],
+        providers: [
+            provideDefaultConfig({
+                cmsComponents: {
+                    ConsentManagementComponent: {
+                        component: ConsentManagementComponent,
+                        guards: [AuthGuard],
+                    },
+                },
+            }),
+        ],
+        declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
+        exports: [ConsentManagementComponent, ConsentManagementFormComponent],
+        entryComponents: [ConsentManagementComponent],
+    })
+], ConsentManagementModule);
+
+let AnonymousConsentsDialogModule = class AnonymousConsentsDialogModule {
+};
+AnonymousConsentsDialogModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            I18nModule,
+            IconModule,
+            SpinnerModule,
+            ConsentManagementModule,
+            KeyboardFocusModule,
+        ],
+        declarations: [AnonymousConsentDialogComponent],
+        entryComponents: [AnonymousConsentDialogComponent],
+        exports: [AnonymousConsentDialogComponent],
+    })
+], AnonymousConsentsDialogModule);
+
+let CardComponent = class CardComponent {
+    constructor() {
+        this.iconTypes = ICON_TYPE;
+        this.deleteCard = new EventEmitter();
+        this.setDefaultCard = new EventEmitter();
+        this.sendCard = new EventEmitter();
+        this.editCard = new EventEmitter();
+        this.cancelCard = new EventEmitter();
+        this.border = false;
+        this.editMode = false;
+        this.isDefault = false;
+        this.fitToContainer = false;
+    }
+    // ACTIONS
+    setEditMode() {
+        this.editMode = true;
+    }
+    cancelEdit() {
+        this.editMode = false;
+        this.cancelCard.emit(5);
+    }
+    delete() {
+        this.deleteCard.emit(1);
+    }
+    setDefault() {
+        this.isDefault = true;
+        this.setDefaultCard.emit(2);
+    }
+    send() {
+        this.sendCard.emit(3);
+    }
+    edit() {
+        this.editCard.emit(4);
+    }
+    ngOnInit() { }
+};
+__decorate([
+    Output()
+], CardComponent.prototype, "deleteCard", void 0);
+__decorate([
+    Output()
+], CardComponent.prototype, "setDefaultCard", void 0);
+__decorate([
+    Output()
+], CardComponent.prototype, "sendCard", void 0);
+__decorate([
+    Output()
+], CardComponent.prototype, "editCard", void 0);
+__decorate([
+    Output()
+], CardComponent.prototype, "cancelCard", void 0);
+__decorate([
+    Input()
+], CardComponent.prototype, "border", void 0);
+__decorate([
+    Input()
+], CardComponent.prototype, "editMode", void 0);
+__decorate([
+    Input()
+], CardComponent.prototype, "isDefault", void 0);
+__decorate([
+    Input()
+], CardComponent.prototype, "content", void 0);
+__decorate([
+    Input()
+], CardComponent.prototype, "fitToContainer", void 0);
+CardComponent = __decorate([
+    Component({
+        selector: 'cx-card',
+        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link cx-action-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+    })
+], CardComponent);
+
+let CardModule = class CardModule {
+};
+CardModule = __decorate([
+    NgModule({
+        imports: [CommonModule, I18nModule, IconModule],
+        declarations: [CardComponent],
+        exports: [CardComponent],
+    })
+], CardModule);
+
+let CarouselService = class CarouselService {
+    constructor(winRef) {
+        this.winRef = winRef;
+    }
+    /**
+     * The number of items per slide is calculated by the help of
+     * the item width and the available width of the host element.
+     * This appoach makes it possible to place the carousel in different
+     * layouts. Instead of using the page breakpoints, the host size is
+     * taken into account.
+     *
+     * Since there's no element resize API available, we use the
+     * window `resize` event, so that we can adjust the number of items
+     * whenever the window got resized.
+     */
+    getItemsPerSlide(nativeElement, itemWidth) {
+        return this.winRef.resize$.pipe(map(() => nativeElement.clientWidth), map((totalWidth) => this.calculateItems(totalWidth, itemWidth)));
+    }
+    /**
+     * Calculates the number of items per given hostSize.  calculated based on the given
+     * intended size in pixels or percentages. The
+     *
+     * @param availableWidth The available width in pixels for the carousel items.
+     * @param itemWidth The width per carousel item, in px or percentage.
+     */
+    calculateItems(availableWidth, itemWidth) {
+        let calculatedItems = 0;
+        if (itemWidth.endsWith('px')) {
+            const num = itemWidth.substring(0, itemWidth.length - 2);
+            calculatedItems = availableWidth / num;
+        }
+        if (itemWidth.endsWith('%')) {
+            const perc = itemWidth.substring(0, itemWidth.length - 1);
+            calculatedItems =
+                availableWidth / (availableWidth * (perc / 100));
+        }
+        return Math.floor(calculatedItems) || 1;
+    }
+};
+CarouselService.ctorParameters = () => [
+    { type: WindowRef }
+];
+CarouselService.ɵprov = ɵɵdefineInjectable({ factory: function CarouselService_Factory() { return new CarouselService(ɵɵinject(WindowRef)); }, token: CarouselService, providedIn: "root" });
+CarouselService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], CarouselService);
+
+/**
+ * Generic carousel component that can be used to render any carousel items,
+ * such as products, images, banners, or any component. Carousel items are
+ * rendered in so-called carousel slides, and the previous/next buttons as well as
+ * the indicator-buttons can used to navigate the slides.
+ *
+ * The component uses an array of Observables (`items$`) as an input, to allow
+ * for lazy loading of items.
+ *
+ * The number of items per slide is calculated with the `itemWidth`, which can given
+ * in pixels or percentage.
+ *
+ * To allow for flexible rendering of items, the rendering is delegated to the
+ * given `template`. This allows for maximum flexibility.
+ */
+let CarouselComponent = class CarouselComponent {
+    constructor(el, service) {
+        this.el = el;
+        this.service = service;
+        /**
+         * Specifies the minimum size of the carousel item, either in px or %.
+         * This value is used for the calculation of numbers per carousel, so that
+         * the number of carousel items is dynamic. The calculation uses the `itemWidth`
+         * and the host element `clientWidth`, so that the carousel is reusable in
+         * different layouts (for example in a 50% grid).
+         */
+        this.itemWidth = '300px';
+        /**
+         * Indicates whether the visual indicators are used.
+         */
+        this.hideIndicators = false;
+        this.indicatorIcon = ICON_TYPE.CIRCLE;
+        this.previousIcon = ICON_TYPE.CARET_LEFT;
+        this.nextIcon = ICON_TYPE.CARET_RIGHT;
+    }
+    set setItems(inputItems) {
+        this.items = inputItems;
+        //Reset slider when changing products
+        this.activeSlide = 0;
+    }
+    ngOnInit() {
+        if (!this.template && isDevMode()) {
+            console.error('No template reference provided to render the carousel items for the `cx-carousel`');
+            return;
+        }
+        this.size$ = this.service
+            .getItemsPerSlide(this.el.nativeElement, this.itemWidth)
+            .pipe(tap(() => (this.activeSlide = 0)));
+    }
+};
+CarouselComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: CarouselService }
+];
+__decorate([
+    Input()
+], CarouselComponent.prototype, "title", void 0);
+__decorate([
+    Input('items')
+], CarouselComponent.prototype, "setItems", null);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "template", void 0);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "itemWidth", void 0);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "hideIndicators", void 0);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "indicatorIcon", void 0);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "previousIcon", void 0);
+__decorate([
+    Input()
+], CarouselComponent.prototype, "nextIcon", void 0);
+CarouselComponent = __decorate([
+    Component({
+        selector: 'cx-carousel',
+        template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"-1\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"-1\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], CarouselComponent);
+
+const DEFAULT_BREAKPOINTS = {
+    [BREAKPOINT.xs]: 576,
+    [BREAKPOINT.sm]: 768,
+    [BREAKPOINT.md]: 992,
+    [BREAKPOINT.lg]: 1200,
+};
+let BreakpointService = class BreakpointService {
+    constructor(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+    }
+    get breakpoint$() {
+        if (!this.window) {
+            return of(BREAKPOINT.xs);
+        }
+        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
+    }
+    /**
+     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
+     * configuration. If no configuration is available for the given breakpoint, the
+     * method will return the default values:
+     * - xs: 567
+     * - sm: 768
+     * - md: 992
+     * - lg: 1200
+     */
+    getSize(breakpoint) {
+        var _a;
+        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
+            : DEFAULT_BREAKPOINTS[breakpoint];
+    }
+    /**
+     * Returns all available breakpoints for the system.
+     */
+    get breakpoints() {
+        return [
+            BREAKPOINT.xs,
+            BREAKPOINT.sm,
+            BREAKPOINT.md,
+            BREAKPOINT.lg,
+            BREAKPOINT.xl,
+        ];
+    }
+    /**
+     * Indicates whether the current screen size is smaller than the maximum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
+     */
+    isDown(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size is larger than the minimum size of the
+     * given breakpoint.
+     *
+     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
+     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
+     */
+    isUp(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
+            .slice(this.breakpoints.indexOf(breakpoint))
+            .includes(br)));
+    }
+    /**
+     * Indicates whether the current screen size fits to the given breakpoint
+     */
+    isEqual(breakpoint) {
+        return this.breakpoint$.pipe(map((br) => br === breakpoint));
+    }
+    getBreakpoint(windowWidth) {
+        const breakpoint = this.getClosest(windowWidth);
+        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
+    }
+    getClosest(windowWidth) {
+        if (!windowWidth) {
+            windowWidth = this.window.innerWidth;
+        }
+        return windowWidth > this.getSize(BREAKPOINT.lg)
+            ? BREAKPOINT.xl
+            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
+    }
+    get window() {
+        return this.winRef.nativeWindow;
+    }
+};
+BreakpointService.ctorParameters = () => [
+    { type: WindowRef },
+    { type: LayoutConfig }
+];
+BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+BreakpointService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], BreakpointService);
+
+/**
+ * Service which generates media URLs. It leverage the MediaContainer and MediaFormats so
+ * that URLs and sizes are generated for the same media. This helps to improve performance
+ * across difference devices and layouts.
+ *
+ * Media formats are optional, but highly recommended. The format will help the browser to
+ * identify the right media for the right experience.
+ *
+ * The MediaService will generate absolute URLs in case relative URLs are provided for the Media.
+ * The baseUrl is read from the `occConfig.backend.media.baseUrl` or
+ * `occConfig.backend.occ.baseUrl`.
+ */
+let MediaService = class MediaService {
+    constructor(config, 
+    /**
+     * The BreakpointService is no longer used in version 2.0 as the different size formats are
+     * driven by configuration only. There's however a change that this service will play a role
+     * in the near future, which is why we keep the constructor as-is.
+     */
+    breakpointService) {
+        this.config = config;
+        this.breakpointService = breakpointService;
+    }
+    /**
+     * Returns a `Media` object with the main media (`src`) and various media (`src`)
+     * for specific formats.
+     */
+    getMedia(mediaContainer, format, alt) {
+        if (!mediaContainer) {
+            return;
+        }
+        const mainMedia = mediaContainer.url
+            ? mediaContainer
+            : this.resolveMedia(mediaContainer, format);
+        return {
+            src: this.resolveAbsoluteUrl(mainMedia === null || mainMedia === void 0 ? void 0 : mainMedia.url),
+            alt: alt || (mainMedia === null || mainMedia === void 0 ? void 0 : mainMedia.altText),
+            srcset: this.resolveSrcSet(mediaContainer),
+        };
+    }
+    /**
+     * Creates the media formats in a logical sorted order. The map contains the
+     * format key and the format size information. We do this only once for performance
+     * benefits.
+     */
+    get sortedFormats() {
+        if (!this._sortedFormats) {
+            this._sortedFormats = Object.keys(this.config.mediaFormats)
+                .map((key) => ({
+                code: key,
+                size: this.config.mediaFormats[key],
+            }))
+                .sort((a, b) => (a.size.width > b.size.width ? 1 : -1));
+        }
+        return this._sortedFormats;
+    }
+    /**
+     * Creates the media formats in a reversed sorted order.
+     */
+    get reversedFormats() {
+        if (!this._reversedFormats) {
+            this._reversedFormats = this.sortedFormats.slice().reverse();
+        }
+        return this._reversedFormats;
+    }
+    /**
+     * Resolves the right media for the given format. The fo
+     */
+    resolveMedia(media, format) {
+        return media[this.resolveFormat(media, format)];
+    }
+    /**
+     * Validates the format against the given mediaContainer. If there is no format available,
+     * or if the mediaContainer doesn't contain a media for the given media, the most optimal
+     * format is resolved. If even that is not possible, the first format is returned.
+     */
+    resolveFormat(mediaContainer, format) {
+        if (format && mediaContainer[format]) {
+            return format;
+        }
+        return (this.resolveBestFormat(mediaContainer) || Object.keys(mediaContainer)[0]);
+    }
+    /**
+     * Returns the media format code with the best size.
+     */
+    resolveBestFormat(media) {
+        var _a;
+        return (_a = this.reversedFormats.find((format) => media.hasOwnProperty(format.code))) === null || _a === void 0 ? void 0 : _a.code;
+    }
+    /**
+     * Returns a set of media for the available media formats. Additionally, the congiured media
+     * format width is added to the srcset, so that browsers can select the appropriate media.
+     */
+    resolveSrcSet(media) {
+        if (!media) {
+            return undefined;
+        }
+        const srcset = this.sortedFormats.reduce((set, format) => {
+            if (!!media[format.code]) {
+                if (set) {
+                    set += ', ';
+                }
+                set += `${this.resolveAbsoluteUrl(media[format.code].url)} ${format.size.width}w`;
+            }
+            return set;
+        }, '');
+        return srcset === '' ? undefined : srcset;
+    }
+    /**
+     * Resolves the absolute URL for the given url. In most cases, this URL represents
+     * the relative URL on the backend. In that case, we prefix the url with the baseUrl.
+     */
+    resolveAbsoluteUrl(url) {
+        if (!url) {
+            return null;
+        }
+        return url.startsWith('http') ? url : this.getBaseUrl() + url;
+    }
+    /**
+     * The base URL is either driven by a specific `backend.media.baseUrl`, or by the
+     * `backend.occ.baseUrl`.
+     *
+     * The `backend.media.baseUrl` can be used to load media from a different location.
+     *
+     * In Commerce Cloud, a differnt location could mean a different "aspect".
+     */
+    getBaseUrl() {
+        return (this.config.backend.media.baseUrl ||
+            this.config.backend.occ.baseUrl ||
+            '');
+    }
+};
+MediaService.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: Inject, args: [Config,] }] },
+    { type: BreakpointService }
+];
+MediaService.ɵprov = ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(ɵɵinject(Config), ɵɵinject(BreakpointService)); }, token: MediaService, providedIn: "root" });
+MediaService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    }),
+    __param(0, Inject(Config))
+], MediaService);
+
+let MediaComponent = class MediaComponent {
+    constructor(mediaService) {
+        this.mediaService = mediaService;
+        /**
+         * Once the media is loaded, we emit an event.
+         */
+        this.loaded = new EventEmitter();
+        /**
+         * The `cx-media` component has an `is-initialized` class as long as the
+         * media is being initialized.
+         */
+        this.isInitialized = false;
+        /**
+         * The `cx-media` component has a `is-loading` class as long as the
+         * media is loaded. Wehn the media is loaded, the `is-initialized` class
+         * is added.
+         */
+        this.isLoading = true;
+        /**
+         * When there's no media provided for the content, or in case an error
+         * happened during loading, we add the `is-missing` class. Visual effects
+         * can be controlled by CSS.
+         */
+        this.isMissing = false;
+    }
+    ngOnChanges() {
+        this.create();
+    }
+    /**
+     * Creates the `Media` object
+     */
+    create() {
+        var _a;
+        this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
+        if (!((_a = this.media) === null || _a === void 0 ? void 0 : _a.src)) {
+            this.handleMissing();
+        }
+    }
+    /**
+     * This handler is called from the UI when the image is loaded.
+     */
+    loadHandler() {
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.isMissing = false;
+        this.loaded.emit(true);
+    }
+    /**
+     * Whenever an error happens during load, we mark the component
+     * with css classes to have a missing media.
+     */
+    errorHandler() {
+        this.handleMissing();
+    }
+    handleMissing() {
+        this.isLoading = false;
+        this.isInitialized = true;
+        this.isMissing = true;
+        this.loaded.emit(false);
+    }
+};
+MediaComponent.ctorParameters = () => [
+    { type: MediaService }
+];
+__decorate([
+    Input()
+], MediaComponent.prototype, "container", void 0);
+__decorate([
+    Input()
+], MediaComponent.prototype, "format", void 0);
+__decorate([
+    Input()
+], MediaComponent.prototype, "alt", void 0);
+__decorate([
+    Output()
+], MediaComponent.prototype, "loaded", void 0);
+__decorate([
+    HostBinding('class.is-initialized')
+], MediaComponent.prototype, "isInitialized", void 0);
+__decorate([
+    HostBinding('class.is-loading')
+], MediaComponent.prototype, "isLoading", void 0);
+__decorate([
+    HostBinding('class.is-missing')
+], MediaComponent.prototype, "isMissing", void 0);
+MediaComponent = __decorate([
+    Component({
+        selector: 'cx-media',
+        template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], MediaComponent);
+
+var MediaModule_1;
+let MediaModule = MediaModule_1 = class MediaModule {
+    static forRoot() {
+        return {
+            ngModule: MediaModule_1,
+        };
+    }
+};
+MediaModule = MediaModule_1 = __decorate([
+    NgModule({
+        imports: [CommonModule],
+        declarations: [MediaComponent],
+        exports: [MediaComponent],
+    })
+], MediaModule);
+
+let CarouselModule = class CarouselModule {
+};
+CarouselModule = __decorate([
+    NgModule({
+        imports: [CommonModule, RouterModule, IconModule, MediaModule, UrlModule],
+        declarations: [CarouselComponent],
+        exports: [CarouselComponent],
+    })
+], CarouselModule);
+
+/**
+ * This component renders form errors.
+ */
+let FormErrorsComponent = class FormErrorsComponent {
+    set control(control) {
+        this._control = control;
+        this.errors$ = control === null || control === void 0 ? void 0 : control.statusChanges.pipe(startWith({}), map(() => control.errors || {}), map((errors) => Object.entries(errors)
+            .filter((error) => error[1])
+            .map((error) => error[0])));
+    }
+    get control() {
+        return this._control;
+    }
+    get invalid() {
+        return this.control.invalid;
+    }
+    get dirty() {
+        return this.control.dirty;
+    }
+    get touched() {
+        return this.control.touched;
+    }
+};
+__decorate([
+    Input()
+], FormErrorsComponent.prototype, "control", null);
+__decorate([
+    HostBinding('class.control-invalid')
+], FormErrorsComponent.prototype, "invalid", null);
+__decorate([
+    HostBinding('class.control-dirty')
+], FormErrorsComponent.prototype, "dirty", null);
+__decorate([
+    HostBinding('class.control-touched')
+], FormErrorsComponent.prototype, "touched", null);
+FormErrorsComponent = __decorate([
+    Component({
+        selector: 'cx-form-errors',
+        template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate }}\n</p>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], FormErrorsComponent);
+
+let FormErrorsModule = class FormErrorsModule {
+};
+FormErrorsModule = __decorate([
+    NgModule({
+        imports: [CommonModule, I18nModule],
+        declarations: [FormErrorsComponent],
+        exports: [FormErrorsComponent],
+    })
+], FormErrorsModule);
+
+/**
+ * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
+ */
+let GenericLinkComponent = class GenericLinkComponent {
+    constructor() {
+        this.protocolRegex = /^https?:\/\//i;
+    }
+    get rel() {
+        return this.target === '_blank' ? 'noopener' : null;
+    }
+    get routerUrl() {
+        if (typeof this.url === 'string') {
+            return [this.getAbsoluteUrl(this.url)];
+        }
+        return this.url;
+    }
+    isExternalUrl() {
+        return typeof this.url === 'string' && this.protocolRegex.test(this.url);
+    }
+    getAbsoluteUrl(url) {
+        return url.startsWith('/') ? this.url : '/' + this.url;
+    }
+};
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "url", void 0);
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "target", void 0);
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "class", void 0);
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "id", void 0);
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "style", void 0);
+__decorate([
+    Input()
+], GenericLinkComponent.prototype, "title", void 0);
+GenericLinkComponent = __decorate([
+    Component({
+        selector: 'cx-generic-link',
+        template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
+    })
+], GenericLinkComponent);
+
+let GenericLinkModule = class GenericLinkModule {
+};
+GenericLinkModule = __decorate([
+    NgModule({
+        imports: [CommonModule, RouterModule],
+        declarations: [GenericLinkComponent],
+        exports: [GenericLinkComponent],
+    })
+], GenericLinkModule);
+
+/**
+ * Provides a UI to manage the count of the quantity, typically by using
+ * increase and decrease functinality. The item counter expects an input `FormControl`
+ * so that the state of the control can be managed outside of this component.
+ */
+let ItemCounterComponent = class ItemCounterComponent {
+    constructor() {
+        /**
+         * This can be used in case an item has a minmum order quantity.
+         * @default 1
+         */
+        this.min = 1;
+        /**
+         * The step is used to increment the count. It is supposed to be a
+         * positive inteteger or float.
+         * @default 1
+         */
+        this.step = 1;
+        /**
+         * Inidicates that the input can be manually set to zero,
+         * despite the fact that the input controls will be limited to
+         * the minimum. The zero value can be used to remove an item.
+         */
+        this.allowZero = false;
+        /**
+         * In readonly mode the item counter will only be shown as a label,
+         * the form controls are not rendered.
+         * Please not that readonly is different from the `disabled` form state.
+         * @default false
+         */
+        this.readonly = false;
+    }
+    handleClick() {
+        this.input.nativeElement.focus();
+    }
+    increment() {
+        // it's too early to use the `stepUp` and `stepDown` API...
+        // let's wait for FF: https://caniuse.com/#search=stepUp
+        this.control.setValue(this.control.value + this.step);
+        this.control.markAsDirty();
+    }
+    decrement() {
+        this.control.setValue(this.control.value - this.step);
+        this.control.markAsDirty();
+    }
+    /**
+     * Returns an observable with the control. The value changes of the
+     * control are intercepted in order to suppress invalid values.
+     */
+    getControl() {
+        if (!this._control$) {
+            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
+        }
+        return this._control$;
+    }
+    /**
+     * Validate that the given value is in between
+     * the `min` and `max` value. If the value is out
+     * of  the min/max range, it will be altered.
+     * If `allowZero` is set to true, the 0 value is ignored.
+     *
+     */
+    getValidCount(value) {
+        if (value < this.min && !(value === 0 && this.allowZero)) {
+            value = this.min;
+        }
+        if (this.max && value > this.max) {
+            value = this.max;
+        }
+        return value;
+    }
+};
+__decorate([
+    Input()
+], ItemCounterComponent.prototype, "control", void 0);
+__decorate([
+    Input()
+], ItemCounterComponent.prototype, "min", void 0);
+__decorate([
+    Input()
+], ItemCounterComponent.prototype, "max", void 0);
+__decorate([
+    Input()
+], ItemCounterComponent.prototype, "step", void 0);
+__decorate([
+    Input()
+], ItemCounterComponent.prototype, "allowZero", void 0);
+__decorate([
+    HostBinding('class.readonly'), Input()
+], ItemCounterComponent.prototype, "readonly", void 0);
+__decorate([
+    ViewChild('qty')
+], ItemCounterComponent.prototype, "input", void 0);
+__decorate([
+    HostListener('click')
+], ItemCounterComponent.prototype, "handleClick", null);
+ItemCounterComponent = __decorate([
+    Component({
+        selector: 'cx-item-counter',
+        template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+    })
+], ItemCounterComponent);
+
+let ItemCounterModule = class ItemCounterModule {
+};
+ItemCounterModule = __decorate([
+    NgModule({
+        imports: [CommonModule, ReactiveFormsModule],
+        declarations: [ItemCounterComponent],
+        exports: [ItemCounterComponent],
+    })
+], ItemCounterModule);
+
+const defaultPaginationConfig = {
+    pagination: {
+        addStart: true,
+        addEnd: true,
+    },
+};
+
+let PaginationConfig = class PaginationConfig {
+};
+PaginationConfig.ɵprov = ɵɵdefineInjectable({ factory: function PaginationConfig_Factory() { return ɵɵinject(Config); }, token: PaginationConfig, providedIn: "root" });
+PaginationConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], PaginationConfig);
+
+/**
+ * The item type is used to add semantic structure to the
+ * PaginationItem, so that the UI understands the usage.
+ */
+var PaginationItemType;
+(function (PaginationItemType) {
+    PaginationItemType["GAP"] = "gap";
+    PaginationItemType["FIRST"] = "first";
+    PaginationItemType["LAST"] = "last";
+    PaginationItemType["PREVIOUS"] = "previous";
+    PaginationItemType["NEXT"] = "next";
+    PaginationItemType["START"] = "start";
+    PaginationItemType["END"] = "end";
+    PaginationItemType["PAGE"] = "page";
+})(PaginationItemType || (PaginationItemType = {}));
+var PaginationNavigationPosition;
+(function (PaginationNavigationPosition) {
+    PaginationNavigationPosition["ASIDE"] = "aside";
+    PaginationNavigationPosition["BEFORE"] = "before";
+    PaginationNavigationPosition["AFTER"] = "after";
+})(PaginationNavigationPosition || (PaginationNavigationPosition = {}));
+
+const FALLBACK_PAGINATION_OPTIONS = {
+    rangeCount: 3,
+    dotsLabel: '...',
+    startLabel: '«',
+    previousLabel: '‹',
+    nextLabel: '›',
+    endLabel: '»',
+};
+/**
+ * Builds a pagination structures based on a pageCount and current page number.
+ * There are various {@link PaginationConfig} options which can be used to configure
+ * the behaviour of the build. Alternatively, CSS can be used to further customise
+ * the pagination.
+ *
+ * Examples:
+ * The full blown pagination items contain the follow elements:
+ *
+ * `« ‹ 1 ... 4 (5) 6 ... 9 › »`
+ *
+ * This includes pagination items to the following pages:
+ * - start page
+ * - previous page
+ * - first page
+ * - page range
+ * - last page
+ * - next page
+ * - end page
+ *
+ * All of those links are configurable, including the size of the page range.
+ * The current page will always be centered in the page range to provide direct access
+ * to the previous and next page.
+ */
+let PaginationBuilder = class PaginationBuilder {
+    constructor(paginationConfig) {
+        this.paginationConfig = paginationConfig;
+    }
+    /**
+     * Builds a list of `PaginationItem`. The give pageCount and current are used
+     * to build out the full pagination. There are various {@link PaginationConfig} options
+     * which can be used to configure the behaviour of the build. Alternatively, CSS
+     * can be used to further specialize visibility of the pagination.
+     *
+     * @param pageCount The total number of pages
+     * @param current The current page number, 0-index based
+     * @returns An array of `PaginationItem`
+     */
+    paginate(pageCount, current) {
+        const pages = [];
+        if (pageCount < 2) {
+            return pages;
+        }
+        this.addPages(pages, pageCount, current);
+        this.addDots(pages, pageCount);
+        this.addFirstLast(pages, pageCount);
+        this.addNavigation(pages, pageCount, current);
+        return pages;
+    }
+    /**
+     * Returns the current page with surrounding pages (based on the `config.rangeCount`).
+     * The current page is always centered to provide direct access to the previous and next page.
+     *
+     * @param pages The list of page items that is used to amend
+     * @param pageCount The total number of pages
+     * @param current The current page number, 0-index based
+     */
+    addPages(pages, pageCount, current) {
+        const start = this.getStartOfRange(pageCount, current);
+        const max = Math.min(this.config.rangeCount, pageCount);
+        Array.from(Array(max)).forEach((_, i) => {
+            pages.push({
+                number: i + start,
+                label: String(i + start + 1),
+                type: PaginationItemType.PAGE,
+            });
+        });
+    }
+    /**
+     * Adds dots before and after the given pages, if configured (defaults to true).
+     * If the dots only represent a single page, the page number is added instead of
+     * the dots, unless the configuration requires dots always.
+     *
+     * @param pages The list of page items that is used to amend
+     * @param pageCount The total number of pages
+     */
+    addDots(pages, pageCount) {
+        if (!this.config.addDots) {
+            return;
+        }
+        const addFirstGap = () => {
+            const firstItemNumber = pages[0].number;
+            const gapNumber = this.config.addFirst ? 1 : 0;
+            if (firstItemNumber > gapNumber) {
+                const isGap = !this.config.substituteDotsForSingularPage ||
+                    firstItemNumber !== gapNumber + 1;
+                const isSubstitued = this.config.addFirst &&
+                    this.config.substituteDotsForSingularPage &&
+                    gapNumber === 0;
+                const type = isGap
+                    ? PaginationItemType.GAP
+                    : isSubstitued
+                        ? PaginationItemType.FIRST
+                        : PaginationItemType.PAGE;
+                return [
+                    Object.assign({
+                        label: isGap ? this.config.dotsLabel : String(gapNumber + 1),
+                        type,
+                    }, isGap ? null : { number: gapNumber }),
+                ];
+            }
+            else
+                return [];
+        };
+        const addLastGap = () => {
+            const nextPageNumber = pages[pages.length - 1].number + 1;
+            const last = pageCount - (this.config.addLast ? 2 : 1);
+            if (nextPageNumber <= last) {
+                const isSubstitued = this.config.addLast &&
+                    this.config.substituteDotsForSingularPage &&
+                    nextPageNumber === last;
+                const isGap = nextPageNumber <
+                    pageCount -
+                        (this.config.substituteDotsForSingularPage ? 1 : 0) -
+                        (this.config.addLast ? 1 : 0);
+                const type = isGap
+                    ? PaginationItemType.GAP
+                    : isSubstitued
+                        ? PaginationItemType.LAST
+                        : PaginationItemType.PAGE;
+                return [
+                    Object.assign({
+                        label: isGap ? this.config.dotsLabel : String(nextPageNumber + 1),
+                        type,
+                    }, isGap ? null : { number: nextPageNumber }),
+                ];
+            }
+            else
+                return [];
+        };
+        pages.unshift(...addFirstGap());
+        pages.push(...addLastGap());
+    }
+    /**
+     * Add links to the first and last page, if configured to do so.
+     *
+     * @param pages The list of page items that is used to amend
+     * @param pageCount The total number of pages
+     *
+     */
+    addFirstLast(pages, pageCount) {
+        if (this.config.addFirst && pages[0].number !== 0) {
+            pages.unshift({
+                number: 0,
+                label: '1',
+                type: PaginationItemType.FIRST,
+            });
+        }
+        if (this.config.addLast &&
+            pages[pages.length - 1].number !== pageCount - 1) {
+            pages.push({
+                number: pageCount - 1,
+                label: String(pageCount),
+                type: PaginationItemType.LAST,
+            });
+        }
+    }
+    /**
+     * Add links to the start, previous, next and last page, if configured to do so.
+     * The order of the links can be configured by using the {@link PaginationConfig},
+     * using the `PaginationNavigationPosition` (`BEFORE` or `AFTER`).
+     * The `PaginationNavigationPosition` allows for 3 flavours:
+     *
+     * - by default the pagination starts with start and previous and ends with the next and end links
+     * - BEFORE – all navigation links are added in the front of the pagination list
+     * - AFTER – all navigation links are pushed to the end of the pagination list
+     *
+     * @param pages The list of page items that is used to amend
+     * @param pageCount The total number of pages
+     * @param current The current page number, 0-index based
+     *
+     */
+    addNavigation(pages, pageCount, current) {
+        const before = this.getBeforeLinks(current);
+        const after = this.getAfter(pageCount, current);
+        const pos = this.config.navigationPosition;
+        if (!pos || pos === PaginationNavigationPosition.ASIDE) {
+            pages.unshift(...before);
+            pages.push(...after);
+        }
+        else {
+            if (pos === PaginationNavigationPosition.BEFORE) {
+                pages.unshift(...before, ...after);
+            }
+            if (pos === PaginationNavigationPosition.AFTER) {
+                pages.push(...before, ...after);
+            }
+        }
+    }
+    /**
+     * Returns the start and previous links, if applicable.
+     */
+    getBeforeLinks(current) {
+        const list = [];
+        if (this.config.addStart) {
+            const start = () => {
+                return Object.assign({
+                    label: this.config.startLabel,
+                    type: PaginationItemType.START,
+                }, current > 0 ? { number: 0 } : null);
+            };
+            list.push(start());
+        }
+        if (this.config.addPrevious) {
+            const previous = () => {
+                return Object.assign({
+                    label: this.config.previousLabel,
+                    type: PaginationItemType.PREVIOUS,
+                }, current > 0 ? { number: current - 1 } : null);
+            };
+            list.push(previous());
+        }
+        return list;
+    }
+    /**
+     * Returns the next and end links, if applicable.
+     */
+    getAfter(pageCount, current) {
+        const list = [];
+        if (this.config.addNext) {
+            const next = () => {
+                return Object.assign({
+                    label: this.config.nextLabel,
+                    type: PaginationItemType.NEXT,
+                }, current < pageCount - 1 ? { number: current + 1 } : null);
+            };
+            list.push(next());
+        }
+        if (this.config.addEnd) {
+            const end = () => {
+                return Object.assign({
+                    label: this.config.endLabel,
+                    type: PaginationItemType.END,
+                }, current < pageCount - 1 ? { number: pageCount - 1 } : null);
+            };
+            list.push(end());
+        }
+        return list;
+    }
+    /**
+     * Resolves the first page of the range we need to build.
+     * This is the page that is leading up to the range of the
+     * current page.
+     *
+     * @param pageCount The total number of pages.
+     * @param current The current page number, 0-index based.
+     */
+    getStartOfRange(pageCount, current) {
+        const count = this.config.rangeCount - 1;
+        // the least number of pages before and after the current
+        const delta = Math.round(count / 2);
+        // ensure that we start with at least the first page
+        const minStart = Math.max(0, current - delta);
+        // ensures that we start with at least 1 and do not pass the last range
+        const maxStart = Math.max(0, pageCount - count - 1);
+        // ensure that we get at least a full range at the end
+        return Math.min(maxStart, minStart);
+    }
+    get config() {
+        return Object.assign(FALLBACK_PAGINATION_OPTIONS, this.paginationConfig.pagination);
+    }
+};
+PaginationBuilder.ctorParameters = () => [
+    { type: PaginationConfig }
+];
+PaginationBuilder.ɵprov = ɵɵdefineInjectable({ factory: function PaginationBuilder_Factory() { return new PaginationBuilder(ɵɵinject(PaginationConfig)); }, token: PaginationBuilder, providedIn: "root" });
+PaginationBuilder = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], PaginationBuilder);
+
+/**
+ * The `PaginationComponent` is a generic component that is used for
+ * all lists in Spartacus that require pagination. The component supports
+ * all common features, which can be configured or hidden by CSS.
+ */
+let PaginationComponent = class PaginationComponent {
+    constructor(paginationBuilder, activatedRoute) {
+        this.paginationBuilder = paginationBuilder;
+        this.activatedRoute = activatedRoute;
+        this.viewPageEvent = new EventEmitter();
+        this.pages = [];
+    }
+    get pagination() {
+        return this._pagination;
+    }
+    set pagination(value) {
+        this._pagination = value;
+        this.render(value);
+    }
+    render(pagination) {
+        this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
+    }
+    /**
+     * Inidicates whether the given item is the current item.
+     *
+     * @param item PaginationItem
+     * @returns boolean
+     */
+    isCurrent(item) {
+        return (item.type === PaginationItemType.PAGE &&
+            item.number === this.pagination.currentPage);
+    }
+    /**
+     * Indicates whether the pagination item is inactive. This is used
+     * to disabled a link or set the tabindex to `-1`.
+     *
+     * Defaults to true
+     *
+     * @param item PaginationItem
+     * @returns returns -1 in case of a disabled
+     */
+    isInactive(item) {
+        return (!item.hasOwnProperty('number') ||
+            item.number === this.pagination.currentPage);
+    }
+    getQueryParams(item) {
+        const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
+        if (this.queryParam &&
+            item.number < this.pagination.totalPages &&
+            !this.isCurrent(item)) {
+            queryParams[this.queryParam] = item.number;
+        }
+        // omit the page number from the query parameters in case it's the default
+        // to clean up the experience and avoid unnecessary polluting of the URL
+        if (queryParams[this.queryParam] === this.defaultPage) {
+            delete queryParams[this.queryParam];
+        }
+        return queryParams;
+    }
+    pageChange(page) {
+        this.viewPageEvent.emit(page.number);
+    }
+};
+PaginationComponent.ctorParameters = () => [
+    { type: PaginationBuilder },
+    { type: ActivatedRoute }
+];
+__decorate([
+    Input()
+], PaginationComponent.prototype, "pageRoute", void 0);
+__decorate([
+    Input()
+], PaginationComponent.prototype, "queryParam", void 0);
+__decorate([
+    Input()
+], PaginationComponent.prototype, "defaultPage", void 0);
+__decorate([
+    Input()
+], PaginationComponent.prototype, "pagination", null);
+__decorate([
+    Output()
+], PaginationComponent.prototype, "viewPageEvent", void 0);
+PaginationComponent = __decorate([
+    Component({
+        selector: 'cx-pagination',
+        template: "<a\n  *ngFor=\"let item of pages\"\n  [class]=\"item.type\"\n  [class.disabled]=\"isInactive(item)\"\n  [class.current]=\"isCurrent(item)\"\n  [routerLink]=\"pageRoute\"\n  [queryParams]=\"getQueryParams(item)\"\n  [tabIndex]=\"isInactive(item) ? -1 : 0\"\n  (click)=\"pageChange(item)\"\n>\n  {{ item.label }}\n</a>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], PaginationComponent);
+
+let PaginationModule = class PaginationModule {
+};
+PaginationModule = __decorate([
+    NgModule({
+        imports: [CommonModule, RouterModule],
+        providers: [provideDefaultConfig(defaultPaginationConfig)],
+        declarations: [PaginationComponent],
+        exports: [PaginationComponent],
+    })
+], PaginationModule);
+
+let SortingComponent = class SortingComponent {
+    constructor() {
+        this.sortListEvent = new EventEmitter();
+    }
+    sortList(sortCode) {
+        this.sortListEvent.emit(sortCode);
+    }
+};
+__decorate([
+    Input()
+], SortingComponent.prototype, "sortOptions", void 0);
+__decorate([
+    Input()
+], SortingComponent.prototype, "selectedOption", void 0);
+__decorate([
+    Input()
+], SortingComponent.prototype, "placeholder", void 0);
+__decorate([
+    Input()
+], SortingComponent.prototype, "sortLabels", void 0);
+__decorate([
+    Output()
+], SortingComponent.prototype, "sortListEvent", void 0);
+SortingComponent = __decorate([
+    Component({
+        selector: 'cx-sorting',
+        template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], SortingComponent);
+
+let ListNavigationModule = class ListNavigationModule {
+};
+ListNavigationModule = __decorate([
+    NgModule({
+        imports: [CommonModule, NgSelectModule, FormsModule, PaginationModule],
+        declarations: [SortingComponent],
+        exports: [SortingComponent, PaginationComponent],
+    })
+], ListNavigationModule);
+
+/**
+ * Provides configuration specific to Media, such as images. This is used to optimize
+ * rendering of the media, SEO and performance.
+ */
+let MediaConfig = class MediaConfig {
+};
+MediaConfig.ɵprov = ɵɵdefineInjectable({ factory: function MediaConfig_Factory() { return ɵɵinject(Config); }, token: MediaConfig, providedIn: "root" });
+MediaConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], MediaConfig);
+
 /**
  * A reference to a newly opened modal
  *
@@ -362,187 +4056,658 @@ ModalService = __decorate([
     })
 ], ModalService);
 
-let AnonymousConsentDialogComponent = class AnonymousConsentDialogComponent {
-    constructor(config, modalService, anonymousConsentsService) {
-        this.config = config;
-        this.modalService = modalService;
-        this.anonymousConsentsService = anonymousConsentsService;
-        this.subscriptions = new Subscription();
-        this.showLegalDescription = true;
+let GlobalMessageComponent = class GlobalMessageComponent {
+    constructor(globalMessageService) {
+        this.globalMessageService = globalMessageService;
         this.iconTypes = ICON_TYPE;
-        this.requiredConsents = [];
-        if (Boolean(this.config.anonymousConsents)) {
-            this.showLegalDescription = this.config.anonymousConsents.showLegalDescriptionInDialog;
-            if (Boolean(this.config.anonymousConsents.requiredConsents)) {
-                this.requiredConsents = this.config.anonymousConsents.requiredConsents;
-            }
-        }
+        this.messageType = GlobalMessageType;
     }
     ngOnInit() {
-        this.templates$ = this.anonymousConsentsService.getTemplates();
-        this.consents$ = this.anonymousConsentsService.getConsents();
-        this.loading$ = this.anonymousConsentsService.getLoadTemplatesLoading();
+        this.messages$ = this.globalMessageService.get();
     }
-    closeModal(reason) {
-        this.modalService.closeActiveModal(reason);
-    }
-    rejectAll() {
-        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
-            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
-            const consent = this.getCorrespondingConsent(template, consents);
-            if (this.anonymousConsentsService.isConsentGiven(consent)) {
-                if (this.isRequiredConsent(template)) {
-                    return;
-                }
-                this.anonymousConsentsService.withdrawConsent(template.id);
-            }
-        })))
-            .subscribe());
-        this.closeModal('rejectAll');
-    }
-    allowAll() {
-        this.subscriptions.add(combineLatest([this.templates$, this.consents$])
-            .pipe(take(1), distinctUntilChanged(), tap(([templates, consents]) => templates.forEach((template) => {
-            const consent = this.getCorrespondingConsent(template, consents);
-            if ((consent && consent.consentState == null) ||
-                this.anonymousConsentsService.isConsentWithdrawn(consent)) {
-                if (this.isRequiredConsent(template)) {
-                    return;
-                }
-                this.anonymousConsentsService.giveConsent(template.id);
-            }
-        })))
-            .subscribe());
-        this.closeModal('allowAll');
-    }
-    isRequiredConsent(template) {
-        return (Boolean(this.config.anonymousConsents) &&
-            Boolean(this.config.anonymousConsents.requiredConsents) &&
-            this.config.anonymousConsents.requiredConsents.includes(template.id));
-    }
-    onConsentChange({ given, template, }) {
-        if (given) {
-            this.anonymousConsentsService.giveConsent(template.id);
-        }
-        else {
-            this.anonymousConsentsService.withdrawConsent(template.id);
-        }
-    }
-    getCorrespondingConsent(template, consents = []) {
-        for (const consent of consents) {
-            if (template.id === consent.templateCode) {
-                return consent;
-            }
-        }
-        return null;
-    }
-    ngOnDestroy() {
-        this.subscriptions.unsubscribe();
+    clear(type, index) {
+        this.globalMessageService.remove(type, index);
     }
 };
-AnonymousConsentDialogComponent.ctorParameters = () => [
-    { type: AnonymousConsentsConfig },
-    { type: ModalService },
-    { type: AnonymousConsentsService }
+GlobalMessageComponent.ctorParameters = () => [
+    { type: GlobalMessageService }
 ];
-AnonymousConsentDialogComponent = __decorate([
+GlobalMessageComponent = __decorate([
     Component({
-        selector: 'cx-anonymous-consent-dialog',
-        template: "<div #dialog>\n  <div *ngIf=\"loading$ | async; else dialogBody\">\n    <div class=\"cx-spinner\">\n      <cx-spinner></cx-spinner>\n    </div>\n  </div>\n\n  <!-- Modal Header -->\n  <ng-template #dialogBody>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'anonymousConsents.dialog.title' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"closeModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Separator -->\n    <div\n      class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n    ></div>\n    <div class=\"cx-dialog-description\" *ngIf=\"showLegalDescription\">\n      {{ 'anonymousConsents.dialog.legalDescription' | cxTranslate }}\n      <div\n        class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n      ></div>\n    </div>\n    <!-- Actions -->\n    <div class=\"cx-dialog-buttons\">\n      <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"rejectAll()\">{{\n        'anonymousConsents.dialog.clearAll' | cxTranslate\n      }}</a>\n      <a tabindex=\"0\" class=\"btn-link cx-action-link\" (click)=\"allowAll()\">{{\n        'anonymousConsents.dialog.selectAll' | cxTranslate\n      }}</a>\n    </div>\n    <!-- Modal Body -->\n    <div\n      class=\"cx-dialog-body modal-body\"\n      *ngIf=\"templates$ | async as templates\"\n    >\n      <div *ngIf=\"consents$ | async as consents\">\n        <div\n          class=\"cx-dialog-row col-sm-12 col-md-6\"\n          *ngFor=\"let template of templates\"\n        >\n          <cx-consent-management-form\n            [consentTemplate]=\"template\"\n            [requiredConsents]=\"requiredConsents\"\n            [consent]=\"getCorrespondingConsent(template, consents)\"\n            (consentChanged)=\"onConsentChange($event)\"\n          ></cx-consent-management-form>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+        selector: 'cx-global-message',
+        template: "<div *ngIf=\"messages$ | async as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.SUCCESS\"></cx-icon>\n    </span>\n    <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-info\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.INFO\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"\n      let infoMsg of messages[messageType.MSG_TYPE_WARNING];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.WARNING\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.ERROR\"></cx-icon>\n    </span>\n    <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n</div>\n"
     })
-], AnonymousConsentDialogComponent);
+], GlobalMessageComponent);
 
-let AnonymousConsentManagementBannerComponent = class AnonymousConsentManagementBannerComponent {
-    constructor(modalService, anonymousConsentsService) {
-        this.modalService = modalService;
-        this.anonymousConsentsService = anonymousConsentsService;
-        this.subscriptions = new Subscription();
-        this.bannerVisible$ = this.anonymousConsentsService.isBannerVisible();
-    }
-    viewDetails() {
-        this.hideBanner();
-        this.modalService.open(AnonymousConsentDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
-    }
-    allowAll() {
-        this.subscriptions.add(this.anonymousConsentsService
-            .giveAllConsents()
-            .pipe(tap(() => this.hideBanner()))
-            .subscribe());
-    }
-    hideBanner() {
-        this.anonymousConsentsService.toggleBannerDismissed(true);
-    }
-    ngOnDestroy() {
-        this.subscriptions.unsubscribe();
-    }
+let GlobalMessageComponentModule = class GlobalMessageComponentModule {
 };
-AnonymousConsentManagementBannerComponent.ctorParameters = () => [
-    { type: ModalService },
-    { type: AnonymousConsentsService }
-];
-AnonymousConsentManagementBannerComponent = __decorate([
-    Component({
-        selector: 'cx-anonymous-consent-management-banner',
-        template: "<ng-container *ngIf=\"bannerVisible$ | async as bannerVisible\">\n  <div\n    [ngClass]=\"{ 'anonymous-consent-banner-hidden': !bannerVisible }\"\n    class=\"anonymous-consent-banner\"\n  >\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-lg-8 col-xs-12\">\n          <div class=\"cx-banner-title\">\n            {{ 'anonymousConsents.banner.title' | cxTranslate }}\n          </div>\n          <div class=\"cx-banner-description\">\n            {{ 'anonymousConsents.banner.description' | cxTranslate }}\n          </div>\n        </div>\n\n        <div class=\"col-lg-4 col-xs-12 cx-banner-buttons\">\n          <button class=\"btn btn-action\" (click)=\"viewDetails()\">\n            {{ 'anonymousConsents.banner.viewDetails' | cxTranslate }}\n          </button>\n          <button class=\"btn btn-primary\" (click)=\"allowAll()\">\n            {{ 'anonymousConsents.banner.allowAll' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
-    })
-], AnonymousConsentManagementBannerComponent);
-
-let AnonymousConsentOpenDialogComponent = class AnonymousConsentOpenDialogComponent {
-    constructor(modalService) {
-        this.modalService = modalService;
-    }
-    openDialog() {
-        this.modalService.open(AnonymousConsentDialogComponent, {
-            centered: true,
-            size: 'lg',
-        });
-    }
-};
-AnonymousConsentOpenDialogComponent.ctorParameters = () => [
-    { type: ModalService }
-];
-AnonymousConsentOpenDialogComponent = __decorate([
-    Component({
-        selector: 'cx-anonymous-consent-open-dialog',
-        template: "<div class=\"anonymous-consents\">\n  <button class=\"btn btn-link\" (click)=\"openDialog()\">\n    {{ 'anonymousConsents.preferences' | cxTranslate }}\n  </button>\n</div>\n"
-    })
-], AnonymousConsentOpenDialogComponent);
-
-let AnonymousConsentManagementBannerModule = class AnonymousConsentManagementBannerModule {
-};
-AnonymousConsentManagementBannerModule = __decorate([
+GlobalMessageComponentModule = __decorate([
     NgModule({
-        imports: [CommonModule, I18nModule, FeaturesConfigModule],
+        imports: [CommonModule, HttpClientModule, IconModule, I18nModule],
+        declarations: [GlobalMessageComponent],
+        exports: [GlobalMessageComponent],
+    })
+], GlobalMessageComponentModule);
+
+let QualtricsConfig = class QualtricsConfig {
+};
+QualtricsConfig.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsConfig_Factory() { return ɵɵinject(Config); }, token: QualtricsConfig, providedIn: "root" });
+QualtricsConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], QualtricsConfig);
+
+let QualtricsLoaderService = class QualtricsLoaderService {
+    constructor(winRef, config) {
+        this.winRef = winRef;
+        this.config = config;
+        this.qualtricsLoaded$ = new BehaviorSubject(false);
+        if (Boolean(this.winRef.nativeWindow) &&
+            Boolean(this.winRef.document) &&
+            this.isQualtricsConfigured()) {
+            this.initialize();
+            this.setup();
+        }
+    }
+    initialize() {
+        fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe(() => this.qualtricsLoaded$.next(true));
+    }
+    setup() {
+        const qualtricsScript = this.winRef.document.createElement('script');
+        qualtricsScript.type = 'text/javascript';
+        qualtricsScript.defer = true;
+        qualtricsScript.src = 'assets/qualtricsIntegration.js';
+        const idScript = this.winRef.document.createElement('div');
+        idScript.id = this.config.qualtrics.projectId;
+        this.winRef.document
+            .getElementsByTagName('head')[0]
+            .appendChild(qualtricsScript);
+        this.winRef.document.getElementsByTagName('head')[0].appendChild(idScript);
+    }
+    isQualtricsConfigured() {
+        return (Boolean(this.config.qualtrics) && Boolean(this.config.qualtrics.projectId));
+    }
+    load() {
+        return this.qualtricsLoaded$.pipe(filter((loaded) => loaded), switchMap(() => {
+            const qsi = this.winRef.nativeWindow['QSI'];
+            return this.isDataLoaded().pipe(distinctUntilChanged(), tap((dataLoaded) => {
+                if (dataLoaded) {
+                    qsi.API.unload();
+                    qsi.API.load().done(qsi.API.run());
+                }
+            }));
+        }));
+    }
+    /**
+     * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
+     * If client(s) does not extend this service to override this implementation, it returns true
+     * Return false otherwise.
+     */
+    isDataLoaded() {
+        return of(true);
+    }
+};
+QualtricsLoaderService.ctorParameters = () => [
+    { type: WindowRef },
+    { type: QualtricsConfig }
+];
+QualtricsLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsLoaderService_Factory() { return new QualtricsLoaderService(ɵɵinject(WindowRef), ɵɵinject(QualtricsConfig)); }, token: QualtricsLoaderService, providedIn: "root" });
+QualtricsLoaderService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], QualtricsLoaderService);
+
+let QualtricsComponent = class QualtricsComponent {
+    constructor(qualtricsLoader) {
+        this.qualtricsLoader = qualtricsLoader;
+        this.qualtricsEnabled$ = this.qualtricsLoader.load();
+    }
+};
+QualtricsComponent.ctorParameters = () => [
+    { type: QualtricsLoaderService }
+];
+QualtricsComponent = __decorate([
+    Component({
+        selector: 'cx-qualtrics',
+        template: ` <ng-container *ngIf="qualtricsEnabled$ | async"></ng-container> `
+    })
+], QualtricsComponent);
+
+const defaultQualtricsConfig = {
+    qualtrics: {},
+};
+
+let QualtricsModule = class QualtricsModule {
+};
+QualtricsModule = __decorate([
+    NgModule({
+        imports: [CommonModule, HttpClientModule],
+        declarations: [QualtricsComponent],
+        entryComponents: [QualtricsComponent],
         providers: [
             provideDefaultConfig({
                 cmsComponents: {
-                    AnonymousConsentManagementBannerComponent: {
-                        component: AnonymousConsentManagementBannerComponent,
-                        deferLoading: DeferLoadingStrategy.INSTANT,
-                    },
-                    AnonymousConsentOpenDialogComponent: {
-                        component: AnonymousConsentOpenDialogComponent,
+                    QualtricsComponent: {
+                        component: QualtricsComponent,
                     },
                 },
             }),
-        ],
-        declarations: [
-            AnonymousConsentManagementBannerComponent,
-            AnonymousConsentOpenDialogComponent,
-        ],
-        exports: [
-            AnonymousConsentManagementBannerComponent,
-            AnonymousConsentOpenDialogComponent,
-        ],
-        entryComponents: [
-            AnonymousConsentManagementBannerComponent,
-            AnonymousConsentOpenDialogComponent,
+            provideDefaultConfig(defaultQualtricsConfig),
         ],
     })
-], AnonymousConsentManagementBannerModule);
+], QualtricsModule);
+
+let LanguageCurrencyComponent = class LanguageCurrencyComponent {
+};
+LanguageCurrencyComponent = __decorate([
+    Component({
+        selector: 'cx-language-currency-selector',
+        template: `
+    <cx-site-context-selector context="language"></cx-site-context-selector>
+    <cx-site-context-selector context="currency"></cx-site-context-selector>
+  `,
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], LanguageCurrencyComponent);
+
+class CmsComponentData {
+}
+
+const LABELS = {
+    [LANGUAGE_CONTEXT_ID]: 'Language',
+    [CURRENCY_CONTEXT_ID]: 'Currency',
+};
+let SiteContextComponentService = class SiteContextComponentService {
+    constructor(componentData, contextServiceMap, injector) {
+        this.componentData = componentData;
+        this.contextServiceMap = contextServiceMap;
+        this.injector = injector;
+    }
+    getItems(context) {
+        return this.getService(context).pipe(switchMap((service) => service.getAll()), switchMap((items) => this.getContext(context).pipe(switchMap((ctx) => {
+            const itemsCopy = [];
+            for (const item of items) {
+                itemsCopy.push(Object.assign(Object.assign({}, item), { label: this.getOptionLabel(item, ctx) }));
+            }
+            return of(itemsCopy);
+        }))));
+    }
+    getActiveItem(context) {
+        return this.getService(context).pipe(switchMap((service) => service.getActive()));
+    }
+    getLabel(context) {
+        return this.getContext(context).pipe(map((ctx) => {
+            return LABELS[ctx];
+        }));
+    }
+    setActive(value, context) {
+        this.getService(context)
+            .pipe(take(1))
+            .subscribe((service) => {
+            service.setActive(value);
+        });
+    }
+    getService(context) {
+        return this.getContext(context).pipe(map((ctx) => (ctx ? this.getInjectedService(ctx) : undefined)), filter((s) => !!s));
+    }
+    getContext(context) {
+        if (context) {
+            return of(context);
+        }
+        else if (this.componentData) {
+            return this.componentData.data$.pipe(map((data) => data === null || data === void 0 ? void 0 : data.context), map((ctx) => {
+                switch (ctx) {
+                    case 'LANGUAGE':
+                        return LANGUAGE_CONTEXT_ID;
+                    case 'CURRENCY':
+                        return CURRENCY_CONTEXT_ID;
+                    default:
+                        return ctx;
+                }
+            }));
+        }
+    }
+    getInjectedService(context) {
+        return this.injector.get(this.contextServiceMap[context], null);
+    }
+    getOptionLabel(item, context) {
+        switch (context) {
+            case LANGUAGE_CONTEXT_ID:
+                return item.nativeName;
+            case CURRENCY_CONTEXT_ID:
+                return item.symbol + ' ' + item.isocode;
+            default:
+                return item.isocode;
+        }
+    }
+};
+SiteContextComponentService.ctorParameters = () => [
+    { type: CmsComponentData, decorators: [{ type: Optional }] },
+    { type: ContextServiceMap },
+    { type: Injector }
+];
+SiteContextComponentService = __decorate([
+    Injectable(),
+    __param(0, Optional())
+], SiteContextComponentService);
+
+let SiteContextSelectorComponent = class SiteContextSelectorComponent {
+    constructor(componentService) {
+        this.componentService = componentService;
+        this.iconTypes = ICON_TYPE;
+    }
+    get items$() {
+        return this.componentService.getItems(this.context);
+    }
+    get activeItem$() {
+        return this.componentService.getActiveItem(this.context);
+    }
+    set active(value) {
+        this.componentService.setActive(value, this.context);
+    }
+    get label$() {
+        return this.componentService.getLabel(this.context);
+    }
+};
+SiteContextSelectorComponent.ctorParameters = () => [
+    { type: SiteContextComponentService }
+];
+__decorate([
+    Input()
+], SiteContextSelectorComponent.prototype, "context", void 0);
+SiteContextSelectorComponent = __decorate([
+    Component({
+        selector: 'cx-site-context-selector',
+        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\" class=\"small\"></cx-icon>\n</label>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], SiteContextSelectorComponent);
+
+let SiteContextSelectorModule = class SiteContextSelectorModule {
+};
+SiteContextSelectorModule = __decorate([
+    NgModule({
+        imports: [CommonModule, RouterModule, SiteContextModule, IconModule],
+        providers: [
+            provideDefaultConfig({
+                cmsComponents: {
+                    CMSSiteContextComponent: {
+                        component: SiteContextSelectorComponent,
+                        providers: [
+                            {
+                                provide: SiteContextComponentService,
+                                useClass: SiteContextComponentService,
+                                deps: [CmsComponentData, ContextServiceMap, Injector],
+                            },
+                        ],
+                    },
+                    LanguageCurrencyComponent: {
+                        component: LanguageCurrencyComponent,
+                    },
+                },
+            }),
+            SiteContextComponentService,
+        ],
+        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+        exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
+    })
+], SiteContextSelectorModule);
+
+var SiteContextType;
+(function (SiteContextType) {
+    SiteContextType["LANGUAGE"] = "LANGUAGE";
+    SiteContextType["CURRENCY"] = "CURRENCY";
+})(SiteContextType || (SiteContextType = {}));
+
+let StarRatingComponent = class StarRatingComponent {
+    constructor(el, renderer) {
+        this.el = el;
+        this.renderer = renderer;
+        /**
+         * The rating component can be used in disabled mode,
+         * so that the interation is not provided.
+         */
+        this.disabled = false;
+        /**
+         * Emits the given rating when the user clicks on a star.
+         */
+        // tslint:disable-next-line:no-output-native
+        this.change = new EventEmitter();
+        this.initialRate = 0;
+        this.iconTypes = ICON_TYPE;
+    }
+    ngOnInit() {
+        this.setRate(this.rating, true);
+    }
+    setRate(value, force) {
+        if (!this.disabled || force) {
+            this.renderer.setAttribute(this.el.nativeElement, 'style', `--star-fill:${value || this.initialRate};`);
+        }
+    }
+    saveRate(rating) {
+        if (this.disabled) {
+            return;
+        }
+        this.initialRate = rating;
+        this.setRate(rating);
+        this.change.emit(rating);
+    }
+    setRateOnEvent(event, rating) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            this.setRate(rating);
+        }
+    }
+};
+StarRatingComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Renderer2 }
+];
+__decorate([
+    Input(), HostBinding('attr.disabled')
+], StarRatingComponent.prototype, "disabled", void 0);
+__decorate([
+    Input()
+], StarRatingComponent.prototype, "rating", void 0);
+__decorate([
+    Output()
+], StarRatingComponent.prototype, "change", void 0);
+StarRatingComponent = __decorate([
+    Component({
+        selector: 'cx-star-rating',
+        template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (keydown)=\"setRateOnEvent($event, i)\"\n  (click)=\"saveRate(i)\"\n  [attr.tabindex]=\"disabled ? null : 0\"\n></cx-icon>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], StarRatingComponent);
+
+let StarRatingModule = class StarRatingModule {
+};
+StarRatingModule = __decorate([
+    NgModule({
+        imports: [CommonModule, IconModule],
+        declarations: [StarRatingComponent],
+        exports: [StarRatingComponent],
+    })
+], StarRatingModule);
+
+let ViewConfig = class ViewConfig {
+};
+ViewConfig.ɵprov = ɵɵdefineInjectable({ factory: function ViewConfig_Factory() { return ɵɵinject(Config); }, token: ViewConfig, providedIn: "root" });
+ViewConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], ViewConfig);
+
+var ViewConfigModule_1;
+let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
+    static forRoot() {
+        return {
+            ngModule: ViewConfigModule_1,
+            providers: [
+                provideDefaultConfig({
+                    view: {},
+                }),
+            ],
+        };
+    }
+};
+ViewConfigModule = ViewConfigModule_1 = __decorate([
+    NgModule({})
+], ViewConfigModule);
+
+let OrderDetailsService = class OrderDetailsService {
+    constructor(userOrderService, routingService) {
+        this.userOrderService = userOrderService;
+        this.routingService = routingService;
+        this.orderCode$ = this.routingService
+            .getRouterState()
+            .pipe(map((routingData) => routingData.state.params.orderCode));
+        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
+            if (orderCode) {
+                this.userOrderService.loadOrderDetails(orderCode);
+            }
+            else {
+                this.userOrderService.clearOrderDetails();
+            }
+        }), shareReplay({ bufferSize: 1, refCount: true }));
+    }
+    getOrderDetails() {
+        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
+    }
+};
+OrderDetailsService.ctorParameters = () => [
+    { type: UserOrderService },
+    { type: RoutingService }
+];
+OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
+OrderDetailsService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], OrderDetailsService);
+
+let PromotionService = class PromotionService {
+    constructor(orderDetailsService, checkoutService, activeCartService) {
+        this.orderDetailsService = orderDetailsService;
+        this.checkoutService = checkoutService;
+        this.activeCartService = activeCartService;
+    }
+    getOrderPromotions(promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.getOrderPromotionsFromCart();
+            case PromotionLocation.Checkout:
+                return this.getOrderPromotionsFromCheckout();
+            case PromotionLocation.Order:
+                return this.getOrderPromotionsFromOrder();
+            default:
+                return of([]);
+        }
+    }
+    getOrderPromotionsFromCart() {
+        return this.activeCartService
+            .getActive()
+            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
+    }
+    getOrderPromotionsFromCartHelper(cart) {
+        const potentialPromotions = [];
+        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
+        const appliedPromotions = [];
+        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
+        return [...potentialPromotions, ...appliedPromotions];
+    }
+    getOrderPromotionsFromCheckout() {
+        return this.checkoutService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrder() {
+        return this.orderDetailsService
+            .getOrderDetails()
+            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
+    }
+    getOrderPromotionsFromOrderHelper(order) {
+        const appliedOrderPromotions = [];
+        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
+        return appliedOrderPromotions;
+    }
+    getProductPromotionForEntry(item, promotionLocation) {
+        switch (promotionLocation) {
+            case PromotionLocation.ActiveCart:
+                return this.activeCartService
+                    .getActive()
+                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
+            case PromotionLocation.Checkout:
+                return this.checkoutService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+            case PromotionLocation.Order:
+                return this.orderDetailsService
+                    .getOrderDetails()
+                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
+        }
+    }
+    getProductPromotion(item, promotions) {
+        const entryPromotions = [];
+        if (promotions && promotions.length > 0) {
+            for (const promotion of promotions) {
+                if (promotion.description &&
+                    promotion.consumedEntries &&
+                    promotion.consumedEntries.length > 0) {
+                    for (const consumedEntry of promotion.consumedEntries) {
+                        if (this.isConsumedByEntry(consumedEntry, item)) {
+                            entryPromotions.push(promotion);
+                        }
+                    }
+                }
+            }
+        }
+        return entryPromotions;
+    }
+    isConsumedByEntry(consumedEntry, entry) {
+        const consumedEntryNumber = consumedEntry.orderEntryNumber;
+        if (entry.entries && entry.entries.length > 0) {
+            for (const subEntry of entry.entries) {
+                if (subEntry.entryNumber === consumedEntryNumber) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else {
+            return consumedEntryNumber === entry.entryNumber;
+        }
+    }
+};
+PromotionService.ctorParameters = () => [
+    { type: OrderDetailsService },
+    { type: CheckoutService },
+    { type: ActiveCartService }
+];
+PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
+PromotionService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], PromotionService);
+
+class CustomFormValidators {
+    /**
+     * Checks control's value with predefined email regexp
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxInvalidEmail' validator error
+     * @memberof CustomFormValidators
+     */
+    static emailValidator(control) {
+        const email = control.value;
+        return !email.length || email.match(EMAIL_PATTERN)
+            ? null
+            : { cxInvalidEmail: true };
+    }
+    /**
+     * Checks control's value with predefined password regexp
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxInvalidPassword' validator error
+     * @memberof CustomFormValidators
+     */
+    static passwordValidator(control) {
+        const password = control.value;
+        return !password.length || password.match(PASSWORD_PATTERN)
+            ? null
+            : { cxInvalidPassword: true };
+    }
+    /**
+     * Checks if control's value is between 1 and 5
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxStarRatingEmpty' validator error
+     * @memberof CustomFormValidators
+     */
+    static starRatingEmpty(control) {
+        const rating = control.value;
+        return rating >= 1 && rating <= 5 ? null : { cxStarRatingEmpty: true };
+    }
+    /**
+     * Checks if two password controls match
+     *
+     * NOTE: Use it as a form validator and pass password control names as parameters
+     *
+     * @static
+     * @param {string} password First password control name
+     * @param {string} passwordConfirmation Second password control name
+     * @returns Uses 'cxPasswordsMustMatch' validator error
+     * @memberof CustomFormValidators
+     */
+    static passwordsMustMatch(password, passwordConfirmation) {
+        const validator = (formGroup) => controlsMustMatch(formGroup, password, passwordConfirmation, 'cxPasswordsMustMatch');
+        return validator;
+    }
+    /**
+     * Checks if two email controls match
+     *
+     * NOTE: Use it as a form validator and pass email control names as parameters
+     *
+     * @static
+     * @param {string} email First email control name
+     * @param {string} emailConfirmation Second email control name
+     * @returns Uses 'cxEmailsMustMatch' validator error
+     * @memberof CustomFormValidators
+     */
+    static emailsMustMatch(email, emailConfirmation) {
+        const validator = (formGroup) => controlsMustMatch(formGroup, email, emailConfirmation, 'cxEmailsMustMatch');
+        return validator;
+    }
+}
+/**
+ * Generic function for validators, which checks if two passed controls match.
+ *
+ * @param formGroup
+ * @param firstControlName First control to check
+ * @param secondControlName Second control to check
+ * @param errorName Error which will be returned by validator
+ */
+function controlsMustMatch(formGroup, firstControlName, secondControlName, errorName) {
+    const firstControl = formGroup.controls[firstControlName];
+    const secondControl = formGroup.controls[secondControlName];
+    if (secondControl.errors && !secondControl.errors[errorName]) {
+        return;
+    }
+    secondControl.setErrors(firstControl.value !== secondControl.value ? { [errorName]: true } : null);
+}
+
+const titleScores = {
+    mr: 1,
+    mrs: 2,
+    miss: 3,
+    ms: 4,
+    dr: 5,
+    rev: 6,
+};
+function sortTitles(title1, title2) {
+    if (!titleScores[title1.code] || !titleScores[title2.code]) {
+        return 1;
+    }
+    else {
+        return titleScores[title1.code] - titleScores[title2.code];
+    }
+}
 
 let CmsComponentsService = class CmsComponentsService {
     constructor(config, platformId) {
@@ -647,9 +4812,6 @@ CmsComponentsService = __decorate([
     }),
     __param(1, Inject(PLATFORM_ID))
 ], CmsComponentsService);
-
-class CmsComponentData {
-}
 
 /**
  * Used to prepare injector for CMS components.
@@ -1143,6 +5305,103 @@ PageComponentModule = __decorate([
 
 const ASM_ENABLED_LOCAL_STORAGE_KEY = 'asm_enabled';
 
+/**
+ * The AsmEnablerService is used to enable ASM for those scenario's
+ * where it's actually used. This service is added to avoid any polution
+ * of the UI and runtime performance for the ordinary production user.
+ */
+let AsmEnablerService = class AsmEnablerService {
+    constructor(location, winRef, launchDialogService) {
+        this.location = location;
+        this.winRef = winRef;
+        this.launchDialogService = launchDialogService;
+    }
+    /**
+     * Loads the ASM UI if needed. The ASM UI will be added based on the
+     * existence of a URL parameter or previous usage given by local storage.
+     */
+    load() {
+        if (this.isEnabled()) {
+            this.addUi();
+        }
+    }
+    /**
+     * Indicates whether the ASM module is enabled.
+     */
+    isEnabled() {
+        if (this.isLaunched() && !this.isUsedBefore()) {
+            if (this.winRef.localStorage) {
+                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
+            }
+        }
+        return this.isLaunched() || this.isUsedBefore();
+    }
+    /**
+     * Indicates whether ASM is launched through the URL,
+     * using the asm flag in the URL.
+     */
+    isLaunched() {
+        const params = this.location.path().split('?')[1];
+        return params && params.split('&').includes('asm=true');
+    }
+    /**
+     * Evaluates local storage where we persist the usage of ASM.
+     */
+    isUsedBefore() {
+        return (this.winRef.localStorage &&
+            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
+    }
+    /**
+     * Adds the ASM UI by using the `cx-storefront` outlet.
+     */
+    addUi() {
+        this.launchDialogService.launch(LAUNCH_CALLER.ASM);
+    }
+};
+AsmEnablerService.ctorParameters = () => [
+    { type: Location },
+    { type: WindowRef },
+    { type: LaunchDialogService }
+];
+AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(LaunchDialogService)); }, token: AsmEnablerService, providedIn: "root" });
+AsmEnablerService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], AsmEnablerService);
+
+/**
+ * The ASM loader module takes care of loading the ASM UI
+ * only in case there's a reason to do so.
+ */
+let AsmLoaderModule = class AsmLoaderModule {
+};
+AsmLoaderModule = __decorate([
+    NgModule({
+        imports: [CommonModule, PageComponentModule],
+        providers: [
+            {
+                provide: APP_INITIALIZER,
+                useFactory: asmFactory,
+                deps: [AsmEnablerService],
+                multi: true,
+            },
+        ],
+    })
+], AsmLoaderModule);
+/**
+ *
+ * We do not like to block the UI, which is why we delgate loading of ASM
+ * to a real component; the router and state aren't available in an optimized
+ * way during the APP_INITIALIZER.
+ */
+function asmFactory(asmEnablerService) {
+    const isReady = () => {
+        asmEnablerService.load();
+    };
+    return isReady;
+}
+
 let AsmComponentService = class AsmComponentService {
     constructor(authService, asmAuthService, routingService, winRef) {
         this.authService = authService;
@@ -1266,725 +5525,6 @@ AsmMainUiComponent = __decorate([
         styles: ["cx-asm-main-ui{font-family:Arial,sans-serif;font-size:14px;width:100%;display:flex;flex-direction:column}cx-asm-main-ui .close,cx-asm-main-ui .logout{cursor:pointer;width:16px;height:16px;border:transparent;background-color:transparent}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{padding:0 12px;white-space:nowrap;border-radius:4px;height:36px;font-weight:400;border-style:solid;border-width:1px}cx-asm-main-ui button[type=submit]:disabled{opacity:.4;cursor:not-allowed}cx-asm-main-ui .spinner{display:flex;justify-content:center;width:100%;color:#0a6ed1}cx-asm-main-ui .spinner>div{width:8px;height:8px;margin:6px;border-radius:100%;background-color:currentColor;-webkit-animation:1s infinite spinner-dots-pulse;animation:1s infinite spinner-dots-pulse}cx-asm-main-ui .spinner>div:nth-child(1){-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,100%,60%{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{color:#fff;background-color:#354a5f;height:48px;display:flex;padding:0 2rem;justify-content:space-between;z-index:1}cx-asm-main-ui .asm-bar-branding{display:flex;align-items:center}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{display:flex;justify-content:flex-end;align-items:center}cx-asm-main-ui>:nth-child(2){padding:1rem 2rem;display:flex;width:100%}cx-asm-main-ui input{outline:0;border:1px solid #89919a;color:#32363a;background-color:#fff;border-radius:4px;padding:0 12px;height:36px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-webkit-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
     })
 ], AsmMainUiComponent);
-
-let BaseFocusService = class BaseFocusService {
-};
-BaseFocusService.ɵprov = ɵɵdefineInjectable({ factory: function BaseFocusService_Factory() { return new BaseFocusService(); }, token: BaseFocusService, providedIn: "root" });
-BaseFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], BaseFocusService);
-
-/** The element attribute used to store the focus state */
-const FOCUS_ATTR = 'data-cx-focus';
-/** The element attribute used to store the focus group state */
-const FOCUS_GROUP_ATTR = 'data-cx-focus-group';
-
-const GLOBAL_GROUP = '_g_';
-/**
- * Shared service to persist the focus for an element or a group
- * of elements. The persisted element focus can be used to persist
- * the focus for a DOM tree, so that the focus remains after a repaint
- * or reoccurs when a DOM tree is "unlocked".
- */
-let PersistFocusService = class PersistFocusService extends BaseFocusService {
-    constructor() {
-        super(...arguments);
-        // this is going to fail as we have sub services. They will al have their own map.
-        // We must bring this to a singlton map.
-        this.focus = new Map();
-    }
-    get(group) {
-        return this.focus.get(group || GLOBAL_GROUP);
-    }
-    /**
-     * Persist the keyboard focus state for the given key. The focus is stored globally
-     * or for the given group.
-     */
-    set(key, group) {
-        if (key) {
-            this.focus.set(group || GLOBAL_GROUP, key);
-        }
-    }
-    /**
-     * Clears the persisted keyboard focus state globally or for the given group.
-     */
-    clear(group) {
-        this.focus.delete(group || GLOBAL_GROUP);
-    }
-    /**
-     * Returns the group for the host element based on the configured group or
-     * by the `data-cx-focus-group` attribute stored on the host.
-     */
-    getPersistenceGroup(host, config) {
-        return (config === null || config === void 0 ? void 0 : config.group) ? config.group : host.getAttribute(FOCUS_GROUP_ATTR);
-    }
-};
-PersistFocusService.ɵprov = ɵɵdefineInjectable({ factory: function PersistFocusService_Factory() { return new PersistFocusService(); }, token: PersistFocusService, providedIn: "root" });
-PersistFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], PersistFocusService);
-
-let SelectFocusUtility = class SelectFocusUtility {
-    constructor() {
-        /**
-         * Query selectors used to query focusable child elements of the host element.
-         * The selectors are supplemented with `:not([disabled])` and `:not([hidden])`.
-         */
-        this.focusableSelectors = [
-            'a[href]',
-            'button',
-            '[tabindex]',
-            'input',
-            'select',
-            'textarea',
-        ];
-        // like to leave out the following as we don't use it, and make this list exensible.
-        //   `[contentEditable=true]`, // very unlikely to suport as we're not a business tool
-        //   `iframe`, // we really don't like iframes...
-        //   `area[href]`, // very debatable!
-        this.focusableSelectorSuffix = ':not([disabled]):not([hidden])';
-    }
-    query(host, selector) {
-        if (!selector || selector === '') {
-            return [];
-        }
-        return Array.from(host.querySelectorAll(selector));
-    }
-    findFirstFocusable(host, config = { autofocus: true }) {
-        const selector = typeof (config === null || config === void 0 ? void 0 : config.autofocus) === 'string' ? config.autofocus : '[autofocus]';
-        // fallback to first focusable
-        return (this.query(host, selector).find((el) => !this.isHidden(el)) ||
-            this.findFocusable(host).find((el) => Boolean(el)));
-    }
-    /**
-     * returns all focusable child elements of the host element. The element selectors
-     * are build from the `focusableSelectors`.
-     *
-     * @param host the `HTMLElement` used to query focusable elements
-     * @param locked indicates whether inactive (`tabindex="-1"`) focusable elements should be returned
-     * @param invisible indicates whether hidden focusable elements should be returned
-     */
-    findFocusable(host, locked = false, invisible = false) {
-        let suffix = this.focusableSelectorSuffix;
-        if (!locked) {
-            suffix += `:not([tabindex='-1'])`;
-        }
-        const selector = this.focusableSelectors
-            .map((s) => (s += suffix))
-            .join(',');
-        return this.query(host, selector).filter((el) => !invisible ? !this.isHidden(el) : Boolean(el));
-    }
-    /**
-     * Indicates whether the element is hidden by CSS. There are various CSS rules and
-     * HTML structures which can lead to an hidden or invisible element. An `offsetParent`
-     * of null indicates that the element or any of it's decendants is hidden (`display:none`).
-     *
-     * Oother techniques use the visibility (`visibility: hidden`), opacity (`opacity`) or
-     * phyisical location on the element itself or any of it's anchestor elements. Those
-     * technique require to work with the _computed styles_, which will cause a performance
-     * downgrade. We don't do this in the standard implementaton.
-     */
-    isHidden(el) {
-        return el.offsetParent === null;
-    }
-};
-SelectFocusUtility.ɵprov = ɵɵdefineInjectable({ factory: function SelectFocusUtility_Factory() { return new SelectFocusUtility(); }, token: SelectFocusUtility, providedIn: "root" });
-SelectFocusUtility = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], SelectFocusUtility);
-
-let EscapeFocusService = class EscapeFocusService extends PersistFocusService {
-    constructor(selectFocusUtil) {
-        super();
-        this.selectFocusUtil = selectFocusUtil;
-    }
-    shouldFocus(config) {
-        return !!(config === null || config === void 0 ? void 0 : config.focusOnEscape);
-    }
-    handleEscape(host, config, event) {
-        var _a;
-        if (this.shouldFocus(config)) {
-            if (host !== event.target) {
-                host.focus({ preventScroll: true });
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            else {
-                if (config === null || config === void 0 ? void 0 : config.focusOnDoubleEscape) {
-                    (_a = this.selectFocusUtil
-                        .findFirstFocusable(host, { autofocus: true })) === null || _a === void 0 ? void 0 : _a.focus();
-                }
-            }
-        }
-    }
-};
-EscapeFocusService.ctorParameters = () => [
-    { type: SelectFocusUtility }
-];
-EscapeFocusService.ɵprov = ɵɵdefineInjectable({ factory: function EscapeFocusService_Factory() { return new EscapeFocusService(ɵɵinject(SelectFocusUtility)); }, token: EscapeFocusService, providedIn: "root" });
-EscapeFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], EscapeFocusService);
-
-let AutoFocusService = class AutoFocusService extends EscapeFocusService {
-    /**
-     * Returns the first focusable child element of the host element.
-     */
-    findFirstFocusable(host, config = { autofocus: true }) {
-        if ((config === null || config === void 0 ? void 0 : config.autofocus) === ':host') {
-            return host;
-        }
-        else if (this.hasPersistedFocus(host, config)) {
-            return this.getPersisted(host, this.getPersistenceGroup(host, config));
-        }
-        else {
-            return this.selectFocusUtil.findFirstFocusable(host, config) || host;
-        }
-    }
-    /**
-     * Indicates whether any of the focusabe child elements is focused.
-     */
-    hasPersistedFocus(host, config) {
-        return !!this.getPersisted(host, this.getPersistenceGroup(host, config));
-    }
-    /**
-     * Returns the element that has a persisted focus state.
-     *
-     * @param host the `HTMLElement` used to query for focusable children
-     * @param group the optional group for the persistent state, to separate different focus
-     *   groups and remain the persistence
-     */
-    getPersisted(host, group) {
-        if (!this.get(group)) {
-            return;
-        }
-        const focussed = Array.from(host.querySelectorAll(`[${FOCUS_ATTR}='${this.get(group)}']`));
-        return focussed.length > 0 ? focussed[0] : null;
-    }
-};
-AutoFocusService.ɵprov = ɵɵdefineInjectable({ factory: function AutoFocusService_Factory() { return new AutoFocusService(ɵɵinject(SelectFocusUtility)); }, token: AutoFocusService, providedIn: "root" });
-AutoFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], AutoFocusService);
-
-let TabFocusService = class TabFocusService extends AutoFocusService {
-    /**
-     * Moves to the next (or previous) tab.
-     */
-    moveTab(host, config, increment, event) {
-        if (config === null || config === void 0 ? void 0 : config.tab) {
-            const next = config.tab === 'scroll'
-                ? this.findNextScrollable(host, config, increment)
-                : this.findNext(host, config, increment);
-            next === null || next === void 0 ? void 0 : next.focus();
-            event.preventDefault();
-            event.stopPropagation();
-        }
-    }
-    /**
-     * builds out virtual slides out of the full scrollable area, to allow
-     * for maximum flexibility for the underlying layout without using hardcoded
-     * slide sizes.
-     */
-    findNextScrollable(host, config, increment) {
-        var _a;
-        const active = this.getActiveChild(host, config);
-        if (!active) {
-            return;
-        }
-        // slide count
-        const virtualSlideCount = Math.round(host.scrollWidth / host.clientWidth);
-        // find current virtual slide
-        const currentVirtualSlide = Math.round(active.offsetLeft / (host.scrollWidth / virtualSlideCount));
-        let nextVirtualSlide = currentVirtualSlide + increment;
-        if (increment === 1 /* NEXT */ &&
-            nextVirtualSlide >= virtualSlideCount) {
-            nextVirtualSlide = 0;
-        }
-        if (increment === -1 /* PREV */ && nextVirtualSlide < 0) {
-            nextVirtualSlide = virtualSlideCount - 1;
-        }
-        const firstItemOnNextSlide = (_a = this.getChildren(host, config)) === null || _a === void 0 ? void 0 : _a.find((tab) => tab.offsetLeft >=
-            (host.scrollWidth / virtualSlideCount) * nextVirtualSlide);
-        return firstItemOnNextSlide;
-    }
-    findNext(host, config, increment) {
-        const childs = this.getChildren(host, config);
-        let activeIndex = childs === null || childs === void 0 ? void 0 : childs.findIndex((c) => c === this.getActiveChild(host, config));
-        if (!activeIndex || activeIndex === -1) {
-            activeIndex = 0;
-        }
-        activeIndex += increment;
-        if (increment === 1 /* NEXT */ && activeIndex >= (childs === null || childs === void 0 ? void 0 : childs.length)) {
-            activeIndex = childs.length - 1;
-        }
-        if (increment === -1 /* PREV */ && activeIndex < 0) {
-            activeIndex = 0;
-        }
-        return childs ? childs[activeIndex] : undefined;
-    }
-    /**
-     * Returns the active focusable child element. If there's no active
-     * focusable child element, the first focusable child is returned.
-     */
-    getActiveChild(host, config) {
-        const persisted = this.getPersisted(host, config === null || config === void 0 ? void 0 : config.group);
-        if (persisted) {
-            return persisted;
-        }
-        const children = this.getChildren(host, config);
-        let index = children.findIndex((tab) => this.isActive(tab));
-        if (!index || index === -1) {
-            index = 0;
-        }
-        return children[index];
-    }
-    getChildren(host, config) {
-        if (typeof config.tab === 'string' && config.tab !== 'scroll') {
-            return this.selectFocusUtil.query(host, config.tab);
-        }
-        else {
-            return this.findFocusable(host, true);
-        }
-    }
-    /**
-     * Returns all focusable child elements of the host element.
-     *
-     * @param host The host element is used to query child focusable elements.
-     * @param locked Indicates if locked elements (tabindex=-1) should be returned, defaults to false.
-     * @param invisible Indicates if invisible child elements should be returned, defaults to false.
-     */
-    findFocusable(host, locked = false, invisible = false) {
-        return this.selectFocusUtil.findFocusable(host, locked, invisible);
-    }
-    isActive(el) {
-        const child = document.activeElement;
-        const selector = child.tagName;
-        return (el === child ||
-            !!Array.from(el.querySelectorAll(selector)).find((e) => e === child));
-    }
-};
-TabFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TabFocusService_Factory() { return new TabFocusService(ɵɵinject(SelectFocusUtility)); }, token: TabFocusService, providedIn: "root" });
-TabFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], TabFocusService);
-
-let TrapFocusService = class TrapFocusService extends TabFocusService {
-    /**
-     * Indicates whether any of the child elements of the host are focusable.
-     *
-     * @param host `HTMLElement` that is used to query the focusable elements.
-     */
-    hasFocusableChildren(host) {
-        return this.findFocusable(host).length > 0;
-    }
-    /**
-     * Focus the next or previous element of all available focusable elements.
-     * The focus is _trapped_ in case there's no next or previous available element.
-     * The focus will automatically move the start or end of the list.
-     */
-    moveFocus(host, config, increment, event) {
-        const focusable = this.findFocusable(host);
-        let index = focusable.findIndex((v) => v === event.target) + increment;
-        const shouldMoveFocus = (index >= 0 && index < focusable.length) ||
-            (index < 0 && this.getTrapStart(config.trap)) ||
-            (index >= focusable.length && this.getTrapEnd(config.trap));
-        if (shouldMoveFocus) {
-            if (index >= focusable.length) {
-                index = 0;
-            }
-            if (index < 0) {
-                index = focusable.length - 1;
-            }
-            event.preventDefault();
-            event.stopPropagation();
-            const el = focusable[index];
-            el.focus();
-        }
-    }
-    getTrapStart(trap) {
-        return trap === true || trap === 'start';
-    }
-    getTrapEnd(trap) {
-        return trap === true || trap === 'end';
-    }
-};
-TrapFocusService.ɵprov = ɵɵdefineInjectable({ factory: function TrapFocusService_Factory() { return new TrapFocusService(ɵɵinject(SelectFocusUtility)); }, token: TrapFocusService, providedIn: "root" });
-TrapFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], TrapFocusService);
-
-let LockFocusService = class LockFocusService extends TrapFocusService {
-};
-LockFocusService.ɵprov = ɵɵdefineInjectable({ factory: function LockFocusService_Factory() { return new LockFocusService(ɵɵinject(SelectFocusUtility)); }, token: LockFocusService, providedIn: "root" });
-LockFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], LockFocusService);
-
-let KeyboardFocusService = class KeyboardFocusService extends LockFocusService {
-};
-KeyboardFocusService.ɵprov = ɵɵdefineInjectable({ factory: function KeyboardFocusService_Factory() { return new KeyboardFocusService(ɵɵinject(SelectFocusUtility)); }, token: KeyboardFocusService, providedIn: "root" });
-KeyboardFocusService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], KeyboardFocusService);
-
-let SkipLinkConfig = class SkipLinkConfig {
-};
-SkipLinkConfig.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkConfig_Factory() { return ɵɵinject(Config); }, token: SkipLinkConfig, providedIn: "root" });
-SkipLinkConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], SkipLinkConfig);
-class SkipLink {
-}
-var SkipLinkScrollPosition;
-(function (SkipLinkScrollPosition) {
-    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
-    SkipLinkScrollPosition["AFTER"] = "AFTER";
-})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
-
-let SkipLinkService = class SkipLinkService {
-    constructor(config, keyboardFocusService) {
-        this.config = config;
-        this.keyboardFocusService = keyboardFocusService;
-        this.skipLinks$ = new BehaviorSubject([]);
-    }
-    getSkipLinks() {
-        return this.skipLinks$;
-    }
-    add(key, target) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            const existing = this.skipLinks$.value;
-            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
-                target,
-                i18nKey: found.i18nKey,
-                position: found.position,
-                key,
-            });
-            this.skipLinks$.next(existing);
-        }
-    }
-    remove(key) {
-        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
-        if (found) {
-            let existing = this.skipLinks$.value;
-            existing = existing.filter((skipLink) => skipLink.key !== key);
-            this.skipLinks$.next(existing);
-        }
-    }
-    scrollToTarget(skipLink) {
-        const target = skipLink.target instanceof HTMLElement
-            ? skipLink.target
-            : skipLink.target.parentElement;
-        // focus first focusable element in the
-        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
-        // we force a tabindex if not available, to ensure we can focus into the element
-        const hasTabindex = firstFocusable.hasAttribute('tabindex');
-        if (!hasTabindex) {
-            firstFocusable.setAttribute('tabindex', '-1');
-        }
-        firstFocusable.focus();
-        // drop the tmp tabindex
-        if (!hasTabindex) {
-            firstFocusable.removeAttribute('tabindex');
-        }
-    }
-    getSkipLinkIndexInArray(key) {
-        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
-        while (index > 0) {
-            index--;
-            const previous = this.config.skipLinks[index];
-            if (previous) {
-                const existing = this.skipLinks$.value;
-                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
-                if (found > -1) {
-                    return found + 1;
-                }
-            }
-        }
-        return 0;
-    }
-};
-SkipLinkService.ctorParameters = () => [
-    { type: SkipLinkConfig },
-    { type: KeyboardFocusService }
-];
-SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
-SkipLinkService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], SkipLinkService);
-
-let SkipLinkComponent = class SkipLinkComponent {
-    constructor(skipLinkService) {
-        this.skipLinkService = skipLinkService;
-        this.skipLinks$ = this.skipLinkService.getSkipLinks();
-    }
-    scrollToTarget(skipLink) {
-        this.skipLinkService.scrollToTarget(skipLink);
-    }
-};
-SkipLinkComponent.ctorParameters = () => [
-    { type: SkipLinkService }
-];
-SkipLinkComponent = __decorate([
-    Component({
-        selector: 'cx-skip-link',
-        template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], SkipLinkComponent);
-
-const DEFAULT_LAUNCH_CONFIG = {
-    launch: {
-        ASM: {
-            outlet: 'cx-storefront',
-            component: AsmMainUiComponent,
-        },
-        SKIP_LINKS: {
-            outlet: 'cx-storefront',
-            component: SkipLinkComponent,
-        },
-    },
-};
-
-let LaunchConfig = class LaunchConfig {
-};
-LaunchConfig.ɵprov = ɵɵdefineInjectable({ factory: function LaunchConfig_Factory() { return ɵɵinject(Config); }, token: LaunchConfig, providedIn: "root" });
-LaunchConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], LaunchConfig);
-/**
- * Types of dialog openings supported
- */
-var DIALOG_TYPE;
-(function (DIALOG_TYPE) {
-    DIALOG_TYPE["POPOVER"] = "POPOVER";
-    DIALOG_TYPE["DIALOG"] = "DIALOG";
-    DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
-    DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
-})(DIALOG_TYPE || (DIALOG_TYPE = {}));
-/**
- * List of available callers
- */
-var LAUNCH_CALLER;
-(function (LAUNCH_CALLER) {
-    LAUNCH_CALLER["ASM"] = "ASM";
-    LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
-})(LAUNCH_CALLER || (LAUNCH_CALLER = {}));
-
-class LaunchRenderStrategy {
-    constructor() {
-        // List of called references; only used for rendered elements
-        this.renderedCallers = [];
-    }
-    /**
-     * Determines if element should render
-     *
-     * @param caller
-     * @param config
-     */
-    shouldRender(caller, config) {
-        return this.renderedCallers.some((el) => el.caller === caller)
-            ? !!config.multi
-            : true;
-    }
-    /**
-     * Method to call when rendered element is destroyed
-     * The element will be removed from the list of rendered elements
-     *
-     * @param caller
-     * @param _config optional parameters used in children strategies
-     */
-    remove(caller, _config) {
-        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
-    }
-}
-
-let LaunchDialogService = class LaunchDialogService {
-    constructor(renderStrategies, launchConfig) {
-        this.renderStrategies = renderStrategies;
-        this.launchConfig = launchConfig;
-        // Keep a list of rendered elements
-        this.renderedCallers = [];
-        this.renderStrategies = this.renderStrategies || [];
-    }
-    /**
-     * Render the element based on the strategy from the launch configuration
-     *
-     * @param caller LAUNCH_CALLER
-     * @param vcr View Container Ref of the container for inline rendering
-     */
-    launch(caller, vcr) {
-        const config = this.findConfiguration(caller);
-        const renderer = this.getStrategy(config);
-        // Render if the strategy exists
-        if (renderer) {
-            renderer.render(config, caller, vcr);
-        }
-    }
-    /**
-     * Util method to remove element from rendered elements list
-     *
-     * @param caller LAUNCH_CALLER
-     */
-    clear(caller) {
-        const config = this.findConfiguration(caller);
-        const renderer = this.getStrategy(config);
-        // Render if the strategy exists
-        if (renderer) {
-            renderer.remove(caller, config);
-        }
-    }
-    /**
-     * Returns the configuration for the caller
-     *
-     * @param caller LAUNCH_CALLER
-     */
-    findConfiguration(caller) {
-        var _a;
-        return (_a = this.launchConfig) === null || _a === void 0 ? void 0 : _a.launch[caller];
-    }
-    /**
-     * Returns the render strategy based on the configuration
-     *
-     * @param config Configuration for launch
-     */
-    getStrategy(config) {
-        return resolveApplicable(this.renderStrategies, [config]);
-    }
-};
-LaunchDialogService.ctorParameters = () => [
-    { type: Array, decorators: [{ type: Inject, args: [LaunchRenderStrategy,] }] },
-    { type: LaunchConfig }
-];
-LaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function LaunchDialogService_Factory() { return new LaunchDialogService(ɵɵinject(LaunchRenderStrategy), ɵɵinject(LaunchConfig)); }, token: LaunchDialogService, providedIn: "root" });
-LaunchDialogService = __decorate([
-    Injectable({ providedIn: 'root' }),
-    __param(0, Inject(LaunchRenderStrategy))
-], LaunchDialogService);
-
-/**
- * The AsmEnablerService is used to enable ASM for those scenario's
- * where it's actually used. This service is added to avoid any polution
- * of the UI and runtime performance for the ordinary production user.
- */
-let AsmEnablerService = class AsmEnablerService {
-    constructor(location, winRef, launchDialogService) {
-        this.location = location;
-        this.winRef = winRef;
-        this.launchDialogService = launchDialogService;
-    }
-    /**
-     * Loads the ASM UI if needed. The ASM UI will be added based on the
-     * existence of a URL parameter or previous usage given by local storage.
-     */
-    load() {
-        if (this.isEnabled()) {
-            this.addUi();
-        }
-    }
-    /**
-     * Indicates whether the ASM module is enabled.
-     */
-    isEnabled() {
-        if (this.isLaunched() && !this.isUsedBefore()) {
-            if (this.winRef.localStorage) {
-                this.winRef.localStorage.setItem(ASM_ENABLED_LOCAL_STORAGE_KEY, 'true');
-            }
-        }
-        return this.isLaunched() || this.isUsedBefore();
-    }
-    /**
-     * Indicates whether ASM is launched through the URL,
-     * using the asm flag in the URL.
-     */
-    isLaunched() {
-        const params = this.location.path().split('?')[1];
-        return params && params.split('&').includes('asm=true');
-    }
-    /**
-     * Evaluates local storage where we persist the usage of ASM.
-     */
-    isUsedBefore() {
-        return (this.winRef.localStorage &&
-            this.winRef.localStorage.getItem(ASM_ENABLED_LOCAL_STORAGE_KEY) === 'true');
-    }
-    /**
-     * Adds the ASM UI by using the `cx-storefront` outlet.
-     */
-    addUi() {
-        this.launchDialogService.launch(LAUNCH_CALLER.ASM);
-    }
-};
-AsmEnablerService.ctorParameters = () => [
-    { type: Location },
-    { type: WindowRef },
-    { type: LaunchDialogService }
-];
-AsmEnablerService.ɵprov = ɵɵdefineInjectable({ factory: function AsmEnablerService_Factory() { return new AsmEnablerService(ɵɵinject(Location), ɵɵinject(WindowRef), ɵɵinject(LaunchDialogService)); }, token: AsmEnablerService, providedIn: "root" });
-AsmEnablerService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], AsmEnablerService);
-
-/**
- * The ASM loader module takes care of loading the ASM UI
- * only in case there's a reason to do so.
- */
-let AsmLoaderModule = class AsmLoaderModule {
-};
-AsmLoaderModule = __decorate([
-    NgModule({
-        imports: [CommonModule, PageComponentModule],
-        providers: [
-            {
-                provide: APP_INITIALIZER,
-                useFactory: asmFactory,
-                deps: [AsmEnablerService],
-                multi: true,
-            },
-        ],
-    })
-], AsmLoaderModule);
-/**
- *
- * We do not like to block the UI, which is why we delgate loading of ASM
- * to a real component; the router and state aren't available in an optimized
- * way during the APP_INITIALIZER.
- */
-function asmFactory(asmEnablerService) {
-    const isReady = () => {
-        asmEnablerService.load();
-    };
-    return isReady;
-}
 
 let AsmSessionTimerComponent = class AsmSessionTimerComponent {
     constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
@@ -2253,1980 +5793,14 @@ CustomerSelectionComponent = __decorate([
     })
 ], CustomerSelectionComponent);
 
-let CardComponent = class CardComponent {
-    constructor() {
-        this.iconTypes = ICON_TYPE;
-        this.deleteCard = new EventEmitter();
-        this.setDefaultCard = new EventEmitter();
-        this.sendCard = new EventEmitter();
-        this.editCard = new EventEmitter();
-        this.cancelCard = new EventEmitter();
-        this.border = false;
-        this.editMode = false;
-        this.isDefault = false;
-        this.fitToContainer = false;
-    }
-    // ACTIONS
-    setEditMode() {
-        this.editMode = true;
-    }
-    cancelEdit() {
-        this.editMode = false;
-        this.cancelCard.emit(5);
-    }
-    delete() {
-        this.deleteCard.emit(1);
-    }
-    setDefault() {
-        this.isDefault = true;
-        this.setDefaultCard.emit(2);
-    }
-    send() {
-        this.sendCard.emit(3);
-    }
-    edit() {
-        this.editCard.emit(4);
-    }
-    ngOnInit() { }
-};
-__decorate([
-    Output()
-], CardComponent.prototype, "deleteCard", void 0);
-__decorate([
-    Output()
-], CardComponent.prototype, "setDefaultCard", void 0);
-__decorate([
-    Output()
-], CardComponent.prototype, "sendCard", void 0);
-__decorate([
-    Output()
-], CardComponent.prototype, "editCard", void 0);
-__decorate([
-    Output()
-], CardComponent.prototype, "cancelCard", void 0);
-__decorate([
-    Input()
-], CardComponent.prototype, "border", void 0);
-__decorate([
-    Input()
-], CardComponent.prototype, "editMode", void 0);
-__decorate([
-    Input()
-], CardComponent.prototype, "isDefault", void 0);
-__decorate([
-    Input()
-], CardComponent.prototype, "content", void 0);
-__decorate([
-    Input()
-], CardComponent.prototype, "fitToContainer", void 0);
-CardComponent = __decorate([
-    Component({
-        selector: 'cx-card',
-        template: "<div\n  *ngIf=\"content\"\n  class=\"cx-card\"\n  [class.cx-card-border]=\"border\"\n  [class.cx-card-fit-to-container]=\"fitToContainer\"\n>\n  <!-- Card Header -->\n  <div *ngIf=\"content.header && !editMode\" class=\"card-header\">\n    {{ content.header }}\n  </div>\n  <!-- Card Body -->\n  <div class=\"card-body cx-card-body\" [class.cx-card-delete]=\"editMode\">\n    <!-- Edit message -->\n    <div *ngIf=\"editMode\" class=\"cx-card-delete-msg\">\n      {{ content.deleteMsg }}\n    </div>\n    <!-- Card title -->\n    <h4 *ngIf=\"content.title\" class=\"cx-card-title\">\n      {{ content.title }}\n    </h4>\n    <!-- Card Content -->\n    <div class=\"cx-card-container\">\n      <!-- Card Label -->\n      <div class=\"cx-card-label-container\">\n        <div *ngIf=\"content.textBold\" class=\"cx-card-label-bold\">\n          {{ content.textBold }}\n        </div>\n        <div *ngFor=\"let line of content.text\">\n          <div class=\"cx-card-label\">{{ line }}</div>\n        </div>\n      </div>\n      <!-- Image -->\n      <div *ngIf=\"content.img\" class=\"cx-card-img-container\">\n        <cx-icon [type]=\"content.img\"></cx-icon>\n      </div>\n    </div>\n    <!-- Edit Mode Actions -->\n    <div *ngIf=\"editMode\" class=\"row cx-card-body-delete\">\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-secondary\" (click)=\"cancelEdit()\">\n          {{ 'common.cancel' | cxTranslate }}\n        </button>\n      </div>\n      <div class=\"col-md-6\">\n        <button class=\"btn btn-block btn-primary\" (click)=\"delete()\">\n          {{ 'common.delete' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <!-- Actions -->\n    <div *ngIf=\"content.actions && !editMode\" class=\"cx-card-actions\">\n      <div *ngFor=\"let action of content.actions\">\n        <div [ngSwitch]=\"action.event\">\n          <a\n            *ngSwitchCase=\"'delete'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"delete()\"\n            (keydown.enter)=\"delete()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'default'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"setDefault()\"\n            (keydown.enter)=\"setDefault()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'send'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"send()\"\n            (keydown.enter)=\"send()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchCase=\"'edit'\"\n            class=\"cx-card-link card-link btn-link cx-action-link\"\n            (click)=\"edit()\"\n            (keydown.enter)=\"edit()\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n          <a\n            *ngSwitchDefault\n            href=\"{{ action.link }}\"\n            class=\"card-link btn-link cx-action-link\"\n            tabindex=\"0\"\n            >{{ action.name }}</a\n          >\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
-    })
-], CardComponent);
-
-let CardModule = class CardModule {
-};
-CardModule = __decorate([
-    NgModule({
-        imports: [CommonModule, I18nModule, IconModule],
-        declarations: [CardComponent],
-        exports: [CardComponent],
-    })
-], CardModule);
-
-let CarouselService = class CarouselService {
-    constructor(winRef) {
-        this.winRef = winRef;
-    }
-    /**
-     * The number of items per slide is calculated by the help of
-     * the item width and the available width of the host element.
-     * This appoach makes it possible to place the carousel in different
-     * layouts. Instead of using the page breakpoints, the host size is
-     * taken into account.
-     *
-     * Since there's no element resize API available, we use the
-     * window `resize` event, so that we can adjust the number of items
-     * whenever the window got resized.
-     */
-    getItemsPerSlide(nativeElement, itemWidth) {
-        return this.winRef.resize$.pipe(map(() => nativeElement.clientWidth), map((totalWidth) => this.calculateItems(totalWidth, itemWidth)));
-    }
-    /**
-     * Calculates the number of items per given hostSize.  calculated based on the given
-     * intended size in pixels or percentages. The
-     *
-     * @param availableWidth The available width in pixels for the carousel items.
-     * @param itemWidth The width per carousel item, in px or percentage.
-     */
-    calculateItems(availableWidth, itemWidth) {
-        let calculatedItems = 0;
-        if (itemWidth.endsWith('px')) {
-            const num = itemWidth.substring(0, itemWidth.length - 2);
-            calculatedItems = availableWidth / num;
-        }
-        if (itemWidth.endsWith('%')) {
-            const perc = itemWidth.substring(0, itemWidth.length - 1);
-            calculatedItems =
-                availableWidth / (availableWidth * (perc / 100));
-        }
-        return Math.floor(calculatedItems) || 1;
-    }
-};
-CarouselService.ctorParameters = () => [
-    { type: WindowRef }
-];
-CarouselService.ɵprov = ɵɵdefineInjectable({ factory: function CarouselService_Factory() { return new CarouselService(ɵɵinject(WindowRef)); }, token: CarouselService, providedIn: "root" });
-CarouselService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], CarouselService);
-
-/**
- * Generic carousel component that can be used to render any carousel items,
- * such as products, images, banners, or any component. Carousel items are
- * rendered in so-called carousel slides, and the previous/next buttons as well as
- * the indicator-buttons can used to navigate the slides.
- *
- * The component uses an array of Observables (`items$`) as an input, to allow
- * for lazy loading of items.
- *
- * The number of items per slide is calculated with the `itemWidth`, which can given
- * in pixels or percentage.
- *
- * To allow for flexible rendering of items, the rendering is delegated to the
- * given `template`. This allows for maximum flexibility.
- */
-let CarouselComponent = class CarouselComponent {
-    constructor(el, service) {
-        this.el = el;
-        this.service = service;
-        /**
-         * Specifies the minimum size of the carousel item, either in px or %.
-         * This value is used for the calculation of numbers per carousel, so that
-         * the number of carousel items is dynamic. The calculation uses the `itemWidth`
-         * and the host element `clientWidth`, so that the carousel is reusable in
-         * different layouts (for example in a 50% grid).
-         */
-        this.itemWidth = '300px';
-        /**
-         * Indicates whether the visual indicators are used.
-         */
-        this.hideIndicators = false;
-        this.indicatorIcon = ICON_TYPE.CIRCLE;
-        this.previousIcon = ICON_TYPE.CARET_LEFT;
-        this.nextIcon = ICON_TYPE.CARET_RIGHT;
-    }
-    set setItems(inputItems) {
-        this.items = inputItems;
-        //Reset slider when changing products
-        this.activeSlide = 0;
-    }
-    ngOnInit() {
-        if (!this.template && isDevMode()) {
-            console.error('No template reference provided to render the carousel items for the `cx-carousel`');
-            return;
-        }
-        this.size$ = this.service
-            .getItemsPerSlide(this.el.nativeElement, this.itemWidth)
-            .pipe(tap(() => (this.activeSlide = 0)));
-    }
-};
-CarouselComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: CarouselService }
-];
-__decorate([
-    Input()
-], CarouselComponent.prototype, "title", void 0);
-__decorate([
-    Input('items')
-], CarouselComponent.prototype, "setItems", null);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "template", void 0);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "itemWidth", void 0);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "hideIndicators", void 0);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "indicatorIcon", void 0);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "previousIcon", void 0);
-__decorate([
-    Input()
-], CarouselComponent.prototype, "nextIcon", void 0);
-CarouselComponent = __decorate([
-    Component({
-        selector: 'cx-carousel',
-        template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"-1\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"-1\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], CarouselComponent);
-
-var BREAKPOINT;
-(function (BREAKPOINT) {
-    BREAKPOINT["xs"] = "xs";
-    BREAKPOINT["sm"] = "sm";
-    BREAKPOINT["md"] = "md";
-    BREAKPOINT["lg"] = "lg";
-    BREAKPOINT["xl"] = "xl";
-})(BREAKPOINT || (BREAKPOINT = {}));
-/**
- * The LayoutConfig supports the configuration of page slots by page templates
- * or page sections, such as headers and footers. The configuration also supports
- * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
- * por a given breakpoint.
- */
-let LayoutConfig = class LayoutConfig {
-};
-LayoutConfig.ɵprov = ɵɵdefineInjectable({ factory: function LayoutConfig_Factory() { return ɵɵinject(Config); }, token: LayoutConfig, providedIn: "root" });
-LayoutConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], LayoutConfig);
-
-const DEFAULT_BREAKPOINTS = {
-    [BREAKPOINT.xs]: 576,
-    [BREAKPOINT.sm]: 768,
-    [BREAKPOINT.md]: 992,
-    [BREAKPOINT.lg]: 1200,
-};
-let BreakpointService = class BreakpointService {
-    constructor(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-    }
-    get breakpoint$() {
-        if (!this.window) {
-            return of(BREAKPOINT.xs);
-        }
-        return this.winRef.resize$.pipe(map((event) => this.getBreakpoint(event.target.innerWidth)), distinctUntilChanged());
-    }
-    /**
-     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-     * configuration. If no configuration is available for the given breakpoint, the
-     * method will return the default values:
-     * - xs: 567
-     * - sm: 768
-     * - md: 992
-     * - lg: 1200
-     */
-    getSize(breakpoint) {
-        var _a;
-        return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
-            : DEFAULT_BREAKPOINTS[breakpoint];
-    }
-    /**
-     * Returns all available breakpoints for the system.
-     */
-    get breakpoints() {
-        return [
-            BREAKPOINT.xs,
-            BREAKPOINT.sm,
-            BREAKPOINT.md,
-            BREAKPOINT.lg,
-            BREAKPOINT.xl,
-        ];
-    }
-    /**
-     * Indicates whether the current screen size is smaller than the maximum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
-     */
-    isDown(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size is larger than the minimum size of the
-     * given breakpoint.
-     *
-     * If the given breakpoint is `BREAKPOINT.md`, the method returns `true` when the
-     * window innerWidth is larger than the configured size of `BREAKPOINT.sm`.
-     */
-    isUp(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => this.breakpoints
-            .slice(this.breakpoints.indexOf(breakpoint))
-            .includes(br)));
-    }
-    /**
-     * Indicates whether the current screen size fits to the given breakpoint
-     */
-    isEqual(breakpoint) {
-        return this.breakpoint$.pipe(map((br) => br === breakpoint));
-    }
-    getBreakpoint(windowWidth) {
-        const breakpoint = this.getClosest(windowWidth);
-        return BREAKPOINT[breakpoint || BREAKPOINT.lg];
-    }
-    getClosest(windowWidth) {
-        if (!windowWidth) {
-            windowWidth = this.window.innerWidth;
-        }
-        return windowWidth > this.getSize(BREAKPOINT.lg)
-            ? BREAKPOINT.xl
-            : this.breakpoints.find((br) => windowWidth <= this.getSize(br));
-    }
-    get window() {
-        return this.winRef.nativeWindow;
-    }
-};
-BreakpointService.ctorParameters = () => [
-    { type: WindowRef },
-    { type: LayoutConfig }
-];
-BreakpointService.ɵprov = ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(ɵɵinject(WindowRef), ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
-BreakpointService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], BreakpointService);
-
-/**
- * Service which generates media URLs. It leverage the MediaContainer and MediaFormats so
- * that URLs and sizes are generated for the same media. This helps to improve performance
- * across difference devices and layouts.
- *
- * Media formats are optional, but highly recommended. The format will help the browser to
- * identify the right media for the right experience.
- *
- * The MediaService will generate absolute URLs in case relative URLs are provided for the Media.
- * The baseUrl is read from the `occConfig.backend.media.baseUrl` or
- * `occConfig.backend.occ.baseUrl`.
- */
-let MediaService = class MediaService {
-    constructor(config, 
-    /**
-     * The BreakpointService is no longer used in version 2.0 as the different size formats are
-     * driven by configuration only. There's however a change that this service will play a role
-     * in the near future, which is why we keep the constructor as-is.
-     */
-    breakpointService) {
-        this.config = config;
-        this.breakpointService = breakpointService;
-    }
-    /**
-     * Returns a `Media` object with the main media (`src`) and various media (`src`)
-     * for specific formats.
-     */
-    getMedia(mediaContainer, format, alt) {
-        if (!mediaContainer) {
-            return;
-        }
-        const mainMedia = mediaContainer.url
-            ? mediaContainer
-            : this.resolveMedia(mediaContainer, format);
-        return {
-            src: this.resolveAbsoluteUrl(mainMedia === null || mainMedia === void 0 ? void 0 : mainMedia.url),
-            alt: alt || (mainMedia === null || mainMedia === void 0 ? void 0 : mainMedia.altText),
-            srcset: this.resolveSrcSet(mediaContainer),
-        };
-    }
-    /**
-     * Creates the media formats in a logical sorted order. The map contains the
-     * format key and the format size information. We do this only once for performance
-     * benefits.
-     */
-    get sortedFormats() {
-        if (!this._sortedFormats) {
-            this._sortedFormats = Object.keys(this.config.mediaFormats)
-                .map((key) => ({
-                code: key,
-                size: this.config.mediaFormats[key],
-            }))
-                .sort((a, b) => (a.size.width > b.size.width ? 1 : -1));
-        }
-        return this._sortedFormats;
-    }
-    /**
-     * Creates the media formats in a reversed sorted order.
-     */
-    get reversedFormats() {
-        if (!this._reversedFormats) {
-            this._reversedFormats = this.sortedFormats.slice().reverse();
-        }
-        return this._reversedFormats;
-    }
-    /**
-     * Resolves the right media for the given format. The fo
-     */
-    resolveMedia(media, format) {
-        return media[this.resolveFormat(media, format)];
-    }
-    /**
-     * Validates the format against the given mediaContainer. If there is no format available,
-     * or if the mediaContainer doesn't contain a media for the given media, the most optimal
-     * format is resolved. If even that is not possible, the first format is returned.
-     */
-    resolveFormat(mediaContainer, format) {
-        if (format && mediaContainer[format]) {
-            return format;
-        }
-        return (this.resolveBestFormat(mediaContainer) || Object.keys(mediaContainer)[0]);
-    }
-    /**
-     * Returns the media format code with the best size.
-     */
-    resolveBestFormat(media) {
-        var _a;
-        return (_a = this.reversedFormats.find((format) => media.hasOwnProperty(format.code))) === null || _a === void 0 ? void 0 : _a.code;
-    }
-    /**
-     * Returns a set of media for the available media formats. Additionally, the congiured media
-     * format width is added to the srcset, so that browsers can select the appropriate media.
-     */
-    resolveSrcSet(media) {
-        if (!media) {
-            return undefined;
-        }
-        const srcset = this.sortedFormats.reduce((set, format) => {
-            if (!!media[format.code]) {
-                if (set) {
-                    set += ', ';
-                }
-                set += `${this.resolveAbsoluteUrl(media[format.code].url)} ${format.size.width}w`;
-            }
-            return set;
-        }, '');
-        return srcset === '' ? undefined : srcset;
-    }
-    /**
-     * Resolves the absolute URL for the given url. In most cases, this URL represents
-     * the relative URL on the backend. In that case, we prefix the url with the baseUrl.
-     */
-    resolveAbsoluteUrl(url) {
-        if (!url) {
-            return null;
-        }
-        return url.startsWith('http') ? url : this.getBaseUrl() + url;
-    }
-    /**
-     * The base URL is either driven by a specific `backend.media.baseUrl`, or by the
-     * `backend.occ.baseUrl`.
-     *
-     * The `backend.media.baseUrl` can be used to load media from a different location.
-     *
-     * In Commerce Cloud, a differnt location could mean a different "aspect".
-     */
-    getBaseUrl() {
-        return (this.config.backend.media.baseUrl ||
-            this.config.backend.occ.baseUrl ||
-            '');
-    }
-};
-MediaService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: [Config,] }] },
-    { type: BreakpointService }
-];
-MediaService.ɵprov = ɵɵdefineInjectable({ factory: function MediaService_Factory() { return new MediaService(ɵɵinject(Config), ɵɵinject(BreakpointService)); }, token: MediaService, providedIn: "root" });
-MediaService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(0, Inject(Config))
-], MediaService);
-
-let MediaComponent = class MediaComponent {
-    constructor(mediaService) {
-        this.mediaService = mediaService;
-        /**
-         * Once the media is loaded, we emit an event.
-         */
-        this.loaded = new EventEmitter();
-        /**
-         * The `cx-media` component has an `is-initialized` class as long as the
-         * media is being initialized.
-         */
-        this.isInitialized = false;
-        /**
-         * The `cx-media` component has a `is-loading` class as long as the
-         * media is loaded. Wehn the media is loaded, the `is-initialized` class
-         * is added.
-         */
-        this.isLoading = true;
-        /**
-         * When there's no media provided for the content, or in case an error
-         * happened during loading, we add the `is-missing` class. Visual effects
-         * can be controlled by CSS.
-         */
-        this.isMissing = false;
-    }
-    ngOnChanges() {
-        this.create();
-    }
-    /**
-     * Creates the `Media` object
-     */
-    create() {
-        var _a;
-        this.media = this.mediaService.getMedia(this.container, this.format, this.alt);
-        if (!((_a = this.media) === null || _a === void 0 ? void 0 : _a.src)) {
-            this.handleMissing();
-        }
-    }
-    /**
-     * This handler is called from the UI when the image is loaded.
-     */
-    loadHandler() {
-        this.isLoading = false;
-        this.isInitialized = true;
-        this.isMissing = false;
-        this.loaded.emit(true);
-    }
-    /**
-     * Whenever an error happens during load, we mark the component
-     * with css classes to have a missing media.
-     */
-    errorHandler() {
-        this.handleMissing();
-    }
-    handleMissing() {
-        this.isLoading = false;
-        this.isInitialized = true;
-        this.isMissing = true;
-        this.loaded.emit(false);
-    }
-};
-MediaComponent.ctorParameters = () => [
-    { type: MediaService }
-];
-__decorate([
-    Input()
-], MediaComponent.prototype, "container", void 0);
-__decorate([
-    Input()
-], MediaComponent.prototype, "format", void 0);
-__decorate([
-    Input()
-], MediaComponent.prototype, "alt", void 0);
-__decorate([
-    Output()
-], MediaComponent.prototype, "loaded", void 0);
-__decorate([
-    HostBinding('class.is-initialized')
-], MediaComponent.prototype, "isInitialized", void 0);
-__decorate([
-    HostBinding('class.is-loading')
-], MediaComponent.prototype, "isLoading", void 0);
-__decorate([
-    HostBinding('class.is-missing')
-], MediaComponent.prototype, "isMissing", void 0);
-MediaComponent = __decorate([
-    Component({
-        selector: 'cx-media',
-        template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], MediaComponent);
-
-var MediaModule_1;
-let MediaModule = MediaModule_1 = class MediaModule {
-    static forRoot() {
-        return {
-            ngModule: MediaModule_1,
-        };
-    }
-};
-MediaModule = MediaModule_1 = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [MediaComponent],
-        exports: [MediaComponent],
-    })
-], MediaModule);
-
-let CarouselModule = class CarouselModule {
-};
-CarouselModule = __decorate([
-    NgModule({
-        imports: [CommonModule, RouterModule, IconModule, MediaModule, UrlModule],
-        declarations: [CarouselComponent],
-        exports: [CarouselComponent],
-    })
-], CarouselModule);
-
-/**
- * Provides a UI to manage the count of the quantity, typically by using
- * increase and decrease functinality. The item counter expects an input `FormControl`
- * so that the state of the control can be managed outside of this component.
- */
-let ItemCounterComponent = class ItemCounterComponent {
-    constructor() {
-        /**
-         * This can be used in case an item has a minmum order quantity.
-         * @default 1
-         */
-        this.min = 1;
-        /**
-         * The step is used to increment the count. It is supposed to be a
-         * positive inteteger or float.
-         * @default 1
-         */
-        this.step = 1;
-        /**
-         * Inidicates that the input can be manually set to zero,
-         * despite the fact that the input controls will be limited to
-         * the minimum. The zero value can be used to remove an item.
-         */
-        this.allowZero = false;
-        /**
-         * In readonly mode the item counter will only be shown as a label,
-         * the form controls are not rendered.
-         * Please not that readonly is different from the `disabled` form state.
-         * @default false
-         */
-        this.readonly = false;
-    }
-    handleClick() {
-        this.input.nativeElement.focus();
-    }
-    increment() {
-        // it's too early to use the `stepUp` and `stepDown` API...
-        // let's wait for FF: https://caniuse.com/#search=stepUp
-        this.control.setValue(this.control.value + this.step);
-        this.control.markAsDirty();
-    }
-    decrement() {
-        this.control.setValue(this.control.value - this.step);
-        this.control.markAsDirty();
-    }
-    /**
-     * Returns an observable with the control. The value changes of the
-     * control are intercepted in order to suppress invalid values.
-     */
-    getControl() {
-        if (!this._control$) {
-            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
-        }
-        return this._control$;
-    }
-    /**
-     * Validate that the given value is in between
-     * the `min` and `max` value. If the value is out
-     * of  the min/max range, it will be altered.
-     * If `allowZero` is set to true, the 0 value is ignored.
-     *
-     */
-    getValidCount(value) {
-        if (value < this.min && !(value === 0 && this.allowZero)) {
-            value = this.min;
-        }
-        if (this.max && value > this.max) {
-            value = this.max;
-        }
-        return value;
-    }
-};
-__decorate([
-    Input()
-], ItemCounterComponent.prototype, "control", void 0);
-__decorate([
-    Input()
-], ItemCounterComponent.prototype, "min", void 0);
-__decorate([
-    Input()
-], ItemCounterComponent.prototype, "max", void 0);
-__decorate([
-    Input()
-], ItemCounterComponent.prototype, "step", void 0);
-__decorate([
-    Input()
-], ItemCounterComponent.prototype, "allowZero", void 0);
-__decorate([
-    HostBinding('class.readonly'), Input()
-], ItemCounterComponent.prototype, "readonly", void 0);
-__decorate([
-    ViewChild('qty')
-], ItemCounterComponent.prototype, "input", void 0);
-__decorate([
-    HostListener('click')
-], ItemCounterComponent.prototype, "handleClick", null);
-ItemCounterComponent = __decorate([
-    Component({
-        selector: 'cx-item-counter',
-        template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
-    })
-], ItemCounterComponent);
-
-let ItemCounterModule = class ItemCounterModule {
-};
-ItemCounterModule = __decorate([
-    NgModule({
-        imports: [CommonModule, ReactiveFormsModule],
-        declarations: [ItemCounterComponent],
-        exports: [ItemCounterComponent],
-    })
-], ItemCounterModule);
-
-/**
- * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
- */
-let GenericLinkComponent = class GenericLinkComponent {
-    constructor() {
-        this.protocolRegex = /^https?:\/\//i;
-    }
-    get rel() {
-        return this.target === '_blank' ? 'noopener' : null;
-    }
-    get routerUrl() {
-        if (typeof this.url === 'string') {
-            return [this.getAbsoluteUrl(this.url)];
-        }
-        return this.url;
-    }
-    isExternalUrl() {
-        return typeof this.url === 'string' && this.protocolRegex.test(this.url);
-    }
-    getAbsoluteUrl(url) {
-        return url.startsWith('/') ? this.url : '/' + this.url;
-    }
-};
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "url", void 0);
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "target", void 0);
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "class", void 0);
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "id", void 0);
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "style", void 0);
-__decorate([
-    Input()
-], GenericLinkComponent.prototype, "title", void 0);
-GenericLinkComponent = __decorate([
-    Component({
-        selector: 'cx-generic-link',
-        template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
-    })
-], GenericLinkComponent);
-
-let GenericLinkModule = class GenericLinkModule {
-};
-GenericLinkModule = __decorate([
-    NgModule({
-        imports: [CommonModule, RouterModule],
-        declarations: [GenericLinkComponent],
-        exports: [GenericLinkComponent],
-    })
-], GenericLinkModule);
-
-const defaultPaginationConfig = {
-    pagination: {
-        addStart: true,
-        addEnd: true,
+const defaultAsmLayoutConfig = {
+    launch: {
+        ASM: {
+            outlet: 'cx-storefront',
+            component: AsmMainUiComponent,
+        },
     },
 };
-
-let PaginationConfig = class PaginationConfig {
-};
-PaginationConfig.ɵprov = ɵɵdefineInjectable({ factory: function PaginationConfig_Factory() { return ɵɵinject(Config); }, token: PaginationConfig, providedIn: "root" });
-PaginationConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], PaginationConfig);
-
-/**
- * The item type is used to add semantic structure to the
- * PaginationItem, so that the UI understands the usage.
- */
-var PaginationItemType;
-(function (PaginationItemType) {
-    PaginationItemType["GAP"] = "gap";
-    PaginationItemType["FIRST"] = "first";
-    PaginationItemType["LAST"] = "last";
-    PaginationItemType["PREVIOUS"] = "previous";
-    PaginationItemType["NEXT"] = "next";
-    PaginationItemType["START"] = "start";
-    PaginationItemType["END"] = "end";
-    PaginationItemType["PAGE"] = "page";
-})(PaginationItemType || (PaginationItemType = {}));
-var PaginationNavigationPosition;
-(function (PaginationNavigationPosition) {
-    PaginationNavigationPosition["ASIDE"] = "aside";
-    PaginationNavigationPosition["BEFORE"] = "before";
-    PaginationNavigationPosition["AFTER"] = "after";
-})(PaginationNavigationPosition || (PaginationNavigationPosition = {}));
-
-const FALLBACK_PAGINATION_OPTIONS = {
-    rangeCount: 3,
-    dotsLabel: '...',
-    startLabel: '«',
-    previousLabel: '‹',
-    nextLabel: '›',
-    endLabel: '»',
-};
-/**
- * Builds a pagination structures based on a pageCount and current page number.
- * There are various {@link PaginationConfig} options which can be used to configure
- * the behaviour of the build. Alternatively, CSS can be used to further customise
- * the pagination.
- *
- * Examples:
- * The full blown pagination items contain the follow elements:
- *
- * `« ‹ 1 ... 4 (5) 6 ... 9 › »`
- *
- * This includes pagination items to the following pages:
- * - start page
- * - previous page
- * - first page
- * - page range
- * - last page
- * - next page
- * - end page
- *
- * All of those links are configurable, including the size of the page range.
- * The current page will always be centered in the page range to provide direct access
- * to the previous and next page.
- */
-let PaginationBuilder = class PaginationBuilder {
-    constructor(paginationConfig) {
-        this.paginationConfig = paginationConfig;
-    }
-    /**
-     * Builds a list of `PaginationItem`. The give pageCount and current are used
-     * to build out the full pagination. There are various {@link PaginationConfig} options
-     * which can be used to configure the behaviour of the build. Alternatively, CSS
-     * can be used to further specialize visibility of the pagination.
-     *
-     * @param pageCount The total number of pages
-     * @param current The current page number, 0-index based
-     * @returns An array of `PaginationItem`
-     */
-    paginate(pageCount, current) {
-        const pages = [];
-        if (pageCount < 2) {
-            return pages;
-        }
-        this.addPages(pages, pageCount, current);
-        this.addDots(pages, pageCount);
-        this.addFirstLast(pages, pageCount);
-        this.addNavigation(pages, pageCount, current);
-        return pages;
-    }
-    /**
-     * Returns the current page with surrounding pages (based on the `config.rangeCount`).
-     * The current page is always centered to provide direct access to the previous and next page.
-     *
-     * @param pages The list of page items that is used to amend
-     * @param pageCount The total number of pages
-     * @param current The current page number, 0-index based
-     */
-    addPages(pages, pageCount, current) {
-        const start = this.getStartOfRange(pageCount, current);
-        const max = Math.min(this.config.rangeCount, pageCount);
-        Array.from(Array(max)).forEach((_, i) => {
-            pages.push({
-                number: i + start,
-                label: String(i + start + 1),
-                type: PaginationItemType.PAGE,
-            });
-        });
-    }
-    /**
-     * Adds dots before and after the given pages, if configured (defaults to true).
-     * If the dots only represent a single page, the page number is added instead of
-     * the dots, unless the configuration requires dots always.
-     *
-     * @param pages The list of page items that is used to amend
-     * @param pageCount The total number of pages
-     */
-    addDots(pages, pageCount) {
-        if (!this.config.addDots) {
-            return;
-        }
-        const addFirstGap = () => {
-            const firstItemNumber = pages[0].number;
-            const gapNumber = this.config.addFirst ? 1 : 0;
-            if (firstItemNumber > gapNumber) {
-                const isGap = !this.config.substituteDotsForSingularPage ||
-                    firstItemNumber !== gapNumber + 1;
-                const isSubstitued = this.config.addFirst &&
-                    this.config.substituteDotsForSingularPage &&
-                    gapNumber === 0;
-                const type = isGap
-                    ? PaginationItemType.GAP
-                    : isSubstitued
-                        ? PaginationItemType.FIRST
-                        : PaginationItemType.PAGE;
-                return [
-                    Object.assign({
-                        label: isGap ? this.config.dotsLabel : String(gapNumber + 1),
-                        type,
-                    }, isGap ? null : { number: gapNumber }),
-                ];
-            }
-            else
-                return [];
-        };
-        const addLastGap = () => {
-            const nextPageNumber = pages[pages.length - 1].number + 1;
-            const last = pageCount - (this.config.addLast ? 2 : 1);
-            if (nextPageNumber <= last) {
-                const isSubstitued = this.config.addLast &&
-                    this.config.substituteDotsForSingularPage &&
-                    nextPageNumber === last;
-                const isGap = nextPageNumber <
-                    pageCount -
-                        (this.config.substituteDotsForSingularPage ? 1 : 0) -
-                        (this.config.addLast ? 1 : 0);
-                const type = isGap
-                    ? PaginationItemType.GAP
-                    : isSubstitued
-                        ? PaginationItemType.LAST
-                        : PaginationItemType.PAGE;
-                return [
-                    Object.assign({
-                        label: isGap ? this.config.dotsLabel : String(nextPageNumber + 1),
-                        type,
-                    }, isGap ? null : { number: nextPageNumber }),
-                ];
-            }
-            else
-                return [];
-        };
-        pages.unshift(...addFirstGap());
-        pages.push(...addLastGap());
-    }
-    /**
-     * Add links to the first and last page, if configured to do so.
-     *
-     * @param pages The list of page items that is used to amend
-     * @param pageCount The total number of pages
-     *
-     */
-    addFirstLast(pages, pageCount) {
-        if (this.config.addFirst && pages[0].number !== 0) {
-            pages.unshift({
-                number: 0,
-                label: '1',
-                type: PaginationItemType.FIRST,
-            });
-        }
-        if (this.config.addLast &&
-            pages[pages.length - 1].number !== pageCount - 1) {
-            pages.push({
-                number: pageCount - 1,
-                label: String(pageCount),
-                type: PaginationItemType.LAST,
-            });
-        }
-    }
-    /**
-     * Add links to the start, previous, next and last page, if configured to do so.
-     * The order of the links can be configured by using the {@link PaginationConfig},
-     * using the `PaginationNavigationPosition` (`BEFORE` or `AFTER`).
-     * The `PaginationNavigationPosition` allows for 3 flavours:
-     *
-     * - by default the pagination starts with start and previous and ends with the next and end links
-     * - BEFORE – all navigation links are added in the front of the pagination list
-     * - AFTER – all navigation links are pushed to the end of the pagination list
-     *
-     * @param pages The list of page items that is used to amend
-     * @param pageCount The total number of pages
-     * @param current The current page number, 0-index based
-     *
-     */
-    addNavigation(pages, pageCount, current) {
-        const before = this.getBeforeLinks(current);
-        const after = this.getAfter(pageCount, current);
-        const pos = this.config.navigationPosition;
-        if (!pos || pos === PaginationNavigationPosition.ASIDE) {
-            pages.unshift(...before);
-            pages.push(...after);
-        }
-        else {
-            if (pos === PaginationNavigationPosition.BEFORE) {
-                pages.unshift(...before, ...after);
-            }
-            if (pos === PaginationNavigationPosition.AFTER) {
-                pages.push(...before, ...after);
-            }
-        }
-    }
-    /**
-     * Returns the start and previous links, if applicable.
-     */
-    getBeforeLinks(current) {
-        const list = [];
-        if (this.config.addStart) {
-            const start = () => {
-                return Object.assign({
-                    label: this.config.startLabel,
-                    type: PaginationItemType.START,
-                }, current > 0 ? { number: 0 } : null);
-            };
-            list.push(start());
-        }
-        if (this.config.addPrevious) {
-            const previous = () => {
-                return Object.assign({
-                    label: this.config.previousLabel,
-                    type: PaginationItemType.PREVIOUS,
-                }, current > 0 ? { number: current - 1 } : null);
-            };
-            list.push(previous());
-        }
-        return list;
-    }
-    /**
-     * Returns the next and end links, if applicable.
-     */
-    getAfter(pageCount, current) {
-        const list = [];
-        if (this.config.addNext) {
-            const next = () => {
-                return Object.assign({
-                    label: this.config.nextLabel,
-                    type: PaginationItemType.NEXT,
-                }, current < pageCount - 1 ? { number: current + 1 } : null);
-            };
-            list.push(next());
-        }
-        if (this.config.addEnd) {
-            const end = () => {
-                return Object.assign({
-                    label: this.config.endLabel,
-                    type: PaginationItemType.END,
-                }, current < pageCount - 1 ? { number: pageCount - 1 } : null);
-            };
-            list.push(end());
-        }
-        return list;
-    }
-    /**
-     * Resolves the first page of the range we need to build.
-     * This is the page that is leading up to the range of the
-     * current page.
-     *
-     * @param pageCount The total number of pages.
-     * @param current The current page number, 0-index based.
-     */
-    getStartOfRange(pageCount, current) {
-        const count = this.config.rangeCount - 1;
-        // the least number of pages before and after the current
-        const delta = Math.round(count / 2);
-        // ensure that we start with at least the first page
-        const minStart = Math.max(0, current - delta);
-        // ensures that we start with at least 1 and do not pass the last range
-        const maxStart = Math.max(0, pageCount - count - 1);
-        // ensure that we get at least a full range at the end
-        return Math.min(maxStart, minStart);
-    }
-    get config() {
-        return Object.assign(FALLBACK_PAGINATION_OPTIONS, this.paginationConfig.pagination);
-    }
-};
-PaginationBuilder.ctorParameters = () => [
-    { type: PaginationConfig }
-];
-PaginationBuilder.ɵprov = ɵɵdefineInjectable({ factory: function PaginationBuilder_Factory() { return new PaginationBuilder(ɵɵinject(PaginationConfig)); }, token: PaginationBuilder, providedIn: "root" });
-PaginationBuilder = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], PaginationBuilder);
-
-/**
- * The `PaginationComponent` is a generic component that is used for
- * all lists in Spartacus that require pagination. The component supports
- * all common features, which can be configured or hidden by CSS.
- */
-let PaginationComponent = class PaginationComponent {
-    constructor(paginationBuilder, activatedRoute) {
-        this.paginationBuilder = paginationBuilder;
-        this.activatedRoute = activatedRoute;
-        this.viewPageEvent = new EventEmitter();
-        this.pages = [];
-    }
-    get pagination() {
-        return this._pagination;
-    }
-    set pagination(value) {
-        this._pagination = value;
-        this.render(value);
-    }
-    render(pagination) {
-        this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
-    }
-    /**
-     * Inidicates whether the given item is the current item.
-     *
-     * @param item PaginationItem
-     * @returns boolean
-     */
-    isCurrent(item) {
-        return (item.type === PaginationItemType.PAGE &&
-            item.number === this.pagination.currentPage);
-    }
-    /**
-     * Indicates whether the pagination item is inactive. This is used
-     * to disabled a link or set the tabindex to `-1`.
-     *
-     * Defaults to true
-     *
-     * @param item PaginationItem
-     * @returns returns -1 in case of a disabled
-     */
-    isInactive(item) {
-        return (!item.hasOwnProperty('number') ||
-            item.number === this.pagination.currentPage);
-    }
-    getQueryParams(item) {
-        const queryParams = Object.assign({}, this.activatedRoute.snapshot.queryParams);
-        if (this.queryParam &&
-            item.number < this.pagination.totalPages &&
-            !this.isCurrent(item)) {
-            queryParams[this.queryParam] = item.number;
-        }
-        // omit the page number from the query parameters in case it's the default
-        // to clean up the experience and avoid unnecessary polluting of the URL
-        if (queryParams[this.queryParam] === this.defaultPage) {
-            delete queryParams[this.queryParam];
-        }
-        return queryParams;
-    }
-    pageChange(page) {
-        this.viewPageEvent.emit(page.number);
-    }
-};
-PaginationComponent.ctorParameters = () => [
-    { type: PaginationBuilder },
-    { type: ActivatedRoute }
-];
-__decorate([
-    Input()
-], PaginationComponent.prototype, "pageRoute", void 0);
-__decorate([
-    Input()
-], PaginationComponent.prototype, "queryParam", void 0);
-__decorate([
-    Input()
-], PaginationComponent.prototype, "defaultPage", void 0);
-__decorate([
-    Input()
-], PaginationComponent.prototype, "pagination", null);
-__decorate([
-    Output()
-], PaginationComponent.prototype, "viewPageEvent", void 0);
-PaginationComponent = __decorate([
-    Component({
-        selector: 'cx-pagination',
-        template: "<a\n  *ngFor=\"let item of pages\"\n  [class]=\"item.type\"\n  [class.disabled]=\"isInactive(item)\"\n  [class.current]=\"isCurrent(item)\"\n  [routerLink]=\"pageRoute\"\n  [queryParams]=\"getQueryParams(item)\"\n  [tabIndex]=\"isInactive(item) ? -1 : 0\"\n  (click)=\"pageChange(item)\"\n>\n  {{ item.label }}\n</a>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], PaginationComponent);
-
-let PaginationModule = class PaginationModule {
-};
-PaginationModule = __decorate([
-    NgModule({
-        imports: [CommonModule, RouterModule],
-        providers: [provideDefaultConfig(defaultPaginationConfig)],
-        declarations: [PaginationComponent],
-        exports: [PaginationComponent],
-    })
-], PaginationModule);
-
-let SortingComponent = class SortingComponent {
-    constructor() {
-        this.sortListEvent = new EventEmitter();
-    }
-    sortList(sortCode) {
-        this.sortListEvent.emit(sortCode);
-    }
-};
-__decorate([
-    Input()
-], SortingComponent.prototype, "sortOptions", void 0);
-__decorate([
-    Input()
-], SortingComponent.prototype, "selectedOption", void 0);
-__decorate([
-    Input()
-], SortingComponent.prototype, "placeholder", void 0);
-__decorate([
-    Input()
-], SortingComponent.prototype, "sortLabels", void 0);
-__decorate([
-    Output()
-], SortingComponent.prototype, "sortListEvent", void 0);
-SortingComponent = __decorate([
-    Component({
-        selector: 'cx-sorting',
-        template: "<ng-select\n  [searchable]=\"false\"\n  [clearable]=\"false\"\n  placeholder=\"{{ placeholder }}\"\n  (change)=\"sortList($event)\"\n  [ngModel]=\"selectedOption\"\n>\n  <ng-option *ngFor=\"let sort of sortOptions\" [value]=\"sort.code\">{{\n    sort.name ? sort.name : sortLabels ? sortLabels[sort.code] : ''\n  }}</ng-option>\n</ng-select>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], SortingComponent);
-
-let ListNavigationModule = class ListNavigationModule {
-};
-ListNavigationModule = __decorate([
-    NgModule({
-        imports: [CommonModule, NgSelectModule, FormsModule, PaginationModule],
-        declarations: [SortingComponent],
-        exports: [SortingComponent, PaginationComponent],
-    })
-], ListNavigationModule);
-
-/**
- * Provides configuration specific to Media, such as images. This is used to optimize
- * rendering of the media, SEO and performance.
- */
-let MediaConfig = class MediaConfig {
-};
-MediaConfig.ɵprov = ɵɵdefineInjectable({ factory: function MediaConfig_Factory() { return ɵɵinject(Config); }, token: MediaConfig, providedIn: "root" });
-MediaConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], MediaConfig);
-
-// TODO: Improve a11y with better text appropriate to usage (example: loading cart spinner)
-let SpinnerComponent = class SpinnerComponent {
-    constructor() { }
-};
-SpinnerComponent = __decorate([
-    Component({
-        selector: 'cx-spinner',
-        template: "<div class=\"loader-container\">\n  <div class=\"loader\">{{ 'spinner.loading' | cxTranslate }}</div>\n</div>\n"
-    })
-], SpinnerComponent);
-
-let SpinnerModule = class SpinnerModule {
-};
-SpinnerModule = __decorate([
-    NgModule({
-        imports: [CommonModule, I18nModule],
-        declarations: [SpinnerComponent],
-        exports: [SpinnerComponent],
-    })
-], SpinnerModule);
-
-let GlobalMessageComponent = class GlobalMessageComponent {
-    constructor(globalMessageService) {
-        this.globalMessageService = globalMessageService;
-        this.iconTypes = ICON_TYPE;
-        this.messageType = GlobalMessageType;
-    }
-    ngOnInit() {
-        this.messages$ = this.globalMessageService.get();
-    }
-    clear(type, index) {
-        this.globalMessageService.remove(type, index);
-    }
-};
-GlobalMessageComponent.ctorParameters = () => [
-    { type: GlobalMessageService }
-];
-GlobalMessageComponent = __decorate([
-    Component({
-        selector: 'cx-global-message',
-        template: "<div *ngIf=\"messages$ | async as messages\">\n  <div\n    class=\"alert alert-success\"\n    *ngFor=\"\n      let confMsg of messages[messageType.MSG_TYPE_CONFIRMATION];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.SUCCESS\"></cx-icon>\n    </span>\n    <span>{{ confMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_CONFIRMATION, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-info\"\n    *ngFor=\"let infoMsg of messages[messageType.MSG_TYPE_INFO]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.INFO\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-warning\"\n    *ngFor=\"\n      let infoMsg of messages[messageType.MSG_TYPE_WARNING];\n      let i = index\n    \"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.WARNING\"></cx-icon>\n    </span>\n    <span>{{ infoMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_INFO, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n  <div\n    class=\"alert alert-danger\"\n    *ngFor=\"let errorMsg of messages[messageType.MSG_TYPE_ERROR]; let i = index\"\n  >\n    <span class=\"alert-icon\">\n      <cx-icon [type]=\"iconTypes.ERROR\"></cx-icon>\n    </span>\n    <span>{{ errorMsg | cxTranslate }}</span>\n    <button\n      class=\"close\"\n      type=\"button\"\n      (click)=\"clear(messageType.MSG_TYPE_ERROR, i)\"\n    >\n      <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n    </button>\n  </div>\n</div>\n"
-    })
-], GlobalMessageComponent);
-
-let GlobalMessageComponentModule = class GlobalMessageComponentModule {
-};
-GlobalMessageComponentModule = __decorate([
-    NgModule({
-        imports: [CommonModule, HttpClientModule, IconModule, I18nModule],
-        declarations: [GlobalMessageComponent],
-        exports: [GlobalMessageComponent],
-    })
-], GlobalMessageComponentModule);
-
-let QualtricsConfig = class QualtricsConfig {
-};
-QualtricsConfig.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsConfig_Factory() { return ɵɵinject(Config); }, token: QualtricsConfig, providedIn: "root" });
-QualtricsConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], QualtricsConfig);
-
-let QualtricsLoaderService = class QualtricsLoaderService {
-    constructor(winRef, config) {
-        this.winRef = winRef;
-        this.config = config;
-        this.qualtricsLoaded$ = new BehaviorSubject(false);
-        if (Boolean(this.winRef.nativeWindow) &&
-            Boolean(this.winRef.document) &&
-            this.isQualtricsConfigured()) {
-            this.initialize();
-            this.setup();
-        }
-    }
-    initialize() {
-        fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe(() => this.qualtricsLoaded$.next(true));
-    }
-    setup() {
-        const qualtricsScript = this.winRef.document.createElement('script');
-        qualtricsScript.type = 'text/javascript';
-        qualtricsScript.defer = true;
-        qualtricsScript.src = 'assets/qualtricsIntegration.js';
-        const idScript = this.winRef.document.createElement('div');
-        idScript.id = this.config.qualtrics.projectId;
-        this.winRef.document
-            .getElementsByTagName('head')[0]
-            .appendChild(qualtricsScript);
-        this.winRef.document.getElementsByTagName('head')[0].appendChild(idScript);
-    }
-    isQualtricsConfigured() {
-        return (Boolean(this.config.qualtrics) && Boolean(this.config.qualtrics.projectId));
-    }
-    load() {
-        return this.qualtricsLoaded$.pipe(filter((loaded) => loaded), switchMap(() => {
-            const qsi = this.winRef.nativeWindow['QSI'];
-            return this.isDataLoaded().pipe(distinctUntilChanged(), tap((dataLoaded) => {
-                if (dataLoaded) {
-                    qsi.API.unload();
-                    qsi.API.load().done(qsi.API.run());
-                }
-            }));
-        }));
-    }
-    /**
-     * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
-     * If client(s) does not extend this service to override this implementation, it returns true
-     * Return false otherwise.
-     */
-    isDataLoaded() {
-        return of(true);
-    }
-};
-QualtricsLoaderService.ctorParameters = () => [
-    { type: WindowRef },
-    { type: QualtricsConfig }
-];
-QualtricsLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function QualtricsLoaderService_Factory() { return new QualtricsLoaderService(ɵɵinject(WindowRef), ɵɵinject(QualtricsConfig)); }, token: QualtricsLoaderService, providedIn: "root" });
-QualtricsLoaderService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], QualtricsLoaderService);
-
-let QualtricsComponent = class QualtricsComponent {
-    constructor(qualtricsLoader) {
-        this.qualtricsLoader = qualtricsLoader;
-        this.qualtricsEnabled$ = this.qualtricsLoader.load();
-    }
-};
-QualtricsComponent.ctorParameters = () => [
-    { type: QualtricsLoaderService }
-];
-QualtricsComponent = __decorate([
-    Component({
-        selector: 'cx-qualtrics',
-        template: ` <ng-container *ngIf="qualtricsEnabled$ | async"></ng-container> `
-    })
-], QualtricsComponent);
-
-const defaultQualtricsConfig = {
-    qualtrics: {},
-};
-
-let QualtricsModule = class QualtricsModule {
-};
-QualtricsModule = __decorate([
-    NgModule({
-        imports: [CommonModule, HttpClientModule],
-        declarations: [QualtricsComponent],
-        entryComponents: [QualtricsComponent],
-        providers: [
-            provideDefaultConfig({
-                cmsComponents: {
-                    QualtricsComponent: {
-                        component: QualtricsComponent,
-                    },
-                },
-            }),
-            provideDefaultConfig(defaultQualtricsConfig),
-        ],
-    })
-], QualtricsModule);
-
-let LanguageCurrencyComponent = class LanguageCurrencyComponent {
-};
-LanguageCurrencyComponent = __decorate([
-    Component({
-        selector: 'cx-language-currency-selector',
-        template: `
-    <cx-site-context-selector context="language"></cx-site-context-selector>
-    <cx-site-context-selector context="currency"></cx-site-context-selector>
-  `,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], LanguageCurrencyComponent);
-
-const LABELS = {
-    [LANGUAGE_CONTEXT_ID]: 'Language',
-    [CURRENCY_CONTEXT_ID]: 'Currency',
-};
-let SiteContextComponentService = class SiteContextComponentService {
-    constructor(componentData, contextServiceMap, injector) {
-        this.componentData = componentData;
-        this.contextServiceMap = contextServiceMap;
-        this.injector = injector;
-    }
-    getItems(context) {
-        return this.getService(context).pipe(switchMap((service) => service.getAll()), switchMap((items) => this.getContext(context).pipe(switchMap((ctx) => {
-            const itemsCopy = [];
-            for (const item of items) {
-                itemsCopy.push(Object.assign(Object.assign({}, item), { label: this.getOptionLabel(item, ctx) }));
-            }
-            return of(itemsCopy);
-        }))));
-    }
-    getActiveItem(context) {
-        return this.getService(context).pipe(switchMap((service) => service.getActive()));
-    }
-    getLabel(context) {
-        return this.getContext(context).pipe(map((ctx) => {
-            return LABELS[ctx];
-        }));
-    }
-    setActive(value, context) {
-        this.getService(context)
-            .pipe(take(1))
-            .subscribe((service) => {
-            service.setActive(value);
-        });
-    }
-    getService(context) {
-        return this.getContext(context).pipe(map((ctx) => (ctx ? this.getInjectedService(ctx) : undefined)), filter((s) => !!s));
-    }
-    getContext(context) {
-        if (context) {
-            return of(context);
-        }
-        else if (this.componentData) {
-            return this.componentData.data$.pipe(map((data) => data === null || data === void 0 ? void 0 : data.context), map((ctx) => {
-                switch (ctx) {
-                    case 'LANGUAGE':
-                        return LANGUAGE_CONTEXT_ID;
-                    case 'CURRENCY':
-                        return CURRENCY_CONTEXT_ID;
-                    default:
-                        return ctx;
-                }
-            }));
-        }
-    }
-    getInjectedService(context) {
-        return this.injector.get(this.contextServiceMap[context], null);
-    }
-    getOptionLabel(item, context) {
-        switch (context) {
-            case LANGUAGE_CONTEXT_ID:
-                return item.nativeName;
-            case CURRENCY_CONTEXT_ID:
-                return item.symbol + ' ' + item.isocode;
-            default:
-                return item.isocode;
-        }
-    }
-};
-SiteContextComponentService.ctorParameters = () => [
-    { type: CmsComponentData, decorators: [{ type: Optional }] },
-    { type: ContextServiceMap },
-    { type: Injector }
-];
-SiteContextComponentService = __decorate([
-    Injectable(),
-    __param(0, Optional())
-], SiteContextComponentService);
-
-let SiteContextSelectorComponent = class SiteContextSelectorComponent {
-    constructor(componentService) {
-        this.componentService = componentService;
-        this.iconTypes = ICON_TYPE;
-    }
-    get items$() {
-        return this.componentService.getItems(this.context);
-    }
-    get activeItem$() {
-        return this.componentService.getActiveItem(this.context);
-    }
-    set active(value) {
-        this.componentService.setActive(value, this.context);
-    }
-    get label$() {
-        return this.componentService.getLabel(this.context);
-    }
-};
-SiteContextSelectorComponent.ctorParameters = () => [
-    { type: SiteContextComponentService }
-];
-__decorate([
-    Input()
-], SiteContextSelectorComponent.prototype, "context", void 0);
-SiteContextSelectorComponent = __decorate([
-    Component({
-        selector: 'cx-site-context-selector',
-        template: "<label *ngIf=\"(items$ | async)?.length > 1 && (items$ | async) as items\">\n  <span>{{ label$ | async }}</span>\n  <select (change)=\"active = $event.target.value\">\n    <option\n      *ngFor=\"let item of items\"\n      value=\"{{ item.isocode }}\"\n      [selected]=\"(activeItem$ | async) === item.isocode\"\n      >{{ item.label }}</option\n    > </select\n  ><cx-icon [type]=\"iconTypes.CARET_DOWN\" class=\"small\"></cx-icon>\n</label>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], SiteContextSelectorComponent);
-
-let SiteContextSelectorModule = class SiteContextSelectorModule {
-};
-SiteContextSelectorModule = __decorate([
-    NgModule({
-        imports: [CommonModule, RouterModule, SiteContextModule, IconModule],
-        providers: [
-            provideDefaultConfig({
-                cmsComponents: {
-                    CMSSiteContextComponent: {
-                        component: SiteContextSelectorComponent,
-                        providers: [
-                            {
-                                provide: SiteContextComponentService,
-                                useClass: SiteContextComponentService,
-                                deps: [CmsComponentData, ContextServiceMap, Injector],
-                            },
-                        ],
-                    },
-                    LanguageCurrencyComponent: {
-                        component: LanguageCurrencyComponent,
-                    },
-                },
-            }),
-            SiteContextComponentService,
-        ],
-        declarations: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-        entryComponents: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-        exports: [SiteContextSelectorComponent, LanguageCurrencyComponent],
-    })
-], SiteContextSelectorModule);
-
-var SiteContextType;
-(function (SiteContextType) {
-    SiteContextType["LANGUAGE"] = "LANGUAGE";
-    SiteContextType["CURRENCY"] = "CURRENCY";
-})(SiteContextType || (SiteContextType = {}));
-
-let StarRatingComponent = class StarRatingComponent {
-    constructor(el, renderer) {
-        this.el = el;
-        this.renderer = renderer;
-        /**
-         * The rating component can be used in disabled mode,
-         * so that the interation is not provided.
-         */
-        this.disabled = false;
-        /**
-         * Emits the given rating when the user clicks on a star.
-         */
-        // tslint:disable-next-line:no-output-native
-        this.change = new EventEmitter();
-        this.initialRate = 0;
-        this.iconTypes = ICON_TYPE;
-    }
-    ngOnInit() {
-        this.setRate(this.rating, true);
-    }
-    setRate(value, force) {
-        if (!this.disabled || force) {
-            this.renderer.setAttribute(this.el.nativeElement, 'style', `--star-fill:${value || this.initialRate};`);
-        }
-    }
-    saveRate(rating) {
-        if (this.disabled) {
-            return;
-        }
-        this.initialRate = rating;
-        this.setRate(rating);
-        this.change.emit(rating);
-    }
-    setRateOnEvent(event, rating) {
-        if (event.code === 'Space') {
-            event.preventDefault();
-            this.setRate(rating);
-        }
-    }
-};
-StarRatingComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Renderer2 }
-];
-__decorate([
-    Input(), HostBinding('attr.disabled')
-], StarRatingComponent.prototype, "disabled", void 0);
-__decorate([
-    Input()
-], StarRatingComponent.prototype, "rating", void 0);
-__decorate([
-    Output()
-], StarRatingComponent.prototype, "change", void 0);
-StarRatingComponent = __decorate([
-    Component({
-        selector: 'cx-star-rating',
-        template: "<cx-icon\n  *ngFor=\"let i of [1, 2, 3, 4, 5]\"\n  [type]=\"iconTypes.STAR\"\n  class=\"star\"\n  (mouseover)=\"setRate(i)\"\n  (mouseout)=\"setRate(0)\"\n  (keydown)=\"setRateOnEvent($event, i)\"\n  (click)=\"saveRate(i)\"\n  [attr.tabindex]=\"disabled ? null : 0\"\n></cx-icon>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], StarRatingComponent);
-
-let StarRatingModule = class StarRatingModule {
-};
-StarRatingModule = __decorate([
-    NgModule({
-        imports: [CommonModule, IconModule],
-        declarations: [StarRatingComponent],
-        exports: [StarRatingComponent],
-    })
-], StarRatingModule);
-
-/**
- * This component renders form errors.
- */
-let FormErrorsComponent = class FormErrorsComponent {
-    set control(control) {
-        this._control = control;
-        this.errors$ = control === null || control === void 0 ? void 0 : control.statusChanges.pipe(startWith({}), map(() => control.errors || {}), map((errors) => Object.entries(errors)
-            .filter((error) => error[1])
-            .map((error) => error[0])));
-    }
-    get control() {
-        return this._control;
-    }
-    get invalid() {
-        return this.control.invalid;
-    }
-    get dirty() {
-        return this.control.dirty;
-    }
-    get touched() {
-        return this.control.touched;
-    }
-};
-__decorate([
-    Input()
-], FormErrorsComponent.prototype, "control", null);
-__decorate([
-    HostBinding('class.control-invalid')
-], FormErrorsComponent.prototype, "invalid", null);
-__decorate([
-    HostBinding('class.control-dirty')
-], FormErrorsComponent.prototype, "dirty", null);
-__decorate([
-    HostBinding('class.control-touched')
-], FormErrorsComponent.prototype, "touched", null);
-FormErrorsComponent = __decorate([
-    Component({
-        selector: 'cx-form-errors',
-        template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate }}\n</p>\n",
-        changeDetection: ChangeDetectionStrategy.OnPush
-    })
-], FormErrorsComponent);
-
-let FormErrorsModule = class FormErrorsModule {
-};
-FormErrorsModule = __decorate([
-    NgModule({
-        imports: [CommonModule, I18nModule],
-        declarations: [FormErrorsComponent],
-        exports: [FormErrorsComponent],
-    })
-], FormErrorsModule);
-
-let ViewConfig = class ViewConfig {
-};
-ViewConfig.ɵprov = ɵɵdefineInjectable({ factory: function ViewConfig_Factory() { return ɵɵinject(Config); }, token: ViewConfig, providedIn: "root" });
-ViewConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], ViewConfig);
-
-var ViewConfigModule_1;
-let ViewConfigModule = ViewConfigModule_1 = class ViewConfigModule {
-    static forRoot() {
-        return {
-            ngModule: ViewConfigModule_1,
-            providers: [
-                provideDefaultConfig({
-                    view: {},
-                }),
-            ],
-        };
-    }
-};
-ViewConfigModule = ViewConfigModule_1 = __decorate([
-    NgModule({})
-], ViewConfigModule);
-
-let OrderDetailsService = class OrderDetailsService {
-    constructor(userOrderService, routingService) {
-        this.userOrderService = userOrderService;
-        this.routingService = routingService;
-        this.orderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map((routingData) => routingData.state.params.orderCode));
-        this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
-            if (orderCode) {
-                this.userOrderService.loadOrderDetails(orderCode);
-            }
-            else {
-                this.userOrderService.clearOrderDetails();
-            }
-        }), shareReplay({ bufferSize: 1, refCount: true }));
-    }
-    getOrderDetails() {
-        return this.orderLoad$.pipe(switchMap(() => this.userOrderService.getOrderDetails()));
-    }
-};
-OrderDetailsService.ctorParameters = () => [
-    { type: UserOrderService },
-    { type: RoutingService }
-];
-OrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function OrderDetailsService_Factory() { return new OrderDetailsService(ɵɵinject(UserOrderService), ɵɵinject(RoutingService)); }, token: OrderDetailsService, providedIn: "root" });
-OrderDetailsService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], OrderDetailsService);
-
-let PromotionService = class PromotionService {
-    constructor(orderDetailsService, checkoutService, activeCartService) {
-        this.orderDetailsService = orderDetailsService;
-        this.checkoutService = checkoutService;
-        this.activeCartService = activeCartService;
-    }
-    getOrderPromotions(promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.getOrderPromotionsFromCart();
-            case PromotionLocation.Checkout:
-                return this.getOrderPromotionsFromCheckout();
-            case PromotionLocation.Order:
-                return this.getOrderPromotionsFromOrder();
-            default:
-                return of([]);
-        }
-    }
-    getOrderPromotionsFromCart() {
-        return this.activeCartService
-            .getActive()
-            .pipe(map((cart) => this.getOrderPromotionsFromCartHelper(cart)));
-    }
-    getOrderPromotionsFromCartHelper(cart) {
-        const potentialPromotions = [];
-        potentialPromotions.push(...(cart.potentialOrderPromotions || []));
-        const appliedPromotions = [];
-        appliedPromotions.push(...(cart.appliedOrderPromotions || []));
-        return [...potentialPromotions, ...appliedPromotions];
-    }
-    getOrderPromotionsFromCheckout() {
-        return this.checkoutService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrder() {
-        return this.orderDetailsService
-            .getOrderDetails()
-            .pipe(map((order) => this.getOrderPromotionsFromOrderHelper(order)));
-    }
-    getOrderPromotionsFromOrderHelper(order) {
-        const appliedOrderPromotions = [];
-        appliedOrderPromotions.push(...(order.appliedOrderPromotions || []));
-        return appliedOrderPromotions;
-    }
-    getProductPromotionForEntry(item, promotionLocation) {
-        switch (promotionLocation) {
-            case PromotionLocation.ActiveCart:
-                return this.activeCartService
-                    .getActive()
-                    .pipe(map((cart) => this.getProductPromotion(item, cart.appliedProductPromotions || [])));
-            case PromotionLocation.Checkout:
-                return this.checkoutService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-            case PromotionLocation.Order:
-                return this.orderDetailsService
-                    .getOrderDetails()
-                    .pipe(map((order) => this.getProductPromotion(item, order.appliedProductPromotions || [])));
-        }
-    }
-    getProductPromotion(item, promotions) {
-        const entryPromotions = [];
-        if (promotions && promotions.length > 0) {
-            for (const promotion of promotions) {
-                if (promotion.description &&
-                    promotion.consumedEntries &&
-                    promotion.consumedEntries.length > 0) {
-                    for (const consumedEntry of promotion.consumedEntries) {
-                        if (this.isConsumedByEntry(consumedEntry, item)) {
-                            entryPromotions.push(promotion);
-                        }
-                    }
-                }
-            }
-        }
-        return entryPromotions;
-    }
-    isConsumedByEntry(consumedEntry, entry) {
-        const consumedEntryNumber = consumedEntry.orderEntryNumber;
-        if (entry.entries && entry.entries.length > 0) {
-            for (const subEntry of entry.entries) {
-                if (subEntry.entryNumber === consumedEntryNumber) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        else {
-            return consumedEntryNumber === entry.entryNumber;
-        }
-    }
-};
-PromotionService.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: CheckoutService },
-    { type: ActiveCartService }
-];
-PromotionService.ɵprov = ɵɵdefineInjectable({ factory: function PromotionService_Factory() { return new PromotionService(ɵɵinject(OrderDetailsService), ɵɵinject(CheckoutService), ɵɵinject(ActiveCartService)); }, token: PromotionService, providedIn: "root" });
-PromotionService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], PromotionService);
-
-class CustomFormValidators {
-    /**
-     * Checks control's value with predefined email regexp
-     *
-     * NOTE: Use it as a control validator
-     *
-     * @static
-     * @param {AbstractControl} control
-     * @returns {(ValidationErrors | null)} Uses 'cxInvalidEmail' validator error
-     * @memberof CustomFormValidators
-     */
-    static emailValidator(control) {
-        const email = control.value;
-        return !email.length || email.match(EMAIL_PATTERN)
-            ? null
-            : { cxInvalidEmail: true };
-    }
-    /**
-     * Checks control's value with predefined password regexp
-     *
-     * NOTE: Use it as a control validator
-     *
-     * @static
-     * @param {AbstractControl} control
-     * @returns {(ValidationErrors | null)} Uses 'cxInvalidPassword' validator error
-     * @memberof CustomFormValidators
-     */
-    static passwordValidator(control) {
-        const password = control.value;
-        return !password.length || password.match(PASSWORD_PATTERN)
-            ? null
-            : { cxInvalidPassword: true };
-    }
-    /**
-     * Checks if control's value is between 1 and 5
-     *
-     * NOTE: Use it as a control validator
-     *
-     * @static
-     * @param {AbstractControl} control
-     * @returns {(ValidationErrors | null)} Uses 'cxStarRatingEmpty' validator error
-     * @memberof CustomFormValidators
-     */
-    static starRatingEmpty(control) {
-        const rating = control.value;
-        return rating >= 1 && rating <= 5 ? null : { cxStarRatingEmpty: true };
-    }
-    /**
-     * Checks if two password controls match
-     *
-     * NOTE: Use it as a form validator and pass password control names as parameters
-     *
-     * @static
-     * @param {string} password First password control name
-     * @param {string} passwordConfirmation Second password control name
-     * @returns Uses 'cxPasswordsMustMatch' validator error
-     * @memberof CustomFormValidators
-     */
-    static passwordsMustMatch(password, passwordConfirmation) {
-        const validator = (formGroup) => controlsMustMatch(formGroup, password, passwordConfirmation, 'cxPasswordsMustMatch');
-        return validator;
-    }
-    /**
-     * Checks if two email controls match
-     *
-     * NOTE: Use it as a form validator and pass email control names as parameters
-     *
-     * @static
-     * @param {string} email First email control name
-     * @param {string} emailConfirmation Second email control name
-     * @returns Uses 'cxEmailsMustMatch' validator error
-     * @memberof CustomFormValidators
-     */
-    static emailsMustMatch(email, emailConfirmation) {
-        const validator = (formGroup) => controlsMustMatch(formGroup, email, emailConfirmation, 'cxEmailsMustMatch');
-        return validator;
-    }
-}
-/**
- * Generic function for validators, which checks if two passed controls match.
- *
- * @param formGroup
- * @param firstControlName First control to check
- * @param secondControlName Second control to check
- * @param errorName Error which will be returned by validator
- */
-function controlsMustMatch(formGroup, firstControlName, secondControlName, errorName) {
-    const firstControl = formGroup.controls[firstControlName];
-    const secondControl = formGroup.controls[secondControlName];
-    if (secondControl.errors && !secondControl.errors[errorName]) {
-        return;
-    }
-    secondControl.setErrors(firstControl.value !== secondControl.value ? { [errorName]: true } : null);
-}
-
-const titleScores = {
-    mr: 1,
-    mrs: 2,
-    miss: 3,
-    ms: 4,
-    dr: 5,
-    rev: 6,
-};
-function sortTitles(title1, title2) {
-    if (!titleScores[title1.code] || !titleScores[title2.code]) {
-        return 1;
-    }
-    else {
-        return titleScores[title1.code] - titleScores[title2.code];
-    }
-}
 
 let AsmModule = class AsmModule {
 };
@@ -4248,6 +5822,7 @@ AsmModule = __decorate([
             FormatTimerPipe,
             CustomerEmulationComponent,
         ],
+        providers: [provideConfig(defaultAsmLayoutConfig)],
         entryComponents: [AsmMainUiComponent],
     })
 ], AsmModule);
@@ -4458,695 +6033,6 @@ AddToCartComponent = __decorate([
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], AddToCartComponent);
-
-/**
- * Abstract directive that provides a common interface for all focus directives:
- * - Block Focus
- * - Persist Focus
- * - Escape Focus
- * - Auto Focus
- * - Tab Focus
- * - Trap Focus
- * - Lock Focus
- */
-let BaseFocusDirective = class BaseFocusDirective {
-    constructor(elementRef, service) {
-        this.elementRef = elementRef;
-        this.service = service;
-        /**
-         * A default config can be provided for each directive if a specific focus directive
-         * is used directly. i.e. `<div cxAutoFocus></div>`
-         */
-        this.defaultConfig = {};
-    }
-    ngOnInit() {
-        this.setDefaultConfiguration();
-        this.requiredTabindex = -1;
-    }
-    /**
-     * Override the (input) config if it undefined or an empty string, with the
-     * `defaultConfig`. The `defaultConfig` might be specified for each directive
-     * differently. If a specific directive is used (i.e. `cxAutoFocus`), the
-     * specific (inherited) defaultConfig will be used.
-     */
-    setDefaultConfiguration() {
-        if ((!this.config || this.config === '') && this.defaultConfig) {
-            this.config = this.defaultConfig;
-        }
-    }
-    /**
-     * Helper method to return the host element for the directive
-     * given by the `elementRef`.
-     */
-    get host() {
-        return this.elementRef.nativeElement;
-    }
-    /**
-     * Force a tabindex on the host element if it is _requried_ to make the element
-     * focusable. If the element is focusable by nature or by a given tabindex, the
-     * `tabindex` is not applied.
-     *
-     * Buttons, active links, etc. do no need an explicit tabindex to receive focus.
-     */
-    set requiredTabindex(tabindex) {
-        if (this.requiresExplicitTabIndex) {
-            this.tabindex = tabindex;
-        }
-    }
-    /**
-     * Returns true if the host element does not have a tabindex defined
-     * and it also doesn't get focus by browsers nature (i.e. button or
-     * active link).
-     */
-    get requiresExplicitTabIndex() {
-        return (this.tabindex === undefined &&
-            ['button', 'input', 'select', 'textarea'].indexOf(this.host.tagName.toLowerCase()) === -1 &&
-            !(this.host.tagName === 'A' &&
-                (this.host.hasAttribute('href') || this.host.hasAttribute('routerlink'))));
-    }
-};
-BaseFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
-__decorate([
-    Input(), HostBinding('attr.tabindex')
-], BaseFocusDirective.prototype, "tabindex", void 0);
-BaseFocusDirective = __decorate([
-    Directive()
-], BaseFocusDirective);
-
-/**
- * Directive implementation that adds a CSS class to the host element
- * when the moused is used to focus an element. As soon as the keyboard
- * is used, the class is removed.
- */
-let VisibleFocusDirective = class VisibleFocusDirective extends BaseFocusDirective {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = { disableMouseFocus: true };
-        /** controls a polyfill class for the lacking focus-visible feature */
-        this.mouseFocus = false;
-    }
-    handleMousedown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = true;
-        }
-    }
-    handleKeydown() {
-        if (this.shouldFocusVisible) {
-            this.mouseFocus = false;
-        }
-    }
-    get shouldFocusVisible() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
-    }
-};
-__decorate([
-    HostBinding('class.mouse-focus')
-], VisibleFocusDirective.prototype, "mouseFocus", void 0);
-__decorate([
-    HostListener('mousedown')
-], VisibleFocusDirective.prototype, "handleMousedown", null);
-__decorate([
-    HostListener('keydown')
-], VisibleFocusDirective.prototype, "handleKeydown", null);
-VisibleFocusDirective = __decorate([
-    Directive() // selector: '[cxVisibleFocus]'
-], VisibleFocusDirective);
-
-let BlockFocusDirective = 
-// { selector: '[cxBlockFocus]' }
-class BlockFocusDirective extends VisibleFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { block: true };
-        // @Input('cxBlockFocus')
-        this.config = {};
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        if (this.config.block) {
-            this.tabindex = -1;
-        }
-    }
-};
-BlockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: BaseFocusService }
-];
-BlockFocusDirective = __decorate([
-    Directive()
-    // { selector: '[cxBlockFocus]' }
-], BlockFocusDirective);
-
-/**
- * Directive that provides persistence of the focused state. This is useful
- * when a group of focusable elements got refocused or even recreated. That
- * happens often when the DOM is constructed with an `*ngIf` or `*ngFor`.
- *
- * The focus state is based on a configured _key_, which can be passed in the
- * config input, either by using a string primitive or `PersistFocusConfig.key`:
- *
- * ```html
- * <button cxPersistFocus="myKey"></button>
- * <button cxFocus="myKey"></button>
- * <button [cxFocus]="{{key:'myKey'}"></button>
- * ```
- *
- * The focus state can be part of a focus _group_, so that the state is shared
- * and remember for the given group. In order to detect the persistence for a
- * given element, we store the persistence key as a data attribute (`data-cx-focus`):
- *
- * ```html
- * <button data-cx-focus="myKey"></button>
- * ```
- *
- * Other keyboard focus directives can read the key to understand whether the element
- * should retrieve focus.
- *
- */
-let PersistFocusDirective = class PersistFocusDirective extends BlockFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = {};
-        /**
-         * The persistence key can be passed directly or through the `FocusConfig.key`.
-         * While this could be considered a global key, the likeliness of conflicts
-         * is very small since the key is cleared when the focus is changed.
-         */
-        // @Input('cxPersistFocus')
-        this.config = {};
-    }
-    handleFocus(event) {
-        this.service.set(this.key, this.group);
-        event === null || event === void 0 ? void 0 : event.preventDefault();
-        event === null || event === void 0 ? void 0 : event.stopPropagation();
-    }
-    ngOnInit() {
-        super.ngOnInit();
-        this.attr = this.key ? this.key : undefined;
-    }
-    setDefaultConfiguration() {
-        if (typeof this.config === 'string' && this.config !== '') {
-            this.config = { key: this.config };
-        }
-        super.setDefaultConfiguration();
-    }
-    /**
-     * Focus the element explicitly if it was focused before.
-     */
-    ngAfterViewInit() {
-        if (this.isPersisted) {
-            this.host.focus({ preventScroll: true });
-        }
-    }
-    get isPersisted() {
-        return !!this.key && this.service.get(this.group) === this.key;
-    }
-    /**
-     * Returns the key for the host element, which is used to persist the
-     * focus state. This is useful in cases where the DOM is rebuild.
-     */
-    get key() {
-        var _a;
-        return (_a = this.config) === null || _a === void 0 ? void 0 : _a.key;
-    }
-    /**
-     * returns the persistence group (if any) for the focusable elements.
-     */
-    get group() {
-        return this.service.getPersistenceGroup(this.host, this.config);
-    }
-};
-PersistFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: PersistFocusService }
-];
-__decorate([
-    HostBinding(`attr.${FOCUS_ATTR}`)
-], PersistFocusDirective.prototype, "attr", void 0);
-__decorate([
-    HostListener('focus', ['$event'])
-], PersistFocusDirective.prototype, "handleFocus", null);
-PersistFocusDirective = __decorate([
-    Directive() // selector: '[cxPersistFocus]',
-], PersistFocusDirective);
-
-/**
- * Directive to focus the host element whenever the `escape` key is captured.
- * UiEvents bubble up by nature, which is why the `cxEscGroup` can be used
- * on a tree of elements. Each time the escape key is used, the focus will
- * move up in the DOM tree.
- *
- */
-let EscapeFocusDirective = class EscapeFocusDirective extends PersistFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { focusOnEscape: true };
-        this.esc = new EventEmitter();
-    }
-    /**
-     * Handles the escape key event.
-     * @param event the native keyboard event which contains the escape keydown event
-     */
-    handleEscape(event) {
-        if (this.service.shouldFocus(this.config)) {
-            this.service.handleEscape(this.host, this.config, event);
-        }
-        this.esc.emit(this.service.shouldFocus(this.config));
-    }
-    ngOnInit() {
-        if (this.service.shouldFocus(this.config)) {
-            this.requiredTabindex = -1;
-        }
-        super.ngOnInit();
-    }
-};
-EscapeFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: EscapeFocusService }
-];
-__decorate([
-    Output()
-], EscapeFocusDirective.prototype, "esc", void 0);
-__decorate([
-    HostListener('keydown.escape', ['$event'])
-], EscapeFocusDirective.prototype, "handleEscape", null);
-EscapeFocusDirective = __decorate([
-    Directive() // selector: '[cxEscFocus]',
-], EscapeFocusDirective);
-
-/**
- * Directive that focus the first nested _focusable_ element based on state and configuration:
- *
- * 1. focusable element that was left in a focused state (aka _persisted_ focus)
- * 2. focusable element selected by configured CSS selector (i.e. 'button[type=submit]')
- * 3. focusable element marked with the native HTML5 `autofocus` attribute
- * 4. first focusable element
- * 5. the host element, in case the configured CSS selector is `:host`.
- *
- * Example configurations:
- *
- * `<div cxAutoFocus>[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: false}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: 'button.active'}">[...]</div>`
- *
- * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
- *
- */
-let AutoFocusDirective = class AutoFocusDirective extends EscapeFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** The AutoFocusDirective will be using autofocus by default  */
-        this.defaultConfig = { autofocus: true };
-    }
-    /**
-     * Focus the element explicitly if it was focussed before.
-     */
-    ngAfterViewInit() {
-        if (this.shouldAutofocus) {
-            this.handleFocus();
-        }
-        if (!this.shouldAutofocus || this.hasPersistedFocus) {
-            super.ngAfterViewInit();
-        }
-    }
-    /**
-     * Mimic the focus without setting the actual focus on the host. The first
-     * focusable child element will be focussed.
-     */
-    handleFocus(event) {
-        var _a;
-        if (this.shouldAutofocus) {
-            if (!(event === null || event === void 0 ? void 0 : event.target) || event.target === this.host) {
-                (_a = this.firstFocusable) === null || _a === void 0 ? void 0 : _a.focus();
-            }
-            else {
-                event.target.focus();
-            }
-        }
-        super.handleFocus(event);
-    }
-    /**
-     * Helper function to get the first focusable child element
-     */
-    get hasPersistedFocus() {
-        return this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Helper function to indicate whether we should use autofocus for the
-     * child elements.
-     */
-    get shouldAutofocus() {
-        var _a;
-        return !!((_a = this.config) === null || _a === void 0 ? void 0 : _a.autofocus);
-    }
-    /**
-     * Helper function to get the first focusable child element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get firstFocusable() {
-        return this.service.findFirstFocusable(this.host, this.config);
-    }
-};
-AutoFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: AutoFocusService }
-];
-AutoFocusDirective = __decorate([
-    Directive() // selector: '[cxAutoFocus]'
-], AutoFocusDirective);
-
-/**
- * Directive to move the focus of ("locked") child elements. This is useful
- * for a nested list of tabs, carousel slides or any group of elements that
- * requires horizontal navigation.
- */
-let TabFocusDirective = class TabFocusDirective extends AutoFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        /** `tab` defaults to true if the directive `cxTabFocus` is used. */
-        this.defaultConfig = { tab: true };
-        // @Input('cxTabFocus')
-        this.config = {};
-    }
-    handleNextTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, 1 /* NEXT */, event);
-        }
-    }
-    handlePreviousTab(event) {
-        var _a;
-        if ((_a = this.config) === null || _a === void 0 ? void 0 : _a.tab) {
-            this.service.moveTab(this.host, this.config, -1 /* PREV */, event);
-        }
-    }
-};
-TabFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TabFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowRight', ['$event'])
-], TabFocusDirective.prototype, "handleNextTab", null);
-__decorate([
-    HostListener('keydown.arrowLeft', ['$event'])
-], TabFocusDirective.prototype, "handlePreviousTab", null);
-TabFocusDirective = __decorate([
-    Directive() // selector: '[cxTabFocus]'
-], TabFocusDirective);
-
-/**
- * Directive that keeps the focus inside the focussable child elements,
- * also known as a _focus trap_.
- */
-let TrapFocusDirective = class TrapFocusDirective extends TabFocusDirective {
-    constructor(elementRef, service) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.defaultConfig = { trap: true };
-        // @Input('cxTrapFocus')
-        this.config = {};
-        this.handleTrapDown = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, 1 /* NEXT */);
-            }
-        };
-        this.handleTrapUp = (event) => {
-            if (!!this.config.trap) {
-                this.moveFocus(event, -1 /* PREV */);
-            }
-        };
-    }
-    /**
-     * Moves the focus of the element reference up or down, depending on the increment.
-     * The focus of the element is trapped to avoid it from going out of the group.
-     *
-     * @param event UIEvent that is used to get the target element. The event is blocked
-     *   from standard execution and further bubbling.
-     * @param increment indicates whether the next or previous is focussed.
-     */
-    moveFocus(event, increment) {
-        if (this.service.hasFocusableChildren(this.host)) {
-            this.service.moveFocus(this.host, this.config, increment, event);
-        }
-    }
-};
-TrapFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: TrapFocusService }
-];
-__decorate([
-    HostListener('keydown.arrowdown', ['$event']),
-    HostListener('keydown.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapDown", void 0);
-__decorate([
-    HostListener('keydown.arrowup', ['$event']),
-    HostListener('keydown.shift.tab', ['$event'])
-], TrapFocusDirective.prototype, "handleTrapUp", void 0);
-TrapFocusDirective = __decorate([
-    Directive() // selector: '[cxTrapFocus]'
-], TrapFocusDirective);
-
-/**
- * Focusable elements exclude hidden elements by default, but this contradicts with
- * unlocking (hidden) elements.
- */
-const UNLOCK_HIDDEN_ELEMENTS = true;
-/**
- * Directive that adds persistence for focussed element in case
- * the elements are being rebuild. This happens often when change
- * detection kicks in because of new data set from the backend.
- */
-let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = { lock: true };
-        // @Input('cxLockFocus')
-        this.config = {};
-        /**
-         * Emits an event when the host is unlocked.
-         */
-        this.unlock = new EventEmitter();
-    }
-    /**
-     * When the user selects enter or space, the focusable childs are
-     * unlocked, which means that the tabindex is set to 0.
-     */
-    handleEnter(event) {
-        if (this.shouldLock && this.host === event.target) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    /**
-     * In case any of the children elements is touched by the mouse,
-     * we unlock the group to not break the mouse-experience.
-     */
-    handleClick(event) {
-        if (this.shouldLock && this.isLocked) {
-            this.unlockFocus(event);
-            event.stopPropagation();
-        }
-    }
-    lockFocus() {
-        this.addTabindexToChildren(-1);
-    }
-    unlockFocus(event) {
-        this.unlock.emit(true);
-        this.addTabindexToChildren(0);
-        // we focus the host if the event was triggered from a child
-        if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
-            super.handleFocus(event);
-        }
-    }
-    ngOnInit() {
-        var _a, _b;
-        super.ngOnInit();
-        this.shouldLock = (_a = this.config) === null || _a === void 0 ? void 0 : _a.lock;
-        if (this.shouldLock) {
-            this.tabindex = 0;
-            // Locked elements will be set to `autofocus` by default if it's not
-            // been configured. This will ensure that autofocus kicks in upon unlock.
-            if (!this.config.hasOwnProperty('autofocus')) {
-                this.config.autofocus = true;
-            }
-            // Locked elements will be set to `focusOnEscape` by default if it's not
-            // been configured. This will ensure that  the host gets locked again when
-            // `escape` is pressed.
-            if (!this.config.hasOwnProperty('focusOnEscape')) {
-                this.config.focusOnEscape = !(((_b = this.config) === null || _b === void 0 ? void 0 : _b.focusOnEscape) === false);
-            }
-        }
-    }
-    ngAfterViewInit() {
-        if (this.shouldLock) {
-            /**
-             * If the component hosts a group of focusable children elmenents,
-             * we persist the group key to the children, so that they can taken this
-             * into account when they persist their focus state.
-             */
-            if (!!this.group) {
-                this.service.findFocusable(this.host).forEach((el) => 
-                // we must do this in after view init as
-                this.renderer.setAttribute(el, FOCUS_GROUP_ATTR, this.group));
-            }
-            if (this.shouldAutofocus) {
-                this.handleFocus();
-            }
-        }
-        super.ngAfterViewInit();
-    }
-    handleFocus(event) {
-        if (this.shouldLock) {
-            if (this.shouldUnlockAfterAutofocus(event)) {
-                // Delay unlocking in case the host is using `ChangeDetectionStrategy.Default`
-                setTimeout(() => this.unlockFocus(event));
-            }
-            else {
-                setTimeout(() => this.lockFocus());
-                event === null || event === void 0 ? void 0 : event.stopPropagation();
-                return;
-            }
-        }
-        super.handleFocus(event);
-    }
-    handleEscape(event) {
-        if (this.shouldLock) {
-            this.service.clear(this.config.group);
-        }
-        super.handleEscape(event);
-    }
-    /**
-     * When the handleFocus is called without an actual event, it's coming from Autofocus.
-     * In this case we unlock the focusable children in case there's a focusable child that
-     * was unlocked before.
-     *
-     * We keep this private to not polute the API.
-     */
-    shouldUnlockAfterAutofocus(event) {
-        return !event && this.service.hasPersistedFocus(this.host, this.config);
-    }
-    /**
-     * Add the tabindex attribute to the focusable children elements
-     */
-    addTabindexToChildren(i = 0) {
-        if (this.shouldLock) {
-            this.isLocked = i === -1;
-            if (!(this.hasFocusableChildren && i === 0) || i === 0) {
-                this.focusable.forEach((el) => this.renderer.setAttribute(el, 'tabindex', i.toString()));
-            }
-        }
-    }
-    /**
-     * Utility method, returns all focusable children for the host element.
-     *
-     * We keep this private to not polute the API.
-     */
-    get hasFocusableChildren() {
-        return this.service.hasFocusableChildren(this.host);
-    }
-    /**
-     * Returns the focusable children of the host element. If the host element
-     * is configured to be locked, the query is restricted to child elements
-     * with a tabindex !== `-1`.
-     *
-     * We keep this private to not polute the API.
-     */
-    get focusable() {
-        return this.service.findFocusable(this.host, this.shouldLock, UNLOCK_HIDDEN_ELEMENTS);
-    }
-};
-LockFocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: LockFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    HostBinding('class.focus-lock')
-], LockFocusDirective.prototype, "shouldLock", void 0);
-__decorate([
-    HostBinding('class.is-locked')
-], LockFocusDirective.prototype, "isLocked", void 0);
-__decorate([
-    Output()
-], LockFocusDirective.prototype, "unlock", void 0);
-__decorate([
-    HostListener('keydown.enter', ['$event']),
-    HostListener('keydown.space', ['$event'])
-], LockFocusDirective.prototype, "handleEnter", null);
-__decorate([
-    HostListener('click', ['$event'])
-], LockFocusDirective.prototype, "handleClick", null);
-LockFocusDirective = __decorate([
-    Directive() // selector: '[cxLockFocus]'
-], LockFocusDirective);
-
-let FocusDirective = class FocusDirective extends LockFocusDirective {
-    constructor(elementRef, service, renderer) {
-        super(elementRef, service, renderer);
-        this.elementRef = elementRef;
-        this.service = service;
-        this.renderer = renderer;
-        this.defaultConfig = {};
-        // tslint:disable-next-line: no-input-rename
-        this.config = {};
-    }
-};
-FocusDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: KeyboardFocusService },
-    { type: Renderer2 }
-];
-__decorate([
-    Input('cxFocus')
-], FocusDirective.prototype, "config", void 0);
-FocusDirective = __decorate([
-    Directive({
-        selector: '[cxFocus]',
-    })
-], FocusDirective);
-
-const directives = [
-    // PersistFocusDirective,
-    // VisibleFocusDirective,
-    // BlockFocusDirective,
-    // AutoFocusDirective,
-    // EscapeFocusDirective,
-    // LockFocusDirective,
-    // TrapFocusDirective,
-    // TabFocusDirective,
-    FocusDirective,
-];
-let KeyboardFocusModule = class KeyboardFocusModule {
-};
-KeyboardFocusModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [...directives],
-        exports: [...directives],
-    })
-], KeyboardFocusModule);
 
 let PromotionsComponent = class PromotionsComponent {
     constructor() { }
@@ -8006,17 +8892,116 @@ NotCheckoutAuthGuard = __decorate([
     })
 ], NotCheckoutAuthGuard);
 
-// given that we're likely going to refactor the directives, we're
-// export * from './autofocus/index';
-// export * from './base/index';
-// export * from './block/index';
-// export * from './escape/index';
-// export * from './lock/index';
-// export * from './persist/index';
-// export * from './tab/index';
-// export * from './trap/index';
-// export * from './visible/index';
-// export * from './keyboard-focus.model';
+let SkipLinkConfig = class SkipLinkConfig {
+};
+SkipLinkConfig.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkConfig_Factory() { return ɵɵinject(Config); }, token: SkipLinkConfig, providedIn: "root" });
+SkipLinkConfig = __decorate([
+    Injectable({
+        providedIn: 'root',
+        useExisting: Config,
+    })
+], SkipLinkConfig);
+class SkipLink {
+}
+var SkipLinkScrollPosition;
+(function (SkipLinkScrollPosition) {
+    SkipLinkScrollPosition["BEFORE"] = "BEFORE";
+    SkipLinkScrollPosition["AFTER"] = "AFTER";
+})(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
+
+let SkipLinkService = class SkipLinkService {
+    constructor(config, keyboardFocusService) {
+        this.config = config;
+        this.keyboardFocusService = keyboardFocusService;
+        this.skipLinks$ = new BehaviorSubject([]);
+    }
+    getSkipLinks() {
+        return this.skipLinks$;
+    }
+    add(key, target) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            const existing = this.skipLinks$.value;
+            existing.splice(this.getSkipLinkIndexInArray(key), 0, {
+                target,
+                i18nKey: found.i18nKey,
+                position: found.position,
+                key,
+            });
+            this.skipLinks$.next(existing);
+        }
+    }
+    remove(key) {
+        const found = this.config.skipLinks.find((skipLink) => skipLink.key === key);
+        if (found) {
+            let existing = this.skipLinks$.value;
+            existing = existing.filter((skipLink) => skipLink.key !== key);
+            this.skipLinks$.next(existing);
+        }
+    }
+    scrollToTarget(skipLink) {
+        const target = skipLink.target instanceof HTMLElement
+            ? skipLink.target
+            : skipLink.target.parentElement;
+        // focus first focusable element in the
+        const firstFocusable = this.keyboardFocusService.findFirstFocusable(target) || target;
+        // we force a tabindex if not available, to ensure we can focus into the element
+        const hasTabindex = firstFocusable.hasAttribute('tabindex');
+        if (!hasTabindex) {
+            firstFocusable.setAttribute('tabindex', '-1');
+        }
+        firstFocusable.focus();
+        // drop the tmp tabindex
+        if (!hasTabindex) {
+            firstFocusable.removeAttribute('tabindex');
+        }
+    }
+    getSkipLinkIndexInArray(key) {
+        let index = this.config.skipLinks.findIndex((skipLink) => skipLink.key === key);
+        while (index > 0) {
+            index--;
+            const previous = this.config.skipLinks[index];
+            if (previous) {
+                const existing = this.skipLinks$.value;
+                const found = existing.findIndex((skipLink) => skipLink.key === previous.key);
+                if (found > -1) {
+                    return found + 1;
+                }
+            }
+        }
+        return 0;
+    }
+};
+SkipLinkService.ctorParameters = () => [
+    { type: SkipLinkConfig },
+    { type: KeyboardFocusService }
+];
+SkipLinkService.ɵprov = ɵɵdefineInjectable({ factory: function SkipLinkService_Factory() { return new SkipLinkService(ɵɵinject(SkipLinkConfig), ɵɵinject(KeyboardFocusService)); }, token: SkipLinkService, providedIn: "root" });
+SkipLinkService = __decorate([
+    Injectable({
+        providedIn: 'root',
+    })
+], SkipLinkService);
+
+let SkipLinkComponent = class SkipLinkComponent {
+    constructor(skipLinkService) {
+        this.skipLinkService = skipLinkService;
+        this.skipLinks$ = this.skipLinkService.getSkipLinks();
+    }
+    scrollToTarget(skipLink) {
+        this.skipLinkService.scrollToTarget(skipLink);
+    }
+};
+SkipLinkComponent.ctorParameters = () => [
+    { type: SkipLinkService }
+];
+SkipLinkComponent = __decorate([
+    Component({
+        selector: 'cx-skip-link',
+        template: "<div [cxFocus]=\"{ tab: true }\" *ngIf=\"skipLinks$ | async as links\">\n  <button *ngFor=\"let link of links\" (click)=\"scrollToTarget(link)\">\n    {{ 'skipLink.skipTo' | cxTranslate }}\n    {{ link.i18nKey | cxTranslate }}\n  </button>\n</div>\n",
+        changeDetection: ChangeDetectionStrategy.OnPush
+    })
+], SkipLinkComponent);
 
 const defaultSkipLinkConfig = {
     skipLinks: [
@@ -8056,96 +9041,6 @@ SkipLinkDirective = __decorate([
         selector: '[cxSkipLink]',
     })
 ], SkipLinkDirective);
-
-var OutletPosition;
-(function (OutletPosition) {
-    OutletPosition["REPLACE"] = "replace";
-    OutletPosition["BEFORE"] = "before";
-    OutletPosition["AFTER"] = "after";
-})(OutletPosition || (OutletPosition = {}));
-const AVOID_STACKED_OUTLETS = false;
-const USE_STACKED_OUTLETS = true;
-
-let OutletService = class OutletService {
-    constructor() {
-        this.templatesRefs = new Map();
-        this.templatesRefsBefore = new Map();
-        this.templatesRefsAfter = new Map();
-    }
-    /**
-     * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
-     */
-    add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
-        if (position === OutletPosition.BEFORE) {
-            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.store(this.templatesRefs, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.AFTER) {
-            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
-        }
-    }
-    /**
-     *
-     * Returns a single object or multiple objects for the given outlet reference,
-     * depending on the `stacked` argument.
-     *
-     * @param outlet The outlet reference
-     * @param position the outlet position, `OutletPosition.before`, `OutletPosition.AFTER` or `OutletPosition.REPLACE`
-     * @param stacked Indicates whether an array of outlet components is returned
-     */
-    get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
-        let templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore.get(outlet);
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter.get(outlet);
-                break;
-            default:
-                templateRef = this.templatesRefs.get(outlet);
-        }
-        if (templateRef && !stacked) {
-            return templateRef[0];
-        }
-        return templateRef;
-    }
-    remove(outlet, position = OutletPosition.REPLACE, value) {
-        switch (position) {
-            case OutletPosition.BEFORE:
-                this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
-                break;
-            case OutletPosition.AFTER:
-                this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
-                break;
-            default:
-                this.removeValueOrAll(this.templatesRefs, outlet, value);
-        }
-    }
-    store(store, outlet, value) {
-        const existing = store.get(outlet) || [];
-        const newValue = existing.concat([value]);
-        store.set(outlet, newValue);
-    }
-    removeValueOrAll(store, outlet, value) {
-        if (!value && store.has(outlet)) {
-            store.delete(outlet);
-        }
-        else if (value && store.has(outlet)) {
-            let existing = store.get(outlet);
-            existing = existing.filter((val) => val === value);
-            store.set(outlet, existing);
-        }
-    }
-};
-OutletService.ɵprov = ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
-OutletService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], OutletService);
 
 let SkipLinkModule = class SkipLinkModule {
 };
@@ -8254,443 +9149,6 @@ HamburgerMenuModule = __decorate([
         entryComponents: [HamburgerMenuComponent],
     })
 ], HamburgerMenuModule);
-
-let InlineRenderStrategy = class InlineRenderStrategy extends LaunchRenderStrategy {
-    constructor(componentFactoryResolver) {
-        super();
-        this.componentFactoryResolver = componentFactoryResolver;
-    }
-    /**
-     * Renders the component from the configuration in the view container ref
-     *
-     * @param config
-     * @param caller
-     * @param vcr
-     */
-    render(config, caller, vcr) {
-        // Only render if a ViewContainerRef is provided
-        if (vcr && this.shouldRender(caller, config)) {
-            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
-            vcr.createComponent(template);
-            this.renderedCallers.push({ caller, element: vcr.element });
-        }
-        else if (isDevMode()) {
-            if (!vcr) {
-                console.warn(`No view container ref provided for ${caller}`);
-            }
-            else {
-                console.warn(`Element for ${caller} already rendered. To allow multi rendering add property multi: true.`);
-            }
-        }
-    }
-    hasMatch(config) {
-        return Boolean(config.inline);
-    }
-};
-InlineRenderStrategy.ctorParameters = () => [
-    { type: ComponentFactoryResolver }
-];
-InlineRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function InlineRenderStrategy_Factory() { return new InlineRenderStrategy(ɵɵinject(ComponentFactoryResolver)); }, token: InlineRenderStrategy, providedIn: "root" });
-InlineRenderStrategy = __decorate([
-    Injectable({ providedIn: 'root' })
-], InlineRenderStrategy);
-
-let OutletRefDirective = class OutletRefDirective {
-    constructor(tpl, outletService) {
-        this.tpl = tpl;
-        this.outletService = outletService;
-    }
-    ngOnInit() {
-        this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
-    }
-};
-OutletRefDirective.ctorParameters = () => [
-    { type: TemplateRef },
-    { type: OutletService }
-];
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletRef", void 0);
-__decorate([
-    Input()
-], OutletRefDirective.prototype, "cxOutletPos", void 0);
-OutletRefDirective = __decorate([
-    Directive({
-        selector: '[cxOutletRef]',
-    })
-], OutletRefDirective);
-
-let OutletRefModule = class OutletRefModule {
-};
-OutletRefModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [OutletRefDirective],
-        exports: [OutletRefDirective],
-    })
-], OutletRefModule);
-
-/**
- * The IntersectionService uses the native IntersectionObserver (v2), which
- * can be used to implement pre-loading and deferred loading of DOM content.
- *
- */
-let IntersectionService = class IntersectionService {
-    constructor(config) {
-        this.config = config;
-    }
-    /**
-     * Returns an Observable that emits only once a boolean value whenever
-     * the given element has shown in the view port.
-     *
-     * The returned observable will only emit the first value. The
-     * observable must be cleaned up either way, since the value might never emit; it
-     *  depends on whether the element appears in the view port.
-     */
-    isIntersected(element, options) {
-        return this.intersects(element, options).pipe(first((v) => v === true));
-    }
-    /**
-     * Indicates whenever the element intersects the view port. An optional margin
-     * is used to intersects before the element shows up in the viewport.
-     * A value is emitted each time the element intersects.
-     *
-     * This is private for now, but could be exposed as a public API
-     * to introduce additional (css) render effects to the UI.
-     */
-    intersects(element, options = {}) {
-        const elementVisible$ = new Observable((observer) => {
-            const rootMargin = this.getRootMargin(options);
-            const intersectOptions = { rootMargin, threshold: options.threshold };
-            const intersectionObserver = new IntersectionObserver((entries) => {
-                observer.next(entries);
-            }, intersectOptions);
-            intersectionObserver.observe(element);
-            return () => {
-                intersectionObserver.disconnect();
-            };
-        }).pipe(flatMap((entries) => entries), map((entry) => entry.isIntersecting), distinctUntilChanged());
-        return elementVisible$;
-    }
-    getRootMargin(options = {}) {
-        if (options.rootMargin) {
-            return options.rootMargin;
-        }
-        const layoutConfig = this.config;
-        if (layoutConfig.deferredLoading &&
-            layoutConfig.deferredLoading.intersectionMargin) {
-            return layoutConfig.deferredLoading.intersectionMargin;
-        }
-    }
-};
-IntersectionService.ctorParameters = () => [
-    { type: LayoutConfig }
-];
-IntersectionService.ɵprov = ɵɵdefineInjectable({ factory: function IntersectionService_Factory() { return new IntersectionService(ɵɵinject(LayoutConfig)); }, token: IntersectionService, providedIn: "root" });
-IntersectionService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], IntersectionService);
-
-/**
- * The defer loading serivce is used to defer loading of DOM elements
- * until the elements are required for the user experience.
- */
-let DeferLoaderService = class DeferLoaderService {
-    constructor(platformId, config, intersectionService) {
-        this.platformId = platformId;
-        this.config = config;
-        this.intersectionService = intersectionService;
-        this.globalLoadStrategy = config.deferredLoading
-            ? config.deferredLoading.strategy
-            : DeferLoadingStrategy.INSTANT;
-    }
-    /**
-     * Defer loading till the element intersects the viewport.
-     *
-     * We evaluate whether we instantly load the element for different reasons:
-     * - we run in SSR mode
-     * - there's no global strategy given
-     * - the global loading strategy is set to INSTANT loading,
-     *   and the loading strategy in the given is not set to DEFER
-     * - the loading strategy in the given options is set to INSTANT
-     */
-    load(element, options) {
-        if (this.shouldLoadInstantly((options || {}).deferLoading)) {
-            return of(true);
-        }
-        else {
-            return this.intersectionService.isIntersected(element, options);
-        }
-    }
-    shouldLoadInstantly(elementLoadingStrategy) {
-        return (isPlatformServer(this.platformId) ||
-            elementLoadingStrategy === DeferLoadingStrategy.INSTANT ||
-            (elementLoadingStrategy !== DeferLoadingStrategy.DEFER &&
-                this.globalLoadStrategy === DeferLoadingStrategy.INSTANT));
-    }
-};
-DeferLoaderService.ctorParameters = () => [
-    { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
-    { type: LayoutConfig },
-    { type: IntersectionService }
-];
-DeferLoaderService.ɵprov = ɵɵdefineInjectable({ factory: function DeferLoaderService_Factory() { return new DeferLoaderService(ɵɵinject(PLATFORM_ID), ɵɵinject(LayoutConfig), ɵɵinject(IntersectionService)); }, token: DeferLoaderService, providedIn: "root" });
-DeferLoaderService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    }),
-    __param(0, Inject(PLATFORM_ID))
-], DeferLoaderService);
-
-let OutletRendererService = class OutletRendererService {
-    constructor() {
-        this.outletRefs = new Map();
-    }
-    render(outlet) {
-        if (this.outletRefs.size !== 0) {
-            this.outletRefs.get(outlet).render();
-        }
-    }
-    register(cxOutlet, context) {
-        this.outletRefs.set(cxOutlet, context);
-    }
-};
-OutletRendererService.ɵprov = ɵɵdefineInjectable({ factory: function OutletRendererService_Factory() { return new OutletRendererService(); }, token: OutletRendererService, providedIn: "root" });
-OutletRendererService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
-], OutletRendererService);
-
-let OutletDirective = class OutletDirective {
-    constructor(vcr, templateRef, outletService, deferLoaderService, outletRendererService) {
-        this.vcr = vcr;
-        this.templateRef = templateRef;
-        this.outletService = outletService;
-        this.deferLoaderService = deferLoaderService;
-        this.outletRendererService = outletRendererService;
-        this.renderedTemplate = [];
-        this.loaded = new EventEmitter(true);
-        this.subscription = new Subscription();
-    }
-    render() {
-        this.vcr.clear();
-        this.renderedTemplate = [];
-        this.subscription.unsubscribe();
-        this.subscription = new Subscription();
-        this.outletRendererService.register(this.cxOutlet, this);
-        if (this.cxOutletDefer) {
-            this.deferLoading();
-        }
-        else {
-            this.build();
-        }
-    }
-    ngOnChanges(changes) {
-        if (changes.cxOutlet) {
-            this.render();
-        }
-    }
-    deferLoading() {
-        this.loaded.emit(false);
-        const hostElement = this.getHostElement(this.vcr.element.nativeElement);
-        // Although the deferLoaderService might emit only once, as long as the hostElement
-        // isn't being loaded, there's no value being emitted. Therefor we need to clean up
-        // the subscription on destroy.
-        this.subscription.add(this.deferLoaderService
-            .load(hostElement, this.cxOutletDefer)
-            .subscribe(() => {
-            this.build();
-            this.loaded.emit(true);
-        }));
-    }
-    build() {
-        this.buildOutlet(OutletPosition.BEFORE);
-        this.buildOutlet(OutletPosition.REPLACE);
-        this.buildOutlet(OutletPosition.AFTER);
-    }
-    buildOutlet(position) {
-        let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
-        templates = templates === null || templates === void 0 ? void 0 : templates.filter((el) => !this.renderedTemplate.includes(el));
-        if (!templates && position === OutletPosition.REPLACE) {
-            templates = [this.templateRef];
-        }
-        // Just in case someone extended the `OutletService` and
-        // returns a singular object.
-        if (!Array.isArray(templates)) {
-            templates = [templates];
-        }
-        templates.forEach((obj) => {
-            this.create(obj);
-        });
-    }
-    create(tmplOrFactory) {
-        if (tmplOrFactory instanceof ComponentFactory) {
-            this.vcr.createComponent(tmplOrFactory);
-        }
-        else if (tmplOrFactory instanceof TemplateRef) {
-            const view = this.vcr.createEmbeddedView(tmplOrFactory, {
-                $implicit: this.cxOutletContext,
-            });
-            // we do not know if content is created dynamically or not
-            // so we apply change detection anyway
-            view.markForCheck();
-        }
-        this.renderedTemplate.push(tmplOrFactory);
-    }
-    /**
-     * Returns the closest `HtmlElement`, by iterating over the
-     * parent nodes of the given element.
-     *
-     * We avoid traversing the parent _elements_, as this is blocking
-     * ie11 implementations. One of the spare exclusions we make to not
-     * supporting ie11.
-     *
-     * @param element
-     */
-    getHostElement(element) {
-        if (element instanceof HTMLElement) {
-            return element;
-        }
-        return this.getHostElement(element.parentNode);
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
-};
-OutletDirective.ctorParameters = () => [
-    { type: ViewContainerRef },
-    { type: TemplateRef },
-    { type: OutletService },
-    { type: DeferLoaderService },
-    { type: OutletRendererService }
-];
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutlet", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletContext", void 0);
-__decorate([
-    Input()
-], OutletDirective.prototype, "cxOutletDefer", void 0);
-__decorate([
-    Output()
-], OutletDirective.prototype, "loaded", void 0);
-OutletDirective = __decorate([
-    Directive({
-        selector: '[cxOutlet]',
-    })
-], OutletDirective);
-
-let OutletModule = class OutletModule {
-};
-OutletModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        declarations: [OutletDirective],
-        providers: [OutletService],
-        exports: [OutletDirective],
-    })
-], OutletModule);
-
-let OutletRenderStrategy = class OutletRenderStrategy extends LaunchRenderStrategy {
-    constructor(outletService, componentFactoryResolver, outletRendererService) {
-        super();
-        this.outletService = outletService;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.outletRendererService = outletRendererService;
-    }
-    /**
-     * Renders the element in the configured outlet
-     *
-     * @param config
-     * @param caller
-     * @param vcr
-     */
-    render(config, caller, vcr) {
-        if (this.shouldRender(caller, config)) {
-            const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
-            this.outletService.add(config.outlet, template, config.position ? config.position : OutletPosition.BEFORE);
-            this.outletRendererService.render(config.outlet);
-            const element = vcr === null || vcr === void 0 ? void 0 : vcr.element;
-            this.renderedCallers.push({ caller, element });
-        }
-    }
-    hasMatch(config) {
-        return Boolean(config.outlet);
-    }
-    remove(caller, config) {
-        const template = this.componentFactoryResolver.resolveComponentFactory(config.component);
-        this.renderedCallers = this.renderedCallers.filter((el) => el.caller === caller);
-        this.outletService.remove(config.outlet, config.position ? config.position : OutletPosition.BEFORE, template);
-    }
-};
-OutletRenderStrategy.ctorParameters = () => [
-    { type: OutletService },
-    { type: ComponentFactoryResolver },
-    { type: OutletRendererService }
-];
-OutletRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function OutletRenderStrategy_Factory() { return new OutletRenderStrategy(ɵɵinject(OutletService), ɵɵinject(ComponentFactoryResolver), ɵɵinject(OutletRendererService)); }, token: OutletRenderStrategy, providedIn: "root" });
-OutletRenderStrategy = __decorate([
-    Injectable({ providedIn: 'root' })
-], OutletRenderStrategy);
-
-let RoutingRenderStrategy = class RoutingRenderStrategy extends LaunchRenderStrategy {
-    constructor(routingService) {
-        super();
-        this.routingService = routingService;
-    }
-    /**
-     * Navigates to the route configured for the caller
-     */
-    render(config, _caller) {
-        this.routingService.go(config);
-    }
-    hasMatch(config) {
-        return Boolean(config.cxRoute);
-    }
-};
-RoutingRenderStrategy.ctorParameters = () => [
-    { type: RoutingService }
-];
-RoutingRenderStrategy.ɵprov = ɵɵdefineInjectable({ factory: function RoutingRenderStrategy_Factory() { return new RoutingRenderStrategy(ɵɵinject(RoutingService)); }, token: RoutingRenderStrategy, providedIn: "root" });
-RoutingRenderStrategy = __decorate([
-    Injectable({ providedIn: 'root' })
-], RoutingRenderStrategy);
-
-var LaunchDialogModule_1;
-let LaunchDialogModule = LaunchDialogModule_1 = class LaunchDialogModule {
-    static forRoot() {
-        return {
-            ngModule: LaunchDialogModule_1,
-            providers: [provideConfig(DEFAULT_LAUNCH_CONFIG)],
-        };
-    }
-};
-LaunchDialogModule = LaunchDialogModule_1 = __decorate([
-    NgModule({
-        providers: [
-            {
-                provide: LaunchRenderStrategy,
-                useExisting: OutletRenderStrategy,
-                multi: true,
-            },
-            {
-                provide: LaunchRenderStrategy,
-                useExisting: InlineRenderStrategy,
-                multi: true,
-            },
-            {
-                provide: LaunchRenderStrategy,
-                useExisting: RoutingRenderStrategy,
-                multi: true,
-            },
-        ],
-    })
-], LaunchDialogModule);
 
 let LayoutModule = class LayoutModule {
 };
@@ -9495,281 +9953,6 @@ SeoModule = __decorate([
     })
 ], SeoModule);
 
-let ConsentManagementFormComponent = class ConsentManagementFormComponent {
-    constructor() {
-        this.consentGiven = false;
-        this.requiredConsents = [];
-        this.consentChanged = new EventEmitter();
-    }
-    ngOnInit() {
-        if (this.consent) {
-            this.consentGiven = Boolean(this.consent.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN);
-        }
-        else {
-            if (this.consentTemplate && this.consentTemplate.currentConsent) {
-                if (this.consentTemplate.currentConsent.consentWithdrawnDate) {
-                    this.consentGiven = false;
-                }
-                else if (this.consentTemplate.currentConsent.consentGivenDate) {
-                    this.consentGiven = true;
-                }
-            }
-        }
-    }
-    onConsentChange() {
-        this.consentGiven = !this.consentGiven;
-        this.consentChanged.emit({
-            given: this.consentGiven,
-            template: this.consentTemplate,
-        });
-    }
-    isRequired(templateId) {
-        return this.requiredConsents.includes(templateId);
-    }
-};
-__decorate([
-    Input()
-], ConsentManagementFormComponent.prototype, "consentTemplate", void 0);
-__decorate([
-    Input()
-], ConsentManagementFormComponent.prototype, "requiredConsents", void 0);
-__decorate([
-    Input()
-], ConsentManagementFormComponent.prototype, "consent", void 0);
-__decorate([
-    Output()
-], ConsentManagementFormComponent.prototype, "consentChanged", void 0);
-ConsentManagementFormComponent = __decorate([
-    Component({
-        selector: 'cx-consent-management-form',
-        template: "<div class=\"form-check\">\n  <label>\n    <input\n      type=\"checkbox\"\n      class=\"form-check-input\"\n      (change)=\"onConsentChange()\"\n      [checked]=\"consentGiven\"\n      [disabled]=\"isRequired(consentTemplate?.id)\"\n    />\n    <span class=\"form-check-label cx-be-bold\">\n      {{ consentTemplate?.name }}\n    </span>\n    <br />\n    <span class=\"form-check-label\">\n      {{ consentTemplate?.description }}\n    </span>\n  </label>\n</div>\n"
-    })
-], ConsentManagementFormComponent);
-
-let ConsentManagementComponent = class ConsentManagementComponent {
-    constructor(userConsentService, globalMessageService, anonymousConsentsConfig, anonymousConsentsService, authService) {
-        this.userConsentService = userConsentService;
-        this.globalMessageService = globalMessageService;
-        this.anonymousConsentsConfig = anonymousConsentsConfig;
-        this.anonymousConsentsService = anonymousConsentsService;
-        this.authService = authService;
-        this.subscriptions = new Subscription();
-        this.allConsentsLoading = new BehaviorSubject(false);
-        this.requiredConsents = [];
-    }
-    ngOnInit() {
-        this.loading$ = combineLatest([
-            this.userConsentService.getConsentsResultLoading(),
-            this.userConsentService.getGiveConsentResultLoading(),
-            this.userConsentService.getWithdrawConsentResultLoading(),
-            this.authService.isUserLoggedIn(),
-            this.allConsentsLoading,
-        ]).pipe(map(([consentLoading, giveConsentLoading, withdrawConsentLoading, isUserLoggedIn, allConsentsLoading,]) => consentLoading ||
-            giveConsentLoading ||
-            withdrawConsentLoading ||
-            !isUserLoggedIn ||
-            allConsentsLoading));
-        this.consentListInit();
-        this.giveConsentInit();
-        this.withdrawConsentInit();
-    }
-    consentListInit() {
-        this.templateList$ = this.userConsentService.getConsents().pipe(withLatestFrom(this.anonymousConsentsService.getTemplates(), this.authService.isUserLoggedIn()), filter(([_templateList, _anonymousTemplates, isUserLoggedIn]) => isUserLoggedIn), tap(([templateList, _anonymousTemplates]) => {
-            if (!this.consentsExists(templateList)) {
-                this.userConsentService.loadConsents();
-            }
-        }), map(([templateList, anonymousTemplates]) => {
-            if (Boolean(this.anonymousConsentsConfig.anonymousConsents)) {
-                if (Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents)) {
-                    this.requiredConsents = this.anonymousConsentsConfig.anonymousConsents.requiredConsents;
-                }
-                if (Boolean(this.anonymousConsentsConfig.anonymousConsents
-                    .consentManagementPage)) {
-                    return this.hideAnonymousConsents(templateList, anonymousTemplates);
-                }
-            }
-            return templateList;
-        }));
-    }
-    hideAnonymousConsents(templateList, anonymousTemplates = []) {
-        let hideTemplateIds = [];
-        if (!this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-            .showAnonymousConsents) {
-            hideTemplateIds = anonymousTemplates.map((template) => template.id);
-            return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
-        }
-        if (Boolean(this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-            .hideConsents) &&
-            this.anonymousConsentsConfig.anonymousConsents.consentManagementPage
-                .hideConsents.length > 0) {
-            hideTemplateIds = this.anonymousConsentsConfig.anonymousConsents
-                .consentManagementPage.hideConsents;
-        }
-        return this.userConsentService.filterConsentTemplates(templateList, hideTemplateIds);
-    }
-    giveConsentInit() {
-        this.userConsentService.resetGiveConsentProcessState();
-        this.subscriptions.add(this.userConsentService
-            .getGiveConsentResultSuccess()
-            .subscribe((success) => this.onConsentGivenSuccess(success)));
-    }
-    withdrawConsentInit() {
-        this.userConsentService.resetWithdrawConsentProcessState();
-        this.subscriptions.add(this.userConsentService
-            .getWithdrawConsentResultLoading()
-            .pipe(skipWhile(Boolean), withLatestFrom(this.userConsentService.getWithdrawConsentResultSuccess()), map(([, withdrawalSuccess]) => withdrawalSuccess), tap((withdrawalSuccess) => {
-            if (withdrawalSuccess) {
-                this.userConsentService.loadConsents();
-            }
-        }))
-            .subscribe((withdrawalSuccess) => this.onConsentWithdrawnSuccess(withdrawalSuccess)));
-    }
-    consentsExists(templateList) {
-        return Boolean(templateList) && templateList.length > 0;
-    }
-    onConsentChange({ given, template, }) {
-        if (given) {
-            this.userConsentService.giveConsent(template.id, template.version);
-        }
-        else {
-            this.userConsentService.withdrawConsent(template.currentConsent.code);
-        }
-    }
-    onConsentGivenSuccess(success) {
-        if (success) {
-            this.userConsentService.resetGiveConsentProcessState();
-            this.globalMessageService.add({ key: 'consentManagementForm.message.success.given' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-        }
-    }
-    onConsentWithdrawnSuccess(success) {
-        if (success) {
-            this.userConsentService.resetWithdrawConsentProcessState();
-            this.globalMessageService.add({ key: 'consentManagementForm.message.success.withdrawn' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-        }
-    }
-    rejectAll(templates = []) {
-        const consentsToWithdraw = [];
-        templates.forEach((template) => {
-            if (this.userConsentService.isConsentGiven(template.currentConsent)) {
-                if (this.isRequiredConsent(template)) {
-                    return;
-                }
-                consentsToWithdraw.push(template);
-            }
-        });
-        this.allConsentsLoading.next(true);
-        this.subscriptions.add(this.setupWithdrawalStream(consentsToWithdraw)
-            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
-            .subscribe());
-    }
-    setupWithdrawalStream(consentsToWithdraw = []) {
-        const loading$ = concat(this.userConsentService.getWithdrawConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
-        const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
-        const withdraw$ = count$.pipe(tap((i) => {
-            if (i < consentsToWithdraw.length) {
-                this.userConsentService.withdrawConsent(consentsToWithdraw[i].currentConsent.code);
-            }
-        }));
-        const checkTimesLoaded$ = withdraw$.pipe(filter((timesLoaded) => timesLoaded === consentsToWithdraw.length));
-        return checkTimesLoaded$;
-    }
-    allowAll(templates = []) {
-        const consentsToGive = [];
-        templates.forEach((template) => {
-            if (this.userConsentService.isConsentWithdrawn(template.currentConsent)) {
-                if (this.isRequiredConsent(template)) {
-                    return;
-                }
-                consentsToGive.push(template);
-            }
-        });
-        this.allConsentsLoading.next(true);
-        this.subscriptions.add(this.setupGiveStream(consentsToGive)
-            .pipe(tap((_timesLoaded) => this.allConsentsLoading.next(false)))
-            .subscribe());
-    }
-    setupGiveStream(consentsToGive = []) {
-        const loading$ = concat(this.userConsentService.getGiveConsentResultLoading()).pipe(distinctUntilChanged(), filter((loading) => !loading));
-        const count$ = loading$.pipe(scan((acc, _value) => acc + 1, -1));
-        const giveConsent$ = count$.pipe(tap((i) => {
-            if (i < consentsToGive.length) {
-                this.userConsentService.giveConsent(consentsToGive[i].id, consentsToGive[i].version);
-            }
-        }));
-        const checkTimesLoaded$ = giveConsent$.pipe(filter((timesLoaded) => timesLoaded === consentsToGive.length));
-        return checkTimesLoaded$;
-    }
-    isRequiredConsent(template) {
-        return (Boolean(this.anonymousConsentsConfig.anonymousConsents) &&
-            Boolean(this.anonymousConsentsConfig.anonymousConsents.requiredConsents) &&
-            this.anonymousConsentsConfig.anonymousConsents.requiredConsents.includes(template.id));
-    }
-    ngOnDestroy() {
-        this.subscriptions.unsubscribe();
-        this.allConsentsLoading.unsubscribe();
-        this.userConsentService.resetGiveConsentProcessState();
-        this.userConsentService.resetWithdrawConsentProcessState();
-    }
-};
-ConsentManagementComponent.ctorParameters = () => [
-    { type: UserConsentService },
-    { type: GlobalMessageService },
-    { type: AnonymousConsentsConfig },
-    { type: AnonymousConsentsService },
-    { type: AuthService }
-];
-ConsentManagementComponent = __decorate([
-    Component({
-        selector: 'cx-consent-management',
-        template: "<div *ngIf=\"loading$ | async; else consentManagementForm\">\n  <div class=\"cx-spinner\">\n    <cx-spinner></cx-spinner>\n  </div>\n</div>\n\n<ng-template #consentManagementForm>\n  <ng-container *ngIf=\"templateList$ | async as templateList\">\n    <div class=\"cx-consent-action-links\">\n      <div class=\"col-sm-12 col-md-8 col-lg-6\">\n        <button\n          tabindex=\"0\"\n          class=\"btn btn-link cx-action-link\"\n          (click)=\"rejectAll(templateList)\"\n        >\n          {{ 'consentManagementForm.clearAll' | cxTranslate }}\n        </button>\n        <button\n          tabindex=\"0\"\n          class=\"btn btn-link cx-action-link\"\n          (click)=\"allowAll(templateList)\"\n        >\n          {{ 'consentManagementForm.selectAll' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n\n    <div class=\"cx-consent-toggles\">\n      <div class=\"col-sm-12 col-md-8 col-lg-6\">\n        <cx-consent-management-form\n          *ngFor=\"let consentTemplate of templateList\"\n          [consentTemplate]=\"consentTemplate\"\n          [requiredConsents]=\"requiredConsents\"\n          (consentChanged)=\"onConsentChange($event)\"\n        ></cx-consent-management-form>\n      </div>\n    </div>\n  </ng-container>\n</ng-template>\n"
-    })
-], ConsentManagementComponent);
-
-let ConsentManagementModule = class ConsentManagementModule {
-};
-ConsentManagementModule = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            FormsModule,
-            ReactiveFormsModule,
-            SpinnerModule,
-            I18nModule,
-            IconModule,
-        ],
-        providers: [
-            provideDefaultConfig({
-                cmsComponents: {
-                    ConsentManagementComponent: {
-                        component: ConsentManagementComponent,
-                        guards: [AuthGuard],
-                    },
-                },
-            }),
-        ],
-        declarations: [ConsentManagementComponent, ConsentManagementFormComponent],
-        exports: [ConsentManagementComponent, ConsentManagementFormComponent],
-        entryComponents: [ConsentManagementComponent],
-    })
-], ConsentManagementModule);
-
-let AnonymousConsentsModule = class AnonymousConsentsModule {
-};
-AnonymousConsentsModule = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            I18nModule,
-            IconModule,
-            SpinnerModule,
-            ConsentManagementModule,
-        ],
-        declarations: [AnonymousConsentDialogComponent],
-        entryComponents: [AnonymousConsentDialogComponent],
-        exports: [AnonymousConsentDialogComponent],
-    })
-], AnonymousConsentsModule);
-
 let StorefrontComponent = class StorefrontComponent {
     constructor(hamburgerMenuService, routingService, elementRef, keyboardFocusService) {
         this.hamburgerMenuService = hamburgerMenuService;
@@ -9851,7 +10034,7 @@ MainModule = __decorate([
             PageLayoutModule,
             SeoModule,
             PageSlotModule,
-            AnonymousConsentsModule,
+            AnonymousConsentsDialogModule,
             FeaturesConfigModule,
             SkipLinkModule,
             KeyboardFocusModule,
@@ -18279,7 +18462,7 @@ StorefrontFoundationModule = __decorate([
         imports: [
             StateModule.forRoot(),
             AuthModule.forRoot(),
-            AnonymousConsentsModule$1.forRoot(),
+            AnonymousConsentsModule.forRoot(),
             ConfigModule.forRoot(),
             ConfigInitializerModule.forRoot(),
             ConfigValidatorModule.forRoot(),
@@ -18377,5 +18560,5 @@ B2cStorefrontModule = B2cStorefrontModule_1 = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DEFAULT_LAUNCH_CONFIG, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchConfig, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, PersistFocusService as ɵba, EscapeFocusService as ɵbb, AutoFocusService as ɵbc, TabFocusService as ɵbd, TrapFocusService as ɵbe, LockFocusService as ɵbf, defaultCheckoutConfig as ɵbg, defaultQualtricsConfig as ɵbh, CmsPageGuardService as ɵbi, CmsRoutesImplService as ɵbj, CmsComponentsService as ɵbk, ReturnRequestService as ɵbl, OutletRendererService as ɵbm, AddToHomeScreenService as ɵbn, MyCouponsComponentService as ɵbo, addCmsRoute as ɵbp, defaultStorefrontRoutesConfig as ɵbq, defaultRoutingConfig as ɵbr, htmlLangProvider as ɵbs, setHtmlLangAttribute as ɵbt, AnonymousConsentsModule as ɵbu, AnonymousConsentDialogComponent as ɵbv, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, AsmLoaderModule as ɵf, asmFactory as ɵg, WebComponentHandler as ɵh, AsmEnablerService as ɵi, AsmMainUiComponent as ɵj, AsmComponentService as ɵk, CSAgentLoginFormComponent as ɵl, CustomerSelectionComponent as ɵm, AsmSessionTimerComponent as ɵn, FormatTimerPipe as ɵo, CustomerEmulationComponent as ɵp, LockFocusDirective as ɵq, TrapFocusDirective as ɵr, TabFocusDirective as ɵs, AutoFocusDirective as ɵt, EscapeFocusDirective as ɵu, PersistFocusDirective as ɵv, BlockFocusDirective as ɵw, VisibleFocusDirective as ɵx, BaseFocusDirective as ɵy, BaseFocusService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, AsmMainUiComponent as ɵba, AsmComponentService as ɵbb, CSAgentLoginFormComponent as ɵbc, CustomerSelectionComponent as ɵbd, AsmSessionTimerComponent as ɵbe, FormatTimerPipe as ɵbf, CustomerEmulationComponent as ɵbg, defaultAsmLayoutConfig as ɵbh, defaultCheckoutConfig as ɵbi, defaultQualtricsConfig as ɵbj, CmsPageGuardService as ɵbk, CmsRoutesImplService as ɵbl, CmsComponentsService as ɵbm, ReturnRequestService as ɵbn, AddToHomeScreenService as ɵbo, MyCouponsComponentService as ɵbp, addCmsRoute as ɵbq, defaultStorefrontRoutesConfig as ɵbr, defaultRoutingConfig as ɵbs, htmlLangProvider as ɵbt, setHtmlLangAttribute as ɵbu, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, LockFocusDirective as ɵf, TrapFocusDirective as ɵg, TabFocusDirective as ɵh, AutoFocusDirective as ɵi, EscapeFocusDirective as ɵj, PersistFocusDirective as ɵk, BlockFocusDirective as ɵl, VisibleFocusDirective as ɵm, BaseFocusDirective as ɵn, BaseFocusService as ɵo, PersistFocusService as ɵp, EscapeFocusService as ɵq, AutoFocusService as ɵr, TabFocusService as ɵs, TrapFocusService as ɵt, LockFocusService as ɵu, defaultAnonymousConsentLayoutConfig as ɵv, AsmLoaderModule as ɵw, asmFactory as ɵx, WebComponentHandler as ɵy, AsmEnablerService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
