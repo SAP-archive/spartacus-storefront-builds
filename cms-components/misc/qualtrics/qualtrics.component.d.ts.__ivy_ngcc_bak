@@ -1,6 +1,11 @@
+import { QualtricsConfig } from './config/qualtrics-config';
 import { QualtricsLoaderService } from './qualtrics-loader.service';
+/**
+ * Adds the Qualtrics deployment script whenever the component is loaded. The
+ * deployment script is loaded from the global configuration (`qualtrics.scriptSource`).
+ */
 export declare class QualtricsComponent {
-    private qualtricsLoader;
-    qualtricsEnabled$: import("rxjs").Observable<boolean>;
-    constructor(qualtricsLoader: QualtricsLoaderService);
+    protected qualtricsLoader: QualtricsLoaderService;
+    protected config: QualtricsConfig;
+    constructor(qualtricsLoader: QualtricsLoaderService, config: QualtricsConfig);
 }

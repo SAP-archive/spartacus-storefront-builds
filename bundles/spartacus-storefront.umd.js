@@ -4706,6 +4706,10 @@
         return GlobalMessageComponentModule;
     }());
 
+    /**
+     * Configuration options for the Qualtrics integration, which allows you to
+     * specify the qualtrics project and deployment script.
+     */
     var QualtricsConfig = /** @class */ (function () {
         function QualtricsConfig() {
         }
@@ -4719,64 +4723,117 @@
         return QualtricsConfig;
     }());
 
+    var QUALTRICS_EVENT_NAME = 'qsi_js_loaded';
+    /**
+     * Service to integration Qualtrics.
+     *
+     * The integration observes the Qualtrics API, and when available, it runs the QSI API
+     * to let Qualtrics evaluate the application.
+     *
+     * The service supports an additional _hook_ (`isDataLoaded()`) that can be used to load application
+     * data before pulling the QSI API. This is beneficial in a single page application when additional
+     * data is required before the Qualtrics _creatives_ run.
+     *
+     * This service also supports the creation of the Qualtrics deployment script. This is optional, as
+     * the script can be added in alternatives ways.
+     */
     var QualtricsLoaderService = /** @class */ (function () {
-        function QualtricsLoaderService(winRef, config) {
+        function QualtricsLoaderService(winRef, rendererFactory) {
+            var _this = this;
+            var _a;
             this.winRef = winRef;
-            this.config = config;
-            this.qualtricsLoaded$ = new rxjs.BehaviorSubject(false);
-            if (Boolean(this.winRef.nativeWindow) &&
-                Boolean(this.winRef.document) &&
-                this.isQualtricsConfigured()) {
-                this.initialize();
-                this.setup();
-            }
+            this.rendererFactory = rendererFactory;
+            /**
+             * QSI load event that happens when the QSI JS file is loaded.
+             */
+            this.qsiLoaded$ = ((_a = this.winRef) === null || _a === void 0 ? void 0 : _a.nativeWindow) ? rxjs.fromEvent(this.winRef.nativeWindow, QUALTRICS_EVENT_NAME)
+                : rxjs.of();
+            /**
+             * Emits the Qualtrics Site Intercept (QSI) JavaScript API whenever available.
+             *
+             * The API is emitted when the JavaScript resource holding this API is fully loaded.
+             * The API is also stored locally in the service, in case it's required later on.
+             */
+            this.qsi$ = this.qsiLoaded$.pipe(operators.switchMap(function () { return _this.isDataLoaded(); }), operators.map(function () { var _a; return (_a = _this.winRef) === null || _a === void 0 ? void 0 : _a.nativeWindow['QSI']; }), operators.filter(function (api) { return Boolean(api); }), operators.tap(function (qsi) { return (_this.qsiApi = qsi); }));
+            this.initialize();
         }
+        /**
+         * Starts observing the Qualtrics integration. The integration is based on a
+         * Qualtrics specific event (`qsi_js_loaded`). As soon as this events happens,
+         * we run the API.
+         */
         QualtricsLoaderService.prototype.initialize = function () {
             var _this = this;
-            rxjs.fromEvent(this.winRef.nativeWindow, 'qsi_js_loaded').subscribe(function () {
-                return _this.qualtricsLoaded$.next(true);
-            });
-        };
-        QualtricsLoaderService.prototype.setup = function () {
-            var qualtricsScript = this.winRef.document.createElement('script');
-            qualtricsScript.type = 'text/javascript';
-            qualtricsScript.defer = true;
-            qualtricsScript.src = 'assets/qualtricsIntegration.js';
-            var idScript = this.winRef.document.createElement('div');
-            idScript.id = this.config.qualtrics.projectId;
-            this.winRef.document
-                .getElementsByTagName('head')[0]
-                .appendChild(qualtricsScript);
-            this.winRef.document.getElementsByTagName('head')[0].appendChild(idScript);
-        };
-        QualtricsLoaderService.prototype.isQualtricsConfigured = function () {
-            return (Boolean(this.config.qualtrics) && Boolean(this.config.qualtrics.projectId));
-        };
-        QualtricsLoaderService.prototype.load = function () {
-            var _this = this;
-            return this.qualtricsLoaded$.pipe(operators.filter(function (loaded) { return loaded; }), operators.switchMap(function () {
-                var qsi = _this.winRef.nativeWindow['QSI'];
-                return _this.isDataLoaded().pipe(operators.distinctUntilChanged(), operators.tap(function (dataLoaded) {
-                    if (dataLoaded) {
-                        qsi.API.unload();
-                        qsi.API.load().done(qsi.API.run());
-                    }
-                }));
-            }));
+            this.qsi$.subscribe(function () { return _this.run(); });
         };
         /**
-         * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data
-         * If client(s) does not extend this service to override this implementation, it returns true
-         * Return false otherwise.
+         * Evaluates the Qualtrics project code for the application.
+         *
+         * In order to reload the evaluation in Qualtrics, the API requires to unload the API before
+         * running it again. We don't do this by default, but offer a flag to conditionally unload the API.
+         */
+        QualtricsLoaderService.prototype.run = function (reload) {
+            if (reload === void 0) { reload = false; }
+            var _a;
+            if (!((_a = this.qsiApi) === null || _a === void 0 ? void 0 : _a.API)) {
+                if (core.isDevMode()) {
+                    console.log('The QSI api is not available');
+                }
+                return;
+            }
+            if (reload) {
+                // Removes any currently displaying creatives
+                this.qsiApi.API.unload();
+            }
+            // Starts the intercept code evaluation right after loading the Site Intercept
+            // code for any defined intercepts or creatives
+            this.qsiApi.API.load().done(this.qsiApi.API.run());
+        };
+        /**
+         * Adds the deployment script to the DOM.
+         *
+         * The script will not be added twice if it was loaded before. In that case, we use
+         * the Qualtrics API directly to _unload_ and _run_ the project.
+         */
+        QualtricsLoaderService.prototype.addScript = function (scriptSource) {
+            if (this.hasScript(scriptSource)) {
+                this.run(true);
+            }
+            else {
+                var script = this.renderer.createElement('script');
+                script.type = 'text/javascript';
+                script.defer = true;
+                script.src = scriptSource;
+                this.renderer.appendChild(this.winRef.document.body, script);
+            }
+        };
+        /**
+         * This logic exist in order to let the client(s) add their own logic to wait for any kind of page data.
+         * You can observe any data in this method.
+         *
+         * Defaults to true.
          */
         QualtricsLoaderService.prototype.isDataLoaded = function () {
             return rxjs.of(true);
         };
+        /**
+         * Indicates if the script is already added to the DOM.
+         */
+        QualtricsLoaderService.prototype.hasScript = function (source) {
+            return !!this.winRef.document.querySelector("script[src=\"" + source + "\"]");
+        };
+        Object.defineProperty(QualtricsLoaderService.prototype, "renderer", {
+            get: function () {
+                return this.rendererFactory.createRenderer(null, null);
+            },
+            enumerable: true,
+            configurable: true
+        });
         QualtricsLoaderService.ctorParameters = function () { return [
             { type: core$1.WindowRef },
-            { type: QualtricsConfig }
+            { type: core.RendererFactory2 }
         ]; };
-        QualtricsLoaderService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function QualtricsLoaderService_Factory() { return new QualtricsLoaderService(core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](QualtricsConfig)); }, token: QualtricsLoaderService, providedIn: "root" });
+        QualtricsLoaderService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function QualtricsLoaderService_Factory() { return new QualtricsLoaderService(core["ɵɵinject"](core$1.WindowRef), core["ɵɵinject"](core.RendererFactory2)); }, token: QualtricsLoaderService, providedIn: "root" });
         QualtricsLoaderService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -4785,18 +4842,30 @@
         return QualtricsLoaderService;
     }());
 
+    /**
+     * Adds the Qualtrics deployment script whenever the component is loaded. The
+     * deployment script is loaded from the global configuration (`qualtrics.scriptSource`).
+     */
     var QualtricsComponent = /** @class */ (function () {
-        function QualtricsComponent(qualtricsLoader) {
+        function QualtricsComponent(qualtricsLoader, config) {
+            var _a;
             this.qualtricsLoader = qualtricsLoader;
-            this.qualtricsEnabled$ = this.qualtricsLoader.load();
+            this.config = config;
+            if ((_a = this.config.qualtrics) === null || _a === void 0 ? void 0 : _a.scriptSource) {
+                this.qualtricsLoader.addScript(this.config.qualtrics.scriptSource);
+            }
+            else if (core.isDevMode()) {
+                console.warn("We're unable to add the Qualtrics deployment code as there is no script source defined in config.qualtrics.scriptSource.");
+            }
         }
         QualtricsComponent.ctorParameters = function () { return [
-            { type: QualtricsLoaderService }
+            { type: QualtricsLoaderService },
+            { type: QualtricsConfig }
         ]; };
         QualtricsComponent = __decorate([
             core.Component({
                 selector: 'cx-qualtrics',
-                template: " <ng-container *ngIf=\"qualtricsEnabled$ | async\"></ng-container> "
+                template: ""
             })
         ], QualtricsComponent);
         return QualtricsComponent;
@@ -20737,6 +20806,7 @@
     exports.PromotionsComponent = PromotionsComponent;
     exports.PromotionsModule = PromotionsModule;
     exports.PwaModule = PwaModule;
+    exports.QUALTRICS_EVENT_NAME = QUALTRICS_EVENT_NAME;
     exports.QualtricsComponent = QualtricsComponent;
     exports.QualtricsConfig = QualtricsConfig;
     exports.QualtricsLoaderService = QualtricsLoaderService;
