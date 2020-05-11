@@ -9903,12 +9903,9 @@
         };
         ShippingAddressComponent.prototype.addAddress = function (address) {
             var _this = this;
-            var selectedSub = this.selectedAddress$.subscribe(function (selected) {
-                if (selected && selected.shippingAddress) {
-                    _this.goNext();
-                    selectedSub.unsubscribe();
-                }
-            });
+            this.selectedAddress$
+                .pipe(operators.filter(function (selected) { return !!(selected === null || selected === void 0 ? void 0 : selected.shippingAddress); }), operators.take(1))
+                .subscribe(function () { return _this.goNext(); });
             this.forceLoader = true;
             this.existingAddresses$.pipe(operators.take(1)).subscribe(function (addresses) {
                 addresses.includes(address)

@@ -17711,12 +17711,9 @@ let ShippingAddressComponent = class ShippingAddressComponent {
         this.checkoutDeliveryService.setDeliveryAddress(address);
     }
     addAddress(address) {
-        const selectedSub = this.selectedAddress$.subscribe((selected) => {
-            if (selected && selected.shippingAddress) {
-                this.goNext();
-                selectedSub.unsubscribe();
-            }
-        });
+        this.selectedAddress$
+            .pipe(filter((selected) => !!(selected === null || selected === void 0 ? void 0 : selected.shippingAddress)), take(1))
+            .subscribe(() => this.goNext());
         this.forceLoader = true;
         this.existingAddresses$.pipe(take(1)).subscribe((addresses) => {
             addresses.includes(address)
