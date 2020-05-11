@@ -24381,7 +24381,10 @@ let ProductImagesComponent = class ProductImagesComponent {
     constructor(currentProductService) {
         this.currentProductService = currentProductService;
         this.mainMediaContainer = new BehaviorSubject(null);
-        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap((p) => this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {})));
+        this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap((p) => {
+            var _a;
+            this.mainMediaContainer.next(((_a = p.images) === null || _a === void 0 ? void 0 : _a.PRIMARY) ? p.images.PRIMARY : {});
+        }));
         this.thumbs$ = this.product$.pipe(map((p) => this.createThumbs(p)));
         this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map(([, container]) => container));
     }

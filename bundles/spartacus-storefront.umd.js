@@ -16855,7 +16855,8 @@
             this.currentProductService = currentProductService;
             this.mainMediaContainer = new rxjs.BehaviorSubject(null);
             this.product$ = this.currentProductService.getProduct().pipe(operators.filter(Boolean), operators.distinctUntilChanged(), operators.tap(function (p) {
-                return _this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {});
+                var _a;
+                _this.mainMediaContainer.next(((_a = p.images) === null || _a === void 0 ? void 0 : _a.PRIMARY) ? p.images.PRIMARY : {});
             }));
             this.thumbs$ = this.product$.pipe(operators.map(function (p) { return _this.createThumbs(p); }));
             this.mainImage$ = rxjs.combineLatest([this.product$, this.mainMediaContainer]).pipe(operators.map(function (_a) {

@@ -16669,7 +16669,8 @@ var ProductImagesComponent = /** @class */ (function () {
         this.currentProductService = currentProductService;
         this.mainMediaContainer = new BehaviorSubject(null);
         this.product$ = this.currentProductService.getProduct().pipe(filter(Boolean), distinctUntilChanged(), tap(function (p) {
-            return _this.mainMediaContainer.next(p.images ? p.images.PRIMARY : {});
+            var _a;
+            _this.mainMediaContainer.next(((_a = p.images) === null || _a === void 0 ? void 0 : _a.PRIMARY) ? p.images.PRIMARY : {});
         }));
         this.thumbs$ = this.product$.pipe(map(function (p) { return _this.createThumbs(p); }));
         this.mainImage$ = combineLatest([this.product$, this.mainMediaContainer]).pipe(map(function (_a) {
