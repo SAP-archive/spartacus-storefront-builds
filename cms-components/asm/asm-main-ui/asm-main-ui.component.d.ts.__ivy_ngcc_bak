@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { AsmAuthService, AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
+import { AsmAuthService, AsmService, AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { AsmComponentService } from '../services/asm-component.service';
 export declare class AsmMainUiComponent implements OnInit {
@@ -9,12 +9,14 @@ export declare class AsmMainUiComponent implements OnInit {
     protected asmComponentService: AsmComponentService;
     protected globalMessageService: GlobalMessageService;
     protected routingService: RoutingService;
+    protected asmService: AsmService;
     csAgentToken$: Observable<UserToken>;
     csAgentTokenLoading$: Observable<boolean>;
     customer$: Observable<User>;
+    isCollapsed$: Observable<boolean>;
     disabled: boolean;
     private startingCustomerSession;
-    constructor(authService: AuthService, asmAuthService: AsmAuthService, userService: UserService, asmComponentService: AsmComponentService, globalMessageService: GlobalMessageService, routingService: RoutingService);
+    constructor(authService: AuthService, asmAuthService: AsmAuthService, userService: UserService, asmComponentService: AsmComponentService, globalMessageService: GlobalMessageService, routingService: RoutingService, asmService: AsmService);
     ngOnInit(): void;
     private handleCustomerSessionStartRedirection;
     loginCustomerSupportAgent({ userId, password, }: {
