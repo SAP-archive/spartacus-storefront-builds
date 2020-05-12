@@ -25171,13 +25171,16 @@ let ActiveFacetsComponent = class ActiveFacetsComponent {
     }
     /**
      * The focus key is used to persist the focus on the facet when the DOM is being
-     * recreated. We only apply the focus key for the given facet when there are no
-     * facets available. This is a great experience for the keyboard user, who keep the
-     * focus on the activated facet all the time.
+     * recreated. We only apply the focus key for the given _active_ facet when there
+     * the original facets is not available. This happens for non multi-valued facets.
+     *
+     * With this approach, the we keep the focus, either at the facet list or on the
+     * active facets.
      */
     getFocusKey(facetList, facet) {
         var _a;
-        return !((_a = facetList.facets) === null || _a === void 0 ? void 0 : _a.length) ? facet.facetValueName : '';
+        return ((_a = facetList.facets) === null || _a === void 0 ? void 0 : _a.find((f) => { var _a; return (_a = f.values) === null || _a === void 0 ? void 0 : _a.find((val) => val.name === facet.facetValueName); })) ? ''
+            : facet.facetValueName;
     }
 };
 ActiveFacetsComponent.ɵfac = function ActiveFacetsComponent_Factory(t) { return new (t || ActiveFacetsComponent)(ɵngcc0.ɵɵdirectiveInject(FacetService)); };
