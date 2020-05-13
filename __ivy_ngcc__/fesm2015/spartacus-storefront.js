@@ -18485,13 +18485,13 @@ let PageLayoutService = class PageLayoutService {
     }
 };
 PageLayoutService.ɵfac = function PageLayoutService_Factory(t) { return new (t || PageLayoutService)(ɵngcc0.ɵɵinject(ɵngcc1.CmsService), ɵngcc0.ɵɵinject(LayoutConfig), ɵngcc0.ɵɵinject(BreakpointService), ɵngcc0.ɵɵinject(PAGE_LAYOUT_HANDLER, 8)); };
-PageLayoutService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: PageLayoutService, factory: PageLayoutService.ɵfac });
 PageLayoutService.ctorParameters = () => [
     { type: CmsService },
     { type: LayoutConfig },
     { type: BreakpointService },
     { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
 ];
+PageLayoutService.ɵprov = ɵɵdefineInjectable({ factory: function PageLayoutService_Factory() { return new PageLayoutService(ɵɵinject(CmsService), ɵɵinject(LayoutConfig), ɵɵinject(BreakpointService), ɵɵinject(PAGE_LAYOUT_HANDLER, 8)); }, token: PageLayoutService, providedIn: "root" });
 PageLayoutService = __decorate([ __param(3, Optional()),
     __param(3, Inject(PAGE_LAYOUT_HANDLER))
 ], PageLayoutService);
@@ -18541,7 +18541,7 @@ __decorate([
 let PageLayoutModule = class PageLayoutModule {
 };
 PageLayoutModule.ɵmod = ɵngcc0.ɵɵdefineNgModule({ type: PageLayoutModule });
-PageLayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageLayoutModule_Factory(t) { return new (t || PageLayoutModule)(); }, providers: [PageLayoutService], imports: [[CommonModule, OutletModule, PageSlotModule]] });
+PageLayoutModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PageLayoutModule_Factory(t) { return new (t || PageLayoutModule)(); }, imports: [[CommonModule, OutletModule, PageSlotModule]] });
 
 let PWAModuleConfig = class PWAModuleConfig {
 };
@@ -18592,12 +18592,12 @@ let AddToHomeScreenService = class AddToHomeScreenService {
     }
 };
 AddToHomeScreenService.ɵfac = function AddToHomeScreenService_Factory(t) { return new (t || AddToHomeScreenService)(ɵngcc0.ɵɵinject(PWAModuleConfig), ɵngcc0.ɵɵinject(ɵngcc1.GlobalMessageService), ɵngcc0.ɵɵinject(ɵngcc1.WindowRef)); };
-AddToHomeScreenService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: AddToHomeScreenService, factory: AddToHomeScreenService.ɵfac });
 AddToHomeScreenService.ctorParameters = () => [
     { type: PWAModuleConfig },
     { type: GlobalMessageService },
     { type: WindowRef }
 ];
+AddToHomeScreenService.ɵprov = ɵɵdefineInjectable({ factory: function AddToHomeScreenService_Factory() { return new AddToHomeScreenService(ɵɵinject(PWAModuleConfig), ɵɵinject(GlobalMessageService), ɵɵinject(WindowRef)); }, token: AddToHomeScreenService, providedIn: "root" });
 
 class AddToHomeScreenComponent {
     constructor(addToHomeScreenService) {
@@ -18675,7 +18675,6 @@ PwaModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function PwaModule_Facto
             deps: [AddToHomeScreenService],
             multi: true
         },
-        AddToHomeScreenService,
     ], imports: [[
             CommonModule,
             ServiceWorkerModule.register('/ngsw-worker.js'),
@@ -19955,11 +19954,11 @@ let AddressBookComponentService = class AddressBookComponentService {
     }
 };
 AddressBookComponentService.ɵfac = function AddressBookComponentService_Factory(t) { return new (t || AddressBookComponentService)(ɵngcc0.ɵɵinject(ɵngcc1.UserAddressService), ɵngcc0.ɵɵinject(ɵngcc1.CheckoutDeliveryService)); };
-AddressBookComponentService.ɵprov = ɵngcc0.ɵɵdefineInjectable({ token: AddressBookComponentService, factory: AddressBookComponentService.ɵfac });
 AddressBookComponentService.ctorParameters = () => [
     { type: UserAddressService },
     { type: CheckoutDeliveryService }
 ];
+AddressBookComponentService.ɵprov = ɵɵdefineInjectable({ factory: function AddressBookComponentService_Factory() { return new AddressBookComponentService(ɵɵinject(UserAddressService), ɵɵinject(CheckoutDeliveryService)); }, token: AddressBookComponentService, providedIn: "root" });
 
 let AddressBookComponent = class AddressBookComponent {
     constructor(service, translation, userAddressService, checkoutDeliveryService) {
@@ -20098,7 +20097,6 @@ AddressBookModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Address
             }
         }),
         UserAddressService,
-        AddressBookComponentService,
     ], imports: [[
             CommonModule,
             CardModule,
@@ -30550,7 +30548,10 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(PageLayoutService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: ɵngcc1.CmsService }, { type: LayoutConfig }, { type: BreakpointService }, { type: Array, decorators: [{
                 type: Optional
             }, {
@@ -30575,7 +30576,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         args: [{
                 imports: [CommonModule, OutletModule, PageSlotModule],
                 declarations: [PageLayoutComponent],
-                providers: [PageLayoutService],
                 exports: [PageLayoutComponent]
             }]
     }], null, null); })();
@@ -30587,7 +30587,10 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: PWAModuleConfig }, { type: ɵngcc1.GlobalMessageService }, { type: ɵngcc1.WindowRef }]; }, null); })();
 
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddToHomeScreenBannerComponent, [{
@@ -30628,7 +30631,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                         deps: [AddToHomeScreenService],
                         multi: true
                     },
-                    AddToHomeScreenService,
                 ],
                 declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
                 exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent]
@@ -31043,7 +31045,10 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
             }]
     }], null, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressBookComponentService, [{
-        type: Injectable
+        type: Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
     }], function () { return [{ type: ɵngcc1.UserAddressService }, { type: ɵngcc1.CheckoutDeliveryService }]; }, null); })();
 /*@__PURE__*/ (function () { ɵngcc0.ɵsetClassMetadata(AddressBookComponent, [{
         type: Component,
@@ -31086,7 +31091,6 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
                         }
                     }),
                     UserAddressService,
-                    AddressBookComponentService,
                 ],
                 entryComponents: [AddressBookComponent]
             }]

@@ -10757,8 +10757,11 @@
             { type: BreakpointService },
             { type: Array, decorators: [{ type: core.Optional }, { type: core.Inject, args: [PAGE_LAYOUT_HANDLER,] }] }
         ]; };
+        PageLayoutService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function PageLayoutService_Factory() { return new PageLayoutService(core["ɵɵinject"](core$1.CmsService), core["ɵɵinject"](LayoutConfig), core["ɵɵinject"](BreakpointService), core["ɵɵinject"](PAGE_LAYOUT_HANDLER, 8)); }, token: PageLayoutService, providedIn: "root" });
         PageLayoutService = __decorate([
-            core.Injectable(),
+            core.Injectable({
+                providedIn: 'root',
+            }),
             __param(3, core.Optional()),
             __param(3, core.Inject(PAGE_LAYOUT_HANDLER))
         ], PageLayoutService);
@@ -10825,7 +10828,6 @@
             core.NgModule({
                 imports: [common.CommonModule, OutletModule, PageSlotModule],
                 declarations: [PageLayoutComponent],
-                providers: [PageLayoutService],
                 exports: [PageLayoutComponent],
             })
         ], PageLayoutModule);
@@ -10893,8 +10895,11 @@
             { type: core$1.GlobalMessageService },
             { type: core$1.WindowRef }
         ]; };
+        AddToHomeScreenService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AddToHomeScreenService_Factory() { return new AddToHomeScreenService(core["ɵɵinject"](PWAModuleConfig), core["ɵɵinject"](core$1.GlobalMessageService), core["ɵɵinject"](core$1.WindowRef)); }, token: AddToHomeScreenService, providedIn: "root" });
         AddToHomeScreenService = __decorate([
-            core.Injectable()
+            core.Injectable({
+                providedIn: 'root',
+            })
         ], AddToHomeScreenService);
         return AddToHomeScreenService;
     }());
@@ -10980,7 +10985,6 @@
                         deps: [AddToHomeScreenService],
                         multi: true,
                     },
-                    AddToHomeScreenService,
                 ],
                 declarations: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
                 exports: [AddToHomeScreenBtnComponent, AddToHomeScreenBannerComponent],
@@ -12491,8 +12495,11 @@
             { type: core$1.UserAddressService },
             { type: core$1.CheckoutDeliveryService }
         ]; };
+        AddressBookComponentService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function AddressBookComponentService_Factory() { return new AddressBookComponentService(core["ɵɵinject"](core$1.UserAddressService), core["ɵɵinject"](core$1.CheckoutDeliveryService)); }, token: AddressBookComponentService, providedIn: "root" });
         AddressBookComponentService = __decorate([
-            core.Injectable()
+            core.Injectable({
+                providedIn: 'root',
+            })
         ], AddressBookComponentService);
         return AddressBookComponentService;
     }());
@@ -12633,7 +12640,6 @@
                         },
                     }),
                     core$1.UserAddressService,
-                    AddressBookComponentService,
                 ],
                 entryComponents: [AddressBookComponent],
             })
