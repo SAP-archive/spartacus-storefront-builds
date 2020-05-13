@@ -15496,7 +15496,7 @@
         BreadcrumbComponent.prototype.setCrumbs = function () {
             this.crumbs$ = rxjs.combineLatest([
                 this.pageMetaService.getMeta(),
-                this.translation.translate('common.home').pipe(operators.observeOn(rxjs.asyncScheduler)),
+                this.translation.translate('common.home'),
             ]).pipe(operators.map(function (_a) {
                 var _b = __read(_a, 2), meta = _b[0], textHome = _b[1];
                 return (meta === null || meta === void 0 ? void 0 : meta.breadcrumbs) ? meta.breadcrumbs : [{ label: textHome, link: '/' }];
