@@ -1859,6 +1859,7 @@ var LockFocusDirective = /** @class */ (function (_super) {
     LockFocusDirective.prototype.handleEnter = function (event) {
         if (this.shouldLock && this.host === event.target) {
             this.unlockFocus(event);
+            event.preventDefault();
             event.stopPropagation();
         }
     };
@@ -1876,11 +1877,16 @@ var LockFocusDirective = /** @class */ (function (_super) {
         this.addTabindexToChildren(-1);
     };
     LockFocusDirective.prototype.unlockFocus = function (event) {
+        var _this = this;
         this.unlock.emit(true);
         this.addTabindexToChildren(0);
         // we focus the host if the event was triggered from a child
         if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
-            _super.prototype.handleFocus.call(this, event);
+            // we wait a few milliseconds, mainly because firefox will otherwise apply
+            // the mouse event on the new focused child element
+            setTimeout(function () {
+                _super.prototype.handleFocus.call(_this, event);
+            }, 100);
         }
     };
     LockFocusDirective.prototype.ngOnInit = function () {
@@ -1906,7 +1912,7 @@ var LockFocusDirective = /** @class */ (function (_super) {
         var _this = this;
         if (this.shouldLock) {
             /**
-             * If the component hosts a group of focusable children elmenents,
+             * If the component hosts a group of focusable children elements,
              * we persist the group key to the children, so that they can taken this
              * into account when they persist their focus state.
              */

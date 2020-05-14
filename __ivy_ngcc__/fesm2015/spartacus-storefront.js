@@ -10398,6 +10398,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
     handleEnter(event) {
         if (this.shouldLock && this.host === event.target) {
             this.unlockFocus(event);
+            event.preventDefault();
             event.stopPropagation();
         }
     }
@@ -10419,7 +10420,11 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
         this.addTabindexToChildren(0);
         // we focus the host if the event was triggered from a child
         if ((event === null || event === void 0 ? void 0 : event.target) === this.host) {
-            super.handleFocus(event);
+            // we wait a few milliseconds, mainly because firefox will otherwise apply
+            // the mouse event on the new focused child element
+            setTimeout(() => {
+                super.handleFocus(event);
+            }, 100);
         }
     }
     ngOnInit() {
@@ -10444,7 +10449,7 @@ let LockFocusDirective = class LockFocusDirective extends TrapFocusDirective {
     ngAfterViewInit() {
         if (this.shouldLock) {
             /**
-             * If the component hosts a group of focusable children elmenents,
+             * If the component hosts a group of focusable children elements,
              * we persist the group key to the children, so that they can taken this
              * into account when they persist their focus state.
              */
