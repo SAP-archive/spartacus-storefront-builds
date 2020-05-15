@@ -16955,9 +16955,6 @@ var ProductListComponentService = /** @class */ (function () {
             this.searchByRouting$,
         ]).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
     }
-    ProductListComponentService.prototype.clearSearchResults = function () {
-        this.productSearchService.clearResults();
-    };
     ProductListComponentService.prototype.getCriteriaFromRoute = function (routeParams, queryParams) {
         return {
             query: queryParams.query || this.getQueryFromRouteParams(routeParams),
@@ -17106,7 +17103,6 @@ var ProductListComponent = /** @class */ (function () {
     ProductListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.isInfiniteScroll = this.scrollConfig.view.infiniteScroll.active;
-        this.productListComponentService.clearSearchResults();
         this.subscription.add(this.pageLayoutService.templateName$
             .pipe(take(1))
             .subscribe(function (template) {

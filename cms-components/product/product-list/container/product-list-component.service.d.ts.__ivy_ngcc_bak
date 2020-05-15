@@ -24,7 +24,6 @@ export declare class ProductListComponentService {
      * so no longer the search is performed on route change.
      */
     readonly model$: Observable<ProductSearchPage>;
-    clearSearchResults(): void;
     private getCriteriaFromRoute;
     private getQueryFromRouteParams;
     private search;

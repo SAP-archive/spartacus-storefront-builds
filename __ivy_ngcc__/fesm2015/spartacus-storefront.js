@@ -24680,9 +24680,6 @@ let ProductListComponentService = class ProductListComponentService {
             this.searchByRouting$,
         ]).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
     }
-    clearSearchResults() {
-        this.productSearchService.clearResults();
-    }
     getCriteriaFromRoute(routeParams, queryParams) {
         return {
             query: queryParams.query || this.getQueryFromRouteParams(routeParams),
@@ -24823,7 +24820,6 @@ let ProductListComponent = class ProductListComponent {
     }
     ngOnInit() {
         this.isInfiniteScroll = this.scrollConfig.view.infiniteScroll.active;
-        this.productListComponentService.clearSearchResults();
         this.subscription.add(this.pageLayoutService.templateName$
             .pipe(take(1))
             .subscribe((template) => {
