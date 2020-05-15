@@ -75,15 +75,15 @@ var LaunchRenderStrategy = /** @class */ (function () {
         /**
          * Classes to apply to the component when the dialog is a POPOVER
          */
-        this.popoverClasses = [];
+        this.popoverClasses = ['cx-dialog-popover'];
         /**
          * Classes to apply to the component when the dialog is a SIDEBAR_END
          */
-        this.sidebarEndClasses = [];
+        this.sidebarEndClasses = ['cx-sidebar-end'];
         /**
          * Classes to apply to the component when the dialog is a SIDEBAR_START
          */
-        this.sidebarStartClasses = [];
+        this.sidebarStartClasses = ['cx-sidebar-start'];
         this.renderer = rendererFactory.createRenderer(null, null);
     }
     /**

@@ -17,15 +17,15 @@ export declare abstract class LaunchRenderStrategy implements Applicable {
     /**
      * Classes to apply to the component when the dialog is a POPOVER
      */
-    protected popoverClasses: any[];
+    protected popoverClasses: string[];
     /**
      * Classes to apply to the component when the dialog is a SIDEBAR_END
      */
-    protected sidebarEndClasses: any[];
+    protected sidebarEndClasses: string[];
     /**
      * Classes to apply to the component when the dialog is a SIDEBAR_START
      */
-    protected sidebarStartClasses: any[];
+    protected sidebarStartClasses: string[];
     protected renderer: Renderer2;
     constructor(document: any, rendererFactory: RendererFactory2);
     /**
