@@ -12101,7 +12101,7 @@ GenericLinkModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function Generic
 
 /**
  * Provides a UI to manage the count of the quantity, typically by using
- * increase and decrease functinality. The item counter expects an input `FormControl`
+ * increase and decrease functionality. The item counter expects an input `FormControl`
  * so that the state of the control can be managed outside of this component.
  */
 let ItemCounterComponent = class ItemCounterComponent {
@@ -12113,12 +12113,12 @@ let ItemCounterComponent = class ItemCounterComponent {
         this.min = 1;
         /**
          * The step is used to increment the count. It is supposed to be a
-         * positive inteteger or float.
+         * positive integer or float.
          * @default 1
          */
         this.step = 1;
         /**
-         * Inidicates that the input can be manually set to zero,
+         * Indicates that the input can be manually set to zero,
          * despite the fact that the input controls will be limited to
          * the minimum. The zero value can be used to remove an item.
          */
@@ -12134,6 +12134,16 @@ let ItemCounterComponent = class ItemCounterComponent {
     handleClick() {
         this.input.nativeElement.focus();
     }
+    ngOnInit() {
+        this.sub = this.control.valueChanges
+            .pipe(startWith(this.control.value))
+            .subscribe((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false }));
+    }
+    ngOnDestroy() {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+    }
     increment() {
         // it's too early to use the `stepUp` and `stepDown` API...
         // let's wait for FF: https://caniuse.com/#search=stepUp
@@ -12143,16 +12153,6 @@ let ItemCounterComponent = class ItemCounterComponent {
     decrement() {
         this.control.setValue(this.control.value - this.step);
         this.control.markAsDirty();
-    }
-    /**
-     * Returns an observable with the control. The value changes of the
-     * control are intercepted in order to suppress invalid values.
-     */
-    getControl() {
-        if (!this._control$) {
-            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
-        }
-        return this._control$;
     }
     /**
      * Validate that the given value is in between
@@ -12181,25 +12181,23 @@ ItemCounterComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: ItemCounterComp
         ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_click_HostBindingHandler() { return ctx.handleClick(); });
     } if (rf & 2) {
         ɵngcc0.ɵɵclassProp("readonly", ctx.readonly);
-    } }, inputs: { min: "min", step: "step", allowZero: "allowZero", readonly: "readonly", control: "control", max: "max" }, decls: 7, vars: 9, consts: [["type", "button", "tabindex", "-1", 3, "disabled", "click"], ["type", "number", 3, "min", "max", "step", "readonly", "formControl"], ["qty", ""]], template: function ItemCounterComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { min: "min", step: "step", allowZero: "allowZero", readonly: "readonly", control: "control", max: "max" }, decls: 6, vars: 7, consts: [["type", "button", "tabindex", "-1", 3, "disabled", "click"], ["type", "number", 3, "min", "max", "step", "readonly", "formControl"], ["qty", ""]], template: function ItemCounterComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵelementStart(0, "button", 0);
         ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_0_listener() { return ctx.decrement(); });
         ɵngcc0.ɵɵtext(1, " -\n");
         ɵngcc0.ɵɵelementEnd();
         ɵngcc0.ɵɵelement(2, "input", 1, 2);
-        ɵngcc0.ɵɵpipe(4, "async");
-        ɵngcc0.ɵɵelementStart(5, "button", 0);
-        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_5_listener() { return ctx.increment(); });
-        ɵngcc0.ɵɵtext(6, " +\n");
+        ɵngcc0.ɵɵelementStart(4, "button", 0);
+        ɵngcc0.ɵɵlistener("click", function ItemCounterComponent_Template_button_click_4_listener() { return ctx.increment(); });
+        ɵngcc0.ɵɵtext(5, " +\n");
         ɵngcc0.ɵɵelementEnd();
     } if (rf & 2) {
-        const _r122 = ɵngcc0.ɵɵreference(3);
-        ɵngcc0.ɵɵproperty("disabled", _r122.disabled || (_r122 == null ? null : _r122.value) <= ctx.min);
+        ɵngcc0.ɵɵproperty("disabled", ctx.control.disabled || ctx.control.value <= ctx.min);
         ɵngcc0.ɵɵadvance(2);
-        ɵngcc0.ɵɵproperty("min", ctx.min)("max", ctx.max)("step", ctx.step)("readonly", ctx.readonly)("formControl", ɵngcc0.ɵɵpipeBind1(4, 7, ctx.getControl()));
-        ɵngcc0.ɵɵadvance(3);
-        ɵngcc0.ɵɵproperty("disabled", _r122.disabled || (_r122 == null ? null : _r122.value) >= ctx.max);
-    } }, directives: [ɵngcc5.NumberValueAccessor, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlDirective], pipes: [ɵngcc2.AsyncPipe], encapsulation: 2 });
+        ɵngcc0.ɵɵproperty("min", ctx.min)("max", ctx.max)("step", ctx.step)("readonly", ctx.readonly)("formControl", ctx.control);
+        ɵngcc0.ɵɵadvance(2);
+        ɵngcc0.ɵɵproperty("disabled", ctx.control.disabled || ctx.control.value >= ctx.max);
+    } }, directives: [ɵngcc5.NumberValueAccessor, ɵngcc5.DefaultValueAccessor, ɵngcc5.NgControlStatus, ɵngcc5.FormControlDirective], encapsulation: 2 });
 __decorate([
     Input()
 ], ItemCounterComponent.prototype, "control", void 0);
@@ -28815,7 +28813,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-item-counter',
-                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"control.disabled || control.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"control\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"control.disabled || control.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
             }]
     }], function () { return []; }, { min: [{
             type: Input

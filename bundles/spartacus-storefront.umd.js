@@ -3999,7 +3999,7 @@
 
     /**
      * Provides a UI to manage the count of the quantity, typically by using
-     * increase and decrease functinality. The item counter expects an input `FormControl`
+     * increase and decrease functionality. The item counter expects an input `FormControl`
      * so that the state of the control can be managed outside of this component.
      */
     var ItemCounterComponent = /** @class */ (function () {
@@ -4011,12 +4011,12 @@
             this.min = 1;
             /**
              * The step is used to increment the count. It is supposed to be a
-             * positive inteteger or float.
+             * positive integer or float.
              * @default 1
              */
             this.step = 1;
             /**
-             * Inidicates that the input can be manually set to zero,
+             * Indicates that the input can be manually set to zero,
              * despite the fact that the input controls will be limited to
              * the minimum. The zero value can be used to remove an item.
              */
@@ -4032,6 +4032,19 @@
         ItemCounterComponent.prototype.handleClick = function () {
             this.input.nativeElement.focus();
         };
+        ItemCounterComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.sub = this.control.valueChanges
+                .pipe(operators.startWith(this.control.value))
+                .subscribe(function (value) {
+                return _this.control.setValue(_this.getValidCount(value), { emitEvent: false });
+            });
+        };
+        ItemCounterComponent.prototype.ngOnDestroy = function () {
+            if (this.sub) {
+                this.sub.unsubscribe();
+            }
+        };
         ItemCounterComponent.prototype.increment = function () {
             // it's too early to use the `stepUp` and `stepDown` API...
             // let's wait for FF: https://caniuse.com/#search=stepUp
@@ -4041,19 +4054,6 @@
         ItemCounterComponent.prototype.decrement = function () {
             this.control.setValue(this.control.value - this.step);
             this.control.markAsDirty();
-        };
-        /**
-         * Returns an observable with the control. The value changes of the
-         * control are intercepted in order to suppress invalid values.
-         */
-        ItemCounterComponent.prototype.getControl = function () {
-            var _this = this;
-            if (!this._control$) {
-                this._control$ = this.control.valueChanges.pipe(operators.startWith(this.control.value), operators.tap(function (value) {
-                    return _this.control.setValue(_this.getValidCount(value), { emitEvent: false });
-                }), operators.map(function () { return _this.control; }));
-            }
-            return this._control$;
         };
         /**
          * Validate that the given value is in between
@@ -4098,7 +4098,7 @@
         ItemCounterComponent = __decorate([
             core.Component({
                 selector: 'cx-item-counter',
-                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+                template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"control.disabled || control.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"control\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"control.disabled || control.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
             })
         ], ItemCounterComponent);
         return ItemCounterComponent;

@@ -3424,7 +3424,7 @@ GenericLinkModule = __decorate([
 
 /**
  * Provides a UI to manage the count of the quantity, typically by using
- * increase and decrease functinality. The item counter expects an input `FormControl`
+ * increase and decrease functionality. The item counter expects an input `FormControl`
  * so that the state of the control can be managed outside of this component.
  */
 let ItemCounterComponent = class ItemCounterComponent {
@@ -3436,12 +3436,12 @@ let ItemCounterComponent = class ItemCounterComponent {
         this.min = 1;
         /**
          * The step is used to increment the count. It is supposed to be a
-         * positive inteteger or float.
+         * positive integer or float.
          * @default 1
          */
         this.step = 1;
         /**
-         * Inidicates that the input can be manually set to zero,
+         * Indicates that the input can be manually set to zero,
          * despite the fact that the input controls will be limited to
          * the minimum. The zero value can be used to remove an item.
          */
@@ -3457,6 +3457,16 @@ let ItemCounterComponent = class ItemCounterComponent {
     handleClick() {
         this.input.nativeElement.focus();
     }
+    ngOnInit() {
+        this.sub = this.control.valueChanges
+            .pipe(startWith(this.control.value))
+            .subscribe((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false }));
+    }
+    ngOnDestroy() {
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
+    }
     increment() {
         // it's too early to use the `stepUp` and `stepDown` API...
         // let's wait for FF: https://caniuse.com/#search=stepUp
@@ -3466,16 +3476,6 @@ let ItemCounterComponent = class ItemCounterComponent {
     decrement() {
         this.control.setValue(this.control.value - this.step);
         this.control.markAsDirty();
-    }
-    /**
-     * Returns an observable with the control. The value changes of the
-     * control are intercepted in order to suppress invalid values.
-     */
-    getControl() {
-        if (!this._control$) {
-            this._control$ = this.control.valueChanges.pipe(startWith(this.control.value), tap((value) => this.control.setValue(this.getValidCount(value), { emitEvent: false })), map(() => this.control));
-        }
-        return this._control$;
     }
     /**
      * Validate that the given value is in between
@@ -3521,7 +3521,7 @@ __decorate([
 ItemCounterComponent = __decorate([
     Component({
         selector: 'cx-item-counter',
-        template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"qty.disabled || qty?.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"getControl() | async\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"qty.disabled || qty?.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
+        template: "<button\n  type=\"button\"\n  (click)=\"decrement()\"\n  [disabled]=\"control.disabled || control.value <= min\"\n  tabindex=\"-1\"\n>\n  -\n</button>\n\n<input\n  #qty\n  type=\"number\"\n  [min]=\"min\"\n  [max]=\"max\"\n  [step]=\"step\"\n  [readonly]=\"readonly\"\n  [formControl]=\"control\"\n/>\n\n<button\n  type=\"button\"\n  (click)=\"increment()\"\n  [disabled]=\"control.disabled || control.value >= max\"\n  tabindex=\"-1\"\n>\n  +\n</button>\n"
     })
 ], ItemCounterComponent);
 
