@@ -488,12 +488,13 @@ function CarouselComponent_ng_container_0_ng_container_5_div_1_Template(rf, ctx)
     const i_r84 = ɵngcc0.ɵɵnextContext().index;
     const size_r74 = ɵngcc0.ɵɵnextContext().ngIf;
     const ctx_r85 = ɵngcc0.ɵɵnextContext();
+    ɵngcc0.ɵɵclassProp("active", i_r84 === ctx_r85.activeSlide);
     ɵngcc0.ɵɵadvance(1);
-    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 1, ctx_r85.items, i_r84, i_r84 + size_r74));
+    ɵngcc0.ɵɵproperty("ngForOf", ɵngcc0.ɵɵpipeBind3(2, 3, ctx_r85.items, i_r84, i_r84 + size_r74));
 } }
 function CarouselComponent_ng_container_0_ng_container_5_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementContainerStart(0);
-    ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_Template, 3, 5, "div", 9);
+    ɵngcc0.ɵɵtemplate(1, CarouselComponent_ng_container_0_ng_container_5_div_1_Template, 3, 7, "div", 9);
     ɵngcc0.ɵɵelementContainerEnd();
 } if (rf & 2) {
     const i_r84 = ctx.index;
@@ -6399,9 +6400,9 @@ function ProductCarouselComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) 
     ɵngcc0.ɵɵadvance(2);
     ɵngcc0.ɵɵproperty("container", item_r986.images == null ? null : item_r986.images.PRIMARY);
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r986.name);
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r986.name, " ");
     ɵngcc0.ɵɵadvance(2);
-    ɵngcc0.ɵɵtextInterpolate(item_r986.price == null ? null : item_r986.price.formattedValue);
+    ɵngcc0.ɵɵtextInterpolate1(" ", item_r986.price == null ? null : item_r986.price.formattedValue, " ");
 } }
 function ProductReferencesComponent_ng_template_3_Template(rf, ctx) { if (rf & 1) {
     ɵngcc0.ɵɵelementStart(0, "a", 2);
@@ -11610,7 +11611,7 @@ let CarouselComponent = class CarouselComponent {
     }
 };
 CarouselComponent.ɵfac = function CarouselComponent_Factory(t) { return new (t || CarouselComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc0.ElementRef), ɵngcc0.ɵɵdirectiveInject(CarouselService)); };
-CarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CarouselComponent, selectors: [["cx-carousel"]], inputs: { itemWidth: "itemWidth", hideIndicators: "hideIndicators", indicatorIcon: "indicatorIcon", previousIcon: "previousIcon", nextIcon: "nextIcon", setItems: ["items", "setItems"], title: "title", template: "template" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "carousel-panel", 3, "ngClass"], ["class", "previous", 3, "disabled", "click", 4, "ngIf"], [1, "slides"], [4, "ngFor", "ngForOf"], ["class", "next", "tabindex", "-1", 3, "disabled", "click", 4, "ngIf"], ["class", "indicators", 4, "ngIf"], [1, "previous", 3, "disabled", "click"], [3, "type"], ["class", "slide", 4, "ngIf"], [1, "slide"], ["class", "item", 3, "active", 4, "ngIf"], [1, "item"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "-1", 1, "next", 3, "disabled", "click"], [1, "indicators"], ["tabindex", "-1", 3, "disabled", "focus", 4, "ngIf"], ["tabindex", "-1", 3, "disabled", "focus"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
+CarouselComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: CarouselComponent, selectors: [["cx-carousel"]], inputs: { itemWidth: "itemWidth", hideIndicators: "hideIndicators", indicatorIcon: "indicatorIcon", previousIcon: "previousIcon", nextIcon: "nextIcon", setItems: ["items", "setItems"], title: "title", template: "template" }, decls: 2, vars: 3, consts: [[4, "ngIf"], [1, "carousel-panel", 3, "ngClass"], ["class", "previous", 3, "disabled", "click", 4, "ngIf"], [1, "slides"], [4, "ngFor", "ngForOf"], ["class", "next", "tabindex", "-1", 3, "disabled", "click", 4, "ngIf"], ["class", "indicators", 4, "ngIf"], [1, "previous", 3, "disabled", "click"], [3, "type"], ["class", "slide", 3, "active", 4, "ngIf"], [1, "slide"], ["class", "item", 3, "active", 4, "ngIf"], [1, "item"], [4, "ngTemplateOutlet", "ngTemplateOutletContext"], ["tabindex", "-1", 1, "next", 3, "disabled", "click"], [1, "indicators"], ["tabindex", "-1", 3, "disabled", "focus", 4, "ngIf"], ["tabindex", "-1", 3, "disabled", "focus"]], template: function CarouselComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵtemplate(0, CarouselComponent_ng_container_0_Template, 8, 6, "ng-container", 0);
         ɵngcc0.ɵɵpipe(1, "async");
     } if (rf & 2) {
@@ -28671,7 +28672,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-carousel',
-                template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div class=\"slide\" *ngIf=\"i % size === 0\">\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"-1\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"-1\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"items?.length > 0 && (size$ | async) as size\">\n  <h3 *ngIf=\"title\">{{ title }}</h3>\n\n  <div class=\"carousel-panel\" [ngClass]=\"'size-' + size\">\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"previous\"\n      (click)=\"activeSlide = activeSlide - size\"\n      [disabled]=\"activeSlide === 0\"\n    >\n      <cx-icon [type]=\"previousIcon\"></cx-icon>\n    </button>\n\n    <div class=\"slides\">\n      <ng-container *ngFor=\"let _ of items; let i = index\">\n        <div\n          class=\"slide\"\n          *ngIf=\"i % size === 0\"\n          [class.active]=\"i === activeSlide\"\n        >\n          <ng-container\n            *ngFor=\"let item of items | slice: i:i + size; let j = index\"\n          >\n            <div\n              *ngIf=\"item | async as data\"\n              class=\"item\"\n              [class.active]=\"i === activeSlide\"\n            >\n              <ng-container\n                *ngTemplateOutlet=\"template; context: { item: data }\"\n              ></ng-container>\n            </div>\n          </ng-container>\n        </div>\n      </ng-container>\n    </div>\n\n    <button\n      *ngIf=\"size < items.length\"\n      class=\"next\"\n      (click)=\"activeSlide = activeSlide + size\"\n      tabindex=\"-1\"\n      [disabled]=\"activeSlide > items.length - size - 1\"\n    >\n      <cx-icon [type]=\"nextIcon\"></cx-icon>\n    </button>\n  </div>\n\n  <div *ngIf=\"!hideIndicators && size < items.length\" class=\"indicators\">\n    <ng-container *ngFor=\"let _ of items; let i = index\">\n      <button\n        *ngIf=\"i % size === 0\"\n        (focus)=\"activeSlide = i\"\n        [disabled]=\"i === activeSlide\"\n        tabindex=\"-1\"\n      >\n        <cx-icon [type]=\"indicatorIcon\"></cx-icon>\n      </button>\n    </ng-container>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: ɵngcc0.ElementRef }, { type: CarouselService }]; }, { itemWidth: [{
@@ -32553,7 +32554,7 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-product-carousel',
-                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media [container]=\"item.images?.PRIMARY\"></cx-media>\n    <h4>{{ item.name }}</h4>\n    <div class=\"price\">{{ item.price?.formattedValue }}</div>\n  </a>\n</ng-template>\n",
+                template: "<cx-carousel\n  [items]=\"items$ | async\"\n  [title]=\"title$ | async\"\n  [template]=\"carouselItem\"\n  itemWidth=\"285px\"\n>\n</cx-carousel>\n\n<ng-template #carouselItem let-item=\"item\">\n  <a tabindex=\"0\" [routerLink]=\"{ cxRoute: 'product', params: item } | cxUrl\">\n    <cx-media [container]=\"item.images?.PRIMARY\"></cx-media>\n    <h4>\n      {{ item.name }}\n    </h4>\n    <div class=\"price\">\n      {{ item.price?.formattedValue }}\n    </div>\n  </a>\n</ng-template>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             }]
     }], function () { return [{ type: CmsComponentData }, { type: ɵngcc1.ProductService }]; }, null); })();
