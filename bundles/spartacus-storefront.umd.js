@@ -5877,232 +5877,6 @@
         return DefaultComponentHandler;
     }());
 
-    var CxApiService = /** @class */ (function () {
-        function CxApiService(
-        // auth
-        auth, 
-        // cart
-        cart, 
-        // checkout
-        checkout, checkoutDelivery, checkoutPayment, 
-        // cms
-        cms, pageMeta, 
-        // features config
-        featureConfig, 
-        // global message
-        globalMessage, 
-        // i18n
-        translation, 
-        // kyma
-        kyma, 
-        // occ
-        occEndpoints, 
-        // product
-        product, productSearch, productReview, productReference, searchbox, 
-        // routing
-        routing, 
-        // site context
-        currency, language, baseSite, 
-        // user
-        user, userAddress, userConsent, userOrder, userPayment, userNotificationPreferenceService, userInterestsService, selectiveCartService, 
-        // framework
-        ngZone) {
-            this.auth = auth;
-            this.cart = cart;
-            this.checkout = checkout;
-            this.checkoutDelivery = checkoutDelivery;
-            this.checkoutPayment = checkoutPayment;
-            this.cms = cms;
-            this.pageMeta = pageMeta;
-            this.featureConfig = featureConfig;
-            this.globalMessage = globalMessage;
-            this.translation = translation;
-            this.kyma = kyma;
-            this.occEndpoints = occEndpoints;
-            this.product = product;
-            this.productSearch = productSearch;
-            this.productReview = productReview;
-            this.productReference = productReference;
-            this.searchbox = searchbox;
-            this.routing = routing;
-            this.currency = currency;
-            this.language = language;
-            this.baseSite = baseSite;
-            this.user = user;
-            this.userAddress = userAddress;
-            this.userConsent = userConsent;
-            this.userOrder = userOrder;
-            this.userPayment = userPayment;
-            this.userNotificationPreferenceService = userNotificationPreferenceService;
-            this.userInterestsService = userInterestsService;
-            this.selectiveCartService = selectiveCartService;
-            this.ngZone = ngZone;
-        }
-        CxApiService.ctorParameters = function () { return [
-            { type: core$1.AuthService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ActiveCartService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CheckoutService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CheckoutDeliveryService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CheckoutPaymentService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CmsService, decorators: [{ type: core.Optional }] },
-            { type: core$1.PageMetaService, decorators: [{ type: core.Optional }] },
-            { type: core$1.FeatureConfigService, decorators: [{ type: core.Optional }] },
-            { type: core$1.GlobalMessageService, decorators: [{ type: core.Optional }] },
-            { type: core$1.TranslationService, decorators: [{ type: core.Optional }] },
-            { type: core$1.KymaService, decorators: [{ type: core.Optional }] },
-            { type: core$1.OccEndpointsService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductSearchService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductReviewService, decorators: [{ type: core.Optional }] },
-            { type: core$1.ProductReferenceService, decorators: [{ type: core.Optional }] },
-            { type: core$1.SearchboxService, decorators: [{ type: core.Optional }] },
-            { type: core$1.RoutingService, decorators: [{ type: core.Optional }] },
-            { type: core$1.CurrencyService, decorators: [{ type: core.Optional }] },
-            { type: core$1.LanguageService, decorators: [{ type: core.Optional }] },
-            { type: core$1.BaseSiteService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserAddressService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserConsentService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserOrderService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserPaymentService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserNotificationPreferenceService, decorators: [{ type: core.Optional }] },
-            { type: core$1.UserInterestsService, decorators: [{ type: core.Optional }] },
-            { type: core$1.SelectiveCartService, decorators: [{ type: core.Optional }] },
-            { type: core.NgZone }
-        ]; };
-        CxApiService.ɵprov = core["ɵɵdefineInjectable"]({ factory: function CxApiService_Factory() { return new CxApiService(core["ɵɵinject"](core$1.AuthService, 8), core["ɵɵinject"](core$1.ActiveCartService, 8), core["ɵɵinject"](core$1.CheckoutService, 8), core["ɵɵinject"](core$1.CheckoutDeliveryService, 8), core["ɵɵinject"](core$1.CheckoutPaymentService, 8), core["ɵɵinject"](core$1.CmsService, 8), core["ɵɵinject"](core$1.PageMetaService, 8), core["ɵɵinject"](core$1.FeatureConfigService, 8), core["ɵɵinject"](core$1.GlobalMessageService, 8), core["ɵɵinject"](core$1.TranslationService, 8), core["ɵɵinject"](core$1.KymaService, 8), core["ɵɵinject"](core$1.OccEndpointsService, 8), core["ɵɵinject"](core$1.ProductService, 8), core["ɵɵinject"](core$1.ProductSearchService, 8), core["ɵɵinject"](core$1.ProductReviewService, 8), core["ɵɵinject"](core$1.ProductReferenceService, 8), core["ɵɵinject"](core$1.SearchboxService, 8), core["ɵɵinject"](core$1.RoutingService, 8), core["ɵɵinject"](core$1.CurrencyService, 8), core["ɵɵinject"](core$1.LanguageService, 8), core["ɵɵinject"](core$1.BaseSiteService, 8), core["ɵɵinject"](core$1.UserService, 8), core["ɵɵinject"](core$1.UserAddressService, 8), core["ɵɵinject"](core$1.UserConsentService, 8), core["ɵɵinject"](core$1.UserOrderService, 8), core["ɵɵinject"](core$1.UserPaymentService, 8), core["ɵɵinject"](core$1.UserNotificationPreferenceService, 8), core["ɵɵinject"](core$1.UserInterestsService, 8), core["ɵɵinject"](core$1.SelectiveCartService, 8), core["ɵɵinject"](core.NgZone)); }, token: CxApiService, providedIn: "root" });
-        CxApiService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(0, core.Optional()),
-            __param(1, core.Optional()),
-            __param(2, core.Optional()),
-            __param(3, core.Optional()),
-            __param(4, core.Optional()),
-            __param(5, core.Optional()),
-            __param(6, core.Optional()),
-            __param(7, core.Optional()),
-            __param(8, core.Optional()),
-            __param(9, core.Optional()),
-            __param(10, core.Optional()),
-            __param(11, core.Optional()),
-            __param(12, core.Optional()),
-            __param(13, core.Optional()),
-            __param(14, core.Optional()),
-            __param(15, core.Optional()),
-            __param(16, core.Optional()),
-            __param(17, core.Optional()),
-            __param(18, core.Optional()),
-            __param(19, core.Optional()),
-            __param(20, core.Optional()),
-            __param(21, core.Optional()),
-            __param(22, core.Optional()),
-            __param(23, core.Optional()),
-            __param(24, core.Optional()),
-            __param(25, core.Optional()),
-            __param(26, core.Optional()),
-            __param(27, core.Optional()),
-            __param(28, core.Optional())
-        ], CxApiService);
-        return CxApiService;
-    }());
-
-    /**
-     * Component handler responsible for launching cms web components.
-     */
-    var WebComponentHandler = /** @class */ (function () {
-        function WebComponentHandler(document, platform) {
-            this.document = document;
-            this.platform = platform;
-            this.loadedWebComponents = {};
-        }
-        WebComponentHandler.prototype.hasMatch = function (componentMapping) {
-            return (typeof componentMapping.component === 'string' &&
-                componentMapping.component.includes('#'));
-        };
-        WebComponentHandler.prototype.getPriority = function () {
-            return -10 /* LOW */; // low, as it's a default matcher
-        };
-        WebComponentHandler.prototype.launcher = function (componentMapping, viewContainerRef, elementInjector) {
-            var _this = this;
-            return new rxjs.Observable(function (subscriber) {
-                var webElement;
-                var active = true;
-                var injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
-                var renderer = injector.get(core.Renderer2);
-                var disposeFunc = function () {
-                    active = false;
-                    if (webElement) {
-                        webElement.remove();
-                    }
-                };
-                _this.initWebComponent(componentMapping.component, renderer).then(function (elementName) {
-                    if (elementName) {
-                        webElement = renderer.createElement(elementName);
-                        var cmsComponentData = injector.get(CmsComponentData, null);
-                        webElement.cxApi = __assign(__assign({}, injector.get(CxApiService)), { cmsComponentData: cmsComponentData });
-                        renderer.appendChild(viewContainerRef.element.nativeElement.parentElement, webElement);
-                        subscriber.next({ elementRef: new core.ElementRef(webElement) });
-                        if (!active) {
-                            disposeFunc();
-                        }
-                    }
-                });
-                return disposeFunc;
-            });
-        };
-        WebComponentHandler.prototype.initWebComponent = function (component, renderer) {
-            var _this = this;
-            return new Promise(function (resolve) {
-                var _a = __read(component.split('#'), 2), path = _a[0], selector = _a[1];
-                var script = _this.loadedWebComponents[path];
-                if (!script) {
-                    if (path) {
-                        script = renderer.createElement('script');
-                        _this.loadedWebComponents[path] = script;
-                        script.setAttribute('src', path);
-                        renderer.appendChild(_this.document.body, script);
-                        if (common.isPlatformBrowser(_this.platform)) {
-                            script.onload = function () {
-                                script.onload = null;
-                            };
-                        }
-                    }
-                    else {
-                        script = {};
-                    }
-                }
-                if (script.onload) {
-                    // If script is still loading (has onload callback defined)
-                    // add new callback and chain it with the existing one.
-                    // Needed to support loading multiple components from one script
-                    var chainedOnload_1 = script.onload;
-                    script.onload = function () {
-                        chainedOnload_1();
-                        resolve(selector);
-                    };
-                }
-                else {
-                    resolve(selector);
-                }
-            });
-        };
-        WebComponentHandler.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: undefined, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
-        ]; };
-        WebComponentHandler.ɵprov = core["ɵɵdefineInjectable"]({ factory: function WebComponentHandler_Factory() { return new WebComponentHandler(core["ɵɵinject"](common.DOCUMENT), core["ɵɵinject"](core.PLATFORM_ID)); }, token: WebComponentHandler, providedIn: "root" });
-        WebComponentHandler = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            }),
-            __param(0, core.Inject(common.DOCUMENT)),
-            __param(1, core.Inject(core.PLATFORM_ID))
-        ], WebComponentHandler);
-        return WebComponentHandler;
-    }());
-
     /**
      * Lazy component handler used for launching lazy loaded cms components implemented
      * as native Angular components.
@@ -6158,11 +5932,6 @@
                     {
                         provide: ComponentHandler,
                         useExisting: LazyComponentHandler,
-                        multi: true,
-                    },
-                    {
-                        provide: ComponentHandler,
-                        useExisting: WebComponentHandler,
                         multi: true,
                     },
                 ],
@@ -20969,28 +20738,27 @@
     exports.ɵ2 = ɵ2;
     exports.ɵa = pwaConfigurationFactory;
     exports.ɵb = pwaFactory;
-    exports.ɵba = AsmMainUiComponent;
-    exports.ɵbb = AsmComponentService;
-    exports.ɵbc = CSAgentLoginFormComponent;
-    exports.ɵbd = CustomerSelectionComponent;
-    exports.ɵbe = AsmSessionTimerComponent;
-    exports.ɵbf = FormatTimerPipe;
-    exports.ɵbg = CustomerEmulationComponent;
-    exports.ɵbh = AsmToggleUiComponent;
-    exports.ɵbi = defaultAsmLayoutConfig;
-    exports.ɵbj = defaultCheckoutConfig;
-    exports.ɵbk = defaultQualtricsConfig;
-    exports.ɵbl = CmsPageGuardService;
-    exports.ɵbm = CmsRoutesImplService;
-    exports.ɵbn = CmsComponentsService;
-    exports.ɵbo = ReturnRequestService;
-    exports.ɵbp = AddToHomeScreenService;
-    exports.ɵbq = MyCouponsComponentService;
-    exports.ɵbr = addCmsRoute;
-    exports.ɵbs = defaultStorefrontRoutesConfig;
-    exports.ɵbt = defaultRoutingConfig;
-    exports.ɵbu = htmlLangProvider;
-    exports.ɵbv = setHtmlLangAttribute;
+    exports.ɵba = AsmComponentService;
+    exports.ɵbb = CSAgentLoginFormComponent;
+    exports.ɵbc = CustomerSelectionComponent;
+    exports.ɵbd = AsmSessionTimerComponent;
+    exports.ɵbe = FormatTimerPipe;
+    exports.ɵbf = CustomerEmulationComponent;
+    exports.ɵbg = AsmToggleUiComponent;
+    exports.ɵbh = defaultAsmLayoutConfig;
+    exports.ɵbi = defaultCheckoutConfig;
+    exports.ɵbj = defaultQualtricsConfig;
+    exports.ɵbk = CmsPageGuardService;
+    exports.ɵbl = CmsRoutesImplService;
+    exports.ɵbm = CmsComponentsService;
+    exports.ɵbn = ReturnRequestService;
+    exports.ɵbo = AddToHomeScreenService;
+    exports.ɵbp = MyCouponsComponentService;
+    exports.ɵbq = addCmsRoute;
+    exports.ɵbr = defaultStorefrontRoutesConfig;
+    exports.ɵbs = defaultRoutingConfig;
+    exports.ɵbt = htmlLangProvider;
+    exports.ɵbu = setHtmlLangAttribute;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;
@@ -21013,8 +20781,8 @@
     exports.ɵv = defaultAnonymousConsentLayoutConfig;
     exports.ɵw = AsmLoaderModule;
     exports.ɵx = asmFactory;
-    exports.ɵy = WebComponentHandler;
-    exports.ɵz = AsmEnablerService;
+    exports.ɵy = AsmEnablerService;
+    exports.ɵz = AsmMainUiComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
