@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { OrderEntry } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { OrderAmendService } from '../../amend-order.service';
@@ -5,11 +6,11 @@ import * as ɵngcc0 from '@angular/core';
 export declare class CancelOrderComponent {
     protected orderAmendService: OrderAmendService;
     orderCode: string;
-    form$: Observable<import("@angular/forms").FormGroup>;
+    form$: Observable<FormGroup>;
     entries$: Observable<OrderEntry[]>;
     constructor(orderAmendService: OrderAmendService);
     static ɵfac: ɵngcc0.ɵɵFactoryDef<CancelOrderComponent, never>;
     static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CancelOrderComponent, "cx-cancel-order", never, {}, {}, never, never>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FuY2VsLW9yZGVyLmNvbXBvbmVudC5kLnRzIiwic291cmNlcyI6WyJjYW5jZWwtb3JkZXIuY29tcG9uZW50LmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7QUFHQTs7Ozs7Ozs7QUFNQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE9yZGVyRW50cnkgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgT3JkZXJBbWVuZFNlcnZpY2UgfSBmcm9tICcuLi8uLi9hbWVuZC1vcmRlci5zZXJ2aWNlJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIENhbmNlbE9yZGVyQ29tcG9uZW50IHtcbiAgICBwcm90ZWN0ZWQgb3JkZXJBbWVuZFNlcnZpY2U6IE9yZGVyQW1lbmRTZXJ2aWNlO1xuICAgIG9yZGVyQ29kZTogc3RyaW5nO1xuICAgIGZvcm0kOiBPYnNlcnZhYmxlPGltcG9ydChcIkBhbmd1bGFyL2Zvcm1zXCIpLkZvcm1Hcm91cD47XG4gICAgZW50cmllcyQ6IE9ic2VydmFibGU8T3JkZXJFbnRyeVtdPjtcbiAgICBjb25zdHJ1Y3RvcihvcmRlckFtZW5kU2VydmljZTogT3JkZXJBbWVuZFNlcnZpY2UpO1xufVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FuY2VsLW9yZGVyLmNvbXBvbmVudC5kLnRzIiwic291cmNlcyI6WyJjYW5jZWwtb3JkZXIuY29tcG9uZW50LmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7O0FBSUE7Ozs7Ozs7O0FBTUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBGb3JtR3JvdXAgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5pbXBvcnQgeyBPcmRlckVudHJ5IH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IE9yZGVyQW1lbmRTZXJ2aWNlIH0gZnJvbSAnLi4vLi4vYW1lbmQtb3JkZXIuc2VydmljZSc7XG5leHBvcnQgZGVjbGFyZSBjbGFzcyBDYW5jZWxPcmRlckNvbXBvbmVudCB7XG4gICAgcHJvdGVjdGVkIG9yZGVyQW1lbmRTZXJ2aWNlOiBPcmRlckFtZW5kU2VydmljZTtcbiAgICBvcmRlckNvZGU6IHN0cmluZztcbiAgICBmb3JtJDogT2JzZXJ2YWJsZTxGb3JtR3JvdXA+O1xuICAgIGVudHJpZXMkOiBPYnNlcnZhYmxlPE9yZGVyRW50cnlbXT47XG4gICAgY29uc3RydWN0b3Iob3JkZXJBbWVuZFNlcnZpY2U6IE9yZGVyQW1lbmRTZXJ2aWNlKTtcbn1cbiJdfQ==

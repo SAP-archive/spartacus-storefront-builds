@@ -1,5 +1,5 @@
 import { EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title, User } from '@spartacus/core';
 export declare class UpdateProfileFormComponent implements OnInit {
     private fb;
@@ -9,7 +9,7 @@ export declare class UpdateProfileFormComponent implements OnInit {
         userUpdates: User;
     }>;
     cancelled: EventEmitter<void>;
-    updateProfileForm: import("@angular/forms").FormGroup;
+    updateProfileForm: FormGroup;
     constructor(fb: FormBuilder);
     ngOnInit(): void;
     onSubmit(): void;

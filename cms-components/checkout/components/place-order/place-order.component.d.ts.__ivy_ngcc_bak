@@ -1,13 +1,13 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CheckoutService, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
 export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
     protected routingService: RoutingService;
     protected fb: FormBuilder;
     placeOrderSubscription: Subscription;
-    checkoutSubmitForm: import("@angular/forms").FormGroup;
+    checkoutSubmitForm: FormGroup;
     constructor(checkoutService: CheckoutService, routingService: RoutingService, fb: FormBuilder);
     submitForm(): void;
     ngOnInit(): void;

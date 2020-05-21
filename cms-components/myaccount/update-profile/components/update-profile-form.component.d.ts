@@ -1,5 +1,5 @@
 import { EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Title, User } from '@spartacus/core';
 import * as ɵngcc0 from '@angular/core';
 export declare class UpdateProfileFormComponent implements OnInit {
@@ -10,7 +10,7 @@ export declare class UpdateProfileFormComponent implements OnInit {
         userUpdates: User;
     }>;
     cancelled: EventEmitter<void>;
-    updateProfileForm: import("@angular/forms").FormGroup;
+    updateProfileForm: FormGroup;
     constructor(fb: FormBuilder);
     ngOnInit(): void;
     onSubmit(): void;
@@ -19,4 +19,4 @@ export declare class UpdateProfileFormComponent implements OnInit {
     static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<UpdateProfileFormComponent, "cx-update-profile-form", never, { "user": "user"; "titles": "titles"; }, { "submitted": "submitted"; "cancelled": "cancelled"; }, never, never>;
 }
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7OztBQUdBOzs7Ozs7Ozs7Ozs7Ozs7QUFhQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEV2ZW50RW1pdHRlciwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBGb3JtQnVpbGRlciB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcbmltcG9ydCB7IFRpdGxlLCBVc2VyIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIFVwZGF0ZVByb2ZpbGVGb3JtQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0IHtcbiAgICBwcml2YXRlIGZiO1xuICAgIHVzZXI6IFVzZXI7XG4gICAgdGl0bGVzOiBUaXRsZVtdO1xuICAgIHN1Ym1pdHRlZDogRXZlbnRFbWl0dGVyPHtcbiAgICAgICAgdXNlclVwZGF0ZXM6IFVzZXI7XG4gICAgfT47XG4gICAgY2FuY2VsbGVkOiBFdmVudEVtaXR0ZXI8dm9pZD47XG4gICAgdXBkYXRlUHJvZmlsZUZvcm06IGltcG9ydChcIkBhbmd1bGFyL2Zvcm1zXCIpLkZvcm1Hcm91cDtcbiAgICBjb25zdHJ1Y3RvcihmYjogRm9ybUJ1aWxkZXIpO1xuICAgIG5nT25Jbml0KCk6IHZvaWQ7XG4gICAgb25TdWJtaXQoKTogdm9pZDtcbiAgICBvbkNhbmNlbCgpOiB2b2lkO1xufVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyIsInNvdXJjZXMiOlsidXBkYXRlLXByb2ZpbGUtZm9ybS5jb21wb25lbnQuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7OztBQUdBOzs7Ozs7Ozs7Ozs7Ozs7QUFhQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEV2ZW50RW1pdHRlciwgT25Jbml0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBGb3JtQnVpbGRlciwgRm9ybUdyb3VwIH0gZnJvbSAnQGFuZ3VsYXIvZm9ybXMnO1xuaW1wb3J0IHsgVGl0bGUsIFVzZXIgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuZXhwb3J0IGRlY2xhcmUgY2xhc3MgVXBkYXRlUHJvZmlsZUZvcm1Db21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICAgIHByaXZhdGUgZmI7XG4gICAgdXNlcjogVXNlcjtcbiAgICB0aXRsZXM6IFRpdGxlW107XG4gICAgc3VibWl0dGVkOiBFdmVudEVtaXR0ZXI8e1xuICAgICAgICB1c2VyVXBkYXRlczogVXNlcjtcbiAgICB9PjtcbiAgICBjYW5jZWxsZWQ6IEV2ZW50RW1pdHRlcjx2b2lkPjtcbiAgICB1cGRhdGVQcm9maWxlRm9ybTogRm9ybUdyb3VwO1xuICAgIGNvbnN0cnVjdG9yKGZiOiBGb3JtQnVpbGRlcik7XG4gICAgbmdPbkluaXQoKTogdm9pZDtcbiAgICBvblN1Ym1pdCgpOiB2b2lkO1xuICAgIG9uQ2FuY2VsKCk6IHZvaWQ7XG59XG4iXX0=
