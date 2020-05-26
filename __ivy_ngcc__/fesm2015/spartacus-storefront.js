@@ -9724,7 +9724,7 @@ let PersistFocusService = class PersistFocusService extends BaseFocusService {
     constructor() {
         super(...arguments);
         // this is going to fail as we have sub services. They will al have their own map.
-        // We must bring this to a singlton map.
+        // We must bring this to a singleton map.
         this.focus = new Map();
     }
     get(group) {

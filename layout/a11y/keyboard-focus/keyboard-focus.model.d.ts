@@ -50,7 +50,6 @@ export interface AutoFocusConfig extends EscapeFocusConfig {
      * Defaults to `true`.
      */
     autofocus?: boolean | string;
-    skipFocus?: string;
 }
 export interface TabFocusConfig extends AutoFocusConfig {
     tab?: boolean | 'scroll' | string;

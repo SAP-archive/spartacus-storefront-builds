@@ -1080,7 +1080,7 @@ var PersistFocusService = /** @class */ (function (_super) {
     function PersistFocusService() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         // this is going to fail as we have sub services. They will al have their own map.
-        // We must bring this to a singlton map.
+        // We must bring this to a singleton map.
         _this.focus = new Map();
         return _this;
     }
