@@ -5988,7 +5988,7 @@ __decorate([
 PromotionsComponent = __decorate([
     Component({
         selector: 'cx-promotions',
-        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <ng-container *cxFeatureLevel=\"'!1.4'\">\n    <strong *ngFor=\"let promotion of promotions\">\n      <li>{{ promotion.description }}</li>\n    </strong>\n  </ng-container>\n\n  <ng-container *cxFeatureLevel=\"'1.4'\">\n    <ul *ngFor=\"let promotion of promotions\">\n      <li>{{ promotion.description }}</li>\n    </ul>\n  </ng-container>\n</div>\n",
+        template: "<div class=\"cx-promotions\" *ngIf=\"promotions\">\n  <ul *ngFor=\"let promotion of promotions\">\n    <li>{{ promotion.description }}</li>\n  </ul>\n</div>\n",
         changeDetection: ChangeDetectionStrategy.OnPush
     })
 ], PromotionsComponent);
@@ -5997,7 +5997,7 @@ let PromotionsModule = class PromotionsModule {
 };
 PromotionsModule = __decorate([
     NgModule({
-        imports: [CommonModule, FeaturesConfigModule],
+        imports: [CommonModule],
         declarations: [PromotionsComponent],
         exports: [PromotionsComponent],
     })
