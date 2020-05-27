@@ -6,7 +6,7 @@ import { Config, resolveApplicable, DeferLoadingStrategy, RoutingService, Anonym
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
@@ -622,7 +622,7 @@ function GenericLinkComponent_ng_template_1_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r117 = ɵngcc0.ɵɵnextContext();
     const _r118 = ɵngcc0.ɵɵreference(4);
-    ɵngcc0.ɵɵproperty("routerLink", ctx_r117.routerUrl);
+    ɵngcc0.ɵɵproperty("routerLink", ctx_r117.routerUrl)("queryParams", ctx_r117.queryParams)("fragment", ctx_r117.fragment);
     ɵngcc0.ɵɵattribute("target", ctx_r117.target)("class", ctx_r117.class)("id", ctx_r117.id)("style", ctx_r117.style, ɵngcc0.ɵɵsanitizeStyle)("title", ctx_r117.title);
     ɵngcc0.ɵɵadvance(1);
     ɵngcc0.ɵɵproperty("ngTemplateOutlet", _r118);
@@ -12047,35 +12047,101 @@ FormErrorsModule.ɵinj = ɵngcc0.ɵɵdefineInjector({ factory: function FormErro
  * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
  */
 let GenericLinkComponent = class GenericLinkComponent {
-    constructor() {
-        this.protocolRegex = /^https?:\/\//i;
+    constructor(router) {
+        this.router = router;
+        /**
+         * Pattern matching string starting with `http://` or `https://`.
+         */
+        this.PROTOCOL_REGEX = /^https?:\/\//i;
+        /**
+         * Used to split url into 2 parts:
+         * 1. the path
+         * 2. query params + hash fragment
+         */
+        this.URL_SPLIT = /(^[^#?]*)(.*)/;
+        /**
+         * Parsed parts of the @Input `url`, when it's a local URL.
+         * It should not be used when the `url` is external.
+         * @see `url`
+         */
+        this.routeParts = {};
+    }
+    /**
+     * Returns true when the @Input `url` is a string starting with `http://` or `https://`.
+     */
+    isExternalUrl() {
+        return typeof this.url === 'string' && this.PROTOCOL_REGEX.test(this.url);
     }
     get rel() {
         return this.target === '_blank' ? 'noopener' : null;
     }
-    get routerUrl() {
-        if (typeof this.url === 'string') {
-            return [this.getAbsoluteUrl(this.url)];
+    ngOnChanges(changes) {
+        if (changes['url']) {
+            this.setUrlParts(changes['url'].currentValue);
         }
-        return this.url;
     }
-    isExternalUrl() {
-        return typeof this.url === 'string' && this.protocolRegex.test(this.url);
+    /**
+     * The part with the path of the local url.
+     */
+    get routerUrl() {
+        return this.routeParts.path;
     }
+    /**
+     * The part with the query params of the local url.
+     */
+    get queryParams() {
+        return this.routeParts.queryParams;
+    }
+    /**
+     * The part with the hash fragment of the local url.
+     */
+    get fragment() {
+        return this.routeParts.fragment;
+    }
+    /**
+     * Parses the given url and sets the property `urlParts` accordingly.
+     */
+    setUrlParts(url) {
+        if (typeof url === 'string') {
+            url = this.getAbsoluteUrl(url); // string links in CMS sometimes don't have the leading slash, so fix it here
+            this.routeParts = this.splitUrl(url);
+        }
+        else {
+            this.routeParts = { path: url };
+        }
+    }
+    /**
+     * Parses the given string into 3 parts:
+     * - string path (wrapped in an array to be compatible with Angular syntax for the `routerLink`)
+     * - query params (as an object)
+     * - hash fragment (string)
+     */
+    splitUrl(url = '') {
+        const { queryParams, fragment } = this.router.parseUrl(url);
+        const [, path] = url.match(this.URL_SPLIT);
+        // wrap path in an array, to have the Angular-like path format
+        return { path: [path], queryParams, fragment };
+    }
+    /**
+     * Prepends a leading slash to the given URL string, in case it doesn't have it.
+     */
     getAbsoluteUrl(url) {
-        return url.startsWith('/') ? this.url : '/' + this.url;
+        return url.startsWith('/') ? url : '/' + url;
     }
 };
-GenericLinkComponent.ɵfac = function GenericLinkComponent_Factory(t) { return new (t || GenericLinkComponent)(); };
-GenericLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GenericLinkComponent, selectors: [["cx-generic-link"]], inputs: { url: "url", target: "target", class: "class", id: "id", style: "style", title: "title" }, ngContentSelectors: _c1, decls: 5, vars: 2, consts: [[4, "ngIf", "ngIfElse"], ["isLocalUrl", ""], ["content", ""], ["role", "link", 3, "href"], [4, "ngTemplateOutlet"], ["role", "link", 3, "routerLink"]], template: function GenericLinkComponent_Template(rf, ctx) { if (rf & 1) {
+GenericLinkComponent.ɵfac = function GenericLinkComponent_Factory(t) { return new (t || GenericLinkComponent)(ɵngcc0.ɵɵdirectiveInject(ɵngcc4.Router)); };
+GenericLinkComponent.ɵcmp = ɵngcc0.ɵɵdefineComponent({ type: GenericLinkComponent, selectors: [["cx-generic-link"]], inputs: { url: "url", target: "target", class: "class", id: "id", style: "style", title: "title" }, features: [ɵngcc0.ɵɵNgOnChangesFeature], ngContentSelectors: _c1, decls: 5, vars: 2, consts: [[4, "ngIf", "ngIfElse"], ["isLocalUrl", ""], ["content", ""], ["role", "link", 3, "href"], [4, "ngTemplateOutlet"], ["role", "link", 3, "routerLink", "queryParams", "fragment"]], template: function GenericLinkComponent_Template(rf, ctx) { if (rf & 1) {
         ɵngcc0.ɵɵprojectionDef();
         ɵngcc0.ɵɵtemplate(0, GenericLinkComponent_ng_container_0_Template, 3, 8, "ng-container", 0);
-        ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_Template, 2, 7, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
+        ɵngcc0.ɵɵtemplate(1, GenericLinkComponent_ng_template_1_Template, 2, 9, "ng-template", null, 1, ɵngcc0.ɵɵtemplateRefExtractor);
         ɵngcc0.ɵɵtemplate(3, GenericLinkComponent_ng_template_3_Template, 1, 0, "ng-template", null, 2, ɵngcc0.ɵɵtemplateRefExtractor);
     } if (rf & 2) {
         const _r116 = ɵngcc0.ɵɵreference(2);
         ɵngcc0.ɵɵproperty("ngIf", ctx.isExternalUrl())("ngIfElse", _r116);
     } }, directives: [ɵngcc2.NgIf, ɵngcc2.NgTemplateOutlet, ɵngcc4.RouterLinkWithHref], encapsulation: 2 });
+GenericLinkComponent.ctorParameters = () => [
+    { type: Router }
+];
 __decorate([
     Input()
 ], GenericLinkComponent.prototype, "url", void 0);
@@ -28565,9 +28631,9 @@ const ɵKeyboardFocusService_BaseFactory = ɵngcc0.ɵɵgetInheritedFactory(Keybo
         type: Component,
         args: [{
                 selector: 'cx-generic-link',
-                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
+                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
             }]
-    }], function () { return []; }, { url: [{
+    }], function () { return [{ type: ɵngcc4.Router }]; }, { url: [{
             type: Input
         }], target: [{
             type: Input

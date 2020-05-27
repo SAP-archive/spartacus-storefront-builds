@@ -6,7 +6,7 @@ import { Config, resolveApplicable, DeferLoadingStrategy, RoutingService, Anonym
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { RouterModule, ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
@@ -3745,9 +3745,31 @@ var FormErrorsModule = /** @class */ (function () {
  * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
  */
 var GenericLinkComponent = /** @class */ (function () {
-    function GenericLinkComponent() {
-        this.protocolRegex = /^https?:\/\//i;
+    function GenericLinkComponent(router) {
+        this.router = router;
+        /**
+         * Pattern matching string starting with `http://` or `https://`.
+         */
+        this.PROTOCOL_REGEX = /^https?:\/\//i;
+        /**
+         * Used to split url into 2 parts:
+         * 1. the path
+         * 2. query params + hash fragment
+         */
+        this.URL_SPLIT = /(^[^#?]*)(.*)/;
+        /**
+         * Parsed parts of the @Input `url`, when it's a local URL.
+         * It should not be used when the `url` is external.
+         * @see `url`
+         */
+        this.routeParts = {};
     }
+    /**
+     * Returns true when the @Input `url` is a string starting with `http://` or `https://`.
+     */
+    GenericLinkComponent.prototype.isExternalUrl = function () {
+        return typeof this.url === 'string' && this.PROTOCOL_REGEX.test(this.url);
+    };
     Object.defineProperty(GenericLinkComponent.prototype, "rel", {
         get: function () {
             return this.target === '_blank' ? 'noopener' : null;
@@ -3755,22 +3777,75 @@ var GenericLinkComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    GenericLinkComponent.prototype.ngOnChanges = function (changes) {
+        if (changes['url']) {
+            this.setUrlParts(changes['url'].currentValue);
+        }
+    };
     Object.defineProperty(GenericLinkComponent.prototype, "routerUrl", {
+        /**
+         * The part with the path of the local url.
+         */
         get: function () {
-            if (typeof this.url === 'string') {
-                return [this.getAbsoluteUrl(this.url)];
-            }
-            return this.url;
+            return this.routeParts.path;
         },
         enumerable: true,
         configurable: true
     });
-    GenericLinkComponent.prototype.isExternalUrl = function () {
-        return typeof this.url === 'string' && this.protocolRegex.test(this.url);
+    Object.defineProperty(GenericLinkComponent.prototype, "queryParams", {
+        /**
+         * The part with the query params of the local url.
+         */
+        get: function () {
+            return this.routeParts.queryParams;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GenericLinkComponent.prototype, "fragment", {
+        /**
+         * The part with the hash fragment of the local url.
+         */
+        get: function () {
+            return this.routeParts.fragment;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Parses the given url and sets the property `urlParts` accordingly.
+     */
+    GenericLinkComponent.prototype.setUrlParts = function (url) {
+        if (typeof url === 'string') {
+            url = this.getAbsoluteUrl(url); // string links in CMS sometimes don't have the leading slash, so fix it here
+            this.routeParts = this.splitUrl(url);
+        }
+        else {
+            this.routeParts = { path: url };
+        }
     };
+    /**
+     * Parses the given string into 3 parts:
+     * - string path (wrapped in an array to be compatible with Angular syntax for the `routerLink`)
+     * - query params (as an object)
+     * - hash fragment (string)
+     */
+    GenericLinkComponent.prototype.splitUrl = function (url) {
+        if (url === void 0) { url = ''; }
+        var _a = this.router.parseUrl(url), queryParams = _a.queryParams, fragment = _a.fragment;
+        var _b = __read(url.match(this.URL_SPLIT), 2), path = _b[1];
+        // wrap path in an array, to have the Angular-like path format
+        return { path: [path], queryParams: queryParams, fragment: fragment };
+    };
+    /**
+     * Prepends a leading slash to the given URL string, in case it doesn't have it.
+     */
     GenericLinkComponent.prototype.getAbsoluteUrl = function (url) {
-        return url.startsWith('/') ? this.url : '/' + this.url;
+        return url.startsWith('/') ? url : '/' + url;
     };
+    GenericLinkComponent.ctorParameters = function () { return [
+        { type: Router }
+    ]; };
     __decorate([
         Input()
     ], GenericLinkComponent.prototype, "url", void 0);
@@ -3792,7 +3867,7 @@ var GenericLinkComponent = /** @class */ (function () {
     GenericLinkComponent = __decorate([
         Component({
             selector: 'cx-generic-link',
-            template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
+            template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
         })
     ], GenericLinkComponent);
     return GenericLinkComponent;
