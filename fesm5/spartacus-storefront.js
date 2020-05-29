@@ -7046,7 +7046,7 @@ var OrderSummaryComponent = /** @class */ (function () {
     OrderSummaryComponent = __decorate([
         Component({
             selector: 'cx-order-summary',
-            template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.estimatedShipping' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n\n<ng-container *cxFeatureLevel=\"'1.3'\">\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [isReadOnly]=\"true\"\n  ></cx-applied-coupons>\n</ng-container>\n"
+            template: "<h4>{{ 'orderCost.orderSummary' | cxTranslate }}</h4>\n\n<div class=\"cx-summary-partials\" *ngIf=\"cart\">\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.subtotal' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.subTotal?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\">\n    <div class=\"col-6 cx-summary-label\">\n      {{\n        (cart.deliveryCost?.formattedValue\n          ? 'orderCost.shipping'\n          : 'orderCost.estimatedShipping'\n        ) | cxTranslate\n      }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{\n        cart.deliveryCost?.formattedValue\n          ? cart.deliveryCost.formattedValue\n          : 'TBD'\n      }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.net\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.salesTax' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row cx-summary-total\">\n    <div class=\"col-6 cx-summary-label\">\n      {{ 'orderCost.total' | cxTranslate }}\n    </div>\n    <div class=\"col-6 cx-summary-amount\">\n      {{ cart.totalPriceWithTax?.formattedValue }}\n    </div>\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"cart.totalDiscounts?.value > 0\">\n    {{ 'orderCost.discount' | cxTranslate }}\n    {{ cart.totalDiscounts?.formattedValue }}\n  </div>\n  <div class=\"cx-summary-row\" *ngIf=\"!cart.net\">\n    {{ 'orderCost.grossTax' | cxTranslate }}\n    {{ cart.totalTax?.formattedValue }}.\n  </div>\n</div>\n\n<!--\n<cx-promotions\n  *ngIf=\"cart\"\n  [promotions]=\"cart.appliedOrderPromotions\"\n></cx-promotions>\n-->\n\n<ng-container *cxFeatureLevel=\"'1.3'\">\n  <cx-applied-coupons\n    [vouchers]=\"cart.appliedVouchers\"\n    [isReadOnly]=\"true\"\n  ></cx-applied-coupons>\n</ng-container>\n"
         })
     ], OrderSummaryComponent);
     return OrderSummaryComponent;
@@ -8385,14 +8385,18 @@ var DeliveryModeComponent = /** @class */ (function () {
                 code === _this.currentDeliveryModeId) {
                 _this.routingService.go(_this.checkoutStepUrlNext);
             }
-            _this.currentDeliveryModeId = code;
             if (code) {
                 _this.mode.controls['deliveryModeId'].setValue(code);
+                if (code !== _this.currentDeliveryModeId) {
+                    _this.checkoutDeliveryService.setDeliveryMode(code);
+                }
             }
+            _this.currentDeliveryModeId = code;
         });
     };
     DeliveryModeComponent.prototype.changeMode = function (code) {
         if (code !== this.currentDeliveryModeId) {
+            this.checkoutDeliveryService.setDeliveryMode(code);
             this.currentDeliveryModeId = code;
         }
     };
@@ -8404,7 +8408,6 @@ var DeliveryModeComponent = /** @class */ (function () {
             }
             this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
-        this.routingService.go(this.checkoutStepUrlNext);
     };
     DeliveryModeComponent.prototype.back = function () {
         this.routingService.go(this.checkoutStepUrlPrevious);
