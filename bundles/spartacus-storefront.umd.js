@@ -10872,7 +10872,7 @@
         }
         SeoMetaService.prototype.init = function () {
             var _this = this;
-            this.pageMetaService
+            this.subscription = this.pageMetaService
                 .getMeta()
                 .pipe(operators.filter(Boolean))
                 .subscribe(function (meta) { return (_this.meta = meta); });
@@ -10922,6 +10922,11 @@
         SeoMetaService.prototype.addTag = function (meta) {
             if (meta.content) {
                 this.ngMeta.updateTag(meta);
+            }
+        };
+        SeoMetaService.prototype.ngOnDestroy = function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
             }
         };
         SeoMetaService.ctorParameters = function () { return [
@@ -11062,7 +11067,7 @@
         }
         StructuredDataFactory.prototype.build = function () {
             var _this = this;
-            this.collectSchemas().subscribe(function (schema) {
+            this.subscription = this.collectSchemas().subscribe(function (schema) {
                 _this.scriptBuilder.build(schema);
             });
         };
@@ -11071,6 +11076,11 @@
                 return rxjs.of();
             }
             return rxjs.combineLatest(this.builders.map(function (builder) { return builder.build(); })).pipe();
+        };
+        StructuredDataFactory.prototype.ngOnDestroy = function () {
+            if (this.subscription) {
+                this.subscription.unsubscribe();
+            }
         };
         StructuredDataFactory.ctorParameters = function () { return [
             { type: JsonLdScriptFactory },

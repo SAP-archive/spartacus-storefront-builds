@@ -9666,7 +9666,7 @@ let SeoMetaService = class SeoMetaService {
         this.pageMetaService = pageMetaService;
     }
     init() {
-        this.pageMetaService
+        this.subscription = this.pageMetaService
             .getMeta()
             .pipe(filter(Boolean))
             .subscribe((meta) => (this.meta = meta));
@@ -9696,6 +9696,11 @@ let SeoMetaService = class SeoMetaService {
     addTag(meta) {
         if (meta.content) {
             this.ngMeta.updateTag(meta);
+        }
+    }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
         }
     }
 };
@@ -9825,7 +9830,7 @@ let StructuredDataFactory = class StructuredDataFactory {
         this.builders = builders;
     }
     build() {
-        this.collectSchemas().subscribe((schema) => {
+        this.subscription = this.collectSchemas().subscribe((schema) => {
             this.scriptBuilder.build(schema);
         });
     }
@@ -9834,6 +9839,11 @@ let StructuredDataFactory = class StructuredDataFactory {
             return of();
         }
         return combineLatest(this.builders.map((builder) => builder.build())).pipe();
+    }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 };
 StructuredDataFactory.ctorParameters = () => [
