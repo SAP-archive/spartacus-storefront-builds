@@ -12072,8 +12072,8 @@ var TabParagraphContainerComponent = /** @class */ (function () {
         this.activeTabNum = tabNum;
     };
     TabParagraphContainerComponent.prototype.ngOnInit = function () {
-        var _a, _b, _c;
-        this.activeTabNum = (_c = (_b = (_a = this.winRef.nativeWindow.history) === null || _a === void 0 ? void 0 : _a.state) === null || _b === void 0 ? void 0 : _b.activeTab) !== null && _c !== void 0 ? _c : this.activeTabNum;
+        var _a, _b, _c, _d;
+        this.activeTabNum = (_d = (_c = (_b = (_a = this.winRef.nativeWindow) === null || _a === void 0 ? void 0 : _a.history) === null || _b === void 0 ? void 0 : _b.state) === null || _c === void 0 ? void 0 : _c.activeTab) !== null && _d !== void 0 ? _d : this.activeTabNum;
     };
     TabParagraphContainerComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
