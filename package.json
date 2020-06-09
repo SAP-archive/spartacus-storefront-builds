@@ -29,8 +29,7 @@
     "bootstrap": "^4.2.1",
     "rxjs": "^6.5.4",
     "zone.js": "^0.10.2",
-    "ngx-infinite-scroll": "^8.0.0",
-    "tslib": "^1.10.0"
+    "ngx-infinite-scroll": "^8.0.0"
   },
   "main": "bundles/spartacus-storefront.umd.js",
   "module": "fesm5/spartacus-storefront.js",
@@ -41,5 +40,8 @@
   "fesm2015": "fesm2015/spartacus-storefront.js",
   "typings": "spartacus-storefront.d.ts",
   "metadata": "spartacus-storefront.metadata.json",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.10.0"
+  }
 }
