@@ -14,6 +14,7 @@ export declare class AddressFormComponent implements OnInit, OnDestroy {
     titles$: Observable<Title[]>;
     regions$: Observable<Region[]>;
     selectedCountry$: BehaviorSubject<string>;
+    addresses$: Observable<Address[]>;
     addressData: Address;
     actionBtnLabel: string;
     cancelBtnLabel: string;
