@@ -16957,6 +16957,14 @@
         return ProductIntroModule;
     }());
 
+    /**
+     * The `ProductListComponentService` is used to search products. The service is used
+     * on the Product Listing Page, for listing products and the facet navigation.
+     *
+     * The service exposes the product search results based on the category and search
+     * route parameters. The route parameters are used to query products by the help of
+     * the `ProductSearchService`.
+     */
     var ProductListComponentService = /** @class */ (function () {
         function ProductListComponentService(productSearchService, routing, activatedRoute, currencyService, languageService, router) {
             var _this = this;
@@ -16969,24 +16977,36 @@
             // TODO: make it configurable
             this.defaultPageSize = 10;
             this.RELEVANCE_ALLCATEGORIES = ':relevance:allCategories:';
+            /**
+             * Emits the search results for the current search query.
+             *
+             * The `searchResults$` is _not_ concerned with querying, it only observes the
+             * `productSearchService.getResults()`
+             */
             this.searchResults$ = this.productSearchService
                 .getResults()
                 .pipe(operators.filter(function (searchResult) { return Object.keys(searchResult).length > 0; }));
-            this.searchByRouting$ = rxjs.combineLatest([
+            /**
+             * Observes the route and performs a search on each route change.
+             *
+             * Context changes, such as language and currencies are also taken
+             * into account, so that the search is performed again.
+             */
+            this.searchByRouting$ = rxjs.combineLatest(__spread([
                 this.routing.getRouterState().pipe(operators.distinctUntilChanged(function (x, y) {
                     // router emits new value also when the anticipated `nextState` changes
                     // but we want to perform search only when current url changes
                     return x.state.url === y.state.url;
-                })),
-                // also trigger search on site context changes
-                this.languageService.getActive(),
-                this.currencyService.getActive(),
-            ]).pipe(operators.pluck(0, 'state'), operators.tap(function (state) {
+                }))
+            ], this.siteContext)).pipe(operators.map(function (_a) {
+                var _b = __read(_a), routerState = _b[0], _context = _b.slice(1);
+                return routerState.state;
+            }), operators.tap(function (state) {
                 var criteria = _this.getCriteriaFromRoute(state.params, state.queryParams);
                 _this.search(criteria);
             }));
             /**
-             * This stream should be used only on the Product Listing Page.
+             * This stream is used for the Product Listing and Product Facets.
              *
              * It not only emits search results, but also performs a search on every change
              * of the route (i.e. route params or query params).
@@ -16999,6 +17019,12 @@
                 this.searchByRouting$,
             ]).pipe(operators.pluck(0), operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
+        /**
+         * Expose the `SearchCriteria`. The search criteria are driven by the route parameters.
+         *
+         * This search route configuration is not yet configurable
+         * (see https://github.com/SAP/spartacus/issues/7191).
+         */
         ProductListComponentService.prototype.getCriteriaFromRoute = function (routeParams, queryParams) {
             return {
                 query: queryParams.query || this.getQueryFromRouteParams(routeParams),
@@ -17007,38 +17033,35 @@
                 sortCode: queryParams.sortCode,
             };
         };
+        /**
+         * Resolves the search query from the given `ProductListRouteParams`.
+         */
         ProductListComponentService.prototype.getQueryFromRouteParams = function (_a) {
-            var brandCode = _a.brandCode, categoryCode = _a.categoryCode, query = _a.query;
+            var query = _a.query, categoryCode = _a.categoryCode, brandCode = _a.brandCode;
             if (query) {
                 return query;
             }
             if (categoryCode) {
                 return this.RELEVANCE_ALLCATEGORIES + categoryCode;
             }
+            // TODO: drop support for brands as they should be treated
+            // similarly as any category.
             if (brandCode) {
                 return this.RELEVANCE_ALLCATEGORIES + brandCode;
             }
         };
+        /**
+         * Performs a search based on the given search criteria.
+         *
+         * The search is delegated to the `ProductSearchService`.
+         */
         ProductListComponentService.prototype.search = function (criteria) {
-            var query = criteria.query;
-            var searchConfig = this.getSearchConfig(criteria);
-            this.productSearchService.search(query, searchConfig);
-        };
-        ProductListComponentService.prototype.getSearchConfig = function (criteria) {
-            var result = {
-                currentPage: criteria.currentPage,
-                pageSize: criteria.pageSize,
-                sortCode: criteria.sortCode,
-            };
-            // drop empty keys
-            Object.keys(result).forEach(function (key) { return !result[key] && delete result[key]; });
-            return result;
-        };
-        ProductListComponentService.prototype.setQuery = function (query) {
-            this.setQueryParams({ query: query, currentPage: undefined });
-        };
-        ProductListComponentService.prototype.viewPage = function (pageNumber) {
-            this.setQueryParams({ currentPage: pageNumber });
+            var currentPage = criteria.currentPage;
+            var pageSize = criteria.pageSize;
+            var sortCode = criteria.sortCode;
+            this.productSearchService.search(criteria.query, 
+            // TODO: consider dropping this complex passing of cleaned object
+            Object.assign({}, currentPage && { currentPage: currentPage }, pageSize && { pageSize: pageSize }, sortCode && { sortCode: sortCode }));
         };
         /**
          * Get items from a given page without using navigation
@@ -17054,15 +17077,53 @@
             })
                 .unsubscribe();
         };
+        /**
+         * Sort the search results by the given sort code.
+         */
         ProductListComponentService.prototype.sort = function (sortCode) {
-            this.setQueryParams({ sortCode: sortCode });
+            this.route({ sortCode: sortCode });
         };
-        ProductListComponentService.prototype.setQueryParams = function (queryParams) {
+        /**
+         * Routes to the next product listing page, using the given `queryParams`. The
+         * `queryParams` support sorting, pagination and querying.
+         *
+         * The `queryParams` are delegated to the Angular router `NavigationExtras`.
+         */
+        ProductListComponentService.prototype.route = function (queryParams) {
             this.router.navigate([], {
                 queryParams: queryParams,
                 queryParamsHandling: 'merge',
                 relativeTo: this.activatedRoute,
             });
+        };
+        Object.defineProperty(ProductListComponentService.prototype, "siteContext", {
+            /**
+             * The site context is used to update the search query in case of a
+             * changing context. The context will typically influence the search data.
+             *
+             * We keep this private for now, as we're likely refactoring this in the next
+             * major version.
+             */
+            get: function () {
+                // TODO: we should refactor this so that custom context will be taken
+                // into account automatically. Ideally, we drop the specific context
+                // from the constructor, and query a ContextService for all contexts.
+                return [this.languageService.getActive(), this.currencyService.getActive()];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @deprecated will be dropped in version 3.0 as it's no longer in use
+         */
+        ProductListComponentService.prototype.setQuery = function (query) {
+            this.route({ query: query, currentPage: undefined });
+        };
+        /**
+         * @deprecated will be dropped in version 3.0 as it's no longer in use
+         */
+        ProductListComponentService.prototype.viewPage = function (pageNumber) {
+            this.route({ currentPage: pageNumber });
         };
         ProductListComponentService.ctorParameters = function () { return [
             { type: core$1.ProductSearchService },

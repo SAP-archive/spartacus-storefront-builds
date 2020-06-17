@@ -15273,6 +15273,14 @@ ProductIntroModule = __decorate([
     })
 ], ProductIntroModule);
 
+/**
+ * The `ProductListComponentService` is used to search products. The service is used
+ * on the Product Listing Page, for listing products and the facet navigation.
+ *
+ * The service exposes the product search results based on the category and search
+ * route parameters. The route parameters are used to query products by the help of
+ * the `ProductSearchService`.
+ */
 let ProductListComponentService = class ProductListComponentService {
     constructor(productSearchService, routing, activatedRoute, currencyService, languageService, router) {
         this.productSearchService = productSearchService;
@@ -15284,24 +15292,34 @@ let ProductListComponentService = class ProductListComponentService {
         // TODO: make it configurable
         this.defaultPageSize = 10;
         this.RELEVANCE_ALLCATEGORIES = ':relevance:allCategories:';
+        /**
+         * Emits the search results for the current search query.
+         *
+         * The `searchResults$` is _not_ concerned with querying, it only observes the
+         * `productSearchService.getResults()`
+         */
         this.searchResults$ = this.productSearchService
             .getResults()
             .pipe(filter((searchResult) => Object.keys(searchResult).length > 0));
+        /**
+         * Observes the route and performs a search on each route change.
+         *
+         * Context changes, such as language and currencies are also taken
+         * into account, so that the search is performed again.
+         */
         this.searchByRouting$ = combineLatest([
             this.routing.getRouterState().pipe(distinctUntilChanged((x, y) => {
                 // router emits new value also when the anticipated `nextState` changes
                 // but we want to perform search only when current url changes
                 return x.state.url === y.state.url;
             })),
-            // also trigger search on site context changes
-            this.languageService.getActive(),
-            this.currencyService.getActive(),
-        ]).pipe(pluck(0, 'state'), tap((state) => {
+            ...this.siteContext,
+        ]).pipe(map(([routerState, ..._context]) => routerState.state), tap((state) => {
             const criteria = this.getCriteriaFromRoute(state.params, state.queryParams);
             this.search(criteria);
         }));
         /**
-         * This stream should be used only on the Product Listing Page.
+         * This stream is used for the Product Listing and Product Facets.
          *
          * It not only emits search results, but also performs a search on every change
          * of the route (i.e. route params or query params).
@@ -15314,6 +15332,12 @@ let ProductListComponentService = class ProductListComponentService {
             this.searchByRouting$,
         ]).pipe(pluck(0), shareReplay({ bufferSize: 1, refCount: true }));
     }
+    /**
+     * Expose the `SearchCriteria`. The search criteria are driven by the route parameters.
+     *
+     * This search route configuration is not yet configurable
+     * (see https://github.com/SAP/spartacus/issues/7191).
+     */
     getCriteriaFromRoute(routeParams, queryParams) {
         return {
             query: queryParams.query || this.getQueryFromRouteParams(routeParams),
@@ -15322,37 +15346,34 @@ let ProductListComponentService = class ProductListComponentService {
             sortCode: queryParams.sortCode,
         };
     }
-    getQueryFromRouteParams({ brandCode, categoryCode, query, }) {
+    /**
+     * Resolves the search query from the given `ProductListRouteParams`.
+     */
+    getQueryFromRouteParams({ query, categoryCode, brandCode, }) {
         if (query) {
             return query;
         }
         if (categoryCode) {
             return this.RELEVANCE_ALLCATEGORIES + categoryCode;
         }
+        // TODO: drop support for brands as they should be treated
+        // similarly as any category.
         if (brandCode) {
             return this.RELEVANCE_ALLCATEGORIES + brandCode;
         }
     }
+    /**
+     * Performs a search based on the given search criteria.
+     *
+     * The search is delegated to the `ProductSearchService`.
+     */
     search(criteria) {
-        const query = criteria.query;
-        const searchConfig = this.getSearchConfig(criteria);
-        this.productSearchService.search(query, searchConfig);
-    }
-    getSearchConfig(criteria) {
-        const result = {
-            currentPage: criteria.currentPage,
-            pageSize: criteria.pageSize,
-            sortCode: criteria.sortCode,
-        };
-        // drop empty keys
-        Object.keys(result).forEach((key) => !result[key] && delete result[key]);
-        return result;
-    }
-    setQuery(query) {
-        this.setQueryParams({ query, currentPage: undefined });
-    }
-    viewPage(pageNumber) {
-        this.setQueryParams({ currentPage: pageNumber });
+        const currentPage = criteria.currentPage;
+        const pageSize = criteria.pageSize;
+        const sortCode = criteria.sortCode;
+        this.productSearchService.search(criteria.query, 
+        // TODO: consider dropping this complex passing of cleaned object
+        Object.assign({}, currentPage && { currentPage }, pageSize && { pageSize }, sortCode && { sortCode }));
     }
     /**
      * Get items from a given page without using navigation
@@ -15367,15 +15388,49 @@ let ProductListComponentService = class ProductListComponentService {
         })
             .unsubscribe();
     }
+    /**
+     * Sort the search results by the given sort code.
+     */
     sort(sortCode) {
-        this.setQueryParams({ sortCode });
+        this.route({ sortCode });
     }
-    setQueryParams(queryParams) {
+    /**
+     * Routes to the next product listing page, using the given `queryParams`. The
+     * `queryParams` support sorting, pagination and querying.
+     *
+     * The `queryParams` are delegated to the Angular router `NavigationExtras`.
+     */
+    route(queryParams) {
         this.router.navigate([], {
             queryParams,
             queryParamsHandling: 'merge',
             relativeTo: this.activatedRoute,
         });
+    }
+    /**
+     * The site context is used to update the search query in case of a
+     * changing context. The context will typically influence the search data.
+     *
+     * We keep this private for now, as we're likely refactoring this in the next
+     * major version.
+     */
+    get siteContext() {
+        // TODO: we should refactor this so that custom context will be taken
+        // into account automatically. Ideally, we drop the specific context
+        // from the constructor, and query a ContextService for all contexts.
+        return [this.languageService.getActive(), this.currencyService.getActive()];
+    }
+    /**
+     * @deprecated will be dropped in version 3.0 as it's no longer in use
+     */
+    setQuery(query) {
+        this.route({ query, currentPage: undefined });
+    }
+    /**
+     * @deprecated will be dropped in version 3.0 as it's no longer in use
+     */
+    viewPage(pageNumber) {
+        this.route({ currentPage: pageNumber });
     }
 };
 ProductListComponentService.ctorParameters = () => [
