@@ -5873,6 +5873,7 @@
                 var elementRef = _a.elementRef, componentRef = _a.componentRef;
                 _this.cmpRef = componentRef;
                 _this.decorate(elementRef);
+                _this.injector.get(core.ChangeDetectorRef).markForCheck();
             });
         };
         ComponentWrapperDirective.prototype.decorate = function (elementRef) {
