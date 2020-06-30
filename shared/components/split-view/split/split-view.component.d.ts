@@ -1,4 +1,4 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SplitViewService } from '../split-view.service';
 /**
@@ -23,7 +23,7 @@ import { SplitViewService } from '../split-view.service';
  * `--cx-last-visible-view` on the host, so that all descendants views will inherit the
  * property conveniently.
  */
-export declare class SplitViewComponent implements OnInit, OnDestroy {
+export declare class SplitViewComponent implements OnDestroy {
     protected splitService: SplitViewService;
     /**
      * Indicates the last visible view in the range of views that is visible. This
@@ -31,8 +31,7 @@ export declare class SplitViewComponent implements OnInit, OnDestroy {
      * can be fully controlled by css.
      */
     lastVisibleView: number;
-    protected subscription$: Subscription;
+    protected subscription: Subscription;
     constructor(splitService: SplitViewService);
-    ngOnInit(): void;
     ngOnDestroy(): void;
 }

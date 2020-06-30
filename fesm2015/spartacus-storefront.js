@@ -4209,11 +4209,8 @@ let SplitViewService = class SplitViewService {
         return this._views$.value;
     }
 };
-SplitViewService.ɵprov = ɵɵdefineInjectable({ factory: function SplitViewService_Factory() { return new SplitViewService(); }, token: SplitViewService, providedIn: "root" });
 SplitViewService = __decorate([
-    Injectable({
-        providedIn: 'root',
-    })
+    Injectable()
 ], SplitViewService);
 
 /**
@@ -4247,15 +4244,13 @@ let SplitViewComponent = class SplitViewComponent {
          * can be fully controlled by css.
          */
         this.lastVisibleView = 1;
-    }
-    ngOnInit() {
-        this.subscription$ = this.splitService
+        this.subscription = this.splitService
             .visibleViewCount()
             .subscribe((lastVisible) => (this.lastVisibleView = lastVisible));
     }
     ngOnDestroy() {
         var _a;
-        (_a = this.subscription$) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     }
 };
 SplitViewComponent.ctorParameters = () => [

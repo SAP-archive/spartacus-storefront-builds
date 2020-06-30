@@ -4839,11 +4839,8 @@
             enumerable: true,
             configurable: true
         });
-        SplitViewService.ɵprov = core.ɵɵdefineInjectable({ factory: function SplitViewService_Factory() { return new SplitViewService(); }, token: SplitViewService, providedIn: "root" });
         SplitViewService = __decorate([
-            core.Injectable({
-                providedIn: 'root',
-            })
+            core.Injectable()
         ], SplitViewService);
         return SplitViewService;
     }());
@@ -4872,6 +4869,7 @@
      */
     var SplitViewComponent = /** @class */ (function () {
         function SplitViewComponent(splitService) {
+            var _this = this;
             this.splitService = splitService;
             /**
              * Indicates the last visible view in the range of views that is visible. This
@@ -4879,16 +4877,13 @@
              * can be fully controlled by css.
              */
             this.lastVisibleView = 1;
-        }
-        SplitViewComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.subscription$ = this.splitService
+            this.subscription = this.splitService
                 .visibleViewCount()
                 .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible); });
-        };
+        }
         SplitViewComponent.prototype.ngOnDestroy = function () {
             var _a;
-            (_a = this.subscription$) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+            (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         };
         SplitViewComponent.ctorParameters = function () { return [
             { type: SplitViewService }
