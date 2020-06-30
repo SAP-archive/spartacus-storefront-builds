@@ -1,10 +1,10 @@
 import { RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CmsActivatedRouteSnapshot, CmsService, Page, PageContext, SemanticPathService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { CmsComponentsService } from '../services/cms-components.service';
 import { CmsGuardsService } from '../services/cms-guards.service';
 import { CmsI18nService } from '../services/cms-i18n.service';
 import { CmsRoutesService } from '../services/cms-routes.service';
-import { CmsComponentsService } from '../services';
 /**
  * Helper service for `CmsPageGuard`
  */
