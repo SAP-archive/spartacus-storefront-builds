@@ -4750,6 +4750,300 @@
         return ModalService;
     }());
 
+    /**
+     * Guard that can be used in split-view based child routes. This guard
+     * delays the guard to be removed with 500ms, so that any css transition can be
+     * finished before the DOM is destroyed.
+     */
+    var SplitViewDeactivateGuard = /** @class */ (function () {
+        function SplitViewDeactivateGuard() {
+        }
+        SplitViewDeactivateGuard.prototype.canDeactivate = function () {
+            return rxjs.timer(500).pipe(operators.map(function () { return true; }));
+        };
+        SplitViewDeactivateGuard.ɵprov = core.ɵɵdefineInjectable({ factory: function SplitViewDeactivateGuard_Factory() { return new SplitViewDeactivateGuard(); }, token: SplitViewDeactivateGuard, providedIn: "root" });
+        SplitViewDeactivateGuard = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SplitViewDeactivateGuard);
+        return SplitViewDeactivateGuard;
+    }());
+
+    /**
+     * Supposed to be injected in the split view component, so that the view state
+     * is maintained in the context of a single split view.
+     */
+    var SplitViewService = /** @class */ (function () {
+        function SplitViewService() {
+            this._views$ = new rxjs.BehaviorSubject([]);
+        }
+        /**
+         * Resolves the max number of visible views for the split view.
+         */
+        SplitViewService.prototype.visibleViewCount = function () {
+            return this._views$.pipe(operators.map(function (views) {
+                var hidden = views.findIndex(function (view) { return view.hidden; });
+                return hidden === -1 ? views.length : hidden;
+            }), operators.filter(function (visible) { return visible > 0; }), operators.distinctUntilChanged());
+        };
+        /**
+         * Adds a view to the list of views. The view is initialized with the
+         * hide state, which defaults to false.
+         */
+        SplitViewService.prototype.add = function (viewPosition, hide) {
+            if (hide === void 0) { hide = false; }
+            if (!this.views[viewPosition]) {
+                this.views[viewPosition] = { hidden: hide };
+                this._views$.next(this.views);
+            }
+        };
+        /**
+         * Removes a view from the list of views.
+         */
+        SplitViewService.prototype.remove = function (viewPosition) {
+            this._views$.next(this.views.splice(0, viewPosition));
+        };
+        /**
+         * Toggles the visible state for the given view. An optional
+         * force argument can be used to dictate the visibility.
+         */
+        SplitViewService.prototype.toggle = function (viewPosition, force) {
+            if (!this.views[viewPosition]) {
+                this.add(viewPosition, force !== null && force !== void 0 ? force : false);
+            }
+            else {
+                this.views[viewPosition].hidden = force !== null && force !== void 0 ? force : !this.views[viewPosition].hidden;
+                // Whenever a view is closing, we close all underlying views as well.
+                if (!this.views[viewPosition].hidden) {
+                    this.views
+                        .slice(viewPosition + 1)
+                        .map(function (viewState) { return (viewState.hidden = true); });
+                }
+                this._views$.next(this.views);
+            }
+        };
+        /**
+         * Returns the next view number, that can be used by views to register itself.
+         */
+        SplitViewService.prototype.generateNextPosition = function () {
+            return this.views.length;
+        };
+        Object.defineProperty(SplitViewService.prototype, "views", {
+            /**
+             * Utility method that resolves all views.
+             */
+            get: function () {
+                return this._views$.value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        SplitViewService.ɵprov = core.ɵɵdefineInjectable({ factory: function SplitViewService_Factory() { return new SplitViewService(); }, token: SplitViewService, providedIn: "root" });
+        SplitViewService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], SplitViewService);
+        return SplitViewService;
+    }());
+
+    /**
+     * The split-view component supports an unlimited number of nested views. The component
+     * is a host to those view components and doesn't add any restrictions to it's content;
+     * content is projected as-is.
+     *
+     * ```html
+     * <cx-split-view>
+     *   <cx-view></cx-view>
+     *   <cx-view></cx-view>
+     *   <any-wrapper>
+     *     <cx-view></cx-view>
+     *   </any-wrapper>
+     * </cx-split-view>
+     * ```
+     *
+     * The split view component is only concerned with tracking the underlying _visible_
+     * view components, so that the `lastVisibleView` can be updated accordingly. The actual
+     * visibility of views is controlled by CSS. To allow for maximum flexibility, the CSS
+     * implementation is using CSS variables. The `lastVisibleView` is bind to the
+     * `--cx-last-visible-view` on the host, so that all descendants views will inherit the
+     * property conveniently.
+     */
+    var SplitViewComponent = /** @class */ (function () {
+        function SplitViewComponent(splitService) {
+            this.splitService = splitService;
+            /**
+             * Indicates the last visible view in the range of views that is visible. This
+             * is bind to a css variable `--cx-last-visible-view` so that the experience
+             * can be fully controlled by css.
+             */
+            this.lastVisibleView = 1;
+        }
+        SplitViewComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription$ = this.splitService
+                .visibleViewCount()
+                .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible); });
+        };
+        SplitViewComponent.prototype.ngOnDestroy = function () {
+            var _a;
+            (_a = this.subscription$) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        };
+        SplitViewComponent.ctorParameters = function () { return [
+            { type: SplitViewService }
+        ]; };
+        __decorate([
+            core.HostBinding('style.--cx-last-visible-view')
+        ], SplitViewComponent.prototype, "lastVisibleView", void 0);
+        SplitViewComponent = __decorate([
+            core.Component({
+                selector: 'cx-split-view',
+                template: "<ng-content></ng-content>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush,
+                providers: [SplitViewService]
+            })
+        ], SplitViewComponent);
+        return SplitViewComponent;
+    }());
+
+    /**
+     * The view component is part of the `SplitViewComponent`. The view
+     * contains the navigable content that should be split up. It maintains
+     * a view position and allows to show or hide the view.
+     *
+     * The ViewComponent interacts with the `SplitViewService` for handing over the
+     * view state, so that the overarching `SplitViewComponent` can manage the
+     * overall experience.
+     */
+    var ViewComponent = /** @class */ (function () {
+        function ViewComponent(splitService) {
+            this.splitService = splitService;
+            /**
+             * An update of the view visibility is emitted to the hiddenChange output.
+             */
+            this.hiddenChange = new core.EventEmitter();
+        }
+        Object.defineProperty(ViewComponent.prototype, "hidden", {
+            /**
+             * The hidden input is used to set the initial visible state of the view.
+             * The hidden state defaults to false.
+             *
+             * The hidden input supports 2-way binding, see `hiddenChange` property.
+             */
+            set: function (hidden) {
+                this.splitService.toggle(this.viewPosition, hidden);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ViewComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.splitService.add(this.viewPosition, this.hidden);
+            this.subscription = this.splitService
+                .visibleViewCount()
+                .subscribe(function (visible) {
+                if (_this.hidden !== _this.viewPosition >= visible) {
+                    _this.hiddenChange.emit(_this.viewPosition >= visible);
+                }
+            });
+        };
+        /**
+         * Toggles the visibility of the view.
+         *
+         * An optional force flag can be used to explicitly show or hide view component.
+         */
+        ViewComponent.prototype.toggle = function (force) {
+            this.splitService.toggle(this.viewPosition, force);
+        };
+        Object.defineProperty(ViewComponent.prototype, "viewPosition", {
+            /**
+             * Returns the position for the view.
+             *
+             * The position is either taken from the input `position` or generated by the `SplitService`.
+             */
+            get: function () {
+                if (this.position === undefined) {
+                    this.position = this.splitService.generateNextPosition();
+                }
+                return this.position;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * The view is removed from the `SplitService` so that the view no longer
+         * plays a role in the overall split view.
+         */
+        ViewComponent.prototype.ngOnDestroy = function () {
+            var _a;
+            this.splitService.remove(this.viewPosition);
+            (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        };
+        ViewComponent.ctorParameters = function () { return [
+            { type: SplitViewService }
+        ]; };
+        __decorate([
+            core.Input(),
+            core.HostBinding('attr.position')
+        ], ViewComponent.prototype, "position", void 0);
+        __decorate([
+            core.Input()
+        ], ViewComponent.prototype, "hidden", null);
+        __decorate([
+            core.Output()
+        ], ViewComponent.prototype, "hiddenChange", void 0);
+        ViewComponent = __decorate([
+            core.Component({
+                selector: 'cx-view',
+                template: "<ng-content></ng-content>\n",
+                changeDetection: core.ChangeDetectionStrategy.OnPush
+            })
+        ], ViewComponent);
+        return ViewComponent;
+    }());
+
+    /**
+     * The split-view component supports an unlimited number of nested views. Nested views are rendered
+     * next to each other. The views can be rendered next to each other, but the max number of visible
+     * views can be limisted as well. This is configurable in the CSS layer, so that the max number of views
+     * per split-view can be different for each component.
+     *
+     * The basic structure of the split-view component is shown below:
+     *
+     *
+     * ```
+     * <cx-split-view>
+     * </cx-split-view>
+     * ```
+     *
+     * The UX pattern used for the split-view is driven by an initial view, which gets splitted into
+     * more views as soon as the user starts interacting with the initial and subsequantial views.
+     * The views can be driven by routes, which means that you can navigate through the splitted views
+     * by using the browser history as well as share or bookmark splitted views.
+     *
+     * The UI is implemented in the style layer, with only a few generic style rules. Most of the split
+     * view style is driven by CSS properties, so that alternative split-view styles can be introduced
+     * per page or component.
+     *
+     * The max number of views per split-view on mobile is limited to 1 by default, where as on tablet
+     * (and higher) it is set to 2. Spartacus has a pretty narrow layout, which is why 2 is maximum,
+     * but customers could alter the layout to bring in more views in the same split-view at the time.
+     *
+     */
+    var SplitViewModule = /** @class */ (function () {
+        function SplitViewModule() {
+        }
+        SplitViewModule = __decorate([
+            core.NgModule({
+                declarations: [SplitViewComponent, ViewComponent],
+                imports: [common.CommonModule, router.RouterModule],
+                exports: [SplitViewComponent, ViewComponent],
+            })
+        ], SplitViewModule);
+        return SplitViewModule;
+    }());
+
     var GlobalMessageComponent = /** @class */ (function () {
         function GlobalMessageComponent(globalMessageService) {
             this.globalMessageService = globalMessageService;
@@ -21087,6 +21381,10 @@
     exports.SortingComponent = SortingComponent;
     exports.SpinnerComponent = SpinnerComponent;
     exports.SpinnerModule = SpinnerModule;
+    exports.SplitViewComponent = SplitViewComponent;
+    exports.SplitViewDeactivateGuard = SplitViewDeactivateGuard;
+    exports.SplitViewModule = SplitViewModule;
+    exports.SplitViewService = SplitViewService;
     exports.StarRatingComponent = StarRatingComponent;
     exports.StarRatingModule = StarRatingModule;
     exports.StockNotificationComponent = StockNotificationComponent;
@@ -21136,6 +21434,7 @@
     exports.VariantStyleIconsModule = VariantStyleIconsModule;
     exports.VariantStyleSelectorComponent = VariantStyleSelectorComponent;
     exports.VariantStyleSelectorModule = VariantStyleSelectorModule;
+    exports.ViewComponent = ViewComponent;
     exports.ViewConfig = ViewConfig;
     exports.ViewConfigModule = ViewConfigModule;
     exports.WishListComponent = WishListComponent;
