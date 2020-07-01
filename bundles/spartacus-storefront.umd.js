@@ -17987,7 +17987,8 @@
          */
         ProductFacetService.prototype.hasBreadcrumb = function (breadcrumb, params) {
             return (breadcrumb.facetCode === 'allCategories' &&
-                breadcrumb.facetValueCode === params.categoryCode);
+                (breadcrumb.facetValueCode === params.categoryCode ||
+                    breadcrumb.facetValueCode === params.brandCode));
         };
         ProductFacetService.ctorParameters = function () { return [
             { type: core$1.RoutingService },

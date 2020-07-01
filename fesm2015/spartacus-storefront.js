@@ -16226,7 +16226,8 @@ let ProductFacetService = class ProductFacetService {
      */
     hasBreadcrumb(breadcrumb, params) {
         return (breadcrumb.facetCode === 'allCategories' &&
-            breadcrumb.facetValueCode === params.categoryCode);
+            (breadcrumb.facetValueCode === params.categoryCode ||
+                breadcrumb.facetValueCode === params.brandCode));
     }
 };
 ProductFacetService.ctorParameters = () => [
