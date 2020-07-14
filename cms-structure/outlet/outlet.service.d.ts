@@ -1,6 +1,13 @@
 import { TemplateRef } from '@angular/core';
+import { FeatureConfigService } from '@spartacus/core';
 import { OutletPosition } from './outlet.model';
 export declare class OutletService<T = TemplateRef<any>> {
+    protected features?: FeatureConfigService;
+    /**
+     * @deprecated since 2.1, see #8116
+     */
+    constructor();
+    constructor(features: FeatureConfigService);
     private templatesRefs;
     private templatesRefsBefore;
     private templatesRefsAfter;

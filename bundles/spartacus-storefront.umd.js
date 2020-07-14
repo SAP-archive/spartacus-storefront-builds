@@ -484,7 +484,8 @@
     var USE_STACKED_OUTLETS = true;
 
     var OutletService = /** @class */ (function () {
-        function OutletService() {
+        function OutletService(features) {
+            this.features = features;
             this.templatesRefs = new Map();
             this.templatesRefsBefore = new Map();
             this.templatesRefsAfter = new Map();
@@ -551,15 +552,25 @@
             store.set(outlet, newValue);
         };
         OutletService.prototype.removeValueOrAll = function (store, outlet, value) {
+            var _a;
             if (!value && store.has(outlet)) {
                 store.delete(outlet);
             }
             else if (value && store.has(outlet)) {
                 var existing = store.get(outlet);
-                existing = existing.filter(function (val) { return val === value; });
+                if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
+                    existing = existing.filter(function (val) { return val !== value; });
+                }
+                else {
+                    // deprecated since 2.1, see #8116:
+                    existing = existing.filter(function (val) { return val === value; });
+                }
                 store.set(outlet, existing);
             }
         };
+        OutletService.ctorParameters = function () { return [
+            { type: core$1.FeatureConfigService }
+        ]; };
         OutletService.ɵprov = core.ɵɵdefineInjectable({ factory: function OutletService_Factory() { return new OutletService(); }, token: OutletService, providedIn: "root" });
         OutletService = __decorate([
             core.Injectable({
