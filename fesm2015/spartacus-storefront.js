@@ -277,22 +277,21 @@ const USE_STACKED_OUTLETS = true;
 let OutletService = class OutletService {
     constructor(features) {
         this.features = features;
-        this.templatesRefs = new Map();
-        this.templatesRefsBefore = new Map();
-        this.templatesRefsAfter = new Map();
+        this.templatesRefs = {
+            [OutletPosition.BEFORE]: new Map(),
+            [OutletPosition.REPLACE]: new Map(),
+            [OutletPosition.AFTER]: new Map(),
+        };
     }
     /**
      * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
      */
     add(outlet, templateOrFactory, position = OutletPosition.REPLACE) {
-        if (position === OutletPosition.BEFORE) {
-            this.store(this.templatesRefsBefore, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.REPLACE) {
-            this.store(this.templatesRefs, outlet, templateOrFactory);
-        }
-        if (position === OutletPosition.AFTER) {
-            this.store(this.templatesRefsAfter, outlet, templateOrFactory);
+        const store = this.templatesRefs[position];
+        if (store) {
+            const existing = store.get(outlet) || [];
+            const newValue = existing.concat([templateOrFactory]);
+            store.set(outlet, newValue);
         }
     }
     /**
@@ -305,38 +304,18 @@ let OutletService = class OutletService {
      * @param stacked Indicates whether an array of outlet components is returned
      */
     get(outlet, position = OutletPosition.REPLACE, stacked = AVOID_STACKED_OUTLETS) {
-        let templateRef;
-        switch (position) {
-            case OutletPosition.BEFORE:
-                templateRef = this.templatesRefsBefore.get(outlet);
-                break;
-            case OutletPosition.AFTER:
-                templateRef = this.templatesRefsAfter.get(outlet);
-                break;
-            default:
-                templateRef = this.templatesRefs.get(outlet);
-        }
+        const store = this.templatesRefs[position] ||
+            this.templatesRefs[OutletPosition.REPLACE];
+        const templateRef = store.get(outlet);
         if (templateRef && !stacked) {
             return templateRef[0];
         }
         return templateRef;
     }
     remove(outlet, position = OutletPosition.REPLACE, value) {
-        switch (position) {
-            case OutletPosition.BEFORE:
-                this.removeValueOrAll(this.templatesRefsBefore, outlet, value);
-                break;
-            case OutletPosition.AFTER:
-                this.removeValueOrAll(this.templatesRefsAfter, outlet, value);
-                break;
-            default:
-                this.removeValueOrAll(this.templatesRefs, outlet, value);
-        }
-    }
-    store(store, outlet, value) {
-        const existing = store.get(outlet) || [];
-        const newValue = existing.concat([value]);
-        store.set(outlet, newValue);
+        const store = this.templatesRefs[position] ||
+            this.templatesRefs[OutletPosition.REPLACE];
+        this.removeValueOrAll(store, outlet, value);
     }
     removeValueOrAll(store, outlet, value) {
         var _a;

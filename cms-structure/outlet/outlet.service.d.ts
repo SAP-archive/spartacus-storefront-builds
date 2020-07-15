@@ -9,8 +9,6 @@ export declare class OutletService<T = TemplateRef<any>> {
     constructor();
     constructor(features: FeatureConfigService);
     private templatesRefs;
-    private templatesRefsBefore;
-    private templatesRefsAfter;
     /**
      * Adds a template or ComponentFactory, so that UI outlets can be replaced dynamically.
      * The UI position where this template or ComponentFactory is inserted is given by a
@@ -37,6 +35,5 @@ export declare class OutletService<T = TemplateRef<any>> {
      */
     get(outlet: string, position?: OutletPosition, stacked?: boolean): T[] | T;
     remove(outlet: string, position?: OutletPosition, value?: T): void;
-    private store;
     protected removeValueOrAll(store: Map<string, T[]>, outlet: string, value?: T): void;
 }
