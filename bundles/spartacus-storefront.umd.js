@@ -21050,6 +21050,7 @@
     exports.AddToHomeScreenBannerComponent = AddToHomeScreenBannerComponent;
     exports.AddToHomeScreenBtnComponent = AddToHomeScreenBtnComponent;
     exports.AddToHomeScreenComponent = AddToHomeScreenComponent;
+    exports.AddToHomeScreenService = AddToHomeScreenService;
     exports.AddToWishListComponent = AddToWishListComponent;
     exports.AddToWishListModule = AddToWishListModule;
     exports.AddedToCartDialogComponent = AddedToCartDialogComponent;
@@ -21460,13 +21461,12 @@
     exports.ɵbk = CmsPageGuardService;
     exports.ɵbl = CmsRoutesImplService;
     exports.ɵbm = ReturnRequestService;
-    exports.ɵbn = AddToHomeScreenService;
-    exports.ɵbo = MyCouponsComponentService;
-    exports.ɵbp = addCmsRoute;
-    exports.ɵbq = defaultStorefrontRoutesConfig;
-    exports.ɵbr = defaultRoutingConfig;
-    exports.ɵbs = htmlLangProvider;
-    exports.ɵbt = setHtmlLangAttribute;
+    exports.ɵbn = MyCouponsComponentService;
+    exports.ɵbo = addCmsRoute;
+    exports.ɵbp = defaultStorefrontRoutesConfig;
+    exports.ɵbq = defaultRoutingConfig;
+    exports.ɵbr = htmlLangProvider;
+    exports.ɵbs = setHtmlLangAttribute;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;
