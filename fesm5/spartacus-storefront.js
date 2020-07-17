@@ -375,16 +375,24 @@ var OutletService = /** @class */ (function () {
 }());
 
 var OutletRefDirective = /** @class */ (function () {
-    function OutletRefDirective(tpl, outletService) {
+    function OutletRefDirective(tpl, outletService, features) {
         this.tpl = tpl;
         this.outletService = outletService;
+        this.features = features;
     }
     OutletRefDirective.prototype.ngOnInit = function () {
         this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
     };
+    OutletRefDirective.prototype.ngOnDestroy = function () {
+        var _a;
+        if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
+            this.outletService.remove(this.cxOutletRef, this.cxOutletPos, this.tpl);
+        }
+    };
     OutletRefDirective.ctorParameters = function () { return [
         { type: TemplateRef },
-        { type: OutletService }
+        { type: OutletService },
+        { type: FeatureConfigService }
     ]; };
     __decorate([
         Input()
