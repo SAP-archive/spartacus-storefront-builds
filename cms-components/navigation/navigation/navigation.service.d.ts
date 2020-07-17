@@ -31,7 +31,9 @@ export declare class NavigationService {
     private populateLink;
     /**
      *
-     * Gets the URL or link to a related item (category)
+     * Gets the URL or link to a related item (category),
+     * also taking into account content pages (contentPageLabelOrId)
+     * and product pages (productCode)
      */
-    private getLink;
+    protected getLink(item: any): string | string[];
 }

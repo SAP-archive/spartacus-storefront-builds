@@ -15893,17 +15893,31 @@ var NavigationService = /** @class */ (function () {
     };
     /**
      *
-     * Gets the URL or link to a related item (category)
+     * Gets the URL or link to a related item (category),
+     * also taking into account content pages (contentPageLabelOrId)
+     * and product pages (productCode)
      */
     NavigationService.prototype.getLink = function (item) {
         if (item.url) {
             return item.url;
+        }
+        else if (item.contentPageLabelOrId) {
+            return item.contentPageLabelOrId;
         }
         else if (item.categoryCode) {
             return this.semanticPathService.transform({
                 cxRoute: 'category',
                 params: {
                     code: item.categoryCode,
+                    name: item.name,
+                },
+            });
+        }
+        else if (item.productCode) {
+            return this.semanticPathService.transform({
+                cxRoute: 'product',
+                params: {
+                    code: item.productCode,
                     name: item.name,
                 },
             });
