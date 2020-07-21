@@ -12604,12 +12604,11 @@ var CmsParagraphModule = /** @class */ (function () {
 }());
 
 var TabParagraphContainerComponent = /** @class */ (function () {
-    function TabParagraphContainerComponent(componentData, cmsService, winRef, breakpointService) {
+    function TabParagraphContainerComponent(componentData, cmsService, winRef) {
         var _this = this;
         this.componentData = componentData;
         this.cmsService = cmsService;
         this.winRef = winRef;
-        this.breakpointService = breakpointService;
         this.activeTabNum = 0;
         this.tabTitleParams = [];
         this.components$ = this.componentData.data$.pipe(distinctUntilChanged(function (x, y) { return (x === null || x === void 0 ? void 0 : x.components) === (y === null || y === void 0 ? void 0 : y.components); }), switchMap(function (data) {
@@ -12627,19 +12626,8 @@ var TabParagraphContainerComponent = /** @class */ (function () {
             }));
         }));
     }
-    TabParagraphContainerComponent.prototype.select = function (tabNum, event) {
-        var _this = this;
-        this.tabSubscription = this.breakpointService
-            .isDown(BREAKPOINT.sm)
-            .subscribe(function (res) {
-            if (res) {
-                _this.activeTabNum = _this.activeTabNum === tabNum ? -1 : tabNum;
-                window.scrollTo(0, event.path[1].offsetTop);
-            }
-            else {
-                _this.activeTabNum = tabNum;
-            }
-        });
+    TabParagraphContainerComponent.prototype.select = function (tabNum) {
+        this.activeTabNum = tabNum;
     };
     TabParagraphContainerComponent.prototype.ngOnInit = function () {
         var _a, _b, _c, _d;
@@ -12675,15 +12663,11 @@ var TabParagraphContainerComponent = /** @class */ (function () {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
-        if (this.tabSubscription) {
-            this.tabSubscription.unsubscribe();
-        }
     };
     TabParagraphContainerComponent.ctorParameters = function () { return [
         { type: CmsComponentData },
         { type: CmsService },
-        { type: WindowRef },
-        { type: BreakpointService }
+        { type: WindowRef }
     ]; };
     __decorate([
         ViewChildren(ComponentWrapperDirective)
@@ -12691,7 +12675,7 @@ var TabParagraphContainerComponent = /** @class */ (function () {
     TabParagraphContainerComponent = __decorate([
         Component({
             selector: 'cx-tab-paragraph-container',
-            template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i, $event)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
+            template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], TabParagraphContainerComponent);
