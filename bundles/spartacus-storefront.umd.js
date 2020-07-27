@@ -12790,11 +12790,12 @@
     }());
 
     var TabParagraphContainerComponent = /** @class */ (function () {
-        function TabParagraphContainerComponent(componentData, cmsService, winRef) {
+        function TabParagraphContainerComponent(componentData, cmsService, winRef, breakpointService) {
             var _this = this;
             this.componentData = componentData;
             this.cmsService = cmsService;
             this.winRef = winRef;
+            this.breakpointService = breakpointService;
             this.activeTabNum = 0;
             this.tabTitleParams = [];
             this.components$ = this.componentData.data$.pipe(operators.distinctUntilChanged(function (x, y) { return (x === null || x === void 0 ? void 0 : x.components) === (y === null || y === void 0 ? void 0 : y.components); }), operators.switchMap(function (data) {
@@ -12812,12 +12813,27 @@
                 }));
             }));
         }
-        TabParagraphContainerComponent.prototype.select = function (tabNum) {
-            this.activeTabNum = tabNum;
+        TabParagraphContainerComponent.prototype.select = function (tabNum, event) {
+            var _this = this;
+            var _a;
+            (_a = this.breakpointService) === null || _a === void 0 ? void 0 : _a.isDown(exports.BREAKPOINT.sm).pipe(operators.take(1)).subscribe(function (res) {
+                var _a, _b;
+                if (res) {
+                    _this.activeTabNum = _this.activeTabNum === tabNum ? -1 : tabNum;
+                    if (event && (event === null || event === void 0 ? void 0 : event.target)) {
+                        var target = event.target;
+                        var parentNode = target.parentNode;
+                        (_b = (_a = _this.winRef) === null || _a === void 0 ? void 0 : _a.nativeWindow) === null || _b === void 0 ? void 0 : _b.scrollTo(0, parentNode.offsetTop);
+                    }
+                }
+                else {
+                    _this.activeTabNum = tabNum;
+                }
+            });
         };
         TabParagraphContainerComponent.prototype.ngOnInit = function () {
-            var _a, _b, _c, _d;
-            this.activeTabNum = (_d = (_c = (_b = (_a = this.winRef.nativeWindow) === null || _a === void 0 ? void 0 : _a.history) === null || _b === void 0 ? void 0 : _b.state) === null || _c === void 0 ? void 0 : _c.activeTab) !== null && _d !== void 0 ? _d : this.activeTabNum;
+            var _a, _b, _c, _d, _e;
+            this.activeTabNum = (_e = (_d = (_c = (_b = (_a = this.winRef) === null || _a === void 0 ? void 0 : _a.nativeWindow) === null || _b === void 0 ? void 0 : _b.history) === null || _c === void 0 ? void 0 : _c.state) === null || _d === void 0 ? void 0 : _d.activeTab) !== null && _e !== void 0 ? _e : this.activeTabNum;
         };
         TabParagraphContainerComponent.prototype.ngAfterViewInit = function () {
             var _this = this;
@@ -12853,7 +12869,8 @@
         TabParagraphContainerComponent.ctorParameters = function () { return [
             { type: CmsComponentData },
             { type: core$1.CmsService },
-            { type: core$1.WindowRef }
+            { type: core$1.WindowRef },
+            { type: BreakpointService }
         ]; };
         __decorate([
             core.ViewChildren(ComponentWrapperDirective)
@@ -12861,7 +12878,7 @@
         TabParagraphContainerComponent = __decorate([
             core.Component({
                 selector: 'cx-tab-paragraph-container',
-                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                template: "<ng-container *ngFor=\"let component of components$ | async; let i = index\">\n  <ng-container *ngIf=\"component\">\n    <button [class.active]=\"i === activeTabNum\" (click)=\"select(i, $event)\">\n      {{ component.title | cxTranslate: { param: tabTitleParams[i] | async } }}\n    </button>\n    <div [class.active]=\"i === activeTabNum\">\n      <ng-template [cxOutlet]=\"component.flexType\" [cxOutletContext]=\"{}\">\n        <ng-container [cxComponentWrapper]=\"component\"></ng-container>\n      </ng-template>\n    </div>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: core.ChangeDetectionStrategy.OnPush
             })
         ], TabParagraphContainerComponent);
