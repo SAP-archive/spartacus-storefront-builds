@@ -1,8 +1,8 @@
-import { __decorate, __values, __param, __extends, __read, __spread, __assign } from 'tslib';
-import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, isDevMode, RendererFactory2, ComponentFactoryResolver, TemplateRef, Input, Directive, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, Optional, Injector, INJECTOR, ChangeDetectorRef, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, SecurityContext, ViewChildren, inject } from '@angular/core';
-import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, from, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
-import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, switchMap, shareReplay, mergeMap, debounceTime, endWith, pluck, observeOn, delayWhen, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, ConfigModule, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { __decorate, __values, __param, __extends, __read, __spread, __assign, __awaiter, __generator } from 'tslib';
+import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, isDevMode, RendererFactory2, ComponentFactoryResolver, TemplateRef, Input, Directive, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, Optional, Injector, InjectFlags, NgModuleFactory, Compiler, INJECTOR, ChangeDetectorRef, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, SecurityContext, ViewChildren, inject } from '@angular/core';
+import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
+import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, endWith, delayWhen, skip } from 'rxjs/operators';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, configurationFactory, ConfigInitializerService, deepMerge, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, TranslationService, ConfigModule, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, CheckoutModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -5964,11 +5964,233 @@ function sortTitles(title1, title2) {
     }
 }
 
+/**
+ * Service responsible for resolving cms config based feature modules.
+ */
+var FeatureModulesService = /** @class */ (function () {
+    function FeatureModulesService(configInitializer, compiler, injector) {
+        this.configInitializer = configInitializer;
+        this.compiler = compiler;
+        this.injector = injector;
+        // maps componentType to feature
+        this.componentFeatureMap = new Map();
+        /*
+         * Contains either FeatureInstance or FeatureInstance resolver for not yet
+         * resolved feature modules
+         */
+        this.features = new Map();
+        this.dependencyModules = new Map();
+        this.initFeatureMap();
+    }
+    FeatureModulesService.prototype.initFeatureMap = function () {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var config, _c, _d, _e, featureName, featureConfig, _f, _g, component;
+            var e_1, _h, e_2, _j;
+            return __generator(this, function (_k) {
+                switch (_k.label) {
+                    case 0: return [4 /*yield*/, this.configInitializer.getStableConfig('featureModules')];
+                    case 1:
+                        config = _k.sent();
+                        this.featureModulesConfig = (_a = config.featureModules) !== null && _a !== void 0 ? _a : {};
+                        try {
+                            for (_c = __values(Object.entries(this.featureModulesConfig)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                _e = __read(_d.value, 2), featureName = _e[0], featureConfig = _e[1];
+                                if ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length) {
+                                    try {
+                                        for (_f = (e_2 = void 0, __values(featureConfig.cmsComponents)), _g = _f.next(); !_g.done; _g = _f.next()) {
+                                            component = _g.value;
+                                            this.componentFeatureMap.set(component, featureName);
+                                        }
+                                    }
+                                    catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                                    finally {
+                                        try {
+                                            if (_g && !_g.done && (_j = _f.return)) _j.call(_f);
+                                        }
+                                        finally { if (e_2) throw e_2.error; }
+                                    }
+                                }
+                            }
+                        }
+                        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                        finally {
+                            try {
+                                if (_d && !_d.done && (_h = _c.return)) _h.call(_c);
+                            }
+                            finally { if (e_1) throw e_1.error; }
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    /**
+     * Check if there is feature module configuration that covers specified
+     * component type
+     */
+    FeatureModulesService.prototype.hasFeatureFor = function (componentType) {
+        return this.componentFeatureMap.has(componentType);
+    };
+    /**
+     * Return full CmsComponent mapping defined in feature module
+     */
+    FeatureModulesService.prototype.getCmsMapping = function (componentType) {
+        var feature = this.componentFeatureMap.get(componentType);
+        return this.resolveFeature(feature).pipe(map(function (featureInstance) { return featureInstance.componentsMappings[componentType]; }));
+    };
+    /**
+     * Get all injectors for feature and its dependencies
+     *
+     * As it's a synchronous method, it works only for already resolved features,
+     * returning undefined otherwise
+     */
+    FeatureModulesService.prototype.getInjectors = function (componentType) {
+        var _this = this;
+        var _a;
+        var feature = this.componentFeatureMap.get(componentType);
+        var injectors;
+        // we are returning injectors only for already resolved features
+        (_a = this.features
+            .get(feature)) === null || _a === void 0 ? void 0 : _a.subscribe(function (featureInstance) {
+            injectors = __spread([
+                // feature module injector
+                featureInstance.moduleRef.injector
+            ], featureInstance.depsModules.map(function (module) { return _this.dependencyModules.get(module).injector; }));
+        }).unsubscribe();
+        return injectors;
+    };
+    /**
+     * Resolve feature based on feature name, if feature was not yet resolved
+     *
+     * It will first resolve all module dependencies if defined
+     */
+    FeatureModulesService.prototype.resolveFeature = function (featureName) {
+        var _this = this;
+        return defer(function () {
+            var _a;
+            if (!_this.features.has(featureName)) {
+                var featureConfig_1 = _this.featureModulesConfig[featureName];
+                if (!(featureConfig_1 === null || featureConfig_1 === void 0 ? void 0 : featureConfig_1.module)) {
+                    throw new Error('No module defined for Feature Module ' + featureName);
+                }
+                // resolve dependencies first (if any)
+                var depsResolve = ((_a = featureConfig_1.dependencies) === null || _a === void 0 ? void 0 : _a.length) ? forkJoin(featureConfig_1.dependencies.map(function (depModuleFunc) {
+                    return _this.resolveDependencyModule(depModuleFunc);
+                }))
+                    : of(undefined);
+                _this.features.set(featureName, depsResolve.pipe(switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), shareReplay()));
+            }
+            return _this.features.get(featureName);
+        });
+    };
+    /**
+     * Initialize feature module by returning feature instance
+     */
+    FeatureModulesService.prototype.resolveFeatureModule = function (featureConfig, depsModules) {
+        var _this = this;
+        if (depsModules === void 0) { depsModules = []; }
+        return this.resolveModuleFactory(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module).pipe(map(function (_a) {
+            var e_3, _b;
+            var _c = __read(_a, 1), moduleFactory = _c[0];
+            var moduleRef = moduleFactory.create(_this.injector);
+            var featureInstance = __assign(__assign({}, featureConfig), { moduleRef: moduleRef,
+                depsModules: depsModules, componentsMappings: {} });
+            // resolve configuration for feature module
+            var resolvedConfiguration = _this.resolveFeatureConfiguration(moduleRef.injector);
+            try {
+                // extract cms components configuration from feature config
+                for (var _d = __values(featureInstance.cmsComponents), _e = _d.next(); !_e.done; _e = _d.next()) {
+                    var componentType = _e.value;
+                    featureInstance.componentsMappings[componentType] =
+                        resolvedConfiguration.cmsComponents[componentType];
+                }
+            }
+            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            finally {
+                try {
+                    if (_e && !_e.done && (_b = _d.return)) _b.call(_d);
+                }
+                finally { if (e_3) throw e_3.error; }
+            }
+            return featureInstance;
+        }));
+    };
+    /**
+     * Returns configuration provided in feature module
+     */
+    FeatureModulesService.prototype.resolveFeatureConfiguration = function (featureInjector) {
+        // get config chunks from feature lib
+        var featureConfigChunks = featureInjector.get(ConfigChunk, [], InjectFlags.Self);
+        // get default config chunks from feature lib
+        var featureDefaultConfigChunks = featureInjector.get(DefaultConfigChunk, [], InjectFlags.Self);
+        return configurationFactory(featureConfigChunks, featureDefaultConfigChunks);
+    };
+    /**
+     * Resolves dependency module and initializes single module instance
+     */
+    FeatureModulesService.prototype.resolveDependencyModule = function (moduleFunc) {
+        var _this = this;
+        // We grab moduleFactory symbol from module function and if there is no
+        // such a module created yet, we create it and store it in a
+        // dependencyModules map
+        return this.resolveModuleFactory(moduleFunc).pipe(tap(function (_a) {
+            var _b = __read(_a, 2), moduleFactory = _b[0], module = _b[1];
+            if (!_this.dependencyModules.has(module)) {
+                var moduleRef = moduleFactory.create(_this.injector);
+                _this.dependencyModules.set(module, moduleRef);
+            }
+        }), pluck(1));
+    };
+    /**
+     * Resolve any Angular module from an function that return module or moduleFactory
+     */
+    FeatureModulesService.prototype.resolveModuleFactory = function (moduleFunc) {
+        var _this = this;
+        return from(moduleFunc()).pipe(switchMap(function (module) {
+            return module instanceof NgModuleFactory
+                ? of([module, module])
+                : combineLatest([
+                    // using compiler here is for jit compatibility, there is no overhead
+                    // for aot production builds as it will be stubbed
+                    from(_this.compiler.compileModuleAsync(module)),
+                    of(module),
+                ]);
+        }), observeOn(queueScheduler));
+    };
+    FeatureModulesService.prototype.ngOnDestroy = function () {
+        // clean up all initialized features
+        merge.apply(void 0, __spread(Array.from(this.features.values()))).subscribe(function (featureInstance) { var _a; return (_a = featureInstance.moduleRef) === null || _a === void 0 ? void 0 : _a.destroy(); });
+        // clean up all initialized dependency modules
+        this.dependencyModules.forEach(function (dependency) { return dependency.destroy(); });
+    };
+    FeatureModulesService.ctorParameters = function () { return [
+        { type: ConfigInitializerService },
+        { type: Compiler },
+        { type: Injector }
+    ]; };
+    FeatureModulesService.ɵprov = ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(ɵɵinject(ConfigInitializerService), ɵɵinject(Compiler), ɵɵinject(INJECTOR)); }, token: FeatureModulesService, providedIn: "root" });
+    FeatureModulesService = __decorate([
+        Injectable({
+            providedIn: 'root',
+        })
+    ], FeatureModulesService);
+    return FeatureModulesService;
+}());
+
 var CmsComponentsService = /** @class */ (function () {
-    function CmsComponentsService(config, platformId) {
+    /**
+     * @deprecated since 2.1
+     * constructor(config: CmsConfig, platformId: Object);
+     */
+    function CmsComponentsService(config, platformId, featureModules) {
         this.config = config;
         this.platformId = platformId;
+        this.featureModules = featureModules;
         this.missingComponents = [];
+        this.mappings = {};
+        // contains
+        this.mappingResolvers = new Map();
     }
     /**
      * Should be called to make sure all component mappings are determined,
@@ -5979,7 +6201,65 @@ var CmsComponentsService = /** @class */ (function () {
      * of potential errors that could be thrown otherwise.
      */
     CmsComponentsService.prototype.determineMappings = function (componentTypes) {
-        return of(componentTypes);
+        var _this = this;
+        return defer(function () {
+            var e_1, _a;
+            // we use defer, to be sure the logic below used to compose final observable
+            // will be executed at subscription time (with up to date state at the time,
+            // when it will be needed)
+            var featureResolvers = [];
+            try {
+                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                    var componentType = componentTypes_1_1.value;
+                    if (!_this.mappings[componentType]) {
+                        var staticConfig = _this.config.cmsComponents[componentType];
+                        // check if this component type is managed by feature module
+                        if (_this.featureModules.hasFeatureFor(componentType)) {
+                            featureResolvers.push(
+                            // we delegate populating this.mappings to feature resolver
+                            _this.getFeatureMappingResolver(componentType, staticConfig));
+                        }
+                        else {
+                            // simply use only static config
+                            _this.mappings[componentType] = staticConfig;
+                        }
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            if (featureResolvers.length) {
+                return forkJoin(featureResolvers).pipe(mapTo(componentTypes));
+            }
+            else {
+                return of(componentTypes);
+            }
+        });
+    };
+    CmsComponentsService.prototype.getFeatureMappingResolver = function (componentType, staticConfig) {
+        var _this = this;
+        if (!this.mappingResolvers.has(componentType)) {
+            var mappingResolver$ = this.featureModules
+                .getCmsMapping(componentType)
+                .pipe(tap(function (featureComponentMapping) {
+                // We treat cms mapping configuration from a feature as a default,
+                // that can be overridden by app/static configuration
+                _this.mappings[componentType] = deepMerge({}, featureComponentMapping, staticConfig);
+                _this.mappingResolvers.delete(componentType);
+            }), share());
+            this.mappingResolvers.set(componentType, mappingResolver$);
+        }
+        return this.mappingResolvers.get(componentType);
+    };
+    CmsComponentsService.prototype.getInjectors = function (componentType) {
+        var _a;
+        return ((_a = (this.featureModules.hasFeatureFor(componentType) &&
+            this.featureModules.getInjectors(componentType))) !== null && _a !== void 0 ? _a : []);
     };
     /**
      * Return collection of component mapping configuration for specified list of
@@ -5992,8 +6272,8 @@ var CmsComponentsService = /** @class */ (function () {
      * should be called and completed first.
      */
     CmsComponentsService.prototype.getMapping = function (componentType) {
-        var _a;
-        var componentConfig = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType];
+        var _a, _b;
+        var componentConfig = (_a = this.mappings[componentType]) !== null && _a !== void 0 ? _a : (_b = this.config.cmsComponents) === null || _b === void 0 ? void 0 : _b[componentType];
         if (!componentConfig) {
             if (!this.missingComponents.includes(componentType)) {
                 this.missingComponents.push(componentType);
@@ -6022,39 +6302,15 @@ var CmsComponentsService = /** @class */ (function () {
      * Get cms driven child routes for components
      */
     CmsComponentsService.prototype.getChildRoutes = function (componentTypes) {
-        var e_1, _a;
+        var e_2, _a;
         var _b, _c;
         var routes = [];
         try {
-            for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                var componentType = componentTypes_1_1.value;
+            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                var componentType = componentTypes_2_1.value;
                 if (this.shouldRender(componentType)) {
                     routes.push.apply(routes, __spread(((_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.childRoutes) !== null && _c !== void 0 ? _c : [])));
                 }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return routes;
-    };
-    /**
-     * Get cms driven guards for components
-     */
-    CmsComponentsService.prototype.getGuards = function (componentTypes) {
-        var e_2, _a;
-        var _b, _c;
-        var guards = new Set();
-        try {
-            for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                var componentType = componentTypes_2_1.value;
-                (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.guards) === null || _c === void 0 ? void 0 : _c.forEach(function (guard) {
-                    return guards.add(guard);
-                });
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
@@ -6064,23 +6320,21 @@ var CmsComponentsService = /** @class */ (function () {
             }
             finally { if (e_2) throw e_2.error; }
         }
-        return Array.from(guards);
+        return routes;
     };
     /**
-     * Get i18n keys associated with components
+     * Get cms driven guards for components
      */
-    CmsComponentsService.prototype.getI18nKeys = function (componentTypes) {
+    CmsComponentsService.prototype.getGuards = function (componentTypes) {
         var e_3, _a;
         var _b, _c;
-        var i18nKeys = new Set();
+        var guards = new Set();
         try {
             for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
                 var componentType = componentTypes_3_1.value;
-                if (this.shouldRender(componentType)) {
-                    (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.i18nKeys) === null || _c === void 0 ? void 0 : _c.forEach(function (key) {
-                        return i18nKeys.add(key);
-                    });
-                }
+                (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.guards) === null || _c === void 0 ? void 0 : _c.forEach(function (guard) {
+                    return guards.add(guard);
+                });
             }
         }
         catch (e_3_1) { e_3 = { error: e_3_1 }; }
@@ -6090,13 +6344,40 @@ var CmsComponentsService = /** @class */ (function () {
             }
             finally { if (e_3) throw e_3.error; }
         }
+        return Array.from(guards);
+    };
+    /**
+     * Get i18n keys associated with components
+     */
+    CmsComponentsService.prototype.getI18nKeys = function (componentTypes) {
+        var e_4, _a;
+        var _b, _c;
+        var i18nKeys = new Set();
+        try {
+            for (var componentTypes_4 = __values(componentTypes), componentTypes_4_1 = componentTypes_4.next(); !componentTypes_4_1.done; componentTypes_4_1 = componentTypes_4.next()) {
+                var componentType = componentTypes_4_1.value;
+                if (this.shouldRender(componentType)) {
+                    (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.i18nKeys) === null || _c === void 0 ? void 0 : _c.forEach(function (key) {
+                        return i18nKeys.add(key);
+                    });
+                }
+            }
+        }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
+        finally {
+            try {
+                if (componentTypes_4_1 && !componentTypes_4_1.done && (_a = componentTypes_4.return)) _a.call(componentTypes_4);
+            }
+            finally { if (e_4) throw e_4.error; }
+        }
         return Array.from(i18nKeys);
     };
     CmsComponentsService.ctorParameters = function () { return [
         { type: CmsConfig },
-        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] }
+        { type: Object, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
+        { type: FeatureModulesService }
     ]; };
-    CmsComponentsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsComponentsService_Factory() { return new CmsComponentsService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID)); }, token: CmsComponentsService, providedIn: "root" });
+    CmsComponentsService.ɵprov = ɵɵdefineInjectable({ factory: function CmsComponentsService_Factory() { return new CmsComponentsService(ɵɵinject(CmsConfig), ɵɵinject(PLATFORM_ID), ɵɵinject(FeatureModulesService)); }, token: CmsComponentsService, providedIn: "root" });
     CmsComponentsService = __decorate([
         Injectable({
             providedIn: 'root',
@@ -6104,6 +6385,59 @@ var CmsComponentsService = /** @class */ (function () {
         __param(1, Inject(PLATFORM_ID))
     ], CmsComponentsService);
     return CmsComponentsService;
+}());
+
+var NOT_FOUND_SYMBOL = {};
+/**
+ * CombinedInjector is able to combine more than one injector together in a way
+ * that main injector is supported by complementary injectors.
+ *
+ * Should be used as a parent injector for components, when we want to have access
+ * to both providers from component hierarchical injectors and providers from any
+ * number of additional injectors (lazy loaded modules for example).
+ */
+var CombinedInjector = /** @class */ (function () {
+    /**
+     * @param mainInjector Component hierarchical injector
+     * @param complementaryInjectors Additional injector that will be taken into an account when resolving dependencies
+     */
+    function CombinedInjector(mainInjector, complementaryInjectors) {
+        this.mainInjector = mainInjector;
+        this.complementaryInjectors = complementaryInjectors;
+    }
+    CombinedInjector.prototype.get = function (token, notFoundValue, flags) {
+        var e_1, _a;
+        // tslint:disable-next-line:no-bitwise
+        if (flags & InjectFlags.Self) {
+            if (notFoundValue !== undefined) {
+                return notFoundValue;
+            }
+            throw new Error("CombinedInjector should be used as a parent injector / doesn't support self dependencies");
+        }
+        try {
+            for (var _b = __values(__spread([
+                this.mainInjector
+            ], this.complementaryInjectors)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var injector = _c.value;
+                // First we are resolving providers provided at Self level in all injectors,
+                // starting with main injector and going through complementary ones...
+                var service = injector.get(token, NOT_FOUND_SYMBOL, InjectFlags.Self);
+                if (service !== NOT_FOUND_SYMBOL) {
+                    return service;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        // ...and then fallback to main injector passing the flag
+        return this.mainInjector.get(token, notFoundValue, flags);
+    };
+    return CombinedInjector;
 }());
 
 /**
@@ -6128,6 +6462,10 @@ var CmsInjectorService = /** @class */ (function () {
     CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
         var _a, _b;
         var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+        var complementaryInjectors = this.cmsComponentsService.getInjectors(type);
+        if (complementaryInjectors === null || complementaryInjectors === void 0 ? void 0 : complementaryInjectors.length) {
+            parentInjector = new CombinedInjector(parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector, complementaryInjectors);
+        }
         return Injector.create({
             providers: __spread([
                 {
@@ -21151,5 +21489,5 @@ var B2cStorefrontModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartPageVisitedEvent, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageVisitedEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PageVisitedEvent, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableModule, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, AsmComponentService as ɵba, CSAgentLoginFormComponent as ɵbb, CustomerSelectionComponent as ɵbc, AsmSessionTimerComponent as ɵbd, FormatTimerPipe as ɵbe, CustomerEmulationComponent as ɵbf, AsmToggleUiComponent as ɵbg, defaultAsmLayoutConfig as ɵbh, defaultCheckoutConfig as ɵbi, defaultQualtricsConfig as ɵbj, CmsPageGuardService as ɵbk, CmsRoutesImplService as ɵbl, ReturnRequestService as ɵbm, MyCouponsComponentService as ɵbn, addCmsRoute as ɵbo, defaultStorefrontRoutesConfig as ɵbp, defaultRoutingConfig as ɵbq, htmlLangProvider as ɵbr, setHtmlLangAttribute as ɵbs, EventsModule as ɵbt, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, LockFocusDirective as ɵf, TrapFocusDirective as ɵg, TabFocusDirective as ɵh, AutoFocusDirective as ɵi, EscapeFocusDirective as ɵj, PersistFocusDirective as ɵk, BlockFocusDirective as ɵl, VisibleFocusDirective as ɵm, BaseFocusDirective as ɵn, BaseFocusService as ɵo, PersistFocusService as ɵp, EscapeFocusService as ɵq, AutoFocusService as ɵr, TabFocusService as ɵs, TrapFocusService as ɵt, LockFocusService as ɵu, defaultAnonymousConsentLayoutConfig as ɵv, AsmLoaderModule as ɵw, asmFactory as ɵx, AsmEnablerService as ɵy, AsmMainUiComponent as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartPageVisitedEvent, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageVisitedEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PageVisitedEvent, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableModule, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, AsmComponentService as ɵba, CSAgentLoginFormComponent as ɵbb, CustomerSelectionComponent as ɵbc, AsmSessionTimerComponent as ɵbd, FormatTimerPipe as ɵbe, CustomerEmulationComponent as ɵbf, AsmToggleUiComponent as ɵbg, defaultAsmLayoutConfig as ɵbh, defaultCheckoutConfig as ɵbi, defaultQualtricsConfig as ɵbj, CmsPageGuardService as ɵbk, CmsRoutesImplService as ɵbl, ReturnRequestService as ɵbm, MyCouponsComponentService as ɵbn, addCmsRoute as ɵbo, defaultStorefrontRoutesConfig as ɵbp, defaultRoutingConfig as ɵbq, htmlLangProvider as ɵbr, setHtmlLangAttribute as ɵbs, EventsModule as ɵbt, getStructuredDataFactory as ɵc, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, LockFocusDirective as ɵf, TrapFocusDirective as ɵg, TabFocusDirective as ɵh, AutoFocusDirective as ɵi, EscapeFocusDirective as ɵj, PersistFocusDirective as ɵk, BlockFocusDirective as ɵl, VisibleFocusDirective as ɵm, BaseFocusDirective as ɵn, BaseFocusService as ɵo, PersistFocusService as ɵp, EscapeFocusService as ɵq, AutoFocusService as ɵr, TabFocusService as ɵs, TrapFocusService as ɵt, LockFocusService as ɵu, defaultAnonymousConsentLayoutConfig as ɵv, AsmLoaderModule as ɵw, asmFactory as ɵx, AsmEnablerService as ɵy, AsmMainUiComponent as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

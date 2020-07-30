@@ -6149,11 +6149,233 @@
         }
     }
 
+    /**
+     * Service responsible for resolving cms config based feature modules.
+     */
+    var FeatureModulesService = /** @class */ (function () {
+        function FeatureModulesService(configInitializer, compiler, injector) {
+            this.configInitializer = configInitializer;
+            this.compiler = compiler;
+            this.injector = injector;
+            // maps componentType to feature
+            this.componentFeatureMap = new Map();
+            /*
+             * Contains either FeatureInstance or FeatureInstance resolver for not yet
+             * resolved feature modules
+             */
+            this.features = new Map();
+            this.dependencyModules = new Map();
+            this.initFeatureMap();
+        }
+        FeatureModulesService.prototype.initFeatureMap = function () {
+            var _a, _b;
+            return __awaiter(this, void 0, void 0, function () {
+                var config, _c, _d, _e, featureName, featureConfig, _f, _g, component;
+                var e_1, _h, e_2, _j;
+                return __generator(this, function (_k) {
+                    switch (_k.label) {
+                        case 0: return [4 /*yield*/, this.configInitializer.getStableConfig('featureModules')];
+                        case 1:
+                            config = _k.sent();
+                            this.featureModulesConfig = (_a = config.featureModules) !== null && _a !== void 0 ? _a : {};
+                            try {
+                                for (_c = __values(Object.entries(this.featureModulesConfig)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                    _e = __read(_d.value, 2), featureName = _e[0], featureConfig = _e[1];
+                                    if ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length) {
+                                        try {
+                                            for (_f = (e_2 = void 0, __values(featureConfig.cmsComponents)), _g = _f.next(); !_g.done; _g = _f.next()) {
+                                                component = _g.value;
+                                                this.componentFeatureMap.set(component, featureName);
+                                            }
+                                        }
+                                        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                                        finally {
+                                            try {
+                                                if (_g && !_g.done && (_j = _f.return)) _j.call(_f);
+                                            }
+                                            finally { if (e_2) throw e_2.error; }
+                                        }
+                                    }
+                                }
+                            }
+                            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                            finally {
+                                try {
+                                    if (_d && !_d.done && (_h = _c.return)) _h.call(_c);
+                                }
+                                finally { if (e_1) throw e_1.error; }
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        };
+        /**
+         * Check if there is feature module configuration that covers specified
+         * component type
+         */
+        FeatureModulesService.prototype.hasFeatureFor = function (componentType) {
+            return this.componentFeatureMap.has(componentType);
+        };
+        /**
+         * Return full CmsComponent mapping defined in feature module
+         */
+        FeatureModulesService.prototype.getCmsMapping = function (componentType) {
+            var feature = this.componentFeatureMap.get(componentType);
+            return this.resolveFeature(feature).pipe(operators.map(function (featureInstance) { return featureInstance.componentsMappings[componentType]; }));
+        };
+        /**
+         * Get all injectors for feature and its dependencies
+         *
+         * As it's a synchronous method, it works only for already resolved features,
+         * returning undefined otherwise
+         */
+        FeatureModulesService.prototype.getInjectors = function (componentType) {
+            var _this = this;
+            var _a;
+            var feature = this.componentFeatureMap.get(componentType);
+            var injectors;
+            // we are returning injectors only for already resolved features
+            (_a = this.features
+                .get(feature)) === null || _a === void 0 ? void 0 : _a.subscribe(function (featureInstance) {
+                injectors = __spread([
+                    // feature module injector
+                    featureInstance.moduleRef.injector
+                ], featureInstance.depsModules.map(function (module) { return _this.dependencyModules.get(module).injector; }));
+            }).unsubscribe();
+            return injectors;
+        };
+        /**
+         * Resolve feature based on feature name, if feature was not yet resolved
+         *
+         * It will first resolve all module dependencies if defined
+         */
+        FeatureModulesService.prototype.resolveFeature = function (featureName) {
+            var _this = this;
+            return rxjs.defer(function () {
+                var _a;
+                if (!_this.features.has(featureName)) {
+                    var featureConfig_1 = _this.featureModulesConfig[featureName];
+                    if (!(featureConfig_1 === null || featureConfig_1 === void 0 ? void 0 : featureConfig_1.module)) {
+                        throw new Error('No module defined for Feature Module ' + featureName);
+                    }
+                    // resolve dependencies first (if any)
+                    var depsResolve = ((_a = featureConfig_1.dependencies) === null || _a === void 0 ? void 0 : _a.length) ? rxjs.forkJoin(featureConfig_1.dependencies.map(function (depModuleFunc) {
+                        return _this.resolveDependencyModule(depModuleFunc);
+                    }))
+                        : rxjs.of(undefined);
+                    _this.features.set(featureName, depsResolve.pipe(operators.switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), operators.shareReplay()));
+                }
+                return _this.features.get(featureName);
+            });
+        };
+        /**
+         * Initialize feature module by returning feature instance
+         */
+        FeatureModulesService.prototype.resolveFeatureModule = function (featureConfig, depsModules) {
+            var _this = this;
+            if (depsModules === void 0) { depsModules = []; }
+            return this.resolveModuleFactory(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module).pipe(operators.map(function (_a) {
+                var e_3, _b;
+                var _c = __read(_a, 1), moduleFactory = _c[0];
+                var moduleRef = moduleFactory.create(_this.injector);
+                var featureInstance = __assign(__assign({}, featureConfig), { moduleRef: moduleRef,
+                    depsModules: depsModules, componentsMappings: {} });
+                // resolve configuration for feature module
+                var resolvedConfiguration = _this.resolveFeatureConfiguration(moduleRef.injector);
+                try {
+                    // extract cms components configuration from feature config
+                    for (var _d = __values(featureInstance.cmsComponents), _e = _d.next(); !_e.done; _e = _d.next()) {
+                        var componentType = _e.value;
+                        featureInstance.componentsMappings[componentType] =
+                            resolvedConfiguration.cmsComponents[componentType];
+                    }
+                }
+                catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                finally {
+                    try {
+                        if (_e && !_e.done && (_b = _d.return)) _b.call(_d);
+                    }
+                    finally { if (e_3) throw e_3.error; }
+                }
+                return featureInstance;
+            }));
+        };
+        /**
+         * Returns configuration provided in feature module
+         */
+        FeatureModulesService.prototype.resolveFeatureConfiguration = function (featureInjector) {
+            // get config chunks from feature lib
+            var featureConfigChunks = featureInjector.get(core$1.ConfigChunk, [], core.InjectFlags.Self);
+            // get default config chunks from feature lib
+            var featureDefaultConfigChunks = featureInjector.get(core$1.DefaultConfigChunk, [], core.InjectFlags.Self);
+            return core$1.configurationFactory(featureConfigChunks, featureDefaultConfigChunks);
+        };
+        /**
+         * Resolves dependency module and initializes single module instance
+         */
+        FeatureModulesService.prototype.resolveDependencyModule = function (moduleFunc) {
+            var _this = this;
+            // We grab moduleFactory symbol from module function and if there is no
+            // such a module created yet, we create it and store it in a
+            // dependencyModules map
+            return this.resolveModuleFactory(moduleFunc).pipe(operators.tap(function (_a) {
+                var _b = __read(_a, 2), moduleFactory = _b[0], module = _b[1];
+                if (!_this.dependencyModules.has(module)) {
+                    var moduleRef = moduleFactory.create(_this.injector);
+                    _this.dependencyModules.set(module, moduleRef);
+                }
+            }), operators.pluck(1));
+        };
+        /**
+         * Resolve any Angular module from an function that return module or moduleFactory
+         */
+        FeatureModulesService.prototype.resolveModuleFactory = function (moduleFunc) {
+            var _this = this;
+            return rxjs.from(moduleFunc()).pipe(operators.switchMap(function (module) {
+                return module instanceof core.NgModuleFactory
+                    ? rxjs.of([module, module])
+                    : rxjs.combineLatest([
+                        // using compiler here is for jit compatibility, there is no overhead
+                        // for aot production builds as it will be stubbed
+                        rxjs.from(_this.compiler.compileModuleAsync(module)),
+                        rxjs.of(module),
+                    ]);
+            }), operators.observeOn(rxjs.queueScheduler));
+        };
+        FeatureModulesService.prototype.ngOnDestroy = function () {
+            // clean up all initialized features
+            rxjs.merge.apply(void 0, __spread(Array.from(this.features.values()))).subscribe(function (featureInstance) { var _a; return (_a = featureInstance.moduleRef) === null || _a === void 0 ? void 0 : _a.destroy(); });
+            // clean up all initialized dependency modules
+            this.dependencyModules.forEach(function (dependency) { return dependency.destroy(); });
+        };
+        FeatureModulesService.ctorParameters = function () { return [
+            { type: core$1.ConfigInitializerService },
+            { type: core.Compiler },
+            { type: core.Injector }
+        ]; };
+        FeatureModulesService.ɵprov = core.ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(core.ɵɵinject(core$1.ConfigInitializerService), core.ɵɵinject(core.Compiler), core.ɵɵinject(core.INJECTOR)); }, token: FeatureModulesService, providedIn: "root" });
+        FeatureModulesService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], FeatureModulesService);
+        return FeatureModulesService;
+    }());
+
     var CmsComponentsService = /** @class */ (function () {
-        function CmsComponentsService(config, platformId) {
+        /**
+         * @deprecated since 2.1
+         * constructor(config: CmsConfig, platformId: Object);
+         */
+        function CmsComponentsService(config, platformId, featureModules) {
             this.config = config;
             this.platformId = platformId;
+            this.featureModules = featureModules;
             this.missingComponents = [];
+            this.mappings = {};
+            // contains
+            this.mappingResolvers = new Map();
         }
         /**
          * Should be called to make sure all component mappings are determined,
@@ -6164,7 +6386,65 @@
          * of potential errors that could be thrown otherwise.
          */
         CmsComponentsService.prototype.determineMappings = function (componentTypes) {
-            return rxjs.of(componentTypes);
+            var _this = this;
+            return rxjs.defer(function () {
+                var e_1, _a;
+                // we use defer, to be sure the logic below used to compose final observable
+                // will be executed at subscription time (with up to date state at the time,
+                // when it will be needed)
+                var featureResolvers = [];
+                try {
+                    for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
+                        var componentType = componentTypes_1_1.value;
+                        if (!_this.mappings[componentType]) {
+                            var staticConfig = _this.config.cmsComponents[componentType];
+                            // check if this component type is managed by feature module
+                            if (_this.featureModules.hasFeatureFor(componentType)) {
+                                featureResolvers.push(
+                                // we delegate populating this.mappings to feature resolver
+                                _this.getFeatureMappingResolver(componentType, staticConfig));
+                            }
+                            else {
+                                // simply use only static config
+                                _this.mappings[componentType] = staticConfig;
+                            }
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                if (featureResolvers.length) {
+                    return rxjs.forkJoin(featureResolvers).pipe(operators.mapTo(componentTypes));
+                }
+                else {
+                    return rxjs.of(componentTypes);
+                }
+            });
+        };
+        CmsComponentsService.prototype.getFeatureMappingResolver = function (componentType, staticConfig) {
+            var _this = this;
+            if (!this.mappingResolvers.has(componentType)) {
+                var mappingResolver$ = this.featureModules
+                    .getCmsMapping(componentType)
+                    .pipe(operators.tap(function (featureComponentMapping) {
+                    // We treat cms mapping configuration from a feature as a default,
+                    // that can be overridden by app/static configuration
+                    _this.mappings[componentType] = core$1.deepMerge({}, featureComponentMapping, staticConfig);
+                    _this.mappingResolvers.delete(componentType);
+                }), operators.share());
+                this.mappingResolvers.set(componentType, mappingResolver$);
+            }
+            return this.mappingResolvers.get(componentType);
+        };
+        CmsComponentsService.prototype.getInjectors = function (componentType) {
+            var _a;
+            return ((_a = (this.featureModules.hasFeatureFor(componentType) &&
+                this.featureModules.getInjectors(componentType))) !== null && _a !== void 0 ? _a : []);
         };
         /**
          * Return collection of component mapping configuration for specified list of
@@ -6177,8 +6457,8 @@
          * should be called and completed first.
          */
         CmsComponentsService.prototype.getMapping = function (componentType) {
-            var _a;
-            var componentConfig = (_a = this.config.cmsComponents) === null || _a === void 0 ? void 0 : _a[componentType];
+            var _a, _b;
+            var componentConfig = (_a = this.mappings[componentType]) !== null && _a !== void 0 ? _a : (_b = this.config.cmsComponents) === null || _b === void 0 ? void 0 : _b[componentType];
             if (!componentConfig) {
                 if (!this.missingComponents.includes(componentType)) {
                     this.missingComponents.push(componentType);
@@ -6207,39 +6487,15 @@
          * Get cms driven child routes for components
          */
         CmsComponentsService.prototype.getChildRoutes = function (componentTypes) {
-            var e_1, _a;
+            var e_2, _a;
             var _b, _c;
             var routes = [];
             try {
-                for (var componentTypes_1 = __values(componentTypes), componentTypes_1_1 = componentTypes_1.next(); !componentTypes_1_1.done; componentTypes_1_1 = componentTypes_1.next()) {
-                    var componentType = componentTypes_1_1.value;
+                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
+                    var componentType = componentTypes_2_1.value;
                     if (this.shouldRender(componentType)) {
                         routes.push.apply(routes, __spread(((_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.childRoutes) !== null && _c !== void 0 ? _c : [])));
                     }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (componentTypes_1_1 && !componentTypes_1_1.done && (_a = componentTypes_1.return)) _a.call(componentTypes_1);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return routes;
-        };
-        /**
-         * Get cms driven guards for components
-         */
-        CmsComponentsService.prototype.getGuards = function (componentTypes) {
-            var e_2, _a;
-            var _b, _c;
-            var guards = new Set();
-            try {
-                for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
-                    var componentType = componentTypes_2_1.value;
-                    (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.guards) === null || _c === void 0 ? void 0 : _c.forEach(function (guard) {
-                        return guards.add(guard);
-                    });
                 }
             }
             catch (e_2_1) { e_2 = { error: e_2_1 }; }
@@ -6249,23 +6505,21 @@
                 }
                 finally { if (e_2) throw e_2.error; }
             }
-            return Array.from(guards);
+            return routes;
         };
         /**
-         * Get i18n keys associated with components
+         * Get cms driven guards for components
          */
-        CmsComponentsService.prototype.getI18nKeys = function (componentTypes) {
+        CmsComponentsService.prototype.getGuards = function (componentTypes) {
             var e_3, _a;
             var _b, _c;
-            var i18nKeys = new Set();
+            var guards = new Set();
             try {
                 for (var componentTypes_3 = __values(componentTypes), componentTypes_3_1 = componentTypes_3.next(); !componentTypes_3_1.done; componentTypes_3_1 = componentTypes_3.next()) {
                     var componentType = componentTypes_3_1.value;
-                    if (this.shouldRender(componentType)) {
-                        (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.i18nKeys) === null || _c === void 0 ? void 0 : _c.forEach(function (key) {
-                            return i18nKeys.add(key);
-                        });
-                    }
+                    (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.guards) === null || _c === void 0 ? void 0 : _c.forEach(function (guard) {
+                        return guards.add(guard);
+                    });
                 }
             }
             catch (e_3_1) { e_3 = { error: e_3_1 }; }
@@ -6275,13 +6529,40 @@
                 }
                 finally { if (e_3) throw e_3.error; }
             }
+            return Array.from(guards);
+        };
+        /**
+         * Get i18n keys associated with components
+         */
+        CmsComponentsService.prototype.getI18nKeys = function (componentTypes) {
+            var e_4, _a;
+            var _b, _c;
+            var i18nKeys = new Set();
+            try {
+                for (var componentTypes_4 = __values(componentTypes), componentTypes_4_1 = componentTypes_4.next(); !componentTypes_4_1.done; componentTypes_4_1 = componentTypes_4.next()) {
+                    var componentType = componentTypes_4_1.value;
+                    if (this.shouldRender(componentType)) {
+                        (_c = (_b = this.getMapping(componentType)) === null || _b === void 0 ? void 0 : _b.i18nKeys) === null || _c === void 0 ? void 0 : _c.forEach(function (key) {
+                            return i18nKeys.add(key);
+                        });
+                    }
+                }
+            }
+            catch (e_4_1) { e_4 = { error: e_4_1 }; }
+            finally {
+                try {
+                    if (componentTypes_4_1 && !componentTypes_4_1.done && (_a = componentTypes_4.return)) _a.call(componentTypes_4);
+                }
+                finally { if (e_4) throw e_4.error; }
+            }
             return Array.from(i18nKeys);
         };
         CmsComponentsService.ctorParameters = function () { return [
             { type: core$1.CmsConfig },
-            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] }
+            { type: Object, decorators: [{ type: core.Inject, args: [core.PLATFORM_ID,] }] },
+            { type: FeatureModulesService }
         ]; };
-        CmsComponentsService.ɵprov = core.ɵɵdefineInjectable({ factory: function CmsComponentsService_Factory() { return new CmsComponentsService(core.ɵɵinject(core$1.CmsConfig), core.ɵɵinject(core.PLATFORM_ID)); }, token: CmsComponentsService, providedIn: "root" });
+        CmsComponentsService.ɵprov = core.ɵɵdefineInjectable({ factory: function CmsComponentsService_Factory() { return new CmsComponentsService(core.ɵɵinject(core$1.CmsConfig), core.ɵɵinject(core.PLATFORM_ID), core.ɵɵinject(FeatureModulesService)); }, token: CmsComponentsService, providedIn: "root" });
         CmsComponentsService = __decorate([
             core.Injectable({
                 providedIn: 'root',
@@ -6289,6 +6570,59 @@
             __param(1, core.Inject(core.PLATFORM_ID))
         ], CmsComponentsService);
         return CmsComponentsService;
+    }());
+
+    var NOT_FOUND_SYMBOL = {};
+    /**
+     * CombinedInjector is able to combine more than one injector together in a way
+     * that main injector is supported by complementary injectors.
+     *
+     * Should be used as a parent injector for components, when we want to have access
+     * to both providers from component hierarchical injectors and providers from any
+     * number of additional injectors (lazy loaded modules for example).
+     */
+    var CombinedInjector = /** @class */ (function () {
+        /**
+         * @param mainInjector Component hierarchical injector
+         * @param complementaryInjectors Additional injector that will be taken into an account when resolving dependencies
+         */
+        function CombinedInjector(mainInjector, complementaryInjectors) {
+            this.mainInjector = mainInjector;
+            this.complementaryInjectors = complementaryInjectors;
+        }
+        CombinedInjector.prototype.get = function (token, notFoundValue, flags) {
+            var e_1, _a;
+            // tslint:disable-next-line:no-bitwise
+            if (flags & core.InjectFlags.Self) {
+                if (notFoundValue !== undefined) {
+                    return notFoundValue;
+                }
+                throw new Error("CombinedInjector should be used as a parent injector / doesn't support self dependencies");
+            }
+            try {
+                for (var _b = __values(__spread([
+                    this.mainInjector
+                ], this.complementaryInjectors)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var injector = _c.value;
+                    // First we are resolving providers provided at Self level in all injectors,
+                    // starting with main injector and going through complementary ones...
+                    var service = injector.get(token, NOT_FOUND_SYMBOL, core.InjectFlags.Self);
+                    if (service !== NOT_FOUND_SYMBOL) {
+                        return service;
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            // ...and then fallback to main injector passing the flag
+            return this.mainInjector.get(token, notFoundValue, flags);
+        };
+        return CombinedInjector;
     }());
 
     /**
@@ -6313,6 +6647,10 @@
         CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
             var _a, _b;
             var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
+            var complementaryInjectors = this.cmsComponentsService.getInjectors(type);
+            if (complementaryInjectors === null || complementaryInjectors === void 0 ? void 0 : complementaryInjectors.length) {
+                parentInjector = new CombinedInjector(parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector, complementaryInjectors);
+            }
             return core.Injector.create({
                 providers: __spread([
                     {
@@ -21449,6 +21787,7 @@
     exports.FacetListModule = FacetListModule;
     exports.FacetModule = FacetModule;
     exports.FacetService = FacetService;
+    exports.FeatureModulesService = FeatureModulesService;
     exports.FocusDirective = FocusDirective;
     exports.FooterNavigationComponent = FooterNavigationComponent;
     exports.FooterNavigationModule = FooterNavigationModule;

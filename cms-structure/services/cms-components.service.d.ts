@@ -1,11 +1,20 @@
+import { Injector } from '@angular/core';
 import { CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
 import { Route } from '@angular/router';
 import { Observable } from 'rxjs';
+import { FeatureModulesService } from './feature-modules.service';
 export declare class CmsComponentsService {
     protected config: CmsConfig;
     protected platformId: Object;
+    protected featureModules?: FeatureModulesService;
     private missingComponents;
-    constructor(config: CmsConfig, platformId: Object);
+    private mappings;
+    private mappingResolvers;
+    /**
+     * @deprecated since 2.1
+     * constructor(config: CmsConfig, platformId: Object);
+     */
+    constructor(config: CmsConfig, platformId: Object, featureModules?: FeatureModulesService);
     /**
      * Should be called to make sure all component mappings are determined,
      * especially lazy loaded ones.
@@ -15,6 +24,8 @@ export declare class CmsComponentsService {
      * of potential errors that could be thrown otherwise.
      */
     determineMappings(componentTypes: string[]): Observable<string[]>;
+    private getFeatureMappingResolver;
+    getInjectors(componentType: string): Injector[];
     /**
      * Return collection of component mapping configuration for specified list of
      * component types.
