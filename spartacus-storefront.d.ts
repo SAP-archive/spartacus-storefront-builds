@@ -25,6 +25,7 @@ export { defaultRoutingConfig as ɵbq, defaultStorefrontRoutesConfig as ɵbp } f
 export { htmlLangProvider as ɵbr, setHtmlLangAttribute as ɵbs } from './cms-structure/seo/html-lang-provider';
 export { getStructuredDataFactory as ɵc } from './cms-structure/seo/structured-data/structured-data.module';
 export { CmsRoutesImplService as ɵbl } from './cms-structure/services/cms-routes-impl.service';
+export { EventsModule as ɵbt } from './events/events.module';
 export { AutoFocusDirective as ɵi } from './layout/a11y/keyboard-focus/autofocus/auto-focus.directive';
 export { AutoFocusService as ɵr } from './layout/a11y/keyboard-focus/autofocus/auto-focus.service';
 export { BaseFocusDirective as ɵn } from './layout/a11y/keyboard-focus/base/base-focus.directive';

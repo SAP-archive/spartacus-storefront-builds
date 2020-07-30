@@ -1,0 +1,14 @@
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { CartPageEventBuilder } from './cart-page-event.builder';
+let CartPageEventModule = class CartPageEventModule {
+    constructor(_cartPageEventBuilder) { }
+};
+CartPageEventModule.ctorParameters = () => [
+    { type: CartPageEventBuilder }
+];
+CartPageEventModule = __decorate([
+    NgModule({})
+], CartPageEventModule);
+export { CartPageEventModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2FydC1wYWdlLWV2ZW50Lm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImV2ZW50cy9jYXJ0L2NhcnQtcGFnZS1ldmVudC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLG9CQUFvQixFQUFFLE1BQU0sMkJBQTJCLENBQUM7QUFHakUsSUFBYSxtQkFBbUIsR0FBaEMsTUFBYSxtQkFBbUI7SUFDOUIsWUFBWSxxQkFBMkMsSUFBRyxDQUFDO0NBQzVELENBQUE7O1lBRG9DLG9CQUFvQjs7QUFENUMsbUJBQW1CO0lBRC9CLFFBQVEsQ0FBQyxFQUFFLENBQUM7R0FDQSxtQkFBbUIsQ0FFL0I7U0FGWSxtQkFBbUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ2FydFBhZ2VFdmVudEJ1aWxkZXIgfSBmcm9tICcuL2NhcnQtcGFnZS1ldmVudC5idWlsZGVyJztcblxuQE5nTW9kdWxlKHt9KVxuZXhwb3J0IGNsYXNzIENhcnRQYWdlRXZlbnRNb2R1bGUge1xuICBjb25zdHJ1Y3RvcihfY2FydFBhZ2VFdmVudEJ1aWxkZXI6IENhcnRQYWdlRXZlbnRCdWlsZGVyKSB7fVxufVxuIl19

@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/common/http'), require('@angular/service-worker'), require('ngx-infinite-scroll'), require('@ngrx/effects'), require('@ngrx/store')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@spartacus/core', '@angular/common', '@angular/platform-browser', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', '@angular/common/http', '@angular/service-worker', 'ngx-infinite-scroll', '@ngrx/effects', '@ngrx/store'], factory) :
-    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.core, global.ng.common, global.ng.platformBrowser, global.ng.forms, global.ng.router, global.ngSelect, global.ngBootstrap, global.ng.common.http, global.ng.serviceWorker, global.ngxInfiniteScroll, global.effects, global.store));
-}(this, (function (exports, core, rxjs, operators, core$1, common, platformBrowser, forms, router, ngSelect, ngBootstrap, http, serviceWorker, ngxInfiniteScroll, effects, store) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/common/http'), require('@angular/service-worker'), require('ngx-infinite-scroll'), require('@ngrx/store'), require('@ngrx/effects'), require('@ngrx/router-store')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@spartacus/core', '@angular/common', '@angular/platform-browser', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', '@angular/common/http', '@angular/service-worker', 'ngx-infinite-scroll', '@ngrx/store', '@ngrx/effects', '@ngrx/router-store'], factory) :
+    (global = global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.core, global.ng.common, global.ng.platformBrowser, global.ng.forms, global.ng.router, global.ngSelect, global.ngBootstrap, global.ng.common.http, global.ng.serviceWorker, global.ngxInfiniteScroll, global.store, global.effects, global.fromNgrxRouter));
+}(this, (function (exports, core, rxjs, operators, core$1, common, platformBrowser, forms, router, ngSelect, ngBootstrap, http, serviceWorker, ngxInfiniteScroll, store, effects, routerStore) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -20807,6 +20807,242 @@
         return ProductListingPageModule;
     }());
 
+    /**
+     * Indicates either that a user visited an arbitrary page of a web presence or that the page type was unknown.
+     */
+    var PageVisitedEvent = /** @class */ (function () {
+        function PageVisitedEvent() {
+        }
+        return PageVisitedEvent;
+    }());
+    /**
+     * Indicates that a user visited the home page of a web presence.
+     */
+    var HomePageVisitedEvent = /** @class */ (function (_super) {
+        __extends(HomePageVisitedEvent, _super);
+        function HomePageVisitedEvent() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return HomePageVisitedEvent;
+    }(PageVisitedEvent));
+
+    /**
+     * Indicates that a user visited a cart page.
+     */
+    var CartPageVisitedEvent = /** @class */ (function (_super) {
+        __extends(CartPageVisitedEvent, _super);
+        function CartPageVisitedEvent() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        return CartPageVisitedEvent;
+    }(PageVisitedEvent));
+
+    var CartPageEventBuilder = /** @class */ (function () {
+        function CartPageEventBuilder(actions, eventService) {
+            this.actions = actions;
+            this.eventService = eventService;
+            this.register();
+        }
+        CartPageEventBuilder.prototype.register = function () {
+            this.eventService.register(CartPageVisitedEvent, this.buildCartPageEvent());
+        };
+        CartPageEventBuilder.prototype.buildCartPageEvent = function () {
+            return this.eventService.get(PageVisitedEvent).pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'cart'; }), operators.map(function (pageVisitedEvent) {
+                return core$1.createFrom(CartPageVisitedEvent, pageVisitedEvent);
+            }));
+        };
+        CartPageEventBuilder.ctorParameters = function () { return [
+            { type: store.ActionsSubject },
+            { type: core$1.EventService }
+        ]; };
+        CartPageEventBuilder.ɵprov = core.ɵɵdefineInjectable({ factory: function CartPageEventBuilder_Factory() { return new CartPageEventBuilder(core.ɵɵinject(store.ActionsSubject), core.ɵɵinject(core$1.EventService)); }, token: CartPageEventBuilder, providedIn: "root" });
+        CartPageEventBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], CartPageEventBuilder);
+        return CartPageEventBuilder;
+    }());
+
+    var CartPageEventModule = /** @class */ (function () {
+        function CartPageEventModule(_cartPageEventBuilder) {
+        }
+        CartPageEventModule.ctorParameters = function () { return [
+            { type: CartPageEventBuilder }
+        ]; };
+        CartPageEventModule = __decorate([
+            core.NgModule({})
+        ], CartPageEventModule);
+        return CartPageEventModule;
+    }());
+
+    var PageEventBuilder = /** @class */ (function () {
+        function PageEventBuilder(actions, eventService) {
+            this.actions = actions;
+            this.eventService = eventService;
+            this.register();
+        }
+        PageEventBuilder.prototype.register = function () {
+            this.eventService.register(PageVisitedEvent, this.buildPageVisitedEvent());
+            this.eventService.register(HomePageVisitedEvent, this.buildHomePageVisitedEvent());
+        };
+        PageEventBuilder.prototype.buildPageVisitedEvent = function () {
+            return this.getNavigatedEvent().pipe(operators.map(function (state) {
+                return core$1.createFrom(PageVisitedEvent, {
+                    context: state.context,
+                    semanticRoute: state.semanticRoute,
+                    url: state.url,
+                    params: state.params,
+                });
+            }));
+        };
+        PageEventBuilder.prototype.buildHomePageVisitedEvent = function () {
+            return this.buildPageVisitedEvent().pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'home'; }), operators.map(function (pageVisitedEvent) {
+                return core$1.createFrom(HomePageVisitedEvent, pageVisitedEvent);
+            }));
+        };
+        PageEventBuilder.prototype.getNavigatedEvent = function () {
+            return this.actions.pipe(effects.ofType(routerStore.ROUTER_NAVIGATED), operators.map(function (event) { return event.payload.routerState; }));
+        };
+        PageEventBuilder.ctorParameters = function () { return [
+            { type: store.ActionsSubject },
+            { type: core$1.EventService }
+        ]; };
+        PageEventBuilder.ɵprov = core.ɵɵdefineInjectable({ factory: function PageEventBuilder_Factory() { return new PageEventBuilder(core.ɵɵinject(store.ActionsSubject), core.ɵɵinject(core$1.EventService)); }, token: PageEventBuilder, providedIn: "root" });
+        PageEventBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], PageEventBuilder);
+        return PageEventBuilder;
+    }());
+
+    var PageEventModule = /** @class */ (function () {
+        function PageEventModule(_pageEventBuilder) {
+        }
+        PageEventModule.ctorParameters = function () { return [
+            { type: PageEventBuilder }
+        ]; };
+        PageEventModule = __decorate([
+            core.NgModule({})
+        ], PageEventModule);
+        return PageEventModule;
+    }());
+
+    /**
+     * Indicates that a user visited a product details page. A visited product code value is emitted whenever the product
+     * details page is visited, together with the name, the price, and the categories of that product.
+     */
+    var ProductDetailsPageEvent = /** @class */ (function () {
+        function ProductDetailsPageEvent() {
+        }
+        return ProductDetailsPageEvent;
+    }());
+    /**
+     * Indicates that a user visited a category. The code and the name of the category
+     * are emitted whenever a category page is visited.
+     */
+    var CategoryPageResultsEvent = /** @class */ (function () {
+        function CategoryPageResultsEvent() {
+        }
+        return CategoryPageResultsEvent;
+    }());
+    /**
+     * Indicates that the search results have been retrieved.
+     * The search term and the number of results are emitted
+     * whenever a search has been executed.
+     */
+    var SearchPageResultsEvent = /** @class */ (function () {
+        function SearchPageResultsEvent() {
+        }
+        return SearchPageResultsEvent;
+    }());
+
+    var ProductPageEventBuilder = /** @class */ (function () {
+        function ProductPageEventBuilder(eventService, productService, productSearchService) {
+            this.eventService = eventService;
+            this.productService = productService;
+            this.productSearchService = productSearchService;
+            this.register();
+        }
+        ProductPageEventBuilder.prototype.register = function () {
+            this.eventService.register(SearchPageResultsEvent, this.buildSearchPageResultsEvent());
+            this.eventService.register(ProductDetailsPageEvent, this.buildProductDetailsPageEvent());
+            this.eventService.register(CategoryPageResultsEvent, this.buildCategoryResultsPageEvent());
+        };
+        ProductPageEventBuilder.prototype.buildProductDetailsPageEvent = function () {
+            var _this = this;
+            return this.eventService.get(PageVisitedEvent).pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'product'; }), operators.map(function (pageVisitedEvent) { return pageVisitedEvent.context.id; }), operators.switchMap(function (productId) {
+                return _this.productService.get(productId).pipe(operators.filter(function (product) { return Boolean(product); }), operators.take(1), operators.map(function (product) {
+                    return core$1.createFrom(ProductDetailsPageEvent, {
+                        categories: product.categories,
+                        code: product.code,
+                        name: product.name,
+                        price: product.price,
+                    });
+                }));
+            }));
+        };
+        ProductPageEventBuilder.prototype.buildCategoryResultsPageEvent = function () {
+            var searchResults$ = this.productSearchService.getResults().pipe(
+            // skipping the initial value, and preventing emission of the previous search state
+            operators.skip(1));
+            var categoryPageVisitedEvent$ = this.eventService
+                .get(PageVisitedEvent)
+                .pipe(operators.map(function (pageVisitedEvent) { return ({
+                isCategoryPage: pageVisitedEvent.semanticRoute === 'category',
+                categoryCode: pageVisitedEvent.context.id,
+            }); }));
+            return categoryPageVisitedEvent$.pipe(operators.switchMap(function (pageEvent) {
+                if (!pageEvent.isCategoryPage) {
+                    return rxjs.EMPTY;
+                }
+                return searchResults$.pipe(operators.map(function (searchResults) { return ({
+                    categoryCode: pageEvent.categoryCode,
+                    categoryName: searchResults.breadcrumbs[0].facetValueName,
+                }); }), operators.map(function (categoryPage) {
+                    return core$1.createFrom(CategoryPageResultsEvent, categoryPage);
+                }));
+            }));
+        };
+        ProductPageEventBuilder.prototype.buildSearchPageResultsEvent = function () {
+            var searchResults$ = this.productSearchService.getResults().pipe(
+            // skipping the initial value, and preventing emission of the previous search state
+            operators.skip(1), operators.map(function (searchResults) { return ({
+                searchTerm: searchResults.freeTextSearch,
+                numberOfResults: searchResults.pagination.totalResults,
+            }); }), operators.map(function (searchPage) { return core$1.createFrom(SearchPageResultsEvent, searchPage); }));
+            var searchPageVisitedEvent$ = this.eventService
+                .get(PageVisitedEvent)
+                .pipe(operators.map(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'search'; }));
+            return searchPageVisitedEvent$.pipe(operators.switchMap(function (isSearchPage) { return (isSearchPage ? searchResults$ : rxjs.EMPTY); }));
+        };
+        ProductPageEventBuilder.ctorParameters = function () { return [
+            { type: core$1.EventService },
+            { type: core$1.ProductService },
+            { type: core$1.ProductSearchService }
+        ]; };
+        ProductPageEventBuilder.ɵprov = core.ɵɵdefineInjectable({ factory: function ProductPageEventBuilder_Factory() { return new ProductPageEventBuilder(core.ɵɵinject(core$1.EventService), core.ɵɵinject(core$1.ProductService), core.ɵɵinject(core$1.ProductSearchService)); }, token: ProductPageEventBuilder, providedIn: "root" });
+        ProductPageEventBuilder = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], ProductPageEventBuilder);
+        return ProductPageEventBuilder;
+    }());
+
+    var ProductPageEventModule = /** @class */ (function () {
+        function ProductPageEventModule(_productPageEventBuilder) {
+        }
+        ProductPageEventModule.ctorParameters = function () { return [
+            { type: ProductPageEventBuilder }
+        ]; };
+        ProductPageEventModule = __decorate([
+            core.NgModule({})
+        ], ProductPageEventModule);
+        return ProductPageEventModule;
+    }());
+
     var b2cLayoutConfig = {
         // deferredLoading: {
         //   strategy: DeferLoadingStrategy.DEFER,
@@ -20972,6 +21208,17 @@
         };
     }
 
+    var EventsModule = /** @class */ (function () {
+        function EventsModule() {
+        }
+        EventsModule = __decorate([
+            core.NgModule({
+                imports: [CartPageEventModule, PageEventModule, ProductPageEventModule],
+            })
+        ], EventsModule);
+        return EventsModule;
+    }());
+
     var StorefrontFoundationModule = /** @class */ (function () {
         function StorefrontFoundationModule() {
         }
@@ -20997,6 +21244,7 @@
                     core$1.FeaturesConfigModule.forRoot('2.0'),
                     LayoutModule,
                     MediaModule.forRoot(),
+                    EventsModule,
                 ],
                 exports: [LayoutModule],
                 providers: __spread(core$1.provideConfigFromMetaTags()),
@@ -21136,12 +21384,16 @@
     exports.CartItemComponent = CartItemComponent;
     exports.CartItemListComponent = CartItemListComponent;
     exports.CartNotEmptyGuard = CartNotEmptyGuard;
+    exports.CartPageEventBuilder = CartPageEventBuilder;
+    exports.CartPageEventModule = CartPageEventModule;
     exports.CartPageLayoutHandler = CartPageLayoutHandler;
+    exports.CartPageVisitedEvent = CartPageVisitedEvent;
     exports.CartSharedModule = CartSharedModule;
     exports.CartTotalsComponent = CartTotalsComponent;
     exports.CartTotalsModule = CartTotalsModule;
     exports.CategoryNavigationComponent = CategoryNavigationComponent;
     exports.CategoryNavigationModule = CategoryNavigationModule;
+    exports.CategoryPageResultsEvent = CategoryPageResultsEvent;
     exports.CheckoutAuthGuard = CheckoutAuthGuard;
     exports.CheckoutComponentModule = CheckoutComponentModule;
     exports.CheckoutConfig = CheckoutConfig;
@@ -21213,6 +21465,7 @@
     exports.HamburgerMenuModule = HamburgerMenuModule;
     exports.HamburgerMenuService = HamburgerMenuService;
     exports.HighlightPipe = HighlightPipe;
+    exports.HomePageVisitedEvent = HomePageVisitedEvent;
     exports.IconComponent = IconComponent;
     exports.IconConfig = IconConfig;
     exports.IconLoaderService = IconLoaderService;
@@ -21304,11 +21557,14 @@
     exports.PRODUCT_LISTING_URL_MATCHER = PRODUCT_LISTING_URL_MATCHER;
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.PageComponentModule = PageComponentModule;
+    exports.PageEventBuilder = PageEventBuilder;
+    exports.PageEventModule = PageEventModule;
     exports.PageLayoutComponent = PageLayoutComponent;
     exports.PageLayoutModule = PageLayoutModule;
     exports.PageLayoutService = PageLayoutService;
     exports.PageSlotComponent = PageSlotComponent;
     exports.PageSlotModule = PageSlotModule;
+    exports.PageVisitedEvent = PageVisitedEvent;
     exports.PaginationBuilder = PaginationBuilder;
     exports.PaginationComponent = PaginationComponent;
     exports.PaginationConfig = PaginationConfig;
@@ -21328,6 +21584,7 @@
     exports.ProductCarouselComponent = ProductCarouselComponent;
     exports.ProductCarouselModule = ProductCarouselModule;
     exports.ProductCarouselService = ProductCarouselService;
+    exports.ProductDetailsPageEvent = ProductDetailsPageEvent;
     exports.ProductDetailsPageModule = ProductDetailsPageModule;
     exports.ProductDetailsTabComponent = ProductDetailsTabComponent;
     exports.ProductDetailsTabModule = ProductDetailsTabModule;
@@ -21344,6 +21601,8 @@
     exports.ProductListItemComponent = ProductListItemComponent;
     exports.ProductListModule = ProductListModule;
     exports.ProductListingPageModule = ProductListingPageModule;
+    exports.ProductPageEventBuilder = ProductPageEventBuilder;
+    exports.ProductPageEventModule = ProductPageEventModule;
     exports.ProductReferencesComponent = ProductReferencesComponent;
     exports.ProductReferencesModule = ProductReferencesModule;
     exports.ProductReviewsComponent = ProductReviewsComponent;
@@ -21390,6 +21649,7 @@
     exports.SearchBoxComponent = SearchBoxComponent;
     exports.SearchBoxComponentService = SearchBoxComponentService;
     exports.SearchBoxModule = SearchBoxModule;
+    exports.SearchPageResultsEvent = SearchPageResultsEvent;
     exports.SelectFocusUtility = SelectFocusUtility;
     exports.SeoMetaService = SeoMetaService;
     exports.SeoModule = SeoModule;
@@ -21506,6 +21766,7 @@
     exports.ɵbq = defaultRoutingConfig;
     exports.ɵbr = htmlLangProvider;
     exports.ɵbs = setHtmlLangAttribute;
+    exports.ɵbt = EventsModule;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;

@@ -1,0 +1,14 @@
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { PageEventBuilder } from './page-event.builder';
+let PageEventModule = class PageEventModule {
+    constructor(_pageEventBuilder) { }
+};
+PageEventModule.ctorParameters = () => [
+    { type: PageEventBuilder }
+];
+PageEventModule = __decorate([
+    NgModule({})
+], PageEventModule);
+export { PageEventModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnZS1ldmVudC5tb2R1bGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJldmVudHMvcGFnZS9wYWdlLWV2ZW50Lm1vZHVsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUd4RCxJQUFhLGVBQWUsR0FBNUIsTUFBYSxlQUFlO0lBQzFCLFlBQVksaUJBQW1DLElBQUcsQ0FBQztDQUNwRCxDQUFBOztZQURnQyxnQkFBZ0I7O0FBRHBDLGVBQWU7SUFEM0IsUUFBUSxDQUFDLEVBQUUsQ0FBQztHQUNBLGVBQWUsQ0FFM0I7U0FGWSxlQUFlIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFBhZ2VFdmVudEJ1aWxkZXIgfSBmcm9tICcuL3BhZ2UtZXZlbnQuYnVpbGRlcic7XG5cbkBOZ01vZHVsZSh7fSlcbmV4cG9ydCBjbGFzcyBQYWdlRXZlbnRNb2R1bGUge1xuICBjb25zdHJ1Y3RvcihfcGFnZUV2ZW50QnVpbGRlcjogUGFnZUV2ZW50QnVpbGRlcikge31cbn1cbiJdfQ==
