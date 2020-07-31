@@ -997,13 +997,22 @@ var BaseFocusDirective = /** @class */ (function () {
  * Directive implementation that adds a CSS class to the host element
  * when the moused is used to focus an element. As soon as the keyboard
  * is used, the class is removed.
+ *
+ * This feature must be explicitly enabled with the `disableMouseFocus` config.
+ *
+ * The appearance of the visual focus depends on the CSS implementation to
+ * begin with. Spartacus styles add a blue border around each focusable element.
+ * This can be considered annoying by keyboard users, as they won't need such a
+ * strong indication of the selected element.
  */
 var VisibleFocusDirective = /** @class */ (function (_super) {
     __extends(VisibleFocusDirective, _super);
     function VisibleFocusDirective() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.defaultConfig = { disableMouseFocus: true };
-        /** controls a polyfill class for the lacking focus-visible feature */
+        _this.defaultConfig = {
+            disableMouseFocus: true,
+        };
+        /** Controls a css class to hide focus visible CSS rules */
         _this.mouseFocus = false;
         return _this;
     }
@@ -1012,12 +1021,15 @@ var VisibleFocusDirective = /** @class */ (function (_super) {
             this.mouseFocus = true;
         }
     };
-    VisibleFocusDirective.prototype.handleKeydown = function () {
+    VisibleFocusDirective.prototype.handleKeydown = function (event) {
         if (this.shouldFocusVisible) {
-            this.mouseFocus = false;
+            this.mouseFocus = !this.isNavigating(event);
         }
     };
     Object.defineProperty(VisibleFocusDirective.prototype, "shouldFocusVisible", {
+        /**
+         * Indicates whether the configurations setup to disable visual focus.
+         */
         get: function () {
             var _a;
             return (_a = this.config) === null || _a === void 0 ? void 0 : _a.disableMouseFocus;
@@ -1025,6 +1037,25 @@ var VisibleFocusDirective = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Indicates whether the event is used to navigate the storefront. Some keyboard events
+     * are used by mouse users to fill a form or interact with the OS or browser.
+     */
+    VisibleFocusDirective.prototype.isNavigating = function (event) {
+        // when the cmd or ctrl keys are used, the user doesn't navigate the storefront
+        if (event.metaKey) {
+            return false;
+        }
+        // when the tab key is used, users are for navigating away from the current (form) element
+        if (event.code === 'Tab') {
+            return true;
+        }
+        // If the user fill in a form, we don't considering it part of storefront navigation.
+        if (['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
+            return false;
+        }
+        return true;
+    };
     __decorate([
         HostBinding('class.mouse-focus')
     ], VisibleFocusDirective.prototype, "mouseFocus", void 0);
@@ -1032,7 +1063,7 @@ var VisibleFocusDirective = /** @class */ (function (_super) {
         HostListener('mousedown')
     ], VisibleFocusDirective.prototype, "handleMousedown", null);
     __decorate([
-        HostListener('keydown')
+        HostListener('keydown', ['$event'])
     ], VisibleFocusDirective.prototype, "handleKeydown", null);
     VisibleFocusDirective = __decorate([
         Directive() // selector: '[cxVisibleFocus]'
