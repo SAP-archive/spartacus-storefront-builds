@@ -21177,34 +21177,34 @@
     }());
 
     /**
-     * Indicates either that a user visited an arbitrary page of a web presence or that the page type was unknown.
+     * Indicates that a user visited an arbitrary page.
      */
-    var PageVisitedEvent = /** @class */ (function () {
-        function PageVisitedEvent() {
+    var PageEvent = /** @class */ (function () {
+        function PageEvent() {
         }
-        return PageVisitedEvent;
+        return PageEvent;
     }());
     /**
-     * Indicates that a user visited the home page of a web presence.
+     * Indicates that a user visited the home page.
      */
-    var HomePageVisitedEvent = /** @class */ (function (_super) {
-        __extends(HomePageVisitedEvent, _super);
-        function HomePageVisitedEvent() {
+    var HomePageEvent = /** @class */ (function (_super) {
+        __extends(HomePageEvent, _super);
+        function HomePageEvent() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        return HomePageVisitedEvent;
-    }(PageVisitedEvent));
+        return HomePageEvent;
+    }(PageEvent));
 
     /**
      * Indicates that a user visited a cart page.
      */
-    var CartPageVisitedEvent = /** @class */ (function (_super) {
-        __extends(CartPageVisitedEvent, _super);
-        function CartPageVisitedEvent() {
+    var CartPageEvent = /** @class */ (function (_super) {
+        __extends(CartPageEvent, _super);
+        function CartPageEvent() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-        return CartPageVisitedEvent;
-    }(PageVisitedEvent));
+        return CartPageEvent;
+    }(PageEvent));
 
     var CartPageEventBuilder = /** @class */ (function () {
         function CartPageEventBuilder(actions, eventService) {
@@ -21213,12 +21213,10 @@
             this.register();
         }
         CartPageEventBuilder.prototype.register = function () {
-            this.eventService.register(CartPageVisitedEvent, this.buildCartPageEvent());
+            this.eventService.register(CartPageEvent, this.buildCartPageEvent());
         };
         CartPageEventBuilder.prototype.buildCartPageEvent = function () {
-            return this.eventService.get(PageVisitedEvent).pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'cart'; }), operators.map(function (pageVisitedEvent) {
-                return core$1.createFrom(CartPageVisitedEvent, pageVisitedEvent);
-            }));
+            return this.eventService.get(PageEvent).pipe(operators.filter(function (pageEvent) { return pageEvent.semanticRoute === 'cart'; }), operators.map(function (pageEvent) { return core$1.createFrom(CartPageEvent, pageEvent); }));
         };
         CartPageEventBuilder.ctorParameters = function () { return [
             { type: store.ActionsSubject },
@@ -21252,12 +21250,12 @@
             this.register();
         }
         PageEventBuilder.prototype.register = function () {
-            this.eventService.register(PageVisitedEvent, this.buildPageVisitedEvent());
-            this.eventService.register(HomePageVisitedEvent, this.buildHomePageVisitedEvent());
+            this.eventService.register(PageEvent, this.buildPageEvent());
+            this.eventService.register(HomePageEvent, this.buildHomePageEvent());
         };
-        PageEventBuilder.prototype.buildPageVisitedEvent = function () {
+        PageEventBuilder.prototype.buildPageEvent = function () {
             return this.getNavigatedEvent().pipe(operators.map(function (state) {
-                return core$1.createFrom(PageVisitedEvent, {
+                return core$1.createFrom(PageEvent, {
                     context: state.context,
                     semanticRoute: state.semanticRoute,
                     url: state.url,
@@ -21265,10 +21263,8 @@
                 });
             }));
         };
-        PageEventBuilder.prototype.buildHomePageVisitedEvent = function () {
-            return this.buildPageVisitedEvent().pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'home'; }), operators.map(function (pageVisitedEvent) {
-                return core$1.createFrom(HomePageVisitedEvent, pageVisitedEvent);
-            }));
+        PageEventBuilder.prototype.buildHomePageEvent = function () {
+            return this.buildPageEvent().pipe(operators.filter(function (pageEvent) { return pageEvent.semanticRoute === 'home'; }), operators.map(function (pageEvent) { return core$1.createFrom(HomePageEvent, pageEvent); }));
         };
         PageEventBuilder.prototype.getNavigatedEvent = function () {
             return this.actions.pipe(effects.ofType(routerStore.ROUTER_NAVIGATED), operators.map(function (event) { return event.payload.routerState; }));
@@ -21299,8 +21295,7 @@
     }());
 
     /**
-     * Indicates that a user visited a product details page. A visited product code value is emitted whenever the product
-     * details page is visited, together with the name, the price, and the categories of that product.
+     * Indicates that a user visited a product details page.
      */
     var ProductDetailsPageEvent = /** @class */ (function () {
         function ProductDetailsPageEvent() {
@@ -21308,8 +21303,7 @@
         return ProductDetailsPageEvent;
     }());
     /**
-     * Indicates that a user visited a category. The code and the name of the category
-     * are emitted whenever a category page is visited.
+     * Indicates that a user visited a category page.
      */
     var CategoryPageResultsEvent = /** @class */ (function () {
         function CategoryPageResultsEvent() {
@@ -21317,9 +21311,8 @@
         return CategoryPageResultsEvent;
     }());
     /**
-     * Indicates that the search results have been retrieved.
-     * The search term and the number of results are emitted
-     * whenever a search has been executed.
+     * Indicates that the a user visited the search results page,
+     * and that the search results have been retrieved.
      */
     var SearchPageResultsEvent = /** @class */ (function () {
         function SearchPageResultsEvent() {
@@ -21341,7 +21334,7 @@
         };
         ProductPageEventBuilder.prototype.buildProductDetailsPageEvent = function () {
             var _this = this;
-            return this.eventService.get(PageVisitedEvent).pipe(operators.filter(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'product'; }), operators.map(function (pageVisitedEvent) { return pageVisitedEvent.context.id; }), operators.switchMap(function (productId) {
+            return this.eventService.get(PageEvent).pipe(operators.filter(function (pageEvent) { return pageEvent.semanticRoute === 'product'; }), operators.map(function (pageEvent) { return pageEvent.context.id; }), operators.switchMap(function (productId) {
                 return _this.productService.get(productId).pipe(operators.filter(function (product) { return Boolean(product); }), operators.take(1), operators.map(function (product) {
                     return core$1.createFrom(ProductDetailsPageEvent, {
                         categories: product.categories,
@@ -21356,13 +21349,11 @@
             var searchResults$ = this.productSearchService.getResults().pipe(
             // skipping the initial value, and preventing emission of the previous search state
             operators.skip(1));
-            var categoryPageVisitedEvent$ = this.eventService
-                .get(PageVisitedEvent)
-                .pipe(operators.map(function (pageVisitedEvent) { return ({
-                isCategoryPage: pageVisitedEvent.semanticRoute === 'category',
-                categoryCode: pageVisitedEvent.context.id,
+            var categoryPageEvent$ = this.eventService.get(PageEvent).pipe(operators.map(function (pageEvent) { return ({
+                isCategoryPage: pageEvent.semanticRoute === 'category',
+                categoryCode: pageEvent.context.id,
             }); }));
-            return categoryPageVisitedEvent$.pipe(operators.switchMap(function (pageEvent) {
+            return categoryPageEvent$.pipe(operators.switchMap(function (pageEvent) {
                 if (!pageEvent.isCategoryPage) {
                     return rxjs.EMPTY;
                 }
@@ -21381,10 +21372,10 @@
                 searchTerm: searchResults.freeTextSearch,
                 numberOfResults: searchResults.pagination.totalResults,
             }); }), operators.map(function (searchPage) { return core$1.createFrom(SearchPageResultsEvent, searchPage); }));
-            var searchPageVisitedEvent$ = this.eventService
-                .get(PageVisitedEvent)
-                .pipe(operators.map(function (pageVisitedEvent) { return pageVisitedEvent.semanticRoute === 'search'; }));
-            return searchPageVisitedEvent$.pipe(operators.switchMap(function (isSearchPage) { return (isSearchPage ? searchResults$ : rxjs.EMPTY); }));
+            var searchPageEvent$ = this.eventService
+                .get(PageEvent)
+                .pipe(operators.map(function (pageEvent) { return pageEvent.semanticRoute === 'search'; }));
+            return searchPageEvent$.pipe(operators.switchMap(function (isSearchPage) { return (isSearchPage ? searchResults$ : rxjs.EMPTY); }));
         };
         ProductPageEventBuilder.ctorParameters = function () { return [
             { type: core$1.EventService },
@@ -21753,10 +21744,10 @@
     exports.CartItemComponent = CartItemComponent;
     exports.CartItemListComponent = CartItemListComponent;
     exports.CartNotEmptyGuard = CartNotEmptyGuard;
+    exports.CartPageEvent = CartPageEvent;
     exports.CartPageEventBuilder = CartPageEventBuilder;
     exports.CartPageEventModule = CartPageEventModule;
     exports.CartPageLayoutHandler = CartPageLayoutHandler;
-    exports.CartPageVisitedEvent = CartPageVisitedEvent;
     exports.CartSharedModule = CartSharedModule;
     exports.CartTotalsComponent = CartTotalsComponent;
     exports.CartTotalsModule = CartTotalsModule;
@@ -21835,7 +21826,7 @@
     exports.HamburgerMenuModule = HamburgerMenuModule;
     exports.HamburgerMenuService = HamburgerMenuService;
     exports.HighlightPipe = HighlightPipe;
-    exports.HomePageVisitedEvent = HomePageVisitedEvent;
+    exports.HomePageEvent = HomePageEvent;
     exports.IconComponent = IconComponent;
     exports.IconConfig = IconConfig;
     exports.IconLoaderService = IconLoaderService;
@@ -21927,6 +21918,7 @@
     exports.PRODUCT_LISTING_URL_MATCHER = PRODUCT_LISTING_URL_MATCHER;
     exports.PWAModuleConfig = PWAModuleConfig;
     exports.PageComponentModule = PageComponentModule;
+    exports.PageEvent = PageEvent;
     exports.PageEventBuilder = PageEventBuilder;
     exports.PageEventModule = PageEventModule;
     exports.PageLayoutComponent = PageLayoutComponent;
@@ -21934,7 +21926,6 @@
     exports.PageLayoutService = PageLayoutService;
     exports.PageSlotComponent = PageSlotComponent;
     exports.PageSlotModule = PageSlotModule;
-    exports.PageVisitedEvent = PageVisitedEvent;
     exports.PaginationBuilder = PaginationBuilder;
     exports.PaginationComponent = PaginationComponent;
     exports.PaginationConfig = PaginationConfig;

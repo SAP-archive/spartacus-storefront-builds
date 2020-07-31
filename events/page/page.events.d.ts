@@ -1,16 +1,16 @@
 import { Params } from '@angular/router';
 import { PageContext } from '@spartacus/core';
 /**
- * Indicates either that a user visited an arbitrary page of a web presence or that the page type was unknown.
+ * Indicates that a user visited an arbitrary page.
  */
-export declare class PageVisitedEvent {
+export declare class PageEvent {
     context: PageContext;
     semanticRoute?: string;
     url: string;
     params: Params;
 }
 /**
- * Indicates that a user visited the home page of a web presence.
+ * Indicates that a user visited the home page.
  */
-export declare class HomePageVisitedEvent extends PageVisitedEvent {
+export declare class HomePageEvent extends PageEvent {
 }
