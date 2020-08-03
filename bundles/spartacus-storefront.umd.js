@@ -2405,7 +2405,7 @@
     }());
     /**
      * Each ICON type can have an companied resource type, such as SVG, LINK (font) or just TEXT.
-     * The resources will be automitacally loaded in case they're required for the `ICON_TYPE`.
+     * The resources will be automatically loaded in case they're required for the `ICON_TYPE`.
      */
 
     (function (IconResourceType) {
@@ -2480,6 +2480,14 @@
             if (this.isResourceType(type, exports.IconResourceType.TEXT)) {
                 return this.sanitizer.bypassSecurityTrustHtml(this.getSymbol(type));
             }
+        };
+        /**
+         * Return the direction for which the icon should mirror (ltr vs rtl). The icon direction
+         * is configurable, but optional, as only a few icons should be flipped for rtl direction.
+         */
+        IconLoaderService.prototype.getFlipDirection = function (type) {
+            var _a, _b;
+            return (_b = (_a = this.config) === null || _a === void 0 ? void 0 : _a.flipDirection) === null || _b === void 0 ? void 0 : _b[type];
         };
         /**
          *
@@ -2578,6 +2586,25 @@
     }());
 
     /**
+     * The ltr and rtl directions can be used to configure the storefront for a certain direction, both statically
+     * or dynamically.
+     *
+     * The HTML5 "auto" value is not supported in Spartacus, as it's considered to be too fragile for the global
+     * direction.
+     */
+
+    (function (DirectionMode) {
+        /**
+         * Indicates Left to Right direction.
+         */
+        DirectionMode["LTR"] = "ltr";
+        /**
+         * Indicates Right to Left direction.
+         */
+        DirectionMode["RTL"] = "rtl";
+    })(exports.DirectionMode || (exports.DirectionMode = {}));
+
+    /**
      *
      * The icon component can be added in different ways:
      *
@@ -2632,6 +2659,11 @@
             this.icon = this.iconLoader.getHtml(type);
             this.addStyleClasses(type);
             this.iconLoader.addLinkResource(type);
+            // the flip direction is added so that icons can be flipped for rtl vs ltr
+            this.flipAtLtr =
+                this.iconLoader.getFlipDirection(type) === exports.DirectionMode.LTR;
+            this.flipAtRtl =
+                this.iconLoader.getFlipDirection(type) === exports.DirectionMode.RTL;
         };
         /**
          * Adds the style classes and the link resource (if available).
@@ -2669,6 +2701,12 @@
         __decorate([
             core.Input()
         ], IconComponent.prototype, "type", null);
+        __decorate([
+            core.HostBinding('class.flip-at-rtl')
+        ], IconComponent.prototype, "flipAtRtl", void 0);
+        __decorate([
+            core.HostBinding('class.flip-at-ltr')
+        ], IconComponent.prototype, "flipAtLtr", void 0);
         IconComponent = __decorate([
             core.Component({
                 selector: 'cx-icon,[cxIcon]',
@@ -2678,6 +2716,16 @@
         return IconComponent;
     }());
 
+    var defaultIconConfig = {
+        icon: {
+            flipDirection: {
+                STAR: exports.DirectionMode.RTL,
+                CARET_RIGHT: exports.DirectionMode.RTL,
+                CARET_LEFT: exports.DirectionMode.RTL,
+            },
+        },
+    };
+
     var IconModule = /** @class */ (function () {
         function IconModule() {
         }
@@ -2685,7 +2733,11 @@
             core.NgModule({
                 declarations: [IconComponent],
                 imports: [common.CommonModule],
-                providers: [core$1.provideDefaultConfig(fontawesomeIconConfig)],
+                providers: [
+                    core$1.provideDefaultConfig(defaultIconConfig),
+                    // TODO: move the opinionated fontawesome config to a recipe
+                    core$1.provideDefaultConfig(fontawesomeIconConfig),
+                ],
                 exports: [IconComponent],
             })
         ], IconModule);
@@ -11061,25 +11113,6 @@
         };
         return isReady;
     }
-
-    /**
-     * The ltr and rtl directions can be used to configure the storefront for a certain direction, both statically
-     * or dynamically.
-     *
-     * The HTML5 "auto" value is not supported in Spartacus, as it's considered to be too fragile for the global
-     * direction.
-     */
-
-    (function (DirectionMode) {
-        /**
-         * Indicates Left to Right direction.
-         */
-        DirectionMode["LTR"] = "ltr";
-        /**
-         * Indicates Right to Left direction.
-         */
-        DirectionMode["RTL"] = "rtl";
-    })(exports.DirectionMode || (exports.DirectionMode = {}));
 
     /**
      * The direction config provides an easy way to configure "ltr" versus "rtl" direction
@@ -22306,19 +22339,20 @@
     exports.ɵbg = CustomerEmulationComponent;
     exports.ɵbh = AsmToggleUiComponent;
     exports.ɵbi = defaultAsmLayoutConfig;
-    exports.ɵbj = defaultCheckoutConfig;
-    exports.ɵbk = defaultQualtricsConfig;
-    exports.ɵbl = CmsPageGuardService;
-    exports.ɵbm = CmsRoutesImplService;
-    exports.ɵbn = ReturnRequestService;
-    exports.ɵbo = MyCouponsComponentService;
-    exports.ɵbp = addCmsRoute;
-    exports.ɵbq = defaultStorefrontRoutesConfig;
-    exports.ɵbr = defaultRoutingConfig;
-    exports.ɵbs = htmlLangProvider;
-    exports.ɵbt = setHtmlLangAttribute;
-    exports.ɵbu = defaultDirectionConfig;
-    exports.ɵbv = EventsModule;
+    exports.ɵbj = defaultIconConfig;
+    exports.ɵbk = defaultCheckoutConfig;
+    exports.ɵbl = defaultQualtricsConfig;
+    exports.ɵbm = CmsPageGuardService;
+    exports.ɵbn = CmsRoutesImplService;
+    exports.ɵbo = ReturnRequestService;
+    exports.ɵbp = MyCouponsComponentService;
+    exports.ɵbq = addCmsRoute;
+    exports.ɵbr = defaultStorefrontRoutesConfig;
+    exports.ɵbs = defaultRoutingConfig;
+    exports.ɵbt = htmlLangProvider;
+    exports.ɵbu = setHtmlLangAttribute;
+    exports.ɵbv = defaultDirectionConfig;
+    exports.ɵbw = EventsModule;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;

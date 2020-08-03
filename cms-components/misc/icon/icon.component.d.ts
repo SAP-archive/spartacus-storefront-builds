@@ -41,6 +41,13 @@ export declare class IconComponent {
      */
     icon: SafeHtml;
     /**
+     * The flip direction adds information to the DOM on whether it should flipped for a specific
+     * direction (ltr vs rtl). Typically, icons are ltr based, and only in case of rtl some of
+     * the icons will be flipped.
+     */
+    flipAtRtl: boolean;
+    flipAtLtr: boolean;
+    /**
      * Maintains the applied style classes so we can remove them when the
      * icon type changes at run time.
      */

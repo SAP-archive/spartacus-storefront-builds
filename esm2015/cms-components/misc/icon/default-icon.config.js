@@ -1,0 +1,11 @@
+import { DirectionMode } from '../../../layout/direction/config/direction.model';
+export const defaultIconConfig = {
+    icon: {
+        flipDirection: {
+            STAR: DirectionMode.RTL,
+            CARET_RIGHT: DirectionMode.RTL,
+            CARET_LEFT: DirectionMode.RTL,
+        },
+    },
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC1pY29uLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL21pc2MvaWNvbi9kZWZhdWx0LWljb24uY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxrREFBa0QsQ0FBQztBQUdqRixNQUFNLENBQUMsTUFBTSxpQkFBaUIsR0FBZTtJQUMzQyxJQUFJLEVBQUU7UUFDSixhQUFhLEVBQUU7WUFDYixJQUFJLEVBQUUsYUFBYSxDQUFDLEdBQUc7WUFDdkIsV0FBVyxFQUFFLGFBQWEsQ0FBQyxHQUFHO1lBQzlCLFVBQVUsRUFBRSxhQUFhLENBQUMsR0FBRztTQUM5QjtLQUNGO0NBQ0YsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IERpcmVjdGlvbk1vZGUgfSBmcm9tICcuLi8uLi8uLi9sYXlvdXQvZGlyZWN0aW9uL2NvbmZpZy9kaXJlY3Rpb24ubW9kZWwnO1xuaW1wb3J0IHsgSWNvbkNvbmZpZyB9IGZyb20gJy4vaWNvbi5tb2RlbCc7XG5cbmV4cG9ydCBjb25zdCBkZWZhdWx0SWNvbkNvbmZpZzogSWNvbkNvbmZpZyA9IHtcbiAgaWNvbjoge1xuICAgIGZsaXBEaXJlY3Rpb246IHtcbiAgICAgIFNUQVI6IERpcmVjdGlvbk1vZGUuUlRMLFxuICAgICAgQ0FSRVRfUklHSFQ6IERpcmVjdGlvbk1vZGUuUlRMLFxuICAgICAgQ0FSRVRfTEVGVDogRGlyZWN0aW9uTW9kZS5SVEwsXG4gICAgfSxcbiAgfSxcbn07XG4iXX0=

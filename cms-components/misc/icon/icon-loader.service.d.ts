@@ -1,5 +1,6 @@
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { WindowRef } from '@spartacus/core';
+import { DirectionMode } from '../../../layout/direction/config/direction.model';
 import { IconConfig, ICON_TYPE } from './icon.model';
 export declare class IconLoaderService {
     protected winRef: WindowRef;
@@ -11,6 +12,11 @@ export declare class IconLoaderService {
      * Returns an html fragment which can be added to the DOM in a safe way.
      */
     getHtml(type: ICON_TYPE | string): SafeHtml;
+    /**
+     * Return the direction for which the icon should mirror (ltr vs rtl). The icon direction
+     * is configurable, but optional, as only a few icons should be flipped for rtl direction.
+     */
+    getFlipDirection(type: ICON_TYPE | string): DirectionMode;
     /**
      *
      * Returns the symbol class(es) for the icon type.
