@@ -232,7 +232,7 @@
     /**
      * The LayoutConfig supports the configuration of page slots by page templates
      * or page sections, such as headers and footers. The configuration also supports
-     * adaptive design per breadpoint (not per device type), so that the DOM is (re)rendered
+     * adaptive design per breakpoint (not per device type), so that the DOM is (re)rendered
      * por a given breakpoint.
      */
     var LayoutConfig = /** @class */ (function () {
@@ -11062,6 +11062,192 @@
         return isReady;
     }
 
+    /**
+     * The ltr and rtl directions can be used to configure the storefront for a certain direction, both statically
+     * or dynamically.
+     *
+     * The HTML5 "auto" value is not supported in Spartacus, as it's considered to be too fragile for the global
+     * direction.
+     */
+
+    (function (DirectionMode) {
+        /**
+         * Indicates Left to Right direction.
+         */
+        DirectionMode["LTR"] = "ltr";
+        /**
+         * Indicates Right to Left direction.
+         */
+        DirectionMode["RTL"] = "rtl";
+    })(exports.DirectionMode || (exports.DirectionMode = {}));
+
+    /**
+     * The direction config provides an easy way to configure "ltr" versus "rtl" direction
+     * for the storefront. The direction can be configured to detect the direction by language.
+     *
+     * The following configuration detects rtl languages by isoCode for Arabic and Hebrew:
+     *
+     * ```typescript
+     * direction: {
+     *   detect: true,
+     *   default: DirectionMode.LTR,
+     *   rtlLanguages: ['ar', 'he']
+     * }
+     * ```
+     */
+    var DirectionConfig = /** @class */ (function () {
+        function DirectionConfig() {
+        }
+        DirectionConfig.ɵprov = core.ɵɵdefineInjectable({ factory: function DirectionConfig_Factory() { return core.ɵɵinject(core$1.Config); }, token: DirectionConfig, providedIn: "root" });
+        DirectionConfig = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+                useExisting: core$1.Config,
+            })
+        ], DirectionConfig);
+        return DirectionConfig;
+    }());
+
+    var defaultDirectionConfig = {
+        direction: {
+            detect: true,
+            default: exports.DirectionMode.LTR,
+            // we're not polluting the system with all defaults for ltr, but add 2 common used
+            // languages (hebrew and arabic) to easily demo directionality
+            // see https://meta.wikimedia.org/wiki/Template:List_of_language_names_ordered_by_code
+            rtlLanguages: ['he', 'ar'],
+        },
+    };
+
+    /**
+     * The `DirectionService` can be used to add the direction to the overall storefront or individual elements.
+     * By default, the direction is added to the `html` element (i.e. `<html dir="ltr">`). The API of this service
+     * does however provide methods to add direction to individual elements if needed.
+     *
+     * The direction is configurable and allows for language driven direction configuration.
+     *
+     * To react to the active language, the service subscribes to the active language in the initialize method. This
+     * is called from an APP_INITIALIZER method and should only happen once.
+     */
+    var DirectionService = /** @class */ (function () {
+        function DirectionService(configInit, languageService, winRef) {
+            this.configInit = configInit;
+            this.languageService = languageService;
+            this.winRef = winRef;
+            this.startsDetecting = false;
+            this.subscription = new rxjs.Subscription();
+        }
+        /**
+         * Initializes the layout direction for the storefront.
+         */
+        DirectionService.prototype.initialize = function () {
+            var _this = this;
+            return this.configInit
+                .getStableConfig('direction')
+                .then(function (config) {
+                var _a, _b;
+                _this.config = config === null || config === void 0 ? void 0 : config.direction;
+                if ((_a = _this.config) === null || _a === void 0 ? void 0 : _a.detect) {
+                    _this.detect();
+                }
+                else {
+                    _this.setDirection(_this.winRef.document.documentElement, (_b = _this.config) === null || _b === void 0 ? void 0 : _b.default);
+                }
+            });
+        };
+        /**
+         * Observes the _active_ language and set the required direction for the given language.
+         * The method is guarded to ensure that the active language is observed only once.
+         */
+        DirectionService.prototype.detect = function () {
+            var _this = this;
+            if (this.startsDetecting) {
+                return;
+            }
+            this.subscription.add(this.languageService
+                .getActive()
+                .subscribe(function (isoCode) {
+                return _this.setDirection(_this.winRef.document.documentElement, _this.getDirection(isoCode));
+            }));
+            this.startsDetecting = true;
+        };
+        /**
+         * Sets the direction attribute for the given element. If the direction is undefined, the `dir`
+         * attribute is removed.
+         */
+        DirectionService.prototype.setDirection = function (el, direction) {
+            if (direction) {
+                el.setAttribute('dir', direction);
+            }
+            else {
+                el.removeAttribute('dir');
+            }
+        };
+        /**
+         * Gets the `DirectionMode` for the given language isoCode. The language isoCode is compared
+         * to the configured list of languages(`direction.rtlLanguages` vs `direction.ltrLanguages`).
+         *
+         * If no language is given, or no language mapping could be found, we fallback to the default
+         * `direction.mode`.
+         */
+        DirectionService.prototype.getDirection = function (language) {
+            var _a, _b, _c, _d, _e;
+            if (language && ((_b = (_a = this.config) === null || _a === void 0 ? void 0 : _a.rtlLanguages) === null || _b === void 0 ? void 0 : _b.includes(language))) {
+                return exports.DirectionMode.RTL;
+            }
+            if (language && ((_d = (_c = this.config) === null || _c === void 0 ? void 0 : _c.ltrLanguages) === null || _d === void 0 ? void 0 : _d.includes(language))) {
+                return exports.DirectionMode.LTR;
+            }
+            return (_e = this.config) === null || _e === void 0 ? void 0 : _e.default;
+        };
+        DirectionService.prototype.ngOnDestroy = function () {
+            // Cleans up the subscription, to avoid memory leaks in SSR.
+            this.subscription.unsubscribe();
+        };
+        DirectionService.ctorParameters = function () { return [
+            { type: core$1.ConfigInitializerService },
+            { type: core$1.LanguageService },
+            { type: core$1.WindowRef }
+        ]; };
+        DirectionService.ɵprov = core.ɵɵdefineInjectable({ factory: function DirectionService_Factory() { return new DirectionService(core.ɵɵinject(core$1.ConfigInitializerService), core.ɵɵinject(core$1.LanguageService), core.ɵɵinject(core$1.WindowRef)); }, token: DirectionService, providedIn: "root" });
+        DirectionService = __decorate([
+            core.Injectable({
+                providedIn: 'root',
+            })
+        ], DirectionService);
+        return DirectionService;
+    }());
+
+    function initHtmlDirAttribute(directionService, featureConfigService) {
+        var result = function () {
+            if (featureConfigService.isLevel('2.1')) {
+                return directionService.initialize();
+            }
+        };
+        return result;
+    }
+    /**
+     * Provides a configuration and APP_INITIALIZER to add the correct (language drive) html direction.
+     */
+    var DirectionModule = /** @class */ (function () {
+        function DirectionModule() {
+        }
+        DirectionModule = __decorate([
+            core.NgModule({
+                providers: [
+                    {
+                        provide: core.APP_INITIALIZER,
+                        multi: true,
+                        useFactory: initHtmlDirAttribute,
+                        deps: [DirectionService, core$1.FeatureConfigService],
+                    },
+                    core$1.provideDefaultConfig(defaultDirectionConfig),
+                ],
+            })
+        ], DirectionModule);
+        return DirectionModule;
+    }());
+
     var HamburgerMenuService = /** @class */ (function () {
         function HamburgerMenuService(router$1) {
             var _this = this;
@@ -11150,7 +11336,7 @@
         }
         LayoutModule = __decorate([
             core.NgModule({
-                imports: [OutletRefModule, LaunchDialogModule.forRoot()],
+                imports: [OutletRefModule, LaunchDialogModule.forRoot(), DirectionModule],
                 exports: [OutletRefModule],
             })
         ], LayoutModule);
@@ -21803,6 +21989,9 @@
     exports.DeliveryModeComponent = DeliveryModeComponent;
     exports.DeliveryModeModule = DeliveryModeModule;
     exports.DeliveryModeSetGuard = DeliveryModeSetGuard;
+    exports.DirectionConfig = DirectionConfig;
+    exports.DirectionModule = DirectionModule;
+    exports.DirectionService = DirectionService;
     exports.ExpressCheckoutService = ExpressCheckoutService;
     exports.FacetComponent = FacetComponent;
     exports.FacetListComponent = FacetListComponent;
@@ -22108,50 +22297,52 @@
     exports.ɵ2 = ɵ2;
     exports.ɵa = pwaConfigurationFactory;
     exports.ɵb = pwaFactory;
-    exports.ɵba = AsmComponentService;
-    exports.ɵbb = CSAgentLoginFormComponent;
-    exports.ɵbc = CustomerSelectionComponent;
-    exports.ɵbd = AsmSessionTimerComponent;
-    exports.ɵbe = FormatTimerPipe;
-    exports.ɵbf = CustomerEmulationComponent;
-    exports.ɵbg = AsmToggleUiComponent;
-    exports.ɵbh = defaultAsmLayoutConfig;
-    exports.ɵbi = defaultCheckoutConfig;
-    exports.ɵbj = defaultQualtricsConfig;
-    exports.ɵbk = CmsPageGuardService;
-    exports.ɵbl = CmsRoutesImplService;
-    exports.ɵbm = ReturnRequestService;
-    exports.ɵbn = MyCouponsComponentService;
-    exports.ɵbo = addCmsRoute;
-    exports.ɵbp = defaultStorefrontRoutesConfig;
-    exports.ɵbq = defaultRoutingConfig;
-    exports.ɵbr = htmlLangProvider;
-    exports.ɵbs = setHtmlLangAttribute;
-    exports.ɵbt = EventsModule;
+    exports.ɵba = AsmMainUiComponent;
+    exports.ɵbb = AsmComponentService;
+    exports.ɵbc = CSAgentLoginFormComponent;
+    exports.ɵbd = CustomerSelectionComponent;
+    exports.ɵbe = AsmSessionTimerComponent;
+    exports.ɵbf = FormatTimerPipe;
+    exports.ɵbg = CustomerEmulationComponent;
+    exports.ɵbh = AsmToggleUiComponent;
+    exports.ɵbi = defaultAsmLayoutConfig;
+    exports.ɵbj = defaultCheckoutConfig;
+    exports.ɵbk = defaultQualtricsConfig;
+    exports.ɵbl = CmsPageGuardService;
+    exports.ɵbm = CmsRoutesImplService;
+    exports.ɵbn = ReturnRequestService;
+    exports.ɵbo = MyCouponsComponentService;
+    exports.ɵbp = addCmsRoute;
+    exports.ɵbq = defaultStorefrontRoutesConfig;
+    exports.ɵbr = defaultRoutingConfig;
+    exports.ɵbs = htmlLangProvider;
+    exports.ɵbt = setHtmlLangAttribute;
+    exports.ɵbu = defaultDirectionConfig;
+    exports.ɵbv = EventsModule;
     exports.ɵc = getStructuredDataFactory;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;
-    exports.ɵf = LockFocusDirective;
-    exports.ɵg = TrapFocusDirective;
-    exports.ɵh = TabFocusDirective;
-    exports.ɵi = AutoFocusDirective;
-    exports.ɵj = EscapeFocusDirective;
-    exports.ɵk = PersistFocusDirective;
-    exports.ɵl = BlockFocusDirective;
-    exports.ɵm = VisibleFocusDirective;
-    exports.ɵn = BaseFocusDirective;
-    exports.ɵo = BaseFocusService;
-    exports.ɵp = PersistFocusService;
-    exports.ɵq = EscapeFocusService;
-    exports.ɵr = AutoFocusService;
-    exports.ɵs = TabFocusService;
-    exports.ɵt = TrapFocusService;
-    exports.ɵu = LockFocusService;
-    exports.ɵv = defaultAnonymousConsentLayoutConfig;
-    exports.ɵw = AsmLoaderModule;
-    exports.ɵx = asmFactory;
-    exports.ɵy = AsmEnablerService;
-    exports.ɵz = AsmMainUiComponent;
+    exports.ɵf = initHtmlDirAttribute;
+    exports.ɵg = LockFocusDirective;
+    exports.ɵh = TrapFocusDirective;
+    exports.ɵi = TabFocusDirective;
+    exports.ɵj = AutoFocusDirective;
+    exports.ɵk = EscapeFocusDirective;
+    exports.ɵl = PersistFocusDirective;
+    exports.ɵm = BlockFocusDirective;
+    exports.ɵn = VisibleFocusDirective;
+    exports.ɵo = BaseFocusDirective;
+    exports.ɵp = BaseFocusService;
+    exports.ɵq = PersistFocusService;
+    exports.ɵr = EscapeFocusService;
+    exports.ɵs = AutoFocusService;
+    exports.ɵt = TabFocusService;
+    exports.ɵu = TrapFocusService;
+    exports.ɵv = LockFocusService;
+    exports.ɵw = defaultAnonymousConsentLayoutConfig;
+    exports.ɵx = AsmLoaderModule;
+    exports.ɵy = asmFactory;
+    exports.ɵz = AsmEnablerService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
