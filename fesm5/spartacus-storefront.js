@@ -2534,7 +2534,6 @@ var IconComponent = /** @class */ (function () {
 var defaultIconConfig = {
     icon: {
         flipDirection: {
-            STAR: DirectionMode.RTL,
             CARET_RIGHT: DirectionMode.RTL,
             CARET_LEFT: DirectionMode.RTL,
         },

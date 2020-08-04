@@ -2719,7 +2719,6 @@
     var defaultIconConfig = {
         icon: {
             flipDirection: {
-                STAR: exports.DirectionMode.RTL,
                 CARET_RIGHT: exports.DirectionMode.RTL,
                 CARET_LEFT: exports.DirectionMode.RTL,
             },
