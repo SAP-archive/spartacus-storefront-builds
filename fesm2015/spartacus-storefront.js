@@ -19461,18 +19461,18 @@ PageEventModule = __decorate([
 /**
  * Indicates that a user visited a product details page.
  */
-class ProductDetailsPageEvent {
+class ProductDetailsPageEvent extends PageEvent {
 }
 /**
  * Indicates that a user visited a category page.
  */
-class CategoryPageResultsEvent {
+class CategoryPageResultsEvent extends PageEvent {
 }
 /**
  * Indicates that the a user visited the search results page,
  * and that the search results have been retrieved.
  */
-class SearchPageResultsEvent {
+class SearchPageResultsEvent extends PageEvent {
 }
 
 let ProductPageEventBuilder = class ProductPageEventBuilder {
@@ -19488,42 +19488,42 @@ let ProductPageEventBuilder = class ProductPageEventBuilder {
         this.eventService.register(CategoryPageResultsEvent, this.buildCategoryResultsPageEvent());
     }
     buildProductDetailsPageEvent() {
-        return this.eventService.get(PageEvent).pipe(filter((pageEvent) => pageEvent.semanticRoute === 'product'), map((pageEvent) => pageEvent.context.id), switchMap((productId) => this.productService.get(productId).pipe(filter((product) => Boolean(product)), take(1), map((product) => createFrom(ProductDetailsPageEvent, {
-            categories: product.categories,
-            code: product.code,
-            name: product.name,
-            price: product.price,
-        })))));
+        return this.eventService.get(PageEvent).pipe(filter((pageEvent) => pageEvent.semanticRoute === 'product'), switchMap((pageEvent) => this.productService.get(pageEvent.context.id).pipe(filter((product) => Boolean(product)), take(1), map((product) => createFrom(ProductDetailsPageEvent, Object.assign(Object.assign({}, pageEvent), { categories: product.categories, code: product.code, name: product.name, price: product.price }))))));
     }
     buildCategoryResultsPageEvent() {
         const searchResults$ = this.productSearchService.getResults().pipe(
         // skipping the initial value, and preventing emission of the previous search state
         skip(1));
-        const categoryPageEvent$ = this.eventService.get(PageEvent).pipe(map((pageEvent) => ({
-            isCategoryPage: pageEvent.semanticRoute === 'category',
-            categoryCode: pageEvent.context.id,
-        })));
-        return categoryPageEvent$.pipe(switchMap((pageEvent) => {
-            if (!pageEvent.isCategoryPage) {
+        return this.eventService.get(PageEvent).pipe(switchMap((pageEvent) => {
+            if ((pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.semanticRoute) !== 'category') {
                 return EMPTY;
             }
-            return searchResults$.pipe(map((searchResults) => ({
-                categoryCode: pageEvent.categoryCode,
-                categoryName: searchResults.breadcrumbs[0].facetValueName,
-            })), map((categoryPage) => createFrom(CategoryPageResultsEvent, categoryPage)));
+            return searchResults$.pipe(map((searchResults) => {
+                var _a, _b, _c;
+                return (Object.assign(Object.assign({}, pageEvent), {
+                    categoryCode: (_a = pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.context) === null || _a === void 0 ? void 0 : _a.id,
+                    numberOfResults: (_b = searchResults === null || searchResults === void 0 ? void 0 : searchResults.pagination) === null || _b === void 0 ? void 0 : _b.totalResults,
+                    categoryName: (_c = searchResults.breadcrumbs) === null || _c === void 0 ? void 0 : _c[0].facetValueName,
+                }));
+            }), map((categoryPage) => createFrom(CategoryPageResultsEvent, categoryPage)));
         }));
     }
     buildSearchPageResultsEvent() {
         const searchResults$ = this.productSearchService.getResults().pipe(
         // skipping the initial value, and preventing emission of the previous search state
-        skip(1), map((searchResults) => ({
-            searchTerm: searchResults.freeTextSearch,
-            numberOfResults: searchResults.pagination.totalResults,
-        })), map((searchPage) => createFrom(SearchPageResultsEvent, searchPage)));
-        const searchPageEvent$ = this.eventService
-            .get(PageEvent)
-            .pipe(map((pageEvent) => pageEvent.semanticRoute === 'search'));
-        return searchPageEvent$.pipe(switchMap((isSearchPage) => (isSearchPage ? searchResults$ : EMPTY)));
+        skip(1));
+        return this.eventService.get(PageEvent).pipe(switchMap((pageEvent) => {
+            if ((pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.semanticRoute) !== 'search') {
+                return EMPTY;
+            }
+            return searchResults$.pipe(map((searchResults) => {
+                var _a;
+                return (Object.assign(Object.assign({}, pageEvent), {
+                    searchTerm: searchResults === null || searchResults === void 0 ? void 0 : searchResults.freeTextSearch,
+                    numberOfResults: (_a = searchResults === null || searchResults === void 0 ? void 0 : searchResults.pagination) === null || _a === void 0 ? void 0 : _a.totalResults,
+                }));
+            }), map((searchPage) => createFrom(SearchPageResultsEvent, searchPage)));
+        }));
     }
 };
 ProductPageEventBuilder.ctorParameters = () => [

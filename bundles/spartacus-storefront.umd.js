@@ -21515,28 +21515,34 @@
     /**
      * Indicates that a user visited a product details page.
      */
-    var ProductDetailsPageEvent = /** @class */ (function () {
+    var ProductDetailsPageEvent = /** @class */ (function (_super) {
+        __extends(ProductDetailsPageEvent, _super);
         function ProductDetailsPageEvent() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         return ProductDetailsPageEvent;
-    }());
+    }(PageEvent));
     /**
      * Indicates that a user visited a category page.
      */
-    var CategoryPageResultsEvent = /** @class */ (function () {
+    var CategoryPageResultsEvent = /** @class */ (function (_super) {
+        __extends(CategoryPageResultsEvent, _super);
         function CategoryPageResultsEvent() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         return CategoryPageResultsEvent;
-    }());
+    }(PageEvent));
     /**
      * Indicates that the a user visited the search results page,
      * and that the search results have been retrieved.
      */
-    var SearchPageResultsEvent = /** @class */ (function () {
+    var SearchPageResultsEvent = /** @class */ (function (_super) {
+        __extends(SearchPageResultsEvent, _super);
         function SearchPageResultsEvent() {
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         return SearchPageResultsEvent;
-    }());
+    }(PageEvent));
 
     var ProductPageEventBuilder = /** @class */ (function () {
         function ProductPageEventBuilder(eventService, productService, productSearchService) {
@@ -21552,14 +21558,9 @@
         };
         ProductPageEventBuilder.prototype.buildProductDetailsPageEvent = function () {
             var _this = this;
-            return this.eventService.get(PageEvent).pipe(operators.filter(function (pageEvent) { return pageEvent.semanticRoute === 'product'; }), operators.map(function (pageEvent) { return pageEvent.context.id; }), operators.switchMap(function (productId) {
-                return _this.productService.get(productId).pipe(operators.filter(function (product) { return Boolean(product); }), operators.take(1), operators.map(function (product) {
-                    return core$1.createFrom(ProductDetailsPageEvent, {
-                        categories: product.categories,
-                        code: product.code,
-                        name: product.name,
-                        price: product.price,
-                    });
+            return this.eventService.get(PageEvent).pipe(operators.filter(function (pageEvent) { return pageEvent.semanticRoute === 'product'; }), operators.switchMap(function (pageEvent) {
+                return _this.productService.get(pageEvent.context.id).pipe(operators.filter(function (product) { return Boolean(product); }), operators.take(1), operators.map(function (product) {
+                    return core$1.createFrom(ProductDetailsPageEvent, __assign(__assign({}, pageEvent), { categories: product.categories, code: product.code, name: product.name, price: product.price }));
                 }));
             }));
         };
@@ -21567,18 +21568,18 @@
             var searchResults$ = this.productSearchService.getResults().pipe(
             // skipping the initial value, and preventing emission of the previous search state
             operators.skip(1));
-            var categoryPageEvent$ = this.eventService.get(PageEvent).pipe(operators.map(function (pageEvent) { return ({
-                isCategoryPage: pageEvent.semanticRoute === 'category',
-                categoryCode: pageEvent.context.id,
-            }); }));
-            return categoryPageEvent$.pipe(operators.switchMap(function (pageEvent) {
-                if (!pageEvent.isCategoryPage) {
+            return this.eventService.get(PageEvent).pipe(operators.switchMap(function (pageEvent) {
+                if ((pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.semanticRoute) !== 'category') {
                     return rxjs.EMPTY;
                 }
-                return searchResults$.pipe(operators.map(function (searchResults) { return ({
-                    categoryCode: pageEvent.categoryCode,
-                    categoryName: searchResults.breadcrumbs[0].facetValueName,
-                }); }), operators.map(function (categoryPage) {
+                return searchResults$.pipe(operators.map(function (searchResults) {
+                    var _a, _b, _c;
+                    return (__assign(__assign({}, pageEvent), {
+                        categoryCode: (_a = pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.context) === null || _a === void 0 ? void 0 : _a.id,
+                        numberOfResults: (_b = searchResults === null || searchResults === void 0 ? void 0 : searchResults.pagination) === null || _b === void 0 ? void 0 : _b.totalResults,
+                        categoryName: (_c = searchResults.breadcrumbs) === null || _c === void 0 ? void 0 : _c[0].facetValueName,
+                    }));
+                }), operators.map(function (categoryPage) {
                     return core$1.createFrom(CategoryPageResultsEvent, categoryPage);
                 }));
             }));
@@ -21586,14 +21587,19 @@
         ProductPageEventBuilder.prototype.buildSearchPageResultsEvent = function () {
             var searchResults$ = this.productSearchService.getResults().pipe(
             // skipping the initial value, and preventing emission of the previous search state
-            operators.skip(1), operators.map(function (searchResults) { return ({
-                searchTerm: searchResults.freeTextSearch,
-                numberOfResults: searchResults.pagination.totalResults,
-            }); }), operators.map(function (searchPage) { return core$1.createFrom(SearchPageResultsEvent, searchPage); }));
-            var searchPageEvent$ = this.eventService
-                .get(PageEvent)
-                .pipe(operators.map(function (pageEvent) { return pageEvent.semanticRoute === 'search'; }));
-            return searchPageEvent$.pipe(operators.switchMap(function (isSearchPage) { return (isSearchPage ? searchResults$ : rxjs.EMPTY); }));
+            operators.skip(1));
+            return this.eventService.get(PageEvent).pipe(operators.switchMap(function (pageEvent) {
+                if ((pageEvent === null || pageEvent === void 0 ? void 0 : pageEvent.semanticRoute) !== 'search') {
+                    return rxjs.EMPTY;
+                }
+                return searchResults$.pipe(operators.map(function (searchResults) {
+                    var _a;
+                    return (__assign(__assign({}, pageEvent), {
+                        searchTerm: searchResults === null || searchResults === void 0 ? void 0 : searchResults.freeTextSearch,
+                        numberOfResults: (_a = searchResults === null || searchResults === void 0 ? void 0 : searchResults.pagination) === null || _a === void 0 ? void 0 : _a.totalResults,
+                    }));
+                }), operators.map(function (searchPage) { return core$1.createFrom(SearchPageResultsEvent, searchPage); }));
+            }));
         };
         ProductPageEventBuilder.ctorParameters = function () { return [
             { type: core$1.EventService },
