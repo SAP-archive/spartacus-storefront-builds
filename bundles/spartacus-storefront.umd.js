@@ -11819,6 +11819,67 @@
         return PageLayoutComponent;
     }());
 
+    /**
+     * Service that adds the page template as a className to the application root element. If the root
+     * element is cx-storefront, the resulting DOM would look like:
+     *
+     * ```html
+     * <cx-storefront class="LandingPageTemplate">
+     *  [...]
+     * <cx-storefront>
+     * ```
+     */
+    var PageTemplateStyleService = /** @class */ (function () {
+        function PageTemplateStyleService(pageLayoutService) {
+            this.pageLayoutService = pageLayoutService;
+            /**
+             * Keeps the subscriptions for this service so that we can unsubscribe on destroy.
+             */
+            this.subscription = new rxjs.Subscription();
+        }
+        PageTemplateStyleService.prototype.initialize = function (ref) {
+            var _this = this;
+            var el = ref.location.nativeElement;
+            this.subscription.add(this.pageLayoutService.templateName$
+                .pipe(operators.distinctUntilChanged())
+                .subscribe(function (template) { return _this.addStyleClass(el, template); }));
+        };
+        /**
+         * Adds the page template as a style class to the given element. If any page template
+         * was added before, we clean it up.
+         */
+        PageTemplateStyleService.prototype.addStyleClass = function (el, template) {
+            var _a;
+            // clean up previous template class binding
+            if (this.currentTemplate) {
+                (_a = el.classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
+            }
+            if (template) {
+                this.currentTemplate = template;
+                el.classList.add(this.currentTemplate);
+            }
+        };
+        PageTemplateStyleService.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        PageTemplateStyleService.ctorParameters = function () { return [
+            { type: PageLayoutService }
+        ]; };
+        PageTemplateStyleService.ɵprov = core.ɵɵdefineInjectable({ factory: function PageTemplateStyleService_Factory() { return new PageTemplateStyleService(core.ɵɵinject(PageLayoutService)); }, token: PageTemplateStyleService, providedIn: "root" });
+        PageTemplateStyleService = __decorate([
+            core.Injectable({ providedIn: 'root' })
+        ], PageTemplateStyleService);
+        return PageTemplateStyleService;
+    }());
+
+    function initPageTemplateStyle(service, featureConfigService) {
+        var result = function (componentRef) {
+            if (featureConfigService.isLevel('2.1')) {
+                service.initialize(componentRef);
+            }
+        };
+        return result;
+    }
     var PageLayoutModule = /** @class */ (function () {
         function PageLayoutModule() {
         }
@@ -11827,6 +11888,14 @@
                 imports: [common.CommonModule, OutletModule, PageSlotModule],
                 declarations: [PageLayoutComponent],
                 exports: [PageLayoutComponent],
+                providers: [
+                    {
+                        provide: core.APP_BOOTSTRAP_LISTENER,
+                        multi: true,
+                        useFactory: initPageTemplateStyle,
+                        deps: [PageTemplateStyleService, core$1.FeatureConfigService],
+                    },
+                ],
             })
         ], PageLayoutModule);
         return PageLayoutModule;
@@ -22333,55 +22402,57 @@
     exports.ɵ0 = ɵ0$1;
     exports.ɵ1 = ɵ1;
     exports.ɵ2 = ɵ2;
-    exports.ɵa = pwaConfigurationFactory;
-    exports.ɵb = pwaFactory;
-    exports.ɵba = AsmMainUiComponent;
-    exports.ɵbb = AsmComponentService;
-    exports.ɵbc = CSAgentLoginFormComponent;
-    exports.ɵbd = CustomerSelectionComponent;
-    exports.ɵbe = AsmSessionTimerComponent;
-    exports.ɵbf = FormatTimerPipe;
-    exports.ɵbg = CustomerEmulationComponent;
-    exports.ɵbh = AsmToggleUiComponent;
-    exports.ɵbi = defaultAsmLayoutConfig;
-    exports.ɵbj = defaultIconConfig;
-    exports.ɵbk = defaultCheckoutConfig;
-    exports.ɵbl = defaultQualtricsConfig;
-    exports.ɵbm = CmsPageGuardService;
-    exports.ɵbn = CmsRoutesImplService;
-    exports.ɵbo = ReturnRequestService;
-    exports.ɵbp = MyCouponsComponentService;
-    exports.ɵbq = addCmsRoute;
-    exports.ɵbr = defaultStorefrontRoutesConfig;
-    exports.ɵbs = defaultRoutingConfig;
-    exports.ɵbt = htmlLangProvider;
-    exports.ɵbu = setHtmlLangAttribute;
-    exports.ɵbv = defaultDirectionConfig;
-    exports.ɵbw = EventsModule;
-    exports.ɵc = getStructuredDataFactory;
-    exports.ɵd = FOCUS_ATTR;
-    exports.ɵe = skipLinkFactory;
-    exports.ɵf = initHtmlDirAttribute;
-    exports.ɵg = LockFocusDirective;
-    exports.ɵh = TrapFocusDirective;
-    exports.ɵi = TabFocusDirective;
-    exports.ɵj = AutoFocusDirective;
-    exports.ɵk = EscapeFocusDirective;
-    exports.ɵl = PersistFocusDirective;
-    exports.ɵm = BlockFocusDirective;
-    exports.ɵn = VisibleFocusDirective;
-    exports.ɵo = BaseFocusDirective;
-    exports.ɵp = BaseFocusService;
-    exports.ɵq = PersistFocusService;
-    exports.ɵr = EscapeFocusService;
-    exports.ɵs = AutoFocusService;
-    exports.ɵt = TabFocusService;
-    exports.ɵu = TrapFocusService;
-    exports.ɵv = LockFocusService;
-    exports.ɵw = defaultAnonymousConsentLayoutConfig;
-    exports.ɵx = AsmLoaderModule;
-    exports.ɵy = asmFactory;
-    exports.ɵz = AsmEnablerService;
+    exports.ɵa = initPageTemplateStyle;
+    exports.ɵb = pwaConfigurationFactory;
+    exports.ɵba = AsmEnablerService;
+    exports.ɵbb = AsmMainUiComponent;
+    exports.ɵbc = AsmComponentService;
+    exports.ɵbd = CSAgentLoginFormComponent;
+    exports.ɵbe = CustomerSelectionComponent;
+    exports.ɵbf = AsmSessionTimerComponent;
+    exports.ɵbg = FormatTimerPipe;
+    exports.ɵbh = CustomerEmulationComponent;
+    exports.ɵbi = AsmToggleUiComponent;
+    exports.ɵbj = defaultAsmLayoutConfig;
+    exports.ɵbk = defaultIconConfig;
+    exports.ɵbl = defaultCheckoutConfig;
+    exports.ɵbm = defaultQualtricsConfig;
+    exports.ɵbn = CmsPageGuardService;
+    exports.ɵbo = CmsRoutesImplService;
+    exports.ɵbp = ReturnRequestService;
+    exports.ɵbq = PageTemplateStyleService;
+    exports.ɵbr = MyCouponsComponentService;
+    exports.ɵbs = addCmsRoute;
+    exports.ɵbt = defaultStorefrontRoutesConfig;
+    exports.ɵbu = defaultRoutingConfig;
+    exports.ɵbv = htmlLangProvider;
+    exports.ɵbw = setHtmlLangAttribute;
+    exports.ɵbx = defaultDirectionConfig;
+    exports.ɵby = EventsModule;
+    exports.ɵc = pwaFactory;
+    exports.ɵd = getStructuredDataFactory;
+    exports.ɵe = FOCUS_ATTR;
+    exports.ɵf = skipLinkFactory;
+    exports.ɵg = initHtmlDirAttribute;
+    exports.ɵh = LockFocusDirective;
+    exports.ɵi = TrapFocusDirective;
+    exports.ɵj = TabFocusDirective;
+    exports.ɵk = AutoFocusDirective;
+    exports.ɵl = EscapeFocusDirective;
+    exports.ɵm = PersistFocusDirective;
+    exports.ɵn = BlockFocusDirective;
+    exports.ɵo = VisibleFocusDirective;
+    exports.ɵp = BaseFocusDirective;
+    exports.ɵq = BaseFocusService;
+    exports.ɵr = PersistFocusService;
+    exports.ɵs = EscapeFocusService;
+    exports.ɵt = AutoFocusService;
+    exports.ɵu = TabFocusService;
+    exports.ɵv = TrapFocusService;
+    exports.ɵw = LockFocusService;
+    exports.ɵx = defaultAnonymousConsentLayoutConfig;
+    exports.ɵy = AsmLoaderModule;
+    exports.ɵz = asmFactory;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
