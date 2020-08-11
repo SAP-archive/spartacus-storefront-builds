@@ -41,11 +41,12 @@ export declare class IconComponent {
      */
     icon: SafeHtml;
     /**
-     * The flip direction adds information to the DOM on whether it should flipped for a specific
-     * direction (ltr vs rtl). Typically, icons are ltr based, and only in case of rtl some of
-     * the icons will be flipped.
+     * The `flip-at-rtl` class is added to the DOM for the style layer to flip the icon in RTL direction.
      */
     flipAtRtl: boolean;
+    /**
+     * The `flip-at-ltr` class is added to the DOM for the style layer to flip the icon in LTR direction.
+     */
     flipAtLtr: boolean;
     /**
      * Maintains the applied style classes so we can remove them when the
@@ -54,6 +55,10 @@ export declare class IconComponent {
     protected styleClasses: string[];
     constructor(iconLoader: IconLoaderService, elementRef: ElementRef<HTMLElement>, renderer: Renderer2);
     protected setIcon(type: ICON_TYPE): void;
+    /**
+     * The icons supports flipping for some icons to support rtl and ltr directions.
+     */
+    protected flipIcon(type: ICON_TYPE): void;
     /**
      * Adds the style classes and the link resource (if available).
      */

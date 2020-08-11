@@ -2659,11 +2659,19 @@
             this.icon = this.iconLoader.getHtml(type);
             this.addStyleClasses(type);
             this.iconLoader.addLinkResource(type);
-            // the flip direction is added so that icons can be flipped for rtl vs ltr
-            this.flipAtLtr =
-                this.iconLoader.getFlipDirection(type) === exports.DirectionMode.LTR;
-            this.flipAtRtl =
-                this.iconLoader.getFlipDirection(type) === exports.DirectionMode.RTL;
+            this.flipIcon(type);
+        };
+        /**
+         * The icons supports flipping for some icons to support rtl and ltr directions.
+         */
+        IconComponent.prototype.flipIcon = function (type) {
+            // TODO: this can be dropped with the next major release.
+            if (!this.iconLoader.getFlipDirection) {
+                return;
+            }
+            var iconDirection = this.iconLoader.getFlipDirection(type);
+            this.flipAtLtr = iconDirection === exports.DirectionMode.LTR;
+            this.flipAtRtl = iconDirection === exports.DirectionMode.RTL;
         };
         /**
          * Adds the style classes and the link resource (if available).
