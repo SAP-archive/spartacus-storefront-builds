@@ -4675,67 +4675,136 @@ var SplitViewDeactivateGuard = /** @class */ (function () {
 }());
 
 /**
- * Supposed to be injected in the split view component, so that the view state
- * is maintained in the context of a single split view.
+ * Supposed to be injected in the split view component, so that the split view state
+ * is maintained for a single split view.
  */
 var SplitViewService = /** @class */ (function () {
     function SplitViewService() {
+        /**
+         * Newly added views are hidden by default, unless it is the first view of the split view.
+         * The default hide mode can be overridden.
+         */
+        this.defaultHideMode = true;
+        this._splitViewCount = 2;
         this._views$ = new BehaviorSubject([]);
     }
     /**
-     * Resolves the max number of visible views for the split view.
+     * Adds a view to the list of views. The view is initialized with the `SplitViewState`
+     * state. If no state is provided, the state is created with the hidden property. The hidden
+     * property is provided by the `defaultHideMode`, unless it's the first view (position: 0).
      */
-    SplitViewService.prototype.visibleViewCount = function () {
-        return this._views$.pipe(map(function (views) {
-            var hidden = views.findIndex(function (view) { return view.hidden; });
-            return hidden === -1 ? views.length : hidden;
-        }), filter(function (visible) { return visible > 0; }), distinctUntilChanged());
-    };
-    /**
-     * Adds a view to the list of views. The view is initialized with the
-     * hide state, which defaults to false.
-     */
-    SplitViewService.prototype.add = function (viewPosition, hide) {
-        if (hide === void 0) { hide = false; }
-        if (!this.views[viewPosition]) {
-            this.views[viewPosition] = { hidden: hide };
+    SplitViewService.prototype.add = function (position, initialState) {
+        if (!this.views[position]) {
+            this.views[position] = __assign({ hidden: position === 0 ? false : this.defaultHideMode }, initialState);
             this._views$.next(this.views);
         }
+    };
+    /**
+     * Returns an observable with the active view number. The active view number
+     * represents the last visible view.
+     */
+    SplitViewService.prototype.getActiveView = function () {
+        var _this = this;
+        return this._views$.pipe(map(function (views) { return _this.getActive(views); }), distinctUntilChanged());
+    };
+    /**
+     * Returns an observable with the SplitViewState for the given view position.
+     */
+    SplitViewService.prototype.getViewState = function (position) {
+        return this._views$.pipe(map(function (views) { return views[position]; }), 
+        // we must filter here, since outlet driven views will destroyed the view
+        filter(function (view) { return Boolean(view); }));
     };
     /**
      * Removes a view from the list of views.
+     *
+     * Removing a view is different from hiding a view. Removing a view is typically done
+     * when a component is destroyed.
+     *
+     * When the view is removed, the SplitViewState is updated to reflect that new organization
+     * of views.
      */
-    SplitViewService.prototype.remove = function (viewPosition) {
-        this._views$.next(this.views.splice(0, viewPosition));
-    };
-    /**
-     * Toggles the visible state for the given view. An optional
-     * force argument can be used to dictate the visibility.
-     */
-    SplitViewService.prototype.toggle = function (viewPosition, force) {
-        if (!this.views[viewPosition]) {
-            this.add(viewPosition, force !== null && force !== void 0 ? force : false);
+    SplitViewService.prototype.remove = function (position) {
+        var activePosition = this.getActive(this.views);
+        this._views$.next(this.views.splice(0, position));
+        if (activePosition >= position) {
+            this.updateState(position - 1);
         }
-        else {
-            this.views[viewPosition].hidden = force !== null && force !== void 0 ? force : !this.views[viewPosition].hidden;
-            // Whenever a view is closing, we close all underlying views as well.
-            if (!this.views[viewPosition].hidden) {
-                this.views
-                    .slice(viewPosition + 1)
-                    .map(function (viewState) { return (viewState.hidden = true); });
+    };
+    Object.defineProperty(SplitViewService.prototype, "nextPosition", {
+        /**
+         * Returns the next view position. This is useful for views that do not want to be bothered
+         * with controlling view numbers.
+         */
+        get: function () {
+            return this.views.length || 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Toggles the visibility of the views based on the given view position. If the view
+     * is already visible, we close the view and active the former view. Unless the hide flag
+     * is used, to force the view.
+     *
+     * The view state of other views in the split view are updated as well.
+     *
+     * @param position The zero-based position number of the view.
+     * @param forceHide The (optional) hide state for the view position.
+     */
+    SplitViewService.prototype.toggle = function (position, forceHide) {
+        // add the view if it hasn't been added before.
+        if (!this.views[position]) {
+            this.add(position, { hidden: forceHide !== null && forceHide !== void 0 ? forceHide : false });
+        }
+        // If the position is already visible, we move to a previous position. Only if the hide
+        // state is forced, we keep the current position.
+        if (this.views[position] &&
+            forceHide === undefined &&
+            !this.views[position].hidden) {
+            position--;
+        }
+        this.updateState(position, forceHide);
+    };
+    SplitViewService.prototype.updateState = function (position, hide) {
+        var views = __spread(this.views);
+        var split = this._splitViewCount - 1;
+        // toggle the hidden state per view, based on the next position and number of views per split view
+        views.forEach(function (view, pos) {
+            if (pos === position) {
+                view.hidden = hide !== null && hide !== void 0 ? hide : !(pos >= position - split && pos <= position);
             }
-            this._views$.next(this.views);
-        }
+            else {
+                view.hidden = !(pos >= position - split && pos <= position);
+            }
+        });
+        this._views$.next(views);
     };
     /**
-     * Returns the next view number, that can be used by views to register itself.
+     * Returns the active view count for the list of views.
      */
-    SplitViewService.prototype.generateNextPosition = function () {
-        return this.views.length;
+    SplitViewService.prototype.getActive = function (views) {
+        // we reverse the list to find the last visible view
+        var l = __spread(views).reverse()
+            .findIndex(function (view) { return !view.hidden; });
+        var last = l === -1 ? 0 : views.length - l - 1;
+        return last;
     };
+    Object.defineProperty(SplitViewService.prototype, "splitViewCount", {
+        /**
+         * Sets the view count for the split view.
+         *
+         * Defaults to 2.
+         */
+        set: function (count) {
+            this._splitViewCount = count;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SplitViewService.prototype, "views", {
         /**
-         * Utility method that resolves all views.
+         * Utility method that resolves all views from the subject.
          */
         get: function () {
             return this._views$.value;
@@ -4768,7 +4837,7 @@ var SplitViewService = /** @class */ (function () {
  * view components, so that the `lastVisibleView` can be updated accordingly. The actual
  * visibility of views is controlled by CSS. To allow for maximum flexibility, the CSS
  * implementation is using CSS variables. The `lastVisibleView` is bind to the
- * `--cx-last-visible-view` on the host, so that all descendants views will inherit the
+ * `--cx-active-view` on the host, so that all descendants views will inherit the
  * property conveniently.
  */
 var SplitViewComponent = /** @class */ (function () {
@@ -4777,14 +4846,25 @@ var SplitViewComponent = /** @class */ (function () {
         this.splitService = splitService;
         /**
          * Indicates the last visible view in the range of views that is visible. This
-         * is bind to a css variable `--cx-last-visible-view` so that the experience
+         * is bind to a css variable `--cx-active-view` so that the experience
          * can be fully controlled by css.
          */
         this.lastVisibleView = 1;
         this.subscription = this.splitService
-            .visibleViewCount()
-            .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible); });
+            .getActiveView()
+            .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible + 1); });
     }
+    Object.defineProperty(SplitViewComponent.prototype, "hideMode", {
+        /**
+         * Sets the default hide mode for views. This mode is useful in case views are dynamically being created,
+         * for example when they are created by router components.
+         */
+        set: function (mode) {
+            this.splitService.defaultHideMode = mode;
+        },
+        enumerable: true,
+        configurable: true
+    });
     SplitViewComponent.prototype.ngOnDestroy = function () {
         var _a;
         (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
@@ -4793,7 +4873,10 @@ var SplitViewComponent = /** @class */ (function () {
         { type: SplitViewService }
     ]; };
     __decorate([
-        HostBinding('style.--cx-last-visible-view')
+        Input()
+    ], SplitViewComponent.prototype, "hideMode", null);
+    __decorate([
+        HostBinding('style.--cx-active-view')
     ], SplitViewComponent.prototype, "lastVisibleView", void 0);
     SplitViewComponent = __decorate([
         Component({
@@ -4816,8 +4899,13 @@ var SplitViewComponent = /** @class */ (function () {
  * overall experience.
  */
 var ViewComponent = /** @class */ (function () {
-    function ViewComponent(splitService) {
+    function ViewComponent(splitService, elementRef) {
         this.splitService = splitService;
+        this.elementRef = elementRef;
+        /**
+         * The disappeared flag is added to the
+         */
+        this.disappeared = true;
         /**
          * An update of the view visibility is emitted to the hiddenChange output.
          */
@@ -4831,6 +4919,7 @@ var ViewComponent = /** @class */ (function () {
          * The hidden input supports 2-way binding, see `hiddenChange` property.
          */
         set: function (hidden) {
+            this._hidden = hidden;
             this.splitService.toggle(this.viewPosition, hidden);
         },
         enumerable: true,
@@ -4838,12 +4927,21 @@ var ViewComponent = /** @class */ (function () {
     });
     ViewComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.splitService.add(this.viewPosition, this.hidden);
+        this.splitService.splitViewCount = this.splitViewCount;
+        var hidden = this._hidden ? { hidden: this._hidden } : {};
+        this.splitService.add(this.viewPosition, hidden);
         this.subscription = this.splitService
-            .visibleViewCount()
-            .subscribe(function (visible) {
-            if (_this.hidden !== _this.viewPosition >= visible) {
-                _this.hiddenChange.emit(_this.viewPosition >= visible);
+            .getViewState(Number(this.position))
+            .subscribe(function (view) {
+            _this.hiddenChange.emit(view.hidden);
+            _this._hidden = view.hidden;
+            if (view.hidden) {
+                setTimeout(function () {
+                    _this.disappeared = true;
+                }, _this.duration * 1.25);
+            }
+            else {
+                _this.disappeared = false;
             }
         });
     };
@@ -4862,10 +4960,45 @@ var ViewComponent = /** @class */ (function () {
          * The position is either taken from the input `position` or generated by the `SplitService`.
          */
         get: function () {
-            if (this.position === undefined) {
-                this.position = this.splitService.generateNextPosition();
+            if (!(Number(this.position) >= 0)) {
+                this.position = this.splitService.nextPosition.toString();
             }
-            return this.position;
+            return Number(this.position);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewComponent.prototype, "duration", {
+        /**
+         * Returns the duration in milliseconds. The duration is based on the CSS custom property
+         * `--cx-transition-duration`. Defaults to 300 milliseconds.
+         */
+        get: function () {
+            var duration = getComputedStyle(this.elementRef.nativeElement)
+                .getPropertyValue('--cx-transition-duration')
+                .trim();
+            if (duration.indexOf('ms') > -1) {
+                return Number(duration.split('ms')[0]);
+            }
+            else if (duration.indexOf('s') > -1) {
+                return Number(duration.split('s')[0]) * 1000;
+            }
+            else {
+                return 300;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ViewComponent.prototype, "splitViewCount", {
+        /**
+         * Returns the maximum number of views per split-view. The number is based on the CSS custom property
+         * `--cx-max-views`. Defaults to `2`
+         */
+        get: function () {
+            return Number(getComputedStyle(this.elementRef.nativeElement)
+                .getPropertyValue('--cx-max-views')
+                .trim() || 2);
         },
         enumerable: true,
         configurable: true
@@ -4880,12 +5013,16 @@ var ViewComponent = /** @class */ (function () {
         (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     };
     ViewComponent.ctorParameters = function () { return [
-        { type: SplitViewService }
+        { type: SplitViewService },
+        { type: ElementRef }
     ]; };
     __decorate([
         Input(),
         HostBinding('attr.position')
     ], ViewComponent.prototype, "position", void 0);
+    __decorate([
+        HostBinding('attr.disappeared')
+    ], ViewComponent.prototype, "disappeared", void 0);
     __decorate([
         Input()
     ], ViewComponent.prototype, "hidden", null);

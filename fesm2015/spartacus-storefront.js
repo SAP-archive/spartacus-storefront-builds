@@ -4234,65 +4234,127 @@ SplitViewDeactivateGuard = __decorate([
 ], SplitViewDeactivateGuard);
 
 /**
- * Supposed to be injected in the split view component, so that the view state
- * is maintained in the context of a single split view.
+ * Supposed to be injected in the split view component, so that the split view state
+ * is maintained for a single split view.
  */
 let SplitViewService = class SplitViewService {
     constructor() {
+        /**
+         * Newly added views are hidden by default, unless it is the first view of the split view.
+         * The default hide mode can be overridden.
+         */
+        this.defaultHideMode = true;
+        this._splitViewCount = 2;
         this._views$ = new BehaviorSubject([]);
     }
     /**
-     * Resolves the max number of visible views for the split view.
+     * Adds a view to the list of views. The view is initialized with the `SplitViewState`
+     * state. If no state is provided, the state is created with the hidden property. The hidden
+     * property is provided by the `defaultHideMode`, unless it's the first view (position: 0).
      */
-    visibleViewCount() {
-        return this._views$.pipe(map((views) => {
-            const hidden = views.findIndex((view) => view.hidden);
-            return hidden === -1 ? views.length : hidden;
-        }), filter((visible) => visible > 0), distinctUntilChanged());
-    }
-    /**
-     * Adds a view to the list of views. The view is initialized with the
-     * hide state, which defaults to false.
-     */
-    add(viewPosition, hide = false) {
-        if (!this.views[viewPosition]) {
-            this.views[viewPosition] = { hidden: hide };
+    add(position, initialState) {
+        if (!this.views[position]) {
+            this.views[position] = Object.assign({ hidden: position === 0 ? false : this.defaultHideMode }, initialState);
             this._views$.next(this.views);
         }
+    }
+    /**
+     * Returns an observable with the active view number. The active view number
+     * represents the last visible view.
+     */
+    getActiveView() {
+        return this._views$.pipe(map((views) => this.getActive(views)), distinctUntilChanged());
+    }
+    /**
+     * Returns an observable with the SplitViewState for the given view position.
+     */
+    getViewState(position) {
+        return this._views$.pipe(map((views) => views[position]), 
+        // we must filter here, since outlet driven views will destroyed the view
+        filter((view) => Boolean(view)));
     }
     /**
      * Removes a view from the list of views.
+     *
+     * Removing a view is different from hiding a view. Removing a view is typically done
+     * when a component is destroyed.
+     *
+     * When the view is removed, the SplitViewState is updated to reflect that new organization
+     * of views.
      */
-    remove(viewPosition) {
-        this._views$.next(this.views.splice(0, viewPosition));
+    remove(position) {
+        const activePosition = this.getActive(this.views);
+        this._views$.next(this.views.splice(0, position));
+        if (activePosition >= position) {
+            this.updateState(position - 1);
+        }
     }
     /**
-     * Toggles the visible state for the given view. An optional
-     * force argument can be used to dictate the visibility.
+     * Returns the next view position. This is useful for views that do not want to be bothered
+     * with controlling view numbers.
      */
-    toggle(viewPosition, force) {
-        if (!this.views[viewPosition]) {
-            this.add(viewPosition, force !== null && force !== void 0 ? force : false);
+    get nextPosition() {
+        return this.views.length || 0;
+    }
+    /**
+     * Toggles the visibility of the views based on the given view position. If the view
+     * is already visible, we close the view and active the former view. Unless the hide flag
+     * is used, to force the view.
+     *
+     * The view state of other views in the split view are updated as well.
+     *
+     * @param position The zero-based position number of the view.
+     * @param forceHide The (optional) hide state for the view position.
+     */
+    toggle(position, forceHide) {
+        // add the view if it hasn't been added before.
+        if (!this.views[position]) {
+            this.add(position, { hidden: forceHide !== null && forceHide !== void 0 ? forceHide : false });
         }
-        else {
-            this.views[viewPosition].hidden = force !== null && force !== void 0 ? force : !this.views[viewPosition].hidden;
-            // Whenever a view is closing, we close all underlying views as well.
-            if (!this.views[viewPosition].hidden) {
-                this.views
-                    .slice(viewPosition + 1)
-                    .map((viewState) => (viewState.hidden = true));
+        // If the position is already visible, we move to a previous position. Only if the hide
+        // state is forced, we keep the current position.
+        if (this.views[position] &&
+            forceHide === undefined &&
+            !this.views[position].hidden) {
+            position--;
+        }
+        this.updateState(position, forceHide);
+    }
+    updateState(position, hide) {
+        const views = [...this.views];
+        const split = this._splitViewCount - 1;
+        // toggle the hidden state per view, based on the next position and number of views per split view
+        views.forEach((view, pos) => {
+            if (pos === position) {
+                view.hidden = hide !== null && hide !== void 0 ? hide : !(pos >= position - split && pos <= position);
             }
-            this._views$.next(this.views);
-        }
+            else {
+                view.hidden = !(pos >= position - split && pos <= position);
+            }
+        });
+        this._views$.next(views);
     }
     /**
-     * Returns the next view number, that can be used by views to register itself.
+     * Returns the active view count for the list of views.
      */
-    generateNextPosition() {
-        return this.views.length;
+    getActive(views) {
+        // we reverse the list to find the last visible view
+        const l = [...views]
+            .reverse()
+            .findIndex((view) => !view.hidden);
+        const last = l === -1 ? 0 : views.length - l - 1;
+        return last;
     }
     /**
-     * Utility method that resolves all views.
+     * Sets the view count for the split view.
+     *
+     * Defaults to 2.
+     */
+    set splitViewCount(count) {
+        this._splitViewCount = count;
+    }
+    /**
+     * Utility method that resolves all views from the subject.
      */
     get views() {
         return this._views$.value;
@@ -4321,7 +4383,7 @@ SplitViewService = __decorate([
  * view components, so that the `lastVisibleView` can be updated accordingly. The actual
  * visibility of views is controlled by CSS. To allow for maximum flexibility, the CSS
  * implementation is using CSS variables. The `lastVisibleView` is bind to the
- * `--cx-last-visible-view` on the host, so that all descendants views will inherit the
+ * `--cx-active-view` on the host, so that all descendants views will inherit the
  * property conveniently.
  */
 let SplitViewComponent = class SplitViewComponent {
@@ -4329,13 +4391,20 @@ let SplitViewComponent = class SplitViewComponent {
         this.splitService = splitService;
         /**
          * Indicates the last visible view in the range of views that is visible. This
-         * is bind to a css variable `--cx-last-visible-view` so that the experience
+         * is bind to a css variable `--cx-active-view` so that the experience
          * can be fully controlled by css.
          */
         this.lastVisibleView = 1;
         this.subscription = this.splitService
-            .visibleViewCount()
-            .subscribe((lastVisible) => (this.lastVisibleView = lastVisible));
+            .getActiveView()
+            .subscribe((lastVisible) => (this.lastVisibleView = lastVisible + 1));
+    }
+    /**
+     * Sets the default hide mode for views. This mode is useful in case views are dynamically being created,
+     * for example when they are created by router components.
+     */
+    set hideMode(mode) {
+        this.splitService.defaultHideMode = mode;
     }
     ngOnDestroy() {
         var _a;
@@ -4346,7 +4415,10 @@ SplitViewComponent.ctorParameters = () => [
     { type: SplitViewService }
 ];
 __decorate([
-    HostBinding('style.--cx-last-visible-view')
+    Input()
+], SplitViewComponent.prototype, "hideMode", null);
+__decorate([
+    HostBinding('style.--cx-active-view')
 ], SplitViewComponent.prototype, "lastVisibleView", void 0);
 SplitViewComponent = __decorate([
     Component({
@@ -4367,8 +4439,13 @@ SplitViewComponent = __decorate([
  * overall experience.
  */
 let ViewComponent = class ViewComponent {
-    constructor(splitService) {
+    constructor(splitService, elementRef) {
         this.splitService = splitService;
+        this.elementRef = elementRef;
+        /**
+         * The disappeared flag is added to the
+         */
+        this.disappeared = true;
         /**
          * An update of the view visibility is emitted to the hiddenChange output.
          */
@@ -4381,15 +4458,25 @@ let ViewComponent = class ViewComponent {
      * The hidden input supports 2-way binding, see `hiddenChange` property.
      */
     set hidden(hidden) {
+        this._hidden = hidden;
         this.splitService.toggle(this.viewPosition, hidden);
     }
     ngOnInit() {
-        this.splitService.add(this.viewPosition, this.hidden);
+        this.splitService.splitViewCount = this.splitViewCount;
+        const hidden = this._hidden ? { hidden: this._hidden } : {};
+        this.splitService.add(this.viewPosition, hidden);
         this.subscription = this.splitService
-            .visibleViewCount()
-            .subscribe((visible) => {
-            if (this.hidden !== this.viewPosition >= visible) {
-                this.hiddenChange.emit(this.viewPosition >= visible);
+            .getViewState(Number(this.position))
+            .subscribe((view) => {
+            this.hiddenChange.emit(view.hidden);
+            this._hidden = view.hidden;
+            if (view.hidden) {
+                setTimeout(() => {
+                    this.disappeared = true;
+                }, this.duration * 1.25);
+            }
+            else {
+                this.disappeared = false;
             }
         });
     }
@@ -4407,10 +4494,37 @@ let ViewComponent = class ViewComponent {
      * The position is either taken from the input `position` or generated by the `SplitService`.
      */
     get viewPosition() {
-        if (this.position === undefined) {
-            this.position = this.splitService.generateNextPosition();
+        if (!(Number(this.position) >= 0)) {
+            this.position = this.splitService.nextPosition.toString();
         }
-        return this.position;
+        return Number(this.position);
+    }
+    /**
+     * Returns the duration in milliseconds. The duration is based on the CSS custom property
+     * `--cx-transition-duration`. Defaults to 300 milliseconds.
+     */
+    get duration() {
+        const duration = getComputedStyle(this.elementRef.nativeElement)
+            .getPropertyValue('--cx-transition-duration')
+            .trim();
+        if (duration.indexOf('ms') > -1) {
+            return Number(duration.split('ms')[0]);
+        }
+        else if (duration.indexOf('s') > -1) {
+            return Number(duration.split('s')[0]) * 1000;
+        }
+        else {
+            return 300;
+        }
+    }
+    /**
+     * Returns the maximum number of views per split-view. The number is based on the CSS custom property
+     * `--cx-max-views`. Defaults to `2`
+     */
+    get splitViewCount() {
+        return Number(getComputedStyle(this.elementRef.nativeElement)
+            .getPropertyValue('--cx-max-views')
+            .trim() || 2);
     }
     /**
      * The view is removed from the `SplitService` so that the view no longer
@@ -4423,12 +4537,16 @@ let ViewComponent = class ViewComponent {
     }
 };
 ViewComponent.ctorParameters = () => [
-    { type: SplitViewService }
+    { type: SplitViewService },
+    { type: ElementRef }
 ];
 __decorate([
     Input(),
     HostBinding('attr.position')
 ], ViewComponent.prototype, "position", void 0);
+__decorate([
+    HostBinding('attr.disappeared')
+], ViewComponent.prototype, "disappeared", void 0);
 __decorate([
     Input()
 ], ViewComponent.prototype, "hidden", null);
