@@ -17043,10 +17043,12 @@ let FacetService = class FacetService {
      * and max visible values.
      */
     initialize(facet) {
+        var _a;
+        const topFacets = facet.topValueCount > 0 ? facet.topValueCount : ((_a = facet.values) === null || _a === void 0 ? void 0 : _a.length) || 0;
         if (!this.hasState(facet)) {
             this.facetState.set(facet.name, new BehaviorSubject({
-                topVisible: facet.topValueCount || 0,
-                maxVisible: facet.topValueCount || 0,
+                topVisible: topFacets,
+                maxVisible: topFacets,
             }));
         }
     }
