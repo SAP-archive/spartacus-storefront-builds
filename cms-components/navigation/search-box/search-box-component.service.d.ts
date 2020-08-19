@@ -1,4 +1,4 @@
-import { ProductSearchPage, RoutingService, SearchboxService, TranslationService, WindowRef } from '@spartacus/core';
+import { RoutingService, SearchboxService, TranslationService, WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { SearchBoxConfig, SearchResults } from './search-box.model';
 export declare class SearchBoxComponentService {
@@ -26,19 +26,19 @@ export declare class SearchBoxComponentService {
     clearResults(): void;
     hasBodyClass(className: string): boolean;
     toggleBodyClass(className: string, add?: boolean): void;
-    protected hasResults(results: SearchResults): boolean;
-    protected getProductResults(config: SearchBoxConfig): Observable<ProductSearchPage>;
+    private hasResults;
+    private getProductResults;
     /**
      * Loads suggestions from the backend. In case there's no suggestion
      * available, we try to get an exact match suggestion.
      */
-    protected getProductSuggestions(config: SearchBoxConfig): Observable<string[]>;
+    private getProductSuggestions;
     /**
      * whenever there is at least 1 product, we simulate
      * a suggestion to provide easy access to the search result page
      */
-    protected getExactSuggestion(config: SearchBoxConfig): Observable<string>;
-    protected getSearchMessage(config: SearchBoxConfig): Observable<string>;
+    private getExactSuggestion;
+    private getSearchMessage;
     /**
      * Navigates to the search result page with a given query
      */
