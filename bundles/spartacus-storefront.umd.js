@@ -482,6 +482,14 @@
     })(exports.OutletPosition || (exports.OutletPosition = {}));
     var AVOID_STACKED_OUTLETS = false;
     var USE_STACKED_OUTLETS = true;
+    /**
+     * Token for injecting outlet related context to the component rendered in the outlet
+     */
+    var OutletContextData = /** @class */ (function () {
+        function OutletContextData() {
+        }
+        return OutletContextData;
+    }());
 
     var OutletService = /** @class */ (function () {
         function OutletService(features) {
@@ -829,15 +837,15 @@
             }
             var components = [];
             templates.forEach(function (obj) {
-                var component = _this.create(obj);
+                var component = _this.create(obj, position);
                 components.push(component);
             });
             this.renderedComponents.set(position, components);
         };
-        OutletDirective.prototype.create = function (tmplOrFactory) {
+        OutletDirective.prototype.create = function (tmplOrFactory, position) {
             this.renderedTemplate.push(tmplOrFactory);
             if (tmplOrFactory instanceof core.ComponentFactory) {
-                var component = this.vcr.createComponent(tmplOrFactory);
+                var component = this.vcr.createComponent(tmplOrFactory, undefined, this.getComponentInjector(position));
                 return component;
             }
             else if (tmplOrFactory instanceof core.TemplateRef) {
@@ -849,6 +857,26 @@
                 view.markForCheck();
                 return view;
             }
+        };
+        /**
+         * Returns injector with OutletContextData that can be injected to the component
+         * rendered in the outlet
+         */
+        OutletDirective.prototype.getComponentInjector = function (position) {
+            var contextData = {
+                reference: this.cxOutlet,
+                position: position,
+                context: this.cxOutletContext,
+            };
+            return core.Injector.create({
+                providers: [
+                    {
+                        provide: OutletContextData,
+                        useValue: contextData,
+                    },
+                ],
+                parent: this.vcr.injector,
+            });
         };
         /**
          * Returns the closest `HtmlElement`, by iterating over the
@@ -22331,6 +22359,7 @@
     exports.OrderReturnRequestListComponent = OrderReturnRequestListComponent;
     exports.OrderReturnService = OrderReturnService;
     exports.OrderSummaryComponent = OrderSummaryComponent;
+    exports.OutletContextData = OutletContextData;
     exports.OutletDirective = OutletDirective;
     exports.OutletModule = OutletModule;
     exports.OutletRefDirective = OutletRefDirective;

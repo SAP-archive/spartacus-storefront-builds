@@ -1,4 +1,4 @@
-import { ComponentFactory, ComponentRef, EmbeddedViewRef, EventEmitter, OnChanges, OnDestroy, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentRef, EmbeddedViewRef, EventEmitter, OnChanges, OnDestroy, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DeferLoaderService } from '../../layout/loading/defer-loader.service';
 import { IntersectionOptions } from '../../layout/loading/intersection.model';
@@ -21,13 +21,18 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
     cxOutletDefer: IntersectionOptions;
     loaded: EventEmitter<Boolean>;
     subscription: Subscription;
-    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService<TemplateRef<any> | ComponentFactory<any>>, deferLoaderService: DeferLoaderService, outletRendererService: OutletRendererService);
+    constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService, deferLoaderService: DeferLoaderService, outletRendererService: OutletRendererService);
     render(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private deferLoading;
     private build;
     private buildOutlet;
     private create;
+    /**
+     * Returns injector with OutletContextData that can be injected to the component
+     * rendered in the outlet
+     */
+    private getComponentInjector;
     /**
      * Returns the closest `HtmlElement`, by iterating over the
      * parent nodes of the given element.
