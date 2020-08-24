@@ -15586,11 +15586,23 @@ let SearchBoxComponentService = class SearchBoxComponentService {
                 : this.winRef.document.body.classList.remove(className);
         }
     }
+    /**
+     * For search results model, it returns true when:
+     * * there is any product OR
+     * * the is any search suggestion OR
+     * * there is a message.
+     *
+     * Otherwise it returns false.
+     */
     hasResults(results) {
         return ((!!results.products && results.products.length > 0) ||
             (!!results.suggestions && results.suggestions.length > 0) ||
             !!results.message);
     }
+    /**
+     * Emits product search results in case when the config property `displayProducts` is true.
+     * Otherwise it emits an empty object.
+     */
     getProductResults(config) {
         if (config.displayProducts) {
             return this.searchService.getResults();
@@ -15619,7 +15631,7 @@ let SearchBoxComponentService = class SearchBoxComponentService {
         }
     }
     /**
-     * whenever there is at least 1 product, we simulate
+     * Whenever there is at least 1 product, we simulate
      * a suggestion to provide easy access to the search result page
      */
     getExactSuggestion(config) {
@@ -15631,6 +15643,10 @@ let SearchBoxComponentService = class SearchBoxComponentService {
                 : of(null);
         }));
     }
+    /**
+     * Emits a 'no match' message, in case the product search results and search suggestions are empty.
+     * Otherwise it emits null.
+     */
     getSearchMessage(config) {
         return combineLatest([
             this.getProductResults(config),
