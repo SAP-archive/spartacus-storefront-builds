@@ -9687,6 +9687,15 @@
             this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
             this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(this.activatedRoute);
             this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+            // Reload delivery modes on error
+            this.checkoutDeliveryService
+                .getLoadSupportedDeliveryModeProcess()
+                .pipe(operators.takeWhile(function (state) { return (state === null || state === void 0 ? void 0 : state.success) === false; }))
+                .subscribe(function (state) {
+                if (state.error && !state.loading) {
+                    _this.checkoutDeliveryService.loadSupportedDeliveryModes();
+                }
+            });
             this.deliveryModeSub = this.supportedDeliveryModes$
                 .pipe(operators.withLatestFrom(this.checkoutDeliveryService
                 .getSelectedDeliveryMode()
