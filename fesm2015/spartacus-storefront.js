@@ -11167,7 +11167,7 @@ let StorefrontComponent = class StorefrontComponent {
         });
     }
     collapseMenuIfClickOutside(event) {
-        if (event.target.className.includes('is-expanded')) {
+        if (event.currentTarget.className.includes('is-expanded')) {
             this.collapseMenu();
         }
     }
