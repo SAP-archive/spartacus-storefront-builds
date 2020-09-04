@@ -12376,7 +12376,7 @@ var StorefrontComponent = /** @class */ (function () {
         });
     };
     StorefrontComponent.prototype.collapseMenuIfClickOutside = function (event) {
-        if (event.currentTarget.className.includes('is-expanded')) {
+        if (event.target.className.includes('is-expanded')) {
             this.collapseMenu();
         }
     };
