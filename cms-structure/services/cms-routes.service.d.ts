@@ -1,8 +1,4 @@
 import { PageContext } from '@spartacus/core';
-import * as ɵngcc0 from '@angular/core';
 export declare abstract class CmsRoutesService {
     abstract handleCmsRoutesInGuard(pageContext: PageContext, componentTypes: string[], currentUrl: string, currentPageLabel: string): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsRoutesService, never>;
 }
-
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY21zLXJvdXRlcy5zZXJ2aWNlLmQudHMiLCJzb3VyY2VzIjpbImNtcy1yb3V0ZXMuc2VydmljZS5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztBQUNBOzs7QUFFQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFBhZ2VDb250ZXh0IH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmV4cG9ydCBkZWNsYXJlIGFic3RyYWN0IGNsYXNzIENtc1JvdXRlc1NlcnZpY2Uge1xuICAgIGFic3RyYWN0IGhhbmRsZUNtc1JvdXRlc0luR3VhcmQocGFnZUNvbnRleHQ6IFBhZ2VDb250ZXh0LCBjb21wb25lbnRUeXBlczogc3RyaW5nW10sIGN1cnJlbnRVcmw6IHN0cmluZywgY3VycmVudFBhZ2VMYWJlbDogc3RyaW5nKTogYm9vbGVhbjtcbn1cbiJdfQ==
