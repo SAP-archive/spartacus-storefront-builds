@@ -1,18 +1,17 @@
-import { RoutingService, RoutingConfigService } from '@spartacus/core';
-import { OnInit } from '@angular/core';
-import { CheckoutConfig } from '../../config/checkout-config';
+import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { CheckoutStep } from '../../model/checkout-step.model';
-import { Observable } from 'rxjs';
-export declare class CheckoutProgressComponent implements OnInit {
-    protected config: CheckoutConfig;
-    protected routingService: RoutingService;
-    protected routingConfigService: RoutingConfigService;
-    constructor(config: CheckoutConfig, routingService: RoutingService, routingConfigService: RoutingConfigService);
-    steps: Array<CheckoutStep>;
-    routerState$: Observable<any>;
+import { CheckoutStepService } from '../../services/checkout-step.service';
+export declare class CheckoutProgressComponent implements OnInit, OnDestroy {
+    protected checkoutStepService: CheckoutStepService;
+    protected cdr: ChangeDetectorRef;
+    constructor(checkoutStepService: CheckoutStepService, cdr: ChangeDetectorRef);
+    steps: CheckoutStep[];
     activeStepIndex: number;
-    activeStepUrl: string;
+    activeStepIndex$: Observable<number>;
+    subscription: Subscription;
     ngOnInit(): void;
+    ngOnDestroy(): void;
     getTabIndex(stepIndex: number): number;
     isActive(index: number): boolean;
     isDisabled(index: number): boolean;

@@ -1,18 +1,18 @@
-import { OnInit } from '@angular/core';
-import { ActiveCartService, Cart, RoutingConfigService, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
-import { CheckoutConfig } from '../../../config/checkout-config';
+import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ActiveCartService, Cart } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
+import { CheckoutStepService } from '../../../services/checkout-step.service';
 import { CheckoutStep } from '../../../model/checkout-step.model';
-export declare class CheckoutProgressMobileTopComponent implements OnInit {
-    protected config: CheckoutConfig;
-    protected routingService: RoutingService;
-    protected routingConfigService: RoutingConfigService;
+export declare class CheckoutProgressMobileTopComponent implements OnInit, OnDestroy {
+    protected checkoutStepService: CheckoutStepService;
     protected activeCartService: ActiveCartService;
-    constructor(config: CheckoutConfig, routingService: RoutingService, routingConfigService: RoutingConfigService, activeCartService: ActiveCartService);
-    steps: Array<CheckoutStep>;
-    routerState$: Observable<any>;
+    protected cdr: ChangeDetectorRef;
+    constructor(checkoutStepService: CheckoutStepService, activeCartService: ActiveCartService, cdr: ChangeDetectorRef);
     cart$: Observable<Cart>;
+    steps: CheckoutStep[];
     activeStepIndex: number;
-    activeStepUrl: string;
+    activeStepIndex$: Observable<number>;
+    subscription: Subscription;
     ngOnInit(): void;
+    ngOnDestroy(): void;
 }

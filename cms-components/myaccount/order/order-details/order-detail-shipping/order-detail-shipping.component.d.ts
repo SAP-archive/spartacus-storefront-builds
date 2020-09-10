@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { Address, DeliveryMode, Order, PaymentDetails, TranslationService } from '@spartacus/core';
+import { Address, CostCenter, DeliveryMode, Order, PaymentDetails, TranslationService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { OrderDetailsService } from '../order-details.service';
@@ -9,8 +9,15 @@ export declare class OrderDetailShippingComponent implements OnInit {
     constructor(orderDetailsService: OrderDetailsService, translation: TranslationService);
     order$: Observable<Order>;
     ngOnInit(): void;
-    getAddressCardContent(address: Address): Observable<Card>;
+    getOrderCodeCardContent(orderCode: string): Observable<Card>;
+    getOrderCurrentDateCardContent(isoDate: string): Observable<Card>;
+    getOrderStatusCardContent(status: string): Observable<Card>;
+    getPurchaseOrderNumber(poNumber: string): Observable<Card>;
+    getMethodOfPaymentCardContent(hasPaymentInfo: PaymentDetails): Observable<Card>;
+    getCostCenterCardContent(costCenter: CostCenter): Observable<Card>;
+    getAddressCardContent(deliveryAddress: Address): Observable<Card>;
+    getDeliveryModeCardContent(deliveryMode: DeliveryMode): Observable<Card>;
+    getPaymentInfoCardContent(payment: PaymentDetails): Observable<Card>;
     getBillingAddressCardContent(billingAddress: Address): Observable<Card>;
-    getPaymentCardContent(payment: PaymentDetails): Observable<Card>;
-    getShippingMethodCardContent(shipping: DeliveryMode): Observable<Card>;
+    private getDate;
 }
