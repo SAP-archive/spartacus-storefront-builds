@@ -4212,7 +4212,13 @@ let ModalService = class ModalService {
         let activeModal;
         activeModal = this.ngbModalService.open(content, options);
         this.modals.push(activeModal);
+        this.handleModalRemoveEvents(activeModal);
         return activeModal;
+    }
+    handleModalRemoveEvents(modal) {
+        modal.result.finally(() => {
+            this.modals = this.modals.filter((m) => m !== modal);
+        });
     }
     getActiveModal() {
         const modal = this.modals[this.modals.length - 1];
@@ -4222,14 +4228,12 @@ let ModalService = class ModalService {
         const modal = this.getActiveModal();
         if (modal) {
             modal.dismiss(reason);
-            this.modals.pop();
         }
     }
     closeActiveModal(reason) {
         const modal = this.getActiveModal();
         if (modal) {
             modal.close(reason);
-            this.modals.pop();
         }
     }
 };

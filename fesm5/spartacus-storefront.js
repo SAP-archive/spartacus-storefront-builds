@@ -4652,7 +4652,14 @@ var ModalService = /** @class */ (function () {
         var activeModal;
         activeModal = this.ngbModalService.open(content, options);
         this.modals.push(activeModal);
+        this.handleModalRemoveEvents(activeModal);
         return activeModal;
+    };
+    ModalService.prototype.handleModalRemoveEvents = function (modal) {
+        var _this = this;
+        modal.result.finally(function () {
+            _this.modals = _this.modals.filter(function (m) { return m !== modal; });
+        });
     };
     ModalService.prototype.getActiveModal = function () {
         var modal = this.modals[this.modals.length - 1];
@@ -4662,14 +4669,12 @@ var ModalService = /** @class */ (function () {
         var modal = this.getActiveModal();
         if (modal) {
             modal.dismiss(reason);
-            this.modals.pop();
         }
     };
     ModalService.prototype.closeActiveModal = function (reason) {
         var modal = this.getActiveModal();
         if (modal) {
             modal.close(reason);
-            this.modals.pop();
         }
     };
     ModalService.ctorParameters = function () { return [
