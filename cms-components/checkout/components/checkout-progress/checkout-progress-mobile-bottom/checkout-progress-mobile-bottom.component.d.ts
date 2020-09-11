@@ -1,7 +1,7 @@
-import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { CheckoutStepService } from '../../../services/checkout-step.service';
 import { CheckoutStep } from '../../../model/checkout-step.model';
+import { CheckoutStepService } from '../../../services/checkout-step.service';
 export declare class CheckoutProgressMobileBottomComponent implements OnInit, OnDestroy {
     protected checkoutStepService: CheckoutStepService;
     protected cdr: ChangeDetectorRef;

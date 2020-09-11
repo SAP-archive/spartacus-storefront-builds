@@ -1,8 +1,8 @@
-import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { ActiveCartService, Cart } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { CheckoutStepService } from '../../../services/checkout-step.service';
 import { CheckoutStep } from '../../../model/checkout-step.model';
+import { CheckoutStepService } from '../../../services/checkout-step.service';
 export declare class CheckoutProgressMobileTopComponent implements OnInit, OnDestroy {
     protected checkoutStepService: CheckoutStepService;
     protected activeCartService: ActiveCartService;

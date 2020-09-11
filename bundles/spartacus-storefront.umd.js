@@ -9649,6 +9649,7 @@
             var _this = this;
             this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
                 _this.steps = steps;
+                // TODO(#8879): Couldn't we use observables here instead?
                 _this.cdr.detectChanges();
             });
         };
@@ -9851,6 +9852,7 @@
             this.cart$ = this.activeCartService.getActive();
             this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
                 _this.steps = steps;
+                // TODO(#8879): Couldn't we use observables here instead?
                 _this.cdr.detectChanges();
             });
         };
@@ -9910,6 +9912,7 @@
             var _this = this;
             this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
                 _this.steps = steps;
+                // TODO(#8879): Couldn't we use observables here instead?
                 _this.cdr.detectChanges();
             });
         };
@@ -10319,6 +10322,7 @@
                         cmsComponents: {
                             CheckoutDeliveryMode: {
                                 component: DeliveryModeComponent,
+                                // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard here?
                                 guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -10822,6 +10826,7 @@
                         cmsComponents: {
                             CheckoutPaymentDetails: {
                                 component: PaymentMethodComponent,
+                                // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard and others here?
                                 guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -11270,6 +11275,7 @@
                         cmsComponents: {
                             CheckoutReviewOrder: {
                                 component: ReviewSubmitComponent,
+                                // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard and others here?
                                 guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                             },
                         },
@@ -19300,10 +19306,10 @@
         ProductListComponentService.prototype.search = function (criteria) {
             var currentPage = criteria.currentPage;
             var pageSize = criteria.pageSize;
-            var sortCode = criteria.sortCode;
+            var sort = criteria.sortCode;
             this.productSearchService.search(criteria.query, 
             // TODO: consider dropping this complex passing of cleaned object
-            Object.assign({}, currentPage && { currentPage: currentPage }, pageSize && { pageSize: pageSize }, sortCode && { sortCode: sortCode }));
+            Object.assign({}, currentPage && { currentPage: currentPage }, pageSize && { pageSize: pageSize }, sort && { sort: sort }));
         };
         /**
          * Get items from a given page without using navigation
@@ -22837,6 +22843,7 @@
                     user: 'orgUsers/${userId}',
                     addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
                     setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
+                    // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
                     placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
                 },
             },
@@ -23182,7 +23189,7 @@
         B2bStorefrontModule = B2bStorefrontModule_1 = __decorate([
             core.NgModule({
                 imports: [
-                    core$1.OrganizationModule.forRoot(),
+                    core$1.CostCenterModule.forRoot(),
                     StorefrontModule,
                     // the cms lib module contains all components that added in the bundle
                     CmsLibModule,

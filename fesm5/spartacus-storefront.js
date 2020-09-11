@@ -2,7 +2,7 @@ import { __decorate, __values, __param, __extends, __read, __spread, __assign, _
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, isDevMode, RendererFactory2, ComponentFactoryResolver, TemplateRef, Input, Directive, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, Optional, InjectFlags, NgModuleFactory, Compiler, INJECTOR, ChangeDetectorRef, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, APP_BOOTSTRAP_LISTENER, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, takeWhile, endWith, delayWhen, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, configurationFactory, ConfigInitializerService, deepMerge, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, B2BUserGroup, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory, OrganizationModule } from '@spartacus/core';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, configurationFactory, ConfigInitializerService, deepMerge, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, B2BUserGroup, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory, CostCenterModule as CostCenterModule$1 } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -9464,6 +9464,7 @@ var CheckoutProgressMobileBottomComponent = /** @class */ (function () {
         var _this = this;
         this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
             _this.steps = steps;
+            // TODO(#8879): Couldn't we use observables here instead?
             _this.cdr.detectChanges();
         });
     };
@@ -9666,6 +9667,7 @@ var CheckoutProgressMobileTopComponent = /** @class */ (function () {
         this.cart$ = this.activeCartService.getActive();
         this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
             _this.steps = steps;
+            // TODO(#8879): Couldn't we use observables here instead?
             _this.cdr.detectChanges();
         });
     };
@@ -9725,6 +9727,7 @@ var CheckoutProgressComponent = /** @class */ (function () {
         var _this = this;
         this.subscription = this.checkoutStepService.steps$.subscribe(function (steps) {
             _this.steps = steps;
+            // TODO(#8879): Couldn't we use observables here instead?
             _this.cdr.detectChanges();
         });
     };
@@ -10134,6 +10137,7 @@ var DeliveryModeModule = /** @class */ (function () {
                     cmsComponents: {
                         CheckoutDeliveryMode: {
                             component: DeliveryModeComponent,
+                            // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard here?
                             guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                         },
                     },
@@ -10637,6 +10641,7 @@ var PaymentMethodModule = /** @class */ (function () {
                     cmsComponents: {
                         CheckoutPaymentDetails: {
                             component: PaymentMethodComponent,
+                            // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard and others here?
                             guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                         },
                     },
@@ -11085,6 +11090,7 @@ var ReviewSubmitModule = /** @class */ (function () {
                     cmsComponents: {
                         CheckoutReviewOrder: {
                             component: ReviewSubmitComponent,
+                            // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard and others here?
                             guards: [CheckoutAuthGuard, CartNotEmptyGuard],
                         },
                     },
@@ -19115,10 +19121,10 @@ var ProductListComponentService = /** @class */ (function () {
     ProductListComponentService.prototype.search = function (criteria) {
         var currentPage = criteria.currentPage;
         var pageSize = criteria.pageSize;
-        var sortCode = criteria.sortCode;
+        var sort = criteria.sortCode;
         this.productSearchService.search(criteria.query, 
         // TODO: consider dropping this complex passing of cleaned object
-        Object.assign({}, currentPage && { currentPage: currentPage }, pageSize && { pageSize: pageSize }, sortCode && { sortCode: sortCode }));
+        Object.assign({}, currentPage && { currentPage: currentPage }, pageSize && { pageSize: pageSize }, sort && { sort: sort }));
     };
     /**
      * Get items from a given page without using navigation
@@ -22652,6 +22658,7 @@ var defaultB2bOccConfig = {
                 user: 'orgUsers/${userId}',
                 addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
                 setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
+                // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
                 placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
             },
         },
@@ -22997,7 +23004,7 @@ var B2bStorefrontModule = /** @class */ (function () {
     B2bStorefrontModule = B2bStorefrontModule_1 = __decorate([
         NgModule({
             imports: [
-                OrganizationModule.forRoot(),
+                CostCenterModule$1.forRoot(),
                 StorefrontModule,
                 // the cms lib module contains all components that added in the bundle
                 CmsLibModule,
