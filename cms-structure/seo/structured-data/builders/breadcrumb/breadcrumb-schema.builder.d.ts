@@ -1,9 +1,13 @@
 import { PageMeta, PageMetaService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { SchemaBuilder } from '../schema.interface';
+import * as ɵngcc0 from '@angular/core';
 export declare class BreadcrumbSchemaBuilder implements SchemaBuilder {
     protected pageMetaService: PageMetaService;
     constructor(pageMetaService: PageMetaService);
     build(): Observable<any>;
     protected collect(pageMeta: PageMeta): any;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<BreadcrumbSchemaBuilder, never>;
 }
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnJlYWRjcnVtYi1zY2hlbWEuYnVpbGRlci5kLnRzIiwic291cmNlcyI6WyJicmVhZGNydW1iLXNjaGVtYS5idWlsZGVyLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7QUFHQTs7Ozs7O0FBS0EiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBQYWdlTWV0YSwgUGFnZU1ldGFTZXJ2aWNlIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmltcG9ydCB7IFNjaGVtYUJ1aWxkZXIgfSBmcm9tICcuLi9zY2hlbWEuaW50ZXJmYWNlJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIEJyZWFkY3J1bWJTY2hlbWFCdWlsZGVyIGltcGxlbWVudHMgU2NoZW1hQnVpbGRlciB7XG4gICAgcHJvdGVjdGVkIHBhZ2VNZXRhU2VydmljZTogUGFnZU1ldGFTZXJ2aWNlO1xuICAgIGNvbnN0cnVjdG9yKHBhZ2VNZXRhU2VydmljZTogUGFnZU1ldGFTZXJ2aWNlKTtcbiAgICBidWlsZCgpOiBPYnNlcnZhYmxlPGFueT47XG4gICAgcHJvdGVjdGVkIGNvbGxlY3QocGFnZU1ldGE6IFBhZ2VNZXRhKTogYW55O1xufVxuIl19
