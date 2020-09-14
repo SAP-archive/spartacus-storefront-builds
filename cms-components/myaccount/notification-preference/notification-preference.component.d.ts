@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { NotificationPreference, UserNotificationPreferenceService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class NotificationPreferenceComponent implements OnInit {
     private notificationPreferenceService;
     preferences$: Observable<NotificationPreference[]>;
@@ -9,4 +10,8 @@ export declare class NotificationPreferenceComponent implements OnInit {
     constructor(notificationPreferenceService: UserNotificationPreferenceService);
     ngOnInit(): void;
     updatePreference(preference: NotificationPreference): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<NotificationPreferenceComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<NotificationPreferenceComponent, "cx-notification-preference", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm90aWZpY2F0aW9uLXByZWZlcmVuY2UuY29tcG9uZW50LmQudHMiLCJzb3VyY2VzIjpbIm5vdGlmaWNhdGlvbi1wcmVmZXJlbmNlLmNvbXBvbmVudC5kLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7O0FBR0E7Ozs7Ozs7Ozs7QUFRQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgTm90aWZpY2F0aW9uUHJlZmVyZW5jZSwgVXNlck5vdGlmaWNhdGlvblByZWZlcmVuY2VTZXJ2aWNlIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IE9ic2VydmFibGUgfSBmcm9tICdyeGpzJztcbmV4cG9ydCBkZWNsYXJlIGNsYXNzIE5vdGlmaWNhdGlvblByZWZlcmVuY2VDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQge1xuICAgIHByaXZhdGUgbm90aWZpY2F0aW9uUHJlZmVyZW5jZVNlcnZpY2U7XG4gICAgcHJlZmVyZW5jZXMkOiBPYnNlcnZhYmxlPE5vdGlmaWNhdGlvblByZWZlcmVuY2VbXT47XG4gICAgaXNMb2FkaW5nJDogT2JzZXJ2YWJsZTxib29sZWFuPjtcbiAgICBwcm90ZWN0ZWQgcHJlZmVyZW5jZXM6IE5vdGlmaWNhdGlvblByZWZlcmVuY2VbXTtcbiAgICBjb25zdHJ1Y3Rvcihub3RpZmljYXRpb25QcmVmZXJlbmNlU2VydmljZTogVXNlck5vdGlmaWNhdGlvblByZWZlcmVuY2VTZXJ2aWNlKTtcbiAgICBuZ09uSW5pdCgpOiB2b2lkO1xuICAgIHVwZGF0ZVByZWZlcmVuY2UocHJlZmVyZW5jZTogTm90aWZpY2F0aW9uUHJlZmVyZW5jZSk6IHZvaWQ7XG59XG4iXX0=

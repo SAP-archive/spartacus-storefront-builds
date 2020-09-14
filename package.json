@@ -1,6 +1,6 @@
 {
   "name": "@spartacus/storefront",
-  "version": "2.1.0-next.1",
+  "version": "3.0.0-next.0",
   "homepage": "https://github.com/SAP/spartacus",
   "keywords": [
     "spartacus",
@@ -25,7 +25,7 @@
     "@ng-select/ng-select": "^4.0.0",
     "@ngrx/effects": "^9.0.0",
     "@ngrx/store": "^9.0.0",
-    "@spartacus/core": "2.1.0-next.1",
+    "@spartacus/core": "3.0.0-next.0",
     "bootstrap": "4.2.1",
     "rxjs": "^6.5.4",
     "zone.js": "^0.10.2",
@@ -33,15 +33,25 @@
   },
   "main": "bundles/spartacus-storefront.umd.js",
   "module": "fesm5/spartacus-storefront.js",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/spartacus-storefront.js",
   "es2015": "fesm2015/spartacus-storefront.js",
   "esm5": "esm5/spartacus-storefront.js",
   "esm2015": "esm2015/spartacus-storefront.js",
   "fesm5": "fesm5/spartacus-storefront.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/spartacus-storefront.js",
   "fesm2015": "fesm2015/spartacus-storefront.js",
   "typings": "spartacus-storefront.d.ts",
   "metadata": "spartacus-storefront.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.10.0"
+  },
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "9.1.9",
+    "fesm2015": "9.1.9",
+    "typings": "9.1.9"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
   }
 }

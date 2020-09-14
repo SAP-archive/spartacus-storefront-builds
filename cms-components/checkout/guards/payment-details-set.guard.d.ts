@@ -3,6 +3,7 @@ import { RoutingConfigService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CheckoutStepService } from '../services/checkout-step.service';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PaymentDetailsSetGuard implements CanActivate {
     private checkoutDetailsService;
     private checkoutStepService;
@@ -10,4 +11,7 @@ export declare class PaymentDetailsSetGuard implements CanActivate {
     private router;
     constructor(checkoutDetailsService: CheckoutDetailsService, checkoutStepService: CheckoutStepService, routingConfigService: RoutingConfigService, router: Router);
     canActivate(): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentDetailsSetGuard, never>;
 }
+
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGF5bWVudC1kZXRhaWxzLXNldC5ndWFyZC5kLnRzIiwic291cmNlcyI6WyJwYXltZW50LWRldGFpbHMtc2V0Lmd1YXJkLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7OztBQUtBOzs7Ozs7OztBQU9BIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2FuQWN0aXZhdGUsIFJvdXRlciwgVXJsVHJlZSB9IGZyb20gJ0Bhbmd1bGFyL3JvdXRlcic7XG5pbXBvcnQgeyBSb3V0aW5nQ29uZmlnU2VydmljZSB9IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5pbXBvcnQgeyBPYnNlcnZhYmxlIH0gZnJvbSAncnhqcyc7XG5pbXBvcnQgeyBDaGVja291dFN0ZXBTZXJ2aWNlIH0gZnJvbSAnLi4vc2VydmljZXMvY2hlY2tvdXQtc3RlcC5zZXJ2aWNlJztcbmltcG9ydCB7IENoZWNrb3V0RGV0YWlsc1NlcnZpY2UgfSBmcm9tICcuLi9zZXJ2aWNlcy9jaGVja291dC1kZXRhaWxzLnNlcnZpY2UnO1xuZXhwb3J0IGRlY2xhcmUgY2xhc3MgUGF5bWVudERldGFpbHNTZXRHdWFyZCBpbXBsZW1lbnRzIENhbkFjdGl2YXRlIHtcbiAgICBwcml2YXRlIGNoZWNrb3V0RGV0YWlsc1NlcnZpY2U7XG4gICAgcHJpdmF0ZSBjaGVja291dFN0ZXBTZXJ2aWNlO1xuICAgIHByaXZhdGUgcm91dGluZ0NvbmZpZ1NlcnZpY2U7XG4gICAgcHJpdmF0ZSByb3V0ZXI7XG4gICAgY29uc3RydWN0b3IoY2hlY2tvdXREZXRhaWxzU2VydmljZTogQ2hlY2tvdXREZXRhaWxzU2VydmljZSwgY2hlY2tvdXRTdGVwU2VydmljZTogQ2hlY2tvdXRTdGVwU2VydmljZSwgcm91dGluZ0NvbmZpZ1NlcnZpY2U6IFJvdXRpbmdDb25maWdTZXJ2aWNlLCByb3V0ZXI6IFJvdXRlcik7XG4gICAgY2FuQWN0aXZhdGUoKTogT2JzZXJ2YWJsZTxib29sZWFuIHwgVXJsVHJlZT47XG59XG4iXX0=
