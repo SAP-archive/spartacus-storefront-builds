@@ -5,14 +5,10 @@ import { JsonLdBuilder } from '../schema.interface';
  * Builds the structured data for the product reviews, see https://schema.org/Review.
  * The data includes the aggregated product rating and the individual reviews.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class JsonLdProductReviewBuilder implements JsonLdBuilder<Product> {
     private reviewService;
     constructor(reviewService: ProductReviewService);
     build(product: Product): Observable<any>;
     private buildAggregatedReviews;
     private buildReviews;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<JsonLdProductReviewBuilder, never>;
 }
-
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvbmxkLXByb2R1Y3QtcmV2aWV3LmJ1aWxkZXIuZC50cyIsInNvdXJjZXMiOlsianNvbmxkLXByb2R1Y3QtcmV2aWV3LmJ1aWxkZXIuZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7Ozs7Ozs7QUFPQTs7Ozs7OztBQU1BIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUHJvZHVjdCwgUHJvZHVjdFJldmlld1NlcnZpY2UgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgSnNvbkxkQnVpbGRlciB9IGZyb20gJy4uL3NjaGVtYS5pbnRlcmZhY2UnO1xuLyoqXG4gKiBCdWlsZHMgdGhlIHN0cnVjdHVyZWQgZGF0YSBmb3IgdGhlIHByb2R1Y3QgcmV2aWV3cywgc2VlIGh0dHBzOi8vc2NoZW1hLm9yZy9SZXZpZXcuXG4gKiBUaGUgZGF0YSBpbmNsdWRlcyB0aGUgYWdncmVnYXRlZCBwcm9kdWN0IHJhdGluZyBhbmQgdGhlIGluZGl2aWR1YWwgcmV2aWV3cy5cbiAqL1xuZXhwb3J0IGRlY2xhcmUgY2xhc3MgSnNvbkxkUHJvZHVjdFJldmlld0J1aWxkZXIgaW1wbGVtZW50cyBKc29uTGRCdWlsZGVyPFByb2R1Y3Q+IHtcbiAgICBwcml2YXRlIHJldmlld1NlcnZpY2U7XG4gICAgY29uc3RydWN0b3IocmV2aWV3U2VydmljZTogUHJvZHVjdFJldmlld1NlcnZpY2UpO1xuICAgIGJ1aWxkKHByb2R1Y3Q6IFByb2R1Y3QpOiBPYnNlcnZhYmxlPGFueT47XG4gICAgcHJpdmF0ZSBidWlsZEFnZ3JlZ2F0ZWRSZXZpZXdzO1xuICAgIHByaXZhdGUgYnVpbGRSZXZpZXdzO1xufVxuIl19

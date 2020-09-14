@@ -1,9 +1,4 @@
 import { ProductPageEventBuilder } from './product-page-event.builder';
-import * as ɵngcc0 from '@angular/core';
 export declare class ProductPageEventModule {
     constructor(_productPageEventBuilder: ProductPageEventBuilder);
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<ProductPageEventModule, never, never, never>;
-    static ɵinj: ɵngcc0.ɵɵInjectorDef<ProductPageEventModule>;
 }
-
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1wYWdlLWV2ZW50Lm1vZHVsZS5kLnRzIiwic291cmNlcyI6WyJwcm9kdWN0LXBhZ2UtZXZlbnQubW9kdWxlLmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0FBQ0E7Ozs7QUFFQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFByb2R1Y3RQYWdlRXZlbnRCdWlsZGVyIH0gZnJvbSAnLi9wcm9kdWN0LXBhZ2UtZXZlbnQuYnVpbGRlcic7XG5leHBvcnQgZGVjbGFyZSBjbGFzcyBQcm9kdWN0UGFnZUV2ZW50TW9kdWxlIHtcbiAgICBjb25zdHJ1Y3RvcihfcHJvZHVjdFBhZ2VFdmVudEJ1aWxkZXI6IFByb2R1Y3RQYWdlRXZlbnRCdWlsZGVyKTtcbn1cbiJdfQ==
