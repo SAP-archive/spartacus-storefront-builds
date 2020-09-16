@@ -2,7 +2,7 @@ import { __decorate, __values, __param, __extends, __read, __spread, __assign, _
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, isDevMode, RendererFactory2, ComponentFactoryResolver, TemplateRef, Input, Directive, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, Optional, InjectFlags, NgModuleFactory, Compiler, INJECTOR, ChangeDetectorRef, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, APP_BOOTSTRAP_LISTENER, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, takeWhile, endWith, delayWhen, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, configurationFactory, ConfigInitializerService, deepMerge, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, B2BUserGroup, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory, CostCenterModule as CostCenterModule$1 } from '@spartacus/core';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, B2BUserGroup, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory, CostCenterModule as CostCenterModule$1 } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -6212,10 +6212,11 @@ function sortTitles(title1, title2) {
  * Service responsible for resolving cms config based feature modules.
  */
 var FeatureModulesService = /** @class */ (function () {
-    function FeatureModulesService(configInitializer, compiler, injector) {
+    function FeatureModulesService(configInitializer, compiler, injector, events) {
         this.configInitializer = configInitializer;
         this.compiler = compiler;
         this.injector = injector;
+        this.events = events;
         // maps componentType to feature
         this.componentFeatureMap = new Map();
         /*
@@ -6323,7 +6324,12 @@ var FeatureModulesService = /** @class */ (function () {
                     return _this.resolveDependencyModule(depModuleFunc);
                 }))
                     : of(undefined);
-                _this.features.set(featureName, depsResolve.pipe(switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), shareReplay()));
+                _this.features.set(featureName, depsResolve.pipe(switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), tap(function (featureInstance) {
+                    return _this.events.dispatch(createFrom(ModuleInitializedEvent, {
+                        featureName: featureName,
+                        moduleRef: featureInstance.moduleRef,
+                    }));
+                }), shareReplay()));
             }
             return _this.features.get(featureName);
         });
@@ -6368,7 +6374,7 @@ var FeatureModulesService = /** @class */ (function () {
         var featureConfigChunks = featureInjector.get(ConfigChunk, [], InjectFlags.Self);
         // get default config chunks from feature lib
         var featureDefaultConfigChunks = featureInjector.get(DefaultConfigChunk, [], InjectFlags.Self);
-        return configurationFactory(featureConfigChunks, featureDefaultConfigChunks);
+        return deepMerge.apply(void 0, __spread([{}], (featureDefaultConfigChunks !== null && featureDefaultConfigChunks !== void 0 ? featureDefaultConfigChunks : []), (featureConfigChunks !== null && featureConfigChunks !== void 0 ? featureConfigChunks : [])));
     };
     /**
      * Resolves dependency module and initializes single module instance
@@ -6383,6 +6389,9 @@ var FeatureModulesService = /** @class */ (function () {
             if (!_this.dependencyModules.has(module)) {
                 var moduleRef = moduleFactory.create(_this.injector);
                 _this.dependencyModules.set(module, moduleRef);
+                _this.events.dispatch(createFrom(ModuleInitializedEvent, {
+                    moduleRef: moduleRef,
+                }));
             }
         }), pluck(1));
     };
@@ -6411,9 +6420,10 @@ var FeatureModulesService = /** @class */ (function () {
     FeatureModulesService.ctorParameters = function () { return [
         { type: ConfigInitializerService },
         { type: Compiler },
-        { type: Injector }
+        { type: Injector },
+        { type: EventService }
     ]; };
-    FeatureModulesService.ɵprov = ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(ɵɵinject(ConfigInitializerService), ɵɵinject(Compiler), ɵɵinject(INJECTOR)); }, token: FeatureModulesService, providedIn: "root" });
+    FeatureModulesService.ɵprov = ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(ɵɵinject(ConfigInitializerService), ɵɵinject(Compiler), ɵɵinject(INJECTOR), ɵɵinject(EventService)); }, token: FeatureModulesService, providedIn: "root" });
     FeatureModulesService = __decorate([
         Injectable({
             providedIn: 'root',

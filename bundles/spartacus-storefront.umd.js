@@ -6397,10 +6397,11 @@
      * Service responsible for resolving cms config based feature modules.
      */
     var FeatureModulesService = /** @class */ (function () {
-        function FeatureModulesService(configInitializer, compiler, injector) {
+        function FeatureModulesService(configInitializer, compiler, injector, events) {
             this.configInitializer = configInitializer;
             this.compiler = compiler;
             this.injector = injector;
+            this.events = events;
             // maps componentType to feature
             this.componentFeatureMap = new Map();
             /*
@@ -6508,7 +6509,12 @@
                         return _this.resolveDependencyModule(depModuleFunc);
                     }))
                         : rxjs.of(undefined);
-                    _this.features.set(featureName, depsResolve.pipe(operators.switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), operators.shareReplay()));
+                    _this.features.set(featureName, depsResolve.pipe(operators.switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), operators.tap(function (featureInstance) {
+                        return _this.events.dispatch(core$1.createFrom(core$1.ModuleInitializedEvent, {
+                            featureName: featureName,
+                            moduleRef: featureInstance.moduleRef,
+                        }));
+                    }), operators.shareReplay()));
                 }
                 return _this.features.get(featureName);
             });
@@ -6553,7 +6559,7 @@
             var featureConfigChunks = featureInjector.get(core$1.ConfigChunk, [], core.InjectFlags.Self);
             // get default config chunks from feature lib
             var featureDefaultConfigChunks = featureInjector.get(core$1.DefaultConfigChunk, [], core.InjectFlags.Self);
-            return core$1.configurationFactory(featureConfigChunks, featureDefaultConfigChunks);
+            return core$1.deepMerge.apply(void 0, __spread([{}], (featureDefaultConfigChunks !== null && featureDefaultConfigChunks !== void 0 ? featureDefaultConfigChunks : []), (featureConfigChunks !== null && featureConfigChunks !== void 0 ? featureConfigChunks : [])));
         };
         /**
          * Resolves dependency module and initializes single module instance
@@ -6568,6 +6574,9 @@
                 if (!_this.dependencyModules.has(module)) {
                     var moduleRef = moduleFactory.create(_this.injector);
                     _this.dependencyModules.set(module, moduleRef);
+                    _this.events.dispatch(core$1.createFrom(core$1.ModuleInitializedEvent, {
+                        moduleRef: moduleRef,
+                    }));
                 }
             }), operators.pluck(1));
         };
@@ -6596,9 +6605,10 @@
         FeatureModulesService.ctorParameters = function () { return [
             { type: core$1.ConfigInitializerService },
             { type: core.Compiler },
-            { type: core.Injector }
+            { type: core.Injector },
+            { type: core$1.EventService }
         ]; };
-        FeatureModulesService.ɵprov = core.ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(core.ɵɵinject(core$1.ConfigInitializerService), core.ɵɵinject(core.Compiler), core.ɵɵinject(core.INJECTOR)); }, token: FeatureModulesService, providedIn: "root" });
+        FeatureModulesService.ɵprov = core.ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(core.ɵɵinject(core$1.ConfigInitializerService), core.ɵɵinject(core.Compiler), core.ɵɵinject(core.INJECTOR), core.ɵɵinject(core$1.EventService)); }, token: FeatureModulesService, providedIn: "root" });
         FeatureModulesService = __decorate([
             core.Injectable({
                 providedIn: 'root',

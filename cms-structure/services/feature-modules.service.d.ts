@@ -1,5 +1,5 @@
 import { Compiler, Injector, OnDestroy } from '@angular/core';
-import { CmsComponentMapping, ConfigInitializerService } from '@spartacus/core';
+import { CmsComponentMapping, ConfigInitializerService, EventService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 /**
  * Service responsible for resolving cms config based feature modules.
@@ -8,11 +8,12 @@ export declare class FeatureModulesService implements OnDestroy {
     protected configInitializer: ConfigInitializerService;
     protected compiler: Compiler;
     protected injector: Injector;
+    protected events: EventService;
     private featureModulesConfig?;
     private componentFeatureMap;
     private features;
     private dependencyModules;
-    constructor(configInitializer: ConfigInitializerService, compiler: Compiler, injector: Injector);
+    constructor(configInitializer: ConfigInitializerService, compiler: Compiler, injector: Injector, events: EventService);
     private initFeatureMap;
     /**
      * Check if there is feature module configuration that covers specified
