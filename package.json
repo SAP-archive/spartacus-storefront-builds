@@ -12,36 +12,46 @@
     "access": "public"
   },
   "repository": "https://github.com/SAP/spartacus/tree/develop/projects/storefrontlib",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/compiler": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/forms": "^9.0.0",
-    "@angular/localize": "^9.0.0",
-    "@angular/platform-browser": "^9.0.0",
-    "@angular/router": "^9.0.0",
-    "@angular/service-worker": "^9.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^6.0.0",
-    "@ng-select/ng-select": "^4.0.0",
-    "@ngrx/effects": "^9.0.0",
-    "@ngrx/store": "^9.0.0",
+    "@angular/common": "^10.1.0",
+    "@angular/compiler": "^10.1.0",
+    "@angular/core": "^10.1.0",
+    "@angular/forms": "^10.1.0",
+    "@angular/localize": "^10.1.0",
+    "@angular/platform-browser": "^10.1.0",
+    "@angular/router": "^10.1.0",
+    "@angular/service-worker": "^10.1.0",
+    "@ng-bootstrap/ng-bootstrap": "^7.0.0",
+    "@ng-select/ng-select": "^5.0.0",
+    "@ngrx/effects": "^10.0.0",
+    "@ngrx/store": "^10.0.0",
     "@spartacus/core": "3.0.0-next.0",
     "bootstrap": "4.2.1",
-    "rxjs": "^6.5.4",
+    "rxjs": "^6.6.0",
     "zone.js": "^0.10.2",
     "ngx-infinite-scroll": "^8.0.0"
   },
   "main": "bundles/spartacus-storefront.umd.js",
-  "module": "fesm5/spartacus-storefront.js",
+  "module_ivy_ngcc": "__ivy_ngcc__/fesm2015/spartacus-storefront.js",
+  "module": "fesm2015/spartacus-storefront.js",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/spartacus-storefront.js",
   "es2015": "fesm2015/spartacus-storefront.js",
-  "esm5": "esm5/spartacus-storefront.js",
   "esm2015": "esm2015/spartacus-storefront.js",
-  "fesm5": "fesm5/spartacus-storefront.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/spartacus-storefront.js",
   "fesm2015": "fesm2015/spartacus-storefront.js",
   "typings": "spartacus-storefront.d.ts",
   "metadata": "spartacus-storefront.metadata.json",
   "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.10.0"
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "10.1.1",
+    "fesm2015": "10.1.1",
+    "module": "10.1.1",
+    "typings": "10.1.1"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
   }
 }

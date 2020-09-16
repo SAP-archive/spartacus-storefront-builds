@@ -1,4 +1,3 @@
-import { __decorate } from "tslib";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,26 +6,25 @@ import { SpinnerModule } from '../../../../shared/components/spinner/spinner.mod
 import { CheckoutAuthGuard } from '../../guards/checkout-auth.guard';
 import { CartNotEmptyGuard } from './../../../../cms-components/cart/cart-not-empty.guard';
 import { DeliveryModeComponent } from './delivery-mode.component';
-let DeliveryModeModule = class DeliveryModeModule {
-};
-DeliveryModeModule = __decorate([
-    NgModule({
-        imports: [CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule],
-        providers: [
-            provideDefaultConfig({
-                cmsComponents: {
-                    CheckoutDeliveryMode: {
-                        component: DeliveryModeComponent,
-                        // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard here?
-                        guards: [CheckoutAuthGuard, CartNotEmptyGuard],
-                    },
-                },
-            }),
-        ],
-        declarations: [DeliveryModeComponent],
-        entryComponents: [DeliveryModeComponent],
-        exports: [DeliveryModeComponent],
-    })
-], DeliveryModeModule);
-export { DeliveryModeModule };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVsaXZlcnktbW9kZS5tb2R1bGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtY29tcG9uZW50cy9jaGVja291dC9jb21wb25lbnRzL2RlbGl2ZXJ5LW1vZGUvZGVsaXZlcnktbW9kZS5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUMvQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ3pDLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBQ3JELE9BQU8sRUFBYSxVQUFVLEVBQUUsb0JBQW9CLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUM5RSxPQUFPLEVBQUUsYUFBYSxFQUFFLE1BQU0sc0RBQXNELENBQUM7QUFDckYsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sa0NBQWtDLENBQUM7QUFDckUsT0FBTyxFQUFFLGlCQUFpQixFQUFFLE1BQU0sd0RBQXdELENBQUM7QUFDM0YsT0FBTyxFQUFFLHFCQUFxQixFQUFFLE1BQU0sMkJBQTJCLENBQUM7QUFtQmxFLElBQWEsa0JBQWtCLEdBQS9CLE1BQWEsa0JBQWtCO0NBQUcsQ0FBQTtBQUFyQixrQkFBa0I7SUFqQjlCLFFBQVEsQ0FBQztRQUNSLE9BQU8sRUFBRSxDQUFDLFlBQVksRUFBRSxtQkFBbUIsRUFBRSxVQUFVLEVBQUUsYUFBYSxDQUFDO1FBQ3ZFLFNBQVMsRUFBRTtZQUNULG9CQUFvQixDQUFZO2dCQUM5QixhQUFhLEVBQUU7b0JBQ2Isb0JBQW9CLEVBQUU7d0JBQ3BCLFNBQVMsRUFBRSxxQkFBcUI7d0JBQ2hDLCtEQUErRDt3QkFDL0QsTUFBTSxFQUFFLENBQUMsaUJBQWlCLEVBQUUsaUJBQWlCLENBQUM7cUJBQy9DO2lCQUNGO2FBQ0YsQ0FBQztTQUNIO1FBQ0QsWUFBWSxFQUFFLENBQUMscUJBQXFCLENBQUM7UUFDckMsZUFBZSxFQUFFLENBQUMscUJBQXFCLENBQUM7UUFDeEMsT0FBTyxFQUFFLENBQUMscUJBQXFCLENBQUM7S0FDakMsQ0FBQztHQUNXLGtCQUFrQixDQUFHO1NBQXJCLGtCQUFrQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgUmVhY3RpdmVGb3Jtc01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcbmltcG9ydCB7IENtc0NvbmZpZywgSTE4bk1vZHVsZSwgcHJvdmlkZURlZmF1bHRDb25maWcgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuaW1wb3J0IHsgU3Bpbm5lck1vZHVsZSB9IGZyb20gJy4uLy4uLy4uLy4uL3NoYXJlZC9jb21wb25lbnRzL3NwaW5uZXIvc3Bpbm5lci5tb2R1bGUnO1xuaW1wb3J0IHsgQ2hlY2tvdXRBdXRoR3VhcmQgfSBmcm9tICcuLi8uLi9ndWFyZHMvY2hlY2tvdXQtYXV0aC5ndWFyZCc7XG5pbXBvcnQgeyBDYXJ0Tm90RW1wdHlHdWFyZCB9IGZyb20gJy4vLi4vLi4vLi4vLi4vY21zLWNvbXBvbmVudHMvY2FydC9jYXJ0LW5vdC1lbXB0eS5ndWFyZCc7XG5pbXBvcnQgeyBEZWxpdmVyeU1vZGVDb21wb25lbnQgfSBmcm9tICcuL2RlbGl2ZXJ5LW1vZGUuY29tcG9uZW50JztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW0NvbW1vbk1vZHVsZSwgUmVhY3RpdmVGb3Jtc01vZHVsZSwgSTE4bk1vZHVsZSwgU3Bpbm5lck1vZHVsZV0sXG4gIHByb3ZpZGVyczogW1xuICAgIHByb3ZpZGVEZWZhdWx0Q29uZmlnKDxDbXNDb25maWc+e1xuICAgICAgY21zQ29tcG9uZW50czoge1xuICAgICAgICBDaGVja291dERlbGl2ZXJ5TW9kZToge1xuICAgICAgICAgIGNvbXBvbmVudDogRGVsaXZlcnlNb2RlQ29tcG9uZW50LFxuICAgICAgICAgIC8vIFRPRE8oIzg4ODApOiBTaG91bGRuJ3Qgd2Uga2VlcCBTaGlwcGluZ0FkZHJlc3NTZXRHdWFyZCBoZXJlP1xuICAgICAgICAgIGd1YXJkczogW0NoZWNrb3V0QXV0aEd1YXJkLCBDYXJ0Tm90RW1wdHlHdWFyZF0sXG4gICAgICAgIH0sXG4gICAgICB9LFxuICAgIH0pLFxuICBdLFxuICBkZWNsYXJhdGlvbnM6IFtEZWxpdmVyeU1vZGVDb21wb25lbnRdLFxuICBlbnRyeUNvbXBvbmVudHM6IFtEZWxpdmVyeU1vZGVDb21wb25lbnRdLFxuICBleHBvcnRzOiBbRGVsaXZlcnlNb2RlQ29tcG9uZW50XSxcbn0pXG5leHBvcnQgY2xhc3MgRGVsaXZlcnlNb2RlTW9kdWxlIHt9XG4iXX0=
+export class DeliveryModeModule {
+}
+DeliveryModeModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, ReactiveFormsModule, I18nModule, SpinnerModule],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            CheckoutDeliveryMode: {
+                                component: DeliveryModeComponent,
+                                // TODO(#8880): Shouldn't we keep ShippingAddressSetGuard here?
+                                guards: [CheckoutAuthGuard, CartNotEmptyGuard],
+                            },
+                        },
+                    }),
+                ],
+                declarations: [DeliveryModeComponent],
+                entryComponents: [DeliveryModeComponent],
+                exports: [DeliveryModeComponent],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVsaXZlcnktbW9kZS5tb2R1bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9zdG9yZWZyb250bGliL3NyYy9jbXMtY29tcG9uZW50cy9jaGVja291dC9jb21wb25lbnRzL2RlbGl2ZXJ5LW1vZGUvZGVsaXZlcnktbW9kZS5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQy9DLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLG1CQUFtQixFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFDckQsT0FBTyxFQUFhLFVBQVUsRUFBRSxvQkFBb0IsRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQzlFLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxzREFBc0QsQ0FBQztBQUNyRixPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQUNyRSxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSx3REFBd0QsQ0FBQztBQUMzRixPQUFPLEVBQUUscUJBQXFCLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQW1CbEUsTUFBTSxPQUFPLGtCQUFrQjs7O1lBakI5QixRQUFRLFNBQUM7Z0JBQ1IsT0FBTyxFQUFFLENBQUMsWUFBWSxFQUFFLG1CQUFtQixFQUFFLFVBQVUsRUFBRSxhQUFhLENBQUM7Z0JBQ3ZFLFNBQVMsRUFBRTtvQkFDVCxvQkFBb0IsQ0FBWTt3QkFDOUIsYUFBYSxFQUFFOzRCQUNiLG9CQUFvQixFQUFFO2dDQUNwQixTQUFTLEVBQUUscUJBQXFCO2dDQUNoQywrREFBK0Q7Z0NBQy9ELE1BQU0sRUFBRSxDQUFDLGlCQUFpQixFQUFFLGlCQUFpQixDQUFDOzZCQUMvQzt5QkFDRjtxQkFDRixDQUFDO2lCQUNIO2dCQUNELFlBQVksRUFBRSxDQUFDLHFCQUFxQixDQUFDO2dCQUNyQyxlQUFlLEVBQUUsQ0FBQyxxQkFBcUIsQ0FBQztnQkFDeEMsT0FBTyxFQUFFLENBQUMscUJBQXFCLENBQUM7YUFDakMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21tb25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFJlYWN0aXZlRm9ybXNNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9mb3Jtcyc7XG5pbXBvcnQgeyBDbXNDb25maWcsIEkxOG5Nb2R1bGUsIHByb3ZpZGVEZWZhdWx0Q29uZmlnIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IFNwaW5uZXJNb2R1bGUgfSBmcm9tICcuLi8uLi8uLi8uLi9zaGFyZWQvY29tcG9uZW50cy9zcGlubmVyL3NwaW5uZXIubW9kdWxlJztcbmltcG9ydCB7IENoZWNrb3V0QXV0aEd1YXJkIH0gZnJvbSAnLi4vLi4vZ3VhcmRzL2NoZWNrb3V0LWF1dGguZ3VhcmQnO1xuaW1wb3J0IHsgQ2FydE5vdEVtcHR5R3VhcmQgfSBmcm9tICcuLy4uLy4uLy4uLy4uL2Ntcy1jb21wb25lbnRzL2NhcnQvY2FydC1ub3QtZW1wdHkuZ3VhcmQnO1xuaW1wb3J0IHsgRGVsaXZlcnlNb2RlQ29tcG9uZW50IH0gZnJvbSAnLi9kZWxpdmVyeS1tb2RlLmNvbXBvbmVudCc7XG5cbkBOZ01vZHVsZSh7XG4gIGltcG9ydHM6IFtDb21tb25Nb2R1bGUsIFJlYWN0aXZlRm9ybXNNb2R1bGUsIEkxOG5Nb2R1bGUsIFNwaW5uZXJNb2R1bGVdLFxuICBwcm92aWRlcnM6IFtcbiAgICBwcm92aWRlRGVmYXVsdENvbmZpZyg8Q21zQ29uZmlnPntcbiAgICAgIGNtc0NvbXBvbmVudHM6IHtcbiAgICAgICAgQ2hlY2tvdXREZWxpdmVyeU1vZGU6IHtcbiAgICAgICAgICBjb21wb25lbnQ6IERlbGl2ZXJ5TW9kZUNvbXBvbmVudCxcbiAgICAgICAgICAvLyBUT0RPKCM4ODgwKTogU2hvdWxkbid0IHdlIGtlZXAgU2hpcHBpbmdBZGRyZXNzU2V0R3VhcmQgaGVyZT9cbiAgICAgICAgICBndWFyZHM6IFtDaGVja291dEF1dGhHdWFyZCwgQ2FydE5vdEVtcHR5R3VhcmRdLFxuICAgICAgICB9LFxuICAgICAgfSxcbiAgICB9KSxcbiAgXSxcbiAgZGVjbGFyYXRpb25zOiBbRGVsaXZlcnlNb2RlQ29tcG9uZW50XSxcbiAgZW50cnlDb21wb25lbnRzOiBbRGVsaXZlcnlNb2RlQ29tcG9uZW50XSxcbiAgZXhwb3J0czogW0RlbGl2ZXJ5TW9kZUNvbXBvbmVudF0sXG59KVxuZXhwb3J0IGNsYXNzIERlbGl2ZXJ5TW9kZU1vZHVsZSB7fVxuIl19

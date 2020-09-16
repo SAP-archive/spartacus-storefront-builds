@@ -1,29 +1,27 @@
-import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParagraphComponent } from './paragraph.component';
 import { provideDefaultConfig } from '@spartacus/core';
-let CmsParagraphModule = class CmsParagraphModule {
-};
-CmsParagraphModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        providers: [
-            provideDefaultConfig({
-                cmsComponents: {
-                    CMSParagraphComponent: {
-                        component: ParagraphComponent,
-                    },
-                    CMSTabParagraphComponent: {
-                        component: ParagraphComponent,
-                    },
-                },
-            }),
-        ],
-        declarations: [ParagraphComponent],
-        exports: [ParagraphComponent],
-        entryComponents: [ParagraphComponent],
-    })
-], CmsParagraphModule);
-export { CmsParagraphModule };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyYWdyYXBoLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImNtcy1jb21wb25lbnRzL2NvbnRlbnQvcGFyYWdyYXBoL3BhcmFncmFwaC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQy9DLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLHVCQUF1QixDQUFDO0FBQzNELE9BQU8sRUFBYSxvQkFBb0IsRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBb0JsRSxJQUFhLGtCQUFrQixHQUEvQixNQUFhLGtCQUFrQjtDQUFHLENBQUE7QUFBckIsa0JBQWtCO0lBbEI5QixRQUFRLENBQUM7UUFDUixPQUFPLEVBQUUsQ0FBQyxZQUFZLENBQUM7UUFDdkIsU0FBUyxFQUFFO1lBQ1Qsb0JBQW9CLENBQVk7Z0JBQzlCLGFBQWEsRUFBRTtvQkFDYixxQkFBcUIsRUFBRTt3QkFDckIsU0FBUyxFQUFFLGtCQUFrQjtxQkFDOUI7b0JBQ0Qsd0JBQXdCLEVBQUU7d0JBQ3hCLFNBQVMsRUFBRSxrQkFBa0I7cUJBQzlCO2lCQUNGO2FBQ0YsQ0FBQztTQUNIO1FBQ0QsWUFBWSxFQUFFLENBQUMsa0JBQWtCLENBQUM7UUFDbEMsT0FBTyxFQUFFLENBQUMsa0JBQWtCLENBQUM7UUFDN0IsZUFBZSxFQUFFLENBQUMsa0JBQWtCLENBQUM7S0FDdEMsQ0FBQztHQUNXLGtCQUFrQixDQUFHO1NBQXJCLGtCQUFrQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDb21tb25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgUGFyYWdyYXBoQ29tcG9uZW50IH0gZnJvbSAnLi9wYXJhZ3JhcGguY29tcG9uZW50JztcbmltcG9ydCB7IENtc0NvbmZpZywgcHJvdmlkZURlZmF1bHRDb25maWcgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuXG5ATmdNb2R1bGUoe1xuICBpbXBvcnRzOiBbQ29tbW9uTW9kdWxlXSxcbiAgcHJvdmlkZXJzOiBbXG4gICAgcHJvdmlkZURlZmF1bHRDb25maWcoPENtc0NvbmZpZz57XG4gICAgICBjbXNDb21wb25lbnRzOiB7XG4gICAgICAgIENNU1BhcmFncmFwaENvbXBvbmVudDoge1xuICAgICAgICAgIGNvbXBvbmVudDogUGFyYWdyYXBoQ29tcG9uZW50LFxuICAgICAgICB9LFxuICAgICAgICBDTVNUYWJQYXJhZ3JhcGhDb21wb25lbnQ6IHtcbiAgICAgICAgICBjb21wb25lbnQ6IFBhcmFncmFwaENvbXBvbmVudCxcbiAgICAgICAgfSxcbiAgICAgIH0sXG4gICAgfSksXG4gIF0sXG4gIGRlY2xhcmF0aW9uczogW1BhcmFncmFwaENvbXBvbmVudF0sXG4gIGV4cG9ydHM6IFtQYXJhZ3JhcGhDb21wb25lbnRdLFxuICBlbnRyeUNvbXBvbmVudHM6IFtQYXJhZ3JhcGhDb21wb25lbnRdLFxufSlcbmV4cG9ydCBjbGFzcyBDbXNQYXJhZ3JhcGhNb2R1bGUge31cbiJdfQ==
+export class CmsParagraphModule {
+}
+CmsParagraphModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            CMSParagraphComponent: {
+                                component: ParagraphComponent,
+                            },
+                            CMSTabParagraphComponent: {
+                                component: ParagraphComponent,
+                            },
+                        },
+                    }),
+                ],
+                declarations: [ParagraphComponent],
+                exports: [ParagraphComponent],
+                entryComponents: [ParagraphComponent],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyYWdyYXBoLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL3N0b3JlZnJvbnRsaWIvc3JjL2Ntcy1jb21wb25lbnRzL2NvbnRlbnQvcGFyYWdyYXBoL3BhcmFncmFwaC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUN6QyxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFDL0MsT0FBTyxFQUFFLGtCQUFrQixFQUFFLE1BQU0sdUJBQXVCLENBQUM7QUFDM0QsT0FBTyxFQUFhLG9CQUFvQixFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFvQmxFLE1BQU0sT0FBTyxrQkFBa0I7OztZQWxCOUIsUUFBUSxTQUFDO2dCQUNSLE9BQU8sRUFBRSxDQUFDLFlBQVksQ0FBQztnQkFDdkIsU0FBUyxFQUFFO29CQUNULG9CQUFvQixDQUFZO3dCQUM5QixhQUFhLEVBQUU7NEJBQ2IscUJBQXFCLEVBQUU7Z0NBQ3JCLFNBQVMsRUFBRSxrQkFBa0I7NkJBQzlCOzRCQUNELHdCQUF3QixFQUFFO2dDQUN4QixTQUFTLEVBQUUsa0JBQWtCOzZCQUM5Qjt5QkFDRjtxQkFDRixDQUFDO2lCQUNIO2dCQUNELFlBQVksRUFBRSxDQUFDLGtCQUFrQixDQUFDO2dCQUNsQyxPQUFPLEVBQUUsQ0FBQyxrQkFBa0IsQ0FBQztnQkFDN0IsZUFBZSxFQUFFLENBQUMsa0JBQWtCLENBQUM7YUFDdEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ29tbW9uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uJztcbmltcG9ydCB7IFBhcmFncmFwaENvbXBvbmVudCB9IGZyb20gJy4vcGFyYWdyYXBoLmNvbXBvbmVudCc7XG5pbXBvcnQgeyBDbXNDb25maWcsIHByb3ZpZGVEZWZhdWx0Q29uZmlnIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW0NvbW1vbk1vZHVsZV0sXG4gIHByb3ZpZGVyczogW1xuICAgIHByb3ZpZGVEZWZhdWx0Q29uZmlnKDxDbXNDb25maWc+e1xuICAgICAgY21zQ29tcG9uZW50czoge1xuICAgICAgICBDTVNQYXJhZ3JhcGhDb21wb25lbnQ6IHtcbiAgICAgICAgICBjb21wb25lbnQ6IFBhcmFncmFwaENvbXBvbmVudCxcbiAgICAgICAgfSxcbiAgICAgICAgQ01TVGFiUGFyYWdyYXBoQ29tcG9uZW50OiB7XG4gICAgICAgICAgY29tcG9uZW50OiBQYXJhZ3JhcGhDb21wb25lbnQsXG4gICAgICAgIH0sXG4gICAgICB9LFxuICAgIH0pLFxuICBdLFxuICBkZWNsYXJhdGlvbnM6IFtQYXJhZ3JhcGhDb21wb25lbnRdLFxuICBleHBvcnRzOiBbUGFyYWdyYXBoQ29tcG9uZW50XSxcbiAgZW50cnlDb21wb25lbnRzOiBbUGFyYWdyYXBoQ29tcG9uZW50XSxcbn0pXG5leHBvcnQgY2xhc3MgQ21zUGFyYWdyYXBoTW9kdWxlIHt9XG4iXX0=

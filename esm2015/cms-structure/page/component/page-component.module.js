@@ -1,30 +1,28 @@
-import { __decorate } from "tslib";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ComponentWrapperDirective } from './component-wrapper.directive';
 import { ComponentHandler } from './handlers/component-handler';
 import { DefaultComponentHandler } from './handlers/default-component.handler';
 import { LazyComponentHandler } from './handlers/lazy-component.handler';
-let PageComponentModule = class PageComponentModule {
-};
-PageComponentModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        providers: [
-            {
-                provide: ComponentHandler,
-                useExisting: DefaultComponentHandler,
-                multi: true,
-            },
-            {
-                provide: ComponentHandler,
-                useExisting: LazyComponentHandler,
-                multi: true,
-            },
-        ],
-        declarations: [ComponentWrapperDirective],
-        exports: [ComponentWrapperDirective],
-    })
-], PageComponentModule);
-export { PageComponentModule };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnZS1jb21wb25lbnQubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLXN0cnVjdHVyZS9wYWdlL2NvbXBvbmVudC9wYWdlLWNvbXBvbmVudC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUMvQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ3pDLE9BQU8sRUFBRSx5QkFBeUIsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBQzFFLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLDhCQUE4QixDQUFDO0FBQ2hFLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxNQUFNLHNDQUFzQyxDQUFDO0FBQy9FLE9BQU8sRUFBRSxvQkFBb0IsRUFBRSxNQUFNLG1DQUFtQyxDQUFDO0FBbUJ6RSxJQUFhLG1CQUFtQixHQUFoQyxNQUFhLG1CQUFtQjtDQUFHLENBQUE7QUFBdEIsbUJBQW1CO0lBakIvQixRQUFRLENBQUM7UUFDUixPQUFPLEVBQUUsQ0FBQyxZQUFZLENBQUM7UUFDdkIsU0FBUyxFQUFFO1lBQ1Q7Z0JBQ0UsT0FBTyxFQUFFLGdCQUFnQjtnQkFDekIsV0FBVyxFQUFFLHVCQUF1QjtnQkFDcEMsS0FBSyxFQUFFLElBQUk7YUFDWjtZQUNEO2dCQUNFLE9BQU8sRUFBRSxnQkFBZ0I7Z0JBQ3pCLFdBQVcsRUFBRSxvQkFBb0I7Z0JBQ2pDLEtBQUssRUFBRSxJQUFJO2FBQ1o7U0FDRjtRQUNELFlBQVksRUFBRSxDQUFDLHlCQUF5QixDQUFDO1FBQ3pDLE9BQU8sRUFBRSxDQUFDLHlCQUF5QixDQUFDO0tBQ3JDLENBQUM7R0FDVyxtQkFBbUIsQ0FBRztTQUF0QixtQkFBbUIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21tb25Nb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb21tb24nO1xuaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IENvbXBvbmVudFdyYXBwZXJEaXJlY3RpdmUgfSBmcm9tICcuL2NvbXBvbmVudC13cmFwcGVyLmRpcmVjdGl2ZSc7XG5pbXBvcnQgeyBDb21wb25lbnRIYW5kbGVyIH0gZnJvbSAnLi9oYW5kbGVycy9jb21wb25lbnQtaGFuZGxlcic7XG5pbXBvcnQgeyBEZWZhdWx0Q29tcG9uZW50SGFuZGxlciB9IGZyb20gJy4vaGFuZGxlcnMvZGVmYXVsdC1jb21wb25lbnQuaGFuZGxlcic7XG5pbXBvcnQgeyBMYXp5Q29tcG9uZW50SGFuZGxlciB9IGZyb20gJy4vaGFuZGxlcnMvbGF6eS1jb21wb25lbnQuaGFuZGxlcic7XG5cbkBOZ01vZHVsZSh7XG4gIGltcG9ydHM6IFtDb21tb25Nb2R1bGVdLFxuICBwcm92aWRlcnM6IFtcbiAgICB7XG4gICAgICBwcm92aWRlOiBDb21wb25lbnRIYW5kbGVyLFxuICAgICAgdXNlRXhpc3Rpbmc6IERlZmF1bHRDb21wb25lbnRIYW5kbGVyLFxuICAgICAgbXVsdGk6IHRydWUsXG4gICAgfSxcbiAgICB7XG4gICAgICBwcm92aWRlOiBDb21wb25lbnRIYW5kbGVyLFxuICAgICAgdXNlRXhpc3Rpbmc6IExhenlDb21wb25lbnRIYW5kbGVyLFxuICAgICAgbXVsdGk6IHRydWUsXG4gICAgfSxcbiAgXSxcbiAgZGVjbGFyYXRpb25zOiBbQ29tcG9uZW50V3JhcHBlckRpcmVjdGl2ZV0sXG4gIGV4cG9ydHM6IFtDb21wb25lbnRXcmFwcGVyRGlyZWN0aXZlXSxcbn0pXG5leHBvcnQgY2xhc3MgUGFnZUNvbXBvbmVudE1vZHVsZSB7fVxuIl19
+export class PageComponentModule {
+}
+PageComponentModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                providers: [
+                    {
+                        provide: ComponentHandler,
+                        useExisting: DefaultComponentHandler,
+                        multi: true,
+                    },
+                    {
+                        provide: ComponentHandler,
+                        useExisting: LazyComponentHandler,
+                        multi: true,
+                    },
+                ],
+                declarations: [ComponentWrapperDirective],
+                exports: [ComponentWrapperDirective],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFnZS1jb21wb25lbnQubW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvc3RvcmVmcm9udGxpYi9zcmMvY21zLXN0cnVjdHVyZS9wYWdlL2NvbXBvbmVudC9wYWdlLWNvbXBvbmVudC5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQy9DLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLHlCQUF5QixFQUFFLE1BQU0sK0JBQStCLENBQUM7QUFDMUUsT0FBTyxFQUFFLGdCQUFnQixFQUFFLE1BQU0sOEJBQThCLENBQUM7QUFDaEUsT0FBTyxFQUFFLHVCQUF1QixFQUFFLE1BQU0sc0NBQXNDLENBQUM7QUFDL0UsT0FBTyxFQUFFLG9CQUFvQixFQUFFLE1BQU0sbUNBQW1DLENBQUM7QUFtQnpFLE1BQU0sT0FBTyxtQkFBbUI7OztZQWpCL0IsUUFBUSxTQUFDO2dCQUNSLE9BQU8sRUFBRSxDQUFDLFlBQVksQ0FBQztnQkFDdkIsU0FBUyxFQUFFO29CQUNUO3dCQUNFLE9BQU8sRUFBRSxnQkFBZ0I7d0JBQ3pCLFdBQVcsRUFBRSx1QkFBdUI7d0JBQ3BDLEtBQUssRUFBRSxJQUFJO3FCQUNaO29CQUNEO3dCQUNFLE9BQU8sRUFBRSxnQkFBZ0I7d0JBQ3pCLFdBQVcsRUFBRSxvQkFBb0I7d0JBQ2pDLEtBQUssRUFBRSxJQUFJO3FCQUNaO2lCQUNGO2dCQUNELFlBQVksRUFBRSxDQUFDLHlCQUF5QixDQUFDO2dCQUN6QyxPQUFPLEVBQUUsQ0FBQyx5QkFBeUIsQ0FBQzthQUNyQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBOZ01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgQ29tcG9uZW50V3JhcHBlckRpcmVjdGl2ZSB9IGZyb20gJy4vY29tcG9uZW50LXdyYXBwZXIuZGlyZWN0aXZlJztcbmltcG9ydCB7IENvbXBvbmVudEhhbmRsZXIgfSBmcm9tICcuL2hhbmRsZXJzL2NvbXBvbmVudC1oYW5kbGVyJztcbmltcG9ydCB7IERlZmF1bHRDb21wb25lbnRIYW5kbGVyIH0gZnJvbSAnLi9oYW5kbGVycy9kZWZhdWx0LWNvbXBvbmVudC5oYW5kbGVyJztcbmltcG9ydCB7IExhenlDb21wb25lbnRIYW5kbGVyIH0gZnJvbSAnLi9oYW5kbGVycy9sYXp5LWNvbXBvbmVudC5oYW5kbGVyJztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW0NvbW1vbk1vZHVsZV0sXG4gIHByb3ZpZGVyczogW1xuICAgIHtcbiAgICAgIHByb3ZpZGU6IENvbXBvbmVudEhhbmRsZXIsXG4gICAgICB1c2VFeGlzdGluZzogRGVmYXVsdENvbXBvbmVudEhhbmRsZXIsXG4gICAgICBtdWx0aTogdHJ1ZSxcbiAgICB9LFxuICAgIHtcbiAgICAgIHByb3ZpZGU6IENvbXBvbmVudEhhbmRsZXIsXG4gICAgICB1c2VFeGlzdGluZzogTGF6eUNvbXBvbmVudEhhbmRsZXIsXG4gICAgICBtdWx0aTogdHJ1ZSxcbiAgICB9LFxuICBdLFxuICBkZWNsYXJhdGlvbnM6IFtDb21wb25lbnRXcmFwcGVyRGlyZWN0aXZlXSxcbiAgZXhwb3J0czogW0NvbXBvbmVudFdyYXBwZXJEaXJlY3RpdmVdLFxufSlcbmV4cG9ydCBjbGFzcyBQYWdlQ29tcG9uZW50TW9kdWxlIHt9XG4iXX0=

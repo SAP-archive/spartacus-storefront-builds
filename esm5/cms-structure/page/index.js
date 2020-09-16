@@ -1,6 +1,0 @@
-export * from './component/index';
-export * from './model/index';
-export * from './page-layout/index';
-export * from './slot/page-slot.component';
-export * from './slot/page-slot.module';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ac3BhcnRhY3VzL3N0b3JlZnJvbnQvIiwic291cmNlcyI6WyJjbXMtc3RydWN0dXJlL3BhZ2UvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYyxtQkFBbUIsQ0FBQztBQUNsQyxjQUFjLGVBQWUsQ0FBQztBQUM5QixjQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGNBQWMsNEJBQTRCLENBQUM7QUFDM0MsY0FBYyx5QkFBeUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vY29tcG9uZW50L2luZGV4JztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWwvaW5kZXgnO1xuZXhwb3J0ICogZnJvbSAnLi9wYWdlLWxheW91dC9pbmRleCc7XG5leHBvcnQgKiBmcm9tICcuL3Nsb3QvcGFnZS1zbG90LmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL3Nsb3QvcGFnZS1zbG90Lm1vZHVsZSc7XG4iXX0=

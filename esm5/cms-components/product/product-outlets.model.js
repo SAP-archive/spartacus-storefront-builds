@@ -1,8 +1,0 @@
-export var ProductDetailOutlets;
-(function (ProductDetailOutlets) {
-    ProductDetailOutlets["INTRO"] = "PDP.INTRO";
-    ProductDetailOutlets["PRICE"] = "PDP.PRICE";
-    ProductDetailOutlets["SHARE"] = "PDP.SHARE";
-    ProductDetailOutlets["SUMMARY"] = "PDP.SUMMARY";
-})(ProductDetailOutlets || (ProductDetailOutlets = {}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZHVjdC1vdXRsZXRzLm1vZGVsLmpzIiwic291cmNlUm9vdCI6Im5nOi8vQHNwYXJ0YWN1cy9zdG9yZWZyb250LyIsInNvdXJjZXMiOlsiY21zLWNvbXBvbmVudHMvcHJvZHVjdC9wcm9kdWN0LW91dGxldHMubW9kZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFOLElBQVksb0JBS1g7QUFMRCxXQUFZLG9CQUFvQjtJQUM5QiwyQ0FBbUIsQ0FBQTtJQUNuQiwyQ0FBbUIsQ0FBQTtJQUNuQiwyQ0FBbUIsQ0FBQTtJQUNuQiwrQ0FBdUIsQ0FBQTtBQUN6QixDQUFDLEVBTFcsb0JBQW9CLEtBQXBCLG9CQUFvQixRQUsvQiIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBlbnVtIFByb2R1Y3REZXRhaWxPdXRsZXRzIHtcbiAgSU5UUk8gPSAnUERQLklOVFJPJyxcbiAgUFJJQ0UgPSAnUERQLlBSSUNFJyxcbiAgU0hBUkUgPSAnUERQLlNIQVJFJyxcbiAgU1VNTUFSWSA9ICdQRFAuU1VNTUFSWScsXG59XG4iXX0=

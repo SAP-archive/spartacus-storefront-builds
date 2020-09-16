@@ -1,18 +1,16 @@
-import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
 import { Config } from '@spartacus/core';
 import * as i0 from "@angular/core";
 import * as i1 from "@spartacus/core";
-let SkipLinkConfig = class SkipLinkConfig {
-};
+export class SkipLinkConfig {
+}
 SkipLinkConfig.ɵprov = i0.ɵɵdefineInjectable({ factory: function SkipLinkConfig_Factory() { return i0.ɵɵinject(i1.Config); }, token: SkipLinkConfig, providedIn: "root" });
-SkipLinkConfig = __decorate([
-    Injectable({
-        providedIn: 'root',
-        useExisting: Config,
-    })
-], SkipLinkConfig);
-export { SkipLinkConfig };
+SkipLinkConfig.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+                useExisting: Config,
+            },] }
+];
 export class SkipLink {
 }
 export var SkipLinkScrollPosition;
@@ -20,4 +18,4 @@ export var SkipLinkScrollPosition;
     SkipLinkScrollPosition["BEFORE"] = "BEFORE";
     SkipLinkScrollPosition["AFTER"] = "AFTER";
 })(SkipLinkScrollPosition || (SkipLinkScrollPosition = {}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpcC1saW5rLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BzcGFydGFjdXMvc3RvcmVmcm9udC8iLCJzb3VyY2VzIjpbImxheW91dC9hMTF5L3NraXAtbGluay9jb25maWcvc2tpcC1saW5rLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUMzQyxPQUFPLEVBQUUsTUFBTSxFQUFFLE1BQU0saUJBQWlCLENBQUM7OztBQU16QyxJQUFzQixjQUFjLEdBQXBDLE1BQXNCLGNBQWM7Q0FFbkMsQ0FBQTs7QUFGcUIsY0FBYztJQUpuQyxVQUFVLENBQUM7UUFDVixVQUFVLEVBQUUsTUFBTTtRQUNsQixXQUFXLEVBQUUsTUFBTTtLQUNwQixDQUFDO0dBQ29CLGNBQWMsQ0FFbkM7U0FGcUIsY0FBYztBQUlwQyxNQUFNLE9BQWdCLFFBQVE7Q0FLN0I7QUFFRCxNQUFNLENBQU4sSUFBWSxzQkFHWDtBQUhELFdBQVksc0JBQXNCO0lBQ2hDLDJDQUFpQixDQUFBO0lBQ2pCLHlDQUFlLENBQUE7QUFDakIsQ0FBQyxFQUhXLHNCQUFzQixLQUF0QixzQkFBc0IsUUFHakMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDb25maWcgfSBmcm9tICdAc3BhcnRhY3VzL2NvcmUnO1xuXG5ASW5qZWN0YWJsZSh7XG4gIHByb3ZpZGVkSW46ICdyb290JyxcbiAgdXNlRXhpc3Rpbmc6IENvbmZpZyxcbn0pXG5leHBvcnQgYWJzdHJhY3QgY2xhc3MgU2tpcExpbmtDb25maWcge1xuICBza2lwTGlua3M/OiBTa2lwTGlua1tdO1xufVxuXG5leHBvcnQgYWJzdHJhY3QgY2xhc3MgU2tpcExpbmsge1xuICBrZXk6IHN0cmluZztcbiAgaTE4bktleTogc3RyaW5nO1xuICB0YXJnZXQ/OiBIVE1MRWxlbWVudDtcbiAgcG9zaXRpb24/OiBTa2lwTGlua1Njcm9sbFBvc2l0aW9uO1xufVxuXG5leHBvcnQgZW51bSBTa2lwTGlua1Njcm9sbFBvc2l0aW9uIHtcbiAgQkVGT1JFID0gJ0JFRk9SRScsXG4gIEFGVEVSID0gJ0FGVEVSJyxcbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpcC1saW5rLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL3N0b3JlZnJvbnRsaWIvc3JjL2xheW91dC9hMTF5L3NraXAtbGluay9jb25maWcvc2tpcC1saW5rLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQzs7O0FBTXpDLE1BQU0sT0FBZ0IsY0FBYzs7OztZQUpuQyxVQUFVLFNBQUM7Z0JBQ1YsVUFBVSxFQUFFLE1BQU07Z0JBQ2xCLFdBQVcsRUFBRSxNQUFNO2FBQ3BCOztBQUtELE1BQU0sT0FBZ0IsUUFBUTtDQUs3QjtBQUVELE1BQU0sQ0FBTixJQUFZLHNCQUdYO0FBSEQsV0FBWSxzQkFBc0I7SUFDaEMsMkNBQWlCLENBQUE7SUFDakIseUNBQWUsQ0FBQTtBQUNqQixDQUFDLEVBSFcsc0JBQXNCLEtBQXRCLHNCQUFzQixRQUdqQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEluamVjdGFibGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IENvbmZpZyB9IGZyb20gJ0BzcGFydGFjdXMvY29yZSc7XG5cbkBJbmplY3RhYmxlKHtcbiAgcHJvdmlkZWRJbjogJ3Jvb3QnLFxuICB1c2VFeGlzdGluZzogQ29uZmlnLFxufSlcbmV4cG9ydCBhYnN0cmFjdCBjbGFzcyBTa2lwTGlua0NvbmZpZyB7XG4gIHNraXBMaW5rcz86IFNraXBMaW5rW107XG59XG5cbmV4cG9ydCBhYnN0cmFjdCBjbGFzcyBTa2lwTGluayB7XG4gIGtleTogc3RyaW5nO1xuICBpMThuS2V5OiBzdHJpbmc7XG4gIHRhcmdldD86IEhUTUxFbGVtZW50O1xuICBwb3NpdGlvbj86IFNraXBMaW5rU2Nyb2xsUG9zaXRpb247XG59XG5cbmV4cG9ydCBlbnVtIFNraXBMaW5rU2Nyb2xsUG9zaXRpb24ge1xuICBCRUZPUkUgPSAnQkVGT1JFJyxcbiAgQUZURVIgPSAnQUZURVInLFxufVxuIl19
