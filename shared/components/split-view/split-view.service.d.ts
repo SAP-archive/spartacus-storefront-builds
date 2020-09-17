@@ -4,6 +4,7 @@ import { SplitViewState } from './split/split-view.model';
  * Supposed to be injected in the split view component, so that the split view state
  * is maintained for a single split view.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class SplitViewService {
     /**
      * Newly added views are hidden by default, unless it is the first view of the split view.
@@ -68,4 +69,8 @@ export declare class SplitViewService {
      * Utility method that resolves all views from the subject.
      */
     protected get views(): SplitViewState[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SplitViewService, never>;
+    static ɵprov: ɵngcc0.ɵɵInjectableDef<SplitViewService>;
 }
+
+//# sourceMappingURL=split-view.service.d.ts.map

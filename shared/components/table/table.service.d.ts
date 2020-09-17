@@ -18,6 +18,7 @@ import { TableStructure, TableStructureConfiguration } from './table.model';
  * generating 5 headers. In case of a generated header, we warn the developer in devMode that
  * there is no configuration available.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableService {
     protected breakpointService: BreakpointService;
     protected config: TableConfig;
@@ -60,4 +61,7 @@ export declare class TableService {
      * Prints a convenient message in the console to increase developer experience.
      */
     private warn;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableService, never>;
 }
+
+//# sourceMappingURL=table.service.d.ts.map

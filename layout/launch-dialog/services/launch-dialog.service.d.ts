@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { LayoutConfig } from '../../config/layout-config';
 import { LaunchOptions, LAUNCH_CALLER } from '../config/launch-config';
 import { LaunchRenderStrategy } from './launch-render.strategy';
+import * as ɵngcc0 from '@angular/core';
 export declare class LaunchDialogService {
     protected renderStrategies: LaunchRenderStrategy[];
     protected layoutConfig: LayoutConfig;
@@ -35,4 +36,7 @@ export declare class LaunchDialogService {
      * @param config Configuration for launch
      */
     protected getStrategy(config: LaunchOptions): LaunchRenderStrategy;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<LaunchDialogService, never>;
 }
+
+//# sourceMappingURL=launch-dialog.service.d.ts.map
