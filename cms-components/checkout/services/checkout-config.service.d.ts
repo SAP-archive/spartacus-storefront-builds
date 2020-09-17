@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DeliveryMode, RoutingConfigService } from '@spartacus/core';
 import { CheckoutConfig } from '../config/checkout-config';
 import { CheckoutStep, CheckoutStepType } from '../model/checkout-step.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutConfigService {
     private checkoutConfig;
     private routingConfigService;
@@ -51,4 +52,7 @@ export declare class CheckoutConfigService {
      * will be removed, there is same function in checkout-step.service
      */
     private getCheckoutStepIndex;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutConfigService, never>;
 }
+
+//# sourceMappingURL=checkout-config.service.d.ts.map
