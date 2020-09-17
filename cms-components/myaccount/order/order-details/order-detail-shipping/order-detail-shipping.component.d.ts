@@ -3,7 +3,6 @@ import { Address, CostCenter, DeliveryMode, Order, PaymentDetails, TranslationSe
 import { Observable } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { OrderDetailsService } from '../order-details.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class OrderDetailShippingComponent implements OnInit {
     private orderDetailsService;
     private translation;
@@ -21,8 +20,4 @@ export declare class OrderDetailShippingComponent implements OnInit {
     getPaymentInfoCardContent(payment: PaymentDetails): Observable<Card>;
     getBillingAddressCardContent(billingAddress: Address): Observable<Card>;
     private getDate;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderDetailShippingComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<OrderDetailShippingComponent, "cx-order-details-shipping", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=order-detail-shipping.component.d.ts.map
