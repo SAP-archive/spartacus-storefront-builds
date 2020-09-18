@@ -1,0 +1,1 @@
+{"version":3,"file":"table.module.d.ts","sources":["table.module.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;;;;;;AACA;;;AACA","sourcesContent":["/**\n * The TableModule provides a table component that is driven by (responsible) configuration.\n */\nexport declare class TableModule {\n}\n"]}

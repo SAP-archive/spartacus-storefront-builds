@@ -1,0 +1,1 @@
+{"version":3,"file":"json-ld-builder.module.d.ts","sources":["json-ld-builder.module.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;;AACA;;;AACA","sourcesContent":["/**\n * Provides several standard json-ld builders that contribute\n * to colleting and building json-ld data.\n */\nexport declare class JsonLdBuilderModule {\n}\n"]}
