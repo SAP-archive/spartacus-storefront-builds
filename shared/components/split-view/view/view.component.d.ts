@@ -10,6 +10,7 @@ import { SplitViewService } from '../split-view.service';
  * view state, so that the overarching `SplitViewComponent` can manage the
  * overall experience.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ViewComponent implements OnInit, OnDestroy {
     protected splitService: SplitViewService;
     protected elementRef: ElementRef;
@@ -60,4 +61,8 @@ export declare class ViewComponent implements OnInit, OnDestroy {
      * plays a role in the overall split view.
      */
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ViewComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ViewComponent, "cx-view", never, { "hidden": "hidden"; "position": "position"; }, { "hiddenChange": "hiddenChange"; }, never, ["*"]>;
 }
+
+//# sourceMappingURL=view.component.d.ts.map
