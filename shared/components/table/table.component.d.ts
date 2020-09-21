@@ -30,7 +30,6 @@ import { Table } from './table.model';
  * This allows smart components to further customize the table rendering. More over, customers can
  * customize the header and data by using the generated outlets.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class TableComponent {
     tableType: string;
     protected _dataset: Table;
@@ -47,8 +46,4 @@ export declare class TableComponent {
      * can easily get the notion of the table type.
      */
     protected addTableDebugInfo(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TableComponent, "cx-table", never, { "dataset": "dataset"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=table.component.d.ts.map
