@@ -3,7 +3,6 @@ import { TableStructureConfiguration } from '../table.model';
 /**
  * Helper configuration to introduce a breakpoint specific table configuration.
  */
-import * as ɵngcc0 from '@angular/core';
 export interface TableConfiguration extends TableStructureConfiguration {
     breakpoint?: BREAKPOINT;
 }
@@ -23,7 +22,4 @@ export declare abstract class TableConfig {
     table: {
         [key: string]: TableConfiguration[];
     };
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableConfig, never>;
 }
-
-//# sourceMappingURL=table.config.d.ts.map
