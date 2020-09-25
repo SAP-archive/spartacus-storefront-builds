@@ -9515,7 +9515,11 @@ class LaunchDialogService {
         this.renderStrategies = renderStrategies;
         this.layoutConfig = layoutConfig;
         this._dialogClose = new BehaviorSubject(undefined);
+        this._dataSubject = new BehaviorSubject(undefined);
         this.renderStrategies = this.renderStrategies || [];
+    }
+    get data$() {
+        return this._dataSubject.asObservable();
     }
     /**
      * Render the element based on the strategy from the launch configuration
@@ -9523,13 +9527,14 @@ class LaunchDialogService {
      * @param caller LAUNCH_CALLER
      * @param vcr View Container Ref of the container for inline rendering
      */
-    launch(caller, vcr) {
+    launch(caller, vcr, data) {
         const config = this.findConfiguration(caller);
         if (config) {
             const renderer = this.getStrategy(config);
             // Render if the strategy exists
             if (renderer) {
                 this._dialogClose.next(undefined);
+                this._dataSubject.next(data);
                 return renderer.render(config, caller, vcr);
             }
         }

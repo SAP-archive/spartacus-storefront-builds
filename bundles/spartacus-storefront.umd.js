@@ -495,21 +495,30 @@
             this.renderStrategies = renderStrategies;
             this.layoutConfig = layoutConfig;
             this._dialogClose = new rxjs.BehaviorSubject(undefined);
+            this._dataSubject = new rxjs.BehaviorSubject(undefined);
             this.renderStrategies = this.renderStrategies || [];
         }
+        Object.defineProperty(LaunchDialogService.prototype, "data$", {
+            get: function () {
+                return this._dataSubject.asObservable();
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Render the element based on the strategy from the launch configuration
          *
          * @param caller LAUNCH_CALLER
          * @param vcr View Container Ref of the container for inline rendering
          */
-        LaunchDialogService.prototype.launch = function (caller, vcr) {
+        LaunchDialogService.prototype.launch = function (caller, vcr, data) {
             var config = this.findConfiguration(caller);
             if (config) {
                 var renderer = this.getStrategy(config);
                 // Render if the strategy exists
                 if (renderer) {
                     this._dialogClose.next(undefined);
+                    this._dataSubject.next(data);
                     return renderer.render(config, caller, vcr);
                 }
             }

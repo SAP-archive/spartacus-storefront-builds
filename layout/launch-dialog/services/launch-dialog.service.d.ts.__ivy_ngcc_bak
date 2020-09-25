@@ -7,6 +7,8 @@ export declare class LaunchDialogService {
     protected renderStrategies: LaunchRenderStrategy[];
     protected layoutConfig: LayoutConfig;
     private _dialogClose;
+    private _dataSubject;
+    get data$(): Observable<any>;
     constructor(renderStrategies: LaunchRenderStrategy[], layoutConfig: LayoutConfig);
     /**
      * Render the element based on the strategy from the launch configuration
@@ -14,7 +16,7 @@ export declare class LaunchDialogService {
      * @param caller LAUNCH_CALLER
      * @param vcr View Container Ref of the container for inline rendering
      */
-    launch(caller: LAUNCH_CALLER | string, vcr?: ViewContainerRef): void | Observable<ComponentRef<any>>;
+    launch(caller: LAUNCH_CALLER | string, vcr?: ViewContainerRef, data?: any): void | Observable<ComponentRef<any>>;
     /**
      * Util method to remove element from rendered elements list
      *
