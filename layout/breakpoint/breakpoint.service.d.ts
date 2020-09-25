@@ -1,7 +1,6 @@
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { BREAKPOINT, LayoutConfig } from '../config/layout-config';
-import * as ɵngcc0 from '@angular/core';
 export declare class BreakpointService {
     private winRef;
     private config;
@@ -44,7 +43,4 @@ export declare class BreakpointService {
     protected getBreakpoint(windowWidth: number): BREAKPOINT;
     protected getClosest(windowWidth?: number): BREAKPOINT;
     get window(): Window;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<BreakpointService, never>;
 }
-
-//# sourceMappingURL=breakpoint.service.d.ts.map
