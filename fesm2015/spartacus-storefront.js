@@ -20889,105 +20889,6 @@ ProductPageEventModule.ctorParameters = () => [
     { type: ProductPageEventBuilder }
 ];
 
-const b2bLayoutConfig = {
-    layoutSlots: {
-        header: {
-            md: {
-                slots: [
-                    'PreHeader',
-                    'SiteContext',
-                    'SiteLinks',
-                    'SiteLogo',
-                    'SearchBox',
-                    'SiteLogin',
-                    'MiniCart',
-                    'NavigationBar',
-                ],
-            },
-            xs: {
-                slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
-            },
-        },
-        navigation: {
-            md: { slots: [] },
-            xs: {
-                slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
-            },
-        },
-        footer: {
-            slots: ['Footer'],
-        },
-        LandingPage2Template: {
-            slots: [
-                'Section1',
-                'Section2A',
-                'Section2B',
-                'Section2C',
-                'Section3',
-                'Section4',
-                'Section5',
-            ],
-        },
-        ContentPage1Template: {
-            slots: ['Section2A', 'Section2B'],
-        },
-        CategoryPageTemplate: {
-            slots: ['Section1', 'Section2', 'Section3'],
-        },
-        ProductListPageTemplate: {
-            slots: ['ProductListSlot', 'ProductLeftRefinements'],
-        },
-        SearchResultsListPageTemplate: {
-            slots: [
-                'Section2',
-                'SearchResultsListSlot',
-                'ProductLeftRefinements',
-            ],
-        },
-        ProductDetailsPageTemplate: {
-            slots: [
-                'Summary',
-                'UpSelling',
-                'CrossSelling',
-                'Tabs',
-                'PlaceholderContentSlot',
-            ],
-        },
-        CartPageTemplate: {
-            slots: ['TopContent', 'CenterRightContentSlot', 'EmptyCartMiddleContent'],
-        },
-        AccountPageTemplate: {
-            slots: ['BodyContent', 'SideContent'],
-        },
-        LoginPageTemplate: {
-            slots: ['LeftContentSlot', 'RightContentSlot'],
-        },
-        ErrorPageTemplate: {
-            slots: ['TopContent', 'MiddleContent', 'BottomContent'],
-        },
-        OrderConfirmationPageTemplate: {
-            slots: ['BodyContent', 'SideContent'],
-        },
-        MultiStepCheckoutSummaryPageTemplate: {
-            slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
-        },
-    },
-};
-
-const defaultB2bOccConfig = {
-    backend: {
-        occ: {
-            endpoints: {
-                user: 'orgUsers/${userId}',
-                addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
-                setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
-                // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
-                placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
-            },
-        },
-    },
-};
-
 const defaultB2bCheckoutConfig = {
     checkout: {
         steps: [
@@ -21028,7 +20929,63 @@ const defaultB2bCheckoutConfig = {
     },
 };
 
-const b2cLayoutConfig = {
+const defaultB2bOccConfig = {
+    backend: {
+        occ: {
+            endpoints: {
+                user: 'orgUsers/${userId}',
+                addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
+                setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
+                // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
+                placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
+            },
+        },
+    },
+};
+
+const mediaConfig = {
+    mediaFormats: {
+        mobile: {
+            width: 400,
+        },
+        tablet: {
+            width: 770,
+        },
+        desktop: {
+            width: 1140,
+        },
+        widescreen: {
+            width: 1400,
+        },
+        // product media
+        cartIcon: {
+            width: 65,
+        },
+        thumbnail: {
+            width: 96,
+        },
+        product: {
+            width: 284,
+        },
+        zoom: {
+            width: 515,
+        },
+    },
+};
+
+/**
+ * The layout configuration is used to define the overall layout of the storefront.
+ * The configuration includes the following aspects:
+ * - breakpoint layout (AKA screen layout)
+ * - Page sections slot configuration (i.e. header vs footer)
+ * - page template slot configuration (i.e. landing page template vs PDP page template)
+ * - deferred loading configuration
+ *
+ * The page slot configurations is directly related to the data in the backend. If you use the
+ * Spartacus sample-data, you will have an aligned setup. However, if you introduce custom page
+ * templates and/or slots, you most likely need to further adjust or replace this configuration.
+ */
+const layoutConfig = {
     // deferredLoading: {
     //   strategy: DeferLoadingStrategy.DEFER,
     //   intersectionMargin: '50px',
@@ -21037,6 +20994,7 @@ const b2cLayoutConfig = {
         header: {
             lg: {
                 slots: [
+                    'PreHeader',
                     'SiteContext',
                     'SiteLinks',
                     'SiteLogo',
@@ -21132,36 +21090,13 @@ const b2cLayoutConfig = {
         },
     },
 };
-
-const mediaConfig = {
-    mediaFormats: {
-        mobile: {
-            width: 400,
-        },
-        tablet: {
-            width: 770,
-        },
-        desktop: {
-            width: 1140,
-        },
-        widescreen: {
-            width: 1400,
-        },
-        // product media
-        cartIcon: {
-            width: 65,
-        },
-        thumbnail: {
-            width: 96,
-        },
-        product: {
-            width: 284,
-        },
-        zoom: {
-            width: 515,
-        },
-    },
-};
+/**
+ * @deprecated the b2cLayoutConfig will be dropped with version 4.0.
+ *
+ * With Spartacus 3.0 we started to align various layout configurations. Moreover, we move
+ * into a pattern where layout configurations are shattered through various (lazy loaded) modules.
+ */
+const b2cLayoutConfig = layoutConfig;
 
 const headerComponents = {
     HamburgerMenuComponent: {
@@ -21289,7 +21224,7 @@ B2cStorefrontModule.decorators = [
                             addToHomeScreen: true,
                         },
                     }),
-                    provideDefaultConfig(b2cLayoutConfig),
+                    provideDefaultConfig(layoutConfig),
                     provideDefaultConfig(mediaConfig),
                     provideDefaultConfigFactory(defaultCmsContentConfig),
                 ],
@@ -21320,7 +21255,7 @@ B2bStorefrontModule.decorators = [
                             addToHomeScreen: true,
                         },
                     }),
-                    provideDefaultConfig(b2bLayoutConfig),
+                    provideDefaultConfig(layoutConfig),
                     provideDefaultConfig(mediaConfig),
                     provideDefaultConfig(defaultB2bOccConfig),
                     provideDefaultConfig(defaultB2bCheckoutConfig),
@@ -21373,5 +21308,5 @@ var FormUtils;
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2bStorefrontModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LoginRegisterModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2bLayoutConfig, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultB2bCheckoutConfig, defaultB2bOccConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, initPageTemplateStyle as ɵa, pwaConfigurationFactory as ɵb, AsmEnablerService as ɵba, AsmMainUiComponent as ɵbb, AsmComponentService as ɵbc, CSAgentLoginFormComponent as ɵbd, CustomerSelectionComponent as ɵbe, AsmSessionTimerComponent as ɵbf, FormatTimerPipe as ɵbg, CustomerEmulationComponent as ɵbh, AsmToggleUiComponent as ɵbi, defaultAsmLayoutConfig as ɵbj, defaultIconConfig as ɵbk, defaultCheckoutConfig as ɵbl, MultiLinePipe as ɵbm, CheckoutStepsSetGuard as ɵbn, PaymentTypeModule as ɵbo, PaymentTypeComponent as ɵbp, CostCenterModule as ɵbq, CostCenterComponent as ɵbr, CheckoutAuthGuard as ɵbs, CartNotEmptyGuard as ɵbt, defaultQualtricsConfig as ɵbu, CmsPageGuardService as ɵbv, CmsRoutesImplService as ɵbw, ReturnRequestService as ɵbx, LoginRegisterComponent as ɵby, PageTemplateStyleService as ɵbz, pwaFactory as ɵc, MyCouponsComponentService as ɵca, addCmsRoute as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, htmlLangProvider as ɵce, setHtmlLangAttribute as ɵcf, defaultDirectionConfig as ɵcg, EventsModule as ɵch, DatePickerFormatterService as ɵci, DateTimePickerFormatterService as ɵcj, getStructuredDataFactory as ɵd, FOCUS_ATTR as ɵe, skipLinkFactory as ɵf, initHtmlDirAttribute as ɵg, LockFocusDirective as ɵh, TrapFocusDirective as ɵi, TabFocusDirective as ɵj, AutoFocusDirective as ɵk, EscapeFocusDirective as ɵl, PersistFocusDirective as ɵm, BlockFocusDirective as ɵn, VisibleFocusDirective as ɵo, BaseFocusDirective as ɵp, BaseFocusService as ɵq, PersistFocusService as ɵr, EscapeFocusService as ɵs, AutoFocusService as ɵt, TabFocusService as ɵu, TrapFocusService as ɵv, LockFocusService as ɵw, defaultAnonymousConsentLayoutConfig as ɵx, AsmLoaderModule as ɵy, asmFactory as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2bStorefrontModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LoginRegisterModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultB2bCheckoutConfig, defaultB2bOccConfig, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, layoutConfig, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, initPageTemplateStyle as ɵa, pwaConfigurationFactory as ɵb, AsmEnablerService as ɵba, AsmMainUiComponent as ɵbb, AsmComponentService as ɵbc, CSAgentLoginFormComponent as ɵbd, CustomerSelectionComponent as ɵbe, AsmSessionTimerComponent as ɵbf, FormatTimerPipe as ɵbg, CustomerEmulationComponent as ɵbh, AsmToggleUiComponent as ɵbi, defaultAsmLayoutConfig as ɵbj, defaultIconConfig as ɵbk, defaultCheckoutConfig as ɵbl, MultiLinePipe as ɵbm, CheckoutStepsSetGuard as ɵbn, PaymentTypeModule as ɵbo, PaymentTypeComponent as ɵbp, CostCenterModule as ɵbq, CostCenterComponent as ɵbr, CheckoutAuthGuard as ɵbs, CartNotEmptyGuard as ɵbt, defaultQualtricsConfig as ɵbu, CmsPageGuardService as ɵbv, CmsRoutesImplService as ɵbw, ReturnRequestService as ɵbx, LoginRegisterComponent as ɵby, PageTemplateStyleService as ɵbz, pwaFactory as ɵc, MyCouponsComponentService as ɵca, addCmsRoute as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, htmlLangProvider as ɵce, setHtmlLangAttribute as ɵcf, defaultDirectionConfig as ɵcg, EventsModule as ɵch, DatePickerFormatterService as ɵci, DateTimePickerFormatterService as ɵcj, getStructuredDataFactory as ɵd, FOCUS_ATTR as ɵe, skipLinkFactory as ɵf, initHtmlDirAttribute as ɵg, LockFocusDirective as ɵh, TrapFocusDirective as ɵi, TabFocusDirective as ɵj, AutoFocusDirective as ɵk, EscapeFocusDirective as ɵl, PersistFocusDirective as ɵm, BlockFocusDirective as ɵn, VisibleFocusDirective as ɵo, BaseFocusDirective as ɵp, BaseFocusService as ɵq, PersistFocusService as ɵr, EscapeFocusService as ɵs, AutoFocusService as ɵt, TabFocusService as ɵu, TrapFocusService as ɵv, LockFocusService as ɵw, defaultAnonymousConsentLayoutConfig as ɵx, AsmLoaderModule as ɵy, asmFactory as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

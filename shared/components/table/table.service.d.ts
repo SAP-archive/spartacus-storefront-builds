@@ -15,6 +15,7 @@ import { TableStructure, TableStructureConfiguration } from './table.model';
  * If there is no table configuration for the given type found, a table header structure
  * is generated based on the actual data (if available) or randomly by generating 5 random headers.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableService {
     protected breakpointService: BreakpointService;
     protected config: TableConfig;
@@ -70,4 +71,7 @@ export declare class TableService {
      * The message is only logged in dev mode.
      */
     private logWarning;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableService, never>;
 }
+
+//# sourceMappingURL=table.service.d.ts.map

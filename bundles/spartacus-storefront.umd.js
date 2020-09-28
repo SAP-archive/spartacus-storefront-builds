@@ -23116,105 +23116,6 @@
         { type: ProductPageEventBuilder }
     ]; };
 
-    var b2bLayoutConfig = {
-        layoutSlots: {
-            header: {
-                md: {
-                    slots: [
-                        'PreHeader',
-                        'SiteContext',
-                        'SiteLinks',
-                        'SiteLogo',
-                        'SearchBox',
-                        'SiteLogin',
-                        'MiniCart',
-                        'NavigationBar',
-                    ],
-                },
-                xs: {
-                    slots: ['PreHeader', 'SiteLogo', 'SearchBox', 'MiniCart'],
-                },
-            },
-            navigation: {
-                md: { slots: [] },
-                xs: {
-                    slots: ['SiteLogin', 'NavigationBar', 'SiteContext', 'SiteLinks'],
-                },
-            },
-            footer: {
-                slots: ['Footer'],
-            },
-            LandingPage2Template: {
-                slots: [
-                    'Section1',
-                    'Section2A',
-                    'Section2B',
-                    'Section2C',
-                    'Section3',
-                    'Section4',
-                    'Section5',
-                ],
-            },
-            ContentPage1Template: {
-                slots: ['Section2A', 'Section2B'],
-            },
-            CategoryPageTemplate: {
-                slots: ['Section1', 'Section2', 'Section3'],
-            },
-            ProductListPageTemplate: {
-                slots: ['ProductListSlot', 'ProductLeftRefinements'],
-            },
-            SearchResultsListPageTemplate: {
-                slots: [
-                    'Section2',
-                    'SearchResultsListSlot',
-                    'ProductLeftRefinements',
-                ],
-            },
-            ProductDetailsPageTemplate: {
-                slots: [
-                    'Summary',
-                    'UpSelling',
-                    'CrossSelling',
-                    'Tabs',
-                    'PlaceholderContentSlot',
-                ],
-            },
-            CartPageTemplate: {
-                slots: ['TopContent', 'CenterRightContentSlot', 'EmptyCartMiddleContent'],
-            },
-            AccountPageTemplate: {
-                slots: ['BodyContent', 'SideContent'],
-            },
-            LoginPageTemplate: {
-                slots: ['LeftContentSlot', 'RightContentSlot'],
-            },
-            ErrorPageTemplate: {
-                slots: ['TopContent', 'MiddleContent', 'BottomContent'],
-            },
-            OrderConfirmationPageTemplate: {
-                slots: ['BodyContent', 'SideContent'],
-            },
-            MultiStepCheckoutSummaryPageTemplate: {
-                slots: ['TopContent', 'BodyContent', 'SideContent', 'BottomContent'],
-            },
-        },
-    };
-
-    var defaultB2bOccConfig = {
-        backend: {
-            occ: {
-                endpoints: {
-                    user: 'orgUsers/${userId}',
-                    addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
-                    setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
-                    // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
-                    placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
-                },
-            },
-        },
-    };
-
     var defaultB2bCheckoutConfig = {
         checkout: {
             steps: [
@@ -23255,7 +23156,63 @@
         },
     };
 
-    var b2cLayoutConfig = {
+    var defaultB2bOccConfig = {
+        backend: {
+            occ: {
+                endpoints: {
+                    user: 'orgUsers/${userId}',
+                    addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
+                    setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
+                    // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
+                    placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
+                },
+            },
+        },
+    };
+
+    var mediaConfig = {
+        mediaFormats: {
+            mobile: {
+                width: 400,
+            },
+            tablet: {
+                width: 770,
+            },
+            desktop: {
+                width: 1140,
+            },
+            widescreen: {
+                width: 1400,
+            },
+            // product media
+            cartIcon: {
+                width: 65,
+            },
+            thumbnail: {
+                width: 96,
+            },
+            product: {
+                width: 284,
+            },
+            zoom: {
+                width: 515,
+            },
+        },
+    };
+
+    /**
+     * The layout configuration is used to define the overall layout of the storefront.
+     * The configuration includes the following aspects:
+     * - breakpoint layout (AKA screen layout)
+     * - Page sections slot configuration (i.e. header vs footer)
+     * - page template slot configuration (i.e. landing page template vs PDP page template)
+     * - deferred loading configuration
+     *
+     * The page slot configurations is directly related to the data in the backend. If you use the
+     * Spartacus sample-data, you will have an aligned setup. However, if you introduce custom page
+     * templates and/or slots, you most likely need to further adjust or replace this configuration.
+     */
+    var layoutConfig = {
         // deferredLoading: {
         //   strategy: DeferLoadingStrategy.DEFER,
         //   intersectionMargin: '50px',
@@ -23264,6 +23221,7 @@
             header: {
                 lg: {
                     slots: [
+                        'PreHeader',
                         'SiteContext',
                         'SiteLinks',
                         'SiteLogo',
@@ -23359,36 +23317,13 @@
             },
         },
     };
-
-    var mediaConfig = {
-        mediaFormats: {
-            mobile: {
-                width: 400,
-            },
-            tablet: {
-                width: 770,
-            },
-            desktop: {
-                width: 1140,
-            },
-            widescreen: {
-                width: 1400,
-            },
-            // product media
-            cartIcon: {
-                width: 65,
-            },
-            thumbnail: {
-                width: 96,
-            },
-            product: {
-                width: 284,
-            },
-            zoom: {
-                width: 515,
-            },
-        },
-    };
+    /**
+     * @deprecated the b2cLayoutConfig will be dropped with version 4.0.
+     *
+     * With Spartacus 3.0 we started to align various layout configurations. Moreover, we move
+     * into a pattern where layout configurations are shattered through various (lazy loaded) modules.
+     */
+    var b2cLayoutConfig = layoutConfig;
 
     var headerComponents = {
         HamburgerMenuComponent: {
@@ -23528,7 +23463,7 @@
                                 addToHomeScreen: true,
                             },
                         }),
-                        i1.provideDefaultConfig(b2cLayoutConfig),
+                        i1.provideDefaultConfig(layoutConfig),
                         i1.provideDefaultConfig(mediaConfig),
                         i1.provideDefaultConfigFactory(defaultCmsContentConfig),
                     ],
@@ -23562,7 +23497,7 @@
                                 addToHomeScreen: true,
                             },
                         }),
-                        i1.provideDefaultConfig(b2bLayoutConfig),
+                        i1.provideDefaultConfig(layoutConfig),
                         i1.provideDefaultConfig(mediaConfig),
                         i1.provideDefaultConfig(defaultB2bOccConfig),
                         i1.provideDefaultConfig(defaultB2bCheckoutConfig),
@@ -24029,7 +23964,6 @@
     exports.WishListComponent = WishListComponent;
     exports.WishListItemComponent = WishListItemComponent;
     exports.WishListModule = WishListModule;
-    exports.b2bLayoutConfig = b2bLayoutConfig;
     exports.b2cLayoutConfig = b2cLayoutConfig;
     exports.checkoutPaymentSteps = checkoutPaymentSteps;
     exports.checkoutShippingSteps = checkoutShippingSteps;
@@ -24047,6 +23981,7 @@
     exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
     exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
+    exports.layoutConfig = layoutConfig;
     exports.mediaConfig = mediaConfig;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
