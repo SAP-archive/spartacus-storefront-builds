@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SplitViewService } from '../split-view.service';
 /**
@@ -10,9 +10,11 @@ import { SplitViewService } from '../split-view.service';
  * view state, so that the overarching `SplitViewComponent` can manage the
  * overall experience.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ViewComponent implements OnInit, OnDestroy {
     protected splitService: SplitViewService;
     protected elementRef: ElementRef;
+    protected cd: ChangeDetectorRef;
     protected _hidden: any;
     position: string;
     /**
@@ -31,7 +33,7 @@ export declare class ViewComponent implements OnInit, OnDestroy {
      */
     hiddenChange: EventEmitter<any>;
     protected subscription: Subscription;
-    constructor(splitService: SplitViewService, elementRef: ElementRef);
+    constructor(splitService: SplitViewService, elementRef: ElementRef, cd: ChangeDetectorRef);
     ngOnInit(): void;
     /**
      * Toggles the visibility of the view.
@@ -51,13 +53,12 @@ export declare class ViewComponent implements OnInit, OnDestroy {
      */
     protected get duration(): number;
     /**
-     * Returns the maximum number of views per split-view. The number is based on the CSS custom property
-     * `--cx-max-views`. Defaults to `2`
-     */
-    protected get splitViewCount(): number;
-    /**
      * The view is removed from the `SplitService` so that the view no longer
      * plays a role in the overall split view.
      */
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ViewComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ViewComponent, "cx-view", never, { "hidden": "hidden"; "position": "position"; }, { "hiddenChange": "hiddenChange"; }, never, ["*"]>;
 }
+
+//# sourceMappingURL=view.component.d.ts.map

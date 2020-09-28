@@ -1,33 +1,33 @@
-import { BREAKPOINT } from '../../../layout/config/layout-config';
 import { Observable } from 'rxjs';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
-import { TableConfig } from './config/table.config';
+import { BREAKPOINT } from '../../../layout/config/layout-config';
+import { ResponsiveTableConfiguration, TableConfig } from './config/table.config';
 import { TableStructure, TableStructureConfiguration } from './table.model';
 /**
  * Responsive table service.
  *
- * The `TableService` is used to generate a `TableStructure` based on configuration. The table
- * structure configuration allows for breakpoint specific configuration, so that the table
- * experience can be differentiated various screen sizes.
+ * The `TableService` is used to build a `TableStructure` by configuration. The configuration
+ * allows for breakpoint specific configuration, so that the table can differentiate for
+ * various screen sizes.
  *
- * The table structure configuration is driven by a table type. The various supported
- * table types are exposed in feature libraries.
+ * While there are some global options, the configuration is mainly driven by the table _type_.
  *
  * If there is no table configuration for the given type found, a table header structure
- * is generated based on the actual data or randomly (in case no data is passed in) by
- * generating 5 headers. In case of a generated header, we warn the developer in devMode that
- * there is no configuration available.
+ * is generated based on the actual data (if available) or randomly by generating 5 random headers.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableService {
     protected breakpointService: BreakpointService;
     protected config: TableConfig;
     constructor(breakpointService: BreakpointService, config: TableConfig);
     /**
-     * Builds the table structure. The table structure can be created by the help of
-     * the `tableType`. The `tableType` can be used in the configuration `TableConfig`,
-     * so that the table headers can be defined.
+     * Builds the table structure.
+     *
+     * @param tableType The table type is used  to find the specific table configuration.
+     * @param defaultStructure (optional) Default table structure that contains fallback options. More specific options are merged with the default structure.
+     * @param data$ (optional) The actual data can be passed in to generate the table structure based on actual data.
      */
-    buildStructure(tableType: string, data$?: Observable<any>): Observable<TableStructure>;
+    buildStructure(tableType: string, defaultStructure?: ResponsiveTableConfiguration, data$?: Observable<any>): Observable<TableStructure>;
     /**
      * Returns the table structure by configuration. The configuration can be
      * breakpoint-driven, which means that an alternative header structure can
@@ -35,29 +35,43 @@ export declare class TableService {
      *
      * The breakpoint is resolved by teh `BreakpointService`.
      */
-    protected buildStructureFromConfig(type: string): Observable<TableStructure>;
+    protected buildStructureFromConfig(type: string, defaultStructure?: ResponsiveTableConfiguration): Observable<TableStructure>;
     /**
-     * This method generates a table structure by the help of the first data row.
+     * Finds all applicable table configuration for the given type and breakpoint.
+     * The default table configuration is merged with all relevant breakpoint
+     * configurations.
+     *
+     * This allows to have some default configurations that apply to all screens, and
+     * add configuration options for some screens.
+     */
+    protected getTableConfig(type: string, breakpoint: BREAKPOINT, defaultStructure?: ResponsiveTableConfiguration): TableStructureConfiguration;
+    /**
+     * Generates the table structure by the help of the first data row.
      */
     protected buildStructureFromData(type: string, data$: Observable<any>): Observable<TableStructure>;
     /**
-     * As a last resort, the table structure is randomly created. We add 5 unknown headers
-     * and use the `hideHeader` to avoid the unknown headers to be rendered.
+     * As a last resort, the table structure is randomly created. The random structure
+     * contains 5 headers, so that some of the unknown data is visualized.
      */
     protected buildRandomStructure(type: string): Observable<TableStructure>;
     /**
-     * Finds the best applicable table configuration for the given type
-     * and breakpoint. If there is no configuration available for the breakpoint,
-     * the best match will be returned, using mobile first approach.
+     * Finds all the breakpoints can contribute to the table configuration, from small
+     * to current.
      *
-     * If there is no match for any breakpoint, the fallback is a configuration
-     * without the notion of a breakpoint. Otherwise we fallback to the first
-     * available config.
+     * For example, if the current breakpoint is `MD`, this returns `[XS, SM, MD]`.
      */
-    protected getTableConfig(type: string, breakpoint: BREAKPOINT): TableStructureConfiguration;
+    protected findRelevantBreakpoints(breakpoint: BREAKPOINT): BREAKPOINT[];
+    /**
+     * Indicates if the there is a configuration for the table available.
+     */
     protected hasTableConfig(tableType: string): boolean;
     /**
-     * Prints a convenient message in the console to increase developer experience.
+     * Logs a message in the console to increase developer experience.
+     *
+     * The message is only logged in dev mode.
      */
-    private warn;
+    private logWarning;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableService, never>;
 }
+
+//# sourceMappingURL=table.service.d.ts.map

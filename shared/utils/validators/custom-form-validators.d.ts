@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 export declare class CustomFormValidators {
     /**
      * Checks control's value with predefined email regexp
@@ -57,6 +57,28 @@ export declare class CustomFormValidators {
      * @memberof CustomFormValidators
      */
     static emailsMustMatch(email: string, emailConfirmation: string): any;
+    /**
+     * Checks if control's value is euqal or greater than 0
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxNegativeAmount' validator error
+     * @memberof CustomFormValidators
+     */
+    static mustBePositive(control: AbstractControl): ValidationErrors | null;
+    /**
+     * Checks if control's value does not contain any special characters
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {AbstractControl} control
+     * @returns {(ValidationErrors | null)} Uses 'cxContainsSpecialCharacters' validator error
+     * @memberof CustomFormValidators
+     */
+    static noSpecialCharacters(control: AbstractControl): ValidationErrors | null;
 }
 /**
  * Generic function for validators, which checks if two passed controls match.

@@ -58,3 +58,7 @@ export { VisibleFocusDirective as ɵo } from './layout/a11y/keyboard-focus/visib
 export { skipLinkFactory as ɵf } from './layout/a11y/skip-link/skip-link.module';
 export { defaultDirectionConfig as ɵcg } from './layout/direction/config/default-direction.config';
 export { initHtmlDirAttribute as ɵg } from './layout/direction/direction.module';
+export { DatePickerFormatterService as ɵci } from './shared/components/date-picker/date-picker-formatter.service';
+export { DateTimePickerFormatterService as ɵcj } from './shared/components/date-time-picker/date-time-picker-formatter.service';
+
+//# sourceMappingURL=spartacus-storefront.d.ts.map

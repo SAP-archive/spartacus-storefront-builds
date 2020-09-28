@@ -1,5 +1,5 @@
-import { OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { BreakpointService } from '../../../../layout/breakpoint/breakpoint.service';
 import { SplitViewService } from '../split-view.service';
 /**
  * The split-view component supports an unlimited number of nested views. The component
@@ -23,11 +23,17 @@ import { SplitViewService } from '../split-view.service';
  * `--cx-active-view` on the host, so that all descendants views will inherit the
  * property conveniently.
  */
-export declare class SplitViewComponent implements OnDestroy {
+import * as ɵngcc0 from '@angular/core';
+export declare class SplitViewComponent implements OnInit, OnDestroy {
     protected splitService: SplitViewService;
+    protected breakpointService: BreakpointService;
+    protected elementRef: ElementRef;
+    private subscription;
     /**
      * Sets the default hide mode for views. This mode is useful in case views are dynamically being created,
      * for example when they are created by router components.
+     *
+     * The mode defaults to true, unless this is the first view; the first view is never hidden.
      */
     set hideMode(mode: boolean);
     /**
@@ -36,7 +42,16 @@ export declare class SplitViewComponent implements OnDestroy {
      * can be fully controlled by css.
      */
     lastVisibleView: number;
-    protected subscription: Subscription;
-    constructor(splitService: SplitViewService);
+    constructor(splitService: SplitViewService, breakpointService: BreakpointService, elementRef: ElementRef);
+    ngOnInit(): void;
+    /**
+     * Returns the maximum number of views per split-view. The number is based on the
+     * CSS custom property `--cx-max-views`.
+     */
+    protected get splitViewCount(): number;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SplitViewComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SplitViewComponent, "cx-split-view", never, { "hideMode": "hideMode"; }, {}, never, ["*"]>;
 }
+
+//# sourceMappingURL=split-view.component.d.ts.map

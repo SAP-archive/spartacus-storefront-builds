@@ -2481,6 +2481,13 @@
         ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
         ICON_TYPE["FILTER"] = "FILTER";
         ICON_TYPE["PENCIL"] = "PENCIL";
+        ICON_TYPE["TRASH"] = "TRASH";
+        ICON_TYPE["ACTIVE"] = "ACTIVE";
+        ICON_TYPE["SORT_DOWN"] = "SORT_DOWN";
+        ICON_TYPE["SORT"] = "SORT";
+        ICON_TYPE["ON"] = "ON";
+        ICON_TYPE["OFF"] = "OFF";
+        ICON_TYPE["LINK_OUT"] = "LINK_OUT";
     })(exports.ICON_TYPE || (exports.ICON_TYPE = {}));
     var IconConfig = /** @class */ (function () {
         function IconConfig() {
@@ -2540,6 +2547,13 @@
                 EMPTY_HEART: 'far fa-heart',
                 FILTER: 'fas fa-filter',
                 PENCIL: 'fas fa-pencil-alt',
+                TRASH: 'fas fa-trash',
+                ACTIVE: 'fas fa-check',
+                ON: 'fas fa-toggle-on',
+                OFF: 'fas fa-toggle-off',
+                LINK_OUT: 'fas fa-external-link-alt',
+                SORT_DOWN: 'fas fa-sort-down',
+                SORT: 'fas fa-sort',
             },
             resources: [
                 {
@@ -2758,12 +2772,11 @@
          */
         IconComponent.prototype.addStyleClasses = function (type) {
             var _this = this;
+            var _a, _b, _c;
             this.renderer.addClass(this.host, 'cx-icon');
-            if (this.styleClasses) {
-                this.styleClasses.forEach(function (cls) { return _this.renderer.removeClass(_this.host, cls); });
-            }
-            this.styleClasses = this.iconLoader.getStyleClasses(type).split(' ');
-            this.styleClasses.forEach(function (cls) {
+            (_a = this.styleClasses) === null || _a === void 0 ? void 0 : _a.forEach(function (cls) { return _this.renderer.removeClass(_this.host, cls); });
+            this.styleClasses = (_b = this.iconLoader.getStyleClasses(type)) === null || _b === void 0 ? void 0 : _b.split(' ');
+            (_c = this.styleClasses) === null || _c === void 0 ? void 0 : _c.forEach(function (cls) {
                 if (cls !== '') {
                     _this.renderer.addClass(_this.host, cls);
                 }
@@ -3949,6 +3962,314 @@
                 },] }
     ];
 
+    var DatePickerFormatterService = /** @class */ (function () {
+        function DatePickerFormatterService() {
+        }
+        DatePickerFormatterService.prototype.toNative = function (value) {
+            return value ? new Date(value).toISOString().split('T')[0] : null;
+        };
+        DatePickerFormatterService.prototype.toModel = function (value, endOfDay) {
+            if (value) {
+                var date = new Date(value)
+                    .toISOString()
+                    .replace('.', '+')
+                    .replace('Z', '0');
+                if (endOfDay) {
+                    date = date.replace('00:00:00', '23:59:59');
+                }
+                return date;
+            }
+        };
+        return DatePickerFormatterService;
+    }());
+    DatePickerFormatterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DatePickerFormatterService_Factory() { return new DatePickerFormatterService(); }, token: DatePickerFormatterService, providedIn: "root" });
+    DatePickerFormatterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    DatePickerFormatterService.ctorParameters = function () { return []; };
+
+    var DatePickerComponent = /** @class */ (function () {
+        function DatePickerComponent(dateFormatterService) {
+            this.dateFormatterService = dateFormatterService;
+            this.nativeValue = null;
+            this.endOfDay = false;
+        }
+        DatePickerComponent.prototype.onInput = function (event) {
+            this.value = this.dateFormatterService.toModel(event.target.value, this.endOfDay);
+            this.nativeValue = event.target.value;
+            this.onChange(this.value);
+        };
+        DatePickerComponent.prototype.onChange = function (_event) { };
+        DatePickerComponent.prototype.onTouched = function () { };
+        DatePickerComponent.prototype.registerOnChange = function (fn) {
+            this.onChange = fn;
+        };
+        DatePickerComponent.prototype.registerOnTouched = function (fn) {
+            this.onTouched = fn;
+        };
+        DatePickerComponent.prototype.writeValue = function (value) {
+            if (value) {
+                this.value = value;
+                this.nativeValue = this.dateFormatterService.toNative(value);
+            }
+        };
+        DatePickerComponent.prototype.getMin = function () {
+            return this.dateFormatterService.toNative(this.min);
+        };
+        DatePickerComponent.prototype.getMax = function () {
+            return this.dateFormatterService.toNative(this.max);
+        };
+        DatePickerComponent.prototype.validate = function () {
+            if (this.input && !this.input.nativeElement.validity.valid) {
+                var validity = this.input.nativeElement.validity;
+                var validators = {};
+                if (validity.rangeOverflow) {
+                    validators.cxDateMax = true;
+                }
+                if (validity.rangeUnderflow) {
+                    validators.cxDateMin = true;
+                }
+                return validators;
+            }
+        };
+        return DatePickerComponent;
+    }());
+    DatePickerComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-date-picker',
+                    template: "<input\n  #inputElement\n  type=\"date\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"nativeValue\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"getMin()\"\n  [max]=\"getMax()\"\n/>\n",
+                    providers: [
+                        {
+                            provide: forms.NG_VALUE_ACCESSOR,
+                            useExisting: i0.forwardRef(function () { return DatePickerComponent; }),
+                            multi: true,
+                        },
+                        {
+                            provide: forms.NG_VALIDATORS,
+                            useExisting: i0.forwardRef(function () { return DatePickerComponent; }),
+                            multi: true,
+                        },
+                    ]
+                },] }
+    ];
+    DatePickerComponent.ctorParameters = function () { return [
+        { type: DatePickerFormatterService }
+    ]; };
+    DatePickerComponent.propDecorators = {
+        input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
+        min: [{ type: i0.Input }],
+        max: [{ type: i0.Input }],
+        endOfDay: [{ type: i0.Input }],
+        required: [{ type: i0.Input }],
+        invalid: [{ type: i0.Input }]
+    };
+
+    var DatePickerModule = /** @class */ (function () {
+        function DatePickerModule() {
+        }
+        return DatePickerModule;
+    }());
+    DatePickerModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule],
+                    declarations: [DatePickerComponent],
+                    exports: [DatePickerComponent],
+                },] }
+    ];
+
+    /**
+     * Service responsible for converting date-like strings to/from formats compatible with the `<input type="datetime-local">`
+     * HTML element and valid strings compatible with the `Date` object.
+     *
+     * Date values used are relative to the local timezone of the user.
+     */
+    var DateTimePickerFormatterService = /** @class */ (function () {
+        function DateTimePickerFormatterService() {
+        }
+        /**
+         * Convert date string into a string format compatable with the browser's native `<input type="datetime-local">` HTML element.
+         * @param value: date string to convert
+         *
+         * @example
+         * With UTC-0 local offset, `toNative('2010-01-01T00:00+0000')` returns `'2010-01-01T00:00'`.
+         */
+        DateTimePickerFormatterService.prototype.toNative = function (value) {
+            return value
+                ? this.formatDateStringWithTimezone(value, this.getLocalTimezoneOffset(true))
+                : null;
+        };
+        /**
+         * Convert datetime-local native string into a valid datetime string.
+         * @param value: datetime-local string to convert
+         *
+         * @example
+         * With UTC-0 locale offset, `toModel('2010-01-01T00:00')` returns `'2010-01-01T00:00:00+00:00'`.
+         */
+        DateTimePickerFormatterService.prototype.toModel = function (value) {
+            return value ? value + ":00" + this.getLocalTimezoneOffset() : null;
+        };
+        /**
+         * Returns the local timezone in a format that can be appended to a date-like string.
+         * @param invert (default: false): returns the opposite operator relative to the local timezone
+         *
+         * @example
+         * When locale is set to a CEST timezone, `getLocalTimezoneOffset()` returns '+02:00'
+         * and `getLocalTimezoneOffset(true)` returns '-02:00'
+         */
+        DateTimePickerFormatterService.prototype.getLocalTimezoneOffset = function (invert) {
+            var offset = new Date().getTimezoneOffset() * -1;
+            var hours = Math.abs(Math.floor(offset / 60))
+                .toString()
+                .padStart(2, '0');
+            var minutes = (offset % 60).toString().padStart(2, '0');
+            var sign = offset >= 0 ? (invert ? "-" : "+") : invert ? "+" : "-";
+            return "" + sign + hours + ":" + minutes;
+        };
+        /**
+         * Format date string into a format compatable with the browser's native `<input type="datetime-local">` HTML element.
+         * @param dateString: date string to convert
+         * @param offset: offset to append to date string
+         *
+         * @example
+         * With UTC-0 local offset, `formatDateStringWithTimezone('2010-01-01T00:00+0000', '+00:00')` returns `'2010-01-01T00:00+00:00'`.
+         */
+        DateTimePickerFormatterService.prototype.formatDateStringWithTimezone = function (dateString, offset) {
+            return new Date(dateString.replace('+0000', offset))
+                .toISOString()
+                .substring(0, 16);
+        };
+        return DateTimePickerFormatterService;
+    }());
+    DateTimePickerFormatterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DateTimePickerFormatterService_Factory() { return new DateTimePickerFormatterService(); }, token: DateTimePickerFormatterService, providedIn: "root" });
+    DateTimePickerFormatterService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+
+    /**
+     * This component serves the browser's native `<input type="datetime-local">` HTML element
+     * in whilst projecting the value in the standard date format with regards to timezone offsets.
+     */
+    var DateTimePickerComponent = /** @class */ (function () {
+        function DateTimePickerComponent(dateFormatterService) {
+            this.dateFormatterService = dateFormatterService;
+            this.nativeValue = null;
+        }
+        /**
+         * Handler method for input interactions.
+         * @param event: Input event.
+         */
+        DateTimePickerComponent.prototype.onInput = function (event) {
+            this.value = this.dateFormatterService.toModel(event.target.value);
+            this.nativeValue = event.target.value;
+            this.onChange(this.value);
+        };
+        /**
+         * Handler method for when the value is modified.
+         * @param event: Change event.
+         */
+        DateTimePickerComponent.prototype.onChange = function (_event) { };
+        /**
+         * Handler method for when the element is interacted with.
+         */
+        DateTimePickerComponent.prototype.onTouched = function () { };
+        /**
+         * Register the `onChange()` handler method.
+         */
+        DateTimePickerComponent.prototype.registerOnChange = function (fn) {
+            this.onChange = fn;
+        };
+        /**
+         * Register the `onTouched()` handler method.
+         */
+        DateTimePickerComponent.prototype.registerOnTouched = function (fn) {
+            this.onTouched = fn;
+        };
+        /**
+         * Set the value of the input element.
+         * @param value: Date-like string to be set
+         */
+        DateTimePickerComponent.prototype.writeValue = function (value) {
+            if (value) {
+                this.value = value;
+                this.nativeValue = this.dateFormatterService.toNative(value);
+            }
+        };
+        /**
+         * Get the minimum value allowed for the input.
+         */
+        DateTimePickerComponent.prototype.getMin = function () {
+            return this.dateFormatterService.toNative(this.min);
+        };
+        /**
+         * Get the maximum value allowed for the input.
+         */
+        DateTimePickerComponent.prototype.getMax = function () {
+            return this.dateFormatterService.toNative(this.max);
+        };
+        /**
+         * Returns failing validators if input value is invalid
+         */
+        DateTimePickerComponent.prototype.validate = function () {
+            if (this.input && !this.input.nativeElement.validity.valid) {
+                var validity = this.input.nativeElement.validity;
+                var validators = {};
+                if (validity.rangeOverflow) {
+                    validators.cxDateMax = true;
+                }
+                if (validity.rangeUnderflow) {
+                    validators.cxDateMin = true;
+                }
+                return validators;
+            }
+        };
+        return DateTimePickerComponent;
+    }());
+    DateTimePickerComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-date-time-picker',
+                    template: "<input\n  #inputElement\n  type=\"datetime-local\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"nativeValue\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"getMin()\"\n  [max]=\"getMax()\"\n/>\n",
+                    providers: [
+                        {
+                            provide: forms.NG_VALUE_ACCESSOR,
+                            useExisting: i0.forwardRef(function () { return DateTimePickerComponent; }),
+                            multi: true,
+                        },
+                        {
+                            provide: forms.NG_VALIDATORS,
+                            useExisting: i0.forwardRef(function () { return DateTimePickerComponent; }),
+                            multi: true,
+                        },
+                    ]
+                },] }
+    ];
+    DateTimePickerComponent.ctorParameters = function () { return [
+        { type: DateTimePickerFormatterService }
+    ]; };
+    DateTimePickerComponent.propDecorators = {
+        input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
+        min: [{ type: i0.Input }],
+        max: [{ type: i0.Input }],
+        required: [{ type: i0.Input }],
+        invalid: [{ type: i0.Input }]
+    };
+
+    var DateTimePickerModule = /** @class */ (function () {
+        function DateTimePickerModule() {
+        }
+        return DateTimePickerModule;
+    }());
+    DateTimePickerModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule],
+                    declarations: [DateTimePickerComponent],
+                    exports: [DateTimePickerComponent],
+                },] }
+    ];
+
     /**
      * This component renders form errors.
      */
@@ -3970,21 +4291,24 @@
         });
         Object.defineProperty(FormErrorsComponent.prototype, "invalid", {
             get: function () {
-                return this.control.invalid;
+                var _a;
+                return (_a = this.control) === null || _a === void 0 ? void 0 : _a.invalid;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(FormErrorsComponent.prototype, "dirty", {
             get: function () {
-                return this.control.dirty;
+                var _a;
+                return (_a = this.control) === null || _a === void 0 ? void 0 : _a.dirty;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(FormErrorsComponent.prototype, "touched", {
             get: function () {
-                return this.control.touched;
+                var _a;
+                return (_a = this.control) === null || _a === void 0 ? void 0 : _a.touched;
             },
             enumerable: false,
             configurable: true
@@ -3994,11 +4318,12 @@
     FormErrorsComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-form-errors',
-                    template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate }}\n</p>\n",
+                    template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate: translationParams }}\n</p>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     FormErrorsComponent.propDecorators = {
+        translationParams: [{ type: i0.Input }],
         control: [{ type: i0.Input }],
         invalid: [{ type: i0.HostBinding, args: ['class.control-invalid',] }],
         dirty: [{ type: i0.HostBinding, args: ['class.control-dirty',] }],
@@ -4718,7 +5043,14 @@
     }());
     ListNavigationModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, ngSelect.NgSelectModule, forms.FormsModule, PaginationModule],
+                    imports: [
+                        i1$1.CommonModule,
+                        ngSelect.NgSelectModule,
+                        forms.FormsModule,
+                        forms.ReactiveFormsModule,
+                        IconModule,
+                        PaginationModule,
+                    ],
                     declarations: [SortingComponent],
                     exports: [SortingComponent, PaginationComponent],
                 },] }
@@ -4805,14 +5137,15 @@
 
     /**
      * Guard that can be used in split-view based child routes. This guard
-     * delays the guard to be removed with 500ms, so that any css transition can be
+     * delays the guard to be removed with 300ms, so that any css transition can be
      * finished before the DOM is destroyed.
      */
     var SplitViewDeactivateGuard = /** @class */ (function () {
         function SplitViewDeactivateGuard() {
         }
         SplitViewDeactivateGuard.prototype.canDeactivate = function () {
-            return rxjs.timer(500).pipe(operators.map(function () { return true; }));
+            // TODO: this might cause an issue with e2e
+            return rxjs.timer(300).pipe(operators.map(function () { return true; }));
         };
         return SplitViewDeactivateGuard;
     }());
@@ -4834,7 +5167,7 @@
              * The default hide mode can be overridden.
              */
             this.defaultHideMode = true;
-            this._splitViewCount = 2;
+            this.splitViewCount = 1;
             this._views$ = new rxjs.BehaviorSubject([]);
         }
         /**
@@ -4843,9 +5176,22 @@
          * property is provided by the `defaultHideMode`, unless it's the first view (position: 0).
          */
         SplitViewService.prototype.add = function (position, initialState) {
+            var state = Object.assign({ hidden: position === 0 ? false : this.defaultHideMode }, initialState);
             if (!this.views[position]) {
-                this.views[position] = Object.assign({ hidden: position === 0 ? false : this.defaultHideMode }, initialState);
+                this.views[position] = state;
+                this.updateState(position, state.hidden);
                 this._views$.next(this.views);
+            }
+        };
+        /**
+         * The split view is based on a number of views that can be used next to each other.
+         * When the number changes (i.e. if the screen goes from wide to small), the visibility state
+         * of the views should be updated.
+         */
+        SplitViewService.prototype.updateSplitView = function (splitViewCount) {
+            if (splitViewCount !== this.splitViewCount) {
+                this.splitViewCount = splitViewCount;
+                this.updateState();
             }
         };
         /**
@@ -4877,7 +5223,7 @@
             var activePosition = this.getActive(this.views);
             this._views$.next(this.views.splice(0, position));
             if (activePosition >= position) {
-                this.updateState(position - 1);
+                this.updateState(position);
             }
         };
         Object.defineProperty(SplitViewService.prototype, "nextPosition", {
@@ -4913,18 +5259,33 @@
                 !this.views[position].hidden) {
                 position--;
             }
-            this.updateState(position, forceHide);
+            this.updateState(position, forceHide === true);
         };
+        /**
+         * Updates the hidden state of all the views.
+         */
         SplitViewService.prototype.updateState = function (position, hide) {
+            var _this = this;
             var views = __spread(this.views);
-            var split = this._splitViewCount - 1;
-            // toggle the hidden state per view, based on the next position and number of views per split view
-            views.forEach(function (view, pos) {
-                if (pos === position) {
-                    view.hidden = hide !== null && hide !== void 0 ? hide : !(pos >= position - split && pos <= position);
+            if (hide !== undefined && views[position]) {
+                views[position].hidden = hide;
+            }
+            var lastVisible = views.length - __spread(views).reverse().findIndex(function (view) { return !view.hidden; }) - 1;
+            if (lastVisible === views.length) {
+                if (position) {
+                    // When there's only 1 view (mobile), we might not find any active
+                    // if the user navigates back.
+                    lastVisible = position - 1;
                 }
                 else {
-                    view.hidden = !(pos >= position - split && pos <= position);
+                    lastVisible = views.length - 1;
+                }
+            }
+            views.forEach(function (view, pos) {
+                if (view && pos !== position) {
+                    // hide other views that are outside the split view
+                    view.hidden =
+                        pos > lastVisible || pos < lastVisible - (_this.splitViewCount - 1);
                 }
             });
             this._views$.next(views);
@@ -4939,18 +5300,6 @@
             var last = l === -1 ? 0 : views.length - l - 1;
             return last;
         };
-        Object.defineProperty(SplitViewService.prototype, "splitViewCount", {
-            /**
-             * Sets the view count for the split view.
-             *
-             * Defaults to 2.
-             */
-            set: function (count) {
-                this._splitViewCount = count;
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(SplitViewService.prototype, "views", {
             /**
              * Utility method that resolves all views from the subject.
@@ -4990,23 +5339,24 @@
      * property conveniently.
      */
     var SplitViewComponent = /** @class */ (function () {
-        function SplitViewComponent(splitService) {
-            var _this = this;
+        function SplitViewComponent(splitService, breakpointService, elementRef) {
             this.splitService = splitService;
+            this.breakpointService = breakpointService;
+            this.elementRef = elementRef;
+            this.subscription = new rxjs.Subscription();
             /**
              * Indicates the last visible view in the range of views that is visible. This
              * is bind to a css variable `--cx-active-view` so that the experience
              * can be fully controlled by css.
              */
             this.lastVisibleView = 1;
-            this.subscription = this.splitService
-                .getActiveView()
-                .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible + 1); });
         }
         Object.defineProperty(SplitViewComponent.prototype, "hideMode", {
             /**
              * Sets the default hide mode for views. This mode is useful in case views are dynamically being created,
              * for example when they are created by router components.
+             *
+             * The mode defaults to true, unless this is the first view; the first view is never hidden.
              */
             set: function (mode) {
                 this.splitService.defaultHideMode = mode;
@@ -5014,9 +5364,28 @@
             enumerable: false,
             configurable: true
         });
+        SplitViewComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription.add(this.splitService
+                .getActiveView()
+                .subscribe(function (lastVisible) { return (_this.lastVisibleView = lastVisible + 1); }));
+            this.subscription.add(this.breakpointService.breakpoint$.subscribe(function () {
+                _this.splitService.updateSplitView(_this.splitViewCount);
+            }));
+        };
+        Object.defineProperty(SplitViewComponent.prototype, "splitViewCount", {
+            /**
+             * Returns the maximum number of views per split-view. The number is based on the
+             * CSS custom property `--cx-max-views`.
+             */
+            get: function () {
+                return Number(getComputedStyle(this.elementRef.nativeElement).getPropertyValue('--cx-max-views'));
+            },
+            enumerable: false,
+            configurable: true
+        });
         SplitViewComponent.prototype.ngOnDestroy = function () {
-            var _a;
-            (_a = this.subscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+            this.subscription.unsubscribe();
         };
         return SplitViewComponent;
     }());
@@ -5029,11 +5398,13 @@
                 },] }
     ];
     SplitViewComponent.ctorParameters = function () { return [
-        { type: SplitViewService }
+        { type: SplitViewService },
+        { type: BreakpointService },
+        { type: i0.ElementRef }
     ]; };
     SplitViewComponent.propDecorators = {
         hideMode: [{ type: i0.Input }],
-        lastVisibleView: [{ type: i0.HostBinding, args: ['style.--cx-active-view',] }]
+        lastVisibleView: [{ type: i0.HostBinding, args: ['style.--cx-active-view',] }, { type: i0.HostBinding, args: ['attr.active-view',] }]
     };
 
     /**
@@ -5046,9 +5417,10 @@
      * overall experience.
      */
     var ViewComponent = /** @class */ (function () {
-        function ViewComponent(splitService, elementRef) {
+        function ViewComponent(splitService, elementRef, cd) {
             this.splitService = splitService;
             this.elementRef = elementRef;
+            this.cd = cd;
             /**
              * The disappeared flag is added to the
              */
@@ -5074,22 +5446,17 @@
         });
         ViewComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.splitService.splitViewCount = this.splitViewCount;
             var hidden = this._hidden ? { hidden: this._hidden } : {};
             this.splitService.add(this.viewPosition, hidden);
             this.subscription = this.splitService
-                .getViewState(Number(this.position))
+                .getViewState(this.viewPosition)
+                // delay the disappeared state, so that the (CSS driven) animation has time to finish
+                .pipe(operators.delayWhen(function (view) { return rxjs.timer(view.hidden ? _this.duration * 1.25 : 0); }))
                 .subscribe(function (view) {
                 _this.hiddenChange.emit(view.hidden);
                 _this._hidden = view.hidden;
-                if (view.hidden) {
-                    setTimeout(function () {
-                        _this.disappeared = true;
-                    }, _this.duration * 1.25);
-                }
-                else {
-                    _this.disappeared = false;
-                }
+                _this.disappeared = view.hidden;
+                _this.cd.markForCheck();
             });
         };
         /**
@@ -5137,19 +5504,6 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(ViewComponent.prototype, "splitViewCount", {
-            /**
-             * Returns the maximum number of views per split-view. The number is based on the CSS custom property
-             * `--cx-max-views`. Defaults to `2`
-             */
-            get: function () {
-                return Number(getComputedStyle(this.elementRef.nativeElement)
-                    .getPropertyValue('--cx-max-views')
-                    .trim() || 2);
-            },
-            enumerable: false,
-            configurable: true
-        });
         /**
          * The view is removed from the `SplitService` so that the view no longer
          * plays a role in the overall split view.
@@ -5170,10 +5524,11 @@
     ];
     ViewComponent.ctorParameters = function () { return [
         { type: SplitViewService },
-        { type: i0.ElementRef }
+        { type: i0.ElementRef },
+        { type: i0.ChangeDetectorRef }
     ]; };
     ViewComponent.propDecorators = {
-        position: [{ type: i0.Input }, { type: i0.HostBinding, args: ['attr.position',] }],
+        position: [{ type: i0.Input }, { type: i0.HostBinding, args: ['attr.position',] }, { type: i0.HostBinding, args: ['style.--cx-view-position',] }],
         disappeared: [{ type: i0.HostBinding, args: ['attr.disappeared',] }],
         hidden: [{ type: i0.Input }],
         hiddenChange: [{ type: i0.Output }]
@@ -5719,17 +6074,135 @@
                 },] }
     ];
 
+    var TableDataCellComponent = /** @class */ (function () {
+        function TableDataCellComponent(outlet) {
+            this.outlet = outlet;
+            this.cls = true;
+        }
+        Object.defineProperty(TableDataCellComponent.prototype, "value", {
+            get: function () {
+                return this.model[this.field];
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableDataCellComponent.prototype, "model", {
+            get: function () {
+                var _a;
+                return (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableDataCellComponent.prototype, "field", {
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._field;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return TableDataCellComponent;
+    }());
+    TableDataCellComponent.decorators = [
+        { type: i0.Component, args: [{
+                    template: "{{ value }}",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    TableDataCellComponent.ctorParameters = function () { return [
+        { type: OutletContextData }
+    ]; };
+    TableDataCellComponent.propDecorators = {
+        cls: [{ type: i0.HostBinding, args: ['class.content-wrapper',] }]
+    };
+
+    var TableHeaderCellComponent = /** @class */ (function () {
+        function TableHeaderCellComponent(outlet) {
+            this.outlet = outlet;
+        }
+        Object.defineProperty(TableHeaderCellComponent.prototype, "header", {
+            /**
+             * Returns the static label for the given field, if available.
+             */
+            get: function () {
+                var _a;
+                if (typeof ((_a = this.fieldOptions) === null || _a === void 0 ? void 0 : _a.label) === 'string') {
+                    return this.fieldOptions.label;
+                }
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableHeaderCellComponent.prototype, "localizedHeader", {
+            /**
+             * Returns the localized label for the given field.
+             *
+             * The localized label is either driven by the configured `label.i18nKey`
+             * or concatenated by the table `type` and field `key`:
+             *
+             * `[tableType].[fieldKey]`
+             *
+             * The localized header can be translated with the `cxTranslate` pipe or `TranslationService`.
+             */
+            get: function () {
+                var _a, _b;
+                return (((_b = (_a = this.fieldOptions) === null || _a === void 0 ? void 0 : _a.label) === null || _b === void 0 ? void 0 : _b.i18nKey) ||
+                    this.type + "." + this.field);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableHeaderCellComponent.prototype, "fieldOptions", {
+            get: function () {
+                var _a, _b, _c;
+                return (_c = (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context._options) === null || _b === void 0 ? void 0 : _b.cells) === null || _c === void 0 ? void 0 : _c[this.field];
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableHeaderCellComponent.prototype, "field", {
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._field;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableHeaderCellComponent.prototype, "type", {
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._type;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return TableHeaderCellComponent;
+    }());
+    TableHeaderCellComponent.decorators = [
+        { type: i0.Component, args: [{
+                    template: "{{ header || (localizedHeader | cxTranslate) }}",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    TableHeaderCellComponent.ctorParameters = function () { return [
+        { type: OutletContextData }
+    ]; };
+
+    var defaultTableConfig = {
+        tableOptions: {
+            headerComponent: TableHeaderCellComponent,
+            dataComponent: TableDataCellComponent,
+        },
+    };
+
     /**
-     * The `TableConfig` provides table configurations. The configuration allows for a
-     * an optional breakpoint specific structure, so a dedicated table structure per
-     * screen size can be generated (see `TableService`).
+     * The `TableConfig` provides a table configurations for specific table types. You can define
+     * an all-screen table structure as well as a breakpoint specific table structure. The various
+     * table structures are merged from small to large screen configurations, depending on the users
+     * screen size.
      *
-     * The string based key is used to define a configuration for a specific type. The type
-     * binds to a specific component, such as the cost-center table. The various table types
-     * should be exposed by feature modules, to ease the configuration.
-     *
-     * The `TableConfiguration` is added in an array, so that any opinionated default configurations
-     * can be replaced by customer configurations.
+     * The `table.type` is used as a key to distinguish the various table configurations in the application.
      */
     var TableConfig = /** @class */ (function () {
         function TableConfig() {
@@ -5744,81 +6217,302 @@
                 },] }
     ];
 
+    var TableDataCellModule = /** @class */ (function () {
+        function TableDataCellModule() {
+        }
+        return TableDataCellModule;
+    }());
+    TableDataCellModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule],
+                    declarations: [TableDataCellComponent],
+                },] }
+    ];
+
+    var TableHeaderCellModule = /** @class */ (function () {
+        function TableHeaderCellModule() {
+        }
+        return TableHeaderCellModule;
+    }());
+    TableHeaderCellModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule, i1.I18nModule],
+                    declarations: [TableHeaderCellComponent],
+                },] }
+    ];
+
+    /**
+     * The table renderer service adds a component for each table cells (th and td)
+     * based on a fine grained configuration. Each table type can configure both global
+     * components for headers and cells as well as individual components for field
+     * specific cells.
+     *
+     * The components are added to the outlet slots for the corresponding cells. The table
+     * structure and data is added to the outlet context.
+     */
+    var TableRendererService = /** @class */ (function () {
+        function TableRendererService(outletService, componentFactoryResolver, config) {
+            this.outletService = outletService;
+            this.componentFactoryResolver = componentFactoryResolver;
+            this.config = config;
+            // keep a list of outletRefs to avoid recreation
+            this.outletRefs = new Map();
+        }
+        /**
+         * Adds the configured table component for the header and data.
+         */
+        TableRendererService.prototype.add = function (dataset) {
+            var _this = this;
+            var _a, _b;
+            (_b = (_a = dataset.structure) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b.forEach(function (field) {
+                var thRenderer = _this.getHeaderRenderer(dataset, field);
+                if (thRenderer) {
+                    var ref = _this.getHeaderOutletRef(dataset.structure.type, field);
+                    _this.render(ref, thRenderer);
+                }
+                var tdRenderer = _this.getDataRenderer(dataset, field);
+                if (tdRenderer) {
+                    var ref = _this.getDataOutletRef(dataset.structure.type, field);
+                    _this.render(ref, tdRenderer);
+                }
+            });
+        };
+        TableRendererService.prototype.render = function (outletRef, renderer) {
+            if (this.outletRefs.has(outletRef)) {
+                return;
+            }
+            this.outletRefs.set(outletRef, true);
+            var template = this.componentFactoryResolver.resolveComponentFactory(renderer);
+            this.outletService.add(outletRef, template);
+        };
+        /**
+         * Returns the header render component for the given field.
+         */
+        TableRendererService.prototype.getHeaderRenderer = function (dataset, field) {
+            var _a, _b, _c, _d, _e;
+            return (((_c = (_b = (_a = dataset.structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.headerComponent) || ((_d = dataset.structure.options) === null || _d === void 0 ? void 0 : _d.headerComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.headerComponent));
+        };
+        /**
+         * Returns the data render component for the given field.
+         */
+        TableRendererService.prototype.getDataRenderer = function (dataset, field) {
+            var _a, _b, _c, _d, _e;
+            return (((_c = (_b = (_a = dataset.structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.dataComponent) || ((_d = dataset.structure.options) === null || _d === void 0 ? void 0 : _d.dataComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.dataComponent));
+        };
+        /**
+         * Returns the header (th) outlet reference for the given field.
+         *
+         * The outlet reference is generated as:
+         * `table.[tableType].header.[field]`
+         */
+        TableRendererService.prototype.getHeaderOutletRef = function (type, field) {
+            return "table." + type + ".header." + field;
+        };
+        /**
+         * Returns the header (th) outlet context for the given field.
+         */
+        TableRendererService.prototype.getHeaderOutletContext = function (type, options, field) {
+            return { _type: type, _options: options, _field: field };
+        };
+        /**
+         * Returns the data (td) outlet reference for the given field.
+         *
+         * The field is generated as:
+         * `table.[tableType].data.[tableField]`
+         */
+        TableRendererService.prototype.getDataOutletRef = function (type, field) {
+            return "table." + type + ".data." + field;
+        };
+        /**
+         * Returns the data (td) outlet context for the given field.
+         */
+        TableRendererService.prototype.getDataOutletContext = function (type, options, field, data) {
+            return Object.assign(Object.assign({}, data), { _type: type, _options: options, _field: field });
+        };
+        return TableRendererService;
+    }());
+    TableRendererService.ɵprov = i0.ɵɵdefineInjectable({ factory: function TableRendererService_Factory() { return new TableRendererService(i0.ɵɵinject(OutletService), i0.ɵɵinject(i0.ComponentFactoryResolver), i0.ɵɵinject(TableConfig)); }, token: TableRendererService, providedIn: "root" });
+    TableRendererService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    TableRendererService.ctorParameters = function () { return [
+        { type: OutletService },
+        { type: i0.ComponentFactoryResolver },
+        { type: TableConfig }
+    ]; };
+
+    /**
+     * Layout orientation for the table configuration.
+     */
+    (function (TableLayout) {
+        /**
+         * Renders the table vertically, with a heading on top of the table.
+         *
+         * Vertical layout is most common and the default layout.
+         */
+        TableLayout[TableLayout["VERTICAL"] = 1] = "VERTICAL";
+        /**
+         * Stacks items in a tables by generating a `tbody` for each item.
+         */
+        TableLayout[TableLayout["VERTICAL_STACKED"] = 2] = "VERTICAL_STACKED";
+        /**
+         * Horizontal oriented table layout renders the table headers in the first column of the table.
+         */
+        TableLayout[TableLayout["HORIZONTAL"] = 3] = "HORIZONTAL";
+    })(exports.TableLayout || (exports.TableLayout = {}));
+
     /**
      * The table component provides a generic DOM structure based on the `dataset` input.
      * The `Table` dataset contains a type, table structure and table data.
      *
-     * The table component only supports horizontal table structure.
+     * The table component only supports horizontal, vertical and stacked table layout.
      *
-     * The implementation is fairly "dumb" and only provides the following features:
-     * - Use outlet for table headers (`<th>`) and cells (`<td>`).
-     * - Localizing table headers, using the `I18nModule`.
-     * - Add CSS classes on each cell to
+     * The implementation is fairly "dumb" and only renders string based content for TH and TD elements.
+     * The actual cell rendering is delegated to a (configurable) cell component. Additionally, each cell
+     * is registered as an outlet, so that customizations can be done by both outlet templates
+     * and components.
      *
-     * Al features are optional.
-     *
-     * By default, the headers and columns are rendered with an outlet template. The template
-     * reference is generated by concatenating the table `type` and table header `key`.
-     * The following snippet shows an outlet generated for a table header, for the table type
-     * "cost-center" with a label "name":
+     * The outlet references are concatenated from the table `type` and header `key`. The following
+     * snippet shows an outlet generated for a table header, for the table type "cost-center" with
+     * a header key "name":
      *
      * ```
      * <th>
-     *   <template cxOutlet="tbl.cost-center.header.name">
-     *     [localized label is generated here]
+     *   <template cxOutlet="table.cost-center.header.name">
      *   </template>
      * </th>
      * ```
      *
-     * Similarly, the `<td>` is generated with the outlet template reference `tbl.cost-center.data.name`.
-     *
-     * This allows smart components to further customize the table rendering. More over, customers can
-     * customize the header and data by using the generated outlets.
+     * Similarly, the data cells (`<td>`) are generated with the outlet template reference
+     * `table.cost-center.data.name`.
      */
     var TableComponent = /** @class */ (function () {
-        function TableComponent() {
+        function TableComponent(rendererService) {
+            this.rendererService = rendererService;
+            this.launch = new i0.EventEmitter();
         }
         Object.defineProperty(TableComponent.prototype, "dataset", {
             get: function () {
                 return this._dataset;
             },
-            set: function (dataset) {
-                this._dataset = dataset;
-                this.addTableDebugInfo();
+            set: function (value) {
+                this._dataset = value;
+                this.init(value);
             },
             enumerable: false,
             configurable: true
         });
+        TableComponent.prototype.init = function (dataset) {
+            this.verticalLayout = !this.layout || this.layout === exports.TableLayout.VERTICAL;
+            this.verticalStackedLayout = this.layout === exports.TableLayout.VERTICAL_STACKED;
+            this.horizontalLayout = this.layout === exports.TableLayout.HORIZONTAL;
+            this.rendererService.add(dataset);
+            this.addTableDebugInfo();
+        };
+        TableComponent.prototype.launchItem = function (item) {
+            this.launch.emit(item);
+        };
         /**
-         * Returns the configured data value by the label key.
-         * If there's no headerKey available, or no corresponding value, the
-         * first value in the data row is returned.
+         * Indicates whether the given item is the current item.
+         *
+         * The current item is driven by the `currentItem`, that holds a
+         * property and value to compare.
          */
-        TableComponent.prototype.getDataValue = function (dataRow, headerKey, index) {
-            return dataRow[headerKey] || Object.values(dataRow)[index];
+        TableComponent.prototype.isCurrentItem = function (item) {
+            var _a, _b;
+            if (!this.currentItem || !this.currentItem.value) {
+                return false;
+            }
+            return ((_a = this.currentItem) === null || _a === void 0 ? void 0 : _a.value) === (item === null || item === void 0 ? void 0 : item[(_b = this.currentItem) === null || _b === void 0 ? void 0 : _b.property]);
+        };
+        /**
+         * Returns the header (th) outlet reference for the given field.
+         */
+        TableComponent.prototype.getHeaderOutletRef = function (field) {
+            return this.rendererService.getHeaderOutletRef(this.type, field);
+        };
+        /**
+         * Returns the header (th) outlet context for the given field.
+         */
+        TableComponent.prototype.getHeaderOutletContext = function (field) {
+            return this.rendererService.getHeaderOutletContext(this.type, this.options, field);
+        };
+        /**
+         * Returns the data (td) outlet reference for the given field.
+         */
+        TableComponent.prototype.getDataOutletRef = function (field) {
+            return this.rendererService.getDataOutletRef(this.type, field);
+        };
+        /**
+         * Returns the data (td) outlet context for the given field.
+         */
+        TableComponent.prototype.getDataOutletContext = function (field, data) {
+            return this.rendererService.getDataOutletContext(this.type, this.options, field, data);
+        };
+        TableComponent.prototype.trackData = function (_i, item) {
+            return JSON.stringify(item);
         };
         /**
          * Generates the table type into the UI in devMode, so that developers
          * can easily get the notion of the table type.
          */
         TableComponent.prototype.addTableDebugInfo = function () {
-            var _a, _b;
-            if (i0.isDevMode) {
-                this.tableType = (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.type;
+            if (i0.isDevMode() && this.type) {
+                this.tableType = this.type;
             }
         };
+        Object.defineProperty(TableComponent.prototype, "layout", {
+            /**
+             * Helper method to return the deeply nested orientation configuration.
+             */
+            get: function () {
+                var _a, _b, _c;
+                return (_c = (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.options) === null || _c === void 0 ? void 0 : _c.layout;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "type", {
+            /**
+             * Helper method to return the deeply nested type.
+             */
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.type;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "options", {
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.options;
+            },
+            enumerable: false,
+            configurable: true
+        });
         return TableComponent;
     }());
     TableComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-table',
-                    template: "<table *ngIf=\"dataset?.structure as structure\">\n  <thead *ngIf=\"!structure.hideHeader\">\n    <tr>\n      <th\n        scope=\"col\"\n        *ngFor=\"let header of structure.headers; let i = index\"\n        [class]=\"header.key\"\n      >\n        <!-- render an outlet for each column header -->\n        <ng-template\n          [cxOutlet]=\"\n            'table.' + structure.type + '.header.' + (header.key || i)\n          \"\n          [cxOutletContext]=\"header\"\n        >\n          <!-- Render the label by default, fallback to localize the label by it's key -->\n          {{\n            header.label || (structure.type + '.' + header.key | cxTranslate)\n          }}\n        </ng-template>\n      </th>\n    </tr>\n  </thead>\n\n  <tr *ngFor=\"let row of dataset.data$ | async\">\n    <td *ngFor=\"let col of structure.headers; let i = index\" [class]=\"col.key\">\n      <!-- render an outlet for each cell -->\n      <ng-template\n        [cxOutlet]=\"'table.' + structure.type + '.data.' + (col.key || i)\"\n        [cxOutletContext]=\"row\"\n      >\n        {{ getDataValue(row, col.key, i) }}\n      </ng-template>\n    </td>\n  </tr>\n</table>\n",
+                    template: "<table *ngIf=\"dataset?.structure as structure\">\n  <ng-container *ngIf=\"verticalStackedLayout\">\n    <tbody\n      *ngFor=\"let item of dataset.data; trackBy: trackData\"\n      (click)=\"launchItem(item)\"\n      [class.is-current]=\"isCurrentItem(item)\"\n    >\n      <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n        <th>\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n        <td>\n          <ng-template\n            [cxOutlet]=\"getDataOutletRef(cell)\"\n            [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n          >\n            {{ item[cell] }}\n          </ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </ng-container>\n\n  <!-- vertical tables render the item  -->\n  <ng-container *ngIf=\"verticalLayout\">\n    <thead>\n      <tr>\n        <th scope=\"col\" *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n      </tr>\n    </thead>\n\n    <tr\n      *ngFor=\"let item of dataset.data; trackBy: trackData\"\n      [class.is-current]=\"isCurrentItem(item)\"\n      (click)=\"launchItem(item)\"\n    >\n      <td *ngFor=\"let cell of structure.cells; let i = index\" [class]=\"cell\">\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n\n  <ng-container *ngIf=\"horizontalLayout\">\n    <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n      <th scope=\"col\">\n        <ng-template\n          [cxOutlet]=\"getHeaderOutletRef(cell)\"\n          [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n        >\n          {{ cell }}\n        </ng-template>\n      </th>\n      <td\n        *ngFor=\"let item of dataset.data; trackBy: trackData\"\n        [class.is-current]=\"isCurrentItem(item)\"\n        (click)=\"launchItem(item)\"\n      >\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n</table>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
+    TableComponent.ctorParameters = function () { return [
+        { type: TableRendererService }
+    ]; };
     TableComponent.propDecorators = {
         tableType: [{ type: i0.HostBinding, args: ['attr.__cx-table-type',] }],
-        dataset: [{ type: i0.Input }]
+        horizontalLayout: [{ type: i0.HostBinding, args: ['class.horizontal',] }],
+        verticalLayout: [{ type: i0.HostBinding, args: ['class.vertical',] }],
+        verticalStackedLayout: [{ type: i0.HostBinding, args: ['class.vertical-stacked',] }],
+        dataset: [{ type: i0.Input }],
+        currentItem: [{ type: i0.Input }],
+        launch: [{ type: i0.Output }]
     };
 
     /**
@@ -5831,26 +6525,29 @@
     }());
     TableModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, OutletModule, i1.I18nModule],
+                    imports: [
+                        i1$1.CommonModule,
+                        OutletModule,
+                        TableHeaderCellModule,
+                        TableDataCellModule,
+                    ],
                     declarations: [TableComponent],
                     exports: [TableComponent],
+                    providers: [i1.provideConfig(defaultTableConfig)],
                 },] }
     ];
 
     /**
      * Responsive table service.
      *
-     * The `TableService` is used to generate a `TableStructure` based on configuration. The table
-     * structure configuration allows for breakpoint specific configuration, so that the table
-     * experience can be differentiated various screen sizes.
+     * The `TableService` is used to build a `TableStructure` by configuration. The configuration
+     * allows for breakpoint specific configuration, so that the table can differentiate for
+     * various screen sizes.
      *
-     * The table structure configuration is driven by a table type. The various supported
-     * table types are exposed in feature libraries.
+     * While there are some global options, the configuration is mainly driven by the table _type_.
      *
      * If there is no table configuration for the given type found, a table header structure
-     * is generated based on the actual data or randomly (in case no data is passed in) by
-     * generating 5 headers. In case of a generated header, we warn the developer in devMode that
-     * there is no configuration available.
+     * is generated based on the actual data (if available) or randomly by generating 5 random headers.
      */
     var TableService = /** @class */ (function () {
         function TableService(breakpointService, config) {
@@ -5858,13 +6555,15 @@
             this.config = config;
         }
         /**
-         * Builds the table structure. The table structure can be created by the help of
-         * the `tableType`. The `tableType` can be used in the configuration `TableConfig`,
-         * so that the table headers can be defined.
+         * Builds the table structure.
+         *
+         * @param tableType The table type is used  to find the specific table configuration.
+         * @param defaultStructure (optional) Default table structure that contains fallback options. More specific options are merged with the default structure.
+         * @param data$ (optional) The actual data can be passed in to generate the table structure based on actual data.
          */
-        TableService.prototype.buildStructure = function (tableType, data$) {
+        TableService.prototype.buildStructure = function (tableType, defaultStructure, data$) {
             if (this.hasTableConfig(tableType)) {
-                return this.buildStructureFromConfig(tableType);
+                return this.buildStructureFromConfig(tableType, defaultStructure);
             }
             else {
                 if (data$) {
@@ -5882,75 +6581,84 @@
          *
          * The breakpoint is resolved by teh `BreakpointService`.
          */
-        TableService.prototype.buildStructureFromConfig = function (type) {
+        TableService.prototype.buildStructureFromConfig = function (type, defaultStructure) {
             var _this = this;
-            return this.breakpointService.breakpoint$.pipe(operators.map(function (breakpoint) { return (Object.assign(Object.assign({}, _this.getTableConfig(type, breakpoint)), { type: type })); }));
+            return this.breakpointService.breakpoint$.pipe(operators.map(function (breakpoint) { return (Object.assign(Object.assign({}, _this.getTableConfig(type, breakpoint, defaultStructure)), { type: type })); }));
         };
         /**
-         * This method generates a table structure by the help of the first data row.
+         * Finds all applicable table configuration for the given type and breakpoint.
+         * The default table configuration is merged with all relevant breakpoint
+         * configurations.
+         *
+         * This allows to have some default configurations that apply to all screens, and
+         * add configuration options for some screens.
+         */
+        TableService.prototype.getTableConfig = function (type, breakpoint, defaultStructure) {
+            var _this = this;
+            var _a, _b;
+            if (!((_a = this.config.table) === null || _a === void 0 ? void 0 : _a[type])) {
+                return null;
+            }
+            var relevant = this.findRelevantBreakpoints(breakpoint);
+            var closestBreakpoint = __spread(relevant).reverse()
+                .find(function (br) { var _a; return !!((_a = _this.config.table[type][br]) === null || _a === void 0 ? void 0 : _a.cells); });
+            var cells = ((_b = this.config.table[type][closestBreakpoint]) === null || _b === void 0 ? void 0 : _b.cells) ||
+                this.config.table[type].cells || (defaultStructure === null || defaultStructure === void 0 ? void 0 : defaultStructure.cells);
+            // add all default table configurations
+            var options = Object.assign(Object.assign({}, defaultStructure === null || defaultStructure === void 0 ? void 0 : defaultStructure.options), this.config.table[type].options);
+            // We merge all table options for smaller breakpoints into the global
+            // options, so we inherit options.
+            relevant.forEach(function (br) {
+                var _a, _b, _c;
+                options = Object.assign(Object.assign(Object.assign({}, options), (_a = defaultStructure === null || defaultStructure === void 0 ? void 0 : defaultStructure[br]) === null || _a === void 0 ? void 0 : _a.options), (_c = (_b = _this.config.table[type]) === null || _b === void 0 ? void 0 : _b[br]) === null || _c === void 0 ? void 0 : _c.options);
+            });
+            return { cells: cells, options: options };
+        };
+        /**
+         * Generates the table structure by the help of the first data row.
          */
         TableService.prototype.buildStructureFromData = function (type, data$) {
-            this.warn("No table configuration found to render table with type \"" + type + "\". The table header for \"" + type + "\" is generated by the help of the first data item");
+            this.logWarning("No table configuration found to render table with type \"" + type + "\". The table header for \"" + type + "\" is generated by the help of the first data item");
             return data$.pipe(operators.map(function (data) {
-                var headers = Object.keys(data === null || data === void 0 ? void 0 : data[0]).map(function (key) { return ({
-                    key: key,
-                    label: key,
-                }); });
-                return {
-                    type: type,
-                    headers: headers,
-                };
+                var cells = Object.keys(data === null || data === void 0 ? void 0 : data[0]).map(function (key) { return key; });
+                return { type: type, cells: cells };
             }));
         };
         /**
-         * As a last resort, the table structure is randomly created. We add 5 unknown headers
-         * and use the `hideHeader` to avoid the unknown headers to be rendered.
+         * As a last resort, the table structure is randomly created. The random structure
+         * contains 5 headers, so that some of the unknown data is visualized.
          */
         TableService.prototype.buildRandomStructure = function (type) {
-            this.warn("No data available for \"" + type + "\", a random structure is generated (with hidden table headers).");
+            this.logWarning("No data available for \"" + type + "\", a random structure is generated (with hidden table headers).");
             return rxjs.of({
                 type: type,
-                headers: [
-                    { key: 'unknown' },
-                    { key: 'unknown' },
-                    { key: 'unknown' },
-                    { key: 'unknown' },
-                    { key: 'unknown' },
-                ],
-                hideHeader: true,
+                cells: ['unknown', 'unknown', 'unknown', 'unknown', 'unknown'],
             });
         };
         /**
-         * Finds the best applicable table configuration for the given type
-         * and breakpoint. If there is no configuration available for the breakpoint,
-         * the best match will be returned, using mobile first approach.
+         * Finds all the breakpoints can contribute to the table configuration, from small
+         * to current.
          *
-         * If there is no match for any breakpoint, the fallback is a configuration
-         * without the notion of a breakpoint. Otherwise we fallback to the first
-         * available config.
+         * For example, if the current breakpoint is `MD`, this returns `[XS, SM, MD]`.
          */
-        TableService.prototype.getTableConfig = function (type, breakpoint) {
-            var tableConfig = this.config.table[type];
-            // find all relevant breakpoints
+        TableService.prototype.findRelevantBreakpoints = function (breakpoint) {
             var current = this.breakpointService.breakpoints.indexOf(breakpoint);
-            var relevant = this.breakpointService.breakpoints
-                .slice(0, current + 1)
-                .reverse();
-            var bestMatch = relevant.find(function (br) { return !!tableConfig.find(function (structure) { return structure.breakpoint === br; }); });
-            return bestMatch
-                ? tableConfig.find(function (config) { return config.breakpoint === bestMatch; })
-                : tableConfig.find(function (structure) { return !structure.breakpoint; }) ||
-                    tableConfig[0];
+            return this.breakpointService.breakpoints.slice(0, current + 1);
         };
+        /**
+         * Indicates if the there is a configuration for the table available.
+         */
         TableService.prototype.hasTableConfig = function (tableType) {
             var _a;
             return !!((_a = this.config.table) === null || _a === void 0 ? void 0 : _a[tableType]);
         };
         /**
-         * Prints a convenient message in the console to increase developer experience.
+         * Logs a message in the console to increase developer experience.
+         *
+         * The message is only logged in dev mode.
          */
-        TableService.prototype.warn = function (message) {
-            if (i0.isDevMode) {
+        TableService.prototype.logWarning = function (message) {
+            if (i0.isDevMode()) {
                 console.warn(message);
             }
         };
@@ -6190,7 +6898,7 @@
          */
         CustomFormValidators.emailValidator = function (control) {
             var email = control.value;
-            return !email.length || email.match(i1.EMAIL_PATTERN)
+            return email && (!email.length || email.match(i1.EMAIL_PATTERN))
                 ? null
                 : { cxInvalidEmail: true };
         };
@@ -6206,7 +6914,7 @@
          */
         CustomFormValidators.passwordValidator = function (control) {
             var password = control.value;
-            return !password.length || password.match(i1.PASSWORD_PATTERN)
+            return password && (!password.length || password.match(i1.PASSWORD_PATTERN))
                 ? null
                 : { cxInvalidPassword: true };
         };
@@ -6253,6 +6961,36 @@
         CustomFormValidators.emailsMustMatch = function (email, emailConfirmation) {
             var validator = function (formGroup) { return controlsMustMatch(formGroup, email, emailConfirmation, 'cxEmailsMustMatch'); };
             return validator;
+        };
+        /**
+         * Checks if control's value is euqal or greater than 0
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {AbstractControl} control
+         * @returns {(ValidationErrors | null)} Uses 'cxNegativeAmount' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.mustBePositive = function (control) {
+            var amount = control.value;
+            return amount >= 0 ? null : { cxNegativeAmount: true };
+        };
+        /**
+         * Checks if control's value does not contain any special characters
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {AbstractControl} control
+         * @returns {(ValidationErrors | null)} Uses 'cxContainsSpecialCharacters' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.noSpecialCharacters = function (control) {
+            var forbiddenChars = ['/'];
+            var str = String(control.value);
+            var containsSpecialChars = forbiddenChars.some(function (char) { return str.includes(char); });
+            return !containsSpecialChars ? null : { cxContainsSpecialCharacters: true };
         };
         return CustomFormValidators;
     }());
@@ -13940,7 +14678,7 @@
     BannerComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-banner',
-                    template: "<ng-container *ngIf=\"component.data$ | async as data\">\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <p *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n    <cx-media [container]=\"data.media\"></cx-media>\n    <p *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n  </cx-generic-link>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"component.data$ | async as data\">\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <p class=\"headline\" *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n    <cx-media [container]=\"data.media\"></cx-media>\n    <p class=\"content\" *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n  </cx-generic-link>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -15248,6 +15986,41 @@
                 },] }
     ];
 
+    var OrderDetailActionsComponent = /** @class */ (function () {
+        function OrderDetailActionsComponent(orderDetailsService) {
+            this.orderDetailsService = orderDetailsService;
+            this.order$ = this.orderDetailsService.getOrderDetails();
+        }
+        return OrderDetailActionsComponent;
+    }());
+    OrderDetailActionsComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-order-details-actions',
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        [routerLink]=\"{ cxRoute: 'orders' } | cxUrl\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <a\n        *ngIf=\"order.cancellable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderCancel',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.cancelAction' | cxTranslate }}\n      </a>\n\n      <a\n        *ngIf=\"order.returnable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderReturn',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.returnAction' | cxTranslate }}\n      </a>\n    </div>\n  </div>\n</ng-container>\n"
+                },] }
+    ];
+    OrderDetailActionsComponent.ctorParameters = function () { return [
+        { type: OrderDetailsService }
+    ]; };
+
+    var OrderDetailApprovalDetailsComponent = /** @class */ (function () {
+        function OrderDetailApprovalDetailsComponent(orderDetailsService) {
+            this.orderDetailsService = orderDetailsService;
+            this.order$ = this.orderDetailsService.getOrderDetails();
+        }
+        return OrderDetailApprovalDetailsComponent;
+    }());
+    OrderDetailApprovalDetailsComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-order-details-approval-details',
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container *ngIf=\"order.permissionResults?.length\">\n    <div class=\"cx-approval-header row\">\n      <div class=\"cx-approval-label col-sm-12\">\n        {{ 'orderDetails.approvalDetails.header' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"row\">\n      <table class=\"table table-striped cx-approval-table\">\n        <thead class=\"cx-approval-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.permission' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.approver' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.status' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.approverComments' | cxTranslate }}\n          </th>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let permissionResult of order.permissionResults\">\n            <td class=\"cx-approval-permissionCode\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.permission' | cxTranslate }}\n              </div>\n              {{\n                'orderDetails.approvalDetails.permissionType'\n                  | cxTranslate\n                    : { context: permissionResult.permissionType.code }\n              }}\n            </td>\n            <td class=\"cx-approval-approverName\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.approver' | cxTranslate }}\n              </div>\n              {{ permissionResult.approverName }}\n            </td>\n            <td class=\"cx-approval-statusDisplay\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.status' | cxTranslate }}\n              </div>\n              {{ permissionResult.statusDisplay }}\n            </td>\n            <td class=\"cx-approval-approvalNotes\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{\n                  'orderDetails.approvalDetails.approverComments' | cxTranslate\n                }}\n              </div>\n              {{\n                permissionResult.approverNotes\n                  ? permissionResult.approverNotes\n                  : ('orderDetails.approvalDetails.noApprovalNotes'\n                    | cxTranslate)\n              }}\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </ng-container>\n</ng-container>\n",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    OrderDetailApprovalDetailsComponent.ctorParameters = function () { return [
+        { type: OrderDetailsService }
+    ]; };
+
     var OrderDetailHeadlineComponent = /** @class */ (function () {
         function OrderDetailHeadlineComponent(orderDetailsService) {
             this.orderDetailsService = orderDetailsService;
@@ -15260,7 +16033,7 @@
     OrderDetailHeadlineComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-details-headline',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | cxDate }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\" *ngIf=\"order?.statusDisplay\">\n        {{\n          'orderDetails.statusDisplay'\n            | cxTranslate: { context: order?.statusDisplay }\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | cxDate }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\" *ngIf=\"order?.statusDisplay\">\n        {{ 'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate }}\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"order?.orgCustomer?.orgUnit\" class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.purchaseOrderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.purchaseOrderNumber\n            ? order?.purchaseOrderNumber\n            : ('orderDetails.none' | cxTranslate)\n        }}\n      </div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placedBy' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.orgCustomer?.name }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.costCenterAndUnit' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.costCenter\n            ? ('orderDetails.costCenterAndUnitValue'\n              | cxTranslate\n                : {\n                    costCenterName: order?.costCenter?.name,\n                    unitName: order?.costCenter?.unit?.name\n                  })\n            : ('orderDetails.none'\n              | cxTranslate\n                : { value: 'orderDetails.paidByCreditCard' | cxTranslate })\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
                 },] }
     ];
     OrderDetailHeadlineComponent.ctorParameters = function () { return [
@@ -15306,7 +16079,7 @@
     OrderDetailItemsComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-details-items',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay'\n              | cxTranslate: { context: order.statusDisplay }\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
                 },] }
     ];
     OrderDetailItemsComponent.ctorParameters = function () { return [
@@ -15565,29 +16338,13 @@
         { type: OrderDetailsService }
     ]; };
 
-    var OrderDetailActionsComponent = /** @class */ (function () {
-        function OrderDetailActionsComponent(orderDetailsService) {
-            this.orderDetailsService = orderDetailsService;
-            this.order$ = this.orderDetailsService.getOrderDetails();
-        }
-        return OrderDetailActionsComponent;
-    }());
-    OrderDetailActionsComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'cx-order-details-actions',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-nav row\">\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <button\n        [routerLink]=\"{ cxRoute: 'orders' } | cxUrl\"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'common.back' | cxTranslate }}\n      </button>\n    </div>\n\n    <div class=\"col-xs-12 col-md-4 col-lg-3\">\n      <a\n        *ngIf=\"order.cancellable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderCancel',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.cancelAction' | cxTranslate }}\n      </a>\n\n      <a\n        *ngIf=\"order.returnable\"\n        [routerLink]=\"\n          {\n            cxRoute: 'orderReturn',\n            params: order\n          } | cxUrl\n        \"\n        class=\"btn btn-block btn-action\"\n      >\n        {{ 'orderDetails.cancellationAndReturn.returnAction' | cxTranslate }}\n      </a>\n    </div>\n  </div>\n</ng-container>\n"
-                },] }
-    ];
-    OrderDetailActionsComponent.ctorParameters = function () { return [
-        { type: OrderDetailsService }
-    ]; };
-
     var moduleComponents = [
         OrderDetailActionsComponent,
         OrderDetailHeadlineComponent,
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
+        OrderDetailApprovalDetailsComponent,
         TrackingEventsComponent,
         ConsignmentTrackingComponent,
         OrderConsignedEntriesComponent,
@@ -15632,6 +16389,9 @@
                                 },
                                 AccountOrderDetailsHeadlineComponent: {
                                     component: OrderDetailHeadlineComponent,
+                                },
+                                AccountOrderDetailsApprovalDetailsComponent: {
+                                    component: OrderDetailApprovalDetailsComponent,
                                 },
                                 AccountOrderDetailsItemsComponent: {
                                     component: OrderDetailItemsComponent,
@@ -15718,7 +16478,7 @@
     OrderHistoryComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-history',
-                    template: "<ng-container *ngIf=\"orders$ | async as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay'\n                      | cxTranslate: { context: order?.statusDisplay }\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"isLoaded$ | async\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"orders$ | async as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay_' + order?.statusDisplay\n                      | cxTranslate\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"isLoaded$ | async\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -20993,7 +21753,7 @@
     StoreFinderListComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-store-finder-list',
-                    template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container mb-2\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n      <div class=\"col-md-2 text-left cx-back-wrapper\">\n        <button\n          class=\"btn btn-block btn-action\"\n          *ngIf=\"isDetailsModeVisible\"\n          (click)=\"hideStoreDetails()\"\n        >\n          <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n          {{ 'storeFinder.backToList' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n          <cx-store-finder-store-description\n            [location]=\"storeDetails\"\n            [disableMap]=\"true\"\n          ></cx-store-finder-store-description>\n        </div>\n        <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStoreIndex === i\n            }\"\n            class=\"cx-list-items\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              [displayDistance]=\"useMylocation\"\n              [useClickEvent]=\"true\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n              [listOrderLabel]=\"\n                i +\n                locations.pagination.currentPage *\n                  locations.pagination.pageSize +\n                1\n              \"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n                <cx-store-finder-store-description\n                  [location]=\"storeDetails\"\n                  [disableMap]=\"true\"\n                ></cx-store-finder-store-description>\n              </div>\n              <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStoreIndex === i\n                  }\"\n                  class=\"cx-list-items\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    [displayDistance]=\"useMylocation\"\n                    [useClickEvent]=\"true\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n                    [listOrderLabel]=\"\n                      i +\n                      locations.pagination.currentPage *\n                        locations.pagination.pageSize +\n                      1\n                    \"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"selectedStore ? [selectedStore] : locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"locations\">\n  <div class=\"container mb-2\">\n    <div class=\"row\" *ngIf=\"locations?.pagination\">\n      <div class=\"col-md-12\">\n        <cx-store-finder-pagination-details\n          [pagination]=\"locations.pagination\"\n        ></cx-store-finder-pagination-details>\n      </div>\n      <div class=\"col-md-2 text-left cx-back-wrapper\">\n        <button\n          class=\"btn btn-block btn-action\"\n          *ngIf=\"isDetailsModeVisible\"\n          (click)=\"hideStoreDetails()\"\n        >\n          <cx-icon [type]=\"iconTypes.CARET_LEFT\"></cx-icon>\n          {{ 'storeFinder.clickBack' | cxTranslate }}\n        </button>\n      </div>\n    </div>\n    <div *ngIf=\"locations?.stores\" class=\"row cx-columns\">\n      <div class=\"col-md-4 cx-address-col\">\n        <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n          <cx-store-finder-store-description\n            [location]=\"storeDetails\"\n            [disableMap]=\"true\"\n          ></cx-store-finder-store-description>\n        </div>\n        <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n          <li\n            *ngFor=\"let location of locations?.stores; let i = index\"\n            id=\"{{ 'item-' + i }}\"\n            [ngClass]=\"{\n              'cx-selected-item': selectedStoreIndex === i\n            }\"\n            class=\"cx-list-items\"\n          >\n            <cx-store-finder-list-item\n              [location]=\"location\"\n              [locationIndex]=\"i\"\n              [displayDistance]=\"useMylocation\"\n              [useClickEvent]=\"true\"\n              (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n              [listOrderLabel]=\"\n                i +\n                locations.pagination.currentPage *\n                  locations.pagination.pageSize +\n                1\n              \"\n            ></cx-store-finder-list-item>\n          </li>\n        </ol>\n      </div>\n      <div class=\"col-md-8 cx-map-col\">\n        <cx-store-finder-map\n          #storeMap\n          [locations]=\"locations.stores\"\n          (selectedStoreItem)=\"selectStoreItemList($event)\"\n        ></cx-store-finder-map>\n      </div>\n    </div>\n\n    <!-- mobile tabs for column set only -->\n\n    <div *ngIf=\"locations?.stores\" class=\"cx-columns-mobile\">\n      <ngb-tabset justify=\"center\">\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.listView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-address-col\">\n              <div class=\"cx-store-details\" *ngIf=\"isDetailsModeVisible\">\n                <cx-store-finder-store-description\n                  [location]=\"storeDetails\"\n                  [disableMap]=\"true\"\n                ></cx-store-finder-store-description>\n              </div>\n              <ol class=\"cx-list\" *ngIf=\"!isDetailsModeVisible\">\n                <li\n                  *ngFor=\"let location of locations?.stores; let i = index\"\n                  id=\"{{ 'item-' + i }}\"\n                  [ngClass]=\"{\n                    'cx-selected-item': selectedStoreIndex === i\n                  }\"\n                  class=\"cx-list-items\"\n                >\n                  <cx-store-finder-list-item\n                    [location]=\"location\"\n                    [locationIndex]=\"i\"\n                    [displayDistance]=\"useMylocation\"\n                    [useClickEvent]=\"true\"\n                    (storeItemClick)=\"centerStoreOnMapByIndex($event, location)\"\n                    [listOrderLabel]=\"\n                      i +\n                      locations.pagination.currentPage *\n                        locations.pagination.pageSize +\n                      1\n                    \"\n                  ></cx-store-finder-list-item>\n                </li>\n              </ol>\n            </div>\n          </ng-template>\n        </ngb-tab>\n        <ngb-tab>\n          <ng-template ngbTabTitle>\n            {{ 'storeFinder.mapView' | cxTranslate }}\n          </ng-template>\n          <ng-template ngbTabContent>\n            <div class=\"cx-map-col\">\n              <cx-store-finder-map\n                #storeMap\n                [locations]=\"selectedStore ? [selectedStore] : locations.stores\"\n                (selectedStoreItem)=\"selectStoreItemList($event)\"\n              ></cx-store-finder-map>\n            </div>\n          </ng-template>\n        </ngb-tab>\n      </ngb-tabset>\n    </div>\n\n    <!-- mobile tabs end -->\n\n    <div *ngIf=\"!locations?.stores\" class=\"row\">\n      <div class=\"col-md-12 cx-not-found\">\n        {{ 'storeFinder.noStoreFound' | cxTranslate }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
                 },] }
     ];
     StoreFinderListComponent.ctorParameters = function () { return [
@@ -22812,6 +23572,38 @@
                 },] }
     ];
 
+    (function (FormUtils) {
+        /**
+         * Calls the native Angular method `#updateValueAndValidity` for the given from control
+         * and all its descendants (in case when it's `FormGroup` or `FormArray`).
+         *
+         * In particular it's useful for triggering re-emission of observables
+         * `valueChanges` and `statusChanges` for all descendant form controls.
+         *
+         * _Note: Dropping this function may be considered, when it's implemented natively
+         * by Angular. See https://github.com/angular/angular/issues/6170_
+         *
+         * @param control form control
+         * @param options additional options
+         * * `emitEvent`: When true or not given (the default), the `statusChanges` and
+         * `valueChanges` observables emit the latest status and value. When false,
+         * it doesn't trigger observables emission.
+         */
+        function deepUpdateValueAndValidity(control, options) {
+            if (options === void 0) { options = {}; }
+            if (control instanceof forms.FormGroup || control instanceof forms.FormArray) {
+                Object.values(control.controls).forEach(function (childControl) {
+                    deepUpdateValueAndValidity(childControl, options);
+                });
+            }
+            control.updateValueAndValidity({
+                onlySelf: true,
+                emitEvent: options.emitEvent,
+            });
+        }
+        FormUtils.deepUpdateValueAndValidity = deepUpdateValueAndValidity;
+    })(exports.FormUtils || (exports.FormUtils = {}));
+
     /*
      * Public API Surface of storefrontlib
      */
@@ -22932,6 +23724,10 @@
     exports.CouponDialogComponent = CouponDialogComponent;
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
+    exports.DatePickerComponent = DatePickerComponent;
+    exports.DatePickerModule = DatePickerModule;
+    exports.DateTimePickerComponent = DateTimePickerComponent;
+    exports.DateTimePickerModule = DateTimePickerModule;
     exports.DefaultComponentHandler = DefaultComponentHandler;
     exports.DeferLoaderService = DeferLoaderService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
@@ -23030,6 +23826,7 @@
     exports.OrderConfirmationTotalsComponent = OrderConfirmationTotalsComponent;
     exports.OrderConsignedEntriesComponent = OrderConsignedEntriesComponent;
     exports.OrderDetailActionsComponent = OrderDetailActionsComponent;
+    exports.OrderDetailApprovalDetailsComponent = OrderDetailApprovalDetailsComponent;
     exports.OrderDetailHeadlineComponent = OrderDetailHeadlineComponent;
     exports.OrderDetailItemsComponent = OrderDetailItemsComponent;
     exports.OrderDetailShippingComponent = OrderDetailShippingComponent;
@@ -23199,7 +23996,12 @@
     exports.TabParagraphContainerModule = TabParagraphContainerModule;
     exports.TableComponent = TableComponent;
     exports.TableConfig = TableConfig;
+    exports.TableDataCellComponent = TableDataCellComponent;
+    exports.TableDataCellModule = TableDataCellModule;
+    exports.TableHeaderCellComponent = TableHeaderCellComponent;
+    exports.TableHeaderCellModule = TableHeaderCellModule;
     exports.TableModule = TableModule;
+    exports.TableRendererService = TableRendererService;
     exports.TableService = TableService;
     exports.TrackingEventsComponent = TrackingEventsComponent;
     exports.USE_STACKED_OUTLETS = USE_STACKED_OUTLETS;
@@ -23240,6 +24042,7 @@
     exports.defaultPaginationConfig = defaultPaginationConfig;
     exports.defaultScrollConfig = defaultScrollConfig;
     exports.defaultSkipLinkConfig = defaultSkipLinkConfig;
+    exports.defaultTableConfig = defaultTableConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
     exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
     exports.headerComponents = headerComponents;
@@ -23287,6 +24090,8 @@
     exports.ɵcf = setHtmlLangAttribute;
     exports.ɵcg = defaultDirectionConfig;
     exports.ɵch = EventsModule;
+    exports.ɵci = DatePickerFormatterService;
+    exports.ɵcj = DateTimePickerFormatterService;
     exports.ɵd = getStructuredDataFactory;
     exports.ɵe = FOCUS_ATTR;
     exports.ɵf = skipLinkFactory;

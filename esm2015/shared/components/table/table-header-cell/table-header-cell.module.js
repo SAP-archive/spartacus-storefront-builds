@@ -1,0 +1,13 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { I18nModule } from '@spartacus/core';
+import { TableHeaderCellComponent } from './table-header-cell.component';
+export class TableHeaderCellModule {
+}
+TableHeaderCellModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, I18nModule],
+                declarations: [TableHeaderCellComponent],
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFibGUtaGVhZGVyLWNlbGwubW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvc3RvcmVmcm9udGxpYi9zcmMvc2hhcmVkL2NvbXBvbmVudHMvdGFibGUvdGFibGUtaGVhZGVyLWNlbGwvdGFibGUtaGVhZGVyLWNlbGwubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUMvQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQ3pDLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxpQkFBaUIsQ0FBQztBQUM3QyxPQUFPLEVBQUUsd0JBQXdCLEVBQUUsTUFBTSwrQkFBK0IsQ0FBQztBQU16RSxNQUFNLE9BQU8scUJBQXFCOzs7WUFKakMsUUFBUSxTQUFDO2dCQUNSLE9BQU8sRUFBRSxDQUFDLFlBQVksRUFBRSxVQUFVLENBQUM7Z0JBQ25DLFlBQVksRUFBRSxDQUFDLHdCQUF3QixDQUFDO2FBQ3pDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tbW9uTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29tbW9uJztcbmltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBJMThuTW9kdWxlIH0gZnJvbSAnQHNwYXJ0YWN1cy9jb3JlJztcbmltcG9ydCB7IFRhYmxlSGVhZGVyQ2VsbENvbXBvbmVudCB9IGZyb20gJy4vdGFibGUtaGVhZGVyLWNlbGwuY29tcG9uZW50JztcblxuQE5nTW9kdWxlKHtcbiAgaW1wb3J0czogW0NvbW1vbk1vZHVsZSwgSTE4bk1vZHVsZV0sXG4gIGRlY2xhcmF0aW9uczogW1RhYmxlSGVhZGVyQ2VsbENvbXBvbmVudF0sXG59KVxuZXhwb3J0IGNsYXNzIFRhYmxlSGVhZGVyQ2VsbE1vZHVsZSB7fVxuIl19

@@ -4,13 +4,14 @@ import { SplitViewState } from './split/split-view.model';
  * Supposed to be injected in the split view component, so that the split view state
  * is maintained for a single split view.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class SplitViewService {
     /**
      * Newly added views are hidden by default, unless it is the first view of the split view.
      * The default hide mode can be overridden.
      */
     defaultHideMode: boolean;
-    protected _splitViewCount: number;
+    protected splitViewCount: number;
     protected _views$: BehaviorSubject<any[]>;
     /**
      * Adds a view to the list of views. The view is initialized with the `SplitViewState`
@@ -18,6 +19,12 @@ export declare class SplitViewService {
      * property is provided by the `defaultHideMode`, unless it's the first view (position: 0).
      */
     add(position: number, initialState?: SplitViewState): void;
+    /**
+     * The split view is based on a number of views that can be used next to each other.
+     * When the number changes (i.e. if the screen goes from wide to small), the visibility state
+     * of the views should be updated.
+     */
+    updateSplitView(splitViewCount: number): void;
     /**
      * Returns an observable with the active view number. The active view number
      * represents the last visible view.
@@ -53,19 +60,20 @@ export declare class SplitViewService {
      * @param forceHide The (optional) hide state for the view position.
      */
     toggle(position: number, forceHide?: boolean): void;
-    protected updateState(position: number, hide?: boolean): void;
+    /**
+     * Updates the hidden state of all the views.
+     */
+    protected updateState(position?: number, hide?: boolean): void;
     /**
      * Returns the active view count for the list of views.
      */
     protected getActive(views: SplitViewState[]): number;
     /**
-     * Sets the view count for the split view.
-     *
-     * Defaults to 2.
-     */
-    set splitViewCount(count: number);
-    /**
      * Utility method that resolves all views from the subject.
      */
     protected get views(): SplitViewState[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SplitViewService, never>;
+    static ɵprov: ɵngcc0.ɵɵInjectableDef<SplitViewService>;
 }
+
+//# sourceMappingURL=split-view.service.d.ts.map
