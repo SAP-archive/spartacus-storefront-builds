@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Card } from '../../../../../shared/components/card/card.component';
 import { ModalRef, ModalService } from '../../../../../shared/components/modal/index';
 import { ICON_TYPE } from '../../../../misc/icon/index';
-import * as ɵngcc0 from '@angular/core';
 export declare class PaymentFormComponent implements OnInit, OnDestroy {
     protected checkoutPaymentService: CheckoutPaymentService;
     protected checkoutDeliveryService: CheckoutDeliveryService;
@@ -47,8 +46,4 @@ export declare class PaymentFormComponent implements OnInit, OnDestroy {
     countrySelected(country: Country): void;
     next(): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentFormComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PaymentFormComponent, "cx-payment-form", never, { "setAsDefaultField": "setAsDefaultField"; "paymentMethodsCount": "paymentMethodsCount"; }, { "goBack": "goBack"; "closeForm": "closeForm"; "setPaymentDetails": "setPaymentDetails"; }, never, never>;
 }
-
-//# sourceMappingURL=payment-form.component.d.ts.map
