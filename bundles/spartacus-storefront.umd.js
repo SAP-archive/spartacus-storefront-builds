@@ -23116,60 +23116,6 @@
         { type: ProductPageEventBuilder }
     ]; };
 
-    var defaultB2bCheckoutConfig = {
-        checkout: {
-            steps: [
-                {
-                    id: 'paymentType',
-                    name: 'checkoutProgress.methodOfPayment',
-                    routeName: 'checkoutPaymentType',
-                    type: [exports.CheckoutStepType.PAYMENT_TYPE],
-                },
-                {
-                    id: 'shippingAddress',
-                    name: 'checkoutProgress.shippingAddress',
-                    routeName: 'checkoutShippingAddress',
-                    type: [exports.CheckoutStepType.SHIPPING_ADDRESS],
-                },
-                {
-                    id: 'deliveryMode',
-                    name: 'checkoutProgress.deliveryMode',
-                    routeName: 'checkoutDeliveryMode',
-                    type: [exports.CheckoutStepType.DELIVERY_MODE],
-                },
-                {
-                    id: 'paymentDetails',
-                    name: 'checkoutProgress.paymentDetails',
-                    routeName: 'checkoutPaymentDetails',
-                    type: [exports.CheckoutStepType.PAYMENT_DETAILS],
-                },
-                {
-                    id: 'reviewOrder',
-                    name: 'checkoutProgress.reviewOrder',
-                    routeName: 'checkoutReviewOrder',
-                    type: [exports.CheckoutStepType.REVIEW_ORDER],
-                },
-            ],
-            express: false,
-            defaultDeliveryMode: [exports.DeliveryModePreferences.FREE],
-            guest: false,
-        },
-    };
-
-    var defaultB2bOccConfig = {
-        backend: {
-            occ: {
-                endpoints: {
-                    user: 'orgUsers/${userId}',
-                    addEntries: 'orgUsers/${userId}/carts/${cartId}/entries',
-                    setDeliveryAddress: 'orgUsers/${userId}/carts/${cartId}/addresses/delivery',
-                    // TODO(#8877): Is this a hack for an API? Shouldn't user pass this data?
-                    placeOrder: 'orgUsers/${userId}/orders?termsChecked=true',
-                },
-            },
-        },
-    };
-
     var mediaConfig = {
         mediaFormats: {
             mobile: {
@@ -23471,42 +23417,6 @@
                 },] }
     ];
 
-    var B2bStorefrontModule = /** @class */ (function () {
-        function B2bStorefrontModule() {
-        }
-        B2bStorefrontModule.withConfig = function (config) {
-            return {
-                ngModule: B2bStorefrontModule,
-                providers: [i1.provideConfig(config)],
-            };
-        };
-        return B2bStorefrontModule;
-    }());
-    B2bStorefrontModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [
-                        i1.CostCenterModule.forRoot(),
-                        StorefrontModule,
-                        // the cms lib module contains all components that added in the bundle
-                        CmsLibModule,
-                    ],
-                    providers: [
-                        i1.provideDefaultConfig({
-                            pwa: {
-                                enabled: true,
-                                addToHomeScreen: true,
-                            },
-                        }),
-                        i1.provideDefaultConfig(layoutConfig),
-                        i1.provideDefaultConfig(mediaConfig),
-                        i1.provideDefaultConfig(defaultB2bOccConfig),
-                        i1.provideDefaultConfig(defaultB2bCheckoutConfig),
-                        i1.provideDefaultConfigFactory(defaultCmsContentConfig),
-                    ],
-                    exports: [StorefrontModule],
-                },] }
-    ];
-
     (function (FormUtils) {
         /**
          * Calls the native Angular method `#updateValueAndValidity` for the given from control
@@ -23576,7 +23486,6 @@
     exports.AnonymousConsentsDialogModule = AnonymousConsentsDialogModule;
     exports.AppliedCouponsComponent = AppliedCouponsComponent;
     exports.AsmModule = AsmModule;
-    exports.B2bStorefrontModule = B2bStorefrontModule;
     exports.B2cStorefrontModule = B2cStorefrontModule;
     exports.BannerCarouselComponent = BannerCarouselComponent;
     exports.BannerCarouselModule = BannerCarouselModule;
@@ -23968,8 +23877,6 @@
     exports.checkoutPaymentSteps = checkoutPaymentSteps;
     exports.checkoutShippingSteps = checkoutShippingSteps;
     exports.controlsMustMatch = controlsMustMatch;
-    exports.defaultB2bCheckoutConfig = defaultB2bCheckoutConfig;
-    exports.defaultB2bOccConfig = defaultB2bOccConfig;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
