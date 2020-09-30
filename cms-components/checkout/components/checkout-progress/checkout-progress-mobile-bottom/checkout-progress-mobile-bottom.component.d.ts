@@ -1,15 +1,16 @@
-import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CheckoutStep } from '../../../model/checkout-step.model';
 import { CheckoutStepService } from '../../../services/checkout-step.service';
-export declare class CheckoutProgressMobileBottomComponent implements OnInit, OnDestroy {
+import * as ɵngcc0 from '@angular/core';
+export declare class CheckoutProgressMobileBottomComponent {
     protected checkoutStepService: CheckoutStepService;
-    protected cdr: ChangeDetectorRef;
-    constructor(checkoutStepService: CheckoutStepService, cdr: ChangeDetectorRef);
-    steps: CheckoutStep[];
+    private _steps$;
+    constructor(checkoutStepService: CheckoutStepService);
     activeStepIndex: number;
     activeStepIndex$: Observable<number>;
-    subscription: Subscription;
-    ngOnInit(): void;
-    ngOnDestroy(): void;
+    get steps$(): Observable<CheckoutStep[]>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutProgressMobileBottomComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CheckoutProgressMobileBottomComponent, "cx-checkout-progress-mobile-bottom", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=checkout-progress-mobile-bottom.component.d.ts.map

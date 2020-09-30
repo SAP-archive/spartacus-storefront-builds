@@ -1,18 +1,19 @@
-import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CheckoutStep } from '../../model/checkout-step.model';
 import { CheckoutStepService } from '../../services/checkout-step.service';
-export declare class CheckoutProgressComponent implements OnInit, OnDestroy {
+import * as ɵngcc0 from '@angular/core';
+export declare class CheckoutProgressComponent {
     protected checkoutStepService: CheckoutStepService;
-    protected cdr: ChangeDetectorRef;
-    constructor(checkoutStepService: CheckoutStepService, cdr: ChangeDetectorRef);
-    steps: CheckoutStep[];
+    private _steps$;
+    constructor(checkoutStepService: CheckoutStepService);
     activeStepIndex: number;
     activeStepIndex$: Observable<number>;
-    subscription: Subscription;
-    ngOnInit(): void;
-    ngOnDestroy(): void;
+    get steps$(): Observable<CheckoutStep[]>;
     getTabIndex(stepIndex: number): number;
     isActive(index: number): boolean;
     isDisabled(index: number): boolean;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutProgressComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CheckoutProgressComponent, "cx-checkout-progress", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=checkout-progress.component.d.ts.map

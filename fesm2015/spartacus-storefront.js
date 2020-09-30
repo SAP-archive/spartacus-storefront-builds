@@ -9012,34 +9012,25 @@ CheckoutOrderSummaryModule.decorators = [
 ];
 
 class CheckoutProgressMobileBottomComponent {
-    constructor(checkoutStepService, cdr) {
+    constructor(checkoutStepService) {
         this.checkoutStepService = checkoutStepService;
-        this.cdr = cdr;
+        this._steps$ = this.checkoutStepService
+            .steps$;
         this.activeStepIndex$ = this.checkoutStepService.activeStepIndex$.pipe(tap((index) => (this.activeStepIndex = index)));
     }
-    ngOnInit() {
-        this.subscription = this.checkoutStepService.steps$.subscribe((steps) => {
-            this.steps = steps;
-            // TODO(#8879): Couldn't we use observables here instead?
-            this.cdr.detectChanges();
-        });
-    }
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+    get steps$() {
+        return this._steps$.asObservable();
     }
 }
 CheckoutProgressMobileBottomComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-checkout-progress-mobile-bottom',
-                template: "<div *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div class=\"cx-media\">\n    <div *ngFor=\"let step of steps; let i = index\">\n      <div class=\"cx-list-media\" *ngIf=\"i > activeStepIndex\">\n        <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div class=\"cx-media\">\n    <div *ngFor=\"let step of steps$ | async; let i = index\">\n      <div class=\"cx-list-media\" *ngIf=\"i > activeStepIndex\">\n        <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 CheckoutProgressMobileBottomComponent.ctorParameters = () => [
-    { type: CheckoutStepService },
-    { type: ChangeDetectorRef }
+    { type: CheckoutStepService }
 ];
 
 class CheckoutStepsSetGuard {
@@ -9194,37 +9185,30 @@ CheckoutProgressMobileBottomModule.decorators = [
 ];
 
 class CheckoutProgressMobileTopComponent {
-    constructor(checkoutStepService, activeCartService, cdr) {
+    constructor(checkoutStepService, activeCartService) {
         this.checkoutStepService = checkoutStepService;
         this.activeCartService = activeCartService;
-        this.cdr = cdr;
+        this._steps$ = this.checkoutStepService
+            .steps$;
         this.activeStepIndex$ = this.checkoutStepService.activeStepIndex$.pipe(tap((index) => (this.activeStepIndex = index)));
+    }
+    get steps$() {
+        return this._steps$.asObservable();
     }
     ngOnInit() {
         this.cart$ = this.activeCartService.getActive();
-        this.subscription = this.checkoutStepService.steps$.subscribe((steps) => {
-            this.steps = steps;
-            // TODO(#8879): Couldn't we use observables here instead?
-            this.cdr.detectChanges();
-        });
-    }
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
     }
 }
 CheckoutProgressMobileTopComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-checkout-progress-mobile-top',
-                template: "<div *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
+                template: "<div *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div *ngIf=\"cart$ | async as cart\">\n    <div class=\"cx-media\">\n      <div class=\"cx-list-media\" *ngIf=\"cart?.totalItems && cart?.subTotal\">\n        {{ 'cartItems.cartTotal' | cxTranslate: { count: cart.totalItems } }}:\n        {{ cart.subTotal.formattedValue }}\n      </div>\n      <div *ngFor=\"let step of steps$ | async; let i = index\">\n        <div class=\"cx-list-media\" *ngIf=\"i < activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n          <button\n            class=\"btn btn-link\"\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n          >\n            {{ 'common.edit' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"cx-list-media is-active\" *ngIf=\"i === activeStepIndex\">\n          <div>{{ i + 1 }}. {{ step.name | cxTranslate }}</div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 CheckoutProgressMobileTopComponent.ctorParameters = () => [
     { type: CheckoutStepService },
-    { type: ActiveCartService },
-    { type: ChangeDetectorRef }
+    { type: ActiveCartService }
 ];
 
 class CheckoutProgressMobileTopModule {
@@ -9250,22 +9234,14 @@ CheckoutProgressMobileTopModule.decorators = [
 ];
 
 class CheckoutProgressComponent {
-    constructor(checkoutStepService, cdr) {
+    constructor(checkoutStepService) {
         this.checkoutStepService = checkoutStepService;
-        this.cdr = cdr;
+        this._steps$ = this.checkoutStepService
+            .steps$;
         this.activeStepIndex$ = this.checkoutStepService.activeStepIndex$.pipe(tap((index) => (this.activeStepIndex = index)));
     }
-    ngOnInit() {
-        this.subscription = this.checkoutStepService.steps$.subscribe((steps) => {
-            this.steps = steps;
-            // TODO(#8879): Couldn't we use observables here instead?
-            this.cdr.detectChanges();
-        });
-    }
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+    get steps$() {
+        return this._steps$.asObservable();
     }
     getTabIndex(stepIndex) {
         return !this.isActive(stepIndex) && !this.isDisabled(stepIndex) ? 0 : -1;
@@ -9280,13 +9256,12 @@ class CheckoutProgressComponent {
 CheckoutProgressComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-checkout-progress',
-                template: "<section *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <ng-container *ngFor=\"let step of steps; let i = index\">\n        <li\n          class=\"cx-item\"\n          [class.active]=\"isActive(i)\"\n          [class.disabled]=\"isDisabled(i)\"\n        >\n          <a\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n            class=\"cx-link\"\n            [class.active]=\"isActive(i)\"\n            [class.disabled]=\"isDisabled(i)\"\n            [tabindex]=\"getTabIndex(i)\"\n            [innerHTML]=\"step.name | cxTranslate | cxMultiLine\"\n          >\n          </a>\n        </li>\n      </ng-container>\n    </ul>\n  </div>\n</section>\n",
+                template: "<section *ngIf=\"(activeStepIndex$ | async) !== undefined\">\n  <div class=\"cx-nav d-none d-lg-block d-xl-block\">\n    <ul class=\"cx-list\">\n      <ng-container *ngFor=\"let step of steps$ | async; let i = index\">\n        <li\n          class=\"cx-item\"\n          [class.active]=\"isActive(i)\"\n          [class.disabled]=\"isDisabled(i)\"\n        >\n          <a\n            [routerLink]=\"{ cxRoute: step.routeName } | cxUrl\"\n            class=\"cx-link\"\n            [class.active]=\"isActive(i)\"\n            [class.disabled]=\"isDisabled(i)\"\n            [tabindex]=\"getTabIndex(i)\"\n            [innerHTML]=\"step.name | cxTranslate | cxMultiLine\"\n          >\n          </a>\n        </li>\n      </ng-container>\n    </ul>\n  </div>\n</section>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 CheckoutProgressComponent.ctorParameters = () => [
-    { type: CheckoutStepService },
-    { type: ChangeDetectorRef }
+    { type: CheckoutStepService }
 ];
 
 class MultiLinePipe {
