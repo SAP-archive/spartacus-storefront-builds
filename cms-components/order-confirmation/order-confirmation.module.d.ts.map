@@ -1,1 +1,0 @@
-{"version":3,"file":"order-confirmation.module.d.ts","sources":["order-confirmation.module.d.ts"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class OrderConfirmationModule {\n}\n"]}
