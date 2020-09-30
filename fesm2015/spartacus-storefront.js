@@ -6390,13 +6390,34 @@ class CmsComponentsService {
      */
     getChildRoutes(componentTypes) {
         var _a, _b;
-        const routes = [];
+        const configs = [];
         for (const componentType of componentTypes) {
             if (this.shouldRender(componentType)) {
-                routes.push(...((_b = (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : []));
+                configs.push((_b = (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : []);
             }
         }
-        return routes;
+        return this.standardizeChildRoutes(configs);
+    }
+    /**
+     * Standardizes the format of `childRoutes` config.
+     *
+     * Some `childRoutes` configs are simple arrays of Routes (without the notion of the parent route).
+     * But some configs can be an object with children routes and their parent defined in separate property.
+     */
+    standardizeChildRoutes(childRoutesConfigs) {
+        const result = { children: [] };
+        (childRoutesConfigs || []).forEach((config) => {
+            if (Array.isArray(config)) {
+                result.children.push(...config);
+            }
+            else {
+                result.children.push(...(config.children || []));
+                if (config.parent) {
+                    result.parent = config.parent;
+                }
+            }
+        });
+        return result;
     }
     /**
      * Get cms driven guards for components
@@ -12368,32 +12389,34 @@ class CmsRoutesImplService {
      * @param currentUrl
      */
     handleCmsRoutesInGuard(pageContext, componentTypes, currentUrl, currentPageLabel) {
+        var _a;
         if (this.cmsRouteExists(currentPageLabel)) {
             return true;
         }
-        const componentRoutes = this.cmsComponentsService.getChildRoutes(componentTypes);
-        if (componentRoutes.length) {
-            if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+        const childRoutesConfig = this.cmsComponentsService.getChildRoutes(componentTypes);
+        if ((_a = childRoutesConfig === null || childRoutesConfig === void 0 ? void 0 : childRoutesConfig.children) === null || _a === void 0 ? void 0 : _a.length) {
+            if (this.updateRouting(pageContext, currentPageLabel, childRoutesConfig)) {
                 this.router.navigateByUrl(currentUrl);
                 return false;
             }
         }
         return true;
     }
-    updateRouting(pageContext, pageLabel, routes) {
+    updateRouting(pageContext, pageLabel, childRoutesConfig) {
+        var _a, _b;
         if (pageContext.type === PageType.CONTENT_PAGE &&
             pageLabel.startsWith('/') &&
             pageLabel.length > 1) {
             const newRoute = {
                 path: pageLabel.substr(1),
                 component: PageLayoutComponent,
-                children: routes,
-                data: {
+                children: childRoutesConfig.children,
+                data: deepMerge({}, (_b = (_a = childRoutesConfig === null || childRoutesConfig === void 0 ? void 0 : childRoutesConfig.parent) === null || _a === void 0 ? void 0 : _a.data) !== null && _b !== void 0 ? _b : {}, {
                     cxCmsRouteContext: {
                         type: pageContext.type,
                         id: pageLabel,
                     },
-                },
+                }),
             };
             this.router.resetConfig([newRoute, ...this.router.config]);
             return true;

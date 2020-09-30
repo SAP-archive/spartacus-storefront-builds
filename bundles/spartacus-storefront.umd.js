@@ -7373,12 +7373,12 @@
         CmsComponentsService.prototype.getChildRoutes = function (componentTypes) {
             var e_2, _c;
             var _a, _b;
-            var routes = [];
+            var configs = [];
             try {
                 for (var componentTypes_2 = __values(componentTypes), componentTypes_2_1 = componentTypes_2.next(); !componentTypes_2_1.done; componentTypes_2_1 = componentTypes_2.next()) {
                     var componentType = componentTypes_2_1.value;
                     if (this.shouldRender(componentType)) {
-                        routes.push.apply(routes, __spread(((_b = (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : [])));
+                        configs.push((_b = (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.childRoutes) !== null && _b !== void 0 ? _b : []);
                     }
                 }
             }
@@ -7389,7 +7389,29 @@
                 }
                 finally { if (e_2) throw e_2.error; }
             }
-            return routes;
+            return this.standardizeChildRoutes(configs);
+        };
+        /**
+         * Standardizes the format of `childRoutes` config.
+         *
+         * Some `childRoutes` configs are simple arrays of Routes (without the notion of the parent route).
+         * But some configs can be an object with children routes and their parent defined in separate property.
+         */
+        CmsComponentsService.prototype.standardizeChildRoutes = function (childRoutesConfigs) {
+            var result = { children: [] };
+            (childRoutesConfigs || []).forEach(function (config) {
+                var _c, _d;
+                if (Array.isArray(config)) {
+                    (_c = result.children).push.apply(_c, __spread(config));
+                }
+                else {
+                    (_d = result.children).push.apply(_d, __spread((config.children || [])));
+                    if (config.parent) {
+                        result.parent = config.parent;
+                    }
+                }
+            });
+            return result;
         };
         /**
          * Get cms driven guards for components
@@ -13955,32 +13977,34 @@
          * @param currentUrl
          */
         CmsRoutesImplService.prototype.handleCmsRoutesInGuard = function (pageContext, componentTypes, currentUrl, currentPageLabel) {
+            var _a;
             if (this.cmsRouteExists(currentPageLabel)) {
                 return true;
             }
-            var componentRoutes = this.cmsComponentsService.getChildRoutes(componentTypes);
-            if (componentRoutes.length) {
-                if (this.updateRouting(pageContext, currentPageLabel, componentRoutes)) {
+            var childRoutesConfig = this.cmsComponentsService.getChildRoutes(componentTypes);
+            if ((_a = childRoutesConfig === null || childRoutesConfig === void 0 ? void 0 : childRoutesConfig.children) === null || _a === void 0 ? void 0 : _a.length) {
+                if (this.updateRouting(pageContext, currentPageLabel, childRoutesConfig)) {
                     this.router.navigateByUrl(currentUrl);
                     return false;
                 }
             }
             return true;
         };
-        CmsRoutesImplService.prototype.updateRouting = function (pageContext, pageLabel, routes) {
+        CmsRoutesImplService.prototype.updateRouting = function (pageContext, pageLabel, childRoutesConfig) {
+            var _a, _b;
             if (pageContext.type === i1.PageType.CONTENT_PAGE &&
                 pageLabel.startsWith('/') &&
                 pageLabel.length > 1) {
                 var newRoute = {
                     path: pageLabel.substr(1),
                     component: PageLayoutComponent,
-                    children: routes,
-                    data: {
+                    children: childRoutesConfig.children,
+                    data: i1.deepMerge({}, (_b = (_a = childRoutesConfig === null || childRoutesConfig === void 0 ? void 0 : childRoutesConfig.parent) === null || _a === void 0 ? void 0 : _a.data) !== null && _b !== void 0 ? _b : {}, {
                         cxCmsRouteContext: {
                             type: pageContext.type,
                             id: pageLabel,
                         },
-                    },
+                    }),
                 };
                 this.router.resetConfig(__spread([newRoute], this.router.config));
                 return true;
