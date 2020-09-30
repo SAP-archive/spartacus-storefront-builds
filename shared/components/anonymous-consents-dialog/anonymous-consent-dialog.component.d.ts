@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
 import { FocusConfig } from '../../../layout/a11y/keyboard-focus/index';
 import { LaunchDialogService } from '../../../layout/launch-dialog/services/launch-dialog.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AnonymousConsentDialogComponent implements OnInit, OnDestroy {
     protected config: AnonymousConsentsConfig;
     protected anonymousConsentsService: AnonymousConsentsService;
@@ -32,4 +33,8 @@ export declare class AnonymousConsentDialogComponent implements OnInit, OnDestro
     }): void;
     getCorrespondingConsent(template: ConsentTemplate, consents?: AnonymousConsent[]): AnonymousConsent;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AnonymousConsentDialogComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AnonymousConsentDialogComponent, "cx-anonymous-consent-dialog", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=anonymous-consent-dialog.component.d.ts.map
