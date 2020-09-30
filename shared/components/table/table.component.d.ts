@@ -26,7 +26,6 @@ import { Table, TableDataOutletContext, TableHeaderOutletContext } from './table
  * Similarly, the data cells (`<td>`) are generated with the outlet template reference
  * `table.cost-center.data.name`.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class TableComponent {
     protected rendererService: TableRendererService;
     tableType: string;
@@ -88,8 +87,4 @@ export declare class TableComponent {
      */
     private get type();
     private get options();
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TableComponent, "cx-table", never, { "dataset": "dataset"; "currentItem": "currentItem"; }, { "launch": "launch"; }, never, never>;
 }
-
-//# sourceMappingURL=table.component.d.ts.map
