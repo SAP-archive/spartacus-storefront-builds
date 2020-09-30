@@ -6,7 +6,6 @@ import { ICON_TYPE } from '../../../misc/icon/icon.model';
 import { CheckoutStep } from '../../model/checkout-step.model';
 import { CheckoutStepType } from '../../model/index';
 import { CheckoutStepService } from '../../services/index';
-import * as ɵngcc0 from '@angular/core';
 export declare class ReviewSubmitComponent {
     protected checkoutDeliveryService: CheckoutDeliveryService;
     protected checkoutPaymentService: CheckoutPaymentService;
@@ -43,8 +42,4 @@ export declare class ReviewSubmitComponent {
     getCheckoutStepUrl(stepType: CheckoutStepType): string;
     shippingSteps(steps: CheckoutStep[]): CheckoutStep[];
     paymentSteps(steps: CheckoutStep[]): CheckoutStep[];
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ReviewSubmitComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ReviewSubmitComponent, "cx-review-submit", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=review-submit.component.d.ts.map

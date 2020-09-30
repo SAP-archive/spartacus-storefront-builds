@@ -4,7 +4,6 @@ import { ActiveCartService, Address, B2BAddress, CheckoutCostCenterService, Chec
 import { Observable } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutStepService } from '../../services/checkout-step.service';
-import * as ɵngcc0 from '@angular/core';
 export interface CardWithAddress {
     card: Card;
     address: Address;
@@ -40,8 +39,4 @@ export declare class ShippingAddressComponent implements OnInit {
     hideNewAddressForm(goPrevious?: boolean): void;
     next(): void;
     back(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ShippingAddressComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ShippingAddressComponent, "cx-shipping-address", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=shipping-address.component.d.ts.map
