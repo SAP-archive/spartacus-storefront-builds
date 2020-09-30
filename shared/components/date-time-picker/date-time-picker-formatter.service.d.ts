@@ -4,6 +4,7 @@
  *
  * Date values used are relative to the local timezone of the user.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class DateTimePickerFormatterService {
     /**
      * Convert date string into a string format compatable with the browser's native `<input type="datetime-local">` HTML element.
@@ -39,4 +40,7 @@ export declare class DateTimePickerFormatterService {
      * With UTC-0 local offset, `formatDateStringWithTimezone('2010-01-01T00:00+0000', '+00:00')` returns `'2010-01-01T00:00+00:00'`.
      */
     protected formatDateStringWithTimezone(dateString: string, offset: string): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DateTimePickerFormatterService, never>;
 }
+
+//# sourceMappingURL=date-time-picker-formatter.service.d.ts.map

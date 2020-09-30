@@ -1,16 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
 import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CheckoutConfig } from '../config/checkout-config';
 import { CheckoutStep, CheckoutStepType } from '../model/checkout-step.model';
-import { CheckoutConfigService } from './checkout-config.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutStepService {
     protected routingService: RoutingService;
-    protected checkoutConfigService: CheckoutConfigService;
+    protected checkoutConfig: CheckoutConfig;
     protected routingConfigService: RoutingConfigService;
     allSteps: CheckoutStep[];
     readonly steps$: BehaviorSubject<CheckoutStep[]>;
     readonly activeStepIndex$: Observable<number>;
-    constructor(routingService: RoutingService, checkoutConfigService: CheckoutConfigService, routingConfigService: RoutingConfigService);
+    constructor(routingService: RoutingService, checkoutConfig: CheckoutConfig, routingConfigService: RoutingConfigService);
     back(activatedRoute: ActivatedRoute): void;
     next(activatedRoute: ActivatedRoute): void;
     goToStepWithIndex(stepIndex: number): void;
@@ -26,4 +27,7 @@ export declare class CheckoutStepService {
     private getStepUrlFromActivatedRoute;
     private getStepUrlFromStepRoute;
     private getCheckoutStepIndex;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutStepService, never>;
 }
+
+//# sourceMappingURL=checkout-step.service.d.ts.map

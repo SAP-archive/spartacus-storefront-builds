@@ -1,7 +1,7 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, Optional, InjectFlags, NgModuleFactory, Compiler, INJECTOR, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, APP_BOOTSTRAP_LISTENER, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, takeWhile, endWith, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, RoutingConfigService, B2BUserGroup, AuthRedirectService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
@@ -8400,66 +8400,11 @@ const defaultCheckoutConfig = {
 };
 
 class CheckoutConfigService {
-    constructor(checkoutConfig, routingConfigService) {
+    constructor(checkoutConfig) {
         this.checkoutConfig = checkoutConfig;
-        this.routingConfigService = routingConfigService;
-        this.steps = this.checkoutConfig.checkout.steps;
         this.express = this.checkoutConfig.checkout.express;
         this.guest = this.checkoutConfig.checkout.guest;
         this.defaultDeliveryMode = this.checkoutConfig.checkout.defaultDeliveryMode || [];
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getCheckoutStep(currentStepType) {
-        return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getCheckoutStepRoute(currentStepType) {
-        return this.getCheckoutStep(currentStepType).routeName;
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getFirstCheckoutStepRoute() {
-        return this.steps[0].routeName;
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getNextCheckoutStepUrl(activatedRoute) {
-        const stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex + 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-            : null;
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getPreviousCheckoutStepUrl(activatedRoute) {
-        const stepIndex = this.getCurrentStepIndex(activatedRoute);
-        return stepIndex >= 0 && this.steps[stepIndex - 1]
-            ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-            : null;
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getCurrentStepIndex(activatedRoute) {
-        const currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-        let stepIndex;
-        let index = 0;
-        for (const step of this.steps) {
-            if (currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`) {
-                stepIndex = index;
-            }
-            else {
-                index++;
-            }
-        }
-        return stepIndex >= 0 ? stepIndex : null;
     }
     compareDeliveryCost(deliveryMode1, deliveryMode2) {
         if (deliveryMode1.deliveryCost.value > deliveryMode2.deliveryCost.value) {
@@ -8506,40 +8451,15 @@ class CheckoutConfigService {
     isGuestCheckout() {
         return this.guest;
     }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getStepUrlFromActivatedRoute(activatedRoute) {
-        return activatedRoute &&
-            activatedRoute.snapshot &&
-            activatedRoute.snapshot.url
-            ? `/${activatedRoute.snapshot.url.join('/')}`
-            : null;
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getStepUrlFromStepRoute(stepRoute) {
-        return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-    }
-    /**
-     * will be removed, there is same function in checkout-step.service
-     */
-    getCheckoutStepIndex(key, value) {
-        return key && value
-            ? this.steps.findIndex((step) => step[key].includes(value))
-            : null;
-    }
 }
-CheckoutConfigService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
+CheckoutConfigService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(ɵɵinject(CheckoutConfig)); }, token: CheckoutConfigService, providedIn: "root" });
 CheckoutConfigService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 CheckoutConfigService.ctorParameters = () => [
-    { type: CheckoutConfig },
-    { type: RoutingConfigService }
+    { type: CheckoutConfig }
 ];
 
 class CheckoutAuthGuard {
@@ -8601,9 +8521,9 @@ CheckoutAuthGuard.ctorParameters = () => [
 ];
 
 class CheckoutStepService {
-    constructor(routingService, checkoutConfigService, routingConfigService) {
+    constructor(routingService, checkoutConfig, routingConfigService) {
         this.routingService = routingService;
-        this.checkoutConfigService = checkoutConfigService;
+        this.checkoutConfig = checkoutConfig;
         this.routingConfigService = routingConfigService;
         this.steps$ = new BehaviorSubject(undefined);
         this.activeStepIndex$ = this.routingService.getRouterState().pipe(switchMap((router) => {
@@ -8639,7 +8559,7 @@ class CheckoutStepService {
         return 'common.back';
     }
     resetSteps() {
-        this.allSteps = this.checkoutConfigService.steps
+        this.allSteps = this.checkoutConfig.checkout.steps
             .filter((step) => !step.disabled)
             .map((x) => Object.assign({}, x));
         this.steps$.next(this.allSteps);
@@ -8692,7 +8612,8 @@ class CheckoutStepService {
     }
     getCurrentStepIndex(activatedRoute) {
         const currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-        return this.allSteps.findIndex((step) => currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`);
+        const stepIndex = this.allSteps.findIndex((step) => currentStepUrl === `/${this.getStepUrlFromStepRoute(step.routeName)}`);
+        return stepIndex === -1 ? null : stepIndex;
     }
     getStepUrlFromActivatedRoute(activatedRoute) {
         return activatedRoute &&
@@ -8710,7 +8631,7 @@ class CheckoutStepService {
             : null;
     }
 }
-CheckoutStepService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutStepService_Factory() { return new CheckoutStepService(ɵɵinject(RoutingService), ɵɵinject(CheckoutConfigService), ɵɵinject(RoutingConfigService)); }, token: CheckoutStepService, providedIn: "root" });
+CheckoutStepService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutStepService_Factory() { return new CheckoutStepService(ɵɵinject(RoutingService), ɵɵinject(CheckoutConfig), ɵɵinject(RoutingConfigService)); }, token: CheckoutStepService, providedIn: "root" });
 CheckoutStepService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -8718,7 +8639,7 @@ CheckoutStepService.decorators = [
 ];
 CheckoutStepService.ctorParameters = () => [
     { type: RoutingService },
-    { type: CheckoutConfigService },
+    { type: CheckoutConfig },
     { type: RoutingConfigService }
 ];
 
@@ -10738,9 +10659,7 @@ class ShippingAddressComponent {
                 return this.userCostCenterService.getCostCenterAddresses(selected);
             }));
         }
-        else {
-            return this.userAddressService.getAddresses();
-        }
+        return this.userAddressService.getAddresses();
     }
     selectDefaultAddress(addresses, selected) {
         if (!this.doneAutoSelect &&

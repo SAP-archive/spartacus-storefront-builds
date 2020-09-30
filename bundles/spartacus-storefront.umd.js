@@ -9565,78 +9565,12 @@
     };
 
     var CheckoutConfigService = /** @class */ (function () {
-        function CheckoutConfigService(checkoutConfig, routingConfigService) {
+        function CheckoutConfigService(checkoutConfig) {
             this.checkoutConfig = checkoutConfig;
-            this.routingConfigService = routingConfigService;
-            this.steps = this.checkoutConfig.checkout.steps;
             this.express = this.checkoutConfig.checkout.express;
             this.guest = this.checkoutConfig.checkout.guest;
             this.defaultDeliveryMode = this.checkoutConfig.checkout.defaultDeliveryMode || [];
         }
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getCheckoutStep = function (currentStepType) {
-            return this.steps[this.getCheckoutStepIndex('type', currentStepType)];
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getCheckoutStepRoute = function (currentStepType) {
-            return this.getCheckoutStep(currentStepType).routeName;
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getFirstCheckoutStepRoute = function () {
-            return this.steps[0].routeName;
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getNextCheckoutStepUrl = function (activatedRoute) {
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex + 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-                : null;
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getPreviousCheckoutStepUrl = function (activatedRoute) {
-            var stepIndex = this.getCurrentStepIndex(activatedRoute);
-            return stepIndex >= 0 && this.steps[stepIndex - 1]
-                ? this.getStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-                : null;
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getCurrentStepIndex = function (activatedRoute) {
-            var e_1, _a;
-            var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-            var stepIndex;
-            var index = 0;
-            try {
-                for (var _b = __values(this.steps), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var step = _c.value;
-                    if (currentStepUrl === "/" + this.getStepUrlFromStepRoute(step.routeName)) {
-                        stepIndex = index;
-                    }
-                    else {
-                        index++;
-                    }
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            return stepIndex >= 0 ? stepIndex : null;
-        };
         CheckoutConfigService.prototype.compareDeliveryCost = function (deliveryMode1, deliveryMode2) {
             if (deliveryMode1.deliveryCost.value > deliveryMode2.deliveryCost.value) {
                 return 1;
@@ -9684,41 +9618,16 @@
         CheckoutConfigService.prototype.isGuestCheckout = function () {
             return this.guest;
         };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getStepUrlFromActivatedRoute = function (activatedRoute) {
-            return activatedRoute &&
-                activatedRoute.snapshot &&
-                activatedRoute.snapshot.url
-                ? "/" + activatedRoute.snapshot.url.join('/')
-                : null;
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getStepUrlFromStepRoute = function (stepRoute) {
-            return this.routingConfigService.getRouteConfig(stepRoute).paths[0];
-        };
-        /**
-         * will be removed, there is same function in checkout-step.service
-         */
-        CheckoutConfigService.prototype.getCheckoutStepIndex = function (key, value) {
-            return key && value
-                ? this.steps.findIndex(function (step) { return step[key].includes(value); })
-                : null;
-        };
         return CheckoutConfigService;
     }());
-    CheckoutConfigService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(i0.ɵɵinject(CheckoutConfig), i0.ɵɵinject(i1.RoutingConfigService)); }, token: CheckoutConfigService, providedIn: "root" });
+    CheckoutConfigService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutConfigService_Factory() { return new CheckoutConfigService(i0.ɵɵinject(CheckoutConfig)); }, token: CheckoutConfigService, providedIn: "root" });
     CheckoutConfigService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     CheckoutConfigService.ctorParameters = function () { return [
-        { type: CheckoutConfig },
-        { type: i1.RoutingConfigService }
+        { type: CheckoutConfig }
     ]; };
 
     var CheckoutAuthGuard = /** @class */ (function () {
@@ -9783,10 +9692,10 @@
     ]; };
 
     var CheckoutStepService = /** @class */ (function () {
-        function CheckoutStepService(routingService, checkoutConfigService, routingConfigService) {
+        function CheckoutStepService(routingService, checkoutConfig, routingConfigService) {
             var _this = this;
             this.routingService = routingService;
-            this.checkoutConfigService = checkoutConfigService;
+            this.checkoutConfig = checkoutConfig;
             this.routingConfigService = routingConfigService;
             this.steps$ = new rxjs.BehaviorSubject(undefined);
             this.activeStepIndex$ = this.routingService.getRouterState().pipe(operators.switchMap(function (router) {
@@ -9822,7 +9731,7 @@
             return 'common.back';
         };
         CheckoutStepService.prototype.resetSteps = function () {
-            this.allSteps = this.checkoutConfigService.steps
+            this.allSteps = this.checkoutConfig.checkout.steps
                 .filter(function (step) { return !step.disabled; })
                 .map(function (x) { return Object.assign({}, x); });
             this.steps$.next(this.allSteps);
@@ -9876,7 +9785,8 @@
         CheckoutStepService.prototype.getCurrentStepIndex = function (activatedRoute) {
             var _this = this;
             var currentStepUrl = this.getStepUrlFromActivatedRoute(activatedRoute);
-            return this.allSteps.findIndex(function (step) { return currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName); });
+            var stepIndex = this.allSteps.findIndex(function (step) { return currentStepUrl === "/" + _this.getStepUrlFromStepRoute(step.routeName); });
+            return stepIndex === -1 ? null : stepIndex;
         };
         CheckoutStepService.prototype.getStepUrlFromActivatedRoute = function (activatedRoute) {
             return activatedRoute &&
@@ -9895,7 +9805,7 @@
         };
         return CheckoutStepService;
     }());
-    CheckoutStepService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutStepService_Factory() { return new CheckoutStepService(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(i1.RoutingConfigService)); }, token: CheckoutStepService, providedIn: "root" });
+    CheckoutStepService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutStepService_Factory() { return new CheckoutStepService(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(CheckoutConfig), i0.ɵɵinject(i1.RoutingConfigService)); }, token: CheckoutStepService, providedIn: "root" });
     CheckoutStepService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -9903,7 +9813,7 @@
     ];
     CheckoutStepService.ctorParameters = function () { return [
         { type: i1.RoutingService },
-        { type: CheckoutConfigService },
+        { type: CheckoutConfig },
         { type: i1.RoutingConfigService }
     ]; };
 
@@ -12152,9 +12062,7 @@
                     return _this.userCostCenterService.getCostCenterAddresses(selected);
                 }));
             }
-            else {
-                return this.userAddressService.getAddresses();
-            }
+            return this.userAddressService.getAddresses();
         };
         ShippingAddressComponent.prototype.selectDefaultAddress = function (addresses, selected) {
             if (!this.doneAutoSelect &&
