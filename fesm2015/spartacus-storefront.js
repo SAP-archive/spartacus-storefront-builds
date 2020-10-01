@@ -10428,11 +10428,7 @@ class AddressFormComponent {
             }
         }));
         // Fetching titles
-        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }), map((titles) => {
+        this.titles$ = this.userService.getTitles().pipe(map((titles) => {
             titles.sort(sortTitles);
             const noneTitle = { code: '', name: 'Title' };
             return [noneTitle, ...titles];
@@ -15474,11 +15470,7 @@ class UpdateProfileComponent {
         // reset the previous form processing state
         this.userService.resetUpdatePersonalDetailsProcessingState();
         this.user$ = this.userService.get();
-        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }));
+        this.titles$ = this.userService.getTitles();
         this.loading$ = this.userService.getUpdatePersonalDetailsResultLoading();
         this.subscription.add(this.userService
             .getUpdatePersonalDetailsResultSuccess()
@@ -20150,11 +20142,7 @@ class RegisterComponent {
     }
     ngOnInit() {
         var _a;
-        this.titles$ = this.userService.getTitles().pipe(tap((titles) => {
-            if (Object.keys(titles).length === 0) {
-                this.userService.loadTitles();
-            }
-        }), map((titles) => {
+        this.titles$ = this.userService.getTitles().pipe(map((titles) => {
             return titles.sort(sortTitles);
         }));
         this.loading$ = this.userService.getRegisterUserResultLoading();
