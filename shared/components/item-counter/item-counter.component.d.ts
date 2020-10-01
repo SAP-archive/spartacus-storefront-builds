@@ -5,7 +5,6 @@ import { FormControl } from '@angular/forms';
  * increase and decrease functionality. The item counter expects an input `FormControl`
  * so that the state of the control can be managed outside of this component.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class ItemCounterComponent implements OnInit, OnDestroy {
     /**
      * Holds the value of the counter, the state of the `FormControl`
@@ -58,8 +57,4 @@ export declare class ItemCounterComponent implements OnInit, OnDestroy {
      *
      */
     private getValidCount;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ItemCounterComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ItemCounterComponent, "cx-item-counter", never, { "min": "min"; "step": "step"; "allowZero": "allowZero"; "readonly": "readonly"; "control": "control"; "max": "max"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=item-counter.component.d.ts.map
