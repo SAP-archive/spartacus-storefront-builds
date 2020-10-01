@@ -1,15 +1,31 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { ComponentRef, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CheckoutService, RoutingService } from '@spartacus/core';
-import { Subscription } from 'rxjs';
+import { CheckoutService, ORDER_TYPE, RoutingService, ScheduleReplenishmentForm } from '@spartacus/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LaunchDialogService } from '../../../../layout/launch-dialog/index';
+import { CheckoutReplenishmentFormService } from '../../services/checkout-replenishment-form-service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
+    protected checkoutReplenishmentFormService: CheckoutReplenishmentFormService;
     protected routingService: RoutingService;
+    protected launchDialogService: LaunchDialogService;
     protected fb: FormBuilder;
-    placeOrderSubscription: Subscription;
+    protected vcr: ViewContainerRef;
+    private subscription;
+    currentOrderType: ORDER_TYPE;
+    scheduleReplenishmentFormData: ScheduleReplenishmentForm;
+    placedOrder: void | Observable<ComponentRef<any>>;
+    daysOfWeekNotChecked$: BehaviorSubject<boolean>;
     checkoutSubmitForm: FormGroup;
-    constructor(checkoutService: CheckoutService, routingService: RoutingService, fb: FormBuilder);
+    get termsAndConditionInvalid(): Boolean;
+    constructor(checkoutService: CheckoutService, checkoutReplenishmentFormService: CheckoutReplenishmentFormService, routingService: RoutingService, launchDialogService: LaunchDialogService, fb: FormBuilder, vcr: ViewContainerRef);
     submitForm(): void;
     ngOnInit(): void;
+    onSuccess(data: boolean): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PlaceOrderComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PlaceOrderComponent, "cx-place-order", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=place-order.component.d.ts.map

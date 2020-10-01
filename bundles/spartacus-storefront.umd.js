@@ -310,6 +310,8 @@
      */
     (function (DIALOG_TYPE) {
         DIALOG_TYPE["POPOVER"] = "POPOVER";
+        DIALOG_TYPE["POPOVER_CENTER"] = "POPOVER_CENTER";
+        DIALOG_TYPE["POPOVER_CENTER_BACKDROP"] = "POPOVER_CENTER_BACKDROP";
         DIALOG_TYPE["DIALOG"] = "DIALOG";
         DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
         DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
@@ -318,6 +320,8 @@
         LAUNCH_CALLER["ASM"] = "ASM";
         LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
         LAUNCH_CALLER["ANONYMOUS_CONSENT"] = "ANONYMOUS_CONSENT";
+        LAUNCH_CALLER["REPLENISHMENT_ORDER"] = "REPLENISHMENT_ORDER";
+        LAUNCH_CALLER["PLACE_ORDER_SPINNER"] = "PLACE_ORDER_SPINNER";
     })(exports.LAUNCH_CALLER || (exports.LAUNCH_CALLER = {}));
 
     (function (BREAKPOINT) {
@@ -361,6 +365,16 @@
              */
             this.popoverClasses = ['cx-dialog-popover'];
             /**
+             * Classes to apply to the component when the dialog is a POPOVER_CENTER
+             */
+            this.popoverCenterClasses = ['cx-dialog-popover-center'];
+            /**
+             * Classes to apply to the component when the dialog is a POPOVER_CENTER with a backdrop
+             */
+            this.popoverCenterBackdropClasses = [
+                'cx-dialog-popover-center-backdrop',
+            ];
+            /**
              * Classes to apply to the component when the dialog is a SIDEBAR_END
              */
             this.sidebarEndClasses = ['cx-sidebar-end'];
@@ -393,6 +407,12 @@
                     break;
                 case exports.DIALOG_TYPE.POPOVER:
                     classes = this.popoverClasses;
+                    break;
+                case exports.DIALOG_TYPE.POPOVER_CENTER:
+                    classes = this.popoverCenterClasses;
+                    break;
+                case exports.DIALOG_TYPE.POPOVER_CENTER_BACKDROP:
+                    classes = this.popoverCenterBackdropClasses;
                     break;
                 case exports.DIALOG_TYPE.SIDEBAR_END:
                     classes = this.sidebarEndClasses;
@@ -2481,6 +2501,7 @@
         ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
         ICON_TYPE["FILTER"] = "FILTER";
         ICON_TYPE["PENCIL"] = "PENCIL";
+        ICON_TYPE["CLOCK"] = "CLOCK";
         ICON_TYPE["TRASH"] = "TRASH";
         ICON_TYPE["ACTIVE"] = "ACTIVE";
         ICON_TYPE["SORT_DOWN"] = "SORT_DOWN";
@@ -2547,6 +2568,7 @@
                 EMPTY_HEART: 'far fa-heart',
                 FILTER: 'fas fa-filter',
                 PENCIL: 'fas fa-pencil-alt',
+                CLOCK: 'far fa-clock',
                 TRASH: 'fas fa-trash',
                 ACTIVE: 'fas fa-check',
                 ON: 'fas fa-toggle-on',
@@ -5134,6 +5156,311 @@
     ModalService.ctorParameters = function () { return [
         { type: i1$3.NgbModal }
     ]; };
+
+    var OrderOverviewComponent = /** @class */ (function () {
+        function OrderOverviewComponent(translation) {
+            this.translation = translation;
+        }
+        Object.defineProperty(OrderOverviewComponent.prototype, "setOrder", {
+            set: function (order) {
+                this.order = order;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        OrderOverviewComponent.prototype.getReplenishmentCodeCardContent = function (orderCode) {
+            return this.translation
+                .translate('checkoutOrderConfirmation.replenishmentNumber')
+                .pipe(operators.filter(function () { return Boolean(orderCode); }), operators.map(function (textTitle) { return ({
+                title: textTitle,
+                text: [orderCode],
+            }); }));
+        };
+        OrderOverviewComponent.prototype.getReplenishmentActiveCardContent = function (active) {
+            return rxjs.combineLatest([
+                this.translation.translate('checkoutOrderConfirmation.status'),
+                this.translation.translate('checkoutOrderConfirmation.active'),
+                this.translation.translate('checkoutOrderConfirmation.cancelled'),
+            ]).pipe(operators.map(function (_c) {
+                var _d = __read(_c, 3), textTitle = _d[0], textActive = _d[1], textCancelled = _d[2];
+                return ({
+                    title: textTitle,
+                    text: [active ? textActive : textCancelled],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getReplenishmentStartOnCardContent = function (isoDate) {
+            var _this = this;
+            return this.translation.translate('checkoutReview.startOn').pipe(operators.filter(function () { return Boolean(isoDate); }), operators.map(function (textTitle) {
+                var date = _this.getDate(new Date(isoDate));
+                return {
+                    title: textTitle,
+                    text: [date],
+                };
+            }));
+        };
+        OrderOverviewComponent.prototype.getReplenishmentFrequencyCardContent = function (frequency) {
+            return this.translation
+                .translate('checkoutOrderConfirmation.frequency')
+                .pipe(operators.filter(function () { return Boolean(frequency); }), operators.map(function (textTitle) { return ({
+                title: textTitle,
+                text: [frequency],
+            }); }));
+        };
+        OrderOverviewComponent.prototype.getReplenishmentNextDateCardContent = function (isoDate) {
+            var _this = this;
+            return this.translation
+                .translate('checkoutOrderConfirmation.nextOrderDate')
+                .pipe(operators.filter(function () { return Boolean(isoDate); }), operators.map(function (textTitle) {
+                var date = _this.getDate(new Date(isoDate));
+                return {
+                    title: textTitle,
+                    text: [date],
+                };
+            }));
+        };
+        OrderOverviewComponent.prototype.getOrderCodeCardContent = function (orderCode) {
+            return this.translation
+                .translate('checkoutOrderConfirmation.orderNumber')
+                .pipe(operators.filter(function () { return Boolean(orderCode); }), operators.map(function (textTitle) { return ({
+                title: textTitle,
+                text: [orderCode],
+            }); }));
+        };
+        OrderOverviewComponent.prototype.getOrderCurrentDateCardContent = function (isoDate) {
+            var _this = this;
+            return this.translation
+                .translate('checkoutOrderConfirmation.placedOn')
+                .pipe(operators.map(function (textTitle) {
+                var date;
+                if (Boolean(isoDate)) {
+                    date = _this.getDate(new Date(isoDate));
+                }
+                else {
+                    date = _this.getDate(new Date());
+                }
+                return {
+                    title: textTitle,
+                    text: [date],
+                };
+            }));
+        };
+        OrderOverviewComponent.prototype.getOrderStatusCardContent = function (status) {
+            return rxjs.combineLatest([
+                this.translation.translate('checkoutOrderConfirmation.status'),
+                this.translation.translate('orderDetails.statusDisplay', {
+                    context: status,
+                }),
+            ]).pipe(operators.map(function (_c) {
+                var _d = __read(_c, 2), textTitle = _d[0], textStatus = _d[1];
+                return ({
+                    title: textTitle,
+                    text: [textStatus],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getPurchaseOrderNumber = function (poNumber) {
+            return rxjs.combineLatest([
+                this.translation.translate('checkoutReview.poNumber'),
+                this.translation.translate('checkoutPO.noPoNumber'),
+            ]).pipe(operators.map(function (_c) {
+                var _d = __read(_c, 2), textTitle = _d[0], noneTextTitle = _d[1];
+                return ({
+                    title: textTitle,
+                    text: [poNumber ? poNumber : noneTextTitle],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getMethodOfPaymentCardContent = function (hasPaymentInfo) {
+            return rxjs.combineLatest([
+                this.translation.translate('checkoutProgress.methodOfPayment'),
+                this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
+                this.translation.translate('paymentTypes.paymentType_CARD'),
+            ]).pipe(operators.map(function (_c) {
+                var _d = __read(_c, 3), textTitle = _d[0], textAccount = _d[1], textCard = _d[2];
+                return ({
+                    title: textTitle,
+                    text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getCostCenterCardContent = function (costCenter) {
+            return this.translation.translate('checkoutPO.costCenter').pipe(operators.filter(function () { return Boolean(costCenter); }), operators.map(function (textTitle) {
+                var _a;
+                return ({
+                    title: textTitle,
+                    textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
+                    text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getAddressCardContent = function (deliveryAddress) {
+            return this.translation.translate('addressCard.shipTo').pipe(operators.filter(function () { return Boolean(deliveryAddress); }), operators.map(function (textTitle) { return ({
+                title: textTitle,
+                textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
+                text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
+            }); }));
+        };
+        OrderOverviewComponent.prototype.getDeliveryModeCardContent = function (deliveryMode) {
+            return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.filter(function () { return Boolean(deliveryMode); }), operators.map(function (textTitle) {
+                var _a, _b;
+                return ({
+                    title: textTitle,
+                    textBold: deliveryMode.name,
+                    text: [
+                        deliveryMode.description,
+                        ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
+                    ],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getPaymentInfoCardContent = function (payment) {
+            return rxjs.combineLatest([
+                this.translation.translate('paymentForm.payment'),
+                this.translation.translate('paymentCard.expires', {
+                    month: Boolean(payment) ? payment.expiryMonth : '',
+                    year: Boolean(payment) ? payment.expiryYear : '',
+                }),
+            ]).pipe(operators.filter(function () { return Boolean(payment); }), operators.map(function (_c) {
+                var _d = __read(_c, 2), textTitle = _d[0], textExpires = _d[1];
+                return ({
+                    title: textTitle,
+                    textBold: payment.accountHolderName,
+                    text: [payment.cardNumber, textExpires],
+                });
+            }));
+        };
+        OrderOverviewComponent.prototype.getBillingAddressCardContent = function (billingAddress) {
+            return this.translation.translate('paymentForm.billingAddress').pipe(operators.filter(function () { return Boolean(billingAddress); }), operators.map(function (textTitle) { return ({
+                title: textTitle,
+                textBold: billingAddress.firstName + " " + billingAddress.lastName,
+                text: [billingAddress.formattedAddress, billingAddress.country.name],
+            }); }));
+        };
+        OrderOverviewComponent.prototype.getDate = function (givenDate) {
+            var date = givenDate.toDateString().split(' ');
+            var month = date[1];
+            var day = date[2];
+            var year = date[3];
+            return month + ' ' + day + ' ' + year;
+        };
+        return OrderOverviewComponent;
+    }());
+    OrderOverviewComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-order-overview',
+                    template: "<div class=\"cx-order-summary\">\n  <div class=\"container\">\n    <ng-container *ngIf=\"order.replenishmentOrderCode; else otherOrder\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"\n            getReplenishmentCodeCardContent(order?.replenishmentOrderCode)\n              | async\n          \"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order?.created\">\n          <cx-card\n            [content]=\"getOrderCurrentDateCardContent() | async\"\n          ></cx-card>\n        </ng-container>\n\n        <cx-card\n          [content]=\"getReplenishmentActiveCardContent(order?.active) | async\"\n        ></cx-card>\n      </div>\n\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"\n            getReplenishmentStartOnCardContent(order?.firstDate) | async\n          \"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getReplenishmentFrequencyCardContent(\n              order?.trigger?.displayTimeTable\n            ) | async\n          \"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getReplenishmentNextDateCardContent(order?.trigger?.activationTime)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n\n    <ng-template #otherOrder>\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getOrderCodeCardContent(order?.code) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n        ></cx-card>\n      </div>\n    </ng-template>\n\n    <ng-container\n      *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n    >\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order.costCenter\">\n          <cx-card\n            [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n    </ng-container>\n\n    <div class=\"cx-summary-card\">\n      <ng-container *ngIf=\"order.deliveryAddress\">\n        <cx-card\n          [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n        ></cx-card>\n      </ng-container>\n\n      <ng-container *ngIf=\"order.deliveryMode\">\n        <cx-card\n          [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n        ></cx-card>\n      </ng-container>\n    </div>\n\n    <ng-container *ngIf=\"order.paymentInfo\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    OrderOverviewComponent.ctorParameters = function () { return [
+        { type: i1.TranslationService }
+    ]; };
+    OrderOverviewComponent.propDecorators = {
+        setOrder: [{ type: i0.Input, args: ['order',] }]
+    };
+
+    var OrderOverviewModule = /** @class */ (function () {
+        function OrderOverviewModule() {
+        }
+        return OrderOverviewModule;
+    }());
+    OrderOverviewModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule, i1.I18nModule, CardModule],
+                    declarations: [OrderOverviewComponent],
+                    exports: [OrderOverviewComponent],
+                },] }
+    ];
+
+    var ReplenishmentOrderCancellationDialogComponent = /** @class */ (function () {
+        function ReplenishmentOrderCancellationDialogComponent(userReplenishmentOrderService, globalMessageService, launchDialogService, el) {
+            this.userReplenishmentOrderService = userReplenishmentOrderService;
+            this.globalMessageService = globalMessageService;
+            this.launchDialogService = launchDialogService;
+            this.el = el;
+            this.subscription = new rxjs.Subscription();
+            this.focusConfig = {
+                trap: true,
+                block: true,
+                autofocus: 'button',
+                focusOnEscape: true,
+            };
+        }
+        ReplenishmentOrderCancellationDialogComponent.prototype.handleClick = function (event) {
+            // Close on click outside the dialog window
+            if (event.target.tagName === this.el.nativeElement.tagName) {
+                this.close('Cross click');
+            }
+        };
+        ReplenishmentOrderCancellationDialogComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription.add(rxjs.combineLatest([
+                this.userReplenishmentOrderService
+                    .getReplenishmentOrderDetails()
+                    .pipe(operators.startWith(null)),
+                this.launchDialogService.data$,
+            ]).subscribe(function (_a) {
+                var _b = __read(_a, 2), replenishmentOrder = _b[0], code = _b[1];
+                _this.replenishmentOrderCode =
+                    code || replenishmentOrder.replenishmentOrderCode;
+            }));
+            this.subscription.add(this.userReplenishmentOrderService
+                .getCancelReplenishmentOrderSuccess()
+                .subscribe(function (value) { return _this.onSuccess(value); }));
+        };
+        ReplenishmentOrderCancellationDialogComponent.prototype.onSuccess = function (value) {
+            if (value) {
+                this.launchDialogService.closeDialog('Successffully cancelled replenishment');
+                this.globalMessageService.add({
+                    key: 'orderDetails.cancelReplenishment.cancelSuccess',
+                    params: {
+                        replenishmentOrderCode: this.replenishmentOrderCode,
+                    },
+                }, i1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+            }
+            this.userReplenishmentOrderService.clearCancelReplenishmentOrderProcessState();
+        };
+        ReplenishmentOrderCancellationDialogComponent.prototype.close = function (reason) {
+            this.launchDialogService.closeDialog(reason);
+        };
+        ReplenishmentOrderCancellationDialogComponent.prototype.cancelReplenishment = function () {
+            this.userReplenishmentOrderService.cancelReplenishmentOrder(this.replenishmentOrderCode);
+        };
+        ReplenishmentOrderCancellationDialogComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        return ReplenishmentOrderCancellationDialogComponent;
+    }());
+    ReplenishmentOrderCancellationDialogComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-replenishment-order-cancellation-dialog',
+                    template: "<div\n  [cxFocus]=\"focusConfig\"\n  (esc)=\"close('Escape clicked')\"\n  class=\"cx-cancel-replenishment-dialog-foreground\"\n>\n  <div class=\"cx-cancel-replenishment-dialog-content\">\n    <div class=\"cx-cancel-replenishment-dialog-header\">\n      <h3>\n        {{ 'orderDetails.cancelReplenishment.title' | cxTranslate }}\n      </h3>\n    </div>\n    <div class=\"cx-cancel-replenishment-dialog-description\">\n      {{ 'orderDetails.cancelReplenishment.description' | cxTranslate }}\n    </div>\n\n    <div class=\"cx-cancel-replenishment-dialog-body\">\n      <div class=\"cx-cancel-replenishment-btns row\">\n        <div class=\"col-md-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"close('Close Replenishment Dialog')\"\n          >\n            {{ 'orderDetails.cancelReplenishment.reject' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            (click)=\"cancelReplenishment()\"\n          >\n            {{ 'orderDetails.cancelReplenishment.accept' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+                },] }
+    ];
+    ReplenishmentOrderCancellationDialogComponent.ctorParameters = function () { return [
+        { type: i1.UserReplenishmentOrderService },
+        { type: i1.GlobalMessageService },
+        { type: LaunchDialogService },
+        { type: i0.ElementRef }
+    ]; };
+    ReplenishmentOrderCancellationDialogComponent.propDecorators = {
+        handleClick: [{ type: i0.HostListener, args: ['click', ['$event'],] }]
+    };
+
+    var ReplenishmentOrderCancellationDialogModule = /** @class */ (function () {
+        function ReplenishmentOrderCancellationDialogModule() {
+        }
+        return ReplenishmentOrderCancellationDialogModule;
+    }());
+    ReplenishmentOrderCancellationDialogModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule, i1.I18nModule, KeyboardFocusModule],
+                    declarations: [ReplenishmentOrderCancellationDialogComponent],
+                    entryComponents: [ReplenishmentOrderCancellationDialogComponent],
+                    exports: [ReplenishmentOrderCancellationDialogComponent],
+                },] }
+    ];
 
     /**
      * Guard that can be used in split-view based child routes. This guard
@@ -11382,18 +11709,83 @@
                 },] }
     ];
 
+    var defaultPlaceOrderSpinnerLayoutConfig = {
+        launch: {
+            PLACE_ORDER_SPINNER: {
+                inline: true,
+                component: SpinnerComponent,
+                dialogType: exports.DIALOG_TYPE.POPOVER_CENTER_BACKDROP,
+            },
+        },
+    };
+
+    var CheckoutReplenishmentFormService = /** @class */ (function () {
+        function CheckoutReplenishmentFormService() {
+            /**
+             * Default form data
+             */
+            this.defaultFormData = {
+                daysOfWeek: [i1.DaysOfWeek.MONDAY],
+                nthDayOfMonth: '1',
+                numberOfDays: '14',
+                numberOfWeeks: '1',
+                recurrencePeriod: i1.recurrencePeriod.DAILY,
+                replenishmentStartDate: new Date().toISOString(),
+            };
+            this.scheduleReplenishmentFormData$ = new rxjs.BehaviorSubject(this.defaultFormData);
+        }
+        CheckoutReplenishmentFormService.prototype.getScheduleReplenishmentFormData = function () {
+            return this.scheduleReplenishmentFormData$.asObservable();
+        };
+        CheckoutReplenishmentFormService.prototype.setScheduleReplenishmentFormData = function (formData) {
+            this.scheduleReplenishmentFormData$.next(formData);
+        };
+        CheckoutReplenishmentFormService.prototype.resetScheduleReplenishmentFormData = function () {
+            this.scheduleReplenishmentFormData$.next(this.defaultFormData);
+        };
+        return CheckoutReplenishmentFormService;
+    }());
+    CheckoutReplenishmentFormService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutReplenishmentFormService_Factory() { return new CheckoutReplenishmentFormService(); }, token: CheckoutReplenishmentFormService, providedIn: "root" });
+    CheckoutReplenishmentFormService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    CheckoutReplenishmentFormService.ctorParameters = function () { return []; };
+
     var PlaceOrderComponent = /** @class */ (function () {
-        function PlaceOrderComponent(checkoutService, routingService, fb) {
+        function PlaceOrderComponent(checkoutService, checkoutReplenishmentFormService, routingService, launchDialogService, fb, vcr) {
             this.checkoutService = checkoutService;
+            this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
             this.routingService = routingService;
+            this.launchDialogService = launchDialogService;
             this.fb = fb;
+            this.vcr = vcr;
+            this.subscription = new rxjs.Subscription();
+            this.daysOfWeekNotChecked$ = new rxjs.BehaviorSubject(false);
             this.checkoutSubmitForm = this.fb.group({
                 termsAndConditions: [false, forms.Validators.requiredTrue],
             });
         }
+        Object.defineProperty(PlaceOrderComponent.prototype, "termsAndConditionInvalid", {
+            get: function () {
+                return this.checkoutSubmitForm.invalid;
+            },
+            enumerable: false,
+            configurable: true
+        });
         PlaceOrderComponent.prototype.submitForm = function () {
-            if (this.checkoutSubmitForm.valid) {
-                this.checkoutService.placeOrder();
+            if (this.checkoutSubmitForm.valid && Boolean(this.currentOrderType)) {
+                switch (this.currentOrderType) {
+                    case i1.ORDER_TYPE.PLACE_ORDER: {
+                        this.checkoutService.placeOrder(this.checkoutSubmitForm.valid);
+                        break;
+                    }
+                    case i1.ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER: {
+                        this.checkoutService.scheduleReplenishmentOrder(this.scheduleReplenishmentFormData, this.checkoutSubmitForm.valid);
+                        break;
+                    }
+                }
             }
             else {
                 this.checkoutSubmitForm.markAllAsTouched();
@@ -11401,31 +11793,77 @@
         };
         PlaceOrderComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.placeOrderSubscription = this.checkoutService
-                .getOrderDetails()
-                .pipe(operators.filter(function (order) { return Object.keys(order).length !== 0; }))
-                .subscribe(function () {
-                _this.routingService.go({ cxRoute: 'orderConfirmation' });
-            });
+            this.subscription.add(rxjs.combineLatest([
+                this.checkoutService.getPlaceOrderLoading(),
+                this.checkoutService.getPlaceOrderSuccess(),
+                this.checkoutService.getPlaceOrderError(),
+            ]).subscribe(function (_a) {
+                var _b = __read(_a, 3), orderLoading = _b[0], orderSuccess = _b[1], orderError = _b[2];
+                if (orderLoading) {
+                    _this.placedOrder = _this.launchDialogService.launch(exports.LAUNCH_CALLER.PLACE_ORDER_SPINNER, _this.vcr);
+                }
+                if (orderError) {
+                    if (_this.placedOrder) {
+                        _this.placedOrder
+                            .subscribe(function (component) {
+                            _this.launchDialogService.clear(exports.LAUNCH_CALLER.PLACE_ORDER_SPINNER);
+                            component.destroy();
+                        })
+                            .unsubscribe();
+                        _this.checkoutService.clearPlaceOrderState();
+                    }
+                }
+                if (orderSuccess) {
+                    _this.onSuccess(orderSuccess);
+                }
+            }));
+            this.subscription.add(this.checkoutService
+                .getCurrentOrderType()
+                .subscribe(function (orderType) { return (_this.currentOrderType = orderType); }));
+            this.subscription.add(this.checkoutReplenishmentFormService
+                .getScheduleReplenishmentFormData()
+                .subscribe(function (data) {
+                _this.scheduleReplenishmentFormData = data;
+                _this.daysOfWeekNotChecked$.next(data.daysOfWeek.length === 0 &&
+                    data.recurrencePeriod === i1.recurrencePeriod.WEEKLY);
+            }));
+        };
+        PlaceOrderComponent.prototype.onSuccess = function (data) {
+            if (data) {
+                switch (this.currentOrderType) {
+                    case i1.ORDER_TYPE.PLACE_ORDER: {
+                        this.routingService.go({ cxRoute: 'orderConfirmation' });
+                        break;
+                    }
+                    case i1.ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER: {
+                        this.routingService.go({ cxRoute: 'replenishmentConfirmation' });
+                        break;
+                    }
+                }
+                this.checkoutReplenishmentFormService.resetScheduleReplenishmentFormData();
+            }
         };
         PlaceOrderComponent.prototype.ngOnDestroy = function () {
-            if (this.placeOrderSubscription) {
-                this.placeOrderSubscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
+            this.launchDialogService.clear(exports.LAUNCH_CALLER.PLACE_ORDER_SPINNER);
+            this.checkoutService.clearPlaceOrderState();
         };
         return PlaceOrderComponent;
     }());
     PlaceOrderComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-place-order',
-                    template: "<form\n  (ngSubmit)=\"submitForm()\"\n  class=\"cx-place-order-form form-check\"\n  [formGroup]=\"checkoutSubmitForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <input\n        formControlName=\"termsAndConditions\"\n        class=\"form-check-input\"\n        type=\"checkbox\"\n      />\n      <span class=\"form-check-label\">\n        {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n        <a\n          [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n          class=\"cx-tc-link\"\n          target=\"_blank\"\n        >\n          {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n        </a>\n      </span>\n      <cx-form-errors\n        [control]=\"checkoutSubmitForm.get('termsAndConditions')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary btn-block\">\n    {{ 'checkoutReview.placeOrder' | cxTranslate }}\n  </button>\n</form>\n",
+                    template: "<form\n  (ngSubmit)=\"submitForm()\"\n  class=\"cx-place-order-form form-check\"\n  [formGroup]=\"checkoutSubmitForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <input\n        formControlName=\"termsAndConditions\"\n        class=\"scaled-input form-check-input\"\n        type=\"checkbox\"\n      />\n      <span class=\"form-check-label\">\n        {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n        <a\n          [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n          class=\"cx-tc-link\"\n          target=\"_blank\"\n        >\n          {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n        </a>\n      </span>\n    </label>\n  </div>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-primary btn-block\"\n    [disabled]=\"termsAndConditionInvalid || (daysOfWeekNotChecked$ | async)\"\n  >\n    {{ 'checkoutReview.placeOrder' | cxTranslate }}\n  </button>\n</form>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     PlaceOrderComponent.ctorParameters = function () { return [
         { type: i1.CheckoutService },
+        { type: CheckoutReplenishmentFormService },
         { type: i1.RoutingService },
-        { type: forms.FormBuilder }
+        { type: LaunchDialogService },
+        { type: forms.FormBuilder },
+        { type: i0.ViewContainerRef }
     ]; };
 
     var PlaceOrderModule = /** @class */ (function () {
@@ -11441,9 +11879,9 @@
                         i1.UrlModule,
                         i1.I18nModule,
                         forms.ReactiveFormsModule,
-                        FormErrorsModule,
                     ],
                     providers: [
+                        i1.provideConfig(defaultPlaceOrderSpinnerLayoutConfig),
                         i1.provideDefaultConfig({
                             cmsComponents: {
                                 CheckoutPlaceOrder: {
@@ -11753,6 +12191,135 @@
                     declarations: [ReviewSubmitComponent],
                     entryComponents: [ReviewSubmitComponent],
                     exports: [ReviewSubmitComponent],
+                },] }
+    ];
+
+    var ScheduleReplenishmentOrderComponent = /** @class */ (function () {
+        function ScheduleReplenishmentOrderComponent(checkoutService, checkoutReplenishmentFormService) {
+            this.checkoutService = checkoutService;
+            this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
+            this.subscription = new rxjs.Subscription();
+            this.iconTypes = exports.ICON_TYPE;
+            this.orderTypes = i1.ORDER_TYPE;
+            this.daysOfWeek = Object.keys(i1.DaysOfWeek).map(function (key) { return i1.DaysOfWeek[key]; });
+            this.recurrencePeriodType = Object.keys(i1.recurrencePeriod).map(function (key) { return i1.recurrencePeriod[key]; });
+            this.selectedOrderType$ = this.checkoutService.getCurrentOrderType();
+            this.isMonthly = false;
+            this.isWeekly = false;
+            this.currentDaysOfWeek = [];
+        }
+        ScheduleReplenishmentOrderComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.subscription.add(this.checkoutReplenishmentFormService
+                .getScheduleReplenishmentFormData()
+                .subscribe(function (data) {
+                _this.scheduleReplenishmentFormData = data;
+            }));
+            this.initConfig();
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeOrderType = function (orderType) {
+            this.checkoutService.setOrderType(orderType);
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeNumberOfDays = function (nDays) {
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { numberOfDays: nDays }));
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeNumberOfWeeks = function (nWeeks) {
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { numberOfWeeks: nWeeks }));
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeRecurrencePeriodType = function (type) {
+            this.isWeekly = type === i1.recurrencePeriod.WEEKLY;
+            this.isMonthly = type === i1.recurrencePeriod.MONTHLY;
+            this.numberOfDays = this.isMonthly
+                ? this.createNumberStringArray(31)
+                : this.createNumberStringArray(30);
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { recurrencePeriod: type }));
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeDayOfTheMonth = function (dayOfMonth) {
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { nthDayOfMonth: dayOfMonth }));
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeReplenishmentStartDate = function (date) {
+            if (Boolean(date)) {
+                this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { replenishmentStartDate: date }));
+            }
+        };
+        ScheduleReplenishmentOrderComponent.prototype.changeRepeatDays = function (day, isChecked) {
+            if (isChecked) {
+                this.currentDaysOfWeek = __spread(this.currentDaysOfWeek);
+                this.currentDaysOfWeek.push(day);
+                this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { daysOfWeek: this.currentDaysOfWeek }));
+            }
+            else {
+                var foundDay = this.currentDaysOfWeek.find(function (data) { return day === data; });
+                if (!foundDay)
+                    return;
+                var index = this.currentDaysOfWeek.indexOf(foundDay);
+                this.currentDaysOfWeek.splice(index, 1);
+                this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { daysOfWeek: this.currentDaysOfWeek }));
+            }
+        };
+        ScheduleReplenishmentOrderComponent.prototype.hasDaysOfWeekChecked = function (day) {
+            return this.currentDaysOfWeek.includes(day);
+        };
+        ScheduleReplenishmentOrderComponent.prototype.currentISODate = function (date) {
+            return date.split('T')[0];
+        };
+        ScheduleReplenishmentOrderComponent.prototype.initConfig = function () {
+            this.isMonthly =
+                this.scheduleReplenishmentFormData.recurrencePeriod ===
+                    i1.recurrencePeriod.MONTHLY;
+            this.isWeekly =
+                this.scheduleReplenishmentFormData.recurrencePeriod ===
+                    i1.recurrencePeriod.WEEKLY;
+            this.currentDaysOfWeek = __spread(this.scheduleReplenishmentFormData.daysOfWeek);
+            this.numberOfDays = this.isMonthly
+                ? this.createNumberStringArray(31)
+                : this.createNumberStringArray(30);
+            this.numberOfWeeks = this.createNumberStringArray(12);
+            this.currentDate = this.scheduleReplenishmentFormData.replenishmentStartDate;
+        };
+        ScheduleReplenishmentOrderComponent.prototype.createNumberStringArray = function (n) {
+            return Array(n)
+                .fill(0)
+                .map(function (_, y) { return (y + 1).toString(); });
+        };
+        ScheduleReplenishmentOrderComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+        };
+        return ScheduleReplenishmentOrderComponent;
+    }());
+    ScheduleReplenishmentOrderComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-schedule-replenishment-order',
+                    template: "<div class=\"cx-order-type-card\">\n  <div class=\"cx-label-container\">\n    <h5 class=\"cx-order-replenishment-header\">\n      {{ 'checkoutReview.autoReplenishOrder' | cxTranslate }}\n    </h5>\n    <cx-icon [type]=\"iconTypes.CLOCK\"></cx-icon>\n  </div>\n  <div\n    class=\"cx-order-type-container form-check\"\n    *ngFor=\"let type of orderTypes | keyvalue\"\n  >\n    <input\n      id=\"orderType-{{ type.value }}\"\n      class=\"scaled-input form-check-input\"\n      role=\"radio\"\n      type=\"radio\"\n      aria-checked=\"true\"\n      (change)=\"changeOrderType(type.value)\"\n      [value]=\"type.value\"\n      [checked]=\"type.value == (selectedOrderType$ | async)\"\n    />\n    <label\n      class=\"order-type-label form-check-label form-radio-label\"\n      for=\"orderType-{{ type.value }}\"\n    >\n      <div class=\"order-type\">\n        {{ 'checkoutReview.orderType' | cxTranslate: { context: type.value } }}\n      </div>\n    </label>\n  </div>\n  <ng-container\n    *ngIf=\"\n      scheduleReplenishmentFormData &&\n      (selectedOrderType$ | async) === orderTypes.SCHEDULE_REPLENISHMENT_ORDER\n    \"\n  >\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.every' | cxTranslate\n      }}</span>\n      <div *ngIf=\"!isMonthly\" class=\"cx-days\">\n        <ng-container *ngIf=\"isWeekly; else isDaily\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfWeeks($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nWeeks of numberOfWeeks\"\n              [value]=\"nWeeks\"\n              [selected]=\"\n                nWeeks === scheduleReplenishmentFormData.numberOfWeeks\n              \"\n            >\n              {{ nWeeks }}\n            </option>\n          </select>\n        </ng-container>\n        <ng-template #isDaily>\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfDays($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.numberOfDays\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </ng-template>\n      </div>\n      <div class=\"cx-month\">\n        <select\n          class=\"form-control\"\n          (change)=\"changeRecurrencePeriodType($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let type of recurrencePeriodType\"\n            [value]=\"type\"\n            [selected]=\"type === scheduleReplenishmentFormData.recurrencePeriod\"\n          >\n            {{\n              'checkoutReview.recurrencePeriodType'\n                | cxTranslate: { context: type }\n            }}\n          </option>\n        </select>\n      </div>\n    </div>\n\n    <div *ngIf=\"isMonthly\" class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.dayOfMonth' | cxTranslate\n      }}</span>\n      <div class=\"cx-day-of-month\">\n        <select\n          class=\"form-control\"\n          (change)=\"changeDayOfTheMonth($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let nDays of numberOfDays\"\n            [value]=\"nDays\"\n            [selected]=\"nDays === scheduleReplenishmentFormData.nthDayOfMonth\"\n          >\n            {{ nDays }}\n          </option>\n        </select>\n      </div>\n    </div>\n\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.startOn' | cxTranslate\n      }}</span>\n      <div class=\"cx-replenishment-date\">\n        <input\n          type=\"date\"\n          placeholder=\"yyyy-mm-dd\"\n          [value]=\"currentISODate(currentDate)\"\n          (change)=\"changeReplenishmentStartDate($event.target.value)\"\n        />\n      </div>\n    </div>\n\n    <div\n      *ngIf=\"isWeekly\"\n      class=\"cx-replenishment-form-data-container cx-repeat-days-container\"\n    >\n      <span class=\"cx-repeat-days form-data-label\">{{\n        'checkoutReview.repeatOnDays' | cxTranslate\n      }}</span>\n      <div *ngFor=\"let day of daysOfWeek\" class=\"form-check\">\n        <label for=\"day-{{ day }}\" class=\"cx-week-day\">{{\n          day | titlecase\n        }}</label\n        ><input\n          id=\"day-{{ day }}\"\n          type=\"checkbox\"\n          class=\"form-check-input\"\n          [checked]=\"hasDaysOfWeekChecked(day)\"\n          (change)=\"changeRepeatDays(day, $event.target.checked)\"\n        />\n      </div>\n    </div>\n  </ng-container>\n</div>\n",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    ScheduleReplenishmentOrderComponent.ctorParameters = function () { return [
+        { type: i1.CheckoutService },
+        { type: CheckoutReplenishmentFormService }
+    ]; };
+
+    var ScheduleReplenishmentOrderModule = /** @class */ (function () {
+        function ScheduleReplenishmentOrderModule() {
+        }
+        return ScheduleReplenishmentOrderModule;
+    }());
+    ScheduleReplenishmentOrderModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule, i4.RouterModule, i1.I18nModule, IconModule],
+                    providers: [
+                        i1.provideDefaultConfig({
+                            cmsComponents: {
+                                CheckoutScheduleReplenishmentOrder: {
+                                    component: ScheduleReplenishmentOrderComponent,
+                                    guards: [CheckoutAuthGuard, CartNotEmptyGuard],
+                                },
+                            },
+                        }),
+                    ],
+                    declarations: [ScheduleReplenishmentOrderComponent],
+                    entryComponents: [ScheduleReplenishmentOrderComponent],
+                    exports: [ScheduleReplenishmentOrderComponent],
                 },] }
     ];
 
@@ -12205,6 +12772,7 @@
                         DeliveryModeModule,
                         PaymentMethodModule,
                         PlaceOrderModule,
+                        ScheduleReplenishmentOrderModule,
                         PromotionsModule,
                         ReviewSubmitModule,
                         ShippingAddressModule,
@@ -14112,6 +14680,7 @@
         checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
         checkoutReviewOrder: { paths: ['checkout/review-order'] },
         orderConfirmation: { paths: ['order-confirmation'] },
+        replenishmentConfirmation: { paths: ['replenishment/confirmation'] },
         // plp routes
         search: { paths: ['search/:query'] },
         category: {
@@ -14160,6 +14729,13 @@
         couponClaim: {
             paths: ['my-account/coupon/claim/:couponCode'],
             paramsMapping: { couponCode: 'code' },
+        },
+        replenishmentOrders: {
+            paths: ['my-account/my-replenishments'],
+        },
+        replenishmentDetails: {
+            paths: ['my-account/my-replenishment/:replenishmentOrderCode'],
+            paramsMapping: { replenishmentOrderCode: 'replenishmentOrderCode' },
         },
     };
     var defaultRoutingConfig = {
@@ -15933,25 +16509,6 @@
         { type: OrderDetailsService }
     ]; };
 
-    var OrderDetailHeadlineComponent = /** @class */ (function () {
-        function OrderDetailHeadlineComponent(orderDetailsService) {
-            this.orderDetailsService = orderDetailsService;
-        }
-        OrderDetailHeadlineComponent.prototype.ngOnInit = function () {
-            this.order$ = this.orderDetailsService.getOrderDetails();
-        };
-        return OrderDetailHeadlineComponent;
-    }());
-    OrderDetailHeadlineComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'cx-order-details-headline',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | cxDate }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\" *ngIf=\"order?.statusDisplay\">\n        {{ 'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate }}\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"order?.orgCustomer?.orgUnit\" class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.purchaseOrderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.purchaseOrderNumber\n            ? order?.purchaseOrderNumber\n            : ('orderDetails.none' | cxTranslate)\n        }}\n      </div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placedBy' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.orgCustomer?.name }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.costCenterAndUnit' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.costCenter\n            ? ('orderDetails.costCenterAndUnitValue'\n              | cxTranslate\n                : {\n                    costCenterName: order?.costCenter?.name,\n                    unitName: order?.costCenter?.unit?.name\n                  })\n            : ('orderDetails.none'\n              | cxTranslate\n                : { value: 'orderDetails.paidByCreditCard' | cxTranslate })\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
-                },] }
-    ];
-    OrderDetailHeadlineComponent.ctorParameters = function () { return [
-        { type: OrderDetailsService }
-    ]; };
-
     var completedValues = ['DELIVERY_COMPLETED', 'PICKUP_COMPLETE'];
     var cancelledValues = ['CANCELLED'];
 
@@ -15991,7 +16548,7 @@
     OrderDetailItemsComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-details-items',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries OR any entries -->\n  <ng-container\n    *ngIf=\"\n      order?.unconsignedEntries?.length ||\n      (order?.entries && order?.replenishmentOrderCode)\n    \"\n  >\n    <div class=\"cx-list row\">\n      <div *ngIf=\"order?.statusDisplay\" class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"\n            order?.unconsignedEntries ? order.unconsignedEntries : order.entries\n          \"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
                 },] }
     ];
     OrderDetailItemsComponent.ctorParameters = function () { return [
@@ -16092,143 +16649,22 @@
     };
 
     var OrderDetailShippingComponent = /** @class */ (function () {
-        function OrderDetailShippingComponent(orderDetailsService, translation) {
+        function OrderDetailShippingComponent(orderDetailsService) {
             this.orderDetailsService = orderDetailsService;
-            this.translation = translation;
         }
         OrderDetailShippingComponent.prototype.ngOnInit = function () {
             this.order$ = this.orderDetailsService.getOrderDetails();
-        };
-        OrderDetailShippingComponent.prototype.getOrderCodeCardContent = function (orderCode) {
-            return this.translation
-                .translate('checkoutOrderConfirmation.orderNumber')
-                .pipe(operators.filter(function () { return Boolean(orderCode); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                text: [orderCode],
-            }); }));
-        };
-        OrderDetailShippingComponent.prototype.getOrderCurrentDateCardContent = function (isoDate) {
-            var _this = this;
-            return this.translation
-                .translate('checkoutOrderConfirmation.placedOn')
-                .pipe(operators.map(function (textTitle) {
-                var date = _this.getDate(new Date(isoDate));
-                return {
-                    title: textTitle,
-                    text: [date],
-                };
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getOrderStatusCardContent = function (status) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutOrderConfirmation.status'),
-                this.translation.translate('orderDetails.statusDisplay', {
-                    context: status,
-                }),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], textStatus = _d[1];
-                return ({
-                    title: textTitle,
-                    text: [textStatus],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getPurchaseOrderNumber = function (poNumber) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutReview.poNumber'),
-                this.translation.translate('checkoutPO.noPoNumber'),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], noneTextTitle = _d[1];
-                return ({
-                    title: textTitle,
-                    text: [poNumber ? poNumber : noneTextTitle],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getMethodOfPaymentCardContent = function (hasPaymentInfo) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutProgress.methodOfPayment'),
-                this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
-                this.translation.translate('paymentTypes.paymentType_CARD'),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 3), textTitle = _d[0], textAccount = _d[1], textCard = _d[2];
-                return ({
-                    title: textTitle,
-                    text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getCostCenterCardContent = function (costCenter) {
-            return this.translation.translate('checkoutPO.costCenter').pipe(operators.filter(function () { return Boolean(costCenter); }), operators.map(function (textTitle) {
-                var _a;
-                return ({
-                    title: textTitle,
-                    textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
-                    text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getAddressCardContent = function (deliveryAddress) {
-            return this.translation.translate('addressCard.shipTo').pipe(operators.filter(function () { return Boolean(deliveryAddress); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
-                text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
-            }); }));
-        };
-        OrderDetailShippingComponent.prototype.getDeliveryModeCardContent = function (deliveryMode) {
-            return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.filter(function () { return Boolean(deliveryMode); }), operators.map(function (textTitle) {
-                var _a, _b;
-                return ({
-                    title: textTitle,
-                    textBold: deliveryMode.name,
-                    text: [
-                        deliveryMode.description,
-                        ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
-                    ],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getPaymentInfoCardContent = function (payment) {
-            return rxjs.combineLatest([
-                this.translation.translate('paymentForm.payment'),
-                this.translation.translate('paymentCard.expires', {
-                    month: Boolean(payment) ? payment.expiryMonth : '',
-                    year: Boolean(payment) ? payment.expiryYear : '',
-                }),
-            ]).pipe(operators.filter(function () { return Boolean(payment); }), operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], textExpires = _d[1];
-                return ({
-                    title: textTitle,
-                    textBold: payment.accountHolderName,
-                    text: [payment.cardNumber, textExpires],
-                });
-            }));
-        };
-        OrderDetailShippingComponent.prototype.getBillingAddressCardContent = function (billingAddress) {
-            return this.translation.translate('paymentForm.billingAddress').pipe(operators.filter(function () { return Boolean(billingAddress); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                text: [billingAddress.formattedAddress, billingAddress.country.name],
-            }); }));
-        };
-        OrderDetailShippingComponent.prototype.getDate = function (givenDate) {
-            var date = givenDate.toDateString().split(' ');
-            var month = date[1];
-            var day = date[2];
-            var year = date[3];
-            return month + ' ' + day + ' ' + year;
         };
         return OrderDetailShippingComponent;
     }());
     OrderDetailShippingComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-details-shipping',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-account-summary\">\n    <div class=\"container\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getOrderCodeCardContent(order?.code) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n        ></cx-card>\n      </div>\n\n      <ng-container\n        *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n      >\n        <div class=\"cx-summary-card\">\n          <cx-card\n            [content]=\"\n              getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\n            \"\n          ></cx-card>\n\n          <cx-card\n            [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n          ></cx-card>\n\n          <ng-container *ngIf=\"order.costCenter\">\n            <cx-card\n              [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n            ></cx-card>\n          </ng-container>\n        </div>\n      </ng-container>\n\n      <div class=\"cx-summary-card\">\n        <ng-container *ngIf=\"order.deliveryAddress\">\n          <cx-card\n            [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n          ></cx-card>\n        </ng-container>\n\n        <ng-container *ngIf=\"order.deliveryMode\">\n          <cx-card\n            [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n\n      <ng-container *ngIf=\"order.paymentInfo\">\n        <div class=\"cx-summary-card\">\n          <cx-card\n            [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n          ></cx-card>\n\n          <cx-card\n            [content]=\"\n              getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n                | async\n            \"\n          ></cx-card>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n"
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <cx-order-overview [order]=\"order\"></cx-order-overview>\n</ng-container>\n"
                 },] }
     ];
     OrderDetailShippingComponent.ctorParameters = function () { return [
-        { type: OrderDetailsService },
-        { type: i1.TranslationService }
+        { type: OrderDetailsService }
     ]; };
 
     var OrderDetailTotalsComponent = /** @class */ (function () {
@@ -16252,7 +16688,6 @@
 
     var moduleComponents = [
         OrderDetailActionsComponent,
-        OrderDetailHeadlineComponent,
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
@@ -16276,7 +16711,9 @@
                         i1.I18nModule,
                         i1.FeaturesConfigModule,
                         PromotionsModule,
+                        OrderOverviewModule,
                         i1.UrlModule,
+                        SpinnerModule,
                         i4.RouterModule.forChild([
                             {
                                 path: null,
@@ -16291,16 +16728,12 @@
                                 data: ɵ1,
                             },
                         ]),
-                        SpinnerModule,
                     ],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
                                 AccountOrderDetailsActionsComponent: {
                                     component: OrderDetailActionsComponent,
-                                },
-                                AccountOrderDetailsHeadlineComponent: {
-                                    component: OrderDetailHeadlineComponent,
                                 },
                                 AccountOrderDetailsApprovalDetailsComponent: {
                                     component: OrderDetailApprovalDetailsComponent,
@@ -16328,17 +16761,21 @@
     ];
 
     var OrderHistoryComponent = /** @class */ (function () {
-        function OrderHistoryComponent(routing, userOrderService, translation) {
+        function OrderHistoryComponent(routing, userOrderService, translation, userReplenishmentOrderService) {
             var _this = this;
             this.routing = routing;
             this.userOrderService = userOrderService;
             this.translation = translation;
+            this.userReplenishmentOrderService = userReplenishmentOrderService;
             this.PAGE_SIZE = 5;
             this.orders$ = this.userOrderService.getOrderHistoryList(this.PAGE_SIZE).pipe(operators.tap(function (orders) {
                 if (orders.pagination) {
                     _this.sortType = orders.pagination.sort;
                 }
             }));
+            this.hasReplenishmentOrder$ = this.userReplenishmentOrderService
+                .getReplenishmentOrderDetails()
+                .pipe(operators.map(function (order) { return order && Object.keys(order).length !== 0; }));
             this.isLoaded$ = this.userOrderService.getOrderHistoryListLoaded();
             /**
              * When "Order Return" feature is enabled, this component becomes one tab in
@@ -16390,14 +16827,15 @@
     OrderHistoryComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-history',
-                    template: "<ng-container *ngIf=\"orders$ | async as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay_' + order?.statusDisplay\n                      | cxTranslate\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"isLoaded$ | async\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container\n  *ngIf=\"{\n    orderHistory: orders$ | async,\n    replenishmentOrder: hasReplenishmentOrder$ | async\n  } as type\"\n>\n  <ng-container *ngIf=\"type.orderHistory\">\n    <div [ngClass]=\"type.replenishmentOrder ? '' : 'container'\">\n      <!-- HEADER -->\n      <div\n        [ngClass]=\"\n          type.replenishmentOrder\n            ? 'cx-replenishment-details-order-history-header'\n            : 'cx-order-history-header'\n        \"\n      >\n        <h4 *ngIf=\"type.replenishmentOrder\">\n          {{ 'orderHistory.replenishmentHistory' | cxTranslate }}\n        </h4>\n        <h3 *ngIf=\"!type.replenishmentOrder\">\n          {{ 'orderHistory.orderHistory' | cxTranslate }}\n        </h3>\n      </div>\n\n      <!-- BODY -->\n      <div class=\"cx-order-history-body\">\n        <ng-container\n          *ngIf=\"type.orderHistory.pagination.totalResults > 0; else noOrder\"\n        >\n          <!-- Select Form and Pagination Top -->\n          <div class=\"cx-order-history-sort top row\">\n            <div\n              class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n            >\n              <cx-sorting\n                [sortOptions]=\"type.orderHistory.sorts\"\n                [sortLabels]=\"getSortLabels() | async\"\n                (sortListEvent)=\"changeSortCode($event)\"\n                [selectedOption]=\"type.orderHistory.pagination.sort\"\n                placeholder=\"{{\n                  'orderHistory.sortByMostRecent' | cxTranslate\n                }}\"\n              ></cx-sorting>\n            </div>\n            <div\n              *ngIf=\"type.orderHistory.pagination.totalPages > 1\"\n              class=\"cx-order-history-pagination\"\n            >\n              <cx-pagination\n                [pagination]=\"type.orderHistory.pagination\"\n                (viewPageEvent)=\"pageChange($event)\"\n              ></cx-pagination>\n            </div>\n          </div>\n          <!-- TABLE -->\n          <table class=\"table cx-order-history-table\">\n            <thead class=\"cx-order-history-thead-mobile\">\n              <th scope=\"col\">\n                {{ 'orderHistory.orderId' | cxTranslate }}\n              </th>\n              <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n              <th scope=\"col\">\n                {{ 'orderHistory.status' | cxTranslate }}\n              </th>\n              <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n            </thead>\n            <tbody>\n              <tr\n                *ngFor=\"let order of type.orderHistory.orders\"\n                (click)=\"goToOrderDetail(order)\"\n              >\n                <td class=\"cx-order-history-code\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.orderId' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{ order?.code }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-placed\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.date' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                    >{{ order?.placed | cxDate: 'longDate' }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-status\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.status' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{\n                      'orderDetails.statusDisplay_' + order?.statusDisplay\n                        | cxTranslate\n                    }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-total\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.total' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{ order?.total.formattedValue }}</a\n                  >\n                </td>\n              </tr>\n            </tbody>\n          </table>\n          <!-- Select Form and Pagination Bottom -->\n          <div class=\"cx-order-history-sort bottom row\">\n            <div\n              *ngIf=\"type.orderHistory.pagination.totalPages > 1\"\n              class=\"cx-order-history-pagination\"\n            >\n              <cx-pagination\n                [pagination]=\"type.orderHistory.pagination\"\n                (viewPageEvent)=\"pageChange($event)\"\n              ></cx-pagination>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- NO ORDER CONTAINER -->\n        <ng-template #noOrder>\n          <div\n            *ngIf=\"isLoaded$ | async\"\n            [ngClass]=\"\n              type.replenishmentOrder\n                ? 'cx-replenishment-details-order-history-no-order row'\n                : 'cx-order-history-no-order row'\n            \"\n          >\n            <div\n              [ngClass]=\"\n                type.replenishmentOrder ? '' : 'col-sm-12 col-md-6 col-lg-4'\n              \"\n            >\n              <ng-container *ngIf=\"type.replenishmentOrder; else otherOrder\">\n                <div>{{ 'orderHistory.notFound' | cxTranslate }}</div>\n              </ng-container>\n\n              <ng-template #otherOrder>\n                <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n                <a\n                  [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n                  routerLinkActive=\"active\"\n                  class=\"btn btn-primary btn-block\"\n                  >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n                >\n              </ng-template>\n            </div>\n          </div>\n        </ng-template>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     OrderHistoryComponent.ctorParameters = function () { return [
         { type: i1.RoutingService },
         { type: i1.UserOrderService },
-        { type: i1.TranslationService }
+        { type: i1.TranslationService },
+        { type: i1.UserReplenishmentOrderService }
     ]; };
 
     var ɵ0$6 = { cxRoute: 'orders' };
@@ -16438,6 +16876,322 @@
                         }),
                     ],
                     entryComponents: [OrderHistoryComponent],
+                },] }
+    ];
+
+    var defaultReplenishmentOrderCancellationLayoutConfig = {
+        launch: {
+            REPLENISHMENT_ORDER: {
+                inline: true,
+                component: ReplenishmentOrderCancellationDialogComponent,
+                dialogType: exports.DIALOG_TYPE.DIALOG,
+            },
+        },
+    };
+
+    var ReplenishmentOrderCancellationLaunchDialogService = /** @class */ (function () {
+        function ReplenishmentOrderCancellationLaunchDialogService(launchDialogService) {
+            this.launchDialogService = launchDialogService;
+        }
+        ReplenishmentOrderCancellationLaunchDialogService.prototype.openDialog = function (openElement, vcr, data) {
+            var _this = this;
+            var component = this.launchDialogService.launch(exports.LAUNCH_CALLER.REPLENISHMENT_ORDER, vcr, data);
+            if (component) {
+                return rxjs.combineLatest([
+                    component,
+                    this.launchDialogService.dialogClose,
+                ]).pipe(operators.filter(function (_a) {
+                    var _b = __read(_a, 2), close = _b[1];
+                    return close && close !== undefined;
+                }), operators.tap(function (_a) {
+                    var _b = __read(_a, 1), comp = _b[0];
+                    openElement === null || openElement === void 0 ? void 0 : openElement.nativeElement.focus();
+                    _this.launchDialogService.clear(exports.LAUNCH_CALLER.REPLENISHMENT_ORDER);
+                    comp.destroy();
+                }), operators.map(function (_a) {
+                    var _b = __read(_a, 1), comp = _b[0];
+                    return comp;
+                }));
+            }
+        };
+        return ReplenishmentOrderCancellationLaunchDialogService;
+    }());
+    ReplenishmentOrderCancellationLaunchDialogService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ReplenishmentOrderCancellationLaunchDialogService_Factory() { return new ReplenishmentOrderCancellationLaunchDialogService(i0.ɵɵinject(LaunchDialogService)); }, token: ReplenishmentOrderCancellationLaunchDialogService, providedIn: "root" });
+    ReplenishmentOrderCancellationLaunchDialogService.decorators = [
+        { type: i0.Injectable, args: [{ providedIn: 'root' },] }
+    ];
+    ReplenishmentOrderCancellationLaunchDialogService.ctorParameters = function () { return [
+        { type: LaunchDialogService }
+    ]; };
+
+    var ReplenishmentOrderCancellationComponent = /** @class */ (function () {
+        function ReplenishmentOrderCancellationComponent(userReplenishmentOrderService, replenishmentOrderCancellationLaunchDialogService, vcr) {
+            this.userReplenishmentOrderService = userReplenishmentOrderService;
+            this.replenishmentOrderCancellationLaunchDialogService = replenishmentOrderCancellationLaunchDialogService;
+            this.vcr = vcr;
+            this.subscription = new rxjs.Subscription();
+            this.replenishmentOrder$ = this.userReplenishmentOrderService.getReplenishmentOrderDetails();
+        }
+        ReplenishmentOrderCancellationComponent.prototype.openDialog = function () {
+            var dialog = this.replenishmentOrderCancellationLaunchDialogService.openDialog(this.element, this.vcr);
+            if (dialog) {
+                this.subscription.add(dialog.pipe(operators.take(1)).subscribe());
+            }
+        };
+        ReplenishmentOrderCancellationComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+            this.userReplenishmentOrderService.clearReplenishmentOrderDetails();
+        };
+        return ReplenishmentOrderCancellationComponent;
+    }());
+    ReplenishmentOrderCancellationComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-replenishment-order-cancellation',
+                    template: "<div class=\"cx-cancel-replenishment-btns row\">\n  <div class=\"col-xs-12 col-md-5 col-lg-4\">\n    <a\n      class=\"btn btn-block btn-action\"\n      [routerLink]=\"\n        {\n          cxRoute: 'replenishmentOrders'\n        } | cxUrl\n      \"\n    >\n      {{ 'common.back' | cxTranslate }}\n    </a>\n  </div>\n  <div\n    *ngIf=\"(replenishmentOrder$ | async).active\"\n    class=\"col-xs-12 col-md-5 col-lg-4\"\n  >\n    <button #element class=\"btn btn-block btn-action\" (click)=\"openDialog()\">\n      {{ 'orderDetails.cancelReplenishment.title' | cxTranslate }}\n    </button>\n  </div>\n</div>\n"
+                },] }
+    ];
+    ReplenishmentOrderCancellationComponent.ctorParameters = function () { return [
+        { type: i1.UserReplenishmentOrderService },
+        { type: ReplenishmentOrderCancellationLaunchDialogService },
+        { type: i0.ViewContainerRef }
+    ]; };
+    ReplenishmentOrderCancellationComponent.propDecorators = {
+        element: [{ type: i0.ViewChild, args: ['element',] }]
+    };
+
+    var ReplenishmentOrderDetailsService = /** @class */ (function () {
+        function ReplenishmentOrderDetailsService(routingService, userReplenishmentOrderService) {
+            var _this = this;
+            this.routingService = routingService;
+            this.userReplenishmentOrderService = userReplenishmentOrderService;
+            this.replenishmentOrderCode$ = this.routingService
+                .getRouterState()
+                .pipe(operators.map(function (routingData) { return routingData.state.params.replenishmentOrderCode; }));
+            this.replenishmentOrderLoad$ = this.replenishmentOrderCode$.pipe(operators.tap(function (replenishmentOrderCode) {
+                if (Boolean(replenishmentOrderCode)) {
+                    _this.userReplenishmentOrderService.loadReplenishmentOrderDetails(replenishmentOrderCode);
+                }
+                else {
+                    _this.userReplenishmentOrderService.clearReplenishmentOrderDetails();
+                }
+            }), operators.shareReplay({ bufferSize: 1, refCount: true }));
+        }
+        ReplenishmentOrderDetailsService.prototype.getOrderDetails = function () {
+            var _this = this;
+            return this.replenishmentOrderLoad$.pipe(operators.switchMap(function (_) { return _this.userReplenishmentOrderService.getReplenishmentOrderDetails(); }));
+        };
+        return ReplenishmentOrderDetailsService;
+    }());
+    ReplenishmentOrderDetailsService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ReplenishmentOrderDetailsService_Factory() { return new ReplenishmentOrderDetailsService(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.UserReplenishmentOrderService)); }, token: ReplenishmentOrderDetailsService, providedIn: "root" });
+    ReplenishmentOrderDetailsService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    ReplenishmentOrderDetailsService.ctorParameters = function () { return [
+        { type: i1.RoutingService },
+        { type: i1.UserReplenishmentOrderService }
+    ]; };
+
+    var moduleComponents$1 = [ReplenishmentOrderCancellationComponent];
+    var ɵ0$7 = { cxRoute: 'replenishmentDetails' };
+    var ReplenishmentOrderDetailsModule = /** @class */ (function () {
+        function ReplenishmentOrderDetailsModule() {
+        }
+        return ReplenishmentOrderDetailsModule;
+    }());
+    ReplenishmentOrderDetailsModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [
+                        CartSharedModule,
+                        CardModule,
+                        i1$1.CommonModule,
+                        i1.I18nModule,
+                        PromotionsModule,
+                        i1.UrlModule,
+                        ReplenishmentOrderCancellationDialogModule,
+                        SpinnerModule,
+                        ListNavigationModule,
+                        i4.RouterModule.forChild([
+                            {
+                                path: null,
+                                canActivate: [i1.AuthGuard, CmsPageGuard],
+                                component: PageLayoutComponent,
+                                data: ɵ0$7,
+                            },
+                        ]),
+                    ],
+                    providers: [
+                        i1.provideConfig(defaultReplenishmentOrderCancellationLayoutConfig),
+                        i1.provideDefaultConfig({
+                            cmsComponents: {
+                                ReplenishmentDetailItemsComponent: {
+                                    component: OrderDetailItemsComponent,
+                                    providers: [
+                                        {
+                                            provide: OrderDetailsService,
+                                            useExisting: ReplenishmentOrderDetailsService,
+                                        },
+                                    ],
+                                },
+                                ReplenishmentDetailTotalsComponent: {
+                                    component: OrderDetailTotalsComponent,
+                                    providers: [
+                                        {
+                                            provide: OrderDetailsService,
+                                            useExisting: ReplenishmentOrderDetailsService,
+                                        },
+                                    ],
+                                },
+                                ReplenishmentDetailShippingComponent: {
+                                    component: OrderDetailShippingComponent,
+                                    providers: [
+                                        {
+                                            provide: OrderDetailsService,
+                                            useExisting: ReplenishmentOrderDetailsService,
+                                        },
+                                    ],
+                                },
+                                ReplenishmentDetailActionsComponent: {
+                                    component: ReplenishmentOrderCancellationComponent,
+                                },
+                                ReplenishmentDetailOrderHistoryComponent: {
+                                    component: OrderHistoryComponent,
+                                },
+                            },
+                        }),
+                    ],
+                    declarations: __spread(moduleComponents$1),
+                    exports: __spread(moduleComponents$1),
+                    entryComponents: __spread(moduleComponents$1),
+                },] }
+    ];
+
+    var ReplenishmentOrderHistoryComponent = /** @class */ (function () {
+        function ReplenishmentOrderHistoryComponent(routing, userReplenishmentOrderService, replenishmentOrderCancellationLaunchDialogService, translation, vcr) {
+            var _this = this;
+            this.routing = routing;
+            this.userReplenishmentOrderService = userReplenishmentOrderService;
+            this.replenishmentOrderCancellationLaunchDialogService = replenishmentOrderCancellationLaunchDialogService;
+            this.translation = translation;
+            this.vcr = vcr;
+            this.subscription = new rxjs.Subscription();
+            this.PAGE_SIZE = 5;
+            this.replenishmentOrders$ = this.userReplenishmentOrderService
+                .getReplenishmentOrderHistoryList(this.PAGE_SIZE)
+                .pipe(operators.tap(function (replenishmentOrders) {
+                if (replenishmentOrders.pagination) {
+                    _this.sortType = replenishmentOrders.pagination.sort;
+                }
+            }));
+            this.isLoaded$ = this.userReplenishmentOrderService.getReplenishmentOrderHistoryListSuccess();
+        }
+        ReplenishmentOrderHistoryComponent.prototype.changeSortCode = function (sortCode) {
+            var event = {
+                sortCode: sortCode,
+                currentPage: 0,
+            };
+            this.sortType = sortCode;
+            this.fetchReplenishmentOrders(event);
+        };
+        ReplenishmentOrderHistoryComponent.prototype.pageChange = function (page) {
+            var event = {
+                sortCode: this.sortType,
+                currentPage: page,
+            };
+            this.fetchReplenishmentOrders(event);
+        };
+        ReplenishmentOrderHistoryComponent.prototype.goToOrderDetail = function (order) {
+            this.routing.go({
+                cxRoute: 'replenishmentDetails',
+                params: order,
+            });
+        };
+        ReplenishmentOrderHistoryComponent.prototype.getSortLabels = function () {
+            return rxjs.combineLatest([
+                this.translation.translate('sorting.date'),
+                this.translation.translate('sorting.replenishmentNumber'),
+                this.translation.translate('sorting.nextOrderDate'),
+            ]).pipe(operators.map(function (_a) {
+                var _b = __read(_a, 3), textByDate = _b[0], textByOrderNumber = _b[1], textbyNextOrderDate = _b[2];
+                return {
+                    byDate: textByDate,
+                    byReplenishmentNumber: textByOrderNumber,
+                    byNextOrderDate: textbyNextOrderDate,
+                };
+            }));
+        };
+        ReplenishmentOrderHistoryComponent.prototype.openDialog = function (event, replenishmentOrderCode) {
+            var dialog = this.replenishmentOrderCancellationLaunchDialogService.openDialog(this.element, this.vcr, replenishmentOrderCode);
+            if (dialog) {
+                this.subscription.add(dialog.pipe(operators.take(1)).subscribe());
+            }
+            event.stopPropagation();
+        };
+        ReplenishmentOrderHistoryComponent.prototype.fetchReplenishmentOrders = function (event) {
+            this.userReplenishmentOrderService.loadReplenishmentOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
+        };
+        ReplenishmentOrderHistoryComponent.prototype.ngOnDestroy = function () {
+            this.subscription.unsubscribe();
+            this.userReplenishmentOrderService.clearReplenishmentOrderList();
+        };
+        return ReplenishmentOrderHistoryComponent;
+    }());
+    ReplenishmentOrderHistoryComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-replenishment-order-history',
+                    template: "<ng-container *ngIf=\"replenishmentOrders$ | async as replenishmentOrders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-replenishment-order-history-header\">\n      <h3>\n        {{ 'orderHistory.replenishmentOrderHistory' | cxTranslate }}\n      </h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-replenishment-order-history-body\">\n      <ng-container\n        *ngIf=\"replenishmentOrders.pagination.totalResults > 0; else noOrder\"\n      >\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-replenishment-order-history-sort top row\">\n          <div\n            class=\"cx-replenishment-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"replenishmentOrders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"replenishmentOrders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div\n            class=\"cx-replenishment-order-history-pagination\"\n            *ngIf=\"replenishmentOrders.pagination.totalPages > 1\"\n          >\n            <cx-pagination\n              [pagination]=\"replenishmentOrders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-replenishment-order-history-table\">\n          <thead class=\"cx-replenishment-order-history-thead-mobile\">\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.replenishmentOrderId' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.purchaseOrderNumber' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.startOn' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.frequency' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.nextOrderDate' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\" class=\"cx-replenishment-order-history-total\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.total' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\"></th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of replenishmentOrders.replenishmentOrders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-replenishment-order-history-code\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.replenishmentOrderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.replenishmentOrderCode }}</a\n                >\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.purchaseOrderNumber' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value cx-purchase-order-number\"\n                >\n                  {{\n                    order?.purchaseOrderNumber?.length > 0\n                      ? order?.purchaseOrderNumber\n                      : ('orderHistory.emptyPurchaseOrderId' | cxTranslate)\n                  }}\n                </a>\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.startOn' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.firstDate | cxDate: 'M/d/yyyy' }}</a\n                >\n              </td>\n              <td class=\"cx-replenishment-order-history-frequency\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.frequency' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.trigger.displayTimeTable | slice: 0:-12 }}\n                </a>\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.nextOrderDate' | cxTranslate }}\n                </div>\n\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value cx-next-order-date\"\n                >\n                  {{\n                    order?.active\n                      ? (order?.trigger.activationTime | cxDate: 'M/d/yyyy')\n                      : ('orderHistory.cancelled' | cxTranslate)\n                  }}\n                </a>\n              </td>\n              <td class=\"cx-replenishment-order-history-total\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.subTotal.formattedValue }}</a\n                >\n              </td>\n              <td class=\"cx-replenishment-order-history-cancel\">\n                <div\n                  class=\"d-md-none cx-replenishment-order-history-label\"\n                ></div>\n                <button\n                  (click)=\"openDialog($event, order?.replenishmentOrderCode)\"\n                  class=\"cx-order-cancel btn btn-link\"\n                  #element\n                  *ngIf=\"order?.active\"\n                >\n                  {{ 'orderHistory.cancel' | cxTranslate }}\n                </button>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-replenishment-order-history-sort bottom row\">\n          <div class=\"cx-replenishment-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"replenishmentOrders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n              *ngIf=\"replenishmentOrders.pagination.totalPages > 1\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div\n          class=\"cx-replenishment-order-history-no-order row\"\n          *ngIf=\"isLoaded$ | async\"\n        >\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noReplenishmentOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
+                    changeDetection: i0.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    ReplenishmentOrderHistoryComponent.ctorParameters = function () { return [
+        { type: i1.RoutingService },
+        { type: i1.UserReplenishmentOrderService },
+        { type: ReplenishmentOrderCancellationLaunchDialogService },
+        { type: i1.TranslationService },
+        { type: i0.ViewContainerRef }
+    ]; };
+    ReplenishmentOrderHistoryComponent.propDecorators = {
+        element: [{ type: i0.ViewChild, args: ['element',] }]
+    };
+
+    var ɵ0$8 = { cxRoute: 'replenishmentOrders' };
+    var ReplenishmentOrderHistoryModule = /** @class */ (function () {
+        function ReplenishmentOrderHistoryModule() {
+        }
+        return ReplenishmentOrderHistoryModule;
+    }());
+    ReplenishmentOrderHistoryModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [
+                        i1$1.CommonModule,
+                        i4.RouterModule.forChild([
+                            {
+                                path: null,
+                                canActivate: [i1.AuthGuard, CmsPageGuard],
+                                component: PageLayoutComponent,
+                                data: ɵ0$8,
+                            },
+                        ]),
+                        i4.RouterModule,
+                        ListNavigationModule,
+                        i1.UrlModule,
+                        i1.I18nModule,
+                    ],
+                    providers: [
+                        i1.provideConfig(defaultReplenishmentOrderCancellationLayoutConfig),
+                        i1.provideDefaultConfig({
+                            cmsComponents: {
+                                AccountReplenishmentHistoryComponent: {
+                                    component: ReplenishmentOrderHistoryComponent,
+                                    guards: [i1.AuthGuard],
+                                },
+                            },
+                        }),
+                    ],
+                    declarations: [ReplenishmentOrderHistoryComponent],
+                    exports: [ReplenishmentOrderHistoryComponent],
+                    entryComponents: [ReplenishmentOrderHistoryComponent],
                 },] }
     ];
 
@@ -16612,7 +17366,7 @@
         ReturnRequestItemsComponent,
         ReturnRequestTotalsComponent,
     ];
-    var ɵ0$7 = { cxRoute: 'returnRequestDetails' };
+    var ɵ0$9 = { cxRoute: 'returnRequestDetails' };
     var ReturnRequestDetailModule = /** @class */ (function () {
         function ReturnRequestDetailModule() {
         }
@@ -16627,7 +17381,7 @@
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$7,
+                                data: ɵ0$9,
                             },
                         ]),
                         i4.RouterModule,
@@ -16761,8 +17515,10 @@
                     imports: [
                         OrderHistoryModule,
                         OrderDetailsModule,
+                        ReplenishmentOrderDetailsModule,
                         OrderCancellationModule,
                         OrderReturnModule,
+                        ReplenishmentOrderHistoryModule,
                         ReturnRequestListModule,
                         ReturnRequestDetailModule,
                     ],
@@ -17618,7 +18374,7 @@
         { type: i1.GlobalMessageService }
     ]; };
 
-    var ɵ0$8 = { cxRoute: 'couponClaim' };
+    var ɵ0$a = { cxRoute: 'couponClaim' };
     var MyCouponsModule = /** @class */ (function () {
         function MyCouponsModule() {
         }
@@ -17640,7 +18396,7 @@
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$8,
+                                data: ɵ0$a,
                             },
                         ]),
                     ],
@@ -18832,9 +19588,8 @@
     ]; };
 
     var OrderConfirmationOverviewComponent = /** @class */ (function () {
-        function OrderConfirmationOverviewComponent(checkoutService, translation) {
+        function OrderConfirmationOverviewComponent(checkoutService) {
             this.checkoutService = checkoutService;
-            this.translation = translation;
         }
         OrderConfirmationOverviewComponent.prototype.ngOnInit = function () {
             this.order$ = this.checkoutService.getOrderDetails();
@@ -18842,137 +19597,17 @@
         OrderConfirmationOverviewComponent.prototype.ngOnDestroy = function () {
             this.checkoutService.clearCheckoutData();
         };
-        OrderConfirmationOverviewComponent.prototype.getOrderCodeCardContent = function (orderCode) {
-            return this.translation
-                .translate('checkoutOrderConfirmation.orderNumber')
-                .pipe(operators.filter(function () { return Boolean(orderCode); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                text: [orderCode],
-            }); }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getOrderCurrentDateCardContent = function (isoDate) {
-            var _this = this;
-            return this.translation
-                .translate('checkoutOrderConfirmation.placedOn')
-                .pipe(operators.map(function (textTitle) {
-                var date = _this.getDate(new Date(isoDate));
-                return {
-                    title: textTitle,
-                    text: [date],
-                };
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getOrderStatusCardContent = function (status) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutOrderConfirmation.status'),
-                this.translation.translate('orderDetails.statusDisplay', {
-                    context: status,
-                }),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], textStatus = _d[1];
-                return ({
-                    title: textTitle,
-                    text: [textStatus],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getPurchaseOrderNumber = function (poNumber) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutReview.poNumber'),
-                this.translation.translate('checkoutPO.noPoNumber'),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], noneTextTitle = _d[1];
-                return ({
-                    title: textTitle,
-                    text: [poNumber ? poNumber : noneTextTitle],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getMethodOfPaymentCardContent = function (hasPaymentInfo) {
-            return rxjs.combineLatest([
-                this.translation.translate('checkoutProgress.methodOfPayment'),
-                this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
-                this.translation.translate('paymentTypes.paymentType_CARD'),
-            ]).pipe(operators.map(function (_c) {
-                var _d = __read(_c, 3), textTitle = _d[0], textAccount = _d[1], textCard = _d[2];
-                return ({
-                    title: textTitle,
-                    text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getCostCenterCardContent = function (costCenter) {
-            return this.translation.translate('checkoutPO.costCenter').pipe(operators.filter(function () { return Boolean(costCenter); }), operators.map(function (textTitle) {
-                var _a;
-                return ({
-                    title: textTitle,
-                    textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
-                    text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getAddressCardContent = function (deliveryAddress) {
-            return this.translation.translate('addressCard.shipTo').pipe(operators.filter(function () { return Boolean(deliveryAddress); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                textBold: deliveryAddress.firstName + " " + deliveryAddress.lastName,
-                text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
-            }); }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getDeliveryModeCardContent = function (deliveryMode) {
-            return this.translation.translate('checkoutShipping.shippingMethod').pipe(operators.filter(function () { return Boolean(deliveryMode); }), operators.map(function (textTitle) {
-                var _a, _b;
-                return ({
-                    title: textTitle,
-                    textBold: deliveryMode.name,
-                    text: [
-                        deliveryMode.description,
-                        ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
-                    ],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getPaymentInfoCardContent = function (payment) {
-            return rxjs.combineLatest([
-                this.translation.translate('paymentForm.payment'),
-                this.translation.translate('paymentCard.expires', {
-                    month: Boolean(payment) ? payment.expiryMonth : '',
-                    year: Boolean(payment) ? payment.expiryYear : '',
-                }),
-            ]).pipe(operators.filter(function () { return Boolean(payment); }), operators.map(function (_c) {
-                var _d = __read(_c, 2), textTitle = _d[0], textExpires = _d[1];
-                return ({
-                    title: textTitle,
-                    textBold: payment.accountHolderName,
-                    text: [payment.cardNumber, textExpires],
-                });
-            }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getBillingAddressCardContent = function (billingAddress) {
-            return this.translation.translate('paymentForm.billingAddress').pipe(operators.filter(function () { return Boolean(billingAddress); }), operators.map(function (textTitle) { return ({
-                title: textTitle,
-                textBold: billingAddress.firstName + " " + billingAddress.lastName,
-                text: [billingAddress.formattedAddress, billingAddress.country.name],
-            }); }));
-        };
-        OrderConfirmationOverviewComponent.prototype.getDate = function (givenDate) {
-            var date = givenDate.toDateString().split(' ');
-            var month = date[1];
-            var day = date[2];
-            var year = date[3];
-            return month + ' ' + day + ' ' + year;
-        };
         return OrderConfirmationOverviewComponent;
     }());
     OrderConfirmationOverviewComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-confirmation-overview',
-                    template: "<div class=\"cx-order-review-summary\" *ngIf=\"order$ | async as order\">\n  <div class=\"container\">\n    <div class=\"summary-card\">\n      <cx-card\n        [content]=\"getOrderCodeCardContent(order?.code) | async\"\n      ></cx-card>\n\n      <cx-card\n        [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n      ></cx-card>\n\n      <cx-card\n        [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n      ></cx-card>\n    </div>\n\n    <ng-container\n      *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n    >\n      <div class=\"summary-card\">\n        <cx-card\n          [content]=\"getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order.costCenter\">\n          <cx-card\n            [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n    </ng-container>\n\n    <div class=\"summary-card\">\n      <ng-container *ngIf=\"order.deliveryAddress\">\n        <cx-card\n          [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n        ></cx-card>\n      </ng-container>\n\n      <ng-container *ngIf=\"order.deliveryMode\">\n        <cx-card\n          [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n        ></cx-card>\n      </ng-container>\n    </div>\n\n    <ng-container *ngIf=\"order.paymentInfo\">\n      <div class=\"summary-card\">\n        <cx-card\n          [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <cx-order-overview [order]=\"order\"></cx-order-overview>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     OrderConfirmationOverviewComponent.ctorParameters = function () { return [
-        { type: i1.CheckoutService },
-        { type: i1.TranslationService }
+        { type: i1.CheckoutService }
     ]; };
 
     var OrderConfirmationThankYouMessageComponent = /** @class */ (function () {
@@ -18986,6 +19621,9 @@
                 _this.isGuestCustomer = order.guestCustomer;
                 _this.orderGuid = order.guid;
             }));
+            this.isReplenishmentOrderType$ = this.checkoutService
+                .getCurrentOrderType()
+                .pipe(operators.map(function (orderType) { return i1.ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER === orderType; }));
         };
         OrderConfirmationThankYouMessageComponent.prototype.ngOnDestroy = function () {
             this.checkoutService.clearCheckoutData();
@@ -18995,7 +19633,7 @@
     OrderConfirmationThankYouMessageComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-order-confirmation-thank-you-message',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </div>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n    <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{\n        (isReplenishmentOrderType$ | async)\n          ? order.replenishmentOrderCode\n          : order.code\n      }}\n    </h1>\n  </div>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -19139,6 +19777,7 @@
                         forms.ReactiveFormsModule,
                         i1.FeaturesConfigModule,
                         FormErrorsModule,
+                        OrderOverviewModule,
                     ],
                     providers: [
                         i1.provideDefaultConfig({
@@ -19165,6 +19804,49 @@
                     declarations: __spread(orderConfirmationComponents),
                     exports: __spread(orderConfirmationComponents),
                     entryComponents: __spread(orderConfirmationComponents),
+                },] }
+    ];
+
+    var ReplenishmentOrderConfirmationModule = /** @class */ (function () {
+        function ReplenishmentOrderConfirmationModule() {
+        }
+        return ReplenishmentOrderConfirmationModule;
+    }());
+    ReplenishmentOrderConfirmationModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [
+                        i1$1.CommonModule,
+                        CartSharedModule,
+                        CardModule,
+                        PwaModule,
+                        PromotionsModule,
+                        i1.I18nModule,
+                        forms.ReactiveFormsModule,
+                        i1.FeaturesConfigModule,
+                        FormErrorsModule,
+                    ],
+                    providers: [
+                        i1.provideDefaultConfig({
+                            cmsComponents: {
+                                ReplenishmentConfirmationMessageComponent: {
+                                    component: OrderConfirmationThankYouMessageComponent,
+                                    guards: [OrderConfirmationGuard],
+                                },
+                                ReplenishmentConfirmationOverviewComponent: {
+                                    component: OrderConfirmationOverviewComponent,
+                                    guards: [OrderConfirmationGuard],
+                                },
+                                ReplenishmentConfirmationItemsComponent: {
+                                    component: OrderConfirmationItemsComponent,
+                                    guards: [OrderConfirmationGuard],
+                                },
+                                ReplenishmentConfirmationTotalsComponent: {
+                                    component: OrderConfirmationTotalsComponent,
+                                    guards: [OrderConfirmationGuard],
+                                },
+                            },
+                        }),
+                    ],
                 },] }
     ];
 
@@ -22250,7 +22932,7 @@
         { type: i1.ProtectedRoutesService }
     ]; };
 
-    var ɵ0$9 = { cxRoute: 'logout' };
+    var ɵ0$b = { cxRoute: 'logout' };
     var LogoutModule = /** @class */ (function () {
         function LogoutModule() {
         }
@@ -22265,7 +22947,7 @@
                                 path: null,
                                 canActivate: [LogoutGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$9,
+                                data: ɵ0$b,
                             },
                         ]),
                     ],
@@ -22659,6 +23341,9 @@
                         NotificationPreferenceModule,
                         MyInterestsModule,
                         StockNotificationModule,
+                        ReplenishmentOrderHistoryModule,
+                        ReplenishmentOrderConfirmationModule,
+                        ReplenishmentOrderDetailsModule,
                     ],
                 },] }
     ];
@@ -22690,7 +23375,7 @@
         factory: function () { return getProductDetailsUrlMatcherFactory(i0.inject(i1.UrlMatcherService), i0.inject(i1.DEFAULT_URL_MATCHER)); },
     });
 
-    var ɵ0$a = { cxRoute: 'product' };
+    var ɵ0$c = { cxRoute: 'product' };
     var ProductDetailsPageModule = /** @class */ (function () {
         function ProductDetailsPageModule() {
         }
@@ -22704,7 +23389,7 @@
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$a,
+                                data: ɵ0$c,
                             },
                         ]),
                     ],
@@ -22749,7 +23434,7 @@
         factory: function () { return getProductListingUrlMatcherFactory(i0.inject(i1.UrlMatcherService), i0.inject(i1.DEFAULT_URL_MATCHER)); },
     });
 
-    var ɵ0$b = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
+    var ɵ0$d = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
     var ProductListingPageModule = /** @class */ (function () {
         function ProductListingPageModule() {
         }
@@ -22763,7 +23448,7 @@
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$b,
+                                data: ɵ0$d,
                             },
                             {
                                 path: null,
@@ -23446,6 +24131,7 @@
     exports.CheckoutProgressMobileTopComponent = CheckoutProgressMobileTopComponent;
     exports.CheckoutProgressMobileTopModule = CheckoutProgressMobileTopModule;
     exports.CheckoutProgressModule = CheckoutProgressModule;
+    exports.CheckoutReplenishmentFormService = CheckoutReplenishmentFormService;
     exports.CheckoutStepService = CheckoutStepService;
     exports.CloseAccountComponent = CloseAccountComponent;
     exports.CloseAccountModalComponent = CloseAccountModalComponent;
@@ -23575,7 +24261,6 @@
     exports.OrderConsignedEntriesComponent = OrderConsignedEntriesComponent;
     exports.OrderDetailActionsComponent = OrderDetailActionsComponent;
     exports.OrderDetailApprovalDetailsComponent = OrderDetailApprovalDetailsComponent;
-    exports.OrderDetailHeadlineComponent = OrderDetailHeadlineComponent;
     exports.OrderDetailItemsComponent = OrderDetailItemsComponent;
     exports.OrderDetailShippingComponent = OrderDetailShippingComponent;
     exports.OrderDetailTotalsComponent = OrderDetailTotalsComponent;
@@ -23584,6 +24269,8 @@
     exports.OrderHistoryComponent = OrderHistoryComponent;
     exports.OrderHistoryModule = OrderHistoryModule;
     exports.OrderModule = OrderModule;
+    exports.OrderOverviewComponent = OrderOverviewComponent;
+    exports.OrderOverviewModule = OrderOverviewModule;
     exports.OrderReturnGuard = OrderReturnGuard;
     exports.OrderReturnModule = OrderReturnModule;
     exports.OrderReturnRequestListComponent = OrderReturnRequestListComponent;
@@ -23672,6 +24359,15 @@
     exports.QualtricsModule = QualtricsModule;
     exports.RegisterComponent = RegisterComponent;
     exports.RegisterComponentModule = RegisterComponentModule;
+    exports.ReplenishmentOrderCancellationComponent = ReplenishmentOrderCancellationComponent;
+    exports.ReplenishmentOrderCancellationDialogComponent = ReplenishmentOrderCancellationDialogComponent;
+    exports.ReplenishmentOrderCancellationDialogModule = ReplenishmentOrderCancellationDialogModule;
+    exports.ReplenishmentOrderCancellationLaunchDialogService = ReplenishmentOrderCancellationLaunchDialogService;
+    exports.ReplenishmentOrderConfirmationModule = ReplenishmentOrderConfirmationModule;
+    exports.ReplenishmentOrderDetailsModule = ReplenishmentOrderDetailsModule;
+    exports.ReplenishmentOrderDetailsService = ReplenishmentOrderDetailsService;
+    exports.ReplenishmentOrderHistoryComponent = ReplenishmentOrderHistoryComponent;
+    exports.ReplenishmentOrderHistoryModule = ReplenishmentOrderHistoryModule;
     exports.ResetPasswordFormComponent = ResetPasswordFormComponent;
     exports.ResetPasswordModule = ResetPasswordModule;
     exports.ReturnOrderComponent = ReturnOrderComponent;
@@ -23691,6 +24387,8 @@
     exports.SaveForLaterComponent = SaveForLaterComponent;
     exports.SaveForLaterModule = SaveForLaterModule;
     exports.ScheduleComponent = ScheduleComponent;
+    exports.ScheduleReplenishmentOrderComponent = ScheduleReplenishmentOrderComponent;
+    exports.ScheduleReplenishmentOrderModule = ScheduleReplenishmentOrderModule;
     exports.SearchBoxComponent = SearchBoxComponent;
     exports.SearchBoxComponentService = SearchBoxComponentService;
     exports.SearchBoxModule = SearchBoxModule;
@@ -23785,6 +24483,7 @@
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
     exports.defaultPaginationConfig = defaultPaginationConfig;
+    exports.defaultReplenishmentOrderCancellationLayoutConfig = defaultReplenishmentOrderCancellationLayoutConfig;
     exports.defaultScrollConfig = defaultScrollConfig;
     exports.defaultSkipLinkConfig = defaultSkipLinkConfig;
     exports.defaultTableConfig = defaultTableConfig;
@@ -23817,27 +24516,28 @@
     exports.ɵbn = CheckoutStepsSetGuard;
     exports.ɵbo = PaymentTypeModule;
     exports.ɵbp = PaymentTypeComponent;
-    exports.ɵbq = CostCenterModule;
-    exports.ɵbr = CostCenterComponent;
-    exports.ɵbs = CheckoutAuthGuard;
-    exports.ɵbt = CartNotEmptyGuard;
-    exports.ɵbu = defaultQualtricsConfig;
-    exports.ɵbv = CmsPageGuardService;
-    exports.ɵbw = CmsRoutesImplService;
-    exports.ɵbx = ReturnRequestService;
-    exports.ɵby = LoginRegisterComponent;
-    exports.ɵbz = PageTemplateStyleService;
+    exports.ɵbq = defaultPlaceOrderSpinnerLayoutConfig;
+    exports.ɵbr = CostCenterModule;
+    exports.ɵbs = CostCenterComponent;
+    exports.ɵbt = CheckoutAuthGuard;
+    exports.ɵbu = CartNotEmptyGuard;
+    exports.ɵbv = defaultQualtricsConfig;
+    exports.ɵbw = CmsPageGuardService;
+    exports.ɵbx = CmsRoutesImplService;
+    exports.ɵby = ReturnRequestService;
+    exports.ɵbz = LoginRegisterComponent;
     exports.ɵc = pwaFactory;
-    exports.ɵca = MyCouponsComponentService;
-    exports.ɵcb = addCmsRoute;
-    exports.ɵcc = defaultStorefrontRoutesConfig;
-    exports.ɵcd = defaultRoutingConfig;
-    exports.ɵce = htmlLangProvider;
-    exports.ɵcf = setHtmlLangAttribute;
-    exports.ɵcg = defaultDirectionConfig;
-    exports.ɵch = EventsModule;
-    exports.ɵci = DatePickerFormatterService;
-    exports.ɵcj = DateTimePickerFormatterService;
+    exports.ɵca = PageTemplateStyleService;
+    exports.ɵcb = MyCouponsComponentService;
+    exports.ɵcc = addCmsRoute;
+    exports.ɵcd = defaultStorefrontRoutesConfig;
+    exports.ɵce = defaultRoutingConfig;
+    exports.ɵcf = htmlLangProvider;
+    exports.ɵcg = setHtmlLangAttribute;
+    exports.ɵch = defaultDirectionConfig;
+    exports.ɵci = EventsModule;
+    exports.ɵcj = DatePickerFormatterService;
+    exports.ɵck = DateTimePickerFormatterService;
     exports.ɵd = getStructuredDataFactory;
     exports.ɵe = FOCUS_ATTR;
     exports.ɵf = skipLinkFactory;

@@ -19,6 +19,14 @@ export declare abstract class LaunchRenderStrategy implements Applicable {
      */
     protected popoverClasses: string[];
     /**
+     * Classes to apply to the component when the dialog is a POPOVER_CENTER
+     */
+    protected popoverCenterClasses: string[];
+    /**
+     * Classes to apply to the component when the dialog is a POPOVER_CENTER with a backdrop
+     */
+    protected popoverCenterBackdropClasses: string[];
+    /**
      * Classes to apply to the component when the dialog is a SIDEBAR_END
      */
     protected sidebarEndClasses: string[];

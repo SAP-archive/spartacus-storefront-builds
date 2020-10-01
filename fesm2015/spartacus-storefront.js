@@ -1,7 +1,7 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, Optional, InjectFlags, NgModuleFactory, Compiler, INJECTOR, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, APP_BOOTSTRAP_LISTENER, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, takeWhile, endWith, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, TranslationService, B2BPaymentTypeEnum, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, Location, isPlatformBrowser, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
@@ -22,6 +22,8 @@ import { ROUTER_NAVIGATED } from '@ngrx/router-store';
 var DIALOG_TYPE;
 (function (DIALOG_TYPE) {
     DIALOG_TYPE["POPOVER"] = "POPOVER";
+    DIALOG_TYPE["POPOVER_CENTER"] = "POPOVER_CENTER";
+    DIALOG_TYPE["POPOVER_CENTER_BACKDROP"] = "POPOVER_CENTER_BACKDROP";
     DIALOG_TYPE["DIALOG"] = "DIALOG";
     DIALOG_TYPE["SIDEBAR_START"] = "SIDEBAR_START";
     DIALOG_TYPE["SIDEBAR_END"] = "SIDEBAR_END";
@@ -34,6 +36,8 @@ var LAUNCH_CALLER;
     LAUNCH_CALLER["ASM"] = "ASM";
     LAUNCH_CALLER["SKIP_LINKS"] = "SKIP_LINKS";
     LAUNCH_CALLER["ANONYMOUS_CONSENT"] = "ANONYMOUS_CONSENT";
+    LAUNCH_CALLER["REPLENISHMENT_ORDER"] = "REPLENISHMENT_ORDER";
+    LAUNCH_CALLER["PLACE_ORDER_SPINNER"] = "PLACE_ORDER_SPINNER";
 })(LAUNCH_CALLER || (LAUNCH_CALLER = {}));
 
 var BREAKPOINT;
@@ -75,6 +79,16 @@ class LaunchRenderStrategy {
          */
         this.popoverClasses = ['cx-dialog-popover'];
         /**
+         * Classes to apply to the component when the dialog is a POPOVER_CENTER
+         */
+        this.popoverCenterClasses = ['cx-dialog-popover-center'];
+        /**
+         * Classes to apply to the component when the dialog is a POPOVER_CENTER with a backdrop
+         */
+        this.popoverCenterBackdropClasses = [
+            'cx-dialog-popover-center-backdrop',
+        ];
+        /**
          * Classes to apply to the component when the dialog is a SIDEBAR_END
          */
         this.sidebarEndClasses = ['cx-sidebar-end'];
@@ -106,6 +120,12 @@ class LaunchRenderStrategy {
                 break;
             case DIALOG_TYPE.POPOVER:
                 classes = this.popoverClasses;
+                break;
+            case DIALOG_TYPE.POPOVER_CENTER:
+                classes = this.popoverCenterClasses;
+                break;
+            case DIALOG_TYPE.POPOVER_CENTER_BACKDROP:
+                classes = this.popoverCenterBackdropClasses;
                 break;
             case DIALOG_TYPE.SIDEBAR_END:
                 classes = this.sidebarEndClasses;
@@ -1997,6 +2017,7 @@ var ICON_TYPE;
     ICON_TYPE["EMPTY_HEART"] = "EMPTY_HEART";
     ICON_TYPE["FILTER"] = "FILTER";
     ICON_TYPE["PENCIL"] = "PENCIL";
+    ICON_TYPE["CLOCK"] = "CLOCK";
     ICON_TYPE["TRASH"] = "TRASH";
     ICON_TYPE["ACTIVE"] = "ACTIVE";
     ICON_TYPE["SORT_DOWN"] = "SORT_DOWN";
@@ -2065,6 +2086,7 @@ const fontawesomeIconConfig = {
             EMPTY_HEART: 'far fa-heart',
             FILTER: 'fas fa-filter',
             PENCIL: 'fas fa-pencil-alt',
+            CLOCK: 'far fa-clock',
             TRASH: 'fas fa-trash',
             ACTIVE: 'fas fa-check',
             ON: 'fas fa-toggle-on',
@@ -4427,6 +4449,279 @@ ModalService.decorators = [
 ];
 ModalService.ctorParameters = () => [
     { type: NgbModal }
+];
+
+class OrderOverviewComponent {
+    constructor(translation) {
+        this.translation = translation;
+    }
+    set setOrder(order) {
+        this.order = order;
+    }
+    getReplenishmentCodeCardContent(orderCode) {
+        return this.translation
+            .translate('checkoutOrderConfirmation.replenishmentNumber')
+            .pipe(filter(() => Boolean(orderCode)), map((textTitle) => ({
+            title: textTitle,
+            text: [orderCode],
+        })));
+    }
+    getReplenishmentActiveCardContent(active) {
+        return combineLatest([
+            this.translation.translate('checkoutOrderConfirmation.status'),
+            this.translation.translate('checkoutOrderConfirmation.active'),
+            this.translation.translate('checkoutOrderConfirmation.cancelled'),
+        ]).pipe(map(([textTitle, textActive, textCancelled]) => ({
+            title: textTitle,
+            text: [active ? textActive : textCancelled],
+        })));
+    }
+    getReplenishmentStartOnCardContent(isoDate) {
+        return this.translation.translate('checkoutReview.startOn').pipe(filter(() => Boolean(isoDate)), map((textTitle) => {
+            const date = this.getDate(new Date(isoDate));
+            return {
+                title: textTitle,
+                text: [date],
+            };
+        }));
+    }
+    getReplenishmentFrequencyCardContent(frequency) {
+        return this.translation
+            .translate('checkoutOrderConfirmation.frequency')
+            .pipe(filter(() => Boolean(frequency)), map((textTitle) => ({
+            title: textTitle,
+            text: [frequency],
+        })));
+    }
+    getReplenishmentNextDateCardContent(isoDate) {
+        return this.translation
+            .translate('checkoutOrderConfirmation.nextOrderDate')
+            .pipe(filter(() => Boolean(isoDate)), map((textTitle) => {
+            const date = this.getDate(new Date(isoDate));
+            return {
+                title: textTitle,
+                text: [date],
+            };
+        }));
+    }
+    getOrderCodeCardContent(orderCode) {
+        return this.translation
+            .translate('checkoutOrderConfirmation.orderNumber')
+            .pipe(filter(() => Boolean(orderCode)), map((textTitle) => ({
+            title: textTitle,
+            text: [orderCode],
+        })));
+    }
+    getOrderCurrentDateCardContent(isoDate) {
+        return this.translation
+            .translate('checkoutOrderConfirmation.placedOn')
+            .pipe(map((textTitle) => {
+            let date;
+            if (Boolean(isoDate)) {
+                date = this.getDate(new Date(isoDate));
+            }
+            else {
+                date = this.getDate(new Date());
+            }
+            return {
+                title: textTitle,
+                text: [date],
+            };
+        }));
+    }
+    getOrderStatusCardContent(status) {
+        return combineLatest([
+            this.translation.translate('checkoutOrderConfirmation.status'),
+            this.translation.translate('orderDetails.statusDisplay', {
+                context: status,
+            }),
+        ]).pipe(map(([textTitle, textStatus]) => ({
+            title: textTitle,
+            text: [textStatus],
+        })));
+    }
+    getPurchaseOrderNumber(poNumber) {
+        return combineLatest([
+            this.translation.translate('checkoutReview.poNumber'),
+            this.translation.translate('checkoutPO.noPoNumber'),
+        ]).pipe(map(([textTitle, noneTextTitle]) => ({
+            title: textTitle,
+            text: [poNumber ? poNumber : noneTextTitle],
+        })));
+    }
+    getMethodOfPaymentCardContent(hasPaymentInfo) {
+        return combineLatest([
+            this.translation.translate('checkoutProgress.methodOfPayment'),
+            this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
+            this.translation.translate('paymentTypes.paymentType_CARD'),
+        ]).pipe(map(([textTitle, textAccount, textCard]) => ({
+            title: textTitle,
+            text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
+        })));
+    }
+    getCostCenterCardContent(costCenter) {
+        return this.translation.translate('checkoutPO.costCenter').pipe(filter(() => Boolean(costCenter)), map((textTitle) => {
+            var _a;
+            return ({
+                title: textTitle,
+                textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
+                text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
+            });
+        }));
+    }
+    getAddressCardContent(deliveryAddress) {
+        return this.translation.translate('addressCard.shipTo').pipe(filter(() => Boolean(deliveryAddress)), map((textTitle) => ({
+            title: textTitle,
+            textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
+            text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
+        })));
+    }
+    getDeliveryModeCardContent(deliveryMode) {
+        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter(() => Boolean(deliveryMode)), map((textTitle) => {
+            var _a, _b;
+            return ({
+                title: textTitle,
+                textBold: deliveryMode.name,
+                text: [
+                    deliveryMode.description,
+                    ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
+                ],
+            });
+        }));
+    }
+    getPaymentInfoCardContent(payment) {
+        return combineLatest([
+            this.translation.translate('paymentForm.payment'),
+            this.translation.translate('paymentCard.expires', {
+                month: Boolean(payment) ? payment.expiryMonth : '',
+                year: Boolean(payment) ? payment.expiryYear : '',
+            }),
+        ]).pipe(filter(() => Boolean(payment)), map(([textTitle, textExpires]) => ({
+            title: textTitle,
+            textBold: payment.accountHolderName,
+            text: [payment.cardNumber, textExpires],
+        })));
+    }
+    getBillingAddressCardContent(billingAddress) {
+        return this.translation.translate('paymentForm.billingAddress').pipe(filter(() => Boolean(billingAddress)), map((textTitle) => ({
+            title: textTitle,
+            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
+            text: [billingAddress.formattedAddress, billingAddress.country.name],
+        })));
+    }
+    getDate(givenDate) {
+        const date = givenDate.toDateString().split(' ');
+        const month = date[1];
+        const day = date[2];
+        const year = date[3];
+        return month + ' ' + day + ' ' + year;
+    }
+}
+OrderOverviewComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-order-overview',
+                template: "<div class=\"cx-order-summary\">\n  <div class=\"container\">\n    <ng-container *ngIf=\"order.replenishmentOrderCode; else otherOrder\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"\n            getReplenishmentCodeCardContent(order?.replenishmentOrderCode)\n              | async\n          \"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order?.created\">\n          <cx-card\n            [content]=\"getOrderCurrentDateCardContent() | async\"\n          ></cx-card>\n        </ng-container>\n\n        <cx-card\n          [content]=\"getReplenishmentActiveCardContent(order?.active) | async\"\n        ></cx-card>\n      </div>\n\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"\n            getReplenishmentStartOnCardContent(order?.firstDate) | async\n          \"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getReplenishmentFrequencyCardContent(\n              order?.trigger?.displayTimeTable\n            ) | async\n          \"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getReplenishmentNextDateCardContent(order?.trigger?.activationTime)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n\n    <ng-template #otherOrder>\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getOrderCodeCardContent(order?.code) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n        ></cx-card>\n      </div>\n    </ng-template>\n\n    <ng-container\n      *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n    >\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order.costCenter\">\n          <cx-card\n            [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n    </ng-container>\n\n    <div class=\"cx-summary-card\">\n      <ng-container *ngIf=\"order.deliveryAddress\">\n        <cx-card\n          [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n        ></cx-card>\n      </ng-container>\n\n      <ng-container *ngIf=\"order.deliveryMode\">\n        <cx-card\n          [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n        ></cx-card>\n      </ng-container>\n    </div>\n\n    <ng-container *ngIf=\"order.paymentInfo\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+OrderOverviewComponent.ctorParameters = () => [
+    { type: TranslationService }
+];
+OrderOverviewComponent.propDecorators = {
+    setOrder: [{ type: Input, args: ['order',] }]
+};
+
+class OrderOverviewModule {
+}
+OrderOverviewModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, I18nModule, CardModule],
+                declarations: [OrderOverviewComponent],
+                exports: [OrderOverviewComponent],
+            },] }
+];
+
+class ReplenishmentOrderCancellationDialogComponent {
+    constructor(userReplenishmentOrderService, globalMessageService, launchDialogService, el) {
+        this.userReplenishmentOrderService = userReplenishmentOrderService;
+        this.globalMessageService = globalMessageService;
+        this.launchDialogService = launchDialogService;
+        this.el = el;
+        this.subscription = new Subscription();
+        this.focusConfig = {
+            trap: true,
+            block: true,
+            autofocus: 'button',
+            focusOnEscape: true,
+        };
+    }
+    handleClick(event) {
+        // Close on click outside the dialog window
+        if (event.target.tagName === this.el.nativeElement.tagName) {
+            this.close('Cross click');
+        }
+    }
+    ngOnInit() {
+        this.subscription.add(combineLatest([
+            this.userReplenishmentOrderService
+                .getReplenishmentOrderDetails()
+                .pipe(startWith(null)),
+            this.launchDialogService.data$,
+        ]).subscribe(([replenishmentOrder, code]) => {
+            this.replenishmentOrderCode =
+                code || replenishmentOrder.replenishmentOrderCode;
+        }));
+        this.subscription.add(this.userReplenishmentOrderService
+            .getCancelReplenishmentOrderSuccess()
+            .subscribe((value) => this.onSuccess(value)));
+    }
+    onSuccess(value) {
+        if (value) {
+            this.launchDialogService.closeDialog('Successffully cancelled replenishment');
+            this.globalMessageService.add({
+                key: 'orderDetails.cancelReplenishment.cancelSuccess',
+                params: {
+                    replenishmentOrderCode: this.replenishmentOrderCode,
+                },
+            }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+        }
+        this.userReplenishmentOrderService.clearCancelReplenishmentOrderProcessState();
+    }
+    close(reason) {
+        this.launchDialogService.closeDialog(reason);
+    }
+    cancelReplenishment() {
+        this.userReplenishmentOrderService.cancelReplenishmentOrder(this.replenishmentOrderCode);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+}
+ReplenishmentOrderCancellationDialogComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-replenishment-order-cancellation-dialog',
+                template: "<div\n  [cxFocus]=\"focusConfig\"\n  (esc)=\"close('Escape clicked')\"\n  class=\"cx-cancel-replenishment-dialog-foreground\"\n>\n  <div class=\"cx-cancel-replenishment-dialog-content\">\n    <div class=\"cx-cancel-replenishment-dialog-header\">\n      <h3>\n        {{ 'orderDetails.cancelReplenishment.title' | cxTranslate }}\n      </h3>\n    </div>\n    <div class=\"cx-cancel-replenishment-dialog-description\">\n      {{ 'orderDetails.cancelReplenishment.description' | cxTranslate }}\n    </div>\n\n    <div class=\"cx-cancel-replenishment-dialog-body\">\n      <div class=\"cx-cancel-replenishment-btns row\">\n        <div class=\"col-md-6\">\n          <button\n            class=\"btn btn-block btn-action\"\n            (click)=\"close('Close Replenishment Dialog')\"\n          >\n            {{ 'orderDetails.cancelReplenishment.reject' | cxTranslate }}\n          </button>\n        </div>\n        <div class=\"col-md-6\">\n          <button\n            class=\"btn btn-block btn-primary\"\n            (click)=\"cancelReplenishment()\"\n          >\n            {{ 'orderDetails.cancelReplenishment.accept' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+            },] }
+];
+ReplenishmentOrderCancellationDialogComponent.ctorParameters = () => [
+    { type: UserReplenishmentOrderService },
+    { type: GlobalMessageService },
+    { type: LaunchDialogService },
+    { type: ElementRef }
+];
+ReplenishmentOrderCancellationDialogComponent.propDecorators = {
+    handleClick: [{ type: HostListener, args: ['click', ['$event'],] }]
+};
+
+class ReplenishmentOrderCancellationDialogModule {
+}
+ReplenishmentOrderCancellationDialogModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, I18nModule, KeyboardFocusModule],
+                declarations: [ReplenishmentOrderCancellationDialogComponent],
+                entryComponents: [ReplenishmentOrderCancellationDialogComponent],
+                exports: [ReplenishmentOrderCancellationDialogComponent],
+            },] }
 ];
 
 /**
@@ -10081,48 +10376,153 @@ PaymentTypeModule.decorators = [
             },] }
 ];
 
+const defaultPlaceOrderSpinnerLayoutConfig = {
+    launch: {
+        PLACE_ORDER_SPINNER: {
+            inline: true,
+            component: SpinnerComponent,
+            dialogType: DIALOG_TYPE.POPOVER_CENTER_BACKDROP,
+        },
+    },
+};
+
+class CheckoutReplenishmentFormService {
+    constructor() {
+        /**
+         * Default form data
+         */
+        this.defaultFormData = {
+            daysOfWeek: [DaysOfWeek.MONDAY],
+            nthDayOfMonth: '1',
+            numberOfDays: '14',
+            numberOfWeeks: '1',
+            recurrencePeriod: recurrencePeriod.DAILY,
+            replenishmentStartDate: new Date().toISOString(),
+        };
+        this.scheduleReplenishmentFormData$ = new BehaviorSubject(this.defaultFormData);
+    }
+    getScheduleReplenishmentFormData() {
+        return this.scheduleReplenishmentFormData$.asObservable();
+    }
+    setScheduleReplenishmentFormData(formData) {
+        this.scheduleReplenishmentFormData$.next(formData);
+    }
+    resetScheduleReplenishmentFormData() {
+        this.scheduleReplenishmentFormData$.next(this.defaultFormData);
+    }
+}
+CheckoutReplenishmentFormService.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutReplenishmentFormService_Factory() { return new CheckoutReplenishmentFormService(); }, token: CheckoutReplenishmentFormService, providedIn: "root" });
+CheckoutReplenishmentFormService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+CheckoutReplenishmentFormService.ctorParameters = () => [];
+
 class PlaceOrderComponent {
-    constructor(checkoutService, routingService, fb) {
+    constructor(checkoutService, checkoutReplenishmentFormService, routingService, launchDialogService, fb, vcr) {
         this.checkoutService = checkoutService;
+        this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
         this.routingService = routingService;
+        this.launchDialogService = launchDialogService;
         this.fb = fb;
+        this.vcr = vcr;
+        this.subscription = new Subscription();
+        this.daysOfWeekNotChecked$ = new BehaviorSubject(false);
         this.checkoutSubmitForm = this.fb.group({
             termsAndConditions: [false, Validators.requiredTrue],
         });
     }
+    get termsAndConditionInvalid() {
+        return this.checkoutSubmitForm.invalid;
+    }
     submitForm() {
-        if (this.checkoutSubmitForm.valid) {
-            this.checkoutService.placeOrder();
+        if (this.checkoutSubmitForm.valid && Boolean(this.currentOrderType)) {
+            switch (this.currentOrderType) {
+                case ORDER_TYPE.PLACE_ORDER: {
+                    this.checkoutService.placeOrder(this.checkoutSubmitForm.valid);
+                    break;
+                }
+                case ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER: {
+                    this.checkoutService.scheduleReplenishmentOrder(this.scheduleReplenishmentFormData, this.checkoutSubmitForm.valid);
+                    break;
+                }
+            }
         }
         else {
             this.checkoutSubmitForm.markAllAsTouched();
         }
     }
     ngOnInit() {
-        this.placeOrderSubscription = this.checkoutService
-            .getOrderDetails()
-            .pipe(filter((order) => Object.keys(order).length !== 0))
-            .subscribe(() => {
-            this.routingService.go({ cxRoute: 'orderConfirmation' });
-        });
+        this.subscription.add(combineLatest([
+            this.checkoutService.getPlaceOrderLoading(),
+            this.checkoutService.getPlaceOrderSuccess(),
+            this.checkoutService.getPlaceOrderError(),
+        ]).subscribe(([orderLoading, orderSuccess, orderError]) => {
+            if (orderLoading) {
+                this.placedOrder = this.launchDialogService.launch(LAUNCH_CALLER.PLACE_ORDER_SPINNER, this.vcr);
+            }
+            if (orderError) {
+                if (this.placedOrder) {
+                    this.placedOrder
+                        .subscribe((component) => {
+                        this.launchDialogService.clear(LAUNCH_CALLER.PLACE_ORDER_SPINNER);
+                        component.destroy();
+                    })
+                        .unsubscribe();
+                    this.checkoutService.clearPlaceOrderState();
+                }
+            }
+            if (orderSuccess) {
+                this.onSuccess(orderSuccess);
+            }
+        }));
+        this.subscription.add(this.checkoutService
+            .getCurrentOrderType()
+            .subscribe((orderType) => (this.currentOrderType = orderType)));
+        this.subscription.add(this.checkoutReplenishmentFormService
+            .getScheduleReplenishmentFormData()
+            .subscribe((data) => {
+            this.scheduleReplenishmentFormData = data;
+            this.daysOfWeekNotChecked$.next(data.daysOfWeek.length === 0 &&
+                data.recurrencePeriod === recurrencePeriod.WEEKLY);
+        }));
+    }
+    onSuccess(data) {
+        if (data) {
+            switch (this.currentOrderType) {
+                case ORDER_TYPE.PLACE_ORDER: {
+                    this.routingService.go({ cxRoute: 'orderConfirmation' });
+                    break;
+                }
+                case ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER: {
+                    this.routingService.go({ cxRoute: 'replenishmentConfirmation' });
+                    break;
+                }
+            }
+            this.checkoutReplenishmentFormService.resetScheduleReplenishmentFormData();
+        }
     }
     ngOnDestroy() {
-        if (this.placeOrderSubscription) {
-            this.placeOrderSubscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
+        this.launchDialogService.clear(LAUNCH_CALLER.PLACE_ORDER_SPINNER);
+        this.checkoutService.clearPlaceOrderState();
     }
 }
 PlaceOrderComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-place-order',
-                template: "<form\n  (ngSubmit)=\"submitForm()\"\n  class=\"cx-place-order-form form-check\"\n  [formGroup]=\"checkoutSubmitForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <input\n        formControlName=\"termsAndConditions\"\n        class=\"form-check-input\"\n        type=\"checkbox\"\n      />\n      <span class=\"form-check-label\">\n        {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n        <a\n          [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n          class=\"cx-tc-link\"\n          target=\"_blank\"\n        >\n          {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n        </a>\n      </span>\n      <cx-form-errors\n        [control]=\"checkoutSubmitForm.get('termsAndConditions')\"\n      ></cx-form-errors>\n    </label>\n  </div>\n\n  <button type=\"submit\" class=\"btn btn-primary btn-block\">\n    {{ 'checkoutReview.placeOrder' | cxTranslate }}\n  </button>\n</form>\n",
+                template: "<form\n  (ngSubmit)=\"submitForm()\"\n  class=\"cx-place-order-form form-check\"\n  [formGroup]=\"checkoutSubmitForm\"\n>\n  <div class=\"form-group\">\n    <label>\n      <input\n        formControlName=\"termsAndConditions\"\n        class=\"scaled-input form-check-input\"\n        type=\"checkbox\"\n      />\n      <span class=\"form-check-label\">\n        {{ 'checkoutReview.confirmThatRead' | cxTranslate }}\n        <a\n          [routerLink]=\"{ cxRoute: 'termsAndConditions' } | cxUrl\"\n          class=\"cx-tc-link\"\n          target=\"_blank\"\n        >\n          {{ 'checkoutReview.termsAndConditions' | cxTranslate }}\n        </a>\n      </span>\n    </label>\n  </div>\n\n  <button\n    type=\"submit\"\n    class=\"btn btn-primary btn-block\"\n    [disabled]=\"termsAndConditionInvalid || (daysOfWeekNotChecked$ | async)\"\n  >\n    {{ 'checkoutReview.placeOrder' | cxTranslate }}\n  </button>\n</form>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 PlaceOrderComponent.ctorParameters = () => [
     { type: CheckoutService },
+    { type: CheckoutReplenishmentFormService },
     { type: RoutingService },
-    { type: FormBuilder }
+    { type: LaunchDialogService },
+    { type: FormBuilder },
+    { type: ViewContainerRef }
 ];
 
 class PlaceOrderModule {
@@ -10135,9 +10535,9 @@ PlaceOrderModule.decorators = [
                     UrlModule,
                     I18nModule,
                     ReactiveFormsModule,
-                    FormErrorsModule,
                 ],
                 providers: [
+                    provideConfig(defaultPlaceOrderSpinnerLayoutConfig),
                     provideDefaultConfig({
                         cmsComponents: {
                             CheckoutPlaceOrder: {
@@ -10386,6 +10786,130 @@ ReviewSubmitModule.decorators = [
                 declarations: [ReviewSubmitComponent],
                 entryComponents: [ReviewSubmitComponent],
                 exports: [ReviewSubmitComponent],
+            },] }
+];
+
+class ScheduleReplenishmentOrderComponent {
+    constructor(checkoutService, checkoutReplenishmentFormService) {
+        this.checkoutService = checkoutService;
+        this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
+        this.subscription = new Subscription();
+        this.iconTypes = ICON_TYPE;
+        this.orderTypes = ORDER_TYPE;
+        this.daysOfWeek = Object.keys(DaysOfWeek).map((key) => DaysOfWeek[key]);
+        this.recurrencePeriodType = Object.keys(recurrencePeriod).map((key) => recurrencePeriod[key]);
+        this.selectedOrderType$ = this.checkoutService.getCurrentOrderType();
+        this.isMonthly = false;
+        this.isWeekly = false;
+        this.currentDaysOfWeek = [];
+    }
+    ngOnInit() {
+        this.subscription.add(this.checkoutReplenishmentFormService
+            .getScheduleReplenishmentFormData()
+            .subscribe((data) => {
+            this.scheduleReplenishmentFormData = data;
+        }));
+        this.initConfig();
+    }
+    changeOrderType(orderType) {
+        this.checkoutService.setOrderType(orderType);
+    }
+    changeNumberOfDays(nDays) {
+        this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { numberOfDays: nDays }));
+    }
+    changeNumberOfWeeks(nWeeks) {
+        this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { numberOfWeeks: nWeeks }));
+    }
+    changeRecurrencePeriodType(type) {
+        this.isWeekly = type === recurrencePeriod.WEEKLY;
+        this.isMonthly = type === recurrencePeriod.MONTHLY;
+        this.numberOfDays = this.isMonthly
+            ? this.createNumberStringArray(31)
+            : this.createNumberStringArray(30);
+        this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { recurrencePeriod: type }));
+    }
+    changeDayOfTheMonth(dayOfMonth) {
+        this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { nthDayOfMonth: dayOfMonth }));
+    }
+    changeReplenishmentStartDate(date) {
+        if (Boolean(date)) {
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { replenishmentStartDate: date }));
+        }
+    }
+    changeRepeatDays(day, isChecked) {
+        if (isChecked) {
+            this.currentDaysOfWeek = [...this.currentDaysOfWeek];
+            this.currentDaysOfWeek.push(day);
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { daysOfWeek: this.currentDaysOfWeek }));
+        }
+        else {
+            const foundDay = this.currentDaysOfWeek.find((data) => day === data);
+            if (!foundDay)
+                return;
+            const index = this.currentDaysOfWeek.indexOf(foundDay);
+            this.currentDaysOfWeek.splice(index, 1);
+            this.checkoutReplenishmentFormService.setScheduleReplenishmentFormData(Object.assign(Object.assign({}, this.scheduleReplenishmentFormData), { daysOfWeek: this.currentDaysOfWeek }));
+        }
+    }
+    hasDaysOfWeekChecked(day) {
+        return this.currentDaysOfWeek.includes(day);
+    }
+    currentISODate(date) {
+        return date.split('T')[0];
+    }
+    initConfig() {
+        this.isMonthly =
+            this.scheduleReplenishmentFormData.recurrencePeriod ===
+                recurrencePeriod.MONTHLY;
+        this.isWeekly =
+            this.scheduleReplenishmentFormData.recurrencePeriod ===
+                recurrencePeriod.WEEKLY;
+        this.currentDaysOfWeek = [...this.scheduleReplenishmentFormData.daysOfWeek];
+        this.numberOfDays = this.isMonthly
+            ? this.createNumberStringArray(31)
+            : this.createNumberStringArray(30);
+        this.numberOfWeeks = this.createNumberStringArray(12);
+        this.currentDate = this.scheduleReplenishmentFormData.replenishmentStartDate;
+    }
+    createNumberStringArray(n) {
+        return Array(n)
+            .fill(0)
+            .map((_, y) => (y + 1).toString());
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+}
+ScheduleReplenishmentOrderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-schedule-replenishment-order',
+                template: "<div class=\"cx-order-type-card\">\n  <div class=\"cx-label-container\">\n    <h5 class=\"cx-order-replenishment-header\">\n      {{ 'checkoutReview.autoReplenishOrder' | cxTranslate }}\n    </h5>\n    <cx-icon [type]=\"iconTypes.CLOCK\"></cx-icon>\n  </div>\n  <div\n    class=\"cx-order-type-container form-check\"\n    *ngFor=\"let type of orderTypes | keyvalue\"\n  >\n    <input\n      id=\"orderType-{{ type.value }}\"\n      class=\"scaled-input form-check-input\"\n      role=\"radio\"\n      type=\"radio\"\n      aria-checked=\"true\"\n      (change)=\"changeOrderType(type.value)\"\n      [value]=\"type.value\"\n      [checked]=\"type.value == (selectedOrderType$ | async)\"\n    />\n    <label\n      class=\"order-type-label form-check-label form-radio-label\"\n      for=\"orderType-{{ type.value }}\"\n    >\n      <div class=\"order-type\">\n        {{ 'checkoutReview.orderType' | cxTranslate: { context: type.value } }}\n      </div>\n    </label>\n  </div>\n  <ng-container\n    *ngIf=\"\n      scheduleReplenishmentFormData &&\n      (selectedOrderType$ | async) === orderTypes.SCHEDULE_REPLENISHMENT_ORDER\n    \"\n  >\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.every' | cxTranslate\n      }}</span>\n      <div *ngIf=\"!isMonthly\" class=\"cx-days\">\n        <ng-container *ngIf=\"isWeekly; else isDaily\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfWeeks($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nWeeks of numberOfWeeks\"\n              [value]=\"nWeeks\"\n              [selected]=\"\n                nWeeks === scheduleReplenishmentFormData.numberOfWeeks\n              \"\n            >\n              {{ nWeeks }}\n            </option>\n          </select>\n        </ng-container>\n        <ng-template #isDaily>\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfDays($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.numberOfDays\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </ng-template>\n      </div>\n      <div class=\"cx-month\">\n        <select\n          class=\"form-control\"\n          (change)=\"changeRecurrencePeriodType($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let type of recurrencePeriodType\"\n            [value]=\"type\"\n            [selected]=\"type === scheduleReplenishmentFormData.recurrencePeriod\"\n          >\n            {{\n              'checkoutReview.recurrencePeriodType'\n                | cxTranslate: { context: type }\n            }}\n          </option>\n        </select>\n      </div>\n    </div>\n\n    <div *ngIf=\"isMonthly\" class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.dayOfMonth' | cxTranslate\n      }}</span>\n      <div class=\"cx-day-of-month\">\n        <select\n          class=\"form-control\"\n          (change)=\"changeDayOfTheMonth($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let nDays of numberOfDays\"\n            [value]=\"nDays\"\n            [selected]=\"nDays === scheduleReplenishmentFormData.nthDayOfMonth\"\n          >\n            {{ nDays }}\n          </option>\n        </select>\n      </div>\n    </div>\n\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.startOn' | cxTranslate\n      }}</span>\n      <div class=\"cx-replenishment-date\">\n        <input\n          type=\"date\"\n          placeholder=\"yyyy-mm-dd\"\n          [value]=\"currentISODate(currentDate)\"\n          (change)=\"changeReplenishmentStartDate($event.target.value)\"\n        />\n      </div>\n    </div>\n\n    <div\n      *ngIf=\"isWeekly\"\n      class=\"cx-replenishment-form-data-container cx-repeat-days-container\"\n    >\n      <span class=\"cx-repeat-days form-data-label\">{{\n        'checkoutReview.repeatOnDays' | cxTranslate\n      }}</span>\n      <div *ngFor=\"let day of daysOfWeek\" class=\"form-check\">\n        <label for=\"day-{{ day }}\" class=\"cx-week-day\">{{\n          day | titlecase\n        }}</label\n        ><input\n          id=\"day-{{ day }}\"\n          type=\"checkbox\"\n          class=\"form-check-input\"\n          [checked]=\"hasDaysOfWeekChecked(day)\"\n          (change)=\"changeRepeatDays(day, $event.target.checked)\"\n        />\n      </div>\n    </div>\n  </ng-container>\n</div>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+ScheduleReplenishmentOrderComponent.ctorParameters = () => [
+    { type: CheckoutService },
+    { type: CheckoutReplenishmentFormService }
+];
+
+class ScheduleReplenishmentOrderModule {
+}
+ScheduleReplenishmentOrderModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, RouterModule, I18nModule, IconModule],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            CheckoutScheduleReplenishmentOrder: {
+                                component: ScheduleReplenishmentOrderComponent,
+                                guards: [CheckoutAuthGuard, CartNotEmptyGuard],
+                            },
+                        },
+                    }),
+                ],
+                declarations: [ScheduleReplenishmentOrderComponent],
+                entryComponents: [ScheduleReplenishmentOrderComponent],
+                exports: [ScheduleReplenishmentOrderComponent],
             },] }
 ];
 
@@ -10793,6 +11317,7 @@ CheckoutComponentModule.decorators = [
                     DeliveryModeModule,
                     PaymentMethodModule,
                     PlaceOrderModule,
+                    ScheduleReplenishmentOrderModule,
                     PromotionsModule,
                     ReviewSubmitModule,
                     ShippingAddressModule,
@@ -12512,6 +13037,7 @@ const defaultStorefrontRoutesConfig = {
     checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
     checkoutReviewOrder: { paths: ['checkout/review-order'] },
     orderConfirmation: { paths: ['order-confirmation'] },
+    replenishmentConfirmation: { paths: ['replenishment/confirmation'] },
     // plp routes
     search: { paths: ['search/:query'] },
     category: {
@@ -12560,6 +13086,13 @@ const defaultStorefrontRoutesConfig = {
     couponClaim: {
         paths: ['my-account/coupon/claim/:couponCode'],
         paramsMapping: { couponCode: 'code' },
+    },
+    replenishmentOrders: {
+        paths: ['my-account/my-replenishments'],
+    },
+    replenishmentDetails: {
+        paths: ['my-account/my-replenishment/:replenishmentOrderCode'],
+        paramsMapping: { replenishmentOrderCode: 'replenishmentOrderCode' },
     },
 };
 const defaultRoutingConfig = {
@@ -14215,24 +14748,6 @@ OrderDetailApprovalDetailsComponent.ctorParameters = () => [
     { type: OrderDetailsService }
 ];
 
-class OrderDetailHeadlineComponent {
-    constructor(orderDetailsService) {
-        this.orderDetailsService = orderDetailsService;
-    }
-    ngOnInit() {
-        this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-}
-OrderDetailHeadlineComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-order-details-headline',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.orderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.code }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placed' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.created | cxDate }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.status' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\" *ngIf=\"order?.statusDisplay\">\n        {{ 'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate }}\n      </div>\n    </div>\n  </div>\n  <div *ngIf=\"order?.orgCustomer?.orgUnit\" class=\"cx-header row\">\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.purchaseOrderId' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.purchaseOrderNumber\n            ? order?.purchaseOrderNumber\n            : ('orderDetails.none' | cxTranslate)\n        }}\n      </div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.placedBy' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">{{ order?.orgCustomer?.name }}</div>\n    </div>\n    <div class=\"cx-detail col-sm-12 col-md-4\">\n      <div class=\"cx-detail-label\">\n        {{ 'orderDetails.costCenterAndUnit' | cxTranslate }}\n      </div>\n      <div class=\"cx-detail-value\">\n        {{\n          order?.costCenter\n            ? ('orderDetails.costCenterAndUnitValue'\n              | cxTranslate\n                : {\n                    costCenterName: order?.costCenter?.name,\n                    unitName: order?.costCenter?.unit?.name\n                  })\n            : ('orderDetails.none'\n              | cxTranslate\n                : { value: 'orderDetails.paidByCreditCard' | cxTranslate })\n        }}\n      </div>\n    </div>\n  </div>\n</ng-container>\n"
-            },] }
-];
-OrderDetailHeadlineComponent.ctorParameters = () => [
-    { type: OrderDetailsService }
-];
-
 const completedValues = ['DELIVERY_COMPLETED', 'PICKUP_COMPLETE'];
 const cancelledValues = ['CANCELLED'];
 
@@ -14267,7 +14782,7 @@ class OrderDetailItemsComponent {
 OrderDetailItemsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-items',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries -->\n  <ng-container *ngIf=\"order.unconsignedEntries?.length\">\n    <div class=\"cx-list row\">\n      <div class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"order?.unconsignedEntries\"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container\n    *ngIf=\"order.consignments?.length || order.unconsignedEntries?.length\"\n  >\n    <ng-container *ngIf=\"orderPromotions$ | async as orderPromotions\">\n      <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n    </ng-container>\n  </ng-container>\n\n  <!-- consigned entries -->\n  <ng-container *ngIf=\"order.consignments?.length\">\n    <cx-order-consigned-entries\n      *ngIf=\"others$ | async as others\"\n      [order]=\"order\"\n      [consignments]=\"others\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"completed$ | async as completed\"\n      [order]=\"order\"\n      [consignments]=\"completed\"\n    ></cx-order-consigned-entries>\n\n    <cx-order-consigned-entries\n      *ngIf=\"cancel$ | async as cancel\"\n      [order]=\"order\"\n      [consignments]=\"cancel\"\n    ></cx-order-consigned-entries>\n  </ng-container>\n\n  <!-- unconsigned entries OR any entries -->\n  <ng-container\n    *ngIf=\"\n      order?.unconsignedEntries?.length ||\n      (order?.entries && order?.replenishmentOrderCode)\n    \"\n  >\n    <div class=\"cx-list row\">\n      <div *ngIf=\"order?.statusDisplay\" class=\"cx-list-header col-12\">\n        <div class=\"cx-list-status\">\n          {{\n            'orderDetails.statusDisplay_' + order?.statusDisplay | cxTranslate\n          }}\n        </div>\n      </div>\n      <div class=\"cx-list-item col-12\">\n        <cx-cart-item-list\n          [items]=\"\n            order?.unconsignedEntries ? order.unconsignedEntries : order.entries\n          \"\n          [readonly]=\"true\"\n          [promotionLocation]=\"promotionLocation\"\n        ></cx-cart-item-list>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n"
             },] }
 ];
 OrderDetailItemsComponent.ctorParameters = () => [
@@ -14365,129 +14880,21 @@ OrderConsignedEntriesComponent.propDecorators = {
 };
 
 class OrderDetailShippingComponent {
-    constructor(orderDetailsService, translation) {
+    constructor(orderDetailsService) {
         this.orderDetailsService = orderDetailsService;
-        this.translation = translation;
     }
     ngOnInit() {
         this.order$ = this.orderDetailsService.getOrderDetails();
-    }
-    getOrderCodeCardContent(orderCode) {
-        return this.translation
-            .translate('checkoutOrderConfirmation.orderNumber')
-            .pipe(filter(() => Boolean(orderCode)), map((textTitle) => ({
-            title: textTitle,
-            text: [orderCode],
-        })));
-    }
-    getOrderCurrentDateCardContent(isoDate) {
-        return this.translation
-            .translate('checkoutOrderConfirmation.placedOn')
-            .pipe(map((textTitle) => {
-            const date = this.getDate(new Date(isoDate));
-            return {
-                title: textTitle,
-                text: [date],
-            };
-        }));
-    }
-    getOrderStatusCardContent(status) {
-        return combineLatest([
-            this.translation.translate('checkoutOrderConfirmation.status'),
-            this.translation.translate('orderDetails.statusDisplay', {
-                context: status,
-            }),
-        ]).pipe(map(([textTitle, textStatus]) => ({
-            title: textTitle,
-            text: [textStatus],
-        })));
-    }
-    getPurchaseOrderNumber(poNumber) {
-        return combineLatest([
-            this.translation.translate('checkoutReview.poNumber'),
-            this.translation.translate('checkoutPO.noPoNumber'),
-        ]).pipe(map(([textTitle, noneTextTitle]) => ({
-            title: textTitle,
-            text: [poNumber ? poNumber : noneTextTitle],
-        })));
-    }
-    getMethodOfPaymentCardContent(hasPaymentInfo) {
-        return combineLatest([
-            this.translation.translate('checkoutProgress.methodOfPayment'),
-            this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
-            this.translation.translate('paymentTypes.paymentType_CARD'),
-        ]).pipe(map(([textTitle, textAccount, textCard]) => ({
-            title: textTitle,
-            text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
-        })));
-    }
-    getCostCenterCardContent(costCenter) {
-        return this.translation.translate('checkoutPO.costCenter').pipe(filter(() => Boolean(costCenter)), map((textTitle) => {
-            var _a;
-            return ({
-                title: textTitle,
-                textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
-                text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
-            });
-        }));
-    }
-    getAddressCardContent(deliveryAddress) {
-        return this.translation.translate('addressCard.shipTo').pipe(filter(() => Boolean(deliveryAddress)), map((textTitle) => ({
-            title: textTitle,
-            textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
-            text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
-        })));
-    }
-    getDeliveryModeCardContent(deliveryMode) {
-        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter(() => Boolean(deliveryMode)), map((textTitle) => {
-            var _a, _b;
-            return ({
-                title: textTitle,
-                textBold: deliveryMode.name,
-                text: [
-                    deliveryMode.description,
-                    ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
-                ],
-            });
-        }));
-    }
-    getPaymentInfoCardContent(payment) {
-        return combineLatest([
-            this.translation.translate('paymentForm.payment'),
-            this.translation.translate('paymentCard.expires', {
-                month: Boolean(payment) ? payment.expiryMonth : '',
-                year: Boolean(payment) ? payment.expiryYear : '',
-            }),
-        ]).pipe(filter(() => Boolean(payment)), map(([textTitle, textExpires]) => ({
-            title: textTitle,
-            textBold: payment.accountHolderName,
-            text: [payment.cardNumber, textExpires],
-        })));
-    }
-    getBillingAddressCardContent(billingAddress) {
-        return this.translation.translate('paymentForm.billingAddress').pipe(filter(() => Boolean(billingAddress)), map((textTitle) => ({
-            title: textTitle,
-            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-            text: [billingAddress.formattedAddress, billingAddress.country.name],
-        })));
-    }
-    getDate(givenDate) {
-        const date = givenDate.toDateString().split(' ');
-        const month = date[1];
-        const day = date[2];
-        const year = date[3];
-        return month + ' ' + day + ' ' + year;
     }
 }
 OrderDetailShippingComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-details-shipping',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-account-summary\">\n    <div class=\"container\">\n      <div class=\"cx-summary-card\">\n        <cx-card\n          [content]=\"getOrderCodeCardContent(order?.code) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n        ></cx-card>\n      </div>\n\n      <ng-container\n        *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n      >\n        <div class=\"cx-summary-card\">\n          <cx-card\n            [content]=\"\n              getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\n            \"\n          ></cx-card>\n\n          <cx-card\n            [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n          ></cx-card>\n\n          <ng-container *ngIf=\"order.costCenter\">\n            <cx-card\n              [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n            ></cx-card>\n          </ng-container>\n        </div>\n      </ng-container>\n\n      <div class=\"cx-summary-card\">\n        <ng-container *ngIf=\"order.deliveryAddress\">\n          <cx-card\n            [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n          ></cx-card>\n        </ng-container>\n\n        <ng-container *ngIf=\"order.deliveryMode\">\n          <cx-card\n            [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n\n      <ng-container *ngIf=\"order.paymentInfo\">\n        <div class=\"cx-summary-card\">\n          <cx-card\n            [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n          ></cx-card>\n\n          <cx-card\n            [content]=\"\n              getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n                | async\n            \"\n          ></cx-card>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n"
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <cx-order-overview [order]=\"order\"></cx-order-overview>\n</ng-container>\n"
             },] }
 ];
 OrderDetailShippingComponent.ctorParameters = () => [
-    { type: OrderDetailsService },
-    { type: TranslationService }
+    { type: OrderDetailsService }
 ];
 
 class OrderDetailTotalsComponent {
@@ -14510,7 +14917,6 @@ OrderDetailTotalsComponent.ctorParameters = () => [
 
 const moduleComponents = [
     OrderDetailActionsComponent,
-    OrderDetailHeadlineComponent,
     OrderDetailItemsComponent,
     OrderDetailTotalsComponent,
     OrderDetailShippingComponent,
@@ -14531,7 +14937,9 @@ OrderDetailsModule.decorators = [
                     I18nModule,
                     FeaturesConfigModule,
                     PromotionsModule,
+                    OrderOverviewModule,
                     UrlModule,
+                    SpinnerModule,
                     RouterModule.forChild([
                         {
                             path: null,
@@ -14546,16 +14954,12 @@ OrderDetailsModule.decorators = [
                             data: ɵ1,
                         },
                     ]),
-                    SpinnerModule,
                 ],
                 providers: [
                     provideDefaultConfig({
                         cmsComponents: {
                             AccountOrderDetailsActionsComponent: {
                                 component: OrderDetailActionsComponent,
-                            },
-                            AccountOrderDetailsHeadlineComponent: {
-                                component: OrderDetailHeadlineComponent,
                             },
                             AccountOrderDetailsApprovalDetailsComponent: {
                                 component: OrderDetailApprovalDetailsComponent,
@@ -14583,16 +14987,20 @@ OrderDetailsModule.decorators = [
 ];
 
 class OrderHistoryComponent {
-    constructor(routing, userOrderService, translation) {
+    constructor(routing, userOrderService, translation, userReplenishmentOrderService) {
         this.routing = routing;
         this.userOrderService = userOrderService;
         this.translation = translation;
+        this.userReplenishmentOrderService = userReplenishmentOrderService;
         this.PAGE_SIZE = 5;
         this.orders$ = this.userOrderService.getOrderHistoryList(this.PAGE_SIZE).pipe(tap((orders) => {
             if (orders.pagination) {
                 this.sortType = orders.pagination.sort;
             }
         }));
+        this.hasReplenishmentOrder$ = this.userReplenishmentOrderService
+            .getReplenishmentOrderDetails()
+            .pipe(map((order) => order && Object.keys(order).length !== 0));
         this.isLoaded$ = this.userOrderService.getOrderHistoryListLoaded();
         /**
          * When "Order Return" feature is enabled, this component becomes one tab in
@@ -14642,14 +15050,15 @@ class OrderHistoryComponent {
 OrderHistoryComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-history',
-                template: "<ng-container *ngIf=\"orders$ | async as orders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-order-history-header\">\n      <h3>{{ 'orderHistory.orderHistory' | cxTranslate }}</h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-order-history-body\">\n      <ng-container *ngIf=\"orders.pagination.totalResults > 0; else noOrder\">\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-order-history-sort top row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-order-history-table\">\n          <thead class=\"cx-order-history-thead-mobile\">\n            <th scope=\"col\">\n              {{ 'orderHistory.orderId' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n            <th scope=\"col\">\n              {{ 'orderHistory.status' | cxTranslate }}\n            </th>\n            <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of orders.orders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-order-history-code\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.orderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.code }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-placed\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.date' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                  >{{ order?.placed | cxDate: 'longDate' }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-status\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.status' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{\n                    'orderDetails.statusDisplay_' + order?.statusDisplay\n                      | cxTranslate\n                  }}</a\n                >\n              </td>\n              <td class=\"cx-order-history-total\">\n                <div class=\"d-md-none cx-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'orderDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-order-history-value\"\n                >\n                  {{ order?.total.formattedValue }}</a\n                >\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-order-history-sort bottom row\">\n          <div\n            class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"orders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"orders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div class=\"cx-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"orders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div class=\"cx-order-history-no-order row\" *ngIf=\"isLoaded$ | async\">\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
+                template: "<ng-container\n  *ngIf=\"{\n    orderHistory: orders$ | async,\n    replenishmentOrder: hasReplenishmentOrder$ | async\n  } as type\"\n>\n  <ng-container *ngIf=\"type.orderHistory\">\n    <div [ngClass]=\"type.replenishmentOrder ? '' : 'container'\">\n      <!-- HEADER -->\n      <div\n        [ngClass]=\"\n          type.replenishmentOrder\n            ? 'cx-replenishment-details-order-history-header'\n            : 'cx-order-history-header'\n        \"\n      >\n        <h4 *ngIf=\"type.replenishmentOrder\">\n          {{ 'orderHistory.replenishmentHistory' | cxTranslate }}\n        </h4>\n        <h3 *ngIf=\"!type.replenishmentOrder\">\n          {{ 'orderHistory.orderHistory' | cxTranslate }}\n        </h3>\n      </div>\n\n      <!-- BODY -->\n      <div class=\"cx-order-history-body\">\n        <ng-container\n          *ngIf=\"type.orderHistory.pagination.totalResults > 0; else noOrder\"\n        >\n          <!-- Select Form and Pagination Top -->\n          <div class=\"cx-order-history-sort top row\">\n            <div\n              class=\"cx-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n            >\n              <cx-sorting\n                [sortOptions]=\"type.orderHistory.sorts\"\n                [sortLabels]=\"getSortLabels() | async\"\n                (sortListEvent)=\"changeSortCode($event)\"\n                [selectedOption]=\"type.orderHistory.pagination.sort\"\n                placeholder=\"{{\n                  'orderHistory.sortByMostRecent' | cxTranslate\n                }}\"\n              ></cx-sorting>\n            </div>\n            <div\n              *ngIf=\"type.orderHistory.pagination.totalPages > 1\"\n              class=\"cx-order-history-pagination\"\n            >\n              <cx-pagination\n                [pagination]=\"type.orderHistory.pagination\"\n                (viewPageEvent)=\"pageChange($event)\"\n              ></cx-pagination>\n            </div>\n          </div>\n          <!-- TABLE -->\n          <table class=\"table cx-order-history-table\">\n            <thead class=\"cx-order-history-thead-mobile\">\n              <th scope=\"col\">\n                {{ 'orderHistory.orderId' | cxTranslate }}\n              </th>\n              <th scope=\"col\">{{ 'orderHistory.date' | cxTranslate }}</th>\n              <th scope=\"col\">\n                {{ 'orderHistory.status' | cxTranslate }}\n              </th>\n              <th scope=\"col\">{{ 'orderHistory.total' | cxTranslate }}</th>\n            </thead>\n            <tbody>\n              <tr\n                *ngFor=\"let order of type.orderHistory.orders\"\n                (click)=\"goToOrderDetail(order)\"\n              >\n                <td class=\"cx-order-history-code\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.orderId' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{ order?.code }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-placed\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.date' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                    >{{ order?.placed | cxDate: 'longDate' }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-status\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.status' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{\n                      'orderDetails.statusDisplay_' + order?.statusDisplay\n                        | cxTranslate\n                    }}</a\n                  >\n                </td>\n                <td class=\"cx-order-history-total\">\n                  <div class=\"d-md-none cx-order-history-label\">\n                    {{ 'orderHistory.total' | cxTranslate }}\n                  </div>\n                  <a\n                    [routerLink]=\"\n                      {\n                        cxRoute: 'orderDetails',\n                        params: order\n                      } | cxUrl\n                    \"\n                    class=\"cx-order-history-value\"\n                  >\n                    {{ order?.total.formattedValue }}</a\n                  >\n                </td>\n              </tr>\n            </tbody>\n          </table>\n          <!-- Select Form and Pagination Bottom -->\n          <div class=\"cx-order-history-sort bottom row\">\n            <div\n              *ngIf=\"type.orderHistory.pagination.totalPages > 1\"\n              class=\"cx-order-history-pagination\"\n            >\n              <cx-pagination\n                [pagination]=\"type.orderHistory.pagination\"\n                (viewPageEvent)=\"pageChange($event)\"\n              ></cx-pagination>\n            </div>\n          </div>\n        </ng-container>\n\n        <!-- NO ORDER CONTAINER -->\n        <ng-template #noOrder>\n          <div\n            *ngIf=\"isLoaded$ | async\"\n            [ngClass]=\"\n              type.replenishmentOrder\n                ? 'cx-replenishment-details-order-history-no-order row'\n                : 'cx-order-history-no-order row'\n            \"\n          >\n            <div\n              [ngClass]=\"\n                type.replenishmentOrder ? '' : 'col-sm-12 col-md-6 col-lg-4'\n              \"\n            >\n              <ng-container *ngIf=\"type.replenishmentOrder; else otherOrder\">\n                <div>{{ 'orderHistory.notFound' | cxTranslate }}</div>\n              </ng-container>\n\n              <ng-template #otherOrder>\n                <div>{{ 'orderHistory.noOrders' | cxTranslate }}</div>\n                <a\n                  [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n                  routerLinkActive=\"active\"\n                  class=\"btn btn-primary btn-block\"\n                  >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n                >\n              </ng-template>\n            </div>\n          </div>\n        </ng-template>\n      </div>\n    </div>\n  </ng-container>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 OrderHistoryComponent.ctorParameters = () => [
     { type: RoutingService },
     { type: UserOrderService },
-    { type: TranslationService }
+    { type: TranslationService },
+    { type: UserReplenishmentOrderService }
 ];
 
 const ɵ0$6 = { cxRoute: 'orders' };
@@ -14687,6 +15096,300 @@ OrderHistoryModule.decorators = [
                     }),
                 ],
                 entryComponents: [OrderHistoryComponent],
+            },] }
+];
+
+const defaultReplenishmentOrderCancellationLayoutConfig = {
+    launch: {
+        REPLENISHMENT_ORDER: {
+            inline: true,
+            component: ReplenishmentOrderCancellationDialogComponent,
+            dialogType: DIALOG_TYPE.DIALOG,
+        },
+    },
+};
+
+class ReplenishmentOrderCancellationLaunchDialogService {
+    constructor(launchDialogService) {
+        this.launchDialogService = launchDialogService;
+    }
+    openDialog(openElement, vcr, data) {
+        const component = this.launchDialogService.launch(LAUNCH_CALLER.REPLENISHMENT_ORDER, vcr, data);
+        if (component) {
+            return combineLatest([
+                component,
+                this.launchDialogService.dialogClose,
+            ]).pipe(filter(([, close]) => close && close !== undefined), tap(([comp]) => {
+                openElement === null || openElement === void 0 ? void 0 : openElement.nativeElement.focus();
+                this.launchDialogService.clear(LAUNCH_CALLER.REPLENISHMENT_ORDER);
+                comp.destroy();
+            }), map(([comp]) => comp));
+        }
+    }
+}
+ReplenishmentOrderCancellationLaunchDialogService.ɵprov = ɵɵdefineInjectable({ factory: function ReplenishmentOrderCancellationLaunchDialogService_Factory() { return new ReplenishmentOrderCancellationLaunchDialogService(ɵɵinject(LaunchDialogService)); }, token: ReplenishmentOrderCancellationLaunchDialogService, providedIn: "root" });
+ReplenishmentOrderCancellationLaunchDialogService.decorators = [
+    { type: Injectable, args: [{ providedIn: 'root' },] }
+];
+ReplenishmentOrderCancellationLaunchDialogService.ctorParameters = () => [
+    { type: LaunchDialogService }
+];
+
+class ReplenishmentOrderCancellationComponent {
+    constructor(userReplenishmentOrderService, replenishmentOrderCancellationLaunchDialogService, vcr) {
+        this.userReplenishmentOrderService = userReplenishmentOrderService;
+        this.replenishmentOrderCancellationLaunchDialogService = replenishmentOrderCancellationLaunchDialogService;
+        this.vcr = vcr;
+        this.subscription = new Subscription();
+        this.replenishmentOrder$ = this.userReplenishmentOrderService.getReplenishmentOrderDetails();
+    }
+    openDialog() {
+        const dialog = this.replenishmentOrderCancellationLaunchDialogService.openDialog(this.element, this.vcr);
+        if (dialog) {
+            this.subscription.add(dialog.pipe(take(1)).subscribe());
+        }
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+        this.userReplenishmentOrderService.clearReplenishmentOrderDetails();
+    }
+}
+ReplenishmentOrderCancellationComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-replenishment-order-cancellation',
+                template: "<div class=\"cx-cancel-replenishment-btns row\">\n  <div class=\"col-xs-12 col-md-5 col-lg-4\">\n    <a\n      class=\"btn btn-block btn-action\"\n      [routerLink]=\"\n        {\n          cxRoute: 'replenishmentOrders'\n        } | cxUrl\n      \"\n    >\n      {{ 'common.back' | cxTranslate }}\n    </a>\n  </div>\n  <div\n    *ngIf=\"(replenishmentOrder$ | async).active\"\n    class=\"col-xs-12 col-md-5 col-lg-4\"\n  >\n    <button #element class=\"btn btn-block btn-action\" (click)=\"openDialog()\">\n      {{ 'orderDetails.cancelReplenishment.title' | cxTranslate }}\n    </button>\n  </div>\n</div>\n"
+            },] }
+];
+ReplenishmentOrderCancellationComponent.ctorParameters = () => [
+    { type: UserReplenishmentOrderService },
+    { type: ReplenishmentOrderCancellationLaunchDialogService },
+    { type: ViewContainerRef }
+];
+ReplenishmentOrderCancellationComponent.propDecorators = {
+    element: [{ type: ViewChild, args: ['element',] }]
+};
+
+class ReplenishmentOrderDetailsService {
+    constructor(routingService, userReplenishmentOrderService) {
+        this.routingService = routingService;
+        this.userReplenishmentOrderService = userReplenishmentOrderService;
+        this.replenishmentOrderCode$ = this.routingService
+            .getRouterState()
+            .pipe(map((routingData) => routingData.state.params.replenishmentOrderCode));
+        this.replenishmentOrderLoad$ = this.replenishmentOrderCode$.pipe(tap((replenishmentOrderCode) => {
+            if (Boolean(replenishmentOrderCode)) {
+                this.userReplenishmentOrderService.loadReplenishmentOrderDetails(replenishmentOrderCode);
+            }
+            else {
+                this.userReplenishmentOrderService.clearReplenishmentOrderDetails();
+            }
+        }), shareReplay({ bufferSize: 1, refCount: true }));
+    }
+    getOrderDetails() {
+        return this.replenishmentOrderLoad$.pipe(switchMap((_) => this.userReplenishmentOrderService.getReplenishmentOrderDetails()));
+    }
+}
+ReplenishmentOrderDetailsService.ɵprov = ɵɵdefineInjectable({ factory: function ReplenishmentOrderDetailsService_Factory() { return new ReplenishmentOrderDetailsService(ɵɵinject(RoutingService), ɵɵinject(UserReplenishmentOrderService)); }, token: ReplenishmentOrderDetailsService, providedIn: "root" });
+ReplenishmentOrderDetailsService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+ReplenishmentOrderDetailsService.ctorParameters = () => [
+    { type: RoutingService },
+    { type: UserReplenishmentOrderService }
+];
+
+const moduleComponents$1 = [ReplenishmentOrderCancellationComponent];
+const ɵ0$7 = { cxRoute: 'replenishmentDetails' };
+class ReplenishmentOrderDetailsModule {
+}
+ReplenishmentOrderDetailsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CartSharedModule,
+                    CardModule,
+                    CommonModule,
+                    I18nModule,
+                    PromotionsModule,
+                    UrlModule,
+                    ReplenishmentOrderCancellationDialogModule,
+                    SpinnerModule,
+                    ListNavigationModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [AuthGuard, CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$7,
+                        },
+                    ]),
+                ],
+                providers: [
+                    provideConfig(defaultReplenishmentOrderCancellationLayoutConfig),
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            ReplenishmentDetailItemsComponent: {
+                                component: OrderDetailItemsComponent,
+                                providers: [
+                                    {
+                                        provide: OrderDetailsService,
+                                        useExisting: ReplenishmentOrderDetailsService,
+                                    },
+                                ],
+                            },
+                            ReplenishmentDetailTotalsComponent: {
+                                component: OrderDetailTotalsComponent,
+                                providers: [
+                                    {
+                                        provide: OrderDetailsService,
+                                        useExisting: ReplenishmentOrderDetailsService,
+                                    },
+                                ],
+                            },
+                            ReplenishmentDetailShippingComponent: {
+                                component: OrderDetailShippingComponent,
+                                providers: [
+                                    {
+                                        provide: OrderDetailsService,
+                                        useExisting: ReplenishmentOrderDetailsService,
+                                    },
+                                ],
+                            },
+                            ReplenishmentDetailActionsComponent: {
+                                component: ReplenishmentOrderCancellationComponent,
+                            },
+                            ReplenishmentDetailOrderHistoryComponent: {
+                                component: OrderHistoryComponent,
+                            },
+                        },
+                    }),
+                ],
+                declarations: [...moduleComponents$1],
+                exports: [...moduleComponents$1],
+                entryComponents: [...moduleComponents$1],
+            },] }
+];
+
+class ReplenishmentOrderHistoryComponent {
+    constructor(routing, userReplenishmentOrderService, replenishmentOrderCancellationLaunchDialogService, translation, vcr) {
+        this.routing = routing;
+        this.userReplenishmentOrderService = userReplenishmentOrderService;
+        this.replenishmentOrderCancellationLaunchDialogService = replenishmentOrderCancellationLaunchDialogService;
+        this.translation = translation;
+        this.vcr = vcr;
+        this.subscription = new Subscription();
+        this.PAGE_SIZE = 5;
+        this.replenishmentOrders$ = this.userReplenishmentOrderService
+            .getReplenishmentOrderHistoryList(this.PAGE_SIZE)
+            .pipe(tap((replenishmentOrders) => {
+            if (replenishmentOrders.pagination) {
+                this.sortType = replenishmentOrders.pagination.sort;
+            }
+        }));
+        this.isLoaded$ = this.userReplenishmentOrderService.getReplenishmentOrderHistoryListSuccess();
+    }
+    changeSortCode(sortCode) {
+        const event = {
+            sortCode,
+            currentPage: 0,
+        };
+        this.sortType = sortCode;
+        this.fetchReplenishmentOrders(event);
+    }
+    pageChange(page) {
+        const event = {
+            sortCode: this.sortType,
+            currentPage: page,
+        };
+        this.fetchReplenishmentOrders(event);
+    }
+    goToOrderDetail(order) {
+        this.routing.go({
+            cxRoute: 'replenishmentDetails',
+            params: order,
+        });
+    }
+    getSortLabels() {
+        return combineLatest([
+            this.translation.translate('sorting.date'),
+            this.translation.translate('sorting.replenishmentNumber'),
+            this.translation.translate('sorting.nextOrderDate'),
+        ]).pipe(map(([textByDate, textByOrderNumber, textbyNextOrderDate]) => {
+            return {
+                byDate: textByDate,
+                byReplenishmentNumber: textByOrderNumber,
+                byNextOrderDate: textbyNextOrderDate,
+            };
+        }));
+    }
+    openDialog(event, replenishmentOrderCode) {
+        const dialog = this.replenishmentOrderCancellationLaunchDialogService.openDialog(this.element, this.vcr, replenishmentOrderCode);
+        if (dialog) {
+            this.subscription.add(dialog.pipe(take(1)).subscribe());
+        }
+        event.stopPropagation();
+    }
+    fetchReplenishmentOrders(event) {
+        this.userReplenishmentOrderService.loadReplenishmentOrderList(this.PAGE_SIZE, event.currentPage, event.sortCode);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+        this.userReplenishmentOrderService.clearReplenishmentOrderList();
+    }
+}
+ReplenishmentOrderHistoryComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-replenishment-order-history',
+                template: "<ng-container *ngIf=\"replenishmentOrders$ | async as replenishmentOrders\">\n  <div class=\"container\">\n    <!-- HEADER -->\n    <div class=\"cx-replenishment-order-history-header\">\n      <h3>\n        {{ 'orderHistory.replenishmentOrderHistory' | cxTranslate }}\n      </h3>\n    </div>\n\n    <!-- BODY -->\n    <div class=\"cx-replenishment-order-history-body\">\n      <ng-container\n        *ngIf=\"replenishmentOrders.pagination.totalResults > 0; else noOrder\"\n      >\n        <!-- Select Form and Pagination Top -->\n        <div class=\"cx-replenishment-order-history-sort top row\">\n          <div\n            class=\"cx-replenishment-order-history-form-group form-group col-sm-12 col-md-4 col-lg-4\"\n          >\n            <cx-sorting\n              [sortOptions]=\"replenishmentOrders.sorts\"\n              [sortLabels]=\"getSortLabels() | async\"\n              (sortListEvent)=\"changeSortCode($event)\"\n              [selectedOption]=\"replenishmentOrders.pagination.sort\"\n              placeholder=\"{{ 'orderHistory.sortByMostRecent' | cxTranslate }}\"\n            ></cx-sorting>\n          </div>\n          <div\n            class=\"cx-replenishment-order-history-pagination\"\n            *ngIf=\"replenishmentOrders.pagination.totalPages > 1\"\n          >\n            <cx-pagination\n              [pagination]=\"replenishmentOrders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n            ></cx-pagination>\n          </div>\n        </div>\n        <!-- TABLE -->\n        <table class=\"table cx-replenishment-order-history-table\">\n          <thead class=\"cx-replenishment-order-history-thead-mobile\">\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.replenishmentOrderId' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.purchaseOrderNumber' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.startOn' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.frequency' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.nextOrderDate' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\" class=\"cx-replenishment-order-history-total\">\n              <span class=\"cx-replenishment-order-history-ellipses\">\n                {{ 'orderHistory.total' | cxTranslate }}\n              </span>\n            </th>\n            <th scope=\"col\"></th>\n          </thead>\n          <tbody>\n            <tr\n              *ngFor=\"let order of replenishmentOrders.replenishmentOrders\"\n              (click)=\"goToOrderDetail(order)\"\n            >\n              <td class=\"cx-replenishment-order-history-code\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.replenishmentOrderId' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.replenishmentOrderCode }}</a\n                >\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.purchaseOrderNumber' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value cx-purchase-order-number\"\n                >\n                  {{\n                    order?.purchaseOrderNumber?.length > 0\n                      ? order?.purchaseOrderNumber\n                      : ('orderHistory.emptyPurchaseOrderId' | cxTranslate)\n                  }}\n                </a>\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.startOn' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.firstDate | cxDate: 'M/d/yyyy' }}</a\n                >\n              </td>\n              <td class=\"cx-replenishment-order-history-frequency\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.frequency' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.trigger.displayTimeTable | slice: 0:-12 }}\n                </a>\n              </td>\n              <td>\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.nextOrderDate' | cxTranslate }}\n                </div>\n\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value cx-next-order-date\"\n                >\n                  {{\n                    order?.active\n                      ? (order?.trigger.activationTime | cxDate: 'M/d/yyyy')\n                      : ('orderHistory.cancelled' | cxTranslate)\n                  }}\n                </a>\n              </td>\n              <td class=\"cx-replenishment-order-history-total\">\n                <div class=\"d-md-none cx-replenishment-order-history-label\">\n                  {{ 'orderHistory.total' | cxTranslate }}\n                </div>\n                <a\n                  [routerLink]=\"\n                    {\n                      cxRoute: 'replenishmentDetails',\n                      params: order\n                    } | cxUrl\n                  \"\n                  class=\"cx-replenishment-order-history-value\"\n                >\n                  {{ order?.subTotal.formattedValue }}</a\n                >\n              </td>\n              <td class=\"cx-replenishment-order-history-cancel\">\n                <div\n                  class=\"d-md-none cx-replenishment-order-history-label\"\n                ></div>\n                <button\n                  (click)=\"openDialog($event, order?.replenishmentOrderCode)\"\n                  class=\"cx-order-cancel btn btn-link\"\n                  #element\n                  *ngIf=\"order?.active\"\n                >\n                  {{ 'orderHistory.cancel' | cxTranslate }}\n                </button>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n        <!-- Select Form and Pagination Bottom -->\n        <div class=\"cx-replenishment-order-history-sort bottom row\">\n          <div class=\"cx-replenishment-order-history-pagination\">\n            <cx-pagination\n              [pagination]=\"replenishmentOrders.pagination\"\n              (viewPageEvent)=\"pageChange($event)\"\n              *ngIf=\"replenishmentOrders.pagination.totalPages > 1\"\n            ></cx-pagination>\n          </div>\n        </div>\n      </ng-container>\n\n      <!-- NO ORDER CONTAINER -->\n      <ng-template #noOrder>\n        <div\n          class=\"cx-replenishment-order-history-no-order row\"\n          *ngIf=\"isLoaded$ | async\"\n        >\n          <div class=\"col-sm-12 col-md-6 col-lg-4\">\n            <div>{{ 'orderHistory.noReplenishmentOrders' | cxTranslate }}</div>\n            <a\n              [routerLink]=\"{ cxRoute: 'home' } | cxUrl\"\n              routerLinkActive=\"active\"\n              class=\"btn btn-primary btn-block\"\n              >{{ 'orderHistory.startShopping' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </ng-template>\n    </div>\n  </div>\n</ng-container>\n",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+ReplenishmentOrderHistoryComponent.ctorParameters = () => [
+    { type: RoutingService },
+    { type: UserReplenishmentOrderService },
+    { type: ReplenishmentOrderCancellationLaunchDialogService },
+    { type: TranslationService },
+    { type: ViewContainerRef }
+];
+ReplenishmentOrderHistoryComponent.propDecorators = {
+    element: [{ type: ViewChild, args: ['element',] }]
+};
+
+const ɵ0$8 = { cxRoute: 'replenishmentOrders' };
+class ReplenishmentOrderHistoryModule {
+}
+ReplenishmentOrderHistoryModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [AuthGuard, CmsPageGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$8,
+                        },
+                    ]),
+                    RouterModule,
+                    ListNavigationModule,
+                    UrlModule,
+                    I18nModule,
+                ],
+                providers: [
+                    provideConfig(defaultReplenishmentOrderCancellationLayoutConfig),
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            AccountReplenishmentHistoryComponent: {
+                                component: ReplenishmentOrderHistoryComponent,
+                                guards: [AuthGuard],
+                            },
+                        },
+                    }),
+                ],
+                declarations: [ReplenishmentOrderHistoryComponent],
+                exports: [ReplenishmentOrderHistoryComponent],
+                entryComponents: [ReplenishmentOrderHistoryComponent],
             },] }
 ];
 
@@ -14836,7 +15539,7 @@ const components = [
     ReturnRequestItemsComponent,
     ReturnRequestTotalsComponent,
 ];
-const ɵ0$7 = { cxRoute: 'returnRequestDetails' };
+const ɵ0$9 = { cxRoute: 'returnRequestDetails' };
 class ReturnRequestDetailModule {
 }
 ReturnRequestDetailModule.decorators = [
@@ -14848,7 +15551,7 @@ ReturnRequestDetailModule.decorators = [
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$7,
+                            data: ɵ0$9,
                         },
                     ]),
                     RouterModule,
@@ -14973,8 +15676,10 @@ OrderModule.decorators = [
                 imports: [
                     OrderHistoryModule,
                     OrderDetailsModule,
+                    ReplenishmentOrderDetailsModule,
                     OrderCancellationModule,
                     OrderReturnModule,
+                    ReplenishmentOrderHistoryModule,
                     ReturnRequestListModule,
                     ReturnRequestDetailModule,
                 ],
@@ -15784,7 +16489,7 @@ CouponClaimComponent.ctorParameters = () => [
     { type: GlobalMessageService }
 ];
 
-const ɵ0$8 = { cxRoute: 'couponClaim' };
+const ɵ0$a = { cxRoute: 'couponClaim' };
 class MyCouponsModule {
 }
 MyCouponsModule.decorators = [
@@ -15803,7 +16508,7 @@ MyCouponsModule.decorators = [
                             path: null,
                             canActivate: [AuthGuard, CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$8,
+                            data: ɵ0$a,
                         },
                     ]),
                 ],
@@ -16922,9 +17627,8 @@ OrderConfirmationItemsComponent.ctorParameters = () => [
 ];
 
 class OrderConfirmationOverviewComponent {
-    constructor(checkoutService, translation) {
+    constructor(checkoutService) {
         this.checkoutService = checkoutService;
-        this.translation = translation;
     }
     ngOnInit() {
         this.order$ = this.checkoutService.getOrderDetails();
@@ -16932,123 +17636,16 @@ class OrderConfirmationOverviewComponent {
     ngOnDestroy() {
         this.checkoutService.clearCheckoutData();
     }
-    getOrderCodeCardContent(orderCode) {
-        return this.translation
-            .translate('checkoutOrderConfirmation.orderNumber')
-            .pipe(filter(() => Boolean(orderCode)), map((textTitle) => ({
-            title: textTitle,
-            text: [orderCode],
-        })));
-    }
-    getOrderCurrentDateCardContent(isoDate) {
-        return this.translation
-            .translate('checkoutOrderConfirmation.placedOn')
-            .pipe(map((textTitle) => {
-            const date = this.getDate(new Date(isoDate));
-            return {
-                title: textTitle,
-                text: [date],
-            };
-        }));
-    }
-    getOrderStatusCardContent(status) {
-        return combineLatest([
-            this.translation.translate('checkoutOrderConfirmation.status'),
-            this.translation.translate('orderDetails.statusDisplay', {
-                context: status,
-            }),
-        ]).pipe(map(([textTitle, textStatus]) => ({
-            title: textTitle,
-            text: [textStatus],
-        })));
-    }
-    getPurchaseOrderNumber(poNumber) {
-        return combineLatest([
-            this.translation.translate('checkoutReview.poNumber'),
-            this.translation.translate('checkoutPO.noPoNumber'),
-        ]).pipe(map(([textTitle, noneTextTitle]) => ({
-            title: textTitle,
-            text: [poNumber ? poNumber : noneTextTitle],
-        })));
-    }
-    getMethodOfPaymentCardContent(hasPaymentInfo) {
-        return combineLatest([
-            this.translation.translate('checkoutProgress.methodOfPayment'),
-            this.translation.translate('paymentTypes.paymentType_ACCOUNT'),
-            this.translation.translate('paymentTypes.paymentType_CARD'),
-        ]).pipe(map(([textTitle, textAccount, textCard]) => ({
-            title: textTitle,
-            text: [Boolean(hasPaymentInfo) ? textCard : textAccount],
-        })));
-    }
-    getCostCenterCardContent(costCenter) {
-        return this.translation.translate('checkoutPO.costCenter').pipe(filter(() => Boolean(costCenter)), map((textTitle) => {
-            var _a;
-            return ({
-                title: textTitle,
-                textBold: costCenter === null || costCenter === void 0 ? void 0 : costCenter.name,
-                text: ['(' + ((_a = costCenter === null || costCenter === void 0 ? void 0 : costCenter.unit) === null || _a === void 0 ? void 0 : _a.name) + ')'],
-            });
-        }));
-    }
-    getAddressCardContent(deliveryAddress) {
-        return this.translation.translate('addressCard.shipTo').pipe(filter(() => Boolean(deliveryAddress)), map((textTitle) => ({
-            title: textTitle,
-            textBold: `${deliveryAddress.firstName} ${deliveryAddress.lastName}`,
-            text: [deliveryAddress.formattedAddress, deliveryAddress.country.name],
-        })));
-    }
-    getDeliveryModeCardContent(deliveryMode) {
-        return this.translation.translate('checkoutShipping.shippingMethod').pipe(filter(() => Boolean(deliveryMode)), map((textTitle) => {
-            var _a, _b;
-            return ({
-                title: textTitle,
-                textBold: deliveryMode.name,
-                text: [
-                    deliveryMode.description,
-                    ((_a = deliveryMode.deliveryCost) === null || _a === void 0 ? void 0 : _a.formattedValue) ? (_b = deliveryMode.deliveryCost) === null || _b === void 0 ? void 0 : _b.formattedValue : '',
-                ],
-            });
-        }));
-    }
-    getPaymentInfoCardContent(payment) {
-        return combineLatest([
-            this.translation.translate('paymentForm.payment'),
-            this.translation.translate('paymentCard.expires', {
-                month: Boolean(payment) ? payment.expiryMonth : '',
-                year: Boolean(payment) ? payment.expiryYear : '',
-            }),
-        ]).pipe(filter(() => Boolean(payment)), map(([textTitle, textExpires]) => ({
-            title: textTitle,
-            textBold: payment.accountHolderName,
-            text: [payment.cardNumber, textExpires],
-        })));
-    }
-    getBillingAddressCardContent(billingAddress) {
-        return this.translation.translate('paymentForm.billingAddress').pipe(filter(() => Boolean(billingAddress)), map((textTitle) => ({
-            title: textTitle,
-            textBold: `${billingAddress.firstName} ${billingAddress.lastName}`,
-            text: [billingAddress.formattedAddress, billingAddress.country.name],
-        })));
-    }
-    getDate(givenDate) {
-        const date = givenDate.toDateString().split(' ');
-        const month = date[1];
-        const day = date[2];
-        const year = date[3];
-        return month + ' ' + day + ' ' + year;
-    }
 }
 OrderConfirmationOverviewComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation-overview',
-                template: "<div class=\"cx-order-review-summary\" *ngIf=\"order$ | async as order\">\n  <div class=\"container\">\n    <div class=\"summary-card\">\n      <cx-card\n        [content]=\"getOrderCodeCardContent(order?.code) | async\"\n      ></cx-card>\n\n      <cx-card\n        [content]=\"getOrderCurrentDateCardContent(order?.created) | async\"\n      ></cx-card>\n\n      <cx-card\n        [content]=\"getOrderStatusCardContent(order.statusDisplay) | async\"\n      ></cx-card>\n    </div>\n\n    <ng-container\n      *ngIf=\"order.purchaseOrderNumber || order.purchaseOrderNumber === ''\"\n    >\n      <div class=\"summary-card\">\n        <cx-card\n          [content]=\"getPurchaseOrderNumber(order?.purchaseOrderNumber) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"getMethodOfPaymentCardContent(order.paymentInfo) | async\"\n        ></cx-card>\n\n        <ng-container *ngIf=\"order.costCenter\">\n          <cx-card\n            [content]=\"getCostCenterCardContent(order?.costCenter) | async\"\n          ></cx-card>\n        </ng-container>\n      </div>\n    </ng-container>\n\n    <div class=\"summary-card\">\n      <ng-container *ngIf=\"order.deliveryAddress\">\n        <cx-card\n          [content]=\"getAddressCardContent(order?.deliveryAddress) | async\"\n        ></cx-card>\n      </ng-container>\n\n      <ng-container *ngIf=\"order.deliveryMode\">\n        <cx-card\n          [content]=\"getDeliveryModeCardContent(order?.deliveryMode) | async\"\n        ></cx-card>\n      </ng-container>\n    </div>\n\n    <ng-container *ngIf=\"order.paymentInfo\">\n      <div class=\"summary-card\">\n        <cx-card\n          [content]=\"getPaymentInfoCardContent(order?.paymentInfo) | async\"\n        ></cx-card>\n\n        <cx-card\n          [content]=\"\n            getBillingAddressCardContent(order?.paymentInfo?.billingAddress)\n              | async\n          \"\n        ></cx-card>\n      </div>\n    </ng-container>\n  </div>\n</div>\n",
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <cx-order-overview [order]=\"order\"></cx-order-overview>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 OrderConfirmationOverviewComponent.ctorParameters = () => [
-    { type: CheckoutService },
-    { type: TranslationService }
+    { type: CheckoutService }
 ];
 
 class OrderConfirmationThankYouMessageComponent {
@@ -17061,6 +17658,9 @@ class OrderConfirmationThankYouMessageComponent {
             this.isGuestCustomer = order.guestCustomer;
             this.orderGuid = order.guid;
         }));
+        this.isReplenishmentOrderType$ = this.checkoutService
+            .getCurrentOrderType()
+            .pipe(map((orderType) => ORDER_TYPE.SCHEDULE_REPLENISHMENT_ORDER === orderType));
     }
     ngOnDestroy() {
         this.checkoutService.clearCheckoutData();
@@ -17069,7 +17669,7 @@ class OrderConfirmationThankYouMessageComponent {
 OrderConfirmationThankYouMessageComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-order-confirmation-thank-you-message',
-                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{ order.code }}\n    </h1>\n  </div>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n    <!-- <a href=\"#\" class=\"btn-link\">Print Page</a> -->\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"order$ | async as order\">\n  <div class=\"cx-page-header\">\n    <h1 class=\"cx-page-title\">\n      {{ 'checkoutOrderConfirmation.confirmationOfOrder' | cxTranslate }}\n      {{\n        (isReplenishmentOrderType$ | async)\n          ? order.replenishmentOrderCode\n          : order.code\n      }}\n    </h1>\n  </div>\n\n  <div class=\"cx-order-confirmation-message\">\n    <h2>{{ 'checkoutOrderConfirmation.thankYou' | cxTranslate }}</h2>\n    <p>\n      {{ 'checkoutOrderConfirmation.invoiceHasBeenSentByEmail' | cxTranslate }}\n    </p>\n  </div>\n\n  <div *ngIf=\"isGuestCustomer\">\n    <cx-guest-register-form\n      [guid]=\"orderGuid\"\n      [email]=\"order.paymentInfo.billingAddress.email\"\n    ></cx-guest-register-form>\n  </div>\n\n  <cx-add-to-home-screen-banner></cx-add-to-home-screen-banner>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
@@ -17205,6 +17805,7 @@ OrderConfirmationModule.decorators = [
                     ReactiveFormsModule,
                     FeaturesConfigModule,
                     FormErrorsModule,
+                    OrderOverviewModule,
                 ],
                 providers: [
                     provideDefaultConfig({
@@ -17231,6 +17832,46 @@ OrderConfirmationModule.decorators = [
                 declarations: [...orderConfirmationComponents],
                 exports: [...orderConfirmationComponents],
                 entryComponents: [...orderConfirmationComponents],
+            },] }
+];
+
+class ReplenishmentOrderConfirmationModule {
+}
+ReplenishmentOrderConfirmationModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    CartSharedModule,
+                    CardModule,
+                    PwaModule,
+                    PromotionsModule,
+                    I18nModule,
+                    ReactiveFormsModule,
+                    FeaturesConfigModule,
+                    FormErrorsModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            ReplenishmentConfirmationMessageComponent: {
+                                component: OrderConfirmationThankYouMessageComponent,
+                                guards: [OrderConfirmationGuard],
+                            },
+                            ReplenishmentConfirmationOverviewComponent: {
+                                component: OrderConfirmationOverviewComponent,
+                                guards: [OrderConfirmationGuard],
+                            },
+                            ReplenishmentConfirmationItemsComponent: {
+                                component: OrderConfirmationItemsComponent,
+                                guards: [OrderConfirmationGuard],
+                            },
+                            ReplenishmentConfirmationTotalsComponent: {
+                                component: OrderConfirmationTotalsComponent,
+                                guards: [OrderConfirmationGuard],
+                            },
+                        },
+                    }),
+                ],
             },] }
 ];
 
@@ -20093,7 +20734,7 @@ LogoutGuard.ctorParameters = () => [
     { type: ProtectedRoutesService }
 ];
 
-const ɵ0$9 = { cxRoute: 'logout' };
+const ɵ0$b = { cxRoute: 'logout' };
 class LogoutModule {
 }
 LogoutModule.decorators = [
@@ -20105,7 +20746,7 @@ LogoutModule.decorators = [
                             path: null,
                             canActivate: [LogoutGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$9,
+                            data: ɵ0$b,
                         },
                     ]),
                 ],
@@ -20477,6 +21118,9 @@ CmsLibModule.decorators = [
                     NotificationPreferenceModule,
                     MyInterestsModule,
                     StockNotificationModule,
+                    ReplenishmentOrderHistoryModule,
+                    ReplenishmentOrderConfirmationModule,
+                    ReplenishmentOrderDetailsModule,
                 ],
             },] }
 ];
@@ -20508,7 +21152,7 @@ const PRODUCT_DETAILS_URL_MATCHER = new InjectionToken('PRODUCT_DETAILS_URL_MATC
     factory: () => getProductDetailsUrlMatcherFactory(inject(UrlMatcherService), inject(DEFAULT_URL_MATCHER)),
 });
 
-const ɵ0$a = { cxRoute: 'product' };
+const ɵ0$c = { cxRoute: 'product' };
 class ProductDetailsPageModule {
 }
 ProductDetailsPageModule.decorators = [
@@ -20519,7 +21163,7 @@ ProductDetailsPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$a,
+                            data: ɵ0$c,
                         },
                     ]),
                 ],
@@ -20564,7 +21208,7 @@ const PRODUCT_LISTING_URL_MATCHER = new InjectionToken('PRODUCT_LISTING_URL_MATC
     factory: () => getProductListingUrlMatcherFactory(inject(UrlMatcherService), inject(DEFAULT_URL_MATCHER)),
 });
 
-const ɵ0$b = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
+const ɵ0$d = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
 class ProductListingPageModule {
 }
 ProductListingPageModule.decorators = [
@@ -20575,7 +21219,7 @@ ProductListingPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$b,
+                            data: ɵ0$d,
                         },
                         {
                             path: null,
@@ -21126,5 +21770,5 @@ var FormUtils;
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LoginRegisterModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailHeadlineComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, layoutConfig, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, initPageTemplateStyle as ɵa, pwaConfigurationFactory as ɵb, AsmEnablerService as ɵba, AsmMainUiComponent as ɵbb, AsmComponentService as ɵbc, CSAgentLoginFormComponent as ɵbd, CustomerSelectionComponent as ɵbe, AsmSessionTimerComponent as ɵbf, FormatTimerPipe as ɵbg, CustomerEmulationComponent as ɵbh, AsmToggleUiComponent as ɵbi, defaultAsmLayoutConfig as ɵbj, defaultIconConfig as ɵbk, defaultCheckoutConfig as ɵbl, MultiLinePipe as ɵbm, CheckoutStepsSetGuard as ɵbn, PaymentTypeModule as ɵbo, PaymentTypeComponent as ɵbp, CostCenterModule as ɵbq, CostCenterComponent as ɵbr, CheckoutAuthGuard as ɵbs, CartNotEmptyGuard as ɵbt, defaultQualtricsConfig as ɵbu, CmsPageGuardService as ɵbv, CmsRoutesImplService as ɵbw, ReturnRequestService as ɵbx, LoginRegisterComponent as ɵby, PageTemplateStyleService as ɵbz, pwaFactory as ɵc, MyCouponsComponentService as ɵca, addCmsRoute as ɵcb, defaultStorefrontRoutesConfig as ɵcc, defaultRoutingConfig as ɵcd, htmlLangProvider as ɵce, setHtmlLangAttribute as ɵcf, defaultDirectionConfig as ɵcg, EventsModule as ɵch, DatePickerFormatterService as ɵci, DateTimePickerFormatterService as ɵcj, getStructuredDataFactory as ɵd, FOCUS_ATTR as ɵe, skipLinkFactory as ɵf, initHtmlDirAttribute as ɵg, LockFocusDirective as ɵh, TrapFocusDirective as ɵi, TabFocusDirective as ɵj, AutoFocusDirective as ɵk, EscapeFocusDirective as ɵl, PersistFocusDirective as ɵm, BlockFocusDirective as ɵn, VisibleFocusDirective as ɵo, BaseFocusDirective as ɵp, BaseFocusService as ɵq, PersistFocusService as ɵr, EscapeFocusService as ɵs, AutoFocusService as ɵt, TabFocusService as ɵu, TrapFocusService as ɵv, LockFocusService as ɵw, defaultAnonymousConsentLayoutConfig as ɵx, AsmLoaderModule as ɵy, asmFactory as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LoginRegisterModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, layoutConfig, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, initPageTemplateStyle as ɵa, pwaConfigurationFactory as ɵb, AsmEnablerService as ɵba, AsmMainUiComponent as ɵbb, AsmComponentService as ɵbc, CSAgentLoginFormComponent as ɵbd, CustomerSelectionComponent as ɵbe, AsmSessionTimerComponent as ɵbf, FormatTimerPipe as ɵbg, CustomerEmulationComponent as ɵbh, AsmToggleUiComponent as ɵbi, defaultAsmLayoutConfig as ɵbj, defaultIconConfig as ɵbk, defaultCheckoutConfig as ɵbl, MultiLinePipe as ɵbm, CheckoutStepsSetGuard as ɵbn, PaymentTypeModule as ɵbo, PaymentTypeComponent as ɵbp, defaultPlaceOrderSpinnerLayoutConfig as ɵbq, CostCenterModule as ɵbr, CostCenterComponent as ɵbs, CheckoutAuthGuard as ɵbt, CartNotEmptyGuard as ɵbu, defaultQualtricsConfig as ɵbv, CmsPageGuardService as ɵbw, CmsRoutesImplService as ɵbx, ReturnRequestService as ɵby, LoginRegisterComponent as ɵbz, pwaFactory as ɵc, PageTemplateStyleService as ɵca, MyCouponsComponentService as ɵcb, addCmsRoute as ɵcc, defaultStorefrontRoutesConfig as ɵcd, defaultRoutingConfig as ɵce, htmlLangProvider as ɵcf, setHtmlLangAttribute as ɵcg, defaultDirectionConfig as ɵch, EventsModule as ɵci, DatePickerFormatterService as ɵcj, DateTimePickerFormatterService as ɵck, getStructuredDataFactory as ɵd, FOCUS_ATTR as ɵe, skipLinkFactory as ɵf, initHtmlDirAttribute as ɵg, LockFocusDirective as ɵh, TrapFocusDirective as ɵi, TabFocusDirective as ɵj, AutoFocusDirective as ɵk, EscapeFocusDirective as ɵl, PersistFocusDirective as ɵm, BlockFocusDirective as ɵn, VisibleFocusDirective as ɵo, BaseFocusDirective as ɵp, BaseFocusService as ɵq, PersistFocusService as ɵr, EscapeFocusService as ɵs, AutoFocusService as ɵt, TabFocusService as ɵu, TrapFocusService as ɵv, LockFocusService as ɵw, defaultAnonymousConsentLayoutConfig as ɵx, AsmLoaderModule as ɵy, asmFactory as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
