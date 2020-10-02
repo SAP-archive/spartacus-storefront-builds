@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 import { CheckoutDeliveryService, UserAddressService, UserPaymentService, CheckoutPaymentService } from '@spartacus/core';
 import { CheckoutConfigService } from './checkout-config.service';
 import { CheckoutDetailsService } from './checkout-details.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class ExpressCheckoutService {
     protected userAddressService: UserAddressService;
     protected userPaymentService: UserPaymentService;
@@ -19,7 +18,4 @@ export declare class ExpressCheckoutService {
     protected setDeliveryMode(): void;
     protected resetCheckoutProcesses(): void;
     trySetDefaultCheckoutDetails(): Observable<boolean>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ExpressCheckoutService, never>;
 }
-
-//# sourceMappingURL=express-checkout.service.d.ts.map
