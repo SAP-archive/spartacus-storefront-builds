@@ -1,25 +1,40 @@
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { BREAKPOINT, LayoutConfig } from '../config/layout-config';
+import { BREAKPOINT, LayoutBreakPoints, LayoutConfig } from '../config/layout-config';
+/**
+ * The `BreakpointService` resolves the various screen sizes that are used in
+ * the storefront. The screen sizes are globally configurable based on your
+ * layout requirements. You can adjust the screen sizes by setting the minimum
+ * and/or maximum size for a breakpoint, as well as extending the configuration
+ * with new screens.
+ *
+ * By default, the `BreakpointService` is based on the breakpoints from the
+ * Bootstrap ui library:
+ * - `xs`: 0 - 576px
+ * - `sm`: 576px - 768px
+ * - `md`: 768px - 992px
+ * - `lg`: 992px - 1200px
+ * - `xl`: > 1200px
+ */
 export declare class BreakpointService {
-    private winRef;
-    private config;
-    constructor(winRef: WindowRef, config: LayoutConfig);
-    get breakpoint$(): Observable<BREAKPOINT>;
+    protected winRef: WindowRef;
+    protected layoutConfig: LayoutConfig;
+    protected platform: any;
+    private _breakpoints;
+    breakpoint$: Observable<BREAKPOINT>;
+    constructor(winRef: WindowRef, layoutConfig: LayoutConfig, platform: any);
     /**
-     * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-     * configuration. If no configuration is available for the given breakpoint, the
-     * method will return the default values:
-     * - xs: 567
-     * - sm: 768
-     * - md: 992
-     * - lg: 1200
-     */
-    getSize(breakpoint: BREAKPOINT): number;
-    /**
-     * Returns all available breakpoints for the system.
+     * Returns the breakpoints for the storefront layout.
+     *
+     * The breakpoints are driven by the `LayoutConfig.breakpoints` and sorted based on
+     * the given screen size.
      */
     get breakpoints(): BREAKPOINT[];
+    /**
+     * Returns the _maximum_ size for the breakpoint, given by the `LayoutConfig.breakpoints`
+     * configuration.
+     */
+    getSize(breakpoint: BREAKPOINT): number;
     /**
      * Indicates whether the current screen size is smaller than the maximum size of the
      * given breakpoint.
@@ -37,10 +52,40 @@ export declare class BreakpointService {
      */
     isUp(breakpoint: BREAKPOINT): Observable<boolean>;
     /**
-     * Indicates whether the current screen size fits to the given breakpoint
+     * Indicates whether the given breakpoint fits in the current screen size.
      */
     isEqual(breakpoint: BREAKPOINT): Observable<boolean>;
+    /**
+     * Returns the fallback breakpoint in case no breakpoint can be resolved. This is
+     * typically the case when we're on SSR without an actual window.
+     *
+     * Returns the smallest screen size (mobile first).
+     */
+    protected get fallbackBreakpoint(): BREAKPOINT;
+    /**
+     * Resolves the breakpoints and sorts them according to the configured size.
+     *
+     * The sort order is by small to large screens.
+     */
+    protected resolveBreakpointsFromConfig(): BREAKPOINT[];
+    /**
+     * Returns the _maximum_ size for the breakpoint, given by the
+     * `LayoutConfig.breakpoints` configuration. We will try to resolve the
+     * max size form the current breakpoint, but if this is not available, we
+     * resolve it form the next breakpoint
+     */
+    protected getMaxSize(breakpoint: BREAKPOINT): number;
+    protected getMinSize(breakpoint: BREAKPOINT): number;
+    /**
+     * Returns a `BREAKPOINT` for the given window size.
+     *
+     * This method tries to match the closest breakpoint for the give
+     * window size. We'll fallback to the `largest` size in case the window
+     * is greater than the largest configurable breakpoint.
+     */
     protected getBreakpoint(windowWidth: number): BREAKPOINT;
-    protected getClosest(windowWidth?: number): BREAKPOINT;
-    get window(): Window;
+    /**
+     * Helper method to return the breakpoint configuration.
+     */
+    protected get config(): LayoutBreakPoints;
 }

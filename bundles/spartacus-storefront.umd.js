@@ -3599,59 +3599,58 @@
         nextIcon: [{ type: i0.Input }]
     };
 
-    var _b;
-    var DEFAULT_BREAKPOINTS = (_b = {},
-        _b[exports.BREAKPOINT.xs] = 576,
-        _b[exports.BREAKPOINT.sm] = 768,
-        _b[exports.BREAKPOINT.md] = 992,
-        _b[exports.BREAKPOINT.lg] = 1200,
-        _b);
+    /**
+     * The `BreakpointService` resolves the various screen sizes that are used in
+     * the storefront. The screen sizes are globally configurable based on your
+     * layout requirements. You can adjust the screen sizes by setting the minimum
+     * and/or maximum size for a breakpoint, as well as extending the configuration
+     * with new screens.
+     *
+     * By default, the `BreakpointService` is based on the breakpoints from the
+     * Bootstrap ui library:
+     * - `xs`: 0 - 576px
+     * - `sm`: 576px - 768px
+     * - `md`: 768px - 992px
+     * - `lg`: 992px - 1200px
+     * - `xl`: > 1200px
+     */
     var BreakpointService = /** @class */ (function () {
-        function BreakpointService(winRef, config) {
+        function BreakpointService(winRef, layoutConfig, platform) {
+            var _this = this;
             this.winRef = winRef;
-            this.config = config;
+            this.layoutConfig = layoutConfig;
+            this.platform = platform;
+            this.breakpoint$ = i1$1.isPlatformBrowser(this.platform)
+                ? this.winRef.resize$.pipe(operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged())
+                : rxjs.of(this.fallbackBreakpoint);
         }
-        Object.defineProperty(BreakpointService.prototype, "breakpoint$", {
+        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
+            /**
+             * Returns the breakpoints for the storefront layout.
+             *
+             * The breakpoints are driven by the `LayoutConfig.breakpoints` and sorted based on
+             * the given screen size.
+             */
             get: function () {
-                var _this = this;
-                if (!this.window) {
-                    return rxjs.of(exports.BREAKPOINT.xs);
+                if (!this._breakpoints) {
+                    this._breakpoints = this.resolveBreakpointsFromConfig();
                 }
-                return this.winRef.resize$.pipe(operators.map(function (event) { return _this.getBreakpoint(event.target.innerWidth); }), operators.distinctUntilChanged());
+                return this._breakpoints;
             },
             enumerable: false,
             configurable: true
         });
         /**
-         * Returns the _maximum_ size for the breakpint, given by the `LayoutConfig.breakpoints`
-         * configuration. If no configuration is available for the given breakpoint, the
-         * method will return the default values:
-         * - xs: 567
-         * - sm: 768
-         * - md: 992
-         * - lg: 1200
+         * Returns the _maximum_ size for the breakpoint, given by the `LayoutConfig.breakpoints`
+         * configuration.
          */
         BreakpointService.prototype.getSize = function (breakpoint) {
-            var _a;
-            return ((_a = this.config.breakpoints) === null || _a === void 0 ? void 0 : _a.hasOwnProperty(breakpoint)) ? this.config.breakpoints[breakpoint]
-                : DEFAULT_BREAKPOINTS[breakpoint];
+            var _a, _b;
+            return ((_a = this.getMaxSize(breakpoint)) !== null && _a !== void 0 ? _a :
+                // if there's no direct max value or explicit max value
+                // we must derive the max value from the previous min
+                this.getMinSize((_b = this.breakpoints) === null || _b === void 0 ? void 0 : _b[this.breakpoints.indexOf(breakpoint) + 1]));
         };
-        Object.defineProperty(BreakpointService.prototype, "breakpoints", {
-            /**
-             * Returns all available breakpoints for the system.
-             */
-            get: function () {
-                return [
-                    exports.BREAKPOINT.xs,
-                    exports.BREAKPOINT.sm,
-                    exports.BREAKPOINT.md,
-                    exports.BREAKPOINT.lg,
-                    exports.BREAKPOINT.xl,
-                ];
-            },
-            enumerable: false,
-            configurable: true
-        });
         /**
          * Indicates whether the current screen size is smaller than the maximum size of the
          * given breakpoint.
@@ -3661,7 +3660,7 @@
          */
         BreakpointService.prototype.isDown = function (breakpoint) {
             var _this = this;
-            return this.breakpoint$.pipe(operators.map(function (br) { return _this.breakpoints
+            return this.breakpoint$.pipe(operators.tap(function (br) { return console.log('isDown', br, _this.breakpoints); }), operators.map(function (br) { return _this.breakpoints
                 .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
                 .includes(br); }));
         };
@@ -3679,34 +3678,91 @@
                 .includes(br); }));
         };
         /**
-         * Indicates whether the current screen size fits to the given breakpoint
+         * Indicates whether the given breakpoint fits in the current screen size.
          */
         BreakpointService.prototype.isEqual = function (breakpoint) {
             return this.breakpoint$.pipe(operators.map(function (br) { return br === breakpoint; }));
         };
-        BreakpointService.prototype.getBreakpoint = function (windowWidth) {
-            var breakpoint = this.getClosest(windowWidth);
-            return exports.BREAKPOINT[breakpoint || exports.BREAKPOINT.lg];
-        };
-        BreakpointService.prototype.getClosest = function (windowWidth) {
-            var _this = this;
-            if (!windowWidth) {
-                windowWidth = this.window.innerWidth;
-            }
-            return windowWidth > this.getSize(exports.BREAKPOINT.lg)
-                ? exports.BREAKPOINT.xl
-                : this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); });
-        };
-        Object.defineProperty(BreakpointService.prototype, "window", {
+        Object.defineProperty(BreakpointService.prototype, "fallbackBreakpoint", {
+            /**
+             * Returns the fallback breakpoint in case no breakpoint can be resolved. This is
+             * typically the case when we're on SSR without an actual window.
+             *
+             * Returns the smallest screen size (mobile first).
+             */
             get: function () {
-                return this.winRef.nativeWindow;
+                var _a;
+                return (_a = this.breakpoints) === null || _a === void 0 ? void 0 : _a[0];
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Resolves the breakpoints and sorts them according to the configured size.
+         *
+         * The sort order is by small to large screens.
+         */
+        BreakpointService.prototype.resolveBreakpointsFromConfig = function () {
+            var _this = this;
+            var sortByScreenSize = function (next, prev) {
+                var maxNext = Math.max(_this.getMinSize(next) + 1 || 0, _this.getMaxSize(next) || 0);
+                var maxPrev = Math.max(_this.getMinSize(prev) + 1 || 0, _this.getMaxSize(prev) || 0);
+                return maxNext < maxPrev ? -1 : 0;
+            };
+            return Object.keys(this.config).sort(sortByScreenSize);
+        };
+        /**
+         * Returns the _maximum_ size for the breakpoint, given by the
+         * `LayoutConfig.breakpoints` configuration. We will try to resolve the
+         * max size form the current breakpoint, but if this is not available, we
+         * resolve it form the next breakpoint
+         */
+        BreakpointService.prototype.getMaxSize = function (breakpoint) {
+            var breakpointConfig = this.config[breakpoint];
+            if (!breakpointConfig) {
+                return null;
+            }
+            // we treat numbers as the max number by default
+            if (typeof breakpointConfig === 'number') {
+                return breakpointConfig;
+            }
+            else if (breakpointConfig.max) {
+                return breakpointConfig.max;
+            }
+            else {
+                return null;
+            }
+        };
+        BreakpointService.prototype.getMinSize = function (breakpoint) {
+            var _a;
+            return (_a = this.config[breakpoint]) === null || _a === void 0 ? void 0 : _a.min;
+        };
+        /**
+         * Returns a `BREAKPOINT` for the given window size.
+         *
+         * This method tries to match the closest breakpoint for the give
+         * window size. We'll fallback to the `largest` size in case the window
+         * is greater than the largest configurable breakpoint.
+         */
+        BreakpointService.prototype.getBreakpoint = function (windowWidth) {
+            var _this = this;
+            var _a, _b;
+            return ((_a = this.breakpoints.find(function (br) { return windowWidth <= _this.getSize(br); })) !== null && _a !== void 0 ? _a : (_b = this.breakpoints) === null || _b === void 0 ? void 0 : _b[this.breakpoints.length - 1]);
+        };
+        Object.defineProperty(BreakpointService.prototype, "config", {
+            /**
+             * Helper method to return the breakpoint configuration.
+             */
+            get: function () {
+                var _a;
+                return ((_a = this.layoutConfig) === null || _a === void 0 ? void 0 : _a.breakpoints) || {};
             },
             enumerable: false,
             configurable: true
         });
         return BreakpointService;
     }());
-    BreakpointService.ɵprov = i0.ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(i0.ɵɵinject(i1.WindowRef), i0.ɵɵinject(LayoutConfig)); }, token: BreakpointService, providedIn: "root" });
+    BreakpointService.ɵprov = i0.ɵɵdefineInjectable({ factory: function BreakpointService_Factory() { return new BreakpointService(i0.ɵɵinject(i1.WindowRef), i0.ɵɵinject(LayoutConfig), i0.ɵɵinject(i0.PLATFORM_ID)); }, token: BreakpointService, providedIn: "root" });
     BreakpointService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -3714,7 +3770,8 @@
     ];
     BreakpointService.ctorParameters = function () { return [
         { type: i1.WindowRef },
-        { type: LayoutConfig }
+        { type: LayoutConfig },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] }
     ]; };
 
     /**
@@ -12983,6 +13040,18 @@
         return isReady;
     }
 
+    var defaultLayoutConfig = {
+        breakpoints: {
+            xs: 576,
+            sm: 768,
+            md: 992,
+            lg: 1200,
+            xl: {
+                min: 1200,
+            },
+        },
+    };
+
     /**
      * The direction config provides an easy way to configure "ltr" versus "rtl" direction
      * for the storefront. The direction can be configured to detect the direction by language.
@@ -13239,6 +13308,7 @@
     LayoutModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [OutletRefModule, LaunchDialogModule.forRoot(), DirectionModule],
+                    providers: [i1.provideConfig(defaultLayoutConfig)],
                     exports: [OutletRefModule],
                 },] }
     ];
@@ -13292,7 +13362,7 @@
              * be reused cross pages.
              *
              * The position is used to find the CMS components for the page slot. It is also
-             * added as an additional CSS class so that layoutt can be applied.
+             * added as an additional CSS class so that layout can be applied.
              */
             set: function (value) {
                 this.position$.next(value);
@@ -13551,7 +13621,7 @@
             }
         };
         /**
-         * Returns a list of slots for a breakpoint specific configuratoin
+         * Returns a list of slots for a breakpoint specific configuration
          * If there's no specific configuration for the breakpoint,
          * the closest available configuration will be returned.
          */
@@ -13570,7 +13640,7 @@
             // find closest config
             var all = this.breakpointService.breakpoints;
             try {
-                for (var _b = __values(all.splice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
+                for (var _b = __values(all.slice(0, all.indexOf(breakpoint))), _c = _b.next(); !_c.done; _c = _b.next()) {
                     var br = _c.value;
                     if (layoutSlotConfig[br] &&
                         layoutSlotConfig[br].hasOwnProperty(configAttribute)) {
@@ -24041,6 +24111,7 @@
     /*
      * Public API Surface of storefrontlib
      */
+    /** AUGMENTABLE_TYPES_END */
 
     /**
      * Generated bundle index. Do not edit.
@@ -24480,6 +24551,7 @@
     exports.checkoutShippingSteps = checkoutShippingSteps;
     exports.controlsMustMatch = controlsMustMatch;
     exports.defaultCmsContentConfig = defaultCmsContentConfig;
+    exports.defaultLayoutConfig = defaultLayoutConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
     exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
     exports.defaultPaginationConfig = defaultPaginationConfig;

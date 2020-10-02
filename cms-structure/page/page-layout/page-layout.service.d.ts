@@ -31,7 +31,7 @@ export declare class PageLayoutService {
     protected getSlotConfig(templateUid: string, configAttribute: string, section?: string, breakpoint?: BREAKPOINT): SlotConfig;
     protected getSlotConfigForSection(templateUid: string, configAttribute: string, section?: string, breakpoint?: BREAKPOINT): SlotConfig;
     /**
-     * Returns a list of slots for a breakpoint specific configuratoin
+     * Returns a list of slots for a breakpoint specific configuration
      * If there's no specific configuration for the breakpoint,
      * the closest available configuration will be returned.
      */

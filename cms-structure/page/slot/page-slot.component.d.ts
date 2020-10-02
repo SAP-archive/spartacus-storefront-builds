@@ -24,7 +24,7 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
      * be reused cross pages.
      *
      * The position is used to find the CMS components for the page slot. It is also
-     * added as an additional CSS class so that layoutt can be applied.
+     * added as an additional CSS class so that layout can be applied.
      */
     set position(value: string);
     get position(): string;

@@ -1,6 +1,9 @@
 /**
  * Generated bundle index. Do not edit.
  */
+/** AUGMENTABLE_TYPES_START */
+export { BREAKPOINT } from './layout/config/layout-config';
+/** AUGMENTABLE_TYPES_END */
 export * from './public_api';
 export { defaultAnonymousConsentLayoutConfig as ɵx } from './cms-components/anonymous-consent-management/default-anonymous-consent-layout.config';
 export { AsmLoaderModule as ɵy, asmFactory as ɵz } from './cms-components/asm/asm-loader.module';
