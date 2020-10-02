@@ -1,1 +1,0 @@
-{"version":3,"file":"cart-details.module.d.ts","sources":["cart-details.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class CartDetailsModule {\n}\n"]}
