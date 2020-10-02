@@ -5,7 +5,6 @@ import { CheckoutDeliveryService, DeliveryMode } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { CheckoutConfigService } from '../../services/checkout-config.service';
 import { CheckoutStepService } from '../../services/checkout-step.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     private fb;
     private checkoutDeliveryService;
@@ -26,8 +25,4 @@ export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     back(): void;
     get deliveryModeInvalid(): boolean;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DeliveryModeComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<DeliveryModeComponent, "cx-delivery-mode", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=delivery-mode.component.d.ts.map
