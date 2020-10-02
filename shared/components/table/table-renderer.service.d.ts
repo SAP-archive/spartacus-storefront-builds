@@ -11,6 +11,7 @@ import { Table, TableDataOutletContext, TableHeaderOutletContext, TableOptions }
  * The components are added to the outlet slots for the corresponding cells. The table
  * structure and data is added to the outlet context.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableRendererService {
     protected outletService: OutletService;
     protected componentFactoryResolver: ComponentFactoryResolver;
@@ -52,4 +53,7 @@ export declare class TableRendererService {
      * Returns the data (td) outlet context for the given field.
      */
     getDataOutletContext(type: string, options: TableOptions, field: string, data: any): TableDataOutletContext;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableRendererService, never>;
 }
+
+//# sourceMappingURL=table-renderer.service.d.ts.map
