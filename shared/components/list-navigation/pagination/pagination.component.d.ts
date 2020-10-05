@@ -28,7 +28,7 @@ export declare class PaginationComponent {
     constructor(paginationBuilder: PaginationBuilder, activatedRoute: ActivatedRoute);
     private render;
     /**
-     * Inidicates whether the given item is the current item.
+     * Indicates whether the given item is the current item.
      *
      * @param item PaginationItem
      * @returns boolean

@@ -4740,7 +4740,7 @@
         /**
          * Builds a list of `PaginationItem`. The give pageCount and current are used
          * to build out the full pagination. There are various {@link PaginationConfig} options
-         * which can be used to configure the behaviour of the build. Alternatively, CSS
+         * which can be used to configure the behavior of the build. Alternatively, CSS
          * can be used to further specialize visibility of the pagination.
          *
          * @param pageCount The total number of pages
@@ -5016,7 +5016,7 @@
             this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
         };
         /**
-         * Inidicates whether the given item is the current item.
+         * Indicates whether the given item is the current item.
          *
          * @param item PaginationItem
          * @returns boolean
@@ -6645,18 +6645,18 @@
         /**
          * Adds the configured table component for the header and data.
          */
-        TableRendererService.prototype.add = function (dataset) {
+        TableRendererService.prototype.add = function (structure) {
             var _this = this;
-            var _a, _b;
-            (_b = (_a = dataset.structure) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b.forEach(function (field) {
-                var thRenderer = _this.getHeaderRenderer(dataset, field);
+            var _a;
+            (_a = structure === null || structure === void 0 ? void 0 : structure.cells) === null || _a === void 0 ? void 0 : _a.forEach(function (field) {
+                var thRenderer = _this.getHeaderRenderer(structure, field);
                 if (thRenderer) {
-                    var ref = _this.getHeaderOutletRef(dataset.structure.type, field);
+                    var ref = _this.getHeaderOutletRef(structure.type, field);
                     _this.render(ref, thRenderer);
                 }
-                var tdRenderer = _this.getDataRenderer(dataset, field);
+                var tdRenderer = _this.getDataRenderer(structure, field);
                 if (tdRenderer) {
-                    var ref = _this.getDataOutletRef(dataset.structure.type, field);
+                    var ref = _this.getDataOutletRef(structure.type, field);
                     _this.render(ref, tdRenderer);
                 }
             });
@@ -6672,16 +6672,16 @@
         /**
          * Returns the header render component for the given field.
          */
-        TableRendererService.prototype.getHeaderRenderer = function (dataset, field) {
+        TableRendererService.prototype.getHeaderRenderer = function (structure, field) {
             var _a, _b, _c, _d, _e;
-            return (((_c = (_b = (_a = dataset.structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.headerComponent) || ((_d = dataset.structure.options) === null || _d === void 0 ? void 0 : _d.headerComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.headerComponent));
+            return (((_c = (_b = (_a = structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.headerComponent) || ((_d = structure.options) === null || _d === void 0 ? void 0 : _d.headerComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.headerComponent));
         };
         /**
          * Returns the data render component for the given field.
          */
-        TableRendererService.prototype.getDataRenderer = function (dataset, field) {
+        TableRendererService.prototype.getDataRenderer = function (structure, field) {
             var _a, _b, _c, _d, _e;
-            return (((_c = (_b = (_a = dataset.structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.dataComponent) || ((_d = dataset.structure.options) === null || _d === void 0 ? void 0 : _d.dataComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.dataComponent));
+            return (((_c = (_b = (_a = structure.options) === null || _a === void 0 ? void 0 : _a.cells) === null || _b === void 0 ? void 0 : _b[field]) === null || _c === void 0 ? void 0 : _c.dataComponent) || ((_d = structure.options) === null || _d === void 0 ? void 0 : _d.dataComponent) || ((_e = this.config.tableOptions) === null || _e === void 0 ? void 0 : _e.dataComponent));
         };
         /**
          * Returns the header (th) outlet reference for the given field.
@@ -6748,19 +6748,18 @@
     })(exports.TableLayout || (exports.TableLayout = {}));
 
     /**
-     * The table component provides a generic DOM structure based on the `dataset` input.
-     * The `Table` dataset contains a type, table structure and table data.
+     * The table component provides a generic table DOM structure, with 3 layout types:
+     * horizontal, vertical and _stacked vertical_ layout. The layout is driven by the
+     * table structure.
      *
-     * The table component only supports horizontal, vertical and stacked table layout.
+     * The implementation is fairly "dumb" and only renders string based content for TH
+     * and TD elements. The actual cell rendering is delegated to a (configurable) cell
+     * component. Additionally, each cell is registered as an outlet, so that customizations
+     * can be done by both outlet templates and components.
      *
-     * The implementation is fairly "dumb" and only renders string based content for TH and TD elements.
-     * The actual cell rendering is delegated to a (configurable) cell component. Additionally, each cell
-     * is registered as an outlet, so that customizations can be done by both outlet templates
-     * and components.
-     *
-     * The outlet references are concatenated from the table `type` and header `key`. The following
-     * snippet shows an outlet generated for a table header, for the table type "cost-center" with
-     * a header key "name":
+     * The outlet references are concatenated from the table `type` and header `key`. The
+     * following snippet shows an outlet generated for a table header, for the table type
+     * "cost-center" with a header key "name":
      *
      * ```
      * <th>
@@ -6777,22 +6776,22 @@
             this.rendererService = rendererService;
             this.launch = new i0.EventEmitter();
         }
-        Object.defineProperty(TableComponent.prototype, "dataset", {
+        Object.defineProperty(TableComponent.prototype, "structure", {
             get: function () {
-                return this._dataset;
+                return this._structure;
             },
-            set: function (value) {
-                this._dataset = value;
-                this.init(value);
+            set: function (structure) {
+                this._structure = structure;
+                this.init();
             },
             enumerable: false,
             configurable: true
         });
-        TableComponent.prototype.init = function (dataset) {
+        TableComponent.prototype.init = function () {
             this.verticalLayout = !this.layout || this.layout === exports.TableLayout.VERTICAL;
             this.verticalStackedLayout = this.layout === exports.TableLayout.VERTICAL_STACKED;
             this.horizontalLayout = this.layout === exports.TableLayout.HORIZONTAL;
-            this.rendererService.add(dataset);
+            this.rendererService.add(this.structure);
             this.addTableDebugInfo();
         };
         TableComponent.prototype.launchItem = function (item) {
@@ -6852,8 +6851,8 @@
              * Helper method to return the deeply nested orientation configuration.
              */
             get: function () {
-                var _a, _b, _c;
-                return (_c = (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.options) === null || _c === void 0 ? void 0 : _c.layout;
+                var _a, _b;
+                return (_b = (_a = this.structure) === null || _a === void 0 ? void 0 : _a.options) === null || _b === void 0 ? void 0 : _b.layout;
             },
             enumerable: false,
             configurable: true
@@ -6863,16 +6862,16 @@
              * Helper method to return the deeply nested type.
              */
             get: function () {
-                var _a, _b;
-                return (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.type;
+                var _a;
+                return (_a = this.structure) === null || _a === void 0 ? void 0 : _a.type;
             },
             enumerable: false,
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "options", {
             get: function () {
-                var _a, _b;
-                return (_b = (_a = this.dataset) === null || _a === void 0 ? void 0 : _a.structure) === null || _b === void 0 ? void 0 : _b.options;
+                var _a;
+                return (_a = this.structure) === null || _a === void 0 ? void 0 : _a.options;
             },
             enumerable: false,
             configurable: true
@@ -6882,7 +6881,7 @@
     TableComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-table',
-                    template: "<table *ngIf=\"dataset?.structure as structure\">\n  <ng-container *ngIf=\"verticalStackedLayout\">\n    <tbody\n      *ngFor=\"let item of dataset.data; trackBy: trackData\"\n      (click)=\"launchItem(item)\"\n      [class.is-current]=\"isCurrentItem(item)\"\n    >\n      <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n        <th>\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n        <td>\n          <ng-template\n            [cxOutlet]=\"getDataOutletRef(cell)\"\n            [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n          >\n            {{ item[cell] }}\n          </ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </ng-container>\n\n  <!-- vertical tables render the item  -->\n  <ng-container *ngIf=\"verticalLayout\">\n    <thead>\n      <tr>\n        <th scope=\"col\" *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n      </tr>\n    </thead>\n\n    <tr\n      *ngFor=\"let item of dataset.data; trackBy: trackData\"\n      [class.is-current]=\"isCurrentItem(item)\"\n      (click)=\"launchItem(item)\"\n    >\n      <td *ngFor=\"let cell of structure.cells; let i = index\" [class]=\"cell\">\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n\n  <ng-container *ngIf=\"horizontalLayout\">\n    <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n      <th scope=\"col\">\n        <ng-template\n          [cxOutlet]=\"getHeaderOutletRef(cell)\"\n          [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n        >\n          {{ cell }}\n        </ng-template>\n      </th>\n      <td\n        *ngFor=\"let item of dataset.data; trackBy: trackData\"\n        [class.is-current]=\"isCurrentItem(item)\"\n        (click)=\"launchItem(item)\"\n      >\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n</table>\n",
+                    template: "<table *ngIf=\"structure\">\n  <ng-container *ngIf=\"verticalStackedLayout\">\n    <tbody\n      *ngFor=\"let item of data; trackBy: trackData\"\n      (click)=\"launchItem(item)\"\n      [class.is-current]=\"isCurrentItem(item)\"\n    >\n      <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n        <th>\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n        <td>\n          <ng-template\n            [cxOutlet]=\"getDataOutletRef(cell)\"\n            [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n          >\n            {{ item[cell] }}\n          </ng-template>\n        </td>\n      </tr>\n    </tbody>\n  </ng-container>\n\n  <!-- vertical tables render the item  -->\n  <ng-container *ngIf=\"verticalLayout\">\n    <thead>\n      <tr>\n        <th scope=\"col\" *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n          <ng-template\n            [cxOutlet]=\"getHeaderOutletRef(cell)\"\n            [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n          >\n            {{ cell }}\n          </ng-template>\n        </th>\n      </tr>\n    </thead>\n\n    <tr\n      *ngFor=\"let item of data; trackBy: trackData\"\n      [class.is-current]=\"isCurrentItem(item)\"\n      (click)=\"launchItem(item)\"\n    >\n      <td *ngFor=\"let cell of structure.cells; let i = index\" [class]=\"cell\">\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n\n  <ng-container *ngIf=\"horizontalLayout\">\n    <tr *ngFor=\"let cell of structure.cells\" [class]=\"cell\">\n      <th scope=\"col\">\n        <ng-template\n          [cxOutlet]=\"getHeaderOutletRef(cell)\"\n          [cxOutletContext]=\"getHeaderOutletContext(cell)\"\n        >\n          {{ cell }}\n        </ng-template>\n      </th>\n      <td\n        *ngFor=\"let item of data; trackBy: trackData\"\n        [class.is-current]=\"isCurrentItem(item)\"\n        (click)=\"launchItem(item)\"\n      >\n        <ng-template\n          [cxOutlet]=\"getDataOutletRef(cell)\"\n          [cxOutletContext]=\"getDataOutletContext(cell, item)\"\n        >\n          {{ item[cell] }}\n        </ng-template>\n      </td>\n    </tr>\n  </ng-container>\n</table>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -6894,7 +6893,8 @@
         horizontalLayout: [{ type: i0.HostBinding, args: ['class.horizontal',] }],
         verticalLayout: [{ type: i0.HostBinding, args: ['class.vertical',] }],
         verticalStackedLayout: [{ type: i0.HostBinding, args: ['class.vertical-stacked',] }],
-        dataset: [{ type: i0.Input }],
+        structure: [{ type: i0.Input }],
+        data: [{ type: i0.Input }],
         currentItem: [{ type: i0.Input }],
         launch: [{ type: i0.Output }]
     };

@@ -1,7 +1,7 @@
 import { ComponentFactoryResolver, Type } from '@angular/core';
 import { OutletService } from '../../../cms-structure/outlet/outlet.service';
 import { TableConfig } from './config/table.config';
-import { Table, TableDataOutletContext, TableHeaderOutletContext, TableOptions } from './table.model';
+import { TableDataOutletContext, TableHeaderOutletContext, TableOptions, TableStructure } from './table.model';
 /**
  * The table renderer service adds a component for each table cells (th and td)
  * based on a fine grained configuration. Each table type can configure both global
@@ -20,16 +20,16 @@ export declare class TableRendererService {
     /**
      * Adds the configured table component for the header and data.
      */
-    add(dataset: Table): void;
+    add(structure: TableStructure): void;
     protected render(outletRef: string, renderer: Type<any>): void;
     /**
      * Returns the header render component for the given field.
      */
-    protected getHeaderRenderer(dataset: Table, field: string): Type<any>;
+    protected getHeaderRenderer(structure: TableStructure, field: string): Type<any>;
     /**
      * Returns the data render component for the given field.
      */
-    protected getDataRenderer(dataset: Table, field: string): Type<any>;
+    protected getDataRenderer(structure: TableStructure, field: string): Type<any>;
     /**
      * Returns the header (th) outlet reference for the given field.
      *
