@@ -1,5 +1,6 @@
 import { OrderReturnRequestService, RoutingService, ReturnRequest, GlobalMessageService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class ReturnRequestService {
     protected routingService: RoutingService;
     protected returnRequestService: OrderReturnRequestService;
@@ -12,4 +13,7 @@ export declare class ReturnRequestService {
     cancelReturnRequest(returnRequestCode: string): void;
     cancelSuccess(rma: string): void;
     backToList(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ReturnRequestService, never>;
 }
+
+//# sourceMappingURL=return-request.service.d.ts.map

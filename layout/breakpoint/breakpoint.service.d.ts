@@ -16,6 +16,7 @@ import { BREAKPOINT, LayoutBreakPoints, LayoutConfig } from '../config/layout-co
  * - `lg`: 992px - 1200px
  * - `xl`: > 1200px
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class BreakpointService {
     protected winRef: WindowRef;
     protected layoutConfig: LayoutConfig;
@@ -88,4 +89,7 @@ export declare class BreakpointService {
      * Helper method to return the breakpoint configuration.
      */
     protected get config(): LayoutBreakPoints;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<BreakpointService, never>;
 }
+
+//# sourceMappingURL=breakpoint.service.d.ts.map
