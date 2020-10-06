@@ -1,1 +1,0 @@
-{"version":3,"file":"delivery-mode.module.d.ts","sources":["delivery-mode.module.d.ts"],"names":[],"mappings":";;;;;;AAAA;;;AACA","sourcesContent":["export declare class DeliveryModeModule {\n}\n"]}
