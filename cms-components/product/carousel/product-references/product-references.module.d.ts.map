@@ -1,1 +1,0 @@
-{"version":3,"file":"product-references.module.d.ts","sources":["product-references.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ProductReferencesModule {\n}\n"]}
