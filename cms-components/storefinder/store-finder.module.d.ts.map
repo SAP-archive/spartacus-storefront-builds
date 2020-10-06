@@ -1,1 +1,0 @@
-{"version":3,"file":"store-finder.module.d.ts","sources":["store-finder.module.d.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class StoreFinderModule {\n}\n"]}
