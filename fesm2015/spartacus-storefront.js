@@ -5687,7 +5687,7 @@ class TableHeaderCellComponent {
     get localizedHeader() {
         var _a, _b;
         return (((_b = (_a = this.fieldOptions) === null || _a === void 0 ? void 0 : _a.label) === null || _b === void 0 ? void 0 : _b.i18nKey) ||
-            `${this.type}.${this.field}`);
+            `${this.i18nRoot}.${this.field}`);
     }
     get fieldOptions() {
         var _a, _b, _c;
@@ -5700,6 +5700,10 @@ class TableHeaderCellComponent {
     get type() {
         var _a, _b;
         return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._type;
+    }
+    get i18nRoot() {
+        var _a, _b;
+        return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._i18nRoot;
     }
 }
 TableHeaderCellComponent.decorators = [
@@ -5824,8 +5828,13 @@ class TableRendererService {
     /**
      * Returns the header (th) outlet context for the given field.
      */
-    getHeaderOutletContext(type, options, field) {
-        return { _type: type, _options: options, _field: field };
+    getHeaderOutletContext(type, options, i18nRoot, field) {
+        return {
+            _type: type,
+            _options: options,
+            _field: field,
+            _i18nRoot: i18nRoot,
+        };
     }
     /**
      * Returns the data (td) outlet reference for the given field.
@@ -5839,8 +5848,8 @@ class TableRendererService {
     /**
      * Returns the data (td) outlet context for the given field.
      */
-    getDataOutletContext(type, options, field, data) {
-        return Object.assign(Object.assign({}, data), { _type: type, _options: options, _field: field });
+    getDataOutletContext(type, options, i18nRoot, field, data) {
+        return Object.assign(Object.assign({}, data), { _type: type, _options: options, _field: field, _i18nRoot: i18nRoot });
     }
 }
 TableRendererService.ɵprov = ɵɵdefineInjectable({ factory: function TableRendererService_Factory() { return new TableRendererService(ɵɵinject(OutletService), ɵɵinject(ComponentFactoryResolver), ɵɵinject(TableConfig)); }, token: TableRendererService, providedIn: "root" });
@@ -5945,7 +5954,7 @@ class TableComponent {
      * Returns the header (th) outlet context for the given field.
      */
     getHeaderOutletContext(field) {
-        return this.rendererService.getHeaderOutletContext(this.type, this.options, field);
+        return this.rendererService.getHeaderOutletContext(this.type, this.options, this.i18nRoot, field);
     }
     /**
      * Returns the data (td) outlet reference for the given field.
@@ -5957,7 +5966,7 @@ class TableComponent {
      * Returns the data (td) outlet context for the given field.
      */
     getDataOutletContext(field, data) {
-        return this.rendererService.getDataOutletContext(this.type, this.options, field, data);
+        return this.rendererService.getDataOutletContext(this.type, this.options, this.i18nRoot, field, data);
     }
     trackData(_i, item) {
         return JSON.stringify(item);
@@ -6007,6 +6016,7 @@ TableComponent.propDecorators = {
     verticalStackedLayout: [{ type: HostBinding, args: ['class.vertical-stacked',] }],
     structure: [{ type: Input }],
     data: [{ type: Input }],
+    i18nRoot: [{ type: Input }],
     currentItem: [{ type: Input }],
     launch: [{ type: Output }]
 };
@@ -6054,17 +6064,12 @@ class TableService {
      * @param defaultStructure (optional) Default table structure that contains fallback options. More specific options are merged with the default structure.
      * @param data$ (optional) The actual data can be passed in to generate the table structure based on actual data.
      */
-    buildStructure(tableType, defaultStructure, data$) {
+    buildStructure(tableType, defaultStructure) {
         if (this.hasTableConfig(tableType)) {
             return this.buildStructureFromConfig(tableType, defaultStructure);
         }
         else {
-            if (data$) {
-                return this.buildStructureFromData(tableType, data$);
-            }
-            else {
-                return this.buildRandomStructure(tableType);
-            }
+            return this.buildRandomStructure(tableType);
         }
     }
     /**

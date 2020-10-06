@@ -134,6 +134,14 @@ export interface TableHeaderOutletContext {
     _type: string;
     _field: string;
     _options?: TableOptions;
+    /**
+     * The i18nRoot is used to build localized table headers. The i18nRoot
+     * is used as a prefix for the `_field`. Table header labels wil use the
+     * following locales:
+     *
+     * `[i18nRoot].[_field]`
+     */
+    _i18nRoot?: string;
 }
 export interface TableDataOutletContext extends TableHeaderOutletContext {
     [property: string]: any;

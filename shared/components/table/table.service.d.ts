@@ -15,6 +15,7 @@ import { TableStructure, TableStructureConfiguration } from './table.model';
  * If there is no table configuration for the given type found, a table header structure
  * is generated based on the actual data (if available) or randomly by generating 5 random headers.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableService {
     protected breakpointService: BreakpointService;
     protected config: TableConfig;
@@ -26,7 +27,7 @@ export declare class TableService {
      * @param defaultStructure (optional) Default table structure that contains fallback options. More specific options are merged with the default structure.
      * @param data$ (optional) The actual data can be passed in to generate the table structure based on actual data.
      */
-    buildStructure(tableType: string, defaultStructure?: ResponsiveTableConfiguration, data$?: Observable<any>): Observable<TableStructure>;
+    buildStructure(tableType: string, defaultStructure?: ResponsiveTableConfiguration): Observable<TableStructure>;
     /**
      * Returns the table structure by configuration. The configuration can be
      * breakpoint-driven, which means that an alternative header structure can
@@ -70,4 +71,7 @@ export declare class TableService {
      * The message is only logged in dev mode.
      */
     private logWarning;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableService, never>;
 }
+
+//# sourceMappingURL=table.service.d.ts.map

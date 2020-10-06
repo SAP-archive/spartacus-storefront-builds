@@ -6532,7 +6532,7 @@
             get: function () {
                 var _a, _b;
                 return (((_b = (_a = this.fieldOptions) === null || _a === void 0 ? void 0 : _a.label) === null || _b === void 0 ? void 0 : _b.i18nKey) ||
-                    this.type + "." + this.field);
+                    this.i18nRoot + "." + this.field);
             },
             enumerable: false,
             configurable: true
@@ -6557,6 +6557,14 @@
             get: function () {
                 var _a, _b;
                 return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._type;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(TableHeaderCellComponent.prototype, "i18nRoot", {
+            get: function () {
+                var _a, _b;
+                return (_b = (_a = this.outlet) === null || _a === void 0 ? void 0 : _a.context) === null || _b === void 0 ? void 0 : _b._i18nRoot;
             },
             enumerable: false,
             configurable: true
@@ -6695,8 +6703,13 @@
         /**
          * Returns the header (th) outlet context for the given field.
          */
-        TableRendererService.prototype.getHeaderOutletContext = function (type, options, field) {
-            return { _type: type, _options: options, _field: field };
+        TableRendererService.prototype.getHeaderOutletContext = function (type, options, i18nRoot, field) {
+            return {
+                _type: type,
+                _options: options,
+                _field: field,
+                _i18nRoot: i18nRoot,
+            };
         };
         /**
          * Returns the data (td) outlet reference for the given field.
@@ -6710,8 +6723,8 @@
         /**
          * Returns the data (td) outlet context for the given field.
          */
-        TableRendererService.prototype.getDataOutletContext = function (type, options, field, data) {
-            return Object.assign(Object.assign({}, data), { _type: type, _options: options, _field: field });
+        TableRendererService.prototype.getDataOutletContext = function (type, options, i18nRoot, field, data) {
+            return Object.assign(Object.assign({}, data), { _type: type, _options: options, _field: field, _i18nRoot: i18nRoot });
         };
         return TableRendererService;
     }());
@@ -6820,7 +6833,7 @@
          * Returns the header (th) outlet context for the given field.
          */
         TableComponent.prototype.getHeaderOutletContext = function (field) {
-            return this.rendererService.getHeaderOutletContext(this.type, this.options, field);
+            return this.rendererService.getHeaderOutletContext(this.type, this.options, this.i18nRoot, field);
         };
         /**
          * Returns the data (td) outlet reference for the given field.
@@ -6832,7 +6845,7 @@
          * Returns the data (td) outlet context for the given field.
          */
         TableComponent.prototype.getDataOutletContext = function (field, data) {
-            return this.rendererService.getDataOutletContext(this.type, this.options, field, data);
+            return this.rendererService.getDataOutletContext(this.type, this.options, this.i18nRoot, field, data);
         };
         TableComponent.prototype.trackData = function (_i, item) {
             return JSON.stringify(item);
@@ -6895,6 +6908,7 @@
         verticalStackedLayout: [{ type: i0.HostBinding, args: ['class.vertical-stacked',] }],
         structure: [{ type: i0.Input }],
         data: [{ type: i0.Input }],
+        i18nRoot: [{ type: i0.Input }],
         currentItem: [{ type: i0.Input }],
         launch: [{ type: i0.Output }]
     };
@@ -6945,17 +6959,12 @@
          * @param defaultStructure (optional) Default table structure that contains fallback options. More specific options are merged with the default structure.
          * @param data$ (optional) The actual data can be passed in to generate the table structure based on actual data.
          */
-        TableService.prototype.buildStructure = function (tableType, defaultStructure, data$) {
+        TableService.prototype.buildStructure = function (tableType, defaultStructure) {
             if (this.hasTableConfig(tableType)) {
                 return this.buildStructureFromConfig(tableType, defaultStructure);
             }
             else {
-                if (data$) {
-                    return this.buildStructureFromData(tableType, data$);
-                }
-                else {
-                    return this.buildRandomStructure(tableType);
-                }
+                return this.buildRandomStructure(tableType);
             }
         };
         /**

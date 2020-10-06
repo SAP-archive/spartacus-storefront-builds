@@ -25,6 +25,7 @@ import { TableDataOutletContext, TableHeaderOutletContext, TableStructure } from
  * Similarly, the data cells (`<td>`) are generated with the outlet template reference
  * `table.cost-center.data.name`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class TableComponent<T> {
     protected rendererService: TableRendererService;
     tableType: string;
@@ -35,6 +36,11 @@ export declare class TableComponent<T> {
     set structure(structure: TableStructure);
     get structure(): TableStructure;
     data: T[];
+    /**
+     * The i18nRoot is passed into the table cell context, so that
+     * cell components can concatenate the i18n root and label.
+     */
+    i18nRoot: string;
     /**
      * Provides a mechanism to compare a matching value for each item.
      *
@@ -87,4 +93,8 @@ export declare class TableComponent<T> {
      */
     private get type();
     private get options();
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableComponent<any>, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TableComponent<any>, "cx-table", never, { "structure": "structure"; "data": "data"; "i18nRoot": "i18nRoot"; "currentItem": "currentItem"; }, { "launch": "launch"; }, never, never>;
 }
+
+//# sourceMappingURL=table.component.d.ts.map
