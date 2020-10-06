@@ -3087,7 +3087,7 @@ class BreakpointService {
      * window innerWidth is smaller than the configured size of `BREAKPOINT.md`.
      */
     isDown(breakpoint) {
-        return this.breakpoint$.pipe(tap((br) => console.log('isDown', br, this.breakpoints)), map((br) => this.breakpoints
+        return this.breakpoint$.pipe(map((br) => this.breakpoints
             .slice(0, this.breakpoints.indexOf(breakpoint) + 1)
             .includes(br)));
     }

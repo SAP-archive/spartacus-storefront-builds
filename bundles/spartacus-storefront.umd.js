@@ -3660,7 +3660,7 @@
          */
         BreakpointService.prototype.isDown = function (breakpoint) {
             var _this = this;
-            return this.breakpoint$.pipe(operators.tap(function (br) { return console.log('isDown', br, _this.breakpoints); }), operators.map(function (br) { return _this.breakpoints
+            return this.breakpoint$.pipe(operators.map(function (br) { return _this.breakpoints
                 .slice(0, _this.breakpoints.indexOf(breakpoint) + 1)
                 .includes(br); }));
         };
