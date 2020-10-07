@@ -11,6 +11,7 @@ import { BaseFocusService } from './base-focus.service';
  * - Trap Focus
  * - Lock Focus
  */
+import * as ɵngcc0 from '@angular/core';
 export declare abstract class BaseFocusDirective implements OnInit {
     protected elementRef: ElementRef<HTMLElement>;
     protected service: BaseFocusService;
@@ -53,4 +54,8 @@ export declare abstract class BaseFocusDirective implements OnInit {
      * active link).
      */
     protected get requiresExplicitTabIndex(): boolean;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<BaseFocusDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<BaseFocusDirective, never, never, { "tabindex": "tabindex"; }, {}, never>;
 }
+
+//# sourceMappingURL=base-focus.directive.d.ts.map
