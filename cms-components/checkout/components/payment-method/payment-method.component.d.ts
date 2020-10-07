@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { ICON_TYPE } from '../../../misc/icon';
 import { CheckoutStepService } from '../../services/checkout-step.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     protected userPaymentService: UserPaymentService;
     protected checkoutService: CheckoutService;
@@ -48,4 +49,8 @@ export declare class PaymentMethodComponent implements OnInit, OnDestroy {
     }, selected: PaymentDetails): Card;
     next(): void;
     back(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentMethodComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PaymentMethodComponent, "cx-payment-method", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=payment-method.component.d.ts.map
