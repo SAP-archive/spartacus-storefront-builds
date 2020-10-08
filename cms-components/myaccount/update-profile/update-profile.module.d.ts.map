@@ -1,1 +1,0 @@
-{"version":3,"file":"update-profile.module.d.ts","sources":["update-profile.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class UpdateProfileModule {\n}\n"]}

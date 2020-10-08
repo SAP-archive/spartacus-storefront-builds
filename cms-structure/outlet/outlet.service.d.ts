@@ -1,7 +1,6 @@
 import { ComponentFactory, TemplateRef } from '@angular/core';
 import { FeatureConfigService } from '@spartacus/core';
 import { OutletPosition } from './outlet.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class OutletService<T = TemplateRef<any> | ComponentFactory<any>> {
     protected features?: FeatureConfigService;
     /**
@@ -37,7 +36,4 @@ export declare class OutletService<T = TemplateRef<any> | ComponentFactory<any>>
     get(outlet: string, position?: OutletPosition, stacked?: boolean): T[] | T;
     remove(outlet: string, position?: OutletPosition, value?: T): void;
     protected removeValueOrAll(store: Map<string, T[]>, outlet: string, value?: T): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<OutletService<any>, never>;
 }
-
-//# sourceMappingURL=outlet.service.d.ts.map
