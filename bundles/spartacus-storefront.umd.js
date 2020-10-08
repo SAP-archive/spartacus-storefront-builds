@@ -24032,8 +24032,8 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i4.RouterModule.forRoot([], {
-                            scrollPositionRestoration: 'enabled',
                             anchorScrolling: 'enabled',
+                            relativeLinkResolution: 'corrected',
                         }),
                         i1$4.StoreModule.forRoot({}),
                         effects.EffectsModule.forRoot([]),

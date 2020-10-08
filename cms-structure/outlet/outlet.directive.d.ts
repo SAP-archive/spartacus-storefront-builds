@@ -5,6 +5,7 @@ import { IntersectionOptions } from '../../layout/loading/intersection.model';
 import { OutletRendererService } from './outlet-renderer.service';
 import { OutletPosition } from './outlet.model';
 import { OutletService } from './outlet.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class OutletDirective implements OnDestroy, OnChanges {
     private vcr;
     private templateRef;
@@ -45,4 +46,8 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
      */
     private getHostElement;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OutletDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<OutletDirective, "[cxOutlet]", never, { "cxOutlet": "cxOutlet"; "cxOutletContext": "cxOutletContext"; "cxOutletDefer": "cxOutletDefer"; }, { "loaded": "loaded"; }, never>;
 }
+
+//# sourceMappingURL=outlet.directive.d.ts.map

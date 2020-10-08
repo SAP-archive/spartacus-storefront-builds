@@ -21763,8 +21763,8 @@ StorefrontModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     RouterModule.forRoot([], {
-                        scrollPositionRestoration: 'enabled',
                         anchorScrolling: 'enabled',
+                        relativeLinkResolution: 'corrected',
                     }),
                     StoreModule.forRoot({}),
                     EffectsModule.forRoot([]),
