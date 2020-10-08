@@ -9262,7 +9262,7 @@
             var _this = this;
             this.form = new forms.FormGroup({});
             this._items.forEach(function (item) {
-                var code = item.product.code;
+                var controlName = _this.getControlName(item);
                 var group = new forms.FormGroup({
                     entryNumber: new forms.FormControl(item.entryNumber),
                     quantity: new forms.FormControl(item.quantity, { updateOn: 'blur' }),
@@ -9270,8 +9270,11 @@
                 if (!item.updateable || _this.readonly) {
                     group.disable();
                 }
-                _this.form.addControl(code, group);
+                _this.form.addControl(controlName, group);
             });
+        };
+        CartItemListComponent.prototype.getControlName = function (item) {
+            return item.entryNumber.toString();
         };
         CartItemListComponent.prototype.removeEntry = function (item) {
             if (this.selectiveCartService && this.options.isSaveForLater) {
@@ -9280,11 +9283,11 @@
             else {
                 this.activeCartService.removeEntry(item);
             }
-            delete this.form.controls[item.product.code];
+            delete this.form.controls[this.getControlName(item)];
         };
         CartItemListComponent.prototype.getControl = function (item) {
             var _this = this;
-            return this.form.get(item.product.code).valueChanges.pipe(
+            return this.form.get(this.getControlName(item)).valueChanges.pipe(
             // tslint:disable-next-line:deprecation
             operators.startWith(null), operators.map(function (value) {
                 if (value && _this.selectiveCartService && _this.options.isSaveForLater) {
@@ -9293,7 +9296,7 @@
                 else if (value) {
                     _this.activeCartService.updateEntry(value.entryNumber, value.quantity);
                 }
-            }), operators.map(function () { return _this.form.get(item.product.code); }));
+            }), operators.map(function () { return _this.form.get(_this.getControlName(item)); }));
         };
         return CartItemListComponent;
     }());

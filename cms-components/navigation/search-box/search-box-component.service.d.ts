@@ -1,6 +1,7 @@
 import { ProductSearchPage, RoutingService, SearchboxService, TranslationService, WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { SearchBoxConfig, SearchResults } from './search-box.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class SearchBoxComponentService {
     searchService: SearchboxService;
     protected routingService: RoutingService;
@@ -60,4 +61,7 @@ export declare class SearchBoxComponentService {
      */
     launchSearchPage(query: string): void;
     private fetchTranslation;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SearchBoxComponentService, never>;
 }
+
+//# sourceMappingURL=search-box-component.service.d.ts.map
