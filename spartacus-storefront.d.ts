@@ -64,5 +64,3 @@ export { defaultDirectionConfig as ɵch } from './layout/direction/config/defaul
 export { initHtmlDirAttribute as ɵg } from './layout/direction/direction.module';
 export { DatePickerFormatterService as ɵcj } from './shared/components/date-picker/date-picker-formatter.service';
 export { DateTimePickerFormatterService as ɵck } from './shared/components/date-time-picker/date-time-picker-formatter.service';
-
-//# sourceMappingURL=spartacus-storefront.d.ts.map
