@@ -2,7 +2,6 @@ import { RendererFactory2 } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { LaunchRoute, LAUNCH_CALLER } from '../config/index';
 import { LaunchRenderStrategy } from './launch-render.strategy';
-import * as ɵngcc0 from '@angular/core';
 export declare class RoutingRenderStrategy extends LaunchRenderStrategy {
     protected document: any;
     protected rendererFactory: RendererFactory2;
@@ -13,7 +12,4 @@ export declare class RoutingRenderStrategy extends LaunchRenderStrategy {
      */
     render(config: LaunchRoute, _caller: LAUNCH_CALLER | string): void;
     hasMatch(config: LaunchRoute): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<RoutingRenderStrategy, never>;
 }
-
-//# sourceMappingURL=routing-render.strategy.d.ts.map

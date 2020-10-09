@@ -11,7 +11,6 @@ import { PageLayoutService } from './page-layout.service';
  * <cx-storefront>
  * ```
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class PageTemplateStyleService implements OnDestroy {
     protected pageLayoutService: PageLayoutService;
     /**
@@ -30,7 +29,4 @@ export declare class PageTemplateStyleService implements OnDestroy {
      */
     protected addStyleClass(el: HTMLElement, template: string): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageTemplateStyleService, never>;
 }
-
-//# sourceMappingURL=page-template-style.service.d.ts.map
