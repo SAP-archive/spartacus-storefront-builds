@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActiveCartService, OrderEntry, Product } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { ActiveCartService, Product } from '@spartacus/core';
+import { Subscription } from 'rxjs';
 import { ModalRef } from '../../../shared/components/modal/modal-ref';
 import { ModalService } from '../../../shared/components/modal/modal.service';
 import { CurrentProductService } from '../../product/current-product.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddToCartComponent implements OnInit, OnDestroy {
     protected modalService: ModalService;
     protected currentProductService: CurrentProductService;
@@ -21,8 +22,7 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     modalRef: ModalRef;
     hasStock: boolean;
     quantity: number;
-    increment: boolean;
-    cartEntry$: Observable<OrderEntry>;
+    protected numberOfEntriesBeforeAdd: number;
     subscription: Subscription;
     addToCartForm: FormGroup;
     constructor(modalService: ModalService, currentProductService: CurrentProductService, cd: ChangeDetectorRef, activeCartService: ActiveCartService);
@@ -32,4 +32,8 @@ export declare class AddToCartComponent implements OnInit, OnDestroy {
     addToCart(): void;
     private openModal;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddToCartComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddToCartComponent, "cx-add-to-cart", never, { "showQuantity": "showQuantity"; "productCode": "productCode"; "product": "product"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=add-to-cart.component.d.ts.map

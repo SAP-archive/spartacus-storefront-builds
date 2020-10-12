@@ -1,6 +1,6 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, Optional, InjectFlags, NgModuleFactory, Compiler, INJECTOR, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, APP_BOOTSTRAP_LISTENER, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, from, queueScheduler, merge, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
-import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, takeWhile, endWith, skip } from 'rxjs/operators';
+import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, pluck, observeOn, mapTo, share, mergeMap, debounceTime, switchMapTo, takeWhile, endWith, skip } from 'rxjs/operators';
 import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, createFrom, ModuleInitializedEvent, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, EventService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
@@ -7751,6 +7751,7 @@ class AddedToCartDialogComponent {
     }
     ngOnInit() {
         this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+        this.addedEntryWasMerged$ = this.loaded$.pipe(filter((loaded) => loaded), switchMapTo(this.cartService.getEntries()), map((entries) => entries.length === this.numberOfEntriesBeforeAdd));
     }
     getFormControl(entry) {
         if (!this.form.get('quantity')) {
@@ -7768,7 +7769,7 @@ class AddedToCartDialogComponent {
 AddedToCartDialogComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-added-to-cart-dialog',
-                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment || (addedEntryWasMerged$ | async)\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
             },] }
 ];
 AddedToCartDialogComponent.ctorParameters = () => [
@@ -7789,7 +7790,7 @@ class AddToCartComponent {
         this.showQuantity = true;
         this.hasStock = false;
         this.quantity = 1;
-        this.increment = false;
+        this.numberOfEntriesBeforeAdd = 0;
         this.addToCartForm = new FormGroup({
             quantity: new FormControl(1),
         });
@@ -7797,12 +7798,10 @@ class AddToCartComponent {
     ngOnInit() {
         if (this.product) {
             this.productCode = this.product.code;
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             this.setStockInfo(this.product);
             this.cd.markForCheck();
         }
         else if (this.productCode) {
-            this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
             // force hasStock and quantity for the time being, as we do not have more info:
             this.quantity = 1;
             this.hasStock = true;
@@ -7815,7 +7814,6 @@ class AddToCartComponent {
                 .subscribe((product) => {
                 this.productCode = product.code;
                 this.setStockInfo(product);
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
                 this.cd.markForCheck();
             });
         }
@@ -7836,19 +7834,14 @@ class AddToCartComponent {
         if (!this.productCode || quantity <= 0) {
             return;
         }
-        // check item is already present in the cart
-        // so modal will have proper header text displayed
         this.activeCartService
-            .getEntry(this.productCode)
-            .subscribe((entry) => {
-            if (entry) {
-                this.increment = true;
-            }
+            .getEntries()
+            .pipe(take(1))
+            .subscribe((entries) => {
+            this.numberOfEntriesBeforeAdd = entries.length;
             this.openModal();
             this.activeCartService.addEntry(this.productCode, quantity);
-            this.increment = false;
-        })
-            .unsubscribe();
+        });
     }
     openModal() {
         let modalInstance;
@@ -7857,11 +7850,13 @@ class AddToCartComponent {
             size: 'lg',
         });
         modalInstance = this.modalRef.componentInstance;
-        modalInstance.entry$ = this.cartEntry$;
+        // Display last entry for new product code. This always corresponds to
+        // our new item, independently of whether merging occured or not
+        modalInstance.entry$ = this.activeCartService.getLastEntry(this.productCode);
         modalInstance.cart$ = this.activeCartService.getActive();
         modalInstance.loaded$ = this.activeCartService.isStable();
         modalInstance.quantity = this.quantity;
-        modalInstance.increment = this.increment;
+        modalInstance.numberOfEntriesBeforeAdd = this.numberOfEntriesBeforeAdd;
     }
     ngOnDestroy() {
         if (this.subscription) {

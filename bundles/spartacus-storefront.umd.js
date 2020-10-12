@@ -8852,7 +8852,9 @@
             return this.quantityControl$;
         };
         AddedToCartDialogComponent.prototype.ngOnInit = function () {
+            var _this = this;
             this.orderPromotions$ = this.promotionService.getOrderPromotions(this.promotionLocation);
+            this.addedEntryWasMerged$ = this.loaded$.pipe(operators.filter(function (loaded) { return loaded; }), operators.switchMapTo(this.cartService.getEntries()), operators.map(function (entries) { return entries.length === _this.numberOfEntriesBeforeAdd; }));
         };
         AddedToCartDialogComponent.prototype.getFormControl = function (entry) {
             if (!this.form.get('quantity')) {
@@ -8871,7 +8873,7 @@
     AddedToCartDialogComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-added-to-cart-dialog',
-                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
+                    template: "<div #dialog>\n  <!-- Modal Header -->\n  <ng-container *ngIf=\"(loaded$ | async) || modalIsOpen; else loading\">\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{\n          (increment || (addedEntryWasMerged$ | async)\n            ? 'addToCart.itemsIncrementedInYourCart'\n            : 'addToCart.itemsAddedToYourCart'\n          ) | cxTranslate\n        }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\" *ngIf=\"entry$ | async as entry\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"cx-dialog-item col-sm-12 col-md-6\">\n          <cx-cart-item\n            [item]=\"entry\"\n            [compact]=\"true\"\n            [quantityControl]=\"getQuantityControl() | async\"\n            [promotionLocation]=\"promotionLocation\"\n            (view)=\"dismissModal('Product selected')\"\n          ></cx-cart-item>\n        </div>\n        <!-- Separator -->\n        <div\n          class=\"cx-dialog-separator col-sm-12 d-xs-block d-sm-block d-md-none\"\n        ></div>\n        <!-- Total container -->\n        <div class=\"cx-dialog-actions col-sm-12 col-md-6\">\n          <div class=\"cx-dialog-total\" *ngIf=\"cart$ | async as cart\">\n            <div>\n              {{\n                'cartItems.cartTotal'\n                  | cxTranslate: { count: cart.deliveryItemsQuantity }\n              }}\n            </div>\n\n            <div>{{ cart.subTotal?.formattedValue }}</div>\n          </div>\n\n          <!-- Promotions -->\n          <div\n            class=\"cx-dialog-promotions\"\n            *ngIf=\"orderPromotions$ | async as orderPromotions\"\n          >\n            <cx-promotions [promotions]=\"orderPromotions\"></cx-promotions>\n          </div>\n\n          <!-- Actions -->\n          <div class=\"cx-dialog-buttons\">\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'cart' } | cxUrl\"\n              class=\"btn btn-primary\"\n              autofocus\n              (click)=\"!form.dirty && dismissModal('View Cart click')\"\n              >{{ 'addToCart.viewCart' | cxTranslate }}</a\n            >\n            <a\n              [class.disabled]=\"form.dirty\"\n              [routerLink]=\"{ cxRoute: 'checkout' } | cxUrl\"\n              class=\"btn btn-secondary\"\n              (click)=\"!form.dirty && dismissModal('Proceed To Checkout click')\"\n              >{{ 'addToCart.proceedToCheckout' | cxTranslate }}</a\n            >\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-container>\n\n  <ng-template #loading>\n    <div class=\"cx-dialog-header modal-header\">\n      <div class=\"cx-dialog-title modal-title\">\n        {{ 'addToCart.updatingCart' | cxTranslate }}\n      </div>\n      <button\n        type=\"button\"\n        class=\"close\"\n        aria-label=\"Close\"\n        (click)=\"dismissModal('Cross click')\"\n      >\n        <span aria-hidden=\"true\">\n          <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n        </span>\n      </button>\n    </div>\n    <!-- Modal Body -->\n    <div class=\"cx-dialog-body modal-body\">\n      <div class=\"cx-dialog-row\">\n        <div class=\"col-sm-12\"><cx-spinner></cx-spinner></div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n"
                 },] }
     ];
     AddedToCartDialogComponent.ctorParameters = function () { return [
@@ -8892,7 +8894,7 @@
             this.showQuantity = true;
             this.hasStock = false;
             this.quantity = 1;
-            this.increment = false;
+            this.numberOfEntriesBeforeAdd = 0;
             this.addToCartForm = new forms.FormGroup({
                 quantity: new forms.FormControl(1),
             });
@@ -8901,12 +8903,10 @@
             var _this = this;
             if (this.product) {
                 this.productCode = this.product.code;
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
                 this.setStockInfo(this.product);
                 this.cd.markForCheck();
             }
             else if (this.productCode) {
-                this.cartEntry$ = this.activeCartService.getEntry(this.productCode);
                 // force hasStock and quantity for the time being, as we do not have more info:
                 this.quantity = 1;
                 this.hasStock = true;
@@ -8919,7 +8919,6 @@
                     .subscribe(function (product) {
                     _this.productCode = product.code;
                     _this.setStockInfo(product);
-                    _this.cartEntry$ = _this.activeCartService.getEntry(_this.productCode);
                     _this.cd.markForCheck();
                 });
             }
@@ -8941,19 +8940,14 @@
             if (!this.productCode || quantity <= 0) {
                 return;
             }
-            // check item is already present in the cart
-            // so modal will have proper header text displayed
             this.activeCartService
-                .getEntry(this.productCode)
-                .subscribe(function (entry) {
-                if (entry) {
-                    _this.increment = true;
-                }
+                .getEntries()
+                .pipe(operators.take(1))
+                .subscribe(function (entries) {
+                _this.numberOfEntriesBeforeAdd = entries.length;
                 _this.openModal();
                 _this.activeCartService.addEntry(_this.productCode, quantity);
-                _this.increment = false;
-            })
-                .unsubscribe();
+            });
         };
         AddToCartComponent.prototype.openModal = function () {
             var modalInstance;
@@ -8962,11 +8956,13 @@
                 size: 'lg',
             });
             modalInstance = this.modalRef.componentInstance;
-            modalInstance.entry$ = this.cartEntry$;
+            // Display last entry for new product code. This always corresponds to
+            // our new item, independently of whether merging occured or not
+            modalInstance.entry$ = this.activeCartService.getLastEntry(this.productCode);
             modalInstance.cart$ = this.activeCartService.getActive();
             modalInstance.loaded$ = this.activeCartService.isStable();
             modalInstance.quantity = this.quantity;
-            modalInstance.increment = this.increment;
+            modalInstance.numberOfEntriesBeforeAdd = this.numberOfEntriesBeforeAdd;
         };
         AddToCartComponent.prototype.ngOnDestroy = function () {
             if (this.subscription) {
