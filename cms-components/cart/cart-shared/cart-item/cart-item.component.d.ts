@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PromotionService } from '../../../../shared/services/promotion/promotion.service';
+import * as ɵngcc0 from '@angular/core';
 export interface Item {
     entryNumber?: number;
     product?: any;
@@ -30,4 +31,8 @@ export declare class CartItemComponent implements OnInit {
     isProductOutOfStock(product: any): boolean;
     removeItem(): void;
     viewItem(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CartItemComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CartItemComponent, "cx-cart-item", never, { "compact": "compact"; "readonly": "readonly"; "promotionLocation": "promotionLocation"; "options": "options"; "item": "item"; "quantityControl": "quantityControl"; }, { "view": "view"; }, never, never>;
 }
+
+//# sourceMappingURL=cart-item.component.d.ts.map
