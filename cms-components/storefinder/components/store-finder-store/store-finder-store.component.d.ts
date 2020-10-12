@@ -3,7 +3,6 @@ import { StoreFinderService, PointOfService, RoutingService } from '@spartacus/c
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ICON_TYPE } from '../../../misc/icon';
-import * as ɵngcc0 from '@angular/core';
 export declare class StoreFinderStoreComponent implements OnInit {
     private storeFinderService;
     private route;
@@ -17,8 +16,4 @@ export declare class StoreFinderStoreComponent implements OnInit {
     ngOnInit(): void;
     requestStoresData(): void;
     goBack(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<StoreFinderStoreComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StoreFinderStoreComponent, "cx-store-finder-store", never, { "location": "location"; "disableMap": "disableMap"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=store-finder-store.component.d.ts.map
