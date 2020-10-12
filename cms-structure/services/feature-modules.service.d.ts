@@ -1,19 +1,17 @@
-import { Compiler, Injector, OnDestroy } from '@angular/core';
-import { CmsComponentMapping, ConfigInitializerService, EventService } from '@spartacus/core';
+import { Injector, OnDestroy } from '@angular/core';
+import { CmsComponentMapping, ConfigInitializerService, LazyModulesService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 /**
  * Service responsible for resolving cms config based feature modules.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class FeatureModulesService implements OnDestroy {
     protected configInitializer: ConfigInitializerService;
-    protected compiler: Compiler;
-    protected injector: Injector;
-    protected events: EventService;
+    protected lazyModules: LazyModulesService;
     private featureModulesConfig?;
     private componentFeatureMap;
     private features;
-    private dependencyModules;
-    constructor(configInitializer: ConfigInitializerService, compiler: Compiler, injector: Injector, events: EventService);
+    constructor(configInitializer: ConfigInitializerService, lazyModules: LazyModulesService);
     private initFeatureMap;
     /**
      * Check if there is feature module configuration that covers specified
@@ -45,13 +43,8 @@ export declare class FeatureModulesService implements OnDestroy {
      * Returns configuration provided in feature module
      */
     private resolveFeatureConfiguration;
-    /**
-     * Resolves dependency module and initializes single module instance
-     */
-    private resolveDependencyModule;
-    /**
-     * Resolve any Angular module from an function that return module or moduleFactory
-     */
-    private resolveModuleFactory;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<FeatureModulesService, never>;
 }
+
+//# sourceMappingURL=feature-modules.service.d.ts.map

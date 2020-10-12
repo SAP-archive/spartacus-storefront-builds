@@ -1,0 +1,1 @@
+{"version":3,"file":"table-data-cell.module.d.ts","sources":["table-data-cell.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class TableDataCellModule {\n}\n"]}

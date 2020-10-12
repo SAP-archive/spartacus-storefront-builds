@@ -7426,11 +7426,9 @@
      * Service responsible for resolving cms config based feature modules.
      */
     var FeatureModulesService = /** @class */ (function () {
-        function FeatureModulesService(configInitializer, compiler, injector, events) {
+        function FeatureModulesService(configInitializer, lazyModules) {
             this.configInitializer = configInitializer;
-            this.compiler = compiler;
-            this.injector = injector;
-            this.events = events;
+            this.lazyModules = lazyModules;
             // maps componentType to feature
             this.componentFeatureMap = new Map();
             /*
@@ -7438,7 +7436,6 @@
              * resolved feature modules
              */
             this.features = new Map();
-            this.dependencyModules = new Map();
             this.initFeatureMap();
         }
         FeatureModulesService.prototype.initFeatureMap = function () {
@@ -7455,7 +7452,7 @@
                             try {
                                 for (_c = __values(Object.entries(this.featureModulesConfig)), _d = _c.next(); !_d.done; _d = _c.next()) {
                                     _e = __read(_d.value, 2), featureName = _e[0], featureConfig = _e[1];
-                                    if ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length) {
+                                    if ((featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module) && ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length)) {
                                         try {
                                             for (_f = (e_2 = void 0, __values(featureConfig.cmsComponents)), _g = _f.next(); !_g.done; _g = _f.next()) {
                                                 component = _g.value;
@@ -7505,7 +7502,6 @@
          * returning undefined otherwise
          */
         FeatureModulesService.prototype.getInjectors = function (componentType) {
-            var _this = this;
             var _a;
             var feature = this.componentFeatureMap.get(componentType);
             var injectors;
@@ -7515,7 +7511,7 @@
                 injectors = __spread([
                     // feature module injector
                     featureInstance.moduleRef.injector
-                ], featureInstance.depsModules.map(function (module) { return _this.dependencyModules.get(module).injector; }));
+                ], featureInstance.dependencyModuleRefs.map(function (moduleRef) { return moduleRef.injector; }));
             }).unsubscribe();
             return injectors;
         };
@@ -7534,12 +7530,9 @@
                         throw new Error('No module defined for Feature Module ' + featureName);
                     }
                     // resolve dependencies first (if any)
-                    var depsResolve = ((_a = featureConfig_1.dependencies) === null || _a === void 0 ? void 0 : _a.length) ? rxjs.forkJoin(featureConfig_1.dependencies.map(function (depModuleFunc) { return _this.resolveDependencyModule(depModuleFunc); }))
+                    var depsResolve = ((_a = featureConfig_1.dependencies) === null || _a === void 0 ? void 0 : _a.length) ? rxjs.forkJoin(featureConfig_1.dependencies.map(function (depModuleFunc) { return _this.lazyModules.resolveDependencyModuleInstance(depModuleFunc); }))
                         : rxjs.of(undefined);
-                    _this.features.set(featureName, depsResolve.pipe(operators.switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps); }), operators.tap(function (featureInstance) { return _this.events.dispatch(i1.createFrom(i1.ModuleInitializedEvent, {
-                        featureName: featureName,
-                        moduleRef: featureInstance.moduleRef,
-                    })); }), operators.shareReplay()));
+                    _this.features.set(featureName, depsResolve.pipe(operators.switchMap(function (deps) { return _this.resolveFeatureModule(featureConfig_1, deps, featureName); }), operators.shareReplay()));
                 }
                 return _this.features.get(featureName);
             });
@@ -7547,21 +7540,21 @@
         /**
          * Initialize feature module by returning feature instance
          */
-        FeatureModulesService.prototype.resolveFeatureModule = function (featureConfig, depsModules) {
+        FeatureModulesService.prototype.resolveFeatureModule = function (featureConfig, dependencyModuleRefs, feature) {
             var _this = this;
-            if (depsModules === void 0) { depsModules = []; }
-            return this.resolveModuleFactory(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module).pipe(operators.map(function (_c) {
-                var e_3, _d;
-                var _e = __read(_c, 1), moduleFactory = _e[0];
-                var moduleRef = moduleFactory.create(_this.injector);
+            if (dependencyModuleRefs === void 0) { dependencyModuleRefs = []; }
+            return this.lazyModules
+                .resolveModuleInstance(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module, feature)
+                .pipe(operators.map(function (moduleRef) {
+                var e_3, _c;
                 var featureInstance = Object.assign(Object.assign({}, featureConfig), { moduleRef: moduleRef,
-                    depsModules: depsModules, componentsMappings: {} });
+                    dependencyModuleRefs: dependencyModuleRefs, componentsMappings: {} });
                 // resolve configuration for feature module
                 var resolvedConfiguration = _this.resolveFeatureConfiguration(moduleRef.injector);
                 try {
                     // extract cms components configuration from feature config
-                    for (var _f = __values(featureInstance.cmsComponents), _g = _f.next(); !_g.done; _g = _f.next()) {
-                        var componentType = _g.value;
+                    for (var _d = __values(featureInstance.cmsComponents), _e = _d.next(); !_e.done; _e = _d.next()) {
+                        var componentType = _e.value;
                         featureInstance.componentsMappings[componentType] =
                             resolvedConfiguration.cmsComponents[componentType];
                     }
@@ -7569,7 +7562,7 @@
                 catch (e_3_1) { e_3 = { error: e_3_1 }; }
                 finally {
                     try {
-                        if (_g && !_g.done && (_d = _f.return)) _d.call(_f);
+                        if (_e && !_e.done && (_c = _d.return)) _c.call(_d);
                     }
                     finally { if (e_3) throw e_3.error; }
                 }
@@ -7586,48 +7579,13 @@
             var featureDefaultConfigChunks = featureInjector.get(i1.DefaultConfigChunk, [], i0.InjectFlags.Self);
             return i1.deepMerge.apply(void 0, __spread([{}], (featureDefaultConfigChunks !== null && featureDefaultConfigChunks !== void 0 ? featureDefaultConfigChunks : []), (featureConfigChunks !== null && featureConfigChunks !== void 0 ? featureConfigChunks : [])));
         };
-        /**
-         * Resolves dependency module and initializes single module instance
-         */
-        FeatureModulesService.prototype.resolveDependencyModule = function (moduleFunc) {
-            var _this = this;
-            // We grab moduleFactory symbol from module function and if there is no
-            // such a module created yet, we create it and store it in a
-            // dependencyModules map
-            return this.resolveModuleFactory(moduleFunc).pipe(operators.tap(function (_c) {
-                var _d = __read(_c, 2), moduleFactory = _d[0], module = _d[1];
-                if (!_this.dependencyModules.has(module)) {
-                    var moduleRef = moduleFactory.create(_this.injector);
-                    _this.dependencyModules.set(module, moduleRef);
-                    _this.events.dispatch(i1.createFrom(i1.ModuleInitializedEvent, {
-                        moduleRef: moduleRef,
-                    }));
-                }
-            }), operators.pluck(1));
-        };
-        /**
-         * Resolve any Angular module from an function that return module or moduleFactory
-         */
-        FeatureModulesService.prototype.resolveModuleFactory = function (moduleFunc) {
-            var _this = this;
-            return rxjs.from(moduleFunc()).pipe(operators.switchMap(function (module) { return module instanceof i0.NgModuleFactory
-                ? rxjs.of([module, module])
-                : rxjs.combineLatest([
-                    // using compiler here is for jit compatibility, there is no overhead
-                    // for aot production builds as it will be stubbed
-                    rxjs.from(_this.compiler.compileModuleAsync(module)),
-                    rxjs.of(module),
-                ]); }), operators.observeOn(rxjs.queueScheduler));
-        };
         FeatureModulesService.prototype.ngOnDestroy = function () {
             // clean up all initialized features
             rxjs.merge.apply(void 0, __spread(Array.from(this.features.values()))).subscribe(function (featureInstance) { var _a; return (_a = featureInstance.moduleRef) === null || _a === void 0 ? void 0 : _a.destroy(); });
-            // clean up all initialized dependency modules
-            this.dependencyModules.forEach(function (dependency) { return dependency.destroy(); });
         };
         return FeatureModulesService;
     }());
-    FeatureModulesService.ɵprov = i0.ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(i0.ɵɵinject(i1.ConfigInitializerService), i0.ɵɵinject(i0.Compiler), i0.ɵɵinject(i0.INJECTOR), i0.ɵɵinject(i1.EventService)); }, token: FeatureModulesService, providedIn: "root" });
+    FeatureModulesService.ɵprov = i0.ɵɵdefineInjectable({ factory: function FeatureModulesService_Factory() { return new FeatureModulesService(i0.ɵɵinject(i1.ConfigInitializerService), i0.ɵɵinject(i1.LazyModulesService)); }, token: FeatureModulesService, providedIn: "root" });
     FeatureModulesService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -7635,9 +7593,7 @@
     ];
     FeatureModulesService.ctorParameters = function () { return [
         { type: i1.ConfigInitializerService },
-        { type: i0.Compiler },
-        { type: i0.Injector },
-        { type: i1.EventService }
+        { type: i1.LazyModulesService }
     ]; };
 
     var CmsComponentsService = /** @class */ (function () {
