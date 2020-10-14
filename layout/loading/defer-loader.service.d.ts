@@ -7,7 +7,6 @@ import { IntersectionService } from './intersection.service';
  * The defer loading serivce is used to defer loading of DOM elements
  * until the elements are required for the user experience.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class DeferLoaderService {
     private platformId;
     protected config: LayoutConfig;
@@ -26,7 +25,4 @@ export declare class DeferLoaderService {
      */
     load(element: HTMLElement, options?: IntersectionOptions): Observable<boolean>;
     private shouldLoadInstantly;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DeferLoaderService, never>;
 }
-
-//# sourceMappingURL=defer-loader.service.d.ts.map

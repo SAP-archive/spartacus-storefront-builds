@@ -4,7 +4,6 @@ import { CmsComponentData } from '../../../cms-structure/index';
 /**
  * Generic carousel that renders CMS Components.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class BannerCarouselComponent {
     private componentData;
     private cmsService;
@@ -22,8 +21,4 @@ export declare class BannerCarouselComponent {
      * in the viewpoint.
      */
     getItems(): Observable<Observable<ContentSlotComponentData>[]>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<BannerCarouselComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<BannerCarouselComponent, "cx-banner-carousel", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=banner-carousel.component.d.ts.map
