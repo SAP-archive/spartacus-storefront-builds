@@ -5,7 +5,6 @@ import { ICON_TYPE } from '../../../../../cms-components/misc/icon/icon.model';
 import { FocusDirective } from '../../../../../layout/a11y/keyboard-focus/focus.directive';
 import { FacetCollapseState } from '../facet.model';
 import { FacetService } from '../services/facet.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class FacetComponent {
     protected facetService: FacetService;
     protected elementRef: ElementRef<HTMLElement>;
@@ -42,8 +41,4 @@ export declare class FacetComponent {
     getLinkParams(value: FacetValue): {
         [key: string]: string;
     };
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<FacetComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<FacetComponent, "cx-facet", never, { "expandIcon": "expandIcon"; "collapseIcon": "collapseIcon"; "facet": "facet"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=facet.component.d.ts.map
