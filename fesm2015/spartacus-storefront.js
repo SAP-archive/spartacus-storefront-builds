@@ -9709,13 +9709,19 @@ class CostCenterComponent {
         this.userCostCenterService = userCostCenterService;
         this.checkoutCostCenterService = checkoutCostCenterService;
         this.paymentTypeService = paymentTypeService;
-        this.cartCostCenter$ = this.checkoutCostCenterService.getCostCenter();
-        this.isAccountPayment$ = this.paymentTypeService.isAccountPayment();
-        this.costCenters$ = this.userCostCenterService.getActiveCostCenters().pipe(filter((costCenters) => Boolean(costCenters)), tap((costCenters) => {
-            if (!Boolean(this.costCenterId)) {
+    }
+    get isAccountPayment$() {
+        return this.paymentTypeService.isAccountPayment();
+    }
+    get costCenters$() {
+        return this.userCostCenterService.getActiveCostCenters().pipe(withLatestFrom(this.checkoutCostCenterService.getCostCenter()), filter(([costCenters]) => Boolean(costCenters)), tap(([costCenters, cartCostCenter]) => {
+            if (!Boolean(cartCostCenter)) {
                 this.setCostCenter(costCenters[0].code);
             }
-        }));
+            else {
+                this.costCenterId = cartCostCenter;
+            }
+        }), map(([costCenters]) => costCenters));
     }
     setCostCenter(selectCostCenter) {
         this.costCenterId = selectCostCenter;
@@ -9725,7 +9731,7 @@ class CostCenterComponent {
 CostCenterComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-cost-center',
-                template: "<ng-container *ngIf=\"isAccountPayment$ | async\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-xl-10\">\n      <ng-container *ngIf=\"costCenters$ | async as costCenters\">\n        <div *ngIf=\"costCenters.length !== 0\">\n          <label>\n            <span class=\"label-content required\">{{\n              'checkoutPO.costCenter' | cxTranslate\n            }}</span>\n            <select (change)=\"setCostCenter($event.target.value)\">\n              <option\n                *ngFor=\"let costCenter of costCenters\"\n                value=\"{{ costCenter.code }}\"\n                [selected]=\"(cartCostCenter$ | async) === costCenter.code\"\n              >\n                {{ costCenter.name }}\n              </option>\n            </select>\n            <span class=\"label-content\">{{\n              'checkoutPO.availableLabel' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"isAccountPayment$ | async\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-xl-10\">\n      <ng-container *ngIf=\"costCenters$ | async as costCenters\">\n        <div *ngIf=\"costCenters.length !== 0\">\n          <label>\n            <span class=\"label-content required\">{{\n              'checkoutPO.costCenter' | cxTranslate\n            }}</span>\n            <select (change)=\"setCostCenter($event.target.value)\">\n              <option\n                *ngFor=\"let costCenter of costCenters\"\n                value=\"{{ costCenter.code }}\"\n                [selected]=\"costCenterId === costCenter.code\"\n              >\n                {{ costCenter.name }}\n              </option>\n            </select>\n            <span class=\"label-content\">{{\n              'checkoutPO.availableLabel' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];

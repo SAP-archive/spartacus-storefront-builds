@@ -10990,18 +10990,39 @@
 
     var CostCenterComponent = /** @class */ (function () {
         function CostCenterComponent(userCostCenterService, checkoutCostCenterService, paymentTypeService) {
-            var _this = this;
             this.userCostCenterService = userCostCenterService;
             this.checkoutCostCenterService = checkoutCostCenterService;
             this.paymentTypeService = paymentTypeService;
-            this.cartCostCenter$ = this.checkoutCostCenterService.getCostCenter();
-            this.isAccountPayment$ = this.paymentTypeService.isAccountPayment();
-            this.costCenters$ = this.userCostCenterService.getActiveCostCenters().pipe(operators.filter(function (costCenters) { return Boolean(costCenters); }), operators.tap(function (costCenters) {
-                if (!Boolean(_this.costCenterId)) {
-                    _this.setCostCenter(costCenters[0].code);
-                }
-            }));
         }
+        Object.defineProperty(CostCenterComponent.prototype, "isAccountPayment$", {
+            get: function () {
+                return this.paymentTypeService.isAccountPayment();
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(CostCenterComponent.prototype, "costCenters$", {
+            get: function () {
+                var _this = this;
+                return this.userCostCenterService.getActiveCostCenters().pipe(operators.withLatestFrom(this.checkoutCostCenterService.getCostCenter()), operators.filter(function (_a) {
+                    var _b = __read(_a, 1), costCenters = _b[0];
+                    return Boolean(costCenters);
+                }), operators.tap(function (_a) {
+                    var _b = __read(_a, 2), costCenters = _b[0], cartCostCenter = _b[1];
+                    if (!Boolean(cartCostCenter)) {
+                        _this.setCostCenter(costCenters[0].code);
+                    }
+                    else {
+                        _this.costCenterId = cartCostCenter;
+                    }
+                }), operators.map(function (_a) {
+                    var _b = __read(_a, 1), costCenters = _b[0];
+                    return costCenters;
+                }));
+            },
+            enumerable: false,
+            configurable: true
+        });
         CostCenterComponent.prototype.setCostCenter = function (selectCostCenter) {
             this.costCenterId = selectCostCenter;
             this.checkoutCostCenterService.setCostCenter(this.costCenterId);
@@ -11011,7 +11032,7 @@
     CostCenterComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-cost-center',
-                    template: "<ng-container *ngIf=\"isAccountPayment$ | async\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-xl-10\">\n      <ng-container *ngIf=\"costCenters$ | async as costCenters\">\n        <div *ngIf=\"costCenters.length !== 0\">\n          <label>\n            <span class=\"label-content required\">{{\n              'checkoutPO.costCenter' | cxTranslate\n            }}</span>\n            <select (change)=\"setCostCenter($event.target.value)\">\n              <option\n                *ngFor=\"let costCenter of costCenters\"\n                value=\"{{ costCenter.code }}\"\n                [selected]=\"(cartCostCenter$ | async) === costCenter.code\"\n              >\n                {{ costCenter.name }}\n              </option>\n            </select>\n            <span class=\"label-content\">{{\n              'checkoutPO.availableLabel' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"isAccountPayment$ | async\">\n  <div class=\"row\">\n    <div class=\"col-md-12 col-xl-10\">\n      <ng-container *ngIf=\"costCenters$ | async as costCenters\">\n        <div *ngIf=\"costCenters.length !== 0\">\n          <label>\n            <span class=\"label-content required\">{{\n              'checkoutPO.costCenter' | cxTranslate\n            }}</span>\n            <select (change)=\"setCostCenter($event.target.value)\">\n              <option\n                *ngFor=\"let costCenter of costCenters\"\n                value=\"{{ costCenter.code }}\"\n                [selected]=\"costCenterId === costCenter.code\"\n              >\n                {{ costCenter.name }}\n              </option>\n            </select>\n            <span class=\"label-content\">{{\n              'checkoutPO.availableLabel' | cxTranslate\n            }}</span>\n          </label>\n        </div>\n      </ng-container>\n    </div>\n  </div>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
