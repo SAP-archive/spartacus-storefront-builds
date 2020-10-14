@@ -1,7 +1,6 @@
 import { OnDestroy } from '@angular/core';
 import { Order, OrderHistoryList, RoutingService, TranslationService, UserOrderService, UserReplenishmentOrderService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class OrderHistoryComponent implements OnDestroy {
     protected routing: RoutingService;
     protected userOrderService: UserOrderService;
@@ -27,8 +26,4 @@ export declare class OrderHistoryComponent implements OnDestroy {
         byOrderNumber: string;
     }>;
     private fetchOrders;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderHistoryComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<OrderHistoryComponent, "cx-order-history", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=order-history.component.d.ts.map
