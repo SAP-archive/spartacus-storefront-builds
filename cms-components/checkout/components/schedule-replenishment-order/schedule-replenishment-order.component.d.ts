@@ -3,7 +3,6 @@ import { CheckoutService, DaysOfWeek, ORDER_TYPE, ScheduleReplenishmentForm } fr
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../misc/icon/icon.model';
 import { CheckoutReplenishmentFormService } from '../../services/checkout-replenishment-form-service';
-import * as ɵngcc0 from '@angular/core';
 export declare class ScheduleReplenishmentOrderComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
     protected checkoutReplenishmentFormService: CheckoutReplenishmentFormService;
@@ -34,8 +33,4 @@ export declare class ScheduleReplenishmentOrderComponent implements OnInit, OnDe
     private initConfig;
     private createNumberStringArray;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ScheduleReplenishmentOrderComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ScheduleReplenishmentOrderComponent, "cx-schedule-replenishment-order", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=schedule-replenishment-order.component.d.ts.map
