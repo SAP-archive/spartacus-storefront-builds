@@ -13680,17 +13680,13 @@
     ]; };
 
     var PageLayoutComponent = /** @class */ (function () {
-        function PageLayoutComponent(el, renderer, pageLayoutService) {
+        function PageLayoutComponent(pageLayoutService) {
             var _this = this;
-            this.el = el;
-            this.renderer = renderer;
             this.pageLayoutService = pageLayoutService;
             this.section$ = new rxjs.BehaviorSubject(undefined);
             this.templateName$ = this.pageLayoutService
                 .templateName$;
-            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) { return (section ? rxjs.of(section) : _this.templateName$); }), operators.tap(function (name) {
-                _this.styleClass = name;
-            }));
+            this.layoutName$ = this.section$.pipe(operators.switchMap(function (section) { return (section ? rxjs.of(section) : _this.templateName$); }));
             this.slots$ = this.section$.pipe(operators.switchMap(function (section) { return _this.pageLayoutService.getSlots(section); }));
             this.pageFoldSlot$ = this.templateName$.pipe(operators.switchMap(function (templateName) { return _this.pageLayoutService.getPageFoldSlot(templateName); }), operators.distinctUntilChanged());
         }
@@ -13701,29 +13697,16 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(PageLayoutComponent.prototype, "styleClass", {
-            set: function (cls) {
-                if (this.currentClass) {
-                    this.renderer.removeClass(this.el.nativeElement, this.currentClass);
-                }
-                this.renderer.addClass(this.el.nativeElement, cls);
-                this.currentClass = cls;
-            },
-            enumerable: false,
-            configurable: true
-        });
         return PageLayoutComponent;
     }());
     PageLayoutComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-page-layout',
-                    template: "<ng-template\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
+                    template: "<ng-template\n  [cxPageTemplateStyle]=\"layoutName$ | async\"\n  [cxOutlet]=\"layoutName$ | async\"\n  [cxOutletContext]=\"{\n    templateName$: templateName$,\n    slots$: slots$,\n    section$: section$\n  }\"\n>\n  <ng-content></ng-content>\n\n  <cx-page-slot\n    *ngFor=\"let slot of slots$ | async\"\n    [position]=\"slot\"\n    [isPageFold]=\"slot === (pageFoldSlot$ | async)\"\n  ></cx-page-slot>\n</ng-template>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     PageLayoutComponent.ctorParameters = function () { return [
-        { type: i0.ElementRef },
-        { type: i0.Renderer2 },
         { type: PageLayoutService }
     ]; };
     PageLayoutComponent.propDecorators = {
@@ -13731,37 +13714,56 @@
     };
 
     /**
-     * Service that adds the page template as a className to the application root element. If the root
-     * element is cx-storefront, the resulting DOM would look like:
+     * Directive that Adds a style class to the host element based on the cms page
+     * template. The CMS page template is driven by the CMS structure, which is configurable
+     * in the backend.
+     *
+     * The style class is added to the host element of the directive. The host element is resolved
+     * from the `elementRef`, or, in case the directive is used in an `ng-template`, by the
+     * `TemplateRef`.
+     *
+     * An example of the usage is given below:
      *
      * ```html
      * <cx-storefront class="LandingPageTemplate">
-     *  [...]
+     *   <ng-template cxPageTemplateStyle>...</ng-template>
      * <cx-storefront>
      * ```
+     *
+     * The style class can also be provided by an input:
+     *
+     * ```html
+     * <ng-template [cxPageTemplateStyle]="pageTemplateName">
+     * ```
+     *
      */
-    var PageTemplateStyleService = /** @class */ (function () {
-        function PageTemplateStyleService(pageLayoutService) {
+    var PageTemplateDirective = /** @class */ (function () {
+        function PageTemplateDirective(pageLayoutService, elementRef, templateRef) {
             this.pageLayoutService = pageLayoutService;
-            /**
-             * Keeps the subscriptions for this service so that we can unsubscribe on destroy.
-             */
-            this.subscription = new rxjs.Subscription();
+            this.elementRef = elementRef;
+            this.templateRef = templateRef;
         }
-        PageTemplateStyleService.prototype.initialize = function (ref) {
+        PageTemplateDirective.prototype.ngOnInit = function () {
             var _this = this;
-            var el = ref.location.nativeElement;
-            this.subscription.add(this.pageLayoutService.templateName$
+            this.subscription = this.template
                 .pipe(operators.distinctUntilChanged())
-                .subscribe(function (template) { return _this.addStyleClass(el, template); }));
+                .subscribe(function (template) { return _this.addStyleClass(_this.host, template); });
         };
+        Object.defineProperty(PageTemplateDirective.prototype, "template", {
+            get: function () {
+                return this.cxPageTemplateStyle
+                    ? rxjs.of(this.cxPageTemplateStyle)
+                    : this.pageLayoutService.templateName$;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Adds the page template as a style class to the given element. If any page template
          * was added before, we clean it up.
          */
-        PageTemplateStyleService.prototype.addStyleClass = function (el, template) {
+        PageTemplateDirective.prototype.addStyleClass = function (el, template) {
             var _a;
-            // clean up previous template class binding
             if (this.currentTemplate) {
                 (_a = el.classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
             }
@@ -13770,27 +13772,41 @@
                 el.classList.add(this.currentTemplate);
             }
         };
-        PageTemplateStyleService.prototype.ngOnDestroy = function () {
+        Object.defineProperty(PageTemplateDirective.prototype, "host", {
+            /**
+             * Returns the host element (`HTMLElement`).
+             *
+             * If the directive is used on an `ng-template`, we take the parent element, to
+             * ensure that we're not ending up with a comment.
+             */
+            get: function () {
+                return !!this.templateRef
+                    ? this.templateRef.elementRef.nativeElement.parentElement
+                    : this.elementRef.nativeElement;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        PageTemplateDirective.prototype.ngOnDestroy = function () {
             this.subscription.unsubscribe();
         };
-        return PageTemplateStyleService;
+        return PageTemplateDirective;
     }());
-    PageTemplateStyleService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PageTemplateStyleService_Factory() { return new PageTemplateStyleService(i0.ɵɵinject(PageLayoutService)); }, token: PageTemplateStyleService, providedIn: "root" });
-    PageTemplateStyleService.decorators = [
-        { type: i0.Injectable, args: [{ providedIn: 'root' },] }
+    PageTemplateDirective.decorators = [
+        { type: i0.Directive, args: [{
+                    selector: '[cxPageTemplateStyle]',
+                },] }
     ];
-    PageTemplateStyleService.ctorParameters = function () { return [
-        { type: PageLayoutService }
+    PageTemplateDirective.ctorParameters = function () { return [
+        { type: PageLayoutService },
+        { type: i0.ElementRef },
+        { type: i0.TemplateRef, decorators: [{ type: i0.Optional }] }
     ]; };
+    PageTemplateDirective.propDecorators = {
+        cxPageTemplateStyle: [{ type: i0.Input }],
+        templateClass: [{ type: i0.HostBinding, args: ['class',] }]
+    };
 
-    function initPageTemplateStyle(service, featureConfigService) {
-        var result = function (componentRef) {
-            if (featureConfigService.isLevel('2.1')) {
-                service.initialize(componentRef);
-            }
-        };
-        return result;
-    }
     var PageLayoutModule = /** @class */ (function () {
         function PageLayoutModule() {
         }
@@ -13799,16 +13815,8 @@
     PageLayoutModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [i1$1.CommonModule, OutletModule, PageSlotModule],
-                    declarations: [PageLayoutComponent],
-                    exports: [PageLayoutComponent],
-                    providers: [
-                        {
-                            provide: i0.APP_BOOTSTRAP_LISTENER,
-                            multi: true,
-                            useFactory: initPageTemplateStyle,
-                            deps: [PageTemplateStyleService, i1.FeatureConfigService],
-                        },
-                    ],
+                    declarations: [PageLayoutComponent, PageTemplateDirective],
+                    exports: [PageLayoutComponent, PageTemplateDirective],
                 },] }
     ];
 
@@ -14325,7 +14333,7 @@
     StorefrontComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-storefront',
-                    template: "<ng-template cxOutlet=\"cx-storefront\">\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ disableMouseFocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main cxSkipLink=\"cx-main\" [cxFocus]=\"{ disableMouseFocus: true }\">\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer cxSkipLink=\"cx-footer\" [cxFocus]=\"{ disableMouseFocus: true }\">\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
+                    template: "<ng-template cxOutlet=\"cx-storefront\" cxPageTemplateStyle>\n  <ng-template cxOutlet=\"cx-header\">\n    <header\n      cxSkipLink=\"cx-header\"\n      [cxFocus]=\"{ disableMouseFocus: true }\"\n      [class.is-expanded]=\"isExpanded$ | async\"\n      (keydown.escape)=\"collapseMenu()\"\n      (click)=\"collapseMenuIfClickOutside($event)\"\n    >\n      <cx-page-layout section=\"header\"></cx-page-layout>\n      <cx-page-layout section=\"navigation\"></cx-page-layout>\n    </header>\n    <cx-page-slot position=\"BottomHeaderSlot\"></cx-page-slot>\n    <cx-global-message></cx-global-message>\n  </ng-template>\n\n  <main cxSkipLink=\"cx-main\" [cxFocus]=\"{ disableMouseFocus: true }\">\n    <router-outlet></router-outlet>\n  </main>\n\n  <ng-template cxOutlet=\"cx-footer\">\n    <footer cxSkipLink=\"cx-footer\" [cxFocus]=\"{ disableMouseFocus: true }\">\n      <cx-page-layout section=\"footer\"></cx-page-layout>\n    </footer>\n  </ng-template>\n</ng-template>\n"
                 },] }
     ];
     StorefrontComponent.ctorParameters = function () { return [
@@ -24353,6 +24361,7 @@
     exports.PageLayoutService = PageLayoutService;
     exports.PageSlotComponent = PageSlotComponent;
     exports.PageSlotModule = PageSlotModule;
+    exports.PageTemplateDirective = PageTemplateDirective;
     exports.PaginationBuilder = PaginationBuilder;
     exports.PaginationComponent = PaginationComponent;
     exports.PaginationConfig = PaginationConfig;
@@ -24555,69 +24564,67 @@
     exports.ɵ0 = ɵ0$1;
     exports.ɵ1 = ɵ1;
     exports.ɵ2 = ɵ2;
-    exports.ɵa = initPageTemplateStyle;
-    exports.ɵb = pwaConfigurationFactory;
-    exports.ɵba = AsmEnablerService;
-    exports.ɵbb = AsmMainUiComponent;
-    exports.ɵbc = AsmComponentService;
-    exports.ɵbd = CSAgentLoginFormComponent;
-    exports.ɵbe = CustomerSelectionComponent;
-    exports.ɵbf = AsmSessionTimerComponent;
-    exports.ɵbg = FormatTimerPipe;
-    exports.ɵbh = CustomerEmulationComponent;
-    exports.ɵbi = AsmToggleUiComponent;
-    exports.ɵbj = defaultAsmLayoutConfig;
-    exports.ɵbk = defaultIconConfig;
-    exports.ɵbl = defaultCheckoutConfig;
-    exports.ɵbm = MultiLinePipe;
-    exports.ɵbn = CheckoutStepsSetGuard;
-    exports.ɵbo = PaymentTypeModule;
-    exports.ɵbp = PaymentTypeComponent;
-    exports.ɵbq = defaultPlaceOrderSpinnerLayoutConfig;
-    exports.ɵbr = CostCenterModule;
-    exports.ɵbs = CostCenterComponent;
-    exports.ɵbt = CheckoutAuthGuard;
-    exports.ɵbu = CartNotEmptyGuard;
-    exports.ɵbv = defaultQualtricsConfig;
-    exports.ɵbw = CmsPageGuardService;
-    exports.ɵbx = CmsRoutesImplService;
-    exports.ɵby = ReturnRequestService;
-    exports.ɵbz = LoginRegisterComponent;
-    exports.ɵc = pwaFactory;
-    exports.ɵca = PageTemplateStyleService;
-    exports.ɵcb = MyCouponsComponentService;
-    exports.ɵcc = addCmsRoute;
-    exports.ɵcd = defaultStorefrontRoutesConfig;
-    exports.ɵce = defaultRoutingConfig;
-    exports.ɵcf = htmlLangProvider;
-    exports.ɵcg = setHtmlLangAttribute;
-    exports.ɵch = defaultDirectionConfig;
-    exports.ɵci = EventsModule;
-    exports.ɵcj = DatePickerFormatterService;
-    exports.ɵck = DateTimePickerFormatterService;
-    exports.ɵd = getStructuredDataFactory;
-    exports.ɵe = FOCUS_ATTR;
-    exports.ɵf = skipLinkFactory;
-    exports.ɵg = initHtmlDirAttribute;
-    exports.ɵh = LockFocusDirective;
-    exports.ɵi = TrapFocusDirective;
-    exports.ɵj = TabFocusDirective;
-    exports.ɵk = AutoFocusDirective;
-    exports.ɵl = EscapeFocusDirective;
-    exports.ɵm = PersistFocusDirective;
-    exports.ɵn = BlockFocusDirective;
-    exports.ɵo = VisibleFocusDirective;
-    exports.ɵp = BaseFocusDirective;
-    exports.ɵq = BaseFocusService;
-    exports.ɵr = PersistFocusService;
-    exports.ɵs = EscapeFocusService;
-    exports.ɵt = AutoFocusService;
-    exports.ɵu = TabFocusService;
-    exports.ɵv = TrapFocusService;
-    exports.ɵw = LockFocusService;
-    exports.ɵx = defaultAnonymousConsentLayoutConfig;
-    exports.ɵy = AsmLoaderModule;
-    exports.ɵz = asmFactory;
+    exports.ɵa = pwaConfigurationFactory;
+    exports.ɵb = pwaFactory;
+    exports.ɵba = AsmMainUiComponent;
+    exports.ɵbb = AsmComponentService;
+    exports.ɵbc = CSAgentLoginFormComponent;
+    exports.ɵbd = CustomerSelectionComponent;
+    exports.ɵbe = AsmSessionTimerComponent;
+    exports.ɵbf = FormatTimerPipe;
+    exports.ɵbg = CustomerEmulationComponent;
+    exports.ɵbh = AsmToggleUiComponent;
+    exports.ɵbi = defaultAsmLayoutConfig;
+    exports.ɵbj = defaultIconConfig;
+    exports.ɵbk = defaultCheckoutConfig;
+    exports.ɵbl = MultiLinePipe;
+    exports.ɵbm = CheckoutStepsSetGuard;
+    exports.ɵbn = PaymentTypeModule;
+    exports.ɵbo = PaymentTypeComponent;
+    exports.ɵbp = defaultPlaceOrderSpinnerLayoutConfig;
+    exports.ɵbq = CostCenterModule;
+    exports.ɵbr = CostCenterComponent;
+    exports.ɵbs = CheckoutAuthGuard;
+    exports.ɵbt = CartNotEmptyGuard;
+    exports.ɵbu = defaultQualtricsConfig;
+    exports.ɵbv = CmsPageGuardService;
+    exports.ɵbw = CmsRoutesImplService;
+    exports.ɵbx = ReturnRequestService;
+    exports.ɵby = LoginRegisterComponent;
+    exports.ɵbz = MyCouponsComponentService;
+    exports.ɵc = getStructuredDataFactory;
+    exports.ɵca = addCmsRoute;
+    exports.ɵcb = defaultStorefrontRoutesConfig;
+    exports.ɵcc = defaultRoutingConfig;
+    exports.ɵcd = htmlLangProvider;
+    exports.ɵce = setHtmlLangAttribute;
+    exports.ɵcf = defaultDirectionConfig;
+    exports.ɵcg = EventsModule;
+    exports.ɵch = DatePickerFormatterService;
+    exports.ɵci = DateTimePickerFormatterService;
+    exports.ɵd = FOCUS_ATTR;
+    exports.ɵe = skipLinkFactory;
+    exports.ɵf = initHtmlDirAttribute;
+    exports.ɵg = LockFocusDirective;
+    exports.ɵh = TrapFocusDirective;
+    exports.ɵi = TabFocusDirective;
+    exports.ɵj = AutoFocusDirective;
+    exports.ɵk = EscapeFocusDirective;
+    exports.ɵl = PersistFocusDirective;
+    exports.ɵm = BlockFocusDirective;
+    exports.ɵn = VisibleFocusDirective;
+    exports.ɵo = BaseFocusDirective;
+    exports.ɵp = BaseFocusService;
+    exports.ɵq = PersistFocusService;
+    exports.ɵr = EscapeFocusService;
+    exports.ɵs = AutoFocusService;
+    exports.ɵt = TabFocusService;
+    exports.ɵu = TrapFocusService;
+    exports.ɵv = LockFocusService;
+    exports.ɵw = defaultAnonymousConsentLayoutConfig;
+    exports.ɵx = AsmLoaderModule;
+    exports.ɵy = asmFactory;
+    exports.ɵz = AsmEnablerService;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
