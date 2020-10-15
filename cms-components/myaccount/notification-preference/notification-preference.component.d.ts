@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { NotificationPreference, UserNotificationPreferenceService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class NotificationPreferenceComponent implements OnInit {
     private notificationPreferenceService;
     preferences$: Observable<NotificationPreference[]>;
@@ -9,4 +10,8 @@ export declare class NotificationPreferenceComponent implements OnInit {
     constructor(notificationPreferenceService: UserNotificationPreferenceService);
     ngOnInit(): void;
     updatePreference(preference: NotificationPreference): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<NotificationPreferenceComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<NotificationPreferenceComponent, "cx-notification-preference", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=notification-preference.component.d.ts.map
