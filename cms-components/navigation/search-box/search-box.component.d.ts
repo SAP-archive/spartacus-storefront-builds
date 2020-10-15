@@ -4,7 +4,6 @@ import { ICON_TYPE } from '../../../cms-components/misc/icon/index';
 import { CmsComponentData } from '../../../cms-structure/page/model/cms-component-data';
 import { SearchBoxComponentService } from './search-box-component.service';
 import { SearchBoxConfig, SearchResults } from './search-box.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class SearchBoxComponent {
     protected searchBoxComponentService: SearchBoxComponentService;
     protected componentData: CmsComponentData<CmsSearchBoxComponent>;
@@ -68,8 +67,4 @@ export declare class SearchBoxComponent {
      * Clears the search box input field
      */
     clear(el: HTMLInputElement): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SearchBoxComponent, [null, { optional: true; }, null]>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SearchBoxComponent, "cx-searchbox", never, { "queryText": "queryText"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=search-box.component.d.ts.map
