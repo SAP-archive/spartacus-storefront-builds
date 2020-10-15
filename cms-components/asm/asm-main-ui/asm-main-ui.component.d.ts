@@ -2,6 +2,7 @@ import { OnInit } from '@angular/core';
 import { AsmAuthService, AsmService, AuthService, GlobalMessageService, RoutingService, User, UserService, UserToken } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { AsmComponentService } from '../services/asm-component.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class AsmMainUiComponent implements OnInit {
     protected authService: AuthService;
     protected asmAuthService: AsmAuthService;
@@ -28,4 +29,8 @@ export declare class AsmMainUiComponent implements OnInit {
         customerId: string;
     }): void;
     hideUi(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AsmMainUiComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AsmMainUiComponent, "cx-asm-main-ui", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=asm-main-ui.component.d.ts.map
