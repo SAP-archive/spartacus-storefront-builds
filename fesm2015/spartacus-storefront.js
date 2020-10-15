@@ -8,9 +8,9 @@ import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Val
 import { RouterModule, Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModalRef, NgbModal, NgbModule, NgbActiveModal, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule, HttpUrlEncodingCodec } from '@angular/common/http';
 import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import { HttpUrlEncodingCodec, HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ActionsSubject, StoreModule } from '@ngrx/store';
 import { ofType, EffectsModule } from '@ngrx/effects';
@@ -5219,7 +5219,7 @@ class GlobalMessageComponentModule {
 }
 GlobalMessageComponentModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, HttpClientModule, IconModule, I18nModule],
+                imports: [CommonModule, IconModule, I18nModule],
                 declarations: [GlobalMessageComponent],
                 exports: [GlobalMessageComponent],
             },] }
@@ -5386,7 +5386,7 @@ class QualtricsModule {
 }
 QualtricsModule.decorators = [
     { type: NgModule, args: [{
-                imports: [CommonModule, HttpClientModule],
+                imports: [CommonModule],
                 declarations: [QualtricsComponent],
                 entryComponents: [QualtricsComponent],
                 providers: [
@@ -21763,6 +21763,7 @@ class B2cStorefrontModule {
 B2cStorefrontModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
+                    HttpClientModule,
                     StorefrontModule,
                     // the cms lib module contains all components that added in the bundle
                     CmsLibModule,
