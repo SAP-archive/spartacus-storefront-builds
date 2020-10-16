@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { KeyboardFocusService } from '../a11y/keyboard-focus/index';
 import { SkipLinkComponent } from '../a11y/skip-link/index';
 import { HamburgerMenuService } from '../header/hamburger-menu/hamburger-menu.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class StorefrontComponent implements OnInit, OnDestroy {
     private hamburgerMenuService;
     private routingService;
@@ -23,8 +22,4 @@ export declare class StorefrontComponent implements OnInit, OnDestroy {
     collapseMenuIfClickOutside(event: MouseEvent): void;
     collapseMenu(): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<StorefrontComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StorefrontComponent, "cx-storefront", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=storefront.component.d.ts.map
