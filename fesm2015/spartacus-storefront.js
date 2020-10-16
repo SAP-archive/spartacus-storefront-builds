@@ -4047,7 +4047,7 @@ const FALLBACK_PAGINATION_OPTIONS = {
 /**
  * Builds a pagination structures based on a pageCount and current page number.
  * There are various {@link PaginationConfig} options which can be used to configure
- * the behaviour of the build. Alternatively, CSS can be used to further customise
+ * the behavior of the build. Alternatively, CSS can be used to further customize
  * the pagination.
  *
  * Examples:
@@ -4084,7 +4084,7 @@ class PaginationBuilder {
      */
     paginate(pageCount, current) {
         const pages = [];
-        if (pageCount < 2) {
+        if (!pageCount || pageCount < 2) {
             return pages;
         }
         this.addPages(pages, pageCount, current);
@@ -4130,12 +4130,12 @@ class PaginationBuilder {
             if (firstItemNumber > gapNumber) {
                 const isGap = !this.config.substituteDotsForSingularPage ||
                     firstItemNumber !== gapNumber + 1;
-                const isSubstitued = this.config.addFirst &&
+                const isSubstituted = this.config.addFirst &&
                     this.config.substituteDotsForSingularPage &&
                     gapNumber === 0;
                 const type = isGap
                     ? PaginationItemType.GAP
-                    : isSubstitued
+                    : isSubstituted
                         ? PaginationItemType.FIRST
                         : PaginationItemType.PAGE;
                 return [
@@ -4152,7 +4152,7 @@ class PaginationBuilder {
             const nextPageNumber = pages[pages.length - 1].number + 1;
             const last = pageCount - (this.config.addLast ? 2 : 1);
             if (nextPageNumber <= last) {
-                const isSubstitued = this.config.addLast &&
+                const isSubstituted = this.config.addLast &&
                     this.config.substituteDotsForSingularPage &&
                     nextPageNumber === last;
                 const isGap = nextPageNumber <
@@ -4161,7 +4161,7 @@ class PaginationBuilder {
                         (this.config.addLast ? 1 : 0);
                 const type = isGap
                     ? PaginationItemType.GAP
-                    : isSubstitued
+                    : isSubstituted
                         ? PaginationItemType.LAST
                         : PaginationItemType.PAGE;
                 return [
@@ -4218,7 +4218,7 @@ class PaginationBuilder {
      */
     addNavigation(pages, pageCount, current) {
         const before = this.getBeforeLinks(current);
-        const after = this.getAfter(pageCount, current);
+        const after = this.getAfterLinks(pageCount, current);
         const pos = this.config.navigationPosition;
         if (!pos || pos === PaginationNavigationPosition.ASIDE) {
             pages.unshift(...before);
@@ -4261,7 +4261,7 @@ class PaginationBuilder {
     /**
      * Returns the next and end links, if applicable.
      */
-    getAfter(pageCount, current) {
+    getAfterLinks(pageCount, current) {
         const list = [];
         if (this.config.addNext) {
             const next = () => {
@@ -4302,6 +4302,28 @@ class PaginationBuilder {
         // ensure that we get at least a full range at the end
         return Math.min(maxStart, minStart);
     }
+    /**
+     * Returns the pagination configuration. The configuration is driven by the
+     * (default) application configuration.
+     *
+     * The default application is limited to adding the start and end link:
+     * ```ts
+     *   addStart: true,
+     *   addEnd: true
+     * ```
+     *
+     * The application configuration is however merged into the following static configuration:
+     * ```ts
+     * {
+     *   rangeCount: 3,
+     *   dotsLabel: '...',
+     *   startLabel: '«',
+     *   previousLabel: '‹',
+     *   nextLabel: '›',
+     *   endLabel: '»'
+     * }
+     * ```
+     */
     get config() {
         return Object.assign(FALLBACK_PAGINATION_OPTIONS, this.paginationConfig.pagination);
     }
@@ -4336,6 +4358,9 @@ class PaginationComponent {
         this.render(value);
     }
     render(pagination) {
+        if (!pagination) {
+            return;
+        }
         this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
     }
     /**

@@ -1,9 +1,9 @@
 import { PaginationConfig } from './config/pagination.config';
-import { PaginationItem } from './pagination.model';
+import { PaginationItem, PaginationOptions } from './pagination.model';
 /**
  * Builds a pagination structures based on a pageCount and current page number.
  * There are various {@link PaginationConfig} options which can be used to configure
- * the behaviour of the build. Alternatively, CSS can be used to further customise
+ * the behavior of the build. Alternatively, CSS can be used to further customize
  * the pagination.
  *
  * Examples:
@@ -24,6 +24,7 @@ import { PaginationItem } from './pagination.model';
  * The current page will always be centered in the page range to provide direct access
  * to the previous and next page.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PaginationBuilder {
     protected paginationConfig: PaginationConfig;
     constructor(paginationConfig: PaginationConfig);
@@ -83,11 +84,11 @@ export declare class PaginationBuilder {
     /**
      * Returns the start and previous links, if applicable.
      */
-    private getBeforeLinks;
+    protected getBeforeLinks(current: number): PaginationItem[];
     /**
      * Returns the next and end links, if applicable.
      */
-    private getAfter;
+    protected getAfterLinks(pageCount: number, current: number): PaginationItem[];
     /**
      * Resolves the first page of the range we need to build.
      * This is the page that is leading up to the range of the
@@ -96,6 +97,31 @@ export declare class PaginationBuilder {
      * @param pageCount The total number of pages.
      * @param current The current page number, 0-index based.
      */
-    private getStartOfRange;
-    private get config();
+    protected getStartOfRange(pageCount: number, current: number): number;
+    /**
+     * Returns the pagination configuration. The configuration is driven by the
+     * (default) application configuration.
+     *
+     * The default application is limited to adding the start and end link:
+     * ```ts
+     *   addStart: true,
+     *   addEnd: true
+     * ```
+     *
+     * The application configuration is however merged into the following static configuration:
+     * ```ts
+     * {
+     *   rangeCount: 3,
+     *   dotsLabel: '...',
+     *   startLabel: '«',
+     *   previousLabel: '‹',
+     *   nextLabel: '›',
+     *   endLabel: '»'
+     * }
+     * ```
+     */
+    protected get config(): PaginationOptions;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaginationBuilder, never>;
 }
+
+//# sourceMappingURL=pagination.builder.d.ts.map

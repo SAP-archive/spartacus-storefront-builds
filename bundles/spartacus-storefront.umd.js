@@ -4712,7 +4712,7 @@
     /**
      * Builds a pagination structures based on a pageCount and current page number.
      * There are various {@link PaginationConfig} options which can be used to configure
-     * the behaviour of the build. Alternatively, CSS can be used to further customise
+     * the behavior of the build. Alternatively, CSS can be used to further customize
      * the pagination.
      *
      * Examples:
@@ -4749,7 +4749,7 @@
          */
         PaginationBuilder.prototype.paginate = function (pageCount, current) {
             var pages = [];
-            if (pageCount < 2) {
+            if (!pageCount || pageCount < 2) {
                 return pages;
             }
             this.addPages(pages, pageCount, current);
@@ -4796,12 +4796,12 @@
                 if (firstItemNumber > gapNumber) {
                     var isGap = !_this.config.substituteDotsForSingularPage ||
                         firstItemNumber !== gapNumber + 1;
-                    var isSubstitued = _this.config.addFirst &&
+                    var isSubstituted = _this.config.addFirst &&
                         _this.config.substituteDotsForSingularPage &&
                         gapNumber === 0;
                     var type = isGap
                         ? exports.PaginationItemType.GAP
-                        : isSubstitued
+                        : isSubstituted
                             ? exports.PaginationItemType.FIRST
                             : exports.PaginationItemType.PAGE;
                     return [
@@ -4818,7 +4818,7 @@
                 var nextPageNumber = pages[pages.length - 1].number + 1;
                 var last = pageCount - (_this.config.addLast ? 2 : 1);
                 if (nextPageNumber <= last) {
-                    var isSubstitued = _this.config.addLast &&
+                    var isSubstituted = _this.config.addLast &&
                         _this.config.substituteDotsForSingularPage &&
                         nextPageNumber === last;
                     var isGap = nextPageNumber <
@@ -4827,7 +4827,7 @@
                             (_this.config.addLast ? 1 : 0);
                     var type = isGap
                         ? exports.PaginationItemType.GAP
-                        : isSubstitued
+                        : isSubstituted
                             ? exports.PaginationItemType.LAST
                             : exports.PaginationItemType.PAGE;
                     return [
@@ -4884,7 +4884,7 @@
          */
         PaginationBuilder.prototype.addNavigation = function (pages, pageCount, current) {
             var before = this.getBeforeLinks(current);
-            var after = this.getAfter(pageCount, current);
+            var after = this.getAfterLinks(pageCount, current);
             var pos = this.config.navigationPosition;
             if (!pos || pos === exports.PaginationNavigationPosition.ASIDE) {
                 pages.unshift.apply(pages, __spread(before));
@@ -4928,7 +4928,7 @@
         /**
          * Returns the next and end links, if applicable.
          */
-        PaginationBuilder.prototype.getAfter = function (pageCount, current) {
+        PaginationBuilder.prototype.getAfterLinks = function (pageCount, current) {
             var _this = this;
             var list = [];
             if (this.config.addNext) {
@@ -4971,6 +4971,28 @@
             return Math.min(maxStart, minStart);
         };
         Object.defineProperty(PaginationBuilder.prototype, "config", {
+            /**
+             * Returns the pagination configuration. The configuration is driven by the
+             * (default) application configuration.
+             *
+             * The default application is limited to adding the start and end link:
+             * ```ts
+             *   addStart: true,
+             *   addEnd: true
+             * ```
+             *
+             * The application configuration is however merged into the following static configuration:
+             * ```ts
+             * {
+             *   rangeCount: 3,
+             *   dotsLabel: '...',
+             *   startLabel: '«',
+             *   previousLabel: '‹',
+             *   nextLabel: '›',
+             *   endLabel: '»'
+             * }
+             * ```
+             */
             get: function () {
                 return Object.assign(FALLBACK_PAGINATION_OPTIONS, this.paginationConfig.pagination);
             },
@@ -5013,6 +5035,9 @@
             configurable: true
         });
         PaginationComponent.prototype.render = function (pagination) {
+            if (!pagination) {
+                return;
+            }
             this.pages = this.paginationBuilder.paginate(pagination.totalPages, pagination.currentPage);
         };
         /**
