@@ -1,0 +1,1 @@
+{"version":3,"file":"page-slot.module.d.ts","sources":["page-slot.module.d.ts"],"names":[],"mappings":";;;;;AAAA;;;AACA","sourcesContent":["export declare class PageSlotModule {\n}\n"]}
