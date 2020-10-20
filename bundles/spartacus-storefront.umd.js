@@ -9224,6 +9224,10 @@
          * In case of a `consignmentEntry`, we need to normalize the data from the orderEntry.
          */
         CartItemListComponent.prototype.resolveItems = function (items) {
+            if (!items) {
+                this._items = [];
+                return;
+            }
             if (items.every(function (item) { return item.hasOwnProperty('orderEntry'); })) {
                 this._items = items.map(function (consignmentEntry) {
                     var entry = Object.assign({}, consignmentEntry.orderEntry);
