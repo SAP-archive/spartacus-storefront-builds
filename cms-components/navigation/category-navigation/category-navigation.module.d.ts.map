@@ -1,1 +1,0 @@
-{"version":3,"file":"category-navigation.module.d.ts","sources":["category-navigation.module.d.ts"],"names":[],"mappings":";;;;AAAA;;;AACA","sourcesContent":["export declare class CategoryNavigationModule {\n}\n"]}
