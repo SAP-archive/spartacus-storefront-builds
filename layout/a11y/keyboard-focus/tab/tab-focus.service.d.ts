@@ -1,6 +1,5 @@
 import { AutoFocusService } from '../autofocus/auto-focus.service';
 import { MOVE_FOCUS, TabFocusConfig } from '../keyboard-focus.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class TabFocusService extends AutoFocusService {
     /**
      * Moves to the next (or previous) tab.
@@ -28,7 +27,4 @@ export declare class TabFocusService extends AutoFocusService {
      */
     findFocusable(host: HTMLElement, locked?: boolean, invisible?: boolean): HTMLElement[];
     protected isActive(el: HTMLElement): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TabFocusService, never>;
 }
-
-//# sourceMappingURL=tab-focus.service.d.ts.map
