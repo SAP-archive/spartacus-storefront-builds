@@ -13769,10 +13769,11 @@
      *
      */
     var PageTemplateDirective = /** @class */ (function () {
-        function PageTemplateDirective(pageLayoutService, elementRef, templateRef) {
+        function PageTemplateDirective(pageLayoutService, elementRef, templateRef, cd) {
             this.pageLayoutService = pageLayoutService;
             this.elementRef = elementRef;
             this.templateRef = templateRef;
+            this.cd = cd;
         }
         PageTemplateDirective.prototype.ngOnInit = function () {
             var _this = this;
@@ -13790,25 +13791,27 @@
             configurable: true
         });
         /**
-         * Adds the page template as a style class to the given element. If any page template
-         * was added before, we clean it up.
+         * Adds the page template as a style class to the given element. If any
+         * page template was added before, we clean it up.
          */
         PageTemplateDirective.prototype.addStyleClass = function (el, template) {
             var _a;
             if (this.currentTemplate) {
                 (_a = el.classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
+                this.cd.markForCheck();
             }
             if (template) {
                 this.currentTemplate = template;
                 el.classList.add(this.currentTemplate);
+                this.cd.markForCheck();
             }
         };
         Object.defineProperty(PageTemplateDirective.prototype, "host", {
             /**
              * Returns the host element (`HTMLElement`).
              *
-             * If the directive is used on an `ng-template`, we take the parent element, to
-             * ensure that we're not ending up with a comment.
+             * If the directive is used on an `ng-template`, we take the parent element,
+             * to ensure that we're not ending up with a comment.
              */
             get: function () {
                 return !!this.templateRef
@@ -13831,7 +13834,8 @@
     PageTemplateDirective.ctorParameters = function () { return [
         { type: PageLayoutService },
         { type: i0.ElementRef },
-        { type: i0.TemplateRef, decorators: [{ type: i0.Optional }] }
+        { type: i0.TemplateRef, decorators: [{ type: i0.Optional }] },
+        { type: i0.ChangeDetectorRef }
     ]; };
     PageTemplateDirective.propDecorators = {
         cxPageTemplateStyle: [{ type: i0.Input }],

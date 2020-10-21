@@ -12216,10 +12216,11 @@ PageLayoutComponent.propDecorators = {
  *
  */
 class PageTemplateDirective {
-    constructor(pageLayoutService, elementRef, templateRef) {
+    constructor(pageLayoutService, elementRef, templateRef, cd) {
         this.pageLayoutService = pageLayoutService;
         this.elementRef = elementRef;
         this.templateRef = templateRef;
+        this.cd = cd;
     }
     ngOnInit() {
         this.subscription = this.template
@@ -12232,24 +12233,26 @@ class PageTemplateDirective {
             : this.pageLayoutService.templateName$;
     }
     /**
-     * Adds the page template as a style class to the given element. If any page template
-     * was added before, we clean it up.
+     * Adds the page template as a style class to the given element. If any
+     * page template was added before, we clean it up.
      */
     addStyleClass(el, template) {
         var _a;
         if (this.currentTemplate) {
             (_a = el.classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
+            this.cd.markForCheck();
         }
         if (template) {
             this.currentTemplate = template;
             el.classList.add(this.currentTemplate);
+            this.cd.markForCheck();
         }
     }
     /**
      * Returns the host element (`HTMLElement`).
      *
-     * If the directive is used on an `ng-template`, we take the parent element, to
-     * ensure that we're not ending up with a comment.
+     * If the directive is used on an `ng-template`, we take the parent element,
+     * to ensure that we're not ending up with a comment.
      */
     get host() {
         return !!this.templateRef
@@ -12268,7 +12271,8 @@ PageTemplateDirective.decorators = [
 PageTemplateDirective.ctorParameters = () => [
     { type: PageLayoutService },
     { type: ElementRef },
-    { type: TemplateRef, decorators: [{ type: Optional }] }
+    { type: TemplateRef, decorators: [{ type: Optional }] },
+    { type: ChangeDetectorRef }
 ];
 PageTemplateDirective.propDecorators = {
     cxPageTemplateStyle: [{ type: Input }],

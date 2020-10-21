@@ -1,4 +1,4 @@
-import { ElementRef, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { PageLayoutService } from './page-layout.service';
 /**
@@ -25,10 +25,12 @@ import { PageLayoutService } from './page-layout.service';
  * ```
  *
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PageTemplateDirective implements OnInit, OnDestroy {
     protected pageLayoutService: PageLayoutService;
     protected elementRef: ElementRef;
     protected templateRef: TemplateRef<HTMLElement>;
+    protected cd: ChangeDetectorRef;
     /**
      * Adds a style class to the host element based on the cms page template, unless
      * the class is given as an input.
@@ -44,20 +46,24 @@ export declare class PageTemplateDirective implements OnInit, OnDestroy {
      * from the element classList.
      */
     protected currentTemplate: string;
-    constructor(pageLayoutService: PageLayoutService, elementRef: ElementRef, templateRef: TemplateRef<HTMLElement>);
+    constructor(pageLayoutService: PageLayoutService, elementRef: ElementRef, templateRef: TemplateRef<HTMLElement>, cd: ChangeDetectorRef);
     ngOnInit(): void;
     protected get template(): Observable<string>;
     /**
-     * Adds the page template as a style class to the given element. If any page template
-     * was added before, we clean it up.
+     * Adds the page template as a style class to the given element. If any
+     * page template was added before, we clean it up.
      */
     protected addStyleClass(el: HTMLElement, template: string): void;
     /**
      * Returns the host element (`HTMLElement`).
      *
-     * If the directive is used on an `ng-template`, we take the parent element, to
-     * ensure that we're not ending up with a comment.
+     * If the directive is used on an `ng-template`, we take the parent element,
+     * to ensure that we're not ending up with a comment.
      */
     protected get host(): HTMLElement;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageTemplateDirective, [null, null, { optional: true; }, null]>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<PageTemplateDirective, "[cxPageTemplateStyle]", never, { "cxPageTemplateStyle": "cxPageTemplateStyle"; }, {}, never>;
 }
+
+//# sourceMappingURL=page-template.directive.d.ts.map
