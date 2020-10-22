@@ -6226,9 +6226,7 @@ class OrderDetailsService {
     constructor(userOrderService, routingService) {
         this.userOrderService = userOrderService;
         this.routingService = routingService;
-        this.orderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map((routingData) => routingData.state.params.orderCode));
+        this.orderCode$ = this.routingService.getRouterState().pipe(map((routingData) => routingData.state.params.orderCode), distinctUntilChanged());
         this.orderLoad$ = this.orderCode$.pipe(tap((orderCode) => {
             if (orderCode) {
                 this.userOrderService.loadOrderDetails(orderCode);
@@ -15263,9 +15261,7 @@ class ReplenishmentOrderDetailsService {
     constructor(routingService, userReplenishmentOrderService) {
         this.routingService = routingService;
         this.userReplenishmentOrderService = userReplenishmentOrderService;
-        this.replenishmentOrderCode$ = this.routingService
-            .getRouterState()
-            .pipe(map((routingData) => routingData.state.params.replenishmentOrderCode));
+        this.replenishmentOrderCode$ = this.routingService.getRouterState().pipe(map((routingData) => routingData.state.params.replenishmentOrderCode), distinctUntilChanged());
         this.replenishmentOrderLoad$ = this.replenishmentOrderCode$.pipe(tap((replenishmentOrderCode) => {
             if (Boolean(replenishmentOrderCode)) {
                 this.userReplenishmentOrderService.loadReplenishmentOrderDetails(replenishmentOrderCode);

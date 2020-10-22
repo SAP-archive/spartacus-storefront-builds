@@ -7130,9 +7130,7 @@
             var _this = this;
             this.userOrderService = userOrderService;
             this.routingService = routingService;
-            this.orderCode$ = this.routingService
-                .getRouterState()
-                .pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }));
+            this.orderCode$ = this.routingService.getRouterState().pipe(operators.map(function (routingData) { return routingData.state.params.orderCode; }), operators.distinctUntilChanged());
             this.orderLoad$ = this.orderCode$.pipe(operators.tap(function (orderCode) {
                 if (orderCode) {
                     _this.userOrderService.loadOrderDetails(orderCode);
@@ -17062,9 +17060,7 @@
             var _this = this;
             this.routingService = routingService;
             this.userReplenishmentOrderService = userReplenishmentOrderService;
-            this.replenishmentOrderCode$ = this.routingService
-                .getRouterState()
-                .pipe(operators.map(function (routingData) { return routingData.state.params.replenishmentOrderCode; }));
+            this.replenishmentOrderCode$ = this.routingService.getRouterState().pipe(operators.map(function (routingData) { return routingData.state.params.replenishmentOrderCode; }), operators.distinctUntilChanged());
             this.replenishmentOrderLoad$ = this.replenishmentOrderCode$.pipe(operators.tap(function (replenishmentOrderCode) {
                 if (Boolean(replenishmentOrderCode)) {
                     _this.userReplenishmentOrderService.loadReplenishmentOrderDetails(replenishmentOrderCode);
