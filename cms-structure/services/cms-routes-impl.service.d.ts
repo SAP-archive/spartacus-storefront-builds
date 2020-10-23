@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { PageContext } from '@spartacus/core';
 import { CmsComponentsService } from './cms-components.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsRoutesImplService {
     private router;
     private cmsComponentsService;
@@ -17,4 +18,7 @@ export declare class CmsRoutesImplService {
      */
     handleCmsRoutesInGuard(pageContext: PageContext, componentTypes: string[], currentUrl: string, currentPageLabel: string): boolean;
     private updateRouting;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsRoutesImplService, never>;
 }
+
+//# sourceMappingURL=cms-routes-impl.service.d.ts.map
