@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, ElementRef, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PageLayoutService } from './page-layout.service';
 /**
  * Directive that Adds a style class to the host element based on the cms page
@@ -25,11 +25,17 @@ import { PageLayoutService } from './page-layout.service';
  * ```
  *
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PageTemplateDirective implements OnInit, OnDestroy {
     protected pageLayoutService: PageLayoutService;
     protected elementRef: ElementRef;
     protected templateRef: TemplateRef<HTMLElement>;
     protected cd: ChangeDetectorRef;
+    /**
+     * Indicates whether this component is driven by an input template or should
+     * observe the CMS driven page layout template.
+     */
+    protected useTemplateFromInput: boolean;
     /**
      * Adds a style class to the host element based on the cms page template, unless
      * the class is given as an input.
@@ -37,8 +43,7 @@ export declare class PageTemplateDirective implements OnInit, OnDestroy {
      * The host element is either the actual host, or the parent element in case this
      * is used inside an `ng-template`.
      */
-    cxPageTemplateStyle: string;
-    templateClass: string;
+    set setTemplate(template: string);
     protected subscription: Subscription;
     /**
      * Holds the current page template, so we can remove previous page templates
@@ -47,12 +52,19 @@ export declare class PageTemplateDirective implements OnInit, OnDestroy {
     protected currentTemplate: string;
     constructor(pageLayoutService: PageLayoutService, elementRef: ElementRef, templateRef: TemplateRef<HTMLElement>, cd: ChangeDetectorRef);
     ngOnInit(): void;
-    protected get template(): Observable<string>;
     /**
      * Adds the page template as a style class to the given element. If any
      * page template was added before, we clean it up.
+     *
+     * We'll not use hostBinding for the style class, as it will potential drop
+     * an existing class name on the host. This is why we need to work with
+     * the lower level change detection api.
      */
-    protected addStyleClass(el: HTMLElement, template: string): void;
+    protected addStyleClass(template: string, el?: HTMLElement): void;
+    /**
+     * Cleans up the class host binding, if a template class was assigned before.
+     */
+    protected clear(el?: HTMLElement): void;
     /**
      * Returns the host element (`HTMLElement`).
      *
@@ -61,4 +73,8 @@ export declare class PageTemplateDirective implements OnInit, OnDestroy {
      */
     protected get host(): HTMLElement;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageTemplateDirective, [null, null, { optional: true; }, null]>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<PageTemplateDirective, "[cxPageTemplateStyle]", never, { "setTemplate": "cxPageTemplateStyle"; }, {}, never>;
 }
+
+//# sourceMappingURL=page-template.directive.d.ts.map

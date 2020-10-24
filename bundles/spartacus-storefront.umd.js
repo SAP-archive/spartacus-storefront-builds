@@ -13772,35 +13772,59 @@
             this.elementRef = elementRef;
             this.templateRef = templateRef;
             this.cd = cd;
+            // Maintains the page template subscription
+            this.subscription = new rxjs.Subscription();
         }
-        PageTemplateDirective.prototype.ngOnInit = function () {
-            var _this = this;
-            this.subscription = this.template
-                .pipe(operators.distinctUntilChanged())
-                .subscribe(function (template) { return _this.addStyleClass(_this.host, template); });
-        };
-        Object.defineProperty(PageTemplateDirective.prototype, "template", {
-            get: function () {
-                return this.cxPageTemplateStyle
-                    ? rxjs.of(this.cxPageTemplateStyle)
-                    : this.pageLayoutService.templateName$;
+        Object.defineProperty(PageTemplateDirective.prototype, "setTemplate", {
+            /**
+             * Adds a style class to the host element based on the cms page template, unless
+             * the class is given as an input.
+             *
+             * The host element is either the actual host, or the parent element in case this
+             * is used inside an `ng-template`.
+             */
+            set: function (template) {
+                if (template && template !== '') {
+                    this.useTemplateFromInput = true;
+                    this.addStyleClass(template);
+                }
+                else if (this.useTemplateFromInput) {
+                    // we only clear the template if it has been provided by the input before
+                    this.clear();
+                }
             },
             enumerable: false,
             configurable: true
         });
+        PageTemplateDirective.prototype.ngOnInit = function () {
+            var _this = this;
+            if (!this.useTemplateFromInput) {
+                this.subscription.add(this.pageLayoutService.templateName$.subscribe(function (template) { return _this.addStyleClass(template); }));
+            }
+        };
         /**
          * Adds the page template as a style class to the given element. If any
          * page template was added before, we clean it up.
+         *
+         * We'll not use hostBinding for the style class, as it will potential drop
+         * an existing class name on the host. This is why we need to work with
+         * the lower level change detection api.
          */
-        PageTemplateDirective.prototype.addStyleClass = function (el, template) {
-            var _a;
-            if (this.currentTemplate) {
-                (_a = el.classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
-                this.cd.markForCheck();
-            }
+        PageTemplateDirective.prototype.addStyleClass = function (template, el) {
+            this.clear(el);
             if (template) {
                 this.currentTemplate = template;
-                el.classList.add(this.currentTemplate);
+                (el !== null && el !== void 0 ? el : this.host).classList.add(this.currentTemplate);
+                this.cd.markForCheck();
+            }
+        };
+        /**
+         * Cleans up the class host binding, if a template class was assigned before.
+         */
+        PageTemplateDirective.prototype.clear = function (el) {
+            var _a;
+            if (this.currentTemplate) {
+                (_a = (el !== null && el !== void 0 ? el : this.host).classList) === null || _a === void 0 ? void 0 : _a.remove(this.currentTemplate);
                 this.cd.markForCheck();
             }
         };
@@ -13836,8 +13860,7 @@
         { type: i0.ChangeDetectorRef }
     ]; };
     PageTemplateDirective.propDecorators = {
-        cxPageTemplateStyle: [{ type: i0.Input }],
-        templateClass: [{ type: i0.HostBinding, args: ['class',] }]
+        setTemplate: [{ type: i0.Input, args: ['cxPageTemplateStyle',] }]
     };
 
     var PageLayoutModule = /** @class */ (function () {
