@@ -2,7 +2,6 @@ import { ComponentFactoryResolver, ComponentRef, RendererFactory2, ViewContainer
 import { Observable } from 'rxjs';
 import { LaunchInlineDialog, LAUNCH_CALLER } from '../config/index';
 import { LaunchRenderStrategy } from './launch-render.strategy';
-import * as ɵngcc0 from '@angular/core';
 export declare class InlineRenderStrategy extends LaunchRenderStrategy {
     protected document: any;
     protected rendererFactory: RendererFactory2;
@@ -17,7 +16,4 @@ export declare class InlineRenderStrategy extends LaunchRenderStrategy {
      */
     render(config: LaunchInlineDialog, caller: LAUNCH_CALLER | string, vcr: ViewContainerRef): Observable<ComponentRef<any>>;
     hasMatch(config: LaunchInlineDialog): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<InlineRenderStrategy, never>;
 }
-
-//# sourceMappingURL=inline-render.strategy.d.ts.map
