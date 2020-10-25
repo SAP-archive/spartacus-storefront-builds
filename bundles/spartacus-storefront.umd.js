@@ -19610,9 +19610,16 @@
          * Clears the search box input field
          */
         SearchBoxComponent.prototype.clear = function (el) {
+            var _this = this;
             this.disableClose();
             el.value = '';
             this.searchBoxComponentService.clearResults();
+            // Use Timeout to run after blur event to prevent the searchbox from closing on mobile
+            setTimeout(function () {
+                // Retain focus on input lost by clicking on icon
+                el.focus();
+                _this.ignoreCloseEvent = false;
+            });
         };
         return SearchBoxComponent;
     }());

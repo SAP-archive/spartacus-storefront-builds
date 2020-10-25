@@ -17652,6 +17652,12 @@ class SearchBoxComponent {
         this.disableClose();
         el.value = '';
         this.searchBoxComponentService.clearResults();
+        // Use Timeout to run after blur event to prevent the searchbox from closing on mobile
+        setTimeout(() => {
+            // Retain focus on input lost by clicking on icon
+            el.focus();
+            this.ignoreCloseEvent = false;
+        });
     }
 }
 SearchBoxComponent.decorators = [
