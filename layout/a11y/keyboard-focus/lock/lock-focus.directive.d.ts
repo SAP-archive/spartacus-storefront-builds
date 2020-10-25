@@ -7,6 +7,7 @@ import { LockFocusService } from './lock-focus.service';
  * the elements are being rebuild. This happens often when change
  * detection kicks in because of new data set from the backend.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class LockFocusDirective extends TrapFocusDirective implements OnInit, AfterViewInit {
     protected elementRef: ElementRef;
     protected service: LockFocusService;
@@ -69,4 +70,8 @@ export declare class LockFocusDirective extends TrapFocusDirective implements On
      * We keep this private to not polute the API.
      */
     private get focusable();
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<LockFocusDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<LockFocusDirective, never, never, {}, { "unlock": "unlock"; }, never>;
 }
+
+//# sourceMappingURL=lock-focus.directive.d.ts.map
