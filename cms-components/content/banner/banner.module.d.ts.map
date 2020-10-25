@@ -1,0 +1,1 @@
+{"version":3,"file":"banner.module.d.ts","sources":["banner.module.d.ts"],"names":[],"mappings":";;;;;;AAAA;;;AACA","sourcesContent":["export declare class BannerModule {\n}\n"]}

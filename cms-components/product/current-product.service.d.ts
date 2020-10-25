@@ -1,5 +1,6 @@
 import { Product, ProductScope, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class CurrentProductService {
     private routingService;
     private productService;
@@ -11,4 +12,7 @@ export declare class CurrentProductService {
      * @param scopes
      */
     getProduct(scopes?: (ProductScope | string)[] | ProductScope | string): Observable<Product | null>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CurrentProductService, never>;
 }
+
+//# sourceMappingURL=current-product.service.d.ts.map
