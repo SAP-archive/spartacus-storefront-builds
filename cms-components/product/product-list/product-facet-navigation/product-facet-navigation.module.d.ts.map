@@ -1,1 +1,0 @@
-{"version":3,"file":"product-facet-navigation.module.d.ts","sources":["product-facet-navigation.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ProductFacetNavigationModule {\n}\n"]}
