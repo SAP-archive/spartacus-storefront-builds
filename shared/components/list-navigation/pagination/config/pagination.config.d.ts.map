@@ -1,1 +1,0 @@
-{"version":3,"file":"pagination.config.d.ts","sources":["pagination.config.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;AACA","sourcesContent":["import { PaginationOptions } from '../pagination.model';\nexport declare abstract class PaginationConfig {\n    pagination?: PaginationOptions;\n}\n"]}
