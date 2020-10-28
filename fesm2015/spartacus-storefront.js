@@ -1,5 +1,5 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, Optional, InjectFlags, INJECTOR, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, SecurityContext, ViewChildren, inject } from '@angular/core';
-import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, merge, from, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
+import { of, BehaviorSubject, Observable, ReplaySubject, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, merge, from, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, mapTo, share, debounceTime, switchMapTo, takeWhile, endWith, pluck, observeOn, skip } from 'rxjs/operators';
 import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, CsAgentAuthService, UserService, AsmService, AsmConfig, UserIdService, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, SemanticPathService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, OAuthFlow, AuthConfigService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, CheckoutModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
@@ -587,9 +587,16 @@ class OutletDirective {
         this.outletRendererService = outletRendererService;
         this.renderedTemplate = [];
         this.renderedComponents = new Map();
+        /**
+         * Observable with current outlet context
+         */
+        this.outletContext$ = new ReplaySubject(1);
         this.loaded = new EventEmitter(true);
         this.subscription = new Subscription();
     }
+    /**
+     * Renders view for outlet or defers it, depending on the input `cxOutletDefer`
+     */
     render() {
         this.vcr.clear();
         this.renderedTemplate = [];
@@ -608,6 +615,9 @@ class OutletDirective {
             this.render();
             this.outletRendererService.register(this.cxOutlet, this);
         }
+        if (changes.cxOutletContext) {
+            this.outletContext$.next(this.cxOutletContext);
+        }
     }
     deferLoading() {
         this.loaded.emit(false);
@@ -622,11 +632,17 @@ class OutletDirective {
             this.loaded.emit(true);
         }));
     }
+    /**
+     * Renders view for outlet
+     */
     build() {
         this.buildOutlet(OutletPosition.BEFORE);
         this.buildOutlet(OutletPosition.REPLACE);
         this.buildOutlet(OutletPosition.AFTER);
     }
+    /**
+     * Renders view in a given position for outlet
+     */
     buildOutlet(position) {
         let templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
         templates = templates === null || templates === void 0 ? void 0 : templates.filter((el) => !this.renderedTemplate.includes(el));
@@ -645,6 +661,9 @@ class OutletDirective {
         });
         this.renderedComponents.set(position, components);
     }
+    /**
+     * Renders view based on the given template or component factory
+     */
     create(tmplOrFactory, position) {
         this.renderedTemplate.push(tmplOrFactory);
         if (tmplOrFactory instanceof ComponentFactory) {
@@ -670,6 +689,7 @@ class OutletDirective {
             reference: this.cxOutlet,
             position,
             context: this.cxOutletContext,
+            context$: this.outletContext$.asObservable(),
         };
         return Injector.create({
             providers: [
@@ -699,6 +719,7 @@ class OutletDirective {
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
+        this.outletContext$.complete();
     }
 }
 OutletDirective.decorators = [

@@ -904,9 +904,16 @@
             this.outletRendererService = outletRendererService;
             this.renderedTemplate = [];
             this.renderedComponents = new Map();
+            /**
+             * Observable with current outlet context
+             */
+            this.outletContext$ = new rxjs.ReplaySubject(1);
             this.loaded = new i0.EventEmitter(true);
             this.subscription = new rxjs.Subscription();
         }
+        /**
+         * Renders view for outlet or defers it, depending on the input `cxOutletDefer`
+         */
         OutletDirective.prototype.render = function () {
             this.vcr.clear();
             this.renderedTemplate = [];
@@ -925,6 +932,9 @@
                 this.render();
                 this.outletRendererService.register(this.cxOutlet, this);
             }
+            if (changes.cxOutletContext) {
+                this.outletContext$.next(this.cxOutletContext);
+            }
         };
         OutletDirective.prototype.deferLoading = function () {
             var _this = this;
@@ -940,11 +950,17 @@
                 _this.loaded.emit(true);
             }));
         };
+        /**
+         * Renders view for outlet
+         */
         OutletDirective.prototype.build = function () {
             this.buildOutlet(exports.OutletPosition.BEFORE);
             this.buildOutlet(exports.OutletPosition.REPLACE);
             this.buildOutlet(exports.OutletPosition.AFTER);
         };
+        /**
+         * Renders view in a given position for outlet
+         */
         OutletDirective.prototype.buildOutlet = function (position) {
             var _this = this;
             var templates = (this.outletService.get(this.cxOutlet, position, USE_STACKED_OUTLETS));
@@ -964,6 +980,9 @@
             });
             this.renderedComponents.set(position, components);
         };
+        /**
+         * Renders view based on the given template or component factory
+         */
         OutletDirective.prototype.create = function (tmplOrFactory, position) {
             this.renderedTemplate.push(tmplOrFactory);
             if (tmplOrFactory instanceof i0.ComponentFactory) {
@@ -989,6 +1008,7 @@
                 reference: this.cxOutlet,
                 position: position,
                 context: this.cxOutletContext,
+                context$: this.outletContext$.asObservable(),
             };
             return i0.Injector.create({
                 providers: [
@@ -1018,6 +1038,7 @@
         };
         OutletDirective.prototype.ngOnDestroy = function () {
             this.subscription.unsubscribe();
+            this.outletContext$.complete();
         };
         return OutletDirective;
     }());

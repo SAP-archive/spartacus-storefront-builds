@@ -5,7 +5,7 @@ import { IntersectionOptions } from '../../layout/loading/intersection.model';
 import { OutletRendererService } from './outlet-renderer.service';
 import { OutletPosition } from './outlet.model';
 import { OutletService } from './outlet.service';
-export declare class OutletDirective implements OnDestroy, OnChanges {
+export declare class OutletDirective<T = any> implements OnDestroy, OnChanges {
     private vcr;
     private templateRef;
     private outletService;
@@ -14,7 +14,14 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
     private renderedTemplate;
     renderedComponents: Map<OutletPosition, (ComponentRef<any> | EmbeddedViewRef<any>)[]>;
     cxOutlet: string;
-    cxOutletContext: any;
+    /**
+     * Context data to be provided to child view of the outlet
+     */
+    cxOutletContext: T;
+    /**
+     * Observable with current outlet context
+     */
+    private readonly outletContext$;
     /**
      * Defers loading options for the the templates of this outlet.
      */
@@ -22,11 +29,23 @@ export declare class OutletDirective implements OnDestroy, OnChanges {
     loaded: EventEmitter<Boolean>;
     subscription: Subscription;
     constructor(vcr: ViewContainerRef, templateRef: TemplateRef<any>, outletService: OutletService, deferLoaderService: DeferLoaderService, outletRendererService: OutletRendererService);
+    /**
+     * Renders view for outlet or defers it, depending on the input `cxOutletDefer`
+     */
     render(): void;
     ngOnChanges(changes: SimpleChanges): void;
     private deferLoading;
+    /**
+     * Renders view for outlet
+     */
     private build;
+    /**
+     * Renders view in a given position for outlet
+     */
     private buildOutlet;
+    /**
+     * Renders view based on the given template or component factory
+     */
     private create;
     /**
      * Returns injector with OutletContextData that can be injected to the component
