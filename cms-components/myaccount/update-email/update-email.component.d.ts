@@ -17,7 +17,7 @@ export declare class UpdateEmailComponent implements OnInit, OnDestroy {
         newUid: string;
         password: string;
     }): void;
-    onSuccess(success: boolean): void;
+    onSuccess(success: boolean): Promise<void>;
     ngOnDestroy(): void;
     static ɵfac: ɵngcc0.ɵɵFactoryDef<UpdateEmailComponent, never>;
     static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<UpdateEmailComponent, "cx-update-email", never, {}, {}, never, never>;

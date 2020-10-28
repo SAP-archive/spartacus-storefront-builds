@@ -16069,18 +16069,20 @@ class UpdateEmailComponent {
         this.userService.updateEmail(password, newUid);
     }
     onSuccess(success) {
-        if (success) {
-            this.globalMessageService.add({
-                key: 'updateEmailForm.emailUpdateSuccess',
-                params: { newUid: this.newUid },
-            }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-            this.authService.logout();
-            this.routingService.go({ cxRoute: 'login' }, null, {
-                state: {
-                    newUid: this.newUid,
-                },
-            });
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            if (success) {
+                this.globalMessageService.add({
+                    key: 'updateEmailForm.emailUpdateSuccess',
+                    params: { newUid: this.newUid },
+                }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                yield this.authService.logout();
+                this.routingService.go({ cxRoute: 'login' }, null, {
+                    state: {
+                        newUid: this.newUid,
+                    },
+                });
+            }
+        });
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

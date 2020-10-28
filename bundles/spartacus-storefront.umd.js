@@ -17930,18 +17930,28 @@
             this.userService.updateEmail(password, newUid);
         };
         UpdateEmailComponent.prototype.onSuccess = function (success) {
-            if (success) {
-                this.globalMessageService.add({
-                    key: 'updateEmailForm.emailUpdateSuccess',
-                    params: { newUid: this.newUid },
-                }, i1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                this.authService.logout();
-                this.routingService.go({ cxRoute: 'login' }, null, {
-                    state: {
-                        newUid: this.newUid,
-                    },
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!success) return [3 /*break*/, 2];
+                            this.globalMessageService.add({
+                                key: 'updateEmailForm.emailUpdateSuccess',
+                                params: { newUid: this.newUid },
+                            }, i1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
+                            return [4 /*yield*/, this.authService.logout()];
+                        case 1:
+                            _a.sent();
+                            this.routingService.go({ cxRoute: 'login' }, null, {
+                                state: {
+                                    newUid: this.newUid,
+                                },
+                            });
+                            _a.label = 2;
+                        case 2: return [2 /*return*/];
+                    }
                 });
-            }
+            });
         };
         UpdateEmailComponent.prototype.ngOnDestroy = function () {
             this.subscription.unsubscribe();
