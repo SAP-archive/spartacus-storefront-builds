@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@angular/common/http'), require('ngx-infinite-scroll'), require('@ngrx/store'), require('@ngrx/effects'), require('@ngrx/router-store')) :
     typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@spartacus/core', '@angular/common', '@angular/platform-browser', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@angular/common/http', 'ngx-infinite-scroll', '@ngrx/store', '@ngrx/effects', '@ngrx/router-store'], factory) :
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.core, global.ng.common, global.ng.platformBrowser, global.ng.forms, global.ng.router, global.ngSelect, global.ngBootstrap, global.ng.serviceWorker, global.ng.common.http, global.ngxInfiniteScroll, global.store, global.effects, global.fromNgrxRouter));
-}(this, (function (exports, i0, rxjs, operators, i1, i1$1, i1$2, forms, i4, ngSelect, i1$3, serviceWorker, http, ngxInfiniteScroll, i1$4, effects, routerStore) { 'use strict';
+}(this, (function (exports, i0, rxjs, operators, i1, i1$1, i1$2, forms, i2, ngSelect, i1$3, serviceWorker, http, ngxInfiniteScroll, i1$4, effects, routerStore) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -23,7 +23,7 @@
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b)
-                if (Object.prototype.hasOwnProperty.call(b, p))
+                if (b.hasOwnProperty(p))
                     d[p] = b[p]; };
         return extendStatics(d, b);
     };
@@ -170,10 +170,10 @@
             k2 = k;
         o[k2] = m[k];
     });
-    function __exportStar(m, o) {
+    function __exportStar(m, exports) {
         for (var p in m)
-            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
-                __createBinding(o, m, p);
+            if (p !== "default" && !exports.hasOwnProperty(p))
+                __createBinding(exports, m, p);
     }
     function __values(o) {
         var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
@@ -283,7 +283,7 @@
         var result = {};
         if (mod != null)
             for (var k in mod)
-                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                if (Object.hasOwnProperty.call(mod, k))
                     __createBinding(result, mod, k);
         __setModuleDefault(result, mod);
         return result;
@@ -4035,7 +4035,7 @@
     }());
     CarouselModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, IconModule, MediaModule, i1.UrlModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, IconModule, MediaModule, i1.UrlModule],
                     declarations: [CarouselComponent],
                     exports: [CarouselComponent],
                 },] }
@@ -4533,7 +4533,7 @@
                 },] }
     ];
     GenericLinkComponent.ctorParameters = function () { return [
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
     GenericLinkComponent.propDecorators = {
         url: [{ type: i0.Input }],
@@ -4551,7 +4551,7 @@
     }());
     GenericLinkModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule],
                     declarations: [GenericLinkComponent],
                     exports: [GenericLinkComponent],
                 },] }
@@ -5091,7 +5091,7 @@
     ];
     PaginationComponent.ctorParameters = function () { return [
         { type: PaginationBuilder },
-        { type: i4.ActivatedRoute }
+        { type: i2.ActivatedRoute }
     ]; };
     PaginationComponent.propDecorators = {
         pageRoute: [{ type: i0.Input }],
@@ -5108,7 +5108,7 @@
     }());
     PaginationModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule],
                     providers: [i1.provideDefaultConfig(defaultPaginationConfig)],
                     declarations: [PaginationComponent],
                     exports: [PaginationComponent],
@@ -5979,7 +5979,7 @@
     SplitViewModule.decorators = [
         { type: i0.NgModule, args: [{
                     declarations: [SplitViewComponent, ViewComponent],
-                    imports: [i1$1.CommonModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule],
                     exports: [SplitViewComponent, ViewComponent],
                 },] }
     ];
@@ -6380,7 +6380,7 @@
     }());
     SiteContextSelectorModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.SiteContextModule, IconModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.SiteContextModule, IconModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -8285,38 +8285,24 @@
     }
 
     var AsmComponentService = /** @class */ (function () {
-        function AsmComponentService(authService, asmAuthService, routingService, winRef) {
+        function AsmComponentService(authService, csAgentAuthService, winRef) {
             this.authService = authService;
-            this.asmAuthService = asmAuthService;
-            this.routingService = routingService;
+            this.csAgentAuthService = csAgentAuthService;
             this.winRef = winRef;
         }
         AsmComponentService.prototype.logoutCustomerSupportAgentAndCustomer = function () {
-            var _this = this;
-            this.authService
-                .getUserToken()
-                .pipe(operators.take(1))
-                .subscribe(function (token) {
-                if (_this.asmAuthService.isCustomerEmulationToken(token)) {
-                    _this.logoutCustomer();
-                }
-                _this.asmAuthService.logoutCustomerSupportAgent();
-            });
+            this.csAgentAuthService.logoutCustomerSupportAgent();
         };
         AsmComponentService.prototype.logoutCustomer = function () {
-            this.authService.logout();
-            this.routingService.go({ cxRoute: 'home' });
+            this.authService.initLogout();
         };
         AsmComponentService.prototype.isCustomerEmulationSessionInProgress = function () {
-            var _this = this;
-            return this.authService
-                .getUserToken()
-                .pipe(operators.mergeMap(function (userToken) { return rxjs.of(_this.asmAuthService.isCustomerEmulationToken(userToken)); }));
+            return this.csAgentAuthService.isCustomerEmulated();
         };
         /**
          * We're currently only removing the persisted storage in the browser
          * to ensure the ASM experience isn't loaded on the next visit. There are a few
-         * optimsiations we could think of:
+         * optimizations we could think of:
          * - drop the `asm` parameter from the URL, in case it's still there
          * - remove the generated UI from the DOM (outlets currently do not support this)
          */
@@ -8327,7 +8313,7 @@
         };
         return AsmComponentService;
     }());
-    AsmComponentService.ɵprov = i0.ɵɵdefineInjectable({ factory: function AsmComponentService_Factory() { return new AsmComponentService(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.AsmAuthService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.WindowRef)); }, token: AsmComponentService, providedIn: "root" });
+    AsmComponentService.ɵprov = i0.ɵɵdefineInjectable({ factory: function AsmComponentService_Factory() { return new AsmComponentService(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.CsAgentAuthService), i0.ɵɵinject(i1.WindowRef)); }, token: AsmComponentService, providedIn: "root" });
     AsmComponentService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -8335,15 +8321,14 @@
     ];
     AsmComponentService.ctorParameters = function () { return [
         { type: i1.AuthService },
-        { type: i1.AsmAuthService },
-        { type: i1.RoutingService },
+        { type: i1.CsAgentAuthService },
         { type: i1.WindowRef }
     ]; };
 
     var AsmMainUiComponent = /** @class */ (function () {
-        function AsmMainUiComponent(authService, asmAuthService, userService, asmComponentService, globalMessageService, routingService, asmService) {
+        function AsmMainUiComponent(authService, csAgentAuthService, userService, asmComponentService, globalMessageService, routingService, asmService) {
             this.authService = authService;
-            this.asmAuthService = asmAuthService;
+            this.csAgentAuthService = csAgentAuthService;
             this.userService = userService;
             this.asmComponentService = asmComponentService;
             this.globalMessageService = globalMessageService;
@@ -8354,11 +8339,11 @@
         }
         AsmMainUiComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.csAgentToken$ = this.asmAuthService.getCustomerSupportAgentToken();
-            this.csAgentTokenLoading$ = this.asmAuthService.getCustomerSupportAgentTokenLoading();
-            this.customer$ = this.authService.getUserToken().pipe(operators.switchMap(function (token) {
-                if (token && !!token.access_token) {
-                    _this.handleCustomerSessionStartRedirection(token);
+            this.customerSupportAgentLoggedIn$ = this.csAgentAuthService.isCustomerSupportAgentLoggedIn();
+            this.csAgentTokenLoading$ = this.csAgentAuthService.getCustomerSupportAgentTokenLoading();
+            this.customer$ = this.authService.isUserLoggedIn().pipe(operators.switchMap(function (isLoggedIn) {
+                if (isLoggedIn) {
+                    _this.handleCustomerSessionStartRedirection();
                     return _this.userService.get();
                 }
                 else {
@@ -8369,29 +8354,29 @@
                 .getAsmUiState()
                 .pipe(operators.map(function (uiState) { return uiState.collapsed; }));
         };
-        AsmMainUiComponent.prototype.handleCustomerSessionStartRedirection = function (token) {
-            if (this.startingCustomerSession &&
-                this.asmAuthService.isCustomerEmulationToken(token)) {
-                this.startingCustomerSession = false;
-                this.globalMessageService.remove(i1.GlobalMessageType.MSG_TYPE_ERROR);
-                this.routingService.go('/');
-            }
+        AsmMainUiComponent.prototype.handleCustomerSessionStartRedirection = function () {
+            var _this = this;
+            this.asmComponentService
+                .isCustomerEmulationSessionInProgress()
+                .pipe(operators.take(1))
+                .subscribe(function (isCustomerEmulated) {
+                if (_this.startingCustomerSession && isCustomerEmulated) {
+                    _this.startingCustomerSession = false;
+                    _this.globalMessageService.remove(i1.GlobalMessageType.MSG_TYPE_ERROR);
+                    _this.routingService.go('/');
+                }
+            });
         };
         AsmMainUiComponent.prototype.loginCustomerSupportAgent = function (_a) {
             var userId = _a.userId, password = _a.password;
-            this.asmAuthService.authorizeCustomerSupportAgent(userId, password);
+            this.csAgentAuthService.authorizeCustomerSupportAgent(userId, password);
         };
         AsmMainUiComponent.prototype.logout = function () {
             this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
         };
         AsmMainUiComponent.prototype.startCustomerEmulationSession = function (_a) {
-            var _this = this;
             var customerId = _a.customerId;
-            this.asmAuthService
-                .getCustomerSupportAgentToken()
-                .pipe(operators.take(1))
-                .subscribe(function (customerSupportAgentToken) { return _this.asmAuthService.startCustomerEmulationSession(customerSupportAgentToken, customerId); })
-                .unsubscribe();
+            this.csAgentAuthService.startCustomerEmulationSession(customerId);
             this.startingCustomerSession = true;
         };
         AsmMainUiComponent.prototype.hideUi = function () {
@@ -8403,14 +8388,14 @@
     AsmMainUiComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-asm-main-ui',
-                    template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,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\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-toggle-ui></cx-asm-toggle-ui>\n\n    <cx-asm-session-timer\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n    ></cx-asm-session-timer>\n\n    <button\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(csAgentToken$ | async)?.access_token &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></button>\n\n    <button\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n      (click)=\"logout()\"\n    ></button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"!(isCollapsed$ | async) as notCollapsed\">\n  <ng-container\n    *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\"\n  >\n    <ng-container *ngIf=\"customer$ | async; else showCustomerSelection\">\n      <cx-customer-emulation *ngIf=\"notCollapsed\"></cx-customer-emulation>\n    </ng-container>\n    <ng-template #showCustomerSelection>\n      <cx-customer-selection\n        *ngIf=\"notCollapsed\"\n        (submitEvent)=\"startCustomerEmulationSession($event)\"\n      ></cx-customer-selection>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #showLoginForm>\n    <cx-csagent-login-form\n      *ngIf=\"notCollapsed\"\n      (submitEvent)=\"loginCustomerSupportAgent($event)\"\n      [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n    ></cx-csagent-login-form>\n  </ng-template>\n</ng-container>\n",
+                    template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,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\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-toggle-ui></cx-asm-toggle-ui>\n\n    <cx-asm-session-timer\n      *ngIf=\"customerSupportAgentLoggedIn$ | async\"\n    ></cx-asm-session-timer>\n\n    <button\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(customerSupportAgentLoggedIn$ | async) &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></button>\n\n    <button\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"customerSupportAgentLoggedIn$ | async\"\n      (click)=\"logout()\"\n    ></button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"!(isCollapsed$ | async) as notCollapsed\">\n  <ng-container\n    *ngIf=\"customerSupportAgentLoggedIn$ | async; else showLoginForm\"\n  >\n    <ng-container *ngIf=\"customer$ | async; else showCustomerSelection\">\n      <cx-customer-emulation *ngIf=\"notCollapsed\"></cx-customer-emulation>\n    </ng-container>\n    <ng-template #showCustomerSelection>\n      <cx-customer-selection\n        *ngIf=\"notCollapsed\"\n        (submitEvent)=\"startCustomerEmulationSession($event)\"\n      ></cx-customer-selection>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #showLoginForm>\n    <cx-csagent-login-form\n      *ngIf=\"notCollapsed\"\n      (submitEvent)=\"loginCustomerSupportAgent($event)\"\n      [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n    ></cx-csagent-login-form>\n  </ng-template>\n</ng-container>\n",
                     encapsulation: i0.ViewEncapsulation.None,
                     styles: ["cx-asm-main-ui{display:flex;flex-direction:column;font-family:Arial,sans-serif;font-size:14px;width:100%}cx-asm-main-ui .close,cx-asm-main-ui .logout{background-color:transparent;border:transparent;cursor:pointer;height:16px;width:16px}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{border-radius:4px;border-style:solid;border-width:1px;font-weight:400;height:36px;padding:0 12px;white-space:nowrap}cx-asm-main-ui button[type=submit]:disabled{cursor:not-allowed;opacity:.4}cx-asm-main-ui .spinner{color:#0a6ed1;display:flex;justify-content:center;width:100%}cx-asm-main-ui .spinner>div{-webkit-animation:spinner-dots-pulse 1s ease infinite;animation:spinner-dots-pulse 1s ease infinite;background-color:currentColor;border-radius:100%;height:8px;margin:6px;width:8px}cx-asm-main-ui .spinner>div:first-child{-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,60%,to{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,60%,to{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{background-color:#354a5f;color:#fff;display:flex;height:48px;justify-content:space-between;padding:0 2rem;z-index:1}cx-asm-main-ui .asm-bar-branding{align-items:center;display:flex}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{align-items:center;display:flex;justify-content:flex-end}cx-asm-main-ui>:nth-child(2){display:flex;padding:1rem 2rem;width:100%}cx-asm-main-ui input{background-color:#fff;border:1px solid #89919a;border-radius:4px;color:#32363a;height:36px;outline:0;padding:0 12px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
                 },] }
     ];
     AsmMainUiComponent.ctorParameters = function () { return [
         { type: i1.AuthService },
-        { type: i1.AsmAuthService },
+        { type: i1.CsAgentAuthService },
         { type: i1.UserService },
         { type: AsmComponentService },
         { type: i1.GlobalMessageService },
@@ -8422,12 +8407,12 @@
     };
 
     var AsmSessionTimerComponent = /** @class */ (function () {
-        function AsmSessionTimerComponent(config, asmComponentService, authService, routingService, changeDetectorRef) {
+        function AsmSessionTimerComponent(config, asmComponentService, routingService, changeDetectorRef, userIdService) {
             this.config = config;
             this.asmComponentService = asmComponentService;
-            this.authService = authService;
             this.routingService = routingService;
             this.changeDetectorRef = changeDetectorRef;
+            this.userIdService = userIdService;
             this.subscriptions = new rxjs.Subscription();
             this.maxStartDelayInSeconds = 60000;
         }
@@ -8457,8 +8442,8 @@
         };
         AsmSessionTimerComponent.prototype.resetOnCustomerSessionChange = function () {
             var _this = this;
-            this.subscriptions.add(this.authService
-                .getOccUserId()
+            this.subscriptions.add(this.userIdService
+                .getUserId()
                 .pipe(operators.distinctUntilChanged())
                 .subscribe(function () { return _this.resetTimer(); }));
         };
@@ -8495,9 +8480,9 @@
     AsmSessionTimerComponent.ctorParameters = function () { return [
         { type: i1.AsmConfig },
         { type: AsmComponentService },
-        { type: i1.AuthService },
         { type: i1.RoutingService },
-        { type: i0.ChangeDetectorRef }
+        { type: i0.ChangeDetectorRef },
+        { type: i1.UserIdService }
     ]; };
 
     var FormatTimerPipe = /** @class */ (function () {
@@ -9373,7 +9358,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         CartCouponModule,
                         forms.ReactiveFormsModule,
                         i1.UrlModule,
@@ -9404,7 +9389,7 @@
                         i1$1.CommonModule,
                         forms.ReactiveFormsModule,
                         CartSharedModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         SpinnerModule,
                         PromotionsModule,
                         i1.FeaturesConfigModule,
@@ -9501,7 +9486,7 @@
                         CartSharedModule,
                         i1$1.CommonModule,
                         CartCouponModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         PromotionsModule,
                         i1.FeaturesConfigModule,
@@ -9523,9 +9508,10 @@
     ];
 
     var CartNotEmptyGuard = /** @class */ (function () {
-        function CartNotEmptyGuard(routingService, activeCartService) {
-            this.routingService = routingService;
+        function CartNotEmptyGuard(activeCartService, semanticPathService, router) {
             this.activeCartService = activeCartService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
         }
         CartNotEmptyGuard.prototype.canActivate = function () {
             var _this = this;
@@ -9538,8 +9524,7 @@
             }), operators.map(function (_a) {
                 var _b = __read(_a, 1), cart = _b[0];
                 if (_this.isEmpty(cart)) {
-                    _this.routingService.go({ cxRoute: 'home' });
-                    return false;
+                    return _this.router.parseUrl(_this.semanticPathService.get('home'));
                 }
                 return true;
             }));
@@ -9549,15 +9534,16 @@
         };
         return CartNotEmptyGuard;
     }());
-    CartNotEmptyGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+    CartNotEmptyGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: CartNotEmptyGuard, providedIn: "root" });
     CartNotEmptyGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     CartNotEmptyGuard.ctorParameters = function () { return [
-        { type: i1.RoutingService },
-        { type: i1.ActiveCartService }
+        { type: i1.ActiveCartService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var CartPageLayoutHandler = /** @class */ (function () {
@@ -9640,7 +9626,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         CartSharedModule,
                         i1.I18nModule,
@@ -9690,7 +9676,7 @@
     }());
     MiniCartModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, IconModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, IconModule, i1.I18nModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -9755,7 +9741,7 @@
     }());
     AddToWishListModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i1.I18nModule, IconModule, i4.RouterModule, i1.UrlModule],
+                    imports: [i1$1.CommonModule, i1.I18nModule, IconModule, i2.RouterModule, i1.UrlModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -10006,34 +9992,35 @@
     ]; };
 
     var CheckoutAuthGuard = /** @class */ (function () {
-        function CheckoutAuthGuard(routingService, authService, authRedirectService, checkoutConfigService, activeCartService, userService, globalMessageService) {
-            this.routingService = routingService;
+        function CheckoutAuthGuard(authService, authRedirectService, checkoutConfigService, activeCartService, semanticPathService, router, userService, globalMessageService) {
             this.authService = authService;
             this.authRedirectService = authRedirectService;
             this.checkoutConfigService = checkoutConfigService;
             this.activeCartService = activeCartService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
             this.userService = userService;
             this.globalMessageService = globalMessageService;
         }
         CheckoutAuthGuard.prototype.canActivate = function () {
             var _this = this;
             return rxjs.combineLatest([
-                this.authService.getUserToken(),
+                this.authService.isUserLoggedIn(),
                 this.activeCartService.getAssignedUser(),
                 this.userService.get(),
             ]).pipe(operators.map(function (_a) {
-                var _b = __read(_a, 3), token = _b[0], cartUser = _b[1], user = _b[2];
-                if (!token.access_token) {
+                var _b = __read(_a, 3), isLoggedIn = _b[0], cartUser = _b[1], user = _b[2];
+                if (!isLoggedIn) {
                     if (_this.activeCartService.isGuestCart()) {
                         return Boolean(cartUser);
                     }
+                    _this.authRedirectService.reportAuthGuard();
                     if (_this.checkoutConfigService.isGuestCheckout()) {
-                        _this.routingService.go({ cxRoute: 'login' }, { forced: true });
+                        return _this.router.createUrlTree([_this.semanticPathService.get('login')], { queryParams: { forced: true } });
                     }
                     else {
-                        _this.routingService.go({ cxRoute: 'login' });
+                        return _this.router.parseUrl(_this.semanticPathService.get('login'));
                     }
-                    _this.authRedirectService.reportAuthGuard();
                 }
                 else if ('roles' in user) {
                     var roles = user.roles;
@@ -10045,23 +10032,24 @@
                         return false;
                     }
                 }
-                return !!token.access_token;
+                return isLoggedIn;
             }));
         };
         return CheckoutAuthGuard;
     }());
-    CheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.AuthRedirectService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.UserService), i0.ɵɵinject(i1.GlobalMessageService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+    CheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.AuthRedirectService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router), i0.ɵɵinject(i1.UserService), i0.ɵɵinject(i1.GlobalMessageService)); }, token: CheckoutAuthGuard, providedIn: "root" });
     CheckoutAuthGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     CheckoutAuthGuard.ctorParameters = function () { return [
-        { type: i1.RoutingService },
         { type: i1.AuthService },
         { type: i1.AuthRedirectService },
         { type: CheckoutConfigService },
         { type: i1.ActiveCartService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router },
         { type: i1.UserService },
         { type: i1.GlobalMessageService }
     ]; };
@@ -10427,14 +10415,14 @@
         };
         return CheckoutGuard;
     }());
-    CheckoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.ɵɵinject(i4.Router), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(ExpressCheckoutService), i0.ɵɵinject(i1.ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
+    CheckoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.ɵɵinject(i2.Router), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(ExpressCheckoutService), i0.ɵɵinject(i1.ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
     CheckoutGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     CheckoutGuard.ctorParameters = function () { return [
-        { type: i4.Router },
+        { type: i2.Router },
         { type: i1.RoutingConfigService },
         { type: CheckoutConfigService },
         { type: CheckoutStepService },
@@ -10673,7 +10661,7 @@
         };
         return CheckoutStepsSetGuard;
     }());
-    CheckoutStepsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutStepsSetGuard_Factory() { return new CheckoutStepsSetGuard(i0.ɵɵinject(i1.PaymentTypeService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i1.CheckoutCostCenterService), i0.ɵɵinject(i4.Router)); }, token: CheckoutStepsSetGuard, providedIn: "root" });
+    CheckoutStepsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutStepsSetGuard_Factory() { return new CheckoutStepsSetGuard(i0.ɵɵinject(i1.PaymentTypeService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i1.CheckoutCostCenterService), i0.ɵɵinject(i2.Router)); }, token: CheckoutStepsSetGuard, providedIn: "root" });
     CheckoutStepsSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10685,7 +10673,7 @@
         { type: CheckoutDetailsService },
         { type: i1.RoutingConfigService },
         { type: i1.CheckoutCostCenterService },
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     var CheckoutProgressMobileBottomModule = /** @class */ (function () {
@@ -10695,7 +10683,7 @@
     }());
     CheckoutProgressMobileBottomModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i2.RouterModule],
                     providers: [
                         i1.provideDefaultConfig(defaultCheckoutConfig),
                         i1.provideDefaultConfig({
@@ -10753,7 +10741,7 @@
     }());
     CheckoutProgressMobileTopModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i2.RouterModule],
                     providers: [
                         i1.provideDefaultConfig(defaultCheckoutConfig),
                         i1.provideDefaultConfig({
@@ -10834,7 +10822,7 @@
     }());
     CheckoutProgressModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i4.RouterModule],
+                    imports: [i1$1.CommonModule, i1.UrlModule, i1.I18nModule, i2.RouterModule],
                     declarations: [CheckoutProgressComponent, MultiLinePipe],
                     entryComponents: [CheckoutProgressComponent],
                     exports: [CheckoutProgressComponent],
@@ -10872,36 +10860,37 @@
     ]; };
 
     var NotCheckoutAuthGuard = /** @class */ (function () {
-        function NotCheckoutAuthGuard(routingService, authService, activeCartService) {
-            this.routingService = routingService;
+        function NotCheckoutAuthGuard(authService, activeCartService, semanticPathService, router) {
             this.authService = authService;
             this.activeCartService = activeCartService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
         }
         NotCheckoutAuthGuard.prototype.canActivate = function () {
             var _this = this;
-            return this.authService.getUserToken().pipe(operators.map(function (token) {
-                if (token.access_token) {
-                    _this.routingService.go({ cxRoute: 'home' });
+            return this.authService.isUserLoggedIn().pipe(operators.map(function (isLoggedIn) {
+                if (isLoggedIn) {
+                    return _this.router.parseUrl(_this.semanticPathService.get('home'));
                 }
                 else if (_this.activeCartService.isGuestCart()) {
-                    _this.routingService.go({ cxRoute: 'cart' });
-                    return false;
+                    return _this.router.parseUrl(_this.semanticPathService.get('cart'));
                 }
-                return !token.access_token;
+                return !isLoggedIn;
             }));
         };
         return NotCheckoutAuthGuard;
     }());
-    NotCheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+    NotCheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
     NotCheckoutAuthGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     NotCheckoutAuthGuard.ctorParameters = function () { return [
-        { type: i1.RoutingService },
         { type: i1.AuthService },
-        { type: i1.ActiveCartService }
+        { type: i1.ActiveCartService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var DeliveryModeSetGuard = /** @class */ (function () {
@@ -10929,7 +10918,7 @@
         };
         return DeliveryModeSetGuard;
     }());
-    DeliveryModeSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i4.Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+    DeliveryModeSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
     DeliveryModeSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10939,7 +10928,7 @@
         { type: CheckoutDetailsService },
         { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     var PaymentDetailsSetGuard = /** @class */ (function () {
@@ -10964,7 +10953,7 @@
         };
         return PaymentDetailsSetGuard;
     }());
-    PaymentDetailsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i4.Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+    PaymentDetailsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
     PaymentDetailsSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10974,7 +10963,7 @@
         { type: CheckoutDetailsService },
         { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     var ShippingAddressSetGuard = /** @class */ (function () {
@@ -11002,7 +10991,7 @@
         };
         return ShippingAddressSetGuard;
     }());
-    ShippingAddressSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i4.Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+    ShippingAddressSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
     ShippingAddressSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -11012,7 +11001,7 @@
         { type: CheckoutDetailsService },
         { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     var CostCenterComponent = /** @class */ (function () {
@@ -11187,7 +11176,7 @@
         { type: i1.CheckoutDeliveryService },
         { type: CheckoutConfigService },
         { type: CheckoutStepService },
-        { type: i4.ActivatedRoute }
+        { type: i2.ActivatedRoute }
     ]; };
 
     var DeliveryModeModule = /** @class */ (function () {
@@ -11667,7 +11656,7 @@
         { type: i1.CheckoutDeliveryService },
         { type: i1.CheckoutPaymentService },
         { type: i1.GlobalMessageService },
-        { type: i4.ActivatedRoute },
+        { type: i2.ActivatedRoute },
         { type: i1.TranslationService },
         { type: i1.ActiveCartService },
         { type: CheckoutStepService }
@@ -11682,7 +11671,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         PaymentFormModule,
                         CardModule,
                         SpinnerModule,
@@ -11748,7 +11737,7 @@
     PaymentTypeComponent.ctorParameters = function () { return [
         { type: i1.PaymentTypeService },
         { type: CheckoutStepService },
-        { type: i4.ActivatedRoute }
+        { type: i2.ActivatedRoute }
     ]; };
     PaymentTypeComponent.propDecorators = {
         _poNumberInput: [{ type: i0.ViewChild, args: ['poNumber', { static: false },] }]
@@ -11946,7 +11935,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         forms.ReactiveFormsModule,
@@ -12244,7 +12233,7 @@
                         CartSharedModule,
                         i1.I18nModule,
                         i1.UrlModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         PromotionsModule,
                         IconModule,
                     ],
@@ -12377,7 +12366,7 @@
     }());
     ScheduleReplenishmentOrderModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.I18nModule, IconModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.I18nModule, IconModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -12599,7 +12588,7 @@
                         i1$1.CommonModule,
                         forms.ReactiveFormsModule,
                         forms.FormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         ngSelect.NgSelectModule,
                         IconModule,
                         i1.I18nModule,
@@ -12785,7 +12774,7 @@
     ShippingAddressComponent.ctorParameters = function () { return [
         { type: i1.UserAddressService },
         { type: i1.CheckoutDeliveryService },
-        { type: i4.ActivatedRoute },
+        { type: i2.ActivatedRoute },
         { type: i1.TranslationService },
         { type: i1.ActiveCartService },
         { type: CheckoutStepService },
@@ -12803,7 +12792,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         AddressFormModule,
                         CardModule,
                         SpinnerModule,
@@ -13236,7 +13225,7 @@
             var _this = this;
             this.isExpanded = new rxjs.BehaviorSubject(false);
             router.events
-                .pipe(operators.filter(function (event) { return event instanceof i4.NavigationStart; }))
+                .pipe(operators.filter(function (event) { return event instanceof i2.NavigationStart; }))
                 .subscribe(function () {
                 _this.toggle(true);
             });
@@ -13254,14 +13243,14 @@
         };
         return HamburgerMenuService;
     }());
-    HamburgerMenuService.ɵprov = i0.ɵɵdefineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(i0.ɵɵinject(i4.Router)); }, token: HamburgerMenuService, providedIn: "root" });
+    HamburgerMenuService.ɵprov = i0.ɵɵdefineInjectable({ factory: function HamburgerMenuService_Factory() { return new HamburgerMenuService(i0.ɵɵinject(i2.Router)); }, token: HamburgerMenuService, providedIn: "root" });
     HamburgerMenuService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     HamburgerMenuService.ctorParameters = function () { return [
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     var HamburgerMenuComponent = /** @class */ (function () {
@@ -14415,7 +14404,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         GlobalMessageComponentModule,
                         OutletModule,
                         OutletRefModule,
@@ -14588,12 +14577,12 @@
         };
         return CmsRoutesImplService;
     }());
-    CmsRoutesImplService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(i0.ɵɵinject(i4.Router), i0.ɵɵinject(CmsComponentsService)); }, token: CmsRoutesImplService, providedIn: "root" });
+    CmsRoutesImplService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CmsRoutesImplService_Factory() { return new CmsRoutesImplService(i0.ɵɵinject(i2.Router), i0.ɵɵinject(CmsComponentsService)); }, token: CmsRoutesImplService, providedIn: "root" });
     CmsRoutesImplService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
     CmsRoutesImplService.ctorParameters = function () { return [
-        { type: i4.Router },
+        { type: i2.Router },
         { type: CmsComponentsService }
     ]; };
 
@@ -14720,11 +14709,11 @@
          */
         CmsPageGuard.prototype.canActivate = function (route, state) {
             var _this = this;
-            return this.protectedRoutesGuard.canActivate(route).pipe(operators.switchMap(function (canActivate) { return canActivate
+            return this.protectedRoutesGuard.canActivate(route).pipe(operators.switchMap(function (canActivate) { return canActivate === true
                 ? _this.routingService.getNextPageContext().pipe(operators.switchMap(function (pageContext) { return _this.cmsService.getPage(pageContext, _this.shouldReload()).pipe(operators.first(), operators.switchMap(function (pageData) { return pageData
                     ? _this.service.canActivatePage(pageContext, pageData, route, state)
                     : _this.service.canActivateNotFoundPage(pageContext, route, state); })); }))
-                : rxjs.of(false); }));
+                : rxjs.of(canActivate); }));
         };
         /**
          * Returns whether we should reload the CMS page data, even when it was loaded before.
@@ -14756,7 +14745,7 @@
     };
     function addCmsRoute(injector) {
         var result = function () {
-            var router = injector.get(i4.Router);
+            var router = injector.get(i2.Router);
             router.config.push(cmsRoute);
         };
         return result;
@@ -15300,7 +15289,7 @@
     }());
     BannerModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, GenericLinkModule, MediaModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, GenericLinkModule, MediaModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -15346,7 +15335,7 @@
     }());
     LinkModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, GenericLinkModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, GenericLinkModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -15708,7 +15697,7 @@
         }
         CloseAccountModalComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.userToken$ = this.authService.getUserToken();
+            this.isLoggedIn$ = this.authService.isUserLoggedIn();
             this.userService.resetRemoveUserProcessState();
             this.subscription.add(this.userService
                 .getRemoveUserResultSuccess()
@@ -15759,7 +15748,7 @@
     CloseAccountModalComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-close-account-modal',
-                    template: "<ng-container *ngIf=\"userToken$ | async as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.confirmAccountClosure' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal()\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n\n  <div *ngIf=\"isLoading$ | async; else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.confirmAccountClosureMessage' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button class=\"btn btn-primary\" (click)=\"closeAccount()\">\n            {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"dismissModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                    template: "<ng-container *ngIf=\"isLoggedIn$ | async\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.confirmAccountClosure' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal()\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n\n  <div *ngIf=\"isLoading$ | async; else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.confirmAccountClosureMessage' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button class=\"btn btn-primary\" (click)=\"closeAccount()\">\n            {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"dismissModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -15803,7 +15792,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         IconModule,
@@ -15826,10 +15815,11 @@
     ];
 
     var ForgotPasswordComponent = /** @class */ (function () {
-        function ForgotPasswordComponent(fb, userService, routingService) {
+        function ForgotPasswordComponent(fb, userService, routingService, authConfigService) {
             this.fb = fb;
             this.userService = userService;
             this.routingService = routingService;
+            this.authConfigService = authConfigService;
         }
         ForgotPasswordComponent.prototype.ngOnInit = function () {
             this.forgotPasswordForm = this.fb.group({
@@ -15842,7 +15832,10 @@
         ForgotPasswordComponent.prototype.requestForgotPasswordEmail = function () {
             if (this.forgotPasswordForm.valid) {
                 this.userService.requestForgotPasswordEmail(this.forgotPasswordForm.value.userEmail);
-                this.routingService.go({ cxRoute: 'login' });
+                if (this.authConfigService.getOAuthFlow() ===
+                    i1.OAuthFlow.ResourceOwnerPasswordFlow) {
+                    this.routingService.go({ cxRoute: 'login' });
+                }
             }
             else {
                 this.forgotPasswordForm.markAllAsTouched();
@@ -15859,7 +15852,8 @@
     ForgotPasswordComponent.ctorParameters = function () { return [
         { type: forms.FormBuilder },
         { type: i1.UserService },
-        { type: i1.RoutingService }
+        { type: i1.RoutingService },
+        { type: i1.AuthConfigService }
     ]; };
 
     var ForgotPasswordModule = /** @class */ (function () {
@@ -15872,7 +15866,7 @@
                     imports: [
                         i1$1.CommonModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         FormErrorsModule,
@@ -15937,7 +15931,7 @@
     }());
     AmendOrderActionsModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, i1.I18nModule],
                     declarations: [AmendOrderActionsComponent],
                     exports: [AmendOrderActionsComponent],
                 },] }
@@ -16186,9 +16180,10 @@
     ]; };
 
     var OrderCancellationGuard = /** @class */ (function () {
-        function OrderCancellationGuard(routing, orderAmendService) {
-            this.routing = routing;
+        function OrderCancellationGuard(orderAmendService, semanticPathService, router) {
             this.orderAmendService = orderAmendService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
         }
         OrderCancellationGuard.prototype.canActivate = function () {
             var _this = this;
@@ -16197,8 +16192,7 @@
                     // the order code is not available in the route
                     // as long as we're inside a guard, hence we redirect
                     // to the common orders page.
-                    _this.routing.go({ cxRoute: 'orders' });
-                    return false;
+                    return _this.router.parseUrl(_this.semanticPathService.get('orders'));
                 }
                 else {
                     return true;
@@ -16207,15 +16201,16 @@
         };
         return OrderCancellationGuard;
     }());
-    OrderCancellationGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderCancellationGuard_Factory() { return new OrderCancellationGuard(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(OrderCancellationService)); }, token: OrderCancellationGuard, providedIn: "root" });
+    OrderCancellationGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderCancellationGuard_Factory() { return new OrderCancellationGuard(i0.ɵɵinject(OrderCancellationService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: OrderCancellationGuard, providedIn: "root" });
     OrderCancellationGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     OrderCancellationGuard.ctorParameters = function () { return [
-        { type: i1.RoutingService },
-        { type: OrderCancellationService }
+        { type: OrderCancellationService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var ɵ0$1 = {
@@ -16230,7 +16225,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
@@ -16298,7 +16293,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
@@ -16410,9 +16405,10 @@
     ]; };
 
     var OrderReturnGuard = /** @class */ (function () {
-        function OrderReturnGuard(routing, orderAmendService) {
-            this.routing = routing;
+        function OrderReturnGuard(orderAmendService, semanticPathService, router) {
             this.orderAmendService = orderAmendService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
         }
         OrderReturnGuard.prototype.canActivate = function () {
             var _this = this;
@@ -16421,8 +16417,7 @@
                     // the order code is not available in the route
                     // as long as we're inside a guard, hence we redirect
                     // to the common orders page.
-                    _this.routing.go({ cxRoute: 'orders' });
-                    return false;
+                    return _this.router.parseUrl(_this.semanticPathService.get('orders'));
                 }
                 else {
                     return true;
@@ -16431,15 +16426,16 @@
         };
         return OrderReturnGuard;
     }());
-    OrderReturnGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderReturnGuard_Factory() { return new OrderReturnGuard(i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(OrderReturnService)); }, token: OrderReturnGuard, providedIn: "root" });
+    OrderReturnGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderReturnGuard_Factory() { return new OrderReturnGuard(i0.ɵɵinject(OrderReturnService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: OrderReturnGuard, providedIn: "root" });
     OrderReturnGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     OrderReturnGuard.ctorParameters = function () { return [
-        { type: i1.RoutingService },
-        { type: OrderReturnService }
+        { type: OrderReturnService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var ReturnOrderConfirmationComponent = /** @class */ (function () {
@@ -16480,7 +16476,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
@@ -16549,7 +16545,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
@@ -16833,7 +16829,7 @@
                         OrderOverviewModule,
                         i1.UrlModule,
                         SpinnerModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -16967,7 +16963,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -16975,7 +16971,7 @@
                                 data: ɵ0$6,
                             },
                         ]),
-                        i4.RouterModule,
+                        i2.RouterModule,
                         forms.FormsModule,
                         ngSelect.NgSelectModule,
                         ListNavigationModule,
@@ -17129,7 +17125,7 @@
                         ReplenishmentOrderCancellationDialogModule,
                         SpinnerModule,
                         ListNavigationModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -17282,7 +17278,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -17290,7 +17286,7 @@
                                 data: ɵ0$8,
                             },
                         ]),
-                        i4.RouterModule,
+                        i2.RouterModule,
                         ListNavigationModule,
                         i1.UrlModule,
                         i1.I18nModule,
@@ -17493,7 +17489,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -17501,7 +17497,7 @@
                                 data: ɵ0$9,
                             },
                         ]),
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         MediaModule,
@@ -17601,7 +17597,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         ListNavigationModule,
                         i1.UrlModule,
                         i1.I18nModule,
@@ -17826,7 +17822,7 @@
                         i1$1.CommonModule,
                         forms.FormsModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.I18nModule,
                         FormErrorsModule,
                     ],
@@ -18504,11 +18500,11 @@
                         CardModule,
                         SpinnerModule,
                         i1.I18nModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         IconModule,
                         ListNavigationModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [i1.AuthGuard, CmsPageGuard],
@@ -18718,7 +18714,7 @@
                     imports: [
                         i1$1.CommonModule,
                         i1.I18nModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         ListNavigationModule,
                         i1.I18nModule,
                         i1.UrlModule,
@@ -18784,7 +18780,7 @@
     }());
     BreadcrumbModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.CmsPageTitleModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.CmsPageTitleModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -19004,7 +19000,7 @@
             this.subscriptions = new rxjs.Subscription();
             this.resize = new i0.EventEmitter();
             this.subscriptions.add(this.router.events
-                .pipe(operators.filter(function (event) { return event instanceof i4.NavigationEnd; }))
+                .pipe(operators.filter(function (event) { return event instanceof i2.NavigationEnd; }))
                 .subscribe(function () { return _this.clear(); }));
             this.subscriptions.add(this.resize.pipe(operators.debounceTime(50)).subscribe(function () {
                 _this.alignWrappersToRightIfStickOut();
@@ -19117,7 +19113,7 @@
                 },] }
     ];
     NavigationUIComponent.ctorParameters = function () { return [
-        { type: i4.Router },
+        { type: i2.Router },
         { type: i0.Renderer2 },
         { type: i0.ElementRef }
     ]; };
@@ -19159,7 +19155,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         IconModule,
                         GenericLinkModule,
                         i1.I18nModule,
@@ -19232,7 +19228,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         NavigationModule,
                         GenericLinkModule,
                         i1.I18nModule,
@@ -19663,7 +19659,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         MediaModule,
                         IconModule,
                         i1.UrlModule,
@@ -19810,9 +19806,9 @@
                 this.userService.registerGuest(this.guid, this.guestRegisterForm.value.password);
                 if (!this.subscription) {
                     this.subscription = this.authService
-                        .getUserToken()
-                        .subscribe(function (token) {
-                        if (token.access_token) {
+                        .isUserLoggedIn()
+                        .subscribe(function (isLoggedIn) {
+                        if (isLoggedIn) {
                             _this.routingService.go({ cxRoute: 'home' });
                         }
                     });
@@ -19865,7 +19861,7 @@
         };
         return OrderConfirmationGuard;
     }());
-    OrderConfirmationGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(i0.ɵɵinject(i1.CheckoutService), i0.ɵɵinject(i4.Router), i0.ɵɵinject(i1.SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
+    OrderConfirmationGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function OrderConfirmationGuard_Factory() { return new OrderConfirmationGuard(i0.ɵɵinject(i1.CheckoutService), i0.ɵɵinject(i2.Router), i0.ɵɵinject(i1.SemanticPathService)); }, token: OrderConfirmationGuard, providedIn: "root" });
     OrderConfirmationGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -19873,7 +19869,7 @@
     ];
     OrderConfirmationGuard.ctorParameters = function () { return [
         { type: i1.CheckoutService },
-        { type: i4.Router },
+        { type: i2.Router },
         { type: i1.SemanticPathService }
     ]; };
 
@@ -20069,7 +20065,7 @@
     }());
     ProductCarouselModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, CarouselModule, MediaModule, i4.RouterModule, i1.UrlModule],
+                    imports: [i1$1.CommonModule, CarouselModule, MediaModule, i2.RouterModule, i1.UrlModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -20134,7 +20130,7 @@
     }());
     ProductReferencesModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, CarouselModule, MediaModule, i4.RouterModule, i1.UrlModule],
+                    imports: [i1$1.CommonModule, CarouselModule, MediaModule, i2.RouterModule, i1.UrlModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -20232,7 +20228,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         MediaModule,
                         OutletModule,
                         CarouselModule,
@@ -20529,17 +20525,17 @@
         };
         return ProductListComponentService;
     }());
-    ProductListComponentService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(i0.ɵɵinject(i1.ProductSearchService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i4.ActivatedRoute), i0.ɵɵinject(i1.CurrencyService), i0.ɵɵinject(i1.LanguageService), i0.ɵɵinject(i4.Router)); }, token: ProductListComponentService, providedIn: "root" });
+    ProductListComponentService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(i0.ɵɵinject(i1.ProductSearchService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i2.ActivatedRoute), i0.ɵɵinject(i1.CurrencyService), i0.ɵɵinject(i1.LanguageService), i0.ɵɵinject(i2.Router)); }, token: ProductListComponentService, providedIn: "root" });
     ProductListComponentService.decorators = [
         { type: i0.Injectable, args: [{ providedIn: 'root' },] }
     ];
     ProductListComponentService.ctorParameters = function () { return [
         { type: i1.ProductSearchService },
         { type: i1.RoutingService },
-        { type: i4.ActivatedRoute },
+        { type: i2.ActivatedRoute },
         { type: i1.CurrencyService },
         { type: i1.LanguageService },
-        { type: i4.Router }
+        { type: i2.Router }
     ]; };
 
     (function (ViewModes) {
@@ -21008,7 +21004,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.I18nModule,
                         IconModule,
                         KeyboardFocusModule,
@@ -21204,7 +21200,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         IconModule,
@@ -21451,7 +21447,7 @@
     }());
     VariantStyleSelectorModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, i1.I18nModule],
                     declarations: [VariantStyleSelectorComponent],
                     entryComponents: [VariantStyleSelectorComponent],
                     exports: [VariantStyleSelectorComponent],
@@ -21510,7 +21506,7 @@
     }());
     VariantSizeSelectorModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, i1.I18nModule],
                     declarations: [VariantSizeSelectorComponent],
                     entryComponents: [VariantSizeSelectorComponent],
                     exports: [VariantSizeSelectorComponent],
@@ -21558,7 +21554,7 @@
     }());
     VariantColorSelectorModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, i1.I18nModule],
                     declarations: [VariantColorSelectorComponent],
                     entryComponents: [VariantColorSelectorComponent],
                     exports: [VariantColorSelectorComponent],
@@ -21613,7 +21609,7 @@
     }());
     VariantStyleIconsModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, i1.I18nModule],
                     declarations: [VariantStyleIconsComponent],
                     entryComponents: [VariantStyleIconsComponent],
                     exports: [VariantStyleIconsComponent],
@@ -21621,37 +21617,33 @@
     ];
 
     var ProductVariantGuard = /** @class */ (function () {
-        function ProductVariantGuard(productService, routingService) {
+        function ProductVariantGuard(productService, semanticPathService, router) {
             this.productService = productService;
-            this.routingService = routingService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
         }
-        ProductVariantGuard.prototype.canActivate = function () {
+        ProductVariantGuard.prototype.canActivate = function (activatedRoute) {
             var _this = this;
-            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.nextState.params.productCode; }), operators.switchMap(function (productCode) {
-                // if open pdp from smartedit
-                if (!productCode) {
+            var _a;
+            var productCode = (_a = activatedRoute.params) === null || _a === void 0 ? void 0 : _a.productCode;
+            if (!productCode) {
+                return rxjs.of(true);
+            }
+            return this.productService.get(productCode, i1.ProductScope.VARIANTS).pipe(operators.filter(Boolean), operators.switchMap(function (product) {
+                if (!product.purchasable) {
+                    var variant = _this.findVariant(product.variantOptions);
+                    // below call might looks redundant but in fact this data is going to be loaded anyways
+                    // we're just calling it earlier and storing
+                    return _this.productService.get(variant.code, i1.ProductScope.LIST).pipe(operators.filter(Boolean), operators.take(1), operators.map(function (_product) {
+                        return _this.router.createUrlTree(_this.semanticPathService.transform({
+                            cxRoute: 'product',
+                            params: _product,
+                        }));
+                    }));
+                }
+                else {
                     return rxjs.of(true);
                 }
-                return _this.productService.get(productCode, i1.ProductScope.VARIANTS).pipe(operators.filter(Boolean), operators.map(function (product) {
-                    if (!product.purchasable) {
-                        var variant = _this.findVariant(product.variantOptions);
-                        // below call might looks redundant but in fact this data is going to be loaded anyways
-                        // we're just calling it earlier and storing
-                        _this.productService
-                            .get(variant.code, i1.ProductScope.LIST)
-                            .pipe(operators.filter(Boolean), operators.take(1))
-                            .subscribe(function (_product) {
-                            _this.routingService.go({
-                                cxRoute: 'product',
-                                params: _product,
-                            });
-                        });
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                }));
             }));
         };
         ProductVariantGuard.prototype.findVariant = function (variants) {
@@ -21662,7 +21654,7 @@
         };
         return ProductVariantGuard;
     }());
-    ProductVariantGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(i0.ɵɵinject(i1.ProductService), i0.ɵɵinject(i1.RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
+    ProductVariantGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(i0.ɵɵinject(i1.ProductService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: ProductVariantGuard, providedIn: "root" });
     ProductVariantGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -21670,7 +21662,8 @@
     ];
     ProductVariantGuard.ctorParameters = function () { return [
         { type: i1.ProductService },
-        { type: i1.RoutingService }
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var ProductVariantsModule = /** @class */ (function () {
@@ -21682,7 +21675,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         VariantStyleSelectorModule,
@@ -21715,7 +21708,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         MediaModule,
                         AddToCartModule,
                         ItemCounterModule,
@@ -22063,14 +22056,14 @@
     ]; };
 
     var StockNotificationComponent = /** @class */ (function () {
-        function StockNotificationComponent(authService, currentProductService, globalMessageService, translationService, interestsService, modalService, notificationPrefService) {
-            this.authService = authService;
+        function StockNotificationComponent(currentProductService, globalMessageService, translationService, interestsService, modalService, notificationPrefService, userIdService) {
             this.currentProductService = currentProductService;
             this.globalMessageService = globalMessageService;
             this.translationService = translationService;
             this.interestsService = interestsService;
             this.modalService = modalService;
             this.notificationPrefService = notificationPrefService;
+            this.userIdService = userIdService;
             this.anonymous = true;
             this.enabledPrefs = [];
             this.subscriptions = new rxjs.Subscription();
@@ -22079,7 +22072,7 @@
             var _this = this;
             this.outOfStock$ = rxjs.combineLatest([
                 this.currentProductService.getProduct().pipe(operators.filter(Boolean)),
-                this.authService.getOccUserId(),
+                this.userIdService.getUserId(),
             ]).pipe(operators.tap(function (_a) {
                 var _b = __read(_a, 2), product = _b[0], userId = _b[1];
                 _this.productCode = product.code;
@@ -22164,13 +22157,13 @@
                 },] }
     ];
     StockNotificationComponent.ctorParameters = function () { return [
-        { type: i1.AuthService },
         { type: CurrentProductService },
         { type: i1.GlobalMessageService },
         { type: i1.TranslationService },
         { type: i1.UserInterestsService },
         { type: ModalService },
-        { type: i1.UserNotificationPreferenceService }
+        { type: i1.UserNotificationPreferenceService },
+        { type: i1.UserIdService }
     ]; };
 
     var StockNotificationModule = /** @class */ (function () {
@@ -22181,7 +22174,7 @@
     StockNotificationModule.decorators = [
         { type: i0.NgModule, args: [{
                     declarations: [StockNotificationComponent, StockNotificationDialogComponent],
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.I18nModule, SpinnerModule, i1.UrlModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.I18nModule, SpinnerModule, i1.UrlModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -22279,7 +22272,7 @@
     ];
     StoreFinderGridComponent.ctorParameters = function () { return [
         { type: i1.StoreFinderService },
-        { type: i4.ActivatedRoute }
+        { type: i2.ActivatedRoute }
     ]; };
 
     var StoreFinderHeaderComponent = /** @class */ (function () {
@@ -22535,7 +22528,7 @@
     ];
     StoreFinderSearchResultComponent.ctorParameters = function () { return [
         { type: i1.StoreFinderService },
-        { type: i4.ActivatedRoute },
+        { type: i2.ActivatedRoute },
         { type: i1.StoreFinderConfig }
     ]; };
 
@@ -22658,7 +22651,7 @@
     ];
     StoreFinderStoreComponent.ctorParameters = function () { return [
         { type: i1.StoreFinderService },
-        { type: i4.ActivatedRoute },
+        { type: i2.ActivatedRoute },
         { type: i1.RoutingService }
     ]; };
     StoreFinderStoreComponent.propDecorators = {
@@ -22676,7 +22669,7 @@
                     imports: [
                         i1$1.CommonModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         ListNavigationModule,
                         i1$3.NgbTabsetModule,
                         SpinnerModule,
@@ -22846,11 +22839,10 @@
     ];
 
     var LoginFormComponent = /** @class */ (function () {
-        function LoginFormComponent(auth, globalMessageService, fb, authRedirectService, winRef) {
+        function LoginFormComponent(auth, globalMessageService, fb, winRef) {
             this.auth = auth;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
-            this.authRedirectService = authRedirectService;
             this.winRef = winRef;
         }
         LoginFormComponent.prototype.ngOnInit = function () {
@@ -22884,10 +22876,9 @@
             this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
             password.value);
             if (!this.sub) {
-                this.sub = this.auth.getUserToken().subscribe(function (data) {
-                    if (data && data.access_token) {
+                this.sub = this.auth.isUserLoggedIn().subscribe(function (isLoggedIn) {
+                    if (isLoggedIn) {
                         _this.globalMessageService.remove(i1.GlobalMessageType.MSG_TYPE_ERROR);
-                        _this.authRedirectService.redirect();
                     }
                 });
             }
@@ -22904,7 +22895,6 @@
         { type: i1.AuthService },
         { type: i1.GlobalMessageService },
         { type: forms.FormBuilder },
-        { type: i1.AuthRedirectService },
         { type: i1.WindowRef }
     ]; };
 
@@ -22919,7 +22909,7 @@
                         i1$1.CommonModule,
                         forms.FormsModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         FormErrorsModule,
@@ -22937,6 +22927,139 @@
                     declarations: [LoginFormComponent],
                     exports: [LoginFormComponent],
                     entryComponents: [LoginFormComponent],
+                },] }
+    ];
+
+    var LoginRegisterComponent = /** @class */ (function () {
+        function LoginRegisterComponent(checkoutConfigService, activatedRoute) {
+            this.checkoutConfigService = checkoutConfigService;
+            this.activatedRoute = activatedRoute;
+            this.loginAsGuest = false;
+        }
+        LoginRegisterComponent.prototype.ngOnInit = function () {
+            var _a, _b, _c;
+            if (this.checkoutConfigService.isGuestCheckout()) {
+                this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
+            }
+        };
+        return LoginRegisterComponent;
+    }());
+    LoginRegisterComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'cx-login-register',
+                    template: "<div class=\"register\">\n  <p class=\"cx-section-title\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </p>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
+                },] }
+    ];
+    LoginRegisterComponent.ctorParameters = function () { return [
+        { type: CheckoutConfigService },
+        { type: i2.ActivatedRoute }
+    ]; };
+
+    var LoginRegisterModule = /** @class */ (function () {
+        function LoginRegisterModule() {
+        }
+        return LoginRegisterModule;
+    }());
+    LoginRegisterModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [
+                        i1$1.CommonModule,
+                        i2.RouterModule,
+                        i1.UrlModule,
+                        PageSlotModule,
+                        i1.I18nModule,
+                        i1.CheckoutModule,
+                    ],
+                    providers: [
+                        i1.provideDefaultConfig({
+                            cmsComponents: {
+                                ReturningCustomerRegisterComponent: {
+                                    component: LoginRegisterComponent,
+                                    guards: [i1.NotAuthGuard],
+                                },
+                            },
+                        }),
+                    ],
+                    declarations: [LoginRegisterComponent],
+                    entryComponents: [LoginRegisterComponent],
+                    exports: [LoginRegisterComponent],
+                },] }
+    ];
+
+    /**
+     * Guards the _login_ route.
+     *
+     * Takes care of routing the user to a auth server login page (if implicit or code flow is used).
+     * In case of Resource Owner Password Flow just renders the page as normal CMS page.
+     */
+    var LoginGuard = /** @class */ (function () {
+        function LoginGuard(authService, authRedirectService, authConfigService, cmsPageGuard) {
+            this.authService = authService;
+            this.authRedirectService = authRedirectService;
+            this.authConfigService = authConfigService;
+            this.cmsPageGuard = cmsPageGuard;
+        }
+        LoginGuard.prototype.canActivate = function (route, state) {
+            var _this = this;
+            return this.authService.isUserLoggedIn().pipe(operators.take(1), operators.switchMap(function (isUserLoggedIn) {
+                if (_this.authConfigService.getOAuthFlow() ===
+                    i1.OAuthFlow.ResourceOwnerPasswordFlow ||
+                    isUserLoggedIn) {
+                    return _this.cmsPageGuard.canActivate(route, state);
+                }
+                else {
+                    // Remember the previous url, so we can redirect user to that page after OAuth server callback
+                    _this.authRedirectService.reportNotAuthGuard();
+                    // This method can trigger redirect to OAuth server that's why we don't return anything in this case
+                    var redirected = _this.authService.loginWithRedirect();
+                    if (!redirected) {
+                        return rxjs.of(false);
+                    }
+                    return rxjs.EMPTY;
+                }
+            }));
+        };
+        return LoginGuard;
+    }());
+    LoginGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function LoginGuard_Factory() { return new LoginGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.AuthRedirectService), i0.ɵɵinject(i1.AuthConfigService), i0.ɵɵinject(CmsPageGuard)); }, token: LoginGuard, providedIn: "root" });
+    LoginGuard.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    LoginGuard.ctorParameters = function () { return [
+        { type: i1.AuthService },
+        { type: i1.AuthRedirectService },
+        { type: i1.AuthConfigService },
+        { type: CmsPageGuard }
+    ]; };
+
+    var ɵ0$b = { cxRoute: 'login' };
+    /**
+     * This module enables to quickly switch from Resource Owner Password Flow
+     * to Implicit Flow or Authorization Code Flow. The `login` route in this case will be
+     * responsible for initalizing the redirect to OAuth server to login.
+     *
+     * Instead of manually invoking OAuth redirect you only have to redirect to `login` page.
+     */
+    var LoginRouteModule = /** @class */ (function () {
+        function LoginRouteModule() {
+        }
+        return LoginRouteModule;
+    }());
+    LoginRouteModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [
+                        PageLayoutModule,
+                        i2.RouterModule.forChild([
+                            {
+                                path: null,
+                                canActivate: [LoginGuard],
+                                component: PageLayoutComponent,
+                                data: ɵ0$b,
+                            },
+                        ]),
+                    ],
                 },] }
     ];
 
@@ -22976,7 +23099,7 @@
     }());
     LoginModule.decorators = [
         { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule, i4.RouterModule, i1.UrlModule, PageSlotModule, i1.I18nModule],
+                    imports: [i1$1.CommonModule, i2.RouterModule, i1.UrlModule, PageSlotModule, i1.I18nModule],
                     providers: [
                         i1.provideDefaultConfig({
                             cmsComponents: {
@@ -23000,26 +23123,36 @@
      * to the login route instead.
      */
     var LogoutGuard = /** @class */ (function () {
-        function LogoutGuard(auth, cms, routing, semanticPathService, protectedRoutes) {
+        function LogoutGuard(auth, cms, semanticPathService, protectedRoutes, router) {
             this.auth = auth;
             this.cms = cms;
-            this.routing = routing;
             this.semanticPathService = semanticPathService;
             this.protectedRoutes = protectedRoutes;
+            this.router = router;
         }
         LogoutGuard.prototype.canActivate = function () {
             var _this = this;
-            this.logout();
-            return this.cms
-                .hasPage({
-                id: this.semanticPathService.get('logout'),
-                type: i1.PageType.CONTENT_PAGE,
-            })
-                .pipe(operators.tap(function (hasPage) {
-                if (!hasPage) {
-                    _this.redirect();
-                }
+            /**
+             * First we want to complete logout process before redirecting to logout page
+             * We want to avoid errors like `token is no longer valid`
+             */
+            return rxjs.from(this.logout()).pipe(operators.switchMap(function () {
+                return _this.cms
+                    .hasPage({
+                    id: _this.semanticPathService.get('logout'),
+                    type: i1.PageType.CONTENT_PAGE,
+                })
+                    .pipe(operators.map(function (hasPage) {
+                    if (!hasPage) {
+                        return _this.getRedirectUrl();
+                    }
+                    // TODO(#9385): Use CMS page guard here.
+                    return hasPage;
+                }));
             }));
+        };
+        LogoutGuard.prototype.logout = function () {
+            return this.auth.logout();
         };
         /**
          * Whenever there is no specific "logout" page configured in the CMS,
@@ -23028,21 +23161,13 @@
          * The user gets redirected to the homepage, unless the homepage is protected
          * (in case of a closed shop). We'll redirect to the login page instead.
          */
-        LogoutGuard.prototype.redirect = function () {
+        LogoutGuard.prototype.getRedirectUrl = function () {
             var cxRoute = this.protectedRoutes.shouldProtect ? 'login' : 'home';
-            this.routing.go({ cxRoute: cxRoute });
-        };
-        /**
-         * Log user out.
-         *
-         * This is delegated to the `AuthService`.
-         */
-        LogoutGuard.prototype.logout = function () {
-            this.auth.logout();
+            return this.router.parseUrl(this.semanticPathService.get(cxRoute));
         };
         return LogoutGuard;
     }());
-    LogoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.ProtectedRoutesService)); }, token: LogoutGuard, providedIn: "root" });
+    LogoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.ProtectedRoutesService), i0.ɵɵinject(i2.Router)); }, token: LogoutGuard, providedIn: "root" });
     LogoutGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -23051,12 +23176,12 @@
     LogoutGuard.ctorParameters = function () { return [
         { type: i1.AuthService },
         { type: i1.CmsService },
-        { type: i1.RoutingService },
         { type: i1.SemanticPathService },
-        { type: i1.ProtectedRoutesService }
+        { type: i1.ProtectedRoutesService },
+        { type: i2.Router }
     ]; };
 
-    var ɵ0$b = { cxRoute: 'logout' };
+    var ɵ0$c = { cxRoute: 'logout' };
     var LogoutModule = /** @class */ (function () {
         function LogoutModule() {
         }
@@ -23066,12 +23191,12 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         PageLayoutModule,
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [LogoutGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$b,
+                                data: ɵ0$c,
                             },
                         ]),
                     ],
@@ -23079,13 +23204,14 @@
     ];
 
     var RegisterComponent = /** @class */ (function () {
-        function RegisterComponent(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig) {
+        function RegisterComponent(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig, authConfigService) {
             this.userService = userService;
             this.globalMessageService = globalMessageService;
             this.fb = fb;
             this.router = router;
             this.anonymousConsentsService = anonymousConsentsService;
             this.anonymousConsentsConfig = anonymousConsentsConfig;
+            this.authConfigService = authConfigService;
             this.subscription = new rxjs.Subscription();
             this.registerForm = this.fb.group({
                 titleCode: [''],
@@ -23179,7 +23305,10 @@
         };
         RegisterComponent.prototype.onRegisterUserSuccess = function (success) {
             if (success) {
-                this.router.go('login');
+                if (this.authConfigService.getOAuthFlow() ===
+                    i1.OAuthFlow.ResourceOwnerPasswordFlow) {
+                    this.router.go('login');
+                }
                 this.globalMessageService.add({ key: 'register.postRegisterMessage' }, i1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
             }
         };
@@ -23217,7 +23346,8 @@
         { type: forms.FormBuilder },
         { type: i1.RoutingService },
         { type: i1.AnonymousConsentsService },
-        { type: i1.AnonymousConsentsConfig }
+        { type: i1.AnonymousConsentsConfig },
+        { type: i1.AuthConfigService }
     ]; };
 
     var RegisterComponentModule = /** @class */ (function () {
@@ -23231,7 +23361,7 @@
                         i1$1.CommonModule,
                         LoginModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         i1.I18nModule,
                         SpinnerModule,
@@ -23253,62 +23383,6 @@
                 },] }
     ];
 
-    var LoginRegisterComponent = /** @class */ (function () {
-        function LoginRegisterComponent(checkoutConfigService, activatedRoute) {
-            this.checkoutConfigService = checkoutConfigService;
-            this.activatedRoute = activatedRoute;
-            this.loginAsGuest = false;
-        }
-        LoginRegisterComponent.prototype.ngOnInit = function () {
-            var _a, _b, _c;
-            if (this.checkoutConfigService.isGuestCheckout()) {
-                this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
-            }
-        };
-        return LoginRegisterComponent;
-    }());
-    LoginRegisterComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'cx-login-register',
-                    template: "<div class=\"register\">\n  <p class=\"cx-section-title\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </p>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
-                },] }
-    ];
-    LoginRegisterComponent.ctorParameters = function () { return [
-        { type: CheckoutConfigService },
-        { type: i4.ActivatedRoute }
-    ]; };
-
-    var LoginRegisterModule = /** @class */ (function () {
-        function LoginRegisterModule() {
-        }
-        return LoginRegisterModule;
-    }());
-    LoginRegisterModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [
-                        i1$1.CommonModule,
-                        i4.RouterModule,
-                        i1.UrlModule,
-                        PageSlotModule,
-                        i1.I18nModule,
-                        i1.CheckoutModule,
-                    ],
-                    providers: [
-                        i1.provideDefaultConfig({
-                            cmsComponents: {
-                                ReturningCustomerRegisterComponent: {
-                                    component: LoginRegisterComponent,
-                                    guards: [i1.NotAuthGuard],
-                                },
-                            },
-                        }),
-                    ],
-                    declarations: [LoginRegisterComponent],
-                    entryComponents: [LoginRegisterComponent],
-                    exports: [LoginRegisterComponent],
-                },] }
-    ];
-
     var UserComponentModule = /** @class */ (function () {
         function UserComponentModule() {
         }
@@ -23322,9 +23396,10 @@
                         LoginFormModule,
                         LoginRegisterModule,
                         LogoutModule,
+                        LoginRouteModule,
                         CheckoutLoginModule,
                         forms.ReactiveFormsModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         i1.UrlModule,
                         RegisterComponentModule,
                     ],
@@ -23387,7 +23462,7 @@
                         i1$1.CommonModule,
                         i1.I18nModule,
                         MediaModule,
-                        i4.RouterModule,
+                        i2.RouterModule,
                         StarRatingModule,
                         i1.UrlModule,
                         ItemCounterModule,
@@ -23499,7 +23574,7 @@
         factory: function () { return getProductDetailsUrlMatcherFactory(i0.inject(i1.UrlMatcherService), i0.inject(i1.DEFAULT_URL_MATCHER)); },
     });
 
-    var ɵ0$c = { cxRoute: 'product' };
+    var ɵ0$d = { cxRoute: 'product' };
     var ProductDetailsPageModule = /** @class */ (function () {
         function ProductDetailsPageModule() {
         }
@@ -23508,12 +23583,12 @@
     ProductDetailsPageModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$c,
+                                data: ɵ0$d,
                             },
                         ]),
                     ],
@@ -23558,7 +23633,7 @@
         factory: function () { return getProductListingUrlMatcherFactory(i0.inject(i1.UrlMatcherService), i0.inject(i1.DEFAULT_URL_MATCHER)); },
     });
 
-    var ɵ0$d = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
+    var ɵ0$e = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
     var ProductListingPageModule = /** @class */ (function () {
         function ProductListingPageModule() {
         }
@@ -23567,12 +23642,12 @@
     ProductListingPageModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [
-                        i4.RouterModule.forChild([
+                        i2.RouterModule.forChild([
                             {
                                 path: null,
                                 canActivate: [CmsPageGuard],
                                 component: PageLayoutComponent,
-                                data: ɵ0$d,
+                                data: ɵ0$e,
                             },
                             {
                                 path: null,
@@ -24073,7 +24148,7 @@
     StorefrontModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [
-                        i4.RouterModule.forRoot([], {
+                        i2.RouterModule.forRoot([], {
                             anchorScrolling: 'enabled',
                             relativeLinkResolution: 'corrected',
                         }),
@@ -24350,8 +24425,10 @@
     exports.LoginComponent = LoginComponent;
     exports.LoginFormComponent = LoginFormComponent;
     exports.LoginFormModule = LoginFormModule;
+    exports.LoginGuard = LoginGuard;
     exports.LoginModule = LoginModule;
     exports.LoginRegisterModule = LoginRegisterModule;
+    exports.LoginRouteModule = LoginRouteModule;
     exports.LogoutGuard = LogoutGuard;
     exports.LogoutModule = LogoutModule;
     exports.MainModule = MainModule;

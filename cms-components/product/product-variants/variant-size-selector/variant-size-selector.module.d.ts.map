@@ -1,0 +1,1 @@
+{"version":3,"file":"variant-size-selector.module.d.ts","sources":["variant-size-selector.module.d.ts"],"names":[],"mappings":";;;;;AAAA;;;AACA","sourcesContent":["export declare class VariantSizeSelectorModule {\n}\n"]}

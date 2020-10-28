@@ -1,7 +1,8 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AnonymousConsent, AnonymousConsentsConfig, AnonymousConsentsService, GlobalMessageService, RoutingService, Title, UserService, UserSignUp } from '@spartacus/core';
+import { AnonymousConsent, AnonymousConsentsConfig, AnonymousConsentsService, AuthConfigService, GlobalMessageService, RoutingService, Title, UserService, UserSignUp } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class RegisterComponent implements OnInit, OnDestroy {
     protected userService: UserService;
     protected globalMessageService: GlobalMessageService;
@@ -9,6 +10,7 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     protected router: RoutingService;
     protected anonymousConsentsService: AnonymousConsentsService;
     protected anonymousConsentsConfig: AnonymousConsentsConfig;
+    protected authConfigService: AuthConfigService;
     titles$: Observable<Title[]>;
     loading$: Observable<boolean>;
     private subscription;
@@ -17,7 +19,7 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
         template: string;
     }>;
     registerForm: FormGroup;
-    constructor(userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, router: RoutingService, anonymousConsentsService: AnonymousConsentsService, anonymousConsentsConfig: AnonymousConsentsConfig);
+    constructor(userService: UserService, globalMessageService: GlobalMessageService, fb: FormBuilder, router: RoutingService, anonymousConsentsService: AnonymousConsentsService, anonymousConsentsConfig: AnonymousConsentsConfig, authConfigService: AuthConfigService);
     ngOnInit(): void;
     submitForm(): void;
     registerUser(): void;
@@ -29,4 +31,8 @@ export declare class RegisterComponent implements OnInit, OnDestroy {
     toggleAnonymousConsent(): void;
     private registerUserProcessInit;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<RegisterComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<RegisterComponent, "cx-register", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=register.component.d.ts.map

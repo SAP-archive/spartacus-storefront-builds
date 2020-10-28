@@ -1,7 +1,7 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, Optional, InjectFlags, INJECTOR, APP_INITIALIZER, ViewEncapsulation, Pipe, InjectionToken, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, merge, from, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
-import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, mapTo, share, mergeMap, debounceTime, switchMapTo, takeWhile, endWith, pluck, observeOn, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, AsmAuthService, UserService, AsmService, AsmConfig, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, SemanticPathService, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, ProtectedRoutesService, CheckoutModule, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
+import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, mapTo, share, debounceTime, switchMapTo, takeWhile, endWith, pluck, observeOn, skip } from 'rxjs/operators';
+import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, CsAgentAuthService, UserService, AsmService, AsmConfig, UserIdService, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, SemanticPathService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, OAuthFlow, AuthConfigService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, CheckoutModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule, provideDefaultConfigFactory } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
@@ -7216,36 +7216,24 @@ function asmFactory(asmEnablerService) {
 }
 
 class AsmComponentService {
-    constructor(authService, asmAuthService, routingService, winRef) {
+    constructor(authService, csAgentAuthService, winRef) {
         this.authService = authService;
-        this.asmAuthService = asmAuthService;
-        this.routingService = routingService;
+        this.csAgentAuthService = csAgentAuthService;
         this.winRef = winRef;
     }
     logoutCustomerSupportAgentAndCustomer() {
-        this.authService
-            .getUserToken()
-            .pipe(take(1))
-            .subscribe((token) => {
-            if (this.asmAuthService.isCustomerEmulationToken(token)) {
-                this.logoutCustomer();
-            }
-            this.asmAuthService.logoutCustomerSupportAgent();
-        });
+        this.csAgentAuthService.logoutCustomerSupportAgent();
     }
     logoutCustomer() {
-        this.authService.logout();
-        this.routingService.go({ cxRoute: 'home' });
+        this.authService.initLogout();
     }
     isCustomerEmulationSessionInProgress() {
-        return this.authService
-            .getUserToken()
-            .pipe(mergeMap((userToken) => of(this.asmAuthService.isCustomerEmulationToken(userToken))));
+        return this.csAgentAuthService.isCustomerEmulated();
     }
     /**
      * We're currently only removing the persisted storage in the browser
      * to ensure the ASM experience isn't loaded on the next visit. There are a few
-     * optimsiations we could think of:
+     * optimizations we could think of:
      * - drop the `asm` parameter from the URL, in case it's still there
      * - remove the generated UI from the DOM (outlets currently do not support this)
      */
@@ -7255,7 +7243,7 @@ class AsmComponentService {
         }
     }
 }
-AsmComponentService.ɵprov = ɵɵdefineInjectable({ factory: function AsmComponentService_Factory() { return new AsmComponentService(ɵɵinject(AuthService), ɵɵinject(AsmAuthService), ɵɵinject(RoutingService), ɵɵinject(WindowRef)); }, token: AsmComponentService, providedIn: "root" });
+AsmComponentService.ɵprov = ɵɵdefineInjectable({ factory: function AsmComponentService_Factory() { return new AsmComponentService(ɵɵinject(AuthService), ɵɵinject(CsAgentAuthService), ɵɵinject(WindowRef)); }, token: AsmComponentService, providedIn: "root" });
 AsmComponentService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -7263,15 +7251,14 @@ AsmComponentService.decorators = [
 ];
 AsmComponentService.ctorParameters = () => [
     { type: AuthService },
-    { type: AsmAuthService },
-    { type: RoutingService },
+    { type: CsAgentAuthService },
     { type: WindowRef }
 ];
 
 class AsmMainUiComponent {
-    constructor(authService, asmAuthService, userService, asmComponentService, globalMessageService, routingService, asmService) {
+    constructor(authService, csAgentAuthService, userService, asmComponentService, globalMessageService, routingService, asmService) {
         this.authService = authService;
-        this.asmAuthService = asmAuthService;
+        this.csAgentAuthService = csAgentAuthService;
         this.userService = userService;
         this.asmComponentService = asmComponentService;
         this.globalMessageService = globalMessageService;
@@ -7281,11 +7268,11 @@ class AsmMainUiComponent {
         this.startingCustomerSession = false;
     }
     ngOnInit() {
-        this.csAgentToken$ = this.asmAuthService.getCustomerSupportAgentToken();
-        this.csAgentTokenLoading$ = this.asmAuthService.getCustomerSupportAgentTokenLoading();
-        this.customer$ = this.authService.getUserToken().pipe(switchMap((token) => {
-            if (token && !!token.access_token) {
-                this.handleCustomerSessionStartRedirection(token);
+        this.customerSupportAgentLoggedIn$ = this.csAgentAuthService.isCustomerSupportAgentLoggedIn();
+        this.csAgentTokenLoading$ = this.csAgentAuthService.getCustomerSupportAgentTokenLoading();
+        this.customer$ = this.authService.isUserLoggedIn().pipe(switchMap((isLoggedIn) => {
+            if (isLoggedIn) {
+                this.handleCustomerSessionStartRedirection();
                 return this.userService.get();
             }
             else {
@@ -7296,26 +7283,26 @@ class AsmMainUiComponent {
             .getAsmUiState()
             .pipe(map((uiState) => uiState.collapsed));
     }
-    handleCustomerSessionStartRedirection(token) {
-        if (this.startingCustomerSession &&
-            this.asmAuthService.isCustomerEmulationToken(token)) {
-            this.startingCustomerSession = false;
-            this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-            this.routingService.go('/');
-        }
+    handleCustomerSessionStartRedirection() {
+        this.asmComponentService
+            .isCustomerEmulationSessionInProgress()
+            .pipe(take(1))
+            .subscribe((isCustomerEmulated) => {
+            if (this.startingCustomerSession && isCustomerEmulated) {
+                this.startingCustomerSession = false;
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+                this.routingService.go('/');
+            }
+        });
     }
     loginCustomerSupportAgent({ userId, password, }) {
-        this.asmAuthService.authorizeCustomerSupportAgent(userId, password);
+        this.csAgentAuthService.authorizeCustomerSupportAgent(userId, password);
     }
     logout() {
         this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
     }
     startCustomerEmulationSession({ customerId }) {
-        this.asmAuthService
-            .getCustomerSupportAgentToken()
-            .pipe(take(1))
-            .subscribe((customerSupportAgentToken) => this.asmAuthService.startCustomerEmulationSession(customerSupportAgentToken, customerId))
-            .unsubscribe();
+        this.csAgentAuthService.startCustomerEmulationSession(customerId);
         this.startingCustomerSession = true;
     }
     hideUi() {
@@ -7326,14 +7313,14 @@ class AsmMainUiComponent {
 AsmMainUiComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-asm-main-ui',
-                template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,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\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-toggle-ui></cx-asm-toggle-ui>\n\n    <cx-asm-session-timer\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n    ></cx-asm-session-timer>\n\n    <button\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(csAgentToken$ | async)?.access_token &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></button>\n\n    <button\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"(csAgentToken$ | async)?.access_token\"\n      (click)=\"logout()\"\n    ></button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"!(isCollapsed$ | async) as notCollapsed\">\n  <ng-container\n    *ngIf=\"(csAgentToken$ | async)?.access_token; else showLoginForm\"\n  >\n    <ng-container *ngIf=\"customer$ | async; else showCustomerSelection\">\n      <cx-customer-emulation *ngIf=\"notCollapsed\"></cx-customer-emulation>\n    </ng-container>\n    <ng-template #showCustomerSelection>\n      <cx-customer-selection\n        *ngIf=\"notCollapsed\"\n        (submitEvent)=\"startCustomerEmulationSession($event)\"\n      ></cx-customer-selection>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #showLoginForm>\n    <cx-csagent-login-form\n      *ngIf=\"notCollapsed\"\n      (submitEvent)=\"loginCustomerSupportAgent($event)\"\n      [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n    ></cx-csagent-login-form>\n  </ng-template>\n</ng-container>\n",
+                template: "<div class=\"asm-bar\">\n  <div class=\"asm-bar-branding\">\n    <img\n      class=\"logo\"\n      src=\"data:image/png;base64,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\"\n      width=\"48\"\n      height=\"24\"\n      alt=\"{{ 'asm.mainLogoLabel' | cxTranslate }}\"\n    />\n\n    <div class=\"asm-title\">\n      {{ 'asm.mainTitle' | cxTranslate }}\n    </div>\n  </div>\n  <div class=\"asm-bar-actions\">\n    <cx-asm-toggle-ui></cx-asm-toggle-ui>\n\n    <cx-asm-session-timer\n      *ngIf=\"customerSupportAgentLoggedIn$ | async\"\n    ></cx-asm-session-timer>\n\n    <button\n      class=\"close\"\n      title=\"{{ 'asm.hideUi' | cxTranslate }}\"\n      *ngIf=\"\n        !(customerSupportAgentLoggedIn$ | async) &&\n        !(csAgentTokenLoading$ | async)\n      \"\n      (click)=\"hideUi()\"\n    ></button>\n\n    <button\n      class=\"logout\"\n      title=\"{{ 'asm.logout' | cxTranslate }}\"\n      *ngIf=\"customerSupportAgentLoggedIn$ | async\"\n      (click)=\"logout()\"\n    ></button>\n  </div>\n</div>\n\n<ng-container *ngIf=\"!(isCollapsed$ | async) as notCollapsed\">\n  <ng-container\n    *ngIf=\"customerSupportAgentLoggedIn$ | async; else showLoginForm\"\n  >\n    <ng-container *ngIf=\"customer$ | async; else showCustomerSelection\">\n      <cx-customer-emulation *ngIf=\"notCollapsed\"></cx-customer-emulation>\n    </ng-container>\n    <ng-template #showCustomerSelection>\n      <cx-customer-selection\n        *ngIf=\"notCollapsed\"\n        (submitEvent)=\"startCustomerEmulationSession($event)\"\n      ></cx-customer-selection>\n    </ng-template>\n  </ng-container>\n\n  <ng-template #showLoginForm>\n    <cx-csagent-login-form\n      *ngIf=\"notCollapsed\"\n      (submitEvent)=\"loginCustomerSupportAgent($event)\"\n      [csAgentTokenLoading]=\"csAgentTokenLoading$ | async\"\n    ></cx-csagent-login-form>\n  </ng-template>\n</ng-container>\n",
                 encapsulation: ViewEncapsulation.None,
                 styles: ["cx-asm-main-ui{display:flex;flex-direction:column;font-family:Arial,sans-serif;font-size:14px;width:100%}cx-asm-main-ui .close,cx-asm-main-ui .logout{background-color:transparent;border:transparent;cursor:pointer;height:16px;width:16px}cx-asm-main-ui .close{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z'/%3E%3C/svg%3E\")}cx-asm-main-ui .logout{background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23d1e3ff' d='M11,2.7c1.2,0.6,2.2,1.5,2.9,2.6c1.3,1.9,1.5,4.4,0.6,6.5c-0.3,0.8-0.8,1.6-1.5,2.2c-0.6,0.6-1.4,1.1-2.2,1.5 C9.9,15.8,9,16,8,16c-0.9,0-1.9-0.2-2.7-0.5c-0.8-0.4-1.6-0.9-2.2-1.5c-0.6-0.6-1.1-1.4-1.5-2.2C0.7,9.6,0.9,7.2,2.1,5.3 c0.7-1.1,1.7-2,2.9-2.6v1.1C4.1,4.3,3.3,5.1,2.8,6C2.3,6.9,2,7.9,2,9c0,1.6,0.6,3.2,1.8,4.3c0.5,0.5,1.2,1,1.9,1.3 c1.5,0.6,3.2,0.6,4.7,0c0.7-0.3,1.4-0.7,1.9-1.3C13.4,12.1,14,10.6,14,9c0-1.1-0.3-2.1-0.8-3c-0.5-0.9-1.3-1.7-2.2-2.2 C11,3.8,11,2.7,11,2.7z M8,9C7.7,9,7.5,8.9,7.3,8.7C7.1,8.5,7,8.3,7,8V1c0-0.3,0.1-0.5,0.3-0.7c0.4-0.4,1-0.4,1.4,0 C8.9,0.5,9,0.7,9,1v7c0,0.3-0.1,0.5-0.3,0.7C8.5,8.9,8.2,9,8,9z'/%3E%3C/svg%3E%0A\")}cx-asm-main-ui button[type=submit]{border-radius:4px;border-style:solid;border-width:1px;font-weight:400;height:36px;padding:0 12px;white-space:nowrap}cx-asm-main-ui button[type=submit]:disabled{cursor:not-allowed;opacity:.4}cx-asm-main-ui .spinner{color:#0a6ed1;display:flex;justify-content:center;width:100%}cx-asm-main-ui .spinner>div{-webkit-animation:spinner-dots-pulse 1s ease infinite;animation:spinner-dots-pulse 1s ease infinite;background-color:currentColor;border-radius:100%;height:8px;margin:6px;width:8px}cx-asm-main-ui .spinner>div:first-child{-webkit-animation-delay:-.2s;animation-delay:-.2s}@-webkit-keyframes spinner-dots-pulse{0%,60%,to{transform:scale(1)}30%{transform:scale(2)}}@keyframes spinner-dots-pulse{0%,60%,to{transform:scale(1)}30%{transform:scale(2)}}cx-asm-main-ui.hidden{display:none}cx-asm-main-ui .asm-bar{background-color:#354a5f;color:#fff;display:flex;height:48px;justify-content:space-between;padding:0 2rem;z-index:1}cx-asm-main-ui .asm-bar-branding{align-items:center;display:flex}cx-asm-main-ui .asm-bar-branding .logo{-webkit-margin-end:8px;margin-inline-end:8px}cx-asm-main-ui .asm-bar-branding .asm-title{font-size:16px;font-weight:700}cx-asm-main-ui .asm-bar-actions{align-items:center;display:flex;justify-content:flex-end}cx-asm-main-ui>:nth-child(2){display:flex;padding:1rem 2rem;width:100%}cx-asm-main-ui input{background-color:#fff;border:1px solid #89919a;border-radius:4px;color:#32363a;height:36px;outline:0;padding:0 12px}cx-asm-main-ui input:focus{box-shadow:0 0 0 1px #fafafa}cx-asm-main-ui input:hover{border-color:#085caf}cx-asm-main-ui input::-moz-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input:-ms-input-placeholder{color:#74777a;font-style:italic}cx-asm-main-ui input::placeholder{color:#74777a;font-style:italic}@media (max-width:575px){cx-asm-main-ui .asm-bar-branding .asm-title{display:none}cx-asm-main-ui .asm-alert{margin-top:30px}}"]
             },] }
 ];
 AsmMainUiComponent.ctorParameters = () => [
     { type: AuthService },
-    { type: AsmAuthService },
+    { type: CsAgentAuthService },
     { type: UserService },
     { type: AsmComponentService },
     { type: GlobalMessageService },
@@ -7345,12 +7332,12 @@ AsmMainUiComponent.propDecorators = {
 };
 
 class AsmSessionTimerComponent {
-    constructor(config, asmComponentService, authService, routingService, changeDetectorRef) {
+    constructor(config, asmComponentService, routingService, changeDetectorRef, userIdService) {
         this.config = config;
         this.asmComponentService = asmComponentService;
-        this.authService = authService;
         this.routingService = routingService;
         this.changeDetectorRef = changeDetectorRef;
+        this.userIdService = userIdService;
         this.subscriptions = new Subscription();
         this.maxStartDelayInSeconds = 60000;
     }
@@ -7377,8 +7364,8 @@ class AsmSessionTimerComponent {
         }));
     }
     resetOnCustomerSessionChange() {
-        this.subscriptions.add(this.authService
-            .getOccUserId()
+        this.subscriptions.add(this.userIdService
+            .getUserId()
             .pipe(distinctUntilChanged())
             .subscribe(() => this.resetTimer()));
     }
@@ -7414,9 +7401,9 @@ AsmSessionTimerComponent.decorators = [
 AsmSessionTimerComponent.ctorParameters = () => [
     { type: AsmConfig },
     { type: AsmComponentService },
-    { type: AuthService },
     { type: RoutingService },
-    { type: ChangeDetectorRef }
+    { type: ChangeDetectorRef },
+    { type: UserIdService }
 ];
 
 class FormatTimerPipe {
@@ -8369,9 +8356,10 @@ CartDetailsModule.decorators = [
 ];
 
 class CartNotEmptyGuard {
-    constructor(routingService, activeCartService) {
-        this.routingService = routingService;
+    constructor(activeCartService, semanticPathService, router) {
         this.activeCartService = activeCartService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
     }
     canActivate() {
         return combineLatest([
@@ -8379,8 +8367,7 @@ class CartNotEmptyGuard {
             this.activeCartService.isStable(),
         ]).pipe(filter(([_, loaded]) => loaded), map(([cart]) => {
             if (this.isEmpty(cart)) {
-                this.routingService.go({ cxRoute: 'home' });
-                return false;
+                return this.router.parseUrl(this.semanticPathService.get('home'));
             }
             return true;
         }));
@@ -8389,15 +8376,16 @@ class CartNotEmptyGuard {
         return cart && !cart.totalItems;
     }
 }
-CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(RoutingService), ɵɵinject(ActiveCartService)); }, token: CartNotEmptyGuard, providedIn: "root" });
+CartNotEmptyGuard.ɵprov = ɵɵdefineInjectable({ factory: function CartNotEmptyGuard_Factory() { return new CartNotEmptyGuard(ɵɵinject(ActiveCartService), ɵɵinject(SemanticPathService), ɵɵinject(Router)); }, token: CartNotEmptyGuard, providedIn: "root" });
 CartNotEmptyGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 CartNotEmptyGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: ActiveCartService }
+    { type: ActiveCartService },
+    { type: SemanticPathService },
+    { type: Router }
 ];
 
 class CartPageLayoutHandler {
@@ -8817,32 +8805,33 @@ CheckoutConfigService.ctorParameters = () => [
 ];
 
 class CheckoutAuthGuard {
-    constructor(routingService, authService, authRedirectService, checkoutConfigService, activeCartService, userService, globalMessageService) {
-        this.routingService = routingService;
+    constructor(authService, authRedirectService, checkoutConfigService, activeCartService, semanticPathService, router, userService, globalMessageService) {
         this.authService = authService;
         this.authRedirectService = authRedirectService;
         this.checkoutConfigService = checkoutConfigService;
         this.activeCartService = activeCartService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
         this.userService = userService;
         this.globalMessageService = globalMessageService;
     }
     canActivate() {
         return combineLatest([
-            this.authService.getUserToken(),
+            this.authService.isUserLoggedIn(),
             this.activeCartService.getAssignedUser(),
             this.userService.get(),
-        ]).pipe(map(([token, cartUser, user]) => {
-            if (!token.access_token) {
+        ]).pipe(map(([isLoggedIn, cartUser, user]) => {
+            if (!isLoggedIn) {
                 if (this.activeCartService.isGuestCart()) {
                     return Boolean(cartUser);
                 }
+                this.authRedirectService.reportAuthGuard();
                 if (this.checkoutConfigService.isGuestCheckout()) {
-                    this.routingService.go({ cxRoute: 'login' }, { forced: true });
+                    return this.router.createUrlTree([this.semanticPathService.get('login')], { queryParams: { forced: true } });
                 }
                 else {
-                    this.routingService.go({ cxRoute: 'login' });
+                    return this.router.parseUrl(this.semanticPathService.get('login'));
                 }
-                this.authRedirectService.reportAuthGuard();
             }
             else if ('roles' in user) {
                 const roles = user.roles;
@@ -8854,22 +8843,23 @@ class CheckoutAuthGuard {
                     return false;
                 }
             }
-            return !!token.access_token;
+            return isLoggedIn;
         }));
     }
 }
-CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CheckoutConfigService), ɵɵinject(ActiveCartService), ɵɵinject(UserService), ɵɵinject(GlobalMessageService)); }, token: CheckoutAuthGuard, providedIn: "root" });
+CheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutAuthGuard_Factory() { return new CheckoutAuthGuard(ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(CheckoutConfigService), ɵɵinject(ActiveCartService), ɵɵinject(SemanticPathService), ɵɵinject(Router), ɵɵinject(UserService), ɵɵinject(GlobalMessageService)); }, token: CheckoutAuthGuard, providedIn: "root" });
 CheckoutAuthGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 CheckoutAuthGuard.ctorParameters = () => [
-    { type: RoutingService },
     { type: AuthService },
     { type: AuthRedirectService },
     { type: CheckoutConfigService },
     { type: ActiveCartService },
+    { type: SemanticPathService },
+    { type: Router },
     { type: UserService },
     { type: GlobalMessageService }
 ];
@@ -9596,34 +9586,35 @@ CheckoutDetailsLoadedGuard.ctorParameters = () => [
 ];
 
 class NotCheckoutAuthGuard {
-    constructor(routingService, authService, activeCartService) {
-        this.routingService = routingService;
+    constructor(authService, activeCartService, semanticPathService, router) {
         this.authService = authService;
         this.activeCartService = activeCartService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
     }
     canActivate() {
-        return this.authService.getUserToken().pipe(map((token) => {
-            if (token.access_token) {
-                this.routingService.go({ cxRoute: 'home' });
+        return this.authService.isUserLoggedIn().pipe(map((isLoggedIn) => {
+            if (isLoggedIn) {
+                return this.router.parseUrl(this.semanticPathService.get('home'));
             }
             else if (this.activeCartService.isGuestCart()) {
-                this.routingService.go({ cxRoute: 'cart' });
-                return false;
+                return this.router.parseUrl(this.semanticPathService.get('cart'));
             }
-            return !token.access_token;
+            return !isLoggedIn;
         }));
     }
 }
-NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(RoutingService), ɵɵinject(AuthService), ɵɵinject(ActiveCartService)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+NotCheckoutAuthGuard.ɵprov = ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(ɵɵinject(AuthService), ɵɵinject(ActiveCartService), ɵɵinject(SemanticPathService), ɵɵinject(Router)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
 NotCheckoutAuthGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 NotCheckoutAuthGuard.ctorParameters = () => [
-    { type: RoutingService },
     { type: AuthService },
-    { type: ActiveCartService }
+    { type: ActiveCartService },
+    { type: SemanticPathService },
+    { type: Router }
 ];
 
 class DeliveryModeSetGuard {
@@ -13073,11 +13064,11 @@ class CmsPageGuard {
      * For more, see docs of the `CmsPageGuardService.canActivatePage`.
      */
     canActivate(route, state) {
-        return this.protectedRoutesGuard.canActivate(route).pipe(switchMap((canActivate) => canActivate
+        return this.protectedRoutesGuard.canActivate(route).pipe(switchMap((canActivate) => canActivate === true
             ? this.routingService.getNextPageContext().pipe(switchMap((pageContext) => this.cmsService.getPage(pageContext, this.shouldReload()).pipe(first(), switchMap((pageData) => pageData
                 ? this.service.canActivatePage(pageContext, pageData, route, state)
                 : this.service.canActivateNotFoundPage(pageContext, route, state)))))
-            : of(false)));
+            : of(canActivate)));
     }
     /**
      * Returns whether we should reload the CMS page data, even when it was loaded before.
@@ -14003,7 +13994,7 @@ class CloseAccountModalComponent {
         this.subscription = new Subscription();
     }
     ngOnInit() {
-        this.userToken$ = this.authService.getUserToken();
+        this.isLoggedIn$ = this.authService.isUserLoggedIn();
         this.userService.resetRemoveUserProcessState();
         this.subscription.add(this.userService
             .getRemoveUserResultSuccess()
@@ -14051,7 +14042,7 @@ class CloseAccountModalComponent {
 CloseAccountModalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-close-account-modal',
-                template: "<ng-container *ngIf=\"userToken$ | async as userToken\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.confirmAccountClosure' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal()\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n\n  <div *ngIf=\"isLoading$ | async; else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.confirmAccountClosureMessage' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button class=\"btn btn-primary\" (click)=\"closeAccount()\">\n            {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"dismissModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
+                template: "<ng-container *ngIf=\"isLoggedIn$ | async\">\n  <div class=\"modal-header cx-dialog-header\">\n    <h3 class=\"modal-title\">\n      {{ 'closeAccount.confirmAccountClosure' | cxTranslate }}\n    </h3>\n    <button\n      type=\"button\"\n      class=\"close\"\n      aria-label=\"Close\"\n      (click)=\"dismissModal()\"\n    >\n      <span aria-hidden=\"true\">\n        <cx-icon [type]=\"iconTypes.CLOSE\"></cx-icon>\n      </span>\n    </button>\n  </div>\n\n  <div *ngIf=\"isLoading$ | async; else loaded\">\n    <div class=\"cx-spinner\">\n      <cx-spinner> </cx-spinner>\n    </div>\n  </div>\n\n  <ng-template #loaded>\n    <div class=\"modal-body\">\n      <div class=\"cx-row\">\n        <p class=\"cx-confirmation\">\n          {{ 'closeAccount.confirmAccountClosureMessage' | cxTranslate }}\n        </p>\n      </div>\n      <div class=\"cx-row\">\n        <div class=\"cx-btn-group\">\n          <button class=\"btn btn-primary\" (click)=\"closeAccount()\">\n            {{ 'closeAccount.closeMyAccount' | cxTranslate }}\n          </button>\n          <button (click)=\"dismissModal()\" class=\"btn btn-block btn-secondary\">\n            {{ 'common.cancel' | cxTranslate }}\n          </button>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</ng-container>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
@@ -14114,10 +14105,11 @@ CloseAccountModule.decorators = [
 ];
 
 class ForgotPasswordComponent {
-    constructor(fb, userService, routingService) {
+    constructor(fb, userService, routingService, authConfigService) {
         this.fb = fb;
         this.userService = userService;
         this.routingService = routingService;
+        this.authConfigService = authConfigService;
     }
     ngOnInit() {
         this.forgotPasswordForm = this.fb.group({
@@ -14130,7 +14122,10 @@ class ForgotPasswordComponent {
     requestForgotPasswordEmail() {
         if (this.forgotPasswordForm.valid) {
             this.userService.requestForgotPasswordEmail(this.forgotPasswordForm.value.userEmail);
-            this.routingService.go({ cxRoute: 'login' });
+            if (this.authConfigService.getOAuthFlow() ===
+                OAuthFlow.ResourceOwnerPasswordFlow) {
+                this.routingService.go({ cxRoute: 'login' });
+            }
         }
         else {
             this.forgotPasswordForm.markAllAsTouched();
@@ -14146,7 +14141,8 @@ ForgotPasswordComponent.decorators = [
 ForgotPasswordComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: UserService },
-    { type: RoutingService }
+    { type: RoutingService },
+    { type: AuthConfigService }
 ];
 
 class ForgotPasswordModule {
@@ -14452,9 +14448,10 @@ OrderCancellationService.ctorParameters = () => [
 ];
 
 class OrderCancellationGuard {
-    constructor(routing, orderAmendService) {
-        this.routing = routing;
+    constructor(orderAmendService, semanticPathService, router) {
         this.orderAmendService = orderAmendService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
     }
     canActivate() {
         return this.orderAmendService.getForm().pipe(map((form) => {
@@ -14462,8 +14459,7 @@ class OrderCancellationGuard {
                 // the order code is not available in the route
                 // as long as we're inside a guard, hence we redirect
                 // to the common orders page.
-                this.routing.go({ cxRoute: 'orders' });
-                return false;
+                return this.router.parseUrl(this.semanticPathService.get('orders'));
             }
             else {
                 return true;
@@ -14471,15 +14467,16 @@ class OrderCancellationGuard {
         }));
     }
 }
-OrderCancellationGuard.ɵprov = ɵɵdefineInjectable({ factory: function OrderCancellationGuard_Factory() { return new OrderCancellationGuard(ɵɵinject(RoutingService), ɵɵinject(OrderCancellationService)); }, token: OrderCancellationGuard, providedIn: "root" });
+OrderCancellationGuard.ɵprov = ɵɵdefineInjectable({ factory: function OrderCancellationGuard_Factory() { return new OrderCancellationGuard(ɵɵinject(OrderCancellationService), ɵɵinject(SemanticPathService), ɵɵinject(Router)); }, token: OrderCancellationGuard, providedIn: "root" });
 OrderCancellationGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 OrderCancellationGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: OrderCancellationService }
+    { type: OrderCancellationService },
+    { type: SemanticPathService },
+    { type: Router }
 ];
 
 const ɵ0$1 = {
@@ -14658,9 +14655,10 @@ OrderReturnService.ctorParameters = () => [
 ];
 
 class OrderReturnGuard {
-    constructor(routing, orderAmendService) {
-        this.routing = routing;
+    constructor(orderAmendService, semanticPathService, router) {
         this.orderAmendService = orderAmendService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
     }
     canActivate() {
         return this.orderAmendService.getForm().pipe(map((form) => {
@@ -14668,8 +14666,7 @@ class OrderReturnGuard {
                 // the order code is not available in the route
                 // as long as we're inside a guard, hence we redirect
                 // to the common orders page.
-                this.routing.go({ cxRoute: 'orders' });
-                return false;
+                return this.router.parseUrl(this.semanticPathService.get('orders'));
             }
             else {
                 return true;
@@ -14677,15 +14674,16 @@ class OrderReturnGuard {
         }));
     }
 }
-OrderReturnGuard.ɵprov = ɵɵdefineInjectable({ factory: function OrderReturnGuard_Factory() { return new OrderReturnGuard(ɵɵinject(RoutingService), ɵɵinject(OrderReturnService)); }, token: OrderReturnGuard, providedIn: "root" });
+OrderReturnGuard.ɵprov = ɵɵdefineInjectable({ factory: function OrderReturnGuard_Factory() { return new OrderReturnGuard(ɵɵinject(OrderReturnService), ɵɵinject(SemanticPathService), ɵɵinject(Router)); }, token: OrderReturnGuard, providedIn: "root" });
 OrderReturnGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 OrderReturnGuard.ctorParameters = () => [
-    { type: RoutingService },
-    { type: OrderReturnService }
+    { type: OrderReturnService },
+    { type: SemanticPathService },
+    { type: Router }
 ];
 
 class ReturnOrderConfirmationComponent {
@@ -17835,9 +17833,9 @@ class GuestRegisterFormComponent {
             this.userService.registerGuest(this.guid, this.guestRegisterForm.value.password);
             if (!this.subscription) {
                 this.subscription = this.authService
-                    .getUserToken()
-                    .subscribe((token) => {
-                    if (token.access_token) {
+                    .isUserLoggedIn()
+                    .subscribe((isLoggedIn) => {
+                    if (isLoggedIn) {
                         this.routingService.go({ cxRoute: 'home' });
                     }
                 });
@@ -19498,36 +19496,32 @@ VariantStyleIconsModule.decorators = [
 ];
 
 class ProductVariantGuard {
-    constructor(productService, routingService) {
+    constructor(productService, semanticPathService, router) {
         this.productService = productService;
-        this.routingService = routingService;
+        this.semanticPathService = semanticPathService;
+        this.router = router;
     }
-    canActivate() {
-        return this.routingService.getRouterState().pipe(map((state) => state.nextState.params.productCode), switchMap((productCode) => {
-            // if open pdp from smartedit
-            if (!productCode) {
+    canActivate(activatedRoute) {
+        var _a;
+        const productCode = (_a = activatedRoute.params) === null || _a === void 0 ? void 0 : _a.productCode;
+        if (!productCode) {
+            return of(true);
+        }
+        return this.productService.get(productCode, ProductScope.VARIANTS).pipe(filter(Boolean), switchMap((product) => {
+            if (!product.purchasable) {
+                const variant = this.findVariant(product.variantOptions);
+                // below call might looks redundant but in fact this data is going to be loaded anyways
+                // we're just calling it earlier and storing
+                return this.productService.get(variant.code, ProductScope.LIST).pipe(filter(Boolean), take(1), map((_product) => {
+                    return this.router.createUrlTree(this.semanticPathService.transform({
+                        cxRoute: 'product',
+                        params: _product,
+                    }));
+                }));
+            }
+            else {
                 return of(true);
             }
-            return this.productService.get(productCode, ProductScope.VARIANTS).pipe(filter(Boolean), map((product) => {
-                if (!product.purchasable) {
-                    const variant = this.findVariant(product.variantOptions);
-                    // below call might looks redundant but in fact this data is going to be loaded anyways
-                    // we're just calling it earlier and storing
-                    this.productService
-                        .get(variant.code, ProductScope.LIST)
-                        .pipe(filter(Boolean), take(1))
-                        .subscribe((_product) => {
-                        this.routingService.go({
-                            cxRoute: 'product',
-                            params: _product,
-                        });
-                    });
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }));
         }));
     }
     findVariant(variants) {
@@ -19537,7 +19531,7 @@ class ProductVariantGuard {
         return !results.length && variants.length ? variants[0] : results[0];
     }
 }
-ProductVariantGuard.ɵprov = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(RoutingService)); }, token: ProductVariantGuard, providedIn: "root" });
+ProductVariantGuard.ɵprov = ɵɵdefineInjectable({ factory: function ProductVariantGuard_Factory() { return new ProductVariantGuard(ɵɵinject(ProductService), ɵɵinject(SemanticPathService), ɵɵinject(Router)); }, token: ProductVariantGuard, providedIn: "root" });
 ProductVariantGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -19545,7 +19539,8 @@ ProductVariantGuard.decorators = [
 ];
 ProductVariantGuard.ctorParameters = () => [
     { type: ProductService },
-    { type: RoutingService }
+    { type: SemanticPathService },
+    { type: Router }
 ];
 
 class ProductVariantsModule {
@@ -19911,14 +19906,14 @@ StockNotificationDialogComponent.ctorParameters = () => [
 ];
 
 class StockNotificationComponent {
-    constructor(authService, currentProductService, globalMessageService, translationService, interestsService, modalService, notificationPrefService) {
-        this.authService = authService;
+    constructor(currentProductService, globalMessageService, translationService, interestsService, modalService, notificationPrefService, userIdService) {
         this.currentProductService = currentProductService;
         this.globalMessageService = globalMessageService;
         this.translationService = translationService;
         this.interestsService = interestsService;
         this.modalService = modalService;
         this.notificationPrefService = notificationPrefService;
+        this.userIdService = userIdService;
         this.anonymous = true;
         this.enabledPrefs = [];
         this.subscriptions = new Subscription();
@@ -19926,7 +19921,7 @@ class StockNotificationComponent {
     ngOnInit() {
         this.outOfStock$ = combineLatest([
             this.currentProductService.getProduct().pipe(filter(Boolean)),
-            this.authService.getOccUserId(),
+            this.userIdService.getUserId(),
         ]).pipe(tap(([product, userId]) => {
             this.productCode = product.code;
             if (userId !== OCC_USER_ID_ANONYMOUS) {
@@ -20005,13 +20000,13 @@ StockNotificationComponent.decorators = [
             },] }
 ];
 StockNotificationComponent.ctorParameters = () => [
-    { type: AuthService },
     { type: CurrentProductService },
     { type: GlobalMessageService },
     { type: TranslationService },
     { type: UserInterestsService },
     { type: ModalService },
-    { type: UserNotificationPreferenceService }
+    { type: UserNotificationPreferenceService },
+    { type: UserIdService }
 ];
 
 class StockNotificationModule {
@@ -20651,11 +20646,10 @@ CheckoutLoginModule.decorators = [
 ];
 
 class LoginFormComponent {
-    constructor(auth, globalMessageService, fb, authRedirectService, winRef) {
+    constructor(auth, globalMessageService, fb, winRef) {
         this.auth = auth;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
-        this.authRedirectService = authRedirectService;
         this.winRef = winRef;
     }
     ngOnInit() {
@@ -20688,10 +20682,9 @@ class LoginFormComponent {
         this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
         password.value);
         if (!this.sub) {
-            this.sub = this.auth.getUserToken().subscribe((data) => {
-                if (data && data.access_token) {
+            this.sub = this.auth.isUserLoggedIn().subscribe((isLoggedIn) => {
+                if (isLoggedIn) {
                     this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                    this.authRedirectService.redirect();
                 }
             });
         }
@@ -20707,7 +20700,6 @@ LoginFormComponent.ctorParameters = () => [
     { type: AuthService },
     { type: GlobalMessageService },
     { type: FormBuilder },
-    { type: AuthRedirectService },
     { type: WindowRef }
 ];
 
@@ -20737,6 +20729,130 @@ LoginFormModule.decorators = [
                 declarations: [LoginFormComponent],
                 exports: [LoginFormComponent],
                 entryComponents: [LoginFormComponent],
+            },] }
+];
+
+class LoginRegisterComponent {
+    constructor(checkoutConfigService, activatedRoute) {
+        this.checkoutConfigService = checkoutConfigService;
+        this.activatedRoute = activatedRoute;
+        this.loginAsGuest = false;
+    }
+    ngOnInit() {
+        var _a, _b, _c;
+        if (this.checkoutConfigService.isGuestCheckout()) {
+            this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
+        }
+    }
+}
+LoginRegisterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'cx-login-register',
+                template: "<div class=\"register\">\n  <p class=\"cx-section-title\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </p>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
+            },] }
+];
+LoginRegisterComponent.ctorParameters = () => [
+    { type: CheckoutConfigService },
+    { type: ActivatedRoute }
+];
+
+class LoginRegisterModule {
+}
+LoginRegisterModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    RouterModule,
+                    UrlModule,
+                    PageSlotModule,
+                    I18nModule,
+                    CheckoutModule,
+                ],
+                providers: [
+                    provideDefaultConfig({
+                        cmsComponents: {
+                            ReturningCustomerRegisterComponent: {
+                                component: LoginRegisterComponent,
+                                guards: [NotAuthGuard],
+                            },
+                        },
+                    }),
+                ],
+                declarations: [LoginRegisterComponent],
+                entryComponents: [LoginRegisterComponent],
+                exports: [LoginRegisterComponent],
+            },] }
+];
+
+/**
+ * Guards the _login_ route.
+ *
+ * Takes care of routing the user to a auth server login page (if implicit or code flow is used).
+ * In case of Resource Owner Password Flow just renders the page as normal CMS page.
+ */
+class LoginGuard {
+    constructor(authService, authRedirectService, authConfigService, cmsPageGuard) {
+        this.authService = authService;
+        this.authRedirectService = authRedirectService;
+        this.authConfigService = authConfigService;
+        this.cmsPageGuard = cmsPageGuard;
+    }
+    canActivate(route, state) {
+        return this.authService.isUserLoggedIn().pipe(take(1), switchMap((isUserLoggedIn) => {
+            if (this.authConfigService.getOAuthFlow() ===
+                OAuthFlow.ResourceOwnerPasswordFlow ||
+                isUserLoggedIn) {
+                return this.cmsPageGuard.canActivate(route, state);
+            }
+            else {
+                // Remember the previous url, so we can redirect user to that page after OAuth server callback
+                this.authRedirectService.reportNotAuthGuard();
+                // This method can trigger redirect to OAuth server that's why we don't return anything in this case
+                const redirected = this.authService.loginWithRedirect();
+                if (!redirected) {
+                    return of(false);
+                }
+                return EMPTY;
+            }
+        }));
+    }
+}
+LoginGuard.ɵprov = ɵɵdefineInjectable({ factory: function LoginGuard_Factory() { return new LoginGuard(ɵɵinject(AuthService), ɵɵinject(AuthRedirectService), ɵɵinject(AuthConfigService), ɵɵinject(CmsPageGuard)); }, token: LoginGuard, providedIn: "root" });
+LoginGuard.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+LoginGuard.ctorParameters = () => [
+    { type: AuthService },
+    { type: AuthRedirectService },
+    { type: AuthConfigService },
+    { type: CmsPageGuard }
+];
+
+const ɵ0$b = { cxRoute: 'login' };
+/**
+ * This module enables to quickly switch from Resource Owner Password Flow
+ * to Implicit Flow or Authorization Code Flow. The `login` route in this case will be
+ * responsible for initalizing the redirect to OAuth server to login.
+ *
+ * Instead of manually invoking OAuth redirect you only have to redirect to `login` page.
+ */
+class LoginRouteModule {
+}
+LoginRouteModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    PageLayoutModule,
+                    RouterModule.forChild([
+                        {
+                            path: null,
+                            canActivate: [LoginGuard],
+                            component: PageLayoutComponent,
+                            data: ɵ0$b,
+                        },
+                    ]),
+                ],
             },] }
 ];
 
@@ -20795,25 +20911,35 @@ LoginModule.decorators = [
  * to the login route instead.
  */
 class LogoutGuard {
-    constructor(auth, cms, routing, semanticPathService, protectedRoutes) {
+    constructor(auth, cms, semanticPathService, protectedRoutes, router) {
         this.auth = auth;
         this.cms = cms;
-        this.routing = routing;
         this.semanticPathService = semanticPathService;
         this.protectedRoutes = protectedRoutes;
+        this.router = router;
     }
     canActivate() {
-        this.logout();
-        return this.cms
-            .hasPage({
-            id: this.semanticPathService.get('logout'),
-            type: PageType.CONTENT_PAGE,
-        })
-            .pipe(tap((hasPage) => {
-            if (!hasPage) {
-                this.redirect();
-            }
+        /**
+         * First we want to complete logout process before redirecting to logout page
+         * We want to avoid errors like `token is no longer valid`
+         */
+        return from(this.logout()).pipe(switchMap(() => {
+            return this.cms
+                .hasPage({
+                id: this.semanticPathService.get('logout'),
+                type: PageType.CONTENT_PAGE,
+            })
+                .pipe(map((hasPage) => {
+                if (!hasPage) {
+                    return this.getRedirectUrl();
+                }
+                // TODO(#9385): Use CMS page guard here.
+                return hasPage;
+            }));
         }));
+    }
+    logout() {
+        return this.auth.logout();
     }
     /**
      * Whenever there is no specific "logout" page configured in the CMS,
@@ -20822,20 +20948,12 @@ class LogoutGuard {
      * The user gets redirected to the homepage, unless the homepage is protected
      * (in case of a closed shop). We'll redirect to the login page instead.
      */
-    redirect() {
+    getRedirectUrl() {
         const cxRoute = this.protectedRoutes.shouldProtect ? 'login' : 'home';
-        this.routing.go({ cxRoute });
-    }
-    /**
-     * Log user out.
-     *
-     * This is delegated to the `AuthService`.
-     */
-    logout() {
-        this.auth.logout();
+        return this.router.parseUrl(this.semanticPathService.get(cxRoute));
     }
 }
-LogoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(RoutingService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesService)); }, token: LogoutGuard, providedIn: "root" });
+LogoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function LogoutGuard_Factory() { return new LogoutGuard(ɵɵinject(AuthService), ɵɵinject(CmsService), ɵɵinject(SemanticPathService), ɵɵinject(ProtectedRoutesService), ɵɵinject(Router)); }, token: LogoutGuard, providedIn: "root" });
 LogoutGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -20844,12 +20962,12 @@ LogoutGuard.decorators = [
 LogoutGuard.ctorParameters = () => [
     { type: AuthService },
     { type: CmsService },
-    { type: RoutingService },
     { type: SemanticPathService },
-    { type: ProtectedRoutesService }
+    { type: ProtectedRoutesService },
+    { type: Router }
 ];
 
-const ɵ0$b = { cxRoute: 'logout' };
+const ɵ0$c = { cxRoute: 'logout' };
 class LogoutModule {
 }
 LogoutModule.decorators = [
@@ -20861,7 +20979,7 @@ LogoutModule.decorators = [
                             path: null,
                             canActivate: [LogoutGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$b,
+                            data: ɵ0$c,
                         },
                     ]),
                 ],
@@ -20869,13 +20987,14 @@ LogoutModule.decorators = [
 ];
 
 class RegisterComponent {
-    constructor(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig) {
+    constructor(userService, globalMessageService, fb, router, anonymousConsentsService, anonymousConsentsConfig, authConfigService) {
         this.userService = userService;
         this.globalMessageService = globalMessageService;
         this.fb = fb;
         this.router = router;
         this.anonymousConsentsService = anonymousConsentsService;
         this.anonymousConsentsConfig = anonymousConsentsConfig;
+        this.authConfigService = authConfigService;
         this.subscription = new Subscription();
         this.registerForm = this.fb.group({
             titleCode: [''],
@@ -20967,7 +21086,10 @@ class RegisterComponent {
     }
     onRegisterUserSuccess(success) {
         if (success) {
-            this.router.go('login');
+            if (this.authConfigService.getOAuthFlow() ===
+                OAuthFlow.ResourceOwnerPasswordFlow) {
+                this.router.go('login');
+            }
             this.globalMessageService.add({ key: 'register.postRegisterMessage' }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
         }
     }
@@ -21003,7 +21125,8 @@ RegisterComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: RoutingService },
     { type: AnonymousConsentsService },
-    { type: AnonymousConsentsConfig }
+    { type: AnonymousConsentsConfig },
+    { type: AuthConfigService }
 ];
 
 class RegisterComponentModule {
@@ -21036,58 +21159,6 @@ RegisterComponentModule.decorators = [
             },] }
 ];
 
-class LoginRegisterComponent {
-    constructor(checkoutConfigService, activatedRoute) {
-        this.checkoutConfigService = checkoutConfigService;
-        this.activatedRoute = activatedRoute;
-        this.loginAsGuest = false;
-    }
-    ngOnInit() {
-        var _a, _b, _c;
-        if (this.checkoutConfigService.isGuestCheckout()) {
-            this.loginAsGuest = (_c = (_b = (_a = this.activatedRoute) === null || _a === void 0 ? void 0 : _a.snapshot) === null || _b === void 0 ? void 0 : _b.queryParams) === null || _c === void 0 ? void 0 : _c['forced'];
-        }
-    }
-}
-LoginRegisterComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'cx-login-register',
-                template: "<div class=\"register\">\n  <p class=\"cx-section-title\">\n    {{ 'loginForm.dontHaveAccount' | cxTranslate }}\n  </p>\n\n  <ng-container *ngIf=\"!loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'register' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-register\"\n      >{{ 'loginForm.register' | cxTranslate }}</a\n    >\n  </ng-container>\n\n  <ng-container *ngIf=\"loginAsGuest\">\n    <a\n      [routerLink]=\"{ cxRoute: 'checkoutLogin' } | cxUrl\"\n      class=\"btn btn-block btn-secondary btn-guest\"\n      >{{ 'loginForm.guestCheckout' | cxTranslate }}</a\n    >\n  </ng-container>\n</div>\n"
-            },] }
-];
-LoginRegisterComponent.ctorParameters = () => [
-    { type: CheckoutConfigService },
-    { type: ActivatedRoute }
-];
-
-class LoginRegisterModule {
-}
-LoginRegisterModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [
-                    CommonModule,
-                    RouterModule,
-                    UrlModule,
-                    PageSlotModule,
-                    I18nModule,
-                    CheckoutModule,
-                ],
-                providers: [
-                    provideDefaultConfig({
-                        cmsComponents: {
-                            ReturningCustomerRegisterComponent: {
-                                component: LoginRegisterComponent,
-                                guards: [NotAuthGuard],
-                            },
-                        },
-                    }),
-                ],
-                declarations: [LoginRegisterComponent],
-                entryComponents: [LoginRegisterComponent],
-                exports: [LoginRegisterComponent],
-            },] }
-];
-
 class UserComponentModule {
 }
 UserComponentModule.decorators = [
@@ -21098,6 +21169,7 @@ UserComponentModule.decorators = [
                     LoginFormModule,
                     LoginRegisterModule,
                     LogoutModule,
+                    LoginRouteModule,
                     CheckoutLoginModule,
                     ReactiveFormsModule,
                     RouterModule,
@@ -21267,7 +21339,7 @@ const PRODUCT_DETAILS_URL_MATCHER = new InjectionToken('PRODUCT_DETAILS_URL_MATC
     factory: () => getProductDetailsUrlMatcherFactory(inject(UrlMatcherService), inject(DEFAULT_URL_MATCHER)),
 });
 
-const ɵ0$c = { cxRoute: 'product' };
+const ɵ0$d = { cxRoute: 'product' };
 class ProductDetailsPageModule {
 }
 ProductDetailsPageModule.decorators = [
@@ -21278,7 +21350,7 @@ ProductDetailsPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$c,
+                            data: ɵ0$d,
                         },
                     ]),
                 ],
@@ -21323,7 +21395,7 @@ const PRODUCT_LISTING_URL_MATCHER = new InjectionToken('PRODUCT_LISTING_URL_MATC
     factory: () => getProductListingUrlMatcherFactory(inject(UrlMatcherService), inject(DEFAULT_URL_MATCHER)),
 });
 
-const ɵ0$d = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
+const ɵ0$e = { pageLabel: 'search', cxRoute: 'search' }, ɵ1$1 = { cxRoute: 'brand' }, ɵ2 = { cxRoute: 'category' };
 class ProductListingPageModule {
 }
 ProductListingPageModule.decorators = [
@@ -21334,7 +21406,7 @@ ProductListingPageModule.decorators = [
                             path: null,
                             canActivate: [CmsPageGuard],
                             component: PageLayoutComponent,
-                            data: ɵ0$d,
+                            data: ɵ0$e,
                         },
                         {
                             path: null,
@@ -21887,5 +21959,5 @@ var FormUtils;
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginModule, LoginRegisterModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentConfig, defaultLayoutConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, layoutConfig, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, AsmMainUiComponent as ɵba, AsmComponentService as ɵbb, CSAgentLoginFormComponent as ɵbc, CustomerSelectionComponent as ɵbd, AsmSessionTimerComponent as ɵbe, FormatTimerPipe as ɵbf, CustomerEmulationComponent as ɵbg, AsmToggleUiComponent as ɵbh, defaultAsmLayoutConfig as ɵbi, defaultIconConfig as ɵbj, defaultCheckoutConfig as ɵbk, MultiLinePipe as ɵbl, CheckoutStepsSetGuard as ɵbm, PaymentTypeModule as ɵbn, PaymentTypeComponent as ɵbo, defaultPlaceOrderSpinnerLayoutConfig as ɵbp, CostCenterModule as ɵbq, CostCenterComponent as ɵbr, CheckoutAuthGuard as ɵbs, CartNotEmptyGuard as ɵbt, defaultQualtricsConfig as ɵbu, CmsPageGuardService as ɵbv, CmsRoutesImplService as ɵbw, ReturnRequestService as ɵbx, LoginRegisterComponent as ɵby, MyCouponsComponentService as ɵbz, getStructuredDataFactory as ɵc, addCmsRoute as ɵca, defaultStorefrontRoutesConfig as ɵcb, defaultRoutingConfig as ɵcc, htmlLangProvider as ɵcd, setHtmlLangAttribute as ɵce, defaultDirectionConfig as ɵcf, EventsModule as ɵcg, DatePickerFormatterService as ɵch, DateTimePickerFormatterService as ɵci, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, initHtmlDirAttribute as ɵf, LockFocusDirective as ɵg, TrapFocusDirective as ɵh, TabFocusDirective as ɵi, AutoFocusDirective as ɵj, EscapeFocusDirective as ɵk, PersistFocusDirective as ɵl, BlockFocusDirective as ɵm, VisibleFocusDirective as ɵn, BaseFocusDirective as ɵo, BaseFocusService as ɵp, PersistFocusService as ɵq, EscapeFocusService as ɵr, AutoFocusService as ɵs, TabFocusService as ɵt, TrapFocusService as ɵu, LockFocusService as ɵv, defaultAnonymousConsentLayoutConfig as ɵw, AsmLoaderModule as ɵx, asmFactory as ɵy, AsmEnablerService as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginGuard, LoginModule, LoginRegisterModule, LoginRouteModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailApprovalDetailsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSlotComponent, PageSlotModule, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewDeactivateGuard, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentConfig, defaultLayoutConfig, defaultPWAModuleConfig, defaultPageHeaderConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, headerComponents, initSeoService, layoutConfig, mediaConfig, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, pwaConfigurationFactory as ɵa, pwaFactory as ɵb, AsmMainUiComponent as ɵba, AsmComponentService as ɵbb, CSAgentLoginFormComponent as ɵbc, CustomerSelectionComponent as ɵbd, AsmSessionTimerComponent as ɵbe, FormatTimerPipe as ɵbf, CustomerEmulationComponent as ɵbg, AsmToggleUiComponent as ɵbh, defaultAsmLayoutConfig as ɵbi, defaultIconConfig as ɵbj, defaultCheckoutConfig as ɵbk, MultiLinePipe as ɵbl, CheckoutStepsSetGuard as ɵbm, PaymentTypeModule as ɵbn, PaymentTypeComponent as ɵbo, defaultPlaceOrderSpinnerLayoutConfig as ɵbp, CostCenterModule as ɵbq, CostCenterComponent as ɵbr, CheckoutAuthGuard as ɵbs, CartNotEmptyGuard as ɵbt, defaultQualtricsConfig as ɵbu, CmsPageGuardService as ɵbv, CmsRoutesImplService as ɵbw, ReturnRequestService as ɵbx, LoginRegisterComponent as ɵby, MyCouponsComponentService as ɵbz, getStructuredDataFactory as ɵc, addCmsRoute as ɵca, defaultStorefrontRoutesConfig as ɵcb, defaultRoutingConfig as ɵcc, htmlLangProvider as ɵcd, setHtmlLangAttribute as ɵce, defaultDirectionConfig as ɵcf, EventsModule as ɵcg, DatePickerFormatterService as ɵch, DateTimePickerFormatterService as ɵci, FOCUS_ATTR as ɵd, skipLinkFactory as ɵe, initHtmlDirAttribute as ɵf, LockFocusDirective as ɵg, TrapFocusDirective as ɵh, TabFocusDirective as ɵi, AutoFocusDirective as ɵj, EscapeFocusDirective as ɵk, PersistFocusDirective as ɵl, BlockFocusDirective as ɵm, VisibleFocusDirective as ɵn, BaseFocusDirective as ɵo, BaseFocusService as ɵp, PersistFocusService as ɵq, EscapeFocusService as ɵr, AutoFocusService as ɵs, TabFocusService as ɵt, TrapFocusService as ɵu, LockFocusService as ɵv, defaultAnonymousConsentLayoutConfig as ɵw, AsmLoaderModule as ɵx, asmFactory as ɵy, AsmEnablerService as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map
