@@ -1,1 +1,0 @@
-{"version":3,"file":"stock-notification.module.d.ts","sources":["stock-notification.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class StockNotificationModule {\n}\n"]}

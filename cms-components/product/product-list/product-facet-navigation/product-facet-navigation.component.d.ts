@@ -2,7 +2,6 @@ import { ElementRef } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../../cms-components/misc/icon/icon.model';
 import { BreakpointService } from '../../../../layout/breakpoint/breakpoint.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class ProductFacetNavigationComponent {
     protected breakpointService: BreakpointService;
     iconTypes: typeof ICON_TYPE;
@@ -45,8 +44,4 @@ export declare class ProductFacetNavigationComponent {
      * (display:none) for certain screen sizes.
      */
     get hasTrigger(): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductFacetNavigationComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductFacetNavigationComponent, "cx-product-facet-navigation", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=product-facet-navigation.component.d.ts.map
