@@ -1236,6 +1236,22 @@
     var FOCUS_ATTR = 'data-cx-focus';
     /** The element attribute used to store the focus group state */
     var FOCUS_GROUP_ATTR = 'data-cx-focus-group';
+    (function (TrapFocus) {
+        /**
+         * Will trap the focus at the start of the focus group.
+         */
+        TrapFocus["start"] = "start";
+        /**
+         * Will trap the focus only at the end of the focus group.
+         */
+        TrapFocus["end"] = "end";
+        /**
+         * Will not trap the focus in both directions. This is actually not are
+         * a great example of focus trap, but it will give the benefit of keyboard
+         * tabbing by arrows.
+         */
+        TrapFocus["both"] = "both";
+    })(exports.TrapFocus || (exports.TrapFocus = {}));
 
     var BaseFocusService = /** @class */ (function () {
         function BaseFocusService() {
@@ -2105,10 +2121,10 @@
             }
         };
         TrapFocusService.prototype.getTrapStart = function (trap) {
-            return trap === true || trap === 'start';
+            return trap === true || trap === exports.TrapFocus.start;
         };
         TrapFocusService.prototype.getTrapEnd = function (trap) {
-            return trap === true || trap === 'end';
+            return trap === true || trap === exports.TrapFocus.end;
         };
         return TrapFocusService;
     }(TabFocusService));
@@ -2120,7 +2136,7 @@
     ];
 
     /**
-     * Directive that keeps the focus inside the focussable child elements,
+     * Directive that keeps the focus inside the focusable child elements,
      * also known as a _focus trap_.
      */
     var TrapFocusDirective = /** @class */ (function (_super) {
