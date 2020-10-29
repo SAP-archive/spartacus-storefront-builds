@@ -16647,24 +16647,6 @@
         { type: OrderDetailsService }
     ]; };
 
-    var OrderDetailApprovalDetailsComponent = /** @class */ (function () {
-        function OrderDetailApprovalDetailsComponent(orderDetailsService) {
-            this.orderDetailsService = orderDetailsService;
-            this.order$ = this.orderDetailsService.getOrderDetails();
-        }
-        return OrderDetailApprovalDetailsComponent;
-    }());
-    OrderDetailApprovalDetailsComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'cx-order-details-approval-details',
-                    template: "<ng-container *ngIf=\"order$ | async as order\">\n  <ng-container *ngIf=\"order.permissionResults?.length\">\n    <div class=\"cx-approval-header row\">\n      <div class=\"cx-approval-label col-sm-12\">\n        {{ 'orderDetails.approvalDetails.header' | cxTranslate }}\n      </div>\n    </div>\n    <div class=\"row\">\n      <table class=\"table table-striped cx-approval-table\">\n        <thead class=\"cx-approval-thead-mobile\">\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.permission' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.approver' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.status' | cxTranslate }}\n          </th>\n          <th scope=\"col\">\n            {{ 'orderDetails.approvalDetails.approverComments' | cxTranslate }}\n          </th>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let permissionResult of order.permissionResults\">\n            <td class=\"cx-approval-permissionCode\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.permission' | cxTranslate }}\n              </div>\n              {{\n                'orderDetails.approvalDetails.permissionType'\n                  | cxTranslate\n                    : { context: permissionResult.permissionType.code }\n              }}\n            </td>\n            <td class=\"cx-approval-approverName\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.approver' | cxTranslate }}\n              </div>\n              {{ permissionResult.approverName }}\n            </td>\n            <td class=\"cx-approval-statusDisplay\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{ 'orderDetails.approvalDetails.status' | cxTranslate }}\n              </div>\n              {{ permissionResult.statusDisplay }}\n            </td>\n            <td class=\"cx-approval-approvalNotes\">\n              <div class=\"d-md-none cx-approval-table-label\">\n                {{\n                  'orderDetails.approvalDetails.approverComments' | cxTranslate\n                }}\n              </div>\n              {{\n                permissionResult.approverNotes\n                  ? permissionResult.approverNotes\n                  : ('orderDetails.approvalDetails.noApprovalNotes'\n                    | cxTranslate)\n              }}\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </ng-container>\n</ng-container>\n",
-                    changeDetection: i0.ChangeDetectionStrategy.OnPush
-                },] }
-    ];
-    OrderDetailApprovalDetailsComponent.ctorParameters = function () { return [
-        { type: OrderDetailsService }
-    ]; };
-
     var completedValues = ['DELIVERY_COMPLETED', 'PICKUP_COMPLETE'];
     var cancelledValues = ['CANCELLED'];
 
@@ -16847,7 +16829,6 @@
         OrderDetailItemsComponent,
         OrderDetailTotalsComponent,
         OrderDetailShippingComponent,
-        OrderDetailApprovalDetailsComponent,
         TrackingEventsComponent,
         ConsignmentTrackingComponent,
         OrderConsignedEntriesComponent,
@@ -16890,9 +16871,6 @@
                             cmsComponents: {
                                 AccountOrderDetailsActionsComponent: {
                                     component: OrderDetailActionsComponent,
-                                },
-                                AccountOrderDetailsApprovalDetailsComponent: {
-                                    component: OrderDetailApprovalDetailsComponent,
                                 },
                                 AccountOrderDetailsItemsComponent: {
                                     component: OrderDetailItemsComponent,
@@ -24514,7 +24492,6 @@
     exports.OrderConfirmationTotalsComponent = OrderConfirmationTotalsComponent;
     exports.OrderConsignedEntriesComponent = OrderConsignedEntriesComponent;
     exports.OrderDetailActionsComponent = OrderDetailActionsComponent;
-    exports.OrderDetailApprovalDetailsComponent = OrderDetailApprovalDetailsComponent;
     exports.OrderDetailItemsComponent = OrderDetailItemsComponent;
     exports.OrderDetailShippingComponent = OrderDetailShippingComponent;
     exports.OrderDetailTotalsComponent = OrderDetailTotalsComponent;
