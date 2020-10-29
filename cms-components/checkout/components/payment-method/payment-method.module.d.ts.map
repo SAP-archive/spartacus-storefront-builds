@@ -1,0 +1,1 @@
+{"version":3,"file":"payment-method.module.d.ts","sources":["payment-method.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class PaymentMethodModule {\n}\n"]}
