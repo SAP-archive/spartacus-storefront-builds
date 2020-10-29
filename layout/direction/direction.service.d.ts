@@ -12,7 +12,6 @@ import { Direction, DirectionMode } from './config/direction.model';
  * To react to the active language, the service subscribes to the active language in the initialize method. This
  * is called from an APP_INITIALIZER method and should only happen once.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class DirectionService implements OnDestroy {
     protected configInit: ConfigInitializerService;
     protected languageService: LanguageService;
@@ -44,7 +43,4 @@ export declare class DirectionService implements OnDestroy {
      */
     getDirection(language?: string): DirectionMode;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DirectionService, never>;
 }
-
-//# sourceMappingURL=direction.service.d.ts.map
