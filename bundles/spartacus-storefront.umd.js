@@ -6544,7 +6544,8 @@
         { type: OutletContextData }
     ]; };
     TableDataCellComponent.propDecorators = {
-        cls: [{ type: i0.HostBinding, args: ['class.content-wrapper',] }]
+        cls: [{ type: i0.HostBinding, args: ['class.content-wrapper',] }],
+        value: [{ type: i0.HostBinding, args: ['attr.title',] }]
     };
 
     var TableHeaderCellComponent = /** @class */ (function () {

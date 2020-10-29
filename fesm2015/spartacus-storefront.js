@@ -5704,7 +5704,8 @@ TableDataCellComponent.ctorParameters = () => [
     { type: OutletContextData }
 ];
 TableDataCellComponent.propDecorators = {
-    cls: [{ type: HostBinding, args: ['class.content-wrapper',] }]
+    cls: [{ type: HostBinding, args: ['class.content-wrapper',] }],
+    value: [{ type: HostBinding, args: ['attr.title',] }]
 };
 
 class TableHeaderCellComponent {
