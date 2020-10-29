@@ -9,7 +9,6 @@ import { TableStructureConfiguration } from '../table.model';
  *
  * The `table.type` is used as a key to distinguish the various table configurations in the application.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare abstract class TableConfig {
     table?: {
         [tableType: string]: ResponsiveTableConfiguration;
@@ -28,7 +27,6 @@ export declare abstract class TableConfig {
          */
         dataComponent?: Type<any>;
     };
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableConfig, never>;
 }
 /**
  * Helper configuration to introduce breakpoint specific table configuration.
@@ -45,5 +43,3 @@ export interface ResponsiveTableConfiguration extends TableStructureConfiguratio
     /** The table configurations for extra small screens */
     [BREAKPOINT.xs]?: TableStructureConfiguration;
 }
-
-//# sourceMappingURL=table.config.d.ts.map
