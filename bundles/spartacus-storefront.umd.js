@@ -8677,17 +8677,19 @@
             this.DEFAULT_PRODUCT_SCOPE = i1.ProductScope.DETAILS;
         }
         /**
-         * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+         * Returns an observable for the current product
+         * @returns Product
+         * @returns null if product can't be found
          *
          * @param scopes
          */
         CurrentProductService.prototype.getProduct = function (scopes) {
             var _this = this;
-            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.switchMap(function (productCode) {
+            return this.routingService.getRouterState().pipe(operators.map(function (state) { return state.state.params['productCode']; }), operators.distinctUntilChanged(), operators.switchMap(function (productCode) {
                 return productCode
                     ? _this.productService.get(productCode, scopes || _this.DEFAULT_PRODUCT_SCOPE)
                     : rxjs.of(null);
-            }), operators.filter(function (x) { return x !== undefined; }), operators.distinctUntilChanged());
+            }), operators.filter(function (product) { return product !== undefined; }));
         };
         return CurrentProductService;
     }());
@@ -19972,9 +19974,8 @@
     ];
 
     var ProductCarouselService = /** @class */ (function () {
-        function ProductCarouselService(productService, referenceService, semanticPathService) {
+        function ProductCarouselService(productService, semanticPathService) {
             this.productService = productService;
-            this.referenceService = referenceService;
             this.semanticPathService = semanticPathService;
         }
         /**
@@ -19983,10 +19984,6 @@
         ProductCarouselService.prototype.loadProduct = function (code) {
             var _this = this;
             return this.productService.get(code).pipe(operators.filter(Boolean), operators.map(function (product) { return _this.convertProduct(product); }));
-        };
-        ProductCarouselService.prototype.getProductReferences = function (code, referenceType, displayTitle, displayProductPrices) {
-            var _this = this;
-            return this.referenceService.get(code, referenceType).pipe(operators.filter(Boolean), operators.map(function (refs) { return refs.map(function (ref) { return _this.convertProduct(ref.target, displayTitle, displayProductPrices); }); }));
         };
         /**
          * Converts the product to a generic CarouselItem
@@ -20015,7 +20012,7 @@
         };
         return ProductCarouselService;
     }());
-    ProductCarouselService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(i0.ɵɵinject(i1.ProductService), i0.ɵɵinject(i1.ProductReferenceService), i0.ɵɵinject(i1.SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
+    ProductCarouselService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(i0.ɵɵinject(i1.ProductService), i0.ɵɵinject(i1.SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
     ProductCarouselService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -20023,7 +20020,6 @@
     ];
     ProductCarouselService.ctorParameters = function () { return [
         { type: i1.ProductService },
-        { type: i1.ProductReferenceService },
         { type: i1.SemanticPathService }
     ]; };
 
@@ -20083,31 +20079,59 @@
     ];
 
     var ProductReferencesComponent = /** @class */ (function () {
-        function ProductReferencesComponent(component, current, referenceService) {
+        function ProductReferencesComponent(cmsComponentData, currentProductService, productReferenceService) {
             var _this = this;
-            this.component = component;
-            this.current = current;
-            this.referenceService = referenceService;
+            this.cmsComponentData = cmsComponentData;
+            this.currentProductService = currentProductService;
+            this.productReferenceService = productReferenceService;
             /**
-             * returns an Obervable string for the title
-             */
-            this.title$ = this.component.data$.pipe(operators.map(function (d) { return d === null || d === void 0 ? void 0 : d.title; }));
-            this.currentProductCode$ = this.current.getProduct().pipe(operators.filter(Boolean), operators.map(function (p) { return p.code; }), operators.distinctUntilChanged(), operators.tap(function () { return _this.referenceService.cleanReferences(); }));
-            /**
-             * Obervable with an Array of Observables. This is done, so that
+             * Observable with an Array of Observables. This is done so that
              * the component UI could consider to lazy load the UI components when they're
              * in the viewpoint.
              */
-            this.items$ = rxjs.combineLatest([
-                this.currentProductCode$,
-                this.component.data$,
-            ]).pipe(operators.switchMap(function (_a) {
-                var _b = __read(_a, 2), code = _b[0], data = _b[1];
-                return _this.getProductReferences(code, data === null || data === void 0 ? void 0 : data.productReferenceTypes);
+            this.items$ = this.productCode$.pipe(operators.withLatestFrom(this.componentData$), operators.tap(function (_a) {
+                var _b = __read(_a, 2), productCode = _b[0], data = _b[1];
+                return _this.productReferenceService.loadProductReferences(productCode, data === null || data === void 0 ? void 0 : data.productReferenceTypes);
+            }), operators.switchMap(function (_a) {
+                var _b = __read(_a, 2), productCode = _b[0], data = _b[1];
+                return _this.getProductReferences(productCode, data === null || data === void 0 ? void 0 : data.productReferenceTypes);
             }));
         }
+        Object.defineProperty(ProductReferencesComponent.prototype, "componentData$", {
+            get: function () {
+                return this.cmsComponentData.data$.pipe(operators.filter(Boolean));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ProductReferencesComponent.prototype, "productCode$", {
+            /**
+             * Returns an Observable String for the product code
+             */
+            get: function () {
+                var _this = this;
+                return this.currentProductService.getProduct().pipe(operators.filter(Boolean), operators.map(function (product) { return product.code; }), operators.tap(function (_) { return _this.productReferenceService.cleanReferences(); }));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(ProductReferencesComponent.prototype, "title$", {
+            /**
+             * Returns an Observable String for the title
+             */
+            get: function () {
+                return this.componentData$.pipe(operators.map(function (data) { return data === null || data === void 0 ? void 0 : data.title; }));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Returns an observable for product references
+         */
         ProductReferencesComponent.prototype.getProductReferences = function (code, referenceType) {
-            return this.referenceService.get(code, referenceType).pipe(operators.filter(Boolean), operators.map(function (refs) { return refs.map(function (ref) { return rxjs.of(ref.target); }); }));
+            return this.productReferenceService
+                .getProductReferences(code, referenceType)
+                .pipe(operators.filter(Boolean), operators.map(function (references) { return references.map(function (reference) { return rxjs.of(reference.target); }); }));
         };
         return ProductReferencesComponent;
     }());

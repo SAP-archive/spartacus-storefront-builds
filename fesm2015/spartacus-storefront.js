@@ -7594,16 +7594,18 @@ class CurrentProductService {
         this.DEFAULT_PRODUCT_SCOPE = ProductScope.DETAILS;
     }
     /**
-     * Will emit current product or null, if there is no current product (i.e. we are not on PDP)
+     * Returns an observable for the current product
+     * @returns Product
+     * @returns null if product can't be found
      *
      * @param scopes
      */
     getProduct(scopes) {
-        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), switchMap((productCode) => {
+        return this.routingService.getRouterState().pipe(map((state) => state.state.params['productCode']), distinctUntilChanged(), switchMap((productCode) => {
             return productCode
                 ? this.productService.get(productCode, scopes || this.DEFAULT_PRODUCT_SCOPE)
                 : of(null);
-        }), filter((x) => x !== undefined), distinctUntilChanged());
+        }), filter((product) => product !== undefined));
     }
 }
 CurrentProductService.ɵprov = ɵɵdefineInjectable({ factory: function CurrentProductService_Factory() { return new CurrentProductService(ɵɵinject(RoutingService), ɵɵinject(ProductService)); }, token: CurrentProductService, providedIn: "root" });
@@ -17989,9 +17991,8 @@ ReplenishmentOrderConfirmationModule.decorators = [
 ];
 
 class ProductCarouselService {
-    constructor(productService, referenceService, semanticPathService) {
+    constructor(productService, semanticPathService) {
         this.productService = productService;
-        this.referenceService = referenceService;
         this.semanticPathService = semanticPathService;
     }
     /**
@@ -17999,9 +18000,6 @@ class ProductCarouselService {
      */
     loadProduct(code) {
         return this.productService.get(code).pipe(filter(Boolean), map((product) => this.convertProduct(product)));
-    }
-    getProductReferences(code, referenceType, displayTitle, displayProductPrices) {
-        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map((ref) => this.convertProduct(ref.target, displayTitle, displayProductPrices))));
     }
     /**
      * Converts the product to a generic CarouselItem
@@ -18027,7 +18025,7 @@ class ProductCarouselService {
         return item;
     }
 }
-ProductCarouselService.ɵprov = ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(ɵɵinject(ProductService), ɵɵinject(ProductReferenceService), ɵɵinject(SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
+ProductCarouselService.ɵprov = ɵɵdefineInjectable({ factory: function ProductCarouselService_Factory() { return new ProductCarouselService(ɵɵinject(ProductService), ɵɵinject(SemanticPathService)); }, token: ProductCarouselService, providedIn: "root" });
 ProductCarouselService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -18035,7 +18033,6 @@ ProductCarouselService.decorators = [
 ];
 ProductCarouselService.ctorParameters = () => [
     { type: ProductService },
-    { type: ProductReferenceService },
     { type: SemanticPathService }
 ];
 
@@ -18090,27 +18087,39 @@ ProductCarouselModule.decorators = [
 ];
 
 class ProductReferencesComponent {
-    constructor(component, current, referenceService) {
-        this.component = component;
-        this.current = current;
-        this.referenceService = referenceService;
+    constructor(cmsComponentData, currentProductService, productReferenceService) {
+        this.cmsComponentData = cmsComponentData;
+        this.currentProductService = currentProductService;
+        this.productReferenceService = productReferenceService;
         /**
-         * returns an Obervable string for the title
-         */
-        this.title$ = this.component.data$.pipe(map((d) => d === null || d === void 0 ? void 0 : d.title));
-        this.currentProductCode$ = this.current.getProduct().pipe(filter(Boolean), map((p) => p.code), distinctUntilChanged(), tap(() => this.referenceService.cleanReferences()));
-        /**
-         * Obervable with an Array of Observables. This is done, so that
+         * Observable with an Array of Observables. This is done so that
          * the component UI could consider to lazy load the UI components when they're
          * in the viewpoint.
          */
-        this.items$ = combineLatest([
-            this.currentProductCode$,
-            this.component.data$,
-        ]).pipe(switchMap(([code, data]) => this.getProductReferences(code, data === null || data === void 0 ? void 0 : data.productReferenceTypes)));
+        this.items$ = this.productCode$.pipe(withLatestFrom(this.componentData$), tap(([productCode, data]) => this.productReferenceService.loadProductReferences(productCode, data === null || data === void 0 ? void 0 : data.productReferenceTypes)), switchMap(([productCode, data]) => this.getProductReferences(productCode, data === null || data === void 0 ? void 0 : data.productReferenceTypes)));
     }
+    get componentData$() {
+        return this.cmsComponentData.data$.pipe(filter(Boolean));
+    }
+    /**
+     * Returns an Observable String for the product code
+     */
+    get productCode$() {
+        return this.currentProductService.getProduct().pipe(filter(Boolean), map((product) => product.code), tap((_) => this.productReferenceService.cleanReferences()));
+    }
+    /**
+     * Returns an Observable String for the title
+     */
+    get title$() {
+        return this.componentData$.pipe(map((data) => data === null || data === void 0 ? void 0 : data.title));
+    }
+    /**
+     * Returns an observable for product references
+     */
     getProductReferences(code, referenceType) {
-        return this.referenceService.get(code, referenceType).pipe(filter(Boolean), map((refs) => refs.map((ref) => of(ref.target))));
+        return this.productReferenceService
+            .getProductReferences(code, referenceType)
+            .pipe(filter(Boolean), map((references) => references.map((reference) => of(reference.target))));
     }
 }
 ProductReferencesComponent.decorators = [

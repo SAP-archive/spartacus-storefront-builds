@@ -1,0 +1,1 @@
+{"version":3,"file":"return-request-detail.module.d.ts","sources":["return-request-detail.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ReturnRequestDetailModule {\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"file":"variant-style-selector.module.d.ts","sources":["variant-style-selector.module.d.ts"],"names":[],"mappings":";;;;;AAAA;;;AACA","sourcesContent":["export declare class VariantStyleSelectorModule {\n}\n"]}
