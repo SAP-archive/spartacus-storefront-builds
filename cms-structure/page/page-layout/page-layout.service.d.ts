@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
 import { BREAKPOINT, LayoutConfig, LayoutSlotConfig, SlotConfig } from '../../../layout/config/layout-config';
 import { PageLayoutHandler } from './page-layout-handler';
-import * as ɵngcc0 from '@angular/core';
 export declare class PageLayoutService {
     private cms;
     private config;
@@ -44,7 +43,4 @@ export declare class PageLayoutService {
      * in a format that can be copied / paste to the configuration.
      */
     private logMissingLayoutConfig;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageLayoutService, [null, null, null, { optional: true; }]>;
 }
-
-//# sourceMappingURL=page-layout.service.d.ts.map

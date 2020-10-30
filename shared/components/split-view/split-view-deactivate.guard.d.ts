@@ -5,10 +5,6 @@ import { Observable } from 'rxjs';
  * delays the guard to be removed with 300ms, so that any css transition can be
  * finished before the DOM is destroyed.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class SplitViewDeactivateGuard implements CanDeactivate<boolean> {
     canDeactivate(): Observable<boolean>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SplitViewDeactivateGuard, never>;
 }
-
-//# sourceMappingURL=split-view-deactivate.guard.d.ts.map
