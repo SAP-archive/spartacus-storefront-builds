@@ -5585,27 +5585,6 @@
     ];
 
     /**
-     * Guard that can be used in split-view based child routes. This guard
-     * delays the guard to be removed with 300ms, so that any css transition can be
-     * finished before the DOM is destroyed.
-     */
-    var SplitViewDeactivateGuard = /** @class */ (function () {
-        function SplitViewDeactivateGuard() {
-        }
-        SplitViewDeactivateGuard.prototype.canDeactivate = function () {
-            // TODO: this might cause an issue with e2e
-            return rxjs.timer(300).pipe(operators.map(function () { return true; }));
-        };
-        return SplitViewDeactivateGuard;
-    }());
-    SplitViewDeactivateGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function SplitViewDeactivateGuard_Factory() { return new SplitViewDeactivateGuard(); }, token: SplitViewDeactivateGuard, providedIn: "root" });
-    SplitViewDeactivateGuard.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-
-    /**
      * Supposed to be injected in the split view component, so that the split view state
      * is maintained for a single split view.
      */
@@ -24645,7 +24624,6 @@
     exports.SpinnerComponent = SpinnerComponent;
     exports.SpinnerModule = SpinnerModule;
     exports.SplitViewComponent = SplitViewComponent;
-    exports.SplitViewDeactivateGuard = SplitViewDeactivateGuard;
     exports.SplitViewModule = SplitViewModule;
     exports.SplitViewService = SplitViewService;
     exports.StarRatingComponent = StarRatingComponent;
