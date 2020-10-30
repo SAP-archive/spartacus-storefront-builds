@@ -7,6 +7,7 @@ import { ProductFacetService } from './product-facet.service';
  * represents user related changes on the facets, such as expanding or
  * collapsing a facet group or expanding the number of _visible_ facet values.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class FacetService {
     protected productFacetService: ProductFacetService;
     /**
@@ -66,4 +67,7 @@ export declare class FacetService {
     getLinkParams(query: string): {
         [key: string]: string;
     };
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<FacetService, never>;
 }
+
+//# sourceMappingURL=facet.service.d.ts.map
