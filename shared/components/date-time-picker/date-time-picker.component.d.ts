@@ -1,10 +1,11 @@
 import { ElementRef } from '@angular/core';
 import { ControlValueAccessor, Validator } from '@angular/forms';
-import { DateTimePickerFormatterService } from './date-time-picker-formatter.service';
+import { DateTimePickerFormatterService } from '@spartacus/core';
 /**
  * This component serves the browser's native `<input type="datetime-local">` HTML element
  * in whilst projecting the value in the standard date format with regards to timezone offsets.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class DateTimePickerComponent implements ControlValueAccessor, Validator {
     protected dateFormatterService: DateTimePickerFormatterService;
     value: string;
@@ -71,4 +72,8 @@ export declare class DateTimePickerComponent implements ControlValueAccessor, Va
     validate(): {
         [key: string]: any;
     };
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DateTimePickerComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<DateTimePickerComponent, "cx-date-time-picker", never, { "min": "min"; "max": "max"; "required": "required"; "invalid": "invalid"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=date-time-picker.component.d.ts.map

@@ -4081,34 +4081,6 @@
                 },] }
     ];
 
-    var DatePickerFormatterService = /** @class */ (function () {
-        function DatePickerFormatterService() {
-        }
-        DatePickerFormatterService.prototype.toNative = function (value) {
-            return value ? new Date(value).toISOString().split('T')[0] : null;
-        };
-        DatePickerFormatterService.prototype.toModel = function (value, endOfDay) {
-            if (value) {
-                var date = new Date(value)
-                    .toISOString()
-                    .replace('.', '+')
-                    .replace('Z', '0');
-                if (endOfDay) {
-                    date = date.replace('00:00:00', '23:59:59');
-                }
-                return date;
-            }
-        };
-        return DatePickerFormatterService;
-    }());
-    DatePickerFormatterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DatePickerFormatterService_Factory() { return new DatePickerFormatterService(); }, token: DatePickerFormatterService, providedIn: "root" });
-    DatePickerFormatterService.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    DatePickerFormatterService.ctorParameters = function () { return []; };
-
     var DatePickerComponent = /** @class */ (function () {
         function DatePickerComponent(dateFormatterService) {
             this.dateFormatterService = dateFormatterService;
@@ -4174,7 +4146,7 @@
                 },] }
     ];
     DatePickerComponent.ctorParameters = function () { return [
-        { type: DatePickerFormatterService }
+        { type: i1.DatePickerFormatterService }
     ]; };
     DatePickerComponent.propDecorators = {
         input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
@@ -4195,76 +4167,6 @@
                     imports: [i1$1.CommonModule],
                     declarations: [DatePickerComponent],
                     exports: [DatePickerComponent],
-                },] }
-    ];
-
-    /**
-     * Service responsible for converting date-like strings to/from formats compatible with the `<input type="datetime-local">`
-     * HTML element and valid strings compatible with the `Date` object.
-     *
-     * Date values used are relative to the local timezone of the user.
-     */
-    var DateTimePickerFormatterService = /** @class */ (function () {
-        function DateTimePickerFormatterService() {
-        }
-        /**
-         * Convert date string into a string format compatable with the browser's native `<input type="datetime-local">` HTML element.
-         * @param value: date string to convert
-         *
-         * @example
-         * With UTC-0 local offset, `toNative('2010-01-01T00:00+0000')` returns `'2010-01-01T00:00'`.
-         */
-        DateTimePickerFormatterService.prototype.toNative = function (value) {
-            return value
-                ? this.formatDateStringWithTimezone(value, this.getLocalTimezoneOffset(true))
-                : null;
-        };
-        /**
-         * Convert datetime-local native string into a valid datetime string.
-         * @param value: datetime-local string to convert
-         *
-         * @example
-         * With UTC-0 locale offset, `toModel('2010-01-01T00:00')` returns `'2010-01-01T00:00:00+00:00'`.
-         */
-        DateTimePickerFormatterService.prototype.toModel = function (value) {
-            return value ? value + ":00" + this.getLocalTimezoneOffset() : null;
-        };
-        /**
-         * Returns the local timezone in a format that can be appended to a date-like string.
-         * @param invert (default: false): returns the opposite operator relative to the local timezone
-         *
-         * @example
-         * When locale is set to a CEST timezone, `getLocalTimezoneOffset()` returns '+02:00'
-         * and `getLocalTimezoneOffset(true)` returns '-02:00'
-         */
-        DateTimePickerFormatterService.prototype.getLocalTimezoneOffset = function (invert) {
-            var offset = new Date().getTimezoneOffset() * -1;
-            var hours = Math.abs(Math.floor(offset / 60))
-                .toString()
-                .padStart(2, '0');
-            var minutes = (offset % 60).toString().padStart(2, '0');
-            var sign = offset >= 0 ? (invert ? "-" : "+") : invert ? "+" : "-";
-            return "" + sign + hours + ":" + minutes;
-        };
-        /**
-         * Format date string into a format compatable with the browser's native `<input type="datetime-local">` HTML element.
-         * @param dateString: date string to convert
-         * @param offset: offset to append to date string
-         *
-         * @example
-         * With UTC-0 local offset, `formatDateStringWithTimezone('2010-01-01T00:00+0000', '+00:00')` returns `'2010-01-01T00:00+00:00'`.
-         */
-        DateTimePickerFormatterService.prototype.formatDateStringWithTimezone = function (dateString, offset) {
-            return new Date(dateString.replace('+0000', offset))
-                .toISOString()
-                .substring(0, 16);
-        };
-        return DateTimePickerFormatterService;
-    }());
-    DateTimePickerFormatterService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DateTimePickerFormatterService_Factory() { return new DateTimePickerFormatterService(); }, token: DateTimePickerFormatterService, providedIn: "root" });
-    DateTimePickerFormatterService.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root',
                 },] }
     ];
 
@@ -4366,7 +4268,7 @@
                 },] }
     ];
     DateTimePickerComponent.ctorParameters = function () { return [
-        { type: DateTimePickerFormatterService }
+        { type: i1.DateTimePickerFormatterService }
     ]; };
     DateTimePickerComponent.propDecorators = {
         input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
@@ -11810,7 +11712,7 @@
                 numberOfDays: '14',
                 numberOfWeeks: '1',
                 recurrencePeriod: i1.recurrencePeriod.DAILY,
-                replenishmentStartDate: new Date().toISOString(),
+                replenishmentStartDate: new Date().toISOString().split('T')[0],
             };
             this.scheduleReplenishmentFormData$ = new rxjs.BehaviorSubject(this.defaultFormData);
         }
@@ -12340,9 +12242,6 @@
         ScheduleReplenishmentOrderComponent.prototype.hasDaysOfWeekChecked = function (day) {
             return this.currentDaysOfWeek.includes(day);
         };
-        ScheduleReplenishmentOrderComponent.prototype.currentISODate = function (date) {
-            return date.split('T')[0];
-        };
         ScheduleReplenishmentOrderComponent.prototype.initConfig = function () {
             this.isMonthly =
                 this.scheduleReplenishmentFormData.recurrencePeriod ===
@@ -12370,7 +12269,7 @@
     ScheduleReplenishmentOrderComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-schedule-replenishment-order',
-                    template: "<div class=\"cx-order-type-card\">\n  <div class=\"cx-label-container\">\n    <h5 class=\"cx-order-replenishment-header\">\n      {{ 'checkoutReview.autoReplenishOrder' | cxTranslate }}\n    </h5>\n    <cx-icon [type]=\"iconTypes.CLOCK\"></cx-icon>\n  </div>\n  <div\n    class=\"cx-order-type-container form-check\"\n    *ngFor=\"let type of orderTypes | keyvalue\"\n  >\n    <input\n      id=\"orderType-{{ type.value }}\"\n      class=\"scaled-input form-check-input\"\n      role=\"radio\"\n      type=\"radio\"\n      formControlName=\"orderType\"\n      aria-checked=\"true\"\n      (change)=\"changeOrderType(type.value)\"\n      [value]=\"type.value\"\n      [checked]=\"type.value == (selectedOrderType$ | async)\"\n    />\n    <label\n      class=\"order-type-label form-check-label form-radio-label\"\n      for=\"orderType-{{ type.value }}\"\n    >\n      <div class=\"order-type\">\n        {{ 'checkoutReview.orderType' | cxTranslate: { context: type.value } }}\n      </div>\n    </label>\n  </div>\n  <ng-container\n    *ngIf=\"\n      scheduleReplenishmentFormData &&\n      (selectedOrderType$ | async) === orderTypes.SCHEDULE_REPLENISHMENT_ORDER\n    \"\n  >\n    <div class=\"cx-replenishment-form-data-container\">\n      <div *ngIf=\"!isMonthly\" class=\"cx-days\">\n        <span class=\"form-data-label\">{{\n          'checkoutReview.every' | cxTranslate\n        }}</span>\n        <ng-container *ngIf=\"isWeekly; else isDaily\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfWeeks($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nWeeks of numberOfWeeks\"\n              [value]=\"nWeeks\"\n              [selected]=\"\n                nWeeks === scheduleReplenishmentFormData.numberOfWeeks\n              \"\n            >\n              {{ nWeeks }}\n            </option>\n          </select>\n        </ng-container>\n        <ng-template #isDaily>\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfDays($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.numberOfDays\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </ng-template>\n      </div>\n      <div class=\"cx-month\">\n        <span *ngIf=\"isMonthly\" class=\"form-data-label\">{{\n          'checkoutReview.every' | cxTranslate\n        }}</span>\n        <select\n          class=\"form-control\"\n          (change)=\"changeRecurrencePeriodType($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let type of recurrencePeriodType\"\n            [value]=\"type\"\n            [selected]=\"type === scheduleReplenishmentFormData.recurrencePeriod\"\n          >\n            {{\n              'checkoutReview.recurrencePeriodType'\n                | cxTranslate: { context: type }\n            }}\n          </option>\n        </select>\n      </div>\n      <div *ngIf=\"isMonthly\" class=\"cx-dayMonth\">\n        <span class=\"form-data-label\">{{\n          'checkoutReview.dayOfMonth' | cxTranslate\n        }}</span>\n        <div class=\"cx-day-of-month\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeDayOfTheMonth($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.nthDayOfMonth\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.startOn' | cxTranslate\n      }}</span>\n      <div class=\"cx-replenishment-date\">\n        <input\n          type=\"date\"\n          placeholder=\"yyyy-mm-dd\"\n          [value]=\"currentISODate(currentDate)\"\n          (change)=\"changeReplenishmentStartDate($event.target.value)\"\n        />\n      </div>\n    </div>\n\n    <div\n      *ngIf=\"isWeekly\"\n      class=\"cx-replenishment-form-data-container cx-repeat-days-container\"\n    >\n      <span class=\"cx-repeat-days form-data-label\">{{\n        'checkoutReview.repeatOnDays' | cxTranslate\n      }}</span>\n      <div *ngFor=\"let day of daysOfWeek\" class=\"form-check\">\n        <label for=\"day-{{ day }}\" class=\"cx-week-day\">{{\n          day | titlecase\n        }}</label\n        ><input\n          id=\"day-{{ day }}\"\n          type=\"checkbox\"\n          class=\"form-check-input\"\n          [checked]=\"hasDaysOfWeekChecked(day)\"\n          (change)=\"changeRepeatDays(day, $event.target.checked)\"\n        />\n      </div>\n    </div>\n  </ng-container>\n</div>\n",
+                    template: "<div class=\"cx-order-type-card\">\n  <div class=\"cx-label-container\">\n    <h5 class=\"cx-order-replenishment-header\">\n      {{ 'checkoutReview.autoReplenishOrder' | cxTranslate }}\n    </h5>\n    <cx-icon [type]=\"iconTypes.CLOCK\"></cx-icon>\n  </div>\n  <div\n    class=\"cx-order-type-container form-check\"\n    *ngFor=\"let type of orderTypes | keyvalue\"\n  >\n    <input\n      id=\"orderType-{{ type.value }}\"\n      class=\"scaled-input form-check-input\"\n      role=\"radio\"\n      type=\"radio\"\n      formControlName=\"orderType\"\n      aria-checked=\"true\"\n      (change)=\"changeOrderType(type.value)\"\n      [value]=\"type.value\"\n      [checked]=\"type.value == (selectedOrderType$ | async)\"\n    />\n    <label\n      class=\"order-type-label form-check-label form-radio-label\"\n      for=\"orderType-{{ type.value }}\"\n    >\n      <div class=\"order-type\">\n        {{ 'checkoutReview.orderType' | cxTranslate: { context: type.value } }}\n      </div>\n    </label>\n  </div>\n  <ng-container\n    *ngIf=\"\n      scheduleReplenishmentFormData &&\n      (selectedOrderType$ | async) === orderTypes.SCHEDULE_REPLENISHMENT_ORDER\n    \"\n  >\n    <div class=\"cx-replenishment-form-data-container\">\n      <div *ngIf=\"!isMonthly\" class=\"cx-days\">\n        <span class=\"form-data-label\">{{\n          'checkoutReview.every' | cxTranslate\n        }}</span>\n        <ng-container *ngIf=\"isWeekly; else isDaily\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfWeeks($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nWeeks of numberOfWeeks\"\n              [value]=\"nWeeks\"\n              [selected]=\"\n                nWeeks === scheduleReplenishmentFormData.numberOfWeeks\n              \"\n            >\n              {{ nWeeks }}\n            </option>\n          </select>\n        </ng-container>\n        <ng-template #isDaily>\n          <select\n            class=\"form-control\"\n            (change)=\"changeNumberOfDays($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.numberOfDays\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </ng-template>\n      </div>\n      <div class=\"cx-month\">\n        <span *ngIf=\"isMonthly\" class=\"form-data-label\">{{\n          'checkoutReview.every' | cxTranslate\n        }}</span>\n        <select\n          class=\"form-control\"\n          (change)=\"changeRecurrencePeriodType($event.target.value)\"\n        >\n          <option\n            *ngFor=\"let type of recurrencePeriodType\"\n            [value]=\"type\"\n            [selected]=\"type === scheduleReplenishmentFormData.recurrencePeriod\"\n          >\n            {{\n              'checkoutReview.recurrencePeriodType'\n                | cxTranslate: { context: type }\n            }}\n          </option>\n        </select>\n      </div>\n      <div *ngIf=\"isMonthly\" class=\"cx-dayMonth\">\n        <span class=\"form-data-label\">{{\n          'checkoutReview.dayOfMonth' | cxTranslate\n        }}</span>\n        <div class=\"cx-day-of-month\">\n          <select\n            class=\"form-control\"\n            (change)=\"changeDayOfTheMonth($event.target.value)\"\n          >\n            <option\n              *ngFor=\"let nDays of numberOfDays\"\n              [value]=\"nDays\"\n              [selected]=\"nDays === scheduleReplenishmentFormData.nthDayOfMonth\"\n            >\n              {{ nDays }}\n            </option>\n          </select>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"cx-replenishment-form-data-container\">\n      <span class=\"form-data-label\">{{\n        'checkoutReview.startOn' | cxTranslate\n      }}</span>\n      <div class=\"cx-replenishment-date\">\n        <input\n          type=\"date\"\n          placeholder=\"yyyy-mm-dd\"\n          [value]=\"currentDate\"\n          (change)=\"changeReplenishmentStartDate($event.target.value)\"\n        />\n      </div>\n    </div>\n\n    <div\n      *ngIf=\"isWeekly\"\n      class=\"cx-replenishment-form-data-container cx-repeat-days-container\"\n    >\n      <span class=\"cx-repeat-days form-data-label\">{{\n        'checkoutReview.repeatOnDays' | cxTranslate\n      }}</span>\n      <div *ngFor=\"let day of daysOfWeek\" class=\"form-check\">\n        <label for=\"day-{{ day }}\" class=\"cx-week-day\">{{\n          day | titlecase\n        }}</label\n        ><input\n          id=\"day-{{ day }}\"\n          type=\"checkbox\"\n          class=\"form-check-input\"\n          [checked]=\"hasDaysOfWeekChecked(day)\"\n          (change)=\"changeRepeatDays(day, $event.target.checked)\"\n        />\n      </div>\n    </div>\n  </ng-container>\n</div>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -24746,8 +24645,6 @@
     exports.ɵce = setHtmlLangAttribute;
     exports.ɵcf = defaultDirectionConfig;
     exports.ɵcg = EventsModule;
-    exports.ɵch = DatePickerFormatterService;
-    exports.ɵci = DateTimePickerFormatterService;
     exports.ɵd = FOCUS_ATTR;
     exports.ɵe = skipLinkFactory;
     exports.ɵf = initHtmlDirAttribute;
