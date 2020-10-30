@@ -15120,6 +15120,99 @@
                 },] }
     ];
 
+    (function (PageSection) {
+        PageSection["HEADER"] = "header";
+        PageSection["FOOTER"] = "footer";
+        PageSection["NAVIGATION"] = "navigation";
+    })(exports.PageSection || (exports.PageSection = {}));
+
+    /**
+     * Helper function to simplify the creation of static CMS structure (`CmsStructureConfig`).
+     * The helper function leverage the `provideConfig`, and is only providing an easy way to
+     * generate the cms structure. The function creates a configuration structure for components,
+     * page slot and page template. The following example adds a component to a page slot:
+     *
+     * ```ts
+     * provideCmsStructure({
+     *   componentId: 'LoginComponent',
+     *   pageSlotPosition: 'SiteLogin'
+     * })
+     * ```
+     *
+     * @param options.componentId component identifier is used to provide component structure
+     * @param options.pageSlotPosition page slot position is used to provide the slot configuration
+     * @param options.pageTemplate the page template is used to provide the page slot to the given page template
+     * @param options.section the section is used to provide the page slot to the given section
+     * @param options.breakpoint the breakpoint is used to provide the page slot for a specific breakpoint
+     */
+    function provideCmsStructure(options) {
+        return i1.provideConfig(Object.assign(Object.assign({}, buildCmsStructure(options)), buildLayoutConfig(options)));
+    }
+    /**
+     * @private
+     */
+    function buildCmsStructure(_a) {
+        var _b, _c;
+        var _d = _a === void 0 ? {} : _a, componentId = _d.componentId, pageSlotPosition = _d.pageSlotPosition;
+        var config = { cmsStructure: {} };
+        if (componentId) {
+            config.cmsStructure = {
+                components: (_b = {},
+                    _b[componentId] = {
+                        typeCode: componentId,
+                        flexType: componentId,
+                    },
+                    _b),
+            };
+        }
+        if (componentId && pageSlotPosition) {
+            config.cmsStructure.slots = (_c = {},
+                _c[pageSlotPosition] = { componentIds: [componentId] },
+                _c);
+        }
+        return config;
+    }
+    /**
+     * @private
+     */
+    function buildLayoutConfig(_a) {
+        var _b, _c;
+        var _d = _a === void 0 ? {} : _a, pageTemplate = _d.pageTemplate, pageSlotPosition = _d.pageSlotPosition, breakpoint = _d.breakpoint, section = _d.section;
+        var layoutConfig = {};
+        if (pageTemplate && pageSlotPosition) {
+            var pageTemplateSlots = {};
+            if (breakpoint) {
+                pageTemplateSlots[breakpoint] = {
+                    slots: [pageSlotPosition],
+                };
+            }
+            else {
+                pageTemplateSlots.slots = [pageSlotPosition];
+            }
+            layoutConfig.layoutSlots = (_b = {},
+                _b[pageTemplate] = pageTemplateSlots,
+                _b);
+        }
+        if (section && pageSlotPosition) {
+            var sectionSlots = {};
+            if (breakpoint) {
+                sectionSlots[breakpoint] = { slots: [pageSlotPosition] };
+            }
+            else {
+                sectionSlots.slots = [pageSlotPosition];
+            }
+            if (layoutConfig.layoutSlots) {
+                layoutConfig.layoutSlots[section] = sectionSlots;
+            }
+            else {
+                layoutConfig.layoutSlots = (_c = {},
+                    _c[section] = sectionSlots,
+                    _c);
+            }
+        }
+        return layoutConfig;
+    }
+
     /**
      * Generic carousel that renders CMS Components.
      */
@@ -23967,35 +24060,16 @@
      */
     var b2cLayoutConfig = layoutConfig;
 
-    var headerComponents = {
-        HamburgerMenuComponent: {
-            typeCode: 'HamburgerMenuComponent',
-            flexType: 'HamburgerMenuComponent',
-        },
-        LoginComponent: {
-            typeCode: 'LoginComponent',
-            flexType: 'LoginComponent',
-            uid: 'LoginComponent',
-        },
-    };
-    var defaultPageHeaderConfig = {
-        PreHeader: {
-            componentIds: ['HamburgerMenuComponent'],
-        },
-        SiteLogin: {
-            componentIds: ['LoginComponent'],
-        },
-    };
-
-    function defaultCmsContentConfig() {
-        return {
-            cmsStructure: {
-                components: Object.assign({}, headerComponents),
-                slots: Object.assign({}, defaultPageHeaderConfig),
-                pages: [],
-            },
-        };
-    }
+    var defaultCmsContentProviders = [
+        provideCmsStructure({
+            componentId: 'HamburgerMenuComponent',
+            pageSlotPosition: 'PreHeader',
+        }),
+        provideCmsStructure({
+            componentId: 'LoginComponent',
+            pageSlotPosition: 'SiteLogin',
+        }),
+    ];
 
     var EventsModule = /** @class */ (function () {
         function EventsModule() {
@@ -24099,7 +24173,7 @@
                         // the cms lib module contains all components that added in the bundle
                         CmsLibModule,
                     ],
-                    providers: [
+                    providers: __spread([
                         i1.provideDefaultConfig({
                             pwa: {
                                 enabled: true,
@@ -24107,9 +24181,8 @@
                             },
                         }),
                         i1.provideDefaultConfig(layoutConfig),
-                        i1.provideDefaultConfig(mediaConfig),
-                        i1.provideDefaultConfigFactory(defaultCmsContentConfig),
-                    ],
+                        i1.provideDefaultConfig(mediaConfig)
+                    ], defaultCmsContentProviders),
                     exports: [StorefrontModule],
                 },] }
     ];
@@ -24589,10 +24662,9 @@
     exports.checkoutPaymentSteps = checkoutPaymentSteps;
     exports.checkoutShippingSteps = checkoutShippingSteps;
     exports.controlsMustMatch = controlsMustMatch;
-    exports.defaultCmsContentConfig = defaultCmsContentConfig;
+    exports.defaultCmsContentProviders = defaultCmsContentProviders;
     exports.defaultLayoutConfig = defaultLayoutConfig;
     exports.defaultPWAModuleConfig = defaultPWAModuleConfig;
-    exports.defaultPageHeaderConfig = defaultPageHeaderConfig;
     exports.defaultPaginationConfig = defaultPaginationConfig;
     exports.defaultReplenishmentOrderCancellationLayoutConfig = defaultReplenishmentOrderCancellationLayoutConfig;
     exports.defaultScrollConfig = defaultScrollConfig;
@@ -24600,10 +24672,10 @@
     exports.defaultTableConfig = defaultTableConfig;
     exports.fontawesomeIconConfig = fontawesomeIconConfig;
     exports.getSuffixUrlMatcher = getSuffixUrlMatcher;
-    exports.headerComponents = headerComponents;
     exports.initSeoService = initSeoService;
     exports.layoutConfig = layoutConfig;
     exports.mediaConfig = mediaConfig;
+    exports.provideCmsStructure = provideCmsStructure;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
     exports.ɵ0 = ɵ0$1;
