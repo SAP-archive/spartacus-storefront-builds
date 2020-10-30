@@ -1,1 +1,0 @@
-{"version":3,"file":"order-overview.module.d.ts","sources":["order-overview.module.d.ts"],"names":[],"mappings":";;;;;AAAA;;;AACA","sourcesContent":["export declare class OrderOverviewModule {\n}\n"]}
