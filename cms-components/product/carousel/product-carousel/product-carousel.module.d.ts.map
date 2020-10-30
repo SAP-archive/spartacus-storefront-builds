@@ -1,1 +1,0 @@
-{"version":3,"file":"product-carousel.module.d.ts","sources":["product-carousel.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ProductCarouselModule {\n}\n"]}
