@@ -1061,9 +1061,58 @@
         loaded: [{ type: i0.Output }]
     };
 
+    /**
+     * @private We plan to drive the outlets by standard configuration
+     */
+    var PROVIDE_OUTLET_OPTIONS = new i0.InjectionToken('PROVIDE_OUTLET_OPTIONS');
+    /**
+     * Helper function to register a component for an outlet.
+     *
+     * @param options.id unique id of the outlet
+     * @param options.component Component to be registered for the outlet
+     * @param options.position Component's position in the outlet (default: `OutletPosition.AFTER`)
+     */
+    function provideOutlet(options) {
+        return {
+            provide: PROVIDE_OUTLET_OPTIONS,
+            useValue: options,
+            multi: true,
+        };
+    }
+
+    /**
+     * @private
+     */
+    function registerOutletsFactory(providedOutletOptions, componentFactoryResolver, outletService) {
+        var result = function () {
+            (providedOutletOptions !== null && providedOutletOptions !== void 0 ? providedOutletOptions : []).forEach(function (options) {
+                var _a;
+                var factory = componentFactoryResolver.resolveComponentFactory(options.component);
+                outletService.add(options.id, factory, (_a = options.position) !== null && _a !== void 0 ? _a : exports.OutletPosition.AFTER);
+            });
+        };
+        return result;
+    }
     var OutletModule = /** @class */ (function () {
         function OutletModule() {
         }
+        OutletModule.forRoot = function () {
+            return {
+                ngModule: OutletModule,
+                providers: [
+                    {
+                        provide: i0.APP_INITIALIZER,
+                        useFactory: registerOutletsFactory,
+                        deps: [
+                            [new i0.Optional(), PROVIDE_OUTLET_OPTIONS],
+                            i0.ComponentFactoryResolver,
+                            OutletService,
+                        ],
+                        multi: true,
+                    },
+                ],
+            };
+        };
         return OutletModule;
     }());
     OutletModule.decorators = [
@@ -24134,6 +24183,7 @@
                         LayoutModule,
                         MediaModule.forRoot(),
                         EventsModule,
+                        OutletModule.forRoot(),
                     ],
                     exports: [LayoutModule],
                     providers: __spread(i1.provideConfigFromMetaTags()),
@@ -24700,70 +24750,73 @@
     exports.layoutConfig = layoutConfig;
     exports.mediaConfig = mediaConfig;
     exports.provideCmsStructure = provideCmsStructure;
+    exports.provideOutlet = provideOutlet;
     exports.sortTitles = sortTitles;
     exports.titleScores = titleScores;
     exports.ɵ0 = ɵ0$1;
     exports.ɵ1 = ɵ1;
     exports.ɵ2 = ɵ2;
-    exports.ɵa = pwaConfigurationFactory;
-    exports.ɵb = pwaFactory;
-    exports.ɵba = AsmMainUiComponent;
-    exports.ɵbb = AsmComponentService;
-    exports.ɵbc = CSAgentLoginFormComponent;
-    exports.ɵbd = CustomerSelectionComponent;
-    exports.ɵbe = AsmSessionTimerComponent;
-    exports.ɵbf = FormatTimerPipe;
-    exports.ɵbg = CustomerEmulationComponent;
-    exports.ɵbh = AsmToggleUiComponent;
-    exports.ɵbi = defaultAsmLayoutConfig;
-    exports.ɵbj = defaultIconConfig;
-    exports.ɵbk = defaultCheckoutConfig;
-    exports.ɵbl = MultiLinePipe;
-    exports.ɵbm = CheckoutStepsSetGuard;
-    exports.ɵbn = PaymentTypeModule;
-    exports.ɵbo = PaymentTypeComponent;
-    exports.ɵbp = defaultPlaceOrderSpinnerLayoutConfig;
-    exports.ɵbq = CostCenterModule;
-    exports.ɵbr = CostCenterComponent;
-    exports.ɵbs = CheckoutAuthGuard;
-    exports.ɵbt = CartNotEmptyGuard;
-    exports.ɵbu = defaultQualtricsConfig;
-    exports.ɵbv = CmsPageGuardService;
-    exports.ɵbw = CmsRoutesImplService;
-    exports.ɵbx = ReturnRequestService;
-    exports.ɵby = LoginRegisterComponent;
-    exports.ɵbz = MyCouponsComponentService;
-    exports.ɵc = getStructuredDataFactory;
-    exports.ɵca = addCmsRoute;
-    exports.ɵcb = defaultStorefrontRoutesConfig;
-    exports.ɵcc = defaultRoutingConfig;
-    exports.ɵcd = htmlLangProvider;
-    exports.ɵce = setHtmlLangAttribute;
-    exports.ɵcf = defaultDirectionConfig;
-    exports.ɵcg = EventsModule;
-    exports.ɵd = FOCUS_ATTR;
-    exports.ɵe = skipLinkFactory;
-    exports.ɵf = initHtmlDirAttribute;
-    exports.ɵg = LockFocusDirective;
-    exports.ɵh = TrapFocusDirective;
-    exports.ɵi = TabFocusDirective;
-    exports.ɵj = AutoFocusDirective;
-    exports.ɵk = EscapeFocusDirective;
-    exports.ɵl = PersistFocusDirective;
-    exports.ɵm = BlockFocusDirective;
-    exports.ɵn = VisibleFocusDirective;
-    exports.ɵo = BaseFocusDirective;
-    exports.ɵp = BaseFocusService;
-    exports.ɵq = PersistFocusService;
-    exports.ɵr = EscapeFocusService;
-    exports.ɵs = AutoFocusService;
-    exports.ɵt = TabFocusService;
-    exports.ɵu = TrapFocusService;
-    exports.ɵv = LockFocusService;
-    exports.ɵw = defaultAnonymousConsentLayoutConfig;
-    exports.ɵx = AsmLoaderModule;
-    exports.ɵy = asmFactory;
-    exports.ɵz = AsmEnablerService;
+    exports.ɵa = registerOutletsFactory;
+    exports.ɵb = PROVIDE_OUTLET_OPTIONS;
+    exports.ɵba = asmFactory;
+    exports.ɵbb = AsmEnablerService;
+    exports.ɵbc = AsmMainUiComponent;
+    exports.ɵbd = AsmComponentService;
+    exports.ɵbe = CSAgentLoginFormComponent;
+    exports.ɵbf = CustomerSelectionComponent;
+    exports.ɵbg = AsmSessionTimerComponent;
+    exports.ɵbh = FormatTimerPipe;
+    exports.ɵbi = CustomerEmulationComponent;
+    exports.ɵbj = AsmToggleUiComponent;
+    exports.ɵbk = defaultAsmLayoutConfig;
+    exports.ɵbl = defaultIconConfig;
+    exports.ɵbm = defaultCheckoutConfig;
+    exports.ɵbn = MultiLinePipe;
+    exports.ɵbo = CheckoutStepsSetGuard;
+    exports.ɵbp = PaymentTypeModule;
+    exports.ɵbq = PaymentTypeComponent;
+    exports.ɵbr = defaultPlaceOrderSpinnerLayoutConfig;
+    exports.ɵbs = CostCenterModule;
+    exports.ɵbt = CostCenterComponent;
+    exports.ɵbu = CheckoutAuthGuard;
+    exports.ɵbv = CartNotEmptyGuard;
+    exports.ɵbw = defaultQualtricsConfig;
+    exports.ɵbx = CmsPageGuardService;
+    exports.ɵby = CmsRoutesImplService;
+    exports.ɵbz = ReturnRequestService;
+    exports.ɵc = pwaConfigurationFactory;
+    exports.ɵca = LoginRegisterComponent;
+    exports.ɵcb = MyCouponsComponentService;
+    exports.ɵcc = addCmsRoute;
+    exports.ɵcd = defaultStorefrontRoutesConfig;
+    exports.ɵce = defaultRoutingConfig;
+    exports.ɵcf = htmlLangProvider;
+    exports.ɵcg = setHtmlLangAttribute;
+    exports.ɵch = defaultDirectionConfig;
+    exports.ɵci = EventsModule;
+    exports.ɵd = pwaFactory;
+    exports.ɵe = getStructuredDataFactory;
+    exports.ɵf = FOCUS_ATTR;
+    exports.ɵg = skipLinkFactory;
+    exports.ɵh = initHtmlDirAttribute;
+    exports.ɵi = LockFocusDirective;
+    exports.ɵj = TrapFocusDirective;
+    exports.ɵk = TabFocusDirective;
+    exports.ɵl = AutoFocusDirective;
+    exports.ɵm = EscapeFocusDirective;
+    exports.ɵn = PersistFocusDirective;
+    exports.ɵo = BlockFocusDirective;
+    exports.ɵp = VisibleFocusDirective;
+    exports.ɵq = BaseFocusDirective;
+    exports.ɵr = BaseFocusService;
+    exports.ɵs = PersistFocusService;
+    exports.ɵt = EscapeFocusService;
+    exports.ɵu = AutoFocusService;
+    exports.ɵv = TabFocusService;
+    exports.ɵw = TrapFocusService;
+    exports.ɵx = LockFocusService;
+    exports.ɵy = defaultAnonymousConsentLayoutConfig;
+    exports.ɵz = AsmLoaderModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
