@@ -14389,7 +14389,9 @@
             });
         };
         StorefrontComponent.prototype.collapseMenuIfClickOutside = function (event) {
-            if (event.target.className.includes('is-expanded')) {
+            var element = event.target;
+            if (element.nodeName.toLowerCase() === 'header' &&
+                element.className.includes('is-expanded')) {
                 this.collapseMenu();
             }
         };

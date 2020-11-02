@@ -12778,7 +12778,9 @@ class StorefrontComponent {
         });
     }
     collapseMenuIfClickOutside(event) {
-        if (event.target.className.includes('is-expanded')) {
+        const element = event.target;
+        if (element.nodeName.toLowerCase() === 'header' &&
+            element.className.includes('is-expanded')) {
             this.collapseMenu();
         }
     }
