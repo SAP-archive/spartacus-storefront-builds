@@ -14001,6 +14001,27 @@
                 },] }
     ];
 
+    var defaultSeoConfig = {
+        seo: {
+            structuredData: {
+                disableInDevMode: true,
+            },
+        },
+    };
+
+    var SeoConfig = /** @class */ (function () {
+        function SeoConfig() {
+        }
+        return SeoConfig;
+    }());
+    SeoConfig.ɵprov = i0.ɵɵdefineInjectable({ factory: function SeoConfig_Factory() { return i0.ɵɵinject(i1.Config); }, token: SeoConfig, providedIn: "root" });
+    SeoConfig.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                    useExisting: i1.Config,
+                },] }
+    ];
+
     var htmlLangProvider = {
         provide: i0.APP_INITIALIZER,
         multi: true,
@@ -14099,25 +14120,38 @@
     ]; };
 
     var JsonLdScriptFactory = /** @class */ (function () {
-        function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer) {
+        function JsonLdScriptFactory(platformId, winRef, rendererFactory, sanitizer, config) {
             this.platformId = platformId;
             this.winRef = winRef;
             this.rendererFactory = rendererFactory;
             this.sanitizer = sanitizer;
+            this.config = config;
         }
         JsonLdScriptFactory.prototype.build = function (schema) {
             if (schema && this.isJsonLdRequired()) {
-                this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
+                this.getJsonLdScriptElement().innerHTML = this.sanitize(schema);
             }
         };
         /**
-         * Only return schema data in case of SSR or development mode,
-         * to not waste memory unnecessary.
+         * Indicates whether json ld data should be generated.
+         *
+         * This is only required on the server, but can be enabled in dev mode.
          */
         JsonLdScriptFactory.prototype.isJsonLdRequired = function () {
-            return !i1$1.isPlatformBrowser(this.platformId) || i0.isDevMode();
+            var _a, _b;
+            return (!i1$1.isPlatformBrowser(this.platformId) ||
+                (i0.isDevMode() && !((_b = (_a = this.config.seo) === null || _a === void 0 ? void 0 : _a.structuredData) === null || _b === void 0 ? void 0 : _b.disableInDevMode)));
         };
-        JsonLdScriptFactory.prototype.createJsonLdScriptElement = function () {
+        /**
+         * Creates a json-ld script element. The element is created one, and appended
+         * to the html body element.
+         *
+         * ```html
+         * <script id="json-ld" type="application/ld+json">
+         * </script>
+         * ```
+         */
+        JsonLdScriptFactory.prototype.getJsonLdScriptElement = function () {
             var id = 'json-ld';
             var scriptElement = (this.winRef.document.getElementById(id));
             if (!scriptElement) {
@@ -14144,7 +14178,7 @@
         };
         return JsonLdScriptFactory;
     }());
-    JsonLdScriptFactory.ɵprov = i0.ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(i0.ɵɵinject(i0.PLATFORM_ID), i0.ɵɵinject(i1.WindowRef), i0.ɵɵinject(i0.RendererFactory2), i0.ɵɵinject(i1$2.DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
+    JsonLdScriptFactory.ɵprov = i0.ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(i0.ɵɵinject(i0.PLATFORM_ID), i0.ɵɵinject(i1.WindowRef), i0.ɵɵinject(i0.RendererFactory2), i0.ɵɵinject(i1$2.DomSanitizer), i0.ɵɵinject(SeoConfig)); }, token: JsonLdScriptFactory, providedIn: "root" });
     JsonLdScriptFactory.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -14154,13 +14188,20 @@
         { type: String, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] },
         { type: i1.WindowRef },
         { type: i0.RendererFactory2 },
-        { type: i1$2.DomSanitizer }
+        { type: i1$2.DomSanitizer },
+        { type: SeoConfig }
     ]; };
 
     /**
      * Low level directive that adds a json-ld script tag to the component.
      * This code bypasses the strict XSS security, as otherwise we're not able
      * to append a script tag with JS inside.
+     *
+     * This helper directive is actually not used in Spartacus, as Spartacus
+     * appends json-ld the data to the document body.
+     *
+     * This directive can however be used by merchants to write static schema data
+     * to the DOM in a save way.
      */
     var JsonLdDirective = /** @class */ (function () {
         function JsonLdDirective(jsonLdScriptFactory, sanitizer) {
@@ -14168,17 +14209,24 @@
             this.sanitizer = sanitizer;
         }
         Object.defineProperty(JsonLdDirective.prototype, "cxJsonLd", {
+            /**
+             * Writes the schema data to a json-ld script element.
+             */
             set: function (schema) {
-                this.writeJsonLd(schema);
+                this.jsonLD = this.generateJsonLdScript(schema);
             },
             enumerable: false,
             configurable: true
         });
-        JsonLdDirective.prototype.writeJsonLd = function (schema) {
+        /**
+         * Returns the json-ld script tag with the schema data. The script is
+         * _bypassing_ sanitization explicitly.
+         */
+        JsonLdDirective.prototype.generateJsonLdScript = function (schema) {
             if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
                 var sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
                 var html = "<script type=\"application/ld+json\">" + sanitizedSchema + "</script>";
-                this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+                return this.sanitizer.bypassSecurityTrustHtml(html);
             }
         };
         return JsonLdDirective;
@@ -14201,36 +14249,45 @@
      * Injection token to extend schema builders for adding structural data (json-ld).
      *
      * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
-     * lowever level builder to further extend the schema.
+     * lower level builder to further extend the schema.
      */
     var SCHEMA_BUILDER = new i0.InjectionToken('SchemaBuilderToken');
     /**
-     * Injection token to add specific json-ld builders for product related schema's.
+     * Injection token to add specific json-ld builders for product related schemas.
      * See see https://schema.org/product for more information.
      */
     var JSONLD_PRODUCT_BUILDER = new i0.InjectionToken('JsonLdProductBuilderToken');
 
+    /**
+     * Factory service that is used to build the structured data for
+     * all configured schema builders.
+     */
     var StructuredDataFactory = /** @class */ (function () {
         function StructuredDataFactory(scriptBuilder, builders) {
             this.scriptBuilder = scriptBuilder;
             this.builders = builders;
+            this.subscription = new rxjs.Subscription();
         }
+        /**
+         * Initiates the build of structured data by collecting all schema
+         * builders.
+         */
         StructuredDataFactory.prototype.build = function () {
             var _this = this;
-            this.subscription = this.collectSchemas().subscribe(function (schema) {
-                _this.scriptBuilder.build(schema);
-            });
-        };
-        StructuredDataFactory.prototype.collectSchemas = function () {
-            if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-                return rxjs.of();
+            if (this.scriptBuilder.isJsonLdRequired() && this.builders) {
+                this.subscription.add(this.collectSchemas().subscribe(function (schema) {
+                    _this.scriptBuilder.build(schema);
+                }));
             }
-            return rxjs.combineLatest(this.builders.map(function (builder) { return builder.build(); })).pipe();
+        };
+        /**
+         * Collects all schema builders and observe their structured data.
+         */
+        StructuredDataFactory.prototype.collectSchemas = function () {
+            return rxjs.combineLatest(this.builders.map(function (builder) { return builder.build(); }));
         };
         StructuredDataFactory.prototype.ngOnDestroy = function () {
-            if (this.subscription) {
-                this.subscription.unsubscribe();
-            }
+            this.subscription.unsubscribe();
         };
         return StructuredDataFactory;
     }());
@@ -14293,6 +14350,7 @@
         { type: i0.NgModule, args: [{
                     imports: [StructuredDataModule],
                     providers: [
+                        i1.provideDefaultConfig(defaultSeoConfig),
                         {
                             provide: i0.APP_INITIALIZER,
                             useFactory: initSeoService,
@@ -14945,6 +15003,9 @@
         JsonLdBaseProductBuilder.prototype.build = function (product) {
             return rxjs.of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
         };
+        /**
+         * Returns the product sku, name and description.
+         */
         JsonLdBaseProductBuilder.prototype.getProductBase = function (product) {
             var result = { sku: product.code };
             if (product.name) {
@@ -14955,22 +15016,24 @@
             }
             return result;
         };
+        /**
+         * Returns the image object with the main product image url.
+         *
+         * If the image is not available, an empty object is returned.
+         */
         JsonLdBaseProductBuilder.prototype.getProductImage = function (product) {
-            return product.images &&
-                product.images.PRIMARY &&
-                product.images.PRIMARY['zoom'] &&
-                product.images.PRIMARY['zoom'].url
-                ? {
-                    image: product.images.PRIMARY['zoom'].url,
-                }
-                : {};
+            var _a, _b, _c;
+            var image = (_c = (_b = (_a = product.images) === null || _a === void 0 ? void 0 : _a.PRIMARY) === null || _b === void 0 ? void 0 : _b['zoom']) === null || _c === void 0 ? void 0 : _c.url;
+            return image ? { image: image } : {};
         };
+        /**
+         * Returns the brand object with the product manufacturer.
+         *
+         * If the brand is not available, an empty object is returned.
+         */
         JsonLdBaseProductBuilder.prototype.getProductBrand = function (product) {
-            return product['manufacturer']
-                ? {
-                    brand: product['manufacturer'],
-                }
-                : null;
+            var brand = product.manufacturer;
+            return brand ? { brand: brand } : {};
         };
         return JsonLdBaseProductBuilder;
     }());
@@ -14989,11 +15052,10 @@
         function JsonLdProductOfferBuilder() {
         }
         JsonLdProductOfferBuilder.prototype.build = function (product) {
+            var _a;
             var schema = { '@type': 'Offer' };
-            if (product.price) {
-                if (product.price.value) {
-                    schema.price = product.price.value;
-                }
+            if ((_a = product.price) === null || _a === void 0 ? void 0 : _a.value) {
+                schema.price = product.price.value;
                 if (product.price.currencyIso) {
                     schema.priceCurrency = product.price.currencyIso;
                 }
@@ -15002,9 +15064,7 @@
                 schema.availability =
                     product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
             }
-            return rxjs.of({
-                offers: schema,
-            });
+            return rxjs.of({ offers: schema });
         };
         return JsonLdProductOfferBuilder;
     }());
@@ -15020,17 +15080,18 @@
      * The data includes the aggregated product rating and the individual reviews.
      */
     var JsonLdProductReviewBuilder = /** @class */ (function () {
-        function JsonLdProductReviewBuilder(reviewService) {
+        function JsonLdProductReviewBuilder(reviewService, config) {
             this.reviewService = reviewService;
+            this.config = config;
         }
         JsonLdProductReviewBuilder.prototype.build = function (product) {
             var _this = this;
-            return this.reviewService.getByProductCode(product.code).pipe(operators.filter(Boolean), operators.map(function (reviews) {
-                return {
+            return this.reviewService.getByProductCode(product.code).pipe(operators.map(function (reviews) { return (reviews === null || reviews === void 0 ? void 0 : reviews.length) > 0
+                ? {
                     aggregateRating: _this.buildAggregatedReviews(product, reviews),
                     review: reviews.map(function (review) { return _this.buildReviews(review); }),
-                };
-            }));
+                }
+                : {}; }));
         };
         JsonLdProductReviewBuilder.prototype.buildAggregatedReviews = function (product, reviews) {
             var aggregated = {
@@ -15072,14 +15133,15 @@
         };
         return JsonLdProductReviewBuilder;
     }());
-    JsonLdProductReviewBuilder.ɵprov = i0.ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(i0.ɵɵinject(i1.ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+    JsonLdProductReviewBuilder.ɵprov = i0.ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(i0.ɵɵinject(i1.ProductReviewService), i0.ɵɵinject(SeoConfig)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
     JsonLdProductReviewBuilder.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
                 },] }
     ];
     JsonLdProductReviewBuilder.ctorParameters = function () { return [
-        { type: i1.ProductReviewService }
+        { type: i1.ProductReviewService },
+        { type: SeoConfig }
     ]; };
 
     /**
@@ -15130,7 +15192,7 @@
 
     /**
      * Provides several standard json-ld builders that contribute
-     * to colleting and building json-ld data.
+     * to collecting and building json-ld data.
      */
     var JsonLdBuilderModule = /** @class */ (function () {
         function JsonLdBuilderModule() {
@@ -15150,8 +15212,8 @@
                             useExisting: BreadcrumbSchemaBuilder,
                             multi: true,
                         },
-                        // lower level json-ld builder classes offering fine-graiend control
-                        // for product related schema's
+                        // lower level json-ld builder classes offering fine-grained control
+                        // for product related schemas
                         {
                             provide: JSONLD_PRODUCT_BUILDER,
                             useExisting: JsonLdBaseProductBuilder,
@@ -24790,10 +24852,12 @@
     exports.ɵcc = addCmsRoute;
     exports.ɵcd = defaultStorefrontRoutesConfig;
     exports.ɵce = defaultRoutingConfig;
-    exports.ɵcf = htmlLangProvider;
-    exports.ɵcg = setHtmlLangAttribute;
-    exports.ɵch = defaultDirectionConfig;
-    exports.ɵci = EventsModule;
+    exports.ɵcf = SeoConfig;
+    exports.ɵcg = defaultSeoConfig;
+    exports.ɵch = htmlLangProvider;
+    exports.ɵci = setHtmlLangAttribute;
+    exports.ɵcj = defaultDirectionConfig;
+    exports.ɵck = EventsModule;
     exports.ɵd = pwaFactory;
     exports.ɵe = getStructuredDataFactory;
     exports.ɵf = FOCUS_ATTR;

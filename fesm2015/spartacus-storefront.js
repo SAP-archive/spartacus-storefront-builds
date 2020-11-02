@@ -12431,6 +12431,24 @@ PwaModule.decorators = [
             },] }
 ];
 
+const defaultSeoConfig = {
+    seo: {
+        structuredData: {
+            disableInDevMode: true,
+        },
+    },
+};
+
+class SeoConfig {
+}
+SeoConfig.ɵprov = ɵɵdefineInjectable({ factory: function SeoConfig_Factory() { return ɵɵinject(Config); }, token: SeoConfig, providedIn: "root" });
+SeoConfig.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+                useExisting: Config,
+            },] }
+];
+
 const htmlLangProvider = {
     provide: APP_INITIALIZER,
     multi: true,
@@ -12507,25 +12525,38 @@ SeoMetaService.ctorParameters = () => [
 ];
 
 class JsonLdScriptFactory {
-    constructor(platformId, winRef, rendererFactory, sanitizer) {
+    constructor(platformId, winRef, rendererFactory, sanitizer, config) {
         this.platformId = platformId;
         this.winRef = winRef;
         this.rendererFactory = rendererFactory;
         this.sanitizer = sanitizer;
+        this.config = config;
     }
     build(schema) {
         if (schema && this.isJsonLdRequired()) {
-            this.createJsonLdScriptElement().innerHTML = this.sanitize(schema);
+            this.getJsonLdScriptElement().innerHTML = this.sanitize(schema);
         }
     }
     /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
+     * Indicates whether json ld data should be generated.
+     *
+     * This is only required on the server, but can be enabled in dev mode.
      */
     isJsonLdRequired() {
-        return !isPlatformBrowser(this.platformId) || isDevMode();
+        var _a, _b;
+        return (!isPlatformBrowser(this.platformId) ||
+            (isDevMode() && !((_b = (_a = this.config.seo) === null || _a === void 0 ? void 0 : _a.structuredData) === null || _b === void 0 ? void 0 : _b.disableInDevMode)));
     }
-    createJsonLdScriptElement() {
+    /**
+     * Creates a json-ld script element. The element is created one, and appended
+     * to the html body element.
+     *
+     * ```html
+     * <script id="json-ld" type="application/ld+json">
+     * </script>
+     * ```
+     */
+    getJsonLdScriptElement() {
         const id = 'json-ld';
         let scriptElement = (this.winRef.document.getElementById(id));
         if (!scriptElement) {
@@ -12550,7 +12581,7 @@ class JsonLdScriptFactory {
             : value);
     }
 }
-JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer)); }, token: JsonLdScriptFactory, providedIn: "root" });
+JsonLdScriptFactory.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdScriptFactory_Factory() { return new JsonLdScriptFactory(ɵɵinject(PLATFORM_ID), ɵɵinject(WindowRef), ɵɵinject(RendererFactory2), ɵɵinject(DomSanitizer), ɵɵinject(SeoConfig)); }, token: JsonLdScriptFactory, providedIn: "root" });
 JsonLdScriptFactory.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -12560,27 +12591,41 @@ JsonLdScriptFactory.ctorParameters = () => [
     { type: String, decorators: [{ type: Inject, args: [PLATFORM_ID,] }] },
     { type: WindowRef },
     { type: RendererFactory2 },
-    { type: DomSanitizer }
+    { type: DomSanitizer },
+    { type: SeoConfig }
 ];
 
 /**
  * Low level directive that adds a json-ld script tag to the component.
  * This code bypasses the strict XSS security, as otherwise we're not able
  * to append a script tag with JS inside.
+ *
+ * This helper directive is actually not used in Spartacus, as Spartacus
+ * appends json-ld the data to the document body.
+ *
+ * This directive can however be used by merchants to write static schema data
+ * to the DOM in a save way.
  */
 class JsonLdDirective {
     constructor(jsonLdScriptFactory, sanitizer) {
         this.jsonLdScriptFactory = jsonLdScriptFactory;
         this.sanitizer = sanitizer;
     }
+    /**
+     * Writes the schema data to a json-ld script element.
+     */
     set cxJsonLd(schema) {
-        this.writeJsonLd(schema);
+        this.jsonLD = this.generateJsonLdScript(schema);
     }
-    writeJsonLd(schema) {
+    /**
+     * Returns the json-ld script tag with the schema data. The script is
+     * _bypassing_ sanitization explicitly.
+     */
+    generateJsonLdScript(schema) {
         if (schema && this.jsonLdScriptFactory.isJsonLdRequired()) {
             const sanitizedSchema = this.jsonLdScriptFactory.sanitize(schema);
             const html = `<script type="application/ld+json">${sanitizedSchema}</script>`;
-            this.jsonLD = this.sanitizer.bypassSecurityTrustHtml(html);
+            return this.sanitizer.bypassSecurityTrustHtml(html);
         }
     }
 }
@@ -12602,35 +12647,44 @@ JsonLdDirective.propDecorators = {
  * Injection token to extend schema builders for adding structural data (json-ld).
  *
  * Some builders (i.e. `JSONLD_PRODUCT_BUILDER`) might have additional
- * lowever level builder to further extend the schema.
+ * lower level builder to further extend the schema.
  */
 const SCHEMA_BUILDER = new InjectionToken('SchemaBuilderToken');
 /**
- * Injection token to add specific json-ld builders for product related schema's.
+ * Injection token to add specific json-ld builders for product related schemas.
  * See see https://schema.org/product for more information.
  */
 const JSONLD_PRODUCT_BUILDER = new InjectionToken('JsonLdProductBuilderToken');
 
+/**
+ * Factory service that is used to build the structured data for
+ * all configured schema builders.
+ */
 class StructuredDataFactory {
     constructor(scriptBuilder, builders) {
         this.scriptBuilder = scriptBuilder;
         this.builders = builders;
+        this.subscription = new Subscription();
     }
+    /**
+     * Initiates the build of structured data by collecting all schema
+     * builders.
+     */
     build() {
-        this.subscription = this.collectSchemas().subscribe((schema) => {
-            this.scriptBuilder.build(schema);
-        });
-    }
-    collectSchemas() {
-        if (!this.scriptBuilder.isJsonLdRequired() || !this.builders) {
-            return of();
+        if (this.scriptBuilder.isJsonLdRequired() && this.builders) {
+            this.subscription.add(this.collectSchemas().subscribe((schema) => {
+                this.scriptBuilder.build(schema);
+            }));
         }
-        return combineLatest(this.builders.map((builder) => builder.build())).pipe();
+    }
+    /**
+     * Collects all schema builders and observe their structured data.
+     */
+    collectSchemas() {
+        return combineLatest(this.builders.map((builder) => builder.build()));
     }
     ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+        this.subscription.unsubscribe();
     }
 }
 StructuredDataFactory.ɵprov = ɵɵdefineInjectable({ factory: function StructuredDataFactory_Factory() { return new StructuredDataFactory(ɵɵinject(JsonLdScriptFactory), ɵɵinject(SCHEMA_BUILDER, 8)); }, token: StructuredDataFactory, providedIn: "root" });
@@ -12686,6 +12740,7 @@ SeoModule.decorators = [
     { type: NgModule, args: [{
                 imports: [StructuredDataModule],
                 providers: [
+                    provideDefaultConfig(defaultSeoConfig),
                     {
                         provide: APP_INITIALIZER,
                         useFactory: initSeoService,
@@ -13293,6 +13348,9 @@ class JsonLdBaseProductBuilder {
     build(product) {
         return of(Object.assign(Object.assign(Object.assign({}, this.getProductBase(product)), this.getProductBrand(product)), this.getProductImage(product)));
     }
+    /**
+     * Returns the product sku, name and description.
+     */
     getProductBase(product) {
         const result = { sku: product.code };
         if (product.name) {
@@ -13303,22 +13361,24 @@ class JsonLdBaseProductBuilder {
         }
         return result;
     }
+    /**
+     * Returns the image object with the main product image url.
+     *
+     * If the image is not available, an empty object is returned.
+     */
     getProductImage(product) {
-        return product.images &&
-            product.images.PRIMARY &&
-            product.images.PRIMARY['zoom'] &&
-            product.images.PRIMARY['zoom'].url
-            ? {
-                image: product.images.PRIMARY['zoom'].url,
-            }
-            : {};
+        var _a, _b, _c;
+        const image = (_c = (_b = (_a = product.images) === null || _a === void 0 ? void 0 : _a.PRIMARY) === null || _b === void 0 ? void 0 : _b['zoom']) === null || _c === void 0 ? void 0 : _c.url;
+        return image ? { image } : {};
     }
+    /**
+     * Returns the brand object with the product manufacturer.
+     *
+     * If the brand is not available, an empty object is returned.
+     */
     getProductBrand(product) {
-        return product['manufacturer']
-            ? {
-                brand: product['manufacturer'],
-            }
-            : null;
+        const brand = product.manufacturer;
+        return brand ? { brand } : {};
     }
 }
 JsonLdBaseProductBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdBaseProductBuilder_Factory() { return new JsonLdBaseProductBuilder(); }, token: JsonLdBaseProductBuilder, providedIn: "root" });
@@ -13334,11 +13394,10 @@ JsonLdBaseProductBuilder.decorators = [
  */
 class JsonLdProductOfferBuilder {
     build(product) {
+        var _a;
         const schema = { '@type': 'Offer' };
-        if (product.price) {
-            if (product.price.value) {
-                schema.price = product.price.value;
-            }
+        if ((_a = product.price) === null || _a === void 0 ? void 0 : _a.value) {
+            schema.price = product.price.value;
             if (product.price.currencyIso) {
                 schema.priceCurrency = product.price.currencyIso;
             }
@@ -13347,9 +13406,7 @@ class JsonLdProductOfferBuilder {
             schema.availability =
                 product.stock.stockLevelStatus === 'inStock' ? 'InStock' : 'OutOfStock';
         }
-        return of({
-            offers: schema,
-        });
+        return of({ offers: schema });
     }
 }
 JsonLdProductOfferBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductOfferBuilder_Factory() { return new JsonLdProductOfferBuilder(); }, token: JsonLdProductOfferBuilder, providedIn: "root" });
@@ -13364,16 +13421,17 @@ JsonLdProductOfferBuilder.decorators = [
  * The data includes the aggregated product rating and the individual reviews.
  */
 class JsonLdProductReviewBuilder {
-    constructor(reviewService) {
+    constructor(reviewService, config) {
         this.reviewService = reviewService;
+        this.config = config;
     }
     build(product) {
-        return this.reviewService.getByProductCode(product.code).pipe(filter(Boolean), map((reviews) => {
-            return {
+        return this.reviewService.getByProductCode(product.code).pipe(map((reviews) => (reviews === null || reviews === void 0 ? void 0 : reviews.length) > 0
+            ? {
                 aggregateRating: this.buildAggregatedReviews(product, reviews),
                 review: reviews.map((review) => this.buildReviews(review)),
-            };
-        }));
+            }
+            : {}));
     }
     buildAggregatedReviews(product, reviews) {
         const aggregated = {
@@ -13414,14 +13472,15 @@ class JsonLdProductReviewBuilder {
         return reviewSchema;
     }
 }
-JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
+JsonLdProductReviewBuilder.ɵprov = ɵɵdefineInjectable({ factory: function JsonLdProductReviewBuilder_Factory() { return new JsonLdProductReviewBuilder(ɵɵinject(ProductReviewService), ɵɵinject(SeoConfig)); }, token: JsonLdProductReviewBuilder, providedIn: "root" });
 JsonLdProductReviewBuilder.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
 ];
 JsonLdProductReviewBuilder.ctorParameters = () => [
-    { type: ProductReviewService }
+    { type: ProductReviewService },
+    { type: SeoConfig }
 ];
 
 /**
@@ -13471,7 +13530,7 @@ ProductSchemaBuilder.ctorParameters = () => [
 
 /**
  * Provides several standard json-ld builders that contribute
- * to colleting and building json-ld data.
+ * to collecting and building json-ld data.
  */
 class JsonLdBuilderModule {
 }
@@ -13488,8 +13547,8 @@ JsonLdBuilderModule.decorators = [
                         useExisting: BreadcrumbSchemaBuilder,
                         multi: true,
                     },
-                    // lower level json-ld builder classes offering fine-graiend control
-                    // for product related schema's
+                    // lower level json-ld builder classes offering fine-grained control
+                    // for product related schemas
                     {
                         provide: JSONLD_PRODUCT_BUILDER,
                         useExisting: JsonLdBaseProductBuilder,
@@ -21999,5 +22058,5 @@ var FormUtils;
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginGuard, LoginModule, LoginRegisterModule, LoginRouteModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSection, PageSlotComponent, PageSlotModule, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, TrapFocus, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentProviders, defaultLayoutConfig, defaultPWAModuleConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, initSeoService, layoutConfig, mediaConfig, provideCmsStructure, provideOutlet, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, registerOutletsFactory as ɵa, PROVIDE_OUTLET_OPTIONS as ɵb, asmFactory as ɵba, AsmEnablerService as ɵbb, AsmMainUiComponent as ɵbc, AsmComponentService as ɵbd, CSAgentLoginFormComponent as ɵbe, CustomerSelectionComponent as ɵbf, AsmSessionTimerComponent as ɵbg, FormatTimerPipe as ɵbh, CustomerEmulationComponent as ɵbi, AsmToggleUiComponent as ɵbj, defaultAsmLayoutConfig as ɵbk, defaultIconConfig as ɵbl, defaultCheckoutConfig as ɵbm, MultiLinePipe as ɵbn, CheckoutStepsSetGuard as ɵbo, PaymentTypeModule as ɵbp, PaymentTypeComponent as ɵbq, defaultPlaceOrderSpinnerLayoutConfig as ɵbr, CostCenterModule as ɵbs, CostCenterComponent as ɵbt, CheckoutAuthGuard as ɵbu, CartNotEmptyGuard as ɵbv, defaultQualtricsConfig as ɵbw, CmsPageGuardService as ɵbx, CmsRoutesImplService as ɵby, ReturnRequestService as ɵbz, pwaConfigurationFactory as ɵc, LoginRegisterComponent as ɵca, MyCouponsComponentService as ɵcb, addCmsRoute as ɵcc, defaultStorefrontRoutesConfig as ɵcd, defaultRoutingConfig as ɵce, htmlLangProvider as ɵcf, setHtmlLangAttribute as ɵcg, defaultDirectionConfig as ɵch, EventsModule as ɵci, pwaFactory as ɵd, getStructuredDataFactory as ɵe, FOCUS_ATTR as ɵf, skipLinkFactory as ɵg, initHtmlDirAttribute as ɵh, LockFocusDirective as ɵi, TrapFocusDirective as ɵj, TabFocusDirective as ɵk, AutoFocusDirective as ɵl, EscapeFocusDirective as ɵm, PersistFocusDirective as ɵn, BlockFocusDirective as ɵo, VisibleFocusDirective as ɵp, BaseFocusDirective as ɵq, BaseFocusService as ɵr, PersistFocusService as ɵs, EscapeFocusService as ɵt, AutoFocusService as ɵu, TabFocusService as ɵv, TrapFocusService as ɵw, LockFocusService as ɵx, defaultAnonymousConsentLayoutConfig as ɵy, AsmLoaderModule as ɵz };
+export { AVOID_STACKED_OUTLETS, AbstractStoreItemComponent, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DateTimePickerComponent, DateTimePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginGuard, LoginModule, LoginRegisterModule, LoginRouteModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSection, PageSlotComponent, PageSlotModule, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleComponent, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StoreFinderComponent, StoreFinderGridComponent, StoreFinderHeaderComponent, StoreFinderListComponent, StoreFinderListItemComponent, StoreFinderMapComponent, StoreFinderModule, StoreFinderPaginationDetailsComponent, StoreFinderSearchComponent, StoreFinderSearchResultComponent, StoreFinderStoreComponent, StoreFinderStoreDescriptionComponent, StoreFinderStoresCountComponent, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, TrapFocus, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentProviders, defaultLayoutConfig, defaultPWAModuleConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, initSeoService, layoutConfig, mediaConfig, provideCmsStructure, provideOutlet, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, registerOutletsFactory as ɵa, PROVIDE_OUTLET_OPTIONS as ɵb, asmFactory as ɵba, AsmEnablerService as ɵbb, AsmMainUiComponent as ɵbc, AsmComponentService as ɵbd, CSAgentLoginFormComponent as ɵbe, CustomerSelectionComponent as ɵbf, AsmSessionTimerComponent as ɵbg, FormatTimerPipe as ɵbh, CustomerEmulationComponent as ɵbi, AsmToggleUiComponent as ɵbj, defaultAsmLayoutConfig as ɵbk, defaultIconConfig as ɵbl, defaultCheckoutConfig as ɵbm, MultiLinePipe as ɵbn, CheckoutStepsSetGuard as ɵbo, PaymentTypeModule as ɵbp, PaymentTypeComponent as ɵbq, defaultPlaceOrderSpinnerLayoutConfig as ɵbr, CostCenterModule as ɵbs, CostCenterComponent as ɵbt, CheckoutAuthGuard as ɵbu, CartNotEmptyGuard as ɵbv, defaultQualtricsConfig as ɵbw, CmsPageGuardService as ɵbx, CmsRoutesImplService as ɵby, ReturnRequestService as ɵbz, pwaConfigurationFactory as ɵc, LoginRegisterComponent as ɵca, MyCouponsComponentService as ɵcb, addCmsRoute as ɵcc, defaultStorefrontRoutesConfig as ɵcd, defaultRoutingConfig as ɵce, SeoConfig as ɵcf, defaultSeoConfig as ɵcg, htmlLangProvider as ɵch, setHtmlLangAttribute as ɵci, defaultDirectionConfig as ɵcj, EventsModule as ɵck, pwaFactory as ɵd, getStructuredDataFactory as ɵe, FOCUS_ATTR as ɵf, skipLinkFactory as ɵg, initHtmlDirAttribute as ɵh, LockFocusDirective as ɵi, TrapFocusDirective as ɵj, TabFocusDirective as ɵk, AutoFocusDirective as ɵl, EscapeFocusDirective as ɵm, PersistFocusDirective as ɵn, BlockFocusDirective as ɵo, VisibleFocusDirective as ɵp, BaseFocusDirective as ɵq, BaseFocusService as ɵr, PersistFocusService as ɵs, EscapeFocusService as ɵt, AutoFocusService as ɵu, TabFocusService as ɵv, TrapFocusService as ɵw, LockFocusService as ɵx, defaultAnonymousConsentLayoutConfig as ɵy, AsmLoaderModule as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

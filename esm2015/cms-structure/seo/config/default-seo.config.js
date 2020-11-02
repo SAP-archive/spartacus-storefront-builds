@@ -1,0 +1,8 @@
+export const defaultSeoConfig = {
+    seo: {
+        structuredData: {
+            disableInDevMode: true,
+        },
+    },
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC1zZW8uY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vcHJvamVjdHMvc3RvcmVmcm9udGxpYi9zcmMvY21zLXN0cnVjdHVyZS9zZW8vY29uZmlnL2RlZmF1bHQtc2VvLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQSxNQUFNLENBQUMsTUFBTSxnQkFBZ0IsR0FBYztJQUN6QyxHQUFHLEVBQUU7UUFDSCxjQUFjLEVBQUU7WUFDZCxnQkFBZ0IsRUFBRSxJQUFJO1NBQ3ZCO0tBQ0Y7Q0FDRixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgU2VvQ29uZmlnIH0gZnJvbSAnLi9zZW8uY29uZmlnJztcblxuZXhwb3J0IGNvbnN0IGRlZmF1bHRTZW9Db25maWc6IFNlb0NvbmZpZyA9IHtcbiAgc2VvOiB7XG4gICAgc3RydWN0dXJlZERhdGE6IHtcbiAgICAgIGRpc2FibGVJbkRldk1vZGU6IHRydWUsXG4gICAgfSxcbiAgfSxcbn07XG4iXX0=

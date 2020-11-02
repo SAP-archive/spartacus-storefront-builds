@@ -1,19 +1,32 @@
 import { RendererFactory2 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WindowRef } from '@spartacus/core';
+import { SeoConfig } from '../config';
+import * as ɵngcc0 from '@angular/core';
 export declare class JsonLdScriptFactory {
     protected platformId: string;
     protected winRef: WindowRef;
     protected rendererFactory: RendererFactory2;
     protected sanitizer: DomSanitizer;
-    constructor(platformId: string, winRef: WindowRef, rendererFactory: RendererFactory2, sanitizer: DomSanitizer);
+    protected config: SeoConfig;
+    constructor(platformId: string, winRef: WindowRef, rendererFactory: RendererFactory2, sanitizer: DomSanitizer, config: SeoConfig);
     build(schema: {}[]): void;
     /**
-     * Only return schema data in case of SSR or development mode,
-     * to not waste memory unnecessary.
+     * Indicates whether json ld data should be generated.
+     *
+     * This is only required on the server, but can be enabled in dev mode.
      */
     isJsonLdRequired(): boolean;
-    private createJsonLdScriptElement;
+    /**
+     * Creates a json-ld script element. The element is created one, and appended
+     * to the html body element.
+     *
+     * ```html
+     * <script id="json-ld" type="application/ld+json">
+     * </script>
+     * ```
+     */
+    protected getJsonLdScriptElement(): HTMLScriptElement;
     /**
      * Sanitizes the given json-ld schema by leveraging the angular HTML sanitizer.
      *
@@ -21,4 +34,7 @@ export declare class JsonLdScriptFactory {
      * into the json-ld script.
      */
     sanitize(schema: {}): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<JsonLdScriptFactory, never>;
 }
+
+//# sourceMappingURL=json-ld-script.factory.d.ts.map

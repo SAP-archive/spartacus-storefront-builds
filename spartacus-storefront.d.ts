@@ -38,10 +38,11 @@ export { PROVIDE_OUTLET_OPTIONS as ɵb } from './cms-structure/outlet/outlet.pro
 export { pwaConfigurationFactory as ɵc, pwaFactory as ɵd } from './cms-structure/pwa/pwa.module';
 export { addCmsRoute as ɵcc } from './cms-structure/routing/cms-route/add-cms-route';
 export { defaultRoutingConfig as ɵce, defaultStorefrontRoutesConfig as ɵcd } from './cms-structure/routing/default-routing-config';
-export { htmlLangProvider as ɵcf, setHtmlLangAttribute as ɵcg } from './cms-structure/seo/html-lang-provider';
+export { SeoConfig as ɵcf, defaultSeoConfig as ɵcg } from './cms-structure/seo/config';
+export { htmlLangProvider as ɵch, setHtmlLangAttribute as ɵci } from './cms-structure/seo/html-lang-provider';
 export { getStructuredDataFactory as ɵe } from './cms-structure/seo/structured-data/structured-data.module';
 export { CmsRoutesImplService as ɵby } from './cms-structure/services/cms-routes-impl.service';
-export { EventsModule as ɵci } from './events/events.module';
+export { EventsModule as ɵck } from './events/events.module';
 export { AutoFocusDirective as ɵl } from './layout/a11y/keyboard-focus/autofocus/auto-focus.directive';
 export { AutoFocusService as ɵu } from './layout/a11y/keyboard-focus/autofocus/auto-focus.service';
 export { BaseFocusDirective as ɵq } from './layout/a11y/keyboard-focus/base/base-focus.directive';
@@ -60,5 +61,7 @@ export { TrapFocusDirective as ɵj } from './layout/a11y/keyboard-focus/trap/tra
 export { TrapFocusService as ɵw } from './layout/a11y/keyboard-focus/trap/trap-focus.service';
 export { VisibleFocusDirective as ɵp } from './layout/a11y/keyboard-focus/visible/visible-focus.directive';
 export { skipLinkFactory as ɵg } from './layout/a11y/skip-link/skip-link.module';
-export { defaultDirectionConfig as ɵch } from './layout/direction/config/default-direction.config';
+export { defaultDirectionConfig as ɵcj } from './layout/direction/config/default-direction.config';
 export { initHtmlDirAttribute as ɵh } from './layout/direction/direction.module';
+
+//# sourceMappingURL=spartacus-storefront.d.ts.map
