@@ -3386,8 +3386,8 @@
                     if (_this.isRequiredConsent(template)) {
                         return;
                     }
-                    consentsToGive.push(template);
                 }
+                consentsToGive.push(template);
             });
             this.allConsentsLoading.next(true);
             this.subscriptions.add(this.setupGiveStream(consentsToGive)
