@@ -2,7 +2,6 @@ import { ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICON_TYPE } from '../../misc/icon/index';
 import { NavigationNode } from './navigation-node.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class NavigationUIComponent implements OnDestroy {
     private router;
     private renderer;
@@ -43,8 +42,4 @@ export declare class NavigationUIComponent implements OnDestroy {
     private alignWrapperToRightIfStickOut;
     private alignWrappersToRightIfStickOut;
     private updateClasses;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<NavigationUIComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<NavigationUIComponent, "cx-navigation-ui", never, { "flyout": "flyout"; "isOpen": "isOpen"; "node": "node"; "wrapAfter": "wrapAfter"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=navigation-ui.component.d.ts.map
