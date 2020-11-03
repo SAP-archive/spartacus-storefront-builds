@@ -21964,6 +21964,7 @@ StorefrontModule.decorators = [
                     RouterModule.forRoot([], {
                         anchorScrolling: 'enabled',
                         relativeLinkResolution: 'corrected',
+                        initialNavigation: 'enabled',
                     }),
                     StoreModule.forRoot({}),
                     EffectsModule.forRoot([]),

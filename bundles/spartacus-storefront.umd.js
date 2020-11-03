@@ -24271,6 +24271,7 @@
                         i2.RouterModule.forRoot([], {
                             anchorScrolling: 'enabled',
                             relativeLinkResolution: 'corrected',
+                            initialNavigation: 'enabled',
                         }),
                         i1$4.StoreModule.forRoot({}),
                         effects.EffectsModule.forRoot([]),
