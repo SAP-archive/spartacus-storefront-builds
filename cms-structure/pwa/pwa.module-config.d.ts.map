@@ -1,1 +1,0 @@
-{"version":3,"file":"pwa.module-config.d.ts","sources":["pwa.module-config.d.ts"],"names":[],"mappings":";AAAA;AACA;AACA;AACA;AACA;;AACA;AACA","sourcesContent":["export declare abstract class PWAModuleConfig {\n    pwa?: {\n        enabled?: boolean;\n        addToHomeScreen?: boolean;\n    };\n}\nexport declare const defaultPWAModuleConfig: PWAModuleConfig;\n"]}
