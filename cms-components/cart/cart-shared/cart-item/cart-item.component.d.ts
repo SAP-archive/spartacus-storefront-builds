@@ -6,7 +6,6 @@ import { PromotionService } from '../../../../shared/services/promotion/promotio
 /**
  * @deprecated since 3.0 - use `OrderEntry` instead
  */
-import * as ɵngcc0 from '@angular/core';
 export interface Item {
     entryNumber?: number;
     product?: any;
@@ -34,8 +33,4 @@ export declare class CartItemComponent implements OnInit {
     isProductOutOfStock(product: any): boolean;
     removeItem(): void;
     viewItem(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CartItemComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CartItemComponent, "cx-cart-item", never, { "compact": "compact"; "readonly": "readonly"; "promotionLocation": "promotionLocation"; "options": "options"; "item": "item"; "quantityControl": "quantityControl"; }, { "view": "view"; }, never, never>;
 }
-
-//# sourceMappingURL=cart-item.component.d.ts.map
