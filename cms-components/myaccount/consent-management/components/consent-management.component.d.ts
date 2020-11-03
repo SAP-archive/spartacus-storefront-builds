@@ -1,6 +1,7 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { AnonymousConsentsConfig, AnonymousConsentsService, AuthService, ConsentTemplate, GlobalMessageService, UserConsentService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import * as ɵngcc0 from '@angular/core';
 export declare class ConsentManagementComponent implements OnInit, OnDestroy {
     protected userConsentService: UserConsentService;
     protected globalMessageService: GlobalMessageService;
@@ -31,4 +32,8 @@ export declare class ConsentManagementComponent implements OnInit, OnDestroy {
     private setupGiveStream;
     private isRequiredConsent;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ConsentManagementComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ConsentManagementComponent, "cx-consent-management", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=consent-management.component.d.ts.map
