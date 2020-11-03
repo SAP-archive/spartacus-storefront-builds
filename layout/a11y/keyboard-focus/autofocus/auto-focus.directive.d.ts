@@ -22,6 +22,7 @@ import { AutoFocusService } from './auto-focus.service';
  * `<div [cxAutoFocus]="{autofocus: ':host'}">[...]</div>`
  *
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class AutoFocusDirective extends EscapeFocusDirective implements AfterViewInit {
     protected elementRef: ElementRef;
     protected service: AutoFocusService;
@@ -53,4 +54,8 @@ export declare class AutoFocusDirective extends EscapeFocusDirective implements 
      * We keep this private to not polute the API.
      */
     private get firstFocusable();
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AutoFocusDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<AutoFocusDirective, never, never, {}, {}, never>;
 }
+
+//# sourceMappingURL=auto-focus.directive.d.ts.map
