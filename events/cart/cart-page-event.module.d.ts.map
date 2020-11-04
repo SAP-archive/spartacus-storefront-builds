@@ -1,1 +1,0 @@
-{"version":3,"file":"cart-page-event.module.d.ts","sources":["cart-page-event.module.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { CartPageEventBuilder } from './cart-page-event.builder';\nexport declare class CartPageEventModule {\n    constructor(_cartPageEventBuilder: CartPageEventBuilder);\n}\n"]}
