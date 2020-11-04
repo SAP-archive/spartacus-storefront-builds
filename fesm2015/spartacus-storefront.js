@@ -8891,7 +8891,8 @@ class CheckoutAuthGuard {
             this.authService.isUserLoggedIn(),
             this.activeCartService.getAssignedUser(),
             this.userService.get(),
-        ]).pipe(map(([isLoggedIn, cartUser, user]) => {
+            this.activeCartService.isStable(),
+        ]).pipe(filter(([, , , isStable]) => Boolean(isStable)), map(([isLoggedIn, cartUser, user]) => {
             if (!isLoggedIn) {
                 if (this.activeCartService.isGuestCart()) {
                     return Boolean(cartUser);
@@ -8909,10 +8910,8 @@ class CheckoutAuthGuard {
                 if (roles.includes(B2BUserGroup.B2B_CUSTOMER_GROUP)) {
                     return true;
                 }
-                else {
-                    this.globalMessageService.add({ key: 'checkout.invalid.accountType' }, GlobalMessageType.MSG_TYPE_WARNING);
-                    return false;
-                }
+                this.globalMessageService.add({ key: 'checkout.invalid.accountType' }, GlobalMessageType.MSG_TYPE_WARNING);
+                return false;
             }
             return isLoggedIn;
         }));
@@ -11363,7 +11362,13 @@ class ShippingAddressComponent {
     }
     addAddress(address) {
         this.forceLoader = true;
-        this.checkoutDeliveryService.createAndSetAddress(address);
+        if (Boolean(address)) {
+            this.checkoutDeliveryService.createAndSetAddress(address);
+        }
+        else {
+            this.forceLoader = false;
+            this.next();
+        }
     }
     showNewAddressForm() {
         this.addressFormOpened = true;

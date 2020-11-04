@@ -10081,7 +10081,11 @@
                 this.authService.isUserLoggedIn(),
                 this.activeCartService.getAssignedUser(),
                 this.userService.get(),
-            ]).pipe(operators.map(function (_a) {
+                this.activeCartService.isStable(),
+            ]).pipe(operators.filter(function (_a) {
+                var _b = __read(_a, 4), isStable = _b[3];
+                return Boolean(isStable);
+            }), operators.map(function (_a) {
                 var _b = __read(_a, 3), isLoggedIn = _b[0], cartUser = _b[1], user = _b[2];
                 if (!isLoggedIn) {
                     if (_this.activeCartService.isGuestCart()) {
@@ -10100,10 +10104,8 @@
                     if (roles.includes(i1.B2BUserGroup.B2B_CUSTOMER_GROUP)) {
                         return true;
                     }
-                    else {
-                        _this.globalMessageService.add({ key: 'checkout.invalid.accountType' }, i1.GlobalMessageType.MSG_TYPE_WARNING);
-                        return false;
-                    }
+                    _this.globalMessageService.add({ key: 'checkout.invalid.accountType' }, i1.GlobalMessageType.MSG_TYPE_WARNING);
+                    return false;
                 }
                 return isLoggedIn;
             }));
@@ -12814,7 +12816,13 @@
         };
         ShippingAddressComponent.prototype.addAddress = function (address) {
             this.forceLoader = true;
-            this.checkoutDeliveryService.createAndSetAddress(address);
+            if (Boolean(address)) {
+                this.checkoutDeliveryService.createAndSetAddress(address);
+            }
+            else {
+                this.forceLoader = false;
+                this.next();
+            }
         };
         ShippingAddressComponent.prototype.showNewAddressForm = function () {
             this.addressFormOpened = true;
