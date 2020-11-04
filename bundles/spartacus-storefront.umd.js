@@ -8265,7 +8265,7 @@
             this.csAgentAuthService.logoutCustomerSupportAgent();
         };
         AsmComponentService.prototype.logoutCustomer = function () {
-            this.authService.initLogout();
+            this.authService.logout();
         };
         AsmComponentService.prototype.isCustomerEmulationSessionInProgress = function () {
             return this.csAgentAuthService.isCustomerEmulated();
@@ -18023,8 +18023,10 @@
                                 key: 'updateEmailForm.emailUpdateSuccess',
                                 params: { newUid: this.newUid },
                             }, i1.GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                            return [4 /*yield*/, this.authService.logout()];
+                            // TODO(#9638): Use logout route when it will support passing redirect url
+                            return [4 /*yield*/, this.authService.coreLogout()];
                         case 1:
+                            // TODO(#9638): Use logout route when it will support passing redirect url
                             _a.sent();
                             this.routingService.go({ cxRoute: 'login' }, null, {
                                 state: {
@@ -23003,23 +23005,19 @@
                 this.loginForm.markAllAsTouched();
             }
         };
-        LoginFormComponent.prototype.ngOnDestroy = function () {
-            if (this.sub) {
-                this.sub.unsubscribe();
-            }
-        };
         LoginFormComponent.prototype.loginUser = function () {
             var _this = this;
             var _c = this.loginForm.controls, userId = _c.userId, password = _c.password;
-            this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
-            password.value);
-            if (!this.sub) {
-                this.sub = this.auth.isUserLoggedIn().subscribe(function (isLoggedIn) {
-                    if (isLoggedIn) {
-                        _this.globalMessageService.remove(i1.GlobalMessageType.MSG_TYPE_ERROR);
-                    }
-                });
-            }
+            rxjs.from(this.auth.loginWithCredentials(userId.value.toLowerCase(), // backend accepts lowercase emails only
+            password.value))
+                .pipe(operators.withLatestFrom(this.auth.isUserLoggedIn()), operators.tap(function (_c) {
+                var _d = __read(_c, 2), _ = _d[0], isLoggedIn = _d[1];
+                if (isLoggedIn) {
+                    // We want to remove error messages on successful login (primary the bad username/password combination)
+                    _this.globalMessageService.remove(i1.GlobalMessageType.MSG_TYPE_ERROR);
+                }
+            }))
+                .subscribe();
         };
         return LoginFormComponent;
     }());
@@ -23290,7 +23288,7 @@
             }));
         };
         LogoutGuard.prototype.logout = function () {
-            return this.auth.logout();
+            return this.auth.coreLogout();
         };
         /**
          * Whenever there is no specific "logout" page configured in the CMS,

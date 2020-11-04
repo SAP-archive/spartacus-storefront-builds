@@ -7205,7 +7205,7 @@ class AsmComponentService {
         this.csAgentAuthService.logoutCustomerSupportAgent();
     }
     logoutCustomer() {
-        this.authService.initLogout();
+        this.authService.logout();
     }
     isCustomerEmulationSessionInProgress() {
         return this.csAgentAuthService.isCustomerEmulated();
@@ -16163,7 +16163,8 @@ class UpdateEmailComponent {
                     key: 'updateEmailForm.emailUpdateSuccess',
                     params: { newUid: this.newUid },
                 }, GlobalMessageType.MSG_TYPE_CONFIRMATION);
-                yield this.authService.logout();
+                // TODO(#9638): Use logout route when it will support passing redirect url
+                yield this.authService.coreLogout();
                 this.routingService.go({ cxRoute: 'login' }, null, {
                     state: {
                         newUid: this.newUid,
@@ -20791,22 +20792,17 @@ class LoginFormComponent {
             this.loginForm.markAllAsTouched();
         }
     }
-    ngOnDestroy() {
-        if (this.sub) {
-            this.sub.unsubscribe();
-        }
-    }
     loginUser() {
         const { userId, password } = this.loginForm.controls;
-        this.auth.authorize(userId.value.toLowerCase(), // backend accepts lowercase emails only
-        password.value);
-        if (!this.sub) {
-            this.sub = this.auth.isUserLoggedIn().subscribe((isLoggedIn) => {
-                if (isLoggedIn) {
-                    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
-                }
-            });
-        }
+        from(this.auth.loginWithCredentials(userId.value.toLowerCase(), // backend accepts lowercase emails only
+        password.value))
+            .pipe(withLatestFrom(this.auth.isUserLoggedIn()), tap(([_, isLoggedIn]) => {
+            if (isLoggedIn) {
+                // We want to remove error messages on successful login (primary the bad username/password combination)
+                this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+            }
+        }))
+            .subscribe();
     }
 }
 LoginFormComponent.decorators = [
@@ -21058,7 +21054,7 @@ class LogoutGuard {
         }));
     }
     logout() {
-        return this.auth.logout();
+        return this.auth.coreLogout();
     }
     /**
      * Whenever there is no specific "logout" page configured in the CMS,
