@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OrderEntry, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { PromotionService } from '../../../../shared/services/promotion/promotio
 /**
  * @deprecated since 3.0 - use `OrderEntry` instead
  */
+import * as ɵngcc0 from '@angular/core';
 export interface Item {
     entryNumber?: number;
     product?: any;
@@ -24,7 +25,6 @@ export declare class CartItemComponent implements OnInit {
     item: OrderEntry;
     readonly: boolean;
     quantityControl: FormControl;
-    view: EventEmitter<any>;
     promotionLocation: PromotionLocation;
     options: CartItemComponentOptions;
     appliedProductPromotions$: Observable<PromotionResult[]>;
@@ -32,5 +32,8 @@ export declare class CartItemComponent implements OnInit {
     ngOnInit(): void;
     isProductOutOfStock(product: any): boolean;
     removeItem(): void;
-    viewItem(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CartItemComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CartItemComponent, "cx-cart-item", never, { "compact": "compact"; "readonly": "readonly"; "promotionLocation": "promotionLocation"; "options": "options"; "item": "item"; "quantityControl": "quantityControl"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=cart-item.component.d.ts.map
