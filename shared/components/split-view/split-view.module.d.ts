@@ -26,14 +26,5 @@
  * but customers could alter the layout to bring in more views in the same split-view at the time.
  *
  */
-import * as ɵngcc0 from '@angular/core';
-import * as ɵngcc1 from './split/split-view.component';
-import * as ɵngcc2 from './view/view.component';
-import * as ɵngcc3 from '@angular/common';
-import * as ɵngcc4 from '@angular/router';
 export declare class SplitViewModule {
-    static ɵmod: ɵngcc0.ɵɵNgModuleDefWithMeta<SplitViewModule, [typeof ɵngcc1.SplitViewComponent, typeof ɵngcc2.ViewComponent], [typeof ɵngcc3.CommonModule, typeof ɵngcc4.RouterModule], [typeof ɵngcc1.SplitViewComponent, typeof ɵngcc2.ViewComponent]>;
-    static ɵinj: ɵngcc0.ɵɵInjectorDef<SplitViewModule>;
 }
-
-//# sourceMappingURL=split-view.module.d.ts.map
