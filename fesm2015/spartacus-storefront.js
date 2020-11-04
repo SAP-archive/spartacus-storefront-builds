@@ -18586,7 +18586,7 @@ class ProductListComponentService {
                 return x.state.url === y.state.url;
             })),
             ...this.siteContext,
-        ]).pipe(map(([routerState, ..._context]) => routerState.state), tap((state) => {
+        ]).pipe(debounceTime(0), map(([routerState, ..._context]) => routerState.state), tap((state) => {
             const criteria = this.getCriteriaFromRoute(state.params, state.queryParams);
             this.search(criteria);
         }));

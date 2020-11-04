@@ -20644,7 +20644,7 @@
                     // but we want to perform search only when current url changes
                     return x.state.url === y.state.url;
                 }))
-            ], this.siteContext)).pipe(operators.map(function (_a) {
+            ], this.siteContext)).pipe(operators.debounceTime(0), operators.map(function (_a) {
                 var _b = __read(_a), routerState = _b[0], _context = _b.slice(1);
                 return routerState.state;
             }), operators.tap(function (state) {
