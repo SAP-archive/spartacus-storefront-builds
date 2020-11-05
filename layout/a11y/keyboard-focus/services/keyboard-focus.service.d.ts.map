@@ -1,1 +1,0 @@
-{"version":3,"file":"keyboard-focus.service.d.ts","sources":["keyboard-focus.service.d.ts"],"names":[],"mappings":"AAAA;;AACA;;AACA","sourcesContent":["import { LockFocusService } from '../lock/lock-focus.service';\nexport declare class KeyboardFocusService extends LockFocusService {\n}\n"]}

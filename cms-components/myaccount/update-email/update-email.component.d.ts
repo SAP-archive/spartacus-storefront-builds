@@ -1,7 +1,6 @@
 import { OnDestroy, OnInit } from '@angular/core';
 import { AuthService, GlobalMessageService, RoutingService, UserService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class UpdateEmailComponent implements OnInit, OnDestroy {
     private routingService;
     private globalMessageService;
@@ -19,8 +18,4 @@ export declare class UpdateEmailComponent implements OnInit, OnDestroy {
     }): void;
     onSuccess(success: boolean): Promise<void>;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<UpdateEmailComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<UpdateEmailComponent, "cx-update-email", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=update-email.component.d.ts.map
