@@ -3,7 +3,6 @@ import { GlobalMessageService, TranslationService, UserIdService, UserInterestsS
 import { Observable } from 'rxjs';
 import { ModalService } from '../../../shared/components/modal/modal.service';
 import { CurrentProductService } from '../current-product.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class StockNotificationComponent implements OnInit, OnDestroy {
     private currentProductService;
     private globalMessageService;
@@ -29,8 +28,4 @@ export declare class StockNotificationComponent implements OnInit, OnDestroy {
     private onInterestAddingError;
     private openDialog;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<StockNotificationComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StockNotificationComponent, "cx-stock-notification", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=stock-notification.component.d.ts.map
