@@ -1,7 +1,7 @@
 import { ɵɵdefineInjectable, ɵɵinject, Injectable, Inject, RendererFactory2, isDevMode, ComponentFactoryResolver, Directive, TemplateRef, Input, NgModule, PLATFORM_ID, EventEmitter, ComponentFactory, Injector, ViewContainerRef, Output, InjectionToken, APP_INITIALIZER, Optional, ElementRef, HostBinding, HostListener, Renderer2, Component, ViewChild, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef, InjectFlags, INJECTOR, ViewEncapsulation, Pipe, SecurityContext, ViewChildren, inject } from '@angular/core';
 import { of, BehaviorSubject, Observable, ReplaySubject, Subscription, combineLatest, concat, timer, fromEvent, defer, forkJoin, merge, from, isObservable, asapScheduler, interval, EMPTY } from 'rxjs';
 import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLatestFrom, skipWhile, scan, startWith, delayWhen, switchMap, shareReplay, mapTo, share, debounceTime, switchMapTo, takeWhile, endWith, pluck, observeOn, skip } from 'rxjs/operators';
-import { Config, resolveApplicable, FeatureConfigService, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, DatePickerFormatterService, DateTimePickerFormatterService, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, CsAgentAuthService, UserService, AsmService, AsmConfig, UserIdService, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, SemanticPathService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, OAuthFlow, AuthConfigService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, CheckoutModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
+import { Config, resolveApplicable, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, DatePickerFormatterService, DateTimePickerFormatterService, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, CsAgentAuthService, UserService, AsmService, AsmConfig, UserIdService, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, SemanticPathService, WishListService, CartModule, B2BUserGroup, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, FeatureConfigService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, OAuthFlow, AuthConfigService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, StoreDataService, StoreFinderService, GoogleMapRendererService, StoreFinderConfig, StoreFinderCoreModule, CheckoutModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
@@ -316,8 +316,7 @@ class OutletContextData {
 }
 
 class OutletService {
-    constructor(features) {
-        this.features = features;
+    constructor() {
         this.templatesRefs = {
             [OutletPosition.BEFORE]: new Map(),
             [OutletPosition.REPLACE]: new Map(),
@@ -359,19 +358,12 @@ class OutletService {
         this.removeValueOrAll(store, outlet, value);
     }
     removeValueOrAll(store, outlet, value) {
-        var _a;
         if (!value && store.has(outlet)) {
             store.delete(outlet);
         }
         else if (value && store.has(outlet)) {
             let existing = store.get(outlet);
-            if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
-                existing = existing.filter((val) => val !== value);
-            }
-            else {
-                // deprecated since 2.1, see #8116:
-                existing = existing.filter((val) => val === value);
-            }
+            existing = existing.filter((val) => val !== value);
             store.set(outlet, existing);
         }
     }
@@ -381,9 +373,6 @@ OutletService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
             },] }
-];
-OutletService.ctorParameters = () => [
-    { type: FeatureConfigService }
 ];
 
 class OutletRefDirective {

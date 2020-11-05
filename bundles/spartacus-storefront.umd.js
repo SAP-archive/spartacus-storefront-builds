@@ -617,14 +617,13 @@
     }());
 
     var OutletService = /** @class */ (function () {
-        function OutletService(features) {
-            var _b;
-            this.features = features;
-            this.templatesRefs = (_b = {},
-                _b[exports.OutletPosition.BEFORE] = new Map(),
-                _b[exports.OutletPosition.REPLACE] = new Map(),
-                _b[exports.OutletPosition.AFTER] = new Map(),
-                _b);
+        function OutletService() {
+            var _a;
+            this.templatesRefs = (_a = {},
+                _a[exports.OutletPosition.BEFORE] = new Map(),
+                _a[exports.OutletPosition.REPLACE] = new Map(),
+                _a[exports.OutletPosition.AFTER] = new Map(),
+                _a);
         }
         /**
          * @param templateOrFactory A `ComponentFactory` that inserts a component dynamically.
@@ -665,19 +664,12 @@
             this.removeValueOrAll(store, outlet, value);
         };
         OutletService.prototype.removeValueOrAll = function (store, outlet, value) {
-            var _a;
             if (!value && store.has(outlet)) {
                 store.delete(outlet);
             }
             else if (value && store.has(outlet)) {
                 var existing = store.get(outlet);
-                if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
-                    existing = existing.filter(function (val) { return val !== value; });
-                }
-                else {
-                    // deprecated since 2.1, see #8116:
-                    existing = existing.filter(function (val) { return val === value; });
-                }
+                existing = existing.filter(function (val) { return val !== value; });
                 store.set(outlet, existing);
             }
         };
@@ -689,9 +681,6 @@
                     providedIn: 'root',
                 },] }
     ];
-    OutletService.ctorParameters = function () { return [
-        { type: i1.FeatureConfigService }
-    ]; };
 
     var OutletRefDirective = /** @class */ (function () {
         function OutletRefDirective(tpl, outletService) {
