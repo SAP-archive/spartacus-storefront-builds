@@ -1,1 +1,0 @@
-{"version":3,"file":"close-account.module.d.ts","sources":["close-account.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class CloseAccountModule {\n}\n"]}
