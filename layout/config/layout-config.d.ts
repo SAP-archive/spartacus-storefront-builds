@@ -11,7 +11,6 @@ import { LaunchConfig } from '../launch-dialog/index';
  * for example, are driven by screen size. In case you change the screen size or
  * introduce new screen names, you might loose out on these configurations.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare enum BREAKPOINT {
     xs = "xs",
     sm = "sm",
@@ -95,7 +94,4 @@ export declare abstract class LayoutConfig {
         intersectionMargin?: string;
     };
     launch?: LaunchConfig;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<LayoutConfig, never>;
 }
-
-//# sourceMappingURL=layout-config.d.ts.map
