@@ -11,7 +11,6 @@ import { JsonLdScriptFactory } from './json-ld-script.factory';
  * This directive can however be used by merchants to write static schema data
  * to the DOM in a save way.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class JsonLdDirective {
     protected jsonLdScriptFactory: JsonLdScriptFactory;
     protected sanitizer: DomSanitizer;
@@ -26,8 +25,4 @@ export declare class JsonLdDirective {
      * _bypassing_ sanitization explicitly.
      */
     protected generateJsonLdScript(schema: string | {}): SafeHtml;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<JsonLdDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<JsonLdDirective, "[cxJsonLd]", never, { "cxJsonLd": "cxJsonLd"; }, {}, never>;
 }
-
-//# sourceMappingURL=json-ld.directive.d.ts.map
