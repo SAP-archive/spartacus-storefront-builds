@@ -694,19 +694,15 @@
     ]; };
 
     var OutletRefDirective = /** @class */ (function () {
-        function OutletRefDirective(tpl, outletService, features) {
+        function OutletRefDirective(tpl, outletService) {
             this.tpl = tpl;
             this.outletService = outletService;
-            this.features = features;
         }
         OutletRefDirective.prototype.ngOnInit = function () {
             this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
         };
         OutletRefDirective.prototype.ngOnDestroy = function () {
-            var _a;
-            if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
-                this.outletService.remove(this.cxOutletRef, this.cxOutletPos, this.tpl);
-            }
+            this.outletService.remove(this.cxOutletRef, this.cxOutletPos, this.tpl);
         };
         return OutletRefDirective;
     }());
@@ -717,8 +713,7 @@
     ];
     OutletRefDirective.ctorParameters = function () { return [
         { type: i0.TemplateRef },
-        { type: OutletService },
-        { type: i1.FeatureConfigService }
+        { type: OutletService }
     ]; };
     OutletRefDirective.propDecorators = {
         cxOutletRef: [{ type: i0.Input }],

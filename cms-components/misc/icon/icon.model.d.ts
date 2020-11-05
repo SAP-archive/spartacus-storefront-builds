@@ -1,4 +1,5 @@
 import { DirectionMode } from '../../../layout/direction/config/direction.model';
+import * as ɵngcc0 from '@angular/core';
 export declare enum ICON_TYPE {
     STAR = "STAR",
     SEARCH = "SEARCH",
@@ -37,6 +38,7 @@ export declare enum ICON_TYPE {
 }
 export declare abstract class IconConfig {
     icon?: IconOptions;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<IconConfig, never>;
 }
 export interface IconOptions {
     /**
@@ -92,3 +94,5 @@ export declare enum IconResourceType {
      */
     TEXT = "text"
 }
+
+//# sourceMappingURL=icon.model.d.ts.map

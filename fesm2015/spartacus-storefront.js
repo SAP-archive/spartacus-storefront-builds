@@ -387,19 +387,15 @@ OutletService.ctorParameters = () => [
 ];
 
 class OutletRefDirective {
-    constructor(tpl, outletService, features) {
+    constructor(tpl, outletService) {
         this.tpl = tpl;
         this.outletService = outletService;
-        this.features = features;
     }
     ngOnInit() {
         this.outletService.add(this.cxOutletRef, this.tpl, this.cxOutletPos);
     }
     ngOnDestroy() {
-        var _a;
-        if ((_a = this.features) === null || _a === void 0 ? void 0 : _a.isLevel('2.1')) {
-            this.outletService.remove(this.cxOutletRef, this.cxOutletPos, this.tpl);
-        }
+        this.outletService.remove(this.cxOutletRef, this.cxOutletPos, this.tpl);
     }
 }
 OutletRefDirective.decorators = [
@@ -409,8 +405,7 @@ OutletRefDirective.decorators = [
 ];
 OutletRefDirective.ctorParameters = () => [
     { type: TemplateRef },
-    { type: OutletService },
-    { type: FeatureConfigService }
+    { type: OutletService }
 ];
 OutletRefDirective.propDecorators = {
     cxOutletRef: [{ type: Input }],
