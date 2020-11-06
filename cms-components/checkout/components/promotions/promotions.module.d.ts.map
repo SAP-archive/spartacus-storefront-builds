@@ -1,0 +1,1 @@
+{"version":3,"file":"promotions.module.d.ts","sources":["promotions.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class PromotionsModule {\n}\n"]}
