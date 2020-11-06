@@ -1,1 +1,0 @@
-{"version":3,"file":"update-email.module.d.ts","sources":["update-email.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class UpdateEmailModule {\n}\n"]}
