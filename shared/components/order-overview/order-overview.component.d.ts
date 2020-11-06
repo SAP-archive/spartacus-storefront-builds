@@ -1,6 +1,7 @@
 import { Address, CostCenter, DeliveryMode, PaymentDetails, TranslationService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Card } from '../card/card.component';
+import * as ɵngcc0 from '@angular/core';
 export declare class OrderOverviewComponent {
     protected translation: TranslationService;
     order: any;
@@ -22,4 +23,8 @@ export declare class OrderOverviewComponent {
     getPaymentInfoCardContent(payment: PaymentDetails): Observable<Card>;
     getBillingAddressCardContent(billingAddress: Address): Observable<Card>;
     private getDate;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderOverviewComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<OrderOverviewComponent, "cx-order-overview", never, { "setOrder": "order"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=order-overview.component.d.ts.map
