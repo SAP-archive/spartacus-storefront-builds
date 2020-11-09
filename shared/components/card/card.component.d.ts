@@ -1,5 +1,6 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { ICON_TYPE } from '../../../cms-components/misc/icon/icon.model';
+import * as ɵngcc0 from '@angular/core';
 export interface CardAction {
     event: string;
     name: string;
@@ -41,4 +42,8 @@ export declare class CardComponent implements OnInit {
     edit(): void;
     constructor();
     ngOnInit(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CardComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CardComponent, "cx-card", never, { "border": "border"; "editMode": "editMode"; "isDefault": "isDefault"; "fitToContainer": "fitToContainer"; "content": "content"; }, { "deleteCard": "deleteCard"; "setDefaultCard": "setDefaultCard"; "sendCard": "sendCard"; "editCard": "editCard"; "cancelCard": "cancelCard"; }, never, never>;
 }
+
+//# sourceMappingURL=card.component.d.ts.map

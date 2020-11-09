@@ -6543,7 +6543,6 @@
     var TableDataCellComponent = /** @class */ (function () {
         function TableDataCellComponent(outlet) {
             this.outlet = outlet;
-            this.cls = true;
         }
         Object.defineProperty(TableDataCellComponent.prototype, "value", {
             get: function () {
@@ -6572,6 +6571,7 @@
     }());
     TableDataCellComponent.decorators = [
         { type: i0.Component, args: [{
+                    selector: 'cx-table-data-cell',
                     template: "{{ value }}",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
@@ -6580,7 +6580,6 @@
         { type: OutletContextData }
     ]; };
     TableDataCellComponent.propDecorators = {
-        cls: [{ type: i0.HostBinding, args: ['class.content-wrapper',] }],
         value: [{ type: i0.HostBinding, args: ['attr.title',] }]
     };
 
@@ -6656,6 +6655,7 @@
     }());
     TableHeaderCellComponent.decorators = [
         { type: i0.Component, args: [{
+                    selector: 'cx-table-header-cell',
                     template: "{{ header || (localizedHeader | cxTranslate) }}",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }

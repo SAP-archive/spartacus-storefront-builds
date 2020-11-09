@@ -5714,7 +5714,6 @@ StarRatingModule.decorators = [
 class TableDataCellComponent {
     constructor(outlet) {
         this.outlet = outlet;
-        this.cls = true;
     }
     get value() {
         return this.model[this.field];
@@ -5730,6 +5729,7 @@ class TableDataCellComponent {
 }
 TableDataCellComponent.decorators = [
     { type: Component, args: [{
+                selector: 'cx-table-data-cell',
                 template: `{{ value }}`,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
@@ -5738,7 +5738,6 @@ TableDataCellComponent.ctorParameters = () => [
     { type: OutletContextData }
 ];
 TableDataCellComponent.propDecorators = {
-    cls: [{ type: HostBinding, args: ['class.content-wrapper',] }],
     value: [{ type: HostBinding, args: ['attr.title',] }]
 };
 
@@ -5789,6 +5788,7 @@ class TableHeaderCellComponent {
 }
 TableHeaderCellComponent.decorators = [
     { type: Component, args: [{
+                selector: 'cx-table-header-cell',
                 template: `{{ header || (localizedHeader | cxTranslate) }}`,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
