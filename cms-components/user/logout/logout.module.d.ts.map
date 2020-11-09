@@ -1,1 +1,0 @@
-{"version":3,"file":"logout.module.d.ts","sources":["logout.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class LogoutModule {\n}\n"]}

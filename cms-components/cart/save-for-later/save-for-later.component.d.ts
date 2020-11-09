@@ -1,7 +1,6 @@
 import { OnInit } from '@angular/core';
 import { ActiveCartService, Cart, CmsParagraphComponent, CmsService, OrderEntry, SelectiveCartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class SaveForLaterComponent implements OnInit {
     protected cmsService: CmsService;
     protected cartService: ActiveCartService;
@@ -15,8 +14,4 @@ export declare class SaveForLaterComponent implements OnInit {
     constructor(cmsService: CmsService, cartService: ActiveCartService, selectiveCartService: SelectiveCartService);
     ngOnInit(): void;
     moveToCart(item: OrderEntry): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SaveForLaterComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SaveForLaterComponent, "cx-save-for-later", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=save-for-later.component.d.ts.map
