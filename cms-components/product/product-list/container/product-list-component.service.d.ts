@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivatedRouterStateSnapshot, CurrencyService, LanguageService, ProductSearchPage, ProductSearchService, RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ProductListRouteParams, SearchCriteria } from './product-list.model';
 /**
  * The `ProductListComponentService` is used to search products. The service is used
@@ -10,6 +10,7 @@ import { ProductListRouteParams, SearchCriteria } from './product-list.model';
  * route parameters. The route parameters are used to query products by the help of
  * the `ProductSearchService`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductListComponentService {
     protected productSearchService: ProductSearchService;
     protected routing: RoutingService;
@@ -17,11 +18,6 @@ export declare class ProductListComponentService {
     protected currencyService: CurrencyService;
     protected languageService: LanguageService;
     protected router: Router;
-    /**
-     * @deprecated will be removed in version 3.0 as this is the
-     *   subscription is longer used
-     */
-    protected sub: Subscription;
     protected defaultPageSize: number;
     protected readonly RELEVANCE_ALLCATEGORIES = ":relevance:allCategories:";
     constructor(productSearchService: ProductSearchService, routing: RoutingService, activatedRoute: ActivatedRoute, currencyService: CurrencyService, languageService: LanguageService, router: Router);
@@ -89,12 +85,7 @@ export declare class ProductListComponentService {
      * major version.
      */
     private get siteContext();
-    /**
-     * @deprecated will be dropped in version 3.0 as it's no longer in use
-     */
-    setQuery(query: string): void;
-    /**
-     * @deprecated will be dropped in version 3.0 as it's no longer in use
-     */
-    viewPage(pageNumber: number): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductListComponentService, never>;
 }
+
+//# sourceMappingURL=product-list-component.service.d.ts.map

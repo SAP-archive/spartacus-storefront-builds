@@ -18676,18 +18676,6 @@ class ProductListComponentService {
         // from the constructor, and query a ContextService for all contexts.
         return [this.languageService.getActive(), this.currencyService.getActive()];
     }
-    /**
-     * @deprecated will be dropped in version 3.0 as it's no longer in use
-     */
-    setQuery(query) {
-        this.route({ query, currentPage: undefined });
-    }
-    /**
-     * @deprecated will be dropped in version 3.0 as it's no longer in use
-     */
-    viewPage(pageNumber) {
-        this.route({ currentPage: pageNumber });
-    }
 }
 ProductListComponentService.ɵprov = ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(ɵɵinject(ProductSearchService), ɵɵinject(RoutingService), ɵɵinject(ActivatedRoute), ɵɵinject(CurrencyService), ɵɵinject(LanguageService), ɵɵinject(Router)); }, token: ProductListComponentService, providedIn: "root" });
 ProductListComponentService.decorators = [

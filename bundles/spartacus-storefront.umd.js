@@ -20743,18 +20743,6 @@
             enumerable: false,
             configurable: true
         });
-        /**
-         * @deprecated will be dropped in version 3.0 as it's no longer in use
-         */
-        ProductListComponentService.prototype.setQuery = function (query) {
-            this.route({ query: query, currentPage: undefined });
-        };
-        /**
-         * @deprecated will be dropped in version 3.0 as it's no longer in use
-         */
-        ProductListComponentService.prototype.viewPage = function (pageNumber) {
-            this.route({ currentPage: pageNumber });
-        };
         return ProductListComponentService;
     }());
     ProductListComponentService.ɵprov = i0.ɵɵdefineInjectable({ factory: function ProductListComponentService_Factory() { return new ProductListComponentService(i0.ɵɵinject(i1.ProductSearchService), i0.ɵɵinject(i1.RoutingService), i0.ɵɵinject(i2.ActivatedRoute), i0.ɵɵinject(i1.CurrencyService), i0.ɵɵinject(i1.LanguageService), i0.ɵɵinject(i2.Router)); }, token: ProductListComponentService, providedIn: "root" });
