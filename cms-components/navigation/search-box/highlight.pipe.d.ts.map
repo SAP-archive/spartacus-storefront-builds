@@ -1,1 +1,0 @@
-{"version":3,"file":"highlight.pipe.d.ts","sources":["highlight.pipe.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { PipeTransform } from '@angular/core';\nexport declare class HighlightPipe implements PipeTransform {\n    transform(text: string, match?: string): string;\n}\n"]}
