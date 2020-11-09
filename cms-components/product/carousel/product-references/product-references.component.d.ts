@@ -2,6 +2,7 @@ import { CmsProductReferencesComponent, Product, ProductReferenceService } from 
 import { Observable } from 'rxjs';
 import { CmsComponentData } from '../../../../cms-structure/page/model/cms-component-data';
 import { CurrentProductService } from '../../current-product.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductReferencesComponent {
     protected cmsComponentData: CmsComponentData<CmsProductReferencesComponent>;
     protected currentProductService: CurrentProductService;
@@ -26,4 +27,8 @@ export declare class ProductReferencesComponent {
      * Returns an observable for product references
      */
     private getProductReferences;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductReferencesComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ProductReferencesComponent, "cx-product-references", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=product-references.component.d.ts.map
