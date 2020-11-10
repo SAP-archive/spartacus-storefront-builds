@@ -1,6 +1,5 @@
 import { IntersectionOptions } from '../../../layout/loading/intersection.model';
 import { CmsComponentsService } from '../../services/cms-components.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class PageSlotService {
     protected cmsComponentsService: CmsComponentsService;
     protected platformId: any;
@@ -24,7 +23,4 @@ export declare class PageSlotService {
      * page slot is prerendered, we would ignore the defer options altogether.
      */
     getComponentDeferOptions(slot: string, componentType: string): IntersectionOptions;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageSlotService, never>;
 }
-
-//# sourceMappingURL=page-slot.service.d.ts.map
