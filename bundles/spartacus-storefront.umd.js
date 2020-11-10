@@ -925,7 +925,7 @@
             this.loaded.emit(false);
             var hostElement = this.getHostElement(this.vcr.element.nativeElement);
             // Although the deferLoaderService might emit only once, as long as the hostElement
-            // isn't being loaded, there's no value being emitted. Therefor we need to clean up
+            // isn't being loaded, there's no value being emitted. Therefore we need to clean up
             // the subscription on destroy.
             this.subscription.add(this.deferLoaderService
                 .load(hostElement, this.cxOutletDefer)
@@ -13429,6 +13429,65 @@
                 },] }
     ];
 
+    var PageSlotService = /** @class */ (function () {
+        function PageSlotService(cmsComponentsService, platformId, document) {
+            this.cmsComponentsService = cmsComponentsService;
+            this.platformId = platformId;
+            this.document = document;
+            this.resolvePrerenderedSlots();
+        }
+        /**
+         * Finds all slots visible in the SSR pre-rendered DOM
+         */
+        PageSlotService.prototype.resolvePrerenderedSlots = function () {
+            var _this = this;
+            if (i1$1.isPlatformBrowser(this.platformId)) {
+                this.prerenderedSlots = Array.from(this.document.querySelectorAll('cx-page-slot'))
+                    .filter(function (el) { return el.getBoundingClientRect().top <
+                    _this.document.documentElement.clientHeight; })
+                    .map(function (el) { return el.getAttribute('page-slot'); });
+            }
+        };
+        /**
+         * Indicates if certain slot should be rendered instantly.
+         *
+         * It's especially useful when transitioning from SSR to CSR application,
+         * where we don't want to apply deferring logic to slots that are visible
+         * to avoid unnecessary flickering.
+         */
+        PageSlotService.prototype.shouldNotDefer = function (slot) {
+            var _a;
+            if ((_a = this.prerenderedSlots) === null || _a === void 0 ? void 0 : _a.includes(slot)) {
+                this.prerenderedSlots.splice(this.prerenderedSlots.indexOf(slot), 1);
+                return true;
+            }
+            return false;
+        };
+        /**
+         * Returns the defer options for the given component. If the wrapping
+         * page slot is prerendered, we would ignore the defer options altogether.
+         */
+        PageSlotService.prototype.getComponentDeferOptions = function (slot, componentType) {
+            if (this.shouldNotDefer(slot)) {
+                return { deferLoading: i1.DeferLoadingStrategy.INSTANT };
+            }
+            var deferLoading = this.cmsComponentsService.getDeferLoadingStrategy(componentType);
+            return { deferLoading: deferLoading };
+        };
+        return PageSlotService;
+    }());
+    PageSlotService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PageSlotService_Factory() { return new PageSlotService(i0.ɵɵinject(CmsComponentsService), i0.ɵɵinject(i0.PLATFORM_ID), i0.ɵɵinject(i1$1.DOCUMENT)); }, token: PageSlotService, providedIn: "root" });
+    PageSlotService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    PageSlotService.ctorParameters = function () { return [
+        { type: CmsComponentsService },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i0.PLATFORM_ID,] }] },
+        { type: undefined, decorators: [{ type: i0.Inject, args: [i1$1.DOCUMENT,] }] }
+    ]; };
+
     /**
      * The `PageSlotComponent` is used to render the CMS page slot and it's components.
      *
@@ -13439,14 +13498,14 @@
      * - The `page-fold` style class is added for the page slot which is configured as the page fold.
      */
     var PageSlotComponent = /** @class */ (function () {
-        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, elementRef, cmsComponentsService, cd) {
+        function PageSlotComponent(cmsService, dynamicAttributeService, renderer, elementRef, cd, pageSlotService) {
             var _this = this;
             this.cmsService = cmsService;
             this.dynamicAttributeService = dynamicAttributeService;
             this.renderer = renderer;
             this.elementRef = elementRef;
-            this.cmsComponentsService = cmsComponentsService;
             this.cd = cd;
+            this.pageSlotService = pageSlotService;
             /**
              * Indicates that the page slot is the last page slot above the fold.
              */
@@ -13541,8 +13600,7 @@
          * rendered instantly or whether it should be deferred.
          */
         PageSlotComponent.prototype.getComponentDeferOptions = function (componentType) {
-            var deferLoading = this.cmsComponentsService.getDeferLoadingStrategy(componentType);
-            return { deferLoading: deferLoading };
+            return this.pageSlotService.getComponentDeferOptions(this.position, componentType);
         };
         PageSlotComponent.prototype.isDistinct = function (old, current) {
             var _a;
@@ -13573,11 +13631,11 @@
         { type: i1.DynamicAttributeService },
         { type: i0.Renderer2 },
         { type: i0.ElementRef },
-        { type: CmsComponentsService },
-        { type: i0.ChangeDetectorRef }
+        { type: i0.ChangeDetectorRef },
+        { type: PageSlotService }
     ]; };
     PageSlotComponent.propDecorators = {
-        position: [{ type: i0.Input }],
+        position: [{ type: i0.HostBinding, args: ['attr.position',] }, { type: i0.Input }],
         class: [{ type: i0.Input }, { type: i0.HostBinding }],
         isPageFold: [{ type: i0.HostBinding, args: ['class.page-fold',] }, { type: i0.Input }],
         isPending: [{ type: i0.HostBinding, args: ['class.cx-pending',] }],
@@ -13585,18 +13643,21 @@
     };
 
     var PageSlotModule = /** @class */ (function () {
-        function PageSlotModule() {
+        // instantiate PageSlotService ASAP, so it can examine SSR pre-rendered DOM
+        function PageSlotModule(_pageSlot) {
         }
         return PageSlotModule;
     }());
     PageSlotModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [i1$1.CommonModule, OutletModule, PageComponentModule],
-                    providers: [],
                     declarations: [PageSlotComponent],
                     exports: [PageSlotComponent],
                 },] }
     ];
+    PageSlotModule.ctorParameters = function () { return [
+        { type: PageSlotService }
+    ]; };
 
     var PageLayoutService = /** @class */ (function () {
         function PageLayoutService(cms, config, breakpointService, handlers) {
@@ -24735,6 +24796,7 @@
     exports.PageLayoutService = PageLayoutService;
     exports.PageSlotComponent = PageSlotComponent;
     exports.PageSlotModule = PageSlotModule;
+    exports.PageSlotService = PageSlotService;
     exports.PageTemplateDirective = PageTemplateDirective;
     exports.PaginationBuilder = PaginationBuilder;
     exports.PaginationComponent = PaginationComponent;
