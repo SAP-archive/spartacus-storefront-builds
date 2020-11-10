@@ -17,6 +17,7 @@ import { CarouselService } from './carousel.service';
  * To allow for flexible rendering of items, the rendering is delegated to the
  * given `template`. This allows for maximum flexibility.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class CarouselComponent implements OnInit {
     protected el: ElementRef;
     protected service: CarouselService;
@@ -54,4 +55,8 @@ export declare class CarouselComponent implements OnInit {
     size$: Observable<number>;
     constructor(el: ElementRef, service: CarouselService);
     ngOnInit(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CarouselComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CarouselComponent, "cx-carousel", never, { "itemWidth": "itemWidth"; "hideIndicators": "hideIndicators"; "indicatorIcon": "indicatorIcon"; "previousIcon": "previousIcon"; "nextIcon": "nextIcon"; "setItems": "items"; "title": "title"; "template": "template"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=carousel.component.d.ts.map

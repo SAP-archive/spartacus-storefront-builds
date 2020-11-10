@@ -12,7 +12,6 @@ import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
 import { HttpUrlEncodingCodec, HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { CmsPageGuard as CmsPageGuard$1 } from 'projects/storefrontlib/src/cms-structure';
 import { ActionsSubject, StoreModule } from '@ngrx/store';
 import { ofType, EffectsModule } from '@ngrx/effects';
 import { ROUTER_NAVIGATED } from '@ngrx/router-store';
@@ -21203,7 +21202,7 @@ LogoutModule.decorators = [
                     RouterModule.forChild([
                         {
                             path: null,
-                            canActivate: [CmsPageGuard$1, LogoutGuard],
+                            canActivate: [CmsPageGuard, LogoutGuard],
                             component: PageLayoutComponent,
                             data: ɵ0$c,
                         },
