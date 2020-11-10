@@ -13,6 +13,10 @@ import { Direction } from './direction.model';
  * }
  * ```
  */
+import * as ɵngcc0 from '@angular/core';
 export declare abstract class DirectionConfig {
     direction?: Direction;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DirectionConfig, never>;
 }
+
+//# sourceMappingURL=direction.config.d.ts.map

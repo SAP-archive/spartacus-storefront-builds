@@ -1,7 +1,7 @@
 import { Image } from '@spartacus/core';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
 import { StorefrontConfig } from '../../../storefront-config';
-import { Media, MediaContainer, MediaFormatSize } from './media.model';
+import { ImageLoadingStrategy, Media, MediaContainer, MediaFormatSize } from './media.model';
 /**
  * Service which generates media URLs. It leverage the MediaContainer and MediaFormats so
  * that URLs and sizes are generated for the same media. This helps to improve performance
@@ -14,12 +14,15 @@ import { Media, MediaContainer, MediaFormatSize } from './media.model';
  * The baseUrl is read from the `occConfig.backend.media.baseUrl` or
  * `occConfig.backend.occ.baseUrl`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class MediaService {
     protected config: StorefrontConfig;
     /**
      * The BreakpointService is no longer used in version 2.0 as the different size formats are
      * driven by configuration only. There's however a change that this service will play a role
      * in the near future, which is why we keep the constructor as-is.
+     *
+     * @deprecated
      */
     protected breakpointService: BreakpointService;
     /**
@@ -33,6 +36,8 @@ export declare class MediaService {
      * The BreakpointService is no longer used in version 2.0 as the different size formats are
      * driven by configuration only. There's however a change that this service will play a role
      * in the near future, which is why we keep the constructor as-is.
+     *
+     * @deprecated
      */
     breakpointService: BreakpointService);
     /**
@@ -40,6 +45,12 @@ export declare class MediaService {
      * for specific formats.
      */
     getMedia(mediaContainer: MediaContainer | Image, format?: string, alt?: string): Media;
+    /**
+     * Reads the loading strategy from the `MediaConfig`.
+     *
+     * Defaults to `ImageLoadingStrategy.EAGER`.
+     */
+    get loadingStrategy(): ImageLoadingStrategy;
     /**
      * Creates the media formats in a logical sorted order. The map contains the
      * format key and the format size information. We do this only once for performance
@@ -71,7 +82,7 @@ export declare class MediaService {
      */
     protected resolveBestFormat(media: MediaContainer | Image): string;
     /**
-     * Returns a set of media for the available media formats. Additionally, the congiured media
+     * Returns a set of media for the available media formats. Additionally, the configured media
      * format width is added to the srcset, so that browsers can select the appropriate media.
      */
     protected resolveSrcSet(media: MediaContainer | Image): string;
@@ -89,4 +100,7 @@ export declare class MediaService {
      * In Commerce Cloud, a differnt location could mean a different "aspect".
      */
     protected getBaseUrl(): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MediaService, never>;
 }
+
+//# sourceMappingURL=media.service.d.ts.map

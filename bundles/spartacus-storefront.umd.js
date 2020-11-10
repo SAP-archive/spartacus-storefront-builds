@@ -3670,6 +3670,30 @@
     };
 
     /**
+     * Indicates how the browser should load the image.
+     *
+     * While this might not add too much value in some scenarios, as we have other
+     * optimizations to defer loading of larger pieces of the DOM, there might be
+     * components who haven't implemented other lazy loading techniques. Moreover,
+     * a server sides rendered page that lands directly in the browser could benefit
+     * enormously from the lazy loading of images.
+     */
+    (function (ImageLoadingStrategy) {
+        /**
+         * Loads the image immediately, regardless of whether or not the image
+         * is currently within the visible viewport (this is the default value).
+         */
+        ImageLoadingStrategy["EAGER"] = "eager";
+        /**
+         * Defers loading the image until it reaches a calculated distance from the viewport,
+         * as defined by the browser. The intent is to avoid the network and storage bandwidth
+         * needed to handle the image until it's reasonably certain that it will be needed.
+         * This generally improves the performance of the content in most typical use cases.
+         */
+        ImageLoadingStrategy["LAZY"] = "lazy";
+    })(exports.ImageLoadingStrategy || (exports.ImageLoadingStrategy = {}));
+
+    /**
      * The `BreakpointService` resolves the various screen sizes that are used in
      * the storefront. The screen sizes are globally configurable based on your
      * layout requirements. You can adjust the screen sizes by setting the minimum
@@ -3865,6 +3889,8 @@
          * The BreakpointService is no longer used in version 2.0 as the different size formats are
          * driven by configuration only. There's however a change that this service will play a role
          * in the near future, which is why we keep the constructor as-is.
+         *
+         * @deprecated
          */
         breakpointService) {
             this.config = config;
@@ -3887,6 +3913,19 @@
                 srcset: this.resolveSrcSet(mediaContainer),
             };
         };
+        Object.defineProperty(MediaService.prototype, "loadingStrategy", {
+            /**
+             * Reads the loading strategy from the `MediaConfig`.
+             *
+             * Defaults to `ImageLoadingStrategy.EAGER`.
+             */
+            get: function () {
+                var _a, _b;
+                return ((_b = (_a = this.config) === null || _a === void 0 ? void 0 : _a.imageLoadingStrategy) !== null && _b !== void 0 ? _b : exports.ImageLoadingStrategy.EAGER);
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(MediaService.prototype, "sortedFormats", {
             /**
              * Creates the media formats in a logical sorted order. The map contains the
@@ -3946,7 +3985,7 @@
             return (_a = this.reversedFormats.find(function (format) { return media.hasOwnProperty(format.code); })) === null || _a === void 0 ? void 0 : _a.code;
         };
         /**
-         * Returns a set of media for the available media formats. Additionally, the congiured media
+         * Returns a set of media for the available media formats. Additionally, the configured media
          * format width is added to the srcset, so that browsers can select the appropriate media.
          */
         MediaService.prototype.resolveSrcSet = function (media) {
@@ -4048,6 +4087,18 @@
             this.isMissing = false;
             this.loaded.emit(true);
         };
+        Object.defineProperty(MediaComponent.prototype, "loadingStrategy", {
+            /**
+             * Indicates whether the browser should lazy load the image.
+             */
+            get: function () {
+                return this.mediaService.loadingStrategy === exports.ImageLoadingStrategy.LAZY
+                    ? 'lazy'
+                    : null;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Whenever an error happens during load, we mark the component
          * with css classes to have a missing media.
@@ -4066,7 +4117,7 @@
     MediaComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-media',
-                    template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
+                    template: "<img\n  *ngIf=\"media?.src\"\n  [attr.src]=\"media.src\"\n  [attr.srcset]=\"media.srcset\"\n  [attr.alt]=\"media.alt\"\n  [attr.loading]=\"loadingStrategy\"\n  (load)=\"loadHandler()\"\n  (error)=\"errorHandler()\"\n/>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -24122,31 +24173,15 @@
 
     var mediaConfig = {
         mediaFormats: {
-            mobile: {
-                width: 400,
-            },
-            tablet: {
-                width: 770,
-            },
-            desktop: {
-                width: 1140,
-            },
-            widescreen: {
-                width: 1400,
-            },
+            mobile: { width: 400 },
+            tablet: { width: 770 },
+            desktop: { width: 1140 },
+            widescreen: { width: 1400 },
             // product media
-            cartIcon: {
-                width: 65,
-            },
-            thumbnail: {
-                width: 96,
-            },
-            product: {
-                width: 284,
-            },
-            zoom: {
-                width: 515,
-            },
+            cartIcon: { width: 65 },
+            thumbnail: { width: 96 },
+            product: { width: 284 },
+            zoom: { width: 515 },
         },
     };
 
