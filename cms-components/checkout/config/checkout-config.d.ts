@@ -1,4 +1,5 @@
 import { CheckoutStep } from '../model/checkout-step.model';
+import * as ɵngcc0 from '@angular/core';
 export declare enum DeliveryModePreferences {
     FREE = "FREE",
     LEAST_EXPENSIVE = "LEAST_EXPENSIVE",
@@ -23,4 +24,7 @@ export declare abstract class CheckoutConfig {
          */
         guest?: boolean;
     };
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutConfig, never>;
 }
+
+//# sourceMappingURL=checkout-config.d.ts.map
