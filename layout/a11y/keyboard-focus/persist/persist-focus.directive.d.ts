@@ -28,6 +28,7 @@ import { PersistFocusService } from './persist-focus.service';
  * should retrieve focus.
  *
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class PersistFocusDirective extends BlockFocusDirective implements OnInit, AfterViewInit {
     protected elementRef: ElementRef;
     protected service: PersistFocusService;
@@ -62,4 +63,8 @@ export declare class PersistFocusDirective extends BlockFocusDirective implement
      * returns the persistence group (if any) for the focusable elements.
      */
     protected get group(): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PersistFocusDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<PersistFocusDirective, never, never, {}, {}, never>;
 }
+
+//# sourceMappingURL=persist-focus.directive.d.ts.map

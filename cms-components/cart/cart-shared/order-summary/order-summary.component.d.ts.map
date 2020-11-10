@@ -1,0 +1,1 @@
+{"version":3,"file":"order-summary.component.d.ts","sources":["order-summary.component.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { Cart } from '@spartacus/core';\nexport declare class OrderSummaryComponent {\n    cart: Cart;\n}\n"]}
