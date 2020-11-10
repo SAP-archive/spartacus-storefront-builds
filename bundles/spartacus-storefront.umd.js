@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@angular/common/http'), require('ngx-infinite-scroll'), require('@ngrx/store'), require('@ngrx/effects'), require('@ngrx/router-store')) :
-    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@spartacus/core', '@angular/common', '@angular/platform-browser', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@angular/common/http', 'ngx-infinite-scroll', '@ngrx/store', '@ngrx/effects', '@ngrx/router-store'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.core, global.ng.common, global.ng.platformBrowser, global.ng.forms, global.ng.router, global.ngSelect, global.ngBootstrap, global.ng.serviceWorker, global.ng.common.http, global.ngxInfiniteScroll, global.store, global.effects, global.fromNgrxRouter));
-}(this, (function (exports, i0, rxjs, operators, i1, i1$1, i1$2, forms, i2, ngSelect, i1$3, serviceWorker, http, ngxInfiniteScroll, i1$4, effects, routerStore) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('rxjs'), require('rxjs/operators'), require('@spartacus/core'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms'), require('@angular/router'), require('@ng-select/ng-select'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/service-worker'), require('@angular/common/http'), require('ngx-infinite-scroll'), require('projects/storefrontlib/src/cms-structure'), require('@ngrx/store'), require('@ngrx/effects'), require('@ngrx/router-store')) :
+    typeof define === 'function' && define.amd ? define('@spartacus/storefront', ['exports', '@angular/core', 'rxjs', 'rxjs/operators', '@spartacus/core', '@angular/common', '@angular/platform-browser', '@angular/forms', '@angular/router', '@ng-select/ng-select', '@ng-bootstrap/ng-bootstrap', '@angular/service-worker', '@angular/common/http', 'ngx-infinite-scroll', 'projects/storefrontlib/src/cms-structure', '@ngrx/store', '@ngrx/effects', '@ngrx/router-store'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global.spartacus = global.spartacus || {}, global.spartacus.storefront = {}), global.ng.core, global.rxjs, global.rxjs.operators, global.core, global.ng.common, global.ng.platformBrowser, global.ng.forms, global.ng.router, global.ngSelect, global.ngBootstrap, global.ng.serviceWorker, global.ng.common.http, global.ngxInfiniteScroll, global.cmsStructure, global.store, global.effects, global.fromNgrxRouter));
+}(this, (function (exports, i0, rxjs, operators, i1, i1$1, i1$2, forms, i2, ngSelect, i1$3, serviceWorker, http, ngxInfiniteScroll, cmsStructure, i1$4, effects, routerStore) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -23461,7 +23461,7 @@
                         i2.RouterModule.forChild([
                             {
                                 path: null,
-                                canActivate: [LogoutGuard],
+                                canActivate: [cmsStructure.CmsPageGuard, LogoutGuard],
                                 component: PageLayoutComponent,
                                 data: ɵ0$c,
                             },
