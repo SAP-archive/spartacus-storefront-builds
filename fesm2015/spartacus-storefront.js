@@ -6731,10 +6731,6 @@ FeatureModulesService.ctorParameters = () => [
 ];
 
 class CmsComponentsService {
-    /**
-     * @deprecated since 2.1
-     * constructor(config: CmsConfig, platformId: Object);
-     */
     constructor(config, platformId, featureModules) {
         this.config = config;
         this.platformId = platformId;

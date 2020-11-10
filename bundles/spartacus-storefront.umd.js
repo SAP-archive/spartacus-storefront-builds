@@ -7729,10 +7729,6 @@
     ]; };
 
     var CmsComponentsService = /** @class */ (function () {
-        /**
-         * @deprecated since 2.1
-         * constructor(config: CmsConfig, platformId: Object);
-         */
         function CmsComponentsService(config, platformId, featureModules) {
             this.config = config;
             this.platformId = platformId;

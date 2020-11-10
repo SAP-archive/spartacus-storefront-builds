@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { CmsComponentChildRoutesConfig, CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FeatureModulesService } from './feature-modules.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsComponentsService {
     protected config: CmsConfig;
     protected platformId: Object;
@@ -10,10 +11,6 @@ export declare class CmsComponentsService {
     private missingComponents;
     private mappings;
     private mappingResolvers;
-    /**
-     * @deprecated since 2.1
-     * constructor(config: CmsConfig, platformId: Object);
-     */
     constructor(config: CmsConfig, platformId: Object, featureModules?: FeatureModulesService);
     /**
      * Should be called to make sure all component mappings are determined,
@@ -65,4 +62,7 @@ export declare class CmsComponentsService {
      * Get i18n keys associated with components
      */
     getI18nKeys(componentTypes: string[]): string[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsComponentsService, never>;
 }
+
+//# sourceMappingURL=cms-components.service.d.ts.map

@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { OutletDirective } from './outlet.directive';
+import * as ɵngcc0 from '@angular/core';
 export declare class OutletRendererService {
     private outletRefs;
     /**
@@ -20,4 +21,7 @@ export declare class OutletRendererService {
      *
      */
     getOutletRef(outlet: string): Observable<OutletDirective>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OutletRendererService, never>;
 }
+
+//# sourceMappingURL=outlet-renderer.service.d.ts.map
