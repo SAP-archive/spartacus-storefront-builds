@@ -1,0 +1,1 @@
+{"version":3,"file":"search-box.module.d.ts","sources":["search-box.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class SearchBoxModule {\n}\n"]}
