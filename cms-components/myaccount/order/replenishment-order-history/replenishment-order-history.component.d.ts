@@ -2,7 +2,6 @@ import { OnDestroy, ElementRef, ViewContainerRef } from '@angular/core';
 import { ReplenishmentOrder, ReplenishmentOrderList, RoutingService, TranslationService, UserReplenishmentOrderService } from '@spartacus/core';
 import { ReplenishmentOrderCancellationLaunchDialogService } from '../replenishment-order-details/replenishment-order-cancellation/replenishment-order-cancellation-launch-dialog.service';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class ReplenishmentOrderHistoryComponent implements OnDestroy {
     protected routing: RoutingService;
     protected userReplenishmentOrderService: UserReplenishmentOrderService;
@@ -27,8 +26,4 @@ export declare class ReplenishmentOrderHistoryComponent implements OnDestroy {
     openDialog(event: Event, replenishmentOrderCode: string): void;
     private fetchReplenishmentOrders;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ReplenishmentOrderHistoryComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ReplenishmentOrderHistoryComponent, "cx-replenishment-order-history", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=replenishment-order-history.component.d.ts.map
