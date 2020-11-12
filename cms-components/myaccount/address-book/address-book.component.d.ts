@@ -3,6 +3,7 @@ import { Address, TranslationService, UserAddressService, CheckoutDeliveryServic
 import { Observable } from 'rxjs';
 import { AddressBookComponentService } from './address-book.component.service';
 import { Card } from '../../../shared/components/card';
+import * as ɵngcc0 from '@angular/core';
 export declare class AddressBookComponent implements OnInit {
     service: AddressBookComponentService;
     protected translation: TranslationService;
@@ -37,4 +38,8 @@ export declare class AddressBookComponent implements OnInit {
     deleteAddress(addressId: string): void;
     setEdit(addressId: string): void;
     cancelCard(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AddressBookComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<AddressBookComponent, "cx-address-book", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=address-book.component.d.ts.map
