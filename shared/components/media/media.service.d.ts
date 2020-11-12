@@ -14,6 +14,7 @@ import { ImageLoadingStrategy, Media, MediaContainer, MediaFormatSize } from './
  * The baseUrl is read from the `occConfig.backend.media.baseUrl` or
  * `occConfig.backend.occ.baseUrl`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class MediaService {
     protected config: StorefrontConfig;
     /**
@@ -99,4 +100,7 @@ export declare class MediaService {
      * In Commerce Cloud, a differnt location could mean a different "aspect".
      */
     protected getBaseUrl(): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MediaService, never>;
 }
+
+//# sourceMappingURL=media.service.d.ts.map
