@@ -3,6 +3,7 @@ import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CheckoutConfig } from '../config/checkout-config';
 import { CheckoutStep, CheckoutStepType } from '../model/checkout-step.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutStepService {
     protected routingService: RoutingService;
     protected checkoutConfig: CheckoutConfig;
@@ -26,4 +27,7 @@ export declare class CheckoutStepService {
     private getStepUrlFromActivatedRoute;
     private getStepUrlFromStepRoute;
     private getCheckoutStepIndex;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutStepService, never>;
 }
+
+//# sourceMappingURL=checkout-step.service.d.ts.map
