@@ -1,1 +1,0 @@
-{"version":3,"file":"product-reviews.module.d.ts","sources":["product-reviews.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ProductReviewsModule {\n}\n"]}

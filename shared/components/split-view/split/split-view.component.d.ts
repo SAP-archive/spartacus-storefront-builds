@@ -23,7 +23,6 @@ import { SplitViewService } from '../split-view.service';
  * `--cx-active-view` on the host, so that all descendants views will inherit the
  * property conveniently.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class SplitViewComponent implements OnInit, OnDestroy {
     protected splitService: SplitViewService;
     protected breakpointService: BreakpointService;
@@ -50,8 +49,4 @@ export declare class SplitViewComponent implements OnInit, OnDestroy {
      */
     protected get splitViewCount(): number;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<SplitViewComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<SplitViewComponent, "cx-split-view", never, { "hideMode": "hideMode"; }, {}, never, ["*"]>;
 }
-
-//# sourceMappingURL=split-view.component.d.ts.map

@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { OrderDetailsService } from '../../order-details/order-details.service';
 import { AmendOrderType } from '../amend-order.model';
 import { OrderAmendService } from '../amend-order.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class OrderReturnService extends OrderAmendService {
     protected orderDetailsService: OrderDetailsService;
     protected returnRequestService: OrderReturnRequestService;
@@ -14,7 +13,4 @@ export declare class OrderReturnService extends OrderAmendService {
     getEntries(): Observable<OrderEntry[]>;
     save(): void;
     private afterSave;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<OrderReturnService, never>;
 }
-
-//# sourceMappingURL=order-return.service.d.ts.map
