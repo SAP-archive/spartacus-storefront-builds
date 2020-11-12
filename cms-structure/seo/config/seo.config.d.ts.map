@@ -1,0 +1,1 @@
+{"version":3,"file":"seo.config.d.ts","sources":["seo.config.d.ts"],"names":[],"mappings":";AAAA;AACA;;AACA;AACA;AACA;AACA;AACA;AACA;AACA","sourcesContent":["export declare abstract class SeoConfig {\n    seo?: SeoOptions;\n}\nexport interface SeoOptions {\n    structuredData?: StructuredData;\n}\nexport interface StructuredData {\n    disableInDevMode?: boolean;\n}\n"]}
