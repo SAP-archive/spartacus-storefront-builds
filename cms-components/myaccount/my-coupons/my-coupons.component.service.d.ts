@@ -1,6 +1,5 @@
 import { CustomerCoupon, RoutingService, TranslationService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class MyCouponsComponentService {
     protected routingService: RoutingService;
     protected translation: TranslationService;
@@ -21,7 +20,4 @@ export declare class MyCouponsComponentService {
         byEndDateAsc: string;
         byEndDateDesc: string;
     }>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<MyCouponsComponentService, never>;
 }
-
-//# sourceMappingURL=my-coupons.component.service.d.ts.map
