@@ -2,6 +2,7 @@ import { RendererFactory2 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WindowRef } from '@spartacus/core';
 import { SeoConfig } from '../config';
+import * as ɵngcc0 from '@angular/core';
 export declare class JsonLdScriptFactory {
     protected platformId: string;
     protected winRef: WindowRef;
@@ -33,4 +34,7 @@ export declare class JsonLdScriptFactory {
      * into the json-ld script.
      */
     sanitize(schema: {}): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<JsonLdScriptFactory, never>;
 }
+
+//# sourceMappingURL=json-ld-script.factory.d.ts.map
