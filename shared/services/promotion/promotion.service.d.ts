@@ -1,7 +1,6 @@
 import { ActiveCartService, CheckoutService, OrderEntry, PromotionLocation, PromotionResult } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { OrderDetailsService } from '../../../cms-components/myaccount/order/order-details/order-details.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class PromotionService {
     protected orderDetailsService: OrderDetailsService;
     protected checkoutService: CheckoutService;
@@ -16,7 +15,4 @@ export declare class PromotionService {
     getProductPromotionForEntry(item: OrderEntry, promotionLocation: PromotionLocation): Observable<PromotionResult[]>;
     private getProductPromotion;
     private isConsumedByEntry;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PromotionService, never>;
 }
-
-//# sourceMappingURL=promotion.service.d.ts.map
