@@ -1,1 +1,0 @@
-{"version":3,"file":"page-event.module.d.ts","sources":["page-event.module.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { PageEventBuilder } from './page-event.builder';\nexport declare class PageEventModule {\n    constructor(_pageEventBuilder: PageEventBuilder);\n}\n"]}
