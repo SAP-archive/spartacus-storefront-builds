@@ -1,4 +1,5 @@
 import { AutoFocusConfig } from '../keyboard-focus.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class SelectFocusUtility {
     /**
      * Query selectors used to query focusable child elements of the host element.
@@ -28,4 +29,7 @@ export declare class SelectFocusUtility {
      * downgrade. We don't do this in the standard implementaton.
      */
     protected isHidden(el: HTMLElement): boolean;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SelectFocusUtility, never>;
 }
+
+//# sourceMappingURL=select-focus.util.d.ts.map
