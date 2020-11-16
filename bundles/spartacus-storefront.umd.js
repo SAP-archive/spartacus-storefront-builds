@@ -10132,7 +10132,7 @@
                 }
                 else if ('roles' in user) {
                     var roles = user.roles;
-                    if (roles.includes(i1.B2BUserGroup.B2B_CUSTOMER_GROUP)) {
+                    if (roles.includes(i1.B2BUserRole.CUSTOMER)) {
                         return true;
                     }
                     _this.globalMessageService.add({ key: 'checkout.invalid.accountType' }, i1.GlobalMessageType.MSG_TYPE_WARNING);
