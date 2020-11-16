@@ -4166,14 +4166,10 @@
     ];
 
     var DatePickerComponent = /** @class */ (function () {
-        function DatePickerComponent(dateFormatterService) {
-            this.dateFormatterService = dateFormatterService;
-            this.nativeValue = null;
-            this.endOfDay = false;
+        function DatePickerComponent() {
         }
         DatePickerComponent.prototype.onInput = function (event) {
-            this.value = this.dateFormatterService.toModel(event.target.value, this.endOfDay);
-            this.nativeValue = event.target.value;
+            this.value = event.target.value;
             this.onChange(this.value);
         };
         DatePickerComponent.prototype.onChange = function (_event) { };
@@ -4187,14 +4183,7 @@
         DatePickerComponent.prototype.writeValue = function (value) {
             if (value) {
                 this.value = value;
-                this.nativeValue = this.dateFormatterService.toNative(value);
             }
-        };
-        DatePickerComponent.prototype.getMin = function () {
-            return this.dateFormatterService.toNative(this.min);
-        };
-        DatePickerComponent.prototype.getMax = function () {
-            return this.dateFormatterService.toNative(this.max);
         };
         DatePickerComponent.prototype.validate = function () {
             if (this.input && !this.input.nativeElement.validity.valid) {
@@ -4214,7 +4203,7 @@
     DatePickerComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-date-picker',
-                    template: "<input\n  #inputElement\n  type=\"date\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"nativeValue\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"getMin()\"\n  [max]=\"getMax()\"\n/>\n",
+                    template: "<input\n  #inputElement\n  type=\"date\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"value\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"min\"\n  [max]=\"max\"\n/>\n",
                     providers: [
                         {
                             provide: forms.NG_VALUE_ACCESSOR,
@@ -4229,14 +4218,11 @@
                     ]
                 },] }
     ];
-    DatePickerComponent.ctorParameters = function () { return [
-        { type: i1.DatePickerFormatterService }
-    ]; };
+    DatePickerComponent.ctorParameters = function () { return []; };
     DatePickerComponent.propDecorators = {
         input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
         min: [{ type: i0.Input }],
         max: [{ type: i0.Input }],
-        endOfDay: [{ type: i0.Input }],
         required: [{ type: i0.Input }],
         invalid: [{ type: i0.Input }]
     };
@@ -4251,127 +4237,6 @@
                     imports: [i1$1.CommonModule],
                     declarations: [DatePickerComponent],
                     exports: [DatePickerComponent],
-                },] }
-    ];
-
-    /**
-     * This component serves the browser's native `<input type="datetime-local">` HTML element
-     * in whilst projecting the value in the standard date format with regards to timezone offsets.
-     */
-    var DateTimePickerComponent = /** @class */ (function () {
-        function DateTimePickerComponent(dateFormatterService) {
-            this.dateFormatterService = dateFormatterService;
-            this.nativeValue = null;
-        }
-        /**
-         * Handler method for input interactions.
-         * @param event: Input event.
-         */
-        DateTimePickerComponent.prototype.onInput = function (event) {
-            this.value = this.dateFormatterService.toModel(event.target.value);
-            this.nativeValue = event.target.value;
-            this.onChange(this.value);
-        };
-        /**
-         * Handler method for when the value is modified.
-         * @param event: Change event.
-         */
-        DateTimePickerComponent.prototype.onChange = function (_event) { };
-        /**
-         * Handler method for when the element is interacted with.
-         */
-        DateTimePickerComponent.prototype.onTouched = function () { };
-        /**
-         * Register the `onChange()` handler method.
-         */
-        DateTimePickerComponent.prototype.registerOnChange = function (fn) {
-            this.onChange = fn;
-        };
-        /**
-         * Register the `onTouched()` handler method.
-         */
-        DateTimePickerComponent.prototype.registerOnTouched = function (fn) {
-            this.onTouched = fn;
-        };
-        /**
-         * Set the value of the input element.
-         * @param value: Date-like string to be set
-         */
-        DateTimePickerComponent.prototype.writeValue = function (value) {
-            if (value) {
-                this.value = value;
-                this.nativeValue = this.dateFormatterService.toNative(value);
-            }
-        };
-        /**
-         * Get the minimum value allowed for the input.
-         */
-        DateTimePickerComponent.prototype.getMin = function () {
-            return this.dateFormatterService.toNative(this.min);
-        };
-        /**
-         * Get the maximum value allowed for the input.
-         */
-        DateTimePickerComponent.prototype.getMax = function () {
-            return this.dateFormatterService.toNative(this.max);
-        };
-        /**
-         * Returns failing validators if input value is invalid
-         */
-        DateTimePickerComponent.prototype.validate = function () {
-            if (this.input && !this.input.nativeElement.validity.valid) {
-                var validity = this.input.nativeElement.validity;
-                var validators = {};
-                if (validity.rangeOverflow) {
-                    validators.cxDateMax = true;
-                }
-                if (validity.rangeUnderflow) {
-                    validators.cxDateMin = true;
-                }
-                return validators;
-            }
-        };
-        return DateTimePickerComponent;
-    }());
-    DateTimePickerComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'cx-date-time-picker',
-                    template: "<input\n  #inputElement\n  type=\"datetime-local\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"nativeValue\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"getMin()\"\n  [max]=\"getMax()\"\n/>\n",
-                    providers: [
-                        {
-                            provide: forms.NG_VALUE_ACCESSOR,
-                            useExisting: i0.forwardRef(function () { return DateTimePickerComponent; }),
-                            multi: true,
-                        },
-                        {
-                            provide: forms.NG_VALIDATORS,
-                            useExisting: i0.forwardRef(function () { return DateTimePickerComponent; }),
-                            multi: true,
-                        },
-                    ]
-                },] }
-    ];
-    DateTimePickerComponent.ctorParameters = function () { return [
-        { type: i1.DateTimePickerFormatterService }
-    ]; };
-    DateTimePickerComponent.propDecorators = {
-        input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
-        min: [{ type: i0.Input }],
-        max: [{ type: i0.Input }],
-        required: [{ type: i0.Input }],
-        invalid: [{ type: i0.Input }]
-    };
-
-    var DateTimePickerModule = /** @class */ (function () {
-        function DateTimePickerModule() {
-        }
-        return DateTimePickerModule;
-    }());
-    DateTimePickerModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule],
-                    declarations: [DateTimePickerComponent],
-                    exports: [DateTimePickerComponent],
                 },] }
     ];
 
@@ -24659,8 +24524,6 @@
     exports.CustomFormValidators = CustomFormValidators;
     exports.DatePickerComponent = DatePickerComponent;
     exports.DatePickerModule = DatePickerModule;
-    exports.DateTimePickerComponent = DateTimePickerComponent;
-    exports.DateTimePickerModule = DateTimePickerModule;
     exports.DefaultComponentHandler = DefaultComponentHandler;
     exports.DeferLoaderService = DeferLoaderService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
