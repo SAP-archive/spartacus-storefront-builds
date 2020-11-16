@@ -6,7 +6,6 @@ import { PersistFocusConfig } from '../keyboard-focus.model';
  * the focus for a DOM tree, so that the focus remains after a repaint
  * or reoccurs when a DOM tree is "unlocked".
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class PersistFocusService extends BaseFocusService {
     protected focus: Map<string, string>;
     get(group?: string): string;
@@ -24,7 +23,4 @@ export declare class PersistFocusService extends BaseFocusService {
      * by the `data-cx-focus-group` attribute stored on the host.
      */
     getPersistenceGroup(host: HTMLElement, config?: PersistFocusConfig): string;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PersistFocusService, never>;
 }
-
-//# sourceMappingURL=persist-focus.service.d.ts.map
