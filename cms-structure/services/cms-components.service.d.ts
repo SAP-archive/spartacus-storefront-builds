@@ -3,7 +3,6 @@ import { Route } from '@angular/router';
 import { CmsComponentChildRoutesConfig, CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FeatureModulesService } from './feature-modules.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class CmsComponentsService {
     protected config: CmsConfig;
     protected platformId: Object;
@@ -62,7 +61,4 @@ export declare class CmsComponentsService {
      * Get i18n keys associated with components
      */
     getI18nKeys(componentTypes: string[]): string[];
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsComponentsService, never>;
 }
-
-//# sourceMappingURL=cms-components.service.d.ts.map
