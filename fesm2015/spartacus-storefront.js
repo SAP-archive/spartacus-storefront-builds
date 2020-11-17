@@ -3575,6 +3575,15 @@ class DatePickerComponent {
             this.value = value;
         }
     }
+    setDisabledState(isDisabled) {
+        var _a, _b;
+        if (isDisabled) {
+            (_a = this.input.nativeElement) === null || _a === void 0 ? void 0 : _a.setAttribute('disabled', isDisabled);
+        }
+        else {
+            (_b = this.input.nativeElement) === null || _b === void 0 ? void 0 : _b.removeAttribute('disabled');
+        }
+    }
     validate() {
         if (this.input && !this.input.nativeElement.validity.valid) {
             const validity = this.input.nativeElement.validity;
