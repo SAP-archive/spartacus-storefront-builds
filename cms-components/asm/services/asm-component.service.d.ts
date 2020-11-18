@@ -1,6 +1,5 @@
 import { AuthService, CsAgentAuthService, WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare class AsmComponentService {
     protected authService: AuthService;
     protected csAgentAuthService: CsAgentAuthService;
@@ -17,7 +16,4 @@ export declare class AsmComponentService {
      * - remove the generated UI from the DOM (outlets currently do not support this)
      */
     unload(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<AsmComponentService, never>;
 }
-
-//# sourceMappingURL=asm-component.service.d.ts.map
