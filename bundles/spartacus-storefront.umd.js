@@ -11946,14 +11946,14 @@
     ];
 
     var ReviewSubmitComponent = /** @class */ (function () {
-        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, activeCartService, translation, checkoutStepService, promotionService, paymentTypeService, checkoutCostCenterService, userCostCenterService) {
+        function ReviewSubmitComponent(checkoutDeliveryService, checkoutPaymentService, userAddressService, activeCartService, translation, promotionService, checkoutStepService, paymentTypeService, checkoutCostCenterService, userCostCenterService) {
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutPaymentService = checkoutPaymentService;
             this.userAddressService = userAddressService;
             this.activeCartService = activeCartService;
             this.translation = translation;
-            this.checkoutStepService = checkoutStepService;
             this.promotionService = promotionService;
+            this.checkoutStepService = checkoutStepService;
             this.paymentTypeService = paymentTypeService;
             this.checkoutCostCenterService = checkoutCostCenterService;
             this.userCostCenterService = userCostCenterService;
@@ -12201,8 +12201,8 @@
         { type: i1.UserAddressService },
         { type: i1.ActiveCartService },
         { type: i1.TranslationService },
-        { type: CheckoutStepService },
         { type: PromotionService },
+        { type: CheckoutStepService },
         { type: i1.PaymentTypeService },
         { type: i1.CheckoutCostCenterService },
         { type: i1.UserCostCenterService }

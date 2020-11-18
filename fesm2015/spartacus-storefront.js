@@ -10591,14 +10591,14 @@ PlaceOrderModule.decorators = [
 ];
 
 class ReviewSubmitComponent {
-    constructor(checkoutDeliveryService, checkoutPaymentService, userAddressService, activeCartService, translation, checkoutStepService, promotionService, paymentTypeService, checkoutCostCenterService, userCostCenterService) {
+    constructor(checkoutDeliveryService, checkoutPaymentService, userAddressService, activeCartService, translation, promotionService, checkoutStepService, paymentTypeService, checkoutCostCenterService, userCostCenterService) {
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutPaymentService = checkoutPaymentService;
         this.userAddressService = userAddressService;
         this.activeCartService = activeCartService;
         this.translation = translation;
-        this.checkoutStepService = checkoutStepService;
         this.promotionService = promotionService;
+        this.checkoutStepService = checkoutStepService;
         this.paymentTypeService = paymentTypeService;
         this.checkoutCostCenterService = checkoutCostCenterService;
         this.userCostCenterService = userCostCenterService;
@@ -10788,8 +10788,8 @@ ReviewSubmitComponent.ctorParameters = () => [
     { type: UserAddressService },
     { type: ActiveCartService },
     { type: TranslationService },
-    { type: CheckoutStepService },
     { type: PromotionService },
+    { type: CheckoutStepService },
     { type: PaymentTypeService },
     { type: CheckoutCostCenterService },
     { type: UserCostCenterService }

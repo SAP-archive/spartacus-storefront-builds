@@ -6,21 +6,22 @@ import { ICON_TYPE } from '../../../misc/icon/icon.model';
 import { CheckoutStep } from '../../model/checkout-step.model';
 import { CheckoutStepType } from '../../model/index';
 import { CheckoutStepService } from '../../services/index';
+import * as ɵngcc0 from '@angular/core';
 export declare class ReviewSubmitComponent {
     protected checkoutDeliveryService: CheckoutDeliveryService;
     protected checkoutPaymentService: CheckoutPaymentService;
     protected userAddressService: UserAddressService;
     protected activeCartService: ActiveCartService;
     protected translation: TranslationService;
-    protected checkoutStepService: CheckoutStepService;
     protected promotionService: PromotionService;
+    protected checkoutStepService: CheckoutStepService;
     protected paymentTypeService: PaymentTypeService;
     protected checkoutCostCenterService: CheckoutCostCenterService;
     protected userCostCenterService: UserCostCenterService;
     iconTypes: typeof ICON_TYPE;
     checkoutStepType: typeof CheckoutStepType;
     promotionLocation: PromotionLocation;
-    constructor(checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, userAddressService: UserAddressService, activeCartService: ActiveCartService, translation: TranslationService, checkoutStepService: CheckoutStepService, promotionService: PromotionService, paymentTypeService: PaymentTypeService, checkoutCostCenterService: CheckoutCostCenterService, userCostCenterService: UserCostCenterService);
+    constructor(checkoutDeliveryService: CheckoutDeliveryService, checkoutPaymentService: CheckoutPaymentService, userAddressService: UserAddressService, activeCartService: ActiveCartService, translation: TranslationService, promotionService: PromotionService, checkoutStepService: CheckoutStepService, paymentTypeService: PaymentTypeService, checkoutCostCenterService: CheckoutCostCenterService, userCostCenterService: UserCostCenterService);
     get cart$(): Observable<Cart>;
     get entries$(): Observable<OrderEntry[]>;
     get steps$(): Observable<CheckoutStep[]>;
@@ -42,4 +43,8 @@ export declare class ReviewSubmitComponent {
     getCheckoutStepUrl(stepType: CheckoutStepType): string;
     shippingSteps(steps: CheckoutStep[]): CheckoutStep[];
     paymentSteps(steps: CheckoutStep[]): CheckoutStep[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ReviewSubmitComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ReviewSubmitComponent, "cx-review-submit", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=review-submit.component.d.ts.map
