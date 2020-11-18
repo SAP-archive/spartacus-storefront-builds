@@ -1,6 +1,5 @@
 import { DeliveryMode } from '@spartacus/core';
 import { CheckoutConfig } from '../config/checkout-config';
-import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutConfigService {
     private checkoutConfig;
     private express;
@@ -12,7 +11,4 @@ export declare class CheckoutConfigService {
     getPreferredDeliveryMode(deliveryModes: DeliveryMode[]): string;
     isExpressCheckout(): boolean;
     isGuestCheckout(): boolean;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutConfigService, never>;
 }
-
-//# sourceMappingURL=checkout-config.service.d.ts.map
