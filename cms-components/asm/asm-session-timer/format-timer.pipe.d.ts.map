@@ -1,1 +1,0 @@
-{"version":3,"file":"format-timer.pipe.d.ts","sources":["format-timer.pipe.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { PipeTransform } from '@angular/core';\nexport declare class FormatTimerPipe implements PipeTransform {\n    transform(totalSeconds: number): string;\n}\n"]}
