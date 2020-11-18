@@ -3,6 +3,7 @@ import { PaymentDetails, TranslationService, UserPaymentService } from '@spartac
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../cms-components/misc/icon';
 import { Card } from '../../../shared/components/card/card.component';
+import * as ɵngcc0 from '@angular/core';
 export declare class PaymentMethodsComponent implements OnInit {
     private userPaymentService;
     private translation;
@@ -18,4 +19,8 @@ export declare class PaymentMethodsComponent implements OnInit {
     cancelCard(): void;
     setDefaultPaymentMethod(paymentMethod: PaymentDetails): void;
     getCardIcon(code: string): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaymentMethodsComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PaymentMethodsComponent, "cx-payment-methods", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=payment-methods.component.d.ts.map
