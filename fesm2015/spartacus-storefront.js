@@ -10413,12 +10413,12 @@ CheckoutReplenishmentFormService.decorators = [
 CheckoutReplenishmentFormService.ctorParameters = () => [];
 
 class PlaceOrderComponent {
-    constructor(checkoutService, checkoutReplenishmentFormService, routingService, launchDialogService, fb, vcr) {
+    constructor(checkoutService, routingService, fb, checkoutReplenishmentFormService, launchDialogService, vcr) {
         this.checkoutService = checkoutService;
-        this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
         this.routingService = routingService;
-        this.launchDialogService = launchDialogService;
         this.fb = fb;
+        this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
+        this.launchDialogService = launchDialogService;
         this.vcr = vcr;
         this.subscription = new Subscription();
         this.daysOfWeekNotChecked$ = new BehaviorSubject(false);
@@ -10511,10 +10511,10 @@ PlaceOrderComponent.decorators = [
 ];
 PlaceOrderComponent.ctorParameters = () => [
     { type: CheckoutService },
-    { type: CheckoutReplenishmentFormService },
     { type: RoutingService },
-    { type: LaunchDialogService },
     { type: FormBuilder },
+    { type: CheckoutReplenishmentFormService },
+    { type: LaunchDialogService },
     { type: ViewContainerRef }
 ];
 

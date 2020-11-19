@@ -4,12 +4,13 @@ import { CheckoutService, ORDER_TYPE, RoutingService, ScheduleReplenishmentForm 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LaunchDialogService } from '../../../../layout/launch-dialog/index';
 import { CheckoutReplenishmentFormService } from '../../services/checkout-replenishment-form-service';
+import * as ɵngcc0 from '@angular/core';
 export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
-    protected checkoutReplenishmentFormService: CheckoutReplenishmentFormService;
     protected routingService: RoutingService;
-    protected launchDialogService: LaunchDialogService;
     protected fb: FormBuilder;
+    protected checkoutReplenishmentFormService: CheckoutReplenishmentFormService;
+    protected launchDialogService: LaunchDialogService;
     protected vcr: ViewContainerRef;
     private subscription;
     currentOrderType: ORDER_TYPE;
@@ -18,9 +19,13 @@ export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     daysOfWeekNotChecked$: BehaviorSubject<boolean>;
     checkoutSubmitForm: FormGroup;
     get termsAndConditionInvalid(): Boolean;
-    constructor(checkoutService: CheckoutService, checkoutReplenishmentFormService: CheckoutReplenishmentFormService, routingService: RoutingService, launchDialogService: LaunchDialogService, fb: FormBuilder, vcr: ViewContainerRef);
+    constructor(checkoutService: CheckoutService, routingService: RoutingService, fb: FormBuilder, checkoutReplenishmentFormService: CheckoutReplenishmentFormService, launchDialogService: LaunchDialogService, vcr: ViewContainerRef);
     submitForm(): void;
     ngOnInit(): void;
     onSuccess(data: boolean): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<PlaceOrderComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PlaceOrderComponent, "cx-place-order", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=place-order.component.d.ts.map

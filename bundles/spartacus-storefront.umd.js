@@ -11749,12 +11749,12 @@
     CheckoutReplenishmentFormService.ctorParameters = function () { return []; };
 
     var PlaceOrderComponent = /** @class */ (function () {
-        function PlaceOrderComponent(checkoutService, checkoutReplenishmentFormService, routingService, launchDialogService, fb, vcr) {
+        function PlaceOrderComponent(checkoutService, routingService, fb, checkoutReplenishmentFormService, launchDialogService, vcr) {
             this.checkoutService = checkoutService;
-            this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
             this.routingService = routingService;
-            this.launchDialogService = launchDialogService;
             this.fb = fb;
+            this.checkoutReplenishmentFormService = checkoutReplenishmentFormService;
+            this.launchDialogService = launchDialogService;
             this.vcr = vcr;
             this.subscription = new rxjs.Subscription();
             this.daysOfWeekNotChecked$ = new rxjs.BehaviorSubject(false);
@@ -11854,10 +11854,10 @@
     ];
     PlaceOrderComponent.ctorParameters = function () { return [
         { type: i1.CheckoutService },
-        { type: CheckoutReplenishmentFormService },
         { type: i1.RoutingService },
-        { type: LaunchDialogService },
         { type: forms.FormBuilder },
+        { type: CheckoutReplenishmentFormService },
+        { type: LaunchDialogService },
         { type: i0.ViewContainerRef }
     ]; };
 
