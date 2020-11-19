@@ -1,0 +1,1 @@
+{"version":3,"file":"product-list.module.d.ts","sources":["product-list.module.d.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ProductListModule {\n}\n"]}

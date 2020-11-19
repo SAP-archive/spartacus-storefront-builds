@@ -4,6 +4,7 @@ import { OutletService } from '../../../cms-structure/outlet/index';
 import { OutletRendererService } from '../../../cms-structure/outlet/outlet-renderer.service';
 import { LaunchOutletDialog, LAUNCH_CALLER } from '../config/index';
 import { LaunchRenderStrategy } from './launch-render.strategy';
+import * as ɵngcc0 from '@angular/core';
 export declare class OutletRenderStrategy extends LaunchRenderStrategy {
     protected document: any;
     protected rendererFactory: RendererFactory2;
@@ -21,4 +22,7 @@ export declare class OutletRenderStrategy extends LaunchRenderStrategy {
     render(config: LaunchOutletDialog, caller: LAUNCH_CALLER | string): Observable<ComponentRef<any>>;
     hasMatch(config: LaunchOutletDialog): boolean;
     remove(caller: LAUNCH_CALLER | string, config: LaunchOutletDialog): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<OutletRenderStrategy, never>;
 }
+
+//# sourceMappingURL=outlet-render.strategy.d.ts.map
