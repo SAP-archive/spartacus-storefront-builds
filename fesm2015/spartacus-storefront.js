@@ -9597,11 +9597,11 @@ NotCheckoutAuthGuard.ctorParameters = () => [
 ];
 
 class DeliveryModeSetGuard {
-    constructor(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+    constructor(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
         this.checkoutDetailsService = checkoutDetailsService;
-        this.checkoutStepService = checkoutStepService;
         this.routingConfigService = routingConfigService;
         this.router = router;
+        this.checkoutStepService = checkoutStepService;
     }
     canActivate() {
         const checkoutStep = this.checkoutStepService.getCheckoutStep(CheckoutStepType.DELIVERY_MODE);
@@ -9619,7 +9619,7 @@ class DeliveryModeSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
-DeliveryModeSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutStepService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+DeliveryModeSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(CheckoutStepService)); }, token: DeliveryModeSetGuard, providedIn: "root" });
 DeliveryModeSetGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -9627,17 +9627,17 @@ DeliveryModeSetGuard.decorators = [
 ];
 DeliveryModeSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
-    { type: CheckoutStepService },
     { type: RoutingConfigService },
-    { type: Router }
+    { type: Router },
+    { type: CheckoutStepService }
 ];
 
 class PaymentDetailsSetGuard {
-    constructor(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+    constructor(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
         this.checkoutDetailsService = checkoutDetailsService;
-        this.checkoutStepService = checkoutStepService;
         this.routingConfigService = routingConfigService;
         this.router = router;
+        this.checkoutStepService = checkoutStepService;
     }
     canActivate() {
         const checkoutStep = this.checkoutStepService.getCheckoutStep(CheckoutStepType.PAYMENT_DETAILS);
@@ -9652,7 +9652,7 @@ class PaymentDetailsSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
-PaymentDetailsSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutStepService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+PaymentDetailsSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(CheckoutStepService)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
 PaymentDetailsSetGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -9660,17 +9660,17 @@ PaymentDetailsSetGuard.decorators = [
 ];
 PaymentDetailsSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
-    { type: CheckoutStepService },
     { type: RoutingConfigService },
-    { type: Router }
+    { type: Router },
+    { type: CheckoutStepService }
 ];
 
 class ShippingAddressSetGuard {
-    constructor(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+    constructor(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
         this.checkoutDetailsService = checkoutDetailsService;
-        this.checkoutStepService = checkoutStepService;
         this.routingConfigService = routingConfigService;
         this.router = router;
+        this.checkoutStepService = checkoutStepService;
     }
     canActivate() {
         const checkoutStep = this.checkoutStepService.getCheckoutStep(CheckoutStepType.SHIPPING_ADDRESS);
@@ -9688,7 +9688,7 @@ class ShippingAddressSetGuard {
                 this.routingConfigService.getRouteConfig(checkoutStep.routeName).paths[0])));
     }
 }
-ShippingAddressSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(CheckoutStepService), ɵɵinject(RoutingConfigService), ɵɵinject(Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+ShippingAddressSetGuard.ɵprov = ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(ɵɵinject(CheckoutDetailsService), ɵɵinject(RoutingConfigService), ɵɵinject(Router), ɵɵinject(CheckoutStepService)); }, token: ShippingAddressSetGuard, providedIn: "root" });
 ShippingAddressSetGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -9696,9 +9696,9 @@ ShippingAddressSetGuard.decorators = [
 ];
 ShippingAddressSetGuard.ctorParameters = () => [
     { type: CheckoutDetailsService },
-    { type: CheckoutStepService },
     { type: RoutingConfigService },
-    { type: Router }
+    { type: Router },
+    { type: CheckoutStepService }
 ];
 
 class CostCenterComponent {

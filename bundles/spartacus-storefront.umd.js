@@ -10882,11 +10882,11 @@
     ]; };
 
     var DeliveryModeSetGuard = /** @class */ (function () {
-        function DeliveryModeSetGuard(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+        function DeliveryModeSetGuard(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
             this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutStepService = checkoutStepService;
             this.routingConfigService = routingConfigService;
             this.router = router;
+            this.checkoutStepService = checkoutStepService;
         }
         DeliveryModeSetGuard.prototype.canActivate = function () {
             var _this = this;
@@ -10906,7 +10906,7 @@
         };
         return DeliveryModeSetGuard;
     }());
-    DeliveryModeSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: DeliveryModeSetGuard, providedIn: "root" });
+    DeliveryModeSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function DeliveryModeSetGuard_Factory() { return new DeliveryModeSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router), i0.ɵɵinject(CheckoutStepService)); }, token: DeliveryModeSetGuard, providedIn: "root" });
     DeliveryModeSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10914,17 +10914,17 @@
     ];
     DeliveryModeSetGuard.ctorParameters = function () { return [
         { type: CheckoutDetailsService },
-        { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i2.Router }
+        { type: i2.Router },
+        { type: CheckoutStepService }
     ]; };
 
     var PaymentDetailsSetGuard = /** @class */ (function () {
-        function PaymentDetailsSetGuard(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+        function PaymentDetailsSetGuard(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
             this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutStepService = checkoutStepService;
             this.routingConfigService = routingConfigService;
             this.router = router;
+            this.checkoutStepService = checkoutStepService;
         }
         PaymentDetailsSetGuard.prototype.canActivate = function () {
             var _this = this;
@@ -10941,7 +10941,7 @@
         };
         return PaymentDetailsSetGuard;
     }());
-    PaymentDetailsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
+    PaymentDetailsSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function PaymentDetailsSetGuard_Factory() { return new PaymentDetailsSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router), i0.ɵɵinject(CheckoutStepService)); }, token: PaymentDetailsSetGuard, providedIn: "root" });
     PaymentDetailsSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10949,17 +10949,17 @@
     ];
     PaymentDetailsSetGuard.ctorParameters = function () { return [
         { type: CheckoutDetailsService },
-        { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i2.Router }
+        { type: i2.Router },
+        { type: CheckoutStepService }
     ]; };
 
     var ShippingAddressSetGuard = /** @class */ (function () {
-        function ShippingAddressSetGuard(checkoutDetailsService, checkoutStepService, routingConfigService, router) {
+        function ShippingAddressSetGuard(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
             this.checkoutDetailsService = checkoutDetailsService;
-            this.checkoutStepService = checkoutStepService;
             this.routingConfigService = routingConfigService;
             this.router = router;
+            this.checkoutStepService = checkoutStepService;
         }
         ShippingAddressSetGuard.prototype.canActivate = function () {
             var _this = this;
@@ -10979,7 +10979,7 @@
         };
         return ShippingAddressSetGuard;
     }());
-    ShippingAddressSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router)); }, token: ShippingAddressSetGuard, providedIn: "root" });
+    ShippingAddressSetGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function ShippingAddressSetGuard_Factory() { return new ShippingAddressSetGuard(i0.ɵɵinject(CheckoutDetailsService), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(i2.Router), i0.ɵɵinject(CheckoutStepService)); }, token: ShippingAddressSetGuard, providedIn: "root" });
     ShippingAddressSetGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10987,9 +10987,9 @@
     ];
     ShippingAddressSetGuard.ctorParameters = function () { return [
         { type: CheckoutDetailsService },
-        { type: CheckoutStepService },
         { type: i1.RoutingConfigService },
-        { type: i2.Router }
+        { type: i2.Router },
+        { type: CheckoutStepService }
     ]; };
 
     var CostCenterComponent = /** @class */ (function () {
