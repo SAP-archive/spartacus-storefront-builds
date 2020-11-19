@@ -1,3 +1,4 @@
+import * as ɵngcc0 from '@angular/core';
 export declare abstract class ViewConfig {
     view?: {
         /**
@@ -9,4 +10,7 @@ export declare abstract class ViewConfig {
             showMoreButton?: boolean;
         };
     };
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ViewConfig, never>;
 }
+
+//# sourceMappingURL=view-config.d.ts.map
