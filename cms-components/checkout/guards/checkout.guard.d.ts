@@ -4,14 +4,18 @@ import { Observable } from 'rxjs';
 import { CheckoutConfigService } from '../services/checkout-config.service';
 import { CheckoutStepService } from '../services/checkout-step.service';
 import { ExpressCheckoutService } from '../services/express-checkout.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutGuard implements CanActivate {
     protected router: Router;
     protected routingConfigService: RoutingConfigService;
     protected checkoutConfigService: CheckoutConfigService;
-    protected checkoutStepService: CheckoutStepService;
     protected expressCheckoutService: ExpressCheckoutService;
     protected activeCartService: ActiveCartService;
+    protected checkoutStepService: CheckoutStepService;
     private readonly firstStep$;
-    constructor(router: Router, routingConfigService: RoutingConfigService, checkoutConfigService: CheckoutConfigService, checkoutStepService: CheckoutStepService, expressCheckoutService: ExpressCheckoutService, activeCartService: ActiveCartService);
+    constructor(router: Router, routingConfigService: RoutingConfigService, checkoutConfigService: CheckoutConfigService, expressCheckoutService: ExpressCheckoutService, activeCartService: ActiveCartService, checkoutStepService: CheckoutStepService);
     canActivate(): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutGuard, never>;
 }
+
+//# sourceMappingURL=checkout.guard.d.ts.map

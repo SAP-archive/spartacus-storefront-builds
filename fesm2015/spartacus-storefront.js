@@ -9104,13 +9104,13 @@ ExpressCheckoutService.ctorParameters = () => [
 ];
 
 class CheckoutGuard {
-    constructor(router, routingConfigService, checkoutConfigService, checkoutStepService, expressCheckoutService, activeCartService) {
+    constructor(router, routingConfigService, checkoutConfigService, expressCheckoutService, activeCartService, checkoutStepService) {
         this.router = router;
         this.routingConfigService = routingConfigService;
         this.checkoutConfigService = checkoutConfigService;
-        this.checkoutStepService = checkoutStepService;
         this.expressCheckoutService = expressCheckoutService;
         this.activeCartService = activeCartService;
+        this.checkoutStepService = checkoutStepService;
         this.firstStep$ = of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutStepService.getFirstCheckoutStepRoute()).paths[0]));
     }
     canActivate() {
@@ -9125,7 +9125,7 @@ class CheckoutGuard {
         return this.firstStep$;
     }
 }
-CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(CheckoutStepService), ɵɵinject(ExpressCheckoutService), ɵɵinject(ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
+CheckoutGuard.ɵprov = ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(ɵɵinject(Router), ɵɵinject(RoutingConfigService), ɵɵinject(CheckoutConfigService), ɵɵinject(ExpressCheckoutService), ɵɵinject(ActiveCartService), ɵɵinject(CheckoutStepService)); }, token: CheckoutGuard, providedIn: "root" });
 CheckoutGuard.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root',
@@ -9135,9 +9135,9 @@ CheckoutGuard.ctorParameters = () => [
     { type: Router },
     { type: RoutingConfigService },
     { type: CheckoutConfigService },
-    { type: CheckoutStepService },
     { type: ExpressCheckoutService },
-    { type: ActiveCartService }
+    { type: ActiveCartService },
+    { type: CheckoutStepService }
 ];
 
 class CheckoutOrchestratorComponent {

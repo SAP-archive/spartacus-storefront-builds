@@ -10327,13 +10327,13 @@
     ]; };
 
     var CheckoutGuard = /** @class */ (function () {
-        function CheckoutGuard(router, routingConfigService, checkoutConfigService, checkoutStepService, expressCheckoutService, activeCartService) {
+        function CheckoutGuard(router, routingConfigService, checkoutConfigService, expressCheckoutService, activeCartService, checkoutStepService) {
             this.router = router;
             this.routingConfigService = routingConfigService;
             this.checkoutConfigService = checkoutConfigService;
-            this.checkoutStepService = checkoutStepService;
             this.expressCheckoutService = expressCheckoutService;
             this.activeCartService = activeCartService;
+            this.checkoutStepService = checkoutStepService;
             this.firstStep$ = rxjs.of(this.router.parseUrl(this.routingConfigService.getRouteConfig(this.checkoutStepService.getFirstCheckoutStepRoute()).paths[0]));
         }
         CheckoutGuard.prototype.canActivate = function () {
@@ -10350,7 +10350,7 @@
         };
         return CheckoutGuard;
     }());
-    CheckoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.ɵɵinject(i2.Router), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(CheckoutStepService), i0.ɵɵinject(ExpressCheckoutService), i0.ɵɵinject(i1.ActiveCartService)); }, token: CheckoutGuard, providedIn: "root" });
+    CheckoutGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function CheckoutGuard_Factory() { return new CheckoutGuard(i0.ɵɵinject(i2.Router), i0.ɵɵinject(i1.RoutingConfigService), i0.ɵɵinject(CheckoutConfigService), i0.ɵɵinject(ExpressCheckoutService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(CheckoutStepService)); }, token: CheckoutGuard, providedIn: "root" });
     CheckoutGuard.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -10360,9 +10360,9 @@
         { type: i2.Router },
         { type: i1.RoutingConfigService },
         { type: CheckoutConfigService },
-        { type: CheckoutStepService },
         { type: ExpressCheckoutService },
-        { type: i1.ActiveCartService }
+        { type: i1.ActiveCartService },
+        { type: CheckoutStepService }
     ]; };
 
     var CheckoutOrchestratorComponent = /** @class */ (function () {
