@@ -1,1 +1,0 @@
-{"version":3,"file":"page-slot.module.d.ts","sources":["page-slot.module.d.ts"],"names":[],"mappings":"AAAA;;;;;;AACA;AACA;;;AACA","sourcesContent":["import { PageSlotService } from './page-slot.service';\nexport declare class PageSlotModule {\n    constructor(_pageSlot: PageSlotService);\n}\n"]}
