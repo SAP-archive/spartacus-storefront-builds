@@ -1,4 +1,4 @@
-import { ComponentRef, ElementRef, Injector, ViewContainerRef } from '@angular/core';
+import { ComponentRef, ElementRef, Injector, NgModuleRef, ViewContainerRef } from '@angular/core';
 import { CmsComponentMapping, Priority } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { DefaultComponentHandler } from './default-component.handler';
@@ -7,6 +7,7 @@ import { ComponentHandler } from './component-handler';
  * Lazy component handler used for launching lazy loaded cms components implemented
  * as native Angular components.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class LazyComponentHandler implements ComponentHandler {
     protected defaultHandler: DefaultComponentHandler;
     constructor(defaultHandler: DefaultComponentHandler);
@@ -16,8 +17,11 @@ export declare class LazyComponentHandler implements ComponentHandler {
     hasMatch(componentMapping: CmsComponentMapping): boolean;
     private isNotClass;
     getPriority(): Priority;
-    launcher(componentMapping: CmsComponentMapping, viewContainerRef: ViewContainerRef, elementInjector?: Injector): Observable<{
+    launcher(componentMapping: CmsComponentMapping, viewContainerRef: ViewContainerRef, elementInjector?: Injector, module?: NgModuleRef<any>): Observable<{
         elementRef: ElementRef;
         componentRef?: ComponentRef<any>;
     }>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<LazyComponentHandler, never>;
 }
+
+//# sourceMappingURL=lazy-component.handler.d.ts.map

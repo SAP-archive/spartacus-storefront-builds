@@ -1,4 +1,4 @@
-import { ComponentRef, ElementRef, Injector, ViewContainerRef } from '@angular/core';
+import { ComponentRef, ElementRef, Injector, NgModuleRef, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Applicable, CmsComponentMapping, Priority } from '@spartacus/core';
 /**
@@ -18,8 +18,9 @@ export declare abstract class ComponentHandler implements Applicable {
      * @param componentMapping
      * @param viewContainerRef
      * @param elementInjector
+     * @param module
      */
-    abstract launcher(componentMapping: CmsComponentMapping, viewContainerRef: ViewContainerRef, elementInjector?: Injector): Observable<{
+    abstract launcher(componentMapping: CmsComponentMapping, viewContainerRef: ViewContainerRef, elementInjector?: Injector, module?: NgModuleRef<any>): Observable<{
         elementRef: ElementRef;
         componentRef?: ComponentRef<any>;
     }>;

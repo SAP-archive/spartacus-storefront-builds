@@ -1,8 +1,12 @@
-import { Injector } from '@angular/core';
+import { NgModuleRef } from '@angular/core';
 import { Route } from '@angular/router';
 import { CmsComponentChildRoutesConfig, CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FeatureModulesService } from './feature-modules.service';
+/**
+ * Service with logic related to resolving component from cms mapping
+ */
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsComponentsService {
     protected config: CmsConfig;
     protected platformId: Object;
@@ -21,7 +25,13 @@ export declare class CmsComponentsService {
      */
     determineMappings(componentTypes: string[]): Observable<string[]>;
     private getFeatureMappingResolver;
-    getInjectors(componentType: string): Injector[];
+    /**
+     * Returns the feature module for a cms component.
+     * It will only work for cms components provided by feature modules.
+     *
+     * @param componentType
+     */
+    getModule(componentType: string): NgModuleRef<any> | undefined;
     /**
      * Return collection of component mapping configuration for specified list of
      * component types.
@@ -61,4 +71,7 @@ export declare class CmsComponentsService {
      * Get i18n keys associated with components
      */
     getI18nKeys(componentTypes: string[]): string[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsComponentsService, never>;
 }
+
+//# sourceMappingURL=cms-components.service.d.ts.map

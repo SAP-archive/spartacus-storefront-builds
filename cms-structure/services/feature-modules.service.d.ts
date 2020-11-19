@@ -1,9 +1,10 @@
-import { Injector, OnDestroy } from '@angular/core';
+import { NgModuleRef, OnDestroy } from '@angular/core';
 import { CmsComponentMapping, ConfigInitializerService, LazyModulesService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 /**
  * Service responsible for resolving cms config based feature modules.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class FeatureModulesService implements OnDestroy {
     protected configInitializer: ConfigInitializerService;
     protected lazyModules: LazyModulesService;
@@ -22,12 +23,11 @@ export declare class FeatureModulesService implements OnDestroy {
      */
     getCmsMapping(componentType: string): Observable<CmsComponentMapping>;
     /**
-     * Get all injectors for feature and its dependencies
+     * Resolves feature module for provided component type
      *
-     * As it's a synchronous method, it works only for already resolved features,
-     * returning undefined otherwise
+     * @param componentType
      */
-    getInjectors(componentType: string): Injector[] | undefined;
+    getModule(componentType: string): NgModuleRef<any> | undefined;
     /**
      * Resolve feature based on feature name, if feature was not yet resolved
      *
@@ -43,4 +43,7 @@ export declare class FeatureModulesService implements OnDestroy {
      */
     private resolveFeatureConfiguration;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<FeatureModulesService, never>;
 }
+
+//# sourceMappingURL=feature-modules.service.d.ts.map

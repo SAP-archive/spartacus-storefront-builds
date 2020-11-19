@@ -6528,26 +6528,20 @@ class FeatureModulesService {
         return this.resolveFeature(feature).pipe(map((featureInstance) => featureInstance.componentsMappings[componentType]));
     }
     /**
-     * Get all injectors for feature and its dependencies
+     * Resolves feature module for provided component type
      *
-     * As it's a synchronous method, it works only for already resolved features,
-     * returning undefined otherwise
+     * @param componentType
      */
-    getInjectors(componentType) {
+    getModule(componentType) {
         var _a;
         const feature = this.componentFeatureMap.get(componentType);
-        let injectors;
+        let module;
         // we are returning injectors only for already resolved features
         (_a = this.features
             .get(feature)) === null || _a === void 0 ? void 0 : _a.subscribe((featureInstance) => {
-            injectors = [
-                // feature module injector
-                featureInstance.moduleRef.injector,
-                // injectors from dependency modules
-                ...featureInstance.dependencyModuleRefs.map((moduleRef) => moduleRef.injector),
-            ];
+            module = featureInstance.moduleRef;
         }).unsubscribe();
-        return injectors;
+        return module;
     }
     /**
      * Resolve feature based on feature name, if feature was not yet resolved
@@ -6575,7 +6569,7 @@ class FeatureModulesService {
      */
     resolveFeatureModule(featureConfig, dependencyModuleRefs = [], feature) {
         return this.lazyModules
-            .resolveModuleInstance(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module, feature)
+            .resolveModuleInstance(featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module, feature, dependencyModuleRefs)
             .pipe(map((moduleRef) => {
             const featureInstance = Object.assign(Object.assign({}, featureConfig), { moduleRef,
                 dependencyModuleRefs, componentsMappings: {} });
@@ -6615,6 +6609,9 @@ FeatureModulesService.ctorParameters = () => [
     { type: LazyModulesService }
 ];
 
+/**
+ * Service with logic related to resolving component from cms mapping
+ */
 class CmsComponentsService {
     constructor(config, platformId, featureModules) {
         this.config = config;
@@ -6676,10 +6673,15 @@ class CmsComponentsService {
         }
         return this.mappingResolvers.get(componentType);
     }
-    getInjectors(componentType) {
-        var _a;
-        return ((_a = (this.featureModules.hasFeatureFor(componentType) &&
-            this.featureModules.getInjectors(componentType))) !== null && _a !== void 0 ? _a : []);
+    /**
+     * Returns the feature module for a cms component.
+     * It will only work for cms components provided by feature modules.
+     *
+     * @param componentType
+     */
+    getModule(componentType) {
+        return (this.featureModules.hasFeatureFor(componentType) &&
+            this.featureModules.getModule(componentType));
     }
     /**
      * Return collection of component mapping configuration for specified list of
@@ -6789,48 +6791,6 @@ CmsComponentsService.ctorParameters = () => [
     { type: FeatureModulesService }
 ];
 
-const NOT_FOUND_SYMBOL = {};
-/**
- * CombinedInjector is able to combine more than one injector together in a way
- * that main injector is supported by complementary injectors.
- *
- * Should be used as a parent injector for components, when we want to have access
- * to both providers from component hierarchical injectors and providers from any
- * number of additional injectors (lazy loaded modules for example).
- */
-class CombinedInjector {
-    /**
-     * @param mainInjector Component hierarchical injector
-     * @param complementaryInjectors Additional injector that will be taken into an account when resolving dependencies
-     */
-    constructor(mainInjector, complementaryInjectors) {
-        this.mainInjector = mainInjector;
-        this.complementaryInjectors = complementaryInjectors;
-    }
-    get(token, notFoundValue, flags) {
-        // tslint:disable-next-line:no-bitwise
-        if (flags & InjectFlags.Self) {
-            if (notFoundValue !== undefined) {
-                return notFoundValue;
-            }
-            throw new Error("CombinedInjector should be used as a parent injector / doesn't support self dependencies");
-        }
-        for (const injector of [
-            this.mainInjector,
-            ...this.complementaryInjectors,
-        ]) {
-            // First we are resolving providers provided at Self level in all injectors,
-            // starting with main injector and going through complementary ones...
-            const service = injector.get(token, NOT_FOUND_SYMBOL, InjectFlags.Self);
-            if (service !== NOT_FOUND_SYMBOL) {
-                return service;
-            }
-        }
-        // ...and then fallback to main injector passing the flag
-        return this.mainInjector.get(token, notFoundValue, flags);
-    }
-}
-
 /**
  * Used to prepare injector for CMS components.
  *
@@ -6853,10 +6813,6 @@ class CmsInjectorService {
     getInjector(type, uid, parentInjector) {
         var _a, _b;
         const configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
-        const complementaryInjectors = this.cmsComponentsService.getInjectors(type);
-        if (complementaryInjectors === null || complementaryInjectors === void 0 ? void 0 : complementaryInjectors.length) {
-            parentInjector = new CombinedInjector(parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector, complementaryInjectors);
-        }
         return Injector.create({
             providers: [
                 {
@@ -6917,9 +6873,9 @@ class ComponentHandlerService {
      * @param viewContainerRef
      * @param elementInjector
      */
-    getLauncher(componentMapping, viewContainerRef, elementInjector) {
+    getLauncher(componentMapping, viewContainerRef, elementInjector, module) {
         var _a;
-        return (_a = this.resolve(componentMapping)) === null || _a === void 0 ? void 0 : _a.launcher(componentMapping, viewContainerRef, elementInjector);
+        return (_a = this.resolve(componentMapping)) === null || _a === void 0 ? void 0 : _a.launcher(componentMapping, viewContainerRef, elementInjector, module);
     }
 }
 ComponentHandlerService.ɵprov = ɵɵdefineInjectable({ factory: function ComponentHandlerService_Factory() { return new ComponentHandlerService(ɵɵinject(ComponentHandler, 8)); }, token: ComponentHandlerService, providedIn: "root" });
@@ -6961,7 +6917,7 @@ class ComponentWrapperDirective {
             return;
         }
         this.launcherResource = (_a = this.componentHandler
-            .getLauncher(componentMapping, this.vcr, this.cmsInjector.getInjector(this.cxComponentWrapper.flexType, this.cxComponentWrapper.uid, this.injector))) === null || _a === void 0 ? void 0 : _a.subscribe(({ elementRef, componentRef }) => {
+            .getLauncher(componentMapping, this.vcr, this.cmsInjector.getInjector(this.cxComponentWrapper.flexType, this.cxComponentWrapper.uid, this.injector), this.cmsComponentsService.getModule(this.cxComponentWrapper.flexType))) === null || _a === void 0 ? void 0 : _a.subscribe(({ elementRef, componentRef }) => {
             this.cmpRef = componentRef;
             this.decorate(elementRef);
             this.injector.get(ChangeDetectorRef).markForCheck();
@@ -7005,7 +6961,7 @@ class DefaultComponentHandler {
     getPriority() {
         return -50 /* FALLBACK */;
     }
-    launcher(componentMapping, viewContainerRef, elementInjector) {
+    launcher(componentMapping, viewContainerRef, elementInjector, module) {
         return new Observable((subscriber) => {
             let componentRef;
             const injector = elementInjector !== null && elementInjector !== void 0 ? elementInjector : viewContainerRef.injector;
@@ -7016,7 +6972,7 @@ class DefaultComponentHandler {
             };
             const factory = this.getComponentFactory(injector, componentMapping.component);
             if (factory) {
-                componentRef = viewContainerRef.createComponent(factory, undefined, injector);
+                componentRef = viewContainerRef.createComponent(factory, undefined, injector, undefined, module);
                 subscriber.next({ elementRef: componentRef.location, componentRef });
             }
             return dispose;
@@ -7061,8 +7017,8 @@ class LazyComponentHandler {
     getPriority() {
         return -10 /* LOW */;
     }
-    launcher(componentMapping, viewContainerRef, elementInjector) {
-        return from(componentMapping.component()).pipe(switchMap((component) => this.defaultHandler.launcher(Object.assign(Object.assign({}, componentMapping), { component }), viewContainerRef, elementInjector)));
+    launcher(componentMapping, viewContainerRef, elementInjector, module) {
+        return from(componentMapping.component()).pipe(switchMap((component) => this.defaultHandler.launcher(Object.assign(Object.assign({}, componentMapping), { component }), viewContainerRef, elementInjector, module)));
     }
 }
 LazyComponentHandler.ɵprov = ɵɵdefineInjectable({ factory: function LazyComponentHandler_Factory() { return new LazyComponentHandler(ɵɵinject(DefaultComponentHandler)); }, token: LazyComponentHandler, providedIn: "root" });
