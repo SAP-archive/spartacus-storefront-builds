@@ -3,7 +3,6 @@ import { RoutingConfigService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CheckoutStepService } from '../services/checkout-step.service';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class DeliveryModeSetGuard implements CanActivate {
     private checkoutDetailsService;
     private routingConfigService;
@@ -11,7 +10,4 @@ export declare class DeliveryModeSetGuard implements CanActivate {
     private checkoutStepService;
     constructor(checkoutDetailsService: CheckoutDetailsService, routingConfigService: RoutingConfigService, router: Router, checkoutStepService: CheckoutStepService);
     canActivate(): Observable<boolean | UrlTree>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DeliveryModeSetGuard, never>;
 }
-
-//# sourceMappingURL=delivery-mode-set.guard.d.ts.map
