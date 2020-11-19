@@ -9429,9 +9429,9 @@ CheckoutProgressMobileBottomModule.decorators = [
 ];
 
 class CheckoutProgressMobileTopComponent {
-    constructor(checkoutStepService, activeCartService) {
-        this.checkoutStepService = checkoutStepService;
+    constructor(activeCartService, checkoutStepService) {
         this.activeCartService = activeCartService;
+        this.checkoutStepService = checkoutStepService;
         this._steps$ = this.checkoutStepService
             .steps$;
         this.activeStepIndex$ = this.checkoutStepService.activeStepIndex$.pipe(tap((index) => (this.activeStepIndex = index)));
@@ -9451,8 +9451,8 @@ CheckoutProgressMobileTopComponent.decorators = [
             },] }
 ];
 CheckoutProgressMobileTopComponent.ctorParameters = () => [
-    { type: CheckoutStepService },
-    { type: ActiveCartService }
+    { type: ActiveCartService },
+    { type: CheckoutStepService }
 ];
 
 class CheckoutProgressMobileTopModule {
@@ -9760,12 +9760,12 @@ CostCenterModule.decorators = [
 ];
 
 class DeliveryModeComponent {
-    constructor(fb, checkoutDeliveryService, checkoutConfigService, checkoutStepService, activatedRoute) {
+    constructor(fb, checkoutDeliveryService, checkoutConfigService, activatedRoute, checkoutStepService) {
         this.fb = fb;
         this.checkoutDeliveryService = checkoutDeliveryService;
         this.checkoutConfigService = checkoutConfigService;
-        this.checkoutStepService = checkoutStepService;
         this.activatedRoute = activatedRoute;
+        this.checkoutStepService = checkoutStepService;
         this.continueButtonPressed = false;
         this.allowRedirect = false;
         this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
@@ -9845,8 +9845,8 @@ DeliveryModeComponent.ctorParameters = () => [
     { type: FormBuilder },
     { type: CheckoutDeliveryService },
     { type: CheckoutConfigService },
-    { type: CheckoutStepService },
-    { type: ActivatedRoute }
+    { type: ActivatedRoute },
+    { type: CheckoutStepService }
 ];
 
 class DeliveryModeModule {

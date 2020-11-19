@@ -10690,10 +10690,10 @@
     ];
 
     var CheckoutProgressMobileTopComponent = /** @class */ (function () {
-        function CheckoutProgressMobileTopComponent(checkoutStepService, activeCartService) {
+        function CheckoutProgressMobileTopComponent(activeCartService, checkoutStepService) {
             var _this = this;
-            this.checkoutStepService = checkoutStepService;
             this.activeCartService = activeCartService;
+            this.checkoutStepService = checkoutStepService;
             this._steps$ = this.checkoutStepService
                 .steps$;
             this.activeStepIndex$ = this.checkoutStepService.activeStepIndex$.pipe(operators.tap(function (index) { return (_this.activeStepIndex = index); }));
@@ -10718,8 +10718,8 @@
                 },] }
     ];
     CheckoutProgressMobileTopComponent.ctorParameters = function () { return [
-        { type: CheckoutStepService },
-        { type: i1.ActiveCartService }
+        { type: i1.ActiveCartService },
+        { type: CheckoutStepService }
     ]; };
 
     var CheckoutProgressMobileTopModule = /** @class */ (function () {
@@ -11071,12 +11071,12 @@
     ];
 
     var DeliveryModeComponent = /** @class */ (function () {
-        function DeliveryModeComponent(fb, checkoutDeliveryService, checkoutConfigService, checkoutStepService, activatedRoute) {
+        function DeliveryModeComponent(fb, checkoutDeliveryService, checkoutConfigService, activatedRoute, checkoutStepService) {
             this.fb = fb;
             this.checkoutDeliveryService = checkoutDeliveryService;
             this.checkoutConfigService = checkoutConfigService;
-            this.checkoutStepService = checkoutStepService;
             this.activatedRoute = activatedRoute;
+            this.checkoutStepService = checkoutStepService;
             this.continueButtonPressed = false;
             this.allowRedirect = false;
             this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
@@ -11163,8 +11163,8 @@
         { type: forms.FormBuilder },
         { type: i1.CheckoutDeliveryService },
         { type: CheckoutConfigService },
-        { type: CheckoutStepService },
-        { type: i2.ActivatedRoute }
+        { type: i2.ActivatedRoute },
+        { type: CheckoutStepService }
     ]; };
 
     var DeliveryModeModule = /** @class */ (function () {
