@@ -12,7 +12,6 @@ import { PageSlotService } from './page-slot.service';
  * - The `cx-pending` is added for as long as the slot hasn't start loading.
  * - The `page-fold` style class is added for the page slot which is configured as the page fold.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected cmsService: CmsService;
     protected dynamicAttributeService: DynamicAttributeService;
@@ -75,8 +74,4 @@ export declare class PageSlotComponent implements OnInit, OnDestroy {
     protected isDistinct(old: ContentSlotData, current: ContentSlotData): boolean;
     private addSmartEditSlotClass;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageSlotComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PageSlotComponent, "cx-page-slot,[cx-page-slot]", never, { "isPageFold": "isPageFold"; "hasComponents": "hasComponents"; "position": "position"; "class": "class"; }, {}, never, never>;
 }
-
-//# sourceMappingURL=page-slot.component.d.ts.map

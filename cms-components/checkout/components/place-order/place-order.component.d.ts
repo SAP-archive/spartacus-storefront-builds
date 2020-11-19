@@ -4,7 +4,6 @@ import { CheckoutService, ORDER_TYPE, RoutingService, ScheduleReplenishmentForm 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LaunchDialogService } from '../../../../layout/launch-dialog/index';
 import { CheckoutReplenishmentFormService } from '../../services/checkout-replenishment-form-service';
-import * as ɵngcc0 from '@angular/core';
 export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     protected checkoutService: CheckoutService;
     protected routingService: RoutingService;
@@ -24,8 +23,4 @@ export declare class PlaceOrderComponent implements OnInit, OnDestroy {
     ngOnInit(): void;
     onSuccess(data: boolean): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PlaceOrderComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<PlaceOrderComponent, "cx-place-order", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=place-order.component.d.ts.map
