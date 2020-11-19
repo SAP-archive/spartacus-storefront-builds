@@ -1,5 +1,6 @@
 import { ElementRef } from '@angular/core';
 import { ControlValueAccessor, Validator } from '@angular/forms';
+import * as ɵngcc0 from '@angular/core';
 export declare class DatePickerComponent implements ControlValueAccessor, Validator {
     value: string;
     input: ElementRef;
@@ -18,4 +19,8 @@ export declare class DatePickerComponent implements ControlValueAccessor, Valida
     validate(): {
         [key: string]: any;
     };
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DatePickerComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<DatePickerComponent, "cx-date-picker", never, { "min": "min"; "max": "max"; "required": "required"; "invalid": "invalid"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=date-picker.component.d.ts.map
