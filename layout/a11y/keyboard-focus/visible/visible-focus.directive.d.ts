@@ -12,6 +12,7 @@ import { VisibleFocusConfig } from '../keyboard-focus.model';
  * This can be considered annoying by keyboard users, as they won't need such a
  * strong indication of the selected element.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class VisibleFocusDirective extends BaseFocusDirective {
     protected defaultConfig: VisibleFocusConfig;
     protected config: VisibleFocusConfig;
@@ -28,4 +29,8 @@ export declare class VisibleFocusDirective extends BaseFocusDirective {
      * are used by mouse users to fill a form or interact with the OS or browser.
      */
     protected isNavigating(event: KeyboardEvent): boolean;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<VisibleFocusDirective, never>;
+    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<VisibleFocusDirective, never, never, {}, {}, never>;
 }
+
+//# sourceMappingURL=visible-focus.directive.d.ts.map
