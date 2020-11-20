@@ -780,7 +780,6 @@ OutletModule.decorators = [
     { type: NgModule, args: [{
                 imports: [CommonModule],
                 declarations: [OutletDirective],
-                providers: [OutletService],
                 exports: [OutletDirective],
             },] }
 ];

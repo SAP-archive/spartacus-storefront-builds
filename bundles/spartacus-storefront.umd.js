@@ -1103,7 +1103,6 @@
         { type: i0.NgModule, args: [{
                     imports: [i1$1.CommonModule],
                     declarations: [OutletDirective],
-                    providers: [OutletService],
                     exports: [OutletDirective],
                 },] }
     ];
