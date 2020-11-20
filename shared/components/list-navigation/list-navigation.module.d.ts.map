@@ -1,0 +1,1 @@
+{"version":3,"file":"list-navigation.module.d.ts","sources":["list-navigation.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class ListNavigationModule {\n}\n"]}
