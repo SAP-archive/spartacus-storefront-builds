@@ -4,7 +4,6 @@ import { Observable, Subscription } from 'rxjs';
 import { ComponentWrapperDirective } from '../../../cms-structure/page/component/component-wrapper.directive';
 import { CmsComponentData } from '../../../cms-structure/page/model/index';
 import { BreakpointService } from '../../../layout/breakpoint/breakpoint.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class TabParagraphContainerComponent implements AfterViewInit, OnInit, OnDestroy {
     componentData: CmsComponentData<CMSTabParagraphContainer>;
     protected cmsService: CmsService;
@@ -25,8 +24,4 @@ export declare class TabParagraphContainerComponent implements AfterViewInit, On
     ngAfterViewInit(): void;
     private getTitleParams;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TabParagraphContainerComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TabParagraphContainerComponent, "cx-tab-paragraph-container", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=tab-paragraph-container.component.d.ts.map
