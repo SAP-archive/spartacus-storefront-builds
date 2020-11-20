@@ -1,6 +1,7 @@
 import { CmsNavigationComponent, CmsService, SemanticPathService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { NavigationNode } from './navigation-node.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class NavigationService {
     protected cmsService: CmsService;
     protected semanticPathService: SemanticPathService;
@@ -8,7 +9,7 @@ export declare class NavigationService {
     createNavigation(data$: Observable<CmsNavigationComponent>): Observable<NavigationNode>;
     /**
      * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
-     * This function will load the navigation underlying entries and childs if they haven't been
+     * This function will load the navigation underlying entries and children if they haven't been
      * loaded so far.
      */
     getNavigationNode(data$: Observable<CmsNavigationComponent>): Observable<NavigationNode>;
@@ -36,4 +37,7 @@ export declare class NavigationService {
      * and product pages (productCode)
      */
     protected getLink(item: any): string | string[];
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<NavigationService, never>;
 }
+
+//# sourceMappingURL=navigation.service.d.ts.map

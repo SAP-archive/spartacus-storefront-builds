@@ -3,6 +3,7 @@ import { Params, Router } from '@angular/router';
 /**
  * This component navigates using [routerLink] attribute when input 'url' is a relative url. Otherwise (when it's absolute), [href] is used.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class GenericLinkComponent implements OnChanges {
     protected router: Router;
     constructor(router: Router);
@@ -24,8 +25,8 @@ export declare class GenericLinkComponent implements OnChanges {
     private routeParts;
     url: string | any[];
     target: string;
-    class: string;
     id: string;
+    class: string;
     style: string;
     title: string;
     /**
@@ -61,4 +62,8 @@ export declare class GenericLinkComponent implements OnChanges {
      * Prepends a leading slash to the given URL string, in case it doesn't have it.
      */
     private getAbsoluteUrl;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<GenericLinkComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<GenericLinkComponent, "cx-generic-link", never, { "url": "url"; "target": "target"; "id": "id"; "class": "class"; "style": "style"; "title": "title"; }, {}, never, ["*"]>;
 }
+
+//# sourceMappingURL=generic-link.component.d.ts.map

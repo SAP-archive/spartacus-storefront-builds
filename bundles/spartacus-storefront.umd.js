@@ -4428,7 +4428,7 @@
     GenericLinkComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-generic-link',
-                    template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [attr.target]=\"target\"\n    [attr.class]=\"class\"\n    [attr.id]=\"id\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
+                    template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [attr.target]=\"target\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
                 },] }
     ];
     GenericLinkComponent.ctorParameters = function () { return [
@@ -4437,8 +4437,8 @@
     GenericLinkComponent.propDecorators = {
         url: [{ type: i0.Input }],
         target: [{ type: i0.Input }],
-        class: [{ type: i0.Input }],
         id: [{ type: i0.Input }],
+        class: [{ type: i0.Input }],
         style: [{ type: i0.Input }],
         title: [{ type: i0.Input }]
     };
@@ -15475,7 +15475,7 @@
     LinkComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-link',
-                    template: "<cx-generic-link\n  *ngIf=\"component.data$ | async as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
+                    template: "<cx-generic-link\n  *ngIf=\"component.data$ | async as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  [class]=\"data.styleClasses\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
@@ -18948,8 +18948,8 @@
             this.semanticPathService = semanticPathService;
         }
         NavigationService.prototype.createNavigation = function (data$) {
-            return rxjs.combineLatest([data$, this.getNavigationNode(data$)]).pipe(operators.map(function (_a) {
-                var _b = __read(_a, 2), data = _b[0], nav = _b[1];
+            return rxjs.combineLatest([data$, this.getNavigationNode(data$)]).pipe(operators.map(function (_b) {
+                var _c = __read(_b, 2), data = _c[0], nav = _c[1];
                 return data
                     ? {
                         title: data.name,
@@ -18960,7 +18960,7 @@
         };
         /**
          * returns an observable with the `NavigationNode` for the given `CmsNavigationComponent`.
-         * This function will load the navigation underlying entries and childs if they haven't been
+         * This function will load the navigation underlying entries and children if they haven't been
          * loaded so far.
          */
         NavigationService.prototype.getNavigationNode = function (data$) {
@@ -19018,16 +19018,25 @@
          */
         NavigationService.prototype.populateNavigationNode = function (nodeData, items) {
             var _this = this;
+            var _a;
             var node = {};
             if (nodeData.title) {
                 // the node title will be populated by the first entry (if any)
                 // if there's no nodeData.title available
                 node.title = nodeData.title;
             }
+            // populate style classes to apply CMS driven styling
+            if (nodeData.styleClasses) {
+                node.styleClasses = nodeData.styleClasses;
+            }
+            // populate style attributes to apply CMS driven styling
+            if (nodeData.styleAttributes) {
+                node.styleAttributes = nodeData.styleAttributes;
+            }
             if (nodeData.entries && nodeData.entries.length > 0) {
                 this.populateLink(node, nodeData.entries[0], items);
             }
-            if (nodeData.children && nodeData.children.length > 0) {
+            if (((_a = nodeData.children) === null || _a === void 0 ? void 0 : _a.length) > 0) {
                 var children = nodeData.children
                     .map(function (child) { return _this.populateNavigationNode(child, items); })
                     .filter(Boolean);
@@ -19054,7 +19063,17 @@
                     node.url = url;
                     // the backend provide boolean value for the target
                     // in case the link should be opened in a new window
-                    node.target = !!item.target ? '_blank' : '';
+                    if (item.target === 'true' || item.target === true) {
+                        node.target = '_blank';
+                    }
+                }
+                // populate style classes to apply CMS driven styling
+                if (item.styleClasses) {
+                    node.styleClasses = item.styleClasses;
+                }
+                // populate style attributes to apply CMS driven styling
+                if (item.styleAttributes) {
+                    node.styleAttributes = item.styleAttributes;
                 }
             }
         };
@@ -19254,7 +19273,7 @@
     NavigationUIComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-navigation-ui',
-                    template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child, depth: 0 }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\" let-depth=\"depth\">\n  <nav\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n    (keydown.space)=\"toggleOpen($event)\"\n    (keydown.esc)=\"back()\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5\n        [attr.aria-label]=\"node.title\"\n        [attr.tabindex]=\"flyout && (depth === 0 || node.url) ? 0 : -1\"\n      >\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getTotalDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container\n            *ngTemplateOutlet=\"nav; context: { node: child, depth: depth + 1 }\"\n          >\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
+                    template: "<div\n  *ngIf=\"flyout && node?.children.length > 1\"\n  class=\"back is-open\"\n  (click)=\"back()\"\n>\n  <h5>\n    <cx-icon [type]=\"iconType.CARET_LEFT\"></cx-icon>\n    {{ 'common.back' | cxTranslate }}\n  </h5>\n</div>\n\n<ng-container *ngFor=\"let child of node?.children\">\n  <ng-container *ngTemplateOutlet=\"nav; context: { node: child, depth: 0 }\">\n  </ng-container>\n</ng-container>\n\n<!-- we generate links in a recursive manner -->\n<ng-template #nav let-node=\"node\" let-depth=\"depth\">\n  <nav\n    (click)=\"toggleOpen($event)\"\n    (mouseenter)=\"onMouseEnter($event)\"\n    (keydown.space)=\"toggleOpen($event)\"\n    (keydown.esc)=\"back()\"\n  >\n    <cx-generic-link\n      *ngIf=\"\n        node.url && (!node.children || node.children?.length === 0);\n        else heading\n      \"\n      [url]=\"node.url\"\n      [target]=\"node.target\"\n      [style]=\"node.styleAttributes\"\n      [class]=\"node.styleClasses\"\n    >\n      {{ node.title }}\n      <cx-icon\n        *ngIf=\"flyout && node.children?.length > 0\"\n        [type]=\"iconType.CARET_DOWN\"\n      ></cx-icon>\n    </cx-generic-link>\n\n    <ng-template #heading>\n      <h5\n        [attr.aria-label]=\"node.title\"\n        [attr.tabindex]=\"flyout && (depth === 0 || node.url) ? 0 : -1\"\n      >\n        {{ node.title }}\n        <cx-icon\n          *ngIf=\"flyout && node.children?.length > 0\"\n          [type]=\"iconType.CARET_DOWN\"\n        ></cx-icon>\n      </h5>\n    </ng-template>\n\n    <!-- we add a wrapper to allow for better layout handling in CSS -->\n    <div class=\"wrapper\" *ngIf=\"node.children?.length > 0\">\n      <cx-generic-link\n        *ngIf=\"node.url\"\n        [url]=\"node.url\"\n        [target]=\"node.target\"\n        class=\"all\"\n      >\n        {{ 'navigation.shopAll' | cxTranslate: { navNode: node.title } }}\n      </cx-generic-link>\n      <div\n        class=\"childs\"\n        [attr.depth]=\"getTotalDepth(node)\"\n        [attr.wrap-after]=\"node.children?.length > wrapAfter ? wrapAfter : null\"\n        [attr.columns]=\"getColumnCount(node.children?.length)\"\n      >\n        <ng-container *ngFor=\"let child of node.children\">\n          <ng-container\n            *ngTemplateOutlet=\"nav; context: { node: child, depth: depth + 1 }\"\n          >\n          </ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </nav>\n</ng-template>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
