@@ -7,14 +7,10 @@ import { JsonLdBuilder, SchemaBuilder } from '../schema.interface';
  * The actual data collection is delegated to `JsonLdBuilder`s, which can be injected
  * using the `JSONLD_PRODUCT_BUILDER` token.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class ProductSchemaBuilder implements SchemaBuilder {
     private currentProduct;
     protected builders: JsonLdBuilder<Product>[];
     constructor(currentProduct: CurrentProductService, builders: JsonLdBuilder<Product>[]);
     build(): Observable<any>;
     protected collect(product: Product): Observable<any>[];
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductSchemaBuilder, [null, { optional: true; }]>;
 }
-
-//# sourceMappingURL=product-schema.builder.d.ts.map
