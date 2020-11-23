@@ -1,1 +1,0 @@
-{"version":3,"file":"order-cancellation.module.d.ts","sources":["order-cancellation.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class OrderCancellationModule {\n}\n"]}
