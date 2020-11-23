@@ -1,1 +1,0 @@
-{"version":3,"file":"my-interests.module.d.ts","sources":["my-interests.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class MyInterestsModule {\n}\n"]}

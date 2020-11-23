@@ -25,7 +25,6 @@ import { PageLayoutService } from './page-layout.service';
  * ```
  *
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class PageTemplateDirective implements OnInit, OnDestroy {
     protected pageLayoutService: PageLayoutService;
     protected elementRef: ElementRef;
@@ -73,8 +72,4 @@ export declare class PageTemplateDirective implements OnInit, OnDestroy {
      */
     protected get host(): HTMLElement;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PageTemplateDirective, [null, null, { optional: true; }, null]>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<PageTemplateDirective, "[cxPageTemplateStyle]", never, { "setTemplate": "cxPageTemplateStyle"; }, {}, never>;
 }
-
-//# sourceMappingURL=page-template.directive.d.ts.map
