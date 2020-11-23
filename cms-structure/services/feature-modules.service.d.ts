@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 /**
  * Service responsible for resolving cms config based feature modules.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class FeatureModulesService implements OnDestroy {
     protected configInitializer: ConfigInitializerService;
     protected lazyModules: LazyModulesService;
@@ -42,4 +43,7 @@ export declare class FeatureModulesService implements OnDestroy {
      */
     private resolveFeatureConfiguration;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<FeatureModulesService, never>;
 }
+
+//# sourceMappingURL=feature-modules.service.d.ts.map
