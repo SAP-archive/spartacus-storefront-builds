@@ -1,0 +1,1 @@
+{"version":3,"file":"lock-focus.service.d.ts","sources":["lock-focus.service.d.ts"],"names":[],"mappings":"AAAA;;AACA;;AACA","sourcesContent":["import { TrapFocusService } from '../trap/trap-focus.service';\nexport declare class LockFocusService extends TrapFocusService {\n}\n"]}
