@@ -1,6 +1,5 @@
 import { OutletContextData } from '../../../../cms-structure/outlet/outlet.model';
 import { TableFieldOptions, TableHeaderOutletContext } from '../table.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class TableHeaderCellComponent {
     protected outlet: OutletContextData<TableHeaderOutletContext>;
     constructor(outlet: OutletContextData<TableHeaderOutletContext>);
@@ -23,8 +22,4 @@ export declare class TableHeaderCellComponent {
     protected get field(): string;
     protected get type(): string;
     protected get i18nRoot(): string;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TableHeaderCellComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<TableHeaderCellComponent, "cx-table-header-cell", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=table-header-cell.component.d.ts.map
