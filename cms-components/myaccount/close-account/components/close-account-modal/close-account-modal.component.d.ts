@@ -3,7 +3,6 @@ import { AuthService, GlobalMessageService, RoutingService, TranslationService, 
 import { Observable } from 'rxjs';
 import { ICON_TYPE } from '../../../../../cms-components/misc/icon/icon.model';
 import { ModalService } from '../../../../../shared/components/modal/modal.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class CloseAccountModalComponent implements OnInit, OnDestroy {
     protected modalService: ModalService;
     private userService;
@@ -22,8 +21,4 @@ export declare class CloseAccountModalComponent implements OnInit, OnDestroy {
     dismissModal(reason?: any): void;
     closeAccount(): void;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CloseAccountModalComponent, never>;
-    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<CloseAccountModalComponent, "cx-close-account-modal", never, {}, {}, never, never>;
 }
-
-//# sourceMappingURL=close-account-modal.component.d.ts.map
