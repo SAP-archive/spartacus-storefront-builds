@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { KeyboardFocusService } from '../../keyboard-focus/services/keyboard-focus.service';
 import { SkipLink, SkipLinkConfig } from '../config/skip-link.config';
+import * as ɵngcc0 from '@angular/core';
 export declare class SkipLinkService {
     protected config: SkipLinkConfig;
     protected keyboardFocusService: KeyboardFocusService;
@@ -11,4 +12,7 @@ export declare class SkipLinkService {
     remove(key: string): void;
     scrollToTarget(skipLink: SkipLink): void;
     protected getSkipLinkIndexInArray(key: string): number;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SkipLinkService, never>;
 }
+
+//# sourceMappingURL=skip-link.service.d.ts.map
