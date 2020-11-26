@@ -1,0 +1,1 @@
+{"version":3,"file":"view-config.module.d.ts","sources":["view-config.module.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { ModuleWithProviders } from '@angular/core';\nexport declare class ViewConfigModule {\n    static forRoot(): ModuleWithProviders<ViewConfigModule>;\n}\n"]}
