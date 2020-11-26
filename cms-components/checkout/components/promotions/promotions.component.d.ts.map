@@ -1,1 +1,0 @@
-{"version":3,"file":"promotions.component.d.ts","sources":["promotions.component.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;;;AACA","sourcesContent":["import { Promotion } from '@spartacus/core';\nexport declare class PromotionsComponent {\n    promotions: Promotion[];\n    constructor();\n}\n"]}
