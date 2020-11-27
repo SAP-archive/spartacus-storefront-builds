@@ -1,1 +1,0 @@
-{"version":3,"file":"cost-center.module.d.ts","sources":["cost-center.module.d.ts"],"names":[],"mappings":";;;;AAAA;;;AACA","sourcesContent":["export declare class CostCenterModule {\n}\n"]}
