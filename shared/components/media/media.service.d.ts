@@ -14,6 +14,7 @@ import { ImageLoadingStrategy, Media, MediaContainer, MediaFormatSize } from './
  * The baseUrl is read from the `occConfig.backend.media.baseUrl` or
  * `occConfig.backend.occ.baseUrl`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class MediaService {
     protected config: StorefrontConfig;
     /**
@@ -83,8 +84,11 @@ export declare class MediaService {
     /**
      * Returns a set of media for the available media formats. Additionally, the configured media
      * format width is added to the srcset, so that browsers can select the appropriate media.
+     *
+     * The optional maxFormat indicates that only sources till a certain format should be added
+     * to the srcset.
      */
-    protected resolveSrcSet(media: MediaContainer | Image): string;
+    protected resolveSrcSet(media: MediaContainer | Image, maxFormat?: string): string;
     /**
      * Resolves the absolute URL for the given url. In most cases, this URL represents
      * the relative URL on the backend. In that case, we prefix the url with the baseUrl.
@@ -96,7 +100,12 @@ export declare class MediaService {
      *
      * The `backend.media.baseUrl` can be used to load media from a different location.
      *
-     * In Commerce Cloud, a differnt location could mean a different "aspect".
+     * In Commerce Cloud, a different location could mean a different "aspect".
+     *
+     * Defaults to empty string in case no config is provided.
      */
     protected getBaseUrl(): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MediaService, never>;
 }
+
+//# sourceMappingURL=media.service.d.ts.map
