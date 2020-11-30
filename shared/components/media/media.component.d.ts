@@ -1,6 +1,7 @@
 import { EventEmitter, OnChanges } from '@angular/core';
 import { Media, MediaContainer } from './media.model';
 import { MediaService } from './media.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class MediaComponent implements OnChanges {
     protected mediaService: MediaService;
     /**
@@ -65,4 +66,8 @@ export declare class MediaComponent implements OnChanges {
      */
     errorHandler(): void;
     protected handleMissing(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MediaComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<MediaComponent, "cx-media", never, { "container": "container"; "format": "format"; "alt": "alt"; }, { "loaded": "loaded"; }, never, never>;
 }
+
+//# sourceMappingURL=media.component.d.ts.map
