@@ -1,1 +1,0 @@
-{"version":3,"file":"product-listing-page.module.d.ts","sources":["product-listing-page.module.d.ts"],"names":[],"mappings":";;AAAA;;;AACA","sourcesContent":["export declare class ProductListingPageModule {\n}\n"]}
