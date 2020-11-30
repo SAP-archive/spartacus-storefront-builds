@@ -20611,10 +20611,7 @@
              * When a user leaves the PLP route, the PLP component unsubscribes from this stream
              * so no longer the search is performed on route change.
              */
-            this.model$ = rxjs.combineLatest([
-                this.searchResults$,
-                this.searchByRouting$,
-            ]).pipe(operators.pluck(0), operators.shareReplay({ bufferSize: 1, refCount: true }));
+            this.model$ = rxjs.using(function () { return _this.searchByRouting$.subscribe(); }, function () { return _this.searchResults$; }).pipe(operators.shareReplay({ bufferSize: 1, refCount: true }));
         }
         /**
          * Expose the `SearchCriteria`. The search criteria are driven by the route parameters.
