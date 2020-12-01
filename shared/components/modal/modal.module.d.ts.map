@@ -1,1 +1,0 @@
-{"version":3,"file":"modal.module.d.ts","sources":["modal.module.d.ts"],"names":[],"mappings":";;AAAA;;;AACA","sourcesContent":["export declare class ModalModule {\n}\n"]}
