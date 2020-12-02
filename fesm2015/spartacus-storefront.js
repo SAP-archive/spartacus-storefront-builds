@@ -4,7 +4,7 @@ import { map, filter, first, flatMap, distinctUntilChanged, tap, take, withLates
 import { Config, resolveApplicable, DeferLoadingStrategy, RoutingService, AnonymousConsentsService, WindowRef, provideDefaultConfig, AnonymousConsentsConfig, I18nModule, FeaturesConfigModule, provideConfig, ANONYMOUS_CONSENT_STATUS, GlobalMessageType, UserConsentService, GlobalMessageService, AuthService, AuthGuard, UrlModule, TranslationService, UserReplenishmentOrderService, LANGUAGE_CONTEXT_ID, CURRENCY_CONTEXT_ID, ContextServiceMap, SiteContextModule, UserOrderService, PromotionLocation, CheckoutService, ActiveCartService, EMAIL_PATTERN, PASSWORD_PATTERN, ConfigChunk, DefaultConfigChunk, deepMerge, ConfigInitializerService, LazyModulesService, CmsConfig, CmsService, DynamicAttributeService, CsAgentAuthService, UserService, AsmService, AsmConfig, UserIdService, AsmModule as AsmModule$1, ProductScope, ProductService, CartVoucherService, CustomerCouponService, SelectiveCartService, SemanticPathService, WishListService, CartModule, B2BUserRole, AuthRedirectService, RoutingConfigService, OCC_USER_ID_ANONYMOUS, CheckoutDeliveryService, CheckoutPaymentService, UserAddressService, UserPaymentService, PaymentTypeService, CheckoutCostCenterService, UserCostCenterService, ConfigModule, B2BPaymentTypeEnum, DaysOfWeek, recurrencePeriod, ORDER_TYPE, LanguageService, FeatureConfigService, PageRobotsMeta, PageMetaService, TranslationChunkService, PageType, ProtectedRoutesGuard, RoutingModule as RoutingModule$1, ProductReviewService, OAuthFlow, AuthConfigService, NotAuthGuard, OrderReturnRequestService, UserNotificationPreferenceService, UserInterestsService, CmsPageTitleModule, SearchboxService, ProductReferenceService, ProductSearchService, CurrencyService, VariantType, VariantQualifier, OccConfig, NotificationType, CheckoutModule, ProtectedRoutesService, UrlMatcherService, DEFAULT_URL_MATCHER, createFrom, EventService, StateModule, AuthModule, AnonymousConsentsModule, ConfigInitializerModule, ConfigValidatorModule, CmsModule, GlobalMessageModule, ProcessModule, UserModule, ProductModule, provideConfigFromMetaTags, SmartEditModule, PersonalizationModule, OccModule, ExternalRoutesModule } from '@spartacus/core';
 import { DOCUMENT, CommonModule, isPlatformServer, isPlatformBrowser, Location, formatCurrency, getCurrencySymbol } from '@angular/common';
 import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALIDATORS, Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { RouterModule, Router, ActivatedRoute, RouterLink, RouterLinkWithHref, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModalRef, NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -3566,89 +3566,199 @@ CarouselModule.decorators = [
             },] }
 ];
 
+/**
+ * Service that provides the placeholder and input pattern for date pickers. This is
+ * used in Spartacus to support browser that won't support the native html5 date picker
+ * using `<input type="date">`.
+ *
+ * While the placeholder is configurable, you should be aware that the placeholder format
+ * defaults to `yyyy-mm-dd` to align with Safaris limited support of ISO 8601.
+ * Another consideration is the support of date formats in the backend. In case you change
+ * this format, you might need to serialize the date to the supported date format in the
+ * backend.
+ *
+ */
+class DatePickerService {
+    get placeholder() {
+        return 'yyyy-mm-dd';
+    }
+    /**
+     * The default date pattern is based on the placeholder string;
+     */
+    get pattern() {
+        return this.placeholder
+            .replace('yyyy', '\\d{4}')
+            .replace('mm', '\\d{1,2}')
+            .replace('dd', '\\d{1,2}');
+    }
+    /**
+     * Validates if the string based date value is a valid date.
+     */
+    isValidFormat(date, pattern) {
+        const patternRegex = new RegExp(`^${pattern !== null && pattern !== void 0 ? pattern : this.pattern}$`);
+        return patternRegex.test(date);
+    }
+    /**
+     * Since Safari doesn't support proper date formats (ISO 8601), we need to do this
+     * ourselves. We cannot rely on `new Date('2020-1-1')`. This will fail, only
+     * `new Date('2020-01-01')` works.
+     */
+    getDate(value) {
+        if (!value) {
+            return;
+        }
+        const delimiter = this.placeholder
+            .replace('yyyy', '')
+            .replace('mm', '')
+            .replace('dd', '')
+            .substr(0, 1);
+        const dateParts = value.split(delimiter);
+        const placeholderParts = this.placeholder.split(delimiter);
+        const y = placeholderParts.indexOf('yyyy');
+        const m = placeholderParts.indexOf('mm');
+        const d = placeholderParts.indexOf('dd');
+        return new Date(Number(dateParts[y]), Number(dateParts[m]) - 1, Number(dateParts[d]));
+    }
+}
+DatePickerService.ɵprov = ɵɵdefineInjectable({ factory: function DatePickerService_Factory() { return new DatePickerService(); }, token: DatePickerService, providedIn: "root" });
+DatePickerService.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+
+/**
+ * Directive that adds an alternative for the native html5 date picker
+ * for those browsers that won't support it, Safari being our main concern.
+ *
+ * An input with `type="date"` will be ignored by browsers that do not support
+ * the native date picker. The default text type will be used instead. This directive
+ * introduces a few features to ensure that valid dates are added:
+ *
+ * - add a placeholder to the text input so that the user understands the date format he should provide
+ * - add a pattern validator to the input, based on the the placeholder. Please note that the
+ *   standard pattern will no longer be applicable since the pattern is added dynamically.
+ * - support the `min` and `max` properties by validating the input against those values.
+ *
+ * The placeholder is provided by the `DatePickerService.placeholder` to allow for customizations.
+ *
+ */
+class DatePickerFallbackDirective {
+    constructor(elementRef, service) {
+        this.elementRef = elementRef;
+        this.service = service;
+        this.placeholder = this.service.placeholder;
+        this.pattern = this.service.pattern;
+    }
+    validate(formControl) {
+        const errors = {};
+        if (formControl.value && formControl.value !== '') {
+            // we need to do the pattern validation here, as the default
+            // pattern validator doesn't work dynamically
+            if (!this.service.isValidFormat(formControl.value, this.pattern)) {
+                errors.pattern = true;
+            }
+            if (!errors.pattern) {
+                if (this.validateMin(formControl)) {
+                    errors.min = true;
+                }
+                if (this.validateMax(formControl)) {
+                    errors.max = true;
+                }
+            }
+        }
+        return Object.keys(errors).length === 0 ? null : errors;
+    }
+    validateMin(formControl) {
+        const date = this.service.getDate(formControl.value);
+        return date && date < this.min;
+    }
+    validateMax(formControl) {
+        const date = this.service.getDate(formControl.value);
+        return date && date > this.max;
+    }
+    get min() {
+        return this.service.getDate(this.host.getAttribute('min'));
+    }
+    get max() {
+        return this.service.getDate(this.host.getAttribute('max'));
+    }
+    get host() {
+        return this.elementRef.nativeElement;
+    }
+}
+DatePickerFallbackDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[cxDatePickerFallback]',
+                providers: [
+                    {
+                        provide: NG_VALIDATORS,
+                        useExisting: forwardRef(() => DatePickerFallbackDirective),
+                        multi: true,
+                    },
+                ],
+            },] }
+];
+DatePickerFallbackDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: DatePickerService }
+];
+DatePickerFallbackDirective.propDecorators = {
+    placeholder: [{ type: HostBinding, args: ['placeholder',] }],
+    pattern: [{ type: HostBinding, args: ['pattern',] }]
+};
+
+/**
+ * Component that adds a date control. While the native date picker works in most
+ * modern browsers, some browsers need more guidance (placeholder), validation and
+ * date conversion.
+ *
+ * The data picker supports (optional) min and max form controls, so that you can
+ * limit the start and/or end date.
+ *
+ * Most of the implementation is done in the `DatePickerFallbackDirective`.
+ */
 class DatePickerComponent {
-    constructor() { }
-    onInput(event) {
-        this.value = event.target.value;
-        this.onChange(this.value);
+    constructor(service) {
+        this.service = service;
     }
-    onChange(_event) { }
-    onTouched() { }
-    registerOnChange(fn) {
-        this.onChange = fn;
-    }
-    registerOnTouched(fn) {
-        this.onTouched = fn;
-    }
-    writeValue(value) {
-        if (value) {
-            this.value = value;
-        }
-    }
-    setDisabledState(isDisabled) {
+    update() {
         var _a, _b;
-        if (isDisabled) {
-            (_a = this.input.nativeElement) === null || _a === void 0 ? void 0 : _a.setAttribute('disabled', isDisabled);
-        }
-        else {
-            (_b = this.input.nativeElement) === null || _b === void 0 ? void 0 : _b.removeAttribute('disabled');
-        }
+        // we're updating the min/max controls to ensure that validation kicks in
+        (_a = this.min) === null || _a === void 0 ? void 0 : _a.updateValueAndValidity();
+        (_b = this.max) === null || _b === void 0 ? void 0 : _b.updateValueAndValidity();
     }
-    validate() {
-        if (this.input && !this.input.nativeElement.validity.valid) {
-            const validity = this.input.nativeElement.validity;
-            const validators = {};
-            if (validity.rangeOverflow) {
-                validators.cxDateMax = true;
-            }
-            if (validity.rangeUnderflow) {
-                validators.cxDateMin = true;
-            }
-            return validators;
-        }
+    /**
+     * Only returns the date if we have a valid format. We do this to avoid
+     * loads of console errors coming from the datePipe while the user is typing
+     * (in those browsers where the date picker isn't supported).
+     */
+    getDate(date) {
+        return this.service.isValidFormat(date) ? date : null;
     }
 }
 DatePickerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-date-picker',
-                template: "<input\n  #inputElement\n  type=\"date\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"value\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"min\"\n  [max]=\"max\"\n/>\n",
-                providers: [
-                    {
-                        provide: NG_VALUE_ACCESSOR,
-                        useExisting: forwardRef(() => DatePickerComponent),
-                        multi: true,
-                    },
-                    {
-                        provide: NG_VALIDATORS,
-                        useExisting: forwardRef(() => DatePickerComponent),
-                        multi: true,
-                    },
-                ]
+                template: "<input\n  class=\"form-control\"\n  type=\"date\"\n  [formControl]=\"control\"\n  [attr.min]=\"min?.value\"\n  [attr.max]=\"max?.value\"\n  cxDatePickerFallback\n  (change)=\"update()\"\n/>\n<cx-form-errors\n  [control]=\"control\"\n  prefix=\"formErrors.date\"\n  [translationParams]=\"{\n    max: getDate(max?.value) | cxDate,\n    min: getDate(min?.value) | cxDate\n  }\"\n></cx-form-errors>\n"
             },] }
 ];
-DatePickerComponent.ctorParameters = () => [];
+DatePickerComponent.ctorParameters = () => [
+    { type: DatePickerService }
+];
 DatePickerComponent.propDecorators = {
-    input: [{ type: ViewChild, args: ['inputElement', { static: false, read: ElementRef },] }],
+    control: [{ type: Input }],
     min: [{ type: Input }],
-    max: [{ type: Input }],
-    required: [{ type: Input }],
-    invalid: [{ type: Input }]
+    max: [{ type: Input }]
 };
-
-class DatePickerModule {
-}
-DatePickerModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [CommonModule],
-                declarations: [DatePickerComponent],
-                exports: [DatePickerComponent],
-            },] }
-];
 
 /**
  * This component renders form errors.
  */
 class FormErrorsComponent {
+    constructor() {
+        this.prefix = 'formErrors';
+    }
     set control(control) {
         this._control = control;
         this.errors$ = control === null || control === void 0 ? void 0 : control.statusChanges.pipe(startWith({}), map(() => control.errors || {}), map((errors) => Object.entries(errors)
@@ -3674,11 +3784,12 @@ class FormErrorsComponent {
 FormErrorsComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-form-errors',
-                template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate: translationParams }}\n</p>\n",
+                template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ prefix + '.' + errorName | cxTranslate: translationParams }}\n</p>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 FormErrorsComponent.propDecorators = {
+    prefix: [{ type: Input }],
     translationParams: [{ type: Input }],
     control: [{ type: Input }],
     invalid: [{ type: HostBinding, args: ['class.control-invalid',] }],
@@ -3693,6 +3804,16 @@ FormErrorsModule.decorators = [
                 imports: [CommonModule, I18nModule],
                 declarations: [FormErrorsComponent],
                 exports: [FormErrorsComponent],
+            },] }
+];
+
+class DatePickerModule {
+}
+DatePickerModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, ReactiveFormsModule, FormErrorsModule, I18nModule],
+                declarations: [DatePickerComponent, DatePickerFallbackDirective],
+                exports: [DatePickerComponent, DatePickerFallbackDirective],
             },] }
 ];
 
@@ -21536,5 +21657,5 @@ var FormUtils;
  * Generated bundle index. Do not edit.
  */
 
-export { AVOID_STACKED_OUTLETS, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerModule, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ImageLoadingStrategy, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginGuard, LoginModule, LoginRegisterModule, LoginRouteModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalDirective, ModalDirectiveService, ModalModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSection, PageSlotComponent, PageSlotModule, PageSlotService, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, TrapFocus, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentProviders, defaultLayoutConfig, defaultPWAModuleConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, initSeoService, layoutConfig, mediaConfig, provideCmsStructure, provideOutlet, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, registerOutletsFactory as ɵa, PROVIDE_OUTLET_OPTIONS as ɵb, asmFactory as ɵba, AsmEnablerService as ɵbb, AsmMainUiComponent as ɵbc, AsmComponentService as ɵbd, CSAgentLoginFormComponent as ɵbe, CustomerSelectionComponent as ɵbf, AsmSessionTimerComponent as ɵbg, FormatTimerPipe as ɵbh, CustomerEmulationComponent as ɵbi, AsmToggleUiComponent as ɵbj, defaultAsmLayoutConfig as ɵbk, defaultIconConfig as ɵbl, defaultCheckoutConfig as ɵbm, MultiLinePipe as ɵbn, CheckoutStepsSetGuard as ɵbo, PaymentTypeModule as ɵbp, PaymentTypeComponent as ɵbq, defaultPlaceOrderSpinnerLayoutConfig as ɵbr, CostCenterModule as ɵbs, CostCenterComponent as ɵbt, CheckoutAuthGuard as ɵbu, CartNotEmptyGuard as ɵbv, defaultQualtricsConfig as ɵbw, CmsPageGuardService as ɵbx, CmsRoutesImplService as ɵby, ReturnRequestService as ɵbz, pwaConfigurationFactory as ɵc, LoginRegisterComponent as ɵca, MyCouponsComponentService as ɵcb, addCmsRoute as ɵcc, defaultStorefrontRoutesConfig as ɵcd, defaultRoutingConfig as ɵce, SeoConfig as ɵcf, defaultSeoConfig as ɵcg, htmlLangProvider as ɵch, setHtmlLangAttribute as ɵci, defaultDirectionConfig as ɵcj, EventsModule as ɵck, pwaFactory as ɵd, getStructuredDataFactory as ɵe, FOCUS_ATTR as ɵf, skipLinkFactory as ɵg, initHtmlDirAttribute as ɵh, LockFocusDirective as ɵi, TrapFocusDirective as ɵj, TabFocusDirective as ɵk, AutoFocusDirective as ɵl, EscapeFocusDirective as ɵm, PersistFocusDirective as ɵn, BlockFocusDirective as ɵo, VisibleFocusDirective as ɵp, BaseFocusDirective as ɵq, BaseFocusService as ɵr, PersistFocusService as ɵs, EscapeFocusService as ɵt, AutoFocusService as ɵu, TabFocusService as ɵv, TrapFocusService as ɵw, LockFocusService as ɵx, defaultAnonymousConsentLayoutConfig as ɵy, AsmLoaderModule as ɵz };
+export { AVOID_STACKED_OUTLETS, ActiveFacetsComponent, ActiveFacetsModule, AddToCartComponent, AddToCartModule, AddToHomeScreenBannerComponent, AddToHomeScreenBtnComponent, AddToHomeScreenComponent, AddToHomeScreenService, AddToWishListComponent, AddToWishListModule, AddedToCartDialogComponent, AddressBookComponent, AddressBookComponentService, AddressBookModule, AddressFormComponent, AddressFormModule, AmendOrderActionsComponent, AmendOrderActionsModule, AmendOrderItemsModule, AmendOrderType, AnonymousConsentDialogComponent, AnonymousConsentLaunchDialogService, AnonymousConsentManagementBannerComponent, AnonymousConsentManagementBannerModule, AnonymousConsentOpenDialogComponent, AnonymousConsentsDialogModule, AppliedCouponsComponent, AsmModule, B2cStorefrontModule, BREAKPOINT, BannerCarouselComponent, BannerCarouselModule, BannerComponent, BannerModule, BreadcrumbComponent, BreadcrumbModule, BreadcrumbSchemaBuilder, BreakpointService, CancelOrReturnItemsComponent, CancelOrderComponent, CancelOrderConfirmationComponent, CancelOrderConfirmationModule, CancelOrderModule, CardComponent, CardModule, CarouselComponent, CarouselModule, CarouselService, CartComponentModule, CartCouponComponent, CartCouponModule, CartDetailsComponent, CartDetailsModule, CartItemComponent, CartItemListComponent, CartNotEmptyGuard, CartPageEvent, CartPageEventBuilder, CartPageEventModule, CartPageLayoutHandler, CartSharedModule, CartTotalsComponent, CartTotalsModule, CategoryNavigationComponent, CategoryNavigationModule, CategoryPageResultsEvent, CheckoutAuthGuard, CheckoutComponentModule, CheckoutConfig, CheckoutConfigService, CheckoutDetailsLoadedGuard, CheckoutDetailsService, CheckoutGuard, CheckoutLoginComponent, CheckoutLoginModule, CheckoutOrchestratorComponent, CheckoutOrchestratorModule, CheckoutOrderSummaryComponent, CheckoutOrderSummaryModule, CheckoutProgressComponent, CheckoutProgressMobileBottomComponent, CheckoutProgressMobileBottomModule, CheckoutProgressMobileTopComponent, CheckoutProgressMobileTopModule, CheckoutProgressModule, CheckoutReplenishmentFormService, CheckoutStepService, CheckoutStepType, CloseAccountComponent, CloseAccountModalComponent, CloseAccountModule, CmsComponentData, CmsComponentsService, CmsGuardsService, CmsI18nService, CmsInjectorService, CmsLibModule, CmsPageGuard, CmsParagraphModule, CmsRouteModule, CmsRoutesService, ComponentHandler, ComponentHandlerService, ComponentWrapperDirective, ConsentManagementComponent, ConsentManagementFormComponent, ConsentManagementModule, ConsignmentTrackingComponent, CouponCardComponent, CouponClaimComponent, CouponDialogComponent, CurrentProductService, CustomFormValidators, DIALOG_TYPE, DatePickerComponent, DatePickerFallbackDirective, DatePickerModule, DatePickerService, DefaultComponentHandler, DeferLoaderService, DeliveryModeComponent, DeliveryModeModule, DeliveryModePreferences, DeliveryModeSetGuard, DirectionConfig, DirectionMode, DirectionModule, DirectionService, ExpressCheckoutService, FacetComponent, FacetGroupCollapsedState, FacetListComponent, FacetListModule, FacetModule, FacetService, FeatureModulesService, FocusDirective, FooterNavigationComponent, FooterNavigationModule, ForgotPasswordComponent, ForgotPasswordModule, FormErrorsComponent, FormErrorsModule, FormUtils, GenericLinkComponent, GenericLinkModule, GlobalMessageComponent, GlobalMessageComponentModule, GuestRegisterFormComponent, HamburgerMenuComponent, HamburgerMenuModule, HamburgerMenuService, HighlightPipe, HomePageEvent, ICON_TYPE, IconComponent, IconConfig, IconLoaderService, IconModule, IconResourceType, ImageLoadingStrategy, InlineRenderStrategy, IntersectionService, ItemCounterComponent, ItemCounterModule, JSONLD_PRODUCT_BUILDER, JsonLdBaseProductBuilder, JsonLdBuilderModule, JsonLdDirective, JsonLdProductOfferBuilder, JsonLdProductReviewBuilder, JsonLdScriptFactory, KeyboardFocusModule, KeyboardFocusService, LAUNCH_CALLER, LanguageCurrencyComponent, LaunchDialogModule, LaunchDialogService, LaunchRenderStrategy, LayoutConfig, LayoutModule, LazyComponentHandler, LinkComponent, LinkModule, ListNavigationModule, LoginComponent, LoginFormComponent, LoginFormModule, LoginGuard, LoginModule, LoginRegisterModule, LoginRouteModule, LogoutGuard, LogoutModule, MainModule, MediaComponent, MediaConfig, MediaModule, MediaService, MiniCartComponent, MiniCartModule, ModalDirective, ModalDirectiveService, ModalModule, ModalRef, ModalService, MyCouponsComponent, MyCouponsModule, MyInterestsComponent, MyInterestsModule, NavigationComponent, NavigationModule, NavigationService, NavigationUIComponent, NotCheckoutAuthGuard, NotificationPreferenceComponent, NotificationPreferenceModule, OrderAmendService, OrderCancellationGuard, OrderCancellationModule, OrderCancellationService, OrderConfirmationGuard, OrderConfirmationItemsComponent, OrderConfirmationModule, OrderConfirmationOverviewComponent, OrderConfirmationThankYouMessageComponent, OrderConfirmationTotalsComponent, OrderConsignedEntriesComponent, OrderDetailActionsComponent, OrderDetailItemsComponent, OrderDetailShippingComponent, OrderDetailTotalsComponent, OrderDetailsModule, OrderDetailsService, OrderHistoryComponent, OrderHistoryModule, OrderModule, OrderOverviewComponent, OrderOverviewModule, OrderReturnGuard, OrderReturnModule, OrderReturnRequestListComponent, OrderReturnService, OrderSummaryComponent, OutletContextData, OutletDirective, OutletModule, OutletPosition, OutletRefDirective, OutletRefModule, OutletRenderStrategy, OutletRendererService, OutletService, PAGE_LAYOUT_HANDLER, PRODUCT_DETAILS_URL_MATCHER, PRODUCT_LISTING_URL_MATCHER, PWAModuleConfig, PageComponentModule, PageEvent, PageEventBuilder, PageEventModule, PageLayoutComponent, PageLayoutModule, PageLayoutService, PageSection, PageSlotComponent, PageSlotModule, PageSlotService, PageTemplateDirective, PaginationBuilder, PaginationComponent, PaginationConfig, PaginationItemType, PaginationModule, PaginationNavigationPosition, ParagraphComponent, PaymentDetailsSetGuard, PaymentFormComponent, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, PaymentMethodsComponent, PaymentMethodsModule, PlaceOrderComponent, PlaceOrderModule, ProductAttributesComponent, ProductAttributesModule, ProductCarouselComponent, ProductCarouselModule, ProductCarouselService, ProductDetailOutlets, ProductDetailsPageEvent, ProductDetailsPageModule, ProductDetailsTabComponent, ProductDetailsTabModule, ProductFacetNavigationComponent, ProductFacetNavigationModule, ProductFacetService, ProductGridItemComponent, ProductImagesComponent, ProductImagesModule, ProductIntroComponent, ProductIntroModule, ProductListComponent, ProductListComponentService, ProductListItemComponent, ProductListModule, ProductListingPageModule, ProductPageEventBuilder, ProductPageEventModule, ProductReferencesComponent, ProductReferencesModule, ProductReviewsComponent, ProductReviewsModule, ProductSchemaBuilder, ProductScrollComponent, ProductSummaryComponent, ProductSummaryModule, ProductTabsModule, ProductVariantGuard, ProductVariantsComponent, ProductVariantsModule, ProductViewComponent, PromotionService, PromotionsComponent, PromotionsModule, PwaModule, QUALTRICS_EVENT_NAME, QualtricsComponent, QualtricsConfig, QualtricsLoaderService, QualtricsModule, RegisterComponent, RegisterComponentModule, ReplenishmentOrderCancellationComponent, ReplenishmentOrderCancellationDialogComponent, ReplenishmentOrderCancellationDialogModule, ReplenishmentOrderCancellationLaunchDialogService, ReplenishmentOrderConfirmationModule, ReplenishmentOrderDetailsModule, ReplenishmentOrderDetailsService, ReplenishmentOrderHistoryComponent, ReplenishmentOrderHistoryModule, ResetPasswordFormComponent, ResetPasswordModule, ReturnOrderComponent, ReturnOrderConfirmationComponent, ReturnOrderConfirmationModule, ReturnOrderModule, ReturnRequestDetailModule, ReturnRequestItemsComponent, ReturnRequestListModule, ReturnRequestOverviewComponent, ReturnRequestTotalsComponent, ReviewSubmitComponent, ReviewSubmitModule, RoutingModule, RoutingRenderStrategy, SCHEMA_BUILDER, SaveForLaterComponent, SaveForLaterModule, ScheduleReplenishmentOrderComponent, ScheduleReplenishmentOrderModule, SearchBoxComponent, SearchBoxComponentService, SearchBoxModule, SearchPageResultsEvent, SelectFocusUtility, SeoMetaService, SeoModule, ShippingAddressComponent, ShippingAddressModule, ShippingAddressSetGuard, SiteContextComponentService, SiteContextSelectorComponent, SiteContextSelectorModule, SiteContextType, SkipLink, SkipLinkComponent, SkipLinkConfig, SkipLinkDirective, SkipLinkModule, SkipLinkScrollPosition, SkipLinkService, SortingComponent, SpinnerComponent, SpinnerModule, SplitViewComponent, SplitViewModule, SplitViewService, StarRatingComponent, StarRatingModule, StockNotificationComponent, StockNotificationDialogComponent, StockNotificationModule, StorefrontComponent, StorefrontFoundationModule, StorefrontModule, StructuredDataModule, SuggestedAddressDialogComponent, TabParagraphContainerComponent, TabParagraphContainerModule, TableComponent, TableConfig, TableDataCellComponent, TableDataCellModule, TableHeaderCellComponent, TableHeaderCellModule, TableLayout, TableModule, TableRendererService, TableService, TrackingEventsComponent, TrapFocus, USE_STACKED_OUTLETS, UpdateEmailComponent, UpdateEmailFormComponent, UpdateEmailModule, UpdatePasswordComponent, UpdatePasswordFormComponent, UpdatePasswordModule, UpdateProfileComponent, UpdateProfileFormComponent, UpdateProfileModule, UserComponentModule, VariantColorSelectorComponent, VariantColorSelectorModule, VariantSizeSelectorComponent, VariantSizeSelectorModule, VariantStyleIconsComponent, VariantStyleIconsModule, VariantStyleSelectorComponent, VariantStyleSelectorModule, ViewComponent, ViewConfig, ViewConfigModule, ViewModes, WishListComponent, WishListItemComponent, WishListModule, b2cLayoutConfig, checkoutPaymentSteps, checkoutShippingSteps, controlsMustMatch, defaultCmsContentProviders, defaultLayoutConfig, defaultPWAModuleConfig, defaultPaginationConfig, defaultReplenishmentOrderCancellationLayoutConfig, defaultScrollConfig, defaultSkipLinkConfig, defaultTableConfig, fontawesomeIconConfig, getSuffixUrlMatcher, initSeoService, layoutConfig, mediaConfig, provideCmsStructure, provideOutlet, sortTitles, titleScores, ɵ0$1 as ɵ0, ɵ1, ɵ2, registerOutletsFactory as ɵa, PROVIDE_OUTLET_OPTIONS as ɵb, asmFactory as ɵba, AsmEnablerService as ɵbb, AsmMainUiComponent as ɵbc, AsmComponentService as ɵbd, CSAgentLoginFormComponent as ɵbe, CustomerSelectionComponent as ɵbf, AsmSessionTimerComponent as ɵbg, FormatTimerPipe as ɵbh, CustomerEmulationComponent as ɵbi, AsmToggleUiComponent as ɵbj, defaultAsmLayoutConfig as ɵbk, defaultIconConfig as ɵbl, defaultCheckoutConfig as ɵbm, MultiLinePipe as ɵbn, CheckoutStepsSetGuard as ɵbo, PaymentTypeModule as ɵbp, PaymentTypeComponent as ɵbq, defaultPlaceOrderSpinnerLayoutConfig as ɵbr, CostCenterModule as ɵbs, CostCenterComponent as ɵbt, CheckoutAuthGuard as ɵbu, CartNotEmptyGuard as ɵbv, defaultQualtricsConfig as ɵbw, CmsPageGuardService as ɵbx, CmsRoutesImplService as ɵby, ReturnRequestService as ɵbz, pwaConfigurationFactory as ɵc, LoginRegisterComponent as ɵca, MyCouponsComponentService as ɵcb, addCmsRoute as ɵcc, defaultStorefrontRoutesConfig as ɵcd, defaultRoutingConfig as ɵce, SeoConfig as ɵcf, defaultSeoConfig as ɵcg, htmlLangProvider as ɵch, setHtmlLangAttribute as ɵci, defaultDirectionConfig as ɵcj, EventsModule as ɵck, pwaFactory as ɵd, getStructuredDataFactory as ɵe, FOCUS_ATTR as ɵf, skipLinkFactory as ɵg, initHtmlDirAttribute as ɵh, LockFocusDirective as ɵi, TrapFocusDirective as ɵj, TabFocusDirective as ɵk, AutoFocusDirective as ɵl, EscapeFocusDirective as ɵm, PersistFocusDirective as ɵn, BlockFocusDirective as ɵo, VisibleFocusDirective as ɵp, BaseFocusDirective as ɵq, BaseFocusService as ɵr, PersistFocusService as ɵs, EscapeFocusService as ɵt, AutoFocusService as ɵu, TabFocusService as ɵv, TrapFocusService as ɵw, LockFocusService as ɵx, defaultAnonymousConsentLayoutConfig as ɵy, AsmLoaderModule as ɵz };
 //# sourceMappingURL=spartacus-storefront.js.map

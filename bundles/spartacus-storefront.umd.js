@@ -4175,95 +4175,223 @@
                 },] }
     ];
 
-    var DatePickerComponent = /** @class */ (function () {
-        function DatePickerComponent() {
+    /**
+     * Service that provides the placeholder and input pattern for date pickers. This is
+     * used in Spartacus to support browser that won't support the native html5 date picker
+     * using `<input type="date">`.
+     *
+     * While the placeholder is configurable, you should be aware that the placeholder format
+     * defaults to `yyyy-mm-dd` to align with Safaris limited support of ISO 8601.
+     * Another consideration is the support of date formats in the backend. In case you change
+     * this format, you might need to serialize the date to the supported date format in the
+     * backend.
+     *
+     */
+    var DatePickerService = /** @class */ (function () {
+        function DatePickerService() {
         }
-        DatePickerComponent.prototype.onInput = function (event) {
-            this.value = event.target.value;
-            this.onChange(this.value);
+        Object.defineProperty(DatePickerService.prototype, "placeholder", {
+            get: function () {
+                return 'yyyy-mm-dd';
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DatePickerService.prototype, "pattern", {
+            /**
+             * The default date pattern is based on the placeholder string;
+             */
+            get: function () {
+                return this.placeholder
+                    .replace('yyyy', '\\d{4}')
+                    .replace('mm', '\\d{1,2}')
+                    .replace('dd', '\\d{1,2}');
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Validates if the string based date value is a valid date.
+         */
+        DatePickerService.prototype.isValidFormat = function (date, pattern) {
+            var patternRegex = new RegExp("^" + (pattern !== null && pattern !== void 0 ? pattern : this.pattern) + "$");
+            return patternRegex.test(date);
         };
-        DatePickerComponent.prototype.onChange = function (_event) { };
-        DatePickerComponent.prototype.onTouched = function () { };
-        DatePickerComponent.prototype.registerOnChange = function (fn) {
-            this.onChange = fn;
-        };
-        DatePickerComponent.prototype.registerOnTouched = function (fn) {
-            this.onTouched = fn;
-        };
-        DatePickerComponent.prototype.writeValue = function (value) {
-            if (value) {
-                this.value = value;
+        /**
+         * Since Safari doesn't support proper date formats (ISO 8601), we need to do this
+         * ourselves. We cannot rely on `new Date('2020-1-1')`. This will fail, only
+         * `new Date('2020-01-01')` works.
+         */
+        DatePickerService.prototype.getDate = function (value) {
+            if (!value) {
+                return;
             }
+            var delimiter = this.placeholder
+                .replace('yyyy', '')
+                .replace('mm', '')
+                .replace('dd', '')
+                .substr(0, 1);
+            var dateParts = value.split(delimiter);
+            var placeholderParts = this.placeholder.split(delimiter);
+            var y = placeholderParts.indexOf('yyyy');
+            var m = placeholderParts.indexOf('mm');
+            var d = placeholderParts.indexOf('dd');
+            return new Date(Number(dateParts[y]), Number(dateParts[m]) - 1, Number(dateParts[d]));
         };
-        DatePickerComponent.prototype.setDisabledState = function (isDisabled) {
+        return DatePickerService;
+    }());
+    DatePickerService.ɵprov = i0.ɵɵdefineInjectable({ factory: function DatePickerService_Factory() { return new DatePickerService(); }, token: DatePickerService, providedIn: "root" });
+    DatePickerService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+
+    /**
+     * Directive that adds an alternative for the native html5 date picker
+     * for those browsers that won't support it, Safari being our main concern.
+     *
+     * An input with `type="date"` will be ignored by browsers that do not support
+     * the native date picker. The default text type will be used instead. This directive
+     * introduces a few features to ensure that valid dates are added:
+     *
+     * - add a placeholder to the text input so that the user understands the date format he should provide
+     * - add a pattern validator to the input, based on the the placeholder. Please note that the
+     *   standard pattern will no longer be applicable since the pattern is added dynamically.
+     * - support the `min` and `max` properties by validating the input against those values.
+     *
+     * The placeholder is provided by the `DatePickerService.placeholder` to allow for customizations.
+     *
+     */
+    var DatePickerFallbackDirective = /** @class */ (function () {
+        function DatePickerFallbackDirective(elementRef, service) {
+            this.elementRef = elementRef;
+            this.service = service;
+            this.placeholder = this.service.placeholder;
+            this.pattern = this.service.pattern;
+        }
+        DatePickerFallbackDirective.prototype.validate = function (formControl) {
+            var errors = {};
+            if (formControl.value && formControl.value !== '') {
+                // we need to do the pattern validation here, as the default
+                // pattern validator doesn't work dynamically
+                if (!this.service.isValidFormat(formControl.value, this.pattern)) {
+                    errors.pattern = true;
+                }
+                if (!errors.pattern) {
+                    if (this.validateMin(formControl)) {
+                        errors.min = true;
+                    }
+                    if (this.validateMax(formControl)) {
+                        errors.max = true;
+                    }
+                }
+            }
+            return Object.keys(errors).length === 0 ? null : errors;
+        };
+        DatePickerFallbackDirective.prototype.validateMin = function (formControl) {
+            var date = this.service.getDate(formControl.value);
+            return date && date < this.min;
+        };
+        DatePickerFallbackDirective.prototype.validateMax = function (formControl) {
+            var date = this.service.getDate(formControl.value);
+            return date && date > this.max;
+        };
+        Object.defineProperty(DatePickerFallbackDirective.prototype, "min", {
+            get: function () {
+                return this.service.getDate(this.host.getAttribute('min'));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DatePickerFallbackDirective.prototype, "max", {
+            get: function () {
+                return this.service.getDate(this.host.getAttribute('max'));
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DatePickerFallbackDirective.prototype, "host", {
+            get: function () {
+                return this.elementRef.nativeElement;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        return DatePickerFallbackDirective;
+    }());
+    DatePickerFallbackDirective.decorators = [
+        { type: i0.Directive, args: [{
+                    selector: '[cxDatePickerFallback]',
+                    providers: [
+                        {
+                            provide: forms.NG_VALIDATORS,
+                            useExisting: i0.forwardRef(function () { return DatePickerFallbackDirective; }),
+                            multi: true,
+                        },
+                    ],
+                },] }
+    ];
+    DatePickerFallbackDirective.ctorParameters = function () { return [
+        { type: i0.ElementRef },
+        { type: DatePickerService }
+    ]; };
+    DatePickerFallbackDirective.propDecorators = {
+        placeholder: [{ type: i0.HostBinding, args: ['placeholder',] }],
+        pattern: [{ type: i0.HostBinding, args: ['pattern',] }]
+    };
+
+    /**
+     * Component that adds a date control. While the native date picker works in most
+     * modern browsers, some browsers need more guidance (placeholder), validation and
+     * date conversion.
+     *
+     * The data picker supports (optional) min and max form controls, so that you can
+     * limit the start and/or end date.
+     *
+     * Most of the implementation is done in the `DatePickerFallbackDirective`.
+     */
+    var DatePickerComponent = /** @class */ (function () {
+        function DatePickerComponent(service) {
+            this.service = service;
+        }
+        DatePickerComponent.prototype.update = function () {
             var _a, _b;
-            if (isDisabled) {
-                (_a = this.input.nativeElement) === null || _a === void 0 ? void 0 : _a.setAttribute('disabled', isDisabled);
-            }
-            else {
-                (_b = this.input.nativeElement) === null || _b === void 0 ? void 0 : _b.removeAttribute('disabled');
-            }
+            // we're updating the min/max controls to ensure that validation kicks in
+            (_a = this.min) === null || _a === void 0 ? void 0 : _a.updateValueAndValidity();
+            (_b = this.max) === null || _b === void 0 ? void 0 : _b.updateValueAndValidity();
         };
-        DatePickerComponent.prototype.validate = function () {
-            if (this.input && !this.input.nativeElement.validity.valid) {
-                var validity = this.input.nativeElement.validity;
-                var validators = {};
-                if (validity.rangeOverflow) {
-                    validators.cxDateMax = true;
-                }
-                if (validity.rangeUnderflow) {
-                    validators.cxDateMin = true;
-                }
-                return validators;
-            }
+        /**
+         * Only returns the date if we have a valid format. We do this to avoid
+         * loads of console errors coming from the datePipe while the user is typing
+         * (in those browsers where the date picker isn't supported).
+         */
+        DatePickerComponent.prototype.getDate = function (date) {
+            return this.service.isValidFormat(date) ? date : null;
         };
         return DatePickerComponent;
     }());
     DatePickerComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-date-picker',
-                    template: "<input\n  #inputElement\n  type=\"date\"\n  class=\"form-control\"\n  (blur)=\"onTouched()\"\n  (input)=\"onInput($event)\"\n  [value]=\"value\"\n  [required]=\"required\"\n  [class.is-invalid]=\"invalid\"\n  [min]=\"min\"\n  [max]=\"max\"\n/>\n",
-                    providers: [
-                        {
-                            provide: forms.NG_VALUE_ACCESSOR,
-                            useExisting: i0.forwardRef(function () { return DatePickerComponent; }),
-                            multi: true,
-                        },
-                        {
-                            provide: forms.NG_VALIDATORS,
-                            useExisting: i0.forwardRef(function () { return DatePickerComponent; }),
-                            multi: true,
-                        },
-                    ]
+                    template: "<input\n  class=\"form-control\"\n  type=\"date\"\n  [formControl]=\"control\"\n  [attr.min]=\"min?.value\"\n  [attr.max]=\"max?.value\"\n  cxDatePickerFallback\n  (change)=\"update()\"\n/>\n<cx-form-errors\n  [control]=\"control\"\n  prefix=\"formErrors.date\"\n  [translationParams]=\"{\n    max: getDate(max?.value) | cxDate,\n    min: getDate(min?.value) | cxDate\n  }\"\n></cx-form-errors>\n"
                 },] }
     ];
-    DatePickerComponent.ctorParameters = function () { return []; };
+    DatePickerComponent.ctorParameters = function () { return [
+        { type: DatePickerService }
+    ]; };
     DatePickerComponent.propDecorators = {
-        input: [{ type: i0.ViewChild, args: ['inputElement', { static: false, read: i0.ElementRef },] }],
+        control: [{ type: i0.Input }],
         min: [{ type: i0.Input }],
-        max: [{ type: i0.Input }],
-        required: [{ type: i0.Input }],
-        invalid: [{ type: i0.Input }]
+        max: [{ type: i0.Input }]
     };
-
-    var DatePickerModule = /** @class */ (function () {
-        function DatePickerModule() {
-        }
-        return DatePickerModule;
-    }());
-    DatePickerModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    imports: [i1$1.CommonModule],
-                    declarations: [DatePickerComponent],
-                    exports: [DatePickerComponent],
-                },] }
-    ];
 
     /**
      * This component renders form errors.
      */
     var FormErrorsComponent = /** @class */ (function () {
         function FormErrorsComponent() {
+            this.prefix = 'formErrors';
         }
         Object.defineProperty(FormErrorsComponent.prototype, "control", {
             get: function () {
@@ -4307,11 +4435,12 @@
     FormErrorsComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-form-errors',
-                    template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ 'formErrors.' + errorName | cxTranslate: translationParams }}\n</p>\n",
+                    template: "<p *ngFor=\"let errorName of errors$ | async\">\n  {{ prefix + '.' + errorName | cxTranslate: translationParams }}\n</p>\n",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
     FormErrorsComponent.propDecorators = {
+        prefix: [{ type: i0.Input }],
         translationParams: [{ type: i0.Input }],
         control: [{ type: i0.Input }],
         invalid: [{ type: i0.HostBinding, args: ['class.control-invalid',] }],
@@ -4329,6 +4458,19 @@
                     imports: [i1$1.CommonModule, i1.I18nModule],
                     declarations: [FormErrorsComponent],
                     exports: [FormErrorsComponent],
+                },] }
+    ];
+
+    var DatePickerModule = /** @class */ (function () {
+        function DatePickerModule() {
+        }
+        return DatePickerModule;
+    }());
+    DatePickerModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    imports: [i1$1.CommonModule, forms.ReactiveFormsModule, FormErrorsModule, i1.I18nModule],
+                    declarations: [DatePickerComponent, DatePickerFallbackDirective],
+                    exports: [DatePickerComponent, DatePickerFallbackDirective],
                 },] }
     ];
 
@@ -23938,7 +24080,9 @@
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
     exports.DatePickerComponent = DatePickerComponent;
+    exports.DatePickerFallbackDirective = DatePickerFallbackDirective;
     exports.DatePickerModule = DatePickerModule;
+    exports.DatePickerService = DatePickerService;
     exports.DefaultComponentHandler = DefaultComponentHandler;
     exports.DeferLoaderService = DeferLoaderService;
     exports.DeliveryModeComponent = DeliveryModeComponent;
