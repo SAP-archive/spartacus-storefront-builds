@@ -6706,7 +6706,7 @@ class CmsComponentsService {
     getMapping(componentType) {
         var _a, _b;
         const componentConfig = (_a = this.mappings[componentType]) !== null && _a !== void 0 ? _a : (_b = this.config.cmsComponents) === null || _b === void 0 ? void 0 : _b[componentType];
-        if (!componentConfig) {
+        if (isDevMode() && !componentConfig) {
             if (!this.missingComponents.includes(componentType)) {
                 this.missingComponents.push(componentType);
                 console.warn(`No component implementation found for the CMS component type '${componentType}'.\n`, `Make sure you implement a component and register it in the mapper.`);
