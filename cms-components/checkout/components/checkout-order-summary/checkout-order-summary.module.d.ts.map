@@ -1,0 +1,1 @@
+{"version":3,"file":"checkout-order-summary.module.d.ts","sources":["checkout-order-summary.module.d.ts"],"names":[],"mappings":";;;;AAAA;;;AACA","sourcesContent":["export declare class CheckoutOrderSummaryModule {\n}\n"]}
