@@ -1,7 +1,6 @@
 import { Renderer2, RendererFactory2 } from '@angular/core';
 import { WindowRef } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import * as ɵngcc0 from '@angular/core';
 export declare const QUALTRICS_EVENT_NAME = "qsi_js_loaded";
 /**
  * Service to integration Qualtrics.
@@ -67,7 +66,4 @@ export declare class QualtricsLoaderService {
      */
     protected hasScript(source?: string): boolean;
     protected get renderer(): Renderer2;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<QualtricsLoaderService, never>;
 }
-
-//# sourceMappingURL=qualtrics-loader.service.d.ts.map

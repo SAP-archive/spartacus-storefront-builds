@@ -1,1 +1,0 @@
-{"version":3,"file":"multiline-titles.pipe.d.ts","sources":["multiline-titles.pipe.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;;;AACA","sourcesContent":["import { PipeTransform } from '@angular/core';\nexport declare class MultiLinePipe implements PipeTransform {\n    transform(value: string): string;\n}\n"]}
