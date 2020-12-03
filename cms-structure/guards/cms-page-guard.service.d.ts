@@ -1,5 +1,5 @@
 import { RouterStateSnapshot, UrlTree } from '@angular/router';
-import { CmsActivatedRouteSnapshot, CmsService, Page, PageContext, SemanticPathService } from '@spartacus/core';
+import { CmsActivatedRouteSnapshot, CmsService, Page, PageContext, SemanticPathService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsComponentsService } from '../services/cms-components.service';
 import { CmsGuardsService } from '../services/cms-guards.service';
@@ -8,6 +8,7 @@ import { CmsRoutesService } from '../services/cms-routes.service';
 /**
  * Helper service for `CmsPageGuard`
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsPageGuardService {
     protected semanticPathService: SemanticPathService;
     protected cmsService: CmsService;
@@ -15,7 +16,8 @@ export declare class CmsPageGuardService {
     protected cmsI18n: CmsI18nService;
     protected cmsGuards: CmsGuardsService;
     protected cmsComponentsService: CmsComponentsService;
-    constructor(semanticPathService: SemanticPathService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService, cmsComponentsService: CmsComponentsService);
+    protected routing: RoutingService;
+    constructor(semanticPathService: SemanticPathService, cmsService: CmsService, cmsRoutes: CmsRoutesService, cmsI18n: CmsI18nService, cmsGuards: CmsGuardsService, cmsComponentsService: CmsComponentsService, routing: RoutingService);
     /**
      * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
      *
@@ -40,4 +42,7 @@ export declare class CmsPageGuardService {
      * Then it processes its CMS components with the method `canActivatePage()` of this service. For more, see its docs.
      */
     canActivateNotFoundPage(pageContext: PageContext, route: CmsActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsPageGuardService, never>;
 }
+
+//# sourceMappingURL=cms-page-guard.service.d.ts.map

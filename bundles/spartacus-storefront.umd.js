@@ -14816,13 +14816,14 @@
      * Helper service for `CmsPageGuard`
      */
     var CmsPageGuardService = /** @class */ (function () {
-        function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards, cmsComponentsService) {
+        function CmsPageGuardService(semanticPathService, cmsService, cmsRoutes, cmsI18n, cmsGuards, cmsComponentsService, routing) {
             this.semanticPathService = semanticPathService;
             this.cmsService = cmsService;
             this.cmsRoutes = cmsRoutes;
             this.cmsI18n = cmsI18n;
             this.cmsGuards = cmsGuards;
             this.cmsComponentsService = cmsComponentsService;
+            this.routing = routing;
         }
         /**
          * Takes CMS components types in the current CMS page, triggers (configurable) side effects and returns a boolean - whether the route can be activated.
@@ -14875,6 +14876,7 @@
                 if (notFoundPage) {
                     return _this.cmsService.getPageIndex(notFoundCmsPageContext).pipe(operators.tap(function (notFoundIndex) {
                         _this.cmsService.setPageFailIndex(pageContext, notFoundIndex);
+                        _this.routing.changeNextPageContext(notFoundCmsPageContext);
                     }), operators.switchMap(function (notFoundIndex) { return _this.cmsService.getPageIndex(pageContext).pipe(
                     // we have to wait for page index update
                     operators.filter(function (index) { return index === notFoundIndex; })); }), operators.switchMap(function () { return _this.canActivatePage(pageContext, notFoundPage, route, state); }));
@@ -14884,7 +14886,7 @@
         };
         return CmsPageGuardService;
     }());
-    CmsPageGuardService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(CmsRoutesService), i0.ɵɵinject(CmsI18nService), i0.ɵɵinject(CmsGuardsService), i0.ɵɵinject(CmsComponentsService)); }, token: CmsPageGuardService, providedIn: "root" });
+    CmsPageGuardService.ɵprov = i0.ɵɵdefineInjectable({ factory: function CmsPageGuardService_Factory() { return new CmsPageGuardService(i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i1.CmsService), i0.ɵɵinject(CmsRoutesService), i0.ɵɵinject(CmsI18nService), i0.ɵɵinject(CmsGuardsService), i0.ɵɵinject(CmsComponentsService), i0.ɵɵinject(i1.RoutingService)); }, token: CmsPageGuardService, providedIn: "root" });
     CmsPageGuardService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root',
@@ -14896,7 +14898,8 @@
         { type: CmsRoutesService },
         { type: CmsI18nService },
         { type: CmsGuardsService },
-        { type: CmsComponentsService }
+        { type: CmsComponentsService },
+        { type: i1.RoutingService }
     ]; };
 
     var CmsPageGuard = /** @class */ (function () {
@@ -24064,6 +24067,7 @@
     exports.CmsInjectorService = CmsInjectorService;
     exports.CmsLibModule = CmsLibModule;
     exports.CmsPageGuard = CmsPageGuard;
+    exports.CmsPageGuardService = CmsPageGuardService;
     exports.CmsParagraphModule = CmsParagraphModule;
     exports.CmsRouteModule = CmsRouteModule;
     exports.CmsRoutesService = CmsRoutesService;
@@ -24436,21 +24440,20 @@
     exports.ɵbu = CheckoutAuthGuard;
     exports.ɵbv = CartNotEmptyGuard;
     exports.ɵbw = defaultQualtricsConfig;
-    exports.ɵbx = CmsPageGuardService;
-    exports.ɵby = CmsRoutesImplService;
-    exports.ɵbz = ReturnRequestService;
+    exports.ɵbx = CmsRoutesImplService;
+    exports.ɵby = ReturnRequestService;
+    exports.ɵbz = LoginRegisterComponent;
     exports.ɵc = pwaConfigurationFactory;
-    exports.ɵca = LoginRegisterComponent;
-    exports.ɵcb = MyCouponsComponentService;
-    exports.ɵcc = addCmsRoute;
-    exports.ɵcd = defaultStorefrontRoutesConfig;
-    exports.ɵce = defaultRoutingConfig;
-    exports.ɵcf = SeoConfig;
-    exports.ɵcg = defaultSeoConfig;
-    exports.ɵch = htmlLangProvider;
-    exports.ɵci = setHtmlLangAttribute;
-    exports.ɵcj = defaultDirectionConfig;
-    exports.ɵck = EventsModule;
+    exports.ɵca = MyCouponsComponentService;
+    exports.ɵcb = addCmsRoute;
+    exports.ɵcc = defaultStorefrontRoutesConfig;
+    exports.ɵcd = defaultRoutingConfig;
+    exports.ɵce = SeoConfig;
+    exports.ɵcf = defaultSeoConfig;
+    exports.ɵcg = htmlLangProvider;
+    exports.ɵch = setHtmlLangAttribute;
+    exports.ɵci = defaultDirectionConfig;
+    exports.ɵcj = EventsModule;
     exports.ɵd = pwaFactory;
     exports.ɵe = getStructuredDataFactory;
     exports.ɵf = FOCUS_ATTR;

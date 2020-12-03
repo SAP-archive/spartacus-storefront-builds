@@ -29,20 +29,19 @@ export { CheckoutAuthGuard as ɵbu } from './cms-components/checkout/guards';
 export { CheckoutStepsSetGuard as ɵbo } from './cms-components/checkout/guards/checkout-steps-set.guard';
 export { defaultIconConfig as ɵbl } from './cms-components/misc/icon/default-icon.config';
 export { defaultQualtricsConfig as ɵbw } from './cms-components/misc/qualtrics/config/default-qualtrics-config';
-export { MyCouponsComponentService as ɵcb } from './cms-components/myaccount/my-coupons/my-coupons.component.service';
-export { ReturnRequestService as ɵbz } from './cms-components/myaccount/order/return-request-detail/return-request.service';
-export { LoginRegisterComponent as ɵca } from './cms-components/user/login-register/login-register.component';
-export { CmsPageGuardService as ɵbx } from './cms-structure/guards/cms-page-guard.service';
+export { MyCouponsComponentService as ɵca } from './cms-components/myaccount/my-coupons/my-coupons.component.service';
+export { ReturnRequestService as ɵby } from './cms-components/myaccount/order/return-request-detail/return-request.service';
+export { LoginRegisterComponent as ɵbz } from './cms-components/user/login-register/login-register.component';
 export { registerOutletsFactory as ɵa } from './cms-structure/outlet/outlet.module';
 export { PROVIDE_OUTLET_OPTIONS as ɵb } from './cms-structure/outlet/outlet.providers';
 export { pwaConfigurationFactory as ɵc, pwaFactory as ɵd } from './cms-structure/pwa/pwa.module';
-export { addCmsRoute as ɵcc } from './cms-structure/routing/cms-route/add-cms-route';
-export { defaultRoutingConfig as ɵce, defaultStorefrontRoutesConfig as ɵcd } from './cms-structure/routing/default-routing-config';
-export { SeoConfig as ɵcf, defaultSeoConfig as ɵcg } from './cms-structure/seo/config';
-export { htmlLangProvider as ɵch, setHtmlLangAttribute as ɵci } from './cms-structure/seo/html-lang-provider';
+export { addCmsRoute as ɵcb } from './cms-structure/routing/cms-route/add-cms-route';
+export { defaultRoutingConfig as ɵcd, defaultStorefrontRoutesConfig as ɵcc } from './cms-structure/routing/default-routing-config';
+export { SeoConfig as ɵce, defaultSeoConfig as ɵcf } from './cms-structure/seo/config';
+export { htmlLangProvider as ɵcg, setHtmlLangAttribute as ɵch } from './cms-structure/seo/html-lang-provider';
 export { getStructuredDataFactory as ɵe } from './cms-structure/seo/structured-data/structured-data.module';
-export { CmsRoutesImplService as ɵby } from './cms-structure/services/cms-routes-impl.service';
-export { EventsModule as ɵck } from './events/events.module';
+export { CmsRoutesImplService as ɵbx } from './cms-structure/services/cms-routes-impl.service';
+export { EventsModule as ɵcj } from './events/events.module';
 export { AutoFocusDirective as ɵl } from './layout/a11y/keyboard-focus/autofocus/auto-focus.directive';
 export { AutoFocusService as ɵu } from './layout/a11y/keyboard-focus/autofocus/auto-focus.service';
 export { BaseFocusDirective as ɵq } from './layout/a11y/keyboard-focus/base/base-focus.directive';
@@ -61,5 +60,7 @@ export { TrapFocusDirective as ɵj } from './layout/a11y/keyboard-focus/trap/tra
 export { TrapFocusService as ɵw } from './layout/a11y/keyboard-focus/trap/trap-focus.service';
 export { VisibleFocusDirective as ɵp } from './layout/a11y/keyboard-focus/visible/visible-focus.directive';
 export { skipLinkFactory as ɵg } from './layout/a11y/skip-link/skip-link.module';
-export { defaultDirectionConfig as ɵcj } from './layout/direction/config/default-direction.config';
+export { defaultDirectionConfig as ɵci } from './layout/direction/config/default-direction.config';
 export { initHtmlDirAttribute as ɵh } from './layout/direction/direction.module';
+
+//# sourceMappingURL=spartacus-storefront.d.ts.map
