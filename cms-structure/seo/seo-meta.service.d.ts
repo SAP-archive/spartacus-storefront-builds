@@ -1,6 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { PageMeta, PageMetaService, PageRobotsMeta } from '@spartacus/core';
+import * as ɵngcc0 from '@angular/core';
 export declare class SeoMetaService implements OnDestroy {
     protected ngTitle: Title;
     protected ngMeta: Meta;
@@ -15,4 +16,7 @@ export declare class SeoMetaService implements OnDestroy {
     protected set robots(value: PageRobotsMeta[]);
     protected addTag(meta: MetaDefinition): void;
     ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<SeoMetaService, never>;
 }
+
+//# sourceMappingURL=seo-meta.service.d.ts.map
