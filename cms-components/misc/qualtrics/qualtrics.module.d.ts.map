@@ -1,0 +1,1 @@
+{"version":3,"file":"qualtrics.module.d.ts","sources":["qualtrics.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class QualtricsModule {\n}\n"]}
