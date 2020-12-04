@@ -17,7 +17,6 @@ import { DatePickerService } from './date-picker.service';
  * The placeholder is provided by the `DatePickerService.placeholder` to allow for customizations.
  *
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class DatePickerFallbackDirective implements Validator {
     protected elementRef: ElementRef<HTMLInputElement>;
     protected service: DatePickerService;
@@ -30,8 +29,4 @@ export declare class DatePickerFallbackDirective implements Validator {
     protected get min(): Date;
     protected get max(): Date;
     protected get host(): HTMLInputElement;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<DatePickerFallbackDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<DatePickerFallbackDirective, "[cxDatePickerFallback]", never, {}, {}, never>;
 }
-
-//# sourceMappingURL=date-picker-fallback.directive.d.ts.map
