@@ -8,6 +8,7 @@ import { CmsRoutesService } from '../services/cms-routes.service';
 /**
  * Helper service for `CmsPageGuard`
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsPageGuardService {
     protected semanticPathService: SemanticPathService;
     protected cmsService: CmsService;
@@ -41,4 +42,7 @@ export declare class CmsPageGuardService {
      * Then it processes its CMS components with the method `canActivatePage()` of this service. For more, see its docs.
      */
     canActivateNotFoundPage(pageContext: PageContext, route: CmsActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree>;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsPageGuardService, never>;
 }
+
+//# sourceMappingURL=cms-page-guard.service.d.ts.map
