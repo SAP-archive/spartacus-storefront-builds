@@ -3,6 +3,7 @@ import { ImageLoadingStrategy, MediaFormatSize } from './media.model';
  * Provides configuration specific to Media, such as images. This is used to optimize
  * rendering of the media, SEO and performance.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare abstract class MediaConfig {
     /**
      * Media _format_ configuration holds the size of the media's assigned to
@@ -26,4 +27,7 @@ export declare abstract class MediaConfig {
      * img element.
      */
     imageLoadingStrategy?: ImageLoadingStrategy;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<MediaConfig, never>;
 }
+
+//# sourceMappingURL=media.config.d.ts.map
