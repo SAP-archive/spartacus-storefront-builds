@@ -1,0 +1,1 @@
+{"version":3,"file":"hamburger-menu.module.d.ts","sources":["hamburger-menu.module.d.ts"],"names":[],"mappings":";;;AAAA;;;AACA","sourcesContent":["export declare class HamburgerMenuModule {\n}\n"]}

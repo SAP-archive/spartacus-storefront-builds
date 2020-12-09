@@ -22,6 +22,7 @@ import { ICON_TYPE } from './icon.model';
  * While the content is projected, the icon itself doesn't require an
  * additional DOM node which is an advantage over the component selector.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class IconComponent {
     protected iconLoader: IconLoaderService;
     protected elementRef: ElementRef<HTMLElement>;
@@ -64,4 +65,8 @@ export declare class IconComponent {
      */
     protected addStyleClasses(type: ICON_TYPE): void;
     protected get host(): HTMLElement;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<IconComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<IconComponent, "cx-icon,[cxIcon]", never, { "cxIcon": "cxIcon"; "type": "type"; }, {}, never, ["*"]>;
 }
+
+//# sourceMappingURL=icon.component.d.ts.map
