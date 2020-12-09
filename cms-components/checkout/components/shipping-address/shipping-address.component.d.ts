@@ -1,14 +1,15 @@
-import { OnInit } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ActiveCartService, Address, CheckoutCostCenterService, CheckoutDeliveryService, PaymentTypeService, TranslationService, UserAddressService, UserCostCenterService } from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Card } from '../../../../shared/components/card/card.component';
 import { CheckoutStepService } from '../../services/checkout-step.service';
+import * as ɵngcc0 from '@angular/core';
 export interface CardWithAddress {
     card: Card;
     address: Address;
 }
-export declare class ShippingAddressComponent implements OnInit {
+export declare class ShippingAddressComponent implements OnInit, OnDestroy {
     protected userAddressService: UserAddressService;
     protected checkoutDeliveryService: CheckoutDeliveryService;
     protected activatedRoute: ActivatedRoute;
@@ -23,6 +24,7 @@ export declare class ShippingAddressComponent implements OnInit {
     selectedAddress: Address;
     doneAutoSelect: boolean;
     isAccountPayment: boolean;
+    protected subscriptions: Subscription;
     constructor(userAddressService: UserAddressService, checkoutDeliveryService: CheckoutDeliveryService, activatedRoute: ActivatedRoute, translation: TranslationService, activeCartService: ActiveCartService, checkoutStepService: CheckoutStepService, paymentTypeService?: PaymentTypeService, userCostCenterService?: UserCostCenterService, checkoutCostCenterService?: CheckoutCostCenterService);
     get isGuestCheckout(): boolean;
     get backBtnText(): string;
@@ -39,4 +41,9 @@ export declare class ShippingAddressComponent implements OnInit {
     hideNewAddressForm(goPrevious?: boolean): void;
     next(): void;
     back(): void;
+    ngOnDestroy(): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ShippingAddressComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ShippingAddressComponent, "cx-shipping-address", never, {}, {}, never, never>;
 }
+
+//# sourceMappingURL=shipping-address.component.d.ts.map

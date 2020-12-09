@@ -12699,6 +12699,7 @@
             this.forceLoader = false; // this helps with smoother steps transition
             this.doneAutoSelect = false;
             this.isAccountPayment = false;
+            this.subscriptions = new rxjs.Subscription();
         }
         Object.defineProperty(ShippingAddressComponent.prototype, "isGuestCheckout", {
             get: function () {
@@ -12795,10 +12796,10 @@
             if (this.paymentTypeService &&
                 this.userCostCenterService &&
                 this.checkoutCostCenterService) {
-                this.paymentTypeService
+                this.subscriptions.add(this.paymentTypeService
                     .isAccountPayment()
-                    .pipe(operators.take(1))
-                    .subscribe(function (isAccount) { return (_this.isAccountPayment = isAccount); });
+                    .pipe(operators.distinctUntilChanged())
+                    .subscribe(function (isAccount) { return (_this.isAccountPayment = isAccount); }));
             }
             if (!this.isGuestCheckout && !this.isAccountPayment) {
                 this.userAddressService.loadAddresses();
@@ -12851,6 +12852,9 @@
         };
         ShippingAddressComponent.prototype.back = function () {
             this.checkoutStepService.back(this.activatedRoute);
+        };
+        ShippingAddressComponent.prototype.ngOnDestroy = function () {
+            this.subscriptions.unsubscribe();
         };
         return ShippingAddressComponent;
     }());

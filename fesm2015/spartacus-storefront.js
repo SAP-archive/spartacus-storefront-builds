@@ -11259,6 +11259,7 @@ class ShippingAddressComponent {
         this.forceLoader = false; // this helps with smoother steps transition
         this.doneAutoSelect = false;
         this.isAccountPayment = false;
+        this.subscriptions = new Subscription();
     }
     get isGuestCheckout() {
         return this.activeCartService.isGuestCart();
@@ -11325,10 +11326,10 @@ class ShippingAddressComponent {
         if (this.paymentTypeService &&
             this.userCostCenterService &&
             this.checkoutCostCenterService) {
-            this.paymentTypeService
+            this.subscriptions.add(this.paymentTypeService
                 .isAccountPayment()
-                .pipe(take(1))
-                .subscribe((isAccount) => (this.isAccountPayment = isAccount));
+                .pipe(distinctUntilChanged())
+                .subscribe((isAccount) => (this.isAccountPayment = isAccount)));
         }
         if (!this.isGuestCheckout && !this.isAccountPayment) {
             this.userAddressService.loadAddresses();
@@ -11380,6 +11381,9 @@ class ShippingAddressComponent {
     }
     back() {
         this.checkoutStepService.back(this.activatedRoute);
+    }
+    ngOnDestroy() {
+        this.subscriptions.unsubscribe();
     }
 }
 ShippingAddressComponent.decorators = [
