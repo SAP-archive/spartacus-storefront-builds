@@ -3906,7 +3906,7 @@ class GenericLinkComponent {
 GenericLinkComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-generic-link',
-                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [attr.target]=\"target\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
+                template: "<!-- https://github.com/angular/angular/issues/24567 -->\n\n<ng-container *ngIf=\"isExternalUrl(); else isLocalUrl\">\n  <a\n    role=\"link\"\n    [href]=\"url\"\n    [attr.target]=\"target\"\n    [attr.rel]=\"rel\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-container>\n\n<ng-template #isLocalUrl>\n  <a\n    role=\"link\"\n    [routerLink]=\"routerUrl\"\n    [queryParams]=\"queryParams\"\n    [fragment]=\"fragment\"\n    [target]=\"target\"\n    [attr.id]=\"id\"\n    [attr.class]=\"class\"\n    [attr.style]=\"style\"\n    [attr.title]=\"title\"\n  >\n    <ng-container *ngTemplateOutlet=\"content\"></ng-container>\n  </a>\n</ng-template>\n\n<ng-template #content>\n  <ng-content></ng-content>\n</ng-template>\n"
             },] }
 ];
 GenericLinkComponent.ctorParameters = () => [
@@ -13879,18 +13879,29 @@ BannerCarouselModule.decorators = [
 class BannerComponent {
     constructor(component) {
         this.component = component;
+        this.data$ = this.component.data$.pipe(tap((data) => (this.styleClasses = data.styleClasses)));
+    }
+    /**
+     * Returns `_blank` to force opening the link in a new window whenever the
+     * `data.external` flag is set to true.
+     */
+    getTarget(data) {
+        return data.external === 'true' || data.external === true ? '_blank' : null;
     }
 }
 BannerComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-banner',
-                template: "<ng-container *ngIf=\"component.data$ | async as data\">\n  <cx-generic-link\n    [url]=\"data.urlLink\"\n    [target]=\"data.external ? '_blank' : null\"\n    [title]=\"data.media?.altText\"\n  >\n    <p class=\"headline\" *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n    <cx-media [container]=\"data.media\"></cx-media>\n    <p class=\"content\" *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n  </cx-generic-link>\n</ng-container>\n",
+                template: "<cx-generic-link\n  *ngIf=\"data$ | async as data\"\n  [url]=\"data.urlLink\"\n  [target]=\"getTarget(data)\"\n>\n  <p class=\"headline\" *ngIf=\"data.headline\" [innerHTML]=\"data.headline\"></p>\n  <cx-media [container]=\"data.media\"></cx-media>\n  <p class=\"content\" *ngIf=\"data.content\" [innerHTML]=\"data.content\"></p>\n</cx-generic-link>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 BannerComponent.ctorParameters = () => [
     { type: CmsComponentData }
 ];
+BannerComponent.propDecorators = {
+    styleClasses: [{ type: HostBinding, args: ['class',] }]
+};
 
 class BannerModule {
 }
@@ -13921,18 +13932,29 @@ BannerModule.decorators = [
 class LinkComponent {
     constructor(component) {
         this.component = component;
+        this.data$ = this.component.data$.pipe(tap((data) => (this.styleClasses = data.styleClasses)));
+    }
+    /**
+     * Returns `_blank` to force opening the link in a new window whenever the
+     * `data.target` flag is set to `true`.
+     */
+    getTarget(data) {
+        return data.target === 'true' || data.target === true ? '_blank' : null;
     }
 }
 LinkComponent.decorators = [
     { type: Component, args: [{
                 selector: 'cx-link',
-                template: "<cx-generic-link\n  *ngIf=\"component.data$ | async as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  [class]=\"data.styleClasses\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
+                template: "<cx-generic-link\n  *ngIf=\"data$ | async as data\"\n  [url]=\"data.url\"\n  [style]=\"data.styleAttributes\"\n  [target]=\"getTarget(data)\"\n  >{{ data.linkName }}</cx-generic-link\n>\n",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 LinkComponent.ctorParameters = () => [
     { type: CmsComponentData }
 ];
+LinkComponent.propDecorators = {
+    styleClasses: [{ type: HostBinding, args: ['class',] }]
+};
 
 class LinkModule {
 }
