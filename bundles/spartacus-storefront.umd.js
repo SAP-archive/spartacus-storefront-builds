@@ -14164,7 +14164,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
+                        serviceWorker.ServiceWorkerModule.register('ngsw-worker.js'),
                         i1.I18nModule,
                     ],
                     providers: [

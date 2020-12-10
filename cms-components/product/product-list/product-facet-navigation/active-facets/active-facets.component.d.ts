@@ -7,6 +7,7 @@ import { FacetService } from '../services/facet.service';
  * Active facets render the applied facet values as a list of focusable buttons
  * which can be used to remove the applied facet value.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ActiveFacetsComponent {
     protected facetService: FacetService;
     /** Active facets which are applied to the product results. */
@@ -26,4 +27,8 @@ export declare class ActiveFacetsComponent {
      * active facets.
      */
     getFocusKey(facetList: FacetList, facet: Breadcrumb): string;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ActiveFacetsComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<ActiveFacetsComponent, "cx-active-facets", never, { "closeIcon": "closeIcon"; }, {}, never, never>;
 }
+
+//# sourceMappingURL=active-facets.component.d.ts.map

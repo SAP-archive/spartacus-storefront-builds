@@ -12563,7 +12563,7 @@ PwaModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    ServiceWorkerModule.register('/ngsw-worker.js'),
+                    ServiceWorkerModule.register('ngsw-worker.js'),
                     I18nModule,
                 ],
                 providers: [
