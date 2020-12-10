@@ -9854,14 +9854,17 @@ class DeliveryModeComponent {
         this.activatedRoute = activatedRoute;
         this.checkoutStepService = checkoutStepService;
         this.continueButtonPressed = false;
-        this.allowRedirect = false;
         this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
         this.mode = this.fb.group({
             deliveryModeId: ['', Validators.required],
         });
     }
     ngOnInit() {
-        this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+        this.supportedDeliveryModes$ = this.checkoutDeliveryService
+            .getSupportedDeliveryModes()
+            .pipe(filter((deliveryModes) => !!(deliveryModes === null || deliveryModes === void 0 ? void 0 : deliveryModes.length)), distinctUntilChanged((current, previous) => {
+            return JSON.stringify(current) === JSON.stringify(previous);
+        }));
         // Reload delivery modes on error
         this.checkoutDeliveryService
             .getLoadSupportedDeliveryModeProcess()
@@ -9876,37 +9879,21 @@ class DeliveryModeComponent {
             .getSelectedDeliveryMode()
             .pipe(map((deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null))))
             .subscribe(([deliveryModes, code]) => {
-            if (!code && deliveryModes && deliveryModes.length) {
+            if (!(code &&
+                !!deliveryModes.find((deliveryMode) => deliveryMode.code === code))) {
                 code = this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }
-            if (this.allowRedirect &&
-                !!code &&
-                code === this.currentDeliveryModeId) {
-                this.checkoutStepService.next(this.activatedRoute);
-            }
-            if (code) {
-                this.mode.controls['deliveryModeId'].setValue(code);
-                if (code !== this.currentDeliveryModeId) {
-                    this.checkoutDeliveryService.setDeliveryMode(code);
-                }
-            }
-            this.currentDeliveryModeId = code;
+            this.mode.controls['deliveryModeId'].setValue(code);
+            this.checkoutDeliveryService.setDeliveryMode(code);
         });
     }
     changeMode(code) {
-        if (code !== this.currentDeliveryModeId) {
-            this.checkoutDeliveryService.setDeliveryMode(code);
-            this.currentDeliveryModeId = code;
-        }
+        this.checkoutDeliveryService.setDeliveryMode(code);
     }
     next() {
-        this.allowRedirect = true;
-        this.continueButtonPressed = true;
         if (this.mode.valid && this.mode.value) {
-            if (!this.currentDeliveryModeId) {
-                this.currentDeliveryModeId = this.mode.value.deliveryModeId;
-            }
-            this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
+            this.continueButtonPressed = true;
+            this.checkoutStepService.next(this.activatedRoute);
         }
     }
     back() {
