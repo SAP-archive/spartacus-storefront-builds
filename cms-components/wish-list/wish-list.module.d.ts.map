@@ -1,0 +1,1 @@
+{"version":3,"file":"wish-list.module.d.ts","sources":["wish-list.module.d.ts"],"names":[],"mappings":";;;;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class WishListModule {\n}\n"]}
