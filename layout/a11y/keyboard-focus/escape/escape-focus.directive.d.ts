@@ -9,7 +9,6 @@ import { EscapeFocusService } from './escape-focus.service';
  * move up in the DOM tree.
  *
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class EscapeFocusDirective extends PersistFocusDirective implements OnInit {
     protected elementRef: ElementRef;
     protected service: EscapeFocusService;
@@ -23,8 +22,4 @@ export declare class EscapeFocusDirective extends PersistFocusDirective implemen
     handleEscape(event: KeyboardEvent): void;
     constructor(elementRef: ElementRef, service: EscapeFocusService);
     ngOnInit(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<EscapeFocusDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<EscapeFocusDirective, never, never, {}, { "esc": "esc"; }, never>;
 }
-
-//# sourceMappingURL=escape-focus.directive.d.ts.map

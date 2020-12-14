@@ -1,1 +1,0 @@
-{"version":3,"file":"anonymous-consents-dialog.module.d.ts","sources":["anonymous-consents-dialog.module.d.ts"],"names":[],"mappings":";;;;;;;;AAAA;;;AACA","sourcesContent":["export declare class AnonymousConsentsDialogModule {\n}\n"]}

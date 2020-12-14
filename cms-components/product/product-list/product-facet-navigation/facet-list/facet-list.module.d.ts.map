@@ -1,1 +1,0 @@
-{"version":3,"file":"facet-list.module.d.ts","sources":["facet-list.module.d.ts"],"names":[],"mappings":";;;;;;;AAAA;;;AACA","sourcesContent":["export declare class FacetListModule {\n}\n"]}
