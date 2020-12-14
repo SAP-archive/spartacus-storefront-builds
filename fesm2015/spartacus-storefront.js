@@ -9854,17 +9854,14 @@ class DeliveryModeComponent {
         this.activatedRoute = activatedRoute;
         this.checkoutStepService = checkoutStepService;
         this.continueButtonPressed = false;
+        this.allowRedirect = false;
         this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
         this.mode = this.fb.group({
             deliveryModeId: ['', Validators.required],
         });
     }
     ngOnInit() {
-        this.supportedDeliveryModes$ = this.checkoutDeliveryService
-            .getSupportedDeliveryModes()
-            .pipe(filter((deliveryModes) => !!(deliveryModes === null || deliveryModes === void 0 ? void 0 : deliveryModes.length)), distinctUntilChanged((current, previous) => {
-            return JSON.stringify(current) === JSON.stringify(previous);
-        }));
+        this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
         // Reload delivery modes on error
         this.checkoutDeliveryService
             .getLoadSupportedDeliveryModeProcess()
@@ -9879,21 +9876,37 @@ class DeliveryModeComponent {
             .getSelectedDeliveryMode()
             .pipe(map((deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null))))
             .subscribe(([deliveryModes, code]) => {
-            if (!(code &&
-                !!deliveryModes.find((deliveryMode) => deliveryMode.code === code))) {
+            if (!code && deliveryModes && deliveryModes.length) {
                 code = this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }
-            this.mode.controls['deliveryModeId'].setValue(code);
-            this.checkoutDeliveryService.setDeliveryMode(code);
+            if (this.allowRedirect &&
+                !!code &&
+                code === this.currentDeliveryModeId) {
+                this.checkoutStepService.next(this.activatedRoute);
+            }
+            if (code) {
+                this.mode.controls['deliveryModeId'].setValue(code);
+                if (code !== this.currentDeliveryModeId) {
+                    this.checkoutDeliveryService.setDeliveryMode(code);
+                }
+            }
+            this.currentDeliveryModeId = code;
         });
     }
     changeMode(code) {
-        this.checkoutDeliveryService.setDeliveryMode(code);
+        if (code !== this.currentDeliveryModeId) {
+            this.checkoutDeliveryService.setDeliveryMode(code);
+            this.currentDeliveryModeId = code;
+        }
     }
     next() {
+        this.allowRedirect = true;
+        this.continueButtonPressed = true;
         if (this.mode.valid && this.mode.value) {
-            this.continueButtonPressed = true;
-            this.checkoutStepService.next(this.activatedRoute);
+            if (!this.currentDeliveryModeId) {
+                this.currentDeliveryModeId = this.mode.value.deliveryModeId;
+            }
+            this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
         }
     }
     back() {
@@ -12550,7 +12563,7 @@ PwaModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    ServiceWorkerModule.register('ngsw-worker.js'),
+                    ServiceWorkerModule.register('/ngsw-worker.js'),
                     I18nModule,
                 ],
                 providers: [
