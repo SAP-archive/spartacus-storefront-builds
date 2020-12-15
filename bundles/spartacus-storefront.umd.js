@@ -6549,8 +6549,6 @@
     /**
      * Star rating component can be used to view existing ratings as well
      * as create new ratings. The component can be used for any ratings.
-     *
-     * The rating component has a few import inputs/outputs:
      */
     var StarRatingComponent = /** @class */ (function () {
         function StarRatingComponent() {
