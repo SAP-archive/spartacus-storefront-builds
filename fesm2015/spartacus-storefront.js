@@ -8,8 +8,8 @@ import { FormsModule, ReactiveFormsModule, NG_VALIDATORS, Validators, FormBuilde
 import { RouterModule, Router, ActivatedRoute, RouterLink, RouterLinkWithHref, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModalRef, NgbActiveModal, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { __awaiter } from 'tslib';
 import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import { __awaiter } from 'tslib';
 import { HttpUrlEncodingCodec, HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ActionsSubject, StoreModule } from '@ngrx/store';
@@ -6631,9 +6631,8 @@ class FeatureModulesService {
         this.initFeatureMap();
     }
     initFeatureMap() {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function* () {
-            const config = yield this.configInitializer.getStableConfig('featureModules');
+        this.configInitializer.getStable('featureModules').subscribe((config) => {
+            var _a, _b;
             this.featureModulesConfig = (_a = config.featureModules) !== null && _a !== void 0 ? _a : {};
             for (const [featureName, featureConfig] of Object.entries(this.featureModulesConfig)) {
                 if ((featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module) && ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length)) {
@@ -9854,14 +9853,17 @@ class DeliveryModeComponent {
         this.activatedRoute = activatedRoute;
         this.checkoutStepService = checkoutStepService;
         this.continueButtonPressed = false;
-        this.allowRedirect = false;
         this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
         this.mode = this.fb.group({
             deliveryModeId: ['', Validators.required],
         });
     }
     ngOnInit() {
-        this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+        this.supportedDeliveryModes$ = this.checkoutDeliveryService
+            .getSupportedDeliveryModes()
+            .pipe(filter((deliveryModes) => !!(deliveryModes === null || deliveryModes === void 0 ? void 0 : deliveryModes.length)), distinctUntilChanged((current, previous) => {
+            return JSON.stringify(current) === JSON.stringify(previous);
+        }));
         // Reload delivery modes on error
         this.checkoutDeliveryService
             .getLoadSupportedDeliveryModeProcess()
@@ -9876,37 +9878,21 @@ class DeliveryModeComponent {
             .getSelectedDeliveryMode()
             .pipe(map((deliveryMode) => deliveryMode && deliveryMode.code ? deliveryMode.code : null))))
             .subscribe(([deliveryModes, code]) => {
-            if (!code && deliveryModes && deliveryModes.length) {
+            if (!(code &&
+                !!deliveryModes.find((deliveryMode) => deliveryMode.code === code))) {
                 code = this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
             }
-            if (this.allowRedirect &&
-                !!code &&
-                code === this.currentDeliveryModeId) {
-                this.checkoutStepService.next(this.activatedRoute);
-            }
-            if (code) {
-                this.mode.controls['deliveryModeId'].setValue(code);
-                if (code !== this.currentDeliveryModeId) {
-                    this.checkoutDeliveryService.setDeliveryMode(code);
-                }
-            }
-            this.currentDeliveryModeId = code;
+            this.mode.controls['deliveryModeId'].setValue(code);
+            this.checkoutDeliveryService.setDeliveryMode(code);
         });
     }
     changeMode(code) {
-        if (code !== this.currentDeliveryModeId) {
-            this.checkoutDeliveryService.setDeliveryMode(code);
-            this.currentDeliveryModeId = code;
-        }
+        this.checkoutDeliveryService.setDeliveryMode(code);
     }
     next() {
-        this.allowRedirect = true;
-        this.continueButtonPressed = true;
         if (this.mode.valid && this.mode.value) {
-            if (!this.currentDeliveryModeId) {
-                this.currentDeliveryModeId = this.mode.value.deliveryModeId;
-            }
-            this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
+            this.continueButtonPressed = true;
+            this.checkoutStepService.next(this.activatedRoute);
         }
     }
     back() {
@@ -12563,7 +12549,7 @@ PwaModule.decorators = [
     { type: NgModule, args: [{
                 imports: [
                     CommonModule,
-                    ServiceWorkerModule.register('/ngsw-worker.js'),
+                    ServiceWorkerModule.register('ngsw-worker.js'),
                     I18nModule,
                 ],
                 providers: [

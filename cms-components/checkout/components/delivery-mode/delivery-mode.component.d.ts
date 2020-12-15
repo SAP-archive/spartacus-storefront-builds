@@ -13,9 +13,7 @@ export declare class DeliveryModeComponent implements OnInit, OnDestroy {
     protected checkoutStepService: CheckoutStepService;
     supportedDeliveryModes$: Observable<DeliveryMode[]>;
     selectedDeliveryMode$: Observable<DeliveryMode>;
-    currentDeliveryModeId: string;
     continueButtonPressed: boolean;
-    private allowRedirect;
     backBtnText: string;
     deliveryModeSub: Subscription;
     mode: FormGroup;

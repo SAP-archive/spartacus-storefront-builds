@@ -7605,46 +7605,38 @@
             this.initFeatureMap();
         }
         FeatureModulesService.prototype.initFeatureMap = function () {
-            var _a, _b;
-            return __awaiter(this, void 0, void 0, function () {
-                var config, _c, _d, _e, featureName, featureConfig, _f, _g, component;
-                var e_1, _h, e_2, _j;
-                return __generator(this, function (_k) {
-                    switch (_k.label) {
-                        case 0: return [4 /*yield*/, this.configInitializer.getStableConfig('featureModules')];
-                        case 1:
-                            config = _k.sent();
-                            this.featureModulesConfig = (_a = config.featureModules) !== null && _a !== void 0 ? _a : {};
+            var _this = this;
+            this.configInitializer.getStable('featureModules').subscribe(function (config) {
+                var e_1, _c, e_2, _d;
+                var _a, _b;
+                _this.featureModulesConfig = (_a = config.featureModules) !== null && _a !== void 0 ? _a : {};
+                try {
+                    for (var _e = __values(Object.entries(_this.featureModulesConfig)), _f = _e.next(); !_f.done; _f = _e.next()) {
+                        var _g = __read(_f.value, 2), featureName = _g[0], featureConfig = _g[1];
+                        if ((featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module) && ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length)) {
                             try {
-                                for (_c = __values(Object.entries(this.featureModulesConfig)), _d = _c.next(); !_d.done; _d = _c.next()) {
-                                    _e = __read(_d.value, 2), featureName = _e[0], featureConfig = _e[1];
-                                    if ((featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.module) && ((_b = featureConfig === null || featureConfig === void 0 ? void 0 : featureConfig.cmsComponents) === null || _b === void 0 ? void 0 : _b.length)) {
-                                        try {
-                                            for (_f = (e_2 = void 0, __values(featureConfig.cmsComponents)), _g = _f.next(); !_g.done; _g = _f.next()) {
-                                                component = _g.value;
-                                                this.componentFeatureMap.set(component, featureName);
-                                            }
-                                        }
-                                        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                                        finally {
-                                            try {
-                                                if (_g && !_g.done && (_j = _f.return)) _j.call(_f);
-                                            }
-                                            finally { if (e_2) throw e_2.error; }
-                                        }
-                                    }
+                                for (var _h = (e_2 = void 0, __values(featureConfig.cmsComponents)), _j = _h.next(); !_j.done; _j = _h.next()) {
+                                    var component = _j.value;
+                                    _this.componentFeatureMap.set(component, featureName);
                                 }
                             }
-                            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                            catch (e_2_1) { e_2 = { error: e_2_1 }; }
                             finally {
                                 try {
-                                    if (_d && !_d.done && (_h = _c.return)) _h.call(_c);
+                                    if (_j && !_j.done && (_d = _h.return)) _d.call(_h);
                                 }
-                                finally { if (e_1) throw e_1.error; }
+                                finally { if (e_2) throw e_2.error; }
                             }
-                            return [2 /*return*/];
+                        }
                     }
-                });
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (_f && !_f.done && (_c = _e.return)) _c.call(_e);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
             });
         };
         /**
@@ -11177,7 +11169,6 @@
             this.activatedRoute = activatedRoute;
             this.checkoutStepService = checkoutStepService;
             this.continueButtonPressed = false;
-            this.allowRedirect = false;
             this.backBtnText = this.checkoutStepService.getBackBntText(this.activatedRoute);
             this.mode = this.fb.group({
                 deliveryModeId: ['', forms.Validators.required],
@@ -11185,7 +11176,11 @@
         }
         DeliveryModeComponent.prototype.ngOnInit = function () {
             var _this = this;
-            this.supportedDeliveryModes$ = this.checkoutDeliveryService.getSupportedDeliveryModes();
+            this.supportedDeliveryModes$ = this.checkoutDeliveryService
+                .getSupportedDeliveryModes()
+                .pipe(operators.filter(function (deliveryModes) { return !!(deliveryModes === null || deliveryModes === void 0 ? void 0 : deliveryModes.length); }), operators.distinctUntilChanged(function (current, previous) {
+                return JSON.stringify(current) === JSON.stringify(previous);
+            }));
             // Reload delivery modes on error
             this.checkoutDeliveryService
                 .getLoadSupportedDeliveryModeProcess()
@@ -11201,37 +11196,21 @@
                 .pipe(operators.map(function (deliveryMode) { return deliveryMode && deliveryMode.code ? deliveryMode.code : null; }))))
                 .subscribe(function (_a) {
                 var _b = __read(_a, 2), deliveryModes = _b[0], code = _b[1];
-                if (!code && deliveryModes && deliveryModes.length) {
+                if (!(code &&
+                    !!deliveryModes.find(function (deliveryMode) { return deliveryMode.code === code; }))) {
                     code = _this.checkoutConfigService.getPreferredDeliveryMode(deliveryModes);
                 }
-                if (_this.allowRedirect &&
-                    !!code &&
-                    code === _this.currentDeliveryModeId) {
-                    _this.checkoutStepService.next(_this.activatedRoute);
-                }
-                if (code) {
-                    _this.mode.controls['deliveryModeId'].setValue(code);
-                    if (code !== _this.currentDeliveryModeId) {
-                        _this.checkoutDeliveryService.setDeliveryMode(code);
-                    }
-                }
-                _this.currentDeliveryModeId = code;
+                _this.mode.controls['deliveryModeId'].setValue(code);
+                _this.checkoutDeliveryService.setDeliveryMode(code);
             });
         };
         DeliveryModeComponent.prototype.changeMode = function (code) {
-            if (code !== this.currentDeliveryModeId) {
-                this.checkoutDeliveryService.setDeliveryMode(code);
-                this.currentDeliveryModeId = code;
-            }
+            this.checkoutDeliveryService.setDeliveryMode(code);
         };
         DeliveryModeComponent.prototype.next = function () {
-            this.allowRedirect = true;
-            this.continueButtonPressed = true;
             if (this.mode.valid && this.mode.value) {
-                if (!this.currentDeliveryModeId) {
-                    this.currentDeliveryModeId = this.mode.value.deliveryModeId;
-                }
-                this.checkoutDeliveryService.setDeliveryMode(this.currentDeliveryModeId);
+                this.continueButtonPressed = true;
+                this.checkoutStepService.next(this.activatedRoute);
             }
         };
         DeliveryModeComponent.prototype.back = function () {
@@ -14164,7 +14143,7 @@
         { type: i0.NgModule, args: [{
                     imports: [
                         i1$1.CommonModule,
-                        serviceWorker.ServiceWorkerModule.register('/ngsw-worker.js'),
+                        serviceWorker.ServiceWorkerModule.register('ngsw-worker.js'),
                         i1.I18nModule,
                     ],
                     providers: [
