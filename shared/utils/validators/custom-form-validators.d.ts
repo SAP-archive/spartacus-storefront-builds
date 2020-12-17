@@ -1,4 +1,4 @@
-import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 export declare class CustomFormValidators {
     /**
      * Checks control's value with predefined email regexp
@@ -79,6 +79,30 @@ export declare class CustomFormValidators {
      * @memberof CustomFormValidators
      */
     static noSpecialCharacters(control: AbstractControl): ValidationErrors | null;
+    /**
+     * Checks if control's value passes pattern
+     *
+     * NOTE: Use it as a control validator
+     *
+     * @static
+     * @param {(date: string) => boolean} isValidFormat Pattern verification function
+     * @returns {(control: AbstractControl): ValidationErrors | null} Uses 'pattern' validator error
+     * @memberof CustomFormValidators
+     */
+    static patternValidation(isValidFormat: (date: string) => boolean): ValidatorFn;
+    /**
+     * Checks if two email controls match
+     *
+     * NOTE: Use it as a form validator and pass dates for range
+     *
+     * @static
+     * @param {string} startDateKey First date control name
+     * @param {string} endDateKey Second date control name
+     * @param {(value: string) => Date} getDate Converting function
+     * @returns Uses 'min' and 'max validator error
+     * @memberof CustomFormValidators
+     */
+    static dateRange(startDateKey: string, endDateKey: string, getDate: (value: string) => Date): (FormGroup: any) => any;
 }
 /**
  * Generic function for validators, which checks if two passed controls match.

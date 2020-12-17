@@ -4248,100 +4248,6 @@
     ];
 
     /**
-     * Directive that adds an alternative for the native html5 date picker
-     * for those browsers that won't support it, Safari being our main concern.
-     *
-     * An input with `type="date"` will be ignored by browsers that do not support
-     * the native date picker. The default text type will be used instead. This directive
-     * introduces a few features to ensure that valid dates are added:
-     *
-     * - add a placeholder to the text input so that the user understands the date format he should provide
-     * - add a pattern validator to the input, based on the the placeholder. Please note that the
-     *   standard pattern will no longer be applicable since the pattern is added dynamically.
-     * - support the `min` and `max` properties by validating the input against those values.
-     *
-     * The placeholder is provided by the `DatePickerService.placeholder` to allow for customizations.
-     *
-     */
-    var DatePickerFallbackDirective = /** @class */ (function () {
-        function DatePickerFallbackDirective(elementRef, service) {
-            this.elementRef = elementRef;
-            this.service = service;
-            this.placeholder = this.service.placeholder;
-            this.pattern = this.service.pattern;
-        }
-        DatePickerFallbackDirective.prototype.validate = function (formControl) {
-            var errors = {};
-            if (formControl.value && formControl.value !== '') {
-                // we need to do the pattern validation here, as the default
-                // pattern validator doesn't work dynamically
-                if (!this.service.isValidFormat(formControl.value, this.pattern)) {
-                    errors.pattern = true;
-                }
-                if (!errors.pattern) {
-                    if (this.validateMin(formControl)) {
-                        errors.min = true;
-                    }
-                    if (this.validateMax(formControl)) {
-                        errors.max = true;
-                    }
-                }
-            }
-            return Object.keys(errors).length === 0 ? null : errors;
-        };
-        DatePickerFallbackDirective.prototype.validateMin = function (formControl) {
-            var date = this.service.getDate(formControl.value);
-            return date && date < this.min;
-        };
-        DatePickerFallbackDirective.prototype.validateMax = function (formControl) {
-            var date = this.service.getDate(formControl.value);
-            return date && date > this.max;
-        };
-        Object.defineProperty(DatePickerFallbackDirective.prototype, "min", {
-            get: function () {
-                return this.service.getDate(this.host.getAttribute('min'));
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DatePickerFallbackDirective.prototype, "max", {
-            get: function () {
-                return this.service.getDate(this.host.getAttribute('max'));
-            },
-            enumerable: false,
-            configurable: true
-        });
-        Object.defineProperty(DatePickerFallbackDirective.prototype, "host", {
-            get: function () {
-                return this.elementRef.nativeElement;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        return DatePickerFallbackDirective;
-    }());
-    DatePickerFallbackDirective.decorators = [
-        { type: i0.Directive, args: [{
-                    selector: '[cxDatePickerFallback]',
-                    providers: [
-                        {
-                            provide: forms.NG_VALIDATORS,
-                            useExisting: i0.forwardRef(function () { return DatePickerFallbackDirective; }),
-                            multi: true,
-                        },
-                    ],
-                },] }
-    ];
-    DatePickerFallbackDirective.ctorParameters = function () { return [
-        { type: i0.ElementRef },
-        { type: DatePickerService }
-    ]; };
-    DatePickerFallbackDirective.propDecorators = {
-        placeholder: [{ type: i0.HostBinding, args: ['placeholder',] }],
-        pattern: [{ type: i0.HostBinding, args: ['pattern',] }]
-    };
-
-    /**
      * Component that adds a date control. While the native date picker works in most
      * modern browsers, some browsers need more guidance (placeholder), validation and
      * date conversion.
@@ -4354,13 +4260,25 @@
     var DatePickerComponent = /** @class */ (function () {
         function DatePickerComponent(service) {
             this.service = service;
+            this.update = new i0.EventEmitter();
         }
-        DatePickerComponent.prototype.update = function () {
-            var _a, _b;
-            // we're updating the min/max controls to ensure that validation kicks in
-            (_a = this.min) === null || _a === void 0 ? void 0 : _a.updateValueAndValidity();
-            (_b = this.max) === null || _b === void 0 ? void 0 : _b.updateValueAndValidity();
+        DatePickerComponent.prototype.change = function () {
+            this.update.emit();
         };
+        Object.defineProperty(DatePickerComponent.prototype, "placeholder", {
+            get: function () {
+                return this.service.placeholder;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(DatePickerComponent.prototype, "pattern", {
+            get: function () {
+                return this.service.pattern;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Only returns the date if we have a valid format. We do this to avoid
          * loads of console errors coming from the datePipe while the user is typing
@@ -4374,7 +4292,7 @@
     DatePickerComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'cx-date-picker',
-                    template: "<input\n  class=\"form-control\"\n  type=\"date\"\n  [formControl]=\"control\"\n  [attr.min]=\"min?.value\"\n  [attr.max]=\"max?.value\"\n  cxDatePickerFallback\n  (change)=\"update()\"\n/>\n<cx-form-errors\n  [control]=\"control\"\n  prefix=\"formErrors.date\"\n  [translationParams]=\"{\n    max: getDate(max?.value) | cxDate,\n    min: getDate(min?.value) | cxDate\n  }\"\n></cx-form-errors>\n"
+                    template: "<input\n  class=\"form-control\"\n  type=\"date\"\n  [formControl]=\"control\"\n  [attr.min]=\"min\"\n  [attr.max]=\"max\"\n  (change)=\"change()\"\n  [placeholder]=\"placeholder\"\n  [pattern]=\"pattern\"\n/>\n<cx-form-errors\n  [control]=\"control\"\n  prefix=\"formErrors.date\"\n  [translationParams]=\"{\n    max: getDate(max) | cxDate,\n    min: getDate(min) | cxDate\n  }\"\n></cx-form-errors>\n"
                 },] }
     ];
     DatePickerComponent.ctorParameters = function () { return [
@@ -4383,7 +4301,8 @@
     DatePickerComponent.propDecorators = {
         control: [{ type: i0.Input }],
         min: [{ type: i0.Input }],
-        max: [{ type: i0.Input }]
+        max: [{ type: i0.Input }],
+        update: [{ type: i0.Output }]
     };
 
     /**
@@ -4469,8 +4388,8 @@
     DatePickerModule.decorators = [
         { type: i0.NgModule, args: [{
                     imports: [i1$1.CommonModule, forms.ReactiveFormsModule, FormErrorsModule, i1.I18nModule],
-                    declarations: [DatePickerComponent, DatePickerFallbackDirective],
-                    exports: [DatePickerComponent, DatePickerFallbackDirective],
+                    declarations: [DatePickerComponent],
+                    exports: [DatePickerComponent],
                 },] }
     ];
 
@@ -7549,6 +7468,61 @@
             var containsSpecialChars = forbiddenChars.some(function (char) { return str.includes(char); });
             return !containsSpecialChars ? null : { cxContainsSpecialCharacters: true };
         };
+        /**
+         * Checks if control's value passes pattern
+         *
+         * NOTE: Use it as a control validator
+         *
+         * @static
+         * @param {(date: string) => boolean} isValidFormat Pattern verification function
+         * @returns {(control: AbstractControl): ValidationErrors | null} Uses 'pattern' validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.patternValidation = function (isValidFormat) {
+            var validator = function (control) {
+                var errors = {};
+                if (control.value &&
+                    control.value !== '' &&
+                    !isValidFormat(control.value)) {
+                    errors.pattern = true;
+                }
+                return Object.keys(errors).length === 0 ? null : errors;
+            };
+            return validator;
+        };
+        /**
+         * Checks if two email controls match
+         *
+         * NOTE: Use it as a form validator and pass dates for range
+         *
+         * @static
+         * @param {string} startDateKey First date control name
+         * @param {string} endDateKey Second date control name
+         * @param {(value: string) => Date} getDate Converting function
+         * @returns Uses 'min' and 'max validator error
+         * @memberof CustomFormValidators
+         */
+        CustomFormValidators.dateRange = function (startDateKey, endDateKey, getDate) {
+            var validator = function (formGroup) {
+                var _a, _b;
+                var startDateControl = formGroup.controls[startDateKey];
+                var endDateControl = formGroup.controls[endDateKey];
+                var startDate = getDate(startDateControl.value);
+                var endDate = getDate(endDateControl.value);
+                if (!((_a = startDateControl.errors) === null || _a === void 0 ? void 0 : _a.pattern)) {
+                    if (startDate > endDate) {
+                        startDateControl.setErrors({ max: true });
+                    }
+                }
+                if (!((_b = endDateControl.errors) === null || _b === void 0 ? void 0 : _b.pattern)) {
+                    if (endDate < startDate) {
+                        endDateControl.setErrors({ min: true });
+                    }
+                }
+                return null;
+            };
+            return validator;
+        };
         return CustomFormValidators;
     }());
     /**
@@ -7560,13 +7534,13 @@
      * @param errorName Error which will be returned by validator
      */
     function controlsMustMatch(formGroup, firstControlName, secondControlName, errorName) {
-        var _a;
+        var _c;
         var firstControl = formGroup.controls[firstControlName];
         var secondControl = formGroup.controls[secondControlName];
         if (secondControl.errors && !secondControl.errors[errorName]) {
             return;
         }
-        secondControl.setErrors(firstControl.value !== secondControl.value ? (_a = {}, _a[errorName] = true, _a) : null);
+        secondControl.setErrors(firstControl.value !== secondControl.value ? (_c = {}, _c[errorName] = true, _c) : null);
     }
 
     var titleScores = {
@@ -24089,7 +24063,6 @@
     exports.CurrentProductService = CurrentProductService;
     exports.CustomFormValidators = CustomFormValidators;
     exports.DatePickerComponent = DatePickerComponent;
-    exports.DatePickerFallbackDirective = DatePickerFallbackDirective;
     exports.DatePickerModule = DatePickerModule;
     exports.DatePickerService = DatePickerService;
     exports.DefaultComponentHandler = DefaultComponentHandler;
