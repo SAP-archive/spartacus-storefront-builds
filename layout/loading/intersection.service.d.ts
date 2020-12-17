@@ -6,7 +6,6 @@ import { IntersectionOptions } from './intersection.model';
  * can be used to implement pre-loading and deferred loading of DOM content.
  *
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class IntersectionService {
     protected config: LayoutConfig;
     constructor(config: LayoutConfig);
@@ -29,7 +28,4 @@ export declare class IntersectionService {
      */
     private intersects;
     private getRootMargin;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<IntersectionService, never>;
 }
-
-//# sourceMappingURL=intersection.service.d.ts.map
