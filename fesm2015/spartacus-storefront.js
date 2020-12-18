@@ -6841,6 +6841,13 @@ class CmsComponentsService {
         return this.standardizeChildRoutes(configs);
     }
     /**
+     * Returns the static data for the component type.
+     */
+    getStaticData(componentType) {
+        var _a;
+        return (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.data;
+    }
+    /**
      * Standardizes the format of `childRoutes` config.
      *
      * Some `childRoutes` configs are simple arrays of Routes (without the notion of the parent route).
@@ -6899,6 +6906,50 @@ CmsComponentsService.ctorParameters = () => [
 ];
 
 /**
+ * Provides data for `CmsComponentData`. This is used while component is injected
+ * dynamically, so that the component implementation can access the data.
+ *
+ * The data is resolved from dynamic data (CMS api) as well as static configured data.
+ */
+class ComponentDataProvider {
+    constructor(componentsService, cmsService) {
+        this.componentsService = componentsService;
+        this.cmsService = cmsService;
+    }
+    /**
+     * Return the component data for a component given by the `uid`.
+     *
+     * If the `type` is provided, static component data (if available) is
+     * merged into the component data. The static data is complemented and
+     * overridden with data retrieved from the cms service.
+     */
+    get(uid, type) {
+        return defer(() => {
+            let staticComponentData;
+            if (type) {
+                staticComponentData = this.componentsService.getStaticData(type);
+            }
+            if (staticComponentData) {
+                return this.cmsService.getComponentData(uid).pipe(map((data) => (Object.assign(Object.assign({}, staticComponentData), data))), startWith(staticComponentData));
+            }
+            else {
+                return this.cmsService.getComponentData(uid);
+            }
+        });
+    }
+}
+ComponentDataProvider.ɵprov = ɵɵdefineInjectable({ factory: function ComponentDataProvider_Factory() { return new ComponentDataProvider(ɵɵinject(CmsComponentsService), ɵɵinject(CmsService)); }, token: ComponentDataProvider, providedIn: "root" });
+ComponentDataProvider.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+ComponentDataProvider.ctorParameters = () => [
+    { type: CmsComponentsService },
+    { type: CmsService }
+];
+
+/**
  * Used to prepare injector for CMS components.
  *
  * Injector will take into account configured providers and provides CmsComponentData
@@ -6909,14 +6960,6 @@ class CmsInjectorService {
         this.cmsComponentsService = cmsComponentsService;
         this.injector = injector;
     }
-    getCmsData(uid, parentInjector) {
-        return {
-            uid: uid,
-            data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
-                .get(CmsService)
-                .getComponentData(uid),
-        };
-    }
     getInjector(type, uid, parentInjector) {
         var _a, _b;
         const configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
@@ -6924,7 +6967,11 @@ class CmsInjectorService {
             providers: [
                 {
                     provide: CmsComponentData,
-                    useValue: this.getCmsData(uid),
+                    useFactory: (dataProvider) => ({
+                        uid,
+                        data$: dataProvider.get(uid, type),
+                    }),
+                    deps: [ComponentDataProvider],
                 },
                 ...configProviders,
             ],
@@ -17757,7 +17804,7 @@ SearchBoxComponentService.ctorParameters = () => [
     { type: WindowRef }
 ];
 
-const DEFAULT_SEARCHBOX_CONFIG = {
+const DEFAULT_SEARCH_BOX_CONFIG = {
     minCharactersBeforeRequest: 1,
     displayProducts: true,
     displaySuggestions: true,
@@ -17771,6 +17818,7 @@ class SearchBoxComponent {
      * can be reused without CMS integration.
      */
     constructor(searchBoxComponentService, componentData, winRef) {
+        var _a;
         this.searchBoxComponentService = searchBoxComponentService;
         this.componentData = componentData;
         this.winRef = winRef;
@@ -17780,7 +17828,16 @@ class SearchBoxComponent {
          * for example when we click inside the search result section.
          */
         this.ignoreCloseEvent = false;
-        this.results$ = this.config$.pipe(tap((c) => (this.config = c)), switchMap((config) => this.searchBoxComponentService.getResults(config)));
+        /**
+         * Returns the SearchBox configuration. The configuration is driven by multiple
+         * layers: default configuration, (optional) backend configuration and (optional)
+         * input configuration.
+         */
+        this.config$ = (((_a = this.componentData) === null || _a === void 0 ? void 0 : _a.data$) || of({})).pipe(map((config) => {
+            const isBool = (obj, prop) => (obj === null || obj === void 0 ? void 0 : obj[prop]) !== 'false' && (obj === null || obj === void 0 ? void 0 : obj[prop]) !== false;
+            return Object.assign(Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_BOX_CONFIG), config), { displayProducts: isBool(config, 'displayProducts'), displayProductImages: isBool(config, 'displayProductImages'), displaySuggestions: isBool(config, 'displaySuggestions') }), this.config);
+        }), tap((config) => (this.config = config)));
+        this.results$ = this.config$.pipe(switchMap((config) => this.searchBoxComponentService.getResults(config)));
     }
     /**
      * Sets the search box input field
@@ -17791,44 +17848,26 @@ class SearchBoxComponent {
         }
     }
     /**
-     * Returns the backend configuration or default configuration for the searchbox.
-     */
-    get config$() {
-        if (this.componentData) {
-            return this.componentData.data$.pipe(
-            // Since the backend returns string values (i.e. displayProducts: "true") for
-            // boolean values, we replace them with boolean values.
-            map((c) => {
-                return Object.assign(Object.assign({}, c), { displayProducts: (c === null || c === void 0 ? void 0 : c.displayProducts) === 'true' || (c === null || c === void 0 ? void 0 : c.displayProducts) === true, displayProductImages: (c === null || c === void 0 ? void 0 : c.displayProductImages) === 'true' ||
-                        (c === null || c === void 0 ? void 0 : c.displayProductImages) === true, displaySuggestions: (c === null || c === void 0 ? void 0 : c.displaySuggestions) === 'true' ||
-                        (c === null || c === void 0 ? void 0 : c.displaySuggestions) === true });
-            }));
-        }
-        else {
-            return of(DEFAULT_SEARCHBOX_CONFIG);
-        }
-    }
-    /**
-     * Closes the searchbox and opens the search result page.
+     * Closes the searchBox and opens the search result page.
      */
     search(query) {
         this.searchBoxComponentService.search(query, this.config);
-        // force the searchbox to open
+        // force the searchBox to open
         this.open();
     }
     /**
-     * Opens the typeahead searchbox
+     * Opens the type-ahead searchBox
      */
     open() {
         this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', true);
     }
     /**
-     * Closes the typehead searchbox.
+     * Closes the type-ahead searchBox.
      */
     close(event, force) {
         // Use timeout to detect changes
         setTimeout(() => {
-            if ((!this.ignoreCloseEvent && !this.isSearchboxFocused()) || force) {
+            if ((!this.ignoreCloseEvent && !this.isSearchBoxFocused()) || force) {
                 this.blurSearchBox(event);
             }
         });
@@ -17840,7 +17879,7 @@ class SearchBoxComponent {
         }
     }
     // Check if focus is on searchbox or result list elements
-    isSearchboxFocused() {
+    isSearchBoxFocused() {
         return (this.getResultElements().includes(this.getFocusedElement()) ||
             this.winRef.document.querySelector('input[aria-label="search"]') ===
                 this.getFocusedElement());
@@ -17946,6 +17985,7 @@ SearchBoxComponent.ctorParameters = () => [
     { type: WindowRef }
 ];
 SearchBoxComponent.propDecorators = {
+    config: [{ type: Input }],
     queryText: [{ type: Input, args: ['queryText',] }]
 };
 
@@ -18316,15 +18356,15 @@ class ProductCarouselComponent {
         this.PRODUCT_SCOPE = ProductScope.LIST;
         this.componentData$ = this.componentData.data$.pipe(filter(Boolean));
         /**
-         * returns an Obervable string for the title.
+         * returns an Observable string for the title.
          */
         this.title$ = this.componentData$.pipe(map((data) => data.title));
         /**
-         * Obervable that holds an Array of Observables. This is done, so that
+         * Observable that holds an Array of Observables. This is done, so that
          * the component UI could consider to lazy load the UI components when they're
          * in the viewpoint.
          */
-        this.items$ = this.componentData$.pipe(map((data) => data.productCodes.trim().split(' ')), map((codes) => codes.map((code) => this.productService.get(code, this.PRODUCT_SCOPE))));
+        this.items$ = this.componentData$.pipe(map((data) => { var _a, _b; return (_b = (_a = data.productCodes) === null || _a === void 0 ? void 0 : _a.trim().split(' ')) !== null && _b !== void 0 ? _b : []; }), map((codes) => codes.map((code) => this.productService.get(code, this.PRODUCT_SCOPE))));
     }
 }
 ProductCarouselComponent.decorators = [

@@ -7,11 +7,11 @@ export declare class ProductCarouselComponent {
     protected readonly PRODUCT_SCOPE = ProductScope.LIST;
     private componentData$;
     /**
-     * returns an Obervable string for the title.
+     * returns an Observable string for the title.
      */
     title$: Observable<string>;
     /**
-     * Obervable that holds an Array of Observables. This is done, so that
+     * Observable that holds an Array of Observables. This is done, so that
      * the component UI could consider to lazy load the UI components when they're
      * in the viewpoint.
      */

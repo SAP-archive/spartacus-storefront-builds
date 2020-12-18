@@ -10,6 +10,5 @@ export declare class CmsInjectorService {
     protected cmsComponentsService: CmsComponentsService;
     protected injector: Injector;
     constructor(cmsComponentsService: CmsComponentsService, injector: Injector);
-    private getCmsData;
     getInjector(type: string, uid: string, parentInjector?: Injector): Injector;
 }

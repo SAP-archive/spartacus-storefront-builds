@@ -1,14 +1,14 @@
 import { ComponentRef, ElementRef, Injector, NgModuleRef, ViewContainerRef } from '@angular/core';
-import { ComponentHandler } from '../handlers/component-handler';
 import { CmsComponentMapping } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { ComponentHandler } from '../handlers/component-handler';
 /**
  * Responsible for obtaining component handler for specified component mapping
  */
 export declare class ComponentHandlerService {
     protected handlers: ComponentHandler[];
     constructor(handlers: ComponentHandler[]);
-    protected invalidMappings: Set<CmsComponentMapping>;
+    protected invalidMappings: Set<CmsComponentMapping<any>>;
     /**
      * Get best matching component handler
      *

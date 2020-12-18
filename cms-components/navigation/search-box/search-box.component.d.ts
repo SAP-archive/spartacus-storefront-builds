@@ -24,25 +24,27 @@ export declare class SearchBoxComponent {
      * can be reused without CMS integration.
      */
     constructor(searchBoxComponentService: SearchBoxComponentService, componentData: CmsComponentData<CmsSearchBoxComponent>, winRef: WindowRef);
+    /**
+     * Returns the SearchBox configuration. The configuration is driven by multiple
+     * layers: default configuration, (optional) backend configuration and (optional)
+     * input configuration.
+     */
+    protected config$: Observable<SearchBoxConfig>;
     results$: Observable<SearchResults>;
     /**
-     * Returns the backend configuration or default configuration for the searchbox.
-     */
-    private get config$();
-    /**
-     * Closes the searchbox and opens the search result page.
+     * Closes the searchBox and opens the search result page.
      */
     search(query: string): void;
     /**
-     * Opens the typeahead searchbox
+     * Opens the type-ahead searchBox
      */
     open(): void;
     /**
-     * Closes the typehead searchbox.
+     * Closes the type-ahead searchBox.
      */
     close(event: UIEvent, force?: boolean): void;
     protected blurSearchBox(event: UIEvent): void;
-    private isSearchboxFocused;
+    private isSearchBoxFocused;
     /**
      * Especially in mobile we do not want the search icon
      * to focus the input again when it's already open.

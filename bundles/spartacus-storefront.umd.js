@@ -7871,6 +7871,13 @@
             return this.standardizeChildRoutes(configs);
         };
         /**
+         * Returns the static data for the component type.
+         */
+        CmsComponentsService.prototype.getStaticData = function (componentType) {
+            var _a;
+            return (_a = this.getMapping(componentType)) === null || _a === void 0 ? void 0 : _a.data;
+        };
+        /**
          * Standardizes the format of `childRoutes` config.
          *
          * Some `childRoutes` configs are simple arrays of Routes (without the notion of the parent route).
@@ -7953,6 +7960,52 @@
     ]; };
 
     /**
+     * Provides data for `CmsComponentData`. This is used while component is injected
+     * dynamically, so that the component implementation can access the data.
+     *
+     * The data is resolved from dynamic data (CMS api) as well as static configured data.
+     */
+    var ComponentDataProvider = /** @class */ (function () {
+        function ComponentDataProvider(componentsService, cmsService) {
+            this.componentsService = componentsService;
+            this.cmsService = cmsService;
+        }
+        /**
+         * Return the component data for a component given by the `uid`.
+         *
+         * If the `type` is provided, static component data (if available) is
+         * merged into the component data. The static data is complemented and
+         * overridden with data retrieved from the cms service.
+         */
+        ComponentDataProvider.prototype.get = function (uid, type) {
+            var _this = this;
+            return rxjs.defer(function () {
+                var staticComponentData;
+                if (type) {
+                    staticComponentData = _this.componentsService.getStaticData(type);
+                }
+                if (staticComponentData) {
+                    return _this.cmsService.getComponentData(uid).pipe(operators.map(function (data) { return (Object.assign(Object.assign({}, staticComponentData), data)); }), operators.startWith(staticComponentData));
+                }
+                else {
+                    return _this.cmsService.getComponentData(uid);
+                }
+            });
+        };
+        return ComponentDataProvider;
+    }());
+    ComponentDataProvider.ɵprov = i0.ɵɵdefineInjectable({ factory: function ComponentDataProvider_Factory() { return new ComponentDataProvider(i0.ɵɵinject(CmsComponentsService), i0.ɵɵinject(i1.CmsService)); }, token: ComponentDataProvider, providedIn: "root" });
+    ComponentDataProvider.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    ComponentDataProvider.ctorParameters = function () { return [
+        { type: CmsComponentsService },
+        { type: i1.CmsService }
+    ]; };
+
+    /**
      * Used to prepare injector for CMS components.
      *
      * Injector will take into account configured providers and provides CmsComponentData
@@ -7963,14 +8016,6 @@
             this.cmsComponentsService = cmsComponentsService;
             this.injector = injector;
         }
-        CmsInjectorService.prototype.getCmsData = function (uid, parentInjector) {
-            return {
-                uid: uid,
-                data$: (parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector)
-                    .get(i1.CmsService)
-                    .getComponentData(uid),
-            };
-        };
         CmsInjectorService.prototype.getInjector = function (type, uid, parentInjector) {
             var _a, _b;
             var configProviders = (_b = (_a = this.cmsComponentsService.getMapping(type)) === null || _a === void 0 ? void 0 : _a.providers) !== null && _b !== void 0 ? _b : [];
@@ -7978,7 +8023,11 @@
                 providers: __spread([
                     {
                         provide: CmsComponentData,
-                        useValue: this.getCmsData(uid),
+                        useFactory: function (dataProvider) { return ({
+                            uid: uid,
+                            data$: dataProvider.get(uid, type),
+                        }); },
+                        deps: [ComponentDataProvider],
                     }
                 ], configProviders),
                 parent: parentInjector !== null && parentInjector !== void 0 ? parentInjector : this.injector,
@@ -19732,7 +19781,7 @@
         { type: i1.WindowRef }
     ]; };
 
-    var DEFAULT_SEARCHBOX_CONFIG = {
+    var DEFAULT_SEARCH_BOX_CONFIG = {
         minCharactersBeforeRequest: 1,
         displayProducts: true,
         displaySuggestions: true,
@@ -19747,6 +19796,7 @@
          */
         function SearchBoxComponent(searchBoxComponentService, componentData, winRef) {
             var _this = this;
+            var _a;
             this.searchBoxComponentService = searchBoxComponentService;
             this.componentData = componentData;
             this.winRef = winRef;
@@ -19756,7 +19806,16 @@
              * for example when we click inside the search result section.
              */
             this.ignoreCloseEvent = false;
-            this.results$ = this.config$.pipe(operators.tap(function (c) { return (_this.config = c); }), operators.switchMap(function (config) { return _this.searchBoxComponentService.getResults(config); }));
+            /**
+             * Returns the SearchBox configuration. The configuration is driven by multiple
+             * layers: default configuration, (optional) backend configuration and (optional)
+             * input configuration.
+             */
+            this.config$ = (((_a = this.componentData) === null || _a === void 0 ? void 0 : _a.data$) || rxjs.of({})).pipe(operators.map(function (config) {
+                var isBool = function (obj, prop) { return (obj === null || obj === void 0 ? void 0 : obj[prop]) !== 'false' && (obj === null || obj === void 0 ? void 0 : obj[prop]) !== false; };
+                return Object.assign(Object.assign(Object.assign(Object.assign({}, DEFAULT_SEARCH_BOX_CONFIG), config), { displayProducts: isBool(config, 'displayProducts'), displayProductImages: isBool(config, 'displayProductImages'), displaySuggestions: isBool(config, 'displaySuggestions') }), _this.config);
+            }), operators.tap(function (config) { return (_this.config = config); }));
+            this.results$ = this.config$.pipe(operators.switchMap(function (config) { return _this.searchBoxComponentService.getResults(config); }));
         }
         Object.defineProperty(SearchBoxComponent.prototype, "queryText", {
             /**
@@ -19770,50 +19829,28 @@
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(SearchBoxComponent.prototype, "config$", {
-            /**
-             * Returns the backend configuration or default configuration for the searchbox.
-             */
-            get: function () {
-                if (this.componentData) {
-                    return this.componentData.data$.pipe(
-                    // Since the backend returns string values (i.e. displayProducts: "true") for
-                    // boolean values, we replace them with boolean values.
-                    operators.map(function (c) {
-                        return Object.assign(Object.assign({}, c), { displayProducts: (c === null || c === void 0 ? void 0 : c.displayProducts) === 'true' || (c === null || c === void 0 ? void 0 : c.displayProducts) === true, displayProductImages: (c === null || c === void 0 ? void 0 : c.displayProductImages) === 'true' ||
-                                (c === null || c === void 0 ? void 0 : c.displayProductImages) === true, displaySuggestions: (c === null || c === void 0 ? void 0 : c.displaySuggestions) === 'true' ||
-                                (c === null || c === void 0 ? void 0 : c.displaySuggestions) === true });
-                    }));
-                }
-                else {
-                    return rxjs.of(DEFAULT_SEARCHBOX_CONFIG);
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
         /**
-         * Closes the searchbox and opens the search result page.
+         * Closes the searchBox and opens the search result page.
          */
         SearchBoxComponent.prototype.search = function (query) {
             this.searchBoxComponentService.search(query, this.config);
-            // force the searchbox to open
+            // force the searchBox to open
             this.open();
         };
         /**
-         * Opens the typeahead searchbox
+         * Opens the type-ahead searchBox
          */
         SearchBoxComponent.prototype.open = function () {
             this.searchBoxComponentService.toggleBodyClass('searchbox-is-active', true);
         };
         /**
-         * Closes the typehead searchbox.
+         * Closes the type-ahead searchBox.
          */
         SearchBoxComponent.prototype.close = function (event, force) {
             var _this = this;
             // Use timeout to detect changes
             setTimeout(function () {
-                if ((!_this.ignoreCloseEvent && !_this.isSearchboxFocused()) || force) {
+                if ((!_this.ignoreCloseEvent && !_this.isSearchBoxFocused()) || force) {
                     _this.blurSearchBox(event);
                 }
             });
@@ -19825,7 +19862,7 @@
             }
         };
         // Check if focus is on searchbox or result list elements
-        SearchBoxComponent.prototype.isSearchboxFocused = function () {
+        SearchBoxComponent.prototype.isSearchBoxFocused = function () {
             return (this.getResultElements().includes(this.getFocusedElement()) ||
                 this.winRef.document.querySelector('input[aria-label="search"]') ===
                     this.getFocusedElement());
@@ -19854,10 +19891,10 @@
         // Focus on previous item in results list
         SearchBoxComponent.prototype.focusPreviousChild = function (event) {
             event.preventDefault(); // Negate normal keyscroll
-            var _a = __read([
+            var _b = __read([
                 this.getResultElements(),
                 this.getFocusedIndex(),
-            ], 2), results = _a[0], focusedIndex = _a[1];
+            ], 2), results = _b[0], focusedIndex = _b[1];
             // Focus on last index moving to first
             if (results.length) {
                 if (focusedIndex < 1) {
@@ -19871,10 +19908,10 @@
         // Focus on next item in results list
         SearchBoxComponent.prototype.focusNextChild = function (event) {
             event.preventDefault(); // Negate normal keyscroll
-            var _a = __read([
+            var _b = __read([
                 this.getResultElements(),
                 this.getFocusedIndex(),
-            ], 2), results = _a[0], focusedIndex = _a[1];
+            ], 2), results = _b[0], focusedIndex = _b[1];
             // Focus on first index moving to last
             if (results.length) {
                 if (focusedIndex >= results.length - 1) {
@@ -19933,6 +19970,7 @@
         { type: i1.WindowRef }
     ]; };
     SearchBoxComponent.propDecorators = {
+        config: [{ type: i0.Input }],
         queryText: [{ type: i0.Input, args: ['queryText',] }]
     };
 
@@ -20329,15 +20367,15 @@
             this.PRODUCT_SCOPE = i1.ProductScope.LIST;
             this.componentData$ = this.componentData.data$.pipe(operators.filter(Boolean));
             /**
-             * returns an Obervable string for the title.
+             * returns an Observable string for the title.
              */
             this.title$ = this.componentData$.pipe(operators.map(function (data) { return data.title; }));
             /**
-             * Obervable that holds an Array of Observables. This is done, so that
+             * Observable that holds an Array of Observables. This is done, so that
              * the component UI could consider to lazy load the UI components when they're
              * in the viewpoint.
              */
-            this.items$ = this.componentData$.pipe(operators.map(function (data) { return data.productCodes.trim().split(' '); }), operators.map(function (codes) { return codes.map(function (code) { return _this.productService.get(code, _this.PRODUCT_SCOPE); }); }));
+            this.items$ = this.componentData$.pipe(operators.map(function (data) { var _a, _b; return (_b = (_a = data.productCodes) === null || _a === void 0 ? void 0 : _a.trim().split(' ')) !== null && _b !== void 0 ? _b : []; }), operators.map(function (codes) { return codes.map(function (code) { return _this.productService.get(code, _this.PRODUCT_SCOPE); }); }));
         }
         return ProductCarouselComponent;
     }());

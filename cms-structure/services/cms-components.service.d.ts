@@ -1,6 +1,6 @@
 import { NgModuleRef } from '@angular/core';
 import { Route } from '@angular/router';
-import { CmsComponentChildRoutesConfig, CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
+import { CmsComponent, CmsComponentChildRoutesConfig, CmsComponentMapping, CmsConfig, DeferLoadingStrategy } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FeatureModulesService } from './feature-modules.service';
 /**
@@ -55,6 +55,10 @@ export declare class CmsComponentsService {
      * Get cms driven child routes for components
      */
     getChildRoutes(componentTypes: string[]): CmsComponentChildRoutesConfig;
+    /**
+     * Returns the static data for the component type.
+     */
+    getStaticData<T extends CmsComponent = CmsComponent>(componentType: string): T | undefined;
     /**
      * Standardizes the format of `childRoutes` config.
      *
