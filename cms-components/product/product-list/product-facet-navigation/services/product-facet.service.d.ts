@@ -5,6 +5,7 @@ import { FacetList } from '../facet.model';
 /**
  * Provides access to all the facets and active facets for the Product Listing Page.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductFacetService {
     protected routing: RoutingService;
     protected productListComponentService: ProductListComponentService;
@@ -32,4 +33,7 @@ export declare class ProductFacetService {
      * since either the category or brand code should match those codes.
      */
     private hasBreadcrumb;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductFacetService, never>;
 }
+
+//# sourceMappingURL=product-facet.service.d.ts.map

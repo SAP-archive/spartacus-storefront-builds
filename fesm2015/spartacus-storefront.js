@@ -7393,8 +7393,13 @@ class AsmMainUiComponent {
         this.asmComponentService.logoutCustomerSupportAgentAndCustomer();
     }
     startCustomerEmulationSession({ customerId }) {
-        this.csAgentAuthService.startCustomerEmulationSession(customerId);
-        this.startingCustomerSession = true;
+        if (customerId) {
+            this.csAgentAuthService.startCustomerEmulationSession(customerId);
+            this.startingCustomerSession = true;
+        }
+        else {
+            this.globalMessageService.add({ key: 'asm.error.noCustomerId' }, GlobalMessageType.MSG_TYPE_ERROR);
+        }
     }
     hideUi() {
         this.disabled = true;

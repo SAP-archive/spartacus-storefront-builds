@@ -8475,8 +8475,13 @@
         };
         AsmMainUiComponent.prototype.startCustomerEmulationSession = function (_a) {
             var customerId = _a.customerId;
-            this.csAgentAuthService.startCustomerEmulationSession(customerId);
-            this.startingCustomerSession = true;
+            if (customerId) {
+                this.csAgentAuthService.startCustomerEmulationSession(customerId);
+                this.startingCustomerSession = true;
+            }
+            else {
+                this.globalMessageService.add({ key: 'asm.error.noCustomerId' }, i1.GlobalMessageType.MSG_TYPE_ERROR);
+            }
         };
         AsmMainUiComponent.prototype.hideUi = function () {
             this.disabled = true;
