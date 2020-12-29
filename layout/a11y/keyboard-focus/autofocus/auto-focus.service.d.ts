@@ -1,5 +1,6 @@
 import { EscapeFocusService } from '../escape/escape-focus.service';
 import { AutoFocusConfig, PersistFocusConfig } from '../keyboard-focus.model';
+import * as ɵngcc0 from '@angular/core';
 export declare class AutoFocusService extends EscapeFocusService {
     /**
      * Returns the first focusable child element of the host element.
@@ -17,4 +18,7 @@ export declare class AutoFocusService extends EscapeFocusService {
      *   groups and remain the persistence
      */
     protected getPersisted(host: HTMLElement, group?: string): HTMLElement;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<AutoFocusService, never>;
 }
+
+//# sourceMappingURL=auto-focus.service.d.ts.map

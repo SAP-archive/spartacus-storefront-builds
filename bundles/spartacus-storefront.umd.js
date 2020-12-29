@@ -9535,6 +9535,7 @@
                 .getEntries()
                 .pipe(operators.filter(function (entries) { return entries.length > 0; }));
             this.selectiveCartEnabled = this.selectiveCartService.isEnabled();
+            // TODO(#10547): Switch in 4.0 `selectiveCartService.getLoaded` to `selectiveCartService.isStable` method
             this.cartLoaded$ = rxjs.combineLatest([
                 this.activeCartService.isStable(),
                 this.selectiveCartEnabled
@@ -9874,6 +9875,7 @@
             this.entries$ = this.selectiveCartService
                 .getEntries()
                 .pipe(operators.filter(function (entries) { return entries.length > 0; }));
+            // TODO(#10547): Switch in 4.0 `selectiveCartService.getLoaded` to `selectiveCartService.isStable` method
             this.cartLoaded$ = rxjs.combineLatest([
                 this.cartService.isStable(),
                 this.selectiveCartService.getLoaded(),

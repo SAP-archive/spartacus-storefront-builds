@@ -8385,6 +8385,7 @@ class CartDetailsComponent {
             .getEntries()
             .pipe(filter((entries) => entries.length > 0));
         this.selectiveCartEnabled = this.selectiveCartService.isEnabled();
+        // TODO(#10547): Switch in 4.0 `selectiveCartService.getLoaded` to `selectiveCartService.isStable` method
         this.cartLoaded$ = combineLatest([
             this.activeCartService.isStable(),
             this.selectiveCartEnabled
@@ -8693,6 +8694,7 @@ class SaveForLaterComponent {
         this.entries$ = this.selectiveCartService
             .getEntries()
             .pipe(filter((entries) => entries.length > 0));
+        // TODO(#10547): Switch in 4.0 `selectiveCartService.getLoaded` to `selectiveCartService.isStable` method
         this.cartLoaded$ = combineLatest([
             this.cartService.isStable(),
             this.selectiveCartService.getLoaded(),
