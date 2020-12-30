@@ -10,6 +10,7 @@ import { ProductListRouteParams, SearchCriteria } from './product-list.model';
  * route parameters. The route parameters are used to query products by the help of
  * the `ProductSearchService`.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class ProductListComponentService {
     protected productSearchService: ProductSearchService;
     protected routing: RoutingService;
@@ -84,4 +85,7 @@ export declare class ProductListComponentService {
      * major version.
      */
     private get siteContext();
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<ProductListComponentService, never>;
 }
+
+//# sourceMappingURL=product-list-component.service.d.ts.map
