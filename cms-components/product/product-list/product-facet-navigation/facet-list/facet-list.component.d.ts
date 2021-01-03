@@ -6,6 +6,7 @@ import { ICON_TYPE } from '../../../../misc/icon/icon.model';
 import { FacetList } from '../facet.model';
 import { FacetComponent } from '../facet/facet.component';
 import { FacetService } from '../services/facet.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class FacetListComponent {
     protected facetService: FacetService;
     protected elementRef: ElementRef;
@@ -38,4 +39,8 @@ export declare class FacetListComponent {
     isCollapsed(facet: Facet): Observable<boolean>;
     close(event?: boolean): void;
     block(event?: MouseEvent): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<FacetListComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<FacetListComponent, "cx-facet-list", never, { "isDialog": "isDialog"; }, { "closeList": "closeList"; }, never, never>;
 }
+
+//# sourceMappingURL=facet-list.component.d.ts.map
