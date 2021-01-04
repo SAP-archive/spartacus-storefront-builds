@@ -4,6 +4,7 @@ import { ICON_TYPE } from '../../../cms-components/misc/index';
  * Star rating component can be used to view existing ratings as well
  * as create new ratings. The component can be used for any ratings.
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class StarRatingComponent {
     protected initialRate: number;
     icon: ICON_TYPE;
@@ -27,4 +28,8 @@ export declare class StarRatingComponent {
     setRate(value: number): void;
     reset(): void;
     saveRate(rating: number): void;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<StarRatingComponent, never>;
+    static ɵcmp: ɵngcc0.ɵɵComponentDefWithMeta<StarRatingComponent, "cx-star-rating", never, { "disabled": "disabled"; "rating": "rating"; }, { "change": "change"; }, never, never>;
 }
+
+//# sourceMappingURL=star-rating.component.d.ts.map
