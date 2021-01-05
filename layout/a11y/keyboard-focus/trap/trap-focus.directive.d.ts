@@ -6,7 +6,6 @@ import { TrapFocusService } from './trap-focus.service';
  * Directive that keeps the focus inside the focusable child elements,
  * also known as a _focus trap_.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class TrapFocusDirective extends TabFocusDirective implements OnInit {
     protected elementRef: ElementRef;
     protected service: TrapFocusService;
@@ -24,8 +23,4 @@ export declare class TrapFocusDirective extends TabFocusDirective implements OnI
      * @param increment indicates whether the next or previous is focussed.
      */
     protected moveFocus(event: UIEvent, increment: number): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<TrapFocusDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<TrapFocusDirective, never, never, {}, {}, never>;
 }
-
-//# sourceMappingURL=trap-focus.directive.d.ts.map
