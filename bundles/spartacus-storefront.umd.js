@@ -10966,40 +10966,6 @@
         { type: CheckoutDetailsService }
     ]; };
 
-    var NotCheckoutAuthGuard = /** @class */ (function () {
-        function NotCheckoutAuthGuard(authService, activeCartService, semanticPathService, router) {
-            this.authService = authService;
-            this.activeCartService = activeCartService;
-            this.semanticPathService = semanticPathService;
-            this.router = router;
-        }
-        NotCheckoutAuthGuard.prototype.canActivate = function () {
-            var _this = this;
-            return this.authService.isUserLoggedIn().pipe(operators.map(function (isLoggedIn) {
-                if (isLoggedIn) {
-                    return _this.router.parseUrl(_this.semanticPathService.get('home'));
-                }
-                else if (_this.activeCartService.isGuestCart()) {
-                    return _this.router.parseUrl(_this.semanticPathService.get('cart'));
-                }
-                return !isLoggedIn;
-            }));
-        };
-        return NotCheckoutAuthGuard;
-    }());
-    NotCheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
-    NotCheckoutAuthGuard.decorators = [
-        { type: i0.Injectable, args: [{
-                    providedIn: 'root',
-                },] }
-    ];
-    NotCheckoutAuthGuard.ctorParameters = function () { return [
-        { type: i1.AuthService },
-        { type: i1.ActiveCartService },
-        { type: i1.SemanticPathService },
-        { type: i2.Router }
-    ]; };
-
     var DeliveryModeSetGuard = /** @class */ (function () {
         function DeliveryModeSetGuard(checkoutDetailsService, routingConfigService, router, checkoutStepService) {
             this.checkoutDetailsService = checkoutDetailsService;
@@ -11036,6 +11002,40 @@
         { type: i1.RoutingConfigService },
         { type: i2.Router },
         { type: CheckoutStepService }
+    ]; };
+
+    var NotCheckoutAuthGuard = /** @class */ (function () {
+        function NotCheckoutAuthGuard(authService, activeCartService, semanticPathService, router) {
+            this.authService = authService;
+            this.activeCartService = activeCartService;
+            this.semanticPathService = semanticPathService;
+            this.router = router;
+        }
+        NotCheckoutAuthGuard.prototype.canActivate = function () {
+            var _this = this;
+            return this.authService.isUserLoggedIn().pipe(operators.map(function (isLoggedIn) {
+                if (isLoggedIn) {
+                    return _this.router.parseUrl(_this.semanticPathService.get('home'));
+                }
+                else if (_this.activeCartService.isGuestCart()) {
+                    return _this.router.parseUrl(_this.semanticPathService.get('cart'));
+                }
+                return !isLoggedIn;
+            }));
+        };
+        return NotCheckoutAuthGuard;
+    }());
+    NotCheckoutAuthGuard.ɵprov = i0.ɵɵdefineInjectable({ factory: function NotCheckoutAuthGuard_Factory() { return new NotCheckoutAuthGuard(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i1.ActiveCartService), i0.ɵɵinject(i1.SemanticPathService), i0.ɵɵinject(i2.Router)); }, token: NotCheckoutAuthGuard, providedIn: "root" });
+    NotCheckoutAuthGuard.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root',
+                },] }
+    ];
+    NotCheckoutAuthGuard.ctorParameters = function () { return [
+        { type: i1.AuthService },
+        { type: i1.ActiveCartService },
+        { type: i1.SemanticPathService },
+        { type: i2.Router }
     ]; };
 
     var PaymentDetailsSetGuard = /** @class */ (function () {
@@ -24081,6 +24081,7 @@
     exports.CheckoutProgressModule = CheckoutProgressModule;
     exports.CheckoutReplenishmentFormService = CheckoutReplenishmentFormService;
     exports.CheckoutStepService = CheckoutStepService;
+    exports.CheckoutStepsSetGuard = CheckoutStepsSetGuard;
     exports.CloseAccountComponent = CloseAccountComponent;
     exports.CloseAccountModalComponent = CloseAccountModalComponent;
     exports.CloseAccountModule = CloseAccountModule;
@@ -24454,29 +24455,28 @@
     exports.ɵbl = defaultIconConfig;
     exports.ɵbm = defaultCheckoutConfig;
     exports.ɵbn = MultiLinePipe;
-    exports.ɵbo = CheckoutStepsSetGuard;
-    exports.ɵbp = PaymentTypeModule;
-    exports.ɵbq = PaymentTypeComponent;
-    exports.ɵbr = defaultPlaceOrderSpinnerLayoutConfig;
-    exports.ɵbs = CostCenterModule;
-    exports.ɵbt = CostCenterComponent;
-    exports.ɵbu = CheckoutAuthGuard;
-    exports.ɵbv = CartNotEmptyGuard;
-    exports.ɵbw = defaultQualtricsConfig;
-    exports.ɵbx = CmsRoutesImplService;
-    exports.ɵby = ReturnRequestService;
-    exports.ɵbz = LoginRegisterComponent;
+    exports.ɵbo = PaymentTypeModule;
+    exports.ɵbp = PaymentTypeComponent;
+    exports.ɵbq = defaultPlaceOrderSpinnerLayoutConfig;
+    exports.ɵbr = CostCenterModule;
+    exports.ɵbs = CostCenterComponent;
+    exports.ɵbt = CheckoutAuthGuard;
+    exports.ɵbu = CartNotEmptyGuard;
+    exports.ɵbv = defaultQualtricsConfig;
+    exports.ɵbw = CmsRoutesImplService;
+    exports.ɵbx = ReturnRequestService;
+    exports.ɵby = LoginRegisterComponent;
+    exports.ɵbz = MyCouponsComponentService;
     exports.ɵc = pwaConfigurationFactory;
-    exports.ɵca = MyCouponsComponentService;
-    exports.ɵcb = addCmsRoute;
-    exports.ɵcc = defaultStorefrontRoutesConfig;
-    exports.ɵcd = defaultRoutingConfig;
-    exports.ɵce = SeoConfig;
-    exports.ɵcf = defaultSeoConfig;
-    exports.ɵcg = htmlLangProvider;
-    exports.ɵch = setHtmlLangAttribute;
-    exports.ɵci = defaultDirectionConfig;
-    exports.ɵcj = EventsModule;
+    exports.ɵca = addCmsRoute;
+    exports.ɵcb = defaultStorefrontRoutesConfig;
+    exports.ɵcc = defaultRoutingConfig;
+    exports.ɵcd = SeoConfig;
+    exports.ɵce = defaultSeoConfig;
+    exports.ɵcf = htmlLangProvider;
+    exports.ɵcg = setHtmlLangAttribute;
+    exports.ɵch = defaultDirectionConfig;
+    exports.ɵci = EventsModule;
     exports.ɵd = pwaFactory;
     exports.ɵe = getStructuredDataFactory;
     exports.ɵf = FOCUS_ATTR;
