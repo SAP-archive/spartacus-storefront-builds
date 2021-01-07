@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { CheckoutStep } from '../model/checkout-step.model';
 import { CheckoutDetailsService } from '../services/checkout-details.service';
 import { CheckoutStepService } from '../services/checkout-step.service';
-import * as ɵngcc0 from '@angular/core';
 export declare class CheckoutStepsSetGuard implements CanActivate {
     protected paymentTypeService: PaymentTypeService;
     protected checkoutStepService: CheckoutStepService;
@@ -20,7 +19,4 @@ export declare class CheckoutStepsSetGuard implements CanActivate {
     protected isDeliveryModeSet(step: CheckoutStep): Observable<boolean | UrlTree>;
     protected isPaymentDetailsSet(step: CheckoutStep): Observable<boolean | UrlTree>;
     private getUrl;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<CheckoutStepsSetGuard, never>;
 }
-
-//# sourceMappingURL=checkout-steps-set.guard.d.ts.map
