@@ -1,0 +1,1 @@
+{"version":3,"file":"seo.module.d.ts","sources":["seo.module.d.ts"],"names":[],"mappings":"AAAA;;;AACA;AACA;;;AACA","sourcesContent":["import { Injector } from '@angular/core';\nexport declare function initSeoService(injector: Injector): () => void;\nexport declare class SeoModule {\n}\n"]}

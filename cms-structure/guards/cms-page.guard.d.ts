@@ -2,6 +2,7 @@ import { CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CmsActivatedRouteSnapshot, CmsService, ProtectedRoutesGuard, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { CmsPageGuardService } from './cms-page-guard.service';
+import * as ɵngcc0 from '@angular/core';
 export declare class CmsPageGuard implements CanActivate {
     protected routingService: RoutingService;
     protected cmsService: CmsService;
@@ -26,4 +27,7 @@ export declare class CmsPageGuard implements CanActivate {
      * Returns whether we should reload the CMS page data, even when it was loaded before.
      */
     private shouldReload;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<CmsPageGuard, never>;
 }
+
+//# sourceMappingURL=cms-page.guard.d.ts.map
