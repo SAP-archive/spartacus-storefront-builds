@@ -12668,7 +12668,7 @@ class SeoMetaService {
         }
     }
     set robots(value) {
-        if (value) {
+        if (value && value.length > 0) {
             this.addTag({ name: 'robots', content: value.join(', ') });
         }
     }

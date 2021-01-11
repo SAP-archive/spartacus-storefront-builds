@@ -14280,7 +14280,7 @@
         });
         Object.defineProperty(SeoMetaService.prototype, "robots", {
             set: function (value) {
-                if (value) {
+                if (value && value.length > 0) {
                     this.addTag({ name: 'robots', content: value.join(', ') });
                 }
             },
