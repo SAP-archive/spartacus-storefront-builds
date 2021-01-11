@@ -6,7 +6,6 @@ import { ComponentHandlerService } from './services/component-handler.service';
 /**
  * Directive used to facilitate instantiation of CMS driven dynamic components
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     protected vcr: ViewContainerRef;
     protected cmsComponentsService: CmsComponentsService;
@@ -30,8 +29,4 @@ export declare class ComponentWrapperDirective implements OnInit, OnDestroy {
     private launchComponent;
     private decorate;
     ngOnDestroy(): void;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ComponentWrapperDirective, never>;
-    static ɵdir: ɵngcc0.ɵɵDirectiveDefWithMeta<ComponentWrapperDirective, "[cxComponentWrapper]", never, { "cxComponentWrapper": "cxComponentWrapper"; }, {}, never>;
 }
-
-//# sourceMappingURL=component-wrapper.directive.d.ts.map

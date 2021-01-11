@@ -2,7 +2,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { WindowRef } from '@spartacus/core';
 import { DirectionMode } from '../../../layout/direction/config/direction.model';
 import { IconConfig, ICON_TYPE } from './icon.model';
-import * as ɵngcc0 from '@angular/core';
 export declare class IconLoaderService {
     protected winRef: WindowRef;
     protected iconConfig: IconConfig;
@@ -47,7 +46,4 @@ export declare class IconLoaderService {
     private findResource;
     getSymbol(iconType: ICON_TYPE | string): string;
     private get config();
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<IconLoaderService, never>;
 }
-
-//# sourceMappingURL=icon-loader.service.d.ts.map
