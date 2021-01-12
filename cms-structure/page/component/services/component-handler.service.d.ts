@@ -5,7 +5,6 @@ import { ComponentHandler } from '../handlers/component-handler';
 /**
  * Responsible for obtaining component handler for specified component mapping
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class ComponentHandlerService {
     protected handlers: ComponentHandler[];
     constructor(handlers: ComponentHandler[]);
@@ -27,7 +26,4 @@ export declare class ComponentHandlerService {
         elementRef: ElementRef;
         componentRef?: ComponentRef<any>;
     }>;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<ComponentHandlerService, [{ optional: true; }]>;
 }
-
-//# sourceMappingURL=component-handler.service.d.ts.map
