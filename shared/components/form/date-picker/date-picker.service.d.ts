@@ -10,6 +10,7 @@
  * backend.
  *
  */
+import * as ɵngcc0 from '@angular/core';
 export declare class DatePickerService {
     get placeholder(): string;
     /**
@@ -26,4 +27,7 @@ export declare class DatePickerService {
      * `new Date('2020-01-01')` works.
      */
     getDate(value: string): Date;
+    static ɵfac: ɵngcc0.ɵɵFactoryDef<DatePickerService, never>;
 }
+
+//# sourceMappingURL=date-picker.service.d.ts.map

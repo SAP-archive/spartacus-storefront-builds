@@ -61,3 +61,5 @@ export { VisibleFocusDirective as ɵp } from './layout/a11y/keyboard-focus/visib
 export { skipLinkFactory as ɵg } from './layout/a11y/skip-link/skip-link.module';
 export { defaultDirectionConfig as ɵch } from './layout/direction/config/default-direction.config';
 export { initHtmlDirAttribute as ɵh } from './layout/direction/direction.module';
+
+//# sourceMappingURL=spartacus-storefront.d.ts.map

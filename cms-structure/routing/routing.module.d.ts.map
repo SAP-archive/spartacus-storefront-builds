@@ -1,0 +1,1 @@
+{"version":3,"file":"routing.module.d.ts","sources":["routing.module.d.ts"],"names":[],"mappings":"AAAA;;;;AACA;AACA;;;AACA","sourcesContent":["import { ModuleWithProviders } from '@angular/core';\nexport declare class RoutingModule {\n    static forRoot(): ModuleWithProviders<RoutingModule>;\n}\n"]}
