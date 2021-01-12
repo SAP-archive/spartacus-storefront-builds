@@ -24,7 +24,6 @@ import { PaginationItem, PaginationOptions } from './pagination.model';
  * The current page will always be centered in the page range to provide direct access
  * to the previous and next page.
  */
-import * as ɵngcc0 from '@angular/core';
 export declare class PaginationBuilder {
     protected paginationConfig: PaginationConfig;
     constructor(paginationConfig: PaginationConfig);
@@ -121,7 +120,4 @@ export declare class PaginationBuilder {
      * ```
      */
     protected get config(): PaginationOptions;
-    static ɵfac: ɵngcc0.ɵɵFactoryDef<PaginationBuilder, never>;
 }
-
-//# sourceMappingURL=pagination.builder.d.ts.map
